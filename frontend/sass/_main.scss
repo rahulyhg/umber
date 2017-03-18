@@ -1,4 +1,3 @@
-
 /* Bootstrap Variables Goes Here */
 
 $brand-primary: #0d9dff !default;
@@ -119,4 +118,25 @@ header {
 
 .nav-up {
     transform: translateY(-100%);
+}
+
+// custom css starts here
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    flex: 50%;
+    height: 150px;
+}
+
+.block {
+    width: 60px;
+    /* width: calc(50% - 10px); */
+    height: 60px;
+    background: tomato;
+    margin: 5px;
+    align-items: baseline;
+    align-content: flex-start;
 }
