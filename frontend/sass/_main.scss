@@ -6,12 +6,115 @@ $brand-warning: #ffec39 !default;
 $brand-danger: #fc483f !default;
 $brand-info: #000072 !default;
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "other/font-fix";
+@font-face {
+    font-family: 'vadodara-bld';
+    src: url('../fonts/HindVadodara-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'vadodara-lgt';
+    src: url('../fonts/HindVadodara-Light.ttf');
+}
+
+@font-face {
+    font-family: 'vadodara-md';
+    src: url('../fonts/HindVadodara-Medium.ttf');
+}
+
+@font-face {
+    font-family: 'vadodara-regular';
+    src: url('../fonts/HindVadodara-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'vadodara-semibld';
+    src: url('../fonts/HindVadodara-SemiBold.ttf');
+}
+
+@font-face {
+    font-family: 'fjalla-reg';
+    src: url('../fonts/FjallaOne-Regular.otf');
+}
+
 
 /* Bootstrap Variables Goes Here */
 
-@import "other/font-fix";
+// Mixins (CSS functions)
+@mixin flex($flex,
+$flexDirect,
+$flexWrap,
+$flxGrowAmt,
+$flxShrinkAmt,
+$flxBasisAmt,
+$justifyContent,
+$itemAlign,
+$contentAlign,
+$selfAlign) {
+    // vendor prefixis
+    display: -ms-$flex; // need to type in flex-box for IE & mozilla
+    display: -moz-$flex;
+    display: -webkit-$flex;
+    -ms-flex-flow: $flexDirect $flexWrap;
+    -ms-flex: $flxGrowAmt $flxShrinkAmt $flxBasisAmt;
+    -ms-flex-pack: $justifyContent;
+    -ms-flex-align: $itemAlign;
+    -ms-align-content: $contentAlign; // normal
+    display: $flex;
+    flex-flow: $flexDirect $flexWrap; // shorthand property for flex direction & flex wrap 
+    flex: $flxGrowAmt $flxShrinkAmt $flxBasisAmt; //shorhand property for flex-grow flex shrink & flex-basis
+    justify-content: $justifyContent;
+    align-items: $itemAlign;
+    align-content: $contentAlign;
+    align-self: $selfAlign;
+}
+
+@mixin grid($flex) {
+    @if $flex {
+        @include flex;
+    }
+    @else {
+        display: block;
+    }
+} // need to pass true or false like @include grid(true);
+@mixin font($fontStyle,
+$fontWeight,
+$fontSize,
+$fontFamily) {
+    font-style: $fontStyle;
+    font-weight: $fontWeight;
+    font-size: $fontSize;
+    font-family: $fontFamily;
+}
+
+@mixin headline($mgTp,
+$mgRt,
+$mgBt,
+$mgLt) {
+    margin-top: $mgTp;
+    margin-right: $mgRt;
+    margin-bottom: $mgBt;
+    margin-left: $mgLt;
+}
+
+@mixin inlineBlock($inlineBlock) {
+    display: inline-block;
+}
+
+@mixin block($inlineBlock) {
+    @if $inlineBlock {
+        @include inline-block;
+    }
+    @else {
+        display: block;
+    }
+} // need to pass true or false like @include block(true);
 body {
     padding-top: 70px;
+    font-family: '';
+    overflow-x: hidden!important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-font-smooth: always !important;
 }
 
 img.loading {
