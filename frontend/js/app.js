@@ -28,6 +28,11 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             templateUrl: tempateURL,
             controller: 'CheckoutCtrl'
         })
+        .state('mycart', {
+            url: "/mycart",
+            templateUrl: tempateURL,
+            controller: 'MycartCtrl'
+        })
         .state('form', {
             url: "/form",
             templateUrl: tempateURL,
