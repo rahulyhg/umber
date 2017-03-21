@@ -1,4 +1,4 @@
-<header hide-on-scrol>
+<!--<header hide-on-scrol>
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -13,6 +13,41 @@
             <div class="collapse navbar-collapse" id="nav-collapse">
                 <div ng-include="template.menu" class="template menu"></div>
             </div>
+        </div>
+    </nav>
+</header>-->
+<header hide-on-scrol>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <div class="">
+                    <div class="inline-block">
+                        <div class="navbar__sideNav">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </div>
+                    </div>
+                    <div class="inline-block">
+                        <a class="navbar-brand" ui-sref="home"><img src="/img/logo.png" alt="logo" width="20"> </a>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i>wishlist</a></li>
+                <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true">cart</i></a></li>
+                <li><a><button class="btn btn-default">LOGIN</button></a></li>
+            </ul>
+            <!--<div class="collapse navbar-collapse" id="nav-collapse">
+                <div ng-include="template.menu" class="template menu"></div>
+            </div>-->
         </div>
     </nav>
 </header>
