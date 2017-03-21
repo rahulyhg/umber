@@ -1,46 +1,130 @@
 <div class="checkout">
-	<div>
-		<img src="" alt="" class="img-responsive">
-	</div>
-	<div>
-		<div class="container">
-			<div class="col-md-4">
-				<div>
-					<button class="btn btn-default btn--brown">Login</button>
-				</div>
-				<div>
-					<button class="btn btn-default btn--brown">Order</button>
-				</div>
-				<div>
-					<button class="btn btn-default btn--brown">Details</button>
-				</div>
-				<div>
-					<button class="btn btn-default btn--brown">Payment</button>
-				</div>
-			</div>
-			<div class="login-tab">
-				<div class="col-md-4">
-					<form>
-						<div class="form-group">
-							<input type="text" placeholder="Username">
-						</div>
-						<div class="form-group">
-							<input type="text" placeholder="Password">
-						</div>
-						<p><a href="">Forgot Password?</a></p>
-						<button>log in</button>
-						<p>or</p>
-					</form>
-				</div>
-				<div class="col-md-4">
-				</div>
-			</div>
-			<!--<div class="order-tab">
-			</div>
-			<div class="detail-tab">
+    <div>
+        <img src="img/checkout/checkout-bg.jpg" alt="" class="img-responsive">
+    </div>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3" ng-init="view='loginTab'">
+                    <div>
+                        <button class="btn btn-default btn--brown btn-block" ng-click="view='loginTab'">Login</button>
+                    </div>
+                    <div>
+                        <button class="btn btn-default btn--brown btn-block" ng-click="view='orderTab'">Order</button>
+                    </div>
+                    <div>
+                        <button class="btn btn-default btn--brown btn-block">Details</button>
+                    </div>
+                    <div>
+                        <button class="btn btn-default btn--brown btn-block">Payment</button>
+                    </div>
+                </div>
+                <div class="login-tab" ng-if="view=='loginTab'">
+                    <div class="col-md-3 col-md-offset-1">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" placeholder="Username" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" placeholder="Password" class="form-control">
+                            </div>
+                            <p><a href="">Forgot Password?</a></p>
+                            <div>
+                                <button class="btn btn-default btn-block">log in</button>
+                            </div>
+                            <p>or</p>
+                            <div>
+                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                                <i class="fa fa-google-plus" aria-hidden="true"></i>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-3 col-md-offset-1">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" placeholder="Username" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Email Address" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Mobile" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" placeholder="Password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" placeholder="Confirm Password" class="form-control">
+                            </div>
+                            <p>I agree with the terms and conditions and privacy policy</p>
+                            <div>
+                                <button class="btn btn-default btn-block">log in</button>
+                            </div>
+                            <p>or</p>
+                        </form>
+                    </div>
+                </div>
+                <div class="order-tab" ng-if="view=='orderTab'">
+                    <div class="col-md-9">
+                        <table class="table package-table">
+                            <thead>
+                                <tr>
+                                    <th>ITEM</th>
+                                    <th>Particulars</th>
+                                    <th>Quantity</th>
+                                    <th>Amount</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="cart in myCart">
+                                    <td>{{cart.serial}}</td>
+                                    <td>
+                                        <div class="text-left">
+                                            <div class="table__img display-inblock">
+                                                <img src="{{cart.image}}" alt="" class="img-responsive">
+                                            </div>
+                                            <div class="table__text display-inblock">
+                                                <span>{{cart.particulars}}</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <i class="fa fa-minus display-inblock square__bg" aria-hidden="true"></i>
+                                        <div class="display-inblock">
+                                            <form>
+                                                <div class="form-group marg0">
+                                                    <input type="text" class="form-control quantity__input">
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <i class="fa fa-plus display-inblock square__bg" aria-hidden="true"></i>
+                                    </td>
+                                    <td><span>{{cart.amount}}</span></td>
+                                    <td><span>{{cart.total}}</span></td>
+                                    <td>
+                                        <i class="fa fa-trash-o display-inblock" aria-hidden="true"></i>
+                                        <div class="display-inblock">
+                                            Remove
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="6"><span>Subtotal: $170.98</span></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="detail-tab">
 			</div>
 			<div class="payment-tab">
 			</div>-->
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
