@@ -29,7 +29,7 @@
                 <div>
                     <div class="inline-block">
                         <div class="navbar__sideNav">
-                            <span class="icon-bar navbar"></span>
+                            <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </div>
@@ -39,17 +39,23 @@
                     </div>
                 </div>
             </div>
+
             <div class="navbar__search-bar">
-                <div class="form-group">
-                    <input type="text" class="form-control">
-                </div>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control">
+                    </div>
+                </form>
             </div>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
-                <li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i>wishlist</a></li>
-                <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true">cart</i></a></li>
-                <li><a><button class="btn btn-default">LOGIN</button></a></li>
-            </ul>
+
+            <div class="collapse navbar-collapse" id="nav-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><i class="fa fa-search" aria-hidden="true">&nbsp</i></a></li>
+                    <li><a href="#"><i class="fa fa-heart" aria-hidden="true">&nbsp Wishlist</i></a></li>
+                    <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true">&nbsp Cart&nbsp (3)</i></a></li>
+                    <li><a><button class="btn btn--brown">LOGIN</button></a></li>
+                </ul>
+            </div>
             <!--<div class="collapse navbar-collapse" id="nav-collapse">
                 <div ng-include="template.menu" class="template menu"></div>
             </div>-->
