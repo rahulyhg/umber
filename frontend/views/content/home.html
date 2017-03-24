@@ -31,14 +31,24 @@
 </div>-->
 <section>
     <div class="cloth-cat">
-        <flex-slider flex-slide="s in mySlides" prev-text="" next-text="">
-            <li>
-                <img ng-src="{{s}}" class="img-full">
-            </li>
-        </flex-slider>
-        <div class="cloth-cat__descrp">
+        <flex-slider flex-slide="cloth in clothCat track by $index" prev-text="" next-text="" animation="slide">
 
-        </div>
+            <li>
+                <div class=" cloth-cat__banner-detail relate">
+                    <img ng-src="{{cloth.img}}" alt="" class="img-responsive">
+                    <div class="get-center text-uppercase">
+                        <h1>{{cloth.shirtType}}</h1>
+                        <h3>{{cloth.disc}}</h3>
+                        <p><button class="btn shop--now">{{cloth.buttonText}}</button></p>
+                    </div>
+                </div>
+            </li>
+            <!--<div class="cloth-cat__descrp">
+                <h1>{{cloth.shirtType}}</h1>
+                <h3>{{cloth.disc}}</h3>
+                <p><button class="btn shop--now">{{cloth.buttonText}}</button></p>
+            </div>-->
+        </flex-slider>
     </div>
 
     <!--<div class="flex-container">
@@ -51,3 +61,154 @@
 		<div class="block">5</div>
 	</div>-->
 </section>
+<!--start of new arrivals-->
+<section class="new-arrival">
+    <div class="new-arrival__title text-center">
+        <h1 class="text-uppercase">new arrivals</h1>
+    </div>
+    <div class="new-arrival__img">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9 pull-right new-arrival__slider">
+                    <div class="">
+                        <flex-slider flex-slide="new in newArrival track by $index" prev-text="" next-text="" animation="slide" item-width="250"
+                            item-margin="25" min-items="3">
+                            <li>
+                                <div class=" new-arrival__banner-detail relate">
+                                    <img ng-src="{{new.img}}" alt="" class="img-responsive">
+                                    <div class="get-left">
+                                        <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
+                                        <h4>{{new.type}}</h4>
+
+                                    </div>
+                                </div>
+                            </li>
+                        </flex-slider>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--end of new arrivals-->
+<!--start of Featured Cloth section-->
+<section>
+    <div class="featured">
+        <div class="container">
+            <div class="row">
+                <div class="featured__title text-center">
+                    <h1 class="text-uppercase">featured</h1>
+                </div>
+            </div>
+            <div class="featured__slider">
+                <flex-slider flex-slide="new in featured track by $index" prev-text="" next-text="" animation="slide" item-width="275" item-margin="25"
+                    min-items="3">
+                    <li class="relate">
+                        <div class="featured__banner-detail relate">
+                            <img ng-src="{{new.img}}" alt="" class="img-responsive">
+                            <div class="featured__cloth-desc">
+                                <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
+                                <h4>{{new.type}}</h4>
+                            </div>
+                            <div class="featured__icon-heart">
+                                <i class="fa fa-heart" aria-hidden="true"></i>
+                            </div>
+                            <div class="featured__icon-cart">
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </li>
+                </flex-slider>
+                <p class="text-center">
+                    <button class="btn text-uppercase view--more">view more</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End of Featured Cloth section-->
+<!--Start of Cloth Buy section-->
+<section>
+    <div class="cloth-buy">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 paddrt">
+                    <img src="../img/home/15.jpg" alt="" class="img-responsive">
+                </div>
+                <div class="col-md-5 paddlt">
+                    <div class="cloth-buy__title text-center">
+                        <h1 class="text-uppercase">buy the look</h1>
+                    </div>
+                    <div class="cloth-buy__desc">
+                        <h2>LOREM IPSUM IS DUMMY</h2>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                            the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                            of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+                            but also the leap into electronic typesetting, remaining essentially unchanged.
+                        </p>
+                        <p>
+                            <button class="btn text-uppercase buy--now">buy now</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End of Cloth Buy section-->
+<!--Start of Blog section-->
+<article>
+    <div class="blog">
+        <div class="container">
+            <div class="blog__title text-center">
+                <h1 class="text-uppercase">blogs</h1>
+            </div>
+            <div class="blog__slider">
+                <flex-slider flex-slide="x in blogs track by $index" prev-text="" next-text="" animation="slide" item-width="400" min-items="3">
+                    <li class="relate">
+                        <div class="blog__banner-detail relate">
+                            <img ng-src="{{x.img}}" alt="" class="img-responsive">
+                            <div class="blog__desc">
+                                <h3>{{x.heading}}</h3>
+                                <p>{{x.para}}</p>
+                                <p>Read more &rarr;</p>
+                            </div>
+                        </div>
+                    </li>
+                </flex-slider>
+            </div>
+        </div>
+    </div>
+</article>
+<!--End of Blog section-->
+<!--Start of Sale section-->
+<section>
+    <div class="sale">
+        <div class="container">
+            <div class="sale__title text-center">
+                <h1 class="text-uppercase">sale</h1>
+            </div>
+
+            <div class="sale__slider">
+                <flex-slider flex-slide="new in sale track by $index" prev-text="" next-text="" animation="slide" item-width="215" item-margin="25"
+                    min-items="3">
+                    <li class="relate">
+                        <div class="sale__banner-detail relate">
+                            <img ng-src="{{new.img}}" alt="" class="img-responsive">
+                            <div class="sale__cloth-desc">
+                                <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
+                                <h4>{{new.type}}</h4>
+                            </div>
+                        </div>
+                    </li>
+                </flex-slider>
+                <p class="text-center">
+                    <button class="btn text-uppercase view--more">view more</button>
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!--End of Sale section-->

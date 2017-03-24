@@ -8,8 +8,10 @@ $brand-info: #000072 !default;
 $darkBrown1: #341314;
 $darkBrown2: #331313;
 $lightBrown: #7f3836;
+$lightBrown2: #681214;
 $whiteBrown1: #aa7f80;
-$whiteBrown2:#5d4243;
+$whiteBrown2:#806b6c;
+$whiteBrown3:#5d4243;
 $darkGray: #252525;
 $lightGray: #aeadad;
 $white: #ffffff;
@@ -118,6 +120,16 @@ $mgLt) {
     }
 } // need to pass true or false like @include block(true);
 //end of Mixins CSS finctions
+// CSS classes
+.relate {
+    position: relative;
+}
+
+.padd0 {
+    padding: 0;
+}
+
+//End of CSS classes
 body {
     padding-top: 70px;
     font-family: 'vadodara-regular';
@@ -159,13 +171,92 @@ a,
 
 footer {
     font-size: 12px;
-    background-color: #eee;
+    background-color: $lightBrown2;
+    color: $white;
     padding: 10px 0;
+    a {
+        color: $white;
+        text-decoration: none;
+        &:hover {
+            color: $white;
+            text-decoration: none;
+        }
+    }
     p {
-        margin: 0;
+        // margin: 0;
+        margin: 5px 0;
+    }
+    .share-link__social-icon {
+        i {
+            padding: 5px 7px;
+            margin: 0 3px;
+            border: 1px dashed $white;
+            @include font(normal,
+            600,
+            14px,
+            FontAwesome);
+            width: 28px;
+        }
     }
 }
 
+//start of footermenu
+.footer-up {
+    background-color: $darkBrown1;
+    h5 {
+        @include font(normal,
+        900,
+        inherit,
+        inherit);
+        color: $white;
+    }
+    .contact--btn {
+        @extend .btn--brown;
+    }
+    a[href] {
+        color: $whiteBrown2;
+    }
+    p {
+        color: $whiteBrown2;
+    }
+    address {
+        color: $whiteBrown2;
+    }
+    .inline-block {
+        vertical-align: top; // width: 19%;
+    }
+    .footer-up__abt-shop {
+        width: 33%;
+        @include padding(25px);
+    }
+    .footer-up__cstmr-serv,
+    .footer-up__info,
+    .footer-up__my-account,
+    .footer-up__contact {
+        width: 12%;
+        @include padding(25px 0);
+        .list-unstyled {
+            li {
+                color: $whiteBrown2;
+                @include padding(4px 0);
+            }
+        }
+    }
+    .footer-up__img {
+        width: 280px;
+        top: -28px;
+        position: absolute;
+        right: -15px;
+    } // .footer-up__info{
+    //     width: 17%;
+    //     @include padding(25px);
+    // }
+    .inline-block+.inline-block {
+        margin-left: 10px;
+    }
+}
+
+//end of footermenu
 //bootstrap forms
 .input-lg,
 .input-group-lg>.form-control,
@@ -238,6 +329,10 @@ header {
     display: inline-block;
 }
 
+.marg0 {
+    margin: 0;
+}
+
 .btn--brown {
     @include button-variant($darkBrown1,
     #ededed,
@@ -301,9 +396,212 @@ header {
 
 //END of navigation menu
 //Start of Clothes Categories
-.cloth-cat {}
+.cloth-cat {
+    .get-center {
+        @include position(absolute,
+        60% null null 50%);
+        @include transform(translate(20%,
+        -50%));
+        .shop--now {
+            @extend .btn--brown;
+        }
+    }
+}
 
 //End of  Clothes Categories
+//start of new New arrival section
+.new-arrival {
+    .new-arrival__title {
+        h1 {
+            color: $darkBrown1;
+            @include margin(20px 0 25px);
+        }
+    }
+    .new-arrival__img {
+        background-image: url('../img/home/7.jpg');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 100%;
+        height: auto;
+    }
+    .new-arrival__slider {
+        background-color: rgba(0, 0, 0, 0.5);
+        .flexslider-container {
+            padding: 100px 100px 0;
+            .flexslider {
+                background: transparent;
+                border: none;
+            }
+        }
+        .new-arrival__banner-detail {
+            h3,
+            h4 {
+                @include font(normal,
+                600,
+                null,
+                inherit);
+                color: $white;
+            }
+            i {
+                padding-right: 10px;
+            }
+        }
+    }
+}
+
+//end of new New arrival section
+//Start of Featured section
+.featured {
+    .featured__title {
+        h1 {
+            color: $darkBrown1;
+            @include margin(20px 0 25px);
+        }
+    }
+    .featured__banner-detail {
+        .featured__cloth-desc {
+            h3 {
+                color: $darkBrown1;
+                i {
+                    padding-right: 6px;
+                }
+            }
+            h4 {
+                color: $darkGray;
+            }
+        }
+        .featured__icon-heart {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 35px;
+            height: 35px;
+            padding: 6px;
+            text-align: center;
+            color: $darkBrown2;
+            @include font(normal,
+            null,
+            18px,
+            FontAwesome);
+        }
+        .featured__icon-cart {
+            position: absolute;
+            bottom: 75px;
+            right: 0;
+            width: 35px;
+            height: 35px;
+            padding: 6px;
+            text-align: center;
+            color: $white;
+            background-color: $darkBrown2;
+            @include font(normal,
+            null,
+            18px,
+            FontAwesome); // need to ask
+            // top: 73%;
+            // bottom: 18%;
+            // right: 0;
+            // left: 84%
+        } // [class|="featured__icon"] {
+        //     opacity: 1;
+        // }       
+    }
+    .view--more {
+        // button
+        @extend .btn--brown;
+        width: 135px;
+    }
+}
+
+//End of Featured section
+//Start of cloth Buy
+.cloth-buy {
+    .paddrt {
+        @include padding(null 0 null 15px);
+    }
+    .paddlt {
+        @include padding(null 15px null 0px);
+    }
+    .cloth-buy__title {
+        h1 {
+            color: $darkBrown1;
+            @include margin(20px 0 25px);
+        }
+    }
+    .cloth-buy__desc {
+        h2 {
+            color: $darkBrown1;
+        }
+        padding: 55px;
+        background-color: #ededed;
+        .buy--now {
+            // button-design
+            @extend .btn--brown;
+        }
+    }
+}
+
+//End of Cloth Buy 
+//Start of Blog section design
+.blog {
+    .blog__title {
+        h1 {
+            color: $darkBrown1;
+            @include margin(20px 0 25px);
+        }
+    }
+    .blog__banner-detail {
+        .blog__desc {
+            // p:nth-child(2) {
+            //     &:after {
+            //         content: '\U+02192';
+            //     }
+            // }
+            color: $white;
+            background-color: $darkBrown1;
+            @include padding(1px 35px);
+            height: 176px;
+        }
+    }
+}
+
+//End of Blog section design
+//Start of Sale section design
+.sale {
+    background-color: #ededed;
+    .sale__title {
+        h1 {
+            color: $darkBrown1;
+            @include margin(20px 0 25px);
+        }
+    }
+    .sale__slider {
+        .flexslider-container {
+            //padding: 100px 100px 0;
+            .flexslider {
+                background: transparent;
+                border: none;
+            }
+        }
+        .sale__banner-detail {
+            h3 {
+                color: $darkBrown1;
+                i {
+                    @include padding(0 6px 0 0);
+                }
+            }
+            h4 {
+                color: #bbbbbb;
+            }
+        }
+    }
+    .view--more {
+        @extend .btn--brown;
+    }
+}
+
+////End of Sale section design
 .flex-container {
     display: flex;
     flex-direction: column;
@@ -325,14 +623,134 @@ header {
 }
 
 //Start of footer
-.footer-up {
-    .inline-block {
-        vertical-align: top;
-        width: 19%;
+// .footer-up {
+//      a[href]{
+//          color:
+//      }
+//     .inline-block {
+//         vertical-align: top; // width: 19%;
+//     }
+//     .footer-up__abt-shop {
+//         width: 35%;
+//         @include padding(25px);
+//     }
+//     .footer-up__cstmr-serv,
+//     .footer-up__info,
+//     .footer-up__my-account,
+//     .footer-up__contact {
+//         width: 12%;
+//         @include padding(25px 0);
+//     } // .footer-up__info{
+//     //     width: 17%;
+//     //     @include padding(25px);
+//     // }
+//     .list-unstyled {
+//         li {
+//             @include padding(4px 0);
+//         }
+//     }
+//     .inline-block+.inline-block {
+//         margin-left: 10px;
+//     }
+// }
+//End of footer
+//START of check out
+.checkout {
+    .content-spacing {
+        margin: 40px 0 70px;
+        .btn--brown {
+            margin-bottom: 10px;
+        }
     }
-    .inline-block+.inline-block {
-        margin-left: 10px;
+    .order-table {
+        .item {
+            .item__img {
+                width: 120px;
+                margin: 0 auto;
+            }
+        }
+        tbody>tr {
+            td {
+                border: 1px solid #ddd;
+                border-right: none;
+            }
+            td+td {
+                border-left: none;
+            }
+            td:last-child {
+                border-right: 1px solid #ddd;
+            }
+        }
+    }
+    .customized-form {
+        .form-control {
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: 1px solid $darkBrown1;
+        }
+        .btn--brown {
+            @include button-variant($white,
+            $darkBrown1,
+            $white);
+            &:hover {
+                color: $white;
+                background-color: lighten($darkBrown1, 10%);
+            }
+            &:focus {
+                outline: none; // @include button-variant($white $darkBrown1,
+                // $white);
+                // color: $white;
+                // background-color: lighten($darkBrown1, 10%);
+            }
+        }
+        .border-line {
+            position: relative;
+            text-align: center;
+            font-size: 18px;
+            &:before {
+                content: '';
+                display: block;
+                position: absolute;
+                border: 1px solid;
+                width: 40%;
+                top: 50%;
+                left: 0;
+            }
+            &:after {
+                content: '';
+                display: block;
+                position: absolute;
+                border: 1px solid;
+                width: 40%;
+                top: 50%;
+                right: 0;
+            }
+        }
+        .social-icons {
+            text-align: center;
+            .social-icons__list {
+                width: 50px;
+                height: 50px; // background: tomato;
+                border-radius: 50%;
+                text-align: center;
+                font-size: 24px;
+                line-height: 50px;
+                a {
+                    color: $white;
+                }
+            }
+            .fb {
+                background: #3b5997;
+            }
+            .tw {
+                background: #3fa9f5;
+            }
+            .gp {
+                background: #de4b39
+            }
+        }
     }
 }
 
-//End of footer
+//END of check out
