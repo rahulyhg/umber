@@ -1,52 +1,64 @@
-//scss for mycart
- .mycart-table>thead>tr>th,
- {
-     text-align: center;
-     border: none;
- }
- 
- .bg-mycart {
-     background: url("../img/cart/mycart-bg.jpg");
-     background-repeat: no-repeat;
-     min-height: 436px;
-     background-size: cover;
-     background-position: 100% 100%;
- }
- 
- .mycart-container {
-     padding: 50px 0 100px 0px;
- }
- 
- .mycart-table {
-     .quantity__input {
-         text-align: center;
-         width: 45px;
-         height: 45px;
-         margin: 0 4px;
-     }
-     .square__bg {
-         border: 1px solid #ddd;
-         padding: 5px;
-         font-size: 10px;
-     }
-     .display-inblock {
-         background-position: 100% 100%;
-         display: inline-block;
-     }
-     thead,
-     tbody {
-         tr {
-             td {
-                 border: 1px solid #ddd;
-                 border-right: none;
-                 text-align: center;
-             }
-             td+td {
-                 border-left: none;
-             }
-             td:last-child {
-                 border-right: 1px solid #ddd;
-             }
-         }
-     }
- }
+ //scss for mycart
+.mycart-table>thead>tr>th,
+{
+    text-align: center;
+    border: none;
+}
+
+.bg-mycart {
+    background: url("../img/cart/mycart-bg.jpg");
+    background-repeat: no-repeat;
+    min-height: 436px;
+    background-size: cover;
+    background-position: 100% 100%;
+}
+
+.mycart-container {
+    padding: 50px 0 100px 0px;
+}
+
+.tr-border {
+    border-top: none;
+}
+
+.td-border {
+    border-left: none !important;
+}
+
+.mycart-table {
+    .quantity__input {
+        text-align: center;
+        width: 45px;
+        height: 45px;
+        margin: 0 4px;
+    }
+    .square__bg {
+        border: 1px solid #ddd;
+        padding: 5px;
+        font-size: 10px;
+    }
+    .display-inblock {
+        background-position: 100% 100%;
+        display: inline-block;
+    }
+    thead,
+    tbody {
+        tr {
+            //border-top: 1px solid #ddd;
+            td {
+                border: 1px solid #ddd;
+                border-right: none;
+                text-align: center;
+            }
+            td+td {
+                border-left: none;
+            }
+            td:last-child {
+                border-right: 1px solid #ddd;
+            }
+            th:last-child {
+                border-right: 1px solid #ddd;
+            }
+        }
+    }
+}
