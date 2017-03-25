@@ -14,7 +14,7 @@
                             <button class="btn btn-default btn--brown btn-block" ng-click="view='orderTab'">Order</button>
                         </div>
                         <div>
-                            <button class="btn btn-default btn--brown btn-block">Details</button>
+                            <button class="btn btn-default btn--brown btn-block" ng-click="view='detailTab'">Details</button>
                         </div>
                         <div>
                             <button class="btn btn-default btn--brown btn-block">Payment</button>
@@ -146,12 +146,193 @@
                             </table>
                         </div>
                     </div>
+                    <div class="detail-tab" ng-if="view=='detailTab'">
+                        <div class="col-md-8 col-md-offset-1">
+                            <div class="details-form">
+                                <div>
+                                    <h3 class="marg0 detail-tab__head">your details</h3>
+                                </div>
+                                <div class="row">
+                                    <div class="customized-form">
+                                        <div class="form-group">
+                                            <div class="col-md-4">
+                                                <input type="text" placeholder="First Name" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-4">
+                                                <input type="email" placeholder="Last Name" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="customized-form">
+                                        <div class="form-group">
+                                            <div class="col-md-4">
+                                                <input type="text" placeholder="Mobile No" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-4">
+                                                <input type="email" placeholder="Last Name" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details-form">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div>
+                                            <h3 class="marg0 detail-tab__head">billing address</h3>
+                                        </div>
+                                        <div class="row">
+                                            <div class="customized-form">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <input type="text" placeholder="Line 1*" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="customized-form">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <input type="text" placeholder="Line 2" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="customized-form">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <input type="text" placeholder="Line 3" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="customized-form">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <input type="text" placeholder="City*" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="customized-form">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <input type="text" placeholder="State" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="customized-form">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <input type="text" placeholder="Country" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div>
+                                            <h3 class="marg0 detail-tab__head">shipping address</h3>
+                                        </div>
+                                        <div class="row">
+                                            <div class="customized-form">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <input type="text" placeholder="Line 1*" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="customized-form">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <input type="text" placeholder="Line 2" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="customized-form">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <input type="text" placeholder="Line 3" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="customized-form">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <input type="text" placeholder="City*" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="customized-form">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <input type="text" placeholder="State" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="customized-form">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <input type="text" placeholder="Country" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details-form">
+                                <div>
+                                    <h3 class="marg0 detail-tab__head">payment method</h3>
+                                </div>
+                                <div class="payment-checkbox">
+                                    <form class="font__style">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" value="" class="">Credit card
+                                        </label>
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" value="">Debit card
+                                        </label>
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" value="">net banking
+                                        </label>
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" value="">cash on delivery
+                                        </label>
+                                    </form>
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn btn-default checkout__cont-btn">Continue</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!--<div class="detail-tab">
-			</div>
-			<div class="payment-tab">
-			</div>-->
         </div>
     </div>
+    <!--<div class="payment-tab">
+			</div>-->
 </div>
