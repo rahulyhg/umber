@@ -375,12 +375,119 @@ header {
     }
 }
 
+.customized-form {
+    .form-control {
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 1px solid $darkBrown1;
+    }
+    .btn--brown {
+        @include button-variant($white,
+        $darkBrown1,
+        $white);
+        &:hover {
+            color: $white;
+            background-color: lighten($darkBrown1, 10%);
+        }
+        &:focus {
+            outline: none; // @include button-variant($white $darkBrown1,
+            // $white);
+            // color: $white;
+            // background-color: lighten($darkBrown1, 10%);
+        }
+    }
+}
+
+.order-table {
+    .item {
+        p {
+            text-align: center;
+            padding: 0px;
+            margin: 0;
+        }
+        .item__img {
+            width: 120px;
+            margin: 0 auto;
+        }
+    }
+    thead> {
+        tr:first-child {
+            border-top: 1px solid #bfbfbf;
+            background: #ddd;
+        }
+    }
+    th {
+        border: 1px solid #bfbfbf;
+        border-right: none;
+        color: $darkBrown1;
+        font-family: fjalla-reg;
+        font-size: 19px;
+        font-weight: 400;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    th+th {
+        border-left: none;
+    }
+    th:last-child {
+        border-right: 1px solid #bfbfbf;
+    }
+    tbody>tr {
+        td {
+            border: 1px solid #bfbfbf;
+            border-right: none;
+            vertical-align: middle;
+            color: $darkBrown1;
+            font-size: 20px;
+            p {
+                font-size: 12px;
+            }
+        }
+        td+td {
+            border-left: none;
+            text-align: center;
+            border-left: none;
+            border-bottom: none;
+            vertical-align: bottom;
+        }
+        td:last-child {
+            border-right: 1px solid #bfbfbf;
+        }
+    }
+}
+
+.mycart-table {
+    @extend .order-table;
+    tbody>tr {
+        td:last-child {
+            border-top: 0;
+            border-left: 0; // padding: 0;
+        }
+    }
+    td:last-child {
+        vertical-align: bottom;
+    }
+    .mycart-list {
+        li {
+            list-style-type: none;
+        }
+    }
+    .mycart-footer {
+        ul {
+            color: $darkBrown1;
+        }
+    }
+}
+
 // End of Global CSS Classes
 // start of navigation menu
 .navbar {
+    background-color: $white;
+    border-color: transparent;
     .navbar-header {
         .navbar-brand {
-            @include padding(5px 2px 5px 2px);
+            @include padding(7px 2px 5px);
             @include size(null,
             auto);
         }
@@ -420,7 +527,7 @@ header {
         }
         i {
             color: $darkBrown2;
-            margin: 6px 0;
+            @include margin(14px 0 0);
         }
         .header--login {
             @extend .btn--brown;
@@ -955,108 +1062,6 @@ header {
         margin: 40px 0 70px;
         .btn--brown {
             margin-bottom: 10px;
-        }
-    }
-    .order-table {
-        .item {
-            p {
-                text-align: center;
-                padding: 0px;
-                margin: 0;
-            }
-            .item__img {
-                width: 120px;
-                margin: 0 auto;
-            }
-        }
-        thead> {
-            tr:first-child {
-                border-top: 1px solid #bfbfbf;
-                background: #ddd;
-            }
-        }
-        th {
-            border: 1px solid #bfbfbf;
-            border-right: none;
-            color: $darkBrown1;
-            font-family: fjalla-reg;
-            font-size: 19px;
-            font-weight: 400;
-        }
-        th+th {
-            border-left: none;
-        }
-        th:last-child {
-            border-right: 1px solid #bfbfbf;
-        }
-        tbody>tr {
-            td {
-                border: 1px solid #bfbfbf;
-                border-right: none;
-                vertical-align: middle;
-                color: $darkBrown1;
-                font-size: 20px;
-                p {
-                    font-size: 12px;
-                }
-            }
-            td+td {
-                border-left: none;
-            }
-            td:last-child {
-                border-right: 1px solid #bfbfbf;
-            }
-        }
-    }
-    .mycart-table {
-        @extend .order-table;
-        tbody>tr {
-            td:last-child {
-                border-top: 0;
-                border-left: 0; // padding: 0;
-            }
-        }
-        td:last-child {
-            vertical-align: bottom;
-        }
-        tbody>tr td+td {
-            text-align: center;
-            border-left: none;
-            border-bottom: none;
-            vertical-align: bottom;
-        }
-        .mycart-list {
-            li {
-                list-style-type: none;
-            }
-        }
-        .mycart-footer {
-            ul {
-                color: $darkBrown1;
-            }
-        }
-    }
-    .customized-form {
-        .form-control {
-            border-top: none;
-            border-left: none;
-            border-right: none;
-            border-bottom: 1px solid $darkBrown1;
-        }
-        .btn--brown {
-            @include button-variant($white,
-            $darkBrown1,
-            $white);
-            &:hover {
-                color: $white;
-                background-color: lighten($darkBrown1, 10%);
-            }
-            &:focus {
-                outline: none; // @include button-variant($white $darkBrown1,
-                // $white);
-                // color: $white;
-                // background-color: lighten($darkBrown1, 10%);
-            }
         }
     }
 }
