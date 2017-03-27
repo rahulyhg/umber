@@ -1,0 +1,24 @@
+<div class="mycart-header">
+    <h4>YOU ARE ENTITLED FOR 1 PRODUCT</h4>
+    <div class="cross" ng-click="$dismiss();">
+        <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+    </div>
+</div>
+<div class="mycart-modal">
+    <div class="container-fluid">
+        <div class="mycart-modal-container">
+            <div class="row" ng-repeat="mycartmodal1 in newA">
+                <div class="col-md-3" ng-repeat="mycart in mycartmodal1">
+
+                    <div class="mycart-modal">
+                        <img ng-src="{{mycart.img}}" alt="" class="img-responsive item__img">
+                        <p class="text-left">{{mycart.title1}}</p>
+                        <p class="text-left">{{mycart.title2}}</p>
+                        <button class="btn btn-default btn--brown text-uppercase btn-block">add to cart</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

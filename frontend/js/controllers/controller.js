@@ -121,31 +121,31 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.blogs = [{
                 img: '../img/home/16.jpg',
                 heading: 'Lorem Ipsum is simply dummy text',
-                para: 'Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text'
+                para: 'Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text, Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text'
             },
             {
                 img: '../img/home/17.jpg',
                 heading: 'Lorem Ipsum is simply dummy text',
-                para: 'Lorem Ipsum is simply dummy text'
+                para: 'Lorem Ipsum is simply dummy text, Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text'
             },
             {
                 img: '../img/home/18.jpg',
                 heading: 'Lorem Ipsum is simply dummy text',
-                para: 'Lorem Ipsum is simply dummy text'
+                para: 'Lorem Ipsum is simply dummy text, Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text'
             }, {
                 img: '../img/home/16.jpg',
                 heading: 'Lorem Ipsum is simply dummy text',
-                para: 'Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text'
+                para: 'Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text, Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text'
             },
             {
                 img: '../img/home/17.jpg',
                 heading: 'Lorem Ipsum is simply dummy text',
-                para: 'Lorem Ipsum is simply dummy text'
+                para: 'Lorem Ipsum is simply dummy text, Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text'
             },
             {
                 img: '../img/home/18.jpg',
                 heading: 'Lorem Ipsum is simply dummy text',
-                para: 'Lorem Ipsum is simply dummy text'
+                para: 'Lorem Ipsum is simply dummy text, Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text'
             }
         ];
         $scope.sale = [{
@@ -198,6 +198,74 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         ];
         //$scope.byTheLook = [{text: '', para: ''},]
     })
+    .controller('BuythelookCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.getHTML("content/buythelook.html");
+        TemplateService.title = "Buythelook"; //This is the Title of the Website
+        $scope.navigation = NavigationService.getNavigation();
+
+        $scope.buyshirt = [{
+                img: '../img/buy/2.jpg',
+            },
+            {
+                img: '../img/buy/3.jpg',
+            },
+            {
+                img: '../img/buy/4.jpg',
+            },
+        ]
+        $scope.trouser = [{
+                img: '../img/buy/3.jpg',
+            },
+            {
+                img: '../img/buy/4.jpg',
+            },
+            {
+                img: '../img/buy/5.jpg',
+            },
+        ]
+        $scope.blazer = [{
+                img: '../img/buy/4.jpg',
+            },
+            {
+                img: '../img/buy/5.jpg',
+            },
+            {
+                img: '../img/buy/6.jpg',
+            },
+        ]
+        $scope.derbys = [{
+                img: '../img/buy/5.jpg',
+            },
+            {
+                img: '../img/buy/6.jpg',
+            },
+            {
+                img: '../img/buy/7.jpg',
+            },
+        ]
+        $scope.belt = [{
+                img: '../img/buy/6.jpg',
+            },
+            {
+                img: '../img/buy/7.jpg',
+            },
+            {
+                img: '../img/buy/5.jpg',
+            },
+        ]
+        $scope.glasses = [{
+                img: '../img/buy/7.jpg',
+            },
+            {
+                img: '../img/buy/6.jpg',
+            },
+            {
+                img: '../img/buy/5.jpg',
+            },
+        ]
+    })
+
+
     .controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.getHTML("content/checkout.html");
         TemplateService.title = "Checkout"; //This is the Title of the Website
@@ -221,10 +289,82 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             subtotal: 'Rs. 2,899'
         }]
     })
-    .controller('MycartCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+    .controller('MycartCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
         $scope.template = TemplateService.getHTML("content/mycart.html");
         TemplateService.title = "Mycart"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
+
+        $scope.mycartTable = [{
+            img: 'img/checkout/item.jpg',
+            title1: 'FLORENCE PRINTS',
+            title2: 'HALF SLEEVE SHIRTS',
+            color: 'BLUE',
+            size: 'XL',
+            quantity: '02',
+            subtotal: 'Rs. 2,899'
+        }, {
+            img: 'img/checkout/item.jpg',
+            title1: 'FLORENCE PRINTS',
+            title2: 'HALF SLEEVE SHIRTS',
+            color: 'BLUE',
+            size: 'XL',
+            quantity: '02',
+            subtotal: 'Rs. 2,899'
+        }]
+        $scope.mycartmodal = [{
+                img: 'img/cart/1.jpg',
+                title1: 'WALLET MODERN CORNER ZIP',
+                title2: '',
+            },
+            {
+                img: 'img/cart/2.jpg',
+                title1: 'WALLET MODERN CORNER ZIP',
+                title2: '',
+            }, {
+                img: 'img/cart/3.jpg',
+                title1: 'WALLET MODERN CORNER ZIP',
+                title2: '',
+            },
+            {
+                img: 'img/cart/4.jpg',
+                title1: 'WALLET MODERN CORNER ZIP',
+                title2: '',
+            },
+            {
+                img: 'img/cart/5.jpg',
+                title1: 'WALLET MODERN CORNER ZIP',
+                title2: '',
+            },
+            {
+                img: 'img/cart/6.jpg',
+                title1: 'WALLET MODERN CORNER ZIP',
+                title2: '',
+            },
+            {
+                img: 'img/cart/7.jpg',
+                title1: 'WALLET MODERN CORNER ZIP',
+                title2: '',
+            },
+            {
+                img: 'img/cart/8.jpg',
+                title1: 'WALLET MODERN CORNER ZIP',
+                title2: '',
+            }
+        ]
+        $scope.newA = _.chunk($scope.mycartmodal, 4);
+        console.log("$scope.newA ", $scope.newA);
+
+        $scope.openUpload = function () {
+            console.log("clla");
+            $uibModal.open({
+                animation: true,
+                templateUrl: 'views/modal/mycartmodal.html',
+                scope: $scope,
+                size: 'md',
+                // windowClass: 'modal-content-radi0'
+            });
+        };
+
 
     })
     .controller('FormCtrl', function ($scope, TemplateService, NavigationService, $timeout) {

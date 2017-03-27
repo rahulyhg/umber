@@ -33,6 +33,11 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             templateUrl: tempateURL,
             controller: 'MycartCtrl'
         })
+        .state('buythelook', {
+            url: "/buythelook",
+            templateUrl: tempateURL,
+            controller: 'BuythelookCtrl'
+        })
         .state('form', {
             url: "/form",
             templateUrl: tempateURL,

@@ -3,7 +3,7 @@
     </div>
     <div class="container">
         <div class="mycart-container">
-            <table class="table table-bordered mycart-table">
+            <table class="table mycart-table">
                 <thead>
                     <tr>
                         <th>ITEM</th>
@@ -13,7 +13,45 @@
                         <th>SUBTOTAL</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody ng-repeat="mycart in mycartTable">
+                    <tr>
+                        <td rowspan="2">
+                            <div class="item">
+                                <img ng-src="{{mycart.img}}" alt="" class="img-responsive item__img">
+                                <p class="item__title1">{{mycart.title1}}</p>
+                                <p class="item__title2">{{mycart.title2}}</p>
+                            </div>
+                        </td>
+                        <td>{{mycart.color}}</td>
+                        <td>{{mycart.size}}</td>
+                        <td>
+
+                            <i class="fa fa-minus display-inblock square__bg" aria-hidden="true"></i>
+                            <div class="display-inblock">
+                                <form>
+                                    <div class="form-group marg0">
+                                        <input type="text" class="form-control quantity__input" ng-model="mycart.quantity">
+                                    </div>
+                                </form>
+                            </div>
+                            <i class="fa fa-plus display-inblock square__bg" aria-hidden="true"></i>
+
+
+                        </td>
+                        <td>{{mycart.subtotal}}</td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="td-border">
+                            <div class="pull-right">
+                                <button class=" btn btn-default btn--brown text-uppercase" ng-click="openUpload();"> <i class="fa fa-heart" aria-hidden="true"></i>ADD TO WISHLIST</button>
+                                <button class="btn btn-default btn--brown text-uppercase"><i class="fa fa-trash" aria-hidden="true"></i>REMOVE</button>
+                            </div>
+                        </td>
+
+                    </tr>
+                </tbody>
+                <!--<tbody>
                     <tr>
                         <td rowspan="2">John</td>
                         <td>blue</td>
@@ -34,7 +72,7 @@
                         </td>
 
                     </tr>
-                    <tr class="tr-border">
+                    <tr>
                         <td colspan="6" class="td-border">
                             <div class="pull-right">
                                 <button class=" btn btn-default btn--brown text-uppercase"> <i class="fa fa-heart" aria-hidden="true"></i>ADD TO WISHLIST</button>
@@ -58,7 +96,7 @@
                             <i class="fa fa-plus display-inblock square__bg" aria-hidden="true"></i></td>
                         <td>2000</td>
                     </tr>
-                    <tr class="tr-border">
+                    <tr>
                         <td colspan="6" class="td-border">
                             <div class="pull-right">
                                 <button class=" btn btn-default btn--brown text-uppercase"><i class="fa fa-heart" aria-hidden="true"></i>ADD TO WISHLIST</button>
@@ -67,33 +105,32 @@
                         </td>
 
                     </tr>
-                </tbody>
+                </tbody>-->
             </table>
+            <div class="mycart-footer">
+                <div class="pull-left">
 
-            <tfoot>
-                <tr>
-                    <div class="row">
-                        <td colspan="6">
-                            <span>ENTER COUPON CODE :</span> <input type="text"> </td>
-                        <div class="col-md-5 pull-right">
-                            <ul>
-                                <li>TOTAL: 2,800</li>
-                                <li>SHIPPING:0</li>
-                                <li>DISCOUNT:0</li>
-                                <li>GRAND TOTAL:5000</li>
-                            </ul>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <button class="btn btn-default btn--brown text-uppercase">Continue shopping</button>
-                                </div>
-                                <div class="col-md-6">
-                                    <button class="btn btn-default btn--brown   text-uppercase">checkout</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </tr>
-            </tfoot>
+                    <span>ENTER COUPON CODE :</span> <input type="text">
+                </div>
+                <div class="pull-right">
+                    <ul class="pull-right list-unstyled">
+                        <li>TOTAL: 2,800</li>
+                        <li>SHIPPING:0</li>
+                        <li>DISCOUNT:0</li>
+                        <li>GRAND TOTAL:5000</li>
+                    </ul>
+
+
+                </div>
+                <div class="clearfix"></div>
+                <div class="pull-right">
+                    <button class="btn btn-default btn--brown text-uppercase">Continue shopping</button>
+
+                    <button class="btn btn-default btn--brown   text-uppercase">checkout</button></div>
+            </div>
         </div>
+
+
     </div>
+</div>
 </div>

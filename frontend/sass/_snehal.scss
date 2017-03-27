@@ -1,64 +1,190 @@
- //scss for mycart
-.mycart-table>thead>tr>th,
-{
-    text-align: center;
-    border: none;
-}
-
-.bg-mycart {
-    background: url("../img/cart/mycart-bg.jpg");
-    background-repeat: no-repeat;
-    min-height: 436px;
-    background-size: cover;
-    background-position: 100% 100%;
-}
-
-.mycart-container {
-    padding: 50px 0 100px 0px;
-}
-
-.tr-border {
-    border-top: none;
-}
-
-.td-border {
-    border-left: none !important;
-}
-
-.mycart-table {
-    .quantity__input {
-        text-align: center;
-        width: 45px;
-        height: 45px;
-        margin: 0 4px;
-    }
-    .square__bg {
-        border: 1px solid #ddd;
-        padding: 5px;
-        font-size: 10px;
-    }
-    .display-inblock {
-        background-position: 100% 100%;
-        display: inline-block;
-    }
-    thead,
-    tbody {
-        tr {
-            //border-top: 1px solid #ddd;
-            td {
-                border: 1px solid #ddd;
-                border-right: none;
-                text-align: center;
-            }
-            td+td {
-                border-left: none;
-            }
-            td:last-child {
-                border-right: 1px solid #ddd;
-            }
-            th:last-child {
-                border-right: 1px solid #ddd;
-            }
-        }
-    }
-}
+//scss for mycart
+ .mycart-table>thead>tr>th,
+ {
+     text-align: center;
+     // border: none;
+ }
+ 
+ .bg-mycart {
+     background: url("../img/cart/mycart-bg.jpg");
+     background-repeat: no-repeat;
+     min-height: 436px;
+     background-size: cover;
+     background-position: 100% 100%;
+     margin-top: -10px;
+ }
+ 
+ .mycart-container {
+     padding: 50px 0 100px 0px;
+ }
+ 
+ .mycart-table {
+     .quantity__input {
+         text-align: center;
+         width: 40px;
+         height: 40px;
+         margin: 0 4px;
+     }
+     .square__bg {
+         border: 1px solid #ddd;
+         padding: 5px;
+         font-size: 10px;
+     }
+     .display-inblock {
+         background-position: 100% 100%;
+         display: inline-block;
+     }
+ }
+ 
+ //scss for modal
+ .modal {
+     text-align: center;
+     padding: 0px;
+     height: 100%;
+ }
+ 
+ .mycart-header {
+     h4 {
+         color: white;
+         margin: 0;
+         background: $darkBrown1;
+         padding: 10px;
+         font-family: fjalla-reg;
+     }
+ }
+ 
+ .modal:before {
+     content: '';
+     display: inline-block;
+     height: 100%;
+     vertical-align: middle;
+     margin-right: -4px;
+ }
+ 
+ .modal-dialog {
+     display: inline-block;
+     text-align: center;
+     vertical-align: middle;
+ }
+ 
+ .mycart-modal-container {
+     padding: 0px 20px;
+ }
+ 
+ .cross {
+     position: absolute;
+     top: 18px;
+     right: 2%;
+     transform: translate(0%, -50%);
+     font-size: 25px;
+     color: white;
+     cursor: pointer;
+ }
+ 
+ .mycart-footer {
+     span,
+     li {
+         color: $darkBrown1;
+         font-size: 15px;
+     }
+     span {
+         font-weight: 600;
+     }
+ }
+ 
+ .mycart-modal {
+     .btn--brown {
+         font-size: 12px;
+         letter-spacing: 0;
+     }
+     padding: 15px 0 20px;
+     p {
+         margin: 10px 0;
+         line-height: 1;
+     }
+     img {
+         width: 100%;
+     }
+ }
+ 
+ //SCSS FOR BUY THE LOOK
+ .buy-the-look h1 {
+     font-size: 60px;
+     font-family: fjalla-reg;
+     color: $darkBrown1;
+ }
+ 
+ .buy-main-img {
+     background-image: url("../img/buy/1.jpg");
+     background-repeat: no-repeat;
+     min-height: 740px;
+     background-size: cover;
+     background-position: 100% 100%;
+ }
+ 
+ .sub-row {
+     margin: 0 60px 30px 25px;
+ }
+ 
+ .buy-slider {
+     li {
+         position: relative;
+         i {
+             position: absolute;
+             right: 5px;
+             top: 5px;
+             cursor: pointer;
+         }
+     }
+     .flexslider {
+         margin: 0 0 -12px;
+     }
+     .flex-control-nav li {
+         margin: 0px 2px;
+     }
+     .flex-control-nav {
+         bottom: 30px;
+     }
+     .flex-control-paging li a {
+         width: 8px;
+         height: 8px;
+         background: white;
+     }
+     .flex-control-paging li a:active {
+         background: black;
+     }
+     .flex-direction-nav .flex-next,
+     .flex-prev {
+         display: none;
+     }
+ }
+ 
+ .buy-info {
+     h5,
+     p {
+         line-height: 1;
+         margin: 0px;
+         color: $darkBrown1;
+     }
+     p {
+         font-size: 10px;
+     }
+     .btn--brown {
+         font-size: 13px;
+         padding: 3px 30px;
+     }
+     .buy-para {
+         margin: 10px 0;
+         span {
+             display: block;
+             padding-top: 5px;
+         }
+         span:before {
+             content: "";
+             border-bottom: 1px solid #ddd;
+             width: 87%;
+             height: auto;
+             position: absolute;
+         }
+     }
+ }
