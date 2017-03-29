@@ -1,0 +1,50 @@
+<div class="listing-img">
+</div>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="first">
+                <uib-accordion close-others="oneAtATime">
+                    <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
+                        <uib-accordion-heading>
+                            <h5 class="text-uppercase">Description
+                                <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                            </h5>
+                        </uib-accordion-heading>
+                        <div>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed dolorum, rerum dicta vel sit veniam doloremque incidunt! Ut
+                                esse molestiae suscipit inventore doloremque voluptas, dolorum autem maiores!.
+                            </p>
+                        </div>
+                    </div>
+                </uib-accordion>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row" ng-repeat="abc in myShirt11">
+                <div class="col-md-4" ng-repeat="xyz in abc" ng-init="parentIndex = $index">
+                    <div class="buy-info">
+                        <div class="buy-slider">
+                            <flex-slider flex-slide="buy in xyz track by $index" prev-text="" next-text="" animation="slide" min-items="3">
+                                <li>
+                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                    <img ng-src="{{buy.img}}" class="img-responsive">
+                                </li>
+                            </flex-slider>
+                            <div class="buy-para">
+                                <h4><i class="fa fa-inr" aria-hidden="true"></i> {{xyz[0].rupee}}</h4>
+                                <h5>{{xyz[0].title}}</h5>
+                                <span></span>
+                                <p><input type="checkbox"> Add to compare</p>
+                                <button class="btn btn-default btn--brown text-uppercase">buy</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

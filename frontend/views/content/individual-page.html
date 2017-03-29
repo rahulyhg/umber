@@ -1,0 +1,176 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="img/individual/1.jpg" class="img-responsive">
+            <flexslider flex-slide="shirt in individual track by $index" prev-text="" next-text="" animation="slide" item-width="275"
+                item-margin="25" min-items="3">
+                <li><img ng-src="{{shirt.img}}" class="img-responsive">
+                </li>
+            </flexslider>
+        </div>
+        <div class="col-md-8">
+            <div class="individual-main">
+                <div class="first-sec clearfix border-div">
+                    <h4>LINE FULL SLEEVES SHIRT WITH ROLLUP</h4>
+                    <div class="pull-left">
+                        <h3><i class="fa fa-inr" aria-hidden="true"></i> 3,000</h3>
+                    </div>
+                    <div class="pull-right">
+                        <a>Are you a member?</a>
+                    </div>
+                </div>
+                <div class="second-sec border-div">
+                    <h5>SIZE CHART</h5>
+                    <div class="dropdown inline-block">
+                        <button class="btn dropdown-toggle btn-select" type="button" data-toggle="dropdown">Select Size
+                            <i class="fa fa-angle-down" aria-hidden="true"></i></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">6</a></li>
+                        </ul>
+                    </div>
+                    <!--<div class="inline-block">
+                        <select>
+                    <option>1</option> 
+                    <option>2</option>
+                    <option>3</option>
+                       </select>
+                    </div>-->
+                    <div class="dropdown inline-block ml-10">
+                        <button class="btn dropdown-toggle btn-no" type="button" data-toggle="dropdown">1
+                            <i class="fa fa-angle-down" aria-hidden="true"></i></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">6</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="third-sec border-div">
+                    <uib-accordion close-others="oneAtATime">
+                        <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
+                            <uib-accordion-heading>
+                                <h5 class="text-uppercase">Description
+                                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </h5>
+                            </uib-accordion-heading>
+                            <div>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed dolorum, rerum dicta vel sit veniam doloremque incidunt! Ut
+                                    esse molestiae suscipit inventore doloremque voluptas, dolorum autem maiores!.
+                                </p>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+                <div class="fourth-sec border-div">
+                    <uib-accordion close-others="oneAtATime">
+                        <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
+                            <uib-accordion-heading>
+                                <h5 class="text-uppercase">Specification
+                                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </h5>
+                            </uib-accordion-heading>
+                            <!--<div class="inline-block">
+                                <div class="inline-block">
+                                    <p>Brand</p>
+                                    <p>Brand</p>
+                                    <p>Brand</p>
+                                    <p>Brand</p>
+                                </div>
+                                <div class="inline-block">
+                                    <p>Brand</p>
+                                    <p>Brand</p>
+                                    <p>Brand</p>
+                                    <p>Brand</p>
+                                </div>
+                            </div>
+                            <div class="inline-block">
+                                <h5>Washcare</h5>
+                                <p>wash dark color seperately <br>Turn inside Out before washing and drying <br>Do Not Bleach<br>Tumble
+                                    Dry normal<br>Always Dry in Shade<br>Use warm iron</p>
+                            </div>-->
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="leftContent">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <p>Brand</p>
+                                                <p>Collection</p>
+                                                <p>Sleeves</p>
+                                                <P>Fabric</P>
+                                                <p>Base Color</p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text">
+                                                <input type="text">
+                                                <input type="text">
+                                                <input type="text">
+                                                <input type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="right-content">
+                                        <h4 class="marg0">Washcare</h4>
+                                        <p>wash dark color seperately <br>Turn inside Out before washing and drying <br>Do Not
+                                            Bleach
+                                            <br>Tumble Dry normal<br>Always Dry in Shade<br>Use warm iron</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+                <div class="fifth-sec">
+                    <p class="inline-block"><input type="checkbox">Add to compare</p>
+                    <div class="inline-block ml-10"><i class="fa fa-percent" aria-hidden="true"></i><a>Offer?</a></div>
+                    <p class="inline-block ml-10">Buy 1 Get 1 Free</p>
+                </div>
+                <div class="individual-btn">
+                    <button class=" btn btn-default btn--brown text-uppercase btn-add"><i class="fa fa-shopping-cart" aria-hidden="true"></i>  ADD TO CART</button>
+                    <button class="btn btn-default btn--brown text-uppercase btn-wish"><i class="fa fa-heart" aria-hidden="true"></i>  ADD TO WISHLIST</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section>
+    <div class="featured relate">
+        <div class="container">
+            <div class="row">
+                <div class="featured__title text-center">
+                    <h1 class="text-uppercase individual--border--line">you may also like</h1>
+                </div>
+            </div>
+            <div class="featured__slider">
+                <flex-slider flex-slide="new in featured track by $index" prev-text="" next-text="" animation="slide" item-width="275" item-margin="25"
+                    min-items="3">
+                    <li class="relate">
+                        <div class="featured__banner-detail relate">
+                            <img ng-src="{{new.img}}" alt="" class="img-responsive">
+                            <div class="featured__cloth-desc">
+                                <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
+                                <h4>{{new.type}}</h4>
+                            </div>
+                            <div class="featured__icon-heart">
+                                <i class="fa fa-heart" aria-hidden="true"></i>
+                            </div>
+                            <div class="featured__icon-cart">
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </li>
+                </flex-slider>
+            </div>
+        </div>
+    </div>
+</section>

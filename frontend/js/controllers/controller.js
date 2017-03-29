@@ -204,65 +204,156 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.navigation = NavigationService.getNavigation();
 
         $scope.buyshirt = [{
-                img: '../img/buy/2.jpg',
+                img: 'img/buy/2.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: '../img/buy/3.jpg',
+                img: 'img/buy/3.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: '../img/buy/4.jpg',
+                img: 'img/buy/4.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/6.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/7.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/2.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/3.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/4.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/6.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/7.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/3.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/4.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/6.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/7.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            }
         ]
-        $scope.trouser = [{
-                img: '../img/buy/3.jpg',
-            },
-            {
-                img: '../img/buy/4.jpg',
-            },
-            {
-                img: '../img/buy/5.jpg',
-            },
-        ]
-        $scope.blazer = [{
-                img: '../img/buy/4.jpg',
-            },
-            {
-                img: '../img/buy/5.jpg',
-            },
-            {
-                img: '../img/buy/6.jpg',
-            },
-        ]
-        $scope.derbys = [{
-                img: '../img/buy/5.jpg',
-            },
-            {
-                img: '../img/buy/6.jpg',
-            },
-            {
-                img: '../img/buy/7.jpg',
-            },
-        ]
-        $scope.belt = [{
-                img: '../img/buy/6.jpg',
-            },
-            {
-                img: '../img/buy/7.jpg',
-            },
-            {
-                img: '../img/buy/5.jpg',
-            },
-        ]
-        $scope.glasses = [{
-                img: '../img/buy/7.jpg',
-            },
-            {
-                img: '../img/buy/6.jpg',
-            },
-            {
-                img: '../img/buy/5.jpg',
-            },
-        ]
+        $scope.myShirt = [];
+        $scope.myShirt11 = [];
+        $scope.myShirt = _.chunk($scope.buyshirt, 9);
+        console.log($scope.myShirt);
+        _.each($scope.myShirt, function (n) {
+            $scope.myShirt1 = _.chunk(n, 3);
+            $scope.myShirt11.push($scope.myShirt1);
+        });
+        console.log($scope.myShirt11);
+
+        // $scope.trouser = [{
+        //         img: '../img/buy/3.jpg',
+        //     },
+        //     {
+        //         img: '../img/buy/4.jpg',
+        //     },
+        //     {
+        //         img: '../img/buy/5.jpg',
+        //     },
+        // ]
+        // $scope.blazer = [{
+        //         img: '../img/buy/4.jpg',
+        //     },
+        //     {
+        //         img: '../img/buy/5.jpg',
+        //     },
+        //     {
+        //         img: '../img/buy/6.jpg',
+        //     },
+        // ]
+        // $scope.derbys = [{
+        //         img: '../img/buy/5.jpg',
+        //     },
+        //     {
+        //         img: '../img/buy/6.jpg',
+        //     },
+        //     {
+        //         img: '../img/buy/7.jpg',
+        //     },
+        // ]
+        // $scope.belt = [{
+        //         img: '../img/buy/6.jpg',
+        //     },
+        //     {
+        //         img: '../img/buy/7.jpg',
+        //     },
+        //     {
+        //         img: '../img/buy/5.jpg',
+        //     },
+        // ]
+        // $scope.glasses = [{
+        //         img: '../img/buy/7.jpg',
+        //     },
+        //     {
+        //         img: '../img/buy/6.jpg',
+        //     },
+        //     {
+        //         img: '../img/buy/5.jpg',
+        //     },
+        // ]
     })
 
 
@@ -288,6 +379,65 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             quantity: '02',
             subtotal: 'Rs. 2,899'
         }]
+    })
+    .controller('IndividualPageCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.getHTML("content/individual-page.html");
+        TemplateService.title = "individual-page"; //This is the Title of the Website
+        $scope.navigation = NavigationService.getNavigation();
+        $scope.formSubmitted = false;
+        $scope.oneAtATime = true;
+        $scope.submitForm = function (data) {
+            console.log(data);
+            $scope.formSubmitted = true;
+        };
+        $scope.featured = [{
+                img: '../img/home/11.jpg',
+                price: '3000',
+                type: 'Lorem Ipsum is simply dummy text'
+
+            },
+            {
+                img: '../img/home/12.jpg',
+                price: '4000 ',
+                type: 'Lorem Ipsum is simply dummy text'
+
+            },
+            {
+                img: '../img/home/13.jpg',
+                price: '5000',
+                type: 'Lorem Ipsum is simply dummy text'
+
+            }, {
+                img: '../img/home/14.jpg',
+                price: '3000',
+                type: 'Lorem Ipsum is simply dummy text'
+
+            },
+            {
+                img: '../img/home/11.jpg',
+                price: '4000 ',
+                type: 'Lorem Ipsum is simply dummy text'
+
+            },
+            {
+                img: '../img/home/12.jpg',
+                price: '5000',
+                type: 'Lorem Ipsum is simply dummy text'
+
+            },
+            {
+                img: '../img/home/13.jpg',
+                price: '4000 ',
+                type: 'Lorem Ipsum is simply dummy text'
+
+            },
+            {
+                img: '../img/home/14.jpg',
+                price: '5000',
+                type: 'Lorem Ipsum is simply dummy text'
+
+            }
+        ];
     })
     .controller('MycartCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
         $scope.template = TemplateService.getHTML("content/mycart.html");
@@ -366,6 +516,201 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         };
 
 
+    })
+    .controller('ListingPageCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.getHTML("content/listing-page.html");
+        TemplateService.title = "Form"; //This is the Title of the Website
+        $scope.navigation = NavigationService.getNavigation();
+        $scope.formSubmitted = false;
+        $scope.submitForm = function (data) {
+            console.log(data);
+            $scope.formSubmitted = true;
+        };
+        $scope.buyshirt = [{
+                img: 'img/buy/2.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/3.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/4.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/6.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/7.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/2.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/3.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/4.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/6.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/7.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/3.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/4.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/6.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/7.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            },
+            {
+                img: 'img/buy/5.jpg',
+                rupee: '3,000',
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+            }
+        ]
+        $scope.myShirt = [];
+        $scope.myShirt11 = [];
+        $scope.myShirt = _.chunk($scope.buyshirt, 9);
+        console.log($scope.myShirt);
+        _.each($scope.myShirt, function (n) {
+            $scope.myShirt1 = _.chunk(n, 3);
+            $scope.myShirt11.push($scope.myShirt1);
+        });
+        console.log($scope.myShirt11);
     })
     .controller('FormCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.getHTML("content/form.html");

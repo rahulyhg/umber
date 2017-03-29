@@ -19,11 +19,16 @@
  }
  
  .mycart-table {
+     .quantity__input:focus {
+         border-color: #341314;
+     }
      .quantity__input {
          text-align: center;
-         width: 40px;
+         width: 47px;
          height: 40px;
          margin: 0 4px;
+         font-size: 20px;
+         color: #341314;
      }
      .square__bg {
          border: 1px solid #ddd;
@@ -82,14 +87,24 @@
  }
  
  .mycart-footer {
+     .inline-block:last-child {
+         padding-left: 20px;
+     }
      span,
-     li {
+     p {
          color: $darkBrown1;
          font-size: 15px;
      }
      span {
          font-weight: 600;
      }
+     p {
+         margin: 0
+     }
+ }
+ 
+ .margin-15 {
+     margin-top: 15px;
  }
  
  .mycart-modal {
@@ -108,7 +123,12 @@
  }
  
  //SCSS FOR BUY THE LOOK
+ img.loading {
+     display: none !important
+ }
+ 
  .buy-the-look h1 {
+     @include margin(20px null);
      font-size: 60px;
      font-family: fjalla-reg;
      color: $darkBrown1;
@@ -127,6 +147,7 @@
  }
  
  .buy-slider {
+     margin-bottom: 30px;
      li {
          position: relative;
          i {
@@ -139,11 +160,11 @@
      .flexslider {
          margin: 0 0 -12px;
      }
-     .flex-control-nav li {
-         margin: 0px 2px;
-     }
      .flex-control-nav {
-         bottom: 30px;
+         bottom: 8px;
+         li {
+             margin: 0px 2px;
+         }
      }
      .flex-control-paging li a {
          width: 8px;
@@ -161,6 +182,7 @@
  
  .buy-info {
      h5,
+     h4,
      p {
          line-height: 1;
          margin: 0px;
@@ -169,12 +191,18 @@
      p {
          font-size: 10px;
      }
+     h4 {
+         i {
+             font-size: 15px;
+         }
+     }
      .btn--brown {
+         margin-top: 10px;
          font-size: 13px;
          padding: 3px 30px;
      }
      .buy-para {
-         margin: 10px 0;
+         margin: 15px 4px;
          span {
              display: block;
              padding-top: 5px;
@@ -188,3 +216,151 @@
          }
      }
  }
+ 
+ //SCSS FOR INDIVIDUAL PAGE
+ .individual--border--line {
+     font-family: 'fjalla-reg';
+     @extend .border-line;
+     &:before {
+         width: 13%;
+         top: 50%;
+         left: 25%;
+         border: 1px solid #e7dada;
+     }
+     &:after {
+         border: 1px solid #e7dada;
+         width: 13%;
+         top: 50%;
+         right: 25%;
+     }
+ }
+ 
+ .individual-main {
+     background-color: #efefef;
+     padding: 30px 50px;
+     a {
+         color: $darkBrown1
+     }
+ }
+ 
+ .individual-btn {
+     .btn-add {
+         font-size: 15px;
+         padding: 6px 35px;
+     }
+     .btn-wish {
+         font-size: 15px;
+         padding: 6px 35px;
+         margin-left: 15px;
+     }
+ }
+ 
+ .border-div {
+     border-bottom: 1px solid $whiteBrown1;
+     padding-bottom: 15px;
+ }
+ 
+ .first-sec {
+     h3 {
+         margin: 0;
+     }
+     .inline-block {
+         .fa {
+             margin-left: 30px;
+         }
+     }
+ }
+ 
+ .second-sec {
+     .btn {
+         background: transparent;
+         border: 1px solid black;
+     }
+     .fa {
+         float: right;
+         font-size: 20px;
+     }
+     .dropdown-menu {
+         width: 100%;
+         min-width: 80px;
+     }
+     .btn-select {
+         width: 250px;
+         text-align: left;
+     }
+     .btn-no {
+         width: 80px;
+     }
+ }
+ 
+ .ml-10 {
+     margin-left: 10px;
+ }
+ 
+ .third-sec {
+     p {
+         margin: 0
+     }
+ }
+ 
+ .third-sec,
+ .fourth-sec,
+ {
+     .fa {
+         font-size: 20px;
+     }
+     .panel-group .panel-heading+.panel-collapse>.panel-body {
+         border-top: none;
+     }
+     .panel-heading {
+         padding: 0px;
+     }
+     .panel {
+         margin-bottom: 0px;
+         background-color: transparent;
+         border: none;
+         box-shadow: none;
+     }
+     .panel-default>.panel-heading {
+         color: #333333;
+         background-color: transparent;
+         border-color: transparent;
+     }
+     .panel-group {
+         margin-bottom: 0px;
+     }
+     .panel-body {
+         padding: 0px;
+     }
+ }
+ 
+ .fourth-sec {
+     .leftContent {
+         .inline-block {
+             vertical-align: top;
+         }
+         input {
+             margin: 0px 5px 3px 5px;
+             background: transparent;
+             //border: none;
+         }
+     }
+     .right-content {
+         h4,
+         p {
+             padding-left: 20px;
+         }
+         &:before {
+             content: '';
+             position: absolute;
+             border-left: 1px solid $darkBrown1;
+             height: 95%;
+         }
+     }
+ }
+ 
+ .fifth-sec {
+     margin-top: 10px;
+ }
+ 
+ //

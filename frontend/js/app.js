@@ -38,6 +38,16 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             templateUrl: tempateURL,
             controller: 'BuythelookCtrl'
         })
+        .state('listing-page', {
+            url: "/listing-page",
+            templateUrl: tempateURL,
+            controller: 'ListingPageCtrl'
+        })
+        .state('individual-page', {
+            url: "/individual-page",
+            templateUrl: tempateURL,
+            controller: 'IndividualPageCtrl'
+        })
         .state('form', {
             url: "/form",
             templateUrl: tempateURL,
