@@ -16,4 +16,8 @@ myApp.controller('headerCtrl', function ($scope, TemplateService, $uibModal) {
             // windowClass: 'modal-content-radi0'
         });
     };
+    $scope.view = false;
+    $scope.viewLogin = function () {
+        $scope.view = !$scope.view;
+    }
 });
