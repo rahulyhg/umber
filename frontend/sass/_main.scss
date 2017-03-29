@@ -204,12 +204,17 @@ footer {
     }
     .contact--btn {
         @extend .btn--brown;
+        font-size: inherit;
     }
     a[href] {
         color: $whiteBrown2;
     }
     p {
         color: $whiteBrown2;
+    }
+    p,
+    li {
+        font-size: 12px;
     }
     address {
         color: $whiteBrown2;
@@ -218,14 +223,14 @@ footer {
         vertical-align: top; // width: 19%;
     }
     .footer-up__abt-shop {
-        width: 33%;
+        width: 25%;
         @include padding(25px);
     }
     .footer-up__cstmr-serv,
     .footer-up__info,
     .footer-up__my-account,
     .footer-up__contact {
-        width: 12%;
+        width: 11%;
         @include padding(25px 0);
         .list-unstyled {
             li {
@@ -234,15 +239,15 @@ footer {
             }
         }
     }
+    .footer-up__contact {
+        width: 25%;
+    }
     .footer-up__img {
-        width: 280px;
-        top: -28px;
-        position: absolute;
-        right: -15px;
-    } // .footer-up__info{
-    //     width: 17%;
-    //     @include padding(25px);
-    // }
+        @include size(280px,
+        auto);
+        @include position( absolute,
+        null -15px 0 null);
+    }
     .inline-block+.inline-block {
         margin-left: 10px;
     }
@@ -320,6 +325,10 @@ header {
 .inline-block {
     //@include block(true);
     display: inline-block;
+}
+
+.line--height {
+    line-height: 1;
 }
 
 .marg0 {
@@ -532,6 +541,7 @@ header {
         .header--login {
             @extend .btn--brown;
             width: 100px;
+            @include margin(6px null null null);
         }
     }
 }
@@ -568,6 +578,9 @@ header {
             }
         }
     }
+    .flex-direction-nav a {
+        top: 45%;
+    }
     .flex-control-nav {
         display: none;
     }
@@ -580,7 +593,7 @@ header {
             @include margin(null null 0 null);
             color: $darkBrown1;
             font-family: 'fjalla-reg';
-            font-size: 53px;
+            font-size: 60px;
             font-weight: 500;
         }
         h3 {
@@ -598,8 +611,22 @@ header {
 }
 
 //End of  Clothes Categories
+//Start of All categorie section
+.all-categorie {
+    .all-categorie__dimension {
+        width: 50%;
+        float: left;
+        .padd {
+            @include padding(0 0px 8px 0);
+        }
+    }
+}
+
+//End of all categorie section
 //start of new New arrival section
 .new-arrival {
+    @include margin(null null 55px null);
+    clear: both;
     .new-arrival__title {
         // .border-line {
         //     width: 10%;
@@ -692,6 +719,7 @@ header {
 //end of new New arrival section
 //Start of Featured section
 .featured {
+    @include margin(null null 55px null);
     .featured__title {
         h1 {
             color: $darkBrown1;
@@ -718,6 +746,7 @@ header {
         .flexslider {
             // background: transparent;
             // border: none;
+            @include margin(0 0 20px);
             .flex-prev {
                 left: 92.7% !important;
                 top: -9%;
@@ -809,6 +838,7 @@ header {
 //End of Featured section
 //Start of cloth Buy
 .cloth-buy {
+    @include margin(null null 55px null);
     .paddrt {
         @include padding(null 0 null 15px);
     }
@@ -843,23 +873,19 @@ header {
         h2 {
             color: $darkBrown1;
         }
-        p:nth-child(odd) {
+        p.line--height {
             line-height: 1;
         }
         .buy--now {
             // button-design
             @extend .btn--brown;
             width: 140px;
-            margin-top: 15px;
+            @include margin(15px null null null);
         }
     }
     .absolute {
-        position: absolute;
-        top: 16%;
-        bottom: 9%;
-        left: 39.4%;
-        right: 9%;
-        /* border-top-width: 1px; */
+        @include position(absolute,
+        16% 9% 15% 39.4%);
         border-top: 0px dashed transparent!important;
         border-left: 0 dashed transparent!important;
         border: 2px dashed $darkBrown2;
@@ -892,6 +918,7 @@ header {
     }
     .blog__slider {
         .flexslider {
+            @include margin(0 0 70px);
             .flex-control-nav {
                 display: none;
             }
@@ -924,6 +951,7 @@ header {
 //End of Blog section design
 //Start of Sale section design
 .sale {
+    //  @include margin(null null 55px null);
     background-color: #ededed;
     .sale__title {
         h1 {
@@ -952,6 +980,7 @@ header {
             .flexslider {
                 background: transparent;
                 border: none;
+                @include margin(0 0 20px);
                 .flex-prev {
                     left: 92.7% !important;
                     top: -9%;
@@ -1000,6 +1029,7 @@ header {
     .view--more {
         @extend .btn--brown;
         width: 135px;
+        @include margin(null null 25px);
     }
 }
 
@@ -1096,8 +1126,26 @@ header {
     @extend .customized-form;
 }
 
+.orCircle {
+    @include position(absolute,
+    50% null null 50%);
+    @include transform(translate(-50%,
+    -50%));
+    width: 50px;
+    height: 50px;
+    color: #341314;
+    line-height: 46px;
+    font-size: 20px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: -2px 1px 6px #dedede;
+}
+
 .modal-container {
     padding: 80px 54px 26px; // margin-top: 40px;
+    .minHeight {
+        min-height: 430px;
+    }
     .marginTop {
         margin-top: 38px;
     }
@@ -1113,8 +1161,8 @@ header {
         }
     }
     .login-footer {
-        color: $darkBrown1;
-        margin-top: 50%;
+        font-size: 16px;
+        color: $darkBrown1; // margin-top: 50%;
         text-align: center;
         a {
             color: #292929;
@@ -1129,6 +1177,7 @@ header {
     background-position: center center;
     background-size: cover;
     color: $white;
+    min-height: 584px;
     .login-head {
         p {
             line-height: 1;
@@ -1136,8 +1185,13 @@ header {
     }
     .login-footer {
         color: $white;
+        p {
+            font-weight: bold;
+            font-family: 'vadodara-lgt';
+        }
         a {
             color: $white;
+            font-weight: bold;
         }
     }
     .login__social-icons {
