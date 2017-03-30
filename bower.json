@@ -62,6 +62,7 @@
     "ui-router": "latest",
     "tinymce": "4.3.12",
     "angular-ui-swiper": "^2.3.6",
-    "textAngular": "^1.5.16"
+    "textAngular": "^1.5.16",
+    "angularjs-slider": "^6.1.1"
   }
 }

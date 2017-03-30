@@ -1,50 +1,415 @@
 <div class="listing-img">
 </div>
 <div class="container">
-    <div class="row">
-
-        <div class="col-md-4">
-            <div class="first">
-                <uib-accordion close-others="oneAtATime">
-                    <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
-                        <uib-accordion-heading>
-                            <h5 class="text-uppercase">Description
-                                <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
-                            </h5>
-                        </uib-accordion-heading>
-                        <div>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed dolorum, rerum dicta vel sit veniam doloremque incidunt! Ut
-                                esse molestiae suscipit inventore doloremque voluptas, dolorum autem maiores!.
-                            </p>
-                        </div>
-                    </div>
-                </uib-accordion>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <div class="row" ng-repeat="abc in myShirt11">
-                <div class="col-md-4" ng-repeat="xyz in abc" ng-init="parentIndex = $index">
-                    <div class="buy-info">
-                        <div class="buy-slider">
-                            <flex-slider flex-slide="buy in xyz track by $index" prev-text="" next-text="" animation="slide" min-items="3">
-                                <li>
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    <img ng-src="{{buy.img}}" class="img-responsive">
-                                </li>
-                            </flex-slider>
-                            <div class="buy-para">
-                                <h4><i class="fa fa-inr" aria-hidden="true"></i> {{xyz[0].rupee}}</h4>
-                                <h5>{{xyz[0].title}}</h5>
-                                <span></span>
-                                <p><input type="checkbox"> Add to compare</p>
-                                <button class="btn btn-default btn--brown text-uppercase">buy</button>
+    <div class="listing-container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="border-div">
+                    <ul class="list-breadcrumb">
+                        <li class="inline-block text-uppercase" ui-sref="home" href="#!/">HOME</li> <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        <li class="inline-block text-uppercase">Mens Wear</li> <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        <li class="inline-block text-uppercase">casual shirt</li>
+                    </ul>
+                </div>
+                <div class="sec-one common-Accordian border-div">
+                    <uib-accordion close-others="oneAtATime">
+                        <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
+                            <uib-accordion-heading>
+                                <h5 class="text-uppercase">category
+                                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </h5>
+                            </uib-accordion-heading>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 Casual Shirt
+                               </label>
                             </div>
+                            <div class="checkbox">
+                                <label>
+                             <input type="checkbox" value="">
+                            T-Shirts
+                              </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 Trouser
+                               </label>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+                <div class="sec-second common-Accordian border-div">
+                    <uib-accordion close-others="oneAtATime">
+                        <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
+                            <uib-accordion-heading>
+                                <h5 class="text-uppercase">type
+                                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </h5>
+                            </uib-accordion-heading>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 Lose Angeles Twill
+                               </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                             <input type="checkbox" value="">
+                            Amsler Checks
+                              </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 Indogo Print
+                               </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 Amsler Print
+                               </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 Paris Plaids
+                               </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 Florence Print
+                               </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 Linen prints
+                               </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 Denim Indigo Chambay
+                               </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 Oxport Prints
+                               </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 Pima Lawn
+                               </label>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+                <div class="sec-third common-Accordian border-div">
+                    <uib-accordion close-others="oneAtATime">
+                        <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
+                            <uib-accordion-heading>
+                                <h5 class="text-uppercase">price range
+                                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </h5>
+                            </uib-accordion-heading>
+                            <div class="range-slider">
+                                <span class="rupee-count pull-right">&#8377;{{slider_translate.minValue}}-&#8377; {{slider_translate.maxValue}}</span>
+                                <rzslider rz-slider-model="slider_translate.minValue" rz-slider-high="slider_translate.maxValue" rz-slider-options="slider_translate.options"></rzslider>
+                                <span class="pull-left">&#8377;{{slider_translate.options.floor}}</span>
+                                <span class="pull-right">&#8377;{{slider_translate.options.ceil}}</span>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+                <div class="sec-fourth common-Accordian border-div">
+                    <uib-accordion close-others="oneAtATime">
+                        <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
+                            <uib-accordion-heading>
+                                <h5 class="text-uppercase">Collection
+                                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </h5>
+                            </uib-accordion-heading>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 Amsler Checks
+                               </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                             <input type="checkbox" value="">
+                            Amsler Print
+                              </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 Amten Print
+                               </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 Denim Indigo Chambray
+                               </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 Indigo Amsler
+                               </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 Indigo prints
+                               </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                Linen
+                               </label>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+                <div class="sec-fifth common-Accordian border-div">
+                    <uib-accordion close-others="oneAtATime">
+                        <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
+                            <uib-accordion-heading>
+                                <h5 class="text-uppercase">Choose Size
+                                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </h5>
+                            </uib-accordion-heading>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 42Cms-LS-Slim-Fit
+                               </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                             <input type="checkbox" value="">
+                            40Cms-MS-Slim-Fit
+                              </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                39Cms-SS-Slim-Fit
+                               </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                44Cms-XL-Regular-Fit
+                               </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 42Cms-LR-Regular-Fit
+                               </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 46Cms-2XL-Regular-Fit
+                               </label>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+                <div class="sec-six common-Accordian border-div">
+                    <uib-accordion close-others="oneAtATime">
+                        <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
+                            <uib-accordion-heading>
+                                <h5 class="text-uppercase">Sleeves
+                                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </h5>
+                            </uib-accordion-heading>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 4Full Sleeve
+                               </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                             <input type="checkbox" value="">
+                            Half Sleeve
+                              </label>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+                <div class="sec-seven common-Accordian border-div">
+                    <uib-accordion close-others="oneAtATime">
+                        <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
+                            <uib-accordion-heading>
+                                <h5 class="text-uppercase">Base color
+                                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </h5>
+                            </uib-accordion-heading>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 Beige
+                               </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                             <input type="checkbox" value="">
+                            Black
+                              </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                             <input type="checkbox" value="">
+                            Blue
+                              </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                             <input type="checkbox" value="">
+                            Brown
+                              </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                             <input type="checkbox" value="">
+                            Green
+                              </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                             <input type="checkbox" value="">
+                            Grey
+                              </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                             <input type="checkbox" value="">
+                            Ivory
+                              </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                             <input type="checkbox" value="">
+                            Maroon
+                              </label>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+                <div class="sec-eight common-Accordian border-div">
+                    <uib-accordion close-others="oneAtATime">
+                        <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
+                            <uib-accordion-heading>
+                                <h5 class="text-uppercase">Fabric
+                                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </h5>
+                            </uib-accordion-heading>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 56% Cotton 44% Tensel
+                               </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                             <input type="checkbox" value="">
+                            100% cotton
+                              </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                             <input type="checkbox" value="">
+                            100% Linen
+                              </label>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+                <div class="sec-nine common-Accordian border-div">
+                    <uib-accordion close-others="oneAtATime">
+                        <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
+                            <uib-accordion-heading>
+                                <h5 class="text-uppercase">Discount
+                                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </h5>
+                            </uib-accordion-heading>
+                            <div class="checkbox">
+                                <label>
+                                 <input type="checkbox" value="">
+                                 Buy 1 Get 1 Free
+                               </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                             <input type="checkbox" value="">
+                            Buy 2 Get 20% Free<i class="fa fa-percent" aria-hidden="true"></i>
+                              </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                             <input type="checkbox" value="">
+                            Free gift <i class="fa fa-gift" aria-hidden="true"></i>
+                              </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                             <input type="checkbox" value="">
+                            Flat 50% off
+                              </label>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="listing-main">
+                    <div class="dropdown listing-dropdown">
+                        <button type="button" class="btn btn-listing dropdown-toggle" data-toggle="dropdown">Sort by<i class="fa fa-reg" aria-hidden="true"></i><required></required></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">HTML</a></li>
+                            <li><a href="#">CSS</a></li>
+                            <li><a href="#">JavaScript</a></li>
+                        </ul>
+                    </div>
+                    <div class="row" ng-repeat="abc in myShirt11">
+                        <div class="col-md-4" ng-repeat="xyz in abc" ng-init="parentIndex = $index">
+                            <div class="buy-info">
+                                <div class="buy-slider slider-individual">
+                                    <flex-slider flex-slide="buy in xyz track by $index" prev-text="" next-text="" animation="slide" min-items="3">
+                                        <li>
+                                            <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                            <img ng-src="{{buy.img}}" class="img-responsive">
+                                        </li>
+                                    </flex-slider>
+                                    <div class="buy-para">
+                                        <h4><i class="fa fa-inr" aria-hidden="true"></i> {{xyz[0].rupee}}</h4>
+                                        <h5>{{xyz[0].title}}</h5>
+                                        <span></span>
+                                        <p><input type="checkbox"> Add to compare</p>
+                                        <button class="btn btn-default btn--brown text-uppercase">buy</button>
+                                    </div>
 
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>

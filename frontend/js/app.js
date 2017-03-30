@@ -8,6 +8,7 @@ var myApp = angular.module('myApp', [
     'ngAnimate',
     'ngSanitize',
     'angular-flexslider',
+    'rzModule',
     'ui.swiper'
 ]);
 

@@ -526,6 +526,19 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             console.log(data);
             $scope.formSubmitted = true;
         };
+        $scope.slider_translate = {
+            minValue: 200,
+            maxValue: 1500,
+            options: {
+                ceil: 7000,
+                floor: 100,
+                id: 'translate-slider',
+                translate: function (value, id, which) {
+                    console.info(value, id, which);
+                    return '$' + value;
+                }
+            }
+        };
         $scope.buyshirt = [{
                 img: 'img/buy/2.jpg',
                 rupee: '3,000',
