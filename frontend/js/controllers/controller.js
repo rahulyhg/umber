@@ -2,7 +2,31 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.template = TemplateService.getHTML("content/home.html");
         TemplateService.title = "Home"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
-
+        // $scope.status.isopen = !$scope.status.isopen;
+        $scope.toggled = function (open) {
+            alert('xd');
+        };
+        $scope.cart = [{
+            img: '../img/home/11.jpg',
+            shirtType: 'linen full sleeve shirt with rollup',
+            price: '2899',
+            size: '36'
+        }, {
+            img: '../img/home/12.jpg',
+            shirtType: 'linen full sleeve shirt with rollup',
+            price: '3000',
+            size: '37'
+        }, {
+            img: '../img/home/12.jpg',
+            shirtType: 'linen full sleeve shirt with rollup',
+            price: '3000',
+            size: '37'
+        }, {
+            img: '../img/home/12.jpg',
+            shirtType: 'linen full sleeve shirt with rollup',
+            price: '3000',
+            size: '37'
+        }];
         // $scope.mySlides = [
         //     'http://flexslider.woothemes.com/images/kitchen_adventurer_cheesecake_brownie.jpg',
         //     'http://flexslider.woothemes.com/images/kitchen_adventurer_lemon.jpg',
@@ -540,177 +564,198 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             }
         };
         $scope.buyshirt = [{
-                img: 'img/buy/2.jpg',
+                img1: 'img/listing/shirt.png',
+                img: 'img/listing/2.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/3.jpg',
+                img1: 'img/listing/shirt.png',
+                img: 'img/listing/3.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/4.jpg',
+                img1: 'img/listing/shirt.png',
+                img: 'img/listing/4.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/5.jpg',
+                img1: 'img/listing/gift.png',
+                img: 'img/listing/5.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/6.jpg',
+                img1: 'img/listing/gift.png',
+                img: 'img/listing/6.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/7.jpg',
+                img1: 'img/listing/gift.png',
+                img: 'img/listing/7.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/2.jpg',
+                img: 'img/listing/8.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/3.jpg',
+                img: 'img/listing/9.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/4.jpg',
+                img: 'img/listing/10.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/5.jpg',
+                img1: 'img/listing/percent.png',
+                img: 'img/listing/11.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/6.jpg',
+                img1: 'img/listing/percent.png',
+                img: 'img/listing/12.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/7.jpg',
+                img1: 'img/listing/percent.png',
+                img: 'img/listing/13.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/3.jpg',
+                img: 'img/listing/2.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/4.jpg',
+                img: 'img/listing/3.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/5.jpg',
+                img: 'img/listing/4.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/6.jpg',
+                img1: 'img/listing/lable.png',
+                img: 'img/listing/6.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/7.jpg',
+                img1: 'img/listing/lable.png',
+                img: 'img/listing/7.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/5.jpg',
+                img1: 'img/listing/lable.png',
+                img: 'img/listing/5.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/5.jpg',
+                img1: 'img/listing/star.png',
+                img: 'img/listing/5.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/5.jpg',
+                img1: 'img/listing/star.png',
+                img: 'img/listing/5.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/5.jpg',
+                img1: 'img/listing/star.png',
+                img: 'img/listing/5.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/5.jpg',
+                img1: 'img/listing/star.png',
+                img: 'img/listing/5.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/5.jpg',
+                img1: 'img/listing/star.png',
+                img: 'img/listing/5.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/5.jpg',
+                img1: 'img/listing/star.png',
+                img: 'img/listing/2.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/5.jpg',
+                img1: 'img/listing/star.png',
+                img: 'img/listing/3.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/5.jpg',
+                img1: 'img/listing/star.png',
+                img: 'img/listing/4.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/5.jpg',
+                img1: 'img/listing/star.png',
+                img: 'img/listing/5.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/5.jpg',
+                img: 'img/listing/6.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/5.jpg',
+                img: 'img/listing/7.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/5.jpg',
+                img: 'img/listing/8.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/5.jpg',
+                img: 'img/listing/9.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/5.jpg',
+                img: 'img/listing/10.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/5.jpg',
+                img: 'img/listing/11.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/5.jpg',
+                img: 'img/listing/12.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             },
             {
-                img: 'img/buy/5.jpg',
+                img: 'img/listing/13.jpg',
                 rupee: '3,000',
                 title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
             }
