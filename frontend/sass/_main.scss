@@ -534,7 +534,9 @@ header {
         .fa {
             font-size: 18px;
         }
-        i {
+        .fa-search,
+        .fa-heart,
+        .fa-shopping-cart {
             color: $darkBrown2;
             @include margin(14px 0 0);
         }
@@ -542,6 +544,67 @@ header {
             @extend .btn--brown;
             width: 100px;
             @include margin(6px null null null);
+        }
+         ::-webkit-scrollbar {
+            width: 5px;
+        }
+         ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+         ::-webkit-scrollbar-thumb {
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            background: $darkBrown2;
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+        }
+         ::-webkit-scrollbar-thumb:window-inactive {
+            background: rgba(255, 0, 0, 0.4);
+        }
+        .dropdown-menu {
+            min-width: 310px;
+            height: 360px;
+            overflow-y: scroll;
+            .dropdown-menu__dropdown-cart {
+                @include padding(20px 15px);
+                .inline-block.img {
+                    @include size(50%,
+                    auto);
+                }
+                .inline-block.desc {
+                    @include size(47%,
+                    auto);
+                    vertical-align: top;
+                    @include padding(null null null 15px);
+                    h5 {
+                        text-transform: capitalize;
+                    }
+                    i.fa-inr {
+                        font-size: 25px;
+                        color: $darkBrown1; //  @include margin(0 null null null);
+                    }
+                    .fa-inr:before {
+                        @include padding(null 6px null null);
+                    }
+                    .inline-block__size {
+                        @include margin(null null 20px null);
+                        .size {
+                            @include padding(2px 6px);
+                            border: 1px solid $darkBrown2;
+                        }
+                    }
+                    .remove--btn {
+                        @extend .btn--brown;
+                        width: 105px;
+                        font-size: 12px;
+                        i.fa-trash-o {
+                            font-size: 16px;
+                            @include padding(null 3px null null);
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -613,6 +676,8 @@ header {
 //End of  Clothes Categories
 //Start of All categorie section
 .all-categorie {
+    display: inline-block;
+    @include margin(null null 55px null);
     .all-categorie__dimension {
         width: 50%;
         float: left;
@@ -1030,6 +1095,10 @@ header {
         @extend .btn--brown;
         width: 135px;
         @include margin(null null 25px);
+    }
+    .absolute {
+        @include position(absolute,
+        -10% -4% 0% 94.5%);
     }
 }
 

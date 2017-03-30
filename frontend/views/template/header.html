@@ -50,7 +50,35 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#"><i class="fa fa-search" aria-hidden="true">&nbsp</i></a></li>
                     <li><a href="#"><i class="fa fa-heart" aria-hidden="true">&nbsp Wishlist</i></a></li>
-                    <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true">&nbsp Cart&nbsp (3)</i></a></li>
+                    <li uib-dropdown on-toggle="toggled('open');">
+                        <a href="#" uib-dropdown-toggle> <i class="fa fa-shopping-cart" aria-hidden="true">&nbsp Cart&nbsp (3)</i></a>
+                        <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
+                            <li ng-repeat="choice in cart">
+                                <div class="dropdown-menu__dropdown-cart">
+                                    <div class="inline-block img">
+                                        <img ng-src="{{choice.img}}" alt="shirt_img" class="img-responsive">
+                                    </div>
+                                    <div class="inline-block desc">
+                                        <h5>{{choice.shirtType}}</h5>
+                                        <p><i class="fa fa-inr" aria-hidden="true">{{choice.price}}</i></p>
+                                        <p></p>
+
+                                        <div class="inline-block__size">
+                                            <div class="inline-block">
+                                                <div class="size">
+                                                    {{choice.size}}
+                                                </div>
+                                            </div>
+                                            <div class="inline-block">
+                                                <span>Size</span>
+                                            </div>
+                                        </div>
+                                        <p><button class="btn remove--btn"><i class="fa fa-trash-o" aria-hidden="true"></i>Remove</button></p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
                     <li ng-controller="headerCtrl"><a href="#"><button class="btn header--login" ng-click="openLoginModal10();">LOGIN</button></a></li>
                 </ul>
             </div>
