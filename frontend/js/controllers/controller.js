@@ -230,94 +230,112 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.buyshirt = [{
                 img: 'img/buy/2.jpg',
                 rupee: '3,000',
-                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP',
+                id: 0
             },
             {
                 img: 'img/buy/3.jpg',
                 rupee: '3,000',
-                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP',
+                id: 1
             },
             {
                 img: 'img/buy/4.jpg',
                 rupee: '3,000',
-                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP'
+                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP',
+                id: 2
             },
             {
                 img: 'img/buy/5.jpg',
                 rupee: '3,000',
-                title: 'OFF WHITE SLIM FIT FORMA TROUSER'
+                title: 'OFF WHITE SLIM FIT FORMA TROUSER',
+                id: 3
             },
             {
                 img: 'img/buy/6.jpg',
                 rupee: '3,000',
-                title: 'OFF WHITE SLIM FIT FORMA TROUSER'
+                title: 'OFF WHITE SLIM FIT FORMA TROUSER',
+                id: 4
             },
             {
                 img: 'img/buy/7.jpg',
                 rupee: '3,000',
-                title: 'OFF WHITE SLIM FIT FORMA TROUSER'
+                title: 'OFF WHITE SLIM FIT FORMA TROUSER',
+                id: 5
             },
             {
                 img: 'img/buy/2.jpg',
                 rupee: '3,000',
-                title: 'LINES LIGHT BLUE CASUAL BLAZER'
+                title: 'LINES LIGHT BLUE CASUAL BLAZER',
+                id: 6
             },
             {
                 img: 'img/buy/3.jpg',
                 rupee: '3,000',
-                title: 'LINES LIGHT BLUE CASUAL BLAZER'
+                title: 'LINES LIGHT BLUE CASUAL BLAZER',
+                id: 7
             },
             {
                 img: 'img/buy/4.jpg',
                 rupee: '3,000',
-                title: 'LINES LIGHT BLUE CASUAL BLAZER'
+                title: 'LINES LIGHT BLUE CASUAL BLAZER',
+                id: 8
             },
             {
                 img: 'img/buy/5.jpg',
                 rupee: '3,000',
-                title: 'MEN WHITE GENUINE LEATHER DERBYS'
+                title: 'MEN WHITE GENUINE LEATHER DERBYS',
+                id: 9
             },
             {
                 img: 'img/buy/6.jpg',
                 rupee: '3,000',
-                title: 'MEN WHITE GENUINE LEATHER DERBYS'
+                title: 'MEN WHITE GENUINE LEATHER DERBYS',
+                id: 10
             },
             {
                 img: 'img/buy/7.jpg',
                 rupee: '3,000',
-                title: 'MEN WHITE GENUINE LEATHER DERBYS'
+                title: 'MEN WHITE GENUINE LEATHER DERBYS',
+                id: 11
             },
             {
                 img: 'img/buy/3.jpg',
                 rupee: '3,000',
-                title: 'LETHER MEN BLACK GENUINE LEATHER BELT'
+                title: 'LETHER MEN BLACK GENUINE LEATHER BELT',
+                id: 12
             },
             {
                 img: 'img/buy/4.jpg',
                 rupee: '3,000',
-                title: 'LETHER MEN BLACK GENUINE LEATHER BELT'
+                title: 'LETHER MEN BLACK GENUINE LEATHER BELT',
+                id: 13
             },
             {
                 img: 'img/buy/5.jpg',
                 rupee: '3,000',
-                title: 'LETHER MEN BLACK GENUINE LEATHER BELT'
+                title: 'LETHER MEN BLACK GENUINE LEATHER BELT',
+                id: 14
             },
             {
                 img: 'img/buy/6.jpg',
                 rupee: '3,000',
-                title: 'GRAVIATE BLACK FULL FRAME ROUNDGLASSES'
+                title: 'GRAVIATE BLACK FULL FRAME ROUNDGLASSES',
+                id: 15
             },
             {
                 img: 'img/buy/7.jpg',
                 rupee: '3,000',
-                title: 'GRAVIATE BLACK FULL FRAME ROUNDGLASSES'
+                title: 'GRAVIATE BLACK FULL FRAME ROUNDGLASSES',
+                id: 16
             },
             {
                 img: 'img/buy/5.jpg',
                 rupee: '3,000',
-                title: 'GRAVIATE BLACK FULL FRAME ROUNDGLASSES'
+                title: 'GRAVIATE BLACK FULL FRAME ROUNDGLASSES',
+                id: 17
             }
-        ]
+        ];
         $scope.myShirt = [];
         $scope.myShirt11 = [];
         $scope.myShirt = _.chunk($scope.buyshirt, 9);
@@ -393,7 +411,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             color: 'blue',
             size: 'xl',
             quantity: '02',
-            subtotal: 'Rs. 2,899'
+            subtotal: '2,899'
         }, {
             img: 'img/checkout/item.jpg',
             title1: 'florence prints',
@@ -401,7 +419,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             color: 'blue',
             size: 'xl',
             quantity: '02',
-            subtotal: 'Rs. 2,899'
+            subtotal: '2,899'
         }]
     })
     .controller('IndividualPageCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -588,6 +606,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.buyshirt = [{
                 img1: 'img/listing/shirt.png',
                 img: 'img/listing/2.jpg',
+                toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
                 title1: 'WITH ROLL UP '
@@ -595,6 +614,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             {
                 img1: 'img/listing/shirt.png',
                 img: 'img/listing/3.jpg',
+                toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
                 title1: 'WITH ROLL UP '
@@ -602,6 +622,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             {
                 img1: 'img/listing/shirt.png',
                 img: 'img/listing/4.jpg',
+                toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
                 title1: 'WITH ROLL UP '
@@ -609,6 +630,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             {
                 img1: 'img/listing/gift.png',
                 img: 'img/listing/5.jpg',
+                toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
                 title1: 'WITH ROLL UP '
@@ -616,6 +638,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             {
                 img1: 'img/listing/gift.png',
                 img: 'img/listing/6.jpg',
+                toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
                 title1: 'WITH ROLL UP '
@@ -623,30 +646,35 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             {
                 img1: 'img/listing/gift.png',
                 img: 'img/listing/7.jpg',
+                toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
                 title1: 'WITH ROLL UP '
             },
             {
                 img: 'img/listing/8.jpg',
+                toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
                 title1: 'WITH ROLL UP '
             },
             {
                 img: 'img/listing/9.jpg',
+                toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
                 title1: 'WITH ROLL UP '
             },
             {
                 img: 'img/listing/10.jpg',
+                toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
                 title1: 'WITH ROLL UP '
             },
             {
                 img1: 'img/listing/percent.png',
+                toolTip: 'Buy 1 Get1 Free',
                 img: 'img/listing/11.jpg',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
@@ -655,6 +683,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             {
                 img1: 'img/listing/percent.png',
                 img: 'img/listing/12.jpg',
+                toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
                 title1: 'WITH ROLL UP '
@@ -662,6 +691,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             {
                 img1: 'img/listing/percent.png',
                 img: 'img/listing/13.jpg',
+                toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
                 title1: 'WITH ROLL UP '
@@ -674,12 +704,14 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             },
             {
                 img: 'img/listing/3.jpg',
+                toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
                 title1: 'WITH ROLL UP '
             },
             {
                 img: 'img/listing/4.jpg',
+                toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
                 title1: 'WITH ROLL UP '
@@ -687,11 +719,15 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             {
                 img1: 'img/listing/lable.png',
                 img: 'img/listing/6.jpg',
+                toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
                 title1: 'WITH ROLL UP '
             }
-        ]
+        ];
+        // $scope.displayCntent = function () {
+        //     $('.viewSize, .view--btn').css('display', 'block');
+        // }
         $scope.myShirt = [];
         $scope.myShirt11 = [];
         $scope.myShirt = _.chunk($scope.buyshirt, 9);
