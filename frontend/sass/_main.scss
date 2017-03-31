@@ -1,3 +1,4 @@
+
 /* Bootstrap Variables Goes Here */
 
 $brand-primary: #0d9dff !default;
@@ -359,14 +360,14 @@ header {
         color: $white;
         background-color: darken($darkBrown1, 0); // border-color: darken($border, 12%);
     }
-    // &:active {
-    //     color: $white;
-    //     background-color: darken($darkBrown1, 0); // border-color: darken($border, 12%);
-    // }
-    // &:focus {
-    //     color: $white;
-    //     background-color: darken($darkBrown1, 0); // border-color: darken($border, 12%);
-    // }
+    &:active {
+        color: $white;
+        background-color: darken($darkBrown1, 0); // border-color: darken($border, 12%);
+    }
+    &:focus {
+        color: $white;
+        background-color: darken($darkBrown1, 0); // border-color: darken($border, 12%);
+    }
 }
 
 .btn--brownActive {
@@ -427,6 +428,9 @@ header {
 }
 
 .order-table {
+    .table-bottom {
+        margin-bottom: 12px;
+    }
     .item {
         p {
             text-align: center;
@@ -476,12 +480,15 @@ header {
             border-left: none;
             text-align: center;
             border-left: none;
-            border-bottom: none;
+            // border-bottom: none;
             vertical-align: middle;
         }
         td:last-child {
             border-right: 1px solid #bfbfbf;
         }
+        // .table>thead:first-child>tr:first-child>th {
+        //     border-bottom: 1px solid #bfbfbf;
+        // }
     }
 }
 
@@ -492,12 +499,13 @@ header {
             border-top: 0;
             border-left: 0; // padding: 0;
         }
+        td+td {
+            vertical-align: bottom !important;
+            border-bottom: none;
+        }
     }
     td:last-child {
         vertical-align: bottom;
-    }
-    td+td {
-        vertical-align: bottom !important;
     }
     .mycart-list {
         li {
@@ -1189,6 +1197,10 @@ header {
             margin-bottom: 10px;
         }
     }
+    .next--btn {
+        @extend .btn--brown;
+        width: 150px;
+    }
 }
 
 .social-icons {
@@ -1239,7 +1251,8 @@ header {
 .modal-container {
     padding: 80px 54px 26px; // margin-top: 40px;
     .minHeight {
-        min-height: 430px;
+        // min-height: 430px;
+        min-height: 330px;
     }
     .marginTop {
         margin-top: 38px;
@@ -1252,7 +1265,7 @@ header {
         }
         p {
             font-family: 'vadodara-lgt';
-            font-size: 28px;
+            font-size: 22px;
         }
     }
     .login-footer {
@@ -1272,7 +1285,8 @@ header {
     background-position: center center;
     background-size: cover;
     color: $white;
-    min-height: 584px;
+    // min-height: 584px;
+    min-height: 480px;
     .login-head {
         p {
             line-height: 1;
@@ -1329,13 +1343,36 @@ header {
             font-family: 'vadodara-lgt';
             font-size: 18px;
         }
+        .checkbox {
+            margin-top: 0;
+            label {
+                padding-left: 2px;
+            }
+        }
+        [type="checkbox"]:not(:checked)+label:before,
+        [type="checkbox"]:checked+label:before {
+            width: 18px;
+            height: 18px;
+        }
+        [type="checkbox"]:not(:checked)+label:after,
+        [type="checkbox"]:checked+label:after {
+            top: 6px;
+            font-size: 18px;
+        }
     }
 }
 
 // Compare Products
 .breadCrumbs-letter {
-    ul>li>a {
-        color: #ababab;
+    ul>li {
+        a {
+            color: #ababab;
+            font-size: 10px;
+            &:hover,
+            {
+                text-decoration: none;
+            }
+        }
     }
     .fa {
         color: #ababab;

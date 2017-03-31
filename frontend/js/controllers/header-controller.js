@@ -12,7 +12,7 @@ myApp.controller('headerCtrl', function ($scope, TemplateService, $uibModal) {
             animation: true,
             templateUrl: 'views/modal/login.html',
             scope: $scope,
-            size: 'lg',
+            size: 'md',
             // windowClass: 'modal-content-radi0'
         });
     };

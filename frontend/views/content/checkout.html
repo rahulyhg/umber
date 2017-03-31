@@ -116,7 +116,7 @@
                     </div>
                     <div class="order-tab" ng-if="view=='orderTab'">
                         <div class="col-md-9">
-                            <table class="table order-table">
+                            <table class="table order-table table-bottom">
                                 <thead>
                                     <tr>
                                         <th>item</th>
@@ -138,15 +138,21 @@
                                         <td>{{myorder.color}}</td>
                                         <td>{{myorder.size}}</td>
                                         <td>{{myorder.quantity}}</td>
-                                        <td>{{myorder.subtotal}}</td>
+                                        <td>&#x20b9{{myorder.subtotal}}</td>
                                     </tr>
                                 </tbody>
-                                <tfoot>
+                                <!--<tfoot>
                                     <tr>
                                         <td colspan="6">Grand Total: <span>170.98</span></td>
                                     </tr>
-                                </tfoot>
+                                </tfoot>-->
                             </table>
+                            <div class="pull-right">
+                                <p class="text-right">GRAND TOTAL : <span>&#x20b9 170.98</span></p>
+                                <p>
+                                    <button class="btn next--btn btn-default">Next</button>
+                                </p>
+                            </div>
                         </div>
                     </div>
                     <div class="detail-tab" ng-if="view=='detailTab'">
@@ -318,19 +324,19 @@
                                     <form class="font__style">
                                         <div class="checkbox checkbox-inline">
                                             <input type="checkbox" id="p1">
-                                            <label for="p1">  Credit Card</label>
+                                            <label for="p1" class="chk__label">  Credit Card</label>
                                         </div>
                                         <div class="checkbox checkbox-inline">
                                             <input type="checkbox" id="p2">
-                                            <label for="p2">  Debit card</label>
+                                            <label for="p2" class="chk__label">  Debit card</label>
                                         </div>
                                         <div class="checkbox checkbox-inline">
                                             <input type="checkbox" id="p3">
-                                            <label for="p3">  cash on delivery</label>
+                                            <label for="p3" class="chk__label">  cash on delivery</label>
                                         </div>
                                         <div class="checkbox checkbox-inline">
                                             <input type="checkbox" id="p4">
-                                            <label for="p4">  Credit Card</label>
+                                            <label for="p4" class="chk__label">  Credit Card</label>
                                         </div>
                                     </form>
                                 </div>
