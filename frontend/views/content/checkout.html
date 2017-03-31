@@ -8,13 +8,13 @@
                 <div class="row">
                     <div class="col-md-3" ng-init="view='loginTab'">
                         <div>
-                            <button class="btn btn-default btn--brown btn-block" ng-click="view='loginTab'">Login</button>
+                            <button class="btn btn-default btn--brown btn-block" ng-click="view='loginTab'" ng-class="{'btn--brownActive': view == 'loginTab'}">Login</button>
                         </div>
                         <div>
-                            <button class="btn btn-default btn--brown btn-block" ng-click="view='orderTab'">Order</button>
+                            <button class="btn btn-default btn--brown btn-block" ng-click="view='orderTab'" ng-class="{'btn--brownActive': view == 'orderTab'}">Order</button>
                         </div>
                         <div>
-                            <button class="btn btn-default btn--brown btn-block" ng-click="view='detailTab'">Details</button>
+                            <button class="btn btn-default btn--brown btn-block" ng-click="view='detailTab'" ng-class="{'btn--brownActive': view == 'detailTab'}"> Details</button>
                         </div>
                         <div>
                             <button class="btn btn-default btn--brown btn-block">Payment</button>
@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="password" placeholder="Password" class="form-control">
-                                    <p class="pull-right"><a href="">Forgot Password?</a></p>
+                                    <p class="pull-right forgot__checkout"><a href="">Forgot Password?</a></p>
                                 </div>
                                 <div>
                                     <button class="btn btn-default btn--brown btn-block">log in</button>
@@ -62,7 +62,7 @@
                             </form>
                         </div>
                         <div class="col-md-3 col-md-offset-1">
-                            <form class="customized-form">
+                            <form class="customized-form custom-checkbox">
                                 <div class="form-group">
                                     <input type="text" placeholder="Username" class="form-control">
                                 </div>
@@ -78,7 +78,10 @@
                                 <div class="form-group">
                                     <input type="password" placeholder="Confirm Password" class="form-control">
                                 </div>
-                                <p>I agree with the terms and conditions and privacy policy</p>
+                                <div class="checkbox">
+                                    <input type="checkbox" id="a1">
+                                    <label for="a1">  I agree with the terms and conditions and privacy policy</label>
+                                </div>
                                 <div>
                                     <button class="btn btn-default btn--brown btn-block">sign in</button>
                                 </div>
@@ -140,7 +143,7 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td colspan="6"><span>Subtotal: $170.98</span></td>
+                                        <td colspan="6">Grand Total: <span>170.98</span></td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -243,8 +246,12 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div>
+                                        <div class="custom-checkbox">
                                             <h3 class="marg0 detail-tab__head">shipping address</h3>
+                                            <div class="checkbox">
+                                                <input type="checkbox" id="a1">
+                                                <label for="a1">Same as BIlling Address</label>
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="customized-form">
@@ -307,20 +314,24 @@
                                 <div>
                                     <h3 class="marg0 detail-tab__head">payment method</h3>
                                 </div>
-                                <div class="payment-checkbox">
+                                <div class="payment-checkbox custom-checkbox">
                                     <form class="font__style">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" value="" class="">Credit card
-                                        </label>
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" value="">Debit card
-                                        </label>
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" value="">net banking
-                                        </label>
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" value="">cash on delivery
-                                        </label>
+                                        <div class="checkbox checkbox-inline">
+                                            <input type="checkbox" id="p1">
+                                            <label for="p1">  Credit Card</label>
+                                        </div>
+                                        <div class="checkbox checkbox-inline">
+                                            <input type="checkbox" id="p2">
+                                            <label for="p2">  Debit card</label>
+                                        </div>
+                                        <div class="checkbox checkbox-inline">
+                                            <input type="checkbox" id="p3">
+                                            <label for="p3">  cash on delivery</label>
+                                        </div>
+                                        <div class="checkbox checkbox-inline">
+                                            <input type="checkbox" id="p4">
+                                            <label for="p4">  Credit Card</label>
+                                        </div>
                                     </form>
                                 </div>
                                 <div class="text-center">
