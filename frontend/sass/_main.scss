@@ -1,4 +1,3 @@
-
 /* Bootstrap Variables Goes Here */
 
 $brand-primary: #0d9dff !default;
@@ -151,6 +150,11 @@ nav li:hover .dropdown-menu {
     display: block;
 }
 
+.navbar-default .navbar-nav>li>a {
+    color: $darkBrown2!important;
+    font-size: 20px;
+}
+
 #map img {
     opacity: 1;
 }
@@ -204,21 +208,22 @@ footer {
         color: $white;
     }
     .contact--btn {
+        color: #cdc5c5!important;
         @extend .btn--brown;
         font-size: inherit;
     }
     a[href] {
-        color: $whiteBrown2;
+        color: #715a5b;
     }
     p {
-        color: $whiteBrown2;
+        color: #715a5b;
     }
     p,
     li {
         font-size: 12px;
     }
     address {
-        color: $whiteBrown2;
+        color: #715a5b;
     }
     .inline-block {
         vertical-align: top; // width: 19%;
@@ -226,6 +231,9 @@ footer {
     .footer-up__abt-shop {
         width: 25%;
         @include padding(25px);
+        .underline {
+            text-decoration: underline;
+        }
     }
     .footer-up__cstmr-serv,
     .footer-up__info,
@@ -349,8 +357,11 @@ header {
 }
 
 .btn--brown {
-    @include button-variant($darkBrown1,
-    #ededed,
+    // @include button-variant($darkBrown1,
+    // #ededed,
+    // $white);
+    @include button-variant($white,
+    $darkBrown1,
     $white);
     border: 1px dashed $white; // width: 180px;
     text-transform: uppercase;
@@ -372,6 +383,7 @@ header {
 
 .btn--brownActive {
     color: $white;
+    font-weight: normal;
     background-color: darken($darkBrown1, 0);
 }
 
@@ -406,8 +418,11 @@ header {
         border-bottom: 1px solid $darkBrown1;
     }
     .forgot__checkout {
+        @include margin(null null 20px null);
         a {
             color: #000;
+            text-decoration: underline;
+            @include text-decoration( #929292);
         }
     }
     .btn--brown {
@@ -479,14 +494,12 @@ header {
         td+td {
             border-left: none;
             text-align: center;
-            border-left: none;
-            // border-bottom: none;
+            border-left: none; // border-bottom: none;
             vertical-align: middle;
         }
         td:last-child {
             border-right: 1px solid #bfbfbf;
-        }
-        // .table>thead:first-child>tr:first-child>th {
+        } // .table>thead:first-child>tr:first-child>th {
         //     border-bottom: 1px solid #bfbfbf;
         // }
     }
@@ -644,30 +657,39 @@ header {
 .cloth-cat {
     .flexslider {
         @include margin(0 0 0 0);
+        border: none;
         .flex-prev {
+            opacity: 1;
             left: 39px!important;
-            @include size(40px,
-            40px);
+            @include size(35px,
+            35px);
             &:before {
                 content: '\02190';
                 color: $darkBrown1;
-                font-size: 40px;
+                font-size: 38px;
                 background-color: $white;
                 @include position(absolute,
-                -10px null null null);
+                -12px null null null);
+            }
+            &:hover {
+                opacity: 0.5;
             }
         }
         .flex-next {
             right: 39px!important;
-            @include size(40px,
-            40px);
+            @include size(35px,
+            35px);
+            opacity: 1;
             &:before {
                 content: '\02192'!important;
                 color: $white;
-                font-size: 40px;
+                font-size: 38px;
                 background-color: $darkBrown1;
                 @include position(absolute,
-                -10px null null -4px);
+                -12px null null -4px);
+            }
+            &:hover {
+                opacity: 0.5;
             }
         }
     }
@@ -708,6 +730,9 @@ header {
 .all-categorie {
     display: inline-block;
     @include margin(null null 55px null);
+    .list-inline>li {
+        @include padding(null 0 null null);
+    }
     .all-categorie__dimension {
         width: 50%;
         float: left;
@@ -730,20 +755,21 @@ header {
         h1 {
             color: $darkBrown1;
             @include margin(20px 0 25px);
+            font-family: 'fjalla-reg';
         }
         .new-arrival--border--line {
             @extend .border-line;
             &:before {
                 width: 10%;
                 top: 50%;
-                left: 30%;
+                left: 31.7%;
                 border: 1px solid #e7dada;
             }
             &:after {
                 border: 1px solid #e7dada;
                 width: 10%;
                 top: 50%;
-                right: 30%;
+                right: 31.5%;
             }
         }
     }
@@ -763,31 +789,39 @@ header {
                 background: transparent;
                 border: none;
                 .flex-prev {
-                    left: 88.7% !important;
-                    top: -9%;
-                    @include size(40px,
-                    40px);
+                    opacity: 1;
+                    left: 89.7% !important;
+                    top: -6%;
+                    @include size(35px,
+                    35px);
                     &:before {
                         content: '\02190';
-                        color: #82817f;
-                        font-size: 40px;
+                        color: #474541;
+                        font-size: 38px;
                         background-color: $lightGray;
                         @include position(absolute,
-                        -10px null null null);
+                        -12px null null null);
+                    }
+                    &:hover {
+                        opacity: 0.5;
                     }
                 }
                 .flex-next {
-                    top: -9%;
+                    top: -6%;
                     right: 0!important;
-                    @include size(40px,
-                    40px);
+                    @include size(35px,
+                    35px);
+                    opacity: 1;
                     &:before {
                         content: '\02192'!important;
-                        color: #c5c4c3;
-                        font-size: 40px;
+                        color: #474541;
+                        font-size: 38px;
                         background-color: $white;
                         @include position(absolute,
-                        -10px null null -4px);
+                        -12px null null -4px);
+                    }
+                    &:hover {
+                        opacity: 0.5;
                     }
                 }
                 .flex-control-nav {
@@ -804,6 +838,12 @@ header {
                 inherit);
                 color: $white;
             }
+            h3 {
+                @include margin(null null 0 null);
+            }
+            h4 {
+                @include margin(0 null null null);
+            }
             i {
                 padding-right: 10px;
             }
@@ -819,20 +859,21 @@ header {
         h1 {
             color: $darkBrown1;
             @include margin(20px 0 25px);
+            font-family: 'fjalla-reg';
         }
         .featured--border--line {
             @extend .border-line;
             &:before {
                 width: 10%;
                 top: 50%;
-                left: 32%;
+                left: 33.5%;
                 border: 1px solid #e7dada;
             }
             &:after {
                 border: 1px solid #e7dada;
                 width: 10%;
                 top: 50%;
-                right: 32%;
+                right: 33.5%;
             }
         }
     }
@@ -843,31 +884,39 @@ header {
             // border: none;
             @include margin(0 0 20px);
             .flex-prev {
-                left: 92.7% !important;
-                top: -9%;
-                @include size(40px,
-                40px);
+                opacity: 1;
+                left: 93.5% !important;
+                top: -6%;
+                @include size(35px,
+                35px);
                 &:before {
                     content: '\02190';
                     color: $white;
-                    font-size: 40px;
+                    font-size: 38px;
                     background-color: #b38889;
                     @include position(absolute,
-                    -10px null null null);
+                    -12px null null null);
+                }
+                &:hover {
+                    opacity: 0.5;
                 }
             }
             .flex-next {
-                top: -9%;
+                opacity: 1;
+                top: -6%;
                 right: 0!important;
-                @include size(40px,
-                40px);
+                @include size(35px,
+                35px);
                 &:before {
                     content: '\02192'!important;
                     color: $white;
-                    font-size: 40px;
+                    font-size: 38px;
                     background-color: $lightBrown2;
                     @include position(absolute,
-                    -10px null null -4px);
+                    -12px null null -4px);
+                }
+                &:hover {
+                    opacity: 0.5;
                 }
             }
             .flex-control-nav {
@@ -879,12 +928,14 @@ header {
         .featured__cloth-desc {
             h3 {
                 color: $darkBrown1;
+                @include margin(null null 5px null);
                 i {
                     padding-right: 6px;
                 }
             }
             h4 {
                 color: $darkGray;
+                @include margin(0 null null null);
             }
         }
         .featured__icon-heart {
@@ -903,7 +954,7 @@ header {
         }
         .featured__icon-cart {
             position: absolute;
-            bottom: 75px;
+            bottom: 17%;
             right: 0;
             width: 35px;
             height: 35px;
@@ -944,20 +995,21 @@ header {
         h1 {
             color: $darkBrown1;
             @include margin(20px 0 25px);
+            font-family: 'fjalla-reg';
         }
         .cloth-buy--border--line {
             @extend .border-line;
             &:before {
                 width: 14%;
                 top: 50%;
-                left: 10%;
+                left: 14%;
                 border: 1px solid #e7dada;
             }
             &:after {
                 border: 1px solid #e7dada;
                 width: 14%;
                 top: 50%;
-                right: 10%;
+                right: 14%;
             }
         }
     }
@@ -970,6 +1022,7 @@ header {
         }
         p.line--height {
             line-height: 1;
+            text-align: justify;
         }
         .buy--now {
             // button-design
@@ -994,20 +1047,21 @@ header {
         h1 {
             color: $darkBrown1;
             @include margin(20px 0 25px);
+            font-family: 'fjalla-reg';
         }
         .blog--border--line {
             @extend .border-line;
             &:before {
                 width: 10%;
                 top: 50%;
-                left: 34%;
+                left: 35%;
                 border: 1px solid #e7dada;
             }
             &:after {
                 border: 1px solid #e7dada;
                 width: 10%;
                 top: 50%;
-                right: 34%;
+                right: 35%;
             }
         }
     }
@@ -1015,6 +1069,10 @@ header {
         .flexslider {
             @include margin(0 0 70px);
             .flex-control-nav {
+                display: none;
+            }
+            .flex-prev,
+            .flex-next {
                 display: none;
             }
         }
@@ -1052,20 +1110,21 @@ header {
         h1 {
             color: $darkBrown1;
             @include margin(20px 0 25px);
+            font-family: 'fjalla-reg';
         }
         .sale--border--line {
             @extend .border-line;
             &:before {
                 width: 10%;
                 top: 50%;
-                left: 35%;
+                left: 36.5%;
                 border: 1px solid #e7dada;
             }
             &:after {
                 border: 1px solid #e7dada;
                 width: 10%;
                 top: 50%;
-                right: 35%;
+                right: 36.5%;
             }
         }
     }
@@ -1077,31 +1136,39 @@ header {
                 border: none;
                 @include margin(0 0 20px);
                 .flex-prev {
-                    left: 92.7% !important;
-                    top: -9%;
-                    @include size(40px,
-                    40px);
+                    opacity: 1;
+                    left: 93.5% !important;
+                    top: -6%;
+                    @include size(35px,
+                    35px);
                     &:before {
                         content: '\02190';
                         color: $white;
-                        font-size: 40px;
+                        font-size: 38px;
                         background-color: #b38889;
                         @include position(absolute,
-                        -10px null null null);
+                        -12px null null null);
+                    }
+                    &:hover {
+                        opacity: 0.5;
                     }
                 }
                 .flex-next {
-                    top: -9%;
+                    opacity: 1;
+                    top: -6%;
                     right: 0!important;
-                    @include size(40px,
-                    40px);
+                    @include size(35px,
+                    35px);
                     &:before {
                         content: '\02192'!important;
                         color: $white;
-                        font-size: 40px;
+                        font-size: 38px;
                         background-color: $lightBrown2;
                         @include position(absolute,
-                        -10px null null -4px);
+                        -12px null null -4px);
+                    }
+                    &:hover {
+                        opacity: 0.5;
                     }
                 }
                 .flex-control-nav {
@@ -1112,12 +1179,14 @@ header {
         .sale__banner-detail {
             h3 {
                 color: $darkBrown1;
+                @include margin(0 null null null);
                 i {
                     @include padding(0 6px 0 0);
                 }
             }
             h4 {
                 color: $darkGray;
+                @include margin(null null 5px null);
             }
         }
     }
@@ -1248,6 +1317,10 @@ header {
     box-shadow: -2px 1px 6px #dedede;
 }
 
+.modal-dialog {
+    width: 735px;
+}
+
 .modal-container {
     padding: 80px 54px 26px; // margin-top: 40px;
     .minHeight {
@@ -1274,6 +1347,7 @@ header {
         text-align: center;
         a {
             color: #292929;
+            text-decoration: underline;
         }
     }
 }
@@ -1284,8 +1358,7 @@ header {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    color: $white;
-    // min-height: 584px;
+    color: $white; // min-height: 584px;
     min-height: 480px;
     .login-head {
         p {
@@ -1295,12 +1368,11 @@ header {
     .login-footer {
         color: $white;
         p {
-            font-weight: bold;
+            // font-weight: bold;
             font-family: 'vadodara-lgt';
         }
         a {
-            color: $white;
-            font-weight: bold;
+            color: $white; // font-weight: bold;
         }
     }
     .login__social-icons {
@@ -1335,6 +1407,9 @@ header {
     }
     .checkout__cont-btn {
         @extend .btn--brown;
+        @include size(260px,
+        auto);
+        @include margin(20px null);
     }
     .payment-checkbox {
         margin: 16px 0;
@@ -1346,7 +1421,7 @@ header {
         .checkbox {
             margin-top: 0;
             label {
-                padding-left: 2px;
+                @include padding(null 5px null 25px);
             }
         }
         [type="checkbox"]:not(:checked)+label:before,

@@ -398,9 +398,12 @@
                                 <div class="buy-slider slider-individual list-slider">
                                     <flex-slider flex-slide="buy in xyz track by $index" prev-text="" next-text="" animation="slide" min-items="3">
                                         <li>
-                                            <img ng-src="{{buy.img1}}" class="img-rsponsive img1" title="{{buy. toolTip}}">
+                                            <div class="list-slider__toolTip">
+                                                <a toolTip="{{buy.toolTip}}"><img ng-src="{{buy.img1}}" class="img-rsponsive img1"></a>
+                                            </div>
+                                            <!--<img ng-src="{{buy.img1}}" class="img-rsponsive img1" title="sudd">-->
                                             <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                            <img ng-src="{{buy.img}}" class="img-responsive" ng-mouseover="displayCntent();">
+                                            <img ng-src="{{buy.img}}" class="img-responsive" ng-mouseover="displayCntent();" ng-mouseleave="hideContent();">
                                         </li>
                                     </flex-slider>
                                     <div class="buy-para">

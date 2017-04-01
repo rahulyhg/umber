@@ -6,27 +6,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.toggled = function (open) {
             alert('xd');
         };
-        $scope.cart = [{
-            img: '../img/home/11.jpg',
-            shirtType: 'linen full sleeve shirt with rollup',
-            price: '2899',
-            size: '36'
-        }, {
-            img: '../img/home/12.jpg',
-            shirtType: 'linen full sleeve shirt with rollup',
-            price: '3000',
-            size: '37'
-        }, {
-            img: '../img/home/12.jpg',
-            shirtType: 'linen full sleeve shirt with rollup',
-            price: '3000',
-            size: '37'
-        }, {
-            img: '../img/home/12.jpg',
-            shirtType: 'linen full sleeve shirt with rollup',
-            price: '3000',
-            size: '37'
-        }];
+
         // $scope.mySlides = [
         //     'http://flexslider.woothemes.com/images/kitchen_adventurer_cheesecake_brownie.jpg',
         //     'http://flexslider.woothemes.com/images/kitchen_adventurer_lemon.jpg',
@@ -230,19 +210,19 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.buyshirt = [{
                 img: 'img/buy/2.jpg',
                 rupee: '3,000',
-                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP',
+                title: 'linen FULL SLEEVE SHIRT WITH ROLL UP',
                 id: 0
             },
             {
                 img: 'img/buy/3.jpg',
                 rupee: '3,000',
-                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP',
+                title: 'linen FULL SLEEVE SHIRT WITH ROLL UP',
                 id: 1
             },
             {
                 img: 'img/buy/4.jpg',
                 rupee: '3,000',
-                title: 'LINES FULL SLEEVE SHIRT WITH ROLL UP',
+                title: 'linen FULL SLEEVE SHIRT WITH ROLL UP',
                 id: 2
             },
             {
@@ -266,19 +246,19 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             {
                 img: 'img/buy/2.jpg',
                 rupee: '3,000',
-                title: 'LINES LIGHT BLUE CASUAL BLAZER',
+                title: 'linen LIGHT BLUE CASUAL BLAZER',
                 id: 6
             },
             {
                 img: 'img/buy/3.jpg',
                 rupee: '3,000',
-                title: 'LINES LIGHT BLUE CASUAL BLAZER',
+                title: 'linen LIGHT BLUE CASUAL BLAZER',
                 id: 7
             },
             {
                 img: 'img/buy/4.jpg',
                 rupee: '3,000',
-                title: 'LINES LIGHT BLUE CASUAL BLAZER',
+                title: 'linen LIGHT BLUE CASUAL BLAZER',
                 id: 8
             },
             {
@@ -725,9 +705,18 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 title1: 'WITH ROLL UP '
             }
         ];
-        // $scope.displayCntent = function () {
-        //     $('.viewSize, .view--btn').css('display', 'block');
-        // }
+        $scope.displayCntent = function () {
+            //$('.viewSize, .view--btn').css('opacity', '1');
+            $('.viewSize, .view--btn').css('display', 'block');
+            $(' .view--btn').css({
+                'position': 'relative',
+                'top': '6px'
+            });
+
+        }
+        $scope.hideContent = function () {
+            $('.viewSize, .view--btn').css('display', 'none');
+        };
         $scope.myShirt = [];
         $scope.myShirt11 = [];
         $scope.myShirt = _.chunk($scope.buyshirt, 9);

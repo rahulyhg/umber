@@ -4,6 +4,14 @@
     text-align: center; // border: none;
 }
 
+.mycart-table tbody tr:nth-child(n+2) {
+    button {
+        i {
+            @include margin(null 3px null null);
+        }
+    }
+}
+
 .bg-mycart {
     background: url("../img/cart/mycart-bg.jpg");
     background-repeat: no-repeat;
@@ -154,6 +162,7 @@ img.loading {
             position: absolute;
             right: 15px;
             top: 13px;
+            font-size: 16px;
             cursor: pointer;
         }
     }
@@ -186,6 +195,9 @@ img.loading {
         color: $darkBrown1;
         @include margin(null null 7px null);
     }
+    h5 {
+        @include margin(0 null null null);
+    }
     p {
         line-height: 1;
         margin: 0px;
@@ -211,17 +223,22 @@ img.loading {
         hr {
             margin: 6px 0;
         }
-        .buy-para__sizes {
-            //  display: none;
-            p {
-                font-size: 14px;
-                box-sizing: border-box;
-                border: 1px solid;
-                padding: 5px;
-                display: inline-block;
+        .viewSize {
+            //  opacity: 0;
+            display: none; //  @include transition(opacity 0.5s ease);
+            .buy-para__sizes {
+                p {
+                    font-size: 14px;
+                    box-sizing: border-box;
+                    border: 1px solid;
+                    padding: 5px;
+                    display: inline-block;
+                }
             }
         }
         .view--btn {
+            // opacity: 0;
+            display: none; //@include transition(opacity 0.5s ease);
             @extend .btn--brown;
             width: 115px;
             @include padding(3px 0px); // display: none;
@@ -295,6 +312,7 @@ img.loading {
     padding: 30px 50px;
     a {
         color: $lightBrown3;
+        text-decoration: underline;
     }
 }
 
@@ -311,7 +329,7 @@ img.loading {
 }
 
 .border-div {
-    border-bottom: 1px solid $whiteBrown1; //padding-bottom: 15px;
+    border-bottom: 1px solid #e7dada; //padding-bottom: 15px;
 }
 
 .first-sec {
@@ -482,6 +500,11 @@ img.loading {
 .listing-container {
     padding: 30px;
     @include margin(null null 55px null);
+    .panel-group {
+        .panel-body {
+            @include padding(null 7px);
+        }
+    }
 }
 
 .slider-individual {
@@ -490,12 +513,66 @@ img.loading {
 
 .list-slider {
     li {
-        .img1 {
-            position: absolute;
-            left: 15px;
-            top: 13px;
-            width: 10%;
-        }
+        .list-slider__toolTip {
+            @include size(22px,
+            22px);
+            @include position(absolute,
+            4.4% null null 6%); // .img1 {
+            //     position: absolute;
+            //     left: 15px;
+            //     top: 13px;
+            //     width: 10%;
+            // }
+            a {
+                position: relative;
+                cursor: default;
+            }
+            a:hover {
+                position: relative;
+            }
+            a[toolTip]:hover:after {
+                content: attr(toolTip);
+                display: block;
+                color: $darkBrown2;
+                background-color: #e0e0e0;
+                @include position(absolute,
+                150% null null 0);
+                @include margin(null null null -15px);
+                @include padding(0 5px);
+                white-space: nowrap;
+                z-index: 20;
+            }
+        } // .list-slider__toolTip .toolTip-text {
+        //     visibility: hidden;
+        //     @include size(120px,
+        //     auto);
+        //     background-color: #555;
+        //     color: #fff;
+        //     text-align: center;
+        //     border-radius: 6px;
+        //     padding: 5px 0;
+        //     position: absolute;
+        //     z-index: 1;
+        //     bottom: 125%;
+        //     left: 50%;
+        //     margin-left: -60px;
+        //     opacity: 0;
+        //     transition: opacity 1s;
+        // }
+        // .list-slider__toolTip .toolTip-text:after {
+        //     content: "";
+        //     position: relative;
+        //     top: 100%;
+        //     left: 50%;
+        //     margin-left: -5px;
+        //     border-width: 5px;
+        //     border-style: solid;
+        //     border-color: #555 transparent transparent transparent;
+        // }
+        // .list-slider__toolTip:hover .toolTip-text {
+        //     visibility: visible;
+        //     opacity: 1;
+        // }
     }
 }
 
@@ -656,7 +733,23 @@ img.loading {
     img {
         width: 70%;
     }
-} //scss for check .checkbox
+}
+
+//Start of section Customer Choice
+.customer-choice {
+    .individual-features {
+        .flex-prev {
+            left: 93%!important;
+        }
+        .featured__icon-heart,
+        .featured__icon-cart {
+            display: none;
+        }
+    }
+}
+
+////End of section Customer Choice
+//scss for check .checkbox
 
 /* checkbox aspect */
 
