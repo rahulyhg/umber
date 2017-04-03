@@ -394,7 +394,7 @@
 
                     <div class="row" ng-repeat="abc in myShirt11">
                         <div class="col-md-4" ng-repeat="xyz in abc" ng-init="parentIndex = $index">
-                            <div class="buy-info">
+                            <div class="buy-info custom-checkbox">
                                 <div class="buy-slider slider-individual list-slider">
                                     <flex-slider flex-slide="buy in xyz track by $index" prev-text="" next-text="" animation="slide" min-items="3">
                                         <li>
@@ -420,7 +420,13 @@
                                             </div>
                                         </div>
                                         <hr>
-                                        <p><input type="checkbox"> Add to compare</p>
+                                        <!--<p><input type="checkbox"> Add to compare</p>-->
+                                        <div class="checkbox">
+
+                                            <input type="checkbox" id="">
+                                            <label for="">Add to comapre                               
+                                             </label>
+                                        </div>
                                         <div class="buy-para__button">
                                             <div class="inline-block ">
                                                 <button class="btn btn-default buy--btn text-uppercase">buy</button>

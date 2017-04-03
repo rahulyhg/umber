@@ -2,7 +2,7 @@
     <div class="individual-container">
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 padd-rt0">
                 <div class="breadCrumbs-letter">
                     <ul class="list-unstyled list-inline text-uppercase marg0">
                         <li>
@@ -22,20 +22,21 @@
                         </li>
                     </ul>
                 </div>
-                <img src="img/individual/1.jpg" class="img-responsive">
+                <div class="individual-first">
+                    <img src="img/individual/1.jpg" class="img-responsive">
+                </div>
                 <div class="slider2">
-                    <flex-slider class="carousel" flex-slide="item in gallery track by $index" animation="slide" item-width="228" item-margin="5"
-                        move="1" slideshow-speed=1000 direction-nav="false" control-nav="false" as-nav-for="#slider" slider-id="carousel">
-                        <li>
-                            <div class="img-animated">
-                                <img ng-src="{{item.thumbimage | uploadpath}}" alt="" class="hover-sec">
+                    <flex-slider flex-slide="new in individual track by $index" prev-text="" next-text="" animation="slide" item-width="270"
+                        item-margin="25" min-items="4">
+                        <li class="relate">
+                            <div class="customer-choice__banner-detail relate">
+                                <img ng-src="{{new.img}}" alt="" class="img-responsive">
                             </div>
                         </li>
                     </flex-slider>
-
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 padd-lt3">
                 <div class="prod-code">
                     <div class="pull-left">
                         <p class="prod-code__left">Product Code: G00028- GMSHHS0198-AMTEN-02</p>
@@ -45,13 +46,13 @@
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="individual-main">
+                <div class="individual-main relate">
                     <div class="first-sec clearfix border-div">
                         <h4>LINE FULL SLEEVES SHIRT WITH ROLLUP</h4>
                         <div class="pull-left">
                             <h3><i class="fa fa-inr" aria-hidden="true"></i> 3,000</h3>
                         </div>
-                        <div class="pull-right">
+                        <div class="absolute-text">
                             <a>Are you a member?</a>
                         </div>
                     </div>
@@ -213,31 +214,31 @@
     </div>
 </div>
 
-<section class="customer-choice">
-    <div class="featured relate">
+<section class="">
+    <div class="customer-choice relate">
         <div class="container">
-            <div class="feature-container">
+            <div class="customer-choice-container">
                 <div class="row">
-                    <div class="featured__title text-center">
+                    <div class="customer-choice__title text-center">
                         <h1 class="text-uppercase individual--border--line">you may also like</h1>
                     </div>
                 </div>
-                <div class="individual-features featured__slider">
-                    <flex-slider flex-slide="new in featured track by $index" prev-text="" next-text="" animation="slide" item-width="250" item-margin="25"
+                <div class="customer-choice__slider">
+                    <flex-slider flex-slide="new in featured track by $index" prev-text="" next-text="" animation="slide" item-width="270" item-margin="25"
                         min-items="3">
                         <li class="relate">
-                            <div class="featured__banner-detail relate">
+                            <div class="customer-choice__banner-detail relate">
                                 <img ng-src="{{new.img}}" alt="" class="img-responsive">
-                                <div class="featured__cloth-desc">
+                                <div class="customer-choiced__cloth-desc">
                                     <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
                                     <h4>{{new.type}}</h4>
                                 </div>
-                                <div class="featured__icon-heart">
+                                <!--<div class="customer-choice__icon-heart">
                                     <i class="fa fa-heart" aria-hidden="true"></i>
                                 </div>
-                                <div class="featured__icon-cart">
+                                <div class="customer-choice__icon-cart">
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                </div>
+                                </div>-->
                             </div>
                         </li>
                     </flex-slider>
