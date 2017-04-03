@@ -252,7 +252,7 @@ footer {
         width: 25%;
     }
     .footer-up__img {
-        @include size(280px,
+        @include size(250px,
         auto);
         @include position( absolute,
         null -15px 0 null);
@@ -350,6 +350,18 @@ header {
 
 .padd0 {
     padding: 0;
+}
+
+.padd-rt0 {
+    @include padding(null 0 null null);
+}
+
+.padd-lt0 {
+    @include padding(null null null 0);
+}
+
+.padd-lt3 {
+    @include padding(null null null 3px);
 }
 
 .width100 {
@@ -539,7 +551,7 @@ header {
     border-color: transparent;
     .navbar-header {
         .navbar-brand {
-            @include padding(7px 2px 5px);
+            @include padding(7px 10px 5px);
             @include size(null,
             auto);
         }
@@ -554,10 +566,10 @@ header {
         border-radius: 4px;
         .icon-bar {
             display: block;
-            width: 20px;
+            @include size(22px,
+            2px);
             background-color: $darkBrown2;
-            height: 2px;
-            margin-top: 3px;
+            margin-top: 4px;
             border-radius: 1px;
         }
     }
@@ -661,15 +673,15 @@ header {
         .flex-prev {
             opacity: 1;
             left: 39px!important;
-            @include size(35px,
-            35px);
+            @include size(32px,
+            32px);
             &:before {
                 content: '\02190';
                 color: $darkBrown1;
                 font-size: 38px;
                 background-color: $white;
                 @include position(absolute,
-                -12px null null null);
+                -14px null null -2px);
             }
             &:hover {
                 opacity: 0.5;
@@ -677,8 +689,8 @@ header {
         }
         .flex-next {
             right: 39px!important;
-            @include size(35px,
-            35px);
+            @include size(32px,
+            32px);
             opacity: 1;
             &:before {
                 content: '\02192'!important;
@@ -686,7 +698,7 @@ header {
                 font-size: 38px;
                 background-color: $darkBrown1;
                 @include position(absolute,
-                -12px null null -4px);
+                -14px null null -4px);
             }
             &:hover {
                 opacity: 0.5;
@@ -718,7 +730,12 @@ header {
         .shop--now {
             @extend .btn--brown;
             color: $lightBrown2;
+            font-weight: normal;
             border: 1px dashed $lightBrown2;
+            border-radius: 4px;
+            @include padding(3px 0);
+            font-size: 15px;
+            letter-spacing: 4px;
             background-color: transparent;
             width: 135px;
         }
@@ -729,7 +746,7 @@ header {
 //Start of All categorie section
 .all-categorie {
     display: inline-block;
-    @include margin(null null 55px null);
+    @include margin(null null 45px null);
     .list-inline>li {
         @include padding(null 0 null null);
     }
@@ -774,8 +791,8 @@ header {
         }
     }
     .new-arrival__img {
-        background-image: url('../img/home/7.jpg');
-        background-position: center center;
+        background-image: url('../img/home/7.jpg'); //  background-position: center center;
+        background-position-x: center;
         background-repeat: no-repeat;
         background-size: cover;
         width: 100%;
@@ -783,24 +800,26 @@ header {
     }
     .new-arrival__slider {
         background-color: rgba(0, 0, 0, 0.5);
+        height: 475px;
+        @include padding(85px 145px 0 100px);
         .flexslider-container {
-            padding: 100px 100px 0;
+            //padding: 100px 100px 0;
             .flexslider {
                 background: transparent;
                 border: none;
                 .flex-prev {
                     opacity: 1;
-                    left: 89.7% !important;
+                    left: 90.7% !important;
                     top: -6%;
-                    @include size(35px,
-                    35px);
+                    @include size(32px,
+                    32px);
                     &:before {
                         content: '\02190';
                         color: #474541;
                         font-size: 38px;
                         background-color: $lightGray;
                         @include position(absolute,
-                        -12px null null null);
+                        -14px null null -2px);
                     }
                     &:hover {
                         opacity: 0.5;
@@ -809,8 +828,8 @@ header {
                 .flex-next {
                     top: -6%;
                     right: 0!important;
-                    @include size(35px,
-                    35px);
+                    @include size(32px,
+                    32px);
                     opacity: 1;
                     &:before {
                         content: '\02192'!important;
@@ -818,7 +837,7 @@ header {
                         font-size: 38px;
                         background-color: $white;
                         @include position(absolute,
-                        -12px null null -4px);
+                        -14px null null -4px);
                     }
                     &:hover {
                         opacity: 0.5;
@@ -832,14 +851,11 @@ header {
         .new-arrival__banner-detail {
             h3,
             h4 {
-                @include font(normal,
-                600,
-                null,
-                inherit);
+                font-family: vadodara-md;
                 color: $white;
             }
             h3 {
-                @include margin(null null 0 null);
+                @include margin(10px null 0 null);
             }
             h4 {
                 @include margin(0 null null null);
@@ -858,7 +874,7 @@ header {
     .featured__title {
         h1 {
             color: $darkBrown1;
-            @include margin(20px 0 25px);
+            @include margin(20px 0 30px);
             font-family: 'fjalla-reg';
         }
         .featured--border--line {
@@ -885,17 +901,17 @@ header {
             @include margin(0 0 20px);
             .flex-prev {
                 opacity: 1;
-                left: 93.5% !important;
-                top: -6%;
-                @include size(35px,
-                35px);
+                left: 94% !important;
+                top: -5%;
+                @include size(32px,
+                32px);
                 &:before {
                     content: '\02190';
                     color: $white;
                     font-size: 38px;
                     background-color: #b38889;
                     @include position(absolute,
-                    -12px null null null);
+                    -14px null null -2px);
                 }
                 &:hover {
                     opacity: 0.5;
@@ -903,17 +919,17 @@ header {
             }
             .flex-next {
                 opacity: 1;
-                top: -6%;
+                top: -5%;
                 right: 0!important;
-                @include size(35px,
-                35px);
+                @include size(32px,
+                32px);
                 &:before {
                     content: '\02192'!important;
                     color: $white;
                     font-size: 38px;
                     background-color: $lightBrown2;
                     @include position(absolute,
-                    -12px null null -4px);
+                    -14px null null -4px);
                 }
                 &:hover {
                     opacity: 0.5;
@@ -935,13 +951,13 @@ header {
             }
             h4 {
                 color: $darkGray;
+                font-family: vadodara-md;
                 @include margin(0 null null null);
             }
         }
         .featured__icon-heart {
-            position: absolute;
-            top: 0;
-            right: 0;
+            @include position(absolute,
+            0 0 null null);
             width: 35px;
             height: 35px;
             padding: 6px;
@@ -953,11 +969,10 @@ header {
             FontAwesome);
         }
         .featured__icon-cart {
-            position: absolute;
-            bottom: 17%;
-            right: 0;
-            width: 35px;
-            height: 35px;
+            @include position(absolute,
+            null 0 21.5% null);
+            @include size(35px,
+            35px);
             padding: 6px;
             text-align: center;
             color: $white;
@@ -994,7 +1009,7 @@ header {
     .cloth-buy__title {
         h1 {
             color: $darkBrown1;
-            @include margin(20px 0 25px);
+            @include margin(20px 0 30px);
             font-family: 'fjalla-reg';
         }
         .cloth-buy--border--line {
@@ -1028,6 +1043,8 @@ header {
             // button-design
             @extend .btn--brown;
             width: 140px;
+            font-weight: normal;
+            font-size: 15px;
             @include margin(15px null null null);
         }
     }
@@ -1046,7 +1063,7 @@ header {
     .blog__title {
         h1 {
             color: $darkBrown1;
-            @include margin(20px 0 25px);
+            @include margin(20px 0 30px);
             font-family: 'fjalla-reg';
         }
         .blog--border--line {
@@ -1081,9 +1098,9 @@ header {
                 p:last-child {
                     &:after {
                         content: '\02192';
-                        position: relative;
-                        top: 6px;
-                        font-size: 35px;
+                        @include position(relative,
+                        3px null null null);
+                        font-size: 28px;
                     }
                 }
                 color: $white;
@@ -1092,6 +1109,7 @@ header {
                 height: 176px;
                 h3 {
                     font-size: 20px;
+                    font-weight: 600;
                 }
                 P {
                     line-height: 1;
@@ -1109,7 +1127,7 @@ header {
     .sale__title {
         h1 {
             color: $darkBrown1;
-            @include margin(20px 0 25px);
+            @include margin(30px 0 30px);
             font-family: 'fjalla-reg';
         }
         .sale--border--line {
@@ -1134,20 +1152,20 @@ header {
             .flexslider {
                 background: transparent;
                 border: none;
-                @include margin(0 0 20px);
+                @include margin(0 0 35px);
                 .flex-prev {
                     opacity: 1;
-                    left: 93.5% !important;
-                    top: -6%;
-                    @include size(35px,
-                    35px);
+                    left: 94% !important;
+                    top: -5%;
+                    @include size(32px,
+                    32px);
                     &:before {
                         content: '\02190';
                         color: $white;
                         font-size: 38px;
                         background-color: #b38889;
                         @include position(absolute,
-                        -12px null null null);
+                        -14px null null -2px);
                     }
                     &:hover {
                         opacity: 0.5;
@@ -1155,17 +1173,17 @@ header {
                 }
                 .flex-next {
                     opacity: 1;
-                    top: -6%;
+                    top: -5%;
                     right: 0!important;
-                    @include size(35px,
-                    35px);
+                    @include size(32px,
+                    32px);
                     &:before {
                         content: '\02192'!important;
                         color: $white;
                         font-size: 38px;
                         background-color: $lightBrown2;
                         @include position(absolute,
-                        -12px null null -4px);
+                        -14px null null -4px);
                     }
                     &:hover {
                         opacity: 0.5;
@@ -1192,7 +1210,10 @@ header {
     }
     .view--more {
         @extend .btn--brown;
-        width: 135px;
+        width: 125px;
+        font-size: 15px;
+        @include padding(3px);
+        font-weight: normal;
         @include margin(null null 25px);
     }
     .absolute {
@@ -1478,6 +1499,12 @@ header {
         .compare-img {
             width: 150px;
             margin: 0 auto;
+        }
+        .table-bordered>tbody>tr>td {
+            text-align: center;
+        }
+        .table-bordered>tbody>tr>td:first-child {
+            text-align: right;
         }
     }
     .details-table {

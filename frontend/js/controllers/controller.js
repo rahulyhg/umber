@@ -77,48 +77,48 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.featured = [{
                 img: '../img/home/11.jpg',
                 price: '3000',
-                type: 'Lorem Ipsum is simply dummy text'
+                type: 'Linen Full Sleeve ShirtWith Rollup'
 
             },
             {
                 img: '../img/home/12.jpg',
                 price: '4000 ',
-                type: 'Lorem Ipsum is simply dummy text'
+                type: 'Linen Full Sleeve ShirtWith Rollup'
 
             },
             {
                 img: '../img/home/13.jpg',
                 price: '5000',
-                type: 'Lorem Ipsum is simply dummy text'
+                type: 'Marathon Plain Front Trouser'
 
             }, {
                 img: '../img/home/14.jpg',
                 price: '3000',
-                type: 'Lorem Ipsum is simply dummy text'
+                type: 'Marathon Plain Front Trouser'
 
             },
             {
                 img: '../img/home/11.jpg',
                 price: '4000 ',
-                type: 'Lorem Ipsum is simply dummy text'
+                type: 'Linen Full Sleeve ShirtWith Rollup'
 
             },
             {
                 img: '../img/home/12.jpg',
                 price: '5000',
-                type: 'Lorem Ipsum is simply dummy text'
+                type: 'Linen Full Sleeve ShirtWith Rollup'
 
             },
             {
                 img: '../img/home/13.jpg',
                 price: '4000 ',
-                type: 'Lorem Ipsum is simply dummy text'
+                type: 'Marathon Plain Front Trouser'
 
             },
             {
                 img: '../img/home/14.jpg',
                 price: '5000',
-                type: 'Lorem Ipsum is simply dummy text'
+                type: 'Marathon Plain Front Trouser'
 
             }
         ];
@@ -155,36 +155,36 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.sale = [{
                 img: '../img/home/11.jpg',
                 price: '3000',
-                type: 'Lorem Ipsum is simply dummy text'
+                type: 'Linen Full Sleeve ShirtWith Rollup'
 
             },
             {
                 img: '../img/home/12.jpg',
                 price: '4000 ',
-                type: 'Lorem Ipsum is simply dummy text'
+                type: 'Linen Full Sleeve ShirtWith Rollup'
 
             },
             {
                 img: '../img/home/13.jpg',
                 price: '5000',
-                type: 'Lorem Ipsum is simply dummy text'
+                type: 'Linen Full Sleeve ShirtWith Rollup'
 
             }, {
                 img: '../img/home/14.jpg',
                 price: '3000',
-                type: 'Lorem Ipsum is simply dummy text'
+                type: 'Linen Full Sleeve ShirtWith Rollup'
 
             },
             {
                 img: '../img/home/11.jpg',
                 price: '4000 ',
-                type: 'Lorem Ipsum is simply dummy text'
+                type: 'Linen Full Sleeve ShirtWith Rollup'
 
             },
             {
                 img: '../img/home/12.jpg',
                 price: '5000',
-                type: 'Lorem Ipsum is simply dummy text'
+                type: 'Linen Full Sleeve ShirtWith Rollup'
 
             },
             {
@@ -473,6 +473,32 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 img: '../img/home/14.jpg',
                 price: '5000',
                 type: 'Lorem Ipsum is simply dummy text'
+
+            }
+        ];
+        $scope.individual = [{
+                img: '../img/individual/2.jpg',
+
+
+            },
+            {
+                img: '../img/individual/3.jpg',
+
+            },
+            {
+                img: '../img/individual/4.jpg',
+
+            },
+            {
+                img: '../img/individual/5.jpg',
+
+            },
+            {
+                img: '../img/individual/2.jpg',
+
+            },
+            {
+                img: '../img/individual/3.jpg',
 
             }
         ];
