@@ -615,7 +615,8 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
-                title1: 'WITH ROLL UP '
+                title1: 'WITH ROLL UP ',
+                id: 1
             },
             {
                 img1: 'img/listing/shirt.png',
@@ -623,7 +624,8 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
-                title1: 'WITH ROLL UP '
+                title1: 'WITH ROLL UP ',
+                id: 2
             },
             {
                 img1: 'img/listing/shirt.png',
@@ -631,7 +633,8 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
-                title1: 'WITH ROLL UP '
+                title1: 'WITH ROLL UP ',
+                id: 3
             },
             {
                 img1: 'img/listing/gift.png',
@@ -639,7 +642,8 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
-                title1: 'WITH ROLL UP '
+                title1: 'WITH ROLL UP ',
+                id: 4
             },
             {
                 img1: 'img/listing/gift.png',
@@ -647,7 +651,8 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
-                title1: 'WITH ROLL UP '
+                title1: 'WITH ROLL UP ',
+                id: 5
             },
             {
                 img1: 'img/listing/gift.png',
@@ -655,28 +660,32 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
-                title1: 'WITH ROLL UP '
+                title1: 'WITH ROLL UP ',
+                id: 6
             },
             {
                 img: 'img/listing/8.jpg',
                 toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
-                title1: 'WITH ROLL UP '
+                title1: 'WITH ROLL UP ',
+                id: 7
             },
             {
                 img: 'img/listing/9.jpg',
                 toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
-                title1: 'WITH ROLL UP '
+                title1: 'WITH ROLL UP ',
+                id: 8
             },
             {
                 img: 'img/listing/10.jpg',
                 toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
-                title1: 'WITH ROLL UP '
+                title1: 'WITH ROLL UP ',
+                id: 9
             },
             {
                 img1: 'img/listing/percent.png',
@@ -684,7 +693,8 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 img: 'img/listing/11.jpg',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
-                title1: 'WITH ROLL UP '
+                title1: 'WITH ROLL UP ',
+                id: 10
             },
             {
                 img1: 'img/listing/percent.png',
@@ -692,7 +702,8 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
-                title1: 'WITH ROLL UP '
+                title1: 'WITH ROLL UP ',
+                id: 11
             },
             {
                 img1: 'img/listing/percent.png',
@@ -700,27 +711,31 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
-                title1: 'WITH ROLL UP '
+                title1: 'WITH ROLL UP ',
+                id: 12
             },
             {
                 img: 'img/listing/2.jpg',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
-                title1: 'WITH ROLL UP '
+                title1: 'WITH ROLL UP ',
+                id: 13
             },
             {
                 img: 'img/listing/3.jpg',
                 toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
-                title1: 'WITH ROLL UP '
+                title1: 'WITH ROLL UP ',
+                id: 14
             },
             {
                 img: 'img/listing/4.jpg',
                 toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
-                title1: 'WITH ROLL UP '
+                title1: 'WITH ROLL UP ',
+                id: 15
             },
             {
                 img1: 'img/listing/lable.png',
@@ -728,7 +743,8 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 toolTip: 'Buy 1 Get1 Free',
                 rupee: '3,000',
                 title: 'LINEN FULL SLEEVE SHIRT',
-                title1: 'WITH ROLL UP '
+                title1: 'WITH ROLL UP ',
+                id: 16
             }
         ];
         $scope.displayCntent = function () {
