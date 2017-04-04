@@ -1,3 +1,4 @@
+
 /* Bootstrap Variables Goes Here */
 
 $brand-primary: #0d9dff !default;
@@ -809,7 +810,7 @@ header {
                 border: none;
                 .flex-prev {
                     opacity: 1;
-                    left: 90.7% !important;
+                    left: 90.5% !important;
                     top: -6%;
                     @include size(32px,
                     32px);
@@ -1475,6 +1476,20 @@ header {
     }
 }
 
+.compare--btn {
+    @extend .btn--brown;
+    @include padding(5px 0);
+    @include margin(5px 0);
+    @include size(140px,
+    auto);
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 2px;
+    .fa {
+        padding: 0 5px;
+    }
+}
+
 .compare-section {
     h1 {
         font-family: 'fjalla-reg';
@@ -1505,6 +1520,33 @@ header {
         }
         .table-bordered>tbody>tr>td:first-child {
             text-align: right;
+            width: 14%;
+            text-transform: uppercase;
+            vertical-align: middle;
+            font-weight: 600;
+        }
+        .product-align>tbody>tr:nth-child(2)>td:first-child {
+            vertical-align: top;
+        }
+        .product-align>tbody>tr:nth-child(3)>td+td {
+            font-size: 25px;
+            color: $darkBrown1;
+        }
+        .detail-align>tbody>tr:nth-child(5)>td:first-child {
+            // text-align: right!important;
+            vertical-align: top;
+        }
+        .detail-align>tbody>tr:nth-child(5)>td+td {
+            text-align: justify;
+        }
+        .table>thead:first-child>tr:first-child>th {
+            font-size: 22px;
+            text-transform: uppercase;
+            font-family: 'fjalla-reg';
+            font-weight: normal;
+            color: $darkBrown1;
+            background: #c7baba;
+            text-indent: 25px;
         }
     }
     .details-table {
