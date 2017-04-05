@@ -18,8 +18,10 @@
                         <td rowspan="2">
                             <div class="item">
                                 <img ng-src="{{mycart.img}}" alt="" class="img-responsive item__img">
-                                <p class="item__title1">{{mycart.title1}}</p>
-                                <p class="item__title2">{{mycart.title2}}</p>
+                                <div class="mycart-info">
+                                    <p class="item__title1">{{mycart.title1}}</p>
+                                    <p class="item__title2">{{mycart.title2}}</p>
+                                </div>
                             </div>
                         </td>
                         <td>{{mycart.color}}</td>
@@ -44,8 +46,8 @@
                     <tr>
                         <td colspan="6" class="td-border">
                             <div class="pull-right">
-                                <button class=" btn btn-default btn--brown text-uppercase" ng-click="openUpload();"> <i class="fa fa-heart" aria-hidden="true"></i>ADD TO WISHLIST</button>
-                                <button class="btn btn-default btn--brown text-uppercase"><i class="fa fa-trash" aria-hidden="true"></i>REMOVE</button>
+                                <button class=" btn text-uppercase wishlist--btn" ng-click="openUpload();"> <i class="fa fa-heart" aria-hidden="true"></i>ADD TO WISHLIST</button>
+                                <button class="btn text-uppercase remove--btn"><i class="fa fa-trash" aria-hidden="true"></i>REMOVE</button>
                             </div>
                         </td>
 
@@ -127,8 +129,8 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="pull-right margin-15">
-                    <button class="btn btn-default btn--brown text-uppercase">Continue shopping</button>
-                    <button class="btn btn-default btn--brown   text-uppercase">checkout</button>
+                    <button class="btn text-uppercase shop--btn">Continue shopping</button>
+                    <button class="btn text-uppercase checkout--btn ">checkout</button>
                 </div>
             </div>
         </div>

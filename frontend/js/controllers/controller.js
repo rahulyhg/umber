@@ -477,31 +477,44 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             }
         ];
         $scope.individual = [{
-                img: '../img/individual/2.jpg',
-
-
-            },
-            {
-                img: '../img/individual/3.jpg',
+                bigImg: '../img/individual/6.png',
+                img: '../img/individual/2.jpg'
 
             },
             {
-                img: '../img/individual/4.jpg',
+                bigImg: '../img/individual/7.jpg',
+                img: '../img/individual/3.jpg'
 
             },
             {
-                img: '../img/individual/5.jpg',
+                bigImg: '../img/individual/6.png',
+                img: '../img/individual/4.jpg'
 
             },
             {
-                img: '../img/individual/2.jpg',
+                bigImg: '../img/individual/7.jpg',
+                img: '../img/individual/5.jpg'
 
             },
             {
-                img: '../img/individual/3.jpg',
+                bigImg: '../img/individual/6.png',
+                img: '../img/individual/2.jpg'
+
+            },
+            {
+                bigImg: '../img/individual/7.jpg',
+                img: '../img/individual/3.jpg'
 
             }
         ];
+        $scope.bigImage = $scope.individual[0].bigImg;
+        $scope.changeImage = function (index) {
+            $scope.bigImage = $scope.individual[index].bigImg;
+            console.log(index, $scope.bigImage);
+
+        };
+
+
     })
     .controller('MycartCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
         $scope.template = TemplateService.getHTML("content/mycart.html");
@@ -515,7 +528,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             color: 'BLUE',
             size: 'XL',
             quantity: '02',
-            subtotal: 'Rs. 2,899'
+            subtotal: '2,899'
         }, {
             img: 'img/checkout/item.jpg',
             title1: 'FLORENCE PRINTS',
@@ -523,7 +536,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             color: 'BLUE',
             size: 'XL',
             quantity: '02',
-            subtotal: 'Rs. 2,899'
+            subtotal: '2,899'
         }]
         $scope.mycartmodal = [{
                 img: 'img/cart/1.jpg',

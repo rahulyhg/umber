@@ -1,7 +1,8 @@
 <div class="mycart-header">
     <h4>YOU ARE ENTITLED FOR 1 PRODUCT</h4>
-    <div class="cross" ng-click="$dismiss();">
-        <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+
+    <div class="cross-absolute" ng-click="$dismiss();">
+        <img src="../img/home/3.png" class="img-responsive" alt="">
     </div>
 </div>
 <div class="mycart-modal">
@@ -11,12 +12,13 @@
                 <div class="col-md-3" ng-repeat="mycart in mycartmodal1">
 
                     <div class="mycart-modal">
-                        <img ng-src="{{mycart.img}}" alt="" class="img-responsive item__img">
+                        <div class="modal-img">
+                            <img ng-src="{{mycart.img}}" alt="" class="img-responsive item__img">
+                        </div>
                         <p class="text-left">{{mycart.title1}}</p>
-                        <p class="text-left">{{mycart.title2}}</p>
-                        <button class="btn btn-default btn--brown text-uppercase btn-block">add to cart</button>
+                        <!--<p class="text-left">{{mycart.title2}}</p>-->
+                        <p><button class="btn add-cart--btn btn-block text-uppercase">add to cart</button></p>
                     </div>
-
                 </div>
             </div>
         </div>

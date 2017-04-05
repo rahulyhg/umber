@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="individual-container">
+    <div class="individual-container relate">
 
         <div class="row">
             <div class="col-md-4 padd-rt0">
@@ -22,16 +22,20 @@
                         </li>
                     </ul>
                 </div>
-                <div class="individual-first">
-                    <img src="img/individual/1.jpg" class="img-responsive">
+                <div class="individual-first relate">
+                    <img ng-src="{{bigImage}}" class="img-responsive bg">
+                    <div class="individual-first__absolute-zoom">
+                        <img src="img/individual/zoom.png" alt="zoom" class="img-responsive">
+                    </div>
                 </div>
                 <div class="slider2">
-                    <flex-slider flex-slide="new in individual track by $index" prev-text="" next-text="" animation="slide" item-width="270"
-                        item-margin="25" min-items="4">
+                    <flex-slider flex-slide="new in individual track by $index" prev-text="" next-text="" animation="slide" item-width="70" item-margin="15"
+                        min-items="3">
                         <li class="relate">
                             <div class="customer-choice__banner-detail relate">
-                                <img ng-src="{{new.img}}" alt="" class="img-responsive">
+                                <img ng-src="{{new.img}}" alt="" class="img-responsive" ng-click="changeImage($index)">
                             </div>
+
                         </li>
                     </flex-slider>
                 </div>
@@ -46,8 +50,9 @@
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="individual-main relate">
-                    <div class="first-sec clearfix border-div">
+                <div class="individual-main">
+
+                    <div class="first-sec clearfix border-div relate">
                         <h4>LINE FULL SLEEVES SHIRT WITH ROLLUP</h4>
                         <div class="pull-left">
                             <h3><i class="fa fa-inr" aria-hidden="true"></i> 3,000</h3>
@@ -110,7 +115,7 @@
                                 </uib-accordion-heading>
                                 <div class="row">
                                     <div class="col-md-5">
-                                        <div class="leftContent pd-bottom">
+                                        <div class="leftContent">
                                             <ul class="list-unstyled">
                                                 <li>
                                                     <div class="inline-block leftContent__specHead">
@@ -182,9 +187,9 @@
                                         </div>
                                     </div>
                                     <div class="col-md-7">
-                                        <div class="right-content pd-bottom">
-                                            <h5 class="marg0">Washcare</h5>
-                                            <p>wash dark color seperately <br>Turn inside Out before washing and drying <br>Do
+                                        <div class="right-content">
+                                            <p class="marg0 weight-600">Washcare</p>
+                                            <p class="washcare">wash dark color seperately <br>Turn inside Out before washing and drying <br>Do
                                                 Not Bleach
                                                 <br>Tumble Dry normal<br>Always Dry in Shade<br>Use warm iron</p>
                                         </div>
@@ -212,6 +217,9 @@
             </div>
         </div>
     </div>
+</div>
+<div class="absolute">
+    <img src="img/home/Individual_Product Page.png" class="img-responsive">
 </div>
 
 <section class="">

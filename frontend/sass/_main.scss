@@ -7,16 +7,11 @@ $brand-warning: #ffec39 !default;
 $brand-danger: #fc483f !default;
 $brand-info: #000072 !default;
 $darkBrown1: #341314;
-$darkBrown2: #331313;
 $lightBrown: #7f3836;
 $lightBrown2: #681214;
-$lightBrown3:#9d6564;
-$whiteBrown1: #aa7f80;
-$whiteBrown2:#806b6c;
-$whiteBrown3:#5d4243;
 $darkGray: #252525;
-$lightGray: #aeadad;
-$lightGray1: #8d8b87;
+$borderColor: #e7dada;
+$lightGray1: #ededed;
 $white: #ffffff;
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "other/font-fix";
@@ -152,7 +147,7 @@ nav li:hover .dropdown-menu {
 }
 
 .navbar-default .navbar-nav>li>a {
-    color: $darkBrown2!important;
+    color: $darkBrown1!important;
     font-size: 20px;
 }
 
@@ -244,7 +239,7 @@ footer {
         @include padding(25px 0);
         .list-unstyled {
             li {
-                color: $whiteBrown2;
+                color: $lightGray1;
                 @include padding(4px 0);
             }
         }
@@ -378,7 +373,7 @@ header {
     $white);
     border: 1px dashed $white; // width: 180px;
     text-transform: uppercase;
-    font-weight: bold;
+    //font-weight: bold;
     letter-spacing: 1px;
     &:hover {
         color: $white;
@@ -423,8 +418,15 @@ header {
     }
 }
 
+.login-form {
+    p.border-line {
+        font-size: 20px;
+    }
+}
+
 .customized-form {
     .form-control {
+        height: 38px;
         border-top: none;
         border-left: none;
         border-right: none;
@@ -433,7 +435,7 @@ header {
     .forgot__checkout {
         @include margin(null null 20px null);
         a {
-            color: #000;
+            color: $darkGray;
             text-decoration: underline;
             @include text-decoration( #929292);
         }
@@ -466,18 +468,22 @@ header {
             margin: 0;
         }
         .item__img {
-            width: 120px;
+            width: 100px;
             margin: 0 auto;
         }
     }
     thead> {
         tr:first-child {
-            border-top: 1px solid #bfbfbf;
-            background: #ddd;
+            border-top: 1px solid $borderColor;
+            background: #ededed;
+        }
+        tr>th {
+            line-height: 1;
+            border-bottom: 1px solid $borderColor;
         }
     }
     th {
-        border: 1px solid #bfbfbf;
+        border: 1px solid $borderColor;
         border-right: none;
         color: $darkBrown1;
         font-family: fjalla-reg;
@@ -490,14 +496,14 @@ header {
         border-left: none;
     }
     th:last-child {
-        border-right: 1px solid #bfbfbf;
+        border-right: 1px solid $borderColor;
     }
     tbody>tr {
         td {
-            border: 1px solid #bfbfbf;
+            border: 1px solid $borderColor;
             border-right: none;
             vertical-align: middle;
-            color: $darkBrown1;
+            color: $darkGray;
             font-size: 20px;
             text-transform: uppercase;
             p {
@@ -511,7 +517,7 @@ header {
             vertical-align: middle;
         }
         td:last-child {
-            border-right: 1px solid #bfbfbf;
+            border-right: 1px solid $borderColor;
         } // .table>thead:first-child>tr:first-child>th {
         //     border-bottom: 1px solid #bfbfbf;
         // }
@@ -569,7 +575,7 @@ header {
             display: block;
             @include size(22px,
             2px);
-            background-color: $darkBrown2;
+            background-color: $darkBrown1;
             margin-top: 4px;
             border-radius: 1px;
         }
@@ -582,7 +588,7 @@ header {
             margin: 15px 0;
         }
         .form-control {
-            @include form-control-focus($darkBrown2);
+            @include form-control-focus($darkBrown1);
         }
     }
     .navbar-right {
@@ -593,7 +599,7 @@ header {
         .fa-search,
         .fa-heart,
         .fa-shopping-cart {
-            color: $darkBrown2;
+            color: $darkBrown1;
             @include margin(14px 0 0);
         }
         .header--login {
@@ -612,7 +618,7 @@ header {
          ::-webkit-scrollbar-thumb {
             -webkit-border-radius: 10px;
             border-radius: 10px;
-            background: $darkBrown2;
+            background: $darkBrown1;
             -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
         }
          ::-webkit-scrollbar-thumb:window-inactive {
@@ -647,7 +653,7 @@ header {
                         @include margin(null null 20px null);
                         .size {
                             @include padding(2px 6px);
-                            border: 1px solid $darkBrown2;
+                            border: 1px solid $darkBrown1;
                         }
                     }
                     .remove--btn {
@@ -781,10 +787,10 @@ header {
                 width: 10%;
                 top: 50%;
                 left: 31.7%;
-                border: 1px solid #e7dada;
+                border: 1px solid $borderColor;
             }
             &:after {
-                border: 1px solid #e7dada;
+                border: 1px solid $borderColor;
                 width: 10%;
                 top: 50%;
                 right: 31.5%;
@@ -818,7 +824,7 @@ header {
                         content: '\02190';
                         color: #474541;
                         font-size: 38px;
-                        background-color: $lightGray;
+                        background-color: $lightGray1;
                         @include position(absolute,
                         -14px null null -2px);
                     }
@@ -884,10 +890,10 @@ header {
                 width: 10%;
                 top: 50%;
                 left: 33.5%;
-                border: 1px solid #e7dada;
+                border: 1px solid $borderColor;
             }
             &:after {
-                border: 1px solid #e7dada;
+                border: 1px solid $borderColor;
                 width: 10%;
                 top: 50%;
                 right: 33.5%;
@@ -945,7 +951,7 @@ header {
         .featured__cloth-desc {
             h3 {
                 color: $darkBrown1;
-                @include margin(null null 5px null);
+                @include margin(10px null 5px null);
                 i {
                     padding-right: 6px;
                 }
@@ -963,7 +969,7 @@ header {
             height: 35px;
             padding: 6px;
             text-align: center;
-            color: $darkBrown2;
+            color: $darkBrown1;
             @include font(normal,
             null,
             18px,
@@ -977,7 +983,7 @@ header {
             padding: 6px;
             text-align: center;
             color: $white;
-            background-color: $darkBrown2;
+            background-color: $darkBrown1;
             @include font(normal,
             null,
             18px,
@@ -1019,10 +1025,10 @@ header {
                 width: 14%;
                 top: 50%;
                 left: 14%;
-                border: 1px solid #e7dada;
+                border: 1px solid $borderColor;
             }
             &:after {
-                border: 1px solid #e7dada;
+                border: 1px solid $borderColor;
                 width: 14%;
                 top: 50%;
                 right: 14%;
@@ -1039,6 +1045,7 @@ header {
         p.line--height {
             line-height: 1;
             text-align: justify;
+            color: $darkGray;
         }
         .buy--now {
             // button-design
@@ -1054,7 +1061,7 @@ header {
         16% 9% 15% 39.4%);
         border-top: 0px dashed transparent!important;
         border-left: 0 dashed transparent!important;
-        border: 2px dashed $darkBrown2;
+        border: 2px dashed $darkBrown1;
     }
 }
 
@@ -1073,10 +1080,10 @@ header {
                 width: 10%;
                 top: 50%;
                 left: 35%;
-                border: 1px solid #e7dada;
+                border: 1px solid $borderColor;
             }
             &:after {
-                border: 1px solid #e7dada;
+                border: 1px solid $borderColor;
                 width: 10%;
                 top: 50%;
                 right: 35%;
@@ -1137,10 +1144,10 @@ header {
                 width: 10%;
                 top: 50%;
                 left: 36.5%;
-                border: 1px solid #e7dada;
+                border: 1px solid $borderColor;
             }
             &:after {
-                border: 1px solid #e7dada;
+                border: 1px solid $borderColor;
                 width: 10%;
                 top: 50%;
                 right: 36.5%;
@@ -1281,11 +1288,17 @@ header {
     margin: 30px 0 70px;
 }
 
+.list-checkout {
+    padding-left: 70px;
+}
+
 .checkout {
     .content-spacing {
         margin: 40px 0 70px;
-        .btn--brown {
+        .btn-list {
             margin-bottom: 10px;
+            padding: 3px 0;
+            width: 175px;
         }
     }
     .next--btn {
@@ -1343,8 +1356,17 @@ header {
     width: 735px;
 }
 
+.cross-absolute {
+    right: 10px;
+    width: 3%;
+    /* height: 15%; */
+    top: 10px;
+    position: absolute;
+    cursor: pointer;
+}
+
 .modal-container {
-    padding: 80px 54px 26px; // margin-top: 40px;
+    padding: 60px 54px 20px; // margin-top: 40px;
     .minHeight {
         // min-height: 430px;
         min-height: 330px;
@@ -1463,7 +1485,7 @@ header {
 .breadCrumbs-letter {
     ul>li {
         a {
-            color: #ababab;
+            color: #929292;
             font-size: 10px;
             &:hover,
             {
@@ -1502,12 +1524,12 @@ header {
         &:before {
             width: 20%;
             left: 16%;
-            border: 1px solid #e7dada;
+            border: 1px solid $borderColor;
         }
         &:after {
             width: 20%;
             right: 16%;
-            border: 1px solid #e7dada;
+            border: 1px solid $borderColor;
         }
     }
     .compare-table {
@@ -1545,7 +1567,7 @@ header {
             font-family: 'fjalla-reg';
             font-weight: normal;
             color: $darkBrown1;
-            background: #c7baba;
+            background: $borderColor;
             text-indent: 25px;
         }
     }
