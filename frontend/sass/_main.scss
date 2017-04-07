@@ -179,16 +179,19 @@ footer {
         // margin: 0;
         margin: 5px 0;
     }
+    .copyright {
+        margin-left: 25px;
+    }
     .share-link__social-icon {
         i {
-            padding: 5px 7px;
+            padding: 4px 0px;
             margin: 0 3px;
-            border: 1px dashed $white;
-            @include font(normal,
-            600,
-            14px,
-            FontAwesome);
-            width: 28px;
+            border: 1px dashed #ffffff;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 12px;
+            font-family: FontAwesome;
+            width: 22px;
         }
     }
 }
@@ -390,9 +393,10 @@ header {
 }
 
 .btn--brownActive {
-    color: $white;
+    color: $white !important;
     font-weight: normal;
     background-color: darken($darkBrown1, 0);
+    border: 1px dashed #fff !important;
 }
 
 .border-line {
@@ -421,12 +425,13 @@ header {
 .login-form {
     p.border-line {
         font-size: 20px;
+        margin-top: 10px;
     }
 }
 
 .customized-form {
     .form-control {
-        height: 38px;
+        height: 45px;
         border-top: none;
         border-left: none;
         border-right: none;
@@ -457,6 +462,12 @@ header {
     }
 }
 
+.btn--login {
+    @extend .btn--brown;
+    padding: 3px 0;
+    font-size: 20px;
+}
+
 .order-table {
     .table-bottom {
         margin-bottom: 12px;
@@ -469,6 +480,10 @@ header {
         }
         .item__img {
             width: 100px;
+            margin: 0 auto;
+        }
+        .item__img-checkout {
+            width: 80px;
             margin: 0 auto;
         }
     }
@@ -517,11 +532,21 @@ header {
             vertical-align: middle;
         }
         td:last-child {
+            color: $darkBrown1;
             border-right: 1px solid $borderColor;
         } // .table>thead:first-child>tr:first-child>th {
         //     border-bottom: 1px solid #bfbfbf;
         // }
     }
+}
+
+.fa-angle-down:before {
+    content: url('../img/home/down.png');
+}
+
+.fa-dropdown {
+    position: absolute;
+    bottom: 10px;
 }
 
 .mycart-table {
@@ -603,8 +628,10 @@ header {
             @include margin(14px 0 0);
         }
         .header--login {
+            font-size: 15px;
+            padding: 3px 0;
             @extend .btn--brown;
-            width: 100px;
+            width: 85px;
             @include margin(6px null null null);
         }
          ::-webkit-scrollbar {
@@ -659,7 +686,8 @@ header {
                     .remove--btn {
                         @extend .btn--brown;
                         width: 105px;
-                        font-size: 12px;
+                        font-size: 14px;
+                        padding: 3px 0;
                         i.fa-trash-o {
                             font-size: 16px;
                             @include padding(null 3px null null);
@@ -668,6 +696,16 @@ header {
                 }
             }
         }
+    }
+}
+
+.dropdown-menu__btn {
+    .btn--brown-checkout {
+        @extend .btn--brown;
+        width: 105px;
+        padding: 3px 0;
+        font-size: 14px;
+        margin-bottom: 20px;
     }
 }
 
@@ -763,6 +801,9 @@ header {
         .padd {
             @include padding(0 0px 8px 0);
         }
+    }
+    .m-top {
+        @include margin(6px null null null null);
     }
 }
 
@@ -1284,8 +1325,33 @@ header {
 // }
 //End of footer
 //START of check out
+.checkout-drop {
+    background: transparent;
+    padding: 8px 0;
+    color: #555554;
+    width: 100%;
+    border: none;
+    text-align: left;
+    -webkit-appearance: none;
+    appearance: none;
+    &:focus,
+    &:active:focus {
+        outline: none;
+        color: #555554;
+    }
+}
+
+.country-selection {
+    .fa-angle-down:before {
+        position: absolute;
+        bottom: 5px;
+        right: 12px;
+        cursor: pointer;
+    }
+}
+
 .content-spacing {
-    margin: 30px 0 70px;
+    margin: 40px 0 60px;
 }
 
 .list-checkout {
@@ -1294,16 +1360,25 @@ header {
 
 .checkout {
     .content-spacing {
-        margin: 40px 0 70px;
-        .btn-list {
+        margin: 45px 0 70px;
+        .btn--list {
             margin-bottom: 10px;
             padding: 3px 0;
             width: 175px;
+            text-transform: uppercase;
+            color: $darkBrown1;
+            border: 1px dashed $darkBrown1;
+            letter-spacing: 1px;
+            &:focus,
+            &:active {
+                color: white;
+            }
         }
     }
     .next--btn {
         @extend .btn--brown;
         width: 150px;
+        padding: 2px 0;
     }
 }
 
@@ -1366,7 +1441,7 @@ header {
 }
 
 .modal-container {
-    padding: 60px 54px 20px; // margin-top: 40px;
+    padding: 10px 50px 20px; // margin-top: 40px;
     .minHeight {
         // min-height: 430px;
         min-height: 330px;
@@ -1378,22 +1453,43 @@ header {
         h1 {
             text-transform: uppercase;
             font-family: 'fjalla-reg';
-            font-size: 48px;
+            font-size: 35px;
+            margin-bottom: 5px;
+        }
+        h1.brown--color {
+            color: $darkBrown1;
         }
         p {
             font-family: 'vadodara-lgt';
             font-size: 22px;
         }
+        p.gray--color {
+            color: $darkGray;
+        }
+    }
+    .login-head-top {
+        margin-top: 80px;
+    }
+    .have-account {
+        margin-top: 90px !important;
     }
     .login-footer {
-        font-size: 16px;
+        font-size: 14px;
         color: $darkBrown1; // margin-top: 50%;
         text-align: center;
+        margin: 35px 0 0 0;
         a {
             color: #292929;
             text-decoration: underline;
         }
     }
+}
+
+.btn-login {
+    @extend .btn--brown;
+    width: 265px;
+    padding: 3px 0;
+    font-size: 20px;
 }
 
 .modal-container-right {
@@ -1403,7 +1499,7 @@ header {
     background-position: center center;
     background-size: cover;
     color: $white; // min-height: 584px;
-    min-height: 480px;
+    min-height: 520px;
     .login-head {
         p {
             line-height: 1;
@@ -1423,6 +1519,7 @@ header {
         @extend .social-icons;
         .social-icons__list {
             background: $white;
+            margin-top: 15px;
         }
         .fb {
             a {
@@ -1444,7 +1541,10 @@ header {
 
 // .checkout details tab
 .details-form {
-    margin-bottom: 60px;
+    margin-bottom: 65px;
+    h3 {
+        color: $darkBrown1;
+    }
     .detail-tab__head {
         text-transform: uppercase;
         font-family: 'fjalla-reg';
@@ -1454,9 +1554,11 @@ header {
         @include size(260px,
         auto);
         @include margin(20px null);
+        @include padding(3px null 3px null);
+        font-size: 20px;
     }
     .payment-checkbox {
-        margin: 16px 0;
+        @include margin(15px null 5px null);
         .font__style {
             text-transform: uppercase;
             font-family: 'vadodara-lgt';
@@ -1465,7 +1567,8 @@ header {
         .checkbox {
             margin-top: 0;
             label {
-                @include padding(null 5px null 25px);
+                @include padding(null 5px null 5px);
+                @include margin(null 30px null null);
             }
         }
         [type="checkbox"]:not(:checked)+label:before,
@@ -1498,11 +1601,19 @@ header {
     }
 }
 
+.pluse-icon {
+    @include position(absolute,
+    null null 5% -0.6%);
+    @include size(15px,
+    auto);
+    cursor: pointer;
+}
+
 .compare--btn {
     @extend .btn--brown;
     @include padding(5px 0);
     @include margin(5px 0);
-    @include size(140px,
+    @include size(150px,
     auto);
     font-weight: normal;
     font-size: 15px;
@@ -1513,11 +1624,13 @@ header {
 }
 
 .compare-section {
+    margin-top: 40px;
     h1 {
         font-family: 'fjalla-reg';
         text-transform: uppercase;
         color: $darkBrown1;
         text-align: center;
+        margin-bottom: 25px;
     }
     .compare--borderline {
         @extend .border-line;
@@ -1533,22 +1646,32 @@ header {
         }
     }
     .compare-table {
+        padding-left: 15px;
+        padding-right: 15px;
+        table {
+            margin-bottom: 0;
+        }
         .compare-img {
-            width: 150px;
+            width: 120px;
             margin: 0 auto;
+            @include padding(10px null 10px null);
         }
         .table-bordered>tbody>tr>td {
             text-align: center;
+            color: $darkGray;
         }
         .table-bordered>tbody>tr>td:first-child {
             text-align: right;
             width: 14%;
+            letter-spacing: 1px;
             text-transform: uppercase;
             vertical-align: middle;
             font-weight: 600;
+            color: $darkGray;
         }
         .product-align>tbody>tr:nth-child(2)>td:first-child {
             vertical-align: top;
+            color: $darkGray;
         }
         .product-align>tbody>tr:nth-child(3)>td+td {
             font-size: 25px;
@@ -1557,9 +1680,11 @@ header {
         .detail-align>tbody>tr:nth-child(5)>td:first-child {
             // text-align: right!important;
             vertical-align: top;
+            color: $darkGray;
         }
         .detail-align>tbody>tr:nth-child(5)>td+td {
             text-align: justify;
+            color: $darkGray;
         }
         .table>thead:first-child>tr:first-child>th {
             font-size: 22px;
@@ -1567,7 +1692,7 @@ header {
             font-family: 'fjalla-reg';
             font-weight: normal;
             color: $darkBrown1;
-            background: $borderColor;
+            background: $lightGray1;
             text-indent: 25px;
         }
     }

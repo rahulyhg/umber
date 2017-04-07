@@ -40,84 +40,85 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         ];
         $scope.newArrival = [{
                 img: '../img/home/8.jpg',
-                price: '3000',
-                type: 'Lorem Ipsum is simply dummy text'
+                price: '2,899',
+                type: 'LINEN FULL SLEEVE SHIRT WITH ROLLUP'
 
             },
             {
                 img: '../img/home/9.jpg',
-                price: '4000 ',
-                type: 'Lorem Ipsum is simply dummy text'
+                price: '2,999 ',
+                type: 'WHITE GRAPHIC TEE'
 
             },
             {
                 img: '../img/home/10.jpg',
-                price: '5000',
-                type: 'Lorem Ipsum is simply dummy text'
+                price: '2,999',
+                type: 'AMTEN PRINT FULL SLEEVE SHIRT WITH ROLLUP'
 
             }, {
                 img: '../img/home/8.jpg',
-                price: '3000',
-                type: 'Lorem Ipsum is simply dummy text'
+                price: '2,899',
+                type: 'LINEN FULL SLEEVE SHIRT WITH ROLLUP'
 
             },
             {
                 img: '../img/home/9.jpg',
-                price: '4000 ',
-                type: 'Lorem Ipsum is simply dummy text'
+                price: '2,999 ',
+                type: 'WHITE GRAPHIC TEE'
+
 
             },
             {
                 img: '../img/home/10.jpg',
-                price: '5000',
-                type: 'Lorem Ipsum is simply dummy text'
+                price: '2,999',
+                type: 'AMTEN PRINT FULL SLEEVE SHIRT WITH ROLLUP'
 
             }
         ];
         $scope.featured = [{
                 img: '../img/home/11.jpg',
-                price: '3000',
+                price: '2,899',
                 type: 'Linen Full Sleeve ShirtWith Rollup'
 
             },
             {
                 img: '../img/home/12.jpg',
-                price: '4000 ',
+                price: '2,899',
                 type: 'Linen Full Sleeve ShirtWith Rollup'
 
             },
             {
                 img: '../img/home/13.jpg',
-                price: '5000',
+                price: '2,899',
                 type: 'Marathon Plain Front Trouser'
 
             }, {
                 img: '../img/home/14.jpg',
-                price: '3000',
+                price: '2,899',
                 type: 'Marathon Plain Front Trouser'
 
             },
             {
                 img: '../img/home/11.jpg',
-                price: '4000 ',
+                price: '2,899',
                 type: 'Linen Full Sleeve ShirtWith Rollup'
 
             },
             {
                 img: '../img/home/12.jpg',
-                price: '5000',
+                price: '2,899',
                 type: 'Linen Full Sleeve ShirtWith Rollup'
 
             },
             {
                 img: '../img/home/13.jpg',
-                price: '4000 ',
+                price: '2,899',
                 type: 'Marathon Plain Front Trouser'
 
             },
             {
                 img: '../img/home/14.jpg',
-                price: '5000',
+                price: '2,899',
                 type: 'Marathon Plain Front Trouser'
 
             }
@@ -154,48 +155,48 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         ];
         $scope.sale = [{
                 img: '../img/home/11.jpg',
-                price: '3000',
+                price: '2,899',
                 type: 'Linen Full Sleeve ShirtWith Rollup'
 
             },
             {
                 img: '../img/home/12.jpg',
-                price: '4000 ',
+                price: '2,899',
                 type: 'Linen Full Sleeve ShirtWith Rollup'
 
             },
             {
                 img: '../img/home/13.jpg',
-                price: '5000',
+                price: '2,899',
                 type: 'Linen Full Sleeve ShirtWith Rollup'
 
             }, {
                 img: '../img/home/14.jpg',
-                price: '3000',
+                price: '2,899',
                 type: 'Linen Full Sleeve ShirtWith Rollup'
 
             },
             {
                 img: '../img/home/11.jpg',
-                price: '4000 ',
+                price: '2,899',
                 type: 'Linen Full Sleeve ShirtWith Rollup'
 
             },
             {
                 img: '../img/home/12.jpg',
-                price: '5000',
+                price: '2,899',
                 type: 'Linen Full Sleeve ShirtWith Rollup'
 
             },
             {
                 img: '../img/home/13.jpg',
-                price: '4000 ',
+                price: '2,899',
                 type: 'Lorem Ipsum is simply dummy text'
 
             },
             {
                 img: '../img/home/14.jpg',
-                price: '5000',
+                price: '2,899',
                 type: 'Lorem Ipsum is simply dummy text'
 
             }
@@ -246,7 +247,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             {
                 img: 'img/buy/2.jpg',
                 rupee: '3,000',
-                title: 'linen LIGHT BLUE CASUAL BLAZER',
+                title: 'Linen LIGHT BLUE CASUAL BLAZER',
                 id: 6
             },
             {
@@ -430,54 +431,54 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
         $scope.featured = [{
                 img: '../img/home/11.jpg',
-                price: '3000',
-                type: 'Lorem Ipsum is simply dummy text'
+                price: '2,899',
+                type: 'LINEN FULL SLEEVE SHIRT WITH ROLLUP'
 
             },
             {
                 img: '../img/home/12.jpg',
-                price: '4000 ',
-                type: 'Lorem Ipsum is simply dummy text'
+                price: '2,899 ',
+                type: 'LINEN FULL SLEEVE SHIRT WITH ROLLUP'
 
             },
             {
                 img: '../img/home/13.jpg',
-                price: '5000',
-                type: 'Lorem Ipsum is simply dummy text'
+                price: '2,899',
+                type: 'MARATHON PLAIN FRONT TROUSER'
 
             }, {
                 img: '../img/home/14.jpg',
-                price: '3000',
-                type: 'Lorem Ipsum is simply dummy text'
+                price: '2,899',
+                type: 'MARATHON PLAIN FRONT TROUSER'
 
             },
             {
                 img: '../img/home/11.jpg',
-                price: '4000 ',
-                type: 'Lorem Ipsum is simply dummy text'
+                price: '2,899 ',
+                type: 'LINEN FULL SLEEVE SHIRT WITH ROLLUP'
 
             },
             {
                 img: '../img/home/12.jpg',
-                price: '5000',
-                type: 'Lorem Ipsum is simply dummy text'
+                price: '2,899',
+                type: 'LINEN FULL SLEEVE SHIRT WITH ROLLUP'
 
             },
             {
                 img: '../img/home/13.jpg',
-                price: '4000 ',
-                type: 'Lorem Ipsum is simply dummy text'
+                price: '2,899 ',
+                type: 'MARATHON PLAIN FRONT TROUSER'
 
             },
             {
                 img: '../img/home/14.jpg',
-                price: '5000',
-                type: 'Lorem Ipsum is simply dummy text'
+                price: '2,899',
+                type: 'MARATHON PLAIN FRONT TROUSER'
 
             }
         ];
         $scope.individual = [{
-                bigImg: '../img/individual/6.png',
+                bigImg: '../img/individual/66.png',
                 img: '../img/individual/2.jpg'
 
             },
@@ -487,7 +488,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
             },
             {
-                bigImg: '../img/individual/6.png',
+                bigImg: '../img/individual/66.png',
                 img: '../img/individual/4.jpg'
 
             },
@@ -497,7 +498,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
             },
             {
-                bigImg: '../img/individual/6.png',
+                bigImg: '../img/individual/66.png',
                 img: '../img/individual/2.jpg'
 
             },
@@ -587,7 +588,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 animation: true,
                 templateUrl: 'views/modal/mycartmodal.html',
                 scope: $scope,
-                size: 'md',
+                size: 'sm',
                 // windowClass: 'modal-content-radi0'
             });
         };
@@ -605,6 +606,11 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         TemplateService.title = "Form"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
         $scope.formSubmitted = false;
+        $scope.clickfun = function () {
+            console.log("im in showCheck")
+            $scope.showCheck = !$scope.showCheck;
+        }
+
         $scope.submitForm = function (data) {
             console.log(data);
             $scope.formSubmitted = true;
@@ -758,6 +764,178 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 title: 'LINEN FULL SLEEVE SHIRT',
                 title1: 'WITH ROLL UP ',
                 id: 16
+            }, {
+                img1: 'img/listing/shirt.png',
+                img: 'img/listing/2.jpg',
+                toolTip: 'Buy 1 Get1 Free',
+                rupee: '3,000',
+                title: 'LINEN FULL SLEEVE SHIRT',
+                title1: 'WITH ROLL UP ',
+                id: 17
+            },
+            {
+                img1: 'img/listing/shirt.png',
+                img: 'img/listing/3.jpg',
+                toolTip: 'Buy 1 Get1 Free',
+                rupee: '3,000',
+                title: 'LINEN FULL SLEEVE SHIRT',
+                title1: 'WITH ROLL UP ',
+                id: 18
+            },
+            {
+                img1: 'img/listing/shirt.png',
+                img: 'img/listing/4.jpg',
+                toolTip: 'Buy 1 Get1 Free',
+                rupee: '3,000',
+                title: 'LINEN FULL SLEEVE SHIRT',
+                title1: 'WITH ROLL UP ',
+                id: 19
+            },
+            {
+                img1: 'img/listing/gift.png',
+                img: 'img/listing/5.jpg',
+                toolTip: 'Buy 1 Get1 Free',
+                rupee: '3,000',
+                title: 'LINEN FULL SLEEVE SHIRT',
+                title1: 'WITH ROLL UP ',
+                id: 20
+            },
+            {
+                img1: 'img/listing/gift.png',
+                img: 'img/listing/6.jpg',
+                toolTip: 'Buy 1 Get1 Free',
+                rupee: '3,000',
+                title: 'LINEN FULL SLEEVE SHIRT',
+                title1: 'WITH ROLL UP ',
+                id: 21
+            },
+            {
+                img1: 'img/listing/gift.png',
+                img: 'img/listing/7.jpg',
+                toolTip: 'Buy 1 Get1 Free',
+                rupee: '3,000',
+                title: 'LINEN FULL SLEEVE SHIRT',
+                title1: 'WITH ROLL UP ',
+                id: 22
+            },
+            {
+                img: 'img/listing/8.jpg',
+                toolTip: 'Buy 1 Get1 Free',
+                rupee: '3,000',
+                title: 'LINEN FULL SLEEVE SHIRT',
+                title1: 'WITH ROLL UP ',
+                id: 23
+            },
+            {
+                img: 'img/listing/9.jpg',
+                toolTip: 'Buy 1 Get1 Free',
+                rupee: '3,000',
+                title: 'LINEN FULL SLEEVE SHIRT',
+                title1: 'WITH ROLL UP ',
+                id: 24
+            },
+            {
+                img: 'img/listing/10.jpg',
+                toolTip: 'Buy 1 Get1 Free',
+                rupee: '3,000',
+                title: 'LINEN FULL SLEEVE SHIRT',
+                title1: 'WITH ROLL UP ',
+                id: 25
+            },
+            {
+                img1: 'img/listing/percent.png',
+                toolTip: 'Buy 1 Get1 Free',
+                img: 'img/listing/11.jpg',
+                rupee: '3,000',
+                title: 'LINEN FULL SLEEVE SHIRT',
+                title1: 'WITH ROLL UP ',
+                id: 26
+            },
+            {
+                img1: 'img/listing/percent.png',
+                img: 'img/listing/12.jpg',
+                toolTip: 'Buy 1 Get1 Free',
+                rupee: '3,000',
+                title: 'LINEN FULL SLEEVE SHIRT',
+                title1: 'WITH ROLL UP ',
+                id: 27
+            },
+            {
+                img1: 'img/listing/percent.png',
+                img: 'img/listing/13.jpg',
+                toolTip: 'Buy 1 Get1 Free',
+                rupee: '3,000',
+                title: 'LINEN FULL SLEEVE SHIRT',
+                title1: 'WITH ROLL UP ',
+                id: 28
+            },
+            {
+                img: 'img/listing/2.jpg',
+                rupee: '3,000',
+                title: 'LINEN FULL SLEEVE SHIRT',
+                title1: 'WITH ROLL UP ',
+                id: 29
+            },
+            {
+                img: 'img/listing/3.jpg',
+                toolTip: 'Buy 1 Get1 Free',
+                rupee: '3,000',
+                title: 'LINEN FULL SLEEVE SHIRT',
+                title1: 'WITH ROLL UP ',
+                id: 30
+            },
+            {
+                img: 'img/listing/4.jpg',
+                toolTip: 'Buy 1 Get1 Free',
+                rupee: '3,000',
+                title: 'LINEN FULL SLEEVE SHIRT',
+                title1: 'WITH ROLL UP ',
+                id: 31
+            },
+            {
+                img1: 'img/listing/lable.png',
+                img: 'img/listing/6.jpg',
+                toolTip: 'Buy 1 Get1 Free',
+                rupee: '3,000',
+                title: 'LINEN FULL SLEEVE SHIRT',
+                title1: 'WITH ROLL UP ',
+                id: 32
+            },
+            {
+                img1: 'img/listing/lable.png',
+                img: 'img/listing/6.jpg',
+                toolTip: 'Buy 1 Get1 Free',
+                rupee: '3,000',
+                title: 'LINEN FULL SLEEVE SHIRT',
+                title1: 'WITH ROLL UP ',
+                id: 33
+            },
+            {
+                img1: 'img/listing/lable.png',
+                img: 'img/listing/6.jpg',
+                toolTip: 'Buy 1 Get1 Free',
+                rupee: '3,000',
+                title: 'LINEN FULL SLEEVE SHIRT',
+                title1: 'WITH ROLL UP ',
+                id: 34
+            },
+            {
+                img1: 'img/listing/lable.png',
+                img: 'img/listing/6.jpg',
+                toolTip: 'Buy 1 Get1 Free',
+                rupee: '3,000',
+                title: 'LINEN FULL SLEEVE SHIRT',
+                title1: 'WITH ROLL UP ',
+                id: 35
+            },
+            {
+                img1: 'img/listing/lable.png',
+                img: 'img/listing/6.jpg',
+                toolTip: 'Buy 1 Get1 Free',
+                rupee: '3,000',
+                title: 'LINEN FULL SLEEVE SHIRT',
+                title1: 'WITH ROLL UP ',
+                id: 36
             }
         ];
         $scope.displayCntent = function () {
@@ -765,7 +943,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             $('.viewSize, .view--btn').css('display', 'block');
             $(' .view--btn').css({
                 'position': 'relative',
-                'top': '6px'
+                'top': '3px'
             });
 
         }
@@ -775,12 +953,12 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.myShirt = [];
         $scope.myShirt11 = [];
         $scope.myShirt = _.chunk($scope.buyshirt, 9);
-        console.log($scope.myShirt);
+        console.log($scope.myShirt, "myshitt");
         _.each($scope.myShirt, function (n) {
             $scope.myShirt1 = _.chunk(n, 3);
             $scope.myShirt11.push($scope.myShirt1);
         });
-        console.log($scope.myShirt11);
+        console.log($scope.myShirt11, "*****");
     })
     .controller('FormCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.getHTML("content/form.html");

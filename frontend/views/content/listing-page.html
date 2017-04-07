@@ -2,6 +2,7 @@
 </div>
 <div class="container">
     <div class="listing-container">
+
         <div class="row">
             <div class="col-md-3">
                 <div class="border-div">
@@ -11,7 +12,7 @@
                         <li class="text-uppercase">casual shirt</li>
                     </ul>
                 </div>
-                <div class="sec-one common-Accordian border-div custom-checkbox">
+                <div class="sec-one common-Accordian border-div custom-checkbox relate">
                     <uib-accordion close-others="oneAtATime">
                         <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
                             <uib-accordion-heading>
@@ -37,7 +38,7 @@
                         </div>
                     </uib-accordion>
                 </div>
-                <div class="sec-second common-Accordian border-div scoll-on custom-checkbox">
+                <div class="sec-second common-Accordian border-div scoll-on custom-checkbox relate">
                     <uib-accordion close-others="oneAtATime">
                         <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
                             <uib-accordion-heading>
@@ -106,7 +107,7 @@
                         </div>
                     </uib-accordion>
                 </div>
-                <div class="sec-third common-Accordian border-div">
+                <div class="sec-third common-Accordian border-div relate">
                     <uib-accordion close-others="oneAtATime">
                         <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
                             <uib-accordion-heading>
@@ -122,7 +123,7 @@
                         </div>
                     </uib-accordion>
                 </div>
-                <div class="sec-fourth common-Accordian border-div scoll-on custom-checkbox">
+                <div class="sec-fourth common-Accordian border-div scoll-on custom-checkbox relate">
                     <uib-accordion close-others="oneAtATime">
                         <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
                             <uib-accordion-heading>
@@ -174,7 +175,7 @@
                         </div>
                     </uib-accordion>
                 </div>
-                <div class="sec-fifth common-Accordian border-div custom-checkbox">
+                <div class="sec-fifth common-Accordian border-div custom-checkbox relate">
                     <uib-accordion close-others="oneAtATime">
                         <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
                             <uib-accordion-heading>
@@ -221,7 +222,7 @@
                         </div>
                     </uib-accordion>
                 </div>
-                <div class="sec-six common-Accordian border-div custom-checkbox">
+                <div class="sec-six common-Accordian border-div custom-checkbox relate">
                     <uib-accordion close-others="oneAtATime">
                         <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
                             <uib-accordion-heading>
@@ -244,7 +245,7 @@
                         </div>
                     </uib-accordion>
                 </div>
-                <div class="sec-seven common-Accordian border-div scoll-on custom-checkbox">
+                <div class="sec-seven common-Accordian border-div scoll-on custom-checkbox relate">
                     <uib-accordion close-others="oneAtATime">
                         <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
                             <uib-accordion-heading>
@@ -303,7 +304,7 @@
                         </div>
                     </uib-accordion>
                 </div>
-                <div class="sec-eight common-Accordian border-div custom-checkbox">
+                <div class="sec-eight common-Accordian border-div custom-checkbox relate">
                     <uib-accordion close-others="oneAtATime">
                         <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
                             <uib-accordion-heading>
@@ -335,7 +336,7 @@
                         </div>
                     </uib-accordion>
                 </div>
-                <div class="sec-nine common-Accordian custom-checkbox">
+                <div class="sec-nine common-Accordian custom-checkbox relate">
                     <uib-accordion close-others="oneAtATime">
                         <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
                             <uib-accordion-heading>
@@ -371,73 +372,113 @@
                     </uib-accordion>
                 </div>
             </div>
-            <div class="col-md-9">
-                <div class="listing-main">
 
-                    <div class="dropdown listing-dropdown">
-                        <button type="button" class="btn btn-listing dropdown-toggle" data-toggle="dropdown">Sort by<i class="fa fa-reg" aria-hidden="true"></i><required></required></button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">HTML</a></li>
-                            <li><a href="#">CSS</a></li>
-                            <li><a href="#">JavaScript</a></li>
-                        </ul>
-                        <div class="pull-right">
-                            <div class="inline-block img-w">
-                                <img src="img/listing/listing.png" class="img-responsive">
-                            </div>
-                            <div class="inline-block img-w">
-                                <img src="img/listing/squares30.png" class="img-responsive">
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="Addtocompare" ng-if="showCheck">
+                        <div class="col-md-3">
+                            <div class="compare-img-list">
+                                <img src="img/listing/2.jpg" class="img-responsive">
+
+                                <p>Linen full Sleeve shirt with rollup</p>
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <div class="compare-img-list">
+                                <img src="img/listing/3.jpg" class="img-responsive">
+
+                                <p>Linen full Sleeve shirt with rollup</p>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="compare-img-list">
+                                <img src="img/listing/4.jpg" class="img-responsive">
+
+                                <p>Linen full Sleeve shirt with rollup</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="compare-img-list">
+                                <img src="img/listing/5.jpg" class="img-responsive">
+
+                                <p>Linen full Sleeve shirt with rollup</p>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn--compare">COMPARE</button>
+                        </div>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="listing-main">
+                        <div class="dropdown listing-dropdown">
+                            <button type="button" class="btn btn-listing dropdown-toggle" data-toggle="dropdown">Sort by<i class="fa fa-reg" aria-hidden="true"></i><required></required></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">brand</a></li>
+                                <li><a href="#">color</a></li>
+                                <li><a href="#">price</a></li>
+                            </ul>
+                            <div class="pull-right">
+                                <div class="inline-block img-w">
+                                    <img src="img/listing/listing.png" class="img-responsive">
+                                </div>
+                                <div class="inline-block img-w">
+                                    <img src="img/listing/squares30.png" class="img-responsive">
+                                </div>
+                            </div>
+                        </div>
 
 
-                    <div class="row" ng-repeat="abc in myShirt11">
-                        <div class="col-md-4" ng-repeat="xyz in abc" ng-init="parentIndex = $index">
-                            <div class="buy-info custom-checkbox">
-                                <div class="buy-slider slider-individual list-slider">
-                                    <flex-slider flex-slide="buy in xyz track by $index" prev-text="" next-text="" animation="slide" min-items="3">
-                                        <li>
-                                            <div class="list-slider__toolTip">
-                                                <a toolTip="{{buy.toolTip}}"><img ng-src="{{buy.img1}}" class="img-rsponsive img1"></a>
+                        <div class="row" ng-repeat="abc in myShirt11">
+                            <div class="col-md-4" ng-repeat="xyz in abc" ng-init="parentIndex = $index">
+                                <div class="buy-info custom-checkbox">
+                                    <div class="buy-slider slider-individual list-slider">
+                                        <flex-slider flex-slide="buy in xyz track by $index" prev-text="" next-text="" animation="slide" min-items="3">
+                                            <li>
+                                                <div class="list-slider__toolTip">
+                                                    <a toolTip="{{buy.toolTip}}"><img ng-src="{{buy.img1}}" class="img-rsponsive img1"></a>
+                                                </div>
+                                                <!--<img ng-src="{{buy.img1}}" class="img-rsponsive img1" title="sudd">-->
+                                                <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                                <img ng-src="{{buy.img}}" class="img-responsive" ng-mouseover="displayCntent();" ng-mouseleave="hideContent();">
+                                            </li>
+                                        </flex-slider>
+                                        <div class="buy-para">
+                                            <h4><i class="fa fa-inr" aria-hidden="true"></i> {{xyz[0].rupee}}</h4>
+                                            <h5>{{xyz[0].title}} <br>{{xyz[0].title1}}</h5>
+                                            <div class="viewSize">
+                                                <div class="inline-block">
+                                                    <p>Size:</p>
+                                                </div>
+                                                <div class="inline-block buy-para__sizes">
+                                                    <p>36</p>
+                                                    <p>38</p>
+                                                    <p>40</p>
+                                                    <p>42</p>
+                                                    <p>44</p>
+                                                </div>
                                             </div>
-                                            <!--<img ng-src="{{buy.img1}}" class="img-rsponsive img1" title="sudd">-->
-                                            <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                            <img ng-src="{{buy.img}}" class="img-responsive" ng-mouseover="displayCntent();" ng-mouseleave="hideContent();">
-                                        </li>
-                                    </flex-slider>
-                                    <div class="buy-para">
-                                        <h4><i class="fa fa-inr" aria-hidden="true"></i> {{xyz[0].rupee}}</h4>
-                                        <h5>{{xyz[0].title}} <br>{{xyz[0].title1}}</h5>
-                                        <div class="viewSize">
-                                            <div class="inline-block">
-                                                <p>Size:</p>
-                                            </div>
-                                            <div class="inline-block buy-para__sizes">
-                                                <p>36</p>
-                                                <p>38</p>
-                                                <p>40</p>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <!--<p><input type="checkbox"> Add to compare</p>-->
-                                        <div class="checkbox inline-block marg0">
-                                            <input type="checkbox" id="{{xyz[0].id}}">
-                                            <label for="{{xyz[0].id}}">
+                                            <hr>
+                                            <!--<p><input type="checkbox"> Add to compare</p>-->
+                                            <div class="checkbox inline-block marg0">
+                                                <input type="checkbox" id="{{xyz[0].id}}" ng-model="myVarss" ng-click="clickfun();">
+                                                <label for="{{xyz[0].id}}">
                                           Add to compare
                                         </label>
-                                        </div>
-                                        <div class="buy-para__button">
-                                            <div class="inline-block ">
-                                                <button class="btn btn-default buy--btn text-uppercase">buy</button>
                                             </div>
-                                            <div class="inline-block">
-                                                <button class="btn btn-default  view--btn text-uppercase">view more</button>
+                                            <div class="buy-para__button">
+                                                <div class="inline-block ">
+                                                    <button class="btn btn-default buy--btn text-uppercase">buy</button>
+                                                </div>
+                                                <div class="inline-block">
+                                                    <button class="btn btn-default  view--btn text-uppercase">view more</button>
+                                                </div>
                                             </div>
+
                                         </div>
 
                                     </div>
-
                                 </div>
                             </div>
                         </div>
