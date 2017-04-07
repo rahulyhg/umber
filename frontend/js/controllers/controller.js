@@ -477,6 +477,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
             }
         ];
+        
         $scope.individual = [{
                 bigImg: '../img/individual/66.png',
                 img: '../img/individual/2.jpg'
