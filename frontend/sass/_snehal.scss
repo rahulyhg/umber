@@ -382,7 +382,7 @@
      }
  }
  
- .absolute {
+ .image-individual {
      @include position(absolute, 11% 0% 9% 91%);
  }
  
@@ -450,7 +450,7 @@
          img.bg {
              height: 100%;
          }
-         .individual-first__absolute-zoom {
+         .individual-first__zoom {
              @include position(absolute,
              50% 12% null null);
              @include size(35px,
