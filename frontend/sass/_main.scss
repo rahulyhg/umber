@@ -378,14 +378,8 @@ header {
     text-transform: uppercase;
     //font-weight: bold;
     letter-spacing: 1px;
-    &:hover {
-        color: $white;
-        background-color: darken($darkBrown1, 0); // border-color: darken($border, 12%);
-    }
-    &:active {
-        color: $white;
-        background-color: darken($darkBrown1, 0); // border-color: darken($border, 12%);
-    }
+    &:hover,
+    &:active,
     &:focus {
         color: $white;
         background-color: darken($darkBrown1, 0); // border-color: darken($border, 12%);
