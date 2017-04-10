@@ -382,10 +382,6 @@
      }
  }
  
- .image-individual {
-     @include position(absolute, 11% 0% 9% 91%);
- }
- 
  .absolute-text {
      @include position(absolute, null 8.3% 10% null);
      a {
@@ -994,4 +990,9 @@
      padding: 3px 0;
      font-size: 13px;
      margin-top: 15px;
+ }
+ 
+ .image-individual {
+     @include position(absolute,
+     11% 0% 9% 91%);
  }
