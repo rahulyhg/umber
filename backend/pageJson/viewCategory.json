@@ -1,6 +1,6 @@
 {
-    "title": "Users",
-    "description": "List of Users",
+    "title": "Categories",
+    "description": "List of Categories",
     "pageType": "view",
     "sendIdWithCreate": true,
     "urlFields": ["_id"],
@@ -9,20 +9,21 @@
         "isSort": "",
         "tableRef": "name"
     }, {
-        "name": "Email",
+        "name": "Image",
         "isSort": "",
-        "tableRef": "email"
+        "type": "image",
+        "tableRef": "imgLink"
     }, {
-        "name": "Mobile",
+        "name": "Status",
         "isSort": "",
-        "tableRef": "mobile"
+        "tableRef": "status"
     }],
     "action": [{
         "name": "edit",
         "icon": "fa-pencil",
         "buttonClass": "btn-primary",
         "type": "page",
-        "action": "editUser",
+        "action": "editCategory",
         "fieldsToSend": {
             "_id": "_id"
         }
@@ -31,9 +32,9 @@
         "icon": "fa-trash",
         "buttonClass": "btn-danger",
         "type": "apiCallConfirm",
-        "title": "Delete User",
-        "content": "Are you sure you want to delete User?",
-        "api": "user/delete",
+        "title": "Delete Category",
+        "content": "Are you sure you want to delete Category?",
+        "api": "category/delete",
         "fieldsToSend": {
             "name": "_id",
             "value": "_id"
@@ -44,24 +45,24 @@
         "icon": "print",
         "class": "btn-danger",
         "type": "redirect",
-        "action": "User/generateExcel",
+        "action": "Category/generateExcel",
         "linkType": "admin"
     }, {
         "name": "Upload Excel",
         "icon": "delete",
         "class": "btn-warning",
         "type": "redirect",
-        "action": "excel-upload/User",
+        "action": "excel-upload/Category",
         "linkType": "internal"
     }, {
         "name": "Create",
         "icon": "plus",
         "class": "btn-success",
         "type": "page",
-        "action": "createUser"
+        "action": "createCategory"
     }],
     "apiCall": {
-        "url": "User/search",
+        "url": "Category/search",
         "params": "_id"
     }
 }

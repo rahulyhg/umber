@@ -69,7 +69,38 @@ var schema = new Schema({
         type: String,
         default: "User",
         enum: ['User', 'Admin']
-    }
+    },
+    addresses: {
+        roomNo: String,
+        street: String,
+        locality: String,
+        city: String,
+        state: String,
+        zip: Number
+    },
+    deliveryAddresses: {
+        roomNo: String,
+        street: String,
+        locality: String,
+        city: String,
+        state: String,
+        zip: Number
+    },
+    gender: {
+        type: String,
+        enum: ["M", "F"]
+    },
+    lastAccessed: Date,
+    cart: [{
+        product: String,
+        productJson: String,
+        quantity: Number
+    }],
+    wishlist: [{
+        productId: Schema.Types.ObjectId
+    }],
+    emailConfirmed: Boolean,
+    status: String
 });
 
 schema.plugin(deepPopulate, {

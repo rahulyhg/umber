@@ -1,0 +1,71 @@
+{
+    "title": "Create Subcategory",
+    "name": "Subcategory",
+    "jsonPage": "viewSubcategory",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": ["Subcategory"],
+    "fields": [{
+        "name": "Name",
+        "type": "text",
+        "tableRef": "name",
+        "placeholder": "Enter Category Name",
+        "id": "name",
+        "validation": ["required", "trim", "unique"],
+        "url": ""
+    }, {
+        "name": "Image",
+        "type": "image",
+        "tableRef": "imgLink",
+        "placeholder": "Enter Image Link",
+        "id": "imgLink",
+        "option": "single",
+        "validation": ["", "trim", "unique"],
+        "url": ""
+    }, {
+        "name": "ParentCategory",
+        "type": "tags",
+        "tableRef": "category",
+        "placeholder": "Select Parent Category",
+        "id": "parCategory",
+        "searchApi": "searchCall",
+        "fieldType": "",
+        "url": "Category/search",
+        "dropDownField": "name",
+        "dropDownType": "single"
+    }, {
+        "name": "Status",
+        "type": "tags",
+        "tableRef": "status",
+        "placeholder": "Select Status",
+        "id": "status",
+        "validation": ["required", "trim"],
+        "url": "",
+        "dropDownField": "",
+        "dropDownType": "single",
+        "onView": true,
+        "dropDown": ["Enabled", "Disabled"]
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitSubcategory",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewSubcategory"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewSubcategory"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "Subcategory/save"
+    }
+}

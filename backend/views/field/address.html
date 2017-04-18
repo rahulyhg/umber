@@ -1,0 +1,21 @@
+<div class="form-group" fields>
+    <label>{{type.name}} - Room no <span ng-show="type.required">*</span></label>
+    <input type="text" name="{{type.tableRef}}" placeholder="Enter room/building number" ng-model="formData[type.tableRef].roomNo"
+        class="form-control" ng-required="type.required">
+    <label>{{type.name}} - Street <span ng-show="type.required">*</span></label>
+    <input type="text" name="{{type.tableRef}}" placeholder="Enter street name/number" ng-model="formData[type.tableRef].street"
+        class="form-control" ng-required="type.required">
+    <label>{{type.name}} - Locality <span ng-show="type.required">*</span></label>
+    <input type="text" name="{{type.tableRef}}" placeholder="Enter locality" ng-model="formData[type.tableRef].locality" class="form-control"
+        ng-required="type.required">
+    <label>{{type.name}} - City <span ng-show="type.required">*</span></label>
+    <input type="text" name="{{type.tableRef}}" placeholder="Enter city" ng-model="formData[type.tableRef].city" class="form-control"
+        ng-required="type.required">
+    <label>{{type.name}} - State <span ng-show="type.required">*</span></label>
+    <input type="text" name="{{type.tableRef}}" placeholder="Enter state" ng-model="formData[type.tableRef].state" class="form-control"
+        ng-required="type.required">
+    <label>{{type.name}} - Zipcode <span ng-show="type.required">*</span></label>
+    <input type="text" name="{{type.tableRef}}" placeholder="Enter zipcode" ng-model="formData[type.tableRef].zip" class="form-control"
+        ng-required="type.required">
+    <div class="error-msg" ng-show="detailForm[type.tableRef].$invalid && detailForm[type.tableRef].$touched">Please enter valid {{type.name}}</div>
+</div>

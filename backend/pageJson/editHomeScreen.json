@@ -1,0 +1,73 @@
+{
+    "title": "Edit Home Screen",
+    "name": "HomeScreen",
+    "jsonPage": "viewHomeScreen",
+    "desciption": "",
+    "pageType": "edit",
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "Name",
+        "type": "text",
+        "tableRef": "name",
+        "placeholder": "Enter Name",
+        "id": "name",
+        "validation": ["required", "trim", "unique"],
+        "url": ""
+    }, {
+        "name": "Image",
+        "type": "image",
+        "tableRef": "image",
+        "placeholder": "Enter Image Link",
+        "id": "imgLink",
+        "option": "single",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }, {
+        "name": "Status",
+        "type": "tags",
+        "tableRef": "status",
+        "placeholder": "Select Status",
+        "id": "status",
+        "validation": ["required", "trim"],
+        "url": "",
+        "dropDownField": "",
+        "dropDownType": "single",
+        "onView": true,
+        "dropDown": ["Enabled", "Disabled"]
+    }, {
+        "name": "External link",
+        "type": "text",
+        "tableRef": "extLink",
+        "placeholder": "Update link",
+        "id": "link",
+        "validation": ["required", "trim"],
+        "url": ""
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitCategory",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewHomeScreen"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewHomeScreen"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "HomeScreen/save",
+        "params": "_id"
+    },
+    "preApi": {
+        "url": "HomeScreen/getOne",
+        "params": "_id"
+    }
+}

@@ -1,10 +1,10 @@
 {
-  "title": "Create User",
-  "name": "User",
-  "jsonPage": "viewUser",
-  "desciption": "",
-  "pageType": "create",
-  "urlFields": ["User"],
+    "title": "Create User",
+    "name": "User",
+    "jsonPage": "viewUser",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": ["User"],
     "fields": [{
         "name": "Name",
         "type": "text",
@@ -19,7 +19,7 @@
         "tableRef": "email",
         "placeholder": "Enter Email",
         "id": "email",
-        "validation": ["", "trim", "unique"],
+        "validation": ["required", "trim", "unique"],
         "url": ""
     }, {
         "name": "DOB",
@@ -33,12 +33,12 @@
         "name": "Photo",
         "type": "image",
         "tableRef": "photo",
-        "size":"250 x 250",
+        "size": "250 x 250",
         "placeholder": "Upload photo",
         "id": "photo",
         "view": true,
         "disabled": true,
-        "validation": ["required", "trim", "unique"],
+        "validation": ["", "trim", "unique"],
         "url": ""
     }, {
         "name": "Password",
@@ -62,7 +62,7 @@
         "tableRef": "mobile",
         "placeholder": "Enter mobile",
         "id": "mobile",
-        "validation": ["required", "trim", "unique"],
+        "validation": ["", "trim", "unique"],
         "url": ""
     }, {
         "name": "OTP",
@@ -71,7 +71,7 @@
         "placeholder": "Enter Otp",
         "id": "otp",
         "disabled": false,
-        "validation": ["required", "trim", "unique"],
+        "validation": ["", "trim", "unique"],
         "url": ""
     }, {
         "name": "AccessLevel",
@@ -85,6 +85,32 @@
         "dropDownType": "single",
         "onView": true,
         "dropDown": ["User", "Admin"]
+    }, {
+        "name": "Address",
+        "type": "address",
+        "tableRef": "addresses",
+        "placeholder": "Enter address",
+        "id": "addresses",
+        "validation": [""],
+        "url": ""
+    }, {
+        "name": "Gender",
+        "type": "tags",
+        "tableRef": "gender",
+        "placeholder": "Enter your gender",
+        "dropDownField": "",
+        "dropDownType": "single",
+        "onView": true,
+        "dropDown": ["M", "F"],
+        "url": ""
+    }, {
+        "name": "Delivery address",
+        "type": "address",
+        "tableRef": "deliveryAddresses",
+        "placeholder": "Enter delivery address",
+        "id": "deliveryAddresses",
+        "validation": [""],
+        "url": ""
     }],
     "action": [{
         "name": "submit",
