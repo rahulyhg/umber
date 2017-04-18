@@ -1,14 +1,14 @@
 module.exports = function (grunt) {
-
-    grunt.config.set('sass', {
-        development: {
-            options: {
-                sourceMap: true
-            },
-            files: {
-                "frontend/css/import.css": "frontend/sass/import.scss"
-            }
+    var folderName = grunt.option('target');
+    var dev = {
+        options: {
+            sourceMap: true
         },
+        files: {}
+    };
+    dev.files[folderName + "/css/import.css"] = folderName + "/sass/import.scss";
+    grunt.config.set('sass', {
+        development: dev,
         backendDevelopment: {
             options: {
                 sourceMap: true
@@ -26,6 +26,5 @@ module.exports = function (grunt) {
             }
         }
     });
-
     grunt.loadNpmTasks('grunt-sass');
 };
