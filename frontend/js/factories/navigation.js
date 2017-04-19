@@ -1,4 +1,4 @@
-myApp.factory('NavigationService', function () {
+myApp.factory('NavigationService', function ($http) {
     var navigation = [{
         name: "Home",
         classis: "active",
@@ -19,5 +19,14 @@ myApp.factory('NavigationService', function () {
         getNavigation: function () {
             return navigation;
         },
+
+        HomeScreen: function (callback) {
+            console.log("Frontend->navigation.js->data");
+            $http({
+                url: adminurl + 'HomeScreen/getHomeContent',
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        }
     };
 });

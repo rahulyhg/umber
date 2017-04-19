@@ -1,10 +1,5 @@
 var schema = new Schema({
-    name: {
-        type: String,
-        required: true,
-        unique: true,
-        uniqueCaseInsensitive: true
-    },
+    name: String,
     image: String,
     extLink: String,
     status: String
@@ -16,5 +11,28 @@ schema.plugin(timestamps);
 module.exports = mongoose.model('HomeScreen', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
-var model = {};
+var model = {
+
+    getHomeContent: function (data, callback) {
+        console.log("data", data)
+        HomeScreen.find({
+
+        }).exec(function (err, found) {
+            if (err) {
+                callback(err, null);
+            } else {
+                if (found) {
+                    console.log("Found: ", found);
+                    callback(null, found);
+                } else {
+                    callback({
+                        message: "Incorrect Credentials!"
+                    }, null);
+                }
+            }
+
+        });
+    },
+
+};
 module.exports = _.assign(module.exports, exports, model);

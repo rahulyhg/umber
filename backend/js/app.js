@@ -23,7 +23,7 @@ var myApp = angular.module('myApp', [
 
 myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
     // for http request with session
-    $httpProvider.defaults.withCredentials = true;
+    $httpProvider.defaults.withCredentials = false;
     $stateProvider
 
         .state('dashboard', {

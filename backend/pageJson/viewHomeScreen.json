@@ -3,68 +3,79 @@
     "description": "Slider",
     "pageType": "view",
     "sendIdWithCreate": true,
-    "urlFields": ["_id"],
+    "urlFields": [
+        "_id"
+    ],
     "fields": [{
-        "name": "Name",
-        "isSort": "",
-        "tableRef": "name"
-    }, {
-        "name": "Image",
-        "isSort": "",
-        "type": "image",
-        "tableRef": "image"
-    }, {
-        "name": "Status",
-        "isSort": "",
-        "tableRef": "status"
-    }, {
-        "name": "External link",
-        "isSort": "",
-        "tableRef": "extLink"
-    }],
+            "name": "Name",
+            "isSort": "",
+            "tableRef": "name"
+        },
+        {
+            "name": "Image",
+            "isSort": "",
+            "type": "image",
+            "tableRef": "image"
+        },
+        {
+            "name": "Status",
+            "isSort": "",
+            "tableRef": "status"
+        },
+        {
+            "name": "External link",
+            "isSort": "",
+            "tableRef": "extLink"
+        }
+    ],
     "action": [{
-        "name": "edit",
-        "icon": "fa-pencil",
-        "buttonClass": "btn-primary",
-        "type": "page",
-        "action": "editHomeScreen",
-        "fieldsToSend": {
-            "_id": "_id"
+            "name": "edit",
+            "icon": "fa-pencil",
+            "buttonClass": "btn-primary",
+            "type": "page",
+            "action": "editHomeScreen",
+            "fieldsToSend": {
+                "_id": "_id"
+            }
+        },
+        {
+            "name": "delete",
+            "icon": "fa-trash",
+            "buttonClass": "btn-danger",
+            "type": "apiCallConfirm",
+            "title": "Delete slide",
+            "content": "Are you sure you want to delete slide?",
+            "api": "HomeScreen/delete",
+            "fieldsToSend": {
+                "name": "_id",
+                "value": "_id"
+            }
         }
-    }, {
-        "name": "delete",
-        "icon": "fa-trash",
-        "buttonClass": "btn-danger",
-        "type": "apiCallConfirm",
-        "title": "Delete slide",
-        "content": "Are you sure you want to delete slide?",
-        "api": "HomeScreen/delete",
-        "fieldsToSend": {
-            "name": "_id",
-            "value": "_id"
-        }
-    }],
+    ],
     "button": [{
-        "name": "Excel Export",
-        "icon": "print",
-        "class": "btn-danger",
-        "type": "redirect",
-        "action": "HomeScreen/generateExcel",
-        "linkType": "admin"
-    }, {
-        "name": "Upload Excel",
-        "icon": "delete",
-        "class": "btn-warning",
-        "type": "redirect",
-        "action": "excel-upload/HomeScreen",
-        "linkType": "internal"
-    }, {
-        "name": "Create",
-        "icon": "plus",
-        "class": "btn-success",
-        "type": "page",
-        "action": "createHomeScreen"
-    }],
+            "name": "Excel Export",
+            "icon": "print",
+            "class": "btn-danger",
+            "type": "redirect",
+            "action": "HomeScreen/generateExcel",
+            "linkType": "admin"
+        },
+        {
+            "name": "Upload Excel",
+            "icon": "delete",
+            "class": "btn-warning",
+            "type": "redirect",
+            "action": "excel-upload/HomeScreen",
+            "linkType": "internal"
+        },
+        {
+            "name": "Create",
+            "icon": "plus",
+            "class": "btn-success",
+            "type": "page",
+            "action": "createHomeScreen"
+        }
+    ],
     "apiCall": {
         "url": "HomeScreen/search",
         "params": "_id"

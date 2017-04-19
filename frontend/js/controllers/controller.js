@@ -13,7 +13,13 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         //     'http://flexslider.woothemes.com/images/kitchen_adventurer_donut.jpg',
         //     'http://flexslider.woothemes.com/images/kitchen_adventurer_caramel.jpg'
         // ];
-        $scope.clothCat = [{
+
+        NavigationService.HomeScreen(function (data) {
+            console.log("Frontend->controller.js->data: ", data);
+            $scope.clothCat = data.data.data;
+            console.log("clothCat: ", $scope.clothCat);
+        });
+        /*$scope.clothCat = [{
                 img: '../img/home/1.jpg',
                 shirtType: 'casual shirt',
                 disc: 'Lorem Ipsum is simply dummy text',
@@ -37,7 +43,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 disc: 'Lorem Ipsum is simply dummy text',
                 buttonText: 'shop now'
             }
-        ];
+        ];*/
         $scope.newArrival = [{
                 img: '../img/home/8.jpg',
                 price: '2,899',
@@ -477,7 +483,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
             }
         ];
-        
+
         $scope.individual = [{
                 bigImg: '../img/individual/66.png',
                 img: '../img/individual/2.jpg'
