@@ -14,6 +14,6 @@
 module.exports = function (grunt) {
     grunt.registerTask('prod', [
         'clean:upload', 'copy:upload', 'clean:uploadApp',
-        'copy:assets', 'clean:backend', 'sass:backendDevelopment', 'copy:backendDevelopment', 'copy:jsBackendDevelopment', 'copy:backendDevelopment'
+        'copy:assets'
     ]);
 };
