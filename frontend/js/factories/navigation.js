@@ -36,6 +36,22 @@ myApp.factory('NavigationService', function ($http) {
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
+        },
+
+        getNewArrivals: function (callback) {
+            $http({
+                url: adminurl + 'Product/getNewArrivals',
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
+
+        getFeatured: function (callback) {
+            $http({
+                url: adminurl + 'Product/getFeatured',
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
         }
     };
 });

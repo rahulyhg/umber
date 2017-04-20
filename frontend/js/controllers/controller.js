@@ -25,91 +25,22 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             $scope.categories = data.data.data;
             console.log("Retrieved categories: ", $scope.categories);
         });
-        $scope.newArrival = [{
-                img: '../img/home/8.jpg',
-                price: '2,899',
-                type: 'LINEN FULL SLEEVE SHIRT WITH ROLLUP'
 
-            },
-            {
-                img: '../img/home/9.jpg',
-                price: '2,999 ',
-                type: 'WHITE GRAPHIC TEE'
+        // NavigationService.getProducts(function (data) {
+        //     console.log("Getting products");
+        //     $scope.products = data.data.data;
+        // });
 
-            },
-            {
-                img: '../img/home/10.jpg',
-                price: '2,999',
-                type: 'AMTEN PRINT FULL SLEEVE SHIRT WITH ROLLUP'
+        NavigationService.getNewArrivals(function (data) {
+            console.log("Getting new arrivals: ", data);
+            $scope.newArrivals = data.data.data;
+            console.log("New arrivals: ", $scope.newArrivals);
+        });
 
-            }, {
-                img: '../img/home/8.jpg',
-                price: '2,899',
-                type: 'LINEN FULL SLEEVE SHIRT WITH ROLLUP'
+        NavigationService.getFeatured(function (data) {
+            $scope.featured = data.data.data;
+        });
 
-            },
-            {
-                img: '../img/home/9.jpg',
-                price: '2,999 ',
-                type: 'WHITE GRAPHIC TEE'
-
-
-            },
-            {
-                img: '../img/home/10.jpg',
-                price: '2,999',
-                type: 'AMTEN PRINT FULL SLEEVE SHIRT WITH ROLLUP'
-
-            }
-        ];
-        $scope.featured = [{
-                img: '../img/home/11.jpg',
-                price: '2,899',
-                type: 'Linen Full Sleeve ShirtWith Rollup'
-
-            },
-            {
-                img: '../img/home/12.jpg',
-                price: '2,899',
-                type: 'Linen Full Sleeve ShirtWith Rollup'
-
-            },
-            {
-                img: '../img/home/13.jpg',
-                price: '2,899',
-                type: 'Marathon Plain Front Trouser'
-
-            }, {
-                img: '../img/home/14.jpg',
-                price: '2,899',
-                type: 'Marathon Plain Front Trouser'
-
-            },
-            {
-                img: '../img/home/11.jpg',
-                price: '2,899',
-                type: 'Linen Full Sleeve ShirtWith Rollup'
-
-            },
-            {
-                img: '../img/home/12.jpg',
-                price: '2,899',
-                type: 'Linen Full Sleeve ShirtWith Rollup'
-
-            },
-            {
-                img: '../img/home/13.jpg',
-                price: '2,899',
-                type: 'Marathon Plain Front Trouser'
-
-            },
-            {
-                img: '../img/home/14.jpg',
-                price: '2,899',
-                type: 'Marathon Plain Front Trouser'
-
-            }
-        ];
         $scope.blogs = [{
                 img: '../img/home/16.jpg',
                 heading: 'Lorem Ipsum is simply dummy text',

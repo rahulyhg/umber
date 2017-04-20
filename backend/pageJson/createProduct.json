@@ -1,0 +1,112 @@
+{
+    "title": "Create Product",
+    "name": "Product",
+    "jsonPage": "viewProduct",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": ["Product"],
+    "fields": [{
+        "name": "Name",
+        "type": "text",
+        "tableRef": "name",
+        "placeholder": "Enter Product Name",
+        "id": "name",
+        "validation": ["required", "trim", "unique"],
+        "url": ""
+    }, {
+        "name": "Image",
+        "type": "image",
+        "tableRef": "image",
+        "placeholder": "Enter Image Link",
+        "id": "imgLink",
+        "option": "single",
+        "validation": ["", "trim", "unique"],
+        "url": ""
+    }, {
+        "name": "Category",
+        "type": "tags",
+        "tableRef": "category",
+        "placeholder": "Select Category",
+        "id": "category",
+        "searchApi": "searchCall",
+        "fieldType": "",
+        "url": "Category/search",
+        "dropDownField": "name",
+        "dropDownType": "single"
+    }, {
+        "name": "Sub-Category",
+        "type": "tags",
+        "tableRef": "subCategory",
+        "placeholder": "Select Sub-Category",
+        "id": "subcategory",
+        "searchApi": "searchCall",
+        "fieldType": "",
+        "url": "Subcategory/search",
+        "dropDownField": "name",
+        "dropDownType": "single"
+    }, {
+        "name": "Price",
+        "type": "text",
+        "tableRef": "price",
+        "placeholder": "Set Price",
+        "id": "price",
+        "url": "",
+        "validation": ["required", "trim"]
+    }, {
+        "name": "Type",
+        "type": "text",
+        "tableRef": "type",
+        "placeholder": "Set type",
+        "id": "type",
+        "url": "",
+        "validation": ["", "trim"]
+    }, {
+        "name": "New Arrival",
+        "type": "checkbox",
+        "tableRef": "newArrival",
+        "id": "newArrival",
+        "url": "",
+        "validation": [""]
+    }, {
+        "name": "Featured",
+        "type": "checkbox",
+        "tableRef": "featured",
+        "id": "featured",
+        "url": "",
+        "validation": [""]
+    }, {
+        "name": "Status",
+        "type": "tags",
+        "tableRef": "status",
+        "placeholder": "Select Status",
+        "id": "status",
+        "validation": ["required", "trim"],
+        "url": "",
+        "dropDownField": "",
+        "dropDownType": "single",
+        "onView": true,
+        "dropDown": ["Enabled", "Disabled"]
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitProduct",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewProduct"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewProduct"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "Product/save"
+    }
+}

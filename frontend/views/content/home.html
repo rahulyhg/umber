@@ -99,33 +99,6 @@
                 </ul>
             </li>
         </ul>
-        <!--<li>
-                        <div class="padd">
-                            <img src="../img/home/4.jpg" alt="" class="img-responsive">
-                        </div>
-                    </li>
-                </ul>
-            </li>
-            <li class="all-categorie__dimension">
-                <ul class="list-unstyled">
-                    <li>
-                        <div class="padd">
-                            <img src="../img/home/6.jpg" alt="" class="img-responsive">
-                        </div>
-                    </li>
-                    <li>
-                        <div class="m-top padd">
-                            <img src="../img/home/2.jpg" alt="" class="img-responsive">
-                        </div>
-                    </li>
-                    <li>
-                        <div class="m-top">
-                            <img src="../img/home/3.jpg" alt="" class="img-responsive">
-                        </div>
-                    </li>
-                </ul>
-            </li>
-        </ul>-->
 
     </div>
 </section>
@@ -140,14 +113,14 @@
             <div class="row">
                 <div class="col-md-9 pull-right padd-rt0">
                     <div class="new-arrival__slider">
-                        <flex-slider flex-slide="new in newArrival track by $index" prev-text="" next-text="" animation="slide" item-width="220"
+                        <flex-slider flex-slide="newArrival in newArrivals track by $index" prev-text="" next-text="" animation="slide" item-width="220"
                             item-margin="20" min-items="3">
                             <li>
                                 <div class=" new-arrival__banner-detail relate">
-                                    <img ng-src="{{new.img}}" alt="" class="img-responsive">
+                                    <img ng-src="{{newArrival.image | serverimage}}" alt="" class="img-responsive">
                                     <div class="get-left">
-                                        <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
-                                        <h4>{{new.type}}</h4>
+                                        <h3><i class="fa fa-inr" aria-hidden="true"></i>{{newArrival.price}}</h3>
+                                        <h4>{{newArrival.type}}</h4>
 
                                     </div>
                                 </div>
@@ -174,7 +147,7 @@
                     min-items="3">
                     <li class="relate">
                         <div class="featured__banner-detail relate">
-                            <img ng-src="{{new.img}}" alt="" class="img-responsive">
+                            <img ng-src="{{new.image | serverimage}}" alt="" class="img-responsive">
                             <div class="featured__cloth-desc">
                                 <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
                                 <h4 class="text-uppercase">{{new.type}}</h4>
