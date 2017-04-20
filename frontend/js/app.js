@@ -60,17 +60,18 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             controller: 'FormCtrl'
         });
 
-    myApp.filter('uploadpath', function () {
-        return function (image) {
-            if (image && image !== null) {
-                return adminurl + "upload/readFile?file=" + image;
-            } else {
-                return undefined;
-            }
-        }
-    });
     $urlRouterProvider.otherwise("/");
     $locationProvider.html5Mode(isproduction);
+});
+
+myApp.filter('serverimage', function () {
+    return function (image) {
+        if (image && image !== null) {
+            return adminurl + "upload/readFile?file=" + image;
+        } else {
+            return undefined;
+        }
+    }
 });
 
 // For Language JS
