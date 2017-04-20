@@ -20,6 +20,11 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             console.log("clothCat: ", $scope.clothCat);
         });
 
+        NavigationService.getCategories(function (data) {
+            console.log("Getting categories: ", data);
+            $scope.categories = data.data.data;
+            console.log("Retrieved categories: ", $scope.categories);
+        });
         $scope.newArrival = [{
                 img: '../img/home/8.jpg',
                 price: '2,899',

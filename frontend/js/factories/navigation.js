@@ -27,6 +27,15 @@ myApp.factory('NavigationService', function ($http) {
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
+        },
+
+        getCategories: function (callback) {
+            console.log("Navigation->Categories");
+            $http({
+                url: adminurl + 'Category/getCategories',
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
         }
     };
 });
