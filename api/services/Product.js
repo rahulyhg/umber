@@ -25,11 +25,11 @@ var schema = new Schema({
 
 schema.plugin(deepPopulate, {
     populate: {
-        category: {
-            select: ""
+        'category': {
+            select: "name"
         },
-        subCategory: {
-            select: ""
+        'subCategory': {
+            select: "name"
         }
     }
 });
@@ -37,7 +37,7 @@ schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('Product', schema);
 
-var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "Category Subcategory", "Category Subcategory"));
+var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "category subCategory", "category subCategory"));
 var model = {
     getAllProducts: function (data, callback) {
         Product.find({}).exec(function (error, data) {

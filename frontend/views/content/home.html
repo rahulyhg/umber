@@ -207,14 +207,14 @@
                 <h1 class="text-uppercase blog--border--line">blogs</h1>
             </div>
             <div class="blog__slider">
-                <flex-slider flex-slide="x in blogs track by $index" prev-text="" next-text="" animation="slide" item-width="400" min-items="3">
+                <flex-slider flex-slide="blog in blogs track by $index" prev-text="" next-text="" animation="slide" item-width="400" min-items="3">
                     <li class="relate">
                         <div class="blog__banner-detail relate">
-                            <img ng-src="{{x.img}}" alt="" class="img-responsive">
+                            <img ng-src="{{blog.image | serverimage}}" alt="" class="img-responsive">
                             <div class="blog__desc">
-                                <h3 class="text-uppercase">{{x.heading}}</h3>
-                                <p>{{x.para}}</p>
-                                <p class="rel">Read more</p>
+                                <h3 class="text-uppercase">{{blog.title}}</h3>
+                                <p>{{blog.description}}</p>
+                                <p class="rel"><a href={{blog.link}}>Read more</a></p>
                             </div>
                         </div>
                     </li>

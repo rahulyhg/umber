@@ -1,0 +1,73 @@
+{
+    "title": "Edit Blog",
+    "name": "Blog",
+    "jsonPage": "viewBlog",
+    "desciption": "",
+    "pageType": "edit",
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "Title",
+        "type": "text",
+        "tableRef": "title",
+        "placeholder": "Enter Blog Title",
+        "id": "name",
+        "validation": ["required", "trim", "unique"],
+        "url": ""
+    }, {
+        "name": "Image",
+        "type": "image",
+        "tableRef": "image",
+        "placeholder": "Enter Image Link",
+        "id": "imgLink",
+        "option": "single",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }, {
+        "name": "Description",
+        "type": "text",
+        "tableRef": "description",
+        "placeholder": "Enter blog description",
+        "id": "desc",
+        "validation": ["required", "trim"],
+        "url": ""
+    }, {
+        "name": "Status",
+        "type": "tags",
+        "tableRef": "status",
+        "placeholder": "Select Status",
+        "id": "status",
+        "validation": ["required", "trim"],
+        "url": "",
+        "dropDownField": "",
+        "dropDownType": "single",
+        "onView": true,
+        "dropDown": ["Enabled", "Disabled"]
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitBlog",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewBlog"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewBlog"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "Blog/save",
+        "params": "_id"
+    },
+    "preApi": {
+        "url": "Blog/getOne",
+        "params": "_id"
+    }
+}

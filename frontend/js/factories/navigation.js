@@ -52,6 +52,22 @@ myApp.factory('NavigationService', function ($http) {
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
-        }
+        },
+
+        getBlogs: function (callback) {
+            $http({
+                url: adminurl + 'Blog/getBlogs',
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
+
+        getEnabledBlogs: function (callback) {
+            $http({
+                url: adminurl + 'Blog/getEnabledBlogs',
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
     };
 });

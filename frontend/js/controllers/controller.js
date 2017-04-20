@@ -41,6 +41,14 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             $scope.featured = data.data.data;
         });
 
+        NavigationService.getBlogs(function (data) {
+
+        });
+
+        NavigationService.getEnabledBlogs(function (data) {
+            $scope.blogs = data.data.data;
+        });
+
         $scope.blogs = [{
                 img: '../img/home/16.jpg',
                 heading: 'Lorem Ipsum is simply dummy text',
