@@ -1,4 +1,4 @@
-myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $location) {
         $scope.template = TemplateService.getHTML("content/home.html");
         TemplateService.title = "Home"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -19,31 +19,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             $scope.clothCat = data.data.data;
             console.log("clothCat: ", $scope.clothCat);
         });
-        /*$scope.clothCat = [{
-                img: '../img/home/1.jpg',
-                shirtType: 'casual shirt',
-                disc: 'Lorem Ipsum is simply dummy text',
-                buttonText: 'shop now'
-            },
-            {
-                img: '../img/home/1.jpg',
-                shirtType: 'shirt casual ',
-                disc: 'Lorem Ipsum is simply dummy text',
-                buttonText: 'shop now'
-            },
-            {
-                img: '../img/home/1.jpg',
-                shirtType: 'casual shirt',
-                disc: 'Lorem Ipsum is simply dummy text',
-                buttonText: 'shop now'
-            },
-            {
-                img: '../img/home/1.jpg',
-                shirtType: 'casual shirt',
-                disc: 'Lorem Ipsum is simply dummy text',
-                buttonText: 'shop now'
-            }
-        ];*/
+
         $scope.newArrival = [{
                 img: '../img/home/8.jpg',
                 price: '2,899',

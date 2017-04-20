@@ -36,11 +36,13 @@
             <li>
                 <div class=" cloth-cat__banner-detail relate">
                     <img ng-src="{{cloth.image | serverimage}}" alt="" class="img-responsive">
-                    <!--<div class="get-center text-uppercase">
-                        <h1>{{cloth.shirtType}}</h1>
-                        <h3>{{cloth.disc}}</h3>
-                        <p><button class="btn shop--now">{{cloth.buttonText}}</button></p>
-                    </div>-->
+                    <div class="get-center text-uppercase">
+                        <h1>{{cloth.name}}</h1>
+                        <h3>{{cloth.desc}}</h3>
+                        <p>
+                            <a href="{{cloth.extLink}}"> <button class="btn shop--now">Shop Now</button></a>
+                        </p>
+                    </div>
                 </div>
             </li>
             <!--<div class="cloth-cat__descrp">
