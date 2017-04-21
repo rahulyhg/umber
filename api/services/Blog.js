@@ -1,5 +1,5 @@
 var schema = new Schema({
-    title: {
+    name: {
         type: String,
         required: true,
         unique: true,

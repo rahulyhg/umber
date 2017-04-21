@@ -63,6 +63,7 @@ myApp.factory('NavigationService', function ($http) {
         },
 
         getEnabledBlogs: function (callback) {
+            console.log("Getting enabled blogs");
             $http({
                 url: adminurl + 'Blog/getEnabledBlogs',
                 method: 'POST',

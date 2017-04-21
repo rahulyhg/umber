@@ -47,9 +47,10 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
         NavigationService.getEnabledBlogs(function (data) {
             $scope.blogs = data.data.data;
+            console.log("Enabled blogs retrieved: ", $scope.blogs);
         });
 
-        $scope.blogs = [{
+        /*$scope.blogs = [{
                 img: '../img/home/16.jpg',
                 heading: 'Lorem Ipsum is simply dummy text',
                 para: 'Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text, Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text'
@@ -78,7 +79,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 heading: 'Lorem Ipsum is simply dummy text',
                 para: 'Lorem Ipsum is simply dummy text, Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text'
             }
-        ];
+        ];*/
         $scope.sale = [{
                 img: '../img/home/11.jpg',
                 price: '2,899',

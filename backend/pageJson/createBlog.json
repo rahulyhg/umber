@@ -8,7 +8,7 @@
     "fields": [{
         "name": "Title",
         "type": "text",
-        "tableRef": "title",
+        "tableRef": "name",
         "placeholder": "Enter blog title",
         "id": "name",
         "validation": ["required", "trim", "unique"],

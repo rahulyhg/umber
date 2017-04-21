@@ -7,7 +7,7 @@
     "fields": [{
         "name": "Title",
         "isSort": "",
-        "tableRef": "title"
+        "tableRef": "name"
     }, {
         "name": "Image",
         "isSort": "",
@@ -34,7 +34,7 @@
         "type": "apiCallConfirm",
         "title": "Delete Blog",
         "content": "Are you sure you want to delete Blog?",
-        "api": "Blog/delete",
+        "api": "blog/delete",
         "fieldsToSend": {
             "name": "_id",
             "value": "_id"
