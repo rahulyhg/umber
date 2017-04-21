@@ -14,13 +14,13 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         //     'http://flexslider.woothemes.com/images/kitchen_adventurer_caramel.jpg'
         // ];
 
-        NavigationService.HomeScreen(function (data) {
+        NavigationService.EnabledHomeScreen(function (data) {
             console.log("Frontend->controller.js->data: ", data);
             $scope.clothCat = data.data.data;
             console.log("clothCat: ", $scope.clothCat);
         });
 
-        NavigationService.getCategories(function (data) {
+        NavigationService.getEnabledCategories(function (data) {
             console.log("Getting categories: ", data);
             $scope.categories = data.data.data;
             console.log("Retrieved categories: ", $scope.categories);

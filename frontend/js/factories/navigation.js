@@ -20,19 +20,19 @@ myApp.factory('NavigationService', function ($http) {
             return navigation;
         },
 
-        HomeScreen: function (callback) {
+        EnabledHomeScreen: function (callback) {
             console.log("Frontend->navigation.js->data");
             $http({
-                url: adminurl + 'HomeScreen/getHomeContent',
+                url: adminurl + 'HomeScreen/getEnabledHomeContent',
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
         },
 
-        getCategories: function (callback) {
+        getEnabledCategories: function (callback) {
             console.log("Navigation->Categories");
             $http({
-                url: adminurl + 'Category/getCategories',
+                url: adminurl + 'Category/getEnabledCategories',
                 method: 'POST',
                 withCredentials: false
             }).then(callback);

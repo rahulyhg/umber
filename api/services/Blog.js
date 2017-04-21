@@ -18,6 +18,7 @@ module.exports = mongoose.model('Blog', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
 var model = {
+    // Retrieves all blogs including disabled.
     getAllBlogs: function (data, callback) {
         Blog.find({}).exec(function (err, data) {
             if (err) {
@@ -32,7 +33,7 @@ var model = {
         })
     },
 
-
+    // Retrieves only enabled blogs
     getEnabledBlogs: function (data, callback) {
         Blog.find({
             status: 'Enabled'

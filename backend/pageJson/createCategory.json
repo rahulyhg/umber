@@ -23,6 +23,14 @@
         "validation": ["", "trim", "unique"],
         "url": ""
     }, {
+        "name": "Priority",
+        "type": "text",
+        "tableRef": "priority",
+        "placeholder": "Enter category priority",
+        "id": "priority",
+        "validation": ["required", "trim", "unique"],
+        "url": ""
+    }, {
         "name": "Status",
         "type": "tags",
         "tableRef": "status",

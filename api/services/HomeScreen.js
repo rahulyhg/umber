@@ -14,7 +14,7 @@ module.exports = mongoose.model('HomeScreen', schema);
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
 var model = {
 
-    getHomeContent: function (data, callback) {
+    getEnabledHomeContent: function (data, callback) {
         console.log("data", data)
         HomeScreen.find({
             'status': 'Enabled'
