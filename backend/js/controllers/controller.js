@@ -240,6 +240,7 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
         JsonService.getJson($stateParams.id, function () {});
 
         globalfunction.confDel = function (callback) {
+            console.log("In controller.js->confDel");
             var modalInstance = $uibModal.open({
                 animation: $scope.animationsEnabled,
                 templateUrl: '/backend/views/modal/conf-delete.html',

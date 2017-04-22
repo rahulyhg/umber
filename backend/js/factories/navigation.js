@@ -10,32 +10,32 @@ myApp.factory('NavigationService', function ($http) {
         name: "Users",
         classis: "active",
         sref: "#!/page/viewUser//",
-        icon: "phone"
+        icon: "user"
     }, {
         name: "Category",
         classis: "active",
         sref: "#!/page/viewCategory//",
-        icon: "phone"
+        icon: "tree"
     }, {
         name: "Sub-Category",
         classis: "active",
         sref: "#!/page/viewSubcategory//",
-        icon: "phone"
+        icon: "leaf"
     }, {
         name: "Home Screen",
         classis: "active",
         sref: "#!/page/viewHomeScreen//",
-        icon: "phone"
+        icon: "screen"
     }, {
         name: "Products",
         classis: "active",
         sref: "#!/page/viewProduct//",
-        icon: "phone"
+        icon: "shirt"
     }, {
         name: "Blogs",
         classis: "active",
         sref: "#!/page/viewBlog//",
-        icon: "phone"
+        icon: "document"
     }];
 
     return {

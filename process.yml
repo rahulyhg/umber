@@ -1,5 +1,5 @@
 apps:
   - script: "app.js"
-    name: "Node App - Port"
+    name: "BurntUmber - 1337"
     watch: true
     args: "--prod"
