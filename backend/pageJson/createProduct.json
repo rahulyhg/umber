@@ -35,7 +35,7 @@
         "tableRef": "image",
         "placeholder": "Enter Image Link",
         "id": "imgLink",
-        "option": "single",
+        "option": "mulitple",
         "validation": ["", "trim", "unique"],
         "url": ""
     }, {
@@ -73,7 +73,7 @@
         "dropDownType": "single"
     }, {
         "name": "Collection",
-        "type": "checkbox",
+        "type": "select",
         "tableRef": "prodCollection",
         "placeholder": "Select Collection",
         "id": "collection",

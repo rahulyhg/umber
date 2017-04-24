@@ -35,7 +35,7 @@
         "tableRef": "image",
         "placeholder": "Enter Image Link",
         "id": "imgLink",
-        "option": "single",
+        "option": "multiple",
         "validation": ["", "trim", "unique"],
         "url": ""
     }, {

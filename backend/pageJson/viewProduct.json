@@ -9,10 +9,9 @@
         "isSort": "",
         "tableRef": "name"
     }, {
-        "name": "Image",
+        "name": "Quantity",
         "isSort": "",
-        "type": "image",
-        "tableRef": "imgLink"
+        "tableRef": "quantity"
     }, {
         "name": "Status",
         "isSort": "",

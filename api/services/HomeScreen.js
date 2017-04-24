@@ -15,7 +15,6 @@ var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
 var model = {
 
     getEnabledHomeContent: function (data, callback) {
-        console.log("data", data)
         HomeScreen.find({
             'status': 'Enabled'
         }).exec(function (err, found) {
@@ -23,7 +22,6 @@ var model = {
                 callback(err, null);
             } else {
                 if (found) {
-                    console.log("Found: ", found);
                     callback(null, found);
                 } else {
                     callback({

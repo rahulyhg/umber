@@ -15,7 +15,9 @@ var schema = new Schema({
         ref: 'Subcategory'
     },
     price: Number,
-    image: [String],
+    image: [{
+        type: String
+    }],
     type: String,
     featured: Boolean,
     newArrival: Boolean,
