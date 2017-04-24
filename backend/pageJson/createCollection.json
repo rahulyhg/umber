@@ -1,0 +1,39 @@
+{
+    "title": "Create Collection",
+    "name": "Collection",
+    "jsonPage": "viewCollection",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": ["Collection"],
+    "fields": [{
+        "name": "Name",
+        "type": "text",
+        "tableRef": "name",
+        "placeholder": "Enter Collection Name",
+        "id": "name",
+        "validation": ["required", "trim", "unique"],
+        "url": ""
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitCollection",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewCollection"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewCollection"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "Collection/save"
+    }
+}

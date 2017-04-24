@@ -1,29 +1,25 @@
 {
-    "title": "Blogs",
-    "description": "List of blogs",
+    "title": "Brands",
+    "description": "List of Brands",
     "pageType": "view",
     "sendIdWithCreate": true,
     "urlFields": ["_id"],
     "fields": [{
-        "name": "Title",
+        "name": "Name",
         "isSort": "",
         "tableRef": "name"
     }, {
-        "name": "Image",
+        "name": "Logo Image",
         "isSort": "",
-        "type": "image",
-        "tableRef": "image"
-    }, {
-        "name": "Status",
-        "isSort": "",
-        "tableRef": "status"
+        "tableRef": "logo",
+        "type": "image"
     }],
     "action": [{
         "name": "edit",
         "icon": "fa-pencil",
         "buttonClass": "btn-primary",
         "type": "page",
-        "action": "editBlog",
+        "action": "editBrand",
         "fieldsToSend": {
             "_id": "_id"
         }
@@ -32,9 +28,9 @@
         "icon": "fa-trash",
         "buttonClass": "btn-danger",
         "type": "apiCallConfirm",
-        "title": "Delete Blog",
-        "content": "Are you sure you want to delete Blog?",
-        "api": "blog/delete",
+        "title": "Delete Brand",
+        "content": "Are you sure you want to delete Brand?",
+        "api": "Brand/delete",
         "fieldsToSend": {
             "name": "_id",
             "value": "_id"
@@ -45,24 +41,24 @@
         "icon": "print",
         "class": "btn-danger",
         "type": "redirect",
-        "action": "Blog/generateExcel",
+        "action": "Brand/generateExcel",
         "linkType": "admin"
     }, {
         "name": "Upload Excel",
         "icon": "delete",
         "class": "btn-warning",
         "type": "redirect",
-        "action": "excel-upload/Blog",
+        "action": "excel-upload/Brand",
         "linkType": "internal"
     }, {
         "name": "Create",
         "icon": "plus",
         "class": "btn-success",
         "type": "page",
-        "action": "createBlog"
+        "action": "createBrand"
     }],
     "apiCall": {
-        "url": "Blog/search",
+        "url": "Brand/search",
         "params": "_id"
     }
 }

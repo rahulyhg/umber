@@ -70,7 +70,7 @@ var schema = new Schema({
         default: "User",
         enum: ['User', 'Admin']
     },
-    addresses: {
+    /*addresses: {
         roomNo: String,
         street: String,
         locality: String,
@@ -85,7 +85,7 @@ var schema = new Schema({
         city: String,
         state: String,
         zip: Number
-    },
+    },*/
     gender: {
         type: String,
         enum: ["M", "F"]

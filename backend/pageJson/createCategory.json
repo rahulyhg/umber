@@ -24,7 +24,7 @@
         "url": ""
     }, {
         "name": "Priority",
-        "type": "text",
+        "type": "number",
         "tableRef": "priority",
         "placeholder": "Enter category priority",
         "id": "priority",

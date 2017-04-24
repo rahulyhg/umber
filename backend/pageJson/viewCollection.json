@@ -1,29 +1,20 @@
 {
-    "title": "Blogs",
-    "description": "List of blogs",
+    "title": "Collections",
+    "description": "List of Collections",
     "pageType": "view",
     "sendIdWithCreate": true,
     "urlFields": ["_id"],
     "fields": [{
-        "name": "Title",
+        "name": "Name",
         "isSort": "",
         "tableRef": "name"
-    }, {
-        "name": "Image",
-        "isSort": "",
-        "type": "image",
-        "tableRef": "image"
-    }, {
-        "name": "Status",
-        "isSort": "",
-        "tableRef": "status"
     }],
     "action": [{
         "name": "edit",
         "icon": "fa-pencil",
         "buttonClass": "btn-primary",
         "type": "page",
-        "action": "editBlog",
+        "action": "editCollection",
         "fieldsToSend": {
             "_id": "_id"
         }
@@ -32,9 +23,9 @@
         "icon": "fa-trash",
         "buttonClass": "btn-danger",
         "type": "apiCallConfirm",
-        "title": "Delete Blog",
-        "content": "Are you sure you want to delete Blog?",
-        "api": "blog/delete",
+        "title": "Delete Collection",
+        "content": "Are you sure you want to delete Collection?",
+        "api": "Collection/delete",
         "fieldsToSend": {
             "name": "_id",
             "value": "_id"
@@ -45,24 +36,24 @@
         "icon": "print",
         "class": "btn-danger",
         "type": "redirect",
-        "action": "Blog/generateExcel",
+        "action": "Collection/generateExcel",
         "linkType": "admin"
     }, {
         "name": "Upload Excel",
         "icon": "delete",
         "class": "btn-warning",
         "type": "redirect",
-        "action": "excel-upload/Blog",
+        "action": "excel-upload/Collection",
         "linkType": "internal"
     }, {
         "name": "Create",
         "icon": "plus",
         "class": "btn-success",
         "type": "page",
-        "action": "createBlog"
+        "action": "createCollection"
     }],
     "apiCall": {
-        "url": "Blog/search",
+        "url": "Collection/search",
         "params": "_id"
     }
 }

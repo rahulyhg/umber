@@ -14,6 +14,22 @@
         "validation": ["required", "trim", "unique"],
         "url": ""
     }, {
+        "name": "Code",
+        "type": "text",
+        "tableRef": "code",
+        "placeholder": "Enter Product Code",
+        "id": "code",
+        "validation": ["", "trim", "unique"],
+        "url": ""
+    }, {
+        "name": "Quantity",
+        "type": "number",
+        "tableRef": "quantity",
+        "placeholder": "Enter Available Product Quantity",
+        "id": "quantity",
+        "validation": ["Required", "trim", "unique"],
+        "url": ""
+    }, {
         "name": "Image",
         "type": "image",
         "tableRef": "image",
@@ -45,8 +61,30 @@
         "dropDownField": "name",
         "dropDownType": "single"
     }, {
+        "name": "Brand",
+        "type": "tags",
+        "tableRef": "brand",
+        "placeholder": "Select Brand",
+        "id": "brand",
+        "searchApi": "searchCall",
+        "fieldType": "",
+        "url": "Brand/search",
+        "dropDownField": "name",
+        "dropDownType": "single"
+    }, {
+        "name": "Collection",
+        "type": "checkbox",
+        "tableRef": "prodCollection",
+        "placeholder": "Select Collection",
+        "id": "collection",
+        "searchApi": "searchCall",
+        "fieldType": "",
+        "url": "Collection/search",
+        "dropDownField": "name",
+        "dropDownType": "single"
+    }, {
         "name": "Price",
-        "type": "text",
+        "type": "number",
         "tableRef": "price",
         "placeholder": "Set Price",
         "id": "price",
@@ -74,6 +112,49 @@
         "id": "featured",
         "url": "",
         "validation": [""]
+    }, {
+        "name": "Sleeve",
+        "type": "tags",
+        "tableRef": "sleeve",
+        "placeholder": "Sleeve description",
+        "id": "sleeve",
+        "url": "",
+        "validation": ["", "trim"],
+        "dropDownField": "",
+        "dropDownType": "single",
+        "dropDown": ["Full Sleeve", "Half Sleeve"]
+    }, {
+        "name": "Fabric",
+        "type": "text",
+        "tableRef": "fabric",
+        "placeholder": "Fabric description",
+        "id": "price",
+        "url": "",
+        "validation": ["", "trim"]
+    }, {
+        "name": "Base color",
+        "type": "text",
+        "tableRef": "baseColor",
+        "placeholder": "Set Base color",
+        "id": "baseColor",
+        "url": "",
+        "validation": ["", "trim"]
+    }, {
+        "name": "Washcare",
+        "type": "text",
+        "tableRef": "washcare",
+        "placeholder": "Washcare description",
+        "id": "washcare",
+        "url": "",
+        "validation": ["", "trim"]
+    }, {
+        "name": "Description",
+        "type": "text",
+        "tableRef": "description",
+        "placeholder": "Product description",
+        "id": "descript",
+        "url": "",
+        "validation": ["", "trim"]
     }, {
         "name": "Status",
         "type": "tags",

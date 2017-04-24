@@ -5,6 +5,7 @@ var schema = new Schema({
         unique: true,
         uniqueCaseInsensitive: true
     },
+    code: String,
     category: {
         type: Schema.Types.ObjectId,
         ref: 'Category'
@@ -14,12 +15,28 @@ var schema = new Schema({
         ref: 'Subcategory'
     },
     price: Number,
-    image: String,
+    image: [String],
     type: String,
     featured: Boolean,
     newArrival: Boolean,
-    brand: String,
+    brand: {
+        type: Schema.Types.ObjectId,
+        ref: 'Brand'
+    },
+    prodCollection: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Collection'
+    }],
+    sleeve: {
+        type: String,
+        enum: ["Half sleeve", "Full sleeve"]
+    },
+    fabric: String,
+    baseColor: String,
+    washcare: String,
+    description: String,
     size: Number,
+    quantity: Number,
     status: String
 });
 
@@ -30,6 +47,12 @@ schema.plugin(deepPopulate, {
         },
         'subCategory': {
             select: "name"
+        },
+        'brand': {
+            select: "name"
+        },
+        'collection': {
+            select: "name"
         }
     }
 });
@@ -37,7 +60,7 @@ schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('Product', schema);
 
-var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "category subCategory", "category subCategory"));
+var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "category subCategory brand collection", "category subCategory brand collection"));
 var model = {
     getAllProducts: function (data, callback) {
         Product.find({}).exec(function (error, data) {

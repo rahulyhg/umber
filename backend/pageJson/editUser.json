@@ -136,17 +136,6 @@
             ]
         },
         {
-            "name": "Address",
-            "type": "address",
-            "tableRef": "addresses",
-            "placeholder": "Enter address",
-            "id": "addresses",
-            "validation": [
-                ""
-            ],
-            "url": ""
-        },
-        {
             "name": "Gender",
             "type": "tags",
             "tableRef": "gender",
@@ -157,17 +146,6 @@
             "dropDown": [
                 "M",
                 "F"
-            ],
-            "url": ""
-        },
-        {
-            "name": "Delivery address",
-            "type": "address",
-            "tableRef": "deliveryAddresses",
-            "placeholder": "Enter delivery address",
-            "id": "deliveryAddresses",
-            "validation": [
-                ""
             ],
             "url": ""
         }
