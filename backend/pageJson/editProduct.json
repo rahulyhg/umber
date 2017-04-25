@@ -73,15 +73,13 @@
         "dropDownType": "single"
     }, {
         "name": "Collection",
-        "type": "checkbox",
+        "type": "select",
         "tableRef": "prodCollection",
         "placeholder": "Select Collection",
         "id": "collection",
         "searchApi": "searchCall",
         "fieldType": "",
-        "url": "Collection/search",
-        "dropDownField": "name",
-        "dropDownType": "single"
+        "url": "Collection/search"
     }, {
         "name": "Price",
         "type": "number",

@@ -15,8 +15,13 @@ var schema = new Schema({
         ref: 'Subcategory'
     },
     price: Number,
-    image: [{
-        type: String
+    images: [{
+        bigImage: {
+            type: String
+        },
+        smallImage: {
+            type: String
+        }
     }],
     type: String,
     featured: Boolean,
@@ -107,6 +112,22 @@ var model = {
             } else {
                 callback({
                     message: "Incorrect credentials"
+                }, null);
+            }
+        });
+    },
+
+    getProductWithId: function (data, callback) {
+        Product.find({
+            _id: data.id
+        }).exec(function (err, data) {
+            if (err) {
+                callback(err, null);
+            } else if (data) {
+                callback(null, data);
+            } else {
+                callback({
+                    message: "Incorrect credentials!"
                 }, null);
             }
         });

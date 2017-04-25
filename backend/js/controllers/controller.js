@@ -337,8 +337,6 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
         JsonService.setKeyword($stateParams.keyword);
         $scope.template = TemplateService;
         $scope.data = {};
-        console.log("detail controller");
-        console.log($scope.json);
 
         //  START FOR EDIT
         if ($scope.json.json.preApi) {
@@ -389,6 +387,7 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
         }
         $scope.json = JsonService;
         $scope.tags = {};
+        $scope.items = {}; // Stores all the collections
         $scope.model = [];
         $scope.tagNgModel = {};
         // $scope.boxModel
@@ -498,6 +497,28 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
             $scope.refreshTags();
         }
 
+        if ($scope.type.type == "select") {
+            $scope.formData[$scope.type.tableRef] = [];
+            if ($scope.type.url !== "") {
+                NavigationService.searchCall($scope.type.url, {
+                    keyword: ""
+                }, 1, function (data1) {
+                    $scope.items[$scope.type.tableRef] = data1.data.results;
+                    if ($scope.json.keyword._id) {
+                        for (var idx = 0; idx < $scope.items[$scope.type.tableRef].length; idx++) {
+                            for (var formIdx = 0; formIdx < $scope.formData[$scope.type.tableRef].length; formIdx++) {
+                                if ($scope.items[$scope.type.tableRef][idx]._id == $scope.formData[$scope.type.tableRef][formIdx]) {
+                                    $scope.items[$scope.type.tableRef][idx].checked = true;
+                                }
+                            }
+                        }
+                    }
+                });
+            } else {
+                $scope.items[$scope.type.tableRef] = $scope.type.dropDown;
+            }
+        }
+
         $scope.tagClicked = function (select, index) {
             if ($scope.type.fieldType === "array") {
                 $scope.formData[$scope.type.tableRef] = [];
@@ -508,6 +529,16 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
                 $scope.formData[$scope.type.tableRef] = select;
             }
         };
+
+        $scope.setSelectedItem = function (item) {
+            var index = $scope.formData[$scope.type.tableRef].indexOf(item._id);
+            if (index < 0)
+                $scope.formData[$scope.type.tableRef].push(item._id);
+            else
+                $scope.formData[$scope.type.tableRef].splice(index, 1);
+
+            console.log($scope.formData);
+        }
     })
 
     .controller('LoginCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, $state, toastr) {

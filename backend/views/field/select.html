@@ -1,6 +1,6 @@
-<div>
+<div class="form-group">
     <label>{{type.name}}</label>
-    <div ng-repeat="item in [type.tableRef]">
-        <input type="checkbox" ng-checked="item">{{item.name}}
+    <div ng-repeat="item in items[type.tableRef] track by $index">
+        <input type="checkbox" value="{{item.name}}" ng-change="setSelectedItem(item)" ng-model="item.checked">{{item.name}}
     </div>
 </div>

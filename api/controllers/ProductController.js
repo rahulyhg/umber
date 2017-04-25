@@ -37,6 +37,19 @@ var controller = {
                 }
             })
         }
+    },
+
+    getProductWithId: function (req, res) {
+        if (req.body) {
+            Product.getProductWithId(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid request"
+                }
+            })
+        }
     }
 };
 module.exports = _.assign(module.exports, controller);
