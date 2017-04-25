@@ -118,8 +118,9 @@ var model = {
     },
 
     getProductWithId: function (data, callback) {
+        console.log("Product id data: ", data);
         Product.find({
-            _id: data.id
+            _id: data._id
         }).exec(function (err, data) {
             if (err) {
                 callback(err, null);
