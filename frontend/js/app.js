@@ -45,7 +45,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             controller: 'ListingPageCtrl'
         })
         .state('individual-page', {
-            url: "/individual-page",
+            url: "/individual-page/:id",
             templateUrl: tempateURL,
             controller: 'IndividualPageCtrl'
         })

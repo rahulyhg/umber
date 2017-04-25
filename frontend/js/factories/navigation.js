@@ -70,5 +70,13 @@ myApp.factory('NavigationService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
+
+        getProductWithId: function (input, callback) {
+            $http({
+                url: adminurl + 'Product/getProductWithId/' + input,
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        }
     };
 });

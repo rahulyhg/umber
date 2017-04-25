@@ -235,7 +235,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             subtotal: '2,899'
         }]
     })
-    .controller('IndividualPageCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+    .controller('IndividualPageCtrl', function ($scope, $stateParams, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.getHTML("content/individual-page.html");
         TemplateService.title = "individual-page"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -245,6 +245,12 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             console.log(data);
             $scope.formSubmitted = true;
         };
+
+        var productId = $stateParams.id;
+        NavigationService.getProductWithId(productId, function (data) {
+            $scope.individual = data.data.data;
+            console.log("Retrieved individual page: ", data);
+        })
 
         $scope.featured = [{
                 img: '../img/home/11.jpg',

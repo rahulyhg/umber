@@ -120,7 +120,7 @@ var model = {
     getProductWithId: function (data, callback) {
         console.log("Product id data: ", data);
         Product.find({
-            _id: data._id
+            _id: Schema.Types.ObjectId(data)
         }).exec(function (err, data) {
             if (err) {
                 callback(err, null);

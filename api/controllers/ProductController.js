@@ -41,7 +41,7 @@ var controller = {
 
     getProductWithId: function (req, res) {
         if (req.body) {
-            Product.getProductWithId(req.body, res.callback);
+            Product.getProductWithId(req.params.id, res.callback);
         } else {
             res.json({
                 value: false,
