@@ -7,13 +7,6 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             alert('xd');
         };
 
-        // $scope.mySlides = [
-        //     'http://flexslider.woothemes.com/images/kitchen_adventurer_cheesecake_brownie.jpg',
-        //     'http://flexslider.woothemes.com/images/kitchen_adventurer_lemon.jpg',
-        //     'http://flexslider.woothemes.com/images/kitchen_adventurer_donut.jpg',
-        //     'http://flexslider.woothemes.com/images/kitchen_adventurer_caramel.jpg'
-        // ];
-
         NavigationService.EnabledHomeScreen(function (data) {
             console.log("Frontend->controller.js->data: ", data);
             $scope.clothCat = data.data.data;
@@ -25,11 +18,6 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             $scope.categories = data.data.data;
             console.log("Retrieved categories: ", $scope.categories);
         });
-
-        // NavigationService.getProducts(function (data) {
-        //     console.log("Getting products");
-        //     $scope.products = data.data.data;
-        // });
 
         NavigationService.getNewArrivals(function (data) {
             console.log("Getting new arrivals: ", data);
@@ -50,36 +38,6 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             console.log("Enabled blogs retrieved: ", $scope.blogs);
         });
 
-        /*$scope.blogs = [{
-                img: '../img/home/16.jpg',
-                heading: 'Lorem Ipsum is simply dummy text',
-                para: 'Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text, Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text'
-            },
-            {
-                img: '../img/home/17.jpg',
-                heading: 'Lorem Ipsum is simply dummy text',
-                para: 'Lorem Ipsum is simply dummy text, Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text'
-            },
-            {
-                img: '../img/home/18.jpg',
-                heading: 'Lorem Ipsum is simply dummy text',
-                para: 'Lorem Ipsum is simply dummy text, Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text'
-            }, {
-                img: '../img/home/16.jpg',
-                heading: 'Lorem Ipsum is simply dummy text',
-                para: 'Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text, Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text'
-            },
-            {
-                img: '../img/home/17.jpg',
-                heading: 'Lorem Ipsum is simply dummy text',
-                para: 'Lorem Ipsum is simply dummy text, Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text'
-            },
-            {
-                img: '../img/home/18.jpg',
-                heading: 'Lorem Ipsum is simply dummy text',
-                para: 'Lorem Ipsum is simply dummy text, Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text'
-            }
-        ];*/
         $scope.sale = [{
                 img: '../img/home/11.jpg',
                 price: '2,899',
@@ -128,7 +86,6 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
             }
         ];
-        //$scope.byTheLook = [{text: '', para: ''},]
     })
     .controller('BuythelookCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.getHTML("content/buythelook.html");
@@ -254,59 +211,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         });
         console.log($scope.myShirt11);
 
-        // $scope.trouser = [{
-        //         img: '../img/buy/3.jpg',
-        //     },
-        //     {
-        //         img: '../img/buy/4.jpg',
-        //     },
-        //     {
-        //         img: '../img/buy/5.jpg',
-        //     },
-        // ]
-        // $scope.blazer = [{
-        //         img: '../img/buy/4.jpg',
-        //     },
-        //     {
-        //         img: '../img/buy/5.jpg',
-        //     },
-        //     {
-        //         img: '../img/buy/6.jpg',
-        //     },
-        // ]
-        // $scope.derbys = [{
-        //         img: '../img/buy/5.jpg',
-        //     },
-        //     {
-        //         img: '../img/buy/6.jpg',
-        //     },
-        //     {
-        //         img: '../img/buy/7.jpg',
-        //     },
-        // ]
-        // $scope.belt = [{
-        //         img: '../img/buy/6.jpg',
-        //     },
-        //     {
-        //         img: '../img/buy/7.jpg',
-        //     },
-        //     {
-        //         img: '../img/buy/5.jpg',
-        //     },
-        // ]
-        // $scope.glasses = [{
-        //         img: '../img/buy/7.jpg',
-        //     },
-        //     {
-        //         img: '../img/buy/6.jpg',
-        //     },
-        //     {
-        //         img: '../img/buy/5.jpg',
-        //     },
-        // ]
     })
-
-
     .controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.getHTML("content/checkout.html");
         TemplateService.title = "Checkout"; //This is the Title of the Website
@@ -340,21 +245,6 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             console.log(data);
             $scope.formSubmitted = true;
         };
-        //  $scope.thumbnail = [{
-        //     img: '../img/home/11.jpg'
-        // }, {
-        //     img: '../img/home/11.jpg'
-        // }, {
-        //     img: '../img/home/11.jpg'
-        // }];
-        // $scope.test = function (e) {
-        //     var img = e.target.src;
-        //     console.log(img);
-        //     var x = document.getElementsByClassName('one');
-        //     x.src = img;
-        //     // $('.test img').text(img);
-        //     //console.log(x);
-        // };
 
         $scope.featured = [{
                 img: '../img/home/11.jpg',
