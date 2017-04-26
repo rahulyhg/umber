@@ -1,4 +1,4 @@
-myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $location) {
+myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationService, ProductService, $timeout, $location) {
         $scope.template = TemplateService.getHTML("content/home.html");
         TemplateService.title = "Home"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -19,13 +19,13 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             console.log("Retrieved categories: ", $scope.categories);
         });
 
-        NavigationService.getNewArrivals(function (data) {
+        ProductService.getNewArrivals(function (data) {
             console.log("Getting new arrivals: ", data);
             $scope.newArrivals = data.data.data;
             console.log("New arrivals: ", $scope.newArrivals);
         });
 
-        NavigationService.getFeatured(function (data) {
+        ProductService.getFeatured(function (data) {
             $scope.featured = data.data.data;
         });
 
@@ -235,7 +235,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             subtotal: '2,899'
         }]
     })
-    .controller('IndividualPageCtrl', function ($scope, $stateParams, TemplateService, NavigationService, $timeout) {
+    .controller('IndividualPageCtrl', function ($scope, $stateParams, TemplateService, NavigationService, ProductService, $timeout) {
         $scope.template = TemplateService.getHTML("content/individual-page.html");
         TemplateService.title = "individual-page"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -247,7 +247,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         };
 
         var productId = $stateParams.id;
-        NavigationService.getProductWithId(productId, function (data) {
+        ProductService.getProductWithId(productId, function (data) {
             $scope.product = data.data.data;
             console.log("Retrieved individual page: ", $scope.product);
         })

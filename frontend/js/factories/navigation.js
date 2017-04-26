@@ -38,22 +38,6 @@ myApp.factory('NavigationService', function ($http) {
             }).then(callback);
         },
 
-        getNewArrivals: function (callback) {
-            $http({
-                url: adminurl + 'Product/getNewArrivals',
-                method: 'POST',
-                withCredentials: false
-            }).then(callback);
-        },
-
-        getFeatured: function (callback) {
-            $http({
-                url: adminurl + 'Product/getFeatured',
-                method: 'POST',
-                withCredentials: false
-            }).then(callback);
-        },
-
         getBlogs: function (callback) {
             $http({
                 url: adminurl + 'Blog/getBlogs',
@@ -66,14 +50,6 @@ myApp.factory('NavigationService', function ($http) {
             console.log("Getting enabled blogs");
             $http({
                 url: adminurl + 'Blog/getEnabledBlogs',
-                method: 'POST',
-                withCredentials: false
-            }).then(callback);
-        },
-
-        getProductWithId: function (input, callback) {
-            $http({
-                url: adminurl + 'Product/getProductWithId/' + input,
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
