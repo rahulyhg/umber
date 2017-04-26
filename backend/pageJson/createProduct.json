@@ -7,8 +7,7 @@
     "urlFields": [
         "Product"
     ],
-    "fields": [
-        {
+    "fields": [{
             "name": "Name",
             "type": "text",
             "tableRef": "name",
@@ -99,7 +98,7 @@
         },
         {
             "name": "Collection",
-            "type": "select",
+            "type": "multiCheckbox",
             "tableRef": "prodCollection",
             "placeholder": "Select Collection",
             "id": "collection",
@@ -240,8 +239,7 @@
             ]
         }
     ],
-    "action": [
-        {
+    "action": [{
             "name": "submit",
             "action": "submitProduct",
             "stateName": {

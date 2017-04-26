@@ -59,9 +59,9 @@ schema.plugin(deepPopulate, {
         'brand': {
             select: "name"
         },
-        'prodCollection': [{
+        'prodCollection': {
             select: "name"
-        }]
+        }
     }
 });
 schema.plugin(uniqueValidator);

@@ -497,17 +497,17 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
             $scope.refreshTags();
         }
 
-        if ($scope.type.type == "select") {
-            $scope.formData[$scope.type.tableRef] = [];
+        if ($scope.type.type == "multiCheckbox") {
             if ($scope.type.url !== "") {
                 NavigationService.searchCall($scope.type.url, {
                     keyword: ""
                 }, 1, function (data1) {
                     $scope.items[$scope.type.tableRef] = data1.data.results;
                     if ($scope.json.keyword._id) {
+                        console.log("Edit multiCheckbox formData: ", $scope.formData[$scope.type.tableRef]);
                         for (var idx = 0; idx < $scope.items[$scope.type.tableRef].length; idx++) {
                             for (var formIdx = 0; formIdx < $scope.formData[$scope.type.tableRef].length; formIdx++) {
-                                if ($scope.items[$scope.type.tableRef][idx]._id == $scope.formData[$scope.type.tableRef][formIdx]) {
+                                if ($scope.items[$scope.type.tableRef][idx]._id == $scope.formData[$scope.type.tableRef][formIdx]._id) {
                                     $scope.items[$scope.type.tableRef][idx].checked = true;
                                 }
                             }
@@ -531,13 +531,18 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
         };
 
         $scope.setSelectedItem = function (item) {
-            var index = $scope.formData[$scope.type.tableRef].indexOf(item._id);
-            if (index < 0)
-                $scope.formData[$scope.type.tableRef].push(item._id);
-            else
+            if (typeof $scope.formData[$scope.type.tableRef] === 'undefined')
+                $scope.formData[$scope.type.tableRef] = [];
+            var index = _.findIndex($scope.formData[$scope.type.tableRef], function (doc) {
+                return doc._id == item._id;
+            });
+            if (index < 0) {
+                $scope.formData[$scope.type.tableRef].push({
+                    _id: item._id
+                });
+            } else {
                 $scope.formData[$scope.type.tableRef].splice(index, 1);
-
-            console.log($scope.formData);
+            }
         }
     })
 

@@ -73,7 +73,7 @@
         "dropDownType": "single"
     }, {
         "name": "Collection",
-        "type": "select",
+        "type": "multiCheckbox",
         "tableRef": "prodCollection",
         "placeholder": "Select Collection",
         "id": "collection",
