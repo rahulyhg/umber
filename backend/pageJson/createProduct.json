@@ -7,7 +7,8 @@
     "urlFields": [
         "Product"
     ],
-    "fields": [{
+    "fields": [
+        {
             "name": "Name",
             "type": "text",
             "tableRef": "name",
@@ -104,7 +105,10 @@
             "id": "collection",
             "searchApi": "searchCall",
             "fieldType": "",
-            "url": "Collection/search"
+            "url": "Collection/search",
+            "validation": [
+                "unique"
+            ]
         },
         {
             "name": "Price",
@@ -236,7 +240,8 @@
             ]
         }
     ],
-    "action": [{
+    "action": [
+        {
             "name": "submit",
             "action": "submitProduct",
             "stateName": {

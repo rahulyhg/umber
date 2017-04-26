@@ -79,7 +79,10 @@
         "id": "collection",
         "searchApi": "searchCall",
         "fieldType": "",
-        "url": "Collection/search"
+        "url": "Collection/search",
+        "validation": [
+            "unique"
+        ]
     }, {
         "name": "Price",
         "type": "number",

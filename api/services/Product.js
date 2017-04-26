@@ -32,7 +32,8 @@ var schema = new Schema({
     },
     prodCollection: [{
         type: Schema.Types.ObjectId,
-        ref: 'Collection'
+        ref: 'Collection',
+        unique: true
     }],
     sleeve: {
         type: String,
@@ -58,16 +59,16 @@ schema.plugin(deepPopulate, {
         'brand': {
             select: "name"
         },
-        'collection': {
+        'prodCollection': [{
             select: "name"
-        }
+        }]
     }
 });
 schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('Product', schema);
 
-var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "category subCategory brand collection", "category subCategory brand collection"));
+var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "category subCategory brand prodCollection", "category subCategory brand prodCollection"));
 var model = {
     getAllProducts: function (data, callback) {
         Product.find({}).exec(function (error, data) {
@@ -118,10 +119,9 @@ var model = {
     },
 
     getProductWithId: function (data, callback) {
-        console.log("Product id data: ", data);
-        Product.find({
-            _id: Schema.Types.ObjectId(data)
-        }).exec(function (err, data) {
+        Product.findOne({
+            _id: mongoose.Types.ObjectId(data)
+        }).deepPopulate('brand prodCollection').exec(function (err, data) {
             if (err) {
                 callback(err, null);
             } else if (data) {

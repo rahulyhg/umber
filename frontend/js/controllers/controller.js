@@ -248,8 +248,8 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
         var productId = $stateParams.id;
         NavigationService.getProductWithId(productId, function (data) {
-            $scope.individual = data.data.data;
-            console.log("Retrieved individual page: ", data);
+            $scope.product = data.data.data;
+            console.log("Retrieved individual page: ", $scope.product);
         })
 
         $scope.featured = [{
