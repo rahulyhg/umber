@@ -11,6 +11,34 @@ var controller = {
                 }
             })
         }
+    },
+
+    getListingFilterFields: function (req, res) {
+        var listingFilterFields = [];
+        if (req.body) {
+            Fabric.getEnabledFabrics(req.body, function (err, data) {
+                if (err) {
+                    res.callback(err, null);
+                } else if (data) {
+                    listingFilterFields.push(data);
+                    Type.getEnabledTypes(req.body, function (err, data) {
+                        if (err) {
+                            res.callback(err, null);
+                        } else if (data) {
+                            listingFilterFields.push(data);
+                            BaseColor.getEnabledBaseColors(req.body, function (err, data) {
+                                if (err) {
+                                    res.callback(err, null);
+                                } else if (data) {
+                                    listingFilterFields.push(data);
+                                    res.callback(null, listingFilterFields);
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
     }
 };
 module.exports = _.assign(module.exports, controller);

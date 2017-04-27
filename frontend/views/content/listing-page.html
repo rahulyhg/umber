@@ -36,62 +36,9 @@
                                     <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
                                 </h5>
                             </uib-accordion-heading>
-                            <div class="checkbox">
+                            <div class="checkbox" ng-repeat="type in types">
                                 <input type="checkbox" id="b1">
-                                <label for="b1">Lose Angeles Twill
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="b2">
-                                <label for="b2">Amsler Checks
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="b3">
-                                <label for="b3">
-                                    Indogo Print
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="b4">
-                                <label for="b4">
-                                    Amsler Print
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="b5">
-                                <label for="b5">
-                                     Paris Plaids
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="b6">
-                                <label for="b6">
-                                    Florence Print
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="b7">
-                                <label for="b7">
-                                    Linen prints
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="b8">
-                                <label for="b8">
-                                     Denim Indigo Chambay
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="b9">
-                                <label for="b9">
-                                     Oxport Prints
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="b10">
-                                <label for="b10">
-                                     Pima Lawn
+                                <label for="b1">{{type.name}}
                                 </label>
                             </div>
                         </div>
@@ -207,53 +154,11 @@
                                     <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
                                 </h5>
                             </uib-accordion-heading>
-                            <div class="checkbox">
+                            <div class="checkbox" ng-repeat="baseColor in baseColors">
                                 <input type="checkbox" id="f1">
                                 <label for="f1">
-                                 Beige
+                                 {{baseColor.name}}
                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="f2">
-                                <label for="f2">
-                            Black
-                              </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="f3">
-                                <label for="f3">
-                             Blue
-                              </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="f4">
-                                <label for="f4">
-                            Brown
-                              </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="f5">
-                                <label for="f5">
-                            Green
-                              </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="f6">
-                                <label for="e2">
-                            Grey
-                              </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="f7">
-                                <label for="f7">
-                            Ivory
-                              </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="f8">
-                                <label for="f8">
-                            Maroon
-                              </label>
                             </div>
                         </div>
                     </uib-accordion>
@@ -266,25 +171,11 @@
                                     <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
                                 </h5>
                             </uib-accordion-heading>
-                            <div class="checkbox">
+                            <div class="checkbox" ng-repeat="fabric in fabrics">
 
                                 <input type="checkbox" id="g1">
                                 <label for="g1">
-                                    56% Cotton 44% Tensel
-                                </label>
-                            </div>
-                            <div class="checkbox">
-
-                                <input type="checkbox" id="g2">
-                                <label for="g2">
-                                    100% cotton
-                                </label>
-                            </div>
-                            <div class="checkbox">
-
-                                <input type="checkbox" id="g3">
-                                <label for="g3">
-                                     100% Linen
+                                    {{fabric.name}}
                                 </label>
                             </div>
                         </div>

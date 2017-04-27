@@ -62,6 +62,15 @@ myApp.factory('NavigationService', function ($http) {
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
+        },
+
+        getListingFilterFields: function (callback) {
+            console.log("Getting filter fields");
+            $http({
+                url: adminurl + 'Fabric/getListingFilterFields',
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
         }
     };
 });

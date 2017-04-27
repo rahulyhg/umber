@@ -15,7 +15,7 @@ module.exports = mongoose.model('BaseColor', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
 var model = {
-    getEnabledBaseColors: function (callback) {
+    getEnabledBaseColors: function (data, callback) {
         BaseColor.find({
             status: 'Enabled'
         }).exec(function (err, data) {

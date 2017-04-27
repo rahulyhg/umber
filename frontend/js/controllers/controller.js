@@ -790,6 +790,14 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         NavigationService.getEnabledCollections(function (data) {
             console.log("Collections - data: ", data);
             $scope.collections = data.data.data;
+        });
+
+        NavigationService.getListingFilterFields(function (data) {
+            // In this call we retrieve fabrics, types & baseColors fields to save rtt
+            // They are pushed into the array in the order given below.
+            $scope.fabrics = data.data.data[0];
+            $scope.types = data.data.data[1];
+            $scope.baseColors = data.data.data[2];
         })
         console.log($scope.myShirt11, "*****");
     })

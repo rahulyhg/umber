@@ -15,7 +15,7 @@ module.exports = mongoose.model('Type', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
 var model = {
-    getEnabledTypes: function (callback) {
+    getEnabledTypes: function (data, callback) {
         Type.find({
             status: 'Enabled'
         }).exec(function (err, data) {

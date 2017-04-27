@@ -15,7 +15,7 @@ module.exports = mongoose.model('Fabric', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
 var model = {
-    getEnabledFabrics: function (callback) {
+    getEnabledFabrics: function (data, callback) {
         Fabric.find({
             status: 'Enabled'
         }).exec(function (err, data) {
