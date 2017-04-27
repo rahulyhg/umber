@@ -1,3 +1,5 @@
+// Fields fabric, type, baseColor are converted 
+// into separate schemas for ease of query & retrieval.
 var schema = new Schema({
     name: {
         type: String,
@@ -23,7 +25,10 @@ var schema = new Schema({
             type: String
         }
     }],
-    type: String,
+    type: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Type'
+    }],
     featured: Boolean,
     newArrival: Boolean,
     brand: {
@@ -39,8 +44,14 @@ var schema = new Schema({
         type: String,
         enum: ["Half sleeve", "Full sleeve"]
     },
-    fabric: String,
-    baseColor: String,
+    fabric: {
+        type: Schema.Types.ObjectId,
+        ref: 'Fabric'
+    },
+    baseColor: {
+        type: Schema.Types.ObjectId,
+        ref: 'BaseColor'
+    },
     washcare: String,
     description: String,
     size: Number,
@@ -61,6 +72,15 @@ schema.plugin(deepPopulate, {
         },
         'prodCollection': {
             select: "name"
+        },
+        'baseColor': {
+            select: "name"
+        },
+        'fabric': {
+            select: "name"
+        },
+        'type': {
+            select: "name"
         }
     }
 });
@@ -68,7 +88,8 @@ schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('Product', schema);
 
-var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "category subCategory brand prodCollection", "category subCategory brand prodCollection"));
+var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "category subCategory brand prodCollection baseColor fabric type",
+    "category subCategory brand prodCollection baseColor fabric type"));
 var model = {
     getAllProducts: function (data, callback) {
         Product.find({}).exec(function (error, data) {

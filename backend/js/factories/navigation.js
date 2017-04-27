@@ -46,6 +46,21 @@ myApp.factory('NavigationService', function ($http) {
         classis: "active",
         sref: "#!/page/viewCollection//",
         icon: "document"
+    }, {
+        name: "BaseColor",
+        classis: "active",
+        sref: "#!/page/viewBaseColor//",
+        icon: "document"
+    }, {
+        name: "Fabric",
+        classis: "active",
+        sref: "#!/page/viewFabric//",
+        icon: "document"
+    }, {
+        name: "Type",
+        classis: "active",
+        sref: "#!/page/viewType//",
+        icon: "document"
     }];
 
     return {

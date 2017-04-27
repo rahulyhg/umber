@@ -1,0 +1,68 @@
+{
+    "title": "Create Fabric",
+    "name": "Fabric",
+    "jsonPage": "viewFabric",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": [
+        "Fabric"
+    ],
+    "fields": [{
+            "name": "Name",
+            "type": "text",
+            "tableRef": "name",
+            "placeholder": "Enter Fabric Name",
+            "id": "name",
+            "validation": [
+                "required",
+                "trim",
+                "unique"
+            ],
+            "url": ""
+        },
+        {
+            "name": "Status",
+            "type": "tags",
+            "tableRef": "status",
+            "placeholder": "Set status",
+            "id": "status",
+            "validation": [
+                "required",
+                "trim",
+                "unique"
+            ],
+            "url": "",
+            "dropDownField": "",
+            "dropDownType": "single",
+            "onView": true,
+            "dropDown": [
+                "Enabled",
+                "Disabled"
+            ]
+        }
+    ],
+    "action": [{
+            "name": "submit",
+            "action": "submitFabric",
+            "stateName": {
+                "page": "page",
+                "json": {
+                    "id": "viewFabric"
+                }
+            }
+        },
+        {
+            "name": "cancel",
+            "sideMenuRedirect": true,
+            "stateName": {
+                "page": "page",
+                "json": {
+                    "id": "viewFabric"
+                }
+            }
+        }
+    ],
+    "apiCall": {
+        "url": "Fabric/save"
+    }
+}

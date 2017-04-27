@@ -1,0 +1,68 @@
+{
+    "title": "Create Type",
+    "name": "Type",
+    "jsonPage": "viewType",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": [
+        "Type"
+    ],
+    "fields": [{
+            "name": "Name",
+            "type": "text",
+            "tableRef": "name",
+            "placeholder": "Enter Type Name",
+            "id": "name",
+            "validation": [
+                "required",
+                "trim",
+                "unique"
+            ],
+            "url": ""
+        },
+        {
+            "name": "Status",
+            "type": "tags",
+            "tableRef": "status",
+            "placeholder": "Set status",
+            "id": "status",
+            "validation": [
+                "required",
+                "trim",
+                "unique"
+            ],
+            "url": "",
+            "dropDownField": "",
+            "dropDownType": "single",
+            "onView": true,
+            "dropDown": [
+                "Enabled",
+                "Disabled"
+            ]
+        }
+    ],
+    "action": [{
+            "name": "submit",
+            "action": "submitType",
+            "stateName": {
+                "page": "page",
+                "json": {
+                    "id": "viewType"
+                }
+            }
+        },
+        {
+            "name": "cancel",
+            "sideMenuRedirect": true,
+            "stateName": {
+                "page": "page",
+                "json": {
+                    "id": "viewType"
+                }
+            }
+        }
+    ],
+    "apiCall": {
+        "url": "Type/save"
+    }
+}
