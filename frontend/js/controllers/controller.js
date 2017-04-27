@@ -782,6 +782,15 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             $scope.myShirt1 = _.chunk(n, 3);
             $scope.myShirt11.push($scope.myShirt1);
         });
+
+        NavigationService.getEnabledCategories(function (data) {
+            $scope.categories = data.data.data;
+        });
+
+        NavigationService.getEnabledCollections(function (data) {
+            console.log("Collections - data: ", data);
+            $scope.collections = data.data.data;
+        })
         console.log($scope.myShirt11, "*****");
     })
     .controller('FormCtrl', function ($scope, TemplateService, NavigationService, $timeout) {

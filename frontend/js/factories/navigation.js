@@ -53,6 +53,15 @@ myApp.factory('NavigationService', function ($http) {
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
+        },
+
+        getEnabledCollections: function (callback) {
+            console.log("Getting enabled collections");
+            $http({
+                url: adminurl + 'Collection/getEnabledCollections',
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
         }
     };
 });

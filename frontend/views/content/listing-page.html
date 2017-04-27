@@ -20,20 +20,10 @@
                                     <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
                                 </h5>
                             </uib-accordion-heading>
-                            <div class="checkbox">
-                                <input type="checkbox" id="a1">
-                                <label for="a1"> Casual Shirt
+                            <div ng-repeat="category in categories" class="checkbox">
+                                <input type="checkbox" id="{{category._id}}">
+                                <label for="{{category._id}}"> {{category.name}}
                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="a2">
-                                <label for="a2">T-Shirts
-                              </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="a3">
-                                <label for="a3"> Trouser
-                                </label>
                             </div>
                         </div>
                     </uib-accordion>
@@ -131,45 +121,9 @@
                                     <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
                                 </h5>
                             </uib-accordion-heading>
-                            <div class="checkbox">
-                                <input type="checkbox" id="c1">
-                                <label for="c1">Amsler Checks
-                               </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="c2">
-                                <label for="c2">
-                            Amsler Print
-                              </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="c3">
-                                <label for="c3">
-                                 Amten Print
-                               </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="c4">
-                                <label for="c4">
-                                 Denim Indigo Chambray
-                               </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="c5">
-                                <label for="c5">
-                                 Indigo Amsler
-                               </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="c6">
-                                <label for="c6">
-                                 Indigo prints
-                               </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="c7">
-                                <label for="c7">
-                                Linen
+                            <div class="checkbox" ng-repeat="collection in collections">
+                                <input type="checkbox" id="{{collection._id}}">
+                                <label for="{{collection._id}}">{{collection.name}}
                                </label>
                             </div>
                         </div>
