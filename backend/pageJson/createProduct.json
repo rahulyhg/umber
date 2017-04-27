@@ -123,11 +123,14 @@
         },
         {
             "name": "Type",
-            "type": "text",
+            "type": "multiCheckbox",
             "tableRef": "type",
             "placeholder": "Set type",
             "id": "type",
-            "url": "",
+            "searchApi": "searchCall",
+            "url": "Type/search",
+            "dropDownField": "name",
+            "dropDownType": "single",
             "validation": [
                 "",
                 "trim"
@@ -173,11 +176,14 @@
         },
         {
             "name": "Fabric",
-            "type": "text",
+            "type": "tags",
             "tableRef": "fabric",
             "placeholder": "Fabric description",
             "id": "price",
-            "url": "",
+            "dropDownField": "name",
+            "dropDownType": "single",
+            "searchApi": "searchCall",
+            "url": "Fabric/search",
             "validation": [
                 "",
                 "trim"
@@ -185,11 +191,13 @@
         },
         {
             "name": "Base color",
-            "type": "text",
+            "type": "tags",
             "tableRef": "baseColor",
             "placeholder": "Set Base color",
             "id": "baseColor",
-            "url": "",
+            "url": "BaseColor/search",
+            "dropDownField": "name",
+            "dropDownType": "single",
             "validation": [
                 "",
                 "trim"
