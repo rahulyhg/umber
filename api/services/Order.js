@@ -4,6 +4,16 @@ var schema = new Schema({
         required: true,
         unique: true,
         uniqueCaseInsensitive: true
+    },
+    deliveryAddressId: {
+        type: Schema.Types.ObjectId,
+        ref: 'DeliveryAddress',
+        required: true
+    },
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     }
 });
 

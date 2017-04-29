@@ -1,12 +1,33 @@
 var schema = new Schema({
-    name: {
+    line1: {
+        type: String,
+        required: true
+    },
+    line2: String,
+    line3: String,
+    city: {
+        type: String,
+        required: true
+    },
+    state: {
+        type: String,
+        required: true
+    },
+    pincode: {
+        type: number,
+        required: true
+    },
+    country: String,
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    status: {
         type: String,
         required: true,
-        unique: true,
-        uniqueCaseInsensitive: true,
-        excel: {
-            name: Name
-        }
+        enum: ['Enable', 'Disable'],
+        default: 'Enable'
     }
 });
 
