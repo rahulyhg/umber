@@ -11,6 +11,12 @@ var schema = new Schema({
         type: String,
         required: true
     },
+    userName: {
+        type: String,
+        required: true,
+        unique: true,
+        uniqueCaseInsensitive: true
+    },
     email: {
         type: String,
         validate: validators.isEmail(),

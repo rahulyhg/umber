@@ -6,6 +6,14 @@
     "pageType": "create",
     "urlFields": ["User"],
     "fields": [{
+            "name": "Login User Name",
+            "type": "text",
+            "tableRef": "userName",
+            "placeholder": "Enter Login User Name",
+            "id": "uname",
+            "validation": ["required", "trim", "unique"],
+            "url": ""
+        }, {
             "name": "First Name",
             "type": "text",
             "tableRef": "firstName",
