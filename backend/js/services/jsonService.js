@@ -5,12 +5,8 @@ myApp.service('JsonService', function ($http, TemplateService, $state, toastr, $
   var JsonService = this;
   this.setKeyword = function (data) {
     try {
-      console.log(data);
       this.keyword = JSON.parse(data);
-      console.log(this.keyword);
     } catch (e) {
-      console.log(data);
-      console.log(e);
       console.log("keyword is not is json format");
     }
   };

@@ -21,7 +21,7 @@
     }, {
         "name": "Pincode",
         "isSort": "",
-        "type": "number",
+        "type": "text",
         "tableRef": "pincode"
     }, {
         "name": "Status",

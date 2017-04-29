@@ -70,22 +70,6 @@ var schema = new Schema({
         default: "User",
         enum: ['User', 'Admin']
     },
-    /*addresses: {
-        roomNo: String,
-        street: String,
-        locality: String,
-        city: String,
-        state: String,
-        zip: Number
-    },
-    deliveryAddresses: {
-        roomNo: String,
-        street: String,
-        locality: String,
-        city: String,
-        state: String,
-        zip: Number
-    },*/
     gender: {
         type: String,
         enum: ["M", "F"]

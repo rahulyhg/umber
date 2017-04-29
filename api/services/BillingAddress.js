@@ -26,8 +26,8 @@ var schema = new Schema({
     status: {
         type: String,
         required: true,
-        enum: ['Enable', 'Disable'],
-        default: 'Enable'
+        enum: ['Enabled', 'Disabled'],
+        default: 'Enabled'
     }
 });
 

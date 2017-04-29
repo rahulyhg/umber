@@ -334,7 +334,6 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
 
     .controller('DetailCtrl', function ($scope, TemplateService, NavigationService, JsonService, $timeout, $state, $stateParams, toastr) {
         $scope.json = JsonService;
-        console.log("$stateParams: ", $stateParams);
         JsonService.setKeyword($stateParams.keyword);
         $scope.template = TemplateService;
         $scope.data = {};
@@ -372,6 +371,7 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
                     }
                     toastr.success($scope.json.json.name + " " + formData.name + " " + messText + " successfully.");
                 } else {
+                    console.log("data: ", data);
                     var messText = "creating";
                     if ($scope.json.keyword._id) {
                         messText = "editing";
