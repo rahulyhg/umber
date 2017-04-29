@@ -98,7 +98,7 @@ var schema = new Schema({
 schema.plugin(deepPopulate, {
     populate: {
         'user': {
-            select: 'firstName lastName _id'
+            select: 'firstName lastName fullName _id'
         }
     }
 });

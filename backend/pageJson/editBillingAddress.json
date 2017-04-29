@@ -14,7 +14,7 @@
         "searchApi": "searchCall",
         "fieldType": "",
         "url": "User/search",
-        "dropDownField": "name",
+        "dropDownField": "firstName",
         "dropDownType": "single",
         "onView": true
     }, {
