@@ -98,7 +98,11 @@ var schema = new Schema({
         productId: Schema.Types.ObjectId
     }],
     emailConfirmed: Boolean,
-    status: String
+    status: {
+        type: String,
+        enum: ['Enabled', 'Disabled'],
+        default: 'Enabled'
+    }
 });
 
 schema.plugin(deepPopulate, {

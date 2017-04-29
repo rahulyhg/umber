@@ -14,7 +14,23 @@ var schema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
-    }
+    },
+    products: [{
+        product: {
+            type: Schema.Types.ObjectId,
+            ref: 'Product',
+            required: true
+        },
+        quantity: Number,
+        color: String,
+        size: String,
+        price: Number
+    }],
+    totalAmount: {
+        type: Number,
+        required: true
+    },
+    discountAmount: Number
 });
 
 schema.plugin(deepPopulate, {
