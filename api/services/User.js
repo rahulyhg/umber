@@ -1,8 +1,15 @@
 var schema = new Schema({
-    name: {
+    firstName: {
         type: String,
         required: true,
-        excel: true,
+        excel: true
+    },
+    middleName: {
+        type: String
+    },
+    lastName: {
+        type: String,
+        required: true
     },
     email: {
         type: String,

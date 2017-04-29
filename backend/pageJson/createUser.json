@@ -6,12 +6,28 @@
     "pageType": "create",
     "urlFields": ["User"],
     "fields": [{
-            "name": "Name",
+            "name": "First Name",
             "type": "text",
-            "tableRef": "name",
-            "placeholder": "Enter Name",
-            "id": "name",
-            "validation": ["required", "trim", "unique"],
+            "tableRef": "firstName",
+            "placeholder": "Enter First Name",
+            "id": "fname",
+            "validation": ["required", "trim", ""],
+            "url": ""
+        }, {
+            "name": "Middle Name",
+            "type": "text",
+            "tableRef": "middleName",
+            "placeholder": "Enter Middle Name",
+            "id": "mname",
+            "validation": ["", "trim", ""],
+            "url": ""
+        }, {
+            "name": "Last Name",
+            "type": "text",
+            "tableRef": "lastName",
+            "placeholder": "Enter Last Name",
+            "id": "lname",
+            "validation": ["required", "trim", ""],
             "url": ""
         }, {
             "name": "Email",
@@ -96,6 +112,18 @@
             "onView": true,
             "dropDown": ["M", "F"],
             "url": ""
+        }, {
+            "name": "Status",
+            "type": "tags",
+            "tableRef": "status",
+            "placeholder": "Select Status",
+            "id": "status",
+            "validation": ["required", "trim"],
+            "url": "",
+            "dropDownField": "",
+            "dropDownType": "single",
+            "onView": true,
+            "dropDown": ["Enabled", "Disabled"]
         }
     ],
     "action": [{
