@@ -17,7 +17,7 @@ var schema = new Schema({
 schema.plugin(deepPopulate, {
     populate: {
         category: {
-            select: ""
+            select: "name"
         }
     }
 });
