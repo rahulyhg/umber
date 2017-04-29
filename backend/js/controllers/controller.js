@@ -334,6 +334,7 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
 
     .controller('DetailCtrl', function ($scope, TemplateService, NavigationService, JsonService, $timeout, $state, $stateParams, toastr) {
         $scope.json = JsonService;
+        console.log("$stateParams: ", $stateParams);
         JsonService.setKeyword($stateParams.keyword);
         $scope.template = TemplateService;
         $scope.data = {};

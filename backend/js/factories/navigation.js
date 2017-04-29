@@ -12,6 +12,16 @@ myApp.factory('NavigationService', function ($http) {
         sref: "#!/page/viewUser//",
         icon: "user"
     }, {
+        name: "Delivery Addresses",
+        classis: "active",
+        sref: "#!/page/viewDeliveryAddress//",
+        icon: "document"
+    }, {
+        name: "Billing Addresses",
+        classis: "active",
+        sref: "#!/page/viewBillingAddress//",
+        icon: "document"
+    }, {
         name: "Category",
         classis: "active",
         sref: "#!/page/viewCategory//",

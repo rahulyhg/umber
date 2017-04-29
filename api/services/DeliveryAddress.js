@@ -14,7 +14,7 @@ var schema = new Schema({
         required: true
     },
     pincode: {
-        type: number,
+        type: Number,
         required: true
     },
     country: String,

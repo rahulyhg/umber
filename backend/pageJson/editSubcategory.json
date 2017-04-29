@@ -49,7 +49,7 @@
     }],
     "action": [{
         "name": "submit",
-        "action": "submitCategory",
+        "action": "submitSubcategory",
         "stateName": {
             "page": "page",
             "json": {

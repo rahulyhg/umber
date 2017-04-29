@@ -1,0 +1,110 @@
+{
+    "title": "Create Delivery Address",
+    "name": "DeliveryAddress",
+    "jsonPage": "viewDeliveryAddress",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": ["DeliveryAddress"],
+    "fields": [{
+        "name": "User",
+        "type": "tags",
+        "tableRef": "userId",
+        "placeholder": "Select User",
+        "id": "userId",
+        "searchApi": "searchCall",
+        "fieldType": "",
+        "url": "User/search",
+        "dropDownField": "name",
+        "dropDownType": "single"
+    }, {
+        "name": "Line 1",
+        "type": "text",
+        "tableRef": "line1",
+        "placeholder": "Line 1 *",
+        "id": "line1",
+        "validation": ["required", "trim", ""],
+        "url": ""
+    }, {
+        "name": "Line 2",
+        "type": "text",
+        "tableRef": "line2",
+        "placeholder": "Line 2",
+        "id": "line2",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }, {
+        "name": "Line 3",
+        "type": "text",
+        "tableRef": "line3",
+        "placeholder": "Line 3",
+        "id": "line3",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }, {
+        "name": "City",
+        "type": "text",
+        "tableRef": "city",
+        "placeholder": "City *",
+        "id": "city",
+        "validation": ["required", "trim", ""],
+        "url": ""
+    }, {
+        "name": "State",
+        "type": "text",
+        "tableRef": "state",
+        "placeholder": "State *",
+        "id": "state",
+        "validation": ["required", "trim", ""],
+        "url": ""
+    }, {
+        "name": "Pincode",
+        "type": "number",
+        "tableRef": "pincode",
+        "placeholder": "Pincode *",
+        "id": "pincode",
+        "validation": ["required", "trim", ""],
+        "url": ""
+    }, {
+        "name": "Country",
+        "type": "text",
+        "tableRef": "country",
+        "placeholder": "Country *",
+        "id": "country",
+        "validation": ["required", "trim", ""],
+        "url": ""
+    }, {
+        "name": "Status",
+        "type": "tags",
+        "tableRef": "status",
+        "placeholder": "Select Status",
+        "id": "status",
+        "validation": ["required", "trim"],
+        "url": "",
+        "dropDownField": "",
+        "dropDownType": "single",
+        "onView": true,
+        "dropDown": ["Enabled", "Disabled"]
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitDeliveryAddress",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewDeliveryAddress"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewDeliveryAddress"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "DeliveryAddress/save"
+    }
+}
