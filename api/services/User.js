@@ -15,7 +15,8 @@ var schema = new Schema({
         type: String,
         validate: validators.isEmail(),
         excel: "User Email",
-        unique: true
+        unique: true,
+        uniqueCaseInsensitive: true
     },
     dob: {
         type: Date,
@@ -97,12 +98,15 @@ var schema = new Schema({
 schema.plugin(deepPopulate, {
     populate: {
         'user': {
-            select: 'name _id'
+            select: 'firstName lastName _id'
         }
     }
 });
 schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
+schema.virtual('fullName').get(function () {
+    return this.firstName + ' ' + this.lastName;
+});
 
 module.exports = mongoose.model('User', schema);
 

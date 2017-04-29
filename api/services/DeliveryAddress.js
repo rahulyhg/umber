@@ -34,7 +34,7 @@ var schema = new Schema({
 schema.plugin(deepPopulate, {
     populate: {
         userId: {
-            select: "name"
+            select: "firstName lastName"
         }
     }
 });
