@@ -250,6 +250,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         var productId = $stateParams.id;
         ProductService.getProductWithId(productId, function (data) {
             $scope.product = data.data.data;
+            $scope.selectedImage = $scope.product.images[0];
             console.log("Retrieved individual page: ", $scope.product);
         })
 
@@ -333,11 +334,8 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
             }
         ];
-        $scope.bigImage = $scope.individual[0].bigImg;
         $scope.changeImage = function (index) {
-            $scope.bigImage = $scope.individual[index].bigImg;
-            console.log(index, $scope.bigImage);
-
+            $scope.selectedImage = $scope.product.images[index];
         };
 
 

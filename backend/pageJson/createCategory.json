@@ -20,6 +20,7 @@
         "placeholder": "Enter Image Link",
         "id": "imgLink",
         "option": "single",
+        "view": true,
         "validation": ["", "trim", "unique"],
         "url": ""
     }, {
