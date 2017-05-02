@@ -424,7 +424,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.navigation = NavigationService.getNavigation();
 
     })
-    .controller('ListingPageCtrl', function ($scope, $stateParams, TemplateService, NavigationService, $timeout) {
+    .controller('ListingPageCtrl', function ($scope, $stateParams, TemplateService, NavigationService, CategoryService, ProductService, $timeout) {
         $scope.template = TemplateService.getHTML("content/listing-page.html");
         TemplateService.title = "Form"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
