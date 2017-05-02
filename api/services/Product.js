@@ -17,14 +17,7 @@ var schema = new Schema({
         ref: 'Subcategory'
     },
     price: Number,
-    images: [{
-        bigImage: {
-            type: String
-        },
-        smallImage: {
-            type: String
-        }
-    }],
+    images: [String],
     type: [{
         type: Schema.Types.ObjectId,
         ref: 'Type'
@@ -109,7 +102,7 @@ var model = {
         Product.find({
             newArrival: true,
             status: 'Enabled'
-        }).exec(function (error, data) {
+        }).deepPopulate('type').exec(function (error, data) {
             if (error) {
                 callback(error, null);
             } else if (data) {
@@ -126,7 +119,7 @@ var model = {
         Product.find({
             featured: true,
             status: 'Enabled'
-        }).exec(function (error, data) {
+        }).deepPopulate('type').exec(function (error, data) {
             if (error) {
                 callback(error, null);
             } else if (data) {
@@ -142,7 +135,7 @@ var model = {
     getProductWithId: function (data, callback) {
         Product.findOne({
             _id: mongoose.Types.ObjectId(data)
-        }).deepPopulate('brand prodCollection').exec(function (err, data) {
+        }).deepPopulate('category subCategory brand prodCollection baseColor fabric type').exec(function (err, data) {
             if (err) {
                 callback(err, null);
             } else if (data) {

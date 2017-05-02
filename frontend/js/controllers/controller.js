@@ -27,6 +27,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
         ProductService.getFeatured(function (data) {
             $scope.featured = data.data.data;
+            console.log("Featured: ", $scope.featured);
         });
 
         NavigationService.getBlogs(function (data) {
