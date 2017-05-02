@@ -21,6 +21,7 @@
         "id": "imgLink",
         "option": "single",
         "validation": ["", "trim", "unique"],
+        "view": true,
         "url": ""
     }, {
         "name": "Description",

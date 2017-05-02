@@ -47,9 +47,9 @@
             "url": ""
         },
         {
-            "name": "Image",
+            "name": "Images",
             "type": "image",
-            "tableRef": "image",
+            "tableRef": "images",
             "placeholder": "Enter Image Link",
             "id": "imgLink",
             "option": "mulitple",
@@ -58,6 +58,7 @@
                 "trim",
                 "unique"
             ],
+            "view": true,
             "url": ""
         },
         {
@@ -170,8 +171,8 @@
             "dropDownField": "",
             "dropDownType": "single",
             "dropDown": [
-                "Full Sleeve",
-                "Half Sleeve"
+                "Full sleeve",
+                "Half sleeve"
             ]
         },
         {

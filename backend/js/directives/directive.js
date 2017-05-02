@@ -116,13 +116,13 @@ myApp.directive('uploadImage', function ($http, $filter, $timeout) {
                     if ($scope.isMultiple) {
                         if ($scope.inObject) {
                             $scope.model.push({
-                                "image": data[0]
+                                "image": data.data[0]
                             });
                         } else {
                             if (!$scope.model) {
                                 $scope.clearOld();
                             }
-                            $scope.model.push(data[0]);
+                            $scope.model.push(data.data[0]);
                         }
                     } else {
                         if (_.endsWith(data.data[0], ".pdf")) {

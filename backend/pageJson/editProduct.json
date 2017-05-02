@@ -30,13 +30,14 @@
             "validation": ["Required", "trim", "unique"],
             "url": ""
         }, {
-            "name": "Image",
+            "name": "Images",
             "type": "image",
-            "tableRef": "image",
+            "tableRef": "images",
             "placeholder": "Enter Image Link",
             "id": "imgLink",
             "option": "multiple",
-            "validation": ["", "trim", "unique"],
+            "validation": ["", "trim", ""],
+            "view": true,
             "url": ""
         }, {
             "name": "Category",
@@ -130,7 +131,7 @@
             "validation": ["", "trim"],
             "dropDownField": "",
             "dropDownType": "single",
-            "dropDown": ["Full Sleeve", "Half Sleeve"]
+            "dropDown": ["Full sleeve", "Half sleeve"]
         }, {
             "name": "Fabric",
             "type": "tags",
