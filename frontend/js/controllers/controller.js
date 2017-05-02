@@ -424,7 +424,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.navigation = NavigationService.getNavigation();
 
     })
-    .controller('ListingPageCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+    .controller('ListingPageCtrl', function ($scope, $stateParams, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.getHTML("content/listing-page.html");
         TemplateService.title = "Form"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -433,6 +433,16 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             console.log("im in showCheck")
             $scope.showCheck = !$scope.showCheck;
         }
+
+        var categoryId = $stateParams.id;
+
+        CategoryService.getCategoryWithId(categoryId, function (data) {
+            $scope.category = data.data.data;
+        });
+
+        ProductService.getProductsWithCategoryId(categoryId, function (data) {
+            $scope.products = data.data.data;
+        })
 
         $scope.submitForm = function (data) {
             console.log(data);

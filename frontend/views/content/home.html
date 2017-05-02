@@ -67,33 +67,12 @@
 <!--start of All Categorie-->
 <section>
     <div class="all-categorie">
-        <!--<div class="main-flex">
-            <div class="col-flex">
-                <div class="first">
-                    <img src="../img/home/2.jpg" alt="" class="img-responsive">
-                </div>
-                <div class="sec">
-                    <img src="../img/home/2.jpg" alt="" class="img-responsive">
-                </div>
-            </div>
-            <div class="col-flex">
-                <div class="three">
-                    <img src="../img/home/3.jpg" alt="" class="img-responsive">
-                </div>
-                <div class="fourth">
-                    <img src="../img/home/5.jpg" alt="" class="img-responsive">
-                </div>
-                <div class="five">
-                    <img src="../img/home/6.jpg" alt="" class="img-responsive">
-                </div>
-            </div>
-        </div>-->
         <ul class="list-inline list-unstyled">
             <li class="all-categorie__dimension" ng-repeat="category in categories">
                 <ul class="list-unstyled">
                     <li>
                         <div class="padd">
-                            <img ng-src="{{category.imgLink | serverimage}}" alt="" class="img-responsive">
+                            <a ui-sref="listing-page({id: category._id})"><img ng-src="{{category.imgLink | serverimage}}" alt="" class="img-responsive"></a>
                         </div>
                     </li>
                 </ul>

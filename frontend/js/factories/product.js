@@ -24,6 +24,14 @@ myApp.factory('ProductService', function ($http) {
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
+        },
+
+        getProductsWithCategoryId: function (input, callback) {
+            $http({
+                url: adminurl + 'Product/getProductsWithCategoryId/' + input,
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
         }
     };
 });
