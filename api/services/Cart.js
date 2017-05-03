@@ -1,13 +1,4 @@
 var schema = new Schema({
-    name: {
-        type: String,
-        required: true,
-        unique: true,
-        uniqueCaseInsensitive: true,
-        excel: {
-            name: Name
-        }
-    },
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'User',
@@ -36,5 +27,29 @@ schema.plugin(timestamps);
 module.exports = mongoose.model('Cart', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
-var model = {};
+var model = {
+    saveProduct: function (product, callback) {
+        var cart = {};
+        cart.products = [];
+        cart.products.push({
+            id: mongoose.Types.ObjectId(product._id),
+            quantity: 1,
+            color: 'black',
+            price: product.price
+        });
+        Cart.saveData(cart, function (err, data) {
+            if (err) {
+                callback(err, null);
+            } else if (data) {
+                callback(null, data);
+            } else {
+                callback({
+                    message: {
+                        data: "Invalid credentials!"
+                    }
+                }, null);
+            }
+        });
+    }
+};
 module.exports = _.assign(module.exports, exports, model);

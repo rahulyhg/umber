@@ -236,7 +236,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             subtotal: '2,899'
         }]
     })
-    .controller('IndividualPageCtrl', function ($scope, $stateParams, TemplateService, NavigationService, ProductService, $timeout) {
+    .controller('IndividualPageCtrl', function ($scope, $http, $stateParams, TemplateService, NavigationService, ProductService, CartService, $timeout) {
         $scope.template = TemplateService.getHTML("content/individual-page.html");
         TemplateService.title = "individual-page"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -252,7 +252,18 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             $scope.product = data.data.data;
             $scope.selectedImage = $scope.product.images[0];
             console.log("Retrieved individual page: ", $scope.product);
-        })
+        });
+
+        $scope.addToCart = function () {
+            console.log($scope.product);
+            CartService.saveProduct($scope.product, function (data) {
+                if (data.data.error) {
+                    console.log("Error: ", data.data.error);
+                } else {
+                    console.log("Success");
+                }
+            });
+        }
 
         $scope.featured = [{
                 img: '../img/home/11.jpg',
