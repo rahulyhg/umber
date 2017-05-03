@@ -1,6 +1,13 @@
 myApp.factory('ProductService', function ($http) {
     return {
 
+        getEnabledProducts: function (callback) {
+            $http({
+                url: adminurl + 'Product/getEnabledProducts',
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
 
         getNewArrivals: function (callback) {
             $http({

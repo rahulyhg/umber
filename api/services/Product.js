@@ -98,6 +98,22 @@ var model = {
         });
     },
 
+    getEnabledProducts: function (data, callback) {
+        Product.find({
+            status: 'Enabled'
+        }).deepPopulate("category subCategory brand prodCollection baseColor fabric type").exec(function (error, data) {
+            if (error) {
+                callback(error, null);
+            } else if (data) {
+                callback(null, data);
+            } else {
+                callback({
+                    message: "Incorrect credentials"
+                }, null);
+            }
+        });
+    },
+
     getNewArrivals: function (data, callback) {
         Product.find({
             newArrival: true,

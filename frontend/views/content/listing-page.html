@@ -134,7 +134,7 @@
                             <div class="checkbox">
                                 <input type="checkbox" id="e1">
                                 <label for="e1">
-                                     4Full Sleeve
+                                     Full Sleeve
                                </label>
                             </div>
                             <div class="checkbox">
@@ -275,23 +275,26 @@
                         </div>
 
 
-                        <div class="row" ng-repeat="abc in myShirt11">
-                            <div class="col-md-4" ng-repeat="xyz in abc" ng-init="parentIndex = $index">
+                        <div class="row" ng-repeat="row in products">
+                            <div class="col-md-4" ng-repeat="product in row" ng-init="parentIndex = $index">
                                 <div class="buy-info custom-checkbox">
                                     <div class="buy-slider slider-individual list-slider">
-                                        <flex-slider flex-slide="buy in xyz track by $index" prev-text="" next-text="" animation="slide" min-items="3">
+                                        <flex-slider flex-slide="image in product.images track by $index" prev-text="" next-text="" animation="slide" min-items="3">
                                             <li>
                                                 <div class="list-slider__toolTip">
-                                                    <a toolTip="{{buy.toolTip}}"><img ng-src="{{buy.img1}}" class="img-rsponsive img1"></a>
+                                                    <!--<a toolTip="{{buy.toolTip}}"><img ng-src="{{image | serverimage}}" class="img-rsponsive img1">
+                                                    </a>-->
                                                 </div>
-                                                <!--<img ng-src="{{buy.img1}}" class="img-rsponsive img1" title="sudd">-->
-                                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                                <img ng-src="{{buy.img}}" class="img-responsive" ng-mouseover="displayCntent();" ng-mouseleave="hideContent();">
+                                                <a ui-sref="individual-page({id: product._id})">
+                                                    <img ng-src="{{image | serverimage}}" class="img-rsponsive img1" title="sudd">
+                                                </a>
+                                                <!--<i class="fa fa-heart-o" aria-hidden="true"></i>
+                                            <img ng-src="{{buy.img}}" class="img-responsive" ng-mouseover="displayCntent();" ng-mouseleave="hideContent();">-->
                                             </li>
                                         </flex-slider>
                                         <div class="buy-para">
-                                            <h4><i class="fa fa-inr" aria-hidden="true"></i> {{xyz[0].rupee}}</h4>
-                                            <h5>{{xyz[0].title}} <br>{{xyz[0].title1}}</h5>
+                                            <h4><i class="fa fa-inr" aria-hidden="true"></i> {{product.price}}</h4>
+                                            <h5>{{product.name}} <br>{{product.type.name}}</h5>
                                             <div class="viewSize">
                                                 <div class="inline-block">
                                                     <p>Size:</p>
@@ -307,8 +310,8 @@
                                             <hr>
                                             <!--<p><input type="checkbox"> Add to compare</p>-->
                                             <div class="checkbox inline-block marg0">
-                                                <input type="checkbox" id="{{xyz[0].id}}" ng-model="myVarss" ng-click="clickfun();">
-                                                <label for="{{xyz[0].id}}">
+                                                <input type="checkbox" id="{{product._id}}" ng-model="myVarss" ng-click="clickfun();">
+                                                <label for="{{product._id}}">
                                           Add to compare
                                         </label>
                                             </div>

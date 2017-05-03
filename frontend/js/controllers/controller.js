@@ -434,6 +434,8 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             $scope.showCheck = !$scope.showCheck;
         }
 
+        // Ideally products should be retrieved with respect to category
+        // TODO
         var categoryId = $stateParams.id;
 
         CategoryService.getCategoryWithId(categoryId, function (data) {
@@ -783,6 +785,15 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.hideContent = function () {
             $('.viewSize, .view--btn').css('display', 'none');
         };
+
+        //TODO: For demo purpose. Use category with id in production
+        ProductService.getEnabledProducts(function (data) {
+            $scope.products = _.chunk(data.data.data, 3);
+            console.log("Listing page products: ", $scope.products);
+        });
+
+        // Products should be chunked into 3 instead of 9
+        // Images in each product will be iterated in column
         $scope.myShirt = [];
         $scope.myShirt11 = [];
         $scope.myShirt = _.chunk($scope.buyshirt, 9);

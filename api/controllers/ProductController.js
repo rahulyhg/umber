@@ -13,6 +13,19 @@ var controller = {
         }
     },
 
+    getEnabledProducts: function (req, res) {
+        if (req.body) {
+            Product.getEnabledProducts(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid request"
+                }
+            })
+        }
+    },
+
     getNewArrivals: function (req, res) {
         if (req.body) {
             Product.getNewArrivals(req.body, res.callback);
