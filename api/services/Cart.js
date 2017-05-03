@@ -1,9 +1,9 @@
 var schema = new Schema({
     userId: {
         type: Schema.Types.ObjectId,
-        ref: 'User',
-        unique: true
+        ref: 'User'
         // TODO: remove comment
+        //unique: true
         //required: true
     },
     products: [{
@@ -34,7 +34,7 @@ var model = {
         cart.products.push({
             id: mongoose.Types.ObjectId(product._id),
             quantity: 1,
-            color: 'black',
+            color: product.baseColor,
             price: product.price
         });
         Cart.saveData(cart, function (err, data) {
