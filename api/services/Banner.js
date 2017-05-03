@@ -5,7 +5,7 @@ var schema = new Schema({
         unique: true,
         uniqueCaseInsensitive: true,
         excel: {
-            name: Name
+            name: "Name"
         }
     }
 });
