@@ -47,7 +47,11 @@ var schema = new Schema({
     },
     washcare: String,
     description: String,
-    size: Number,
+    size: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Size',
+        unique: true
+    }],
     quantity: Number,
     status: String
 });

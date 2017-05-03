@@ -7,7 +7,27 @@ var schema = new Schema({
         excel: {
             name: Name
         }
-    }
+    },
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        unique: true
+        // TODO: remove comment
+        //required: true
+    },
+    products: [{
+        id: {
+            type: Schema.Types.ObjectId,
+            ref: 'Product'
+        },
+        quantity: Number,
+        size: {
+            type: Schema.Types.ObjectId,
+            ref: 'Size'
+        },
+        color: String,
+        price: Number
+    }]
 });
 
 schema.plugin(deepPopulate, {});
