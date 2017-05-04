@@ -351,28 +351,28 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
 
     })
-    .controller('MycartCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+    .controller('MycartCtrl', function ($scope, TemplateService, NavigationService, CartService, $timeout, $uibModal) {
         $scope.template = TemplateService.getHTML("content/mycart.html");
         TemplateService.title = "Mycart"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
 
-        $scope.mycartTable = [{
-            img: 'img/checkout/item.jpg',
-            title1: 'FLORENCE PRINTS',
-            title2: 'HALF SLEEVE SHIRTS',
-            color: 'BLUE',
-            size: 'XL',
-            quantity: '02',
-            subtotal: '2,899'
-        }, {
-            img: 'img/checkout/item.jpg',
-            title1: 'FLORENCE PRINTS',
-            title2: 'HALF SLEEVE SHIRTS',
-            color: 'BLUE',
-            size: 'XL',
-            quantity: '02',
-            subtotal: '2,899'
-        }]
+        // $scope.mycartTable = [{
+        //     img: 'img/checkout/item.jpg',
+        //     title1: 'FLORENCE PRINTS',
+        //     title2: 'HALF SLEEVE SHIRTS',
+        //     color: 'BLUE',
+        //     size: 'XL',
+        //     quantity: '02',
+        //     subtotal: '2,899'
+        // }, {
+        //     img: 'img/checkout/item.jpg',
+        //     title1: 'FLORENCE PRINTS',
+        //     title2: 'HALF SLEEVE SHIRTS',
+        //     color: 'BLUE',
+        //     size: 'XL',
+        //     quantity: '02',
+        //     subtotal: '2,899'
+        // }]
         $scope.mycartmodal = [{
                 img: 'img/cart/1.jpg',
                 title1: 'WALLET MODERN CORNER ZIP',
@@ -416,6 +416,24 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.newA = _.chunk($scope.mycartmodal, 4);
         console.log("$scope.newA ", $scope.newA);
 
+        CartService.getCart(function (data) {
+            console.log("getcart->data: ", data);
+            //TODO: Instead of array this will be single doc when query changes to findOneAndUpdate
+            $scope.mycartTable = data.data.data[0];
+            console.log("mycarttable: ", $scope.mycartTable);
+            //TODO: Calculate actual grand total
+            $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+        });
+
+        $scope.updateQuantity = function (index, count) {
+            $scope.mycartTable.products[index].quantity += count;
+            if ($scope.mycartTable.products[index].quantity <= 0)
+                $scope.mycartTable.products[index].quantity = 0;
+            //TODO: Handle error
+            CartService.updateCart($scope.mycartTable);
+            //TODO: Calculate actual grand total
+            $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+        }
         $scope.openUpload = function () {
             console.log("clla");
             $uibModal.open({

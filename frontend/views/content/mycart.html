@@ -13,34 +13,37 @@
                         <th>SUBTOTAL</th>
                     </tr>
                 </thead>
-                <tbody ng-repeat="mycart in mycartTable">
+                <tbody ng-repeat="product in mycartTable.products track by $index">
                     <tr>
                         <td rowspan="2">
                             <div class="item">
-                                <img ng-src="{{mycart.img}}" alt="" class="img-responsive item__img">
+                                <img ng-src="{{product.product.images[0] | serverimage}}" alt="" class="img-responsive item__img">
                                 <div class="mycart-info">
-                                    <p class="item__title1">{{mycart.title1}}</p>
-                                    <p class="item__title2">{{mycart.title2}}</p>
+                                    <p class="item__title1">{{product.product.name}}</p>
                                 </div>
                             </div>
                         </td>
-                        <td>{{mycart.color}}</td>
-                        <td>{{mycart.size}}</td>
+                        <td>{{product.color.name}}</td>
+                        <td>{{product.size}}</td>
                         <td>
 
-                            <i class="fa fa-minus display-inblock square__bg" aria-hidden="true"></i>
+                            <a ng-click="updateQuantity($index, -1)">
+                                <i class="fa fa-minus display-inblock square__bg" aria-hidden="true"></i>
+                            </a>
                             <div class="display-inblock">
                                 <form>
                                     <div class="form-group marg0">
-                                        <input type="text" class="form-control quantity__input" ng-model="mycart.quantity">
+                                        <input type="text" readonly class="form-control quantity__input" ng-model="product.quantity">
                                     </div>
                                 </form>
                             </div>
-                            <i class="fa fa-plus display-inblock square__bg" aria-hidden="true"></i>
+                            <a ng-click="updateQuantity($index, 1)">
+                                <i class="fa fa-plus display-inblock square__bg" aria-hidden="true"></i>
+                            </a>
 
 
                         </td>
-                        <td>&#x20b9 &nbsp;{{mycart.subtotal}}</td>
+                        <td>&#x20b9 &nbsp;{{product.product.price * product.quantity}}</td>
 
                     </tr>
                     <tr>
@@ -66,16 +69,16 @@
                         <p>GRAND TOTAL:</p>
                     </div>
                     <div class="inline-block">
-                        <p>&#x20b9 2,800</p>
+                        <p>&#x20b9 {{total}}</p>
                         <p> 0</p>
                         <p> 0</p>
-                        <p>&#x20b9 5,000</p>
+                        <p>&#x20b9 {{grandTotal}}</p>
                     </div>
                 </div>
                 <div class="clearfix"></div>
                 <div class="pull-right margin-15">
                     <button class="btn text-uppercase shop--btn">Continue shopping</button>
-                    <button class="btn text-uppercase checkout--btn ">checkout</button>
+                    <button class="btn text-uppercase checkout--btn" ui-sref="checkout">checkout</button>
                 </div>
             </div>
         </div>
