@@ -71,6 +71,11 @@ myApp.factory('NavigationService', function ($http) {
         classis: "active",
         sref: "#!/page/viewType//",
         icon: "document"
+    }, {
+        name: "Banner",
+        classis: "active",
+        sref: "#!/page/viewBanner//",
+        icon: "document"
     }];
 
     return {

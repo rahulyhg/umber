@@ -1,12 +1,16 @@
 var schema = new Schema({
-    name: {
+    image: {
         type: String,
         required: true,
-        unique: true,
-        uniqueCaseInsensitive: true,
         excel: {
-            name: "Name"
+            name: "Image"
         }
+    },
+    page: String,
+    status: {
+        type: String,
+        enum: ['Enabled', 'Disabled'],
+        default: 'Enabled'
     }
 });
 

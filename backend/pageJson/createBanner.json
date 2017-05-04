@@ -1,0 +1,81 @@
+{
+    "title": "Create Banner",
+    "name": "Banner",
+    "jsonPage": "viewBanner",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": [
+        "Banner"
+    ],
+    "fields": [{
+            "name": "Image",
+            "type": "image",
+            "tableRef": "image",
+            "placeholder": "Enter Image",
+            "id": "image",
+            "validation": [
+                "required",
+                "trim",
+                "unique"
+            ],
+            "url": "",
+            "view": true
+        }, {
+            "name": "Page",
+            "type": "text",
+            "tableRef": "page",
+            "placeholder": "Enter Page Name",
+            "id": "name",
+            "validation": [
+                "required",
+                "trim",
+                ""
+            ],
+            "url": ""
+        },
+        {
+            "name": "Status",
+            "type": "tags",
+            "tableRef": "status",
+            "placeholder": "Set status",
+            "id": "status",
+            "validation": [
+                "required",
+                "trim",
+                ""
+            ],
+            "url": "",
+            "dropDownField": "",
+            "dropDownType": "single",
+            "onView": true,
+            "dropDown": [
+                "Enabled",
+                "Disabled"
+            ]
+        }
+    ],
+    "action": [{
+            "name": "submit",
+            "action": "submitBanner",
+            "stateName": {
+                "page": "page",
+                "json": {
+                    "id": "viewBanner"
+                }
+            }
+        },
+        {
+            "name": "cancel",
+            "sideMenuRedirect": true,
+            "stateName": {
+                "page": "page",
+                "json": {
+                    "id": "viewBanner"
+                }
+            }
+        }
+    ],
+    "apiCall": {
+        "url": "Banner/save"
+    }
+}

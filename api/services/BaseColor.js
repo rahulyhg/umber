@@ -5,7 +5,11 @@ var schema = new Schema({
         unique: true,
         uniqueCaseInsensitive: true
     },
-    status: String
+    status: {
+        type: String,
+        enum: ['Enabled', 'Disabled'],
+        default: 'Enabled'
+    }
 });
 
 schema.plugin(deepPopulate, {});
