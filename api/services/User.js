@@ -201,7 +201,7 @@ var model = {
     },
     registration: function (userData) {
         console.log(userData);
-        var user = new User();
+        var user = {};
         user.userName = userData.username;
         user.email = userData.email;
         user.password = md5(userData.password);
