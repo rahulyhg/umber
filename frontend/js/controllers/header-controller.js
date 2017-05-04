@@ -1,4 +1,4 @@
-myApp.controller('headerCtrl', function ($scope, TemplateService, $uibModal) {
+myApp.controller('headerCtrl', function ($scope, TemplateService, CartService, $uibModal) {
     $scope.template = TemplateService;
     $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
         $(window).scrollTop(0);
@@ -16,6 +16,14 @@ myApp.controller('headerCtrl', function ($scope, TemplateService, $uibModal) {
             // windowClass: 'modal-content-radi0'
         });
     };
+
+    CartService.getCart(function (data) {
+        console.log("getcart->data: ", data);
+        //TODO: Instead of array this will be single doc when query changes to findOneAndUpdate
+        $scope.cart = data.data.data[0];
+        console.log("mycarttable: ", $scope.cart);
+    });
+
     $scope.view = false;
     $scope.viewLogin = function () {
         $scope.view = !$scope.view;

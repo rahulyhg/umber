@@ -51,22 +51,22 @@
                     <li><a href="#"><i class="fa fa-search"></i></a></li>
                     <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
                     <li uib-dropdown>
-                        <a href="#" uib-dropdown-toggle> <i class="fa fa-shopping-cart"></i> Cart (3)</a>
+                        <a href="#" uib-dropdown-toggle> <i class="fa fa-shopping-cart"></i> Cart ({{cart.products.length}})</a>
                         <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
-                            <li ng-repeat="choice in cart">
+                            <li ng-repeat="product in cart.products">
                                 <div class="dropdown-menu__dropdown-cart">
                                     <div class="inline-block img">
-                                        <img ng-src="{{choice.img}}" alt="shirt_img" class="img-responsive">
+                                        <img ng-src="{{product.product.images[0] | serverimage}}" alt="shirt_img" class="img-responsive">
                                     </div>
                                     <div class="inline-block desc">
-                                        <h5>{{choice.shirtType}}</h5>
-                                        <p><i class="fa fa-inr" aria-hidden="true">{{choice.price}}</i></p>
+                                        <h5>{{product.product.name}}</h5>
+                                        <p><i class="fa fa-inr" aria-hidden="true">{{product.product.price}}</i></p>
                                         <p></p>
 
                                         <div class="inline-block__size">
                                             <div class="inline-block">
                                                 <div class="size">
-                                                    <span>{{choice.size}}</span>
+                                                    <span>{{product.product.size}}</span>
                                                 </div>
                                             </div>
                                             <div class="inline-block">

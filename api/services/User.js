@@ -1,15 +1,14 @@
+var md5 = require('md5');
 var schema = new Schema({
     firstName: {
         type: String,
-        required: true,
         excel: true
     },
     middleName: {
         type: String
     },
     lastName: {
-        type: String,
-        required: true
+        type: String
     },
     userName: {
         type: String,
@@ -198,6 +197,26 @@ var model = {
         }).exec(function (err, data) {
             data.googleAccessToken = accessToken;
             data.save(function () {});
+        });
+    },
+    registration: function (userData) {
+        console.log(userData);
+        var user = new User();
+        user.userName = userData.username;
+        user.email = userData.email;
+        user.password = md5(userData.password);
+        user.mobile = userData.mobile;
+
+        User.saveData(user, function (err, data) {
+            console.log('user: ', user);
+            if (err) {
+                console.log("Err: ", err);
+            } else if (data) {
+                console.log("Data: ", data);
+            } else {
+                //Todo: throw error
+                console.log("error");
+            }
         });
     }
 

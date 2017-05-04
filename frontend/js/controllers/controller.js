@@ -213,10 +213,16 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         console.log($scope.myShirt11);
 
     })
-    .controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+    .controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService, UserService, $timeout) {
         $scope.template = TemplateService.getHTML("content/checkout.html");
         TemplateService.title = "Checkout"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
+
+        $scope.formData = {};
+
+        $scope.registerUser = function () {
+            UserService.userRegistration($scope.formData);
+        }
 
         $scope.orderTable = [{
             img: 'img/checkout/item.jpg',
@@ -356,23 +362,6 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         TemplateService.title = "Mycart"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
 
-        // $scope.mycartTable = [{
-        //     img: 'img/checkout/item.jpg',
-        //     title1: 'FLORENCE PRINTS',
-        //     title2: 'HALF SLEEVE SHIRTS',
-        //     color: 'BLUE',
-        //     size: 'XL',
-        //     quantity: '02',
-        //     subtotal: '2,899'
-        // }, {
-        //     img: 'img/checkout/item.jpg',
-        //     title1: 'FLORENCE PRINTS',
-        //     title2: 'HALF SLEEVE SHIRTS',
-        //     color: 'BLUE',
-        //     size: 'XL',
-        //     quantity: '02',
-        //     subtotal: '2,899'
-        // }]
         $scope.mycartmodal = [{
                 img: 'img/cart/1.jpg',
                 title1: 'WALLET MODERN CORNER ZIP',

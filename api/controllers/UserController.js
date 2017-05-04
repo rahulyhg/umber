@@ -74,6 +74,11 @@ var controller = {
         } else {
             res.callback("Access Denied for Database Backup");
         }
+    },
+    registration: function (req, res) {
+        if (req.body) {
+            User.registration(req.body);
+        }
     }
 };
 module.exports = _.assign(module.exports, controller);

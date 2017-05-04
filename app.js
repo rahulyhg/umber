@@ -23,6 +23,7 @@
 process.chdir(__dirname);
 var mongoose;
 mongoose = require('mongoose');
+var md5 = require('md5');
 
 global["database"] = "burntUmber";
 mongoose.Promise = global.Promise;
