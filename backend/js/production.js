@@ -51986,10 +51986,9 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
 
         //  START FOR EDIT
         if ($scope.json.json.preApi) {
-
-            NavigationService.apiCall($scope.json.json.preApi.url, {
-                [$scope.json.json.preApi.params]: $scope.json.keyword._id
-            }, function (data) {
+            var obj = {};
+            obj[$scope.json.json.preApi.params] = $scope.json.keyword._id;
+            NavigationService.apiCall($scope.json.json.preApi.url, obj, function (data) {
                 $scope.data = data.data;
                 $scope.generateField = true;
 
