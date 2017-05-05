@@ -1,7 +1,7 @@
 myApp.factory('CartService', function ($http) {
     return {
         saveProduct: function (product, callback) {
-            console.log("CartService->saveProduct");
+            console.log("CartService->saveProduct: ", product);
             $http({
                 url: adminurl + 'Cart/saveProduct',
                 method: 'POST',

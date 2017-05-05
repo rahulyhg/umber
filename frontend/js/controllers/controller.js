@@ -279,11 +279,14 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             console.log($scope.product);
             var accessToken = $.jStorage.get("accessToken");
             if (!_.isEmpty(accessToken)) {
+                $scope.product.accessToken = accessToken;
+                $scope.product.userId = $.jStorage.get("userId");
                 CartService.saveProduct($scope.product, function (data) {
                     if (data.data.error) {
                         console.log("Error: ", data.data.error);
                     } else {
                         console.log("Success");
+                        $state.reload("individual-page");
                     }
                 });
             } else {

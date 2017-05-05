@@ -1,4 +1,4 @@
-myApp.controller('headerCtrl', function ($scope, TemplateService, CartService, $uibModal) {
+myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartService, UserService, $uibModal) {
     $scope.template = TemplateService;
     $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
         $(window).scrollTop(0);
@@ -16,6 +16,22 @@ myApp.controller('headerCtrl', function ($scope, TemplateService, CartService, $
             // windowClass: 'modal-content-radi0'
         });
     };
+    $scope.loginData = {};
+    $scope.login = function () {
+        console.log("Header login");
+        UserService.login($scope.loginData, function (data) {
+            console.log("Login data: ", data);
+            if (!_.isEmpty(data.data.data)) {
+                $scope.userData = data.data.data;
+                $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
+                $.jStorage.set("userId", $scope.userData._id);
+                $scope.openLoginModal10.close();
+                $state.go("home");
+            } else {
+                // TODO:: show popup to register
+            }
+        });
+    }
 
     CartService.getCart(function (data) {
         console.log("getcart->data: ", data);
