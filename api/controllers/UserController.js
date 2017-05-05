@@ -79,6 +79,17 @@ var controller = {
         if (req.body) {
             User.registration(req.body);
         }
+    },
+    login: function (req, res) {
+        if (req.body) {
+            User.login(req.body, res.callback);
+        } else {
+            res.json({
+                message: {
+                    data: "Invalid request!"
+                }
+            })
+        }
     }
 };
 module.exports = _.assign(module.exports, controller);

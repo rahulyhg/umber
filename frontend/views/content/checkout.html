@@ -26,14 +26,14 @@
                         <div class="col-md-3 col-md-offset-1">
                             <form class="customized-form login-form">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Full Name" class="form-control">
+                                    <input type="text" placeholder="Username" ng-model="loginData.username" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" placeholder="Password" class="form-control">
+                                    <input type="password" placeholder="Password" ng-model="loginData.password" class="form-control">
                                     <p class="pull-right forgot__checkout"><a href="">Forgot Password?</a></p>
                                 </div>
                                 <div>
-                                    <button class="btn btn--login btn-block">log in</button>
+                                    <button class="btn btn--login btn-block" ng-click="login()">log in</button>
                                 </div>
                                 <p class="border-line">or</p>
                                 <div class="social-icons">

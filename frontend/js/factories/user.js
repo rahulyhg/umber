@@ -7,6 +7,15 @@ myApp.factory('UserService', function ($http) {
                 data: userData,
                 withCredentials: false
             }).then(console.log("executed"));
+        },
+
+        login: function (userData, callback) {
+            $http({
+                url: adminurl + 'User/login',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
         }
     }
 });

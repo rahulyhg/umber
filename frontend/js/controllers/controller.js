@@ -213,15 +213,30 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         console.log($scope.myShirt11);
 
     })
-    .controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService, UserService, $timeout) {
+    .controller('CheckoutCtrl', function ($scope, $state, TemplateService, NavigationService, UserService, $timeout) {
         $scope.template = TemplateService.getHTML("content/checkout.html");
         TemplateService.title = "Checkout"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
 
         $scope.formData = {};
+        $scope.loginData = {};
 
         $scope.registerUser = function () {
             UserService.userRegistration($scope.formData);
+        }
+
+        $scope.login = function () {
+            UserService.login($scope.loginData, function (data) {
+                console.log("Login data: ", data);
+                if (!_.isEmpty(data.data.data)) {
+                    $scope.userData = data.data.data;
+                    $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
+                    $.jStorage.set("userId", $scope.userData._id);
+                    $state.go("home");
+                } else {
+                    // TODO:: show popup to register
+                }
+            });
         }
 
         $scope.orderTable = [{
@@ -242,7 +257,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             subtotal: '2,899'
         }]
     })
-    .controller('IndividualPageCtrl', function ($scope, $http, $stateParams, TemplateService, NavigationService, ProductService, CartService, $timeout) {
+    .controller('IndividualPageCtrl', function ($scope, $http, $stateParams, $state, TemplateService, NavigationService, ProductService, CartService, $timeout) {
         $scope.template = TemplateService.getHTML("content/individual-page.html");
         TemplateService.title = "individual-page"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -262,13 +277,19 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
         $scope.addToCart = function () {
             console.log($scope.product);
-            CartService.saveProduct($scope.product, function (data) {
-                if (data.data.error) {
-                    console.log("Error: ", data.data.error);
-                } else {
-                    console.log("Success");
-                }
-            });
+            var accessToken = $.jStorage.get("accessToken");
+            if (!_.isEmpty(accessToken)) {
+                CartService.saveProduct($scope.product, function (data) {
+                    if (data.data.error) {
+                        console.log("Error: ", data.data.error);
+                    } else {
+                        console.log("Success");
+                    }
+                });
+            } else {
+                console.log("User not logged in");
+                // TODO: goto login. can't route to modal or checkkout
+            }
         }
 
         $scope.featured = [{
@@ -849,7 +870,11 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             $scope.formSubmitted = true;
         };
     })
-
+    .controller('LoginCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.getHTML("modal/login.html");
+        TemplateService.title = "Login"; //This is the Title of the Website
+        $scope.navigation = NavigationService.getNavigation();
+    })
     //Example API Controller
     .controller('DemoAPICtrl', function ($scope, TemplateService, apiService, NavigationService, $timeout) {
         apiService.getDemo($scope.formData, function (data) {

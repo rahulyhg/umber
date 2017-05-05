@@ -16,6 +16,7 @@ module.exports = [
   'bower_components/angular-ui-router/release/angular-ui-router.min.js',
   'bower_components/angular-flexslider/angular-flexslider.js',
   'bower_components/angular-translate/angular-translate.js',
+  'bower_components/jStorage/jstorage.min.js',
   'bower_components/lodash/lodash.js',
   'bower_components/angulartics/dist/angulartics.min.js',
   'bower_components/angulartics-google-analytics/dist/angulartics-ga.min.js',

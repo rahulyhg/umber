@@ -20,8 +20,13 @@ myApp.controller('headerCtrl', function ($scope, TemplateService, CartService, $
     CartService.getCart(function (data) {
         console.log("getcart->data: ", data);
         //TODO: Instead of array this will be single doc when query changes to findOneAndUpdate
-        $scope.cart = data.data.data[0];
-        console.log("mycarttable: ", $scope.cart);
+        var accessToken = $.jStorage.get("accessToken");
+        if (accessToken) {
+            $scope.cart = data.data.data[0];
+            console.log("mycarttable: ", $scope.cart);
+        } else {
+            $scope.cart = {};
+        }
     });
 
     $scope.view = false;

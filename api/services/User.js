@@ -218,6 +218,31 @@ var model = {
                 console.log("error");
             }
         });
+    },
+    login: function (userData, callback) {
+        User.findOne({
+            userName: userData.username,
+            password: md5(userData.password)
+        }).exec(function (err, data) {
+            if (err) {
+                //call callback
+                console.log("err: ", err);
+                callback(err, null);
+            } else if (data) {
+                //call callback
+                if (!_.isEmpty(data)) {
+                    var accessToken = uid(16);
+                    data.accessToken.push(accessToken);
+                    User.saveData(data, function () {});
+                    console.log("data: ", data);
+                    callback(null, data);
+                } else {
+                    callback(null, {});
+                }
+            } else {
+                console.log("Big mistake");
+            }
+        })
     }
 
 };

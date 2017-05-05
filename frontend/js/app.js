@@ -24,6 +24,11 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             templateUrl: tempateURL,
             controller: 'HomeCtrl'
         })
+        .state('login', {
+            url: "/login",
+            templateUrl: tempateURL,
+            controller: 'LoginCtrl'
+        })
         .state('checkout', {
             url: "/checkout",
             templateUrl: tempateURL,
