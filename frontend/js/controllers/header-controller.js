@@ -33,6 +33,17 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
         });
     }
 
+    $scope.removeProductFromCart = function (cartId, productId) {
+        console.log("Removing product: ", productId);
+        var data = {
+            cartId: cartId,
+            productId: productId
+        }
+        CartService.removeProduct(data, function (data) {
+            $scope.mycartTable = data.data.data;
+        });
+    }
+
     var userId = {
         userId: $.jStorage.get("userId")
     }

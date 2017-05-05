@@ -465,6 +465,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 $state.reload("mycart");
             });
         }
+
         $scope.openUpload = function () {
             console.log("clla");
             $uibModal.open({
