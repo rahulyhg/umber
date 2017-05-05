@@ -208,7 +208,6 @@ var model = {
         user.mobile = userData.mobile;
 
         User.saveData(user, function (err, data) {
-            console.log('user: ', user);
             if (err) {
                 console.log("Err: ", err);
             } else if (data) {

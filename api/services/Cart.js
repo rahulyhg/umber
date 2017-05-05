@@ -60,7 +60,6 @@ var model = {
                     // TODO: Optimize this extensively
                     if (!_.isEmpty(data)) {
                         // Check if the retrieved user is same as the user claims
-                        console.log("User: ", data);
                         if (data._id == product.userId) {
                             cart.userId = product.userId;
                             // If user is same retrieve its cart
@@ -127,12 +126,13 @@ var model = {
         }
     },
 
-    getCart: function (callback) {
-        Cart.find({}).deepPopulate("products.product products.color").exec(function (err, data) {
+    getCart: function (userId, callback) {
+        Cart.findOne({
+            userId: userId.userId
+        }).deepPopulate("products.product products.color").exec(function (err, data) {
             if (err) {
                 callback(err, null);
             } else if (data) {
-                console.log("getcart-> ", data);
                 callback(null, data);
             } else {
                 callback({
@@ -148,6 +148,50 @@ var model = {
         Cart.findOneAndUpdate({
             _id: cart._id
         }, cart).exec();
+    },
+
+    removeProduct: function (product, callback) {
+        Cart.findOne({
+            _id: mongoose.Types.ObjectId(product.cartId)
+        }).exec(function (err, data) {
+            if (err) {
+                callback(err, null);
+            } else if (data) {
+                var index = data.products.findIndex(function (value) {
+                    if (value._id.toString() == product.productId)
+                        return true;
+                    else
+                        return false;
+                });
+
+                data.products.splice(index, 1);
+                if (_.isEmpty(data.products)) {
+                    Cart.findOne({
+                        _id: data._id
+                    }).remove().exec(function (err, datat) {
+                        if (err)
+                            console.log("Error: ", err);
+                        else if (data) {
+                            console.log("Data: ", data);
+
+                        }
+                    });
+                }
+                Cart.saveData(data, function (err, data) {
+                    if (err) {
+                        callback(err, null);
+                    } else if (data) {
+                        callback(null, data);
+                    } else {
+                        callback({
+                            message: {
+                                data: "Invalid credentials!"
+                            }
+                        }, null);
+                    }
+                });
+            }
+        })
     }
 };
 module.exports = _.assign(module.exports, exports, model);

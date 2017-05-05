@@ -15,9 +15,8 @@ var controller = {
     },
 
     getCart: function (req, res) {
-        console.log("getCart");
         if (req.body) {
-            Cart.getCart(res.callback);
+            Cart.getCart(req.body, res.callback);
         } else {
             res.json({
                 value: false,
@@ -33,6 +32,14 @@ var controller = {
             Cart.updateCart(req.body);
         } else {
             console.log("No cart found");
+        }
+    },
+
+    removeProduct: function (req, res) {
+        if (req.body) {
+            Cart.removeProduct(req.body, res.callback);
+        } else {
+            console.log("Invalid request!");
         }
     }
 };

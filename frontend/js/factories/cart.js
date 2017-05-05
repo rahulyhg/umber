@@ -10,10 +10,11 @@ myApp.factory('CartService', function ($http) {
             }).then(callback);
         },
 
-        getCart: function (callback) {
+        getCart: function (userId, callback) {
             $http({
                 url: adminurl + 'Cart/getCart',
                 method: 'POST',
+                data: userId,
                 withCredentials: false
             }).then(callback);
         },
@@ -34,6 +35,15 @@ myApp.factory('CartService', function ($http) {
                 data: cart,
                 withCredentials: false
             });
+        },
+
+        removeProduct: function (data, callback) {
+            $http({
+                url: adminurl + 'Cart/removeProduct',
+                method: 'POST',
+                data: data,
+                withCredentials: false
+            }).then(callback);
         }
     };
 });

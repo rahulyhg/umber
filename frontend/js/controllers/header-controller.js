@@ -8,7 +8,7 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
     $scope.openLoginModal10 = function () {
         // alert('click');
         // console.log("clla");
-        $uibModal.open({
+        $scope.loginModal = $uibModal.open({
             animation: true,
             templateUrl: 'views/modal/login.html',
             scope: $scope,
@@ -25,7 +25,7 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
                 $scope.userData = data.data.data;
                 $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
                 $.jStorage.set("userId", $scope.userData._id);
-                $scope.openLoginModal10.close();
+                $scope.loginModal.close();
                 $state.go("home");
             } else {
                 // TODO:: show popup to register
@@ -33,17 +33,24 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
         });
     }
 
-    CartService.getCart(function (data) {
-        console.log("getcart->data: ", data);
-        //TODO: Instead of array this will be single doc when query changes to findOneAndUpdate
-        var accessToken = $.jStorage.get("accessToken");
-        if (accessToken) {
-            $scope.cart = data.data.data[0];
-            console.log("mycarttable: ", $scope.cart);
-        } else {
-            $scope.cart = {};
-        }
-    });
+    var userId = {
+        userId: $.jStorage.get("userId")
+    }
+    if (userId.userId != null || typeof userId.userId == 'undefined') {
+        CartService.getCart(userId, function (data) {
+            console.log("getcart->data: ", data);
+            //TODO: Instead of array this will be single doc when query changes to findOneAndUpdate
+            var accessToken = $.jStorage.get("accessToken");
+            if (accessToken) {
+                $scope.cart = data.data.data;
+                console.log("mycarttable: ", $scope.cart);
+            } else {
+                $scope.cart = {};
+            }
+        });
+    } else {
+        $scope.cart = {};
+    }
 
     $scope.view = false;
     $scope.viewLogin = function () {

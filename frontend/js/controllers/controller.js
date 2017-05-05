@@ -381,7 +381,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
 
     })
-    .controller('MycartCtrl', function ($scope, TemplateService, NavigationService, CartService, $timeout, $uibModal) {
+    .controller('MycartCtrl', function ($scope, $state, TemplateService, NavigationService, CartService, $timeout, $uibModal) {
         $scope.template = TemplateService.getHTML("content/mycart.html");
         TemplateService.title = "Mycart"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -428,16 +428,22 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         ]
         $scope.newA = _.chunk($scope.mycartmodal, 4);
         console.log("$scope.newA ", $scope.newA);
-
-        CartService.getCart(function (data) {
-            console.log("getcart->data: ", data);
-            //TODO: Instead of array this will be single doc when query changes to findOneAndUpdate
-            $scope.mycartTable = data.data.data[0];
-            console.log("mycarttable: ", $scope.mycartTable);
-            //TODO: Calculate actual grand total
-            $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
-        });
-
+        var userId = {
+            userId: $.jStorage.get("userId")
+        };
+        if (userId != null) {
+            CartService.getCart(userId, function (data) {
+                console.log("getcart->data: ", data);
+                //TODO: Instead of array this will be single doc when query changes to findOneAndUpdate
+                $scope.mycartTable = data.data.data;
+                console.log("mycarttable: ", $scope.mycartTable);
+                //TODO: Calculate actual grand total
+                $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+            });
+        } else {
+            $scope.mycartTable = {};
+        }
+        $scope.mycartTable = {};
         $scope.updateQuantity = function (index, count) {
             $scope.mycartTable.products[index].quantity += count;
             if ($scope.mycartTable.products[index].quantity <= 0)
@@ -446,6 +452,18 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             CartService.updateCart($scope.mycartTable);
             //TODO: Calculate actual grand total
             $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+        }
+
+        $scope.removeProductFromCart = function (cartId, productId) {
+            console.log("Removing product: ", productId);
+            var data = {
+                cartId: cartId,
+                productId: productId
+            }
+            CartService.removeProduct(data, function (data) {
+                $scope.mycartTable = data.data.data;
+                $state.reload("mycart");
+            });
         }
         $scope.openUpload = function () {
             console.log("clla");
