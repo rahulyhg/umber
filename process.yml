@@ -1,5 +1,5 @@
 apps:
   - script: "app.js"
     name: "BurntUmber - 1337"
-    watch: true
+    watch: false
     args: "--prod"
