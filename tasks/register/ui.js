@@ -1,4 +1,10 @@
 module.exports = function (grunt) {
     var folderName = grunt.option('target');
-    grunt.registerTask('ui', ["ejs:ui", "sass:development", "concurrent:watchDevelopment"]);
+    var isProduction = grunt.option('production');
+    if (isProduction) {
+        grunt.registerTask('ui', ["ejs:ui", "sass:development", "cssmin:production", "concat:production", "uglify"]);
+    } else {
+        grunt.registerTask('ui', ["ejs:ui", "sass:development", "concurrent:watchDevelopment"]);
+    }
+
 };

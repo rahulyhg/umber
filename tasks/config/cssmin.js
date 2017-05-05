@@ -14,12 +14,13 @@
  *   https://github.com/gruntjs/grunt-contrib-cssmin
  *
  */
-module.exports = function(grunt) {
-
+module.exports = function (grunt) {
+  var folderName = grunt.option('target') || "frontend";
+  var isProduction = grunt.option('production');
   grunt.config.set('cssmin', {
     production: {
-      src: ['.tmp/public/frontend/css/main.css'],
-      dest: '.tmp/public/frontend/css/main.min.css'
+      src: [folderName + '/css/import.css'],
+      dest: folderName + '/css/production.css'
     }
   });
 

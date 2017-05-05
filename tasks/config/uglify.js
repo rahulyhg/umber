@@ -9,17 +9,19 @@
  *   https://github.com/gruntjs/grunt-contrib-uglify
  *
  */
-module.exports = function(grunt) {
+module.exports = function (grunt) {
+    var folderName = grunt.option('target') || "frontend";
+    var isProduction = grunt.option('production');
+    var obj = {
+        files: {}
+    };
+    obj.files[folderName + '/js/production.min.js'] = folderName + '/js/production.js';
 
     grunt.config.set('uglify', {
         options: {
             mangle: false
         },
-        production: {
-            files: {
-                '.tmp/public/frontend/js/main.min.js': ['.tmp/public/frontend/js/main.js']
-            }
-        }
+        production: obj
     });
 
     grunt.loadNpmTasks('grunt-contrib-uglify');

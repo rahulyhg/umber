@@ -12,8 +12,5 @@
  *
  */
 module.exports = function (grunt) {
-    grunt.registerTask('prod', [
-        'clean:upload', 'copy:upload', 'clean:uploadApp',
-        'copy:assets'
-    ]);
+    grunt.registerTask('prod', ['copy:assets']);
 };

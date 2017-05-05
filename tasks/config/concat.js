@@ -16,25 +16,28 @@
  */
 
 
-module.exports = function(grunt) {
-
+module.exports = function (grunt) {
+    var folderName = grunt.option('target');
+    if (folderName) {
+        var jsFiles = require("../../" + folderName + "/files.js");
+    }
     grunt.config.set('concat', {
 
         development: {
             options: {
                 sourceMap: false
             },
-            src: require('../../frontend/files.js'),
-            dest: '.tmp/public/frontend/js/main.js'
-                // dest: '.tmp/public/concat/production.js'
+            src: jsFiles,
+            dest: folderName + '/js/main.js'
+            // dest: '.tmp/public/concat/production.js'
         },
         production: {
             options: {
                 sourceMap: false
             },
-            src: require('../../frontend/files.js'),
-            dest: '.tmp/public/frontend/js/main.js'
-                // dest: '.tmp/public/concat/production.js'
+            src: jsFiles,
+            dest: folderName + '/js/production.js'
+            // dest: '.tmp/public/concat/production.js'
         }
     });
 
