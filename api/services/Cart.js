@@ -39,8 +39,7 @@ module.exports = mongoose.model('Cart', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "products.product products.color", "products.product products.color"));
 var model = {
-    saveProduct: function (product, callback) {;
-        console.log(product);
+    saveProduct: function (product, callback) {
         if (!_.isEmpty(product.accessToken)) {
             var cart = {};
             cart.products = [];
