@@ -83,22 +83,22 @@
                         <div>
                             <form class="modal__customized-form">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Fullname" class="form-control">
+                                    <input type="text" placeholder="Username" ng-model="formData.username" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" placeholder="Email Address" class="form-control">
+                                    <input type="email" placeholder="Email Address" ng-model="formData.email" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" placeholder="Mobile No." class="form-control">
+                                    <input type="text" placeholder="Mobile No." ng-model="formData.mobile" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" placeholder="Password" class="form-control">
+                                    <input type="password" placeholder="Password" ng-model="formData.password" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" placeholder="Confirm" class="form-control">
+                                    <input type="password" placeholder="Confirm Password" ng-model="formData.confirm" class="form-control">
                                 </div>
                                 <div class="marginTop">
-                                    <button class="btn btn-login btn-block">Sign in</button>
+                                    <button class="btn btn-login btn-block" ng-click="registerUser()">Sign in</button>
                                 </div>
                             </form>
                         </div>

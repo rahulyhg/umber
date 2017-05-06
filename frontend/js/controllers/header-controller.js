@@ -16,11 +16,13 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
             // windowClass: 'modal-content-radi0'
         });
     };
+
+    $scope.formData = {};
     $scope.loginData = {};
+
     $scope.login = function () {
         console.log("Header login");
         UserService.login($scope.loginData, function (data) {
-            console.log("Login data: ", data);
             if (!_.isEmpty(data.data.data)) {
                 $scope.userData = data.data.data;
                 $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
@@ -33,6 +35,12 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
         });
     }
 
+    $scope.registerUser = function () {
+        UserService.userRegistration($scope.formData, function (data) {
+            $scope.loginModal.close();
+            $state.go("home");
+        });
+    }
     $scope.removeProductFromCart = function (cartId, productId) {
         console.log("Removing product: ", productId);
         var data = {
