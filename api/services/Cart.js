@@ -39,11 +39,11 @@ module.exports = mongoose.model('Cart', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "products.product products.color", "products.product products.color"));
 var model = {
-    saveProduct: function (product, callback) {
+    saveProduct: function (product, callback) {;
+        console.log(product);
         if (!_.isEmpty(product.accessToken)) {
             var cart = {};
             cart.products = [];
-            console.log("Cart->saveProduct: ", product);
             cart.products.push({
                 product: mongoose.Types.ObjectId(product._id),
                 quantity: 1,
@@ -70,6 +70,36 @@ var model = {
                                     console.log("error: ", error);
                                     callback(err, null);
                                 } else {
+                                    /*Cart.findOneAndUpdate({
+                                            products: {
+                                                product: product._id,
+                                                //TODO: add size
+                                                color: product.baseColor
+                                            }
+                                        }, {
+                                            $inc: {
+                                                products: {
+                                                    quantity: product.reqQuantity
+                                                }
+                                            }
+                                        }, {
+                                            upsert: true,
+                                            new: true
+                                        })
+                                        .exec(function (err, data) {
+                                            if (err) {
+                                                callback(err, null);
+                                            } else if (data) {
+                                                callback(null, data);
+                                            } else {
+                                                callback({
+                                                    message: {
+                                                        data: "Invalid credentials!"
+                                                    }
+                                                }, null);
+                                            }
+                                        });*/
+                                    // If cart is not present, create cart
                                     if (!data) {
                                         Cart.saveData(cart, function (err, data) {
                                             if (err) {
@@ -85,6 +115,7 @@ var model = {
                                             }
                                         });
                                     } else {
+                                        // Update cart product quantity if present
                                         data.products.push({
                                             product: mongoose.Types.ObjectId(product._id),
                                             quantity: 1,

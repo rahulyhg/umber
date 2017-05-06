@@ -281,6 +281,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             if (!_.isEmpty(accessToken)) {
                 $scope.product.accessToken = accessToken;
                 $scope.product.userId = $.jStorage.get("userId");
+                $scope.product.reqQuantity = 1;
                 CartService.saveProduct($scope.product, function (data) {
                     if (data.data.error) {
                         console.log("Error: ", data.data.error);
