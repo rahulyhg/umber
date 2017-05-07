@@ -32,6 +32,7 @@ module.exports = [
 
   // Directives
   'js/directives/directive.js',
+  'js/directives/passwordVerifier.js',
 
   // Filters
   'js/filters/filter.js',

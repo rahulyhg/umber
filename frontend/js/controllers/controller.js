@@ -218,12 +218,14 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         TemplateService.title = "Checkout"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
 
-        $scope.formData = {};
+        $scope.registerData = {};
         $scope.loginData = {};
 
         $scope.registerUser = function () {
+            console.log("Register: ", $scope.registerData);
             UserService.userRegistration($scope.formData);
         }
+
 
         $scope.login = function () {
             UserService.login($scope.loginData, function (data) {
