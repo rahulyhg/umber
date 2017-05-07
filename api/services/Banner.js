@@ -27,7 +27,7 @@ var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
 var model = {
     getBanner: function (pageName, callback) {
         Banner.findOne({
-            page: pageName
+            page: pageName.pageName
         }).exec
     }
 };

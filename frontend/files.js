@@ -46,6 +46,7 @@ module.exports = [
   'js/factories/user.js',
   'js/factories/product.js',
   'js/factories/category.js',
+  'js/factories/banner.js',
 
   // Contorllers
   'js/controllers/controller.js',

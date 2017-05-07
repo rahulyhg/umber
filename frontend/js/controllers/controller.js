@@ -492,7 +492,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.navigation = NavigationService.getNavigation();
 
     })
-    .controller('ListingPageCtrl', function ($scope, $stateParams, TemplateService, NavigationService, CategoryService, ProductService, $timeout) {
+    .controller('ListingPageCtrl', function ($scope, $stateParams, TemplateService, NavigationService, BannerService, CategoryService, ProductService, $timeout) {
         $scope.template = TemplateService.getHTML("content/listing-page.html");
         TemplateService.title = "Form"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -501,7 +501,12 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             console.log("im in showCheck")
             $scope.showCheck = !$scope.showCheck;
         }
-
+        var banner = {
+            pageName: "listing-page"
+        }
+        BannerService.getBanner(banner, function (data) {
+            $scope.banner = data.data.data;
+        });
         // Ideally products should be retrieved with respect to category
         // TODO
         var categoryId = $stateParams.id;
