@@ -282,17 +282,21 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 $scope.product.accessToken = accessToken;
                 $scope.product.userId = $.jStorage.get("userId");
                 $scope.product.reqQuantity = 1;
-                CartService.saveProduct($scope.product, function (data) {
-                    if (data.data.error) {
-                        console.log("Error: ", data.data.error);
-                    } else {
-                        console.log("Success");
-                        $state.reload("individual-page");
-                    }
-                });
+                if (ProductService.isProductAvailable(reqQuantity, $scope.product)) {
+                    CartService.saveProduct($scope.product, function (data) {
+                        if (data.data.error) {
+                            console.log("Error: ", data.data.error);
+                        } else {
+                            console.log("Success");
+                            $state.reload("individual-page");
+                        }
+                    });
+                } else {
+                    console.log("User not logged in");
+                    // TODO: goto login. can't route to modal or checkkout
+                }
             } else {
-                console.log("User not logged in");
-                // TODO: goto login. can't route to modal or checkkout
+                // TODO: Add product not available error
             }
         }
 
@@ -446,13 +450,15 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         }
         $scope.mycartTable = {};
         $scope.updateQuantity = function (index, count) {
-            $scope.mycartTable.products[index].quantity += count;
-            if ($scope.mycartTable.products[index].quantity <= 0)
-                $scope.mycartTable.products[index].quantity = 0;
-            //TODO: Handle error
-            CartService.updateCart($scope.mycartTable);
-            //TODO: Calculate actual grand total
-            $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+            if (ProductService.isProductAvailable(count, $scope.mycartTable.products[index])) {
+                $scope.mycartTable.products[index].quantity += count;
+                if ($scope.mycartTable.products[index].quantity <= 0)
+                    $scope.mycartTable.products[index].quantity = 0;
+                //TODO: Handle update cart error
+                CartService.updateCart($scope.mycartTable);
+                //TODO: Calculate actual grand total
+                $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+            }
         }
 
         $scope.removeProductFromCart = function (cartId, productId) {

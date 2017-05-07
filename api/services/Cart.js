@@ -1,10 +1,9 @@
 var schema = new Schema({
     userId: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
-        // TODO: remove comment
-        //unique: true
-        //required: true
+        ref: 'User',
+        unique: true,
+        required: true
     },
     products: [{
         product: {
@@ -41,6 +40,19 @@ var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "products.prod
 var model = {
     saveProduct: function (product, callback) {
         if (!_.isEmpty(product.accessToken)) {
+            Product.isProductAvailable(product, function (err, data) {
+                if (err) {
+                    callback(err);
+                } else if (data) {
+                    // TODO: Proceed with the process
+                } else {
+                    callback({
+                        message: {
+                            data: "Invalid request!"
+                        }
+                    });
+                }
+            });
             var cart = {};
             cart.products = [];
             cart.products.push({

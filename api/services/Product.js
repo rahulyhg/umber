@@ -37,6 +37,7 @@ var schema = new Schema({
         type: String,
         enum: ["Half sleeve", "Full sleeve"]
     },
+    //TODO: Will the fabric & basecolor be multiple?
     fabric: {
         type: Schema.Types.ObjectId,
         ref: 'Fabric'
@@ -60,6 +61,7 @@ var schema = new Schema({
     }
 });
 
+// Select required fields
 schema.plugin(deepPopulate, {
     populate: {
         'category': {

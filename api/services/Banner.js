@@ -6,7 +6,11 @@ var schema = new Schema({
             name: "Image"
         }
     },
-    page: String,
+    page: {
+        type: String,
+        unique: true,
+        required: true
+    },
     status: {
         type: String,
         enum: ['Enabled', 'Disabled'],
@@ -20,5 +24,11 @@ schema.plugin(timestamps);
 module.exports = mongoose.model('Banner', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
-var model = {};
+var model = {
+    getBanner: function (pageName, callback) {
+        Banner.findOne({
+            page: pageName
+        }).exec
+    }
+};
 module.exports = _.assign(module.exports, exports, model);

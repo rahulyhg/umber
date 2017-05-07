@@ -88,14 +88,6 @@ var schema = new Schema({
         enum: ["M", "F"]
     },
     lastAccessed: Date,
-    cart: [{
-        product: String,
-        productJson: String,
-        quantity: Number
-    }],
-    wishlist: [{
-        productId: Schema.Types.ObjectId
-    }],
     emailConfirmed: Boolean,
     status: {
         type: String,

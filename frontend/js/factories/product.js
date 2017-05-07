@@ -39,6 +39,10 @@ myApp.factory('ProductService', function ($http) {
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
+        },
+
+        isAvailableProduct: function (reqQuantity, product) {
+            return reqQuantity < product.quantity;
         }
     };
 });
