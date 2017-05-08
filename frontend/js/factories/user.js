@@ -16,6 +16,15 @@ myApp.factory('UserService', function ($http) {
                 data: userData,
                 withCredentials: false
             }).then(callback);
+        },
+
+        logout: function (data, callback) {
+            $http({
+                url: adminurl + 'User/logout',
+                method: 'POST',
+                data: data,
+                withCredentials: false
+            })
         }
     }
 });

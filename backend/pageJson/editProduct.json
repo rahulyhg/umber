@@ -22,6 +22,18 @@
             "validation": ["", "trim", "unique"],
             "url": ""
         }, {
+            "name": "Size",
+            "type": "tags",
+            "tableRef": "size",
+            "placeholder": "Select Available Sizes",
+            "id": "size",
+            "searchApi": "searchCall",
+            "fieldType": "",
+            "url": "Size/search",
+            "dropDownField": "name",
+            "view": true,
+            "dropDownType": "multiple"
+        }, {
             "name": "Quantity",
             "type": "number",
             "tableRef": "quantity",

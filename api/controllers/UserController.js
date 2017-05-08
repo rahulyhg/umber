@@ -75,14 +75,28 @@ var controller = {
             res.callback("Access Denied for Database Backup");
         }
     },
+
     registration: function (req, res) {
         if (req.body) {
             User.registration(req.body);
         }
     },
+
     login: function (req, res) {
         if (req.body) {
             User.login(req.body, res.callback);
+        } else {
+            res.json({
+                message: {
+                    data: "Invalid request!"
+                }
+            })
+        }
+    },
+
+    logout: function (req, res) {
+        if (req.body) {
+            User.logout(req.body, res.callback);
         } else {
             res.json({
                 message: {

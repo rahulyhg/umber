@@ -5,6 +5,9 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
     });
     $.fancybox.close(true);
 
+    $scope.userId = "";
+    $scope.accessToken = "";
+
     $scope.openLoginModal10 = function () {
         // alert('click');
         // console.log("clla");
@@ -25,8 +28,13 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
         UserService.login($scope.loginData, function (data) {
             if (!_.isEmpty(data.data.data)) {
                 $scope.userData = data.data.data;
+
                 $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
                 $.jStorage.set("userId", $scope.userData._id);
+
+                $scope.userId = $scope.userData._id;
+                $scope.accessToken = $scope.userData.accessToken[$scope.userData.accessToken.length - 1];
+
                 $scope.loginModal.close();
                 $state.go("home");
             } else {
@@ -38,8 +46,28 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
     $scope.registerUser = function () {
         UserService.userRegistration($scope.formData, function (data) {
             $scope.loginModal.close();
-            $state.go("home");
+            $state.reload("home");
         });
+    }
+
+    $scope.logout = function () {
+        var data = {
+            userId: $scope.userId,
+            accessToken: $scope.accessToken
+        }
+        $.jStorage.deleteKey('userId');
+        $.jStorage.deleteKey('accessToken');
+        UserService.logout(data, function (err, data) {
+            if (err) {
+                // TODO: Show error popup
+            } else if (data) {
+                // TODO: Change view
+                $scope.userId = "";
+                $scope.accessToken = "";
+            } else {
+                // TODO: Show error popup
+            }
+        })
     }
 
     $scope.removeProductFromCart = function (cartId, productId) {
@@ -54,14 +82,12 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
     }
 
     var userId = {
-        userId: $.jStorage.get("userId")
+        userId: $scope.userId
     }
-    if (userId.userId != null || typeof userId.userId == 'undefined') {
+
+    if (userId.userId != "") {
         CartService.getCart(userId, function (data) {
-            console.log("getcart->data: ", data);
-            //TODO: Instead of array this will be single doc when query changes to findOneAndUpdate
-            var accessToken = $.jStorage.get("accessToken");
-            if (accessToken) {
+            if ($scope.accessToken) {
                 $scope.cart = data.data.data;
                 console.log("mycarttable: ", $scope.cart);
             } else {

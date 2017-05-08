@@ -234,6 +234,28 @@ var model = {
                 console.log("Big mistake");
             }
         })
+    },
+
+    logout: function (userData, callback) {
+        User.update({
+            _id: userData.userId
+        }, {
+            $pull: {
+                'accessToken': userData.accessToken
+            }
+        }).exec(function (err, data) {
+            if (err) {
+                callback(err, null);
+            } else if (data) {
+                callback(null, data);
+            } else {
+                callback({
+                    message: {
+                        data: "Invalid credentials!"
+                    }
+                }, null);
+            }
+        })
     }
 
 };

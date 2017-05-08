@@ -16,5 +16,23 @@ schema.plugin(timestamps);
 module.exports = mongoose.model('Size', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
-var model = {};
+var model = {
+    getSizes: function (callback) {
+        Size.find({}).exec({
+            function (err, data) {
+                if (err) {
+                    callback(err, null);
+                } else if (data) {
+                    callback(null, data);
+                } else {
+                    callback({
+                        message: {
+                            data: "Invalid credentials!"
+                        }
+                    }, null);
+                }
+            }
+        })
+    }
+};
 module.exports = _.assign(module.exports, exports, model);
