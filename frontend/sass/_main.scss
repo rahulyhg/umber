@@ -1,4 +1,3 @@
-
 /* Bootstrap Variables Goes Here */
 
 $brand-primary: #0d9dff !default;
@@ -162,7 +161,12 @@ a,
     transition: all ease 300ms;
 }
 
-.btn:focus, .btn.focus, .btn:active:focus, .btn:active.focus, .btn.active:focus, .btn.active.focus {
+.btn:focus,
+.btn.focus,
+.btn:active:focus,
+.btn:active.focus,
+.btn.active:focus,
+.btn.active.focus {
     outline: 0px auto -webkit-focus-ring-color;
     outline-offset: 0px;
 }
@@ -380,8 +384,7 @@ header {
     $darkBrown1,
     $white);
     border: 1px dashed $white; // width: 180px;
-    text-transform: uppercase;
-    //font-weight: bold;
+    text-transform: uppercase; //font-weight: bold;
     letter-spacing: 1px;
     &:hover,
     &:active,
@@ -560,6 +563,13 @@ header {
     }
     td:last-child {
         vertical-align: bottom;
+    }
+    td {
+        a {
+            i {
+                color: #341314;
+            }
+        }
     }
     .mycart-list {
         li {
@@ -792,11 +802,12 @@ header {
     .list-inline>li {
         @include padding(null 0 null null);
     }
-        .list-inline>li:nth-child(3),     .list-inline>li:nth-child(5){
+    .list-inline>li:nth-child(3),
+    .list-inline>li:nth-child(5) {
         padding-top: 8px;
     }
-    .list-inline>li:nth-child(4){
-            margin-top: -9.65%;
+    .list-inline>li:nth-child(4) {
+        margin-top: -9.65%;
     }
     .all-categorie__dimension {
         width: 50%;
@@ -1153,10 +1164,10 @@ header {
                         @include position(relative,
                         6px null null null);
                         font-size: 28px;
-                         padding: 0 4px;
+                        padding: 0 4px;
                     }
                 }
-                a{
+                a {
                     color: $white;
                 }
                 color: $white;
