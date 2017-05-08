@@ -69,13 +69,9 @@
     <div class="all-categorie">
         <ul class="list-inline list-unstyled">
             <li class="all-categorie__dimension" ng-repeat="category in categories">
-                <ul class="list-unstyled">
-                    <li>
                         <div class="padd">
                             <a ui-sref="listing-page({id: category._id})"><img ng-src="{{category.imgLink | serverimage}}" alt="" class="img-responsive"></a>
                         </div>
-                    </li>
-                </ul>
             </li>
         </ul>
 
@@ -193,7 +189,7 @@
                             <div class="blog__desc">
                                 <h3 class="text-uppercase">{{blog.name}}</h3>
                                 <p>{{blog.description}}</p>
-                                <p class="rel"><a href={{blog.link}}>Read more</a></p>
+                                <p class="rel"><a href="{{blog.link}}">Read more</a></p>
                             </div>
                         </div>
                     </li>

@@ -84,10 +84,9 @@
                         </ul>
 
                     </li>
-                    <li ng-if="!loggedUser"><a href=" # "><button class="btn header--login " ng-click="openLoginModal10(); ">LOGIN</button></a></li>
-                    <li ng-if="loggedUser">
-                        <a href=" # "><button class=" btn header--login " ng-click="logout();
-                            " ng-if="userId !='' ">LOGOUT</button></a></li>
+                    <li><button class="btn header--login " ng-click="openLoginModal10(); ">LOGIN</button>
+                    <li ng-if="loggedUser"><button class=" btn header--login " ng-click="logout();
+                            " ng-if="userId !='' ">LOGOUT</button></li>
                 </ul>
             </div>
             <!--<div class="collapse navbar-collapse " id="nav-collapse ">

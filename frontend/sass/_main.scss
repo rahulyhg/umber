@@ -162,6 +162,11 @@ a,
     transition: all ease 300ms;
 }
 
+.btn:focus, .btn.focus, .btn:active:focus, .btn:active.focus, .btn.active:focus, .btn.active.focus {
+    outline: 0px auto -webkit-focus-ring-color;
+    outline-offset: 0px;
+}
+
 footer {
     font-size: 12px;
     background-color: $lightBrown2;
@@ -624,7 +629,7 @@ header {
             padding: 3px 0;
             @extend .btn--brown;
             width: 85px;
-            @include margin(6px null null null);
+            @include margin(25px null null null);
         }
          ::-webkit-scrollbar {
             width: 5px;
@@ -786,6 +791,12 @@ header {
     @include margin(null null 45px null);
     .list-inline>li {
         @include padding(null 0 null null);
+    }
+        .list-inline>li:nth-child(3),     .list-inline>li:nth-child(5){
+        padding-top: 8px;
+    }
+    .list-inline>li:nth-child(4){
+            margin-top: -9.65%;
     }
     .all-categorie__dimension {
         width: 50%;
@@ -1140,9 +1151,13 @@ header {
                     &:after {
                         content: '\02192';
                         @include position(relative,
-                        3px null null null);
+                        6px null null null);
                         font-size: 28px;
+                         padding: 0 4px;
                     }
+                }
+                a{
+                    color: $white;
                 }
                 color: $white;
                 background-color: $darkBrown1;
@@ -1152,7 +1167,7 @@ header {
                     font-size: 20px;
                     font-weight: 600;
                 }
-                P {
+                p {
                     line-height: 1;
                 }
             }
