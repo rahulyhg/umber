@@ -41,6 +41,7 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
             $state.go("home");
         });
     }
+
     $scope.removeProductFromCart = function (cartId, productId) {
         console.log("Removing product: ", productId);
         var data = {

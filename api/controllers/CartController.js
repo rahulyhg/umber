@@ -27,9 +27,9 @@ var controller = {
         }
     },
 
-    updateCart: function (req, res) {
+    updateCartQuantity: function (req, res) {
         if (req.body) {
-            Cart.updateCart(req.body);
+            Cart.updateCartQuantity(req.body);
         } else {
             console.log("No cart found");
         }

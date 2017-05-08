@@ -27,10 +27,10 @@ myApp.factory('CartService', function ($http) {
             return total;
         },
 
-        updateCart: function (cart) {
+        updateCartQuantity: function (cart) {
             console.log("update cart: ", cart);
             $http({
-                url: adminurl + 'Cart/updateCart',
+                url: adminurl + 'Cart/updateCartQuantity',
                 method: 'POST',
                 data: cart,
                 withCredentials: false

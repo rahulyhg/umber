@@ -172,6 +172,48 @@ var model = {
                 }, null);
             }
         });
+    },
+
+    isProductAvailable: function (product, callback) {
+        Product.findOne({
+            _id: mongoose.Types.ObjectId(product._id)
+        }).exec(function (err, data) {
+            if (err) {
+                callback(err, null);
+            } else if (data) {
+                if (product.reqQuatity <= product.quantity)
+                    callback(null, data);
+                else
+                    callback(null, {});
+            } else {
+                callback({
+                    message: {
+                        data: "Invalid credentials!"
+                    }
+                }, null);
+            }
+        })
+    },
+
+    updateProductQuantity: function (product, count, callback) {
+        Product.findOne({
+            _id: product._id
+        }).exec(function (err, data) {
+            data.quantity += count;
+            Product.saveData(data, function (err, data) {
+                if (err) {
+                    callback(err, null);
+                } else if (data) {
+                    callback(null, data);
+                } else {
+                    callback({
+                        message: {
+                            data: "Invalid credentials!"
+                        }
+                    }, null);
+                }
+            })
+        });
     }
 };
 module.exports = _.assign(module.exports, exports, model);

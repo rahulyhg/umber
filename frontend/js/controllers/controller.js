@@ -457,7 +457,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 if ($scope.mycartTable.products[index].quantity <= 0)
                     $scope.mycartTable.products[index].quantity = 0;
                 //TODO: Handle update cart error
-                CartService.updateCart($scope.mycartTable);
+                CartService.updateCartQuantity($scope.mycartTable);
                 //TODO: Calculate actual grand total
                 $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
             }

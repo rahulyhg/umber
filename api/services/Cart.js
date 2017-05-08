@@ -42,7 +42,7 @@ var model = {
         if (!_.isEmpty(product.accessToken)) {
             Product.isProductAvailable(product, function (err, data) {
                 if (err) {
-                    callback(err);
+                    callback(err, null);
                 } else if (data) {
                     // TODO: Proceed with the process
                 } else {
@@ -50,7 +50,7 @@ var model = {
                         message: {
                             data: "Invalid request!"
                         }
-                    });
+                    }, null);
                 }
             });
             var cart = {};
@@ -186,7 +186,7 @@ var model = {
         })
     },
 
-    updateCart: function (cart) {
+    updateCartQuantity: function (cart) {
         Cart.findOneAndUpdate({
             _id: cart._id
         }, cart).exec();
