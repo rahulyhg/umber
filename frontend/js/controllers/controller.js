@@ -223,7 +223,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
         $scope.registerUser = function () {
             console.log("Register: ", $scope.registerData);
-            UserService.userRegistration($scope.formData);
+            UserService.userRegistration($scope.registerData);
         }
 
 
