@@ -84,7 +84,7 @@
                         </ul>
 
                     </li>
-                    <li><button class="btn header--login " ng-click="openLoginModal10(); ">LOGIN</button>
+                    <li ng-if="!loggedUser"><button class="btn header--login " ng-click="openLoginModal10(); ">LOGIN</button></li>
                     <li ng-if="loggedUser"><button class=" btn header--login " ng-click="logout();
                             " ng-if="userId !='' ">LOGOUT</button></li>
                 </ul>

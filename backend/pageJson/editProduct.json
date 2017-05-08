@@ -47,6 +47,7 @@
             "tableRef": "images",
             "placeholder": "Enter Image Link",
             "id": "imgLink",
+            "size": "365 × 460",
             "option": "multiple",
             "validation": ["", "trim", ""],
             "view": true,

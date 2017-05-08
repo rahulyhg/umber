@@ -287,7 +287,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         //     subtotal: '2,899'
         // }]
     })
-    .controller('IndividualPageCtrl', function ($scope, $http, $stateParams, $state, TemplateService, NavigationService, ProductService, CartService, $timeout) {
+    .controller('IndividualPageCtrl', function ($scope, $http, $stateParams, $state, $uibModal, UserService, TemplateService, NavigationService, ProductService, CartService, $timeout) {
         $scope.template = TemplateService.getHTML("content/individual-page.html");
         TemplateService.title = "individual-page"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -299,6 +299,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             $scope.formSubmitted = true;
         };
 
+        $scope.loggedUser = $.jStorage.get("userId");
         var productId = $stateParams.id;
         ProductService.getProductWithId(productId, function (data) {
             $scope.product = data.data.data;
@@ -329,7 +330,68 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             } else {
                 console.log("User not logged in");
                 // TODO: goto login. can't route to modal or checkkout
+                $scope.loginModal = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'views/modal/login.html',
+                    scope: $scope,
+                    size: 'md',
+                    // windowClass: 'modal-content-radi0'
+                });
             }
+        }
+
+        $scope.openLoginModal = function () {
+            var userId = $.jStorage.get("userId");
+            if (!userId) {
+                $scope.loginModal = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'views/modal/login.html',
+                    scope: $scope,
+                    size: 'md',
+                    // windowClass: 'modal-content-radi0'
+                });
+            }
+        }
+
+        //TODO: Do this in single controller
+
+        $scope.formData = {};
+        $scope.loginData = {};
+
+        $scope.login = function () {
+            console.log("Header login");
+            UserService.login($scope.loginData, function (data) {
+                if (!_.isEmpty(data.data.data)) {
+                    $scope.userData = data.data.data;
+
+                    $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
+                    $.jStorage.set("userId", $scope.userData._id);
+
+                    $scope.loggedUser = $scope.userData._id;
+                    $scope.accessToken = $scope.userData.accessToken[$scope.userData.accessToken.length - 1];
+
+                    $scope.loginModal.close();
+                    $state.reload("listing-page");
+                } else {
+                    // TODO:: show popup to register
+                }
+            });
+        }
+
+        $scope.registerUser = function () {
+            console.log("Register data: ", $scope.formData);
+            UserService.userRegistration($scope.formData, function (data) {
+                $scope.userData = data.data.data;
+
+                $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
+                $.jStorage.set("userId", $scope.userData._id);
+
+                $scope.loggedUser = $scope.userData._id;
+                $scope.accessToken = $scope.userData.accessToken[$scope.userData.accessToken.length - 1];
+
+                $scope.loginModal.close();
+                $state.reload("listing-page");
+            });
         }
 
         $scope.selectedSize = {};
@@ -424,8 +486,6 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.changeImage = function (index) {
             $scope.selectedImage = $scope.product.images[index];
         };
-
-
     })
     .controller('MycartCtrl', function ($scope, $state, TemplateService, NavigationService, CartService, $timeout, $uibModal) {
         $scope.template = TemplateService.getHTML("content/mycart.html");

@@ -27,7 +27,7 @@
             "placeholder": "Enter Product Code",
             "id": "code",
             "validation": [
-                "",
+                "required",
                 "trim",
                 "unique"
             ],
@@ -44,7 +44,12 @@
             "url": "Size/search",
             "dropDownField": "name",
             "view": true,
-            "dropDownType": "multiple"
+            "dropDownType": "multiple",
+            "validation": [
+                "required",
+                "trim",
+                ""
+            ]
         },
         {
             "name": "Quantity",
@@ -53,7 +58,7 @@
             "placeholder": "Enter Available Product Quantity",
             "id": "quantity",
             "validation": [
-                "Required",
+                "required",
                 "trim",
                 "unique"
             ],
@@ -65,9 +70,10 @@
             "tableRef": "images",
             "placeholder": "Enter Image Link",
             "id": "imgLink",
+            "size": "365 × 460",
             "option": "mulitple",
             "validation": [
-                "",
+                "required",
                 "trim",
                 "unique"
             ],
@@ -109,6 +115,11 @@
             "searchApi": "searchCall",
             "fieldType": "",
             "url": "Brand/search",
+            "validation": [
+                "required",
+                "trim",
+                ""
+            ],
             "dropDownField": "name",
             "dropDownType": "single"
         },
@@ -201,7 +212,7 @@
             "searchApi": "searchCall",
             "url": "Fabric/search",
             "validation": [
-                "",
+                "required",
                 "trim"
             ]
         },
@@ -215,7 +226,7 @@
             "dropDownField": "name",
             "dropDownType": "single",
             "validation": [
-                "",
+                "required",
                 "trim"
             ]
         },
@@ -227,7 +238,7 @@
             "id": "washcare",
             "url": "",
             "validation": [
-                "",
+                "required",
                 "trim"
             ]
         },
@@ -239,7 +250,7 @@
             "id": "descript",
             "url": "",
             "validation": [
-                "",
+                "required",
                 "trim"
             ]
         },
