@@ -225,6 +225,8 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
         if ($scope.loggedUser) {
             $scope.view = "orderTab";
+        } else {
+            $scope.view = "loginTab";
         }
 
         $scope.registerUser = function () {
@@ -250,7 +252,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                     $scope.userData = data.data.data;
                     $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
                     $.jStorage.set("userId", $scope.userData._id);
-                    $state.go("listing-page");
+                    $state.reload("listing-page");
                 } else {
                     // TODO:: show popup to register
                 }
@@ -261,29 +263,29 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             userId: $.jStorage.get("userId")
         }
 
-        CartService.getCart(userData, function (err, data) {
+        CartService.getCart(userData, function (data) {
             $scope.orderTable = data.data.data;
             $scope.grandTotal = CartService.getTotal($scope.orderTable.products);
         });
 
 
-        $scope.orderTable = [{
-            img: 'img/checkout/item.jpg',
-            title1: 'florence prints',
-            title2: 'half sleeve shirts',
-            color: 'blue',
-            size: 'xl',
-            quantity: '02',
-            subtotal: '2,899'
-        }, {
-            img: 'img/checkout/item.jpg',
-            title1: 'florence prints',
-            title2: 'half sleeve shirts',
-            color: 'blue',
-            size: 'xl',
-            quantity: '02',
-            subtotal: '2,899'
-        }]
+        // $scope.orderTable = [{
+        //     img: 'img/checkout/item.jpg',
+        //     title1: 'florence prints',
+        //     title2: 'half sleeve shirts',
+        //     color: 'blue',
+        //     size: 'xl',
+        //     quantity: '02',
+        //     subtotal: '2,899'
+        // }, {
+        //     img: 'img/checkout/item.jpg',
+        //     title1: 'florence prints',
+        //     title2: 'half sleeve shirts',
+        //     color: 'blue',
+        //     size: 'xl',
+        //     quantity: '02',
+        //     subtotal: '2,899'
+        // }]
     })
     .controller('IndividualPageCtrl', function ($scope, $http, $stateParams, $state, TemplateService, NavigationService, ProductService, CartService, $timeout) {
         $scope.template = TemplateService.getHTML("content/individual-page.html");

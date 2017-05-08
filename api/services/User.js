@@ -203,7 +203,13 @@ var model = {
             if (err) {
                 callback(err, null);
             } else if (data) {
-                callback(null, data);
+                if (!_.isEmpty(data)) {
+                    var accessToken = uid(16);
+                    data.accessToken.push(accessToken);
+                    User.saveData(data, function () {});
+                    console.log("data: ", data);
+                    callback(null, data);
+                }
             } else {
                 callback({
                     message: {
