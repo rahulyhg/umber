@@ -213,7 +213,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         console.log($scope.myShirt11);
 
     })
-    .controller('CheckoutCtrl', function ($scope, $state, TemplateService, NavigationService, UserService, $timeout) {
+    .controller('CheckoutCtrl', function ($scope, $state, TemplateService, NavigationService, UserService, CartService, $timeout) {
         $scope.template = TemplateService.getHTML("content/checkout.html");
         TemplateService.title = "Checkout"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -240,6 +240,16 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 }
             });
         }
+
+        var userData = {
+            userId: $.jStorage.get("userId")
+        }
+
+        CartService.getCart(userData, function (err, data) {
+            $scope.orderTable = data.data.data;
+            $scope.grandTotal = CartService.getTotal($scope.orderTable.products);
+        });
+
 
         $scope.orderTable = [{
             img: 'img/checkout/item.jpg',
@@ -284,21 +294,21 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 $scope.product.accessToken = accessToken;
                 $scope.product.userId = $.jStorage.get("userId");
                 $scope.product.reqQuantity = 1;
-                if (ProductService.isProductAvailable(reqQuantity, $scope.product)) {
-                    CartService.saveProduct($scope.product, function (data) {
-                        if (data.data.error) {
-                            console.log("Error: ", data.data.error);
-                        } else {
-                            console.log("Success");
-                            $state.reload("individual-page");
-                        }
-                    });
-                } else {
-                    console.log("User not logged in");
-                    // TODO: goto login. can't route to modal or checkkout
-                }
+                //if (ProductService.isProductAvailable($scope.product.reqQuantity, $scope.product)) {
+                CartService.saveProduct($scope.product, function (data) {
+                    if (data.data.error) {
+                        console.log("Error: ", data.data.error);
+                    } else {
+                        console.log("Success");
+                        $state.reload("individual-page");
+                    }
+                });
+                // } else {
+                //     // TODO: Add product not available error
+                // }
             } else {
-                // TODO: Add product not available error
+                console.log("User not logged in");
+                // TODO: goto login. can't route to modal or checkkout
             }
         }
 

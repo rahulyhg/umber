@@ -36,7 +36,7 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
                 $scope.accessToken = $scope.userData.accessToken[$scope.userData.accessToken.length - 1];
 
                 $scope.loginModal.close();
-                $state.go("home");
+                $state.reload("home");
             } else {
                 // TODO:: show popup to register
             }

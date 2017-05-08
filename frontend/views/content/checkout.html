@@ -131,20 +131,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="myorder in orderTable">
+                                    <tr ng-repeat="order in orderTable">
                                         <td>
                                             <div class="item">
-                                                <img ng-src="{{myorder.img}}" alt="" class="img-responsive item__img-checkout">
+                                                <img ng-src="{{order.product.images[0] | serverimage}}" alt="" class="img-responsive item__img-checkout">
                                                 <div class="mycart-info">
-                                                    <p class="item__title1">{{myorder.title1}}</p>
-                                                    <p class="item__title2">{{myorder.title2}}</p>
+                                                    <p class="item__title1">{{order.product.name}}</p>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>{{myorder.color}}</td>
-                                        <td>{{myorder.size}}</td>
-                                        <td>{{myorder.quantity}}</td>
-                                        <td>&#x20b9{{myorder.subtotal}}</td>
+                                        <td>{{order.color.name}}</td>
+                                        <td>{{order.size}}</td>
+                                        <td>{{order.quantity}}</td>
+                                        <td>&#x20b9{{order.product.price * order.quantity}}</td>
                                     </tr>
                                 </tbody>
                                 <!--<tfoot>
@@ -154,7 +153,7 @@
                                 </tfoot>-->
                             </table>
                             <div class="pull-right">
-                                <p class="text-right">GRAND TOTAL : <span>&#x20b9 170.98</span></p>
+                                <p class="text-right">GRAND TOTAL : <span>&#x20b9 {{grandTotal}}</span></p>
                                 <p>
                                     <button class="btn next--btn btn-default">Next</button>
                                 </p>
