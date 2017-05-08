@@ -75,26 +75,4 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
     $scope.viewLogin = function () {
         $scope.view = !$scope.view;
     }
-
-    $scope.cart = [{
-        img: '../img/home/11.jpg',
-        shirtType: 'linen full sleeve shirt with rollup',
-        price: '2899',
-        size: '36'
-    }, {
-        img: '../img/home/12.jpg',
-        shirtType: 'linen full sleeve shirt with rollup',
-        price: '3000',
-        size: '37'
-    }, {
-        img: '../img/home/12.jpg',
-        shirtType: 'linen full sleeve shirt with rollup',
-        price: '3000',
-        size: '37'
-    }, {
-        img: '../img/home/12.jpg',
-        shirtType: 'linen full sleeve shirt with rollup',
-        price: '3000',
-        size: '37'
-    }];
 });
