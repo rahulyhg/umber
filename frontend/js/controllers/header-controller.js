@@ -5,8 +5,8 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
     });
     $.fancybox.close(true);
 
-    $scope.userId = "";
-    $scope.accessToken = "";
+    $scope.loggedUser = $.jStorage.get("userId");
+    $scope.accessToken = $.jStorage.get("accessToken");
 
     $scope.openLoginModal10 = function () {
         // alert('click');
@@ -32,11 +32,11 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
                 $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
                 $.jStorage.set("userId", $scope.userData._id);
 
-                $scope.userId = $scope.userData._id;
+                $scope.loggedUser = $scope.userData._id;
                 $scope.accessToken = $scope.userData.accessToken[$scope.userData.accessToken.length - 1];
 
                 $scope.loginModal.close();
-                $state.reload("home");
+                $state.reload("listing-page");
             } else {
                 // TODO:: show popup to register
             }
@@ -44,30 +44,34 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
     }
 
     $scope.registerUser = function () {
+        console.log("Register data: ", $scope.formData);
         UserService.userRegistration($scope.formData, function (data) {
+            $scope.userData = data.data.data;
+
+            $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
+            $.jStorage.set("userId", $scope.userData._id);
+
+            $scope.loggedUser = $scope.userData._id;
+            $scope.accessToken = $scope.userData.accessToken[$scope.userData.accessToken.length - 1];
+
             $scope.loginModal.close();
-            $state.reload("home");
+            $state.reload("listing-page");
         });
     }
 
     $scope.logout = function () {
+        console.log("Logging out user");
         var data = {
-            userId: $scope.userId,
-            accessToken: $scope.accessToken
+            userId: $.jStorage.get("userId"),
+            accessToken: $.jStorage.get("accessToken")
         }
         $.jStorage.deleteKey('userId');
         $.jStorage.deleteKey('accessToken');
-        UserService.logout(data, function (err, data) {
-            if (err) {
-                // TODO: Show error popup
-            } else if (data) {
-                // TODO: Change view
-                $scope.userId = "";
-                $scope.accessToken = "";
-            } else {
-                // TODO: Show error popup
-            }
-        })
+        UserService.logout(data, function (data) {
+            $scope.loggedUser = "";
+            $scope.accessToken = "";
+            $state.reload("home");
+        });
     }
 
     $scope.removeProductFromCart = function (cartId, productId) {
@@ -82,12 +86,13 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
     }
 
     var userId = {
-        userId: $scope.userId
+        userId: $.jStorage.get("userId"),
+        accessToken: $.jStorage.get("accessToken")
     }
 
-    if (userId.userId != "") {
+    if (userId.userId != null || typeof userId.userId != 'undefined') {
         CartService.getCart(userId, function (data) {
-            if ($scope.accessToken) {
+            if (userId.accessToken) {
                 $scope.cart = data.data.data;
                 console.log("mycarttable: ", $scope.cart);
             } else {

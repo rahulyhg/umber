@@ -66,7 +66,7 @@
                                         <div class="inline-block__size">
                                             <div class="inline-block">
                                                 <div class="size">
-                                                    <span>{{product.product.size}}</span>
+                                                    <span>{{product.size.name}}</span>
                                                 </div>
                                             </div>
                                             <div class="inline-block">
@@ -84,8 +84,10 @@
                         </ul>
 
                     </li>
-                    <li><a href=" # "><button class="btn header--login " ng-click="openLoginModal10(); ">LOGIN</button></a>
-                    </li>
+                    <li ng-if="!loggedUser"><a href=" # "><button class="btn header--login " ng-click="openLoginModal10(); ">LOGIN</button></a></li>
+                    <li ng-if="loggedUser">
+                        <a href=" # "><button class=" btn header--login " ng-click="logout();
+                            " ng-if="userId !='' ">LOGOUT</button></a></li>
                 </ul>
             </div>
             <!--<div class="collapse navbar-collapse " id="nav-collapse ">

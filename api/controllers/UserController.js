@@ -78,7 +78,13 @@ var controller = {
 
     registration: function (req, res) {
         if (req.body) {
-            User.registration(req.body);
+            User.registration(req.body, res.callback);
+        } else {
+            res.json({
+                message: {
+                    data: "Invalid request!"
+                }
+            })
         }
     },
 

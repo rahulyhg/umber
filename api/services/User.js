@@ -191,7 +191,7 @@ var model = {
             data.save(function () {});
         });
     },
-    registration: function (userData) {
+    registration: function (userData, callback) {
         console.log(userData);
         var user = {};
         user.userName = userData.username;
@@ -201,12 +201,15 @@ var model = {
 
         User.saveData(user, function (err, data) {
             if (err) {
-                console.log("Err: ", err);
+                callback(err, null);
             } else if (data) {
-                console.log("Data: ", data);
+                callback(null, data);
             } else {
-                //Todo: throw error
-                console.log("error");
+                callback({
+                    message: {
+                        data: "Invalid credentials!"
+                    }
+                })
             }
         });
     },

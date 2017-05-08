@@ -1,0 +1,59 @@
+{
+    "title": "Create Size",
+    "name": "Size",
+    "jsonPage": "viewSize",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": ["Size"],
+    "fields": [{
+        "name": "Name",
+        "type": "text",
+        "tableRef": "name",
+        "placeholder": "Enter Size",
+        "id": "name",
+        "validation": ["required", "trim", "unique"],
+        "url": ""
+    }, {
+        "name": "Order",
+        "type": "text",
+        "tableRef": "order",
+        "placeholder": "Enter Size Order",
+        "id": "order",
+        "validation": ["required", "trim", "unique"],
+        "url": ""
+    }, {
+        "name": "Status",
+        "type": "tags",
+        "tableRef": "status",
+        "placeholder": "Select Status",
+        "id": "status",
+        "validation": ["", "trim"],
+        "url": "",
+        "dropDownField": "",
+        "dropDownType": "single",
+        "onView": true,
+        "dropDown": ["Enabled", "Disabled"]
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitSize",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewSize"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewSize"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "Size/save"
+    }
+}

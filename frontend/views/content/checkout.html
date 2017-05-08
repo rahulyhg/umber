@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-md-3" ng-init="view='loginTab'">
                         <div class="list-checkout">
-                            <div>
+                            <div ng-if="!loggedUser">
                                 <button class="btn btn--list" ng-click="view='loginTab'" ng-class="{'btn--brownActive': view == 'loginTab'}">Login</button>
                             </div>
                             <div>
@@ -22,7 +22,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="login-tab" ng-if="view=='loginTab'">
+                    <div class="login-tab" ng-if="!loggedUser && view =='loginTab'" ng-if="">
                         <div class="col-md-3 col-md-offset-1">
                             <form class="customized-form login-form">
                                 <div class="form-group">

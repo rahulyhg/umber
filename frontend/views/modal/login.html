@@ -81,24 +81,24 @@
                             <p>to your account</p>
                         </div>
                         <div>
-                            <form class="modal__customized-form">
+                            <form class="modal__customized-form" name="registerForm">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Username" ng-model="formData.username" class="form-control">
+                                    <input type="text" placeholder="Username" ng-model="formData.username" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" placeholder="Email Address" ng-model="formData.email" class="form-control">
+                                    <input type="email" placeholder="Email Address" ng-model="formData.email" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" placeholder="Mobile No." ng-model="formData.mobile" class="form-control">
+                                    <input type="text" placeholder="Mobile No." ng-model="formData.mobile" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" placeholder="Password" ng-model="formData.password" class="form-control">
+                                    <input type="password" placeholder="Password" ng-model="formData.password" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" placeholder="Confirm Password" ng-model="formData.confirm" class="form-control">
+                                    <input type="password" placeholder="Confirm Password" ng-model="formData.confirm" class="form-control" required>
                                 </div>
                                 <div class="marginTop">
-                                    <button class="btn btn-login btn-block" ng-click="registerUser()">Sign in</button>
+                                    <button class="btn btn-login btn-block" ng-click="registerForm.$valid && registerUser()">Sign in</button>
                                 </div>
                             </form>
                         </div>

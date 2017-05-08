@@ -40,25 +40,27 @@ var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "products.prod
 var model = {
     saveProduct: function (product, callback) {
         if (!_.isEmpty(product.accessToken)) {
-            Product.isProductAvailable(product, function (err, data) {
-                if (err) {
-                    callback(err, null);
-                } else if (data) {
-                    // TODO: Proceed with the process
-                } else {
-                    callback({
-                        message: {
-                            data: "Invalid request!"
-                        }
-                    }, null);
-                }
-            });
+            // Product.isProductAvailable(product, function (err, data) {
+            //     if (err) {
+            //         callback(err, null);
+            //     } else if (data) {
+            //         // TODO: Proceed with the process
+            //     } else {
+            //         callback({
+            //             message: {
+            //                 data: "Invalid request!"
+            //             }
+            //         }, null);
+            //     }
+            // });
             var cart = {};
             cart.products = [];
             cart.products.push({
                 product: mongoose.Types.ObjectId(product._id),
                 quantity: 1,
-                color: product.baseColor
+                color: product.baseColor,
+                size: product.selectedSize,
+                quantity: product.reqQuantity
             });
             // Check whether a user exists with given access token
             User.findOne({
@@ -129,8 +131,9 @@ var model = {
                                         // Update cart product quantity if present
                                         data.products.push({
                                             product: mongoose.Types.ObjectId(product._id),
-                                            quantity: 1,
-                                            color: product.baseColor
+                                            quantity: product.reqQuantity,
+                                            color: product.baseColor,
+                                            size: product.selectedSize
                                         });
                                         data.userId = product.userId;
                                         Cart.saveData(data, function (err, data) {
@@ -171,7 +174,7 @@ var model = {
     getCart: function (userId, callback) {
         Cart.findOne({
             userId: userId.userId
-        }).deepPopulate("products.product products.color").exec(function (err, data) {
+        }).deepPopulate("products.product products.color products.size").exec(function (err, data) {
             if (err) {
                 callback(err, null);
             } else if (data) {

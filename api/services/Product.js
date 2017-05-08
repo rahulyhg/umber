@@ -84,6 +84,9 @@ schema.plugin(deepPopulate, {
         },
         'type': {
             select: "name"
+        },
+        'size': {
+            select: "name order"
         }
     }
 });
@@ -91,8 +94,8 @@ schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('Product', schema);
 
-var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "category subCategory brand prodCollection baseColor fabric type",
-    "category subCategory brand prodCollection baseColor fabric type"));
+var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "category subCategory brand prodCollection baseColor fabric type size",
+    "category subCategory brand prodCollection baseColor fabric type size"));
 var model = {
     getAllProducts: function (data, callback) {
         Product.find({}).exec(function (error, data) {
@@ -111,7 +114,7 @@ var model = {
     getEnabledProducts: function (data, callback) {
         Product.find({
             status: 'Enabled'
-        }).deepPopulate("category subCategory brand prodCollection baseColor fabric type").exec(function (error, data) {
+        }).deepPopulate("category subCategory brand prodCollection baseColor fabric type size").exec(function (error, data) {
             if (error) {
                 callback(error, null);
             } else if (data) {
@@ -161,7 +164,7 @@ var model = {
     getProductWithId: function (data, callback) {
         Product.findOne({
             _id: mongoose.Types.ObjectId(data)
-        }).deepPopulate('category subCategory brand prodCollection baseColor fabric type').exec(function (err, data) {
+        }).deepPopulate('category subCategory brand prodCollection baseColor fabric type size').exec(function (err, data) {
             if (err) {
                 callback(err, null);
             } else if (data) {

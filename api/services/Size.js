@@ -7,7 +7,9 @@ var schema = new Schema({
         excel: {
             name: "Name"
         }
-    }
+    },
+
+    order: Number
 });
 
 schema.plugin(deepPopulate, {});

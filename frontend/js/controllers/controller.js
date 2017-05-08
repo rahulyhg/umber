@@ -220,10 +220,26 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
         $scope.registerData = {};
         $scope.loginData = {};
+        $scope.loggedUser = $.jStorage.get("userId");
+        $scope.accessToken = $.jStorage.get("accessToken");
+
+        if ($scope.loggedUser) {
+            $scope.view = "orderTab";
+        }
 
         $scope.registerUser = function () {
             console.log("Register: ", $scope.registerData);
-            UserService.userRegistration($scope.registerData);
+            UserService.userRegistration($scope.registerData, function (data) {
+                console.log("Login data: ", data);
+                if (!_.isEmpty(data.data.data)) {
+                    $scope.userData = data.data.data;
+                    $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
+                    $.jStorage.set("userId", $scope.userData._id);
+                    $state.go("listing-page");
+                } else {
+                    // TODO:: show popup to register
+                }
+            });
         }
 
 
@@ -234,7 +250,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                     $scope.userData = data.data.data;
                     $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
                     $.jStorage.set("userId", $scope.userData._id);
-                    $state.go("home");
+                    $state.go("listing-page");
                 } else {
                     // TODO:: show popup to register
                 }
@@ -275,6 +291,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.navigation = NavigationService.getNavigation();
         $scope.formSubmitted = false;
         $scope.oneAtATime = true;
+        $scope.reqQuantity = 1;
         $scope.submitForm = function (data) {
             console.log(data);
             $scope.formSubmitted = true;
@@ -293,7 +310,8 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             if (!_.isEmpty(accessToken)) {
                 $scope.product.accessToken = accessToken;
                 $scope.product.userId = $.jStorage.get("userId");
-                $scope.product.reqQuantity = 1;
+                $scope.product.selectedSize = $scope.selectedSize._id;
+                $scope.product.reqQuantity = $scope.reqQuantity;
                 //if (ProductService.isProductAvailable($scope.product.reqQuantity, $scope.product)) {
                 CartService.saveProduct($scope.product, function (data) {
                     if (data.data.error) {
@@ -310,6 +328,15 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 console.log("User not logged in");
                 // TODO: goto login. can't route to modal or checkkout
             }
+        }
+
+        $scope.selectedSize = {};
+        $scope.selectedSize.name = "Select Size";
+        $scope.setSelectedSize = function (size) {
+            $scope.selectedSize = size;
+        }
+        $scope.setQuantity = function (quantity) {
+            $scope.reqQuantity = quantity;
         }
 
         $scope.featured = [{
@@ -462,15 +489,15 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         }
         $scope.mycartTable = {};
         $scope.updateQuantity = function (index, count) {
-            if (ProductService.isProductAvailable(count, $scope.mycartTable.products[index])) {
-                $scope.mycartTable.products[index].quantity += count;
-                if ($scope.mycartTable.products[index].quantity <= 0)
-                    $scope.mycartTable.products[index].quantity = 0;
-                //TODO: Handle update cart error
-                CartService.updateCartQuantity($scope.mycartTable);
-                //TODO: Calculate actual grand total
-                $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
-            }
+            // if (ProductService.isProductAvailable(count, $scope.mycartTable.products[index])) {
+            $scope.mycartTable.products[index].quantity += count;
+            if ($scope.mycartTable.products[index].quantity <= 0)
+                $scope.mycartTable.products[index].quantity = 0;
+            //TODO: Handle update cart error
+            CartService.updateCartQuantity($scope.mycartTable);
+            //TODO: Calculate actual grand total
+            $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+            // }
         }
 
         $scope.removeProductFromCart = function (cartId, productId) {

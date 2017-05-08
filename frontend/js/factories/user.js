@@ -1,12 +1,12 @@
 myApp.factory('UserService', function ($http) {
     return {
-        userRegistration: function (userData) {
+        userRegistration: function (userData, callback) {
             $http({
                 url: adminurl + 'User/registration',
                 method: 'POST',
                 data: userData,
                 withCredentials: false
-            }).then(console.log("executed"));
+            }).then(callback);
         },
 
         login: function (userData, callback) {
@@ -24,7 +24,7 @@ myApp.factory('UserService', function ($http) {
                 method: 'POST',
                 data: data,
                 withCredentials: false
-            })
+            }).then(callback);
         }
     }
 });
