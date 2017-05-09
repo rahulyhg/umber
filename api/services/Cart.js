@@ -59,16 +59,14 @@ var model = {
                 product: mongoose.Types.ObjectId(product._id),
                 quantity: product.reqQuantity,
                 color: product.baseColor,
-                size: product.selectedSize,
-                quantity: product.reqQuantity
+                size: product.selectedSize
             });
             // Check whether a user exists with given access token
             User.findOne({
                 accessToken: product.accessToken
             }).exec(function (err, data) {
                 if (err) {
-                    //send error
-                    console.log("Cannot find user for cart");
+                    callback(err, null);
                 } else if (data) {
                     // TODO: Optimize this extensively
                     if (!_.isEmpty(data)) {
@@ -128,27 +126,54 @@ var model = {
                                             }
                                         });
                                     } else {
-                                        // Update cart product quantity if present
-                                        data.products.push({
-                                            product: mongoose.Types.ObjectId(product._id),
-                                            quantity: product.reqQuantity,
-                                            color: product.baseColor,
-                                            size: product.selectedSize
+                                        console.log("Product: ", product);
+                                        var idx = _.findIndex(data.products, function (prodVal) {
+                                            console.log("Cart product: ", prodVal);
+                                            return prodVal.product == product._id &&
+                                                prodVal.color == product.baseColor._id &&
+                                                prodVal.size == product.selectedSize
                                         });
-                                        data.userId = product.userId;
-                                        Cart.saveData(data, function (err, data) {
-                                            if (err) {
-                                                callback(err, null);
-                                            } else if (data) {
-                                                callback(null, data);
-                                            } else {
-                                                callback({
-                                                    message: {
-                                                        data: "Invalid credentials2!"
-                                                    }
-                                                }, null);
-                                            }
-                                        });
+                                        console.log("Index: ", idx);
+                                        if (idx < 0) {
+                                            // Insert if proudct isn't present
+                                            data.products.push({
+                                                product: mongoose.Types.ObjectId(product._id),
+                                                quantity: product.reqQuantity,
+                                                color: product.baseColor,
+                                                size: product.selectedSize
+                                            });
+                                            data.userId = product.userId;
+                                            Cart.saveData(data, function (err, data) {
+                                                if (err) {
+                                                    callback(err, null);
+                                                } else if (data) {
+                                                    callback(null, data);
+                                                } else {
+                                                    callback({
+                                                        message: {
+                                                            data: "Invalid credentials2!"
+                                                        }
+                                                    }, null);
+                                                }
+                                            });
+                                        } else {
+                                            // Update cart product quantity if present
+                                            console.log("Matching product: ", data.products[idx]);
+                                            data.products[idx].quantity += product.reqQuantity;
+                                            Cart.saveData(data, function (err, data) {
+                                                if (err) {
+                                                    callback(err, null);
+                                                } else if (data) {
+                                                    callback(null, data);
+                                                } else {
+                                                    callback({
+                                                        message: {
+                                                            data: "Invalid credentials!"
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }
                                     }
                                 }
                             });
