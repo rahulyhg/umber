@@ -10,12 +10,6 @@ var schema = new Schema({
     lastName: {
         type: String
     },
-    userName: {
-        type: String,
-        required: true,
-        unique: true,
-        uniqueCaseInsensitive: true
-    },
     email: {
         type: String,
         validate: validators.isEmail(),
@@ -194,7 +188,8 @@ var model = {
     registration: function (userData, callback) {
         console.log(userData);
         var user = {};
-        user.userName = userData.username;
+        user.firstName = userData.firstname;
+        user.lastName = userData.lastname;
         user.email = userData.email;
         user.password = md5(userData.password);
         user.mobile = userData.mobile;
@@ -221,7 +216,7 @@ var model = {
     },
     login: function (userData, callback) {
         User.findOne({
-            userName: userData.username,
+            email: userData.email,
             password: md5(userData.password)
         }).exec(function (err, data) {
             if (err) {

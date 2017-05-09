@@ -5,10 +5,6 @@
     "sendIdWithCreate": true,
     "urlFields": ["_id"],
     "fields": [{
-        "name": "User Name",
-        "isSort": "",
-        "tableRef": "userName"
-    }, {
         "name": "First Name",
         "isSort": "",
         "tableRef": "firstName"
