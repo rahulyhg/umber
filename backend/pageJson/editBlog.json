@@ -25,7 +25,7 @@
         "url": ""
     }, {
         "name": "Description",
-        "type": "text",
+        "type": "textarea",
         "tableRef": "description",
         "placeholder": "Enter blog description",
         "id": "desc",

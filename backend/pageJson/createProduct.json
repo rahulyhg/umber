@@ -232,7 +232,7 @@
         },
         {
             "name": "Washcare",
-            "type": "text",
+            "type": "textarea",
             "tableRef": "washcare",
             "placeholder": "Washcare description",
             "id": "washcare",
@@ -244,7 +244,7 @@
         },
         {
             "name": "Description",
-            "type": "text",
+            "type": "textarea",
             "tableRef": "description",
             "placeholder": "Product description",
             "id": "descript",

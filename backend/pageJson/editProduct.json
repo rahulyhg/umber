@@ -182,7 +182,7 @@
             "validation": ["", "trim"]
         }, {
             "name": "Description",
-            "type": "text",
+            "type": "textarea",
             "tableRef": "description",
             "placeholder": "Product description",
             "id": "descript",
