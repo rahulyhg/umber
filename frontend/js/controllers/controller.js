@@ -321,7 +321,9 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                         console.log("Error: ", data.data.error);
                     } else {
                         console.log("Success");
-                        $state.reload("individual-page");
+                        $state.reload("individual-page", {
+                            id: $scope.product._id
+                        });
                     }
                 });
                 // } else {
@@ -337,6 +339,24 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                     size: 'md',
                     // windowClass: 'modal-content-radi0'
                 });
+            }
+        }
+
+        $scope.addToWishlist = function () {
+            var accessToken = $.jStorage.get("accessToken")
+            if (accessToken) {
+                $scope.product.accessToken = accessToken;
+                $scope.product.userId = $.jStorage.get("userId");
+                $scope.product.selectedSize = $scope.selectedSize._id;
+                WishlistService.saveProduct($scope.product, function (data) {
+                    if (data.data.error) {
+                        console.log("Error: ", data.data.error);
+                    } else {
+                        $state.reload("individual-page", {
+                            id: $scope.product._id
+                        });
+                    }
+                })
             }
         }
 
