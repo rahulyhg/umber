@@ -57,7 +57,7 @@ var model = {
             cart.products = [];
             cart.products.push({
                 product: mongoose.Types.ObjectId(product._id),
-                quantity: 1,
+                quantity: product.reqQuantity,
                 color: product.baseColor,
                 size: product.selectedSize,
                 quantity: product.reqQuantity

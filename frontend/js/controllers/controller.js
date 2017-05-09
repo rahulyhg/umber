@@ -287,7 +287,8 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         //     subtotal: '2,899'
         // }]
     })
-    .controller('IndividualPageCtrl', function ($scope, $http, $stateParams, $state, $uibModal, UserService, TemplateService, NavigationService, ProductService, CartService, $timeout) {
+    .controller('IndividualPageCtrl', function ($scope, $http, $stateParams, $state, $uibModal, UserService, WishlistService,
+        TemplateService, NavigationService, ProductService, CartService, $timeout) {
         $scope.template = TemplateService.getHTML("content/individual-page.html");
         TemplateService.title = "individual-page"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
