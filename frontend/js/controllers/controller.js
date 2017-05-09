@@ -264,8 +264,10 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         }
 
         CartService.getCart(userData, function (data) {
-            $scope.orderTable = data.data.data;
-            $scope.grandTotal = CartService.getTotal($scope.orderTable.products);
+            if (data.data.data)
+                $scope.orderTable = data.data.data;
+            if ($scope.orderTable && $scope.orderTable.products)
+                $scope.grandTotal = CartService.getTotal($scope.orderTable.products);
         });
 
 
@@ -333,11 +335,12 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             } else {
                 console.log("User not logged in");
                 // TODO: goto login. can't route to modal or checkkout
-                $scope.loginModal = $uibModal.open({
+                $uibModal.open({
                     animation: true,
                     templateUrl: 'views/modal/login.html',
                     scope: $scope,
                     size: 'md',
+                    controller: 'loginModalCtrl'
                     // windowClass: 'modal-content-radi0'
                 });
             }
@@ -358,6 +361,17 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                         });
                     }
                 })
+            } else {
+                console.log("User not logged in");
+                // TODO: goto login. can't route to modal or checkkout
+                $uibModal.open({
+                    animation: true,
+                    templateUrl: 'views/modal/login.html',
+                    scope: $scope,
+                    size: 'md',
+                    controller: 'loginModalCtrl'
+                    // windowClass: 'modal-content-radi0'
+                });
             }
         }
 
@@ -369,50 +383,10 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                     templateUrl: 'views/modal/login.html',
                     scope: $scope,
                     size: 'md',
+                    controller: 'loginModalCtrl'
                     // windowClass: 'modal-content-radi0'
                 });
             }
-        }
-
-        //TODO: Do this in single controller
-
-        $scope.formData = {};
-        $scope.loginData = {};
-
-        $scope.login = function () {
-            console.log("Header login");
-            UserService.login($scope.loginData, function (data) {
-                if (!_.isEmpty(data.data.data)) {
-                    $scope.userData = data.data.data;
-
-                    $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
-                    $.jStorage.set("userId", $scope.userData._id);
-
-                    $scope.loggedUser = $scope.userData._id;
-                    $scope.accessToken = $scope.userData.accessToken[$scope.userData.accessToken.length - 1];
-
-                    $scope.loginModal.close();
-                    $state.reload("listing-page");
-                } else {
-                    // TODO:: show popup to register
-                }
-            });
-        }
-
-        $scope.registerUser = function () {
-            console.log("Register data: ", $scope.formData);
-            UserService.userRegistration($scope.formData, function (data) {
-                $scope.userData = data.data.data;
-
-                $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
-                $.jStorage.set("userId", $scope.userData._id);
-
-                $scope.loggedUser = $scope.userData._id;
-                $scope.accessToken = $scope.userData.accessToken[$scope.userData.accessToken.length - 1];
-
-                $scope.loginModal.close();
-                $state.reload("listing-page");
-            });
         }
 
         $scope.selectedSize = {};
