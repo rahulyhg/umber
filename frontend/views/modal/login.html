@@ -98,7 +98,9 @@
                                     <input type="password" placeholder="Password" ng-model="formData.password" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" placeholder="Confirm Password" ng-model="formData.confirm" class="form-control" required>
+                                    <input type="password" placeholder="Confirm Password" ng-model="formData.confirm" class="form-control" hs-password-verifier="formData.password"
+                                        required>
+                                    <span ng-show='registerForm.formData.confirm.$error.hsPswdMatch'>Passwords don't match</span>
                                 </div>
                                 <div class="marginTop">
                                     <button class="btn btn-login btn-block" ng-click="registerForm.$valid && registerUser()">Sign in</button>

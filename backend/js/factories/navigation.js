@@ -22,7 +22,7 @@ myApp.factory('NavigationService', function ($http) {
         sref: "#!/page/viewBillingAddress//",
         icon: "document"
     }, {
-        name: "Category",
+        name: "Home Category",
         classis: "active",
         sref: "#!/page/viewCategory//",
         icon: "tree"

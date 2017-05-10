@@ -532,7 +532,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         var userId = {
             userId: $.jStorage.get("userId")
         };
-        if (userId != null) {
+        if (userId.userId != null) {
             CartService.getCart(userId, function (data) {
                 console.log("getcart->data: ", data);
                 //TODO: Instead of array this will be single doc when query changes to findOneAndUpdate
@@ -607,6 +607,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         // TODO
         var categoryId = $stateParams.id;
 
+        // Getting sub-categories instead of categories
         CategoryService.getCategoryWithId(categoryId, function (data) {
             $scope.category = data.data.data;
         });
@@ -966,13 +967,12 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.myShirt = [];
         $scope.myShirt11 = [];
         $scope.myShirt = _.chunk($scope.buyshirt, 9);
-        console.log($scope.myShirt, "myshitt");
         _.each($scope.myShirt, function (n) {
             $scope.myShirt1 = _.chunk(n, 3);
             $scope.myShirt11.push($scope.myShirt1);
         });
 
-        NavigationService.getEnabledCategories(function (data) {
+        NavigationService.getEnabledSubCategories(function (data) {
             $scope.categories = data.data.data;
         });
 

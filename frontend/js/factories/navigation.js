@@ -71,6 +71,14 @@ myApp.factory('NavigationService', function ($http) {
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
+        },
+
+        getEnabledSubCategories: function (callback) {
+            $http({
+                url: adminurl + 'Subcategory/getEnabledSubcategories',
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
         }
     };
 });

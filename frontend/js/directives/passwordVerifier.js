@@ -2,18 +2,17 @@ myApp.directive('hsPasswordVerifier', function ($compile, $parse) {
     return {
         require: 'ngModel',
         link: function (scope, elem, attr, ctrl) {
-            var password = attr.hsPasswordVerifier;
-            var confirmPassword = attr.ngModel;
 
             console.log(attr.hsPasswordVerifier, attr.ngModel);
-            scope.$watch('[password, ngModel]', function (value) {
-                console.log("checking password: ", scope[password], scope[confirmPassword]);
-                ctrl.$setValidity('hsPasswordVerifier', scope[password] === scope[confirmPassword]);
-            });
+            scope.$watchGroup([attr.hsPasswordVerifier, attr.ngModel], function (newValues) {
+                // Match password with confirm password
+                ctrl.$setValidity('hsPswdMatch', newValues[0] === newValues[1]);
+            }, true);
 
-            scope.$watch("ngModel", function (newVal, oldVal) {
-                console.log(newVal, oldVal);
-            })
+            // scope.$watch(attr.ngModel, function (newVal, oldVal) {
+            //     console.log("Watch: ", newVal, oldVal);
+            //     console.log(scope[attr.hsPasswordVerifier]);
+            // })
         }
     }
 })
