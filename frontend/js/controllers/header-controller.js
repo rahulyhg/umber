@@ -70,7 +70,7 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
             $scope.view = !$scope.view;
         }
     })
-    .controller('loginModalCtrl', function ($scope, $state, t$uibModalInstance, UserService) {
+    .controller('loginModalCtrl', function ($scope, $state, $uibModalInstance, UserService) {
 
         $scope.formData = {};
         $scope.loginData = {};
