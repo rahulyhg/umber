@@ -25,6 +25,15 @@ myApp.factory('UserService', function ($http) {
                 data: data,
                 withCredentials: false
             }).then(callback);
+        },
+
+        getUserDetails: function (data, callback) {
+            $http({
+                url: adminurl + 'User/getDetails',
+                method: 'POST',
+                data: data,
+                withCredentials: false
+            }).then(callback);
         }
     }
 });

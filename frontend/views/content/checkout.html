@@ -8,10 +8,8 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="list-checkout">
-                            <div ng-if="!loggedUser">
-                                <button class="btn btn--list" ng-click="view='loginTab'" ng-class="{
+                            <button class="btn btn--list" ng-disabled="loggedUser" ng-click="view='loginTab'" ng-class="{
                         'btn--brownActive': view=='loginTab' }">Login</button>
-                            </div>
                             <div>
                                 <button class="btn btn--list" ng-click="view='orderTab'" ng-class="{
                         'btn--brownActive': view=='orderTab' }">Order</button>
@@ -163,7 +161,7 @@
                             <div class="pull-right">
                                 <p class="text-right">GRAND TOTAL : <span>&#x20b9 {{grandTotal}}</span></p>
                                 <p>
-                                    <button class="btn next--btn btn-default">Next</button>
+                                    <button class="btn next--btn btn-default" ng-click="gotoDetails()">Next</button>
                                 </p>
                             </div>
                         </div>
@@ -178,12 +176,12 @@
                                     <div class="customized-form">
                                         <div class="form-group">
                                             <div class="col-md-4">
-                                                <input type="text" placeholder="First Name" class="form-control">
+                                                <input type="text" placeholder="First Name" ng-model="user.firstName" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-4">
-                                                <input type="text" placeholder="Last Name" class="form-control">
+                                                <input type="text" placeholder="Last Name" ng-model="user.lastName" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -192,12 +190,12 @@
                                     <div class="customized-form">
                                         <div class="form-group">
                                             <div class="col-md-4">
-                                                <input type="text" placeholder="Mobile No" class="form-control">
+                                                <input type="text" placeholder="Mobile No" ng-model="user.mobile" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-4">
-                                                <input type="email" placeholder="Email" class="form-control">
+                                                <input type="email" placeholder="Email" ng-model="user.email" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -213,7 +211,7 @@
                                             <div class="customized-form">
                                                 <div class="form-group">
                                                     <div class="col-md-10">
-                                                        <input type="text" placeholder="Line 1*" class="form-control">
+                                                        <input type="text" placeholder="Line 1*" ng-model="user.billingAddress.line1" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -222,7 +220,7 @@
                                             <div class="customized-form">
                                                 <div class="form-group">
                                                     <div class="col-md-10">
-                                                        <input type="text" placeholder="Line 2" class="form-control">
+                                                        <input type="text" placeholder="Line 2" ng-model="user.billingAddress.line2" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -231,7 +229,7 @@
                                             <div class="customized-form">
                                                 <div class="form-group">
                                                     <div class="col-md-10">
-                                                        <input type="text" placeholder="Line 3" class="form-control">
+                                                        <input type="text" placeholder="Line 3" ng-model="user.billingAddress.line3" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -240,7 +238,7 @@
                                             <div class="customized-form">
                                                 <div class="form-group">
                                                     <div class="col-md-10">
-                                                        <input type="text" placeholder="City*" class="form-control">
+                                                        <input type="text" placeholder="City*" ng-model="user.billingAddress.city" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -249,7 +247,7 @@
                                             <div class="customized-form">
                                                 <div class="form-group">
                                                     <div class="col-md-10">
-                                                        <input type="text" placeholder="Pincode" class="form-control">
+                                                        <input type="text" placeholder="Pincode" ng-model="user.billingAddress.pincode" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -258,7 +256,7 @@
                                             <div class="customized-form">
                                                 <div class="form-group">
                                                     <div class="col-md-10">
-                                                        <input type="text" placeholder="State" class="form-control">
+                                                        <input type="text" placeholder="State" ng-model="user.billingAddress.state" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -269,7 +267,7 @@
                                                     <div class="col-md-10">
                                                         <div class=" form-control relate country-selection">
                                                             <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
-                                                            <select class="checkout-drop relate"> 
+                                                            <select ng-model="user.billingAddress.country" class="checkout-drop relate"> 
                                                            <option style="display: none">COUNTRY</option>
                                                             <option>INDIA</option>
                                                             <option>USA</option>

@@ -260,6 +260,32 @@ var model = {
                 }, null);
             }
         })
+    },
+
+    getDetails: function (userData, callback) {
+        User.findOne({
+            _id: userData.userId
+        }).exec(function (err, data) {
+            if (err) {
+                callback(err, null);
+            } else if (data) {
+                if (!_.isEmpty(data)) {
+                    callback(null, data);
+                } else {
+                    callback(null, {
+                        message: {
+                            data: "User not found"
+                        }
+                    });
+                }
+            } else {
+                callback({
+                    message: {
+                        data: "Invalid credentials!"
+                    }
+                }, null);
+            }
+        })
     }
 
 };

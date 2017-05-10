@@ -270,7 +270,16 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 $scope.grandTotal = CartService.getTotal($scope.orderTable.products);
         });
 
+        if (userData.userId) {
+            UserService.getUserDetails(userData, function (data) {
+                $scope.user = data.data.data;
+            });
+        }
 
+        $scope.gotoDetails = function () {
+            $scope.view = "detailTab";
+            //$state.reload("checkkout");
+        }
         // $scope.orderTable = [{
         //     img: 'img/checkout/item.jpg',
         //     title1: 'florence prints',
