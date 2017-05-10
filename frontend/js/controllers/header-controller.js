@@ -32,7 +32,7 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
             UserService.logout(data, function (data) {
                 $scope.loggedUser = "";
                 $scope.accessToken = "";
-                $state.reload("home");
+                $state.go("home");
             });
         }
 
@@ -70,7 +70,7 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
             $scope.view = !$scope.view;
         }
     })
-    .controller('loginModalCtrl', function ($scope, $uibModalInstance, UserService) {
+    .controller('loginModalCtrl', function ($scope, $state, t$uibModalInstance, UserService) {
 
         $scope.formData = {};
         $scope.loginData = {};
@@ -88,7 +88,7 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
                     $scope.accessToken = $scope.userData.accessToken[$scope.userData.accessToken.length - 1];
 
                     $uibModalInstance.close();
-                    $state.reload("listing-page");
+                    $state.reload();
                 } else {
                     // TODO:: show popup to register
                 }
@@ -107,7 +107,7 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
                 $scope.accessToken = $scope.userData.accessToken[$scope.userData.accessToken.length - 1];
 
                 $uibModalInstance.close();
-                $state.reload("listing-page");
+                $state.reload();
             });
         }
 
