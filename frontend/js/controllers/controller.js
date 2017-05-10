@@ -88,7 +88,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             }
         ];
     })
-    .controller('BuythelookCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+    .controller('BuythelookCtrl', function ($scope, TemplateService, NavigationService, $timeout,$uibModal) {
         $scope.template = TemplateService.getHTML("content/buythelook.html");
         TemplateService.title = "Buythelook"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -212,6 +212,22 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         });
         console.log($scope.myShirt11);
 
+
+
+     $scope.forgot=function(){
+            $uibModal.open({
+                    animation: true,
+                    templateUrl: 'views/modal/changepass.html',
+                    scope: $scope       
+            });
+        };
+
+        $scope.form = true;
+         $scope.forms = false;
+        $scope.continue=function(){
+             $scope.forms = true;
+           $scope.form = false;
+        };
     })
     .controller('CheckoutCtrl', function ($scope, $state, TemplateService, NavigationService, UserService, CartService, $timeout) {
         $scope.template = TemplateService.getHTML("content/checkout.html");
@@ -397,6 +413,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 });
             }
         }
+   
 
         $scope.selectedSize = {};
         $scope.selectedSize.name = "Select Size";
