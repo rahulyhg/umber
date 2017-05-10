@@ -164,8 +164,8 @@
                                                     </div>
                                                     <div class="inline-block">
                                                         <ul class="list-unstyled">
-                                                            <li>
-                                                                {{product.fabric.name}}
+                                                            <li ng-repeat="fabric in product.fabric track by $index">
+                                                                {{fabric.name}}
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -178,8 +178,8 @@
                                                     </div>
                                                     <div class="inline-block">
                                                         <ul class="list-unstyled">
-                                                            <li>
-                                                                {{product.baseColor.name}}
+                                                            <li ng-repeat="color in product.baseColor track by $index">
+                                                                {{color.name}}
                                                             </li>
                                                         </ul>
                                                     </div>
