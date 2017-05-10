@@ -44,6 +44,7 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
             }
             CartService.removeProduct(data, function (data) {
                 $scope.mycartTable = data.data.data;
+                $state.reload();
             });
         }
 
