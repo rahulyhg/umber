@@ -63,7 +63,8 @@
             "url": "Category/search",
             "dropDownField": "name",
             "dropDownType": "single"
-        }, {
+        },
+        {
             "name": "Sub-Category",
             "type": "tags",
             "tableRef": "subCategory",
@@ -73,8 +74,10 @@
             "fieldType": "",
             "url": "Subcategory/search",
             "dropDownField": "name",
-            "dropDownType": "single"
-        }, {
+            "view": true,
+            "dropDownType": "multiple"
+        },
+        {
             "name": "Brand",
             "type": "tags",
             "tableRef": "brand",
@@ -83,11 +86,17 @@
             "searchApi": "searchCall",
             "fieldType": "",
             "url": "Brand/search",
+            "validation": [
+                "required",
+                "trim",
+                ""
+            ],
             "dropDownField": "name",
             "dropDownType": "single"
-        }, {
+        },
+        {
             "name": "Collection",
-            "type": "multiCheckbox",
+            "type": "tags",
             "tableRef": "prodCollection",
             "placeholder": "Select Collection",
             "id": "collection",
@@ -96,70 +105,91 @@
             "url": "Collection/search",
             "validation": [
                 "unique"
-            ]
-        }, {
+            ],
+            "dropDownField": "name",
+            "dropDownType": "multiple"
+        },
+        {
             "name": "Price",
             "type": "number",
             "tableRef": "price",
             "placeholder": "Set Price",
             "id": "price",
             "url": "",
-            "validation": ["required", "trim"]
+            "validation": [
+                "required",
+                "trim"
+            ]
         },
         {
             "name": "Type",
-            "type": "multiCheckbox",
+            "type": "tags",
             "tableRef": "type",
             "placeholder": "Set type",
             "id": "type",
             "searchApi": "searchCall",
             "url": "Type/search",
             "dropDownField": "name",
-            "dropDownType": "single",
+            "dropDownType": "multiple",
             "validation": [
                 "",
                 "trim"
             ]
-        }, {
+        },
+        {
             "name": "New Arrival",
             "type": "checkbox",
             "tableRef": "newArrival",
             "id": "newArrival",
             "url": "",
-            "validation": [""]
-        }, {
+            "validation": [
+                ""
+            ]
+        },
+        {
             "name": "Featured",
             "type": "checkbox",
             "tableRef": "featured",
             "id": "featured",
             "url": "",
-            "validation": [""]
-        }, {
+            "validation": [
+                ""
+            ]
+        },
+        {
             "name": "Sleeve",
             "type": "tags",
             "tableRef": "sleeve",
             "placeholder": "Sleeve description",
             "id": "sleeve",
             "url": "",
-            "validation": ["", "trim"],
+            "validation": [
+                "",
+                "trim"
+            ],
             "dropDownField": "",
             "dropDownType": "single",
-            "dropDown": ["Full sleeve", "Half sleeve"]
-        }, {
+            "dropDown": [
+                "Full sleeve",
+                "Half sleeve"
+            ]
+        },
+        {
             "name": "Fabric",
             "type": "tags",
             "tableRef": "fabric",
             "placeholder": "Fabric description",
             "id": "price",
             "dropDownField": "name",
-            "dropDownType": "single",
+            "dropDownType": "multiple",
             "searchApi": "searchCall",
             "url": "Fabric/search",
             "validation": [
-                "",
+                "required",
                 "trim"
             ]
-        }, {
+        },
+        {
             "name": "Base color",
             "type": "tags",
             "tableRef": "baseColor",
@@ -167,27 +197,35 @@
             "id": "baseColor",
             "url": "BaseColor/search",
             "dropDownField": "name",
-            "dropDownType": "single",
+            "dropDownType": "multiple",
             "validation": [
-                "",
+                "required",
                 "trim"
             ]
-        }, {
+        },
+        {
             "name": "Washcare",
-            "type": "text",
+            "type": "textarea",
             "tableRef": "washcare",
             "placeholder": "Washcare description",
             "id": "washcare",
             "url": "",
-            "validation": ["", "trim"]
-        }, {
+            "validation": [
+                "required",
+                "trim"
+            ]
+        },
+        {
             "name": "Description",
             "type": "textarea",
             "tableRef": "description",
             "placeholder": "Product description",
             "id": "descript",
             "url": "",
-            "validation": ["", "trim"]
+            "validation": [
+                "required",
+                "trim"
+            ]
         }, {
             "name": "Status",
             "type": "tags",

@@ -8,14 +8,14 @@ var schema = new Schema({
         uniqueCaseInsensitive: true
     },
     code: String,
-    category: {
+    category: [{
         type: Schema.Types.ObjectId,
         ref: 'Category'
-    },
-    subCategory: {
+    }],
+    subCategory: [{
         type: Schema.Types.ObjectId,
         ref: 'Subcategory'
-    },
+    }],
     price: Number,
     images: [String],
     type: [{
@@ -38,14 +38,14 @@ var schema = new Schema({
         enum: ["Half sleeve", "Full sleeve"]
     },
     //TODO: Will the fabric & basecolor be multiple?
-    fabric: {
+    fabric: [{
         type: Schema.Types.ObjectId,
         ref: 'Fabric'
-    },
-    baseColor: {
+    }],
+    baseColor: [{
         type: Schema.Types.ObjectId,
         ref: 'BaseColor'
-    },
+    }],
     washcare: String,
     description: String,
     size: [{
