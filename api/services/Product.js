@@ -17,7 +17,10 @@ var schema = new Schema({
         ref: 'Subcategory'
     }],
     price: Number,
-    images: [String],
+    images: [{
+        image: String,
+        order: Number
+    }],
     type: [{
         type: Schema.Types.ObjectId,
         ref: 'Type'
