@@ -1,8 +1,8 @@
 var schema = new Schema({
-    name: String,
     image: String,
     desc: String,
     extLink: String,
+    order: Number,
     status: String
 });
 
@@ -17,6 +17,8 @@ var model = {
     getEnabledHomeContent: function (data, callback) {
         HomeScreen.find({
             'status': 'Enabled'
+        }).sort({
+            'order': 1
         }).exec(function (err, found) {
             if (err) {
                 callback(err, null);

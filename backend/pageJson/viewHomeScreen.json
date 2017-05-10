@@ -7,25 +7,25 @@
         "_id"
     ],
     "fields": [{
-            "name": "Name",
-            "isSort": "",
-            "tableRef": "name"
-        },
-        {
             "name": "Image",
             "isSort": "",
             "type": "image",
             "tableRef": "image"
         },
         {
-            "name": "Status",
+            "name": "Order",
             "isSort": "",
-            "tableRef": "status"
+            "tableRef": "order"
         },
         {
             "name": "External link",
             "isSort": "",
             "tableRef": "extLink"
+        },
+        {
+            "name": "Status",
+            "isSort": "",
+            "tableRef": "status"
         }
     ],
     "action": [{

@@ -6,14 +6,6 @@
     "pageType": "edit",
     "urlFields": ["_id"],
     "fields": [{
-        "name": "Name",
-        "type": "text",
-        "tableRef": "name",
-        "placeholder": "Enter Name",
-        "id": "name",
-        "validation": ["required", "trim", "unique"],
-        "url": ""
-    }, {
         "name": "Image",
         "type": "image",
         "tableRef": "image",
@@ -32,6 +24,22 @@
         "validation": ["required", "trim", "unique"],
         "url": ""
     }, {
+        "name": "Order",
+        "type": "text",
+        "tableRef": "order",
+        "placeholder": "Enter image order",
+        "id": "order",
+        "validation": ["required", "trim", "unique"],
+        "url": ""
+    }, {
+        "name": "External link",
+        "type": "text",
+        "tableRef": "extLink",
+        "placeholder": "Update link",
+        "id": "link",
+        "validation": ["required", "trim"],
+        "url": ""
+    }, {
         "name": "Status",
         "type": "tags",
         "tableRef": "status",
@@ -43,14 +51,6 @@
         "dropDownType": "single",
         "onView": true,
         "dropDown": ["Enabled", "Disabled"]
-    }, {
-        "name": "External link",
-        "type": "text",
-        "tableRef": "extLink",
-        "placeholder": "Update link",
-        "id": "link",
-        "validation": ["required", "trim"],
-        "url": ""
     }],
     "action": [{
         "name": "submit",
