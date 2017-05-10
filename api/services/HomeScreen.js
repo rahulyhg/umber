@@ -1,4 +1,5 @@
 var schema = new Schema({
+    name: String,
     image: String,
     desc: String,
     extLink: String,
