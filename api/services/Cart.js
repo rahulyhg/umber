@@ -58,7 +58,7 @@ var model = {
             cart.products.push({
                 product: mongoose.Types.ObjectId(product._id),
                 quantity: product.reqQuantity,
-                color: product.baseColor,
+                color: product.baseColor[0]._id,
                 size: product.selectedSize
             });
             // Check whether a user exists with given access token
@@ -130,7 +130,7 @@ var model = {
                                         var idx = _.findIndex(data.products, function (prodVal) {
                                             console.log("Cart product: ", prodVal);
                                             return prodVal.product == product._id &&
-                                                prodVal.color == product.baseColor._id &&
+                                                prodVal.color == product.baseColor[0]._id &&
                                                 prodVal.size == product.selectedSize
                                         });
                                         console.log("Index: ", idx);
@@ -139,7 +139,7 @@ var model = {
                                             data.products.push({
                                                 product: mongoose.Types.ObjectId(product._id),
                                                 quantity: product.reqQuantity,
-                                                color: product.baseColor,
+                                                color: product.baseColor[0]._id,
                                                 size: product.selectedSize
                                             });
                                             data.userId = product.userId;
