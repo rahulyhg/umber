@@ -64,7 +64,9 @@ myApp.filter('propsFilter', function () {
 
 myApp.filter('serverimage', function () {
     return function (input, width, height, style) {
+
         if (input) {
+            console.log("input: ", input);
             if (input.substr(0, 4) == "http") {
                 return input;
             } else {

@@ -65,22 +65,6 @@
             "url": ""
         },
         {
-            "name": "Images",
-            "type": "image",
-            "tableRef": "images",
-            "placeholder": "Enter Image Link",
-            "id": "imgLink",
-            "size": "365 × 460",
-            "option": "mulitple",
-            "validation": [
-                "required",
-                "trim",
-                "unique"
-            ],
-            "view": true,
-            "url": ""
-        },
-        {
             "name": "Category",
             "type": "tags",
             "tableRef": "category",
@@ -274,6 +258,37 @@
                 "Enabled",
                 "Disabled"
             ]
+        },
+        {
+            "name": "Product images",
+            "type": "box",
+            "tableRef": "images",
+            "validation": [
+                "required",
+                "trim",
+                ""
+            ],
+            "fields": [{
+                "name": "Image",
+                "type": "image",
+                "tableRef": "image",
+                "tableValue": "image",
+                "placeholder": "Enter image",
+                "id": "productimage",
+                "option": "single",
+                "validation": ["", "trim", ""],
+                "onView": true,
+                "url": ""
+            }, {
+                "name": "Image Order",
+                "type": "text",
+                "tableRef": "order",
+                "placeholder": "Enter Image Order",
+                "id": "imageorder",
+                "validation": ["", "trim", ""],
+                "onView": true,
+                "url": ""
+            }]
         }
     ],
     "action": [{

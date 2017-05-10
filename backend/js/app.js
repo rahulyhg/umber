@@ -14,7 +14,6 @@ var myApp = angular.module('myApp', [
     'textAngular',
     'ngSanitize',
     'angular-flexslider',
-    'imageupload',
     'ngMap',
     'toggle-switch',
     'cfp.hotkeys',

@@ -63,6 +63,11 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             url: "/form",
             templateUrl: tempateURL,
             controller: 'FormCtrl'
+        })
+        .state('cancel', {
+            url: "/cancel",
+            templateUrl: tempateURL,
+            controller: 'CancelCtrl'
         });
 
     $urlRouterProvider.otherwise("/");
