@@ -312,10 +312,11 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
         $scope.loggedUser = $.jStorage.get("userId");
         var productId = $stateParams.id;
+
         ProductService.getProductWithId(productId, function (data) {
             $scope.product = data.data.data;
-            $scope.selectedImage = $scope.product.images[0];
-            console.log("Retrieved individual page: ", $scope.product);
+            $scope.productImages = _.sortBy($scope.product.images, ['order']);
+            $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
         });
 
         $scope.addToCart = function () {
@@ -1013,16 +1014,14 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         TemplateService.title = "Login"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
     })
-     .controller('CancelCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+    .controller('CancelCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.getHTML("content/cancel.html");
         TemplateService.title = "Return-Cancellation"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
-     })
+    })
     //Example API Controller
     .controller('DemoAPICtrl', function ($scope, TemplateService, apiService, NavigationService, $timeout) {
         apiService.getDemo($scope.formData, function (data) {
             console.log(data);
         });
     });
-
-   
