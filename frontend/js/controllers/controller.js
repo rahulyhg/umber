@@ -278,7 +278,6 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
         $scope.gotoDetails = function () {
             $scope.view = "detailTab";
-            //$state.reload("checkkout");
         }
         // $scope.orderTable = [{
         //     img: 'img/checkout/item.jpg',
