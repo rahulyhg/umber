@@ -996,3 +996,40 @@
      @include position(absolute,
      11% 0% 9% 91%);
  }
+
+ //ruchi//
+.radio{
+    input[type="radio"]{
+        display: none;
+    }
+    label{
+        display: block;
+        padding: 0;
+    }
+
+label span{
+    display: inline-block;
+    @include size(10px,10px);
+    border-radius: 50%;
+    border:2px solid $darkBrown1;
+    margin-right: 10px;
+}
+
+ input[type="radio"] +label span{
+        background-color:transparent;
+    }
+ input[type="radio"]:checked+label span{
+        background-color:$darkBrown1;
+    }
+   input[type="radio"]:checked+label span,
+    input[type="radio"] +label span
+    {
+       transition: 600ms all ease;
+    }  
+
+.casual{
+    margin-right: 13px;
+}
+}
+
+ //ruchi//

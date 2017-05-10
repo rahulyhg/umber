@@ -21,9 +21,26 @@
                                     <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
                                 </h5>
                             </uib-accordion-heading>
-                            <div ng-repeat="category in categories" class="checkbox">
+                            <!--<div ng-repeat="category in categories" class="checkbox">
                                 <input type="checkbox" id="{{category._id}}">
                                 <label for="{{category._id}}"> {{category.name}}
+                               </label>
+                            </div>-->
+                             <div class="checkbox">
+                               <div class="radio">
+                                   <input type="radio" class="form-control" name="radio" id="radio1">
+                                   <label for="radio1" > <span class="casual"></span>Casual
+                                         
+                                       </label>
+                                        <input type="radio" class="form-control" name="radio" id="radio2">
+                                   <label for="radio2"> <span></span> Tshirt
+                                        
+                                       </label>
+                                         <input type="radio" class="form-control" name="radio" id="radio3">
+                                   <label for="radio3">  <span></span>   Trouser
+                                     
+                                       </label>
+                               </div>
                                </label>
                             </div>
                         </div>
