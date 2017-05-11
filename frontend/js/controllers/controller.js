@@ -246,14 +246,13 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         }
 
         $scope.registerUser = function () {
-            console.log("Register: ", $scope.registerData);
             UserService.userRegistration($scope.registerData, function (data) {
                 console.log("Login data: ", data);
                 if (!_.isEmpty(data.data.data)) {
                     $scope.userData = data.data.data;
                     $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
                     $.jStorage.set("userId", $scope.userData._id);
-                    $state.go("listing-page");
+                    $state.reload();
                 } else {
                     // TODO:: show popup to register
                 }
@@ -263,7 +262,6 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
         $scope.login = function () {
             UserService.login($scope.loginData, function (data) {
-                console.log("Login data: ", data);
                 if (!_.isEmpty(data.data.data)) {
                     $scope.userData = data.data.data;
                     $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
@@ -351,9 +349,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                         console.log("Error: ", data.data.error);
                     } else {
                         console.log("Success");
-                        $state.reload("individual-page", {
-                            id: $scope.product._id
-                        });
+                        $state.reload();
                     }
                 });
                 // } else {
@@ -361,15 +357,16 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 // }
             } else {
                 console.log("User not logged in");
-                // TODO: goto login. can't route to modal or checkkout
-                $uibModal.open({
-                    animation: true,
-                    templateUrl: 'views/modal/login.html',
-                    scope: $scope,
-                    size: 'md',
-                    controller: 'loginModalCtrl'
-                    // windowClass: 'modal-content-radi0'
-                });
+                // TODO: add product without login
+                $scope.cart = {};
+
+                // $scope.cart.products = [];
+                // $scope.product.product = $scope.product._id;
+                // $scope.product.selectedSize = $scope.selectedSize._id;
+                // $scope.product.reqQuantity = $scope.reqQuantity;
+                // $scope.cart.products.push($scope.product);
+                // $.jStorage.set("cart", $scope.cart);
+                // $state.reload();
             }
         }
 
