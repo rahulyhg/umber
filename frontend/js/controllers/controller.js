@@ -88,7 +88,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             }
         ];
     })
-    .controller('BuythelookCtrl', function ($scope, TemplateService, NavigationService, $timeout,$uibModal) {
+    .controller('BuythelookCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
         $scope.template = TemplateService.getHTML("content/buythelook.html");
         TemplateService.title = "Buythelook"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -214,19 +214,19 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
 
 
-     $scope.forgot=function(){
+        $scope.forgot = function () {
             $uibModal.open({
-                    animation: true,
-                    templateUrl: 'views/modal/changepass.html',
-                    scope: $scope       
+                animation: true,
+                templateUrl: 'views/modal/changepass.html',
+                scope: $scope
             });
         };
 
         $scope.form = true;
-         $scope.forms = false;
-        $scope.continue=function(){
-             $scope.forms = true;
-           $scope.form = false;
+        $scope.forms = false;
+        $scope.continue = function () {
+            $scope.forms = true;
+            $scope.form = false;
         };
     })
     .controller('CheckoutCtrl', function ($scope, $state, TemplateService, NavigationService, UserService, CartService, $timeout) {
@@ -333,6 +333,8 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             $scope.product = data.data.data;
             $scope.productImages = _.sortBy($scope.product.images, ['order']);
             $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
+            $scope.sizes = _.sortBy($scope.product.size, ['order']);
+            $scope.selectedSize = _.sortBy($scope.product.size, ['order'])[0];
         });
 
         $scope.addToCart = function () {
@@ -413,7 +415,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 });
             }
         }
-   
+
 
         $scope.selectedSize = {};
         $scope.selectedSize.name = "Select Size";

@@ -68,7 +68,7 @@
                             <button class="btn dropdown-toggle btn-select" type="button" data-toggle="dropdown">{{selectedSize.name}}
                             <i class="fa fa-angle-down" aria-hidden="true"></i></button>
                             <ul class="dropdown-menu">
-                                <li ng-repeat="size in product.size | orderBy:size.order"> <a ng-click="setSelectedSize(size)">{{size.name}}</a></li>
+                                <li ng-repeat="size in sizes"> <a ng-click="setSelectedSize(size)">{{size.name}}</a></li>
                                 <!--<li><a href="#">1</a></li>
                                 <li><a href="#">2</a></li>
                                 <li><a href="#">3</a></li>
