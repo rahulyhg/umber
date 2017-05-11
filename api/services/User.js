@@ -17,7 +17,7 @@ var schema = new Schema({
         unique: true,
         uniqueCaseInsensitive: true
     },
-    deliveryAddress: [{
+    deliveryAddresses: [{
         line1: {
             type: String,
             required: true
@@ -318,6 +318,8 @@ var model = {
                 callback(err, null);
             } else if (data) {
                 if (!_.isEmpty(data)) {
+                    data.deliveryAddress = JSON.parse(JSON.stringify(data.deliveryAddresses[0]));
+                    delete data.deliveryAddresses;
                     callback(null, data);
                 } else {
                     callback(null, {

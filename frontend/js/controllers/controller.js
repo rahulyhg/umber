@@ -293,23 +293,26 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.gotoDetails = function () {
             $scope.view = "detailTab";
         }
-        // $scope.orderTable = [{
-        //     img: 'img/checkout/item.jpg',
-        //     title1: 'florence prints',
-        //     title2: 'half sleeve shirts',
-        //     color: 'blue',
-        //     size: 'xl',
-        //     quantity: '02',
-        //     subtotal: '2,899'
-        // }, {
-        //     img: 'img/checkout/item.jpg',
-        //     title1: 'florence prints',
-        //     title2: 'half sleeve shirts',
-        //     color: 'blue',
-        //     size: 'xl',
-        //     quantity: '02',
-        //     subtotal: '2,899'
-        // }]
+
+        $scope.setDeliveryAddress = function () {
+            if (!$scope.user.deliveryAddress)
+                $scope.user.deliveryAddress = {};
+            $scope.user.deliveryAddress.line1 = $scope.user.billingAddress.line1;
+            $scope.user.deliveryAddress.line2 = $scope.user.billingAddress.line2;
+            $scope.user.deliveryAddress.line3 = $scope.user.billingAddress.line3;
+            $scope.user.deliveryAddress.city = $scope.user.billingAddress.city;
+            $scope.user.deliveryAddress.state = $scope.user.billingAddress.state;
+            $scope.user.deliveryAddress.country = $scope.user.billingAddress.country;
+            $scope.user.deliveryAddress.pincode = $scope.user.billingAddress.pincode;
+        }
+
+        $scope.updateUser = function () {
+            UserService.updateUser($scope.user, function (data) {
+                if (data.data.data) {
+                    $scope.view = 'paymentTab'
+                }
+            });
+        }
     })
     .controller('IndividualPageCtrl', function ($scope, $http, $stateParams, $state, $uibModal, UserService, WishlistService,
         TemplateService, NavigationService, ProductService, CartService, $timeout) {
