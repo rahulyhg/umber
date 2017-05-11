@@ -88,7 +88,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             }
         ];
     })
-    .controller('BuythelookCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+    .controller('BuythelookCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
         $scope.template = TemplateService.getHTML("content/buythelook.html");
         TemplateService.title = "Buythelook"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -212,6 +212,22 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         });
         console.log($scope.myShirt11);
 
+
+
+        $scope.forgot = function () {
+            $uibModal.open({
+                animation: true,
+                templateUrl: 'views/modal/changepass.html',
+                scope: $scope
+            });
+        };
+
+        $scope.form = true;
+        $scope.forms = false;
+        $scope.continue = function () {
+            $scope.forms = true;
+            $scope.form = false;
+        };
     })
     .controller('CheckoutCtrl', function ($scope, $state, TemplateService, NavigationService, UserService, CartService, $timeout) {
         $scope.template = TemplateService.getHTML("content/checkout.html");
@@ -230,14 +246,13 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         }
 
         $scope.registerUser = function () {
-            console.log("Register: ", $scope.registerData);
             UserService.userRegistration($scope.registerData, function (data) {
                 console.log("Login data: ", data);
                 if (!_.isEmpty(data.data.data)) {
                     $scope.userData = data.data.data;
                     $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
                     $.jStorage.set("userId", $scope.userData._id);
-                    $state.go("listing-page");
+                    $state.reload();
                 } else {
                     // TODO:: show popup to register
                 }
@@ -247,7 +262,6 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
         $scope.login = function () {
             UserService.login($scope.loginData, function (data) {
-                console.log("Login data: ", data);
                 if (!_.isEmpty(data.data.data)) {
                     $scope.userData = data.data.data;
                     $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
@@ -279,23 +293,26 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.gotoDetails = function () {
             $scope.view = "detailTab";
         }
-        // $scope.orderTable = [{
-        //     img: 'img/checkout/item.jpg',
-        //     title1: 'florence prints',
-        //     title2: 'half sleeve shirts',
-        //     color: 'blue',
-        //     size: 'xl',
-        //     quantity: '02',
-        //     subtotal: '2,899'
-        // }, {
-        //     img: 'img/checkout/item.jpg',
-        //     title1: 'florence prints',
-        //     title2: 'half sleeve shirts',
-        //     color: 'blue',
-        //     size: 'xl',
-        //     quantity: '02',
-        //     subtotal: '2,899'
-        // }]
+
+        $scope.setDeliveryAddress = function () {
+            if (!$scope.user.deliveryAddress)
+                $scope.user.deliveryAddress = {};
+            $scope.user.deliveryAddress.line1 = $scope.user.billingAddress.line1;
+            $scope.user.deliveryAddress.line2 = $scope.user.billingAddress.line2;
+            $scope.user.deliveryAddress.line3 = $scope.user.billingAddress.line3;
+            $scope.user.deliveryAddress.city = $scope.user.billingAddress.city;
+            $scope.user.deliveryAddress.state = $scope.user.billingAddress.state;
+            $scope.user.deliveryAddress.country = $scope.user.billingAddress.country;
+            $scope.user.deliveryAddress.pincode = $scope.user.billingAddress.pincode;
+        }
+
+        $scope.updateUser = function () {
+            UserService.updateUser($scope.user, function (data) {
+                if (data.data.data) {
+                    $scope.view = 'paymentTab'
+                }
+            });
+        }
     })
     .controller('IndividualPageCtrl', function ($scope, $http, $stateParams, $state, $uibModal, UserService, WishlistService,
         TemplateService, NavigationService, ProductService, CartService, $timeout) {
@@ -312,10 +329,13 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
         $scope.loggedUser = $.jStorage.get("userId");
         var productId = $stateParams.id;
+
         ProductService.getProductWithId(productId, function (data) {
             $scope.product = data.data.data;
-            $scope.selectedImage = $scope.product.images[0];
-            console.log("Retrieved individual page: ", $scope.product);
+            $scope.productImages = _.sortBy($scope.product.images, ['order']);
+            $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
+            $scope.sizes = _.sortBy($scope.product.size, ['order']);
+            $scope.selectedSize = _.sortBy($scope.product.size, ['order'])[0];
         });
 
         $scope.addToCart = function () {
@@ -332,9 +352,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                         console.log("Error: ", data.data.error);
                     } else {
                         console.log("Success");
-                        $state.reload("individual-page", {
-                            id: $scope.product._id
-                        });
+                        $state.reload();
                     }
                 });
                 // } else {
@@ -342,15 +360,16 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 // }
             } else {
                 console.log("User not logged in");
-                // TODO: goto login. can't route to modal or checkkout
-                $uibModal.open({
-                    animation: true,
-                    templateUrl: 'views/modal/login.html',
-                    scope: $scope,
-                    size: 'md',
-                    controller: 'loginModalCtrl'
-                    // windowClass: 'modal-content-radi0'
-                });
+                // TODO: add product without login
+                $scope.cart = {};
+
+                // $scope.cart.products = [];
+                // $scope.product.product = $scope.product._id;
+                // $scope.product.selectedSize = $scope.selectedSize._id;
+                // $scope.product.reqQuantity = $scope.reqQuantity;
+                // $scope.cart.products.push($scope.product);
+                // $.jStorage.set("cart", $scope.cart);
+                // $state.reload();
             }
         }
 
@@ -396,6 +415,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 });
             }
         }
+
 
         $scope.selectedSize = {};
         $scope.selectedSize.name = "Select Size";
@@ -596,7 +616,8 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.navigation = NavigationService.getNavigation();
 
     })
-    .controller('ListingPageCtrl', function ($scope, $stateParams, TemplateService, NavigationService, BannerService, CategoryService, ProductService, $timeout) {
+    .controller('ListingPageCtrl', function ($scope, $stateParams, TemplateService, NavigationService,
+        SizeService, BannerService, CategoryService, ProductService, $timeout) {
         $scope.template = TemplateService.getHTML("content/listing-page.html");
         TemplateService.title = "Form"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -617,12 +638,26 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
         // Getting sub-categories instead of categories
         CategoryService.getCategoryWithId(categoryId, function (data) {
+            console.log("Subcategories");
             $scope.category = data.data.data;
         });
 
-        ProductService.getProductsWithCategoryId(categoryId, function (data) {
-            $scope.products = data.data.data;
-        })
+        $scope.filterProducts = function (filterParameter) {
+            ProductService.filterProducts(filterParameter, function (data) {
+                $scope.products = _.chunk(data.data.data, 3);
+                console.log("Listing page products: ", $scope.products);
+            });
+        }
+
+        // Getting sizes stored in DB
+        SizeService.getEnabledSizes(function (data) {
+            console.log("sizes");
+            $scope.sizes = _.sortBy(data.data.data, ['order']);
+        });
+
+        // ProductService.getProductsWithCategoryId(categoryId, function (data) {
+        //     $scope.products = data.data.data;
+        // })
 
         $scope.submitForm = function (data) {
             console.log(data);
@@ -1013,16 +1048,14 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         TemplateService.title = "Login"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
     })
-     .controller('CancelCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+    .controller('CancelCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.getHTML("content/cancel.html");
         TemplateService.title = "Return-Cancellation"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
-     })
+    })
     //Example API Controller
     .controller('DemoAPICtrl', function ($scope, TemplateService, apiService, NavigationService, $timeout) {
         apiService.getDemo($scope.formData, function (data) {
             console.log(data);
         });
     });
-
-   

@@ -139,7 +139,7 @@
                                         {{order}}
                                         <td>
                                             <div class="item">
-                                                <img ng-src="{{order.product.images[0] | serverimage}}" alt="
+                                                <img ng-src="{{order.product.images[0].image | serverimage}}" alt="
                        " class="img-responsive item__img-checkout">
                                                 <div class="mycart-info">
                                                     <p class="item__title1">{{order.product.name}}</p>
@@ -314,7 +314,7 @@
                                         <div class="custom-checkbox">
                                             <h3 class="marg0 detail-tab__head">shipping address</h3>
                                             <div class="checkbox">
-                                                <input type="checkbox" id="a1">
+                                                <input type="checkbox" id="a1" ng-click="setDeliveryAddress()">
                                                 <label for="a1">Same as BIlling Address</label>
                                             </div>
                                         </div>
@@ -322,7 +322,7 @@
                                             <div class="customized-form">
                                                 <div class="form-group">
                                                     <div class="col-md-10">
-                                                        <input type="text" placeholder="Line 1*" class="form-control">
+                                                        <input type="text" placeholder="Line 1*" ng-model="user.deliveryAddress.line1" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -331,7 +331,7 @@
                                             <div class="customized-form">
                                                 <div class="form-group">
                                                     <div class="col-md-10">
-                                                        <input type="text" placeholder="Line 2" class="form-control">
+                                                        <input type="text" placeholder="Line 2" ng-model="user.deliveryAddress.line2" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -340,7 +340,7 @@
                                             <div class="customized-form">
                                                 <div class="form-group">
                                                     <div class="col-md-10">
-                                                        <input type="text" placeholder="Line 3" class="form-control">
+                                                        <input type="text" placeholder="Line 3" ng-model="user.deliveryAddress.line3" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -349,7 +349,7 @@
                                             <div class="customized-form">
                                                 <div class="form-group">
                                                     <div class="col-md-10">
-                                                        <input type="text" placeholder="City*" class="form-control">
+                                                        <input type="text" placeholder="City*" ng-model="user.deliveryAddress.city" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -358,7 +358,7 @@
                                             <div class="customized-form">
                                                 <div class="form-group">
                                                     <div class="col-md-10">
-                                                        <input type="text" placeholder="Pincode" class="form-control">
+                                                        <input type="text" placeholder="Pincode" ng-model="user.deliveryAddress.pincode" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -367,7 +367,7 @@
                                             <div class="customized-form">
                                                 <div class="form-group">
                                                     <div class="col-md-10">
-                                                        <input type="text" placeholder="State" class="form-control">
+                                                        <input type="text" placeholder="State" ng-model="user.deliveryAddress.state" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -378,7 +378,7 @@
                                                     <div class="col-md-10">
                                                         <div class=" form-control relate country-selection">
                                                             <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
-                                                            <select class="checkout-drop relate"> 
+                                                            <select class="checkout-drop relate" ng-model="user.deliveryAddress.country"> 
                                                             <option style="display: none">COUNTRY</option>
                                                             <option>INDIA</option>
                                                             <option>USA</option>
@@ -447,7 +447,7 @@
                                     </form>
                                 </div>
                                 <div class="text-center">
-                                    <button class="btn btn-default checkout__cont-btn">Continue</button>
+                                    <button class="btn btn-default checkout__cont-btn" ng-click="updateUser()">Continue</button>
                                 </div>
                             </div>
                         </div>

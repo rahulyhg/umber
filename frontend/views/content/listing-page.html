@@ -21,10 +21,27 @@
                                     <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
                                 </h5>
                             </uib-accordion-heading>
-                            <div ng-repeat="category in categories" class="checkbox">
+                            <!--<div ng-repeat="category in categories" class="checkbox">
                                 <input type="checkbox" id="{{category._id}}">
                                 <label for="{{category._id}}"> {{category.name}}
                                </label>
+                            </div>-->
+                            <div class="checkbox" ng-repeat="category in categories">
+                                <div class="radio">
+                                    <input type="radio" class="form-control" name="radio" id="category._id">
+                                    <label for="category._id"> <span class="casual"></span>{{category.name}}
+                                         
+                                       </label>
+                                    <!--<input type="radio" class="form-control" name="radio">
+                                    <label for="radio2"> <span></span> Tshirt
+                                        
+                                       </label>
+                                    <input type="radio" class="form-control" name="radio">
+                                    <label for="radio3">  <span></span>   Trouser
+                                     
+                                       </label>-->
+                                </div>
+                                </label>
                             </div>
                         </div>
                     </uib-accordion>
@@ -85,13 +102,13 @@
                                     <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
                                 </h5>
                             </uib-accordion-heading>
-                            <div class="checkbox">
-                                <input type="checkbox" id="d1">
-                                <label for="d1">
-                                     42Cms-LS-Slim-Fit
+                            <div class="checkbox" ng-repeat="size in sizes">
+                                <input type="checkbox" id="{{size._id}}">
+                                <label for="{{size._id}}">
+                                     {{size.name}}
                                 </label>
                             </div>
-                            <div class="checkbox">
+                            <!--<div class="checkbox">
                                 <input type="checkbox" id="d2">
                                 <label for="d2">
                                      40Cms-MS-Slim-Fit
@@ -120,7 +137,7 @@
                                 <label for="d6">
                                      46Cms-2XL-Regular-Fit
                                 </label>
-                            </div>
+                            </div>-->
                         </div>
                     </uib-accordion>
                 </div>
@@ -287,7 +304,7 @@
                                                     </a>-->
                                                 </div>
                                                 <a ui-sref="individual-page({id: product._id})">
-                                                    <img ng-src="{{image | serverimage}}" class="img-rsponsive img1" title="{{product.name}}">
+                                                    <img ng-src="{{image.image | serverimage}}" class="img-rsponsive img1" title="{{product.name}}">
                                                 </a>
                                                 <!--<i class="fa fa-heart-o" aria-hidden="true"></i>
                                             <img ng-src="{{buy.img}}" class="img-responsive" ng-mouseover="displayCntent();" ng-mouseleave="hideContent();">-->

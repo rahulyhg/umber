@@ -36,7 +36,7 @@ myApp.directive('uploadImage', function ($http, $filter, $timeout) {
             callback: "&ngCallback"
         },
         link: function ($scope, element, attrs) {
-            console.log($scope.model);
+            console.log("upload image model: ", $scope.model);
             $scope.showImage = function () {};
             $scope.check = true;
             if (!$scope.type) {

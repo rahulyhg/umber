@@ -17,6 +17,54 @@ var schema = new Schema({
         unique: true,
         uniqueCaseInsensitive: true
     },
+    deliveryAddresses: [{
+        line1: {
+            type: String,
+            required: true
+        },
+        line2: String,
+        line3: String,
+        city: {
+            type: String,
+            required: true
+        },
+        state: {
+            type: String,
+            required: true
+        },
+        pincode: {
+            type: Number,
+            required: true
+        },
+        country: String,
+        status: {
+            type: String,
+            required: true,
+            enum: ['Enabled', 'Disabled'],
+            default: 'Enabled'
+        }
+    }],
+    billingAddress: {
+        line1: {
+            type: String,
+            required: true
+        },
+        line2: String,
+        line3: String,
+        city: {
+            type: String,
+            required: true
+        },
+        state: {
+            type: String,
+            required: true
+        },
+        pincode: {
+            type: Number,
+            required: true
+        },
+        country: String
+    },
     dob: {
         type: Date,
         excel: {
@@ -270,6 +318,8 @@ var model = {
                 callback(err, null);
             } else if (data) {
                 if (!_.isEmpty(data)) {
+                    data.deliveryAddress = JSON.parse(JSON.stringify(data.deliveryAddresses[0]));
+                    delete data.deliveryAddresses;
                     callback(null, data);
                 } else {
                     callback(null, {

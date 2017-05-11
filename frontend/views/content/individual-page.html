@@ -23,17 +23,17 @@
                     </ul>
                 </div>
                 <div class="individual-first relate">
-                    <img ng-src="{{selectedImage | serverimage}}" class="img-responsive bg">
+                    <img ng-src="{{selectedImage.image | serverimage}}" class="img-responsive bg">
                     <div class="individual-first__zoom">
                         <img ng-src="img/individual/zoom.png" alt="zoom" class="img-responsive">
                     </div>
                 </div>
                 <div class="slider2 relate">
-                    <flex-slider flex-slide="image in product.images track by $index" prev-text="" next-text="" animation="slide" item-width="70"
+                    <flex-slider flex-slide="image in productImages track by $index" prev-text="" next-text="" animation="slide" item-width="70"
                         item-margin="15" min-items="3">
                         <li class="relate">
                             <div class="customer-choice__banner-detail relate">
-                                <img ng-src="{{image | serverimage }}" alt="" class="img-responsive" ng-click="changeImage($index)">
+                                <img ng-src="{{image.image | serverimage }}" alt="" class="img-responsive" ng-click="changeImage($index)">
                             </div>
 
                         </li>
@@ -68,7 +68,7 @@
                             <button class="btn dropdown-toggle btn-select" type="button" data-toggle="dropdown">{{selectedSize.name}}
                             <i class="fa fa-angle-down" aria-hidden="true"></i></button>
                             <ul class="dropdown-menu">
-                                <li ng-repeat="size in product.size | orderBy:size.order"> <a ng-click="setSelectedSize(size)">{{size.name}}</a></li>
+                                <li ng-repeat="size in sizes"> <a ng-click="setSelectedSize(size)">{{size.name}}</a></li>
                                 <!--<li><a href="#">1</a></li>
                                 <li><a href="#">2</a></li>
                                 <li><a href="#">3</a></li>

@@ -44,6 +44,7 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
             }
             CartService.removeProduct(data, function (data) {
                 $scope.mycartTable = data.data.data;
+                $state.reload();
             });
         }
 
@@ -52,7 +53,7 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
             accessToken: $.jStorage.get("accessToken")
         }
 
-        if (userId.userId != null || typeof userId.userId != 'undefined') {
+        if (userId.userId != null) {
             CartService.getCart(userId, function (data) {
                 if (userId.accessToken) {
                     $scope.cart = data.data.data;
@@ -62,6 +63,9 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
                 }
             });
         } else {
+            //TODO: Implement without login
+            // $scope.cart = $.jStorage.get("cart");
+            // console.log("jStorage cart", $scope.cart);
             $scope.cart = {};
         }
 
@@ -70,7 +74,7 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
             $scope.view = !$scope.view;
         }
     })
-    .controller('loginModalCtrl', function ($scope, $state, t$uibModalInstance, UserService) {
+    .controller('loginModalCtrl', function ($scope, $state, $uibModalInstance, UserService) {
 
         $scope.formData = {};
         $scope.loginData = {};

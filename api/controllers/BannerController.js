@@ -6,7 +6,7 @@ var controller = {
         } else {
             res.json({
                 message: {
-                    data: "Inavlid request!"
+                    data: "Invalid request!"
                 }
             })
         }

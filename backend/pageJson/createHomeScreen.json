@@ -6,6 +6,14 @@
     "pageType": "create",
     "urlFields": ["Homescreen"],
     "fields": [{
+        "name": "Title",
+        "type": "text",
+        "tableRef": "name",
+        "placeholder": "Enter Title",
+        "id": "desc",
+        "validation": ["required", "trim", "unique"],
+        "url": ""
+    }, {
         "name": "Image",
         "type": "image",
         "tableRef": "image",
@@ -13,7 +21,8 @@
         "id": "imgLink",
         "size": "1920 X 1080",
         "option": "single",
-        "validation": ["", "trim", "unique"],
+        "view": true,
+        "validation": ["required", "trim", "unique"],
         "url": ""
     }, {
         "name": "Description",
