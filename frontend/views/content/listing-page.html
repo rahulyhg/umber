@@ -102,13 +102,13 @@
                                     <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
                                 </h5>
                             </uib-accordion-heading>
-                            <div class="checkbox">
-                                <input type="checkbox" id="d1">
-                                <label for="d1">
-                                     42Cms-LS-Slim-Fit
+                            <div class="checkbox" ng-repeat="size in sizes">
+                                <input type="checkbox" id="{{size._id}}">
+                                <label for="{{size._id}}">
+                                     {{size.name}}
                                 </label>
                             </div>
-                            <div class="checkbox">
+                            <!--<div class="checkbox">
                                 <input type="checkbox" id="d2">
                                 <label for="d2">
                                      40Cms-MS-Slim-Fit
@@ -137,7 +137,7 @@
                                 <label for="d6">
                                      46Cms-2XL-Regular-Fit
                                 </label>
-                            </div>
+                            </div>-->
                         </div>
                     </uib-accordion>
                 </div>

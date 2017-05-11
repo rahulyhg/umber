@@ -9,7 +9,8 @@ var schema = new Schema({
         }
     },
 
-    order: Number
+    order: Number,
+    status: String
 });
 
 schema.plugin(deepPopulate, {});
@@ -19,8 +20,8 @@ module.exports = mongoose.model('Size', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
 var model = {
-    getSizes: function (callback) {
-        Size.find({}).exec({
+    getEnabledSizes: function (callback) {
+        Size.find({}).exec(
             function (err, data) {
                 if (err) {
                     callback(err, null);
@@ -34,7 +35,7 @@ var model = {
                     }, null);
                 }
             }
-        })
+        );
     }
 };
 module.exports = _.assign(module.exports, exports, model);

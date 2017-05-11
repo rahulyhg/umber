@@ -616,7 +616,8 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.navigation = NavigationService.getNavigation();
 
     })
-    .controller('ListingPageCtrl', function ($scope, $stateParams, TemplateService, NavigationService, BannerService, CategoryService, ProductService, $timeout) {
+    .controller('ListingPageCtrl', function ($scope, $stateParams, TemplateService, NavigationService,
+        SizeService, BannerService, CategoryService, ProductService, $timeout) {
         $scope.template = TemplateService.getHTML("content/listing-page.html");
         TemplateService.title = "Form"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -637,12 +638,19 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
         // Getting sub-categories instead of categories
         CategoryService.getCategoryWithId(categoryId, function (data) {
+            console.log("Subcategories");
             $scope.category = data.data.data;
         });
 
-        ProductService.getProductsWithCategoryId(categoryId, function (data) {
-            $scope.products = data.data.data;
-        })
+        // Getting sizes stored in DB
+        SizeService.getEnabledSizes(function (data) {
+            console.log("sizes");
+            $scope.sizes = _.sortBy(data.data.data, ['order']);
+        });
+
+        // ProductService.getProductsWithCategoryId(categoryId, function (data) {
+        //     $scope.products = data.data.data;
+        // })
 
         $scope.submitForm = function (data) {
             console.log(data);
