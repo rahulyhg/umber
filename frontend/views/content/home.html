@@ -92,7 +92,7 @@
                             item-margin="20" min-items="3">
                             <li>
                                 <div class=" new-arrival__banner-detail relate">
-                                    <img ng-src="{{newArrival.images[0].image | serverimage}}" alt="" class="img-responsive">
+                                    <img ng-src="{{newArrival.images[0].image | serverimage}}" alt="" class="img-responsive" ui-sref="individual-page({id: newArrival._id})">
                                     <div class="get-left">
                                         <h3><i class="fa fa-inr" aria-hidden="true"></i>{{newArrival.price}}</h3>
                                         <h4>{{newArrival.name}}</h4>
@@ -122,7 +122,7 @@
                     min-items="3">
                     <li class="relate">
                         <div class="featured__banner-detail relate">
-                            <img ng-src="{{new.images[0].image | serverimage}}" alt="" class="img-responsive">
+                            <img ng-src="{{new.images[0].image | serverimage}}" alt="" class="img-responsive" ui-sref="individual-page({id: new._id})">
                             <div class="featured__cloth-desc">
                                 <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
                                 <h4 class="text-uppercase">{{new.name}}</h4>
