@@ -17,6 +17,54 @@ var schema = new Schema({
         unique: true,
         uniqueCaseInsensitive: true
     },
+    deliveryAddress: [{
+        line1: {
+            type: String,
+            required: true
+        },
+        line2: String,
+        line3: String,
+        city: {
+            type: String,
+            required: true
+        },
+        state: {
+            type: String,
+            required: true
+        },
+        pincode: {
+            type: Number,
+            required: true
+        },
+        country: String,
+        status: {
+            type: String,
+            required: true,
+            enum: ['Enabled', 'Disabled'],
+            default: 'Enabled'
+        }
+    }],
+    billingAddress: {
+        line1: {
+            type: String,
+            required: true
+        },
+        line2: String,
+        line3: String,
+        city: {
+            type: String,
+            required: true
+        },
+        state: {
+            type: String,
+            required: true
+        },
+        pincode: {
+            type: Number,
+            required: true
+        },
+        country: String
+    },
     dob: {
         type: Date,
         excel: {
