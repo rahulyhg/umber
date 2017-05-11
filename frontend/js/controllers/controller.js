@@ -639,6 +639,13 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             $scope.category = data.data.data;
         });
 
+        $scope.filterProducts = function (filterParameter) {
+            ProductService.filterProducts(filterParameter, function (data) {
+                $scope.products = _.chunk(data.data.data, 3);
+                console.log("Listing page products: ", $scope.products);
+            });
+        }
+
         // Getting sizes stored in DB
         SizeService.getEnabledSizes(function (data) {
             console.log("sizes");
