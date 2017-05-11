@@ -1,20 +1,167 @@
 <div class="container">
   <div class="content-spacing">
-    
-      <h1 class="text-center text-uppercase"> Return/Exchange</h1>
-    <div class="cancel-section">
-      <div class="cancel-content d-inline">
-      <ul class="list-inline">
-        <li>
-          order placed
-        </li>
-        <li>31 january 2017</li>
-      </ul>
-
-
+    <h1 class="text-center text-uppercase custom-cancel-head"> Return/Exchange</h1>
+    <div class="ext-pad">
+      <div class="ext-pad-section">
+        <div class="cancel-section ">
+          <div class="cancel-content">
+            <ul class="list-inline">
+              <li>
+                <div class="cancel-content-1 ">
+                  <h4 class="text-uppercase">Order Placed</h4>
+                  <span>31 January 2017</span>
+                </div>
+              </li>
+              <li>
+                <div class="cancel-content-2">
+                  <h4 class="text-uppercase">Order NO</h4>
+                  <span># 132-423-56789</span>
+                </div>
+              </li>
+              <li class="pull-right">
+                <div class="cancel-content-3">
+                  <h4 class="text-uppercase">Grand total</h4>
+                  <span> <i class="fa fa-inr" aria-hidden="true"></i>&ensp;8,678</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class=cancel-table>
+          <table class=table>
+            <tr class="text-uppercase grey-cancel text-center">
+              <td class="ord-item tl-left">Item Ordered</td>
+              <td class="wd50"></td>
+              <td>Price</td>
+              <td>Quantity</td>
+              <td>Return Item</td>
+            </tr>
+            <tr class="text-center ">
+              <td class="ord-item tl-left">
+                <img src="img/compare/2.jpg" class="img-responsive item-order-img">
+              </td>
+              <td>
+                <div class="cancel-desc">
+                  <p>Marathon plain front trouser
+                    <p>
+                      <p>Product code:G000278-GMSHHS0202-FP-16-22</p>
+                </div>
+              </td>
+              <td class="cancel-price">
+                <p><i class="fa fa-inr" aria-hidden="true"></i>&ensp;2,899</p>
+              </td>
+              <td>
+                <div class="cancel-quant text-center">
+                  02
+                </div>
+              </td>
+              <td cancel-rtn>
+                <div class="checkbox-cancel">
+                  <label><input type="checkbox" value=""></label>
+                </div>
+              </td>
+            </tr>
+            <tr class="text-center ">
+              <td class="ord-item tl-left">
+                <img src="img/compare/2.jpg" class="img-responsive item-order-img">
+              </td>
+              <td>
+                <div class="cancel-desc">
+                  <p>Marathon plain front trouser
+                    <p>
+                      <p>Product code:G000278-GMSHHS0202-FP-16-22</p>
+                </div>
+              </td>
+              <td class="cancel-price">
+                <p><i class="fa fa-inr" aria-hidden="true"></i>&ensp;2,899</p>
+              </td>
+              <td>
+                <div class="cancel-quant text-center">
+                  02
+                </div>
+              </td>
+              <td cancel-rtn>
+                <div class="checkbox-cancel">
+                  <label><input type="checkbox" value=""></label>
+                </div>
+              </td>
+            </tr>
+            <tr class="text-center ">
+              <td class="ord-item tl-left">
+                <img src="img/compare/2.jpg" class="img-responsive item-order-img">
+              </td>
+              <td>
+                <div class="cancel-desc">
+                  <p>Marathon plain front trouser
+                    <p>
+                      <p>Product code:G000278-GMSHHS0202-FP-16-22</p>
+                </div>
+              </td>
+              <td class="cancel-price">
+                <p><i class="fa fa-inr" aria-hidden="true"></i>&ensp;2,899</p>
+              </td>
+              <td>
+                <div class="cancel-quant text-center">
+                  02
+                </div>
+              </td>
+              <td cancel-rtn>
+                <div class="checkbox-cancel">
+                  <label><input type="checkbox" value=""></label>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="reason-rtn">
+        <ul class="list-inline">
+          <li>
+            Reason for Return
+          </li>
+          <li> :</li>
+          <li>
+            <!--<div class="dropdown inline-block ">
+              <button class=" btn dropdown-toggle" type="button" data-toggle="dropdown"><span>Select Return reason<span>
+                            <i class="fa fa-angle-down" aria-hidden="true"></i></button>
+              <ul class="dropdown-menu">
+                <li><a>1</a></li>
+                <li><a>2</a></li>
+                <li><a>3</a></li>
+                <li><a>4</a></li>
+                <li><a>5</a></li>
+              </ul>
+            </div>-->
+            <div class="dropdown inline-block">
+              <button class="btn btn-block  dropdown-toggle btn-select" type="button" data-toggle="dropdown"><span>Select Return Reason </span>
+                            <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></button>
+              <ul class="dropdown-menu">
+                <li ng-repeat="size in product.size | orderBy:size.order"> <a ng-click="setSelectedSize(size)">{{size.name}}</a></li>
+                <!--<li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">6</a></li>-->
+              </ul>
+            </div>
+          </li>
+        </ul>
+        <div class="comment-cancel">
+          <div class="customized-form">
+            <div class="form-group">
+              <input type="text" placeholder="Comments"class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="text" placeholder=""  class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="text" placeholder=""  class="form-control">
+            </div>
+          </div>
+        </div>
+        <button class="cancel-submit btn header--login ">Submit</button>
+      </div>
     </div>
-
-
   </div>
-
 </div>
