@@ -222,6 +222,24 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             });
         };
 
+      $scope.otp1 = function () {
+            $uibModal.open({
+                animation: true,
+                templateUrl: 'views/modal/otp1.html',
+                scope: $scope
+            });
+        };
+
+             $scope.otp2 = function () {
+            $uibModal.open({
+                animation: true,
+                templateUrl: 'views/modal/otp2.html',
+                scope: $scope
+            });
+        };
+        
+        
+
         $scope.form = true;
         $scope.forms = false;
         $scope.continue = function () {
