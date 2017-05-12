@@ -237,6 +237,15 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 scope: $scope
             });
         };
+
+              $scope.addwishlist = function () {
+            $uibModal.open({
+                animation: true,
+                templateUrl: 'views/modal/wishlistadd.html',
+                scope: $scope
+            });
+        };
+        
         
         
 

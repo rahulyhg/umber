@@ -1520,7 +1520,7 @@ header {
                 }
             }
 
-        .close{
+        .closes{
             @include position(absolute,10px 10px null null);
             .fa{
                 &:before{
@@ -1529,6 +1529,17 @@ header {
 
             }
            
+        }
+    }
+    .resend{
+         color: $darkBrown1;
+    }
+    .form-groups{
+        span{
+                display: inline-block;
+            @include size(30px,30px);
+    border-bottom: 2px solid;
+    margin: 0 5px;
         }
     }
 }
@@ -1941,4 +1952,11 @@ header {
     padding: 5px 25px;
     margin-top: 15px;
     font-size: 15px;
+}
+
+.wish-modal{
+    padding: 10px;
+    p{
+        margin: 0;
+    }
 }
