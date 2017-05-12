@@ -1867,14 +1867,23 @@ header {
                 }
 
         li:nth-child(3){
+            // width: 30% !important;
             button{
                 padding: 1px 10px 2px 10px;
                 border: 1px dashed black;
+                    width: 338px;
+                    text-align: left;
+                    letter-spacing: 1px;
+                    .fa{
+                        float: right;
+                        font-size: 20px;
+                    }
                 .fa-angle-down{
                     &:before{
-                        margin-left: 100px;
+                        // mar
+                        padding-top: 2px;
                     }
-                }
+                }  
 
             }
         }
@@ -1887,7 +1896,7 @@ header {
     .form-control{
        
         padding: 0px 12px;
-        width: 40%;
+        width: 50%;
         height: 20px;
     }
 } 

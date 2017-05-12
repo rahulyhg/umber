@@ -132,8 +132,8 @@
                 <li><a>5</a></li>
               </ul>
             </div>-->
-            <div class="dropdown inline-block">
-              <button class="btn btn-block  dropdown-toggle btn-select" type="button" data-toggle="dropdown"><span>Select Return Reason </span>
+            <!--<div class="dropdown inline-block btn-block btn-grp">
+              <button class="btn btn-block  dropdown-toggle btn-select" type="button" data-toggle="dropdown"><span class="pull-left">Select Return Reason </span>
                             <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></button>
               <ul class="dropdown-menu">
                 <li ng-repeat="size in product.size | orderBy:size.order"> <a ng-click="setSelectedSize(size)">{{size.name}}</a></li>
@@ -143,8 +143,21 @@
                                 <li><a href="#">4</a></li>
                                 <li><a href="#">5</a></li>
                                 <li><a href="#">6</a></li>-->
-              </ul>
-            </div>
+              <!--</ul>
+            </div>-->
+                                    <div class="dropdown inline-block">
+                            <button class="btn dropdown-toggle btn-select" type="button" data-toggle="dropdown">Select Return Reason
+                            <i class="fa fa-angle-down" aria-hidden="true"></i></button>
+                            <ul class="dropdown-menu">
+                                <li ng-repeat="size in sizes"> <a ng-click="setSelectedSize(size)">{{size.name}}</a></li>
+                                <!--<li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">6</a></li>-->
+                            </ul>
+                        </div>
           </li>
         </ul>
         <div class="comment-cancel">
