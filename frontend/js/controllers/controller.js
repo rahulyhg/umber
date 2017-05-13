@@ -253,6 +253,16 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 scope: $scope
             });
         };
+
+                    $scope.remove = function () {
+            $uibModal.open({
+                animation: true,
+                templateUrl: 'views/modal/removeitem.html',
+                scope: $scope
+            });
+        };
+
+        
         
         
         
