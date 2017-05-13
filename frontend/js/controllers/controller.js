@@ -245,6 +245,15 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 scope: $scope
             });
         };
+
+                  $scope.addcart = function () {
+            $uibModal.open({
+                animation: true,
+                templateUrl: 'views/modal/cartadd.html',
+                scope: $scope
+            });
+        };
+        
         
         
         
