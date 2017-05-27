@@ -7,7 +7,10 @@ var schema = new Schema({
     },
     // This will be same for the same product
     // regardless of size, color
-    productId: String,
+    productId: {
+        type: String,
+        index: true
+    },
     // This will be like full sleeve in Men's shirt
     // Categories on home page are different
     category: [{
@@ -101,6 +104,62 @@ module.exports = mongoose.model('Product', schema);
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "category brand prodCollection fabric type color size",
     "category brand prodCollection fabric type color size"));
 var model = {
+    getAllSKUsWithProductId: function (data, callback) {
+        Product.find({
+            productId: data.productId
+        }).exec(function (err, SKUs) {
+            callback(err, SKUs);
+        });
+    },
+
+    getProductSizesWithProductId: function (data, callback) {
+        Product.distinct("size", {
+            productId: data.productId
+        }).exec(function (err, sizes) {
+            callback(err, sizes);
+        })
+    },
+
+    getProductColorsWithProductId: function (data, callback) {
+        Product.distinct("color", {
+            productId: data.productId
+        }).exec(function (err, sizes) {
+            callback(err, sizes);
+        })
+    },
+
+    getProductDetails: function (data, callback) {
+        Product.findOne({
+            productId: data.productId,
+            name: {
+                $exists: true
+            },
+            category: {
+                $exists: true
+            },
+            brand: {
+                $exists: true
+            },
+            prodCollection: {
+                $exists: true
+            },
+            type: {
+                $exists: true
+            },
+            fabric: {
+                $exists: true
+            },
+            washcare: {
+                $exists: true
+            },
+            description: {
+                $exists: true
+            }
+        }).exec(function (err, product) {
+            callback(err, product);
+        })
+    },
+
     getAllProducts: function (data, callback) {
         Product.find({}).exec(function (error, data) {
             if (error) {
@@ -131,43 +190,65 @@ var model = {
         });
     },
 
-    getNewArrivals: function (data, callback) {
-        Product.find({
-            newArrival: true,
-            status: 'Enabled'
-        }).deepPopulate('type').exec(function (error, data) {
-            if (error) {
-                callback(error, null);
-            } else if (data) {
-                callback(null, data);
-            } else {
-                callback({
-                    message: "Incorrect credentials"
-                }, null);
+    getNewArrivals: function (callback) {
+        async.waterfall([{
+            function (callback) {
+                Product.aggregate([{
+                    $group: {
+                        _id: productId
+                    }
+                }]).exec(function (err, products) {
+                    callback(err, products);
+                });
+            },
+            function (products, callback) {
+                async.each(products, function (product, callback) {
+                    Product.findOne({
+                        productId: product._id,
+                        newArrival: true
+                    }).exec(function (err, product) {
+                        callback(err, product);
+                    });
+                }, function (err, results) {
+                    callback(err, results);
+                });
             }
+        }], function (err, newarrivals) {
+            callback(err, newArrivals);
         });
     },
 
     getFeatured: function (data, callback) {
-        Product.find({
-            featured: true,
-            status: 'Enabled'
-        }).deepPopulate('type').exec(function (error, data) {
-            if (error) {
-                callback(error, null);
-            } else if (data) {
-                callback(null, data);
-            } else {
-                callback({
-                    message: "Incorrect credentials"
-                }, null);
+        async.waterfall([{
+            function (callback) {
+                Product.aggregate([{
+                    $group: {
+                        _id: productId
+                    }
+                }]).exec(function (err, products) {
+                    callback(err, products);
+                });
+            },
+            function (products, callback) {
+                async.each(products, function (product, callback) {
+                    Product.findOne({
+                        productId: product._id,
+                        featured: true
+                    }).exec(function (err, product) {
+                        callback(err, product);
+                    });
+                }, function (err, results) {
+                    callback(err, results);
+                });
             }
+        }], function (err, featureds) {
+            callback(err, featureds);
         });
     },
 
     getProductWithId: function (data, callback) {
         Product.findOne({
-            _id: mongoose.Types.ObjectId(data)
+            _id: mongoose.Types.ObjectId(data.id)
         }).deepPopulate('category brand prodCollection fabric type color size').exec(function (err, data) {
             if (err) {
                 callback(err, null);

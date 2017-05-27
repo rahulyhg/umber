@@ -152,7 +152,7 @@
             "id": "washcare",
             "url": "",
             "validation": [
-                "required",
+                "",
                 "trim"
             ]
         },
@@ -164,7 +164,7 @@
             "id": "descript",
             "url": "",
             "validation": [
-                "required",
+                "",
                 "trim"
             ]
         },
