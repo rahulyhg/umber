@@ -177,9 +177,9 @@
             "id": "skuid",
             "option": "single",
             "validation": [
-                "",
+                "required",
                 "trim",
-                ""
+                "unique"
             ],
             "onView": true,
             "url": ""
@@ -195,7 +195,7 @@
             "searchApi": "searchCall",
             "url": "BaseColor/search",
             "validation": [
-                "",
+                "required",
                 "trim",
                 ""
             ],
@@ -212,7 +212,7 @@
             "searchApi": "searchCall",
             "url": "Size/search",
             "validation": [
-                "",
+                "required",
                 "trim",
                 ""
             ],
@@ -240,7 +240,7 @@
             "placeholder": "Enter Price",
             "id": "price",
             "validation": [
-                "",
+                "required",
                 "trim",
                 ""
             ],
