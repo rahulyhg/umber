@@ -3,9 +3,7 @@
 var schema = new Schema({
     name: {
         type: String,
-        required: true,
-        unique: true,
-        uniqueCaseInsensitive: true
+        required: true
     },
     // This will be same for the same product
     // regardless of size, color
