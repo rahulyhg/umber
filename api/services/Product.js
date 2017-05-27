@@ -7,7 +7,9 @@ var schema = new Schema({
         unique: true,
         uniqueCaseInsensitive: true
     },
-    code: String,
+    // This will be same for the same product
+    // regardless of size, color
+    productId: String,
     // This will be like full sleeve in Men's shirt
     // Categories on home page are different
     category: [{
@@ -40,22 +42,25 @@ var schema = new Schema({
     }],
     washcare: String,
     description: String,
-    sku: [{
-        skuId: String,
-        colorId: {
-            type: Schema.Types.ObjectId,
-            ref: 'BaseColor'
-        },
-        sizeId: {
-            type: Schema.Types.ObjectId,
-            ref: 'Size'
-        },
-        quantity: Number,
-        images: [{
-            image: String,
-            order: Number
-        }],
-        price: Number
+    // Should be unique to identify individual product
+    skuId: {
+        type: String,
+        unique: true,
+        uniqueCaseInsensitive: true
+    },
+    quantity: Number,
+    size: {
+        type: Schema.Types.ObjectId,
+        ref: 'Size'
+    },
+    color: {
+        type: Schema.Types.ObjectId,
+        ref: 'BaseColor'
+    },
+    price: Number,
+    images: [{
+        image: String,
+        order: Number
     }],
     status: {
         type: String,
@@ -82,20 +87,21 @@ schema.plugin(deepPopulate, {
         'type': {
             select: "name"
         },
-        'sku.colorId': {
+        'color': {
             select: "name"
         },
-        'sku.sizeId': {
+        'size': {
             select: "name"
         }
     }
 });
+
 schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('Product', schema);
 
-var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "category brand prodCollection fabric type sku.colorId sku.sizeId",
-    "category brand prodCollection fabric type sku.colorId sku.sizeId"));
+var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "category brand prodCollection fabric type color size",
+    "category brand prodCollection fabric type color size"));
 var model = {
     getAllProducts: function (data, callback) {
         Product.find({}).exec(function (error, data) {
@@ -114,7 +120,7 @@ var model = {
     getEnabledProducts: function (data, callback) {
         Product.find({
             status: 'Enabled'
-        }).deepPopulate("category brand prodCollection fabric type sku.colorId sku.sizeId").exec(function (error, data) {
+        }).deepPopulate("category brand prodCollection fabric type color size").exec(function (error, data) {
             if (error) {
                 callback(error, null);
             } else if (data) {
@@ -164,7 +170,7 @@ var model = {
     getProductWithId: function (data, callback) {
         Product.findOne({
             _id: mongoose.Types.ObjectId(data)
-        }).deepPopulate('category brand prodCollection fabric type sku.colorId sku.sizeId').exec(function (err, data) {
+        }).deepPopulate('category brand prodCollection fabric type color size').exec(function (err, data) {
             if (err) {
                 callback(err, null);
             } else if (data) {

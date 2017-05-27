@@ -19,10 +19,10 @@
             "url": ""
         },
         {
-            "name": "Code",
+            "name": "Product ID",
             "type": "text",
-            "tableRef": "code",
-            "placeholder": "Enter Product Code",
+            "tableRef": "productId",
+            "placeholder": "Enter Product ID",
             "id": "code",
             "validation": [
                 "required",
@@ -169,6 +169,84 @@
             ]
         },
         {
+            "name": "SKU ID",
+            "type": "text",
+            "tableRef": "skuId",
+            "tableValue": "",
+            "placeholder": "Enter SKU ID",
+            "id": "skuid",
+            "option": "single",
+            "validation": [
+                "",
+                "trim",
+                ""
+            ],
+            "onView": true,
+            "url": ""
+        },
+        {
+            "name": "Color",
+            "type": "tags",
+            "tableRef": "color",
+            "placeholder": "Enter Product Color",
+            "id": "color",
+            "dropDownField": "name",
+            "dropDownType": "single",
+            "searchApi": "searchCall",
+            "url": "BaseColor/search",
+            "validation": [
+                "",
+                "trim",
+                ""
+            ],
+            "onView": true
+        },
+        {
+            "name": "Size",
+            "type": "tags",
+            "tableRef": "size",
+            "placeholder": "Enter Product Color",
+            "id": "size",
+            "dropDownField": "name",
+            "dropDownType": "single",
+            "searchApi": "searchCall",
+            "url": "Size/search",
+            "validation": [
+                "",
+                "trim",
+                ""
+            ],
+            "onView": true
+        },
+        {
+            "name": "Quantity",
+            "type": "text",
+            "tableRef": "quantity",
+            "tableValue": "",
+            "placeholder": "Enter quantity",
+            "id": "quantity",
+            "validation": [
+                "",
+                "trim",
+                ""
+            ],
+            "url": ""
+        },
+        {
+            "name": "Price",
+            "type": "text",
+            "tableRef": "price",
+            "tableValue": "",
+            "placeholder": "Enter Price",
+            "id": "price",
+            "validation": [
+                "",
+                "trim",
+                ""
+            ],
+            "url": ""
+        },
+        {
             "name": "Status",
             "type": "tags",
             "tableRef": "status",
@@ -188,124 +266,35 @@
             ]
         },
         {
-            "name": "SKUs",
+            "name": "Images",
             "type": "box",
-            "tableRef": "sku",
+            "tableRef": "images",
             "validation": [
                 "required",
                 "trim",
                 ""
             ],
             "fields": [{
-                    "name": "SKU ID",
-                    "type": "text",
-                    "tableRef": "skuId",
-                    "tableValue": "",
-                    "placeholder": "Enter SKU ID",
-                    "id": "skuid",
-                    "option": "single",
-                    "validation": [
-                        "",
-                        "trim",
-                        ""
-                    ],
-                    "onView": true,
-                    "url": ""
-                },
-                {
-                    "name": "Color",
-                    "type": "tags",
-                    "tableRef": "colorId",
-                    "placeholder": "Enter Product Color",
-                    "id": "color",
-                    "dropDownField": "name",
-                    "dropDownType": "single",
-                    "searchApi": "searchCall",
-                    "url": "BaseColor/search",
-                    "validation": [
-                        "",
-                        "trim",
-                        ""
-                    ],
-                    "onView": true
-                },
-                {
-                    "name": "Size",
-                    "type": "tags",
-                    "tableRef": "sizeId",
-                    "placeholder": "Enter Product Color",
-                    "id": "size",
-                    "dropDownField": "name",
-                    "dropDownType": "single",
-                    "searchApi": "searchCall",
-                    "url": "Size/search",
-                    "validation": [
-                        "",
-                        "trim",
-                        ""
-                    ],
-                    "onView": true
-                },
-                {
-                    "name": "Quantity",
-                    "type": "text",
-                    "tableRef": "quantity",
-                    "tableValue": "",
-                    "placeholder": "Enter quantity",
-                    "id": "quantity",
-                    "validation": [
-                        "",
-                        "trim",
-                        ""
-                    ],
-                    "url": ""
-                },
-                {
-                    "name": "Price",
-                    "type": "text",
-                    "tableRef": "price",
-                    "tableValue": "",
-                    "placeholder": "Enter Price",
-                    "id": "price",
-                    "validation": [
-                        "",
-                        "trim",
-                        ""
-                    ],
-                    "url": ""
-                },
-                {
-                    "name": "Images",
-                    "type": "box",
-                    "tableRef": "images",
-                    "validation": [
-                        "required",
-                        "trim",
-                        ""
-                    ],
-                    "fields": [{
-                        "name": "Image",
-                        "type": "image",
-                        "tableRef": "image",
-                        "tableValue": "image",
-                        "placeholder": "Enter image",
-                        "id": "productimage",
-                        "option": "single",
-                        "validation": ["", "trim", ""],
-                        "onView": true,
-                        "url": ""
-                    }, {
-                        "name": "Image Order",
-                        "type": "text",
-                        "tableRef": "order",
-                        "placeholder": "Enter Image Order",
-                        "id": "imageorder",
-                        "validation": ["", "trim", ""],
-                        "onView": true,
-                        "url": ""
-                    }]
-                }
-            ]
+                "name": "Image",
+                "type": "image",
+                "tableRef": "image",
+                "tableValue": "image",
+                "placeholder": "Enter image",
+                "id": "productimage",
+                "option": "single",
+                "validation": ["", "trim", ""],
+                "onView": true,
+                "url": ""
+            }, {
+                "name": "Image Order",
+                "type": "text",
+                "tableRef": "order",
+                "placeholder": "Enter Image Order",
+                "id": "imageorder",
+                "validation": ["", "trim", ""],
+                "onView": true,
+                "url": ""
+            }]
         }
     ],
     "action": [{

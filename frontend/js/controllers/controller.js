@@ -222,7 +222,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             });
         };
 
-      $scope.otp1 = function () {
+        $scope.otp1 = function () {
             $uibModal.open({
                 animation: true,
                 templateUrl: 'views/modal/otp1.html',
@@ -230,7 +230,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             });
         };
 
-             $scope.otp2 = function () {
+        $scope.otp2 = function () {
             $uibModal.open({
                 animation: true,
                 templateUrl: 'views/modal/otp2.html',
@@ -238,7 +238,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             });
         };
 
-              $scope.addwishlist = function () {
+        $scope.addwishlist = function () {
             $uibModal.open({
                 animation: true,
                 templateUrl: 'views/modal/wishlistadd.html',
@@ -246,7 +246,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             });
         };
 
-                  $scope.addcart = function () {
+        $scope.addcart = function () {
             $uibModal.open({
                 animation: true,
                 templateUrl: 'views/modal/cartadd.html',
@@ -254,19 +254,13 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             });
         };
 
-                    $scope.remove = function () {
+        $scope.remove = function () {
             $uibModal.open({
                 animation: true,
                 templateUrl: 'views/modal/removeitem.html',
                 scope: $scope
             });
         };
-
-        
-        
-        
-        
-        
 
         $scope.form = true;
         $scope.forms = false;

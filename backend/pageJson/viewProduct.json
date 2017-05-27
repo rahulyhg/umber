@@ -9,13 +9,21 @@
         "isSort": "",
         "tableRef": "name"
     }, {
-        "name": "Code",
+        "name": "Product Id",
         "isSort": "",
-        "tableRef": "code"
+        "tableRef": "productId"
     }, {
-        "name": "Type",
+        "name": "SKU Id",
         "isSort": "",
-        "tableRef": "type"
+        "tableRef": "skuId"
+    }, {
+        "name": "Price",
+        "isSort": "",
+        "tableRef": "price"
+    }, {
+        "name": "Product Id",
+        "isSort": "",
+        "tableRef": "productId"
     }, {
         "name": "Status",
         "isSort": "",
