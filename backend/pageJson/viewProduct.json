@@ -9,9 +9,13 @@
         "isSort": "",
         "tableRef": "name"
     }, {
-        "name": "Quantity",
+        "name": "Code",
         "isSort": "",
-        "tableRef": "quantity"
+        "tableRef": "code"
+    }, {
+        "name": "Type",
+        "isSort": "",
+        "tableRef": "type"
     }, {
         "name": "Status",
         "isSort": "",

@@ -8,18 +8,11 @@ var schema = new Schema({
         uniqueCaseInsensitive: true
     },
     code: String,
+    // This will be like full sleeve in Men's shirt
+    // Categories on home page are different
     category: [{
         type: Schema.Types.ObjectId,
         ref: 'Category'
-    }],
-    subCategory: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Subcategory'
-    }],
-    price: Number,
-    images: [{
-        image: String,
-        order: Number
     }],
     type: [{
         type: Schema.Types.ObjectId,
@@ -45,18 +38,25 @@ var schema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Fabric'
     }],
-    baseColor: [{
-        type: Schema.Types.ObjectId,
-        ref: 'BaseColor'
-    }],
     washcare: String,
     description: String,
-    size: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Size',
-        unique: true
+    sku: [{
+        skuId: String,
+        colorId: {
+            type: Schema.Types.ObjectId,
+            ref: 'BaseColor'
+        },
+        sizeId: {
+            type: Schema.Types.ObjectId,
+            ref: 'Size'
+        },
+        quantity: Number,
+        images: [{
+            image: String,
+            order: Number
+        }],
+        price: Number
     }],
-    quantity: Number,
     status: {
         type: String,
         enum: ['Enabled', 'Disabled'],
@@ -70,16 +70,10 @@ schema.plugin(deepPopulate, {
         'category': {
             select: "name"
         },
-        'subCategory': {
-            select: "name"
-        },
         'brand': {
             select: "name"
         },
         'prodCollection': {
-            select: "name"
-        },
-        'baseColor': {
             select: "name"
         },
         'fabric': {
@@ -88,8 +82,11 @@ schema.plugin(deepPopulate, {
         'type': {
             select: "name"
         },
-        'size': {
-            select: "name order"
+        'sku.colorId': {
+            select: "name"
+        },
+        'sku.sizeId': {
+            select: "name"
         }
     }
 });
@@ -97,8 +94,8 @@ schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('Product', schema);
 
-var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "category subCategory brand prodCollection baseColor fabric type size",
-    "category subCategory brand prodCollection baseColor fabric type size"));
+var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "category brand prodCollection fabric type sku.colorId sku.sizeId",
+    "category brand prodCollection fabric type sku.colorId sku.sizeId"));
 var model = {
     getAllProducts: function (data, callback) {
         Product.find({}).exec(function (error, data) {
@@ -117,7 +114,7 @@ var model = {
     getEnabledProducts: function (data, callback) {
         Product.find({
             status: 'Enabled'
-        }).deepPopulate("category subCategory brand prodCollection baseColor fabric type size").exec(function (error, data) {
+        }).deepPopulate("category brand prodCollection fabric type sku.colorId sku.sizeId").exec(function (error, data) {
             if (error) {
                 callback(error, null);
             } else if (data) {
@@ -167,7 +164,7 @@ var model = {
     getProductWithId: function (data, callback) {
         Product.findOne({
             _id: mongoose.Types.ObjectId(data)
-        }).deepPopulate('category subCategory brand prodCollection baseColor fabric type size').exec(function (err, data) {
+        }).deepPopulate('category brand prodCollection fabric type sku.colorId sku.sizeId').exec(function (err, data) {
             if (err) {
                 callback(err, null);
             } else if (data) {
