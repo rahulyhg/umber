@@ -27,29 +27,11 @@ var controller = {
     },
 
     getNewArrivals: function (req, res) {
-        if (req.body) {
-            Product.getNewArrivals(req.body, res.callback);
-        } else {
-            res.json({
-                value: false,
-                data: {
-                    message: "Invalid request"
-                }
-            })
-        }
+        Product.getNewArrivals(res.callback);
     },
 
     getFeatured: function (req, res) {
-        if (req.body) {
-            Product.getFeatured(req.body, res.callback);
-        } else {
-            res.json({
-                value: false,
-                data: {
-                    message: "Invalid request"
-                }
-            })
-        }
+        Product.getFeatured(res.callback);
     },
 
     getProductWithId: function (req, res) {

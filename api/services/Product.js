@@ -191,58 +191,64 @@ var model = {
     },
 
     getNewArrivals: function (callback) {
-        async.waterfall([{
-            function (callback) {
+        async.waterfall([
+            function (callback1) {
                 Product.aggregate([{
                     $group: {
-                        _id: productId
+                        _id: '$productId'
                     }
                 }]).exec(function (err, products) {
-                    callback(err, products);
+                    callback1(err, products);
                 });
             },
-            function (products, callback) {
-                async.each(products, function (product, callback) {
+            function (products, callback2) {
+                var newArrivals = [];
+                async.each(products, function (product, eachCallback) {
                     Product.findOne({
                         productId: product._id,
                         newArrival: true
                     }).exec(function (err, product) {
-                        callback(err, product);
+                        if (!_.isEmpty(product))
+                            newArrivals.push(product);
+                        eachCallback(err, product);
                     });
-                }, function (err, results) {
-                    callback(err, results);
+                }, function (err) {
+                    callback2(err, newArrivals);
                 });
             }
-        }], function (err, newarrivals) {
-            callback(err, newArrivals);
+        ], function (err, results) {
+            callback(err, results);
         });
     },
 
-    getFeatured: function (data, callback) {
-        async.waterfall([{
-            function (callback) {
+    getFeatured: function (callback) {
+        async.waterfall([
+            function (callback1) {
                 Product.aggregate([{
                     $group: {
-                        _id: productId
+                        _id: '$productId'
                     }
                 }]).exec(function (err, products) {
-                    callback(err, products);
+                    callback1(err, products);
                 });
             },
-            function (products, callback) {
-                async.each(products, function (product, callback) {
+            function (products, callback2) {
+                var featureds = [];
+                async.each(products, function (product, eachCallback) {
                     Product.findOne({
                         productId: product._id,
-                        featured: true
+                        newArrival: true
                     }).exec(function (err, product) {
-                        callback(err, product);
+                        if (!_.isEmpty(product))
+                            featureds.push(product);
+                        eachCallback(err, product);
                     });
-                }, function (err, results) {
-                    callback(err, results);
+                }, function (err) {
+                    callback2(err, featureds);
                 });
             }
-        }], function (err, featureds) {
-            callback(err, featureds);
+        ], function (err, results) {
+            callback(err, results);
         });
     },
 
