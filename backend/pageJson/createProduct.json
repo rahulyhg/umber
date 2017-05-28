@@ -14,9 +14,9 @@
             "placeholder": "Enter Product Name",
             "id": "name",
             "validation": [
-                "required",
+                "",
                 "trim",
-                "unique"
+                ""
             ],
             "url": ""
         },
@@ -29,7 +29,7 @@
             "validation": [
                 "required",
                 "trim",
-                "unique"
+                ""
             ],
             "url": ""
         },
@@ -41,10 +41,11 @@
             "id": "category",
             "searchApi": "searchCall",
             "fieldType": "",
-            "url": "Category/search",
+            "url": "Subcategory/search",
             "dropDownField": "name",
             "view": true,
-            "dropDownType": "single"
+            "dropDownType": "single",
+            "validation": ["required", "", "trim"]
         },
         {
             "name": "Brand",
@@ -56,7 +57,7 @@
             "fieldType": "",
             "url": "Brand/search",
             "validation": [
-                "required",
+                "",
                 "trim",
                 ""
             ],
@@ -73,7 +74,7 @@
             "fieldType": "",
             "url": "Collection/search",
             "validation": [
-                "unique"
+                "trim"
             ],
             "dropDownField": "name",
             "dropDownType": "multiple"
@@ -142,7 +143,7 @@
             "searchApi": "searchCall",
             "url": "Fabric/search",
             "validation": [
-                "required",
+                "",
                 "trim"
             ]
         },
@@ -154,7 +155,7 @@
             "id": "washcare",
             "url": "",
             "validation": [
-                "required",
+                "",
                 "trim"
             ]
         },
@@ -166,7 +167,7 @@
             "id": "descript",
             "url": "",
             "validation": [
-                "required",
+                "",
                 "trim"
             ]
         },
@@ -242,7 +243,7 @@
             "placeholder": "Enter Price",
             "id": "price",
             "validation": [
-                "required",
+                "",
                 "trim",
                 ""
             ],

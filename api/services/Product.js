@@ -2,8 +2,7 @@
 // into separate schemas for ease of query & retrieval.
 var schema = new Schema({
     name: {
-        type: String,
-        required: true
+        type: String
     },
     // This will be same for the same product
     // regardless of size, color
@@ -13,10 +12,10 @@ var schema = new Schema({
     },
     // This will be like full sleeve in Men's shirt
     // Categories on home page are different
-    category: [{
+    category: {
         type: Schema.Types.ObjectId,
-        ref: 'Category'
-    }],
+        ref: 'Subcategory'
+    },
     type: [{
         type: Schema.Types.ObjectId,
         ref: 'Type'
@@ -29,8 +28,7 @@ var schema = new Schema({
     },
     prodCollection: [{
         type: Schema.Types.ObjectId,
-        ref: 'Collection',
-        unique: true
+        ref: 'Collection'
     }],
     sleeve: {
         type: String,
@@ -158,6 +156,54 @@ var model = {
         }).exec(function (err, product) {
             callback(err, product);
         })
+    },
+
+    // This function will retrieve all the unique products with available details
+    // req-> {category: category._id}
+    getProductsWithCategory: function (data, callback) {
+        async.waterfall([
+                // Gets all the unique product ids related to the category
+                function getCategoryProducts(callback1) {
+                    Product.aggregate([
+                        // Stage 1
+                        {
+                            $match: {
+                                category: mongoose.Types.ObjectId(data.category)
+                            }
+                        },
+
+                        // Stage 2
+                        {
+                            $group: {
+                                _id: "$productId"
+                            }
+                        },
+
+                        // Stage 3
+                        {
+                            $project: {
+                                productId: '$_id'
+                            }
+                        }
+                    ]).exec(callback1);
+                },
+                // Retrieve one document containing all the detail based on productId.
+                function getDetailsOfProducts(categoryProducts, callback2) {
+                    var consolidatedProducts = [];
+                    async.each(categoryProducts, function (product, eachCallback) {
+                        Product.getProductDetails(product, function (err, productDetails) {
+                            if (!_.isEmpty(productDetails))
+                                consolidatedProducts.push(productDetails);
+                            eachCallback(err, productDetails);
+                        });
+                    }, function (err1) {
+                        callback2(err1, consolidatedProducts);
+                    });
+                },
+            ],
+            function (err, products) {
+                callback(err, products);
+            });
     },
 
     getAllProducts: function (data, callback) {
