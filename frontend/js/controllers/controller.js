@@ -30,10 +30,6 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             console.log("Featured: ", $scope.featured);
         });
 
-        NavigationService.getBlogs(function (data) {
-
-        });
-
         NavigationService.getEnabledBlogs(function (data) {
             $scope.blogs = data.data.data;
             console.log("Enabled blogs retrieved: ", $scope.blogs);
