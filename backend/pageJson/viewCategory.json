@@ -1,6 +1,6 @@
 {
-    "title": "Categories",
-    "description": "List of Categories",
+    "title": "Subcategories",
+    "description": "List of Subcategories",
     "pageType": "view",
     "sendIdWithCreate": true,
     "urlFields": ["_id"],
@@ -23,7 +23,7 @@
         "icon": "fa-pencil",
         "buttonClass": "btn-primary",
         "type": "page",
-        "action": "editCategory",
+        "action": "editSubcategory",
         "fieldsToSend": {
             "_id": "_id"
         }
@@ -34,7 +34,7 @@
         "type": "apiCallConfirm",
         "title": "Delete Category",
         "content": "Are you sure you want to delete Category?",
-        "api": "category/delete",
+        "api": "subcategory/delete",
         "fieldsToSend": {
             "name": "_id",
             "value": "_id"
@@ -45,24 +45,24 @@
         "icon": "print",
         "class": "btn-danger",
         "type": "redirect",
-        "action": "Category/generateExcel",
+        "action": "Subcategory/generateExcel",
         "linkType": "admin"
     }, {
         "name": "Upload Excel",
         "icon": "delete",
         "class": "btn-warning",
         "type": "redirect",
-        "action": "excel-upload/Category",
+        "action": "excel-upload/Subcategory",
         "linkType": "internal"
     }, {
         "name": "Create",
         "icon": "plus",
         "class": "btn-success",
         "type": "page",
-        "action": "createCategory"
+        "action": "createSubcategory"
     }],
     "apiCall": {
-        "url": "Category/search",
+        "url": "Subcategory/search",
         "params": "_id"
     }
 }

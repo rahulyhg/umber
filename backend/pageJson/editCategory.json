@@ -1,7 +1,7 @@
 {
-    "title": "Edit Category",
-    "name": "Category",
-    "jsonPage": "viewCategory",
+    "title": "Edit Subcategory",
+    "name": "Subcategory",
+    "jsonPage": "viewSubcategory",
     "desciption": "",
     "pageType": "edit",
     "urlFields": ["_id"],
@@ -23,13 +23,17 @@
         "validation": ["", "trim", ""],
         "url": ""
     }, {
-        "name": "Priority",
-        "type": "number",
-        "tableRef": "priority",
-        "placeholder": "Enter category priority",
-        "id": "priority",
-        "validation": ["required", "trim", "unique"],
-        "url": ""
+        "name": "Parent Category",
+        "type": "tags",
+        "tableRef": "category",
+        "placeholder": "Select Parent Category",
+        "id": "parCategory",
+        "searchApi": "searchCall",
+        "fieldType": "",
+        "url": "Category/search",
+        "dropDownField": "name",
+        "dropDownType": "single",
+        "onView": true
     }, {
         "name": "Status",
         "type": "tags",
@@ -45,11 +49,11 @@
     }],
     "action": [{
         "name": "submit",
-        "action": "submitCategory",
+        "action": "submitSubcategory",
         "stateName": {
             "page": "page",
             "json": {
-                "id": "viewCategory"
+                "id": "viewSubcategory"
             }
         }
     }, {
@@ -58,16 +62,16 @@
         "stateName": {
             "page": "page",
             "json": {
-                "id": "viewCategory"
+                "id": "viewSubcategory"
             }
         }
     }],
     "apiCall": {
-        "url": "Category/save",
+        "url": "Subcategory/save",
         "params": "_id"
     },
     "preApi": {
-        "url": "Category/getOne",
+        "url": "Subcategory/getOne",
         "params": "_id"
     }
 }

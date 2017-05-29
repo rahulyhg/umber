@@ -1,10 +1,10 @@
 {
-    "title": "Create Category",
-    "name": "Category",
-    "jsonPage": "viewCategory",
+    "title": "Create Subcategory",
+    "name": "Subcategory",
+    "jsonPage": "viewSubcategory",
     "desciption": "",
     "pageType": "create",
-    "urlFields": ["Category"],
+    "urlFields": ["Subcategory"],
     "fields": [{
         "name": "Name",
         "type": "text",
@@ -20,17 +20,19 @@
         "placeholder": "Enter Image Link",
         "id": "imgLink",
         "option": "single",
-        "view": true,
         "validation": ["", "trim", "unique"],
         "url": ""
     }, {
-        "name": "Priority",
-        "type": "number",
-        "tableRef": "priority",
-        "placeholder": "Enter category priority",
-        "id": "priority",
-        "validation": ["required", "trim", "unique"],
-        "url": ""
+        "name": "ParentCategory",
+        "type": "tags",
+        "tableRef": "category",
+        "placeholder": "Select Parent Category",
+        "id": "parCategory",
+        "searchApi": "searchCall",
+        "fieldType": "",
+        "url": "Category/search",
+        "dropDownField": "name",
+        "dropDownType": "single"
     }, {
         "name": "Status",
         "type": "tags",
@@ -46,11 +48,11 @@
     }],
     "action": [{
         "name": "submit",
-        "action": "submitCategory",
+        "action": "submitSubcategory",
         "stateName": {
             "page": "page",
             "json": {
-                "id": "viewCategory"
+                "id": "viewSubcategory"
             }
         }
     }, {
@@ -59,11 +61,11 @@
         "stateName": {
             "page": "page",
             "json": {
-                "id": "viewCategory"
+                "id": "viewSubcategory"
             }
         }
     }],
     "apiCall": {
-        "url": "Category/save"
+        "url": "Subcategory/save"
     }
 }

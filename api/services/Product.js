@@ -14,7 +14,7 @@ var schema = new Schema({
     // Categories on home page are different
     category: {
         type: Schema.Types.ObjectId,
-        ref: 'Subcategory'
+        ref: 'Category'
     },
     type: [{
         type: Schema.Types.ObjectId,

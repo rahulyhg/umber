@@ -14,12 +14,12 @@ myApp.factory('NavigationService', function ($http) {
     }, {
         name: "Home Category",
         classis: "active",
-        sref: "#!/page/viewCategory//",
+        sref: "#!/page/viewHomeCategory//",
         icon: "tree"
     }, {
         name: "Sub-Category",
         classis: "active",
-        sref: "#!/page/viewSubcategory//",
+        sref: "#!/page/viewCategory//",
         icon: "leaf"
     }, {
         name: "Home Screen",

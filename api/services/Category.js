@@ -5,70 +5,42 @@ var schema = new Schema({
         unique: true,
         uniqueCaseInsensitive: true
     },
-    // Not needed. Instead urlSlug package is installed
     //urlSlug: String,
     imgLink: String,
-    priority: Number,
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: 'HomeCategory'
+    },
     status: String
 });
 
-schema.plugin(deepPopulate, {});
+schema.plugin(deepPopulate, {
+    populate: {
+        category: {
+            select: "name"
+        }
+    }
+});
 schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('Category', schema);
 
-var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
+var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "category", "category"));
 var model = {
-    //Retrieves all categories in order
-    getAllCategories: function (data, callback) {
+    getEnabledSubcategories: function (callback) {
         Category.find({
-
-        }).sort({
-            'priority': 1
+            status: 'Enabled'
         }).exec(function (err, data) {
-            if (err) {
+            if (err)
                 callback(err, null);
-            } else if (data) {
+            else if (data)
                 callback(null, data);
-            } else {
+            else
                 callback({
-                    message: "Incorrect Credentials!"
+                    message: {
+                        data: "Invalid credentials!"
+                    }
                 }, null);
-            }
-        });
-    },
-
-    getEnabledCategories: function (data, callback) {
-        Category.find({
-            'status': 'Enabled'
-        }).sort({
-            'priority': 1
-        }).exec(function (err, data) {
-            if (err) {
-                callback(err, null);
-            } else if (data) {
-                callback(null, data);
-            } else {
-                callback({
-                    message: "Incorrect Credentials!"
-                }, null);
-            }
-        });
-    },
-
-    getCategoryWithId: function (data, callback) {
-        Category.find({
-            '_id': data
-        }).exec(function (err, data) {
-            if (err) {
-                callback(err, null);
-            } else if (data) {
-                callback(null, data);
-            } else {
-                callback({
-                    message: "Incorrect Credentials!"
-                }, null);
-            }
         });
     }
 };

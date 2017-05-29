@@ -3,7 +3,7 @@ myApp.factory('CategoryService', function ($http) {
 
         getCategoryWithId: function (input, callback) {
             $http({
-                url: adminurl + 'Category/getCategoryWithId/' + input,
+                url: adminurl + 'HomeCategory/getCategoryWithId/' + input,
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
