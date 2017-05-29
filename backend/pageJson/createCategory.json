@@ -1,10 +1,10 @@
 {
-    "title": "Create Subcategory",
-    "name": "Subcategory",
-    "jsonPage": "viewSubcategory",
+    "title": "Create Category",
+    "name": "Category",
+    "jsonPage": "viewCategory",
     "desciption": "",
     "pageType": "create",
-    "urlFields": ["Subcategory"],
+    "urlFields": ["Category"],
     "fields": [{
         "name": "Name",
         "type": "text",
@@ -48,11 +48,11 @@
     }],
     "action": [{
         "name": "submit",
-        "action": "submitSubcategory",
+        "action": "submitCategory",
         "stateName": {
             "page": "page",
             "json": {
-                "id": "viewSubcategory"
+                "id": "viewCategory"
             }
         }
     }, {
@@ -61,11 +61,11 @@
         "stateName": {
             "page": "page",
             "json": {
-                "id": "viewSubcategory"
+                "id": "viewCategory"
             }
         }
     }],
     "apiCall": {
-        "url": "Subcategory/save"
+        "url": "Category/save"
     }
 }

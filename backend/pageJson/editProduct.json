@@ -39,7 +39,7 @@
             "id": "category",
             "searchApi": "searchCall",
             "fieldType": "",
-            "url": "Subcategory/search",
+            "url": "Category/search",
             "dropDownField": "name",
             "onView": true,
             "dropDownType": "single",
