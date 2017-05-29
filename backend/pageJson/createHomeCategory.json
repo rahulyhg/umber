@@ -1,15 +1,15 @@
 {
-    "title": "Create Category",
-    "name": "Category",
+    "title": "Create HomeCategory",
+    "name": "HomeCategory",
     "jsonPage": "viewCategory",
     "desciption": "",
     "pageType": "create",
-    "urlFields": ["Category"],
+    "urlFields": ["HomeCategory"],
     "fields": [{
         "name": "Name",
         "type": "text",
         "tableRef": "name",
-        "placeholder": "Enter Category Name",
+        "placeholder": "Enter HomeCategory Name",
         "id": "name",
         "validation": ["required", "trim", "unique"],
         "url": ""
@@ -27,7 +27,7 @@
         "name": "Priority",
         "type": "number",
         "tableRef": "priority",
-        "placeholder": "Enter category priority",
+        "placeholder": "Enter HomeCategory priority",
         "id": "priority",
         "validation": ["required", "trim", "unique"],
         "url": ""
@@ -46,11 +46,11 @@
     }],
     "action": [{
         "name": "submit",
-        "action": "submitCategory",
+        "action": "submitHomeCategory",
         "stateName": {
             "page": "page",
             "json": {
-                "id": "viewCategory"
+                "id": "viewHomeCategory"
             }
         }
     }, {
@@ -59,11 +59,11 @@
         "stateName": {
             "page": "page",
             "json": {
-                "id": "viewCategory"
+                "id": "viewHomeCategory"
             }
         }
     }],
     "apiCall": {
-        "url": "Category/save"
+        "url": "HomeCategory/save"
     }
 }

@@ -1,6 +1,6 @@
 {
-    "title": "Subcategories",
-    "description": "List of Subcategories",
+    "title": "Categories",
+    "description": "List of Categories",
     "pageType": "view",
     "sendIdWithCreate": true,
     "urlFields": ["_id"],

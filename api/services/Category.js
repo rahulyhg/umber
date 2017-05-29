@@ -27,7 +27,7 @@ module.exports = mongoose.model('Category', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "category", "category"));
 var model = {
-    getEnabledSubcategories: function (callback) {
+    getEnabledCategories: function (callback) {
         Category.find({
             status: 'Enabled'
         }).exec(function (err, data) {

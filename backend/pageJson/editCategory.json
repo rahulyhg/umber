@@ -1,7 +1,7 @@
 {
-    "title": "Edit Subcategory",
-    "name": "Subcategory",
-    "jsonPage": "viewSubcategory",
+    "title": "Edit Category",
+    "name": "Category",
+    "jsonPage": "viewCategory",
     "desciption": "",
     "pageType": "edit",
     "urlFields": ["_id"],
@@ -49,11 +49,11 @@
     }],
     "action": [{
         "name": "submit",
-        "action": "submitSubcategory",
+        "action": "submitCategory",
         "stateName": {
             "page": "page",
             "json": {
-                "id": "viewSubcategory"
+                "id": "viewCategory"
             }
         }
     }, {
@@ -62,16 +62,16 @@
         "stateName": {
             "page": "page",
             "json": {
-                "id": "viewSubcategory"
+                "id": "viewCategory"
             }
         }
     }],
     "apiCall": {
-        "url": "Subcategory/save",
+        "url": "Category/save",
         "params": "_id"
     },
     "preApi": {
-        "url": "Subcategory/getOne",
+        "url": "Category/getOne",
         "params": "_id"
     }
 }

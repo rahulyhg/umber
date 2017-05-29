@@ -1,7 +1,7 @@
 {
-    "title": "Edit Category",
-    "name": "Category",
-    "jsonPage": "viewCategory",
+    "title": "Edit HomeCategory",
+    "name": "HomeCategory",
+    "jsonPage": "viewHomeCategory",
     "desciption": "",
     "pageType": "edit",
     "urlFields": ["_id"],
@@ -9,7 +9,7 @@
         "name": "Name",
         "type": "text",
         "tableRef": "name",
-        "placeholder": "Enter Category Name",
+        "placeholder": "Enter HomeCategory Name",
         "id": "name",
         "validation": ["required", "trim", "unique"],
         "url": ""
@@ -26,7 +26,7 @@
         "name": "Priority",
         "type": "number",
         "tableRef": "priority",
-        "placeholder": "Enter category priority",
+        "placeholder": "Enter HomeCategory priority",
         "id": "priority",
         "validation": ["required", "trim", "unique"],
         "url": ""
@@ -45,11 +45,11 @@
     }],
     "action": [{
         "name": "submit",
-        "action": "submitCategory",
+        "action": "submitHomeCategory",
         "stateName": {
             "page": "page",
             "json": {
-                "id": "viewCategory"
+                "id": "viewHomeCategory"
             }
         }
     }, {
@@ -58,16 +58,16 @@
         "stateName": {
             "page": "page",
             "json": {
-                "id": "viewCategory"
+                "id": "viewHomeCategory"
             }
         }
     }],
     "apiCall": {
-        "url": "Category/save",
+        "url": "HomeCategory/save",
         "params": "_id"
     },
     "preApi": {
-        "url": "Category/getOne",
+        "url": "HomeCategory/getOne",
         "params": "_id"
     }
 }

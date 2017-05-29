@@ -23,7 +23,7 @@
         "icon": "fa-pencil",
         "buttonClass": "btn-primary",
         "type": "page",
-        "action": "editCategory",
+        "action": "editHomeCategory",
         "fieldsToSend": {
             "_id": "_id"
         }
@@ -32,9 +32,9 @@
         "icon": "fa-trash",
         "buttonClass": "btn-danger",
         "type": "apiCallConfirm",
-        "title": "Delete Category",
-        "content": "Are you sure you want to delete Category?",
-        "api": "category/delete",
+        "title": "Delete HomeCategory",
+        "content": "Are you sure you want to delete HomeCategory?",
+        "api": "HomeCategory/delete",
         "fieldsToSend": {
             "name": "_id",
             "value": "_id"
@@ -45,24 +45,24 @@
         "icon": "print",
         "class": "btn-danger",
         "type": "redirect",
-        "action": "Category/generateExcel",
+        "action": "HomeCategory/generateExcel",
         "linkType": "admin"
     }, {
         "name": "Upload Excel",
         "icon": "delete",
         "class": "btn-warning",
         "type": "redirect",
-        "action": "excel-upload/Category",
+        "action": "excel-upload/HomeCategory",
         "linkType": "internal"
     }, {
         "name": "Create",
         "icon": "plus",
         "class": "btn-success",
         "type": "page",
-        "action": "createCategory"
+        "action": "createHomeCategory"
     }],
     "apiCall": {
-        "url": "Category/search",
+        "url": "HomeCategory/search",
         "params": "_id"
     }
 }

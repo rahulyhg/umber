@@ -1,7 +1,7 @@
 module.exports = _.cloneDeep(require("sails-wohlig-controller"));
 var controller = {
-    getEnabledSubcategories: function (req, res) {
-        Category.getEnabledSubcategories(res.callback);
+    getEnabledCategories: function (req, res) {
+        Category.getEnabledCategories(res.callback);
     }
 };
 module.exports = _.assign(module.exports, controller);
