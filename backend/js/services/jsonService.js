@@ -83,7 +83,7 @@ myApp.service('JsonService', function ($http, TemplateService, $state, toastr, $
       if (action.linkType == "admin") {
         window.location.href = adminurl + action.action;
       } else if (action.linkType == "internal") {
-        window.location.href = "#/" + action.action;
+        window.location.href = "#!/" + action.action;
       } else {
         window.location.href = action.action;
       }
