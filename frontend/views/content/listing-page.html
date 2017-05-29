@@ -54,7 +54,7 @@
                                     <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
                                 </h5>
                             </uib-accordion-heading>
-                            <div class="checkbox" ng-repeat="type in types">
+                            <div class="checkbox" ng-repeat="type in filters.types">
                                 <input type="checkbox" id="b1">
                                 <label for="b1">{{type.name}}
                                 </label>
@@ -86,7 +86,7 @@
                                     <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
                                 </h5>
                             </uib-accordion-heading>
-                            <div class="checkbox" ng-repeat="collection in collections">
+                            <div class="checkbox" ng-repeat="collection in filters.collections">
                                 <input type="checkbox" id="{{collection._id}}">
                                 <label for="{{collection._id}}">{{collection.name}}
                                </label>
@@ -102,7 +102,7 @@
                                     <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
                                 </h5>
                             </uib-accordion-heading>
-                            <div class="checkbox" ng-repeat="size in sizes">
+                            <div class="checkbox" ng-repeat="size in filters.sizes">
                                 <input type="checkbox" id="{{size._id}}">
                                 <label for="{{size._id}}">
                                      {{size.name}}
@@ -172,7 +172,7 @@
                                     <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
                                 </h5>
                             </uib-accordion-heading>
-                            <div class="checkbox" ng-repeat="baseColor in baseColors">
+                            <div class="checkbox" ng-repeat="baseColor in filters.colors">
                                 <input type="checkbox" id="f1">
                                 <label for="f1">
                                  {{baseColor.name}}
@@ -189,7 +189,7 @@
                                     <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
                                 </h5>
                             </uib-accordion-heading>
-                            <div class="checkbox" ng-repeat="fabric in fabrics">
+                            <div class="checkbox" ng-repeat="fabric in filters.fabrics">
 
                                 <input type="checkbox" id="g1">
                                 <label for="g1">

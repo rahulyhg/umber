@@ -41,6 +41,15 @@ myApp.factory('ProductService', function ($http) {
             }).then(callback);
         },
 
+        getFiltersWithCategory: function (input, callback) {
+            $http({
+                url: adminurl + 'Product/getFiltersWithCategory',
+                method: 'POST',
+                data: input,
+                withCredentials: false
+            }).then(callback);
+        },
+
         isAvailableProduct: function (reqQuantity, product) {
             return reqQuantity < product.quantity;
         }

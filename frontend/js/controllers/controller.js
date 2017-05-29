@@ -669,14 +669,9 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             $scope.banner = data.data.data;
         });
         // Ideally products should be retrieved with respect to category
-        // TODO
-        var categoryId = $stateParams.id;
-
-        // Getting sub-categories instead of categories
-        CategoryService.getCategoryWithId(categoryId, function (data) {
-            console.log("Subcategories");
-            $scope.category = data.data.data;
-        });
+        var data = {
+            category: "5913fa306861d105666afa45"
+        }
 
         $scope.filterProducts = function (filterParameter) {
             ProductService.filterProducts(filterParameter, function (data) {
@@ -685,10 +680,10 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             });
         }
 
-        // Getting sizes stored in DB
-        SizeService.getEnabledSizes(function (data) {
-            console.log("sizes");
-            $scope.sizes = _.sortBy(data.data.data, ['order']);
+        ProductService.getFiltersWithCategory(data, function (data) {
+            console.log(data);
+            if (data.data.value)
+                $scope.filters = data.data.data;
         });
 
         // ProductService.getProductsWithCategoryId(categoryId, function (data) {
@@ -1051,22 +1046,6 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             $scope.myShirt11.push($scope.myShirt1);
         });
 
-        NavigationService.getEnabledSubCategories(function (data) {
-            $scope.categories = data.data.data;
-        });
-
-        NavigationService.getEnabledCollections(function (data) {
-            console.log("Collections - data: ", data);
-            $scope.collections = data.data.data;
-        });
-
-        NavigationService.getListingFilterFields(function (data) {
-            // In this call we retrieve fabrics, types & baseColors fields to save rtt
-            // They are pushed into the array in the order given below.
-            $scope.fabrics = data.data.data[0];
-            $scope.types = data.data.data[1];
-            $scope.baseColors = data.data.data[2];
-        })
         console.log($scope.myShirt11, "*****");
     })
     .controller('FormCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
