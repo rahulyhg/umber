@@ -60,6 +60,19 @@ var controller = {
         }
     },
 
+    getSKUWithParameter: function (req, res) {
+        if (req.body) {
+            Product.getSKUWithParameter(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid request!"
+                }
+            });
+        }
+    },
+
     getProductWithId: function (req, res) {
         if (req.body) {
             Product.getProductWithId(req.params.id, res.callback);

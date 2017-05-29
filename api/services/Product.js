@@ -129,7 +129,6 @@ var model = {
     // Get the common product details with 
     // SKU specific details like sizes, colors
     getProductDetails: function (data, callback) {
-
         async.waterfall([
             function commonDetails(cbWaterfall1) {
                 Product.findOne({
@@ -239,6 +238,18 @@ var model = {
         });
     },
 
+    // Function to retrieve specific SKU with specified parameters
+    // Parameters include color, size
+    getSKUWithParameter: function (data, callback) {
+        Product.findOne({
+            productId: data.productId,
+            size: data.size,
+            color: data.color
+        }).exec(callback);
+    },
+
+    // Function to retrieve filters on listing page
+    // req -> {category: category._id}
     getFiltersWithCategory: function (data, callback) {
         var match = {
             category: mongoose.Types.ObjectId(data.category)
