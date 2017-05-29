@@ -296,10 +296,10 @@ var model = {
                         $group: {
                             _id: null,
                             min: {
-                                $min: price
+                                $min: '$price'
                             },
                             max: {
-                                $max: price
+                                $max: '$price'
                             }
                         }
                     }]).exec(cbParallel6);
