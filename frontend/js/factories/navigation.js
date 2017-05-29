@@ -75,7 +75,7 @@ myApp.factory('NavigationService', function ($http) {
 
         getEnabledCategories: function (callback) {
             $http({
-                url: adminurl + 'Category/getEnabledSubcategories',
+                url: adminurl + 'Category/getEnabledCategories',
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
