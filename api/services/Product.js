@@ -239,6 +239,77 @@ var model = {
         });
     },
 
+    getFiltersWithCategory: function (data, callback) {
+        var match = {
+            category: mongoose.Types.ObjectId(data.category)
+        };
+        async.parallel({
+                types: function (cbParallel1) {
+                    Product.distinct("type", match).exec(function (err, types) {
+                        Type.find({
+                            _id: {
+                                $in: types
+                            }
+                        }).exec(cbParallel1);
+                    });
+                },
+                collections: function (cbParallel2) {
+                    Product.distinct("prodCollection", match).exec(function (err, collections) {
+                        Collection.find({
+                            _id: {
+                                $in: collections
+                            }
+                        }).exec(cbParallel2);
+                    });
+                },
+                sizes: function (cbParallel3) {
+                    Product.distinct("size", match).exec(function (err, sizes) {
+                        Size.find({
+                            _id: {
+                                $in: sizes
+                            }
+                        }).exec(cbParallel3);
+                    });
+                },
+                colors: function (cbParallel4) {
+                    Product.distinct("color", match).exec(function (err, colors) {
+                        BaseColor.find({
+                            _id: {
+                                $in: colors
+                            }
+                        }).exec(cbParallel4);
+                    });
+                },
+                fabrics: function (cbParallel5) {
+                    Product.distinct("fabric", match).exec(function (err, fabrics) {
+                        Fabric.find({
+                            _id: {
+                                $in: fabrics
+                            }
+                        }).exec(cbParallel5);
+                    });
+                },
+                priceRange: function (cbParallel6) {
+                    Product.aggregate([{
+                        $match: match
+                    }, {
+                        $group: {
+                            _id: null,
+                            min: {
+                                $min: price
+                            },
+                            max: {
+                                $max: price
+                            }
+                        }
+                    }]).exec(cbParallel6);
+                }
+            },
+            function (err, filters) {
+                callback(err, filters);
+            });
+    },
+
     getAllProducts: function (data, callback) {
         Product.find({}).exec(function (error, data) {
             if (error) {
