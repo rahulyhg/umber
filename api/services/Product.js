@@ -126,84 +126,117 @@ var model = {
         })
     },
 
+    // Get the common product details with 
+    // SKU specific details like sizes, colors
     getProductDetails: function (data, callback) {
-        Product.findOne({
-            productId: data.productId,
-            name: {
-                $exists: true
+
+        async.waterfall([
+            function commonDetails(cbWaterfall1) {
+                Product.findOne({
+                    productId: data.productId,
+                    name: {
+                        $exists: true
+                    },
+                    category: {
+                        $exists: true
+                    },
+                    brand: {
+                        $exists: true
+                    },
+                    prodCollection: {
+                        $exists: true
+                    },
+                    type: {
+                        $exists: true
+                    },
+                    fabric: {
+                        $exists: true
+                    },
+                    washcare: {
+                        $exists: true
+                    },
+                    description: {
+                        $exists: true
+                    }
+                }).lean().exec(cbWaterfall1);
             },
-            category: {
-                $exists: true
+            function getSizes(product, cbWaterfall2) {
+                Product.distinct("size", {
+                    productId: product.productId
+                }).lean().exec(function (err, prodSizes) {
+                    Size.find({
+                        _id: {
+                            '$in': prodSizes
+                        }
+                    }).exec(function (err, sizesDetails) {
+                        product.sizes = sizesDetails.slice();
+                        cbWaterfall2(err, product);
+                    });
+                });
             },
-            brand: {
-                $exists: true
-            },
-            prodCollection: {
-                $exists: true
-            },
-            type: {
-                $exists: true
-            },
-            fabric: {
-                $exists: true
-            },
-            washcare: {
-                $exists: true
-            },
-            description: {
-                $exists: true
+            function getColors(product, cbWaterfall3) {
+                Product.distinct("color", {
+                    productId: product.productId
+                }).lean().exec(function (err, prodColors) {
+                    BaseColor.find({
+                        _id: {
+                            '$in': prodColors
+                        }
+                    }).exec(function (err, colorsDetails) {
+                        product.colors = colorsDetails.slice();
+                        cbWaterfall3(err, product);
+                    });
+                });
             }
-        }).exec(function (err, product) {
-            callback(err, product);
-        })
+        ], function (err, productDetails) {
+            callback(err, productDetails);
+        });
     },
 
     // This function will retrieve all the unique products with available details
     // req-> {category: category._id}
     getProductsWithCategory: function (data, callback) {
         async.waterfall([
-                // Gets all the unique product ids related to the category
-                function getCategoryProducts(callback1) {
-                    Product.aggregate([
-                        // Stage 1
-                        {
-                            $match: {
-                                category: mongoose.Types.ObjectId(data.category)
-                            }
-                        },
-
-                        // Stage 2
-                        {
-                            $group: {
-                                _id: "$productId"
-                            }
-                        },
-
-                        // Stage 3
-                        {
-                            $project: {
-                                productId: '$_id'
-                            }
+            // Gets all the unique product ids related to the category
+            function getCategoryProducts(callback1) {
+                Product.aggregate([{
+                        $match: {
+                            category: mongoose.Types.ObjectId(data.category)
                         }
-                    ]).exec(callback1);
-                },
-                // Retrieve one document containing all the detail based on productId.
-                function getDetailsOfProducts(categoryProducts, callback2) {
-                    var consolidatedProducts = [];
-                    async.each(categoryProducts, function (product, eachCallback) {
-                        Product.getProductDetails(product, function (err, productDetails) {
-                            if (!_.isEmpty(productDetails))
-                                consolidatedProducts.push(productDetails);
-                            eachCallback(err, productDetails);
-                        });
-                    }, function (err1) {
-                        callback2(err1, consolidatedProducts);
+                    },
+                    {
+                        $sort: {
+                            createdAt: -1
+                        }
+                    },
+                    {
+                        $group: {
+                            _id: "$productId"
+                        }
+                    },
+                    {
+                        $project: {
+                            productId: '$_id'
+                        }
+                    }
+                ]).skip((data.page - 1) * Config.maxRow).limit(Config.maxRow).exec(callback1);
+            },
+            // Retrieve one document containing all the detail based on productId.
+            function getDetailsOfProducts(categoryProducts, callback2) {
+                var consolidatedProducts = [];
+                async.each(categoryProducts, function (product, eachCallback) {
+                    Product.getProductDetails(product, function (err, productDetails) {
+                        if (!_.isEmpty(productDetails))
+                            consolidatedProducts.push(productDetails);
+                        eachCallback(err, productDetails);
                     });
-                },
-            ],
-            function (err, products) {
-                callback(err, products);
-            });
+                }, function (err1) {
+                    callback2(err1, consolidatedProducts);
+                });
+            },
+        ], function (err, products) {
+            callback(err, products);
+        });
     },
 
     getAllProducts: function (data, callback) {
