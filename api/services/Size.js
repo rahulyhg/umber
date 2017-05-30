@@ -8,7 +8,7 @@ var schema = new Schema({
             name: "Name"
         }
     },
-
+    description: String,
     order: Number,
     status: String
 });

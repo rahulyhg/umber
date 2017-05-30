@@ -166,7 +166,7 @@ myApp.factory('NavigationService', function ($http) {
             });
         },
         uploadExcel: function (form, callback) {
-            $http.post(adminurl + form.model + '/import', {
+            $http.post(adminurl + form.model + '/excelUpload', {
                 file: form.file
             }).then(function (data) {
                 data = data.data;
