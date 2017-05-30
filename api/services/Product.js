@@ -330,69 +330,71 @@ var model = {
     // SKU specific details like sizes, colors
     getProductDetails: function (data, callback) {
         async.waterfall([
-            function commonDetails(cbWaterfall1) {
-                Product.findOne({
-                    productId: data.productId,
-                    name: {
-                        $exists: true
-                    },
-                    category: {
-                        $exists: true
-                    },
-                    brand: {
-                        $exists: true
-                    },
-                    prodCollection: {
-                        $exists: true
-                    },
-                    type: {
-                        $exists: true
-                    },
-                    fabric: {
-                        $exists: true
-                    },
-                    washcare: {
-                        $exists: true
-                    },
-                    description: {
-                        $exists: true
-                    }
-                }).lean().exec(cbWaterfall1);
-            },
-            function getSizes(product, cbWaterfall2) {
-                Product.distinct("size", {
-                    productId: product.productId
-                }).lean().exec(function (err, prodSizes) {
-                    Size.find({
-                        _id: {
-                            '$in': prodSizes
+                function commonDetails(cbWaterfall1) {
+                    Product.findOne({
+                        productId: data.productId,
+                        name: {
+                            $exists: true
+                        },
+                        category: {
+                            $exists: true
+                        },
+                        brand: {
+                            $exists: true
+                        },
+                        prodCollection: {
+                            $exists: true
+                        },
+                        type: {
+                            $exists: true
+                        },
+                        fabric: {
+                            $exists: true
+                        },
+                        washcare: {
+                            $exists: true
+                        },
+                        description: {
+                            $exists: true
                         }
-                    }).exec(function (err, sizesDetails) {
-                        product.sizes = sizesDetails.slice();
-                        cbWaterfall2(err, product);
+                    }).lean().exec(cbWaterfall1);
+                },
+                function getSizes(product, cbWaterfall2) {
+                    Product.distinct("size", {
+                        productId: product.productId
+                    }).lean().exec(function (err, prodSizes) {
+                        Size.find({
+                            _id: {
+                                '$in': prodSizes
+                            }
+                        }).exec(function (err, sizesDetails) {
+                            product.sizes = sizesDetails.slice();
+                            cbWaterfall2(err, product);
+                        });
                     });
-                });
-            },
-            function getColors(product, cbWaterfall3) {
-                Product.distinct("color", {
-                    productId: product.productId
-                }).lean().exec(function (err, prodColors) {
-                    BaseColor.find({
-                        _id: {
-                            '$in': prodColors
-                        }
-                    }).exec(function (err, colorsDetails) {
-                        product.colors = colorsDetails.slice();
-                        cbWaterfall3(err, product);
+                },
+                function getColors(product, cbWaterfall3) {
+                    Product.distinct("color", {
+                        productId: product.productId
+                    }).lean().exec(function (err, prodColors) {
+                        BaseColor.find({
+                            _id: {
+                                '$in': prodColors
+                            }
+                        }).exec(function (err, colorsDetails) {
+                            product.colors = colorsDetails.slice();
+                            cbWaterfall3(err, product);
+                        });
                     });
-                });
-            }
-        ], function (err, productDetails) {
-            callback(err, productDetails);
-        });
+                }
+            ],
+            function (err, productDetails) {
+                callback(err, productDetails);
+            });
     },
 
     // This function will retrieve all the unique products with available details
+    // For listing page
     // req-> {category: category._id}
     getProductsWithCategory: function (data, callback) {
         async.waterfall([
@@ -421,6 +423,7 @@ var model = {
                 ]).skip((data.page - 1) * Config.maxRow).limit(Config.maxRow).exec(callback1);
             },
             // Retrieve one document containing all the detail based on productId.
+            // for individual page
             function getDetailsOfProducts(categoryProducts, callback2) {
                 var consolidatedProducts = [];
                 async.each(categoryProducts, function (product, eachCallback) {
