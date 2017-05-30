@@ -5,6 +5,7 @@ var schema = new Schema({
         unique: true,
         uniqueCaseInsensitive: true
     },
+    code: String,
     status: {
         type: String,
         enum: ['Enabled', 'Disabled'],
