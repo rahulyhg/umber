@@ -160,7 +160,7 @@ var model = {
                                 newProduct.price = product.price;
 
                             if (product.productCode)
-                                newProduct.productCode = product.ProductCode;
+                                newProduct.productCode = product.productCode;
                             if (product.image1)
                                 newProduct.images.push({
                                     image: product.image1,
@@ -258,7 +258,7 @@ var model = {
                             if (product.COLOR) {
                                 Product.manageForeignKey(BaseColor, {
                                     name: product.COLOR,
-                                    code: product.Color
+                                    code: product.ColorCode
                                 }, function (err, id) {
                                     newProduct.color = id;
                                     cbWaterfall7(err, newProduct);
