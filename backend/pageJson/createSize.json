@@ -14,6 +14,14 @@
         "validation": ["required", "trim", "unique"],
         "url": ""
     }, {
+        "name": "Size description",
+        "type": "text",
+        "tableRef": "description",
+        "placeholder": "Enter Size Description",
+        "id": "order",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }, {
         "name": "Order",
         "type": "text",
         "tableRef": "order",

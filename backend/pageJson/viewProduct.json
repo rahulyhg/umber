@@ -5,7 +5,7 @@
     "sendIdWithCreate": true,
     "urlFields": ["_id"],
     "fields": [{
-        "name": "Name",
+        "name": "SKU",
         "isSort": "",
         "tableRef": "name"
     }, {
@@ -13,17 +13,17 @@
         "isSort": "",
         "tableRef": "productId"
     }, {
-        "name": "SKU Id",
+        "name": "Product Name",
         "isSort": "",
-        "tableRef": "skuId"
+        "tableRef": "productName"
     }, {
         "name": "Price",
         "isSort": "",
         "tableRef": "price"
     }, {
-        "name": "Product Id",
+        "name": "Quantity",
         "isSort": "",
-        "tableRef": "productId"
+        "tableRef": "quantity"
     }, {
         "name": "Status",
         "isSort": "",

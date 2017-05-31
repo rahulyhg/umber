@@ -11,12 +11,12 @@
             "name": "Name",
             "type": "text",
             "tableRef": "name",
-            "placeholder": "Enter Product Name",
+            "placeholder": "Enter SKU code",
             "id": "name",
             "validation": [
-                "",
+                "required",
                 "trim",
-                ""
+                "unique"
             ],
             "url": ""
         },
@@ -24,7 +24,7 @@
             "name": "Product Id",
             "type": "text",
             "tableRef": "productId",
-            "placeholder": "Enter Product ID",
+            "placeholder": "Enter Lot ID",
             "id": "productId",
             "validation": [
                 "required",
@@ -34,14 +34,28 @@
             "url": ""
         },
         {
-            "name": "Category",
+            "name": "Subcategory",
             "type": "tags",
             "tableRef": "category",
-            "placeholder": "Select Category",
+            "placeholder": "Select Sub-Category",
             "id": "category",
             "searchApi": "searchCall",
             "fieldType": "",
             "url": "Category/search",
+            "dropDownField": "name",
+            "view": true,
+            "dropDownType": "single",
+            "validation": ["required", "", "trim"]
+        },
+        {
+            "name": "Category",
+            "type": "tags",
+            "tableRef": "homeCategory",
+            "placeholder": "Select Category",
+            "id": "category",
+            "searchApi": "searchCall",
+            "fieldType": "",
+            "url": "HomeCategory/search",
             "dropDownField": "name",
             "view": true,
             "dropDownType": "single",
@@ -77,7 +91,7 @@
                 "trim"
             ],
             "dropDownField": "name",
-            "dropDownType": "multiple"
+            "dropDownType": "single"
         },
         {
             "name": "Type",
@@ -88,7 +102,7 @@
             "searchApi": "searchCall",
             "url": "Type/search",
             "dropDownField": "name",
-            "dropDownType": "multiple",
+            "dropDownType": "single",
             "validation": [
                 "",
                 "trim"
@@ -115,21 +129,27 @@
             ]
         },
         {
-            "name": "Sleeve",
-            "type": "tags",
-            "tableRef": "sleeve",
-            "placeholder": "Sleeve description",
-            "id": "sleeve",
+            "name": "Style",
+            "type": "text",
+            "tableRef": "style",
+            "placeholder": "Style description",
+            "id": "style",
             "url": "",
             "validation": [
                 "",
                 "trim"
-            ],
-            "dropDownField": "",
-            "dropDownType": "single",
-            "dropDown": [
-                "Full sleeve",
-                "Half sleeve"
+            ]
+        },
+        {
+            "name": "Style Number",
+            "type": "text",
+            "tableRef": "styleNo",
+            "placeholder": "Style Number",
+            "id": "styleNo",
+            "url": "",
+            "validation": [
+                "",
+                "trim"
             ]
         },
         {
@@ -139,7 +159,7 @@
             "placeholder": "Fabric description",
             "id": "price",
             "dropDownField": "name",
-            "dropDownType": "multiple",
+            "dropDownType": "single",
             "searchApi": "searchCall",
             "url": "Fabric/search",
             "validation": [
@@ -172,17 +192,33 @@
             ]
         },
         {
-            "name": "SKU ID",
+            "name": "Product Name",
             "type": "text",
-            "tableRef": "skuId",
+            "tableRef": "productName",
             "tableValue": "",
-            "placeholder": "Enter SKU ID",
-            "id": "skuid",
+            "placeholder": "Enter Product Name",
+            "id": "prodName",
             "option": "single",
             "validation": [
-                "required",
+                "",
                 "trim",
-                "unique"
+                ""
+            ],
+            "onView": true,
+            "url": ""
+        },
+        {
+            "name": "Product Code",
+            "type": "text",
+            "tableRef": "productCode",
+            "tableValue": "",
+            "placeholder": "Enter Product Code",
+            "id": "prodCode",
+            "option": "single",
+            "validation": [
+                "",
+                "trim",
+                ""
             ],
             "onView": true,
             "url": ""

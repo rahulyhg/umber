@@ -10,6 +10,11 @@
             "tableRef": "name"
         },
         {
+            "name": "Code",
+            "isSort": "",
+            "tableRef": "code"
+        },
+        {
             "name": "Status",
             "isSort": "",
             "tableRef": "status"

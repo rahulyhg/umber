@@ -9,6 +9,10 @@
         "isSort": "",
         "tableRef": "name"
     }, {
+        "name": "Size Description",
+        "isSort": "",
+        "tableRef": "description"
+    }, {
         "name": "Status",
         "isSort": "",
         "tableRef": "status"

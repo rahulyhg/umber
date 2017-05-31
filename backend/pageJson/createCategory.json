@@ -30,7 +30,7 @@
         "id": "parCategory",
         "searchApi": "searchCall",
         "fieldType": "",
-        "url": "Category/search",
+        "url": "HomeCategory/search",
         "dropDownField": "name",
         "dropDownType": "single"
     }, {

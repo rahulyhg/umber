@@ -21,6 +21,19 @@
             "url": ""
         },
         {
+            "name": "Color Code",
+            "type": "text",
+            "tableRef": "code",
+            "placeholder": "Enter Color code",
+            "id": "name",
+            "validation": [
+                "",
+                "trim",
+                ""
+            ],
+            "url": ""
+        },
+        {
             "name": "Status",
             "type": "tags",
             "tableRef": "status",
