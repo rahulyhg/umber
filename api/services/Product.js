@@ -137,7 +137,8 @@ var model = {
                                 newProduct.description = product.DESCRIPTION;
                             }
 
-                            newProduct.productId = product.LOTNO;
+                            if (product.LOTNO)
+                                newProduct.productId = product.LOTNO;
 
                             if (product.Featured)
                                 newProduct.featured = product.Featured;
@@ -148,7 +149,8 @@ var model = {
                             if (product.STYLE1)
                                 newProduct.style = product.STYLE1;
 
-                            newProduct.styleNo = product.STYLENO;
+                            if (product.STYLENO)
+                                newProduct.styleNo = product.STYLENO;
 
                             if (product.Washcare)
                                 newProduct.washcare = product.Washcare;
@@ -302,7 +304,7 @@ var model = {
 
                             });
                         }
-                    ], function (err, newProduct) {
+                    ], function (err, newProduct) { // waterfall callback
                         if (err) {
                             retVal.push(err);
 
