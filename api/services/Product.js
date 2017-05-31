@@ -118,186 +118,207 @@ var model = {
 
     excelUpload: function (data, callback) {
         var filename = data.file;
+        var retVal = [];
         Config.importGS(filename, function (err, data) {
             var i = 1;
-            _.map(data, function (product) {
-                if (_.isEmpty(product.SKU))
-                    return null;
+            async.eachSeries(data, function (product, complete) {
+                if (_.isEmpty(product.SKU)) {
+                    complete({
+                        "message": "No product SKU found"
+                    }, null);
+                } else {
+                    async.waterfall([
+                        function UpdateNormalFields(cbWaterfall1) {
+                            var newProduct = {};
+                            newProduct.images = [];
+                            newProduct.name = product.SKU;
+                            if (product.DESCRIPTION) {
+                                newProduct.productName = product.DESCRIPTION;
+                                newProduct.description = product.DESCRIPTION;
+                            }
 
-                async.waterfall([
-                    function UpdateNormalFields(cbWaterfall1) {
-                        var newProduct = {};
-                        newProduct.images = [];
-                        newProduct.name = product.SKU;
-                        if (product.DESCRIPTION) {
-                            newProduct.productName = product.DESCRIPTION;
-                            newProduct.description = product.DESCRIPTION;
-                        }
+                            newProduct.productId = product.LOTNO;
 
-                        if (_.isEmpty(product.LOTNO))
-                            product.LOTNO = product.SKU.substr(0, 7);
+                            if (product.Featured)
+                                newProduct.featured = product.Featured;
 
-                        newProduct.productId = product.LOTNO;
+                            if (product.NewArrival)
+                                newProduct.newArrival = product.NewArrival;
 
-                        if (product.Featured)
-                            newProduct.featured = product.Featured;
+                            if (product.STYLE1)
+                                newProduct.style = product.STYLE1;
 
-                        if (product.NewArrival)
-                            newProduct.newArrival = product.NewArrival;
+                            newProduct.styleNo = product.STYLENO;
 
-                        if (product.STYLE1)
-                            newProduct.style = product.STYLE1;
+                            if (product.Washcare)
+                                newProduct.washcare = product.Washcare;
 
-                        if (_.isEmpty(product.STYLENO))
-                            product.STYLENO = product.SKU.substr(9, 9);
+                            if (product['STOCK QTY'])
+                                newProduct.quantity = product['STOCK QTY'];
 
-                        newProduct.styleNo = product.STYLENO;
+                            if (product.price)
+                                newProduct.price = product.price;
 
-                        if (product.Washcare)
-                            newProduct.washcare = product.Washcare;
-
-                        if (product['STOCK QTY'])
-                            newProduct.quantity = product['STOCK QTY'];
-
-                        if (product.price)
-                            newProduct.price = product.price;
-
-                        if (product.productCode)
-                            newProduct.productCode = product.ProductCode;
-                        if (product.image1)
-                            newProduct.images.push({
-                                image: product.image1,
-                                order: 1
-                            });
-                        if (product.image2)
-                            newProduct.images.push({
-                                image: product.image2,
-                                order: 2
-                            });
-                        if (product.image3)
-                            newProduct.images.push({
-                                image: product.image3,
-                                order: 3
-                            });
-                        if (product.IMAGE4)
-                            newProduct.images.push({
-                                image: product.IMAGE4,
-                                order: 4
-                            });
-                        cbWaterfall1(null, newProduct);
-                    },
-                    function UpdateCategory(newProduct, cbWaterfall2) {
-                        console.log(newProduct);
-                        if (product.Category) {
-                            Product.manageForeignKey(HomeCategory, {
-                                name: product.Category
-                            }, function (err, id) {
-                                newProduct.homeCategory = id;
-                                if (product.Subcategory) {
-                                    Product.manageForeignKey(Category, {
-                                        name: product.Subcategory,
-                                        category: newProduct.homeCategory
-                                    }, function (err, id) {
-                                        newProduct.category = id;
-                                        cbWaterfall2(null, newProduct);
-                                    });
-                                } else {
-                                    cbWaterfall2(null, newProduct);
-                                }
-                            });
-                        } else {
-                            cbWaterfall2(null, newProduct);
-                        }
-                    },
-                    function UpdateType(newProduct, cbWaterfall3) {
-                        if (product.Type) {
-                            Product.manageForeignKey(Type, {
-                                name: product.Type
-                            }, function (err, id) {
-                                newProduct.type = id;
+                            if (product.productCode)
+                                newProduct.productCode = product.ProductCode;
+                            if (product.image1)
+                                newProduct.images.push({
+                                    image: product.image1,
+                                    order: 1
+                                });
+                            if (product.image2)
+                                newProduct.images.push({
+                                    image: product.image2,
+                                    order: 2
+                                });
+                            if (product.image3)
+                                newProduct.images.push({
+                                    image: product.image3,
+                                    order: 3
+                                });
+                            if (product.IMAGE4)
+                                newProduct.images.push({
+                                    image: product.IMAGE4,
+                                    order: 4
+                                });
+                            cbWaterfall1(null, newProduct);
+                        },
+                        function UpdateCategory(newProduct, cbWaterfall2) {
+                            console.log(newProduct);
+                            if (product.Category) {
+                                Product.manageForeignKey(HomeCategory, {
+                                    name: product.Category
+                                }, function (err, id) {
+                                    newProduct.homeCategory = id;
+                                    if (product.Subcategory) {
+                                        Product.manageForeignKey(Category, {
+                                            name: product.Subcategory,
+                                            category: newProduct.homeCategory
+                                        }, function (err, id) {
+                                            newProduct.category = id;
+                                            cbWaterfall2(err, newProduct);
+                                        });
+                                    } else {
+                                        cbWaterfall2(err, newProduct);
+                                    }
+                                });
+                            } else {
+                                cbWaterfall2(null, newProduct);
+                            }
+                        },
+                        function UpdateType(newProduct, cbWaterfall3) {
+                            if (product.Type) {
+                                Product.manageForeignKey(Type, {
+                                    name: product.Type
+                                }, function (err, id) {
+                                    newProduct.type = id;
+                                    cbWaterfall3(err, newProduct);
+                                });
+                            } else {
                                 cbWaterfall3(null, newProduct);
-                            });
-                        } else {
-                            cbWaterfall3(null, newProduct);
-                        }
-                    },
-                    function UpdateBrand(newProduct, cbWaterfall4) {
-                        if (product.Brand) {
-                            Product.manageForeignKey(Brand, {
-                                name: product.Brand
-                            }, function (err, id) {
-                                newProduct.brand = id;
+                            }
+                        },
+                        function UpdateBrand(newProduct, cbWaterfall4) {
+                            if (product.Brand) {
+                                Product.manageForeignKey(Brand, {
+                                    name: product.Brand
+                                }, function (err, id) {
+                                    newProduct.brand = id;
+                                    cbWaterfall4(err, newProduct);
+                                });
+                            } else {
                                 cbWaterfall4(null, newProduct);
-                            });
-                        } else {
-                            cbWaterfall4(null, newProduct);
-                        }
-                    },
-                    function UpdateCollection(newProduct, cbWaterfall5) {
-                        if (product.COLLECTION) {
-                            Product.manageForeignKey(Collection, {
-                                name: product.COLLECTION
-                            }, function (err, id) {
-                                newProduct.prodCollection = id;
+                            }
+                        },
+                        function UpdateCollection(newProduct, cbWaterfall5) {
+                            if (product.COLLECTION) {
+                                Product.manageForeignKey(Collection, {
+                                    name: product.COLLECTION
+                                }, function (err, id) {
+                                    newProduct.prodCollection = id;
+                                    cbWaterfall5(err, newProduct);
+                                });
+                            } else {
                                 cbWaterfall5(null, newProduct);
-                            });
-                        } else {
-                            cbWaterfall5(null, newProduct);
-                        }
-                    },
-                    function UpdateFabric(newProduct, cbWaterfall6) {
-                        if (product.Fabric) {
-                            Product.manageForeignKey(Fabric, {
-                                name: product.Fabric
-                            }, function (err, id) {
-                                newProduct.fabric = id;
+                            }
+                        },
+                        function UpdateFabric(newProduct, cbWaterfall6) {
+                            if (product.Fabric) {
+                                Product.manageForeignKey(Fabric, {
+                                    name: product.Fabric
+                                }, function (err, id) {
+                                    newProduct.fabric = id;
+                                    cbWaterfall6(err, newProduct);
+                                });
+                            } else {
                                 cbWaterfall6(null, newProduct);
-                            });
-                        } else {
-                            cbWaterfall6(null, newProduct);
-                        }
-                    },
-                    function UpdateColor(newProduct, cbWaterfall7) {
-                        if (product.COLOR) {
-                            Product.manageForeignKey(BaseColor, {
-                                name: product.COLOR,
-                                code: product.Color
-                            }, function (err, id) {
-                                newProduct.color = id;
+                            }
+                        },
+                        function UpdateColor(newProduct, cbWaterfall7) {
+                            if (product.COLOR) {
+                                Product.manageForeignKey(BaseColor, {
+                                    name: product.COLOR,
+                                    code: product.Color
+                                }, function (err, id) {
+                                    newProduct.color = id;
+                                    cbWaterfall7(err, newProduct);
+                                });
+                            } else {
                                 cbWaterfall7(null, newProduct);
-                            });
-                        } else {
-                            cbWaterfall7(null, newProduct);
-                        }
-                    },
-                    function UpdateSize(newProduct, cbWaterfall8) {
-                        if (product.SIZE) {
-                            Product.manageForeignKey(Size, {
-                                name: product.SIZE,
-                                description: product['Attribute Garment Size1']
-                            }, function (err, id) {
-                                newProduct.size = id;
+                            }
+                        },
+                        function UpdateSize(newProduct, cbWaterfall8) {
+                            if (product.SIZE) {
+                                Product.manageForeignKey(Size, {
+                                    name: product.SIZE,
+                                    description: product['Attribute Garment Size']
+                                }, function (err, id) {
+                                    newProduct.size = id;
+                                    cbWaterfall8(err, newProduct);
+                                });
+                            } else {
                                 cbWaterfall8(null, newProduct);
+                            }
+                        },
+                        function (newProduct, cbWaterfall9) {
+                            Product.getIdByName(newProduct, function (err, data) {
+                                if (err) {
+                                    cbWaterfall9(err, null);
+                                } else {
+                                    Product.findOneAndUpdate({
+                                        _id: data
+                                    }, newProduct, {
+                                        upsert: true,
+                                        new: true
+                                    }, function (err, data) {
+                                        if (err) {
+                                            cbWaterfall9(err, null);
+                                        } else {
+                                            cbWaterfall9(null, data);
+                                        }
+
+                                    });
+                                }
+
                             });
-                        } else {
-                            cbWaterfall8(null, newProduct);
                         }
-                    }
-                ], function (err, newProduct) {
-                    console.log(newProduct);
-                    Product.getIdByName(newProduct, function (err, data) {
-                        Product.update({
-                            _id: data
-                        }, newProduct, {
-                            upsert: true
-                        }, function (err, data) {
-                            if (err)
-                                console.log(err);
-                        });
+                    ], function (err, newProduct) {
+                        if (err) {
+                            retVal.push(err);
+
+                        } else {
+                            retVal.push(newProduct._id);
+                        }
+                        complete(err, retVal);
                     });
-                });
+                }
             }, function (err, data) {
-                console.log("async error: ", err);
+                if (err)
+                    console.log("async error: ", err);
+                callback(null, {
+                    total: retVal.length,
+                    value: retVal
+                });
             });
         });
     },
