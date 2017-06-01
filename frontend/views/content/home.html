@@ -95,7 +95,7 @@
                                     <img ng-src="{{newArrival.images[0].image | serverimage}}" alt="" class="img-responsive" ui-sref="individual-page({id: newArrival._id})">
                                     <div class="get-left">
                                         <h3><i class="fa fa-inr" aria-hidden="true"></i>{{newArrival.price}}</h3>
-                                        <h4>{{newArrival.name}}</h4>
+                                        <h4>{{newArrival.productName}}</h4>
 
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@
                             <img ng-src="{{new.images[0].image | serverimage}}" alt="" class="img-responsive" ui-sref="individual-page({id: new._id})">
                             <div class="featured__cloth-desc">
                                 <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
-                                <h4 class="text-uppercase">{{new.name}}</h4>
+                                <h4 class="text-uppercase">{{new.productName}}</h4>
                             </div>
                             <div class="featured__icon-heart">
                                 <i class="fa fa-heart" aria-hidden="true"></i>
