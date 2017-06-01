@@ -25,6 +25,19 @@ var controller = {
         }
     },
 
+    getProductDetails: function (req, res) {
+        if (req.body) {
+            Product.getProductDetails(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid request"
+                }
+            });
+        }
+    },
+
     getEnabledProducts: function (req, res) {
         if (req.body) {
             Product.getEnabledProducts(req.body, res.callback);

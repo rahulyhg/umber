@@ -364,14 +364,21 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         };
 
         $scope.loggedUser = $.jStorage.get("userId");
-        var productId = $stateParams.id;
+        var data = {
+            productId: $stateParams.id
+        };
 
-        ProductService.getProductWithId(productId, function (data) {
-            $scope.product = data.data.data;
-            $scope.productImages = _.sortBy($scope.product.images, ['order']);
-            $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
-            $scope.sizes = _.sortBy($scope.product.size, ['order']);
-            $scope.selectedSize = _.sortBy($scope.product.size, ['order'])[0];
+        ProductService.getProductDetails(data, function (data) {
+            if (data.data.value) {
+                $scope.product = data.data.data;
+                $scope.productImages = _.sortBy($scope.product.images, ['order']);
+                $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
+                $scope.sizes = _.sortBy($scope.product.size, ['order']);
+                $scope.selectedSize = _.sortBy($scope.product.size, ['order'])[0];
+            } else {
+                console.log(data.data.error);
+                $scope.product = {};
+            }
         });
 
         $scope.addToCart = function () {

@@ -387,32 +387,44 @@ var model = {
                     }).lean().exec(cbWaterfall1);
                 },
                 function getSizes(product, cbWaterfall2) {
-                    Product.distinct("size", {
-                        productId: product.productId
-                    }).lean().exec(function (err, prodSizes) {
-                        Size.find({
-                            _id: {
-                                '$in': prodSizes
-                            }
-                        }).exec(function (err, sizesDetails) {
-                            product.sizes = sizesDetails.slice();
-                            cbWaterfall2(err, product);
+                    if (product) {
+                        Product.distinct("size", {
+                            productId: product.productId
+                        }).lean().exec(function (err, prodSizes) {
+                            Size.find({
+                                _id: {
+                                    '$in': prodSizes
+                                }
+                            }).exec(function (err, sizesDetails) {
+                                product.sizes = sizesDetails.slice();
+                                cbWaterfall2(err, product);
+                            });
                         });
-                    });
+                    } else {
+                        cbWaterfall2({
+                            message: "Product not found"
+                        }, null);
+                    }
                 },
                 function getColors(product, cbWaterfall3) {
-                    Product.distinct("color", {
-                        productId: product.productId
-                    }).lean().exec(function (err, prodColors) {
-                        BaseColor.find({
-                            _id: {
-                                '$in': prodColors
-                            }
-                        }).exec(function (err, colorsDetails) {
-                            product.colors = colorsDetails.slice();
-                            cbWaterfall3(err, product);
+                    if (product) {
+                        Product.distinct("color", {
+                            productId: product.productId
+                        }).lean().exec(function (err, prodColors) {
+                            BaseColor.find({
+                                _id: {
+                                    '$in': prodColors
+                                }
+                            }).exec(function (err, colorsDetails) {
+                                product.colors = colorsDetails.slice();
+                                cbWaterfall3(err, product);
+                            });
                         });
-                    });
+                    } else {
+                        cbWaterfall3({
+                            message: "Product not found"
+                        }, null);
+                    }
                 }
             ],
             function (err, productDetails) {

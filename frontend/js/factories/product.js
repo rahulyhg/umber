@@ -25,9 +25,10 @@ myApp.factory('ProductService', function ($http) {
             }).then(callback);
         },
 
-        getProductWithId: function (input, callback) {
+        getProductDetails: function (input, callback) {
             $http({
-                url: adminurl + 'Product/getProductWithId/' + input,
+                url: adminurl + 'Product/getProductDetails',
+                data: input,
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
