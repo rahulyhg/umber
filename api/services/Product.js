@@ -51,6 +51,7 @@ var schema = new Schema({
     productName: String,
     productCode: String,
     quantity: Number,
+    ratings: Number,
     size: {
         type: Schema.Types.ObjectId,
         ref: 'Size'
