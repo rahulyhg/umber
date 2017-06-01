@@ -10,24 +10,13 @@ var schema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Product'
         },
-        quantity: Number,
-        size: {
-            type: Schema.Types.ObjectId,
-            ref: 'Size'
-        },
-        color: {
-            type: Schema.Types.ObjectId,
-            ref: 'BaseColor'
-        }
+        quantity: Number
     }]
 });
 
 schema.plugin(deepPopulate, {
     populate: {
         "products.product": {
-            select: ""
-        },
-        "products.color": {
             select: ""
         }
     }
@@ -36,7 +25,7 @@ schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('Cart', schema);
 
-var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "products.product products.color", "products.product products.color"));
+var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "products.product", "products.product"));
 var model = {
     saveProduct: function (product, callback) {
         if (!_.isEmpty(product.accessToken)) {
@@ -57,9 +46,7 @@ var model = {
             cart.products = [];
             cart.products.push({
                 product: mongoose.Types.ObjectId(product._id),
-                quantity: product.reqQuantity,
-                color: product.baseColor[0]._id,
-                size: product.selectedSize
+                quantity: product.reqQuantity
             });
             // Check whether a user exists with given access token
             User.findOne({
@@ -81,35 +68,6 @@ var model = {
                                     console.log("error: ", error);
                                     callback(err, null);
                                 } else {
-                                    /*Cart.findOneAndUpdate({
-                                            products: {
-                                                product: product._id,
-                                                //TODO: add size
-                                                color: product.baseColor
-                                            }
-                                        }, {
-                                            $inc: {
-                                                products: {
-                                                    quantity: product.reqQuantity
-                                                }
-                                            }
-                                        }, {
-                                            upsert: true,
-                                            new: true
-                                        })
-                                        .exec(function (err, data) {
-                                            if (err) {
-                                                callback(err, null);
-                                            } else if (data) {
-                                                callback(null, data);
-                                            } else {
-                                                callback({
-                                                    message: {
-                                                        data: "Invalid credentials!"
-                                                    }
-                                                }, null);
-                                            }
-                                        });*/
                                     // If cart is not present, create cart
                                     if (!data) {
                                         Cart.saveData(cart, function (err, data) {
@@ -128,19 +86,14 @@ var model = {
                                     } else {
                                         console.log("Product: ", product);
                                         var idx = _.findIndex(data.products, function (prodVal) {
-                                            console.log("Cart product: ", prodVal);
-                                            return prodVal.product == product._id &&
-                                                prodVal.color == product.baseColor[0]._id &&
-                                                prodVal.size == product.selectedSize
+                                            return prodVal.product == product._id;
                                         });
                                         console.log("Index: ", idx);
                                         if (idx < 0) {
                                             // Insert if proudct isn't present
                                             data.products.push({
                                                 product: mongoose.Types.ObjectId(product._id),
-                                                quantity: product.reqQuantity,
-                                                color: product.baseColor[0]._id,
-                                                size: product.selectedSize
+                                                quantity: product.reqQuantity
                                             });
                                             data.userId = product.userId;
                                             Cart.saveData(data, function (err, data) {
@@ -199,7 +152,7 @@ var model = {
     getCart: function (userId, callback) {
         Cart.findOne({
             userId: userId.userId
-        }).deepPopulate("products.product products.color products.size").exec(function (err, data) {
+        }).deepPopulate("products.product").exec(function (err, data) {
             if (err) {
                 callback(err, null);
             } else if (data) {
