@@ -89,8 +89,32 @@ var controller = {
     },
 
     login: function (req, res) {
+        var callback = function (err, data) {
+            if (err || _.isEmpty(data)) {
+                res.json({
+                    error: err,
+                    value: false
+                });
+            } else {
+                if (data) {
+                    req.session.user = data;
+                    //req.session.save();
+                    console.log("session", req.session.user);
+                    res.json({
+                        data: data,
+                        value: true
+                    });
+                } else {
+                    req.session.user = {};
+                    res.json({
+                        data: {},
+                        value: false
+                    });
+                }
+            }
+        };
         if (req.body) {
-            User.login(req.body, res.callback);
+            User.login(req.body, callback);
         } else {
             res.json({
                 message: {
@@ -113,15 +137,21 @@ var controller = {
     },
 
     getDetails: function (req, res) {
-        if (req.body) {
-            User.getDetails(req.body, res.callback);
-        } else {
+        // if (req.body) {
+        //     User.getDetails(req.body, res.callback);
+        // } else {
+        //     res.json({
+        //         message: {
+        //             data: "Invalid request!"
+        //         }
+        //     })
+        // }
+        req.session.destroy(function (err) {
             res.json({
-                message: {
-                    data: "Invalid request!"
-                }
-            })
-        }
+                data: "Logout Successful",
+                value: true
+            });
+        });
     }
 };
 module.exports = _.assign(module.exports, controller);

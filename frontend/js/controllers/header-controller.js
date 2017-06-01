@@ -5,8 +5,8 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
         });
         $.fancybox.close(true);
 
-        $scope.loggedUser = $.jStorage.get("userId");
-        $scope.accessToken = $.jStorage.get("accessToken");
+        $scope.loggedUser = $.jStorage.get("buUser");
+        // $scope.accessToken = $.jStorage.get("accessToken");
 
         $scope.openLoginModal10 = function () {
             // alert('click');
@@ -24,8 +24,8 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
         $scope.logout = function () {
             console.log("Logging out user");
             var data = {
-                userId: $.jStorage.get("userId"),
-                accessToken: $.jStorage.get("accessToken")
+                userId: $.jStorage.get("buUser"),
+                // accessToken: $.jStorage.get("accessToken")
             }
             $.jStorage.deleteKey('userId');
             $.jStorage.deleteKey('accessToken');
@@ -49,8 +49,8 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
         }
 
         var userId = {
-            userId: $.jStorage.get("userId"),
-            accessToken: $.jStorage.get("accessToken")
+            userId: $.jStorage.get("buUser"),
+            // accessToken: $.jStorage.get("accessToken")
         }
 
         if (userId.userId != null) {
@@ -85,11 +85,11 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
                 if (!_.isEmpty(data.data.data)) {
                     $scope.userData = data.data.data;
 
-                    $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
-                    $.jStorage.set("userId", $scope.userData._id);
+                    // $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
+                    $.jStorage.set("buUser", $scope.userData._id);
 
                     $scope.loggedUser = $scope.userData._id;
-                    $scope.accessToken = $scope.userData.accessToken[$scope.userData.accessToken.length - 1];
+                    // $scope.accessToken = $scope.userData.accessToken[$scope.userData.accessToken.length - 1];
 
                     $uibModalInstance.close();
                     $state.reload();
@@ -104,11 +104,11 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
             UserService.userRegistration($scope.formData, function (data) {
                 $scope.userData = data.data.data;
 
-                $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
-                $.jStorage.set("userId", $scope.userData._id);
+                // $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
+                $.jStorage.set("buUser", $scope.userData);
 
                 $scope.loggedUser = $scope.userData._id;
-                $scope.accessToken = $scope.userData.accessToken[$scope.userData.accessToken.length - 1];
+                // $scope.accessToken = $scope.userData.accessToken[$scope.userData.accessToken.length - 1];
 
                 $uibModalInstance.close();
                 $state.reload();

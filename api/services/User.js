@@ -19,49 +19,40 @@ var schema = new Schema({
     },
     deliveryAddresses: [{
         line1: {
-            type: String,
-            required: true
+            type: String
         },
         line2: String,
         line3: String,
         city: {
-            type: String,
-            required: true
+            type: String
         },
         state: {
-            type: String,
-            required: true
+            type: String
         },
         pincode: {
-            type: Number,
-            required: true
+            type: Number
         },
         country: String,
         status: {
             type: String,
-            required: true,
             enum: ['Enabled', 'Disabled'],
             default: 'Enabled'
         }
     }],
     billingAddress: {
         line1: {
-            type: String,
-            required: true
+            type: String
         },
         line2: String,
         line3: String,
         city: {
-            type: String,
-            required: true
+            type: String
         },
         state: {
-            type: String,
-            required: true
+            type: String
         },
         pincode: {
-            type: Number,
-            required: true
+            type: Number
         },
         country: String
     },
@@ -274,9 +265,9 @@ var model = {
             } else if (data) {
                 //call callback
                 if (!_.isEmpty(data)) {
-                    var accessToken = uid(16);
-                    data.accessToken.push(accessToken);
-                    User.saveData(data, function () {});
+                    // var accessToken = uid(16);
+                    // data.accessToken.push(accessToken);
+                    // User.saveData(data, function () {});
                     console.log("data: ", data);
                     callback(null, data);
                 } else {
