@@ -75,6 +75,9 @@ var schema = new Schema({
 // Select required fields
 schema.plugin(deepPopulate, {
     populate: {
+        'homeCategory': {
+            select: "name"
+        },
         'category': {
             select: "name"
         },
@@ -103,8 +106,8 @@ schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('Product', schema);
 
-var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "category brand prodCollection fabric type color size",
-    "category brand prodCollection fabric type color size"));
+var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "homeCategory category brand prodCollection fabric type color size",
+    "homeCategory category brand prodCollection fabric type color size"));
 var model = {
     manageForeignKey: function (model, data, callback) {
         model.getIdByName(data, function (err, id) {
