@@ -259,15 +259,13 @@ var model = {
             password: md5(userData.password)
         }).exec(function (err, data) {
             if (err) {
-                //call callback
                 console.log("err: ", err);
                 callback(err, null);
             } else if (data) {
-                //call callback
                 if (!_.isEmpty(data)) {
-                    // var accessToken = uid(16);
-                    // data.accessToken.push(accessToken);
-                    // User.saveData(data, function () {});
+                    var accessToken = uid(16);
+                    data.accessToken.push(accessToken);
+                    User.saveData(data, function () {});
                     console.log("data: ", data);
                     callback(null, data);
                 } else {

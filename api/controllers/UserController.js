@@ -89,38 +89,14 @@ var controller = {
     },
 
     login: function (req, res) {
-        var callback = function (err, data) {
-            if (err || _.isEmpty(data)) {
-                res.json({
-                    error: err,
-                    value: false
-                });
-            } else {
-                if (data) {
-                    req.session.user = data;
-                    //req.session.save();
-                    console.log("session", req.session.user);
-                    res.json({
-                        data: data,
-                        value: true
-                    });
-                } else {
-                    req.session.user = {};
-                    res.json({
-                        data: {},
-                        value: false
-                    });
-                }
-            }
-        };
         if (req.body) {
-            User.login(req.body, callback);
+            User.login(req.body, res.callback);
         } else {
             res.json({
                 message: {
                     data: "Invalid request!"
                 }
-            })
+            });
         }
     },
 
@@ -132,26 +108,20 @@ var controller = {
                 message: {
                     data: "Invalid request!"
                 }
-            })
+            });
         }
     },
 
     getDetails: function (req, res) {
-        // if (req.body) {
-        //     User.getDetails(req.body, res.callback);
-        // } else {
-        //     res.json({
-        //         message: {
-        //             data: "Invalid request!"
-        //         }
-        //     })
-        // }
-        req.session.destroy(function (err) {
+        if (req.body) {
+            User.getDetails(req.body, res.callback);
+        } else {
             res.json({
-                data: "Logout Successful",
-                value: true
-            });
-        });
+                message: {
+                    data: "Invalid request!"
+                }
+            })
+        }
     }
 };
 module.exports = _.assign(module.exports, controller);

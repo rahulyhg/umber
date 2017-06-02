@@ -272,7 +272,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
         $scope.registerData = {};
         $scope.loginData = {};
-        $scope.loggedUser = $.jStorage.get("buUser");
+        $scope.loggedUser = $.jStorage.get("userId");
         $scope.accessToken = $.jStorage.get("accessToken");
 
         if ($scope.loggedUser) {
@@ -287,7 +287,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 if (!_.isEmpty(data.data.data)) {
                     $scope.userData = data.data.data;
                     $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
-                    $.jStorage.set("buUser", $scope.userData._id);
+                    $.jStorage.set("userId", $scope.userData._id);
                     $state.reload();
                 } else {
                     // TODO:: show popup to register
@@ -301,7 +301,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
                 if (!_.isEmpty(data.data.data)) {
                     $scope.userData = data.data.data;
                     // $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
-                    $.jStorage.set("buUser", $scope.userData._id);
+                    $.jStorage.set("userId", $scope.userData._id);
                     $state.reload("listing-page");
                 } else {
                     // TODO:: show popup to register
@@ -310,7 +310,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         }
 
         var userData = {
-            userId: $.jStorage.get("buUser")
+            userId: $.jStorage.get("userId")
         }
 
         CartService.getCart(userData, function (data) {
@@ -363,7 +363,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             $scope.formSubmitted = true;
         };
 
-        $scope.loggedUser = $.jStorage.get("buUser");
+        $scope.loggedUser = $.jStorage.get("userId");
         var data = {
             productId: $stateParams.id
         };
@@ -386,7 +386,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             var accessToken = $.jStorage.get("accessToken");
             if (!_.isEmpty(accessToken)) {
                 $scope.product.accessToken = accessToken;
-                $scope.product.userId = $.jStorage.get("buUser");
+                $scope.product.userId = $.jStorage.get("userId");
                 $scope.product.selectedSize = $scope.selectedSize._id;
                 $scope.product.reqQuantity = $scope.reqQuantity;
                 //if (ProductService.isProductAvailable($scope.product.reqQuantity, $scope.product)) {
@@ -420,7 +420,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             var accessToken = $.jStorage.get("accessToken")
             if (accessToken) {
                 $scope.product.accessToken = accessToken;
-                $scope.product.userId = $.jStorage.get("buUser");
+                $scope.product.userId = $.jStorage.get("userId");
                 $scope.product.selectedSize = $scope.selectedSize._id;
                 WishlistService.saveProduct($scope.product, function (data) {
                     if (data.data.error) {
@@ -446,7 +446,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         }
 
         $scope.openLoginModal = function () {
-            var userId = $.jStorage.get("buUser");
+            var userId = $.jStorage.get("userId");
             if (!userId) {
                 $scope.loginModal = $uibModal.open({
                     animation: true,
@@ -601,7 +601,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.newA = _.chunk($scope.mycartmodal, 4);
         console.log("$scope.newA ", $scope.newA);
         var userId = {
-            userId: $.jStorage.get("buUser")
+            userId: $.jStorage.get("userId")
         };
         if (userId.userId != null) {
             CartService.getCart(userId, function (data) {
