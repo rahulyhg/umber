@@ -37,6 +37,11 @@ myApp.factory('NavigationService', function ($http) {
         sref: "#!/page/viewSize//",
         icon: "shirt"
     }, {
+        name: "Buy the look",
+        classis: "active",
+        sref: "#!/page/viewBuythelook//",
+        icon: "shirt"
+    }, {
         name: "Blogs",
         classis: "active",
         sref: "#!/page/viewBlog//",

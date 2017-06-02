@@ -109,6 +109,10 @@ var controller = {
                 }
             })
         }
+    },
+
+    getUniqueProducts: function (req, res) {
+        Product.getUniqueProducts(res.callback);
     }
 };
 module.exports = _.assign(module.exports, controller);

@@ -1,0 +1,101 @@
+{
+    "title": "Create Buythelook",
+    "name": "Buythelook",
+    "jsonPage": "viewBuythelook",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": ["Buythelook"],
+    "fields": [{
+        "name": "Title",
+        "type": "text",
+        "tableRef": "title",
+        "placeholder": "Enter Buythelook Name",
+        "id": "name",
+        "validation": ["", "trim", "unique"],
+        "url": ""
+    }, {
+        "name": "Major Image",
+        "type": "image",
+        "tableRef": "majorImage",
+        "placeholder": "Enter Image Link",
+        "id": "imgLink",
+        "option": "single",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }, {
+        "name": "Inside Image",
+        "type": "image",
+        "tableRef": "insideImage",
+        "placeholder": "Enter Image Link",
+        "id": "imgLink1",
+        "option": "single",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }, {
+        "name": "Add Product",
+        "type": "box",
+        "tableRef": "products",
+        "placeholder": "Add product for look",
+        "id": "look",
+        "onView": true,
+        "validation": ["", "trim", ""],
+        "url": "",
+        "fields": [{
+            "name": "Product",
+            "type": "tags",
+            "tableRef": "product",
+            "placeholder": "Select Lot No",
+            "id": "productId",
+            "dropDownField": "productId",
+            "dropDownType": "single",
+            "searchApi": "searchCall",
+            "url": "Product/getUniqueProducts",
+            "validation": ["", "trim", ""]
+        }, {
+            "name": "Color",
+            "type": "tags",
+            "tableRef": "color",
+            "placeholder": "Select Color",
+            "id": "color",
+            "dropDownField": "name",
+            "dropDownType": "single",
+            "searchApi": "searchCall",
+            "url": "BaseColor/search",
+            "validation": ["", "trim", ""]
+        }]
+    }, {
+        "name": "Status",
+        "type": "tags",
+        "tableRef": "status",
+        "placeholder": "Select Status",
+        "id": "status",
+        "validation": ["", "trim"],
+        "url": "",
+        "dropDownField": "",
+        "dropDownType": "single",
+        "onView": true,
+        "dropDown": ["Enabled", "Disabled"]
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitBuythelook",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewBuythelook"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewBuythelook"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "Buythelook/save"
+    }
+}

@@ -1,0 +1,73 @@
+{
+    "title": "Buythelooks",
+    "description": "List of Buythelooks",
+    "pageType": "view",
+    "sendIdWithCreate": true,
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "Title",
+        "isSort": "",
+        "tableRef": "title"
+    }, {
+        "name": "Major Image",
+        "isSort": "",
+        "tableRef": "majorImage",
+        "type": "image"
+    }, {
+        "name": "Inside Image",
+        "isSort": "",
+        "tableRef": "insideImage",
+        "type": "image"
+    }, {
+        "name": "Status",
+        "isSort": "",
+        "tableRef": "status"
+    }],
+    "action": [{
+        "name": "edit",
+        "icon": "fa-pencil",
+        "buttonClass": "btn-primary",
+        "type": "page",
+        "action": "editBuythelook",
+        "fieldsToSend": {
+            "_id": "_id"
+        }
+    }, {
+        "name": "delete",
+        "icon": "fa-trash",
+        "buttonClass": "btn-danger",
+        "type": "apiCallConfirm",
+        "title": "Delete Buythelook",
+        "content": "Are you sure you want to delete Buythelook?",
+        "api": "Buythelook/delete",
+        "fieldsToSend": {
+            "name": "_id",
+            "value": "_id"
+        }
+    }],
+    "button": [{
+        "name": "Excel Export",
+        "icon": "print",
+        "class": "btn-danger",
+        "type": "redirect",
+        "action": "Buythelook/generateExcel",
+        "linkType": "admin"
+    }, {
+        "name": "Upload Excel",
+        "icon": "delete",
+        "class": "btn-warning",
+        "type": "redirect",
+        "action": "excel-upload/Buythelook",
+        "linkType": "internal"
+    }, {
+        "name": "Create",
+        "icon": "plus",
+        "class": "btn-success",
+        "type": "page",
+        "action": "createBuythelook"
+    }],
+    "apiCall": {
+        "url": "Buythelook/search",
+        "params": "_id"
+    }
+}

@@ -711,6 +711,39 @@ var model = {
                 }
             })
         });
+    },
+
+    // API for backend buy the look
+    // Sending only productId field results in error
+    // Cannot cast to string. Dashboard returns object {productId: $productId}
+    // in case only if productId sent, which it tries to map to string.
+    getUniqueProducts: function (callback) {
+        async.waterfall([
+            function findDistinctProducts(cbWaterfall1) {
+                Product.distinct("productId", {
+                    status: 'Enabled'
+                }).exec(function (err, data) {
+                    cbWaterfall1(err, data);
+                });
+            },
+            function getProductDetails(products, cbWaterfall2) {
+                var productsDetails = [];
+                async.each(products, function (product, callback) {
+                    Product.findOne({
+                        productId: product
+                    }).exec(function (err, productDetails) {
+                        productsDetails.push(productDetails);
+                        callback(err);
+                    });
+                }, function (err) {
+                    var finalData = {};
+                    finalData.results = productsDetails;
+                    cbWaterfall2(err, finalData);
+                });
+            }
+        ], function (err, productDetails) {
+            callback(err, productDetails);
+        });
     }
 };
 module.exports = _.assign(module.exports, exports, model);
