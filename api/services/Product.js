@@ -365,25 +365,25 @@ var model = {
                         },
                         category: {
                             $exists: true
-                        },
-                        brand: {
-                            $exists: true
-                        },
-                        prodCollection: {
-                            $exists: true
-                        },
-                        type: {
-                            $exists: true
-                        },
-                        fabric: {
-                            $exists: true
-                        },
-                        washcare: {
-                            $exists: true
-                        },
-                        description: {
-                            $exists: true
-                        }
+                        } //,
+                        // brand: {
+                        //     $exists: true
+                        // },
+                        // prodCollection: {
+                        //     $exists: true
+                        // },
+                        // type: {
+                        //     $exists: true
+                        // },
+                        // fabric: {
+                        //     $exists: true
+                        // },
+                        // washcare: {
+                        //     $exists: true
+                        // },
+                        // description: {
+                        //     $exists: true
+                        // }
                     }).lean().exec(cbWaterfall1);
                 },
                 function getSizes(product, cbWaterfall2) {
@@ -425,6 +425,19 @@ var model = {
                             message: "Product not found"
                         }, null);
                     }
+                },
+                function getMinPrice(product, cbWaterfall4) {
+                    Product.aggregate([{
+                        $group: {
+                            _id: product.productId,
+                            minPrice: {
+                                $min: '$price'
+                            }
+                        }
+                    }]).exec(function (err, price) {
+                        product.minPrice = price;
+                        cbWaterfall4(err, product);
+                    });
                 }
             ],
             function (err, productDetails) {
