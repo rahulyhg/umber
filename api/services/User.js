@@ -273,6 +273,11 @@ var model = {
                 }
             } else {
                 console.log("Big mistake");
+                callback({
+                    message: {
+                        data: "Something terrible happened! Please contact administrator"
+                    }
+                }, null);
             }
         })
     },
