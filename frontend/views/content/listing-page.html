@@ -304,15 +304,15 @@
                                                     </a>-->
                                                 </div>
                                                 <a ui-sref="individual-page({id: product.productId})">
-                                                    <img ng-src="{{image.image | serverimage}}" class="img-rsponsive img1" title="{{product.name}}">
+                                                    <img ng-src="{{image.image | serverimage}}" class="img-rsponsive img1" title="{{product.productName}}">
                                                 </a>
                                                 <!--<i class="fa fa-heart-o" aria-hidden="true"></i>
                                             <img ng-src="{{buy.img}}" class="img-responsive" ng-mouseover="displayCntent();" ng-mouseleave="hideContent();">-->
                                             </li>
                                         </flex-slider>
                                         <div class="buy-para">
-                                            <h4><i class="fa fa-inr" aria-hidden="true"></i> {{product.price}}</h4>
-                                            <h5>{{product.name}} <br>{{product.type.name}}</h5>
+                                            <h4><i class="fa fa-inr" aria-hidden="true"></i> {{product.minPrice[0].minPrice}}</h4>
+                                            <h5>{{product.productName}} <br>{{product.type.name}}</h5>
                                             <div class="viewSize">
                                                 <div class="inline-block">
                                                     <p>Size:</p>

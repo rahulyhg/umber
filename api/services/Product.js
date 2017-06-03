@@ -359,7 +359,7 @@ var model = {
         async.waterfall([
                 function commonDetails(cbWaterfall1) {
                     Product.findOne({
-                        productId: data.productId,
+                        productName: data.productName,
                         name: {
                             $exists: true
                         },
@@ -389,13 +389,13 @@ var model = {
                 function getSizes(product, cbWaterfall2) {
                     if (product) {
                         Product.distinct("size", {
-                            productId: product.productId
+                            productName: product.productName
                         }).lean().exec(function (err, prodSizes) {
                             Size.find({
                                 _id: {
                                     '$in': prodSizes
                                 }
-                            }).exec(function (err, sizesDetails) {
+                            }).sort("name").exec(function (err, sizesDetails) {
                                 product.sizes = sizesDetails.slice();
                                 cbWaterfall2(err, product);
                             });
@@ -409,13 +409,13 @@ var model = {
                 function getColors(product, cbWaterfall3) {
                     if (product) {
                         Product.distinct("color", {
-                            productId: product.productId
+                            productName: product.productName
                         }).lean().exec(function (err, prodColors) {
                             BaseColor.find({
                                 _id: {
                                     '$in': prodColors
                                 }
-                            }).exec(function (err, colorsDetails) {
+                            }).sort("name").exec(function (err, colorsDetails) {
                                 product.colors = colorsDetails.slice();
                                 cbWaterfall3(err, product);
                             });
@@ -429,7 +429,7 @@ var model = {
                 function getMinPrice(product, cbWaterfall4) {
                     Product.aggregate([{
                         $group: {
-                            _id: product.productId,
+                            _id: product.productName,
                             minPrice: {
                                 $min: '$price'
                             }
@@ -445,36 +445,42 @@ var model = {
             });
     },
 
-    // This function will retrieve all the unique products with available details
     // For listing page
+    // This function will retrieve products grouped by product name and 
+    // with available details
     // req-> {category: category._id}
     getProductsWithCategory: function (data, callback) {
         async.waterfall([
             // Gets all the unique product ids related to the category
             function getCategoryProducts(callback1) {
-                Product.aggregate([{
+                var pipeline = [];
+                // If category filter is applied
+                if (data.category)
+                    pipeline.push({
                         $match: {
                             category: mongoose.Types.ObjectId(data.category)
                         }
-                    },
-                    {
-                        $sort: {
-                            createdAt: -1
-                        }
-                    },
-                    {
-                        $group: {
-                            _id: "$productId"
-                        }
-                    },
-                    {
-                        $project: {
-                            productId: '$_id'
-                        }
+                    });
+                // Get products sorted on creation date
+                pipeline.push({
+                    $sort: {
+                        createdAt: -1
                     }
-                ]).skip((data.page - 1) * Config.maxRow).limit(Config.maxRow).exec(callback1);
+                });
+                // Get unique products
+                pipeline.push({
+                    $group: {
+                        _id: "$productName"
+                    }
+                });
+                pipeline.push({
+                    $project: {
+                        productName: '$_id'
+                    }
+                });
+                Product.aggregate(pipeline).skip((data.page - 1) * Config.maxRow).limit(Config.maxRow).exec(callback1);
             },
-            // Retrieve one document containing all the detail based on productId.
+            // Retrieve one document containing all the detail based on product name.
             // for individual page
             function getDetailsOfProducts(categoryProducts, callback2) {
                 var consolidatedProducts = [];
@@ -482,14 +488,14 @@ var model = {
                     Product.getProductDetails(product, function (err, productDetails) {
                         if (!_.isEmpty(productDetails))
                             consolidatedProducts.push(productDetails);
-                        eachCallback(err, productDetails);
+                        eachCallback(null, productDetails);
                     });
                 }, function (err1) {
-                    callback2(err1, consolidatedProducts);
+                    callback2(null, consolidatedProducts);
                 });
             },
         ], function (err, products) {
-            callback(err, products);
+            callback(null, products);
         });
     },
 
