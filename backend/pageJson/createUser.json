@@ -56,6 +56,23 @@
             "disabled": true,
             "validation": ["", "trim", "unique"],
             "url": ""
+        },
+        {
+            "name": "Membership  Status",
+            "type": "tags",
+            "tableRef": "Membership",
+            "placeholder": "Select Membership  Status",
+            "id": "member",
+            "dropDownField": "name",
+            "dropDownType": "single",
+            "searchApi": "searchCall",
+            "url": "Membership/search",
+            "validation": [
+                "required",
+                "trim",
+                ""
+            ],
+            "onView": true
         }, {
             "name": "Password",
             "type": "password",

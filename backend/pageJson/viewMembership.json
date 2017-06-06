@@ -1,36 +1,28 @@
 {
-    "title": "Users",
-    "description": "List of Users",
+    "title": "Memberships",
+    "description": "List of Memberships",
     "pageType": "view",
     "sendIdWithCreate": true,
     "urlFields": ["_id"],
     "fields": [{
-        "name": "First Name",
+        "name": "Membership Status Name",
         "isSort": "",
-        "tableRef": "firstName"
+        "tableRef": "name"
     }, {
-        "name": "Last Name",
+        "name": "Membership Status priority",
         "isSort": "",
-        "tableRef": "lastName"
+        "tableRef": "priority"
     }, {
-        "name": "Email",
+        "name": "Membership Status",
         "isSort": "",
-        "tableRef": "email"
-    }, {
-        "name": "Mobile",
-        "isSort": "",
-        "tableRef": "mobile"
-    }, {
-        "name": "Member Status",
-        "isSort": "",
-        "tableRef": "membership"
+        "tableRef": "status"
     }],
     "action": [{
         "name": "edit",
         "icon": "fa-pencil",
         "buttonClass": "btn-primary",
         "type": "page",
-        "action": "editUser",
+        "action": "editMembership",
         "fieldsToSend": {
             "_id": "_id"
         }
@@ -39,9 +31,9 @@
         "icon": "fa-trash",
         "buttonClass": "btn-danger",
         "type": "apiCallConfirm",
-        "title": "Delete User",
-        "content": "Are you sure you want to delete User?",
-        "api": "user/delete",
+        "title": "Delete Membership",
+        "content": "Are you sure you want to delete Membership?",
+        "api": "Membership/delete",
         "fieldsToSend": {
             "name": "_id",
             "value": "_id"
@@ -52,24 +44,24 @@
         "icon": "print",
         "class": "btn-danger",
         "type": "redirect",
-        "action": "User/generateExcel",
+        "action": "Membership/generateExcel",
         "linkType": "admin"
     }, {
         "name": "Upload Excel",
         "icon": "delete",
         "class": "btn-warning",
         "type": "redirect",
-        "action": "excel-upload/User",
+        "action": "excel-upload/Membership",
         "linkType": "internal"
     }, {
         "name": "Create",
         "icon": "plus",
         "class": "btn-success",
         "type": "page",
-        "action": "createUser"
+        "action": "createMembership"
     }],
     "apiCall": {
-        "url": "User/search",
+        "url": "Membership/search",
         "params": "_id"
     }
 }

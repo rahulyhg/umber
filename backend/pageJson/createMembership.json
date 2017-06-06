@@ -1,0 +1,81 @@
+{
+    "title": "Create Membership Status",
+    "name": "Membership",
+    "jsonPage": "viewMembership",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": [
+        "Membership"
+    ],
+    "fields": [{
+            "name": "Name",
+            "type": "text",
+            "tableRef": "name",
+            "placeholder": "Enter Membership Status Name",
+            "id": "name",
+            "validation": [
+                "required",
+                "trim",
+                "unique"
+            ],
+            "url": "",
+            "view": true
+        }, {
+            "name": "Priority",
+            "type": "text",
+            "tableRef": "priority",
+            "placeholder": "Enter Membership Status priority",
+            "id": "name",
+            "validation": [
+                "required",
+                "trim",
+                "unique"
+            ],
+            "url": ""
+        },
+        {
+            "name": "Status",
+            "type": "tags",
+            "tableRef": "status",
+            "placeholder": "Set status",
+            "id": "status",
+            "validation": [
+                "",
+                "trim",
+                ""
+            ],
+            "url": "",
+            "dropDownField": "",
+            "dropDownType": "single",
+            "onView": true,
+            "dropDown": [
+                "Enabled",
+                "Disabled"
+            ]
+        }
+    ],
+    "action": [{
+            "name": "submit",
+            "action": "submitMembership",
+            "stateName": {
+                "page": "page",
+                "json": {
+                    "id": "viewMembership"
+                }
+            }
+        },
+        {
+            "name": "cancel",
+            "sideMenuRedirect": true,
+            "stateName": {
+                "page": "page",
+                "json": {
+                    "id": "viewMembership"
+                }
+            }
+        }
+    ],
+    "apiCall": {
+        "url": "Membership/save"
+    }
+}

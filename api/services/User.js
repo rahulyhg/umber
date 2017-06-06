@@ -90,6 +90,10 @@ var schema = new Schema({
         type: String,
         default: ""
     },
+    membership: {
+        type: Schema.Types.ObjectId,
+        ref: ['Membership']
+    },
     mobile: {
         type: String,
         default: ""

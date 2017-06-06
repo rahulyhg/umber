@@ -9,7 +9,6 @@ var schema = new Schema({
     //urlSlug: String,
     imgLink: String,
     extLink: String,
-    priority: Number,
     status: String
 });
 

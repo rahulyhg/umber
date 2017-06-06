@@ -14,6 +14,11 @@
         "type": "image",
         "tableRef": "imgLink"
     }, {
+        "name": "External Link",
+        "isSort": "",
+        "type": "text",
+        "tableRef": "extLink"
+    }, {
         "name": "Status",
         "isSort": "",
         "tableRef": "status"

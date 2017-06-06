@@ -4,65 +4,106 @@
     "jsonPage": "viewCategory",
     "desciption": "",
     "pageType": "create",
-    "urlFields": ["HomeCategory"],
-    "fields": [{
-        "name": "Name",
-        "type": "text",
-        "tableRef": "name",
-        "placeholder": "Enter HomeCategory Name",
-        "id": "name",
-        "validation": ["required", "trim", "unique"],
-        "url": ""
-    }, {
-        "name": "Image",
-        "type": "image",
-        "tableRef": "imgLink",
-        "placeholder": "Enter Image Link",
-        "id": "imgLink",
-        "option": "single",
-        "view": true,
-        "validation": ["", "trim", "unique"],
-        "url": ""
-    }, {
-        "name": "Priority",
-        "type": "number",
-        "tableRef": "priority",
-        "placeholder": "Enter HomeCategory priority",
-        "id": "priority",
-        "validation": ["required", "trim", "unique"],
-        "url": ""
-    }, {
-        "name": "Status",
-        "type": "tags",
-        "tableRef": "status",
-        "placeholder": "Select Status",
-        "id": "status",
-        "validation": ["required", "trim"],
-        "url": "",
-        "dropDownField": "",
-        "dropDownType": "single",
-        "onView": true,
-        "dropDown": ["Enabled", "Disabled"]
-    }],
-    "action": [{
-        "name": "submit",
-        "action": "submitHomeCategory",
-        "stateName": {
-            "page": "page",
-            "json": {
-                "id": "viewHomeCategory"
+    "urlFields": [
+        "HomeCategory"
+    ],
+    "fields": [
+        {
+            "name": "Name",
+            "type": "text",
+            "tableRef": "name",
+            "placeholder": "Enter HomeCategory Name",
+            "id": "name",
+            "validation": [
+                "required",
+                "trim",
+                "unique"
+            ],
+            "url": ""
+        },
+        {
+            "name": "External Link",
+            "type": "text",
+            "tableRef": "extLink",
+            "placeholder": "Enter External Link",
+            "id": "extLink",
+            "validation": [
+                "required",
+                "trim",
+                ""
+            ],
+            "url": ""
+        },
+        {
+            "name": "Image",
+            "type": "image",
+            "tableRef": "imgLink",
+            "placeholder": "Enter Image Link",
+            "id": "imgLink",
+            "option": "single",
+            "view": true,
+            "validation": [
+                "",
+                "trim",
+                "unique"
+            ],
+            "url": ""
+        },
+        {
+            "name": "Priority",
+            "type": "number",
+            "tableRef": "priority",
+            "placeholder": "Enter HomeCategory priority",
+            "id": "priority",
+            "validation": [
+                "required",
+                "trim",
+                "unique"
+            ],
+            "url": ""
+        },
+        {
+            "name": "Status",
+            "type": "tags",
+            "tableRef": "status",
+            "placeholder": "Select Status",
+            "id": "status",
+            "validation": [
+                "required",
+                "trim"
+            ],
+            "url": "",
+            "dropDownField": "",
+            "dropDownType": "single",
+            "onView": true,
+            "dropDown": [
+                "Enabled",
+                "Disabled"
+            ]
+        }
+    ],
+    "action": [
+        {
+            "name": "submit",
+            "action": "submitHomeCategory",
+            "stateName": {
+                "page": "page",
+                "json": {
+                    "id": "viewHomeCategory"
+                }
+            }
+        },
+        {
+            "name": "cancel",
+            "sideMenuRedirect": true,
+            "stateName": {
+                "page": "page",
+                "json": {
+                    "id": "viewHomeCategory"
+                }
             }
         }
-    }, {
-        "name": "cancel",
-        "sideMenuRedirect": true,
-        "stateName": {
-            "page": "page",
-            "json": {
-                "id": "viewHomeCategory"
-            }
-        }
-    }],
+    ],
     "apiCall": {
         "url": "HomeCategory/save"
     }
