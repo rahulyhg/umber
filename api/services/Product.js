@@ -387,7 +387,7 @@ var model = {
                         // description: {
                         //     $exists: true
                         // }
-                    }).lean().exec(cbWaterfall1);
+                    }).deepPopulate("prodCollection brand fabric color type category").lean().exec(cbWaterfall1);
                 },
                 function getSizes(product, cbWaterfall2) {
                     if (product) {

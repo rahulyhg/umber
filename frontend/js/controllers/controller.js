@@ -737,8 +737,22 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
 
         ProductService.getFiltersWithCategory(data, function (data) {
             console.log(data);
-            if (data.data.value)
+            if (data.data.value) {
                 $scope.filters = data.data.data;
+                $scope.slider_translate = {
+                    minValue: $scope.filters.priceRange[0].min,
+                    maxValue: $scope.filters.priceRange[0].min,
+                    options: {
+                        ceil: 7000,
+                        floor: 100,
+                        id: 'translate-slider',
+                        translate: function (value, id, which) {
+                            console.info(value, id, which);
+                            return '$' + value;
+                        }
+                    }
+                };
+            }
         });
 
         // ProductService.getProductsWithCategoryId(categoryId, function (data) {
@@ -748,19 +762,6 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
         $scope.submitForm = function (data) {
             console.log(data);
             $scope.formSubmitted = true;
-        };
-        $scope.slider_translate = {
-            minValue: $scope.filters.priceRange[0].min,
-            maxValue: $scope.filters.priceRange[0].min,
-            options: {
-                ceil: 7000,
-                floor: 100,
-                id: 'translate-slider',
-                translate: function (value, id, which) {
-                    console.info(value, id, which);
-                    return '$' + value;
-                }
-            }
         };
 
         $scope.displayCntent = function () {
