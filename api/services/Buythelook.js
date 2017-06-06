@@ -38,5 +38,13 @@ schema.plugin(timestamps);
 module.exports = mongoose.model('Buythelook', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
-var model = {};
+var model = {
+    getEnabledLook: function (callback) {
+        Buythelook.findOne({
+            status: 'Enabled'
+        }).exec(function (err, data) {
+            callback(err, data);
+        });
+    }
+};
 module.exports = _.assign(module.exports, exports, model);
