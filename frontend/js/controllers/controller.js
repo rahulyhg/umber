@@ -1,4 +1,4 @@
-myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationService, ProductService, $timeout, $location) {
+myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, NavigationService, ProductService, $timeout, $location) {
         $scope.template = TemplateService.getHTML("content/home.html");
         TemplateService.title = "Home"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -6,7 +6,11 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.toggled = function (open) {
             alert('xd');
         };
-
+        ProductService.getthelook(function (data) {
+            $scope.getthelook = data.data.data;
+            //console.log("new look", data.data.data);
+        })
+        $scope.userId = $.jStorage.get('userId');
         NavigationService.EnabledHomeScreen(function (data) {
             console.log("Frontend->controller.js->data: ", data);
             $scope.clothCat = data.data.data;
@@ -29,6 +33,33 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             $scope.featured = data.data.data;
             console.log("Featured: ", $scope.featured);
         });
+        var userId = {
+            userId: $.jStorage.get("userId"),
+            accessToken: $.jStorage.get("accessToken")
+        }
+        console.log("before check")
+        /******************todo:for showing cart logo  infinite loop issue******************** */
+        /*  $scope.checkInCart = function (productId) {
+              if (userId.userId) {
+                  console.log("checkproductid:::", userId);
+                  CartService.getCart(userId, function (data) {
+                      console.log(data);
+                      if (data.data.value) {
+                          $scope.cartData = data.data.data.products
+                          var result = _.find($scope.cartData, {
+                              productId: productId
+                          });
+                          if (result) {
+                              return true;
+                          } else {
+                              return false;
+                          }
+                      }
+                  });
+              } else {
+                  return false;
+              }
+          }*/
 
         NavigationService.getEnabledBlogs(function (data) {
             $scope.blogs = data.data.data;
@@ -87,7 +118,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
     .controller('BuythelookCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
         $scope.template = TemplateService.getHTML("content/buythelook.html");
         TemplateService.title = "Buythelook"; //This is the Title of the Website
-        $scope.navigation = NavigationService.getNavigation();
+        $scope.navigation = NavigationService.getEnabledCtNavigation();
 
         $scope.buyshirt = [{
                 img: 'img/buy/2.jpg',
@@ -270,6 +301,13 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.template = TemplateService.getHTML("content/checkout.html");
         TemplateService.title = "Checkout"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
+        var banner = {
+            pageName: "checkout"
+        }
+        BannerService.getBanner(banner, function (data) {
+            $scope.banner = data.data.data;
+
+        });
 
         $scope.registerData = {};
         $scope.loginData = {};
@@ -554,10 +592,17 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             $scope.selectedImage = $scope.product.images[index];
         };
     })
-    .controller('MycartCtrl', function ($scope, $state, TemplateService, NavigationService, CartService, $timeout, $uibModal) {
+    .controller('MycartCtrl', function ($scope, $state, TemplateService, NavigationService, BannerService, CartService, $timeout, $uibModal) {
         $scope.template = TemplateService.getHTML("content/mycart.html");
         TemplateService.title = "Mycart"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
+        var banner = {
+            pageName: "mycart"
+        }
+        BannerService.getBanner(banner, function (data) {
+            $scope.banner = data.data.data;
+
+        });
 
         $scope.mycartmodal = [{
                 img: 'img/cart/1.jpg',

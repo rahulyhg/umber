@@ -59,6 +59,13 @@ myApp.factory('ProductService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
+        getthelook: function (callback) {
+            $http({
+                url: adminurl + 'Buythelook/getEnabledLook',
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
 
         isAvailableProduct: function (reqQuantity, product) {
             return reqQuantity < product.quantity;

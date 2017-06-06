@@ -128,12 +128,14 @@
                                 <h4 class="text-uppercase">{{new.productName}}</h4>
                             </div>
                             <div class="featured__icon-heart">
-                                <i class="fa fa-heart" aria-hidden="true"></i>
+                                <i ng-class="checkWishlist(new._id)" aria-hidden="true"></i>
                             </div>
+                            <!--  <div ng-show="userId && checkInCart(new._id)">-->
                             <div class="featured__icon-cart">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                             </div>
                         </div>
+                        <!--  </div>-->
                     </li>
                 </flex-slider>
                 <p class="text-center">
@@ -150,21 +152,21 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-7 paddrt">
-                    <img src="../img/home/15.jpg" alt="" class="img-responsive">
+                    <img ng-src="{{getthelook.majorImage | serverimage}}" alt="" class="img-responsive">
                 </div>
                 <div class="col-md-5 paddlt">
                     <div class="cloth-buy__title text-center">
                         <h1 class="text-uppercase cloth-buy--border--line">buy the look</h1>
                     </div>
                     <div class="cloth-buy__desc">
-                        <h2>LOREM IPSUM IS DUMMY</h2>
+                        <h2>{{getthelook.title}}</h2>
                         <p class="line--height">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
                             the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
                             of type and scrambled it to make a type specimen book. It has survived not only five centuries,
                             but also the leap into electronic typesetting, remaining essentially unchanged.
                         </p>
                         <p>
-                            <button class="btn text-uppercase buy--now">buy now</button>
+                            <button class="btn text-uppercase buy--now" ui-sref="buythelook">buy now</button>
                         </p>
                     </div>
                 </div>
