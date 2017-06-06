@@ -32,6 +32,14 @@
         "validation": ["", "trim", ""],
         "url": ""
     }, {
+        "name": "Description",
+        "type": "textarea",
+        "tableRef": "desc",
+        "placeholder": "Enter Look Description",
+        "id": "desc",
+        "validation": ["required", "trim", ""],
+        "url": ""
+    }, {
         "name": "Add Product",
         "type": "box",
         "tableRef": "products",
@@ -50,17 +58,6 @@
             "dropDownType": "single",
             "searchApi": "searchCall",
             "url": "Product/getUniqueProducts",
-            "validation": ["", "trim", ""]
-        }, {
-            "name": "Color",
-            "type": "tags",
-            "tableRef": "color",
-            "placeholder": "Select Color",
-            "id": "color",
-            "dropDownField": "name",
-            "dropDownType": "single",
-            "searchApi": "searchCall",
-            "url": "BaseColor/search",
             "validation": ["", "trim", ""]
         }]
     }, {
