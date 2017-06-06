@@ -243,6 +243,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         };
 
         $scope.addcart = function () {
+
             $uibModal.open({
                 animation: true,
                 templateUrl: 'views/modal/cartadd.html',
@@ -674,6 +675,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         }
         BannerService.getBanner(banner, function (data) {
             $scope.banner = data.data.data;
+
         });
         // Ideally products should be retrieved with respect to category
         var data = {
@@ -683,6 +685,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         $scope.filterProducts = function (filterParameter) {
             ProductService.filterProducts(filterParameter, function (data) {
                 $scope.products = _.chunk(data.data.data, 3);
+
                 console.log("Listing page products: ", $scope.products);
             });
         }
