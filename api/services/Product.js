@@ -522,7 +522,7 @@ var model = {
                             _id: {
                                 $in: types
                             }
-                        }).exec(cbParallel1);
+                        }).sort("name").exec(cbParallel1);
                     });
                 },
                 collections: function (cbParallel2) {
@@ -531,7 +531,7 @@ var model = {
                             _id: {
                                 $in: collections
                             }
-                        }).exec(cbParallel2);
+                        }).sort("name").exec(cbParallel2);
                     });
                 },
                 sizes: function (cbParallel3) {
@@ -540,7 +540,7 @@ var model = {
                             _id: {
                                 $in: sizes
                             }
-                        }).exec(cbParallel3);
+                        }).sort("name").exec(cbParallel3);
                     });
                 },
                 colors: function (cbParallel4) {
@@ -549,7 +549,7 @@ var model = {
                             _id: {
                                 $in: colors
                             }
-                        }).exec(cbParallel4);
+                        }).sort("name").exec(cbParallel4);
                     });
                 },
                 fabrics: function (cbParallel5) {
@@ -558,7 +558,7 @@ var model = {
                             _id: {
                                 $in: fabrics
                             }
-                        }).exec(cbParallel5);
+                        }).sort("name").exec(cbParallel5);
                     });
                 },
                 priceRange: function (cbParallel6) {

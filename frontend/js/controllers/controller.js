@@ -677,7 +677,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         });
         // Ideally products should be retrieved with respect to category
         var data = {
-            category: "5913fa306861d105666afa45"
+            category: "592e6d69b958d66a25c0fe48"
         }
 
         $scope.filterProducts = function (filterParameter) {
@@ -702,8 +702,8 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             $scope.formSubmitted = true;
         };
         $scope.slider_translate = {
-            minValue: 200,
-            maxValue: 1500,
+            minValue: $scope.filters.priceRange[0].min,
+            maxValue: $scope.filters.priceRange[0].min,
             options: {
                 ceil: 7000,
                 floor: 100,

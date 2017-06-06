@@ -71,9 +71,9 @@
                                 </h5>
                             </uib-accordion-heading>
                             <div class="range-slider">
-                                <rzslider rz-slider-model="slider_translate.minValue" rz-slider-high="slider_translate.maxValue" rz-slider-options="slider_translate.options"></rzslider>
-                                <span class="rupee-count pull-left">Rs{{slider_translate.minValue}}-&#8377;</span>
-                                <span class="rupee-count pull-right">Rs{{slider_translate.maxValue}}</span>
+                                <rzslider rz-slider-model="filters.priceRange[0].min" rz-slider-high="filters.priceRange[0].max" rz-slider-options="slider_translate.options"></rzslider>
+                                <span class="rupee-count pull-left">Rs{{filters.priceRange[0].min}}-&#8377;</span>
+                                <span class="rupee-count pull-right">Rs{{filters.priceRange[0].max}}</span>
                             </div>
                         </div>
                     </uib-accordion>
@@ -105,39 +105,9 @@
                             <div class="checkbox" ng-repeat="size in filters.sizes">
                                 <input type="checkbox" id="{{size._id}}">
                                 <label for="{{size._id}}">
-                                     {{size.name}}
+                                     {{size.description}}
                                 </label>
                             </div>
-                            <!--<div class="checkbox">
-                                <input type="checkbox" id="d2">
-                                <label for="d2">
-                                     40Cms-MS-Slim-Fit
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="d3">
-                                <label for="d3">
-                                      39Cms-SS-Slim-Fit
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="d4">
-                                <label for="d4">
-                                      44Cms-XL-Regular-Fit
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="d5">
-                                <label for="d5">
-                                     42Cms-LR-Regular-Fit
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="d6">
-                                <label for="d6">
-                                     46Cms-2XL-Regular-Fit
-                                </label>
-                            </div>-->
                         </div>
                     </uib-accordion>
                 </div>
