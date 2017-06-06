@@ -354,12 +354,15 @@ var model = {
     },
 
     // Get the common product details with 
-    // SKU specific details like sizes, colors
+    // Each product id is related with color
+    // so no need to get color externally
+    // SKU specific details like sizes
     getProductDetails: function (data, callback) {
         async.waterfall([
+                // Color is fetched from this record only
                 function commonDetails(cbWaterfall1) {
                     Product.findOne({
-                        productName: data.productName,
+                        productId: data.productId,
                         name: {
                             $exists: true
                         },
@@ -389,7 +392,7 @@ var model = {
                 function getSizes(product, cbWaterfall2) {
                     if (product) {
                         Product.distinct("size", {
-                            productName: product.productName
+                            productId: product.productId
                         }).lean().exec(function (err, prodSizes) {
                             Size.find({
                                 _id: {
@@ -406,30 +409,10 @@ var model = {
                         }, null);
                     }
                 },
-                function getColors(product, cbWaterfall3) {
-                    if (product) {
-                        Product.distinct("color", {
-                            productName: product.productName
-                        }).lean().exec(function (err, prodColors) {
-                            BaseColor.find({
-                                _id: {
-                                    '$in': prodColors
-                                }
-                            }).sort("name").exec(function (err, colorsDetails) {
-                                product.colors = colorsDetails.slice();
-                                cbWaterfall3(err, product);
-                            });
-                        });
-                    } else {
-                        cbWaterfall3({
-                            message: "Product not found"
-                        }, null);
-                    }
-                },
                 function getMinPrice(product, cbWaterfall4) {
                     Product.aggregate([{
                         $group: {
-                            _id: product.productName,
+                            _id: product.productId,
                             minPrice: {
                                 $min: '$price'
                             }
@@ -446,7 +429,7 @@ var model = {
     },
 
     // For listing page
-    // This function will retrieve products grouped by product name and 
+    // This function will retrieve products grouped by product id and 
     // with available details
     // req-> {category: category._id}
     getProductsWithCategory: function (data, callback) {
@@ -470,17 +453,17 @@ var model = {
                 // Get unique products
                 pipeline.push({
                     $group: {
-                        _id: "$productName"
+                        _id: "$productId"
                     }
                 });
                 pipeline.push({
                     $project: {
-                        productName: '$_id'
+                        productId: '$_id'
                     }
                 });
                 Product.aggregate(pipeline).skip((data.page - 1) * Config.maxRow).limit(Config.maxRow).exec(callback1);
             },
-            // Retrieve one document containing all the detail based on product name.
+            // Retrieve one document containing all the detail based on product id.
             // for individual page
             function getDetailsOfProducts(categoryProducts, callback2) {
                 var consolidatedProducts = [];

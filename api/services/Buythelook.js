@@ -20,10 +20,6 @@ var schema = new Schema({
                 type: String,
                 index: true
             }
-        },
-        color: {
-            type: Schema.Types.ObjectId,
-            ref: 'BaseColor'
         }
     }],
     status: {
