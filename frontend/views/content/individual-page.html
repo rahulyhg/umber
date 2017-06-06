@@ -54,7 +54,7 @@
                 <div class="individual-main">
 
                     <div class="first-sec clearfix border-div relate">
-                        <h4>{{product.name}}</h4>
+                        <h4>{{product.productName}}</h4>
                         <div class="pull-left">
                             <h3><i class="fa fa-inr" aria-hidden="true"></i> {{product.price}}</h3>
                         </div>
@@ -68,7 +68,7 @@
                             <button class="btn dropdown-toggle btn-select" type="button" data-toggle="dropdown">{{selectedSize.name}}
                             <i class="fa fa-angle-down" aria-hidden="true"></i></button>
                             <ul class="dropdown-menu">
-                                <li ng-repeat="size in sizes"> <a ng-click="setSelectedSize(size)">{{size.name}}</a></li>
+                                <li ng-repeat="size in product.sizes"> <a ng-click="setSelectedSize(size)">{{size.name}}</a></li>
                                 <!--<li><a href="#">1</a></li>
                                 <li><a href="#">2</a></li>
                                 <li><a href="#">3</a></li>
@@ -125,7 +125,7 @@
                                                     <div class="inline-block">
                                                         <ul class="list-unstyled">
                                                             <li>
-                                                                {{product.brand.name}}
+                                                                {{product.brand}}
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -138,8 +138,8 @@
                                                     </div>
                                                     <div class="inline-block">
                                                         <ul class="list-unstyled">
-                                                            <li ng-repeat="coll in product.prodCollection track by $index">
-                                                                {{coll.name}}
+                                                            <li>
+                                                                {{product.prodCollection}}
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -153,7 +153,7 @@
                                                     <div class="inline-block">
                                                         <ul class="list-unstyled">
                                                             <li>
-                                                                {{product.sleeve}}
+                                                                {{product.style}}
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -164,8 +164,8 @@
                                                     </div>
                                                     <div class="inline-block">
                                                         <ul class="list-unstyled">
-                                                            <li ng-repeat="fabric in product.fabric track by $index">
-                                                                {{fabric.name}}
+                                                            <li>
+                                                                {{product.fabric}}
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -178,8 +178,8 @@
                                                     </div>
                                                     <div class="inline-block">
                                                         <ul class="list-unstyled">
-                                                            <li ng-repeat="color in product.baseColor track by $index">
-                                                                {{color.name}}
+                                                            <li>
+                                                                {{product.color}}
                                                             </li>
                                                         </ul>
                                                     </div>

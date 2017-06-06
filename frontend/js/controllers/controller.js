@@ -408,6 +408,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
         };
 
         ProductService.getProductDetails(data, function (data) {
+            console.log("getproductionDetails:::", data);
             if (data.data.value) {
                 $scope.product = data.data.data;
                 $scope.productImages = _.sortBy($scope.product.images, ['order']);
