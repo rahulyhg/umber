@@ -42,6 +42,20 @@ var model = {
                     }
                 }, null);
         });
+    },
+
+    getCategoriesWithParent: function (data, callback) {
+        Category.find({
+            category: data.category
+        }).exec(function (err, categories) {
+            callback(err, categories);
+        });
+    },
+
+    getAllCategories: function (callback) {
+        Category.find().exec(function (err, categories) {
+            callback(err, categories);
+        });
     }
 };
 module.exports = _.assign(module.exports, exports, model);
