@@ -5,22 +5,7 @@ var schema = new Schema({
         unique: true,
         required: true
     },
-    products: [new Schema({
-        product: {
-            type: Schema.Types.ObjectId,
-            ref: 'Product'
-        },
-        size: {
-            type: Schema.Types.ObjectId,
-            ref: 'Size'
-        },
-        color: {
-            type: Schema.Types.ObjectId,
-            ref: 'BaseColor'
-        }
-    }, {
-        _id: false
-    })]
+    products: []
 });
 
 schema.plugin(deepPopulate, {});
@@ -38,19 +23,13 @@ var model = {
                 callback(err, null);
             } else if (user) {
                 console.log(product);
-                var wishlist = {};
-                wishlist.userId = product.userId;
-                wishlist.products = [];
-                wishlist.products.push({
-                    product: product._id,
-                    size: product.selectedSize,
-                    color: product.baseColor
-                });
                 Wishlist.update({
-                        'userId': wishlist.userId
+                        'userId': product.userId
                     }, {
                         $addToSet: {
-                            products: wishlist.products[0]
+                            products: {
+                                product: product.productId
+                            }
                         }
                     }, {
                         new: true,
