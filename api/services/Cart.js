@@ -27,7 +27,7 @@ module.exports = mongoose.model('Cart', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "products.product", "products.product"));
 var model = {
-    saveProduct: function (product, callback) {
+    setProductInCart: function (product, callback) {
         if (!_.isEmpty(product.accessToken)) {
             // Product.isProductAvailable(product, function (err, data) {
             //     if (err) {
@@ -146,6 +146,18 @@ var model = {
                     data: "User not logged in"
                 }
             }, null);
+        }
+    },
+
+    saveProduct: function (product, callback) {
+        if (product instanceof Array) {
+            async.each(product, 10, function (eachProduct, eachCallback) {
+                Cart.setProductInCart(eachProduct, eachCallback);
+            }, function (err) {
+                callback(err, null);
+            });
+        } else {
+            Cart.setProductInCart(product, callback);
         }
     },
 
