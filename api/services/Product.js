@@ -418,6 +418,7 @@ var model = {
                             }
                         }
                     }]).exec(function (err, price) {
+                        console.log(price);
                         product.minPrice = price;
                         cbWaterfall4(err, product);
                     });
