@@ -492,7 +492,7 @@ var model = {
             productId: data.productId,
             size: data.size,
             color: data.color
-        }).exec(callback);
+        }).deepPopulate('color size').exec(callback);
     },
 
     // Function to retrieve filters on listing page

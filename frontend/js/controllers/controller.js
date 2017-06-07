@@ -497,7 +497,6 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
             }
         }
 
-
         $scope.selectedSize = {};
         $scope.selectedSize.name = "Select Size";
         $scope.setSelectedSize = function (size) {
