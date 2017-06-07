@@ -413,8 +413,9 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
                 $scope.product = data.data.data;
                 $scope.productImages = _.sortBy($scope.product.images, ['order']);
                 $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
-                $scope.sizes = _.sortBy($scope.product.size, ['order']);
-                $scope.selectedSize = _.sortBy($scope.product.size, ['order'])[0];
+                $scope.sizes = $scope.product.sizes;
+                console.log($scope.sizes);
+                $scope.selectedSize = $scope.sizes[0];
             } else {
                 console.log(data.data.error);
                 $scope.product = {};
