@@ -412,14 +412,16 @@ var model = {
                 function getMinPrice(product, cbWaterfall4) {
                     Product.aggregate([{
                         $group: {
-                            _id: product.productId,
+                            _id: "$productId",
                             minPrice: {
                                 $min: '$price'
                             }
                         }
                     }]).exec(function (err, price) {
-                        console.log(price);
-                        product.minPrice = price;
+                        var idx = _.findIndex(price, function (prod) {
+                            return prod._id == product.productId
+                        });
+                        product.price = price[idx].minPrice;
                         cbWaterfall4(err, product);
                     });
                 }
