@@ -422,12 +422,12 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
 
         $scope.addToCart = function () {
             console.log($scope.product);
+            $scope.product.selectedSize = $scope.selectedSize._id;
+            $scope.product.reqQuantity = $scope.reqQuantity;
             var accessToken = $.jStorage.get("accessToken");
             if (!_.isEmpty(accessToken)) {
                 $scope.product.accessToken = accessToken;
                 $scope.product.userId = $.jStorage.get("userId");
-                $scope.product.selectedSize = $scope.selectedSize._id;
-                $scope.product.reqQuantity = $scope.reqQuantity;
                 //if (ProductService.isProductAvailable($scope.product.reqQuantity, $scope.product)) {
                 CartService.saveProduct($scope.product, function (data) {
                     if (data.data.error) {
@@ -443,15 +443,10 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
             } else {
                 console.log("User not logged in");
                 // TODO: add product without login
-                $scope.cart = {};
-
-                // $scope.cart.products = [];
-                // $scope.product.product = $scope.product._id;
-                // $scope.product.selectedSize = $scope.selectedSize._id;
-                // $scope.product.reqQuantity = $scope.reqQuantity;
-                // $scope.cart.products.push($scope.product);
-                // $.jStorage.set("cart", $scope.cart);
-                // $state.reload();
+                $scope.cart = [];
+                $scope.cart.push($scope.product);
+                $.jStorage.set('cart', $scope.cart);
+                $state.reload();
             }
         }
 
