@@ -510,7 +510,6 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
             ProductService.getSKUWithParameter(data, function (data) {
                 if (data.data.value) {
                     $scope.product = data.data.data;
-                    console.log("selectedsize:::::", $scope.product)
                 } else {
                     $scope.product = {};
                     // TODO: show out of stock
