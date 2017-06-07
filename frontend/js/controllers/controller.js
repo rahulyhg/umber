@@ -444,9 +444,11 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
             } else {
                 console.log("User not logged in");
                 // TODO: add product without login
-                $scope.cart = [];
+                $scope.cart = $.jStorage.get('cart') ? $.jStorage.get('cart') : [];
+                $scope.product.sizeName = $scope.selectedSize.name;
                 $scope.cart.push($scope.product);
                 $.jStorage.set('cart', $scope.cart);
+                console.log("Scope cart: ", $scope.cart);
                 $state.reload();
             }
         }
@@ -499,6 +501,19 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
         $scope.selectedSize.name = "Select Size";
         $scope.setSelectedSize = function (size) {
             $scope.selectedSize = size;
+            var data = {
+                productId: $scope.product.productId,
+                size: size._id,
+                color: $scope.product.color._id
+            }
+            ProductService.getSKUWithParameter(data, function (data) {
+                if (data.data.value) {
+                    $scope.product = data.data.data;
+                } else {
+                    $scope.product = {};
+                    // TODO: show out of stock
+                }
+            })
         }
         $scope.setQuantity = function (quantity) {
             $scope.reqQuantity = quantity;

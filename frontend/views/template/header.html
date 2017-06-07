@@ -52,10 +52,10 @@
                     <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
                     <li uib-dropdown>
                         <a href="#" uib-dropdown-toggle ui-sref="mycart">
-                            <i class="fa fa-shopping-cart"></i> Cart ( <span ng-if="cart.products.length">{{cart.products.length}}</span>
-                            <span ng-if="!cart.products.length">0</span> )</a>
+                            <i class="fa fa-shopping-cart"></i> Cart ( <span ng-if="cart.length">{{cart.length}}</span>
+                            <span ng-if="!cart.length">0</span> )</a>
                         <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
-                            <li ng-repeat="product in cart.products">
+                            <li ng-repeat="product in cart">
                                 <div class="dropdown-menu__dropdown-cart">
                                     <div class="inline-block img">
                                         <img ng-src="{{product.product.images[0].image | serverimage}}" alt="shirt_img" class="img-responsive">

@@ -36,16 +36,27 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
             });
         }
 
+        // This productId represents unique mongodb id of SKU
+        // and not the lot no in the backend
         $scope.removeProductFromCart = function (cartId, productId) {
             console.log("Removing product: ", productId);
-            var data = {
-                cartId: cartId,
-                productId: productId
+            if ($.jStorage.get('userId')) {
+                var data = {
+                    cartId: cartId,
+                    productId: productId
+                }
+                CartService.removeProduct(data, function (data) {
+                    $scope.mycartTable = data.data.data;
+                    $state.reload();
+                });
+            } else {
+                $scope.cart = $.jStorage.get('cart');
+                var idx = _.findIndex($scope.cart, function (product) {
+                    return product._id == productId;
+                });
+                // remove this product
+                $scope.cart.splice(idx, 1);
             }
-            CartService.removeProduct(data, function (data) {
-                $scope.mycartTable = data.data.data;
-                $state.reload();
-            });
         }
 
         var userId = {
@@ -64,9 +75,9 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
             });
         } else {
             //TODO: Implement without login
-            // $scope.cart = $.jStorage.get("cart");
-            // console.log("jStorage cart", $scope.cart);
-            $scope.cart = {};
+            $scope.cart = $.jStorage.get("cart");
+            console.log("jStorage cart", $scope.cart);
+            // $scope.cart = {};
         }
 
         $scope.view = false;
