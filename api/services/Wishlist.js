@@ -5,7 +5,7 @@ var schema = new Schema({
         unique: true,
         required: true
     },
-    products: []
+    products: [String]
 });
 
 schema.plugin(deepPopulate, {});
@@ -27,9 +27,7 @@ var model = {
                         'userId': product.userId
                     }, {
                         $addToSet: {
-                            products: {
-                                product: product.productId
-                            }
+                            products: product.productId
                         }
                     }, {
                         new: true,
