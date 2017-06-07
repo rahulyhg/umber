@@ -15,7 +15,7 @@ module.exports = mongoose.model('Wishlist', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
 var model = {
-    saveProduct: function (product, callback) {
+    setProductInWishlist: function (product, callback) {
         User.findOne({
             accessToken: product.accessToken
         }).exec(function (err, user) {
@@ -55,7 +55,17 @@ var model = {
                     }
                 }, null);
             }
-        })
+        });
+    },
+
+    saveProduct: function (product, callback) {
+        if (product instanceof Array) {
+            async.eachLimit(product, 10, function (eachProduct, eachCallback) {
+                setProductInWishlist(eachProduct, eachCallback);
+            }, function (err) {
+                callback(err, null);
+            });
+        }
     },
 
     getWishlist: function (user, callback) {
