@@ -42,6 +42,15 @@ myApp.factory('ProductService', function ($http) {
             }).then(callback);
         },
 
+        getSKUWithParameter: function (input, callback) {
+            $http({
+                url: adminurl + 'Product/getSKUWithParameter',
+                data: input,
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
+
         getFiltersWithCategory: function (input, callback) {
             $http({
                 url: adminurl + 'Product/getFiltersWithCategory',
