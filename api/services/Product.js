@@ -749,6 +749,14 @@ var model = {
         ], function (err, productDetails) {
             callback(err, productDetails);
         });
+    },
+
+    getProductsWithFilters: function (filters, callback) {
+        Product.find(filters).sort({
+            'createdAt': -1
+        }).skip((filters.page - 1) * Config.maxRow).limit(Config.maxRow).lean().exec(function (err, products) {
+            callback(err, products);
+        });
     }
 };
 module.exports = _.assign(module.exports, exports, model);
