@@ -74,7 +74,24 @@ var model = {
     },
 
     getWishlist: function (user, callback) {
-
+        var wishlistProducts = [];
+        Wishlist.findOne({
+            userId: user.userId
+        }).exec(function (err, wishlist) {
+            if (!_.isEmpty(wishlist)) {
+                async.each(wishlist.products, function (productId, eachCallback) {
+                    Product.getProductDetails({
+                        productId: productId
+                    }, function (err, productDetails) {
+                        if (!_.isEmpty(productDetails))
+                            wishlistProducts.push(productDetails);
+                        eachCallback();
+                    })
+                }, function (err) {
+                    callback(null, wishlistProducts);
+                });
+            }
+        });
     }
 };
 module.exports = _.assign(module.exports, exports, model);

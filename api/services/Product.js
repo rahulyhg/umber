@@ -40,7 +40,10 @@ var schema = new Schema({
         ref: 'Collection'
     },
     // Sleeve /trouser style
-    style: String,
+    style: {
+        type: String,
+        index: true
+    },
     styleNo: String,
     fabric: {
         type: Schema.Types.ObjectId,
@@ -752,7 +755,12 @@ var model = {
     },
 
     getProductsWithFilters: function (filters, callback) {
-        Product.find(filters).sort({
+        var updatedFilters = _.mapValues(filters, function (value) {
+            return {
+                "$in": value
+            }
+        });
+        Product.find(updatedFilters).sort({
             'createdAt': -1
         }).skip((filters.page - 1) * Config.maxRow).limit(Config.maxRow).lean().exec(function (err, products) {
             callback(err, products);
