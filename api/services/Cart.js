@@ -27,144 +27,172 @@ module.exports = mongoose.model('Cart', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "products.product", "products.product"));
 var model = {
-    setProductInCart: function (product, callback) {
-        if (!_.isEmpty(product.accessToken)) {
-            // Product.isProductAvailable(product, function (err, data) {
-            //     if (err) {
-            //         callback(err, null);
-            //     } else if (data) {
-            //         // TODO: Proceed with the process
-            //     } else {
-            //         callback({
-            //             message: {
-            //                 data: "Invalid request!"
-            //             }
-            //         }, null);
-            //     }
-            // });
-            var cart = {};
-            cart.products = [];
-            cart.products.push({
-                product: mongoose.Types.ObjectId(product._id),
-                quantity: product.reqQuantity
-            });
-            // Check whether a user exists with given access token
-            User.findOne({
-                accessToken: product.accessToken
-            }).exec(function (err, data) {
-                if (err) {
-                    callback(err, null);
-                } else if (data) {
-                    // TODO: Optimize this extensively
-                    if (!_.isEmpty(data)) {
-                        // Check if the retrieved user is same as the user claims
-                        if (data._id == product.userId) {
-                            cart.userId = product.userId;
-                            // If user is same retrieve its cart
-                            Cart.findOne({
-                                userId: product.userId
-                            }).exec(function (err, data) {
+    setProductInCart: function (userId, product, callback) {
+        // console.log("Each product: ", product);
+        var cart = {};
+        cart.products = [];
+        cart.products.push({
+            product: mongoose.Types.ObjectId(product._id),
+            quantity: product.reqQuantity
+        });
+        cart.userId = userId;
+
+        async.waterfall([
+            function checkProduct(cbWaterfall1) {
+                // Check if product is available
+                Product.findById(product._id).exec(function (err, foundProd) {
+                    if (foundProd && (foundProd.quantity >= product.reqQuantity)) {
+                        cbWaterfall1(null);
+                    } else {
+                        cbWaterfall1({
+                            message: {
+                                data: "productOutOfStock " + product._id + " " + product.reqQuantity
+                            }
+                        });
+                    }
+                });
+            },
+
+            function saveIntoCart(cbWaterfall2) {
+                // If user is same retrieve its cart
+                Cart.findOne({
+                    userId: cart.userId
+                }).lean().exec(function (err, foundCart) {
+                    if (err) {
+                        cbWaterfall2(err, null);
+                    } else {
+                        // If cart is not present, create cart
+                        if (_.isEmpty(foundCart)) {
+                            Cart.saveData(cart, function (err, data) {
                                 if (err) {
-                                    console.log("error: ", error);
-                                    callback(err, null);
+                                    cbWaterfall2(err, null);
+                                } else if (data) {
+                                    Product.subtractQuantity(product, null);
+                                    cbWaterfall2(null, data);
                                 } else {
-                                    // If cart is not present, create cart
-                                    if (!data) {
-                                        Cart.saveData(cart, function (err, data) {
-                                            if (err) {
-                                                callback(err, null);
-                                            } else if (data) {
-                                                callback(null, data);
-                                            } else {
-                                                callback({
-                                                    message: {
-                                                        data: "Invalid credentials1!"
-                                                    }
-                                                }, null);
-                                            }
-                                        });
-                                    } else {
-                                        console.log("Product: ", product);
-                                        var idx = _.findIndex(data.products, function (prodVal) {
-                                            return prodVal.product == product._id;
-                                        });
-                                        console.log("Index: ", idx);
-                                        if (idx < 0) {
-                                            // Insert if proudct isn't present
-                                            data.products.push({
-                                                product: mongoose.Types.ObjectId(product._id),
-                                                quantity: product.reqQuantity
-                                            });
-                                            data.userId = product.userId;
-                                            Cart.saveData(data, function (err, data) {
-                                                if (err) {
-                                                    callback(err, null);
-                                                } else if (data) {
-                                                    callback(null, data);
-                                                } else {
-                                                    callback({
-                                                        message: {
-                                                            data: "Invalid credentials2!"
-                                                        }
-                                                    }, null);
-                                                }
-                                            });
-                                        } else {
-                                            // Update cart product quantity if present
-                                            console.log("Matching product: ", data.products[idx]);
-                                            data.products[idx].quantity += product.reqQuantity;
-                                            Cart.saveData(data, function (err, data) {
-                                                if (err) {
-                                                    callback(err, null);
-                                                } else if (data) {
-                                                    callback(null, data);
-                                                } else {
-                                                    callback({
-                                                        message: {
-                                                            data: "Invalid credentials!"
-                                                        }
-                                                    });
-                                                }
-                                            });
+                                    cbWaterfall2({
+                                        message: {
+                                            data: "Invalid credentials1!"
                                         }
-                                    }
+                                    }, null);
                                 }
                             });
-                        }
-                    } else {
-                        callback({
-                            message: {
-                                data: "User not logged in"
+                        } else {
+                            // Cart is present. Check if product is already added
+                            // console.log("Product: ", product);
+                            var idx = _.findIndex(foundCart.products, function (prodVal) {
+                                return prodVal.product == product._id;
+                            });
+                            // console.log("Index: ", idx);
+                            if (idx < 0) {
+                                // Insert if proudct isn't present
+                                foundCart.products.push({
+                                    product: mongoose.Types.ObjectId(product._id),
+                                    quantity: product.reqQuantity
+                                });
+                                foundCart.userId = userId;
+                                Cart.saveData(foundCart, function (err, data) {
+                                    if (err) {
+                                        cbWaterfall2(err, null);
+                                    } else if (data) {
+                                        Product.subtractQuantity(product, null);
+                                        cbWaterfall2(null, data);
+                                    } else {
+                                        cbWaterfall2({
+                                            message: {
+                                                data: "Invalid credentials2!"
+                                            }
+                                        }, null);
+                                    }
+                                });
+                            } else {
+                                // Update cart product quantity if present
+                                // console.log("Matching product: ", data.products[idx]);
+                                foundCart.products[idx].quantity += product.reqQuantity;
+                                Cart.saveData(foundCart, function (err, data) {
+                                    if (err) {
+                                        cbWaterfall2(err, null);
+                                    } else if (data) {
+                                        Product.subtractQuantity(product, null);
+                                        cbWaterfall2(null, data);
+                                    } else {
+                                        cbWaterfall2({
+                                            message: {
+                                                data: "Invalid credentials!"
+                                            }
+                                        }, null);
+                                    }
+                                });
                             }
-                        }, null);
+                        }
                     }
-                }
-            })
-        } else {
-            callback({
-                message: {
-                    data: "User not logged in"
-                }
-            }, null);
-        }
+                });
+            }
+        ], function (err, data) {
+            console.log("ERror: ", err);
+            if (err)
+                callback(err, null);
+            else
+                callback(null, data);
+        });
     },
 
     saveProduct: function (product, callback) {
-        if (product instanceof Array) {
-            async.each(product, 10, function (eachProduct, eachCallback) {
-                Cart.setProductInCart(eachProduct, eachCallback);
-            }, function (err) {
+        // console.log("Save product: ", JSON.stringify(product));
+        async.waterfall([
+            function isUserLoggedIn(cbWaterfall1) {
+                // Check whether a user exists with given access token
+                User.findOne({
+                    accessToken: product.accessToken
+                }).exec(function (err, data) {
+                    if (err) {
+                        cbWaterfall1(err, null);
+                    } else if (!_.isEmpty(data)) {
+                        // Check if the retrieved user is same as the user claims
+                        if (data._id == product.userId) {
+                            cbWaterfall1(null, product.userId);
+                        }
+                    } else {
+                        cbWaterfall1({
+                            message: {
+                                data: "noLogin"
+                            }
+                        }, null);
+                    }
+                });
+            },
+
+            function saveCart(userId, cbWaterfall2) {
+                if (product.products instanceof Array) {
+                    async.eachSeries(product.products, function (eachProduct, eachCallback) {
+                        Cart.setProductInCart(userId, eachProduct.product, eachCallback);
+                    }, function (err) {
+                        if (err) {
+                            cbWaterfall2(err, null);
+                        } else {
+                            cbWaterfall2(null, {
+                                message: "Cart updated successfully"
+                            });
+                        }
+                    });
+                } else {
+                    Cart.setProductInCart(userId, product, cbWaterfall2);
+                }
+            }
+        ], function (err, data) {
+            console.log("err: ", err);
+            if (err) {
                 callback(err, null);
-            });
-        } else {
-            Cart.setProductInCart(product, callback);
-        }
+            } else {
+                callback(null, data);
+            }
+        });
     },
 
     getCart: function (userId, callback) {
         Cart.findOne({
             userId: userId.userId
-        }).deepPopulate("products.product").exec(function (err, data) {
+        }).deepPopulate("products.product products.product.size products.product.color").exec(function (err, data) {
             if (err) {
                 callback(err, null);
             } else if (data) {

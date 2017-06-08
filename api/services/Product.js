@@ -757,6 +757,47 @@ var model = {
         }).skip((filters.page - 1) * Config.maxRow).limit(Config.maxRow).lean().exec(function (err, products) {
             callback(err, products);
         });
+    },
+
+    subtractQuantity: function (product, callback) {
+        console.log(product);
+        Product.findOneAndUpdate({
+            _id: product._id
+        }, {
+            $inc: {
+                quantity: -product.reqQuantity
+            }
+        }, {
+            new: true
+        }).exec(function (err, data) {
+            console.log(data);
+            if (data.quantity < 0) {
+                Product.update({
+                    _id: product._id
+                }, {
+                    $inc: {
+                        quantity: product.reqQuantity
+                    }
+                }).exec(function (err, data) {
+                    if (callback) {
+                        if (data) {
+                            callback({
+                                message: {
+                                    data: "productOutOfStock " + product._id
+                                }
+                            }, null);
+                        } else {
+                            callback(err, null);
+                        }
+                    }
+                });
+            } else {
+                if (callback)
+                    callback(null, {
+                        message: "success"
+                    });
+            }
+        });
     }
 };
 module.exports = _.assign(module.exports, exports, model);

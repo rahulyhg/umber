@@ -1,7 +1,6 @@
 module.exports = _.cloneDeep(require("sails-wohlig-controller"));
 var controller = {
     saveProduct: function (req, res) {
-        console.log("CartController->saveProduct");
         if (req.body) {
             Cart.saveProduct(req.body, res.callback);
         } else {
@@ -39,7 +38,13 @@ var controller = {
         if (req.body) {
             Cart.removeProduct(req.body, res.callback);
         } else {
-            console.log("Invalid request!");
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid request"
+                }
+            });
+
         }
     }
 };
