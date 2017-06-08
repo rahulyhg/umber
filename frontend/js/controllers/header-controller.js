@@ -101,10 +101,10 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
                     $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
                     $.jStorage.set("userId", $scope.userData._id);
                     $scope.product.accessToken = $.jStorage.get("accessToken");
-
+                    $scope.product.userId = $.jStorage.get("userId");
                     if ($scope.userData) {
-                        var offlinecart = $.jStorage.get("cart")
-                        CartService.saveProduct(offlinecart, function (data) {
+                        $scope.product.offlinecart = $.jStorage.get("cart")
+                        CartService.saveProduct($scope.product, function (data) {
                             if (data.data.error) {
                                 console.log("Error: in ofline storage ", data.data.error);
                             } else {
