@@ -36,7 +36,15 @@ myApp.factory('CartService', function ($http) {
                 withCredentials: false
             });
         },
-
+        offlineCart: function (cart, callback) {
+            console.log("update cart: ", cart);
+            $http({
+                url: adminurl + 'Cart/setProductInCart',
+                method: 'POST',
+                data: cart,
+                withCredentials: false
+            }).then(callback);
+        },
         removeProduct: function (data, callback) {
             $http({
                 url: adminurl + 'Cart/removeProduct',

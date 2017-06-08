@@ -445,12 +445,21 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
             } else {
                 console.log("User not logged in");
                 // TODO: add product without login
-                $scope.cart = $.jStorage.get('cart') ? $.jStorage.get('cart') : [];
+                $scope.cart = {};
+                $scope.cart = $.jStorage.get('cart') ? $.jStorage.get('cart') : {};
+                if (_.isEmpty($scope.cart))
+                    $scope.cart.products = [];
+                console.log($scope.cart);
                 $scope.product.sizeName = $scope.selectedSize.name;
-                $scope.cart.push($scope.product);
+                console.log($scope.product)
+                console.log($scope.cart)
+                $scope.cart.products.push({
+                    product: $scope.product
+                });
                 $.jStorage.set('cart', $scope.cart);
                 console.log("Scope cart: ", $scope.cart);
                 $state.reload();
+
             }
         }
 
@@ -670,7 +679,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
                 $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
             });
         } else {
-            $scope.mycartTable = {};
+            $scope.mycartTable = $.jStorage.get("cart");
         }
         $scope.mycartTable = {};
         $scope.updateQuantity = function (index, count) {
