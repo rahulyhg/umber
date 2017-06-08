@@ -139,6 +139,7 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
                     $state.reload();
                 } else {
                     // TODO:: show popup to register
+                    $scope.message = "Invalid Credentials"
                 }
             });
         }

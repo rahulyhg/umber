@@ -468,6 +468,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
             } else {
                 console.log("User not logged in");
                 // TODO: goto login. can't route to modal or checkkout
+                //todo: offline wishlist add
                 $uibModal.open({
                     animation: true,
                     templateUrl: 'views/modal/login.html',
