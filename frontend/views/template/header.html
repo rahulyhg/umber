@@ -49,46 +49,47 @@
             <div class="collapse navbar-collapse" id="nav-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#"><i class="fa fa-search"></i></a></li>
-                    <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
+                    <li ng-click="openWishlistModal10();"><a href=""><i class="fa fa-heart "></i> Wishlist</a></li>
                     <li uib-dropdown>
-                        <a href="#" uib-dropdown-toggle ui-sref="mycart">
-                            <i class="fa fa-shopping-cart"></i> Cart ( <span ng-if="cart.products.length">{{cart.products.length}}</span>
-                            <span ng-if="!cart.products.length">0</span> )</a>
-                        <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
-                            <li ng-repeat="product in cart.products">
-                                <div class="dropdown-menu__dropdown-cart">
-                                    <div class="inline-block img">
-                                        <img ng-src="{{product.product.images[0].image | serverimage}}" alt="shirt_img" class="img-responsive">
+                        <a href="# " uib-dropdown-toggle ui-sref="mycart ">
+                            <i class="fa fa-shopping-cart "></i> Cart ( <span ng-if="cart.products.length ">{{cart.products.length}}</span>
+                            <span ng-if="!cart.products.length ">0</span> )</a>
+                        <ul class="dropdown-menu " uib-dropdown-menu aria-labelledby="simple-dropdown ">
+                            <li ng-repeat="product in cart.products ">
+                                <div class="dropdown-menu__dropdown-cart ">
+                                    <div class="inline-block img ">
+                                        <img ng-src="{{product.product.images[0].image | serverimage}} " alt="shirt_img
+                        " class="img-responsive ">
                                     </div>
-                                    <div class="inline-block desc">
+                                    <div class="inline-block desc ">
                                         <h5>{{product.product.name}}</h5>
-                                        <p><i class="fa fa-inr" aria-hidden="true">{{product.product.price}}</i></p>
+                                        <p><i class="fa fa-inr " aria-hidden="true ">{{product.product.price}}</i></p>
                                         <p></p>
 
-                                        <div class="inline-block__size">
-                                            <div class="inline-block">
-                                                <div class="size">
+                                        <div class="inline-block__size ">
+                                            <div class="inline-block ">
+                                                <div class="size ">
                                                     <span>{{product.size.name}}</span>
                                                 </div>
                                             </div>
-                                            <div class="inline-block">
+                                            <div class="inline-block ">
                                                 <span>Size</span>
                                             </div>
                                         </div>
-                                        <p><button class="btn remove--btn" ng-click="removeProductFromCart(cart._id, product._id)"><i class="fa fa-trash-o" aria-hidden="true"></i>Remove</button></p>
+                                        <p><button class="btn remove--btn " ng-click="removeProductFromCart(cart._id, product._id)
+                        "><i class="fa fa-trash-o " aria-hidden="true "></i>Remove</button></p>
                                     </div>
                                 </div>
 
                             </li>
                             <div class="dropdown-menu__btn text-center ">
-                                <a ui-sref="checkout"><button class="btn btn--brown-checkout">CHECKOUT</button></a>
+                                <a ui-sref="checkout "><button class="btn btn--brown-checkout ">CHECKOUT</button></a>
                             </div>
                         </ul>
 
                     </li>
-                    <li ng-if="!loggedUser"><button class="btn header--login " ng-click="openLoginModal10(); ">LOGIN</button></li>
-                    <li ng-if="loggedUser"><button class=" btn header--login " ng-click="logout();
-                            " ng-if="userId !='' ">LOGOUT</button></li>
+                    <li ng-if="!loggedUser "><button class="btn header--login " ng-click="openLoginModal10(); ">LOGIN</button></li>
+                    <li ng-if="loggedUser "><button class=" btn header--login " ng-click="logout(); " ng-if="userId !='' ">LOGOUT</button></li>
                 </ul>
             </div>
             <!--<div class="collapse navbar-collapse " id="nav-collapse ">

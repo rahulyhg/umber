@@ -21,6 +21,18 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
             });
         };
 
+        $scope.openWishlistModal10 = function () {
+
+            $scope.wishlistModal = $uibModal.open({
+                animation: true,
+                templateUrl: 'views/modal/mycartmodal.html',
+                scope: $scope,
+                size: 'md',
+                controller: 'wishlistModalCtrl'
+                // windowClass: 'modal-content-radi0'
+            });
+        };
+
         $scope.logout = function () {
             console.log("Logging out user");
             var data = {
@@ -87,6 +99,7 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
             $scope.view = !$scope.view;
         }
     })
+    .controller('wishlistModalCtrl', function ($scope, $state, $uibModalInstance, UserService, CartService) {})
     .controller('loginModalCtrl', function ($scope, $state, $uibModalInstance, UserService, CartService) {
 
         $scope.formData = {};
@@ -131,6 +144,23 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
 
                 $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
                 $.jStorage.set("userId", $scope.userData._id);
+
+                $scope.product.accessToken = $.jStorage.get("accessToken");
+                $scope.product.userId = $.jStorage.get("userId");
+                console.log($scope.product.accessToken);
+                if ($scope.product.accessToken) {
+                    console.log("insideregistrationif:::::::")
+                    $scope.product.products = $.jStorage.get("cart")
+                    console.log("insideregistrationif:::::::", $scope.product.offlinecart)
+                    CartService.saveProduct($scope.product, function (data) {
+                        if (data.data.error) {
+                            console.log("Error: in ofline storage ", data.data.error);
+                        } else {
+                            console.log("Success");
+                            $state.reload();
+                        }
+                    });
+                }
 
                 $scope.loggedUser = $scope.userData._id;
                 $scope.accessToken = $scope.userData.accessToken[$scope.userData.accessToken.length - 1];

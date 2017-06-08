@@ -23,12 +23,12 @@
                             <div class="item">
                                 <img ng-src="{{product.product.images[0].image | serverimage}}" alt="" class="img-responsive item__img">
                                 <div class="mycart-info">
-                                    <p class="item__title1">{{product.product.name}}</p>
+                                    <p class="item__title1">{{product.product.productName}}</p>
                                 </div>
                             </div>
                         </td>
-                        <td>{{product.color.name}}</td>
-                        <td>{{product.size.name}}</td>
+                        <td>{{product.product.color.name}}</td>
+                        <td>{{product.product.size}}</td>
                         <td>
 
                             <a ng-click="updateQuantity($index, -1)">

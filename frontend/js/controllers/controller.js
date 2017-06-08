@@ -327,6 +327,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
                     $scope.userData = data.data.data;
                     $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
                     $.jStorage.set("userId", $scope.userData._id);
+
                     $state.reload();
                 } else {
                     // TODO:: show popup to register
@@ -470,6 +471,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
                 $scope.product.userId = $.jStorage.get("userId");
                 $scope.product.selectedSize = $scope.selectedSize._id;
                 WishlistService.saveProduct($scope.product, function (data) {
+                    console.log(data)
                     if (data.data.error) {
                         console.log("Error: ", data.data.error);
                     } else {
@@ -674,12 +676,13 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
                 console.log("getcart->data: ", data);
                 //TODO: Instead of array this will be single doc when query changes to findOneAndUpdate
                 $scope.mycartTable = data.data.data;
-                console.log("mycarttable: ", $scope.mycartTable);
+                console.log("mycarttableof if: ", $scope.mycartTable);
                 //TODO: Calculate actual grand total
                 $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
             });
         } else {
             $scope.mycartTable = $.jStorage.get("cart");
+            console.log("else ran:::", $scope.mycartTable);
         }
         $scope.mycartTable = {};
         $scope.updateQuantity = function (index, count) {
