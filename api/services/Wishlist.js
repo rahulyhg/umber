@@ -57,12 +57,14 @@ var model = {
     },
 
     saveProduct: function (product, callback) {
-        if (product instanceof Array) {
-            async.eachLimit(product, 10, function (eachProduct, eachCallback) {
+        if (product.products instanceof Array) {
+            async.eachSeries(product, function (eachProduct, eachCallback) {
                 setProductInWishlist(eachProduct, eachCallback);
             }, function (err) {
                 callback(err, null);
             });
+        } else {
+            setProductInWishlist(product, callback);
         }
     },
 

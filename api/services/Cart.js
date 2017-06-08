@@ -227,6 +227,16 @@ var model = {
                         return false;
                 });
 
+                var removeProduct = data.products[index];
+
+                Product.findOneAndUpdate({
+                    _id: mongoose.Types.ObjectId(removeProduct.product)
+                }, {
+                    $inc: {
+                        quantity: removeProduct.quantity
+                    }
+                }).exec(function (err, data) {});
+
                 data.products.splice(index, 1);
                 if (_.isEmpty(data.products)) {
                     Cart.findOne({
@@ -253,6 +263,12 @@ var model = {
                         }, null);
                     }
                 });
+            } else {
+                callback({
+                    message: {
+                        data: "noCartFound!"
+                    }
+                }, null);
             }
         })
     }
