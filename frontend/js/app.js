@@ -64,11 +64,19 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             templateUrl: tempateURL,
             controller: 'FormCtrl'
         })
-        .state('cancel', {
-            url: "/cancel",
-            templateUrl: tempateURL,
-            controller: 'CancelCtrl'
-        });
+
+    .state('brands', {
+        url: "/brands",
+        templateUrl: tempateURL,
+        controller: 'BrandsCtrl'
+    })
+
+
+    .state('cancel', {
+        url: "/cancel",
+        templateUrl: tempateURL,
+        controller: 'CancelCtrl'
+    });
 
     $urlRouterProvider.otherwise("/");
     $locationProvider.html5Mode(isproduction);

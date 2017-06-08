@@ -38,28 +38,28 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
             accessToken: $.jStorage.get("accessToken")
         }
         console.log("before check")
-        /******************todo:for showing cart logo  infinite loop issue******************** */
-        /*  $scope.checkInCart = function (productId) {
-              if (userId.userId) {
-                  console.log("checkproductid:::", userId);
-                  CartService.getCart(userId, function (data) {
-                      console.log(data);
-                      if (data.data.value) {
-                          $scope.cartData = data.data.data.products
-                          var result = _.find($scope.cartData, {
-                              productId: productId
-                          });
-                          if (result) {
-                              return true;
-                          } else {
-                              return false;
+            /******************todo:for showing cart logo  infinite loop issue******************** */
+            /*  $scope.checkInCart = function (productId) {
+                  if (userId.userId) {
+                      console.log("checkproductid:::", userId);
+                      CartService.getCart(userId, function (data) {
+                          console.log(data);
+                          if (data.data.value) {
+                              $scope.cartData = data.data.data.products
+                              var result = _.find($scope.cartData, {
+                                  productId: productId
+                              });
+                              if (result) {
+                                  return true;
+                              } else {
+                                  return false;
+                              }
                           }
-                      }
-                  });
-              } else {
-                  return false;
-              }
-          }*/
+                      });
+                  } else {
+                      return false;
+                  }
+              }*/
 
         NavigationService.getEnabledBlogs(function (data) {
             $scope.blogs = data.data.data;
@@ -67,53 +67,46 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
         });
 
         $scope.sale = [{
-                img: '../img/home/11.jpg',
-                price: '2,899',
-                type: 'Linen Full Sleeve ShirtWith Rollup'
+            img: '../img/home/11.jpg',
+            price: '2,899',
+            type: 'Linen Full Sleeve ShirtWith Rollup'
 
-            },
-            {
-                img: '../img/home/12.jpg',
-                price: '2,899',
-                type: 'Linen Full Sleeve ShirtWith Rollup'
+        }, {
+            img: '../img/home/12.jpg',
+            price: '2,899',
+            type: 'Linen Full Sleeve ShirtWith Rollup'
 
-            },
-            {
-                img: '../img/home/13.jpg',
-                price: '2,899',
-                type: 'Linen Full Sleeve ShirtWith Rollup'
+        }, {
+            img: '../img/home/13.jpg',
+            price: '2,899',
+            type: 'Linen Full Sleeve ShirtWith Rollup'
 
-            }, {
-                img: '../img/home/14.jpg',
-                price: '2,899',
-                type: 'Linen Full Sleeve ShirtWith Rollup'
+        }, {
+            img: '../img/home/14.jpg',
+            price: '2,899',
+            type: 'Linen Full Sleeve ShirtWith Rollup'
 
-            },
-            {
-                img: '../img/home/11.jpg',
-                price: '2,899',
-                type: 'Linen Full Sleeve ShirtWith Rollup'
+        }, {
+            img: '../img/home/11.jpg',
+            price: '2,899',
+            type: 'Linen Full Sleeve ShirtWith Rollup'
 
-            },
-            {
-                img: '../img/home/12.jpg',
-                price: '2,899',
-                type: 'Linen Full Sleeve ShirtWith Rollup'
+        }, {
+            img: '../img/home/12.jpg',
+            price: '2,899',
+            type: 'Linen Full Sleeve ShirtWith Rollup'
 
-            },
-            {
-                img: '../img/home/13.jpg',
-                price: '2,899',
-                type: 'Lorem Ipsum is simply dummy text'
+        }, {
+            img: '../img/home/13.jpg',
+            price: '2,899',
+            type: 'Lorem Ipsum is simply dummy text'
 
-            },
-            {
-                img: '../img/home/14.jpg',
-                price: '2,899',
-                type: 'Lorem Ipsum is simply dummy text'
+        }, {
+            img: '../img/home/14.jpg',
+            price: '2,899',
+            type: 'Lorem Ipsum is simply dummy text'
 
-            }
-        ];
+        }];
     })
     .controller('BuythelookCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
         $scope.template = TemplateService.getHTML("content/buythelook.html");
@@ -121,114 +114,96 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
         $scope.navigation = NavigationService.getEnabledCtNavigation();
 
         $scope.buyshirt = [{
-                img: 'img/buy/2.jpg',
-                rupee: '3,000',
-                title: 'linen FULL SLEEVE SHIRT WITH ROLL UP',
-                id: 0
-            },
-            {
-                img: 'img/buy/3.jpg',
-                rupee: '3,000',
-                title: 'linen FULL SLEEVE SHIRT WITH ROLL UP',
-                id: 1
-            },
-            {
-                img: 'img/buy/4.jpg',
-                rupee: '3,000',
-                title: 'linen FULL SLEEVE SHIRT WITH ROLL UP',
-                id: 2
-            },
-            {
-                img: 'img/buy/5.jpg',
-                rupee: '3,000',
-                title: 'OFF WHITE SLIM FIT FORMA TROUSER',
-                id: 3
-            },
-            {
-                img: 'img/buy/6.jpg',
-                rupee: '3,000',
-                title: 'OFF WHITE SLIM FIT FORMA TROUSER',
-                id: 4
-            },
-            {
-                img: 'img/buy/7.jpg',
-                rupee: '3,000',
-                title: 'OFF WHITE SLIM FIT FORMA TROUSER',
-                id: 5
-            },
-            {
-                img: 'img/buy/2.jpg',
-                rupee: '3,000',
-                title: 'Linen LIGHT BLUE CASUAL BLAZER',
-                id: 6
-            },
-            {
-                img: 'img/buy/3.jpg',
-                rupee: '3,000',
-                title: 'linen LIGHT BLUE CASUAL BLAZER',
-                id: 7
-            },
-            {
-                img: 'img/buy/4.jpg',
-                rupee: '3,000',
-                title: 'linen LIGHT BLUE CASUAL BLAZER',
-                id: 8
-            },
-            {
-                img: 'img/buy/5.jpg',
-                rupee: '3,000',
-                title: 'MEN WHITE GENUINE LEATHER DERBYS',
-                id: 9
-            },
-            {
-                img: 'img/buy/6.jpg',
-                rupee: '3,000',
-                title: 'MEN WHITE GENUINE LEATHER DERBYS',
-                id: 10
-            },
-            {
-                img: 'img/buy/7.jpg',
-                rupee: '3,000',
-                title: 'MEN WHITE GENUINE LEATHER DERBYS',
-                id: 11
-            },
-            {
-                img: 'img/buy/3.jpg',
-                rupee: '3,000',
-                title: 'LETHER MEN BLACK GENUINE LEATHER BELT',
-                id: 12
-            },
-            {
-                img: 'img/buy/4.jpg',
-                rupee: '3,000',
-                title: 'LETHER MEN BLACK GENUINE LEATHER BELT',
-                id: 13
-            },
-            {
-                img: 'img/buy/5.jpg',
-                rupee: '3,000',
-                title: 'LETHER MEN BLACK GENUINE LEATHER BELT',
-                id: 14
-            },
-            {
-                img: 'img/buy/6.jpg',
-                rupee: '3,000',
-                title: 'GRAVIATE BLACK FULL FRAME ROUNDGLASSES',
-                id: 15
-            },
-            {
-                img: 'img/buy/7.jpg',
-                rupee: '3,000',
-                title: 'GRAVIATE BLACK FULL FRAME ROUNDGLASSES',
-                id: 16
-            },
-            {
-                img: 'img/buy/5.jpg',
-                rupee: '3,000',
-                title: 'GRAVIATE BLACK FULL FRAME ROUNDGLASSES',
-                id: 17
-            }
-        ];
+            img: 'img/buy/2.jpg',
+            rupee: '3,000',
+            title: 'linen FULL SLEEVE SHIRT WITH ROLL UP',
+            id: 0
+        }, {
+            img: 'img/buy/3.jpg',
+            rupee: '3,000',
+            title: 'linen FULL SLEEVE SHIRT WITH ROLL UP',
+            id: 1
+        }, {
+            img: 'img/buy/4.jpg',
+            rupee: '3,000',
+            title: 'linen FULL SLEEVE SHIRT WITH ROLL UP',
+            id: 2
+        }, {
+            img: 'img/buy/5.jpg',
+            rupee: '3,000',
+            title: 'OFF WHITE SLIM FIT FORMA TROUSER',
+            id: 3
+        }, {
+            img: 'img/buy/6.jpg',
+            rupee: '3,000',
+            title: 'OFF WHITE SLIM FIT FORMA TROUSER',
+            id: 4
+        }, {
+            img: 'img/buy/7.jpg',
+            rupee: '3,000',
+            title: 'OFF WHITE SLIM FIT FORMA TROUSER',
+            id: 5
+        }, {
+            img: 'img/buy/2.jpg',
+            rupee: '3,000',
+            title: 'Linen LIGHT BLUE CASUAL BLAZER',
+            id: 6
+        }, {
+            img: 'img/buy/3.jpg',
+            rupee: '3,000',
+            title: 'linen LIGHT BLUE CASUAL BLAZER',
+            id: 7
+        }, {
+            img: 'img/buy/4.jpg',
+            rupee: '3,000',
+            title: 'linen LIGHT BLUE CASUAL BLAZER',
+            id: 8
+        }, {
+            img: 'img/buy/5.jpg',
+            rupee: '3,000',
+            title: 'MEN WHITE GENUINE LEATHER DERBYS',
+            id: 9
+        }, {
+            img: 'img/buy/6.jpg',
+            rupee: '3,000',
+            title: 'MEN WHITE GENUINE LEATHER DERBYS',
+            id: 10
+        }, {
+            img: 'img/buy/7.jpg',
+            rupee: '3,000',
+            title: 'MEN WHITE GENUINE LEATHER DERBYS',
+            id: 11
+        }, {
+            img: 'img/buy/3.jpg',
+            rupee: '3,000',
+            title: 'LETHER MEN BLACK GENUINE LEATHER BELT',
+            id: 12
+        }, {
+            img: 'img/buy/4.jpg',
+            rupee: '3,000',
+            title: 'LETHER MEN BLACK GENUINE LEATHER BELT',
+            id: 13
+        }, {
+            img: 'img/buy/5.jpg',
+            rupee: '3,000',
+            title: 'LETHER MEN BLACK GENUINE LEATHER BELT',
+            id: 14
+        }, {
+            img: 'img/buy/6.jpg',
+            rupee: '3,000',
+            title: 'GRAVIATE BLACK FULL FRAME ROUNDGLASSES',
+            id: 15
+        }, {
+            img: 'img/buy/7.jpg',
+            rupee: '3,000',
+            title: 'GRAVIATE BLACK FULL FRAME ROUNDGLASSES',
+            id: 16
+        }, {
+            img: 'img/buy/5.jpg',
+            rupee: '3,000',
+            title: 'GRAVIATE BLACK FULL FRAME ROUNDGLASSES',
+            id: 17
+        }];
         $scope.myShirt = [];
         $scope.myShirt11 = [];
         $scope.myShirt = _.chunk($scope.buyshirt, 9);
@@ -489,7 +464,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
                     scope: $scope,
                     size: 'md',
                     controller: 'loginModalCtrl'
-                    // windowClass: 'modal-content-radi0'
+                        // windowClass: 'modal-content-radi0'
                 });
             }
         }
@@ -503,7 +478,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
                     scope: $scope,
                     size: 'md',
                     controller: 'loginModalCtrl'
-                    // windowClass: 'modal-content-radi0'
+                        // windowClass: 'modal-content-radi0'
                 });
             }
         }
@@ -531,85 +506,72 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
         }
 
         $scope.featured = [{
-                img: '../img/home/11.jpg',
-                price: '2,899',
-                type: 'LINEN FULL SLEEVE SHIRT WITH ROLLUP'
+            img: '../img/home/11.jpg',
+            price: '2,899',
+            type: 'LINEN FULL SLEEVE SHIRT WITH ROLLUP'
 
-            },
-            {
-                img: '../img/home/12.jpg',
-                price: '2,899 ',
-                type: 'LINEN FULL SLEEVE SHIRT WITH ROLLUP'
+        }, {
+            img: '../img/home/12.jpg',
+            price: '2,899 ',
+            type: 'LINEN FULL SLEEVE SHIRT WITH ROLLUP'
 
-            },
-            {
-                img: '../img/home/13.jpg',
-                price: '2,899',
-                type: 'MARATHON PLAIN FRONT TROUSER'
+        }, {
+            img: '../img/home/13.jpg',
+            price: '2,899',
+            type: 'MARATHON PLAIN FRONT TROUSER'
 
-            }, {
-                img: '../img/home/14.jpg',
-                price: '2,899',
-                type: 'MARATHON PLAIN FRONT TROUSER'
+        }, {
+            img: '../img/home/14.jpg',
+            price: '2,899',
+            type: 'MARATHON PLAIN FRONT TROUSER'
 
-            },
-            {
-                img: '../img/home/11.jpg',
-                price: '2,899 ',
-                type: 'LINEN FULL SLEEVE SHIRT WITH ROLLUP'
+        }, {
+            img: '../img/home/11.jpg',
+            price: '2,899 ',
+            type: 'LINEN FULL SLEEVE SHIRT WITH ROLLUP'
 
-            },
-            {
-                img: '../img/home/12.jpg',
-                price: '2,899',
-                type: 'LINEN FULL SLEEVE SHIRT WITH ROLLUP'
+        }, {
+            img: '../img/home/12.jpg',
+            price: '2,899',
+            type: 'LINEN FULL SLEEVE SHIRT WITH ROLLUP'
 
-            },
-            {
-                img: '../img/home/13.jpg',
-                price: '2,899 ',
-                type: 'MARATHON PLAIN FRONT TROUSER'
+        }, {
+            img: '../img/home/13.jpg',
+            price: '2,899 ',
+            type: 'MARATHON PLAIN FRONT TROUSER'
 
-            },
-            {
-                img: '../img/home/14.jpg',
-                price: '2,899',
-                type: 'MARATHON PLAIN FRONT TROUSER'
+        }, {
+            img: '../img/home/14.jpg',
+            price: '2,899',
+            type: 'MARATHON PLAIN FRONT TROUSER'
 
-            }
-        ];
+        }];
 
         $scope.individual = [{
-                bigImg: '../img/individual/66.png',
-                img: '../img/individual/2.jpg'
+            bigImg: '../img/individual/66.png',
+            img: '../img/individual/2.jpg'
 
-            },
-            {
-                bigImg: '../img/individual/7.jpg',
-                img: '../img/individual/3.jpg'
+        }, {
+            bigImg: '../img/individual/7.jpg',
+            img: '../img/individual/3.jpg'
 
-            },
-            {
-                bigImg: '../img/individual/66.png',
-                img: '../img/individual/4.jpg'
+        }, {
+            bigImg: '../img/individual/66.png',
+            img: '../img/individual/4.jpg'
 
-            },
-            {
-                bigImg: '../img/individual/7.jpg',
-                img: '../img/individual/5.jpg'
+        }, {
+            bigImg: '../img/individual/7.jpg',
+            img: '../img/individual/5.jpg'
 
-            },
-            {
-                bigImg: '../img/individual/66.png',
-                img: '../img/individual/2.jpg'
+        }, {
+            bigImg: '../img/individual/66.png',
+            img: '../img/individual/2.jpg'
 
-            },
-            {
-                bigImg: '../img/individual/7.jpg',
-                img: '../img/individual/3.jpg'
+        }, {
+            bigImg: '../img/individual/7.jpg',
+            img: '../img/individual/3.jpg'
 
-            }
-        ];
+        }];
         $scope.changeImage = function (index) {
             $scope.selectedImage = $scope.product.images[index];
         };
@@ -627,45 +589,38 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
         });
 
         $scope.mycartmodal = [{
-                img: 'img/cart/1.jpg',
-                title1: 'WALLET MODERN CORNER ZIP',
-                title2: '',
-            },
-            {
-                img: 'img/cart/2.jpg',
-                title1: 'WALLET MODERN CORNER ZIP',
-                title2: '',
-            }, {
-                img: 'img/cart/3.jpg',
-                title1: 'WALLET MODERN CORNER ZIP',
-                title2: '',
-            },
-            {
-                img: 'img/cart/4.jpg',
-                title1: 'WALLET MODERN CORNER ZIP',
-                title2: '',
-            },
-            {
-                img: 'img/cart/5.jpg',
-                title1: 'WALLET MODERN CORNER ZIP',
-                title2: '',
-            },
-            {
-                img: 'img/cart/6.jpg',
-                title1: 'WALLET MODERN CORNER ZIP',
-                title2: '',
-            },
-            {
-                img: 'img/cart/7.jpg',
-                title1: 'WALLET MODERN CORNER ZIP',
-                title2: '',
-            },
-            {
-                img: 'img/cart/8.jpg',
-                title1: 'WALLET MODERN CORNER ZIP',
-                title2: '',
-            }
-        ]
+            img: 'img/cart/1.jpg',
+            title1: 'WALLET MODERN CORNER ZIP',
+            title2: '',
+        }, {
+            img: 'img/cart/2.jpg',
+            title1: 'WALLET MODERN CORNER ZIP',
+            title2: '',
+        }, {
+            img: 'img/cart/3.jpg',
+            title1: 'WALLET MODERN CORNER ZIP',
+            title2: '',
+        }, {
+            img: 'img/cart/4.jpg',
+            title1: 'WALLET MODERN CORNER ZIP',
+            title2: '',
+        }, {
+            img: 'img/cart/5.jpg',
+            title1: 'WALLET MODERN CORNER ZIP',
+            title2: '',
+        }, {
+            img: 'img/cart/6.jpg',
+            title1: 'WALLET MODERN CORNER ZIP',
+            title2: '',
+        }, {
+            img: 'img/cart/7.jpg',
+            title1: 'WALLET MODERN CORNER ZIP',
+            title2: '',
+        }, {
+            img: 'img/cart/8.jpg',
+            title1: 'WALLET MODERN CORNER ZIP',
+            title2: '',
+        }]
         $scope.newA = _.chunk($scope.mycartmodal, 4);
         console.log("$scope.newA ", $scope.newA);
         var userId = {
@@ -728,7 +683,16 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
         $scope.navigation = NavigationService.getNavigation();
 
     })
-    .controller('ListingPageCtrl', function ($scope, $stateParams, TemplateService, NavigationService,
+
+.controller('BrandsCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+    $scope.template = TemplateService.getHTML("content/brands.html");
+    TemplateService.title = "Brands"; //This is the Title of the Website
+    $scope.navigation = NavigationService.getNavigation();
+
+})
+
+
+.controller('ListingPageCtrl', function ($scope, $stateParams, TemplateService, NavigationService,
         SizeService, BannerService, CategoryService, ProductService, $timeout) {
         $scope.template = TemplateService.getHTML("content/listing-page.html");
         TemplateService.title = "Form"; //This is the Title of the Website
