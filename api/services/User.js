@@ -334,6 +334,23 @@ var model = {
                 }, null);
             }
         })
+    },
+
+    isUserLoggedIn: function (accessToken, callback) {
+        User.findOne({
+            accessToken: {
+                '$in': [accessToken]
+            }
+        }).exec(function (err, user) {
+            if (err)
+                callback(err, null);
+            else if (!_.isEmpty(user))
+                callback(null, user);
+            else
+                callback({
+                    message: "userNotFound"
+                }, null);
+        })
     }
 
 };

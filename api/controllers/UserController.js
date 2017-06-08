@@ -122,6 +122,17 @@ var controller = {
                 }
             })
         }
+    },
+    isUserLoggedIn: function (req, res) {
+        if (req.body)
+            User.isUserLoggedIn(req.body, res.callback);
+        else
+            res.json({
+                message: {
+                    data: "Invalid request!"
+                }
+            })
     }
+
 };
 module.exports = _.assign(module.exports, controller);

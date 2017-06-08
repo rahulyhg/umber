@@ -15,57 +15,62 @@ module.exports = mongoose.model('Wishlist', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
 var model = {
-    setProductInWishlist: function (product, callback) {
-        User.findOne({
-            accessToken: product.accessToken
-        }).exec(function (err, user) {
-            if (err) {
-                callback(err, null);
-            } else if (user) {
-                console.log(product);
-                Wishlist.update({
-                        'userId': product.userId
-                    }, {
-                        $addToSet: {
-                            products: product.productId
+    setProductInWishlist: function (userId, product, callback) {
+        Wishlist.update({
+                'userId': userId
+            }, {
+                $addToSet: {
+                    products: product
+                }
+            }, {
+                new: true,
+                upsert: true
+            },
+            function (err, wishlist) {
+                if (err) {
+                    callback(err, null);
+                } else if (wishlist) {
+                    callback(null, wishlist);
+                } else {
+                    callback({
+                        message: {
+                            data: "Invalid credentials!"
                         }
-                    }, {
-                        new: true,
-                        upsert: true
-                    },
-                    function (err, wishlist) {
-                        if (err) {
-                            callback(err, null);
-                        } else if (wishlist) {
-                            callback(null, wishlist);
-                        } else {
-                            callback({
-                                message: {
-                                    data: "Invalid credentials!"
-                                }
-                            }, null);
-                        }
-                    });
-            } else {
-                callback({
-                    message: {
-                        data: "Invalid credentials!"
-                    }
-                }, null);
-            }
-        });
+                    }, null);
+                }
+            });
     },
 
     saveProduct: function (product, callback) {
-        if (product.products instanceof Array) {
-            async.eachSeries(product, function (eachProduct, eachCallback) {
-                setProductInWishlist(eachProduct, eachCallback);
-            }, function (err) {
+        async.waterfall([
+            function isUserLogged(cbWaterfall1) {
+                User.isUserLoggedIn(product.accessToken, function (err, user) {
+                    if (!_.isEmpty(user))
+                        cbWaterfall1(null, user._id);
+                    else
+                        cbWaterfall1(err, null);
+                });
+            },
+
+            function addToWishlist(userId, cbWaterfall2) {
+                if (product.products instanceof Array) {
+                    async.eachSeries(product.products, function (eachProduct, eachCallback) {
+                        Wishlist.setProductInWishlist(userId, eachProduct, eachCallback);
+                    }, function (err) {
+                        cbWaterfall2(err, null);
+                    });
+                } else {
+                    setProductInWishlist(product, cbWaterfall2);
+                }
+            }
+        ], function (err, data) {
+            if (err)
                 callback(err, null);
-            });
-        } else {
-            setProductInWishlist(product, callback);
-        }
+            else
+                callback(null, {
+                    message: "Wishlist added successfully!"
+                });
+        });
     },
 
     getWishlist: function (user, callback) {

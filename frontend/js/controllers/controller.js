@@ -38,28 +38,28 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
             accessToken: $.jStorage.get("accessToken")
         }
         console.log("before check")
-            /******************todo:for showing cart logo  infinite loop issue******************** */
-            /*  $scope.checkInCart = function (productId) {
-                  if (userId.userId) {
-                      console.log("checkproductid:::", userId);
-                      CartService.getCart(userId, function (data) {
-                          console.log(data);
-                          if (data.data.value) {
-                              $scope.cartData = data.data.data.products
-                              var result = _.find($scope.cartData, {
-                                  productId: productId
-                              });
-                              if (result) {
-                                  return true;
-                              } else {
-                                  return false;
-                              }
+        /******************todo:for showing cart logo  infinite loop issue******************** */
+        /*  $scope.checkInCart = function (productId) {
+              if (userId.userId) {
+                  console.log("checkproductid:::", userId);
+                  CartService.getCart(userId, function (data) {
+                      console.log(data);
+                      if (data.data.value) {
+                          $scope.cartData = data.data.data.products
+                          var result = _.find($scope.cartData, {
+                              productId: productId
+                          });
+                          if (result) {
+                              return true;
+                          } else {
+                              return false;
                           }
-                      });
-                  } else {
-                      return false;
-                  }
-              }*/
+                      }
+                  });
+              } else {
+                  return false;
+              }
+          }*/
 
         NavigationService.getEnabledBlogs(function (data) {
             $scope.blogs = data.data.data;
@@ -440,21 +440,31 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
         }
         console.log("wishlist::", data)
         $scope.addToWishlist = function () {
-            var accessToken = $.jStorage.get("accessToken")
-            if (accessToken) {
+            $scope.product.selectedSize = $scope.selectedSize._id;
+            $scope.product.reqQuantity = $scope.reqQuantity;
+            var accessToken = $.jStorage.get("accessToken");
+            if (!_.isEmpty(accessToken)) {
                 $scope.product.accessToken = accessToken;
                 $scope.product.userId = $.jStorage.get("userId");
-                $scope.product.productId = data.productId
-                WishlistService.saveProduct($scope.product, function (data) {
-                    console.log(data)
+                $scope.wishlist = {
+                    accessToken: accessToken,
+                    userId: $.jStorage.get("userId"),
+                    products: [$scope.product.productId]
+                }
+                console.log("whislist product:::::::::", $scope.wishlist)
+                //if (ProductService.isProductAvailable($scope.product.reqQuantity, $scope.product)) {
+                WishlistService.saveProduct($scope.wishlist, function (data) {
+                    console.log(data);
                     if (data.data.error) {
                         console.log("Error: ", data.data.error);
                     } else {
-                        $state.reload("individual-page", {
-                            id: $scope.product._id
-                        });
+                        console.log("Success");
+                        $state.reload();
                     }
-                })
+                });
+                // } else {
+                //     // TODO: Add product not available error
+                // }
             } else {
                 console.log("User not logged in");
                 // TODO: goto login. can't route to modal or checkkout
@@ -464,7 +474,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
                     scope: $scope,
                     size: 'md',
                     controller: 'loginModalCtrl'
-                        // windowClass: 'modal-content-radi0'
+                    // windowClass: 'modal-content-radi0'
                 });
             }
         }
@@ -478,7 +488,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
                     scope: $scope,
                     size: 'md',
                     controller: 'loginModalCtrl'
-                        // windowClass: 'modal-content-radi0'
+                    // windowClass: 'modal-content-radi0'
                 });
             }
         }
@@ -684,15 +694,15 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
 
     })
 
-.controller('BrandsCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
-    $scope.template = TemplateService.getHTML("content/brands.html");
-    TemplateService.title = "Brands"; //This is the Title of the Website
-    $scope.navigation = NavigationService.getNavigation();
+    .controller('BrandsCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.getHTML("content/brands.html");
+        TemplateService.title = "Brands"; //This is the Title of the Website
+        $scope.navigation = NavigationService.getNavigation();
 
-})
+    })
 
 
-.controller('ListingPageCtrl', function ($scope, $stateParams, TemplateService, NavigationService,
+    .controller('ListingPageCtrl', function ($scope, $stateParams, TemplateService, NavigationService,
         SizeService, BannerService, CategoryService, ProductService, $timeout) {
         $scope.template = TemplateService.getHTML("content/listing-page.html");
         TemplateService.title = "Form"; //This is the Title of the Website

@@ -9,4 +9,5 @@ myApp.factory('WishlistService', function ($http) {
             }).then(callback);
         }
     }
+
 });
