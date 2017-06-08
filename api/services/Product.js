@@ -40,7 +40,10 @@ var schema = new Schema({
         ref: 'Collection'
     },
     // Sleeve /trouser style
-    style: String,
+    style: {
+        type: String,
+        index: true
+    },
     styleNo: String,
     fabric: {
         type: Schema.Types.ObjectId,
