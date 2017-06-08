@@ -297,7 +297,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
             $scope.form = false;
         };
     })
-    .controller('CheckoutCtrl', function ($scope, $state, TemplateService, NavigationService, UserService, CartService, $timeout) {
+    .controller('CheckoutCtrl', function ($scope, $state, BannerService, TemplateService, NavigationService, UserService, CartService, $timeout) {
         $scope.template = TemplateService.getHTML("content/checkout.html");
         TemplateService.title = "Checkout"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -463,13 +463,13 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
 
             }
         }
-
+        console.log("wishlist::", data)
         $scope.addToWishlist = function () {
             var accessToken = $.jStorage.get("accessToken")
             if (accessToken) {
                 $scope.product.accessToken = accessToken;
                 $scope.product.userId = $.jStorage.get("userId");
-                $scope.product.selectedSize = $scope.selectedSize._id;
+                $scope.product.productId = data.productId
                 WishlistService.saveProduct($scope.product, function (data) {
                     console.log(data)
                     if (data.data.error) {

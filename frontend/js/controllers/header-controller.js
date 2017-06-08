@@ -118,7 +118,7 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
                         var cart = {};
                         cart.userId = $.jStorage.get("userId");
                         cart.accessToken = $.jStorage.get("accessToken");
-                        cart.products = $.jStorage.get("cart");
+                        cart.products = $.jStorage.get("cart").products;
                         console.log("Offline cart: ", cart);
                         CartService.saveProduct(cart, function (data) {
                             if (!data.data.value) {
