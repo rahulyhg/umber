@@ -438,7 +438,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
 
             }
         }
-        console.log("wishlist::", data)
+
         $scope.addToWishlist = function () {
             $scope.product.selectedSize = $scope.selectedSize._id;
             $scope.product.reqQuantity = $scope.reqQuantity;
@@ -464,19 +464,16 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
                 });
                 // } else {
                 //     // TODO: Add product not available error
+
                 // }
             } else {
                 console.log("User not logged in");
                 // TODO: goto login. can't route to modal or checkkout
                 //todo: offline wishlist add
-                $uibModal.open({
-                    animation: true,
-                    templateUrl: 'views/modal/login.html',
-                    scope: $scope,
-                    size: 'md',
-                    controller: 'loginModalCtrl'
-                    // windowClass: 'modal-content-radi0'
-                });
+                $scope.productId = $.jStorage.get('wishlist') ? $.jStorage.get('wishlist') : [];
+                $scope.productId.push($scope.product.productId);
+                $.jStorage.set('wishlist', $scope.productId);
+                console.log("offflinewishlist:::::::", $.jStorage.set('wishlist', $scope.productId))
             }
         }
 
@@ -516,7 +513,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
             $scope.reqQuantity = quantity;
         }
 
-        $scope.featured = [{
+        /* $scope.featured = [{
             img: '../img/home/11.jpg',
             price: '2,899',
             type: 'LINEN FULL SLEEVE SHIRT WITH ROLLUP'
@@ -582,7 +579,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
             bigImg: '../img/individual/7.jpg',
             img: '../img/individual/3.jpg'
 
-        }];
+        }];*/
         $scope.changeImage = function (index) {
             $scope.selectedImage = $scope.product.images[index];
         };

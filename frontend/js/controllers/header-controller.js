@@ -100,7 +100,7 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
         }
     })
     .controller('wishlistModalCtrl', function ($scope, $state, $uibModalInstance, UserService, CartService) {})
-    .controller('loginModalCtrl', function ($scope, $state, $uibModalInstance, UserService, CartService) {
+    .controller('loginModalCtrl', function ($scope, $state, $uibModalInstance, UserService, CartService, WishlistService) {
 
         $scope.formData = {};
         $scope.loginData = {};
@@ -130,6 +130,19 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
                                     $state.reload();
                                 }
                             });
+
+                        }
+                        var offlineWishlist = $.jStorage.get("wishlist");
+                        console.log("sendingofflinewishlist::::::", offlineWishlist)
+                        if (offlineWishlist) {
+                            var product = {
+                                accessToken: $.jStorage.get("accessToken"),
+                                userId: $.jStorage.get("userId"),
+                                products: $.jStorage.get("wishlist"),
+                            }
+                            WishlistService.saveProduct(product, function (data) {
+                                console.log("sendingwishlisttodb:::::::", data);
+                            })
                         }
                     }
                     $scope.loggedUser = $scope.userData._id;
@@ -153,19 +166,34 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
                 $.jStorage.set("userId", $scope.userData._id);
                 var tokken = $.jStorage.get("accessToken");
                 if (tokken) {
-                    var cart = {};
-                    cart.userId = $.jStorage.get("userId");
-                    cart.accessToken = $.jStorage.get("accessToken");
-                    cart.products = $.jStorage.get("cart").products;
-                    console.log("Offline cart: ", cart);
-                    CartService.saveProduct(cart, function (data) {
-                        if (!data.data.value) {
-                            console.log("Error: in ofline storage ", data.data.error);
-                        } else {
-                            console.log("Success");
-                            $state.reload();
+                    var offlineCart = $.jStorage.get("cart");
+                    if (offlineCart) {
+                        var cart = {};
+                        cart.userId = $.jStorage.get("userId");
+                        cart.accessToken = $.jStorage.get("accessToken");
+                        cart.products = $.jStorage.get("cart").products;
+                        console.log("Offline cart: ", cart);
+                        CartService.saveProduct(cart, function (data) {
+                            if (!data.data.value) {
+                                console.log("Error: in ofline storage ", data.data.error);
+                            } else {
+                                console.log("Success");
+                                $state.reload();
+                            }
+                        });
+                    }
+                    var offlineWishlist = $.jStorage.get("wishlist");
+                    console.log("sendingofflinewishlist::::::", offlineWishlist)
+                    if (offlineWishlist) {
+                        var product = {
+                            accessToken: $.jStorage.get("accessToken"),
+                            userId: $.jStorage.get("userId"),
+                            products: $.jStorage.get("wishlist"),
                         }
-                    });
+                        WishlistService.saveProduct(product, function (data) {
+                            console.log("sendingwishlisttodb:::::::", data);
+                        })
+                    }
                 }
 
                 $scope.loggedUser = $scope.userData._id;
