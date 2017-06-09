@@ -7,6 +7,14 @@ myApp.factory('WishlistService', function ($http) {
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
+        },
+        getWishlist: function (product, callback) {
+            $http({
+                url: adminurl + 'Wishlist/getWishlist',
+                data: product,
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
         }
     }
 

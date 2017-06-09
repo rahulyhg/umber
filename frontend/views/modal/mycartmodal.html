@@ -14,11 +14,11 @@
 
                     <div class="mycart-modal">
                         <div class="modal-img">
-                            <img ng-src="{{mycart.img}}" alt="" class="img-responsive item__img">
+                            <img ng-src="{{mycart.images[0].image | serverimage}}" alt="" class="img-responsive item__img">
                         </div>
-                        <p class="text-left">{{mycart.title1}}</p>
+                        <p class="text-left">{{mycart.productName}}</p>
                         <!--<p class="text-left">{{mycart.title2}}</p>-->
-                        <p><button class="btn add-cart--btn btn-block text-uppercase">add to cart</button></p>
+                        <p><button class="btn add-cart--btn btn-block text-uppercase" ui-sref="individual-page({id: mycart.productId})">add to cart</button></p>
                     </div>
                 </div>
                 <!--</div>-->

@@ -1,4 +1,4 @@
-myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartService, UserService, $uibModal) {
+myApp.controller('headerCtrl', function ($scope, $state, WishlistService, TemplateService, CartService, UserService, $uibModal) {
         $scope.template = TemplateService;
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             $(window).scrollTop(0);
@@ -87,6 +87,7 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
                     $scope.cart = {};
                 }
             });
+
         } else {
             //TODO: Implement without login
 
@@ -99,7 +100,26 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
             $scope.view = !$scope.view;
         }
     })
-    .controller('wishlistModalCtrl', function ($scope, $state, $uibModalInstance, UserService, CartService) {})
+    .controller('wishlistModalCtrl', function ($scope, $state, $uibModalInstance, UserService, CartService, WishlistService) {
+        var userId = {
+            userId: $.jStorage.get("userId"),
+            accessToken: $.jStorage.get("accessToken")
+        }
+        if (userId.accessToken) {
+            WishlistService.getWishlist(userId, function (data) {
+
+
+                $scope.wishlists = data.data.data;
+                console.log("wishlist returneddata::::::", $scope.wishlists)
+                $scope.newA = _.chunk($scope.wishlists, 4);
+
+            });
+        } else {
+            $scope.wishlists = $.jStorage.get("wishlist");
+            console.log("offlinewishlist returneddata::::::", $scope.wishlists)
+            $scope.newA = _.chunk($scope.wishlists, 4);
+        }
+    })
     .controller('loginModalCtrl', function ($scope, $state, $uibModalInstance, UserService, CartService, WishlistService) {
 
         $scope.formData = {};
@@ -132,13 +152,19 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
                             });
 
                         }
-                        var offlineWishlist = $.jStorage.get("wishlist");
-                        console.log("sendingofflinewishlist::::::", offlineWishlist)
+                        var offlineWishlist = []
+                        offlineWishlist = $.jStorage.get("wishlist");
+                        var products = [];
+                        console.log("sendingofflinewishlist::::::", offlineWishlist[0].productId)
                         if (offlineWishlist) {
+                            console.log(offlineWishlist.length)
+                            for (var i = 0; i < offlineWishlist.length; i++) {
+                                products.push(offlineWishlist[i].productId);
+                            }
                             var product = {
                                 accessToken: $.jStorage.get("accessToken"),
                                 userId: $.jStorage.get("userId"),
-                                products: $.jStorage.get("wishlist"),
+                                products: products
                             }
                             WishlistService.saveProduct(product, function (data) {
                                 console.log("sendingwishlisttodb:::::::", data);
@@ -160,6 +186,10 @@ myApp.controller('headerCtrl', function ($scope, $state, TemplateService, CartSe
         $scope.registerUser = function () {
             console.log("Register data: ", $scope.formData);
             UserService.userRegistration($scope.formData, function (data) {
+                console.log(data.data.error);
+                if (data.data.error) {
+                    $scope.errormsg = "User already exists with the given emailId.<br /> Please login to proced"
+                }
                 $scope.userData = data.data.data;
 
                 $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);

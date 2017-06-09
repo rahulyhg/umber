@@ -471,9 +471,10 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
                 // TODO: goto login. can't route to modal or checkkout
                 //todo: offline wishlist add
                 $scope.productId = $.jStorage.get('wishlist') ? $.jStorage.get('wishlist') : [];
-                $scope.productId.push($scope.product.productId);
+                $scope.productId.push($scope.product);
                 $.jStorage.set('wishlist', $scope.productId);
                 console.log("offflinewishlist:::::::", $.jStorage.set('wishlist', $scope.productId))
+
             }
         }
 
@@ -584,7 +585,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
             $scope.selectedImage = $scope.product.images[index];
         };
     })
-    .controller('MycartCtrl', function ($scope, $state, TemplateService, NavigationService, BannerService, CartService, $timeout, $uibModal) {
+    .controller('MycartCtrl', function ($scope, $state, TemplateService, NavigationService, BannerService, CartService, $timeout, $uibModal, WishlistService) {
         $scope.template = TemplateService.getHTML("content/mycart.html");
         TemplateService.title = "Mycart"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -595,42 +596,58 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
             $scope.banner = data.data.data;
 
         });
+        // var userId = {
+        //     userId: $.jStorage.get("userId"),
+        //     accessToken: $.jStorage.get("accessToken")
+        // }
+        // at = $.jStorage.get("accessToken")
+        // if (at) {
+        //     WishlistService.getWishlist(userId, function (data) {
+        //         console.log("check the data", data)
+        //         if (userId.accessToken) {
+        //             $scope.mycartmodal = data.data;
+        //             console.log("wishlist returneddata::::::", $scope.mycartmodal)
+        //         } else {
+        //             $scope.mycartmodal = {};
+        //         }
+        //     });
+        // }
 
-        $scope.mycartmodal = [{
-            img: 'img/cart/1.jpg',
-            title1: 'WALLET MODERN CORNER ZIP',
-            title2: '',
-        }, {
-            img: 'img/cart/2.jpg',
-            title1: 'WALLET MODERN CORNER ZIP',
-            title2: '',
-        }, {
-            img: 'img/cart/3.jpg',
-            title1: 'WALLET MODERN CORNER ZIP',
-            title2: '',
-        }, {
-            img: 'img/cart/4.jpg',
-            title1: 'WALLET MODERN CORNER ZIP',
-            title2: '',
-        }, {
-            img: 'img/cart/5.jpg',
-            title1: 'WALLET MODERN CORNER ZIP',
-            title2: '',
-        }, {
-            img: 'img/cart/6.jpg',
-            title1: 'WALLET MODERN CORNER ZIP',
-            title2: '',
-        }, {
-            img: 'img/cart/7.jpg',
-            title1: 'WALLET MODERN CORNER ZIP',
-            title2: '',
-        }, {
-            img: 'img/cart/8.jpg',
-            title1: 'WALLET MODERN CORNER ZIP',
-            title2: '',
-        }]
+        // $scope.mycartmodal = [{
+        //     img: 'img/cart/1.jpg',
+        //     title1: 'WALLET MODERN CORNER ZIP',
+        //     title2: '',
+        // }, {
+        //     img: 'img/cart/2.jpg',
+        //     title1: 'WALLET MODERN CORNER ZIP',
+        //     title2: '',
+        // }, {
+        //     img: 'img/cart/3.jpg',
+        //     title1: 'WALLET MODERN CORNER ZIP',
+        //     title2: '',
+        // }, {
+        //     img: 'img/cart/4.jpg',
+        //     title1: 'WALLET MODERN CORNER ZIP',
+        //     title2: '',
+        // }, {
+        //     img: 'img/cart/5.jpg',
+        //     title1: 'WALLET MODERN CORNER ZIP',
+        //     title2: '',
+        // }, {
+        //     img: 'img/cart/6.jpg',
+        //     title1: 'WALLET MODERN CORNER ZIP',
+        //     title2: '',
+        // }, {
+        //     img: 'img/cart/7.jpg',
+        //     title1: 'WALLET MODERN CORNER ZIP',
+        //     title2: '',
+        // }, {
+        //     img: 'img/cart/8.jpg',
+        //     title1: 'WALLET MODERN CORNER ZIP',
+        //     title2: '',
+        // }]
         $scope.newA = _.chunk($scope.mycartmodal, 4);
-        console.log("$scope.newA ", $scope.newA);
+        // console.log("$scope.newA ", $scope.newA);
         var userId = {
             userId: $.jStorage.get("userId")
         };
