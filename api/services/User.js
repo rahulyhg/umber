@@ -237,23 +237,33 @@ var model = {
         user.password = md5(userData.password);
         user.mobile = userData.mobile;
 
-        User.saveData(user, function (err, data) {
-            if (err) {
-                callback(err, null);
-            } else if (data) {
-                if (!_.isEmpty(data)) {
-                    var accessToken = uid(16);
-                    data.accessToken.push(accessToken);
-                    User.saveData(data, function () {});
-                    console.log("data: ", data);
-                    callback(null, data);
-                }
-            } else {
+        User.findOne({
+            email: user.email
+        }).exec(function (err, data) {
+            if (!_.isEmpty(data)) {
                 callback({
-                    message: {
-                        data: "Invalid credentials!"
+                    message: "userExists"
+                }, null);
+            } else {
+                User.saveData(user, function (err, data) {
+                    if (err) {
+                        callback(err, null);
+                    } else if (data) {
+                        if (!_.isEmpty(data)) {
+                            var accessToken = uid(16);
+                            data.accessToken.push(accessToken);
+                            User.saveData(data, function () {});
+                            console.log("data: ", data);
+                            callback(null, data);
+                        }
+                    } else {
+                        callback({
+                            message: {
+                                data: "Invalid credentials!"
+                            }
+                        })
                     }
-                })
+                });
             }
         });
     },
