@@ -37,132 +37,35 @@
                                 <td>
                                     Product
                                 </td>
-                                <td>
-                                    AMTEN PRINTS<br> HALF SLEEVE SHIRT
-                                </td>
-                                <td>
-                                    FLORENCE PRINTS<br> HALF SLEEVE SHIRT
-                                </td>
-                                <td>
-                                    AMSLER CHECKS MENS<br> HALF SLEEVE SHIRT
-                                </td>
-                                <td>
-                                    LINEN FULL SLEEVE<br> HALF SLEEVE SHIRT
+                                <td ng-repeat="product in products">
+                                    {{product.productName}}
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     Image
                                 </td>
-                                <td>
-                                    <img src="img/compare/2.jpg" alt="" class="img-responsive compare-img">
-                                </td>
-                                <td>
-                                    <img src="img/compare/3.jpg" alt="" class="img-responsive compare-img">
-                                </td>
-                                <td>
-                                    <img src="img/compare/4.jpg" alt="" class="img-responsive compare-img">
-                                </td>
-                                <td>
-                                    <img src="img/compare/5.jpg" alt="" class="img-responsive compare-img">
+                                <td ng-repeat="product in products">
+                                    <img src="{{product.images[0].image | serverimage}}" alt="" class="img-responsive compare-img">
                                 </td>
                             </tr>
                             <tr>
                                 <td>Price</td>
-                                <td>&#8377; 2,899</td>
-                                <td>&#8377; 2,899</td>
-                                <td>&#8377; 2,899</td>
-                                <td>&#8377; 2,899</td>
+                                <td ng-repeat="product in products">&#8377; {{product.price}}</td>
                             </tr>
                             <tr>
                                 <td>Product No.</td>
-                                <td>G000278-GMSHHS0202-FP-16-22</td>
-                                <td>G000278-GMSHHS0202-FP-16-22</td>
-                                <td>G000278-GMSHHS0202-FP-16-22</td>
-                                <td>G000278-GMSHHS0202-FP-16-22</td>
+                                <td ng-repeat="product in products">{{product.name}}</td>
                             </tr>
                             <tr>
                                 <td>Brand</td>
-                                <td>BURNT UMBER</td>
-                                <td>BURNT UMBER</td>
-                                <td>BURNT UMBER</td>
-                                <td>BURNT UMBER</td>
-                            </tr>
-                            <tr>
-                                <td>Rating</td>
-                                <td>
-                                    <div>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                    </div>
-                                    <div>
-                                        Based on 0 Reviews
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                    </div>
-                                    <div>
-                                        Based on 0 Reviews
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                    </div>
-                                    <div>
-                                        Based on 0 Reviews
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                    </div>
-                                    <div>
-                                        Based on 0 Reviews
-                                    </div>
-                                </td>
+                                <td ng-repeat="product in products">{{product.brand.name}}</td>
                             </tr>
                             <tr>
                                 <td>Summary</td>
-                                <td>
+                                <td ng-repeat="product in products">
                                     <div>
-                                        <p>Amten Prints</p>
-                                        <p>Half Sleeve Shirts</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <p>Florence Prints</p>
-                                        <p>Half Sleeve Shirts</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <p>Amsler Checks Mens</p>
-                                        <p>Half Sleeve Shirts</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <p>Linen Full Sleeve</p>
-                                        <p>Half Sleeve Shirts</p>
+                                        <p>{{product.description}}</p>
                                     </div>
                                 </td>
                             </tr>
@@ -188,81 +91,30 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Brand</td>
-                                <td>Burnt Umber</td>
-                                <td>Burnt Umber</td>
-                                <td>Burnt Umber</td>
-                                <td>Burnt Umber</td>
-                            </tr>
-                            <tr>
                                 <td>Collection</td>
-                                <td>Amten Prints</td>
-                                <td>Florence Prints</td>
-                                <td>Amsler Checks</td>
-                                <td>Amsler Checks</td>
+                                <td ng-repeat="product in products">{{product.collection.name}}</td>
                             </tr>
                             <tr>
-                                <td>Sleeve</td>
-                                <td>Full Sleeve</td>
-                                <td>Full Sleeve</td>
-                                <td>Full Sleeve</td>
-                                <td>Full Sleeve</td>
+                                <td>Style</td>
+                                <td ng-repeat="product in products">{{product.style}}</td>
                             </tr>
                             <tr>
                                 <td>Fabric</td>
-                                <td>100% Cotton</td>
-                                <td>100% Cotton</td>
-                                <td>100% Cotton</td>
-                                <td>100% Cotton</td>
+                                <td ng-repeat="product in products">{{product.fabric.name}}</td>
                             </tr>
                             <tr>
                                 <td>Washcare</td>
-                                <td>
+                                <td ng-repeat="product in products">
                                     <div>
                                         <p>
-                                            Wash Dark Color Seperately. Turn Inside out before washing and drying. Do not bleach. Tumble dry normal. Always Dry in shade.
-                                            Use Warm Iron.
-                                        </p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <p>
-                                            Wash Dark Color Seperately. Turn Inside out before washing and drying. Do not bleach. Tumble dry normal. Always Dry in shade.
-                                            Use Warm Iron.
-                                        </p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <p>
-                                            Wash Dark Color Seperately. Turn Inside out before washing and drying. Do not bleach. Tumble dry normal. Always Dry in shade.
-                                            Use Warm Iron.
-                                        </p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <p>
-                                            Wash Dark Color Seperately. Turn Inside out before washing and drying. Do not bleach. Tumble dry normal. Always Dry in shade.
-                                            Use Warm Iron.
+                                            {{product.washcare}}
                                         </p>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Basecolor</td>
-                                <td>Blue</td>
-                                <td>Blue</td>
-                                <td>Blue</td>
-                                <td>White</td>
-                            </tr>
-                            <tr>
-                                <td>Gender</td>
-                                <td>Male</td>
-                                <td>Male</td>
-                                <td>Male</td>
-                                <td>Male</td>
+                                <td ng-repeat="product in products">{{product.color.name}}</td>
                             </tr>
                             <tr>
                                 <td>Offer</td>
@@ -273,36 +125,12 @@
                             </tr>
                             <tr>
                                 <td></td>
-                                <td>
+                                <td ng-repeat="product in products">
                                     <div>
-                                        <button class="compare--btn">buy now</button>
+                                        <button class="compare--btn" ui-sref="individual-page({id: product.productId})">buy now</button>
                                     </div>
                                     <div>
-                                        <button class="compare--btn"><i class="fa fa-trash" aria-hidden="true"></i>remove</button>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <button class="compare--btn">buy now</button>
-                                    </div>
-                                    <div>
-                                        <button class="compare--btn"><i class="fa fa-trash" aria-hidden="true"></i>remove</button>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <button class="compare--btn">buy now</button>
-                                    </div>
-                                    <div>
-                                        <button class="compare--btn"><i class="fa fa-trash" aria-hidden="true"></i>remove</button>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <button class="compare--btn">buy now</button>
-                                    </div>
-                                    <div>
-                                        <button class="compare--btn"><i class="fa fa-trash" aria-hidden="true"></i>remove</button>
+                                        <button class="compare--btn" ng-click="removeCompareProduct(product)"><i class="fa fa-trash" aria-hidden="true"></i>remove</button>
                                     </div>
                                 </td>
                             </tr>

@@ -660,6 +660,13 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
 
         $scope.products = $.jStorage.get('compareproduct');
         console.log($scope.products);
+
+        $scope.removeCompareProduct = function (product) {
+            _.remove($scope.products, {
+                productId: product.productId
+            });
+            $.jStorage.set('compareproduct', $scope.products);
+        }
     })
 
     .controller('BrandsCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -699,9 +706,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
                 $scope.showCheck = true
             }
         }
-        $scope.gotoComparePage = function () {
-            $state.go("compare-products");
-        }
+
         var banner = {
             pageName: "listing-page"
         }
