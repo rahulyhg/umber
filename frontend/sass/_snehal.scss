@@ -716,42 +716,11 @@ img.loading {
                 white-space: nowrap;
                 z-index: 20;
             }
-        } // .list-slider__toolTip .toolTip-text {
-        //     visibility: hidden;
-        //     @include size(120px,
-        //     auto);
-        //     background-color: #555;
-        //     color: #fff;
-        //     text-align: center;
-        //     border-radius: 6px;
-        //     padding: 5px 0;
-        //     position: absolute;
-        //     z-index: 1;
-        //     bottom: 125%;
-        //     left: 50%;
-        //     margin-left: -60px;
-        //     opacity: 0;
-        //     transition: opacity 1s;
-        // }
-        // .list-slider__toolTip .toolTip-text:after {
-        //     content: "";
-        //     position: relative;
-        //     top: 100%;
-        //     left: 50%;
-        //     margin-left: -5px;
-        //     border-width: 5px;
-        //     border-style: solid;
-        //     border-color: #555 transparent transparent transparent;
-        // }
-        // .list-slider__toolTip:hover .toolTip-text {
-        //     visibility: visible;
-        //     opacity: 1;
-        // }
+        }
     }
 }
 
 .listing-dropdown {
-    //  padding-bottom: 12px;
     .dropdown-menu {
         min-width: 215px;
     }
@@ -897,7 +866,7 @@ img.loading {
         -webkit-border-radius: 17px;
         border-radius: 17px;
         background: $darkBrown1;
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
     }
      ::-webkit-scrollbar-thumb:window-inactive {
         background: rgba(255, 0, 0, 0.4);
@@ -1028,16 +997,6 @@ img.loading {
 }
 
 //otps
-//brands started//
-// .row-flex {
-//     display: flex;
-//     width: 100%;
-// }
-// .col-flex {
-//     flex: 1;
-//     display: block;
-//     width: 50%;
-// }
 .breadcrumbs {
     ul {
         margin: 0;
@@ -1076,4 +1035,63 @@ img.loading {
 }
 
 //brands ended//
+//about started
+.about-cloth {
+    .cloth-buy {
+        .cloth-buy__desc {
+            box-sizing: border-box;
+            padding: 55px 55px 115px 40px;
+            background-color: #ededed;
+            margin-top: 60px;
+            h2 {
+                position: relative;
+                &:before {
+                    content: "";
+                    height: 50px;
+                    width: 50px;
+                    background: url(../img/about/qoutes.png) no-repeat;
+                    background-position: center center;
+                    background-size: cover;
+                    position: absolute;
+                    top: -80px;
+                    left: 15px;
+                }
+            }
+        }
+    }
+}
+
+.about-desc {
+    @include padding (null null 30px null);
+}
+
+.about-info {
+    padding-left: 20px;
+}
+
+//about ended
+//gift started
+.gift-form {
+    padding: 10px 0 60px;
+    h1 {
+        font-size: 24px;
+    }
+    .btn--list {
+        width: 175px;
+        padding: 3px 0;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+.sales {
+    background-color: transparent;
+}
+
+.amount-card {
+    width: 50%;
+    display: inline-block;
+}
+
+//gift ended
 //ruchi//
