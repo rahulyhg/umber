@@ -156,7 +156,6 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
                         var offlineWishlist = []
                         offlineWishlist = $.jStorage.get("wishlist");
                         var products = [];
-                        console.log("sendingofflinewishlist::::::", offlineWishlist[0].productId)
                         if (offlineWishlist) {
                             console.log(offlineWishlist.length)
                             for (var i = 0; i < offlineWishlist.length; i++) {
