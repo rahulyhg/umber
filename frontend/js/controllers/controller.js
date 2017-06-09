@@ -661,6 +661,8 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
         TemplateService.title = "Compare Products"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
 
+        $scope.products = $.jStorage.get('compareproduct');
+        console.log($scope.products);
     })
 
     .controller('BrandsCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -669,15 +671,12 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
         $scope.navigation = NavigationService.getNavigation();
 
     })
-
-
     .controller('ListingPageCtrl', function ($scope, $stateParams, $state, TemplateService, NavigationService,
         SizeService, BannerService, CategoryService, ProductService, $timeout) {
         $scope.template = TemplateService.getHTML("content/listing-page.html");
         TemplateService.title = "Form"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
         $scope.formSubmitted = false;
-        // $.jStorage.deleteKey("compareproduct")
 
         if (_.isEmpty($.jStorage.get('compareproduct'))) {
             $scope.showCheck = false
@@ -686,6 +685,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
             $scope.showCheck = true
             $scope.compareproduct = $.jStorage.get('compareproduct')
         }
+
         $scope.clickfun = function (product) {
             console.log(product)
             $scope.compareproduct = $.jStorage.get('compareproduct') ? $.jStorage.get('compareproduct') : [];
@@ -724,10 +724,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
             }
         }
         $scope.gotoComparePage = function () {
-            $scope.compare = {
-                products: $.jStorage.get('compareproduct')
-            }
-            $state.go("compare-products", $scope.compare);
+            $state.go("compare-products");
         }
         var banner = {
             pageName: "listing-page"
