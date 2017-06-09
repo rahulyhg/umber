@@ -272,7 +272,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
             $scope.form = false;
         };
     })
-    .controller('CheckoutCtrl', function ($scope, $state, BannerService, TemplateService, NavigationService, UserService, CartService, $timeout) {
+    .controller('CheckoutCtrl', function ($scope, $state, BannerService, TemplateService, NavigationService, UserService, CartService, WishlistService, $timeout) {
         $scope.template = TemplateService.getHTML("content/checkout.html");
         TemplateService.title = "Checkout"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -297,13 +297,14 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
 
         $scope.registerUser = function () {
             UserService.userRegistration($scope.registerData, function (data) {
-                console.log("Login data: ", data);
+                console.log("login  data: ", data);
                 if (!_.isEmpty(data.data.data)) {
+                    console.log("Login data: ", data);
                     $scope.userData = data.data.data;
                     $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
                     $.jStorage.set("userId", $scope.userData._id);
-
                     $state.reload();
+
                 } else {
                     // TODO:: show popup to register
                 }
@@ -313,11 +314,13 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
 
         $scope.login = function () {
             UserService.login($scope.loginData, function (data) {
+                console.log("loginoncheckoutpage::::", data)
                 if (!_.isEmpty(data.data.data)) {
+                    console.log("in if");
                     $scope.userData = data.data.data;
-                    // $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
+                    $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
                     $.jStorage.set("userId", $scope.userData._id);
-                    $state.reload("listing-page");
+                    $state.reload();
                 } else {
                     // TODO:: show popup to register
                 }
@@ -674,7 +677,15 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
         TemplateService.title = "Form"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
         $scope.formSubmitted = false;
-        $.jStorage.deleteKey("compareproduct")
+        // $.jStorage.deleteKey("compareproduct")
+
+        if (_.isEmpty($.jStorage.get('compareproduct'))) {
+            $scope.showCheck = false
+
+        } else {
+            $scope.showCheck = true
+            $scope.compareproduct = $.jStorage.get('compareproduct')
+        }
         $scope.clickfun = function (product) {
             console.log(product)
             $scope.compareproduct = $.jStorage.get('compareproduct') ? $.jStorage.get('compareproduct') : [];
@@ -692,11 +703,24 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
                 console.log($.jStorage.get('compareproduct'))
             }
             console.log($.jStorage.get('compareproduct'))
-            if (_.isEmpty($scope.compareproduct)) {
+            if (_.isEmpty($.jStorage.get('compareproduct'))) {
                 $scope.showCheck = false
 
             } else {
                 $scope.showCheck = true
+            }
+        }
+        /**********logic for checkbox on reload************ */
+        $scope.checkStateOnReload = function (prodid) {
+            console.log(prodid)
+            var cp = $.jStorage.get("compareproduct")
+            var result = _.find(cp, {
+                productId: prodid
+            });
+            if (result) {
+                return true;
+            } else {
+                return false;
             }
         }
         $scope.gotoComparePage = function () {

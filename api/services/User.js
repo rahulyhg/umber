@@ -326,8 +326,10 @@ var model = {
                 callback(err, null);
             } else if (data) {
                 if (!_.isEmpty(data)) {
-                    data.deliveryAddress = JSON.parse(JSON.stringify(data.deliveryAddresses[0]));
-                    delete data.deliveryAddresses;
+                    if (!_.isEmpty(data.deliveryAddresses)) {
+                        data.deliveryAddress = JSON.parse(JSON.stringify(data.deliveryAddresses[0]));
+                        delete data.deliveryAddresses;
+                    }
                     callback(null, data);
                 } else {
                     callback(null, {
