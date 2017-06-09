@@ -276,7 +276,7 @@
                                             <hr>
                                             <!--<p><input type="checkbox"> Add to compare</p>-->
                                             <div class="checkbox inline-block marg0">
-                                                <input type="checkbox" id="{{product._id}}" ng-model="myVarss" ng-click="clickfun(product);">
+                                                <input type="checkbox" id="{{product._id}}" ng-model="myVarss" ng-checked="checkStateOnReload(product.productId)" ng-click="clickfun(product);">
                                                 <label for="{{product._id}}">
                                           Add to compare
                                         </label>

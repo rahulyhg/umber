@@ -142,12 +142,12 @@
                                                 <img ng-src="{{order.product.images[0].image | serverimage}}" alt="
                        " class="img-responsive item__img-checkout">
                                                 <div class="mycart-info">
-                                                    <p class="item__title1">{{order.product.name}}</p>
+                                                    <p class="item__title1">{{order.productName}}</p>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>{{order.color.name}}</td>
-                                        <td>{{order.size.name}}</td>
+                                        <td>{{order.product.color.name}}</td>
+                                        <td>{{order.product.size.name}}</td>
                                         <td>{{order.quantity}}</td>
                                         <td>&#x20b9{{order.product.price * order.quantity}}</td>
                                     </tr>
