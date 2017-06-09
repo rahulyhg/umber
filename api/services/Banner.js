@@ -26,9 +26,12 @@ module.exports = mongoose.model('Banner', schema);
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
 var model = {
     getBanner: function (pageName, callback) {
+        console.log("getting banner: ", pageName);
         Banner.findOne({
             page: pageName.pageName
-        }).exec
+        }).exec(function (err, banner) {
+            callback(err, banner);
+        })
     }
 };
 module.exports = _.assign(module.exports, exports, model);

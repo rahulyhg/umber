@@ -435,6 +435,8 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
                 $scope.cart.products.push({
                     product: $scope.product
                 });
+                var len = $scope.cart.products.length;
+                $scope.cart.products[len - 1].quantity = $scope.reqQuantity;
                 $.jStorage.set('cart', $scope.cart);
                 console.log("Scope cart: ", $scope.cart);
                 $state.reload();
@@ -616,7 +618,8 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
             });
         } else {
             $scope.mycartTable = $.jStorage.get("cart");
-            console.log("else ran:::", $scope.mycartTable);
+            $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+            console.log("else ran:::", $scope.grandTotal);
         }
         // $scope.mycartTable = {};
         $scope.updateQuantity = function (index, count) {
@@ -684,6 +687,16 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
         TemplateService.title = "Form"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
         $scope.formSubmitted = false;
+        var banner = {
+            pageName: "listing-page"
+        }
+        console.log("bannerservice:::::")
+        BannerService.getBanner(banner, function (data) {
+            console.log("bannerservice:::::::", data)
+            if (data.data.value)
+                $scope.banner = data.data.data;
+
+        });
 
         if (_.isEmpty($.jStorage.get('compareproduct'))) {
             $scope.showCheck = false
