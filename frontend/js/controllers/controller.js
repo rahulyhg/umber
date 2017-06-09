@@ -596,56 +596,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
             $scope.banner = data.data.data;
 
         });
-        // var userId = {
-        //     userId: $.jStorage.get("userId"),
-        //     accessToken: $.jStorage.get("accessToken")
-        // }
-        // at = $.jStorage.get("accessToken")
-        // if (at) {
-        //     WishlistService.getWishlist(userId, function (data) {
-        //         console.log("check the data", data)
-        //         if (userId.accessToken) {
-        //             $scope.mycartmodal = data.data;
-        //             console.log("wishlist returneddata::::::", $scope.mycartmodal)
-        //         } else {
-        //             $scope.mycartmodal = {};
-        //         }
-        //     });
-        // }
 
-        // $scope.mycartmodal = [{
-        //     img: 'img/cart/1.jpg',
-        //     title1: 'WALLET MODERN CORNER ZIP',
-        //     title2: '',
-        // }, {
-        //     img: 'img/cart/2.jpg',
-        //     title1: 'WALLET MODERN CORNER ZIP',
-        //     title2: '',
-        // }, {
-        //     img: 'img/cart/3.jpg',
-        //     title1: 'WALLET MODERN CORNER ZIP',
-        //     title2: '',
-        // }, {
-        //     img: 'img/cart/4.jpg',
-        //     title1: 'WALLET MODERN CORNER ZIP',
-        //     title2: '',
-        // }, {
-        //     img: 'img/cart/5.jpg',
-        //     title1: 'WALLET MODERN CORNER ZIP',
-        //     title2: '',
-        // }, {
-        //     img: 'img/cart/6.jpg',
-        //     title1: 'WALLET MODERN CORNER ZIP',
-        //     title2: '',
-        // }, {
-        //     img: 'img/cart/7.jpg',
-        //     title1: 'WALLET MODERN CORNER ZIP',
-        //     title2: '',
-        // }, {
-        //     img: 'img/cart/8.jpg',
-        //     title1: 'WALLET MODERN CORNER ZIP',
-        //     title2: '',
-        // }]
         $scope.newA = _.chunk($scope.mycartmodal, 4);
         // console.log("$scope.newA ", $scope.newA);
         var userId = {
