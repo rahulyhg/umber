@@ -618,7 +618,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
             $scope.mycartTable = $.jStorage.get("cart");
             console.log("else ran:::", $scope.mycartTable);
         }
-        $scope.mycartTable = {};
+        // $scope.mycartTable = {};
         $scope.updateQuantity = function (index, count) {
             // if (ProductService.isProductAvailable(count, $scope.mycartTable.products[index])) {
             $scope.mycartTable.products[index].quantity += count;
@@ -720,7 +720,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
 
         /**********logic for checkbox on reload************ */
         $scope.checkStateOnReload = function (prodid) {
-            console.log(prodid)
+
             var cp = $.jStorage.get("compareproduct")
             var result = _.find(cp, {
                 productId: prodid

@@ -92,6 +92,7 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
             //TODO: Implement without login
 
             $scope.cart = $.jStorage.get("cart");
+            console.log("oflinecart::::::", $scope.cart)
             //$scope.cart = {};
         }
 
