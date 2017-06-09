@@ -668,15 +668,42 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
     })
 
 
-    .controller('ListingPageCtrl', function ($scope, $stateParams, TemplateService, NavigationService,
+    .controller('ListingPageCtrl', function ($scope, $stateParams, $state, TemplateService, NavigationService,
         SizeService, BannerService, CategoryService, ProductService, $timeout) {
         $scope.template = TemplateService.getHTML("content/listing-page.html");
         TemplateService.title = "Form"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
         $scope.formSubmitted = false;
-        $scope.clickfun = function () {
-            console.log("im in showCheck")
-            $scope.showCheck = !$scope.showCheck;
+        $.jStorage.deleteKey("compareproduct")
+        $scope.clickfun = function (product) {
+            console.log(product)
+            $scope.compareproduct = $.jStorage.get('compareproduct') ? $.jStorage.get('compareproduct') : [];
+            var result = _.find($scope.compareproduct, {
+                productId: product.productId
+            });
+            if (result) {
+                _.remove($scope.compareproduct, {
+                    productId: product.productId
+                });
+                $.jStorage.set('compareproduct', $scope.compareproduct);
+            } else {
+                $scope.compareproduct.push(product);
+                $.jStorage.set('compareproduct', $scope.compareproduct);
+                console.log($.jStorage.get('compareproduct'))
+            }
+            console.log($.jStorage.get('compareproduct'))
+            if (_.isEmpty($scope.compareproduct)) {
+                $scope.showCheck = false
+
+            } else {
+                $scope.showCheck = true
+            }
+        }
+        $scope.gotoComparePage = function () {
+            $scope.compare = {
+                products: $.jStorage.get('compareproduct')
+            }
+            $state.go("compare-products", $scope.compare);
         }
         var banner = {
             pageName: "listing-page"

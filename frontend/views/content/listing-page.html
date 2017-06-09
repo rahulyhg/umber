@@ -209,11 +209,11 @@
             <div class="col-md-9">
                 <div class="row">
                     <div class="Addtocompare" ng-if="showCheck">
-                        <div class="col-md-3">
+                        <div class="col-md-3" ng-repeat="compare in compareproduct">
                             <div class="compare-img-list">
-                                <img src="img/listing/2.jpg" class="img-responsive">
+                                <img ng-src="{{compare.images[0].image | serverimage}}" class="img-responsive">
 
-                                <p>Linen full Sleeve shirt with rollup</p>
+                                <p>{{compare.productName}}</p>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -239,7 +239,7 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <button class="btn btn--compare">COMPARE</button>
+                            <button class="btn btn--compare" ng-click="gotoComparePage()">COMPARE</button>
                         </div>
                     </div>
                 </div>
