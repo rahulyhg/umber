@@ -770,7 +770,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
         $scope.navigation = NavigationService.getNavigation();
 
     })
-    .controller('ListingPageCtrl', function ($scope, $stateParams, $state, TemplateService, NavigationService,
+    .controller('ListingPageCtrl', function ($scope, $stateParams, $state, WishlistService, TemplateService, NavigationService,
         SizeService, BannerService, CategoryService, ProductService, $timeout) {
         $scope.template = TemplateService.getHTML("content/listing-page.html");
         TemplateService.title = "Form"; //This is the Title of the Website
@@ -858,7 +858,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
         }
 
         ProductService.getFiltersWithCategory(data, function (data) {
-            console.log(data);
+
             if (data.data.value) {
                 $scope.filters = data.data.data;
                 $scope.slider_translate = {
@@ -908,6 +908,43 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
             $scope.products = _.chunk(data.data.data, 3);
             console.log("Listing page products: ", $scope.products);
         });
+        var userId = {
+            userId: $.jStorage.get("userId"),
+            accessToken: $.jStorage.get("accessToken")
+        }
+        if (userId.userId) {
+            WishlistService.getWishlist(userId, function (data) {
+                $scope.wishlist = data.data.data;
+                console.log("Wishlist data::::::::", $scope.wishlist);
+            });
+        } else {
+            $scope.wishlist = $.jStorage.get("wishlist")
+        }
+        $scope.checkWishlist = function (productId) {
+            if (userId.userId) {
+                console.log("checkproductid:::", productId);
+                var result = _.find($scope.wishlist, {
+                    "productId": productId
+                });
+                console.log("result:::::", result)
+                if (result) {
+                    return "fa fa-heart";
+                } else {
+                    return "fa fa-heart-o";
+                }
+            } else {
+                var result = _.find($scope.wishlist, {
+                    "productId": productId
+                });
+                console.log("result:::::", result)
+                if (result) {
+                    return "fa fa-heart";
+                } else {
+                    return "fa fa-heart-o";
+                }
+            }
+        }
+
     })
     .controller('FormCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.getHTML("content/form.html");

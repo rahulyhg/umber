@@ -254,7 +254,7 @@
                                                 <a ui-sref="individual-page({id: product.productId})">
                                                     <img ng-src="{{image.image | serverimage}}" class="img-rsponsive img1" title="{{product.productName}}">
                                                 </a>
-                                                <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                                <i ng-class="checkWishlist(product.productId)" aria-hidden="true"></i>
                                                 <img ng-src="{{buy.img}}" class="img-responsive" ng-mouseover="displayCntent();" ng-mouseleave="hideContent();">
                                             </li>
                                         </flex-slider>
