@@ -114,10 +114,10 @@ myApp.controller('MyAccountCtrl', function ($scope, TemplateService, $translate,
     }];
     $scope.myShirt = [];
     $scope.myShirt11 = [];
-    $scope.myShirt = _.chunk($scope.buyshirt, 9);
+    $scope.myShirt = _.chunk($scope.buyshirt, 16);
     console.log($scope.myShirt);
     _.each($scope.myShirt, function (n) {
-        $scope.myShirt1 = _.chunk(n, 3);
+        $scope.myShirt1 = _.chunk(n, 4);
         $scope.myShirt11.push($scope.myShirt1);
     });
 

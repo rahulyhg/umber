@@ -1,0 +1,84 @@
+<div>
+    <div class="orderdetail-bg">
+        <img src="" alt="MyAccount" class="img-responsive">
+    </div>
+    <div class="container">
+        <div class="orderdetail-container">
+            <div class="table-responsive">
+                <table class="table orderdetail-table">
+                    <caption>ORDER DETAILS</caption>
+                    <thead>
+                        <tr>
+                            <th>ORDER PLACED<br><span>31 JANUARY 2017<</span>/th>
+                                <th>Order no.<br><span># 132-87654 12390</span></th>
+                                <th>payment method Cash on Delivery</th>
+                                <th>Grand Total 8,999</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="product in mycartTable.products track by $index">
+                        <tr>
+                            <td rowspan="2">
+                                <div class="item">
+                                    <img ng-src="{{product.product.images[0].image | serverimage}}" alt="" class="img-responsive item__img">
+                                    <div class="mycart-info">
+                                        <p class="item__title1">{{product.product.productName}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{product.product.color.name}}</td>
+                            <td>{{product.product.size.name}}</td>
+                            <td>
+
+                                <a ng-click="updateQuantity($index, -1)">
+                                    <i class="fa fa-minus display-inblock square__bg" aria-hidden="true"></i>
+                                </a>
+                                <div class="display-inblock">
+                                    <form>
+                                        <div class="form-group marg0">
+                                            <input type="text" readonly class="form-control quantity__input" ng-model="product.quantity">
+                                        </div>
+                                    </form>
+                                </div>
+                                <a ng-click="updateQuantity($index, 1)">
+                                    <i class="fa fa-plus display-inblock square__bg" aria-hidden="true"></i>
+                                </a>
+
+
+                            </td>
+                            <td>&#x20b9 &nbsp;{{product.product.price * product.quantity}}</td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="td-border">
+                                <div class="pull-right">
+                                    <button class=" btn text-uppercase wishlist--btn" ng-click="openUpload();"> <i class="fa fa-heart" aria-hidden="true"></i>ADD TO WISHLIST</button>
+                                    <button class="btn text-uppercase remove--btn" ng-click="removeProductFromCart(mycartTable._id, product._id)"><i class="fa fa-trash" aria-hidden="true"></i>REMOVE</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="ordertable-footer">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>BILLING ADDRESS</h4>
+                        <p>1308, Panchratna Building, Next to Roxy Cinema, Opera House, Mumbai - 400004. Maharashtra, India</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>SHIPPING ADDRESS</h4>
+                        <p>
+                            1308, Panchratna Building, Next to Roxy Cinema, Opera House, Mumbai - 400004. Maharashtra, India
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4 class="text-center">PAYMENT INFORMATION</h4>
+                        <p class="text-right">Item(s) subtotal: <span>&#8377; 8697</span><br> Shipping: <span>&#8377; 00</span><br> Disscount:
+                            <span>&#8377; 00</span><br> Total: <span>&#8377; 8697</span><br> Tax: <span>&#8377; 00</span><br>                            Grand Total: <span>&#8377; 00</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

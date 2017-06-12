@@ -159,7 +159,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
     .controller('BuythelookCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
         $scope.template = TemplateService.getHTML("content/buythelook.html");
         TemplateService.title = "Buythelook"; //This is the Title of the Website
-        $scope.navigation = NavigationService.getEnabledCtNavigation();
+        //     $scope.navigation = NavigationService.getEnabledCtNavigation();
 
         $scope.buyshirt = [{
             img: 'img/buy/2.jpg',
