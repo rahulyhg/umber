@@ -216,28 +216,19 @@ var model = {
     removeProduct: function (product, callback) {
         Cart.findOne({
             _id: mongoose.Types.ObjectId(product.cartId)
-        }).exec(function (err, data) {
+        }).lean().exec(function (err, data) {
             if (err) {
                 callback(err, null);
             } else if (data) {
                 var index = data.products.findIndex(function (value) {
-                    if (value._id.toString() == product.productId)
+                    if (value.product.toString() == product.productId)
                         return true;
                     else
                         return false;
                 });
 
-                var removeProduct = data.products[index];
+                var removeProduct = data.products.splice(index, 1);
 
-                Product.findOneAndUpdate({
-                    _id: mongoose.Types.ObjectId(removeProduct.product)
-                }, {
-                    $inc: {
-                        quantity: removeProduct.quantity
-                    }
-                }).exec(function (err, data) {});
-
-                data.products.splice(index, 1);
                 if (_.isEmpty(data.products)) {
                     Cart.findOne({
                         _id: data._id
@@ -249,20 +240,21 @@ var model = {
 
                         }
                     });
+                } else {
+                    Cart.saveData(data, function (err, data) {
+                        if (err) {
+                            callback(err, null);
+                        } else if (data) {
+                            callback(null, data);
+                        } else {
+                            callback({
+                                message: {
+                                    data: "Invalid credentials!"
+                                }
+                            }, null);
+                        }
+                    });
                 }
-                Cart.saveData(data, function (err, data) {
-                    if (err) {
-                        callback(err, null);
-                    } else if (data) {
-                        callback(null, data);
-                    } else {
-                        callback({
-                            message: {
-                                data: "Invalid credentials!"
-                            }
-                        }, null);
-                    }
-                });
             } else {
                 callback({
                     message: {

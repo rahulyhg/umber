@@ -44,22 +44,45 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
             accessToken: $.jStorage.get("accessToken")
         }
         console.log("before check")
-        CartService.getCart(userId, function (data) {
-            //console.log("checkproductidinside cart service:::", data.data.data)
+        /****************for cart tooltip after login***************** */
+        if (userId.userId) {
+            CartService.getCart(userId, function (data) {
+                //console.log("checkproductidinside cart service:::", data.data.data)
 
-            $scope.mycart = data.data.data.products;
-            $scope.tempcart = [];
-            for (var i = 0; i < $scope.mycart.length; i++) {
-                $scope.tempcart.push({
-                    productId: $scope.mycart[i].product.productId
-                })
+                $scope.mycart = data.data.data.products;
+                $scope.tempcart = [];
+                for (var i = 0; i < $scope.mycart.length; i++) {
+                    $scope.tempcart.push({
+                        productId: $scope.mycart[i].product.productId
+                    })
+                }
+                ProductService.getFeatured(function (data) {
+                    $scope.featured = data.data.data;
+                    console.log("Featured: ", $scope.featured);
+                });
+
+            })
+        } else {
+            $scope.mycart = []
+            $scope.mycart = $.jStorage.get("cart");
+            if ($scope.mycart) {
+                $scope.mycart = $scope.mycart.products;
+                console.log("mycartfor offlinetooltip::::", $scope.mycart)
+                $scope.tempcart = [];
+                if ($scope.mycart) {
+                    for (var i = 0; i < $scope.mycart.length; i++) {
+                        $scope.tempcart.push({
+                            productId: $scope.mycart[i].product.productId
+                        })
+                    }
+                }
             }
+            console.log("temparraqyfor offline cart", $scope.tempcart)
             ProductService.getFeatured(function (data) {
                 $scope.featured = data.data.data;
                 console.log("Featured: ", $scope.featured);
             });
-            console.log("checkproductidinside cart service:::", $scope.mycart.length);
-        })
+        }
         $scope.checkInCart = function (productId) {
             console.log("inside checkcart");
             if (userId.userId) {
@@ -74,7 +97,15 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
                     return false
                 }
             } else {
-                return false;
+                var result = _.find($scope.tempcart, {
+                    "productId": productId
+                });
+                console.log("result:::::", result)
+                if (result) {
+                    return true
+                } else {
+                    return false
+                }
             }
         }
 
@@ -446,7 +477,8 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
                 if (_.isEmpty($scope.cart))
                     $scope.cart.products = [];
                 console.log($scope.cart);
-                $scope.product.sizeName = $scope.selectedSize.name;
+                $scope.product.size = {};
+                $scope.product.size.name = $scope.selectedSize.name;
                 console.log($scope.product)
                 console.log($scope.cart)
                 $scope.cart.products.push({
