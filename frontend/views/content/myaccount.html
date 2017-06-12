@@ -74,27 +74,29 @@
                     <h4>Cool2</h4>
                 </div>
                 <div class="wishlist-tab" ng-if="view == 'wishlistTab' ">
-                    <div class="col-md-7">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="buy-slider">
-                                    <flex-slider flex-slide="buy in xyz track by $index" prev-text="" next-text="" animation="slide" min-items="3">
-                                        <li>
-                                            <i class="fa fa-heart-o" aria-hidden="true" ng-click="addwishlist();"></i>
-                                            <img ng-src="{{buy.img}}" class="img-responsive" ng-click="addcart();">
-                                        </li>
-                                    </flex-slider>
-                                    <div class="buy-para custom-checkbox">
-                                        <h4><i class="fa fa-inr" aria-hidden="true"></i> {{xyz[0].rupee}}</h4>
-                                        <h5 class="text-uppercase">{{xyz[0].title}}</h5>
-                                        <hr>
-                                        <div class="checkbox inline-block marg0" ng-click="remove();">
-                                            <input type="checkbox" id="{{xyz[0].id}}">
-                                            <label for="{{xyz[0].id}}">
+                    <div class="col-md-9">
+                        <div class="row" ng-repeat="abc in myShirt11">
+                            <div class="col-md-3" ng-repeat="xyz in abc" ng-init="parentIndex = $index">
+                                <div class="buy-info">
+                                    <div class="buy-slider">
+                                        <flex-slider flex-slide="buy in xyz track by $index" prev-text="" next-text="" animation="slide" min-items="3">
+                                            <li>
+                                                <i class="fa fa-heart-o" aria-hidden="true" ng-click="addwishlist();"></i>
+                                                <img ng-src="{{buy.img}}" class="img-responsive" ng-click="addcart();">
+                                            </li>
+                                        </flex-slider>
+                                        <div class="buy-para custom-checkbox">
+                                            <h4><i class="fa fa-inr" aria-hidden="true"></i> {{xyz[0].rupee}}</h4>
+                                            <h5 class="text-uppercase">{{xyz[0].title}}</h5>
+                                            <hr>
+                                            <div class="checkbox inline-block marg0" ng-click="remove();">
+                                                <input type="checkbox" id="{{xyz[0].id}}">
+                                                <label for="{{xyz[0].id}}">
                                           Add to compare
                                         </label>
+                                            </div>
+                                            <button class="btn btn-default btn--brown text-uppercase" ng-click="forgot();">buy</button>
                                         </div>
-                                        <button class="btn btn-default btn--brown text-uppercase" ng-click="forgot();">buy</button>
                                     </div>
                                 </div>
                             </div>

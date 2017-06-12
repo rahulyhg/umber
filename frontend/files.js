@@ -55,5 +55,6 @@ module.exports = [
   'js/controllers/controller.js',
   'js/controllers/header-controller.js',
   'js/controllers/language-controller.js',
+  'js/controllers/orderdetail-controller.js',
   'js/controllers/myaccount-controller.js',
 ];
