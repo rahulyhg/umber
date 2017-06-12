@@ -663,11 +663,13 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
                 $scope.mycartTable = data.data.data;
                 console.log("mycarttableof if: ", $scope.mycartTable);
                 //TODO: Calculate actual grand total
-                $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+                if ($scope.mycartTable)
+                    $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
             });
         } else {
             $scope.mycartTable = $.jStorage.get("cart");
-            $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+            if ($scope.mycartTable)
+                $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
             console.log("else ran:::", $scope.grandTotal);
         }
         // $scope.mycartTable = {};
@@ -685,14 +687,28 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
 
         $scope.removeProductFromCart = function (cartId, productId) {
             console.log("Removing product: ", productId);
-            var data = {
-                cartId: cartId,
-                productId: productId
+            if (userId.userId) {
+                var data = {
+                    cartId: cartId,
+                    productId: productId
+                }
+                CartService.removeProduct(data, function (data) {
+                    $scope.mycartTable = data.data.data;
+                    $state.reload("mycart");
+                });
+            } else {
+                $scope.cart = $.jStorage.get('cart').products;
+                var idx = _.findIndex($scope.cart, function (product) {
+                    return product.product._id == productId;
+                });
+                console.log("Removing product at index: ", idx);
+                // remove this product
+                $scope.cart.splice(idx, 1);
+                var cart = {};
+                cart.products = $scope.cart;
+                $.jStorage.set('cart', cart);
+                $state.reload();
             }
-            CartService.removeProduct(data, function (data) {
-                $scope.mycartTable = data.data.data;
-                $state.reload("mycart");
-            });
         }
 
         $scope.openUpload = function () {
