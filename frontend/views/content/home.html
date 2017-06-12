@@ -130,12 +130,12 @@
                             <div class="featured__icon-heart">
                                 <i ng-class="checkWishlist(new._id)" aria-hidden="true"></i>
                             </div>
-                            <!--  <div ng-show="userId && checkInCart(new._id)">-->
-                            <div class="featured__icon-cart">
+
+                            <div class="featured__icon-cart" ng-if="checkInCart(new.productId)">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+
                             </div>
                         </div>
-                        <!--  </div>-->
                     </li>
                 </flex-slider>
                 <p class="text-center">

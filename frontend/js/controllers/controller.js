@@ -1,11 +1,20 @@
 myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, NavigationService, ProductService, $timeout, $location) {
+
+
+
+
+
         $scope.template = TemplateService.getHTML("content/home.html");
         TemplateService.title = "Home"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
         // $scope.status.isopen = !$scope.status.isopen;
+
+        // $scope.getCartCount = CartService.getCart;
+        // console.log(" $scope.getCartCount ");;
         $scope.toggled = function (open) {
             alert('xd');
         };
+
         ProductService.getthelook(function (data) {
             $scope.getthelook = data.data.data;
             //console.log("new look", data.data.data);
@@ -29,37 +38,45 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
             console.log("New arrivals: ", $scope.newArrivals);
         });
 
-        ProductService.getFeatured(function (data) {
-            $scope.featured = data.data.data;
-            console.log("Featured: ", $scope.featured);
-        });
+        /******************todo:for showing cart logo  infinite loop issue******************** */
         var userId = {
             userId: $.jStorage.get("userId"),
             accessToken: $.jStorage.get("accessToken")
         }
         console.log("before check")
-        /******************todo:for showing cart logo  infinite loop issue******************** */
-        /*  $scope.checkInCart = function (productId) {
-              if (userId.userId) {
-                  console.log("checkproductid:::", userId);
-                  CartService.getCart(userId, function (data) {
-                      console.log(data);
-                      if (data.data.value) {
-                          $scope.cartData = data.data.data.products
-                          var result = _.find($scope.cartData, {
-                              productId: productId
-                          });
-                          if (result) {
-                              return true;
-                          } else {
-                              return false;
-                          }
-                      }
-                  });
-              } else {
-                  return false;
-              }
-          }*/
+        CartService.getCart(userId, function (data) {
+            //console.log("checkproductidinside cart service:::", data.data.data)
+
+            $scope.mycart = data.data.data.products;
+            $scope.tempcart = [];
+            for (var i = 0; i < $scope.mycart.length; i++) {
+                $scope.tempcart.push({
+                    productId: $scope.mycart[i].product.productId
+                })
+            }
+            ProductService.getFeatured(function (data) {
+                $scope.featured = data.data.data;
+                console.log("Featured: ", $scope.featured);
+            });
+            console.log("checkproductidinside cart service:::", $scope.mycart.length);
+        })
+        $scope.checkInCart = function (productId) {
+            console.log("inside checkcart");
+            if (userId.userId) {
+                console.log("checkproductid:::", productId);
+                var result = _.find($scope.tempcart, {
+                    "productId": productId
+                });
+                console.log("result:::::", result)
+                if (result) {
+                    return true
+                } else {
+                    return false
+                }
+            } else {
+                return false;
+            }
+        }
 
         NavigationService.getEnabledBlogs(function (data) {
             $scope.blogs = data.data.data;
