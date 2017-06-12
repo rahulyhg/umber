@@ -65,18 +65,30 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             controller: 'FormCtrl'
         })
 
-    .state('brands', {
-        url: "/brands",
-        templateUrl: tempateURL,
-        controller: 'BrandsCtrl'
-    })
+        .state('brands', {
+            url: "/brands",
+            templateUrl: tempateURL,
+            controller: 'BrandsCtrl'
+        })
 
 
-    .state('cancel', {
-        url: "/cancel",
-        templateUrl: tempateURL,
-        controller: 'CancelCtrl'
-    });
+        .state('cancel', {
+            url: "/cancel",
+            templateUrl: tempateURL,
+            controller: 'CancelCtrl'
+        })
+
+        .state('gift', {
+            url: "/gift-card",
+            templateUrl: tempateURL,
+            controller: 'GiftCtrl'
+        })
+
+        .state('about', {
+            url: "/about",
+            templateUrl: tempateURL,
+            controller: 'AboutCtrl'
+        });
 
     $urlRouterProvider.otherwise("/");
     $locationProvider.html5Mode(isproduction);
