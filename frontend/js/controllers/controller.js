@@ -1,16 +1,7 @@
-myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, NavigationService, ProductService, $timeout, $location) {
-
-
-
-
-
+myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, WishlistService, NavigationService, ProductService, $timeout, $location) {
         $scope.template = TemplateService.getHTML("content/home.html");
         TemplateService.title = "Home"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
-        // $scope.status.isopen = !$scope.status.isopen;
-
-        // $scope.getCartCount = CartService.getCart;
-        // console.log(" $scope.getCartCount ");;
         $scope.toggled = function (open) {
             alert('xd');
         };
@@ -56,15 +47,22 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
                         productId: $scope.mycart[i].product.productId
                     })
                 }
-                ProductService.getFeatured(function (data) {
-                    $scope.featured = data.data.data;
-                    console.log("Featured: ", $scope.featured);
+                WishlistService.getWishlist(userId, function (result) {
+                    $scope.wishlist = result.data.data;
+                    console.log("Wishlist data::::::::", $scope.wishlist);
+                    ProductService.getFeatured(function (data) {
+                        $scope.featured = data.data.data;
+                        console.log("Featured: ", $scope.featured);
+                    });
                 });
+
 
             })
         } else {
             $scope.mycart = []
             $scope.mycart = $.jStorage.get("cart");
+            $scope.wishlist = $.jStorage.get("wishlist")
+            console.log("offline wishlist check:::::::", $scope.wishlist)
             if ($scope.mycart) {
                 $scope.mycart = $scope.mycart.products;
                 console.log("mycartfor offlinetooltip::::", $scope.mycart)
@@ -105,6 +103,32 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Nav
                     return true
                 } else {
                     return false
+                }
+            }
+        }
+
+        $scope.checkWishlist = function (productId) {
+            console.log("inside checkcart");
+            if (userId.userId) {
+                console.log("checkproductid:::", productId);
+                var result = _.find($scope.wishlist, {
+                    "productId": productId
+                });
+                console.log("result:::::", result)
+                if (result) {
+                    return "fa fa-heart";
+                } else {
+                    return "fa fa-heart-o";
+                }
+            } else {
+                var result = _.find($scope.wishlist, {
+                    "productId": productId
+                });
+                console.log("result:::::", result)
+                if (result) {
+                    return "fa fa-heart";
+                } else {
+                    return "fa fa-heart-o";
                 }
             }
         }
