@@ -1,0 +1,108 @@
+<div class="usraccount">
+    <div>
+        <img src="fronend/img/" alt="" class="img-responsive">
+    </div>
+    <div class="container">
+        <div class="content-spacing">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="list-checkout">
+                        <button class="btn btn--list" ng-disabled="loggedUser" ng-click="view='profTab'" ng-class="{
+                        'btn--brownActive': view=='profTab' }">PROFILE</button>
+                        <div>
+                            <button class="btn btn--list" ng-click="view='addrTab'" ng-class="{
+                        'btn--brownActive': view=='addrTab' }">MANAGE ADDRESS</button>
+                        </div>
+                        <div>
+                            <button class="btn btn--list" ng-click="view='orderTab'" ng-class="{
+                        'btn--brownActive': view=='orderTab' }"> ORDER</button>
+                        </div>
+                        <div>
+                            <button class="btn btn--list" ng-click="view='wishlistTab'" ng-class="{
+                        'btn--brownActive': view=='wishlistTab' }">WISHLIST</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="prof-tab" ng-if="view == 'profTab' ">
+                    <div class="col-md-5">
+                        <div class="usrdtl-title">
+                            <span>YOUR DETAILS</span>
+                            <a href=""><span ng-click="edit()" ng-if="!save">edit</span></a>
+                            <a href=""><span ng-if="save" ng-click="edit()">save</span></a>
+                        </div>
+                        <div ng-if="!save">
+                            <div class="usrdtl">
+                                <span>Name: {{userDetails.firstName}} {{userDetails.lastName}}</span><br>
+                                <span>Email id: {{userDetails.email}}</span><br>
+                                <span>Mobile: {{userDetails.mobNo}}</span>
+                            </div>
+                            <p>Member’s Current Status : <span class="text-uppercase">gold</span></p>
+                            <p>Want to change your password? <a href="#">CLICK HERE</a></p>
+                        </div>
+                        <div class="edit-dtl" ng-if="save">
+                            <div class="row">
+                                <form class="customized-form">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="First Name" class="form-control" ng-model="userDetails.firstName">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Last Name" class="form-control" ng-model="userDetails.lastName">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Mobile No" class="form-control" ng-model="userDetails.mobNo">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="email" placeholder="Email Address" class="form-control" ng-model="userDetails.email">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="addr-tab" ng-if="view == 'addrTab' ">
+                    <h4>Cool1</h4>
+                </div>
+                <div class="order-tab" ng-if="view == 'orderTab' ">
+                    <h4>Cool2</h4>
+                </div>
+                <div class="wishlist-tab" ng-if="view == 'wishlistTab' ">
+                    <div class="col-md-7">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="buy-slider">
+                                    <flex-slider flex-slide="buy in xyz track by $index" prev-text="" next-text="" animation="slide" min-items="3">
+                                        <li>
+                                            <i class="fa fa-heart-o" aria-hidden="true" ng-click="addwishlist();"></i>
+                                            <img ng-src="{{buy.img}}" class="img-responsive" ng-click="addcart();">
+                                        </li>
+                                    </flex-slider>
+                                    <div class="buy-para custom-checkbox">
+                                        <h4><i class="fa fa-inr" aria-hidden="true"></i> {{xyz[0].rupee}}</h4>
+                                        <h5 class="text-uppercase">{{xyz[0].title}}</h5>
+                                        <hr>
+                                        <div class="checkbox inline-block marg0" ng-click="remove();">
+                                            <input type="checkbox" id="{{xyz[0].id}}">
+                                            <label for="{{xyz[0].id}}">
+                                          Add to compare
+                                        </label>
+                                        </div>
+                                        <button class="btn btn-default btn--brown text-uppercase" ng-click="forgot();">buy</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
