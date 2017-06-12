@@ -81,6 +81,18 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             url: "/cancel",
             templateUrl: tempateURL,
             controller: 'CancelCtrl'
+        })
+
+        .state('gift', {
+            url: "/gift-card",
+            templateUrl: tempateURL,
+            controller: 'GiftCtrl'
+        })
+
+        .state('about', {
+            url: "/about",
+            templateUrl: tempateURL,
+            controller: 'AboutCtrl'
         });
 
     $urlRouterProvider.otherwise("/");
