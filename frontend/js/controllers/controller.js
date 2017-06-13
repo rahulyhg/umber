@@ -37,27 +37,37 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
         console.log("before check")
         /****************for cart tooltip after login***************** */
         if (userId.userId) {
+
+
             CartService.getCart(userId, function (data) {
-                //console.log("checkproductidinside cart service:::", data.data.data)
 
-                $scope.mycart = data.data.data.products;
-                $scope.tempcart = [];
-                for (var i = 0; i < $scope.mycart.length; i++) {
-                    $scope.tempcart.push({
-                        productId: $scope.mycart[i].product.productId
-                    })
+                console.log("****************************cartran********************************")
+                if (data.data.data) {
+
+                    $scope.mycart = data.data.data.products;
+                    $scope.tempcart = [];
+                    for (var i = 0; i < $scope.mycart.length; i++) {
+                        $scope.tempcart.push({
+                            productId: $scope.mycart[i].product.productId
+                        })
+                    }
                 }
-                WishlistService.getWishlist(userId, function (result) {
-                    $scope.wishlist = result.data.data;
-                    console.log("Wishlist data::::::::", $scope.wishlist);
-                    ProductService.getFeatured(function (data) {
-                        $scope.featured = data.data.data;
-                        console.log("Featured: ", $scope.featured);
-                    });
-                });
-
-
             })
+
+            WishlistService.getWishlist(userId, function (result) {
+
+                console.log("***************************wishlistran*****************************")
+                $scope.wishlist = result.data.data;
+                console.log("Wishlist data::::::::", $scope.wishlist);
+
+            });
+
+            ProductService.getFeatured(function (data) {
+                console.log("***************************************productran***********************")
+                $scope.featured = data.data.data;
+                console.log("Featured: ", $scope.featured);
+            })
+
         } else {
             $scope.mycart = []
             $scope.mycart = $.jStorage.get("cart");
