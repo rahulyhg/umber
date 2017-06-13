@@ -37,27 +37,37 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
         console.log("before check")
         /****************for cart tooltip after login***************** */
         if (userId.userId) {
+
+
             CartService.getCart(userId, function (data) {
-                //console.log("checkproductidinside cart service:::", data.data.data)
 
-                $scope.mycart = data.data.data.products;
-                $scope.tempcart = [];
-                for (var i = 0; i < $scope.mycart.length; i++) {
-                    $scope.tempcart.push({
-                        productId: $scope.mycart[i].product.productId
-                    })
+                console.log("****************************cartran********************************")
+                if (data.data.data) {
+
+                    $scope.mycart = data.data.data.products;
+                    $scope.tempcart = [];
+                    for (var i = 0; i < $scope.mycart.length; i++) {
+                        $scope.tempcart.push({
+                            productId: $scope.mycart[i].product.productId
+                        })
+                    }
                 }
-                WishlistService.getWishlist(userId, function (result) {
-                    $scope.wishlist = result.data.data;
-                    console.log("Wishlist data::::::::", $scope.wishlist);
-                    ProductService.getFeatured(function (data) {
-                        $scope.featured = data.data.data;
-                        console.log("Featured: ", $scope.featured);
-                    });
-                });
-
-
             })
+
+            WishlistService.getWishlist(userId, function (result) {
+
+                console.log("***************************wishlistran*****************************")
+                $scope.wishlist = result.data.data;
+                console.log("Wishlist data::::::::", $scope.wishlist);
+
+            });
+
+            ProductService.getFeatured(function (data) {
+                console.log("***************************************productran***********************")
+                $scope.featured = data.data.data;
+                console.log("Featured: ", $scope.featured);
+            })
+
         } else {
             $scope.mycart = []
             $scope.mycart = $.jStorage.get("cart");
@@ -375,6 +385,37 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
                     $scope.userData = data.data.data;
                     $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
                     $.jStorage.set("userId", $scope.userData._id);
+                    var tokken = $.jStorage.get("accessToken");
+                    if (tokken) {
+                        var offlineCart = $.jStorage.get("cart");
+                        if (offlineCart) {
+                            var cart = {};
+                            cart.userId = $.jStorage.get("userId");
+                            cart.accessToken = $.jStorage.get("accessToken");
+                            cart.products = $.jStorage.get("cart").products;
+                            console.log("Offline cart: ", cart);
+                            CartService.saveProduct(cart, function (data) {
+                                if (!data.data.value) {
+                                    console.log("Error: in ofline storage ", data.data.error);
+                                } else {
+                                    console.log("Success");
+                                    $state.reload();
+                                }
+                            });
+                        }
+                        var offlineWishlist = $.jStorage.get("wishlist");
+                        console.log("sendingofflinewishlist::::::", offlineWishlist)
+                        if (offlineWishlist) {
+                            var product = {
+                                accessToken: $.jStorage.get("accessToken"),
+                                userId: $.jStorage.get("userId"),
+                                products: $.jStorage.get("wishlist"),
+                            }
+                            WishlistService.saveProduct(product, function (data) {
+                                console.log("sendingwishlisttodb:::::::", data);
+                            })
+                        }
+                    }
                     $state.reload();
 
                 } else {
@@ -389,9 +430,43 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
                 console.log("loginoncheckoutpage::::", data)
                 if (!_.isEmpty(data.data.data)) {
                     console.log("in if");
+                    var cart = {};
                     $scope.userData = data.data.data;
                     $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
                     $.jStorage.set("userId", $scope.userData._id);
+                    cart.userId = $.jStorage.get("userId");
+                    cart.accessToken = $.jStorage.get("accessToken");
+                    var userCart = $.jStorage.get("cart");
+                    if (userCart) {
+                        cart.products = userCart.products;
+                        console.log("Offline cart: ", cart);
+                        CartService.saveProduct(cart, function (data) {
+                            if (!data.data.value) {
+                                console.log("Error: in ofline storage ", data.data.error);
+                            } else {
+                                console.log("Success");
+                                $state.reload();
+                            }
+                        });
+
+                    }
+                    var offlineWishlist = []
+                    offlineWishlist = $.jStorage.get("wishlist");
+                    var products = [];
+                    if (offlineWishlist) {
+                        console.log(offlineWishlist.length)
+                        for (var i = 0; i < offlineWishlist.length; i++) {
+                            products.push(offlineWishlist[i].productId);
+                        }
+                        var product = {
+                            accessToken: $.jStorage.get("accessToken"),
+                            userId: $.jStorage.get("userId"),
+                            products: products
+                        }
+                        WishlistService.saveProduct(product, function (data) {
+                            console.log("sendingwishlisttodb:::::::", data);
+                        })
+                    }
                     $state.reload();
                 } else {
                     // TODO:: show popup to register
@@ -459,7 +534,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
         };
 
         ProductService.getProductDetails(data, function (data) {
-            console.log("getproductionDetails:::", data);
+
             if (data.data.value) {
                 $scope.product = data.data.data;
                 $scope.productImages = _.sortBy($scope.product.images, ['order']);
@@ -500,7 +575,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
                 $scope.cart = $.jStorage.get('cart') ? $.jStorage.get('cart') : {};
                 if (_.isEmpty($scope.cart))
                     $scope.cart.products = [];
-                console.log($scope.cart);
+
                 $scope.product.size = {};
                 $scope.product.size.name = $scope.selectedSize.name;
                 console.log($scope.product)
@@ -589,7 +664,14 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
             })
         }
         $scope.setQuantity = function (quantity) {
-            $scope.reqQuantity = quantity;
+
+            if ($scope.product.quantity >= quantity) {
+                angular.element(document.getElementsByClassName('btn-add'))[0].disabled = false;
+                $scope.reqQuantity = quantity;
+            } else {
+                angular.element(document.getElementsByClassName('btn-add'))[0].disabled = true;
+                $scope.reqQuantity = quantity;
+            }
         }
 
         /* $scope.featured = [{
@@ -692,8 +774,10 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
             });
         } else {
             $scope.mycartTable = $.jStorage.get("cart");
-            if ($scope.mycartTable)
+
+            if ($scope.mycartTable) {
                 $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+            }
             console.log("else ran:::", $scope.grandTotal);
         }
         // $scope.mycartTable = {};
@@ -708,6 +792,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
             $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
             // }
         }
+        console.log("oflinecartinmycartcontroller::::::", $.jStorage.get("cart"))
 
         $scope.removeProductFromCart = function (cartId, productId) {
             console.log("Removing product: ", productId);

@@ -456,6 +456,15 @@ var model = {
                         createdAt: -1
                     }
                 });
+
+                // Remove null values for product id
+                pipeline.push({
+                    $match: {
+                        "productId": {
+                            "$exists": true
+                        }
+                    }
+                });
                 // Get unique products
                 pipeline.push({
                     $group: {

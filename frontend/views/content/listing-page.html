@@ -209,10 +209,13 @@
             <div class="col-md-9">
                 <div class="Addtocompare relate" ng-if="showCheck">
                     <div class="row">
-                        <div class="col-md-3" ng-repeat="compare in compareproduct">
+                        <div class="col-md-3" ng-repeat="compare in compareproduct track by $index">
                             <div class="compare-img-list">
                                 <img ng-src="{{compare.images[0].image | serverimage}}" class="img-responsive">
                                 <p>{{compare.productName}}</p>
+                                <!--<div class="cancel-product">
+                                    x
+                                </div>-->
                             </div>
                         </div>
                         <div class="clearfix visible-md"></div>

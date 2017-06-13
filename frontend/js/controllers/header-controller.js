@@ -42,7 +42,8 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
             $.jStorage.deleteKey('userId');
             $.jStorage.deleteKey('accessToken');
             $.jStorage.deleteKey('cart');
-            $.jStorage.flush();
+            $.jStorage.deleteKey('wishlist');
+            //$.jStorage.flush();
             UserService.logout(data, function (data) {
                 $scope.loggedUser = "";
                 $scope.accessToken = "";
@@ -51,7 +52,6 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
             });
         }
 
-        // This productId represents unique mongodb id of SKU
         // and not the lot no in the backend
         $scope.removeProductFromCart = function (cartId, productId) {
             console.log("Cart: ", cartId);
@@ -87,12 +87,8 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
 
         if (userId.userId != null) {
             CartService.getCart(userId, function (data) {
-                if (userId.accessToken) {
-                    $scope.cart = data.data.data;
-                    console.log("mycarttable: ", $scope.cart);
-                } else {
-                    $scope.cart = {};
-                }
+                $scope.cart = data.data.data;
+                console.log("mycarttable: ", $scope.cart);
             });
 
         } else {
@@ -240,5 +236,4 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
                 $state.reload();
             });
         }
-
     });
