@@ -207,18 +207,18 @@
             </div>
 
             <div class="col-md-9">
-                <div class="row">
-                    <div class="Addtocompare" ng-if="showCheck">
+                <div class="Addtocompare relate" ng-if="showCheck">
+                    <div class="row">
                         <div class="col-md-3" ng-repeat="compare in compareproduct">
                             <div class="compare-img-list">
                                 <img ng-src="{{compare.images[0].image | serverimage}}" class="img-responsive">
-
                                 <p>{{compare.productName}}</p>
                             </div>
                         </div>
-                        <div class="text-center">
+                        <div class="clearfix visible-md"></div>
+                        <p class="compare-btn text-center">
                             <button class="btn btn--compare" ui-sref="compare-products">COMPARE</button>
-                        </div>
+                        </p>
                     </div>
                 </div>
                 <div class="row">
@@ -246,7 +246,7 @@
                                 <div class="buy-info custom-checkbox">
                                     <div class="buy-slider slider-individual list-slider">
                                         <flex-slider flex-slide="image in product.images track by $index" prev-text="" next-text="" animation="slide" min-items="3">
-                                            <li>
+                                            <li class="relate">
                                                 <div class="list-slider__toolTip">
                                                     <!--<a toolTip="{{buy.toolTip}}"><img ng-src="{{image | serverimage}}" class="img-rsponsive img1">
                                                     </a>-->
@@ -256,6 +256,7 @@
                                                 </a>
                                                 <i ng-class="checkWishlist(product.productId)" aria-hidden="true"></i>
                                                 <img ng-src="{{buy.img}}" class="img-responsive" ng-mouseover="displayCntent();" ng-mouseleave="hideContent();">
+                                                <i class="fa fa-shopping-cart"></i>
                                             </li>
                                         </flex-slider>
                                         <div class="buy-para">

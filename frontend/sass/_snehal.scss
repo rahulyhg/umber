@@ -186,12 +186,20 @@ img.loading {
     margin-bottom: 30px;
     li {
         position: relative;
-        i {
+        .fa-heart-o {
             position: absolute;
             right: 15px;
             top: 13px;
             font-size: 16px;
             cursor: pointer;
+        }
+        .fa-shopping-cart {
+            @include size(25px, 25px);
+            @include padding(5px);
+            @include position(absolute, null 5% 5% null);
+            font-size: 16px;
+            color: white;
+            background-color: $darkBrown1;
         }
     }
     .flexslider {
@@ -937,11 +945,18 @@ img.loading {
 .Addtocompare {
     background-color: #F5F5F5;
     @include margin(null null null 40px);
-    @include padding(15px 50px 20px 50px);
+    @include padding(25px 50px 40px);
+}
+
+p.compare-btn {
+    @include position(absolute,
+    null 0 0 0);
+    @include margin(null null null 15px);
 }
 
 .compare-img-list {
     padding: 10px;
+    margin-bottom: 15px;
     border: 1px dashed $darkBrown1;
     p {
         font-size: 12px;
