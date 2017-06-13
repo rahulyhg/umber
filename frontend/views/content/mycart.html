@@ -40,7 +40,7 @@
                                     </div>
                                 </form>
                             </div>
-                            <a ng-click="updateQuantity($index, 1)">
+                            <a ng-click="updateQuantity($index, 1)" ng-if="product.quantity< product.product.quantity">
                                 <i class="fa fa-plus display-inblock square__bg" aria-hidden="true"></i>
                             </a>
 
