@@ -22,8 +22,8 @@
                         </li>
                     </ul>
                 </div>
-                <div class="individual-first relate">
-                    <img ng-src="{{selectedImage.image | serverimage}}" class="img-responsive bg">
+                <div class="individual-first relate" style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%">
+                    <!--<img ng-src="{{selectedImage.image | serverimage}}" class="img-responsive bg">-->
                     <div class="individual-first__zoom">
                         <img ng-src="img/individual/zoom.png" alt="zoom" class="img-responsive">
                     </div>
@@ -32,7 +32,7 @@
                     <flex-slider flex-slide="image in productImages track by $index" prev-text="" next-text="" animation="slide" item-width="70"
                         item-margin="15" min-items="3">
                         <li class="relate">
-                            <div class="customer-choice__banner-detail relate">
+                            <div class="customer-choice__banner-detail relate" style="cursor:pointer;">
                                 <img ng-src="{{image.image | serverimage }}" alt="" class="img-responsive" ng-click="changeImage($index)">
                             </div>
 

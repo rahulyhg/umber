@@ -1736,7 +1736,8 @@ header {
             color: $darkGray;
         }
         .detail-align>tbody>tr:nth-child(5)>td+td {
-            text-align: justify;
+            //text-align: justify;
+            text-align: center;
             color: $darkGray;
         }
         .table>thead:first-child>tr:first-child>th {
