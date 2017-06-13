@@ -654,7 +654,14 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
             })
         }
         $scope.setQuantity = function (quantity) {
-            $scope.reqQuantity = quantity;
+
+            if ($scope.product.quantity >= quantity) {
+                angular.element(document.getElementsByClassName('btn-add'))[0].disabled = false;
+                $scope.reqQuantity = quantity;
+            } else {
+                angular.element(document.getElementsByClassName('btn-add'))[0].disabled = true;
+                $scope.reqQuantity = quantity;
+            }
         }
 
         /* $scope.featured = [{
