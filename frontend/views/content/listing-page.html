@@ -210,12 +210,12 @@
                 <div class="Addtocompare relate" ng-if="showCheck">
                     <div class="row">
                         <div class="col-md-3" ng-repeat="compare in compareproduct track by $index">
-                            <div class="compare-img-list">
+                            <div class="compare-img-list relate">
                                 <img ng-src="{{compare.images[0].image | serverimage}}" class="img-responsive">
                                 <p>{{compare.productName}}</p>
-                                <!--<div class="cancel-product">
-                                    x
-                                </div>-->
+                                <div class="remove-item">
+                                    <button type="button" class="btn btn-circle">X</button>
+                                </div>
                             </div>
                         </div>
                         <div class="clearfix visible-md"></div>
