@@ -928,7 +928,7 @@ myApp
         $scope.navigation = NavigationService.getNavigation();
 
     })
-    .controller('ListingPageCtrl', function ($scope, $rootScope, $stateParams, $state, WishlistService, TemplateService, NavigationService,
+    .controller('ListingPageCtrl', function ($scope, CartService, $rootScope, $stateParams, $state, WishlistService, TemplateService, NavigationService,
         SizeService, BannerService, CategoryService, ProductService, $timeout) {
         $scope.template = TemplateService.getHTML("content/listing-page.html");
         TemplateService.title = "Form"; //This is the Title of the Website
@@ -952,7 +952,11 @@ myApp
             $scope.showCheck = true
             $scope.compareproduct = $.jStorage.get('compareproduct')
         }
-
+        NavigationService.getEnabledCategories(function (data) {
+            console.log("Getting categories: ", data);
+            $scope.categories = data.data.data;
+            console.log("Retrieved categories: ", $scope.categories);
+        });
         $rootScope.clickfun = function (product) {
             console.log(product)
             $scope.compareproduct = $.jStorage.get('compareproduct') ? $.jStorage.get('compareproduct') : [];
@@ -1144,7 +1148,7 @@ myApp
         $scope.checkInCart = function (productId) {
 
             if (userId.userId) {
-                console.log("checkproductid:::", productId);
+
                 var result = _.find($scope.tempcart, {
                     "productId": productId
                 });
