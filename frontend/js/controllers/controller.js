@@ -612,13 +612,20 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
                         console.log("Error: ", data.data.error);
                     } else {
                         console.log("Success");
-                        $state.reload();
+                        // $state.reload();
+
+                        $scope.addwishlist = function () {
+                            $scope.addwishlistmodal = $uibModal.open({
+                                animation: true,
+                                templateUrl: 'views/modal/wishlistadd.html',
+                                size: 'md',
+                                scope: $scope
+                            });
+                        };
+                        $scope.addwishlist()
                     }
                 });
-                // } else {
-                //     // TODO: Add product not available error
 
-                // }
             } else {
                 console.log("User not logged in");
                 // TODO: goto login. can't route to modal or checkkout
@@ -628,6 +635,15 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
                 $.jStorage.set('wishlist', $scope.productId);
                 console.log("offflinewishlist:::::::", $.jStorage.set('wishlist', $scope.productId))
 
+                $scope.addwishlist = function () {
+                    $scope.addwishlistmodal = $uibModal.open({
+                        animation: true,
+                        templateUrl: 'views/modal/wishlistadd.html',
+                        size: 'md',
+                        scope: $scope
+                    });
+                };
+                $scope.addwishlist()
             }
         }
 
