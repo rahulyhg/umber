@@ -28,7 +28,7 @@
                             </div>-->
                             <div class="checkbox" ng-repeat="category in categories">
                                 <div class="radio">
-                                    <input type="radio" class="form-control" name="category" id="{{category._id}}" value="{{category.name}}">
+                                    <input type="radio" class="form-control" name="category" id="{{category._id}}" value="{{category.name}}" ng-click="filteredProducts(category._id)">
                                     <label for="{{category._id}}"> <span ></span>{{category.name}}
                                          
                                        </label>

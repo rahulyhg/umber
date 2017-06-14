@@ -953,10 +953,20 @@ myApp
             $scope.compareproduct = $.jStorage.get('compareproduct')
         }
         NavigationService.getEnabledCategories(function (data) {
-            console.log("Getting categories: ", data);
+
             $scope.categories = data.data.data;
-            console.log("Retrieved categories: ", $scope.categories);
+
         });
+        $scope.filteredProducts = function (selectedCategory) {
+            var input = {
+                "category": [selectedCategory]
+            }
+            console.log(input)
+
+            ProductService.getProductsWithFilters(input, function (data) {
+                console.log(data)
+            })
+        }
         $rootScope.clickfun = function (product) {
             console.log(product)
             $scope.compareproduct = $.jStorage.get('compareproduct') ? $.jStorage.get('compareproduct') : [];
@@ -1106,7 +1116,7 @@ myApp
             $scope.mycart = []
             $scope.mycart = $.jStorage.get("cart");
             $scope.wishlist = $.jStorage.get("wishlist")
-            console.log("offline wishlist check:::::::", $scope.wishlist)
+
             if ($scope.mycart) {
                 $scope.mycart = $scope.mycart.products;
                 console.log("mycartfor offlinetooltip::::", $scope.mycart)
