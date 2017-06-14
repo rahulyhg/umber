@@ -998,12 +998,41 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
             accessToken: $.jStorage.get("accessToken")
         }
         if (userId.userId) {
+            CartService.getCart(userId, function (data) {
+
+                console.log("****************************cartran********************************")
+                if (data.data.data) {
+
+                    $scope.mycart = data.data.data.products;
+                    $scope.tempcart = [];
+                    for (var i = 0; i < $scope.mycart.length; i++) {
+                        $scope.tempcart.push({
+                            productId: $scope.mycart[i].product.productId
+                        })
+                    }
+                }
+            })
             WishlistService.getWishlist(userId, function (data) {
                 $scope.wishlist = data.data.data;
                 console.log("Wishlist data::::::::", $scope.wishlist);
             });
         } else {
+            $scope.mycart = []
+            $scope.mycart = $.jStorage.get("cart");
             $scope.wishlist = $.jStorage.get("wishlist")
+            console.log("offline wishlist check:::::::", $scope.wishlist)
+            if ($scope.mycart) {
+                $scope.mycart = $scope.mycart.products;
+                console.log("mycartfor offlinetooltip::::", $scope.mycart)
+                $scope.tempcart = [];
+                if ($scope.mycart) {
+                    for (var i = 0; i < $scope.mycart.length; i++) {
+                        $scope.tempcart.push({
+                            productId: $scope.mycart[i].product.productId
+                        })
+                    }
+                }
+            }
         }
         $scope.checkWishlist = function (productId) {
             if (userId.userId) {
@@ -1026,6 +1055,32 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
                     return "fa fa-heart";
                 } else {
                     return "fa fa-heart-o";
+                }
+            }
+        }
+
+        $scope.checkInCart = function (productId) {
+            console.log("inside checkcart");
+            if (userId.userId) {
+                console.log("checkproductid:::", productId);
+                var result = _.find($scope.tempcart, {
+                    "productId": productId
+                });
+                console.log("result:::::", result)
+                if (result) {
+                    return true
+                } else {
+                    return false
+                }
+            } else {
+                var result = _.find($scope.tempcart, {
+                    "productId": productId
+                });
+                console.log("result:::::", result)
+                if (result) {
+                    return true
+                } else {
+                    return false
                 }
             }
         }

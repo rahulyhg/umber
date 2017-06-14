@@ -259,7 +259,7 @@
                                                 </a>
                                                 <i ng-class="checkWishlist(product.productId)" aria-hidden="true"></i>
                                                 <img ng-src="{{buy.img}}" class="img-responsive" ng-mouseover="displayCntent();" ng-mouseleave="hideContent();">
-                                                <i class="fa fa-shopping-cart"></i>
+                                                <i class="fa fa-shopping-cart" ng-if="checkInCart(product.productId)"></i>
                                             </li>
                                         </flex-slider>
                                         <div class="buy-para">
