@@ -516,7 +516,7 @@ myApp
             });
         }
     })
-    .controller('IndividualPageCtrl', function ($scope, $http, $stateParams, $state, $uibModal, UserService, WishlistService,
+    .controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $stateParams, $state, $uibModal, UserService, WishlistService,
         TemplateService, NavigationService, ProductService, CartService, $timeout) {
         $scope.template = TemplateService.getHTML("content/individual-page.html");
         TemplateService.title = "individual-page"; //This is the Title of the Website
@@ -594,8 +594,10 @@ myApp
         }
 
         $scope.addToWishlist = function () {
+            console.log("wishlissssststststststststst", $scope.product)
             $scope.product.selectedSize = $scope.selectedSize._id;
             $scope.product.reqQuantity = $scope.reqQuantity;
+            console.log("wishlissssstststststststststafter", $scope.product)
             var accessToken = $.jStorage.get("accessToken");
             if (!_.isEmpty(accessToken)) {
                 $scope.product.accessToken = accessToken;
@@ -688,6 +690,17 @@ myApp
             } else {
                 angular.element(document.getElementsByClassName('btn-add'))[0].disabled = true;
                 $scope.reqQuantity = quantity;
+            }
+        }
+        $rootScope.checkStateOnReload = function (prodid) {
+            var cp = $.jStorage.get("compareproduct")
+            var result = _.find(cp, {
+                productId: prodid
+            });
+            if (result) {
+                return true;
+            } else {
+                return false;
             }
         }
 
@@ -837,17 +850,60 @@ myApp
             }
         }
 
-        $scope.openUpload = function () {
-            console.log("clla");
-            $uibModal.open({
-                animation: true,
-                templateUrl: 'views/modal/mycartmodal.html',
-                scope: $scope,
-                size: 'sm',
-                // windowClass: 'modal-content-radi0'
-            });
-        };
+        $scope.addToWishlist = function (prod) {
+            // $scope.product = {}
+            // $scope.product.selectedSize = prod.product.selectedSize;
+            // $scope.product.reqQuantity = prod.quantity;
+            console.log($scope.product)
+            var accessToken = $.jStorage.get("accessToken");
+            if (!_.isEmpty(accessToken)) {
+                // $scope.product.accessToken = accessToken;
+                // $scope.product.userId = $.jStorage.get("userId");
+                $scope.wishlist = {
+                    accessToken: accessToken,
+                    userId: $.jStorage.get("userId"),
+                    products: [prod.product.productId]
+                }
+                console.log("whislist product:::::::::", $scope.wishlist)
+                //if (ProductService.isProductAvailable($scope.product.reqQuantity, $scope.product)) {
+                WishlistService.saveProduct($scope.wishlist, function (data) {
+                    console.log(data);
+                    if (data.data.error) {
+                        console.log("Error: ", data.data.error);
+                    } else {
+                        console.log("Success");
+                        // $state.reload();
 
+                        $scope.addwishlist = function () {
+                            $scope.addwishlistmodal = $uibModal.open({
+                                animation: true,
+                                templateUrl: 'views/modal/wishlistadd.html',
+                                size: 'md',
+                                scope: $scope
+                            });
+                        };
+                        $scope.addwishlist()
+                    }
+                });
+
+            } else {
+                console.log("User not logged in");
+                $scope.productId = $.jStorage.get('wishlist') ? $.jStorage.get('wishlist') : [];
+                $scope.productId.push(prod.product);
+                $.jStorage.set('wishlist', $scope.productId);
+                console.log("offflinewishlist:::::::")
+
+                $scope.addwishlist = function () {
+                    $scope.addwishlistmodal = $uibModal.open({
+                        animation: true,
+                        templateUrl: 'views/modal/wishlistadd.html',
+                        size: 'md',
+                        scope: $scope
+                    });
+                };
+                $scope.addwishlist()
+            }
+        }
 
     })
     .controller('compareProductsCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -934,7 +990,6 @@ myApp
 
         /**********logic for checkbox on reload************ */
         $rootScope.checkStateOnReload = function (prodid) {
-
             var cp = $.jStorage.get("compareproduct")
             var result = _.find(cp, {
                 productId: prodid
