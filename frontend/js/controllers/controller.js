@@ -920,6 +920,16 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
                 $scope.showCheck = true
             }
         }
+        $scope.removeFromCompare = function (prodId) {
+
+            var removeCompare = $.jStorage.get("compareproduct");
+            var result = _.remove(removeCompare, {
+                productId: prodId
+            });
+            console.log("removed from compaare", removeCompare);
+            $.jStorage.set("compareproduct", removeCompare);
+            $state.reload();
+        }
 
         /**********logic for checkbox on reload************ */
         $scope.checkStateOnReload = function (prodid) {

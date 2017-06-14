@@ -214,7 +214,7 @@
                                 <img ng-src="{{compare.images[0].image | serverimage}}" class="img-responsive">
                                 <p>{{compare.productName}}</p>
                                 <div class="remove-item">
-                                    <button type="button" class="btn btn-circle">X</button>
+                                    <button type="button" class="btn btn-circle" ng-click="removeFromCompare(compare.productId)">X</button>
                                 </div>
                             </div>
                         </div>
