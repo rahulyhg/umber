@@ -1,4 +1,5 @@
-myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, WishlistService, NavigationService, ProductService, $timeout, $location) {
+myApp
+    .controller('HomeCtrl', function ($scope, TemplateService, CartService, WishlistService, NavigationService, ProductService, $timeout, $location) {
         $scope.template = TemplateService.getHTML("content/home.html");
         TemplateService.title = "Home"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -85,20 +86,20 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
                     }
                 }
             }
-            console.log("temparraqyfor offline cart", $scope.tempcart)
+
             ProductService.getFeatured(function (data) {
                 $scope.featured = data.data.data;
-                console.log("Featured: ", $scope.featured);
+
             });
         }
         $scope.checkInCart = function (productId) {
-            console.log("inside checkcart");
+
             if (userId.userId) {
-                console.log("checkproductid:::", productId);
+
                 var result = _.find($scope.tempcart, {
                     "productId": productId
                 });
-                console.log("result:::::", result)
+
                 if (result) {
                     return true
                 } else {
@@ -108,7 +109,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
                 var result = _.find($scope.tempcart, {
                     "productId": productId
                 });
-                console.log("result:::::", result)
+
                 if (result) {
                     return true
                 } else {
@@ -118,9 +119,9 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
         }
 
         $scope.checkWishlist = function (productId) {
-            console.log("inside checkcart");
+
             if (userId.userId) {
-                console.log("checkproductid:::", productId);
+
                 var result = _.find($scope.wishlist, {
                     "productId": productId
                 });
@@ -134,7 +135,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
                 var result = _.find($scope.wishlist, {
                     "productId": productId
                 });
-                console.log("result:::::", result)
+
                 if (result) {
                     return "fa fa-heart";
                 } else {
@@ -871,7 +872,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
         $scope.navigation = NavigationService.getNavigation();
 
     })
-    .controller('ListingPageCtrl', function ($scope, $stateParams, $state, WishlistService, TemplateService, NavigationService,
+    .controller('ListingPageCtrl', function ($scope, $rootScope, $stateParams, $state, WishlistService, TemplateService, NavigationService,
         SizeService, BannerService, CategoryService, ProductService, $timeout) {
         $scope.template = TemplateService.getHTML("content/listing-page.html");
         TemplateService.title = "Form"; //This is the Title of the Website
@@ -880,9 +881,9 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
         var banner = {
             pageName: "listing-page"
         }
-        console.log("bannerservice:::::")
+
         BannerService.getBanner(banner, function (data) {
-            console.log("bannerservice:::::::", data)
+
             if (data.data.value)
                 $scope.banner = data.data.data;
 
@@ -896,7 +897,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
             $scope.compareproduct = $.jStorage.get('compareproduct')
         }
 
-        $scope.clickfun = function (product) {
+        $rootScope.clickfun = function (product) {
             console.log(product)
             $scope.compareproduct = $.jStorage.get('compareproduct') ? $.jStorage.get('compareproduct') : [];
             var result = _.find($scope.compareproduct, {
@@ -932,7 +933,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
         }
 
         /**********logic for checkbox on reload************ */
-        $scope.checkStateOnReload = function (prodid) {
+        $rootScope.checkStateOnReload = function (prodid) {
 
             var cp = $.jStorage.get("compareproduct")
             var result = _.find(cp, {
@@ -1017,7 +1018,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
         //TODO: For demo purpose. Use category with id in production
         ProductService.getProductsWithCategory(filter, function (data) {
             $scope.products = _.chunk(data.data.data, 3);
-            console.log("Listing page products: ", $scope.products);
+
         });
         var userId = {
             userId: $.jStorage.get("userId"),
@@ -1062,11 +1063,11 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
         }
         $scope.checkWishlist = function (productId) {
             if (userId.userId) {
-                console.log("checkproductid:::", productId);
+
                 var result = _.find($scope.wishlist, {
                     "productId": productId
                 });
-                console.log("result:::::", result)
+
                 if (result) {
                     return "fa fa-heart";
                 } else {
@@ -1076,7 +1077,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
                 var result = _.find($scope.wishlist, {
                     "productId": productId
                 });
-                console.log("result:::::", result)
+
                 if (result) {
                     return "fa fa-heart";
                 } else {
@@ -1086,13 +1087,13 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
         }
 
         $scope.checkInCart = function (productId) {
-            console.log("inside checkcart");
+
             if (userId.userId) {
                 console.log("checkproductid:::", productId);
                 var result = _.find($scope.tempcart, {
                     "productId": productId
                 });
-                console.log("result:::::", result)
+
                 if (result) {
                     return true
                 } else {
@@ -1102,7 +1103,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, CartService, Wis
                 var result = _.find($scope.tempcart, {
                     "productId": productId
                 });
-                console.log("result:::::", result)
+
                 if (result) {
                     return true
                 } else {
