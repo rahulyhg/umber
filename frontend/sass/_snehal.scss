@@ -264,8 +264,12 @@ img.loading {
             border: 1px solid $borderColor;
         }
         .viewSize {
-            //  opacity: 0;
-            display: none; //  @include transition(opacity 0.5s ease);
+            visibility: hidden;
+            opacity: 0;
+            @include transform(scaleX(0));
+            @include transform-origin(left center);
+            @include transition(all 0.35s ease);
+            @include size(auto, 0);
             .buy-para__sizes {
                 @include margin(5px null 5px null);
                 p {
@@ -278,8 +282,11 @@ img.loading {
             }
         }
         .view--btn {
-            // opacity: 0;
-            display: none; //@include transition(opacity 0.5s ease);
+            visibility: hidden;
+            opacity: 0;
+            @include transform(scaleX(0));
+            @include transform-origin(left center);
+            @include transition(all 0.35s ease);
             @extend .btn--brown;
             width: 115px;
             @include padding(3px 0px); // display: none;
@@ -305,6 +312,19 @@ img.loading {
                 @extend .btn--brown;
                 width: 107px;
             }
+        }
+    }
+    &:hover {
+        .viewSize {
+            visibility: visible;
+            opacity: 1;
+            @include transform(scaleX(1));
+            @include size(auto, auto);
+        }
+        .view--btn {
+            opacity: 1;
+            visibility: visible;
+            @include transform(scaleX(1));
         }
     }
 } //SCSS FOR INDIVIDUAL PAGE
