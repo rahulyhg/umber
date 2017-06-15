@@ -111,8 +111,6 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
         }
         if (userId.accessToken) {
             WishlistService.getWishlist(userId, function (data) {
-
-
                 $scope.wishlists = data.data.data;
                 console.log("wishlist returneddata::::::", $scope.wishlists)
                 $scope.newA = _.chunk($scope.wishlists, 4);
@@ -122,6 +120,28 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
             $scope.wishlists = $.jStorage.get("wishlist");
             console.log("offlinewishlist returneddata::::::", $scope.wishlists)
             $scope.newA = _.chunk($scope.wishlists, 4);
+        }
+        $scope.removeFromWishlist = function (prodId) {
+            if (userId && userId.userId) {
+                var userId = {
+                    userId: $.jStorage.get("userId"),
+                    accessToken: $.jStorage.get("accessToken"),
+                    productId: prodId
+                }
+                WishlistService.removeProduct(userId, function (data) {
+
+                })
+                //remove online wishlist api
+            } else {
+                var wishlist = $.jStorage.get("wishlist")
+                _.remove(wishlist, {
+                    productId: prodId
+                });
+                $.jStorage.set("wishlist", wishlist);
+                $scope.wishlists = $.jStorage.get("wishlist")
+                $scope.newA = _.chunk($scope.wishlists, 4);
+                console.log($scope.wishlists);
+            }
         }
     })
     .controller('loginModalCtrl', function ($scope, $state, $uibModalInstance, UserService, CartService, WishlistService) {
