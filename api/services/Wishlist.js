@@ -92,6 +92,27 @@ var model = {
                 });
             }
         });
+    },
+
+    removeProductFromWishlist: function (products, callback) {
+        async.waterfall([
+            function findUserWithAccessToken(cbWaterfall1) {
+                User.isUserLoggedIn(products, cbWaterfall1);
+            },
+            function removeFromWishlist(user, cbWaterfall2) {
+                Wishlist.findOneAndUpdate({
+                    userId: user._id
+                }, {
+                    $pull: {
+                        products: {
+                            '$in': [products.productId]
+                        }
+                    }
+                }).then(cbWaterfall2)
+            }
+        ], function (err, data) {
+            callback(err, data);
+        });
     }
 };
 module.exports = _.assign(module.exports, exports, model);

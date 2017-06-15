@@ -22,6 +22,18 @@ var controller = {
                 }
             })
         }
+    },
+
+    removeProductFromWishlist: function (req, res) {
+        if (req.body) {
+            Wishlist.removeProductFromWishlist(req.body, res.callback);
+        } else {
+            res.json({
+                message: {
+                    data: "Invalid request!"
+                }
+            });
+        }
     }
 };
 module.exports = _.assign(module.exports, controller);
