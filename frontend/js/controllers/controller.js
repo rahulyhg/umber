@@ -928,7 +928,7 @@ myApp
         $scope.navigation = NavigationService.getNavigation();
 
     })
-    .controller('ListingPageCtrl', function ($scope, CartService, $rootScope, $stateParams, $state, WishlistService, TemplateService, NavigationService,
+    .controller('ListingPageCtrl', function ($scope, toastr, CartService, $rootScope, $stateParams, $state, WishlistService, TemplateService, NavigationService,
         SizeService, BannerService, CategoryService, ProductService, $timeout) {
         $scope.template = TemplateService.getHTML("content/listing-page.html");
         TemplateService.title = "Form"; //This is the Title of the Website
@@ -961,10 +961,36 @@ myApp
             var input = {
                 "category": [selectedCategory]
             }
-            console.log(input)
-
             ProductService.getProductsWithFilters(input, function (data) {
-                console.log(data)
+                if (data.data.data.length == 0) {
+                    $scope.displayMessage = "No Data Found";
+                    $scope.products = ""
+                } else if (!_.isEmpty(data.data.data)) {
+                    $scope.displayMessage = "";
+                    var input = {
+                        "category": selectedCategory
+                    }
+                    ProductService.getFiltersWithCategory(input, function (data) {
+                        console.log("product category on basis of category", data.data.data)
+                        $scope.filters = data.data.data;
+                        $scope.slider_translate = {
+                            minValue: $scope.filters.priceRange[0].min,
+                            maxValue: $scope.filters.priceRange[0].max,
+                            options: {
+                                ceil: $scope.filters.priceRange[0].max,
+                                floor: $scope.filters.priceRange[0].min,
+                                id: 'translate-slider',
+                                translate: function (value, id, which) {
+                                    console.info(value, id, which);
+                                    return '$' + value;
+                                }
+                            }
+                        };
+                    })
+                    $scope.products = _.chunk(data.data.data, 3);
+                } else {
+                    toastr.error('There was some error', 'Error');
+                }
             })
         }
         $rootScope.clickfun = function (product) {
@@ -1026,9 +1052,6 @@ myApp
 
         });
         // Ideally products should be retrieved with respect to category
-        var data = {
-            category: "592e6d69b958d66a25c0fe48"
-        }
 
         $scope.filterProducts = function (filterParameter) {
             ProductService.filterProducts(filterParameter, function (data) {
@@ -1038,29 +1061,7 @@ myApp
             });
         }
 
-        ProductService.getFiltersWithCategory(data, function (data) {
 
-            if (data.data.value) {
-                $scope.filters = data.data.data;
-                $scope.slider_translate = {
-                    minValue: $scope.filters.priceRange[0].min,
-                    maxValue: $scope.filters.priceRange[0].min,
-                    options: {
-                        ceil: 7000,
-                        floor: 100,
-                        id: 'translate-slider',
-                        translate: function (value, id, which) {
-                            console.info(value, id, which);
-                            return '$' + value;
-                        }
-                    }
-                };
-            }
-        });
-
-        // ProductService.getProductsWithCategoryId(categoryId, function (data) {
-        //     $scope.products = data.data.data;
-        // })
 
         $scope.submitForm = function (data) {
             console.log(data);
