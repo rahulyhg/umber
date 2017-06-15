@@ -269,17 +269,16 @@ img.loading {
             @include transform(scaleX(0));
             @include transform-origin(left center);
             @include transition(all 0.35s ease);
-            @include size(auto, 0);
-            .buy-para__sizes {
-                @include margin(5px null 5px null);
-                p {
-                    font-size: 14px;
-                    box-sizing: border-box;
-                    border: 1px solid;
-                    padding: 2px;
-                    display: inline-block;
-                }
-            }
+            @include size(auto, 0); // .buy-para__sizes {
+            //     @include margin(5px null 5px null);
+            //     p {
+            //         font-size: 14px;
+            //         box-sizing: border-box;
+            //         border: 1px solid;
+            //         padding: 2px;
+            //         display: inline-block;
+            //     }
+            // }
         }
         .view--btn {
             visibility: hidden;
@@ -326,6 +325,18 @@ img.loading {
             visibility: visible;
             @include transform(scaleX(1));
         }
+    }
+}
+
+// we have kept this class out because it is used in individual page design. so to use this class, write @extend to extend this class in your own class.
+.buy-para__sizes {
+    @include margin(5px null 5px null);
+    p {
+        font-size: 14px;
+        box-sizing: border-box;
+        border: 1px solid;
+        padding: 2px;
+        display: inline-block;
     }
 } //SCSS FOR INDIVIDUAL PAGE
 .customer-choice {
@@ -562,6 +573,12 @@ img.loading {
     }
     .btn-no {
         width: 80px;
+    }
+    .viewSize {
+        @extend .buy-para__sizes;
+        p {
+            @include padding(2px 5px);
+        }
     }
 }
 

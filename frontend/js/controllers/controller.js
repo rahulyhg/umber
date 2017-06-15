@@ -930,8 +930,7 @@ myApp
     })
 
     .controller('ListingPageCtrl', function ($scope, toastr, CartService, $rootScope, $stateParams, $state, WishlistService, TemplateService, NavigationService,
-
-        SizeService, BannerService, CategoryService, ProductService, $timeout) {
+        SizeService, BannerService, CategoryService, ProductService, $timeout, $uibModal) {
         $scope.template = TemplateService.getHTML("content/listing-page.html");
         TemplateService.title = "Form"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -1183,6 +1182,17 @@ myApp
                 }
             }
         }
+        // This function is used to display the modal on quck view button
+        $scope.quickviewProduct = function () {
+            var quickviewProduct = $uibModal.open({
+                animation: true,
+                templateUrl: 'views/modal/quickview-product.html',
+                scope: $scope,
+                size: 'lg'
+            });
+
+        };
+        //End of  modal on quck view button
 
     })
     .controller('FormCtrl', function ($scope, TemplateService, NavigationService, $timeout) {

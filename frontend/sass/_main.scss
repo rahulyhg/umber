@@ -1032,7 +1032,7 @@ header {
         }
         .featured__icon-cart {
             @include position(absolute,
-            null 0 21.5% null);
+            null 0 60px null);
             @include size(35px,
             35px);
             padding: 6px;
@@ -1444,10 +1444,9 @@ header {
     box-shadow: -2px 1px 6px #dedede;
 }
 
-.modal-dialog {
-    width: 735px;
-}
-
+// .modal-dialog {
+//     width: 735px;
+// }
 .cross-absolute {
     right: 10px;
     width: 3%;
@@ -1968,3 +1967,9 @@ header {
 
 //Start of My account(myaccount.html)
 //End of My account(myaccount.html)
+// All modals html
+.quick-view-product {
+    @extend .individual-container; // This class is extended from snehal.scss
+}
+
+//End of all modals html

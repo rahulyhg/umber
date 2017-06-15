@@ -7,6 +7,9 @@
     <div class="container">
         <div class="mycart-container">
             <table class="table mycart-table">
+                <caption class="text-uppercase">
+                    there are items in your cart which are currently not avaliable.please remove to proceed to checkout
+                </caption>
                 <thead>
                     <tr>
                         <th>ITEM</th>
@@ -24,6 +27,7 @@
                                 <div class="mycart-info">
                                     <p class="item__title1">{{product.product.productName}}</p>
                                 </div>
+                                <div>OUT OF STOCK</div>
                             </div>
                         </td>
                         <td>{{product.product.color.name}}</td>
@@ -43,8 +47,6 @@
                             <a ng-click="updateQuantity($index, 1)" ng-if="product.quantity< product.product.quantity">
                                 <i class="fa fa-plus display-inblock square__bg" aria-hidden="true"></i>
                             </a>
-
-
                         </td>
                         <td>&#x20b9 &nbsp;{{product.product.price * product.quantity}}</td>
 
@@ -61,20 +63,28 @@
                 </tbody>
             </table>
             <div class="mycart-footer">
-                <div class="pull-left  input-pad">
-                    <span>ENTER COUPON CODE:  </span> <input type="text">
+                <div class="pull-left">
+                    <span>ENTER COUPON CODE:  </span>
+                    <input type="text" class="form-control">
+                    <button class="btn apply--btn text-uppercase">apply</button>
+                    <span class="text-uppercase"><i class="fa fa-check"></i>coupen code applied</span>
+                    <a href="">Check Offer</a>
                 </div>
                 <div class="pull-right">
                     <div class="text-right inline-block">
-                        <p>TOTAL :</p>
+                        <p>ITEM(S) SUBTOTAL :</p>
                         <p>SHIPPING:</p>
-                        <p>DISCOUNT:</p>
+                        <p>MEMBER'SDISCOUNT:</p>
+                        <p>TOTAL:</p>
+                        <p>GST:</p>
                         <p>GRAND TOTAL:</p>
                     </div>
                     <div class="inline-block">
                         <p>&#x20b9 {{total}}</p>
-                        <p> 0</p>
-                        <p> 0</p>
+                        <p>&#x20b9 0</p>
+                        <p>&#x20b9 0</p>
+                        <p>&#x20b9 0</p>
+                        <p>&#x20b9 0</p>
                         <p>&#x20b9 {{grandTotal}}</p>
                     </div>
                 </div>
