@@ -105,14 +105,12 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
         }
     })
     .controller('wishlistModalCtrl', function ($scope, $state, $uibModalInstance, UserService, CartService, WishlistService) {
-        var userId = {
+        $scope.userId = {
             userId: $.jStorage.get("userId"),
             accessToken: $.jStorage.get("accessToken")
         }
-        if (userId.accessToken) {
-            WishlistService.getWishlist(userId, function (data) {
-
-
+        if ($scope.userId.accessToken) {
+            WishlistService.getWishlist($scope.userId, function (data) {
                 $scope.wishlists = data.data.data;
                 console.log("wishlist returneddata::::::", $scope.wishlists)
                 $scope.newA = _.chunk($scope.wishlists, 4);
@@ -122,6 +120,35 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
             $scope.wishlists = $.jStorage.get("wishlist");
             console.log("offlinewishlist returneddata::::::", $scope.wishlists)
             $scope.newA = _.chunk($scope.wishlists, 4);
+        }
+        $scope.removeFromWishlist = function (prodId) {
+            if ($scope.userId.accessToken) {
+                console.log("if ran for removal")
+                var userId = {
+                    userId: $.jStorage.get("userId"),
+                    accessToken: $.jStorage.get("accessToken"),
+                    productId: prodId
+                }
+                WishlistService.removeProduct(userId, function (data) {
+                    console.log(data.data.data)
+                    WishlistService.getWishlist($scope.userId, function (data) {
+                        $scope.wishlists = data.data.data;
+                        console.log("wishlist returneddata::::::", $scope.wishlists)
+                        $scope.newA = _.chunk($scope.wishlists, 4);
+
+                    });
+                })
+                //remove online wishlist api
+            } else {
+                var wishlist = $.jStorage.get("wishlist")
+                _.remove(wishlist, {
+                    productId: prodId
+                });
+                $.jStorage.set("wishlist", wishlist);
+                $scope.wishlists = $.jStorage.get("wishlist")
+                $scope.newA = _.chunk($scope.wishlists, 4);
+                console.log($scope.wishlists);
+            }
         }
     })
     .controller('loginModalCtrl', function ($scope, $state, $uibModalInstance, UserService, CartService, WishlistService) {

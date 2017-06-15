@@ -963,9 +963,10 @@ myApp
                 "category": [selectedCategory]
             }
             ProductService.getProductsWithFilters(input, function (data) {
+
                 if (data.data.data.length == 0) {
                     $scope.displayMessage = "No Data Found";
-                    $scope.products = ""
+
                 } else if (!_.isEmpty(data.data.data)) {
                     $scope.displayMessage = "";
                     var input = {
@@ -988,7 +989,7 @@ myApp
                             }
                         };
                     })
-                    $scope.products = _.chunk(data.data.data, 3);
+
                 } else {
                     toastr.error('There was some error', 'Error');
                 }
@@ -1056,8 +1057,8 @@ myApp
 
         $scope.filterProducts = function (filterParameter) {
             ProductService.filterProducts(filterParameter, function (data) {
+                console.log(data)
                 $scope.products = _.chunk(data.data.data, 3);
-
                 console.log("Listing page products: ", $scope.products);
             });
         }
@@ -1088,6 +1089,7 @@ myApp
         };
         //TODO: For demo purpose. Use category with id in production
         ProductService.getProductsWithCategory(filter, function (data) {
+            console.log(data)
             $scope.products = _.chunk(data.data.data, 3);
 
         });

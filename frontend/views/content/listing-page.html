@@ -267,14 +267,14 @@
                                             <h5>{{product.productName}} <br>{{product.type.name}}</h5>
                                             <div class="viewSize">
                                                 <div class="inline-block">
-                                                    <p>Size:</p>
+                                                    <p>Sizes:</p>
                                                 </div>
-                                                <div class="inline-block buy-para__sizes">
-                                                    <p>36</p>
-                                                    <p>38</p>
+                                                <div class="inline-block buy-para__sizes" ng-repeat="size in product.sizes">
+                                                    <p>{{size.name}}</p>
+                                                    <!--<p>38</p>
                                                     <p>40</p>
                                                     <p>42</p>
-                                                    <p>44</p>
+                                                    <p>44</p>-->
                                                 </div>
                                             </div>
                                             <hr>
@@ -292,7 +292,10 @@
                                                     </a>
                                                 </div>
                                                 <div class=" inline-block ">
+
                                                     <button class="btn btn-default view--btn text-uppercase " ng-click="quickviewProduct()">QUICK VIEW</button>
+
+
                                                 </div>
                                             </div>
                                         </div>
