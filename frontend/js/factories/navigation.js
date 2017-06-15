@@ -21,7 +21,7 @@ myApp.factory('NavigationService', function ($http) {
         },
 
         EnabledHomeScreen: function (callback) {
-            console.log("Frontend->navigation.js->data");
+
             $http({
                 url: adminurl + 'HomeScreen/getEnabledHomeContent',
                 method: 'POST',
@@ -30,7 +30,7 @@ myApp.factory('NavigationService', function ($http) {
         },
 
         getEnabledCategories: function (callback) {
-            console.log("Navigation->Categories");
+
             $http({
                 url: adminurl + 'HomeCategory/getEnabledCategories',
                 method: 'POST',
@@ -47,7 +47,7 @@ myApp.factory('NavigationService', function ($http) {
         },
 
         getEnabledBlogs: function (callback) {
-            console.log("Getting enabled blogs");
+
             $http({
                 url: adminurl + 'Blog/getEnabledBlogs',
                 method: 'POST',
@@ -56,7 +56,7 @@ myApp.factory('NavigationService', function ($http) {
         },
 
         getEnabledCollections: function (callback) {
-            console.log("Getting enabled collections");
+
             $http({
                 url: adminurl + 'Collection/getEnabledCollections',
                 method: 'POST',
@@ -65,7 +65,7 @@ myApp.factory('NavigationService', function ($http) {
         },
 
         getListingFilterFields: function (callback) {
-            console.log("Getting filter fields");
+
             $http({
                 url: adminurl + 'Fabric/getListingFilterFields',
                 method: 'POST',

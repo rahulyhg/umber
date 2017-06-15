@@ -9,7 +9,9 @@ var myApp = angular.module('myApp', [
     'ngSanitize',
     'angular-flexslider',
     'rzModule',
-    'ui.swiper'
+    'ui.swiper',
+    'toastr'
+
 ]);
 
 // Define all the routes below

@@ -22,7 +22,7 @@ module.exports = [
   'bower_components/angulartics-google-analytics/dist/angulartics-ga.min.js',
   'bower_components/angular-ui-swiper/dist/angular-ui-swiper.js',
   'bower_components/angularjs-slider/dist/rzslider.min.js',
-
+  'bower_components/angular-toastr/dist/angular-toastr.tpls.js',
   //App.js
   'js/app.js',
 
