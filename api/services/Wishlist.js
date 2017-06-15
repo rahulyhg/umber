@@ -97,7 +97,7 @@ var model = {
     removeProductFromWishlist: function (products, callback) {
         async.waterfall([
             function findUserWithAccessToken(cbWaterfall1) {
-                User.isUserLoggedIn(products, cbWaterfall1);
+                User.isUserLoggedIn(products.accessToken, cbWaterfall1);
             },
             function removeFromWishlist(user, cbWaterfall2) {
                 Wishlist.findOneAndUpdate({
@@ -108,9 +108,10 @@ var model = {
                             '$in': [products.productId]
                         }
                     }
-                }).then(cbWaterfall2)
+                }).exec(cbWaterfall2)
             }
         ], function (err, data) {
+            console.log("Wishlist remove error: ", err);
             callback(err, data);
         });
     }
