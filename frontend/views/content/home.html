@@ -93,11 +93,12 @@
                             <li>
                                 <div class=" new-arrival__banner-detail relate">
                                     <img ng-src="{{newArrival.images[0].image | serverimage}}" alt="" class="img-responsive" ui-sref="individual-page({id: newArrival.productId})">
+
                                     <div class="get-left">
                                         <h3><i class="fa fa-inr" aria-hidden="true"></i>{{newArrival.price}}</h3>
                                         <h4>{{newArrival.productName}}</h4>
-
                                     </div>
+                                    <i class="fa fa-shopping-cart"></i>
                                 </div>
                             </li>
                         </flex-slider>
@@ -128,11 +129,11 @@
                                 <h4 class="text-uppercase">{{new.productName}}</h4>
                             </div>
                             <div class="featured__icon-heart">
-                                <i ng-class="checkWishlist(new._id)" aria-hidden="true"></i>
+                                <i ng-class="checkWishlist(new.productId)" aria-hidden="true"></i>
                             </div>
 
                             <div class="featured__icon-cart" ng-if="checkInCart(new.productId)">
-                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                <i class="fa fa-shopping-cart" aria-hidden="true" data-toggle="tooltip" title="Added to cart"></i>
 
                             </div>
                         </div>

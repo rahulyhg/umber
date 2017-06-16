@@ -456,6 +456,15 @@ var model = {
                         createdAt: -1
                     }
                 });
+
+                // Remove null values for product id
+                pipeline.push({
+                    $match: {
+                        "productId": {
+                            "$exists": true
+                        }
+                    }
+                });
                 // Get unique products
                 pipeline.push({
                     $group: {
@@ -755,11 +764,16 @@ var model = {
     },
 
     getProductsWithFilters: function (filters, callback) {
+        console.log("Filters: ", filters);
         var updatedFilters = _.mapValues(filters, function (value) {
+            var newVal = _.each(value, function (singleValue) {
+                return mongoose.Types.ObjectId(singleValue);
+            })
             return {
-                "$in": value
+                "$in": newVal
             }
         });
+        console.log("new filters: ", updatedFilters);
         Product.find(updatedFilters).sort({
             'createdAt': -1
         }).skip((filters.page - 1) * Config.maxRow).limit(Config.maxRow).lean().exec(function (err, products) {

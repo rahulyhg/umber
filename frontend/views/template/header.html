@@ -48,7 +48,13 @@
             </div>
             <div class="collapse navbar-collapse" id="nav-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><i class="fa fa-search"></i></a></li>
+                    <li><a href="#"><i class="fa fa-search"></i></a>
+                        <div class="search-box-area">
+                            <form action="#">
+                                <input type="search" placeholder="search">
+                            </form>
+                        </div>
+                    </li>
                     <li ng-click="openWishlistModal10();"><a href=""><i class="fa fa-heart "></i> Wishlist</a></li>
                     <li uib-dropdown>
                         <a href="# " uib-dropdown-toggle ui-sref="mycart ">
@@ -76,7 +82,7 @@
                                                 <span>Size</span>
                                             </div>
                                         </div>
-                                        <p><button class="btn remove--btn " ng-click="removeProductFromCart(cart._id, product._id)
+                                        <p><button class="btn remove--btn " ng-click="removeProductFromCart(cart._id, product.product._id)
                         "><i class="fa fa-trash-o " aria-hidden="true "></i>Remove</button></p>
                                     </div>
                                 </div>

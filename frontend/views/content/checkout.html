@@ -11,11 +11,11 @@
                             <button class="btn btn--list" ng-disabled="loggedUser" ng-click="view='loginTab'" ng-class="{
                         'btn--brownActive': view=='loginTab' }">Login</button>
                             <div>
-                                <button class="btn btn--list" ng-click="view='orderTab'" ng-class="{
+                                <button class="btn btn--list" ng-disabled="!loggedUser" ng-click="view='orderTab'" ng-class="{
                         'btn--brownActive': view=='orderTab' }">Order</button>
                             </div>
                             <div>
-                                <button class="btn btn--list" ng-click="view='detailTab'" ng-class="{
+                                <button class="btn btn--list" ng-disabled="!loggedUser" ng-click="view='detailTab'" ng-class="{
                         'btn--brownActive': view=='detailTab' }"> Details</button>
                             </div>
                             <div>
@@ -122,9 +122,9 @@
                             </form>
                         </div>
                     </div>
-                    <div class="order-tab" ng-if="view=='orderTab'">
-                        <div class="col-md-9">
-                            <table class="table order-table table-bottom">
+                    <div class="order-tab">
+                        <div class="col-md-9 ">
+                            <table class="table order-table table-bottom ">
                                 <thead>
                                     <tr>
                                         <th>item</th>
@@ -135,14 +135,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="order in orderTable.products">
+                                    <tr ng-repeat="order in orderTable.products ">
                                         {{order}}
                                         <td>
-                                            <div class="item">
-                                                <img ng-src="{{order.product.images[0].image | serverimage}}" alt="
-                       " class="img-responsive item__img-checkout">
-                                                <div class="mycart-info">
-                                                    <p class="item__title1">{{order.productName}}</p>
+                                            <div class="item ">
+                                                <img ng-src="{{order.product.images[0].image | serverimage}} " alt="
+                        " class="img-responsive item__img-checkout ">
+                                                <div class="mycart-info ">
+                                                    <p class="item__title1 ">{{order.productName}}</p>
                                                 </div>
                                             </div>
                                         </td>
@@ -154,152 +154,163 @@
                                 </tbody>
                                 <!--<tfoot>
                                     <tr>
-                                        <td colspan="6">Grand Total: <span>170.98</span></td>
+                                        <td colspan="6 ">Grand Total: <span>170.98</span></td>
                                     </tr>
                                 </tfoot>-->
                             </table>
-                            <div class="pull-right">
-                                <p class="text-right">GRAND TOTAL : <span>&#x20b9 {{grandTotal}}</span></p>
+                            <div class="pull-right ">
+                                <p class="text-right ">GRAND TOTAL : <span>&#x20b9 {{grandTotal}}</span></p>
                                 <p>
-                                    <button class="btn next--btn btn-default" ng-click="gotoDetails()">Next</button>
+                                    <button class="btn next--btn btn-default " ng-click="gotoDetails() ">Next</button>
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div class="detail-tab" ng-if="view=='detailTab'">
-                        <div class="col-md-8 col-md-offset-1">
-                            <div class="details-form">
+                    <div class="detail-tab " ng-if="view=='detailTab' ">
+                        <div class="col-md-8 col-md-offset-1 ">
+                            <div class="details-form ">
                                 <div>
-                                    <h3 class="marg0 detail-tab__head">your details</h3>
+                                    <h3 class="marg0 detail-tab__head ">your details</h3>
                                 </div>
-                                <div class="row">
-                                    <div class="customized-form">
-                                        <div class="form-group">
-                                            <div class="col-md-4">
-                                                <input type="text" placeholder="First Name" ng-model="user.firstName" class="form-control">
+                                <div class="row ">
+                                    <div class="customized-form ">
+                                        <div class="form-group ">
+                                            <div class="col-md-4 ">
+                                                <input type="text " placeholder="First Name " ng-model="user.firstName
+                        " class="form-control ">
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="col-md-4">
-                                                <input type="text" placeholder="Last Name" ng-model="user.lastName" class="form-control">
+                                        <div class="form-group ">
+                                            <div class="col-md-4 ">
+                                                <input type="text " placeholder="Last Name " ng-model="user.lastName
+                        " class="form-control ">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="customized-form">
-                                        <div class="form-group">
-                                            <div class="col-md-4">
-                                                <input type="text" placeholder="Mobile No" ng-model="user.mobile" class="form-control">
+                                <div class="row ">
+                                    <div class="customized-form ">
+                                        <div class="form-group ">
+                                            <div class="col-md-4 ">
+                                                <input type="text " placeholder="Mobile No " ng-model="user.mobile
+                        " class="form-control ">
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="col-md-4">
-                                                <input type="email" placeholder="Email" ng-model="user.email" class="form-control">
+                                        <div class="form-group ">
+                                            <div class="col-md-4 ">
+                                                <input type="email " placeholder="Email " ng-model="user.email
+                        " class="form-control ">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="details-form">
-                                <div class="row">
-                                    <div class="col-md-6">
+                            <div class="details-form ">
+                                <div class="row ">
+                                    <div class="col-md-6 ">
                                         <div>
-                                            <h3 class="marg0 detail-tab__head">billing address</h3>
+                                            <h3 class="marg0 detail-tab__head ">billing address</h3>
                                         </div>
-                                        <div class="row">
-                                            <div class="customized-form">
-                                                <div class="form-group">
-                                                    <div class="col-md-10">
-                                                        <input type="text" placeholder="Line 1*" ng-model="user.billingAddress.line1" class="form-control">
+                                        <div class="row ">
+                                            <div class="customized-form ">
+                                                <div class="form-group ">
+                                                    <div class="col-md-10 ">
+                                                        <input type="text " placeholder="Line 1* " ng-model="user.billingAddress.line1
+                        " class="form-control ">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="customized-form">
-                                                <div class="form-group">
-                                                    <div class="col-md-10">
-                                                        <input type="text" placeholder="Line 2" ng-model="user.billingAddress.line2" class="form-control">
+                                        <div class="row ">
+                                            <div class="customized-form ">
+                                                <div class="form-group ">
+                                                    <div class="col-md-10 ">
+                                                        <input type="text " placeholder="Line 2 " ng-model="user.billingAddress.line2
+                        " class="form-control ">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="customized-form">
-                                                <div class="form-group">
-                                                    <div class="col-md-10">
-                                                        <input type="text" placeholder="Line 3" ng-model="user.billingAddress.line3" class="form-control">
+                                        <div class="row ">
+                                            <div class="customized-form ">
+                                                <div class="form-group ">
+                                                    <div class="col-md-10 ">
+                                                        <input type="text " placeholder="Line 3 " ng-model="user.billingAddress.line3
+                        " class="form-control ">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="customized-form">
-                                                <div class="form-group">
-                                                    <div class="col-md-10">
-                                                        <input type="text" placeholder="City*" ng-model="user.billingAddress.city" class="form-control">
+                                        <div class="row ">
+                                            <div class="customized-form ">
+                                                <div class="form-group ">
+                                                    <div class="col-md-10 ">
+                                                        <input type="text " placeholder="City* " ng-model="user.billingAddress.city
+                        " class="form-control ">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="customized-form">
-                                                <div class="form-group">
-                                                    <div class="col-md-10">
-                                                        <input type="text" placeholder="Pincode" ng-model="user.billingAddress.pincode" class="form-control">
+                                        <div class="row ">
+                                            <div class="customized-form ">
+                                                <div class="form-group ">
+                                                    <div class="col-md-10 ">
+                                                        <input type="text " placeholder="Pincode " ng-model="user.billingAddress.pincode
+                        " class="form-control ">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="customized-form">
-                                                <div class="form-group">
-                                                    <div class="col-md-10">
-                                                        <input type="text" placeholder="State" ng-model="user.billingAddress.state" class="form-control">
+                                        <div class="row ">
+                                            <div class="customized-form ">
+                                                <div class="form-group ">
+                                                    <div class="col-md-10 ">
+                                                        <input type="text " placeholder="State " ng-model="user.billingAddress.state
+                        " class="form-control ">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="customized-form">
-                                                <div class="form-group">
-                                                    <div class="col-md-10">
-                                                        <div class=" form-control relate country-selection">
-                                                            <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
-                                                            <select ng-model="user.billingAddress.country" class="checkout-drop relate"> 
-                                                           <option style="display: none">COUNTRY</option>
+                                        <div class="row ">
+                                            <div class="customized-form ">
+                                                <div class="form-group ">
+                                                    <div class="col-md-10 ">
+                                                        <div class=" form-control relate country-selection ">
+                                                            <i class="fa fa-angle-down pull-right " aria-hidden="true "></i>
+                                                            <select ng-model="user.billingAddress.country " class="checkout-drop
+                        relate "> 
+                                                           <option style="display: none ">COUNTRY</option>
                                                             <option>INDIA</option>
                                                             <option>USA</option>
                                                             <option>LONDON</option>
                                                             </select>
                                                         </div>
-                                                        <!--<div class="dropdown country-selection form-control custom-checkbox">
-                                                            <button class="btn checkout-drop dropdown-toggle" type="button
-                       " data-toggle="dropdown">Country
-                                                              <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></button>
-                                                            <ul class="dropdown-menu">
+                                                        <!--<div class="dropdown country-selection form-control custom-checkbox ">
+                                                            <button class="btn checkout-drop dropdown-toggle " type="button
+                        " data-toggle="dropdown ">Country
+                                                              <i class="fa fa-angle-down pull-right " aria-hidden="true "></i></button>
+                                                            <ul class="dropdown-menu ">
 
                                                                 <li>India
-                                                                    <div class="checkbox">
-                                                                        <input type="checkbox" id="a1">
-                                                                        <label for="a1"> India
+                                                                    <div class="checkbox ">
+                                                                        <input type="checkbox " id="a1 ">
+                                                                        <label for="a1 "> India
                                                                                </label>
                                                                     </div>
 
                                                                 </li>
 
                                                                 <li>USA
-                                                                    <div class="checkbox">
-                                                                        <input type="checkbox" id="a2">
-                                                                        <label for="a2"> USA
+                                                                    <div class="checkbox ">
+                                                                        <input type="checkbox " id="a2 ">
+                                                                        <label for="a2 "> USA
                                                                                </label>
                                                                     </div>
                                                                 </li>
                                                                 <li>London
-                                                                    <div class="checkbox">
-                                                                        <input type="checkbox" id="a3">
-                                                                        <label for="a3">London
+                                                                    <div class="checkbox ">
+                                                                        <input type="checkbox " id="a3 ">
+                                                                        <label for="a3 ">London
                                                                                </label>
                                                                     </div>
                                                                 </li>
@@ -310,106 +321,112 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="custom-checkbox">
-                                            <h3 class="marg0 detail-tab__head">shipping address</h3>
-                                            <div class="checkbox">
-                                                <input type="checkbox" id="a1" ng-click="setDeliveryAddress()">
-                                                <label for="a1">Same as BIlling Address</label>
+                                    <div class="col-md-6 ">
+                                        <div class="custom-checkbox ">
+                                            <h3 class="marg0 detail-tab__head ">shipping address</h3>
+                                            <div class="checkbox ">
+                                                <input type="checkbox " id="a1 " ng-click="setDeliveryAddress() ">
+                                                <label for="a1 ">Same as BIlling Address</label>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="customized-form">
-                                                <div class="form-group">
-                                                    <div class="col-md-10">
-                                                        <input type="text" placeholder="Line 1*" ng-model="user.deliveryAddress.line1" class="form-control">
+                                        <div class="row ">
+                                            <div class="customized-form ">
+                                                <div class="form-group ">
+                                                    <div class="col-md-10 ">
+                                                        <input type="text " placeholder="Line 1* " ng-model="user.deliveryAddress.line1
+                        " class="form-control ">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="customized-form">
-                                                <div class="form-group">
-                                                    <div class="col-md-10">
-                                                        <input type="text" placeholder="Line 2" ng-model="user.deliveryAddress.line2" class="form-control">
+                                        <div class="row ">
+                                            <div class="customized-form ">
+                                                <div class="form-group ">
+                                                    <div class="col-md-10 ">
+                                                        <input type="text " placeholder="Line 2 " ng-model="user.deliveryAddress.line2
+                        " class="form-control ">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="customized-form">
-                                                <div class="form-group">
-                                                    <div class="col-md-10">
-                                                        <input type="text" placeholder="Line 3" ng-model="user.deliveryAddress.line3" class="form-control">
+                                        <div class="row ">
+                                            <div class="customized-form ">
+                                                <div class="form-group ">
+                                                    <div class="col-md-10 ">
+                                                        <input type="text " placeholder="Line 3 " ng-model="user.deliveryAddress.line3
+                        " class="form-control ">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="customized-form">
-                                                <div class="form-group">
-                                                    <div class="col-md-10">
-                                                        <input type="text" placeholder="City*" ng-model="user.deliveryAddress.city" class="form-control">
+                                        <div class="row ">
+                                            <div class="customized-form ">
+                                                <div class="form-group ">
+                                                    <div class="col-md-10 ">
+                                                        <input type="text " placeholder="City* " ng-model="user.deliveryAddress.city
+                        " class="form-control ">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="customized-form">
-                                                <div class="form-group">
-                                                    <div class="col-md-10">
-                                                        <input type="text" placeholder="Pincode" ng-model="user.deliveryAddress.pincode" class="form-control">
+                                        <div class="row ">
+                                            <div class="customized-form ">
+                                                <div class="form-group ">
+                                                    <div class="col-md-10 ">
+                                                        <input type="text " placeholder="Pincode " ng-model="user.deliveryAddress.pincode
+                        " class="form-control ">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="customized-form">
-                                                <div class="form-group">
-                                                    <div class="col-md-10">
-                                                        <input type="text" placeholder="State" ng-model="user.deliveryAddress.state" class="form-control">
+                                        <div class="row ">
+                                            <div class="customized-form ">
+                                                <div class="form-group ">
+                                                    <div class="col-md-10 ">
+                                                        <input type="text " placeholder="State " ng-model="user.deliveryAddress.state
+                        " class="form-control ">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="customized-form">
-                                                <div class="form-group">
-                                                    <div class="col-md-10">
-                                                        <div class=" form-control relate country-selection">
-                                                            <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
-                                                            <select class="checkout-drop relate" ng-model="user.deliveryAddress.country"> 
-                                                            <option style="display: none">COUNTRY</option>
+                                        <div class="row ">
+                                            <div class="customized-form ">
+                                                <div class="form-group ">
+                                                    <div class="col-md-10 ">
+                                                        <div class=" form-control relate country-selection ">
+                                                            <i class="fa fa-angle-down pull-right " aria-hidden="true "></i>
+                                                            <select class="checkout-drop relate " ng-model="user.deliveryAddress.country "> 
+                                                            <option style="display: none ">COUNTRY</option>
                                                             <option>INDIA</option>
                                                             <option>USA</option>
                                                             <option>LONDON</option>
                                                             </select>
                                                         </div>
-                                                        <!--<div class="dropdown country-selection form-control custom-checkbox">
-                                                            <button class="btn checkout-drop dropdown-toggle" type="button
-                       " data-toggle="dropdown">Country
-                                                              <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></button>
-                                                            <ul class="dropdown-menu">
+                                                        <!--<div class="dropdown country-selection form-control custom-checkbox ">
+                                                            <button class="btn checkout-drop dropdown-toggle " type="button
+                        " data-toggle="dropdown ">Country
+                                                              <i class="fa fa-angle-down pull-right " aria-hidden="true "></i></button>
+                                                            <ul class="dropdown-menu ">
                                                                 <li>India
-                                                                    <div class="checkbox">
-                                                                        <input type="checkbox" id="b1">
-                                                                        <label for="b1"> India
+                                                                    <div class="checkbox ">
+                                                                        <input type="checkbox " id="b1 ">
+                                                                        <label for="b1 "> India
                                                                                </label>
                                                                     </div>
 
                                                                 </li>
 
                                                                 <li>USA
-                                                                    <div class="checkbox">
-                                                                        <input type="checkbox" id="b2">
-                                                                        <label for="b2"> USA
+                                                                    <div class="checkbox ">
+                                                                        <input type="checkbox " id="b2 ">
+                                                                        <label for="b2 "> USA
                                                                                </label>
                                                                     </div>
                                                                 </li>
                                                                 <li>London
-                                                                    <div class="checkbox">
-                                                                        <input type="checkbox" id="b3">
-                                                                        <label for="b3">London
+                                                                    <div class="checkbox ">
+                                                                        <input type="checkbox " id="b3 ">
+                                                                        <label for="b3 ">London
                                                                                </label>
                                                                     </div>
                                                                 </li>
@@ -422,32 +439,32 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="details-form">
+                            <div class="details-form ">
                                 <div>
-                                    <h3 class="marg0 detail-tab__head">payment method</h3>
+                                    <h3 class="marg0 detail-tab__head ">payment method</h3>
                                 </div>
-                                <div class="payment-checkbox custom-checkbox">
-                                    <form class="font__style">
-                                        <div class="checkbox checkbox-inline">
-                                            <input type="checkbox" id="p1">
-                                            <label for="p1" class="chk__label text-uppercase">Credit Card</label>
+                                <div class="payment-checkbox custom-checkbox ">
+                                    <form class="font__style ">
+                                        <div class="checkbox checkbox-inline ">
+                                            <input type="checkbox " id="p1 ">
+                                            <label for="p1 " class="chk__label text-uppercase ">Credit Card</label>
                                         </div>
-                                        <div class="checkbox checkbox-inline">
-                                            <input type="checkbox" id="p2">
-                                            <label for="p2" class="chk__label text-uppercase">  Debit card</label>
+                                        <div class="checkbox checkbox-inline ">
+                                            <input type="checkbox " id="p2 ">
+                                            <label for="p2 " class="chk__label text-uppercase ">  Debit card</label>
                                         </div>
-                                        <div class="checkbox checkbox-inline">
-                                            <input type="checkbox" id="p3">
-                                            <label for="p3" class="chk__label text-uppercase">net banking</label>
+                                        <div class="checkbox checkbox-inline ">
+                                            <input type="checkbox " id="p3 ">
+                                            <label for="p3 " class="chk__label text-uppercase ">net banking</label>
                                         </div>
-                                        <div class="checkbox checkbox-inline">
-                                            <input type="checkbox" id="p4">
-                                            <label for="p4" class="chk__label text-uppercase">Cash on delivery</label>
+                                        <div class="checkbox checkbox-inline ">
+                                            <input type="checkbox " id="p4 ">
+                                            <label for="p4 " class="chk__label text-uppercase ">Cash on delivery</label>
                                         </div>
                                     </form>
                                 </div>
-                                <div class="text-center">
-                                    <button class="btn btn-default checkout__cont-btn" ng-click="updateUser()">Continue</button>
+                                <div class="text-center ">
+                                    <button class="btn btn-default checkout__cont-btn " ng-click="updateUser() ">Continue</button>
                                 </div>
                             </div>
                         </div>
@@ -456,6 +473,6 @@
             </div>
         </div>
     </div>
-    <!--<div class="payment-tab">
+    <!--<div class="payment-tab ">
 			</div>-->
 </div>

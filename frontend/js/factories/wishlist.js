@@ -15,6 +15,14 @@ myApp.factory('WishlistService', function ($http) {
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
+        },
+        removeProduct: function (product, callback) {
+            $http({
+                url: adminurl + 'Wishlist/removeProductFromWishlist',
+                data: product,
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
         }
     }
 

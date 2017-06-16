@@ -28,8 +28,8 @@
                             </div>-->
                             <div class="checkbox" ng-repeat="category in categories">
                                 <div class="radio">
-                                    <input type="radio" class="form-control" name="radio" id="category._id">
-                                    <label for="category._id"> <span class="casual"></span>{{category.name}}
+                                    <input type="radio" class="form-control" name="category" id="{{category._id}}" value="{{category.name}}" ng-click="filteredProducts(category._id)">
+                                    <label for="{{category._id}}"> <span ></span>{{category.name}}
                                          
                                        </label>
                                     <!--<input type="radio" class="form-control" name="radio">
@@ -207,18 +207,21 @@
             </div>
 
             <div class="col-md-9">
-                <div class="row">
-                    <div class="Addtocompare" ng-if="showCheck">
-                        <div class="col-md-3" ng-repeat="compare in compareproduct">
-                            <div class="compare-img-list">
+                <div class="Addtocompare relate" ng-if="showCheck">
+                    <div class="row">
+                        <div class="col-md-3" ng-repeat="compare in compareproduct track by $index">
+                            <div class="compare-img-list relate">
                                 <img ng-src="{{compare.images[0].image | serverimage}}" class="img-responsive">
-
                                 <p>{{compare.productName}}</p>
+                                <div class="remove-item">
+                                    <button type="button" class="btn btn-circle" ng-click="removeFromCompare(compare.productId)">X</button>
+                                </div>
                             </div>
                         </div>
-                        <div class="text-center">
+                        <div class="clearfix visible-md"></div>
+                        <p class="compare-btn text-center">
                             <button class="btn btn--compare" ui-sref="compare-products">COMPARE</button>
-                        </div>
+                        </p>
                     </div>
                 </div>
                 <div class="row">
@@ -239,14 +242,14 @@
                                 </div>
                             </div>
                         </div>
-
+                        {{displayMessage}}
 
                         <div class="row" ng-repeat="row in products">
                             <div class="col-md-4" ng-repeat="product in row" ng-init="parentIndex = $index">
                                 <div class="buy-info custom-checkbox">
                                     <div class="buy-slider slider-individual list-slider">
                                         <flex-slider flex-slide="image in product.images track by $index" prev-text="" next-text="" animation="slide" min-items="3">
-                                            <li>
+                                            <li class="relate">
                                                 <div class="list-slider__toolTip">
                                                     <!--<a toolTip="{{buy.toolTip}}"><img ng-src="{{image | serverimage}}" class="img-rsponsive img1">
                                                     </a>-->
@@ -254,8 +257,9 @@
                                                 <a ui-sref="individual-page({id: product.productId})">
                                                     <img ng-src="{{image.image | serverimage}}" class="img-rsponsive img1" title="{{product.productName}}">
                                                 </a>
-                                                <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                                <i ng-class="checkWishlist(product.productId)" aria-hidden="true"></i>
                                                 <img ng-src="{{buy.img}}" class="img-responsive" ng-mouseover="displayCntent();" ng-mouseleave="hideContent();">
+                                                <i class="fa fa-shopping-cart" ng-if="checkInCart(product.productId)"></i>
                                             </li>
                                         </flex-slider>
                                         <div class="buy-para">
@@ -263,14 +267,14 @@
                                             <h5>{{product.productName}} <br>{{product.type.name}}</h5>
                                             <div class="viewSize">
                                                 <div class="inline-block">
-                                                    <p>Size:</p>
+                                                    <p>Sizes:</p>
                                                 </div>
-                                                <div class="inline-block buy-para__sizes">
-                                                    <p>36</p>
-                                                    <p>38</p>
+                                                <div class="inline-block buy-para__sizes" ng-repeat="size in product.sizes">
+                                                    <p>{{size.name}}</p>
+                                                    <!--<p>38</p>
                                                     <p>40</p>
                                                     <p>42</p>
-                                                    <p>44</p>
+                                                    <p>44</p>-->
                                                 </div>
                                             </div>
                                             <hr>
@@ -288,12 +292,13 @@
                                                     </a>
                                                 </div>
                                                 <div class=" inline-block ">
-                                                    <button class="btn btn-default view--btn text-uppercase ">view more</button>
+
+                                                    <button class="btn btn-default view--btn text-uppercase " ng-click="quickviewProduct()">QUICK VIEW</button>
+
+
                                                 </div>
                                             </div>
-
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

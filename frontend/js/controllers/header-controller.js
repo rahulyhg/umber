@@ -42,17 +42,19 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
             $.jStorage.deleteKey('userId');
             $.jStorage.deleteKey('accessToken');
             $.jStorage.deleteKey('cart');
-            $.jStorage.flush();
+            $.jStorage.deleteKey('wishlist');
+            //$.jStorage.flush();
             UserService.logout(data, function (data) {
                 $scope.loggedUser = "";
                 $scope.accessToken = "";
                 $state.go("home");
+                $state.reload();
             });
         }
 
-        // This productId represents unique mongodb id of SKU
         // and not the lot no in the backend
         $scope.removeProductFromCart = function (cartId, productId) {
+            console.log("Cart: ", cartId);
             console.log("Removing product: ", productId);
             if ($.jStorage.get('userId')) {
                 var data = {
@@ -64,12 +66,17 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
                     $state.reload();
                 });
             } else {
-                $scope.cart = $.jStorage.get('cart');
+                $scope.cart = $.jStorage.get('cart').products;
                 var idx = _.findIndex($scope.cart, function (product) {
-                    return product._id == productId;
+                    return product.product._id == productId;
                 });
+                console.log("Removing product at index: ", idx);
                 // remove this product
                 $scope.cart.splice(idx, 1);
+                var cart = {};
+                cart.products = $scope.cart;
+                $.jStorage.set('cart', cart);
+                $state.reload();
             }
         }
 
@@ -80,19 +87,15 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
 
         if (userId.userId != null) {
             CartService.getCart(userId, function (data) {
-                if (userId.accessToken) {
-                    $scope.cart = data.data.data;
-                    console.log("mycarttable: ", $scope.cart);
-                } else {
-                    $scope.cart = {};
-                }
+                $scope.cart = data.data.data;
+                console.log("mycarttable: ", $scope.cart);
             });
 
         } else {
             //TODO: Implement without login
 
             $scope.cart = $.jStorage.get("cart");
-            console.log("oflinecart::::::", $scope.cart)
+
             //$scope.cart = {};
         }
 
@@ -102,14 +105,12 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
         }
     })
     .controller('wishlistModalCtrl', function ($scope, $state, $uibModalInstance, UserService, CartService, WishlistService) {
-        var userId = {
+        $scope.userId = {
             userId: $.jStorage.get("userId"),
             accessToken: $.jStorage.get("accessToken")
         }
-        if (userId.accessToken) {
-            WishlistService.getWishlist(userId, function (data) {
-
-
+        if ($scope.userId.accessToken) {
+            WishlistService.getWishlist($scope.userId, function (data) {
                 $scope.wishlists = data.data.data;
                 console.log("wishlist returneddata::::::", $scope.wishlists)
                 $scope.newA = _.chunk($scope.wishlists, 4);
@@ -119,6 +120,35 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
             $scope.wishlists = $.jStorage.get("wishlist");
             console.log("offlinewishlist returneddata::::::", $scope.wishlists)
             $scope.newA = _.chunk($scope.wishlists, 4);
+        }
+        $scope.removeFromWishlist = function (prodId) {
+            if ($scope.userId.accessToken) {
+                console.log("if ran for removal")
+                var userId = {
+                    userId: $.jStorage.get("userId"),
+                    accessToken: $.jStorage.get("accessToken"),
+                    productId: prodId
+                }
+                WishlistService.removeProduct(userId, function (data) {
+                    console.log(data.data.data)
+                    WishlistService.getWishlist($scope.userId, function (data) {
+                        $scope.wishlists = data.data.data;
+                        console.log("wishlist returneddata::::::", $scope.wishlists)
+                        $scope.newA = _.chunk($scope.wishlists, 4);
+
+                    });
+                })
+                //remove online wishlist api
+            } else {
+                var wishlist = $.jStorage.get("wishlist")
+                _.remove(wishlist, {
+                    productId: prodId
+                });
+                $.jStorage.set("wishlist", wishlist);
+                $scope.wishlists = $.jStorage.get("wishlist")
+                $scope.newA = _.chunk($scope.wishlists, 4);
+                console.log($scope.wishlists);
+            }
         }
     })
     .controller('loginModalCtrl', function ($scope, $state, $uibModalInstance, UserService, CartService, WishlistService) {
@@ -233,5 +263,4 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
                 $state.reload();
             });
         }
-
     });
