@@ -131,12 +131,14 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
                 }
                 WishlistService.removeProduct(userId, function (data) {
                     console.log(data.data.data)
-                    WishlistService.getWishlist($scope.userId, function (data) {
-                        $scope.wishlists = data.data.data;
-                        console.log("wishlist returneddata::::::", $scope.wishlists)
-                        $scope.newA = _.chunk($scope.wishlists, 4);
+                    if (data.data.data) {
+                        WishlistService.getWishlist($scope.userId, function (data) {
+                            $scope.wishlists = data.data.data;
+                            console.log("wishlist returneddata::::::", $scope.wishlists)
+                            $scope.newA = _.chunk($scope.wishlists, 4);
 
-                    });
+                        });
+                    }
                 })
                 //remove online wishlist api
             } else {

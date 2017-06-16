@@ -42,7 +42,7 @@ myApp
 
             CartService.getCart(userId, function (data) {
 
-                console.log("****************************cartran********************************")
+
                 if (data.data.data) {
 
                     $scope.mycart = data.data.data.products;
@@ -1185,7 +1185,12 @@ myApp
             }
         }
         // This function is used to display the modal on quck view button
-        $scope.quickviewProduct = function () {
+        $scope.quickviewProduct = function (prod) {
+            $scope.product = prod;
+            $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
+            $scope.changeImage = function (index) {
+                $scope.selectedImage = $scope.product.images[index];
+            };
             var quickviewProduct = $uibModal.open({
                 animation: true,
                 templateUrl: 'views/modal/quickview-product.html',
@@ -1195,6 +1200,7 @@ myApp
 
         };
         //End of  modal on quck view button
+
 
     })
     .controller('FormCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -1227,6 +1233,16 @@ myApp
     .controller('AboutCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.getHTML("content/about.html");
         TemplateService.title = "About us"; //This is the Title of the Website
+        $scope.navigation = NavigationService.getNavigation();
+    })
+    .controller('OrdersCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.getHTML("content/orders.html");
+        TemplateService.title = "Order"; //This is the Title of the Website
+        $scope.navigation = NavigationService.getNavigation();
+    })
+    .controller('ComingSoonCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.getHTML("content/coming-soon.html");
+        TemplateService.title = "Coming Soon"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
     })
     //Example API Controller

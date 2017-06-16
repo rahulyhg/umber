@@ -96,6 +96,17 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             templateUrl: tempateURL,
             controller: 'GiftCtrl'
         })
+        .state('orders', {
+            url: "/orders",
+            templateUrl: tempateURL,
+            controller: 'OrdersCtrl'
+        })
+
+        .state('coming-soon', {
+            url: "/coming-soon",
+            templateUrl: tempateURL,
+            controller: 'ComingSoonCtrl'
+        })
 
         .state('about', {
             url: "/about",
