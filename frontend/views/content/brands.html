@@ -9,15 +9,16 @@
         </ul>
     </div>
     <div class="brands-images">
+        {{message}}
         <div class="row marg0">
-            <div class="col-md-3">
+            <div class="col-md-3" ng-repeat="brand in brands">
                 <div class="brand1">
                     <figure>
-                        <img src="img/home/logo.png" class="img-responsive" alt="brands">
+                        <img ng-src="{{brand.logo | serverimage}}" class="img-responsive" alt="brands">
                     </figure>
                 </div>
             </div>
-            <div class="col-md-3">
+            <!--<div class="col-md-3">
                 <div class="brand1">
                     <figure>
                         <img src="img/home/logo.png" class="img-responsive" alt="brands">
@@ -83,7 +84,7 @@
                         <img src="img/home/logo.png" class="img-responsive" alt="brands">
                     </figure>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>

@@ -77,6 +77,13 @@ myApp.factory('ProductService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
+        getBrands: function (callback) {
+            $http({
+                url: adminurl + 'Brand/getBrands',
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
         getthelook: function (callback) {
             $http({
                 url: adminurl + 'Buythelook/getEnabledLook',
