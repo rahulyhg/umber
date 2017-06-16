@@ -1191,6 +1191,11 @@ myApp
             $scope.changeImage = function (index) {
                 $scope.selectedImage = $scope.product.images[index];
             };
+            $scope.reqQuantity = 0;
+            $scope.updateQuantity = function (oper) {
+                $scope.reqQuantity += parseInt(oper);
+                console.log($scope.reqQuantity)
+            }
             var quickviewProduct = $uibModal.open({
                 animation: true,
                 templateUrl: 'views/modal/quickview-product.html',
