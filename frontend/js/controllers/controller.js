@@ -355,18 +355,13 @@ myApp
             $scope.form = false;
         };
     })
-    .controller('CheckoutCtrl', function ($scope, $state, BannerService, TemplateService, NavigationService, UserService, CartService, WishlistService, $timeout) {
+    .controller('CheckoutCtrl', function ($scope, $state, myService, BannerService, TemplateService, NavigationService, UserService, CartService, WishlistService, $timeout) {
         $scope.template = TemplateService.getHTML("content/checkout.html");
         TemplateService.title = "Checkout"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
-        var banner = {
-            pageName: "checkout"
-        }
-        BannerService.getBanner(banner, function (data) {
-            $scope.banner = data.data.data;
-
+        myService.ctrlBanners("checkout", function (data) {
+            $scope.banner = data;
         });
-
         $scope.registerData = {};
         $scope.loginData = {};
         $scope.loggedUser = $.jStorage.get("userId");
@@ -779,18 +774,13 @@ myApp
             $scope.selectedImage = $scope.product.images[index];
         };
     })
-    .controller('MycartCtrl', function ($scope, $state, TemplateService, NavigationService, BannerService, CartService, $timeout, $uibModal, WishlistService) {
+    .controller('MycartCtrl', function ($scope, myService, $state, TemplateService, NavigationService, BannerService, CartService, $timeout, $uibModal, WishlistService) {
         $scope.template = TemplateService.getHTML("content/mycart.html");
         TemplateService.title = "Mycart"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
-        var banner = {
-            pageName: "mycart"
-        }
-        BannerService.getBanner(banner, function (data) {
-            $scope.banner = data.data.data;
-
+        myService.ctrlBanners("mycart", function (data) {
+            $scope.banner = data;
         });
-
         $scope.newA = _.chunk($scope.mycartmodal, 4);
         // console.log("$scope.newA ", $scope.newA);
         var userId = {
@@ -925,17 +915,19 @@ myApp
             $.jStorage.set('compareproduct', $scope.products);
         }
     })
-
-    .controller('BrandsCtrl', function ($scope, TemplateService, ProductService, BannerService, NavigationService, $timeout) {
+    .controller('BrandsCtrl', function ($scope, myService, TemplateService, ProductService, BannerService, NavigationService, $timeout) {
         $scope.template = TemplateService.getHTML("content/brands.html");
         TemplateService.title = "Brands"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
-        var banner = {
-            pageName: "Brands"
-        }
-        BannerService.getBanner(banner, function (data) {
-            $scope.banner = data.data.data;
+        // var banner = {
+        //     pageName: "Brands"
+        // }
+        // BannerService.getBanner(banner, function (data) {
+        //     $scope.banner = data.data.data;
 
+        // });
+        myService.ctrlBanners("Brands", function (data) {
+            $scope.banner = data;
         });
 
         ProductService.getBrands(function (data) {
@@ -949,22 +941,14 @@ myApp
     })
 
     .controller('ListingPageCtrl', function ($scope, toastr, CartService, $rootScope, $stateParams, $state, WishlistService, TemplateService, NavigationService,
-        SizeService, BannerService, CategoryService, ProductService, $timeout, $uibModal) {
+        SizeService, BannerService, CategoryService, myService, ProductService, $timeout, $uibModal) {
         $scope.template = TemplateService.getHTML("content/listing-page.html");
         TemplateService.title = "Form"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
         $scope.formSubmitted = false;
-        var banner = {
-            pageName: "listing-page"
-        }
-
-        BannerService.getBanner(banner, function (data) {
-
-            if (data.data.value)
-                $scope.banner = data.data.data;
-
+        myService.ctrlBanners("listing-page", function (data) {
+            $scope.banner = data;
         });
-
         if (_.isEmpty($.jStorage.get('compareproduct'))) {
             $scope.showCheck = false
 
