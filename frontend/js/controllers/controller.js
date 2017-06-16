@@ -528,7 +528,11 @@ myApp
             console.log(data);
             $scope.formSubmitted = true;
         };
-
+        $scope.updateQuantity = function (oper) {
+            console.log("fiunctioncalled", oper);
+            $scope.reqQuantity += parseInt(oper);
+            console.log($scope.reqQuantity)
+        }
         $scope.loggedUser = $.jStorage.get("userId");
         var data = {
             productId: $stateParams.id
@@ -1191,7 +1195,7 @@ myApp
             $scope.changeImage = function (index) {
                 $scope.selectedImage = $scope.product.images[index];
             };
-            $scope.reqQuantity = 0;
+            $scope.reqQuantity = 1;
             $scope.updateQuantity = function (oper) {
                 $scope.reqQuantity += parseInt(oper);
                 console.log($scope.reqQuantity)

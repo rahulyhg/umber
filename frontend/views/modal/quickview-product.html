@@ -75,7 +75,7 @@
                             </div>
                             <div class="inline-block quantity">
                                 <h5>QUANTITY </h5>
-                                <a ng-click="updateQuantity(-1)" ng-if="reqQuantity>0">
+                                <a ng-click="updateQuantity(-1)" ng-if="reqQuantity>1">
                                     <i class="fa fa-minus display-inblock square__bg" aria-hidden="true"></i>
                                 </a>
                                 <div class="display-inblock">
@@ -85,7 +85,7 @@
                                         </div>
                                     </form>
                                 </div>
-                                <a ng-click="updateQuantity(1)" ng-if="reqQuantity<5 && reqQuantity < product.quantity">
+                                <a ng-click="updateQuantity(1)" ng-if="reqQuantity < product.quantity">
                                     <i class="fa fa-plus display-inblock square__bg"></i>
                                 </a>
                             </div>
