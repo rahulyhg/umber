@@ -24,6 +24,7 @@
                     </div>
                 </div>
                 <div class="prof-tab" ng-if="view == 'profTab' ">
+                    <!--To open profile Tab-->
                     <div class="col-md-5">
                         <div class="usrdtl-title">
                             <span>YOUR DETAILS</span>
@@ -68,10 +69,126 @@
                     </div>
                 </div>
                 <div class="addr-tab" ng-if="view == 'addrTab' ">
-                    <h4>Cool1</h4>
+                    <!--To open Manage Address Tab-->
+                    <div class="col-md-4" ng-if="!save">
+                        <div class="manage-addrs">
+                            <p><span class="user-name">{{userDetails.firstName}}</span>, {{userDetails.mobNo}}<br>{{userDetails.email}}</p>
+                            <address>{{userDetails.address1}}<br>{{userDetails.city}}-{{userDetails.pinCode}}<br>{{userDetails.country}}</address>
+                            <div class="checkbox custom-checkbox">
+                                <label for=""><input type="checkbox">Use this as default shippiong address</label>
+                            </div>
+                            <p><button class="btn address-edit-btn" ng-click="edit()">Edit</button> <button class="btn address-delt-btn">Delete</button></p>
+                        </div>
+                    </div>
+                    <!--<div class="col-md-4" ng-if="!save">
+                        <div class="manage-addrs">
+                            <p><span class="user-name">Siddhesh Talekar</span>, 9935151611<br></p>
+                            <address>Agripad, BIT building no 20/16, R.B Chandorkar marg, Agripada</address>
+                            <div class="checkbox">
+                                <label for=""><input type="checkbox">Use this as default shippiong address</label>
+                            </div>
+                            <p><button class="btn address-edit-btn">Edit</button> <button class="btn address-delt-btn">Delete</button></p>
+                        </div>
+                    </div>-->
+                    <div class="edit-addrs" ng-if="save">
+                        <!--To open Edit Address Tab-->
+                        <div class="col-md-9">
+                            <span class="text-uppercase">your details</span>
+                            <form class="customized-form">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="First Name" class="form-control" ng-model="userDetails.firstName">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Last Name" class="form-control" ng-model="userDetails.lastName">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Mobile Number" class="form-control" ng-model="userDetails.mobNo">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <input type="email" placeholder="Email Address" class="form-control" ng-model="userDetails.email">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="text-uppercase">shipping address</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Line 1*" class="form-control" ng-model="userDetails.address1">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Line 2" class="form-control" ng-model="userDetails.address2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Line 3" class="form-control" ng-model="userDetails.address3">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Line 4" class="form-control" ng-model="userDetails.address4">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="City" class="form-control" ng-model="userDetails.city">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="number" placeholder="Pincode" class="form-control" ng-model="userDetails. pinCode">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group" uib-dropdown>
+                                            <button class="btn" type="button" uib-dropdown-toggle>State <span class="caret"></span></button>
+                                            <ul class="dropdown-menu" uib-dropdown-menu role="menu">
+                                                <li role="menuitem"><a href="#">Action</a></li>
+                                                <li role="menuitem"><a href="#">Another action</a></li>
+                                                <li role="menuitem"><a href="#">Something else here</a></li>
+                                                <li role="menuitem"><a href="#">Separated link</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Country" class="form-control" ng-model="userDetails.country">
+                                        </div>
+                                    </div>
+                                </div>
+                                <p><button class="btn save--btn text-uppercase" ng-if="save" ng-click="edit()">save</button>
+                                    <button class="btn --btn text-uppercase">delete</button>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 <div class="order-tab" ng-if="view == 'orderTab' ">
-                    <h4>Cool2</h4>
+                    <!--To open an Order Tab-->
+                    <div class="col-md-9">
+                        <p class="text-uppercase"></p>
+                    </div>
                 </div>
                 <div class="wishlist-tab" ng-if="view == 'wishlistTab' ">
                     <div class="col-md-9">
@@ -106,5 +223,5 @@
             </div>
         </div>
     </div>
-
+</div>
 </div>

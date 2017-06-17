@@ -11,6 +11,13 @@ myApp.controller('MyAccountCtrl', function ($scope, TemplateService, $translate,
             $scope.userDetails.lastName = '';
             $scope.userDetails.email = '';
             $scope.userDetails.mobNo = '';
+            $scope.userDetails.address1 = '';
+            $scope.userDetails.address2 = '';
+            $scope.userDetails.address3 = '';
+            $scope.userDetails.address4 = '';
+            $scope.userDetails.city = '';
+            $scope.userDetails.pinCode = '';
+            $scope.userDetails.country = '';
         }
     };
 
@@ -18,7 +25,14 @@ myApp.controller('MyAccountCtrl', function ($scope, TemplateService, $translate,
         firstName: '',
         lastName: '',
         emailId: '',
-        mobNo: ''
+        mobNo: '',
+        address1: '',
+        address2: '',
+        address3: '',
+        address4: '',
+        city: '',
+        pinCode: '',
+        country: '',
     };
 
     $scope.buyshirt = [{

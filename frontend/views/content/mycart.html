@@ -22,12 +22,12 @@
                 <tbody ng-repeat="product in mycartTable.products track by $index">
                     <tr>
                         <td rowspan="2">
-                            <div class="item">
+                            <div class="item relate">
                                 <img ng-src="{{product.product.images[0].image | serverimage}}" alt="" class="img-responsive item__img">
                                 <div class="mycart-info">
                                     <p class="item__title1">{{product.product.productName}}</p>
                                 </div>
-                                <div>OUT OF STOCK</div>
+                                <div class="outofstock">OUT OF STOCK</div>
                             </div>
                         </td>
                         <td>{{product.product.color.name}}</td>

@@ -571,6 +571,30 @@ header {
             }
         }
     }
+    .disabled-outofstock {
+        td:first-child {
+            img {
+                opacity: 0.4;
+            }
+        }
+        td+td {
+            color: #ccc !important;
+            pointer-events: none;
+            .square__bg,
+            .quantity__input {
+                color: #ccc;
+                background-color: white;
+            }
+        }
+    }
+    .outofstock {
+        @include position(absolute,
+        50% null null 50%);
+        @include transform(translate(-50%,
+        -50%));
+        font-size: 12px;
+        text-align: center;
+    }
     .mycart-list {
         li {
             list-style-type: none;

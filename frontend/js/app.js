@@ -1,5 +1,6 @@
 // Link all the JS Docs here
 var myApp = angular.module('myApp', [
+    'ui.bootstrap',
     'ui.router',
     'pascalprecht.translate',
     'angulartics',
