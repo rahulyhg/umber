@@ -768,9 +768,16 @@ var model = {
         async.waterfall([
                 function applyFilters(cbWaterfall1) {
                     var updatedFilters = _.mapValues(filters, function (value) {
+                        // If filter is applied with blank array 
+                        // check if field exists & return all products
+                        if (_.isEmpty(value)) {
+                            return {
+                                '$exists': true
+                            }
+                        }
                         var newVal = _.each(value, function (singleValue) {
                             return mongoose.Types.ObjectId(singleValue);
-                        })
+                        });
                         return {
                             "$in": newVal
                         }
