@@ -765,20 +765,39 @@ var model = {
 
     getProductsWithFilters: function (filters, callback) {
         console.log("Filters: ", filters);
-        var updatedFilters = _.mapValues(filters, function (value) {
-            var newVal = _.each(value, function (singleValue) {
-                return mongoose.Types.ObjectId(singleValue);
-            })
-            return {
-                "$in": newVal
-            }
-        });
-        console.log("new filters: ", updatedFilters);
-        Product.find(updatedFilters).sort({
-            'createdAt': -1
-        }).skip((filters.page - 1) * Config.maxRow).limit(Config.maxRow).lean().exec(function (err, products) {
-            callback(err, products);
-        });
+        async.waterfall([
+                function applyFilters(cbWaterfall1) {
+                    var updatedFilters = _.mapValues(filters, function (value) {
+                        var newVal = _.each(value, function (singleValue) {
+                            return mongoose.Types.ObjectId(singleValue);
+                        })
+                        return {
+                            "$in": newVal
+                        }
+                    });
+                    console.log("new filters: ", updatedFilters);
+                    Product.find(updatedFilters).sort({
+                        'createdAt': -1
+                    }).skip((filters.page - 1) * Config.maxRow).limit(Config.maxRow).lean().exec(function (err, products) {
+                        cbWaterfall1(err, products);
+                    });
+                },
+                function getProductDetails(products, cbWaterfall2) {
+                    var filteredProductsDetails = [];
+                    async.each(products, function (product, eachCallback) {
+                        Product.getProductDetails(product, function (err, productDetails) {
+                            if (productDetails && !_.isEmpty(productDetails))
+                                filteredProductsDetails.push(productDetails);
+                            eachCallback(err, productDetails);
+                        });
+                    }, function (err) {
+                        cbWaterfall2(err, filteredProductsDetails);
+                    });
+                }
+            ],
+            function (err, products) {
+                callback(err, products);
+            });
     },
 
     subtractQuantity: function (product, callback) {
