@@ -12,10 +12,6 @@ var schema = new Schema({
     insideImage: String,
     products: [{
         product: {
-            _id: {
-                type: Schema.Types.ObjectId,
-                ref: 'Product'
-            },
             productId: {
                 type: String,
                 index: true
@@ -40,6 +36,24 @@ var model = {
             status: 'Enabled'
         }).exec(function (err, data) {
             callback(err, data);
+        });
+    },
+
+    getBuyTheLookDetails: function (data, callback) {
+        var lookProducts = [];
+        Buythelook.findById(data._id).exec(function (err, look) {
+            if (look && !_.isEmpty(look)) {
+                async.each(look.products, function (data, eachCallback) {
+                    Product.getProductDetails(data.product, function (err, productDetails) {
+                        if (productDetails && !_.isEmpty(productDetails)) {
+                            lookProducts.push(productDetails);
+                        }
+                        eachCallback(err, productDetails);
+                    });
+                }, function (err) {
+                    callback(null, lookProducts);
+                });
+            }
         });
     }
 };
