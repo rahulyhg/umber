@@ -114,6 +114,14 @@ var model = {
         }, function (err, data) {
             callback(err, data);
         });
+    },
+
+    getUserOrders: function (data, callback) {
+        Order.find({
+            user: data.userId
+        }).deepPopulate('products.product products.product.size products.product.color').exec(function (err, orders) {
+            callback(err, orders);
+        });
     }
 };
 module.exports = _.assign(module.exports, exports, model);
