@@ -513,6 +513,13 @@ var model = {
         var match = {
             category: mongoose.Types.ObjectId(data.category)
         };
+
+        if (data.products) {
+            match.productId = {
+                $in: data.products
+            }
+        }
+
         async.parallel({
                 types: function (cbParallel1) {
                     Product.distinct("type", match).exec(function (err, types) {
@@ -763,6 +770,11 @@ var model = {
         });
     },
 
+
+    // API to filter products based on selected criteria
+    // For listing page
+    // req.body-> {key: [val1, val2, ...], key1: [val1, val2, ..], ..}
+    // Converts this object into queryable object
     getProductsWithFilters: function (filters, callback) {
         console.log("Filters: ", filters);
         async.waterfall([
@@ -778,6 +790,7 @@ var model = {
                         var newVal = _.each(value, function (singleValue) {
                             return mongoose.Types.ObjectId(singleValue);
                         });
+                        // convert to queryable object
                         return {
                             "$in": newVal
                         }
@@ -799,6 +812,24 @@ var model = {
                         });
                     }, function (err) {
                         cbWaterfall2(err, filteredProductsDetails);
+                    });
+                },
+                function getProductFilters(products, cbWaterfall3) {
+                    var data = {};
+                    data.products = [];
+                    var filterDetails = {};
+                    filterDetails.products = products;
+                    async.each(products, function (product, eachCallback) {
+                        data.products.push(product.product.productId);
+                        eachCallback(null);
+                    }, function (err) {
+                        data.category = filters.category[0];
+                        Product.getFiltersWithCategory(data, function (err, filters) {
+                            if (filters && !_.isEmpty(filters)) {
+                                filterDetails.filters = filters;
+                            }
+                            cbWaterfall3(null, filterDetails);
+                        });
                     });
                 }
             ],
