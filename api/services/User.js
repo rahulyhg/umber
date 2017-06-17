@@ -23,6 +23,7 @@ var schema = new Schema({
         },
         line2: String,
         line3: String,
+        line4: String,
         city: {
             type: String
         },
@@ -33,6 +34,7 @@ var schema = new Schema({
             type: Number
         },
         country: String,
+        isDefault: Boolean,
         status: {
             type: String,
             enum: ['Enabled', 'Disabled'],
@@ -45,6 +47,7 @@ var schema = new Schema({
         },
         line2: String,
         line3: String,
+        line4: String,
         city: {
             type: String
         },

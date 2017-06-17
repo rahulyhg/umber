@@ -1,16 +1,31 @@
 var schema = new Schema({
-    name: {
+    orderNo: {
         type: String,
         required: true,
         unique: true,
         uniqueCaseInsensitive: true
     },
-    deliveryAddressId: {
-        type: Schema.Types.ObjectId,
-        ref: 'DeliveryAddress',
-        required: true
+    billingAddress: {
+        line1: String,
+        line2: String,
+        line3: String,
+        line4: String,
+        city: String,
+        state: String,
+        pincode: Number,
+        country: String
     },
-    userId: {
+    shippingAddress: {
+        line1: String,
+        line2: String,
+        line3: String,
+        line4: String,
+        city: String,
+        state: String,
+        pincode: Number,
+        country: String
+    },
+    user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
@@ -22,15 +37,18 @@ var schema = new Schema({
             required: true
         },
         quantity: Number,
-        color: String,
-        size: String,
         price: Number
     }],
     totalAmount: {
         type: Number,
         required: true
     },
-    discountAmount: Number
+    discountAmount: Number,
+    shippingAmount: Number,
+    orderStatus: {
+        type: String,
+        enum: ['processing', 'shipped', 'delivered', 'returned', 'cancelled']
+    }
 });
 
 schema.plugin(deepPopulate, {
