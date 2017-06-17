@@ -779,6 +779,7 @@ var model = {
         console.log("Filters: ", filters);
         async.waterfall([
                 function applyFilters(cbWaterfall1) {
+                    console.log("filters: ", filters);
                     var updatedFilters = _.mapValues(filters, function (value) {
                         // If filter is applied with blank array 
                         // check if field exists & return all products
@@ -788,6 +789,7 @@ var model = {
                             }
                         }
                         var newVal = _.each(value, function (singleValue) {
+                            console.log("singlevalue", singleValue);
                             return mongoose.Types.ObjectId(singleValue);
                         });
                         // convert to queryable object
@@ -820,7 +822,7 @@ var model = {
                     var filterDetails = {};
                     filterDetails.products = products;
                     async.each(products, function (product, eachCallback) {
-                        data.products.push(product.product.productId);
+                        data.products.push(product.productId);
                         eachCallback(null);
                     }, function (err) {
                         data.category = filters.category[0];

@@ -55,7 +55,7 @@
                                 </h5>
                             </uib-accordion-heading>
                             <div class="checkbox" ng-repeat="type in filters.types">
-                                <input type="checkbox" id="b1">
+                                <input type="checkbox" id="b1" ng-model="checked" ng-click="applyFilters('type', type)">
                                 <label for="b1">{{type.name}}
                                 </label>
                             </div>
@@ -87,7 +87,7 @@
                                 </h5>
                             </uib-accordion-heading>
                             <div class="checkbox" ng-repeat="collection in filters.collections">
-                                <input type="checkbox" id="{{collection._id}}">
+                                <input type="checkbox" id="{{collection._id}}" ng-click="applyFilters('collection', collection)">
                                 <label for="{{collection._id}}">{{collection.name}}
                                </label>
                             </div>

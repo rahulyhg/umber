@@ -962,6 +962,7 @@ myApp
 
         });
         $scope.filteredProducts = function (selectedCategory) {
+            $.jStorage.set("selectedCategory", selectedCategory)
             var input = {
                 "category": [selectedCategory]
             }
@@ -1066,6 +1067,28 @@ myApp
             });
         }
 
+        var filters = {};
+
+        $scope.applyFilters = function (key, filter) {
+            console.log("key::", key, filter)
+            if (!Array.isArray(filters[key])) {
+                filters = {
+                    "category": [$.jStorage.get("selectedCategory")]
+                }
+                filters[key] = [];
+            }
+            //filters["category"] = $.jStorage.get("selectedCategory");
+            filters[key].push(filter._id);
+            $.jStorage.set("appliedFilters", filters);
+            console.log(filters);
+            ProductService.getProductsWithAppliedFilters(filters, function (data) {
+                console.log(data.data.data);
+                $scope.products = _.chunk(data.data.data.products, 3);
+                $scope.filters = data.data.data.filters;
+            })
+
+            //api call
+        }
 
 
         $scope.submitForm = function (data) {
@@ -1103,7 +1126,6 @@ myApp
         if (userId.userId) {
             CartService.getCart(userId, function (data) {
 
-                console.log("****************************cartran********************************")
                 if (data.data.data) {
 
                     $scope.mycart = data.data.data.products;
