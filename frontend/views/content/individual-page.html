@@ -74,17 +74,17 @@
                         </div>
                         <div class="inline-block quantity">
                             <h5>QUANTITY </h5>
-                            <a>
+                            <a ng-click="updateQuantity(-1)" ng-if="reqQuantity>1">
                                 <i class="fa fa-minus display-inblock square__bg" aria-hidden="true"></i>
                             </a>
                             <div class="display-inblock">
                                 <form>
                                     <div class="form-group marg0">
-                                        <input type="text" readonly class="form-control quantity__input">
+                                        <input type="text" readonly class="form-control quantity__input" ng-model="reqQuantity">
                                     </div>
                                 </form>
                             </div>
-                            <a>
+                            <a ng-click="updateQuantity(1)" ng-if="reqQuantity < product.quantity">
                                 <i class="fa fa-plus display-inblock square__bg" aria-hidden="true"></i>
                             </a>
                         </div>
