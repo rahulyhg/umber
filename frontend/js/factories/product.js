@@ -33,6 +33,15 @@ myApp.factory('ProductService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
+        getProductsWithAppliedFilters: function (input, callback) {
+            console.log("Get products with filters: ", input);
+            $http({
+                url: adminurl + 'Product/getProductsWithFilters',
+                data: input,
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
 
         getProductsWithCategoryId: function (input, callback) {
             $http({
