@@ -59,7 +59,11 @@ var schema = new Schema({
         type: String,
         enum: ['processing', 'shipped', 'delivered', 'returned', 'cancelled'],
         default: 'processing'
-    }
+    },
+    returnReason: {
+        type: String
+    },
+    comment: String
 });
 
 schema.plugin(deepPopulate, {
