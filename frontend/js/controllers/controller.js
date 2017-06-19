@@ -961,8 +961,10 @@ myApp
             $scope.categories = data.data.data;
 
         });
+        /******getting products based on category******* */
         $scope.filteredProducts = function (selectedCategory) {
-            $.jStorage.set("selectedCategory", selectedCategory)
+            $.jStorage.set("selectedCategory", selectedCategory);
+            $.jStorage.deleteKey("appliedFilters");
             var input = {
                 "category": [selectedCategory]
             }
@@ -973,6 +975,8 @@ myApp
 
                 } else if (!_.isEmpty(data.data.data)) {
                     $scope.displayMessage = "";
+                    $scope.products = _.chunk(data.data.data.products, 3);
+                    console.log(data)
                     var input = {
                         "category": selectedCategory
                     }
@@ -1023,6 +1027,7 @@ myApp
                 $scope.showCheck = true
             }
         }
+        /******function to remove product from compare list******* */
         $scope.removeFromCompare = function (prodId) {
 
             var removeCompare = $.jStorage.get("compareproduct");
@@ -1050,46 +1055,86 @@ myApp
             $state.go("compare-products");
         }
 
-        var banner = {
-            pageName: "listing-page"
-        }
-        BannerService.getBanner(banner, function (data) {
-            $scope.banner = data.data.data;
+        // var banner = {
+        //     pageName: "listing-page"
+        // }
+        // BannerService.getBanner(banner, function (data) {
+        //     $scope.banner = data.data.data;
 
-        });
+        // });
         // Ideally products should be retrieved with respect to category
 
-        $scope.filterProducts = function (filterParameter) {
-            ProductService.filterProducts(filterParameter, function (data) {
-                console.log(data)
-                $scope.products = _.chunk(data.data.data, 3);
-                console.log("Listing page products: ", $scope.products);
-            });
-        }
+        // $scope.filterProducts = function (filterParameter) {
+        //     ProductService.filterProducts(filterParameter, function (data) {
+        //         console.log(data)
+        //         $scope.products = _.chunk(data.data.data, 3);
+        //         console.log("Listing page products: ", $scope.products);
+        //     });
+        // }
 
         var filters = {};
 
         $scope.applyFilters = function (key, filter) {
-            console.log("key::", key, filter)
-            if (!Array.isArray(filters[key])) {
-                filters = {
-                    "category": [$.jStorage.get("selectedCategory")]
-                }
-                filters[key] = [];
+            var filters = $.jStorage.get('appliedFilters') ? $.jStorage.get('appliedFilters') : {
+                category: [],
+                type: [],
+                style: [],
+                color: [],
+                collection: [],
+                size: [],
+                fabric: [],
+            };
+            console.log(filter, key)
+            filters.category = [$.jStorage.get("selectedCategory")];
+
+            var result = _.indexOf(filters[key], filter._id);
+            console.log("check result", result)
+            if (result != -1) {
+                _.pullAt(filters[key], result);
+            } else {
+                console.log("insideelse:", filters, filters[key])
+                filters[key].push(filter._id);
             }
+
+            $.jStorage.set('appliedFilters', filters)
+            console.log("Jstoragefor filters::", $.jStorage.get("appliedFilters"))
+            // console.log("key::", key, filter)
+            // if (!Array.isArray(filters[key])) {
+            //     filters = {
+            //         "category": [$.jStorage.get("selectedCategory")]
+            //     }
+            //     filters[key] = [];
+            // }
+            // if (key == "style") {
+            //     filters[key].push(filter);
+            // } else {
+            //     filters[key].push(filter._id);
+            // }
             //filters["category"] = $.jStorage.get("selectedCategory");
-            filters[key].push(filter._id);
-            $.jStorage.set("appliedFilters", filters);
-            console.log(filters);
+
+            //$scope.filteredProduct = $.jStorage.get('appliedFilters') ? $.jStorage.get('appliedFilters') : {};
+            //$scope.filteredProduct.filters[key].push(filter._id);
+            // $.jStorage.set('appliedFilters', $scope.filteredProduct);
             ProductService.getProductsWithAppliedFilters(filters, function (data) {
                 console.log(data.data.data);
                 $scope.products = _.chunk(data.data.data.products, 3);
                 $scope.filters = data.data.data.filters;
+
             })
 
             //api call
         }
-
+        /******checking filters after reload***** */
+        $scope.checkFilterStatus = function (key, filter) {
+            var appliedFilters = $.jStorage.get("appliedFilters");
+            var result = _.indexOf(appliedFilters[key], filter);
+            console.log(result)
+            if (result != -1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
 
         $scope.submitForm = function (data) {
             console.log(data);
@@ -1109,16 +1154,16 @@ myApp
             $('.viewSize, .view--btn').css('display', 'none');
         };
 
-        var filter = {
-            category: "",
-            page: 1
-        };
-        //TODO: For demo purpose. Use category with id in production
-        ProductService.getProductsWithCategory(filter, function (data) {
-            console.log(data)
-            $scope.products = _.chunk(data.data.data, 3);
+        // var filter = {
+        //     category: "",
+        //     page: 1
+        // };
+        // //TODO: For demo purpose. Use category with id in production
+        // ProductService.getProductsWithCategory(filter, function (data) {
+        //     console.log(data)
+        //     $scope.products = _.chunk(data.data.data, 3);
 
-        });
+        // });
         var userId = {
             userId: $.jStorage.get("userId"),
             accessToken: $.jStorage.get("accessToken")
