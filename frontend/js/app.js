@@ -11,7 +11,8 @@ var myApp = angular.module('myApp', [
     'angular-flexslider',
     'rzModule',
     'ui.swiper',
-    'toastr'
+    'toastr',
+    'angular-loading-bar'
 
 ]);
 

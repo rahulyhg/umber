@@ -811,7 +811,8 @@ var model = {
                 },
                 function getProductDetails(products, cbWaterfall2) {
                     var filteredProductsDetails = [];
-                    async.each(products, function (product, eachCallback) {
+                    var newProducts = _.uniqBy(products, "productId");
+                    async.each(newProducts, function (product, eachCallback) {
                         Product.getProductDetails(product, function (err, productDetails) {
                             if (productDetails && !_.isEmpty(productDetails))
                                 filteredProductsDetails.push(productDetails);

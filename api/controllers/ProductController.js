@@ -87,7 +87,9 @@ var controller = {
 
     getProductsWithFilters: function (req, res) {
         if (req.body) {
+
             Product.getProductsWithFilters(req.body, res.callback);
+
         } else {
             res.json({
                 value: false,
