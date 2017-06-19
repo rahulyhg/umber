@@ -580,6 +580,11 @@ var model = {
                             }
                         }
                     }]).exec(cbParallel6);
+                },
+                styles: function (cbParallel7) {
+                    Product.distinct("style", match).exec(function (err, styles) {
+                        cbParallel7(err, styles);
+                    });
                 }
             },
             function (err, filters) {
