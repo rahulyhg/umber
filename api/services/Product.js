@@ -297,16 +297,16 @@ var model = {
                                     Product.findOneAndUpdate({
                                         _id: data
                                     }, newProduct, {
-                                        upsert: true,
-                                        new: true
-                                    }, function (err, data) {
-                                        if (err) {
-                                            cbWaterfall9(err, null);
-                                        } else {
-                                            cbWaterfall9(null, data);
-                                        }
+                                            upsert: true,
+                                            new: true
+                                        }, function (err, data) {
+                                            if (err) {
+                                                cbWaterfall9(err, null);
+                                            } else {
+                                                cbWaterfall9(null, data);
+                                            }
 
-                                    });
+                                        });
                                 }
 
                             });
@@ -362,73 +362,73 @@ var model = {
     // SKU specific details like sizes
     getProductDetails: function (data, callback) {
         async.waterfall([
-                // Color is fetched from this record only
-                function commonDetails(cbWaterfall1) {
-                    Product.findOne({
-                        productId: data.productId,
-                        name: {
-                            $exists: true
-                        },
-                        category: {
-                            $exists: true
-                        } //,
-                        // brand: {
-                        //     $exists: true
-                        // },
-                        // prodCollection: {
-                        //     $exists: true
-                        // },
-                        // type: {
-                        //     $exists: true
-                        // },
-                        // fabric: {
-                        //     $exists: true
-                        // },
-                        // washcare: {
-                        //     $exists: true
-                        // },
-                        // description: {
-                        //     $exists: true
-                        // }
-                    }).deepPopulate("prodCollection brand fabric color type category").lean().exec(cbWaterfall1);
-                },
-                function getSizes(product, cbWaterfall2) {
-                    if (product) {
-                        Product.distinct("size", {
-                            productId: product.productId
-                        }).lean().exec(function (err, prodSizes) {
-                            Size.find({
-                                _id: {
-                                    '$in': prodSizes
-                                }
-                            }).sort("name").exec(function (err, sizesDetails) {
-                                product.sizes = sizesDetails.slice();
-                                cbWaterfall2(err, product);
-                            });
-                        });
-                    } else {
-                        cbWaterfall2({
-                            message: "Product not found"
-                        }, null);
-                    }
-                },
-                function getMinPrice(product, cbWaterfall4) {
-                    Product.aggregate([{
-                        $group: {
-                            _id: "$productId",
-                            minPrice: {
-                                $min: '$price'
+            // Color is fetched from this record only
+            function commonDetails(cbWaterfall1) {
+                Product.findOne({
+                    productId: data.productId,
+                    name: {
+                        $exists: true
+                    },
+                    category: {
+                        $exists: true
+                    } //,
+                    // brand: {
+                    //     $exists: true
+                    // },
+                    // prodCollection: {
+                    //     $exists: true
+                    // },
+                    // type: {
+                    //     $exists: true
+                    // },
+                    // fabric: {
+                    //     $exists: true
+                    // },
+                    // washcare: {
+                    //     $exists: true
+                    // },
+                    // description: {
+                    //     $exists: true
+                    // }
+                }).deepPopulate("prodCollection brand fabric color type category").lean().exec(cbWaterfall1);
+            },
+            function getSizes(product, cbWaterfall2) {
+                if (product) {
+                    Product.distinct("size", {
+                        productId: product.productId
+                    }).lean().exec(function (err, prodSizes) {
+                        Size.find({
+                            _id: {
+                                '$in': prodSizes
                             }
-                        }
-                    }]).exec(function (err, price) {
-                        var idx = _.findIndex(price, function (prod) {
-                            return prod._id == product.productId
+                        }).sort("name").exec(function (err, sizesDetails) {
+                            product.sizes = sizesDetails.slice();
+                            cbWaterfall2(err, product);
                         });
-                        product.price = price[idx].minPrice;
-                        cbWaterfall4(err, product);
                     });
+                } else {
+                    cbWaterfall2({
+                        message: "Product not found"
+                    }, null);
                 }
-            ],
+            },
+            function getMinPrice(product, cbWaterfall4) {
+                Product.aggregate([{
+                    $group: {
+                        _id: "$productId",
+                        minPrice: {
+                            $min: '$price'
+                        }
+                    }
+                }]).exec(function (err, price) {
+                    var idx = _.findIndex(price, function (prod) {
+                        return prod._id == product.productId
+                    });
+                    product.price = price[idx].minPrice;
+                    cbWaterfall4(err, product);
+                });
+            }
+        ],
             function (err, productDetails) {
                 callback(err, productDetails);
             });
@@ -521,72 +521,72 @@ var model = {
         }
 
         async.parallel({
-                types: function (cbParallel1) {
-                    Product.distinct("type", match).exec(function (err, types) {
-                        Type.find({
-                            _id: {
-                                $in: types
-                            }
-                        }).sort("name").exec(cbParallel1);
-                    });
-                },
-                collections: function (cbParallel2) {
-                    Product.distinct("prodCollection", match).exec(function (err, collections) {
-                        Collection.find({
-                            _id: {
-                                $in: collections
-                            }
-                        }).sort("name").exec(cbParallel2);
-                    });
-                },
-                sizes: function (cbParallel3) {
-                    Product.distinct("size", match).exec(function (err, sizes) {
-                        Size.find({
-                            _id: {
-                                $in: sizes
-                            }
-                        }).sort("name").exec(cbParallel3);
-                    });
-                },
-                colors: function (cbParallel4) {
-                    Product.distinct("color", match).exec(function (err, colors) {
-                        BaseColor.find({
-                            _id: {
-                                $in: colors
-                            }
-                        }).sort("name").exec(cbParallel4);
-                    });
-                },
-                fabrics: function (cbParallel5) {
-                    Product.distinct("fabric", match).exec(function (err, fabrics) {
-                        Fabric.find({
-                            _id: {
-                                $in: fabrics
-                            }
-                        }).sort("name").exec(cbParallel5);
-                    });
-                },
-                priceRange: function (cbParallel6) {
-                    Product.aggregate([{
-                        $match: match
-                    }, {
-                        $group: {
-                            _id: null,
-                            min: {
-                                $min: '$price'
-                            },
-                            max: {
-                                $max: '$price'
-                            }
+            types: function (cbParallel1) {
+                Product.distinct("type", match).exec(function (err, types) {
+                    Type.find({
+                        _id: {
+                            $in: types
                         }
-                    }]).exec(cbParallel6);
-                },
-                styles: function (cbParallel7) {
-                    Product.distinct("style", match).exec(function (err, styles) {
-                        cbParallel7(err, styles);
-                    });
-                }
+                    }).sort("name").exec(cbParallel1);
+                });
             },
+            collections: function (cbParallel2) {
+                Product.distinct("prodCollection", match).exec(function (err, collections) {
+                    Collection.find({
+                        _id: {
+                            $in: collections
+                        }
+                    }).sort("name").exec(cbParallel2);
+                });
+            },
+            sizes: function (cbParallel3) {
+                Product.distinct("size", match).exec(function (err, sizes) {
+                    Size.find({
+                        _id: {
+                            $in: sizes
+                        }
+                    }).sort("name").exec(cbParallel3);
+                });
+            },
+            colors: function (cbParallel4) {
+                Product.distinct("color", match).exec(function (err, colors) {
+                    BaseColor.find({
+                        _id: {
+                            $in: colors
+                        }
+                    }).sort("name").exec(cbParallel4);
+                });
+            },
+            fabrics: function (cbParallel5) {
+                Product.distinct("fabric", match).exec(function (err, fabrics) {
+                    Fabric.find({
+                        _id: {
+                            $in: fabrics
+                        }
+                    }).sort("name").exec(cbParallel5);
+                });
+            },
+            priceRange: function (cbParallel6) {
+                Product.aggregate([{
+                    $match: match
+                }, {
+                    $group: {
+                        _id: null,
+                        min: {
+                            $min: '$price'
+                        },
+                        max: {
+                            $max: '$price'
+                        }
+                    }
+                }]).exec(cbParallel6);
+            },
+            styles: function (cbParallel7) {
+                Product.distinct("style", match).exec(function (err, styles) {
+                    cbParallel7(err, styles);
+                });
+            }
+        },
             function (err, filters) {
                 callback(err, filters);
             });
@@ -783,64 +783,62 @@ var model = {
     getProductsWithFilters: function (filters, callback) {
         console.log("Filters: ", filters);
         async.waterfall([
-                function applyFilters(cbWaterfall1) {
-                    console.log("filters: ", filters);
-                    var updatedFilters = _.mapValues(filters, function (value) {
-                        // If filter is applied with blank array 
-                        // check if field exists & return all products
-                        if (_.isEmpty(value)) {
-                            return {
-                                '$exists': true
-                            }
-                        }
-                        var newVal = _.each(value, function (singleValue) {
-                            console.log("singlevalue", singleValue);
-                            return mongoose.Types.ObjectId(singleValue);
-                        });
-                        // convert to queryable object
+            function applyFilters(cbWaterfall1) {
+                console.log("filters: ", filters);
+                var updatedFilters = _.mapValues(filters, function (value) {
+                    // If filter is applied with blank array 
+                    // check if field exists & return all products
+                    if (_.isEmpty(value)) {
                         return {
-                            "$in": newVal
+                            '$exists': true
                         }
+                    }
+                    var newVal = _.each(value, function (singleValue) {
+                        console.log("singlevalue", singleValue);
+                        return mongoose.Types.ObjectId(singleValue);
                     });
-                    console.log("new filters: ", updatedFilters);
-                    Product.find(updatedFilters).sort({
-                        'createdAt': -1
-                    }).skip((filters.page - 1) * Config.maxRow).limit(Config.maxRow).lean().exec(function (err, products) {
+                    // convert to queryable object
+                    return {
+                        "$in": newVal
+                    }
+                });
+                console.log("new filters: ", updatedFilters);
+                Product.aggregate([{ $match: updatedFilters }, { $sort: { createdAt: -1 } }, { $group: { _id: '$productId' } }, { $project: { productId: '_$id' } }]).
+                    skip((filters.page - 1) * Config.maxRow).limit(Config.maxRow).lean().exec(function (err, products) {
                         cbWaterfall1(err, products);
                     });
-                },
-                function getProductDetails(products, cbWaterfall2) {
-                    var filteredProductsDetails = [];
-                    var newProducts = _.uniqBy(products, "productId");
-                    async.each(newProducts, function (product, eachCallback) {
-                        Product.getProductDetails(product, function (err, productDetails) {
-                            if (productDetails && !_.isEmpty(productDetails))
-                                filteredProductsDetails.push(productDetails);
-                            eachCallback(err, productDetails);
-                        });
-                    }, function (err) {
-                        cbWaterfall2(err, filteredProductsDetails);
+            },
+            function getProductDetails(products, cbWaterfall2) {
+                var filteredProductsDetails = [];
+                async.each(products, function (product, eachCallback) {
+                    Product.getProductDetails(product, function (err, productDetails) {
+                        if (productDetails && !_.isEmpty(productDetails))
+                            filteredProductsDetails.push(productDetails);
+                        eachCallback(err, productDetails);
                     });
-                },
-                function getProductFilters(products, cbWaterfall3) {
-                    var data = {};
-                    data.products = [];
-                    var filterDetails = {};
-                    filterDetails.products = products;
-                    async.each(products, function (product, eachCallback) {
-                        data.products.push(product.productId);
-                        eachCallback(null);
-                    }, function (err) {
-                        data.category = filters.category[0];
-                        Product.getFiltersWithCategory(data, function (err, filters) {
-                            if (filters && !_.isEmpty(filters)) {
-                                filterDetails.filters = filters;
-                            }
-                            cbWaterfall3(null, filterDetails);
-                        });
+                }, function (err) {
+                    cbWaterfall2(err, filteredProductsDetails);
+                });
+            },
+            function getProductFilters(products, cbWaterfall3) {
+                var data = {};
+                data.products = [];
+                var filterDetails = {};
+                filterDetails.products = products;
+                async.each(products, function (product, eachCallback) {
+                    data.products.push(product.productId);
+                    eachCallback(null);
+                }, function (err) {
+                    data.category = filters.category[0];
+                    Product.getFiltersWithCategory(data, function (err, filters) {
+                        if (filters && !_.isEmpty(filters)) {
+                            filterDetails.filters = filters;
+                        }
+                        cbWaterfall3(null, filterDetails);
                     });
-                }
-            ],
+                });
+            }
+        ],
             function (err, products) {
                 callback(err, products);
             });
@@ -851,40 +849,40 @@ var model = {
         Product.findOneAndUpdate({
             _id: product._id
         }, {
-            $inc: {
-                quantity: -product.reqQuantity
-            }
-        }, {
-            new: true
-        }).exec(function (err, data) {
-            console.log(data);
-            if (data.quantity < 0) {
-                Product.update({
-                    _id: product._id
-                }, {
-                    $inc: {
-                        quantity: product.reqQuantity
-                    }
-                }).exec(function (err, data) {
-                    if (callback) {
-                        if (data) {
-                            callback({
-                                message: {
-                                    data: "productOutOfStock " + product._id
+                $inc: {
+                    quantity: -product.reqQuantity
+                }
+            }, {
+                new: true
+            }).exec(function (err, data) {
+                console.log(data);
+                if (data.quantity < 0) {
+                    Product.update({
+                        _id: product._id
+                    }, {
+                            $inc: {
+                                quantity: product.reqQuantity
+                            }
+                        }).exec(function (err, data) {
+                            if (callback) {
+                                if (data) {
+                                    callback({
+                                        message: {
+                                            data: "productOutOfStock " + product._id
+                                        }
+                                    }, null);
+                                } else {
+                                    callback(err, null);
                                 }
-                            }, null);
-                        } else {
-                            callback(err, null);
-                        }
-                    }
-                });
-            } else {
-                if (callback)
-                    callback(null, {
-                        message: "success"
-                    });
-            }
-        });
+                            }
+                        });
+                } else {
+                    if (callback)
+                        callback(null, {
+                            message: "success"
+                        });
+                }
+            });
     }
 };
 module.exports = _.assign(module.exports, exports, model);
