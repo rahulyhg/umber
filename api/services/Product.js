@@ -439,6 +439,9 @@ var model = {
     // with available details
     // req-> {category: category._id}
     getProductsWithCategory: function (data, callback) {
+        if (!data.page) {
+            data.page = 1;
+        }
         async.waterfall([
             // Gets all the unique product ids related to the category
             function getCategoryProducts(callback1) {
@@ -782,6 +785,9 @@ var model = {
     // Converts this object into queryable object
     getProductsWithFilters: function (filters, callback) {
         console.log("Filters: ", filters);
+        if (!filters.page) {
+            filters.page = 1;
+        }
         async.waterfall([
                 function applyFilters(cbWaterfall1) {
                     console.log("filters: ", filters);
