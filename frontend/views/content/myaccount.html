@@ -1,4 +1,4 @@
-<div class="usraccount">
+<div class="usr-account">
     <div>
         <img src="fronend/img/" alt="" class="img-responsive">
     </div>
@@ -80,16 +80,6 @@
                             <p><button class="btn address-edit-btn" ng-click="edit()">Edit</button> <button class="btn address-delt-btn">Delete</button></p>
                         </div>
                     </div>
-                    <!--<div class="col-md-4" ng-if="!save">
-                        <div class="manage-addrs">
-                            <p><span class="user-name">Siddhesh Talekar</span>, 9935151611<br></p>
-                            <address>Agripad, BIT building no 20/16, R.B Chandorkar marg, Agripada</address>
-                            <div class="checkbox">
-                                <label for=""><input type="checkbox">Use this as default shippiong address</label>
-                            </div>
-                            <p><button class="btn address-edit-btn">Edit</button> <button class="btn address-delt-btn">Delete</button></p>
-                        </div>
-                    </div>-->
                     <div class="edit-addrs" ng-if="save">
                         <!--To open Edit Address Tab-->
                         <div class="col-md-9">
@@ -187,7 +177,126 @@
                 <div class="order-tab" ng-if="view == 'orderTab' ">
                     <!--To open an Order Tab-->
                     <div class="col-md-9">
-                        <p class="text-uppercase"></p>
+                        <p class="text-uppercase text-center">
+                            <button class="btn order-list--btn" ng-click="view='orders'" ng-class="{
+                        'btn--brownActive': view=='orders' }">orders </button>
+                            <button class="btn order-list--btn" ng-click="view='return'" ng-class="{
+                        'btn--brownActive': view=='return' }">return/exchange</button>
+                            <button class="btn order-list--btn" ng-click="view='cancel'" ng-class="{
+                        'btn--brownActive': view=='cancel' }">cancelled</button>
+                        </p>
+                        <div class="table-responsive" ng-if="view == 'orders'">
+                            <table class="table account-order-table">
+                                <thead>
+                                    <tr class="text-uppercase">
+                                        <th><span class="order-status">order placed</span><br><span class="order-date">1 march 2017</span></th>
+                                        <th>order no.<br>#123-45678 90123</th>
+                                        <th>order-satus<br>returned</th>
+                                        <th>tracking id<br>updating</th>
+                                        <th>Grand total<br>&#8377; 2899</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
+                                            <div class="item-img" style="background: url('frontend/img/individual/6.jpg') no-repeat 50% 50%">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h4 class="item-name text-uppercase">Linen Full Sleeve Shirt With Rollup</h4>
+                                            <p class="item-code">Product Code:<span class="text-uppercase"> G000278-GMSHHS0198-AMTEN-02</span>
+                                            </p>
+                                            <p class="item-cost"><i class="fa fa-inr"></i>2,899</p>
+
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <button class="btn order-action--btn text-uppercase">Cancel purchase
+                                                </button>
+                                                <button class="btn order-action--btn text-uppercase">order details
+                                                </button>
+                                                <button class="btn order-action--btn text-uppercase">download Invoice
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-responsive" ng-if="view == 'return'">
+                            <table class="table">
+                                <thead>
+                                    <tr class="text-uppercase">
+                                        <th><span class="order-status">order placed</span><br><span class="order-date">1 march 2017</span></th>
+                                        <th>order no.<br>#123-45678 90123</th>
+                                        <th>order-satus<br>returned</th>
+                                        <th>Grand total<br>&#8377; 2899</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
+                                            <div class="item-img" style="background: url('frontend/img/individual/6.jpg') no-repeat 50% 50%">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h4 class="item-name text-uppercase">Linen Full Sleeve Shirt With Rollup</h4>
+                                            <p class="item-code">Product Code:<span class="text-uppercase"> G000278-GMSHHS0198-AMTEN-02</span>
+                                            </p>
+                                            <p class="item-cost"><i class="fa fa-inr"></i>2,899</p>
+
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <button class="btn order-action--btn text-uppercase">order details
+                                                </button>
+                                                <button class="btn order-action--btn text-uppercase">buy it again
+                                                </button>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-responsive" ng-if="view == 'cancel'">
+                            <table class="table">
+                                <thead>
+                                    <tr class="text-uppercase">
+                                        <th><span class="order-status">order placed</span><br><span class="order-date">1 march 2017</span></th>
+                                        <th>order no.<br>#123-45678 90123</th>
+                                        <th>order-satus<br>returned</th>
+                                        <th>Grand total<br>&#8377; 2899</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
+                                            <div class="item-img" style="background: url('frontend/img/individual/6.jpg') no-repeat 50% 50%">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h4 class="item-name text-uppercase">Linen Full Sleeve Shirt With Rollup</h4>
+                                            <p class="item-code">Product Code:<span class="text-uppercase"> G000278-GMSHHS0198-AMTEN-02</span>
+                                            </p>
+                                            <p class="item-cost">
+                                                <i class="fa fa-inr"></i>2,899
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <button class="btn order-action--btn text-uppercase">buy it again
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div class="wishlist-tab" ng-if="view == 'wishlistTab' ">
