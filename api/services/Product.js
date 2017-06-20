@@ -815,7 +815,7 @@ var model = {
                         }
                     }, {
                         $project: {
-                            productId: '_$id'
+                            productId: '$_id'
                         }
                     }]).
                     skip((filters.page - 1) * Config.maxRow).limit(Config.maxRow).exec(function (err, products) {
