@@ -195,7 +195,7 @@ myApp
         $scope.template = TemplateService.getHTML("content/buythelook.html");
         TemplateService.title = "Buythelook"; //This is the Title of the Website
         //     $scope.navigation = NavigationService.getEnabledCtNavigation();
-
+        $scope.currentId = $stateParams.id
         $scope.buyshirt = [{
             img: 'img/buy/2.jpg',
             rupee: '3,000',
@@ -966,8 +966,11 @@ myApp
             $.jStorage.set("selectedCategory", selectedCategory);
             $.jStorage.deleteKey("appliedFilters");
             var input = {
-                "category": [selectedCategory]
+
+                "category": selectedCategory,
+                "page": 1
             }
+
             ProductService.getProductsWithFilters(input, function (data) {
 
                 if (data.data.data.length == 0) {
@@ -975,10 +978,10 @@ myApp
 
                 } else if (!_.isEmpty(data.data.data)) {
                     $scope.displayMessage = "";
-                    $scope.products = _.chunk(data.data.data.products, 3);
+                    $scope.products = _.chunk(data.data.data, 3);
                     console.log(data)
                     var input = {
-                        "category": selectedCategory
+                        "category": selectedCategory,
                     }
                     ProductService.getFiltersWithCategory(input, function (data) {
                         console.log("product category on basis of category", data.data.data)
@@ -1076,47 +1079,34 @@ myApp
 
         $scope.applyFilters = function (key, filter) {
             var filters = $.jStorage.get('appliedFilters') ? $.jStorage.get('appliedFilters') : {
-                category: [],
-                type: [],
-                style: [],
-                color: [],
-                collection: [],
-                size: [],
-                fabric: [],
+                appliedFilters: {
+                    category: [],
+                    type: [],
+                    style: [],
+                    color: [],
+                    collection: [],
+                    size: [],
+                    fabric: [],
+                },
             };
             console.log(filter, key)
-            filters.category = [$.jStorage.get("selectedCategory")];
+            filters.appliedFilters.category = [$.jStorage.get("selectedCategory")];
 
-            var result = _.indexOf(filters[key], filter._id);
+            var result = _.indexOf(filters.appliedFilters[key], filter._id);
             console.log("check result", result)
             if (result != -1) {
-                _.pullAt(filters[key], result);
+                _.pullAt(filters.appliedFilters[key], result);
             } else {
                 console.log("insideelse:", filters, filters[key])
-                filters[key].push(filter._id);
+                filters.appliedFilters[key].push(filter._id);
             }
-
+            filters.page = 1;
             $.jStorage.set('appliedFilters', filters)
-            console.log("Jstoragefor filters::", $.jStorage.get("appliedFilters"))
-            // console.log("key::", key, filter)
-            // if (!Array.isArray(filters[key])) {
-            //     filters = {
-            //         "category": [$.jStorage.get("selectedCategory")]
-            //     }
-            //     filters[key] = [];
-            // }
-            // if (key == "style") {
-            //     filters[key].push(filter);
-            // } else {
-            //     filters[key].push(filter._id);
-            // }
-            //filters["category"] = $.jStorage.get("selectedCategory");
 
-            //$scope.filteredProduct = $.jStorage.get('appliedFilters') ? $.jStorage.get('appliedFilters') : {};
-            //$scope.filteredProduct.filters[key].push(filter._id);
-            // $.jStorage.set('appliedFilters', $scope.filteredProduct);
+            console.log("Jstoragefor filters::", $.jStorage.get("appliedFilters"))
+
             ProductService.getProductsWithAppliedFilters(filters, function (data) {
-                console.log(data.data.data);
+                console.log("filtersretrived:::", data.data.data);
                 $scope.products = _.chunk(data.data.data.products, 3);
                 $scope.filters = data.data.data.filters;
 
@@ -1126,13 +1116,30 @@ myApp
         }
         /******checking filters after reload***** */
         $scope.checkFilterStatus = function (key, filter) {
-            var appliedFilters = $.jStorage.get("appliedFilters");
-            var result = _.indexOf(appliedFilters[key], filter);
-            console.log(result)
-            if (result != -1) {
-                return true;
-            } else {
-                return false;
+            var filters = $.jStorage.get("appliedFilters");
+
+            if (filters) {
+                var result = _.indexOf(filters.appliedFilters[key], filter);
+                console.log(result)
+                if (result != -1) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        /********check selected category******** */
+        $scope.checkRadioCategory = function (catid) {
+
+            var selectedId = $.jStorage.get("selectedCategory")
+            if (selectedId) {
+
+
+                if (selectedId == catid) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
 

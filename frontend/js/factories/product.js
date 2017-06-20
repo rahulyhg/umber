@@ -45,17 +45,11 @@ myApp.factory('ProductService', function ($http, $timeout) {
             );
         },
 
-        getProductsWithCategoryId: function (input, callback) {
-            $http({
-                url: adminurl + 'Product/getProductsWithCategoryId/' + input,
-                method: 'POST',
-                withCredentials: false
-            }).then(callback);
-        },
+
 
         getProductsWithFilters: function (input, callback) {
             $http({
-                url: adminurl + 'Product/getProductsWithFilters/',
+                url: adminurl + 'Product/getProductsWithCategory/',
                 data: input,
                 method: 'POST',
                 withCredentials: false

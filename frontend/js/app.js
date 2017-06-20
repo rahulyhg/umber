@@ -47,7 +47,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             controller: 'MycartCtrl'
         })
         .state('buythelook', {
-            url: "/buythelook",
+            url: "/buythelook/:id",
             templateUrl: tempateURL,
             controller: 'BuythelookCtrl'
         })
