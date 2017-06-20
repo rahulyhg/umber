@@ -1,4 +1,4 @@
-myApp.factory('ProductService', function ($http) {
+myApp.factory('ProductService', function ($http, $timeout) {
     return {
 
         getEnabledProducts: function (callback) {
@@ -40,7 +40,9 @@ myApp.factory('ProductService', function ($http) {
                 data: input,
                 method: 'POST',
                 withCredentials: false
-            }).then(callback);
+            }).then(
+                callback
+            );
         },
 
         getProductsWithCategoryId: function (input, callback) {
