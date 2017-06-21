@@ -402,7 +402,7 @@ myApp
             $scope.form = false;
         };
     })
-    .controller('CheckoutCtrl', function ($scope, $state, myService, BannerService, TemplateService, NavigationService, UserService, CartService, WishlistService, $timeout) {
+    .controller('CheckoutCtrl', function ($scope, ProductService, toastr, $state, myService, BannerService, TemplateService, NavigationService, UserService, CartService, WishlistService, $timeout) {
         $scope.template = TemplateService.getHTML("content/checkout.html");
         TemplateService.title = "Checkout"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -531,6 +531,7 @@ myApp
         if (userData.userId) {
             UserService.getUserDetails(userData, function (data) {
                 $scope.user = data.data.data;
+                console.log("userdetails::", $scope.user)
             });
         }
 
@@ -557,6 +558,17 @@ myApp
                 }
             });
         }
+        var input = {
+            "userId": $.jStorage.get("userId")
+        }
+        ProductService.createOrderFromCart(input, function (data) {
+            console.log("oderplaced", data);
+            if (data.data.data) {
+                toastr.success('Thank You your order was placed successfully', 'success');
+            } else {
+                toastr.error('Sorry there was some problem in placing your order', 'Error');
+            }
+        })
     })
     .controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $stateParams, $state, $uibModal, UserService, WishlistService,
         TemplateService, NavigationService, ProductService, CartService, $timeout) {
@@ -945,6 +957,19 @@ myApp
                 $scope.addwishlist()
             }
         }
+
+        $scope.checkStockStatus = function (prod) {
+            if (prod.quantity > prod.product.quantity) {
+
+                angular.element(document.getElementsByClassName('checkout--btn'))[0].disabled = true;
+                return "disabled-outofstock";
+
+            } else {
+                return "";
+            }
+
+        }
+
 
     })
     .controller('compareProductsCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
