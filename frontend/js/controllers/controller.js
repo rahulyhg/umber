@@ -191,111 +191,158 @@ myApp
 
         }];
     })
-    .controller('BuythelookCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+    .controller('BuythelookCtrl', function ($scope, $rootScope, $stateParams, ProductService, TemplateService, NavigationService, $timeout, $uibModal) {
         $scope.template = TemplateService.getHTML("content/buythelook.html");
         TemplateService.title = "Buythelook"; //This is the Title of the Website
-        //     $scope.navigation = NavigationService.getEnabledCtNavigation();
-        $scope.currentId = $stateParams.id
-        $scope.buyshirt = [{
-            img: 'img/buy/2.jpg',
-            rupee: '3,000',
-            title: 'linen FULL SLEEVE SHIRT WITH ROLL UP',
-            id: 0
-        }, {
-            img: 'img/buy/3.jpg',
-            rupee: '3,000',
-            title: 'linen FULL SLEEVE SHIRT WITH ROLL UP',
-            id: 1
-        }, {
-            img: 'img/buy/4.jpg',
-            rupee: '3,000',
-            title: 'linen FULL SLEEVE SHIRT WITH ROLL UP',
-            id: 2
-        }, {
-            img: 'img/buy/5.jpg',
-            rupee: '3,000',
-            title: 'OFF WHITE SLIM FIT FORMA TROUSER',
-            id: 3
-        }, {
-            img: 'img/buy/6.jpg',
-            rupee: '3,000',
-            title: 'OFF WHITE SLIM FIT FORMA TROUSER',
-            id: 4
-        }, {
-            img: 'img/buy/7.jpg',
-            rupee: '3,000',
-            title: 'OFF WHITE SLIM FIT FORMA TROUSER',
-            id: 5
-        }, {
-            img: 'img/buy/2.jpg',
-            rupee: '3,000',
-            title: 'Linen LIGHT BLUE CASUAL BLAZER',
-            id: 6
-        }, {
-            img: 'img/buy/3.jpg',
-            rupee: '3,000',
-            title: 'linen LIGHT BLUE CASUAL BLAZER',
-            id: 7
-        }, {
-            img: 'img/buy/4.jpg',
-            rupee: '3,000',
-            title: 'linen LIGHT BLUE CASUAL BLAZER',
-            id: 8
-        }, {
-            img: 'img/buy/5.jpg',
-            rupee: '3,000',
-            title: 'MEN WHITE GENUINE LEATHER DERBYS',
-            id: 9
-        }, {
-            img: 'img/buy/6.jpg',
-            rupee: '3,000',
-            title: 'MEN WHITE GENUINE LEATHER DERBYS',
-            id: 10
-        }, {
-            img: 'img/buy/7.jpg',
-            rupee: '3,000',
-            title: 'MEN WHITE GENUINE LEATHER DERBYS',
-            id: 11
-        }, {
-            img: 'img/buy/3.jpg',
-            rupee: '3,000',
-            title: 'LETHER MEN BLACK GENUINE LEATHER BELT',
-            id: 12
-        }, {
-            img: 'img/buy/4.jpg',
-            rupee: '3,000',
-            title: 'LETHER MEN BLACK GENUINE LEATHER BELT',
-            id: 13
-        }, {
-            img: 'img/buy/5.jpg',
-            rupee: '3,000',
-            title: 'LETHER MEN BLACK GENUINE LEATHER BELT',
-            id: 14
-        }, {
-            img: 'img/buy/6.jpg',
-            rupee: '3,000',
-            title: 'GRAVIATE BLACK FULL FRAME ROUNDGLASSES',
-            id: 15
-        }, {
-            img: 'img/buy/7.jpg',
-            rupee: '3,000',
-            title: 'GRAVIATE BLACK FULL FRAME ROUNDGLASSES',
-            id: 16
-        }, {
-            img: 'img/buy/5.jpg',
-            rupee: '3,000',
-            title: 'GRAVIATE BLACK FULL FRAME ROUNDGLASSES',
-            id: 17
-        }];
-        $scope.myShirt = [];
-        $scope.myShirt11 = [];
-        $scope.myShirt = _.chunk($scope.buyshirt, 9);
-        console.log($scope.myShirt);
-        _.each($scope.myShirt, function (n) {
-            $scope.myShirt1 = _.chunk(n, 3);
-            $scope.myShirt11.push($scope.myShirt1);
-        });
-        console.log($scope.myShirt11);
+        //$scope.navigation = NavigationService.getEnabledCtNavigation();
+        $scope.currentId = $stateParams.id;
+        console.log($scope.currentId);
+        var input = {
+            _id: $scope.currentId
+        }
+        ProductService.getBuyTheLookDetails(input, function (data) {
+            $scope.buyshirt = data.data.data;
+            $scope.myShirt = [];
+            $scope.myShirt11 = [];
+            $scope.myShirt = _.chunk($scope.buyshirt, 3);
+            console.log($scope.myShirt)
+            // console.log("myshirt", $scope.myShirt);
+            // _.each($scope.myShirt, function (n) {
+            //     $scope.myShirt1 = _.chunk(n, 3);
+            //     $scope.myShirt11.push($scope.myShirt1);
+            //     console.log($scope.myShirt11);
+            // });
+        })
+
+        $rootScope.clickfun = function (product) {
+            console.log(product)
+            $scope.compareproduct = $.jStorage.get('compareproduct') ? $.jStorage.get('compareproduct') : [];
+            var result = _.find($scope.compareproduct, {
+                productId: product.productId
+            });
+            if (result) {
+                _.remove($scope.compareproduct, {
+                    productId: product.productId
+                });
+                $.jStorage.set('compareproduct', $scope.compareproduct);
+            } else {
+                $scope.compareproduct.push(product);
+                $.jStorage.set('compareproduct', $scope.compareproduct);
+                console.log($.jStorage.get('compareproduct'))
+            }
+            console.log($.jStorage.get('compareproduct'))
+            if (_.isEmpty($.jStorage.get('compareproduct'))) {
+                $scope.showCheck = false
+
+            } else {
+                $scope.showCheck = true
+            }
+        }
+        $rootScope.checkStateOnReload = function (prodid) {
+            var cp = $.jStorage.get("compareproduct")
+            var result = _.find(cp, {
+                productId: prodid
+            });
+            if (result) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        // $scope.buyshirt = [{
+        //     img: 'img/buy/2.jpg',
+        //     rupee: '3,000',
+        //     title: 'linen FULL SLEEVE SHIRT WITH ROLL UP',
+        //     id: 0
+        // }, {
+        //     img: 'img/buy/3.jpg',
+        //     rupee: '3,000',
+        //     title: 'linen FULL SLEEVE SHIRT WITH ROLL UP',
+        //     id: 1
+        // }, {
+        //     img: 'img/buy/4.jpg',
+        //     rupee: '3,000',
+        //     title: 'linen FULL SLEEVE SHIRT WITH ROLL UP',
+        //     id: 2
+        // }, {
+        //     img: 'img/buy/5.jpg',
+        //     rupee: '3,000',
+        //     title: 'OFF WHITE SLIM FIT FORMA TROUSER',
+        //     id: 3
+        // }, {
+        //     img: 'img/buy/6.jpg',
+        //     rupee: '3,000',
+        //     title: 'OFF WHITE SLIM FIT FORMA TROUSER',
+        //     id: 4
+        // }, {
+        //     img: 'img/buy/7.jpg',
+        //     rupee: '3,000',
+        //     title: 'OFF WHITE SLIM FIT FORMA TROUSER',
+        //     id: 5
+        // }, {
+        //     img: 'img/buy/2.jpg',
+        //     rupee: '3,000',
+        //     title: 'Linen LIGHT BLUE CASUAL BLAZER',
+        //     id: 6
+        // }, {
+        //     img: 'img/buy/3.jpg',
+        //     rupee: '3,000',
+        //     title: 'linen LIGHT BLUE CASUAL BLAZER',
+        //     id: 7
+        // }, {
+        //     img: 'img/buy/4.jpg',
+        //     rupee: '3,000',
+        //     title: 'linen LIGHT BLUE CASUAL BLAZER',
+        //     id: 8
+        // }, {
+        //     img: 'img/buy/5.jpg',
+        //     rupee: '3,000',
+        //     title: 'MEN WHITE GENUINE LEATHER DERBYS',
+        //     id: 9
+        // }, {
+        //     img: 'img/buy/6.jpg',
+        //     rupee: '3,000',
+        //     title: 'MEN WHITE GENUINE LEATHER DERBYS',
+        //     id: 10
+        // }, {
+        //     img: 'img/buy/7.jpg',
+        //     rupee: '3,000',
+        //     title: 'MEN WHITE GENUINE LEATHER DERBYS',
+        //     id: 11
+        // }, {
+        //     img: 'img/buy/3.jpg',
+        //     rupee: '3,000',
+        //     title: 'LETHER MEN BLACK GENUINE LEATHER BELT',
+        //     id: 12
+        // }, {
+        //     img: 'img/buy/4.jpg',
+        //     rupee: '3,000',
+        //     title: 'LETHER MEN BLACK GENUINE LEATHER BELT',
+        //     id: 13
+        // }, {
+        //     img: 'img/buy/5.jpg',
+        //     rupee: '3,000',
+        //     title: 'LETHER MEN BLACK GENUINE LEATHER BELT',
+        //     id: 14
+        // }, {
+        //     img: 'img/buy/6.jpg',
+        //     rupee: '3,000',
+        //     title: 'GRAVIATE BLACK FULL FRAME ROUNDGLASSES',
+        //     id: 15
+        // }, {
+        //     img: 'img/buy/7.jpg',
+        //     rupee: '3,000',
+        //     title: 'GRAVIATE BLACK FULL FRAME ROUNDGLASSES',
+        //     id: 16
+        // }, {
+        //     img: 'img/buy/5.jpg',
+        //     rupee: '3,000',
+        //     title: 'GRAVIATE BLACK FULL FRAME ROUNDGLASSES',
+        //     id: 17
+        // }];
+
+
 
 
 
@@ -986,17 +1033,19 @@ myApp
                     ProductService.getFiltersWithCategory(input, function (data) {
                         console.log("product category on basis of category", data.data.data)
                         $scope.filters = data.data.data;
+                        $scope.min = $scope.filters.priceRange[0].min;
+                        $scope.max = $scope.filters.priceRange[0].max;
+                        console.log("filters", $scope.filters.priceRange[0].max)
                         $scope.slider_translate = {
-                            minValue: $scope.filters.priceRange[0].min,
-                            maxValue: $scope.filters.priceRange[0].max,
+                            minValue: 80,
+                            maxValue: 100,
                             options: {
                                 ceil: $scope.filters.priceRange[0].max,
                                 floor: $scope.filters.priceRange[0].min,
-                                id: 'translate-slider',
-                                translate: function (value, id, which) {
-                                    console.info(value, id, which);
-                                    return '$' + value;
-                                }
+                                id: 'translate-slider'
+                                // translate: function (value, id, which) {
+                                //     return '$' + value;
+                                // }
                             }
                         };
                     })
@@ -1022,7 +1071,7 @@ myApp
                 $.jStorage.set('compareproduct', $scope.compareproduct);
                 console.log($.jStorage.get('compareproduct'))
             }
-            console.log($.jStorage.get('compareproduct'))
+
             if (_.isEmpty($.jStorage.get('compareproduct'))) {
                 $scope.showCheck = false
 
@@ -1037,7 +1086,7 @@ myApp
             var result = _.remove(removeCompare, {
                 productId: prodId
             });
-            console.log("removed from compaare", removeCompare);
+
             $.jStorage.set("compareproduct", removeCompare);
             $state.reload();
         }
@@ -1058,27 +1107,10 @@ myApp
             $state.go("compare-products");
         }
 
-        // var banner = {
-        //     pageName: "listing-page"
-        // }
-        // BannerService.getBanner(banner, function (data) {
-        //     $scope.banner = data.data.data;
-
-        // });
-        // Ideally products should be retrieved with respect to category
-
-        // $scope.filterProducts = function (filterParameter) {
-        //     ProductService.filterProducts(filterParameter, function (data) {
-        //         console.log(data)
-        //         $scope.products = _.chunk(data.data.data, 3);
-        //         console.log("Listing page products: ", $scope.products);
-        //     });
-        // }
-
-        var filters = {};
+        var appliedFilters = {};
 
         $scope.applyFilters = function (key, filter) {
-            var filters = $.jStorage.get('appliedFilters') ? $.jStorage.get('appliedFilters') : {
+            var appliedFilters = $.jStorage.get('appliedFilters') ? $.jStorage.get('appliedFilters') : {
                 appliedFilters: {
                     category: [],
                     type: [],
@@ -1090,18 +1122,17 @@ myApp
                 },
             };
             console.log(filter, key)
-            filters.appliedFilters.category = [$.jStorage.get("selectedCategory")];
+            appliedFilters.appliedFilters.category = [$.jStorage.get("selectedCategory")];
 
-            var result = _.indexOf(filters.appliedFilters[key], filter._id);
+            var result = _.indexOf(appliedFilters.appliedFilters[key], filter._id);
             console.log("check result", result)
             if (result != -1) {
-                _.pullAt(filters.appliedFilters[key], result);
+                _.pullAt(appliedFilters.appliedFilters[key], result);
             } else {
-                console.log("insideelse:", filters, filters[key])
-                filters.appliedFilters[key].push(filter._id);
+                appliedFilters.appliedFilters[key].push(filter._id);
             }
-            filters.page = 1;
-            $.jStorage.set('appliedFilters', filters)
+            appliedFilters.page = 1;
+            $.jStorage.set('appliedFilters', appliedFilters)
 
             console.log("Jstoragefor filters::", $.jStorage.get("appliedFilters"))
 
@@ -1116,11 +1147,11 @@ myApp
         }
         /******checking filters after reload***** */
         $scope.checkFilterStatus = function (key, filter) {
-            var filters = $.jStorage.get("appliedFilters");
+            var appliedFilters = $.jStorage.get("appliedFilters");
 
-            if (filters) {
-                var result = _.indexOf(filters.appliedFilters[key], filter);
-                console.log(result)
+            if (appliedFilters) {
+                var result = _.indexOf(appliedFilters.appliedFilters[key], filter);
+
                 if (result != -1) {
                     return true;
                 } else {

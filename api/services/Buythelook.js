@@ -41,14 +41,15 @@ var model = {
 
     getBuyTheLookDetails: function (data, callback) {
         var lookProducts = [];
-        Buythelook.findById(data._id).exec(function (err, look) {
+        Buythelook.findById(mongoose.Types.ObjectId(data._id)).exec(function (err, look) {
             if (look && !_.isEmpty(look)) {
                 async.each(look.products, function (data, eachCallback) {
                     Product.getProductDetails(data.product, function (err, productDetails) {
                         if (productDetails && !_.isEmpty(productDetails)) {
                             lookProducts.push(productDetails);
                         }
-                        eachCallback(err, productDetails);
+                        eachCallback(null, productDetails);
+
                     });
                 }, function (err) {
                     callback(null, lookProducts);

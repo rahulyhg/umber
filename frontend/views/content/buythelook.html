@@ -11,27 +11,27 @@
             </div>
             <div class="col-md-7">
                 <div class="sub-row">
-                    <div class="row" ng-repeat="abc in myShirt11">
+                    <div class="row" ng-repeat="abc in myShirt">
                         <div class="col-md-4" ng-repeat="xyz in abc" ng-init="parentIndex = $index">
                             <div class="buy-info">
                                 <div class="buy-slider">
-                                    <flex-slider flex-slide="buy in xyz track by $index" prev-text="" next-text="" animation="slide" min-items="3">
+                                    <flex-slider flex-slide="buy in xyz.images track by $index" prev-text="" next-text="" animation="slide" min-items="3">
                                         <li>
                                             <i class="fa fa-heart-o" aria-hidden="true" ng-click="addwishlist();"></i>
-                                            <img ng-src="{{buy.img}}" class="img-responsive" ng-click="addcart();">
+                                            <img ng-src="{{buy.image | serverimage}}" class="img-responsive" ng-click="addcart();">
                                         </li>
                                     </flex-slider>
                                     <div class="buy-para custom-checkbox">
-                                        <h4><i class="fa fa-inr" aria-hidden="true"></i> {{xyz[0].rupee}}</h4>
-                                        <h5 class="text-uppercase">{{xyz[0].title}}</h5>
+                                        <h4><i class="fa fa-inr" aria-hidden="true"></i> {{xyz.price}}</h4>
+                                        <h5 class="text-uppercase">{{xyz.description}}</h5>
                                         <hr>
                                         <div class="checkbox inline-block marg0" ng-click="remove();">
-                                            <input type="checkbox" id="{{xyz[0].id}}">
-                                            <label for="{{xyz[0].id}}">
+                                            <input type="checkbox" id="{{xyz.productId}}" ng-checked="checkStateOnReload(product.productId)" ng-click="clickfun(product)">
+                                            <label for=" {{xyz.productId}} ">
                                           Add to compare
                                         </label>
                                         </div>
-                                        <button class="btn btn-default btn--brown text-uppercase" ng-click="forgot();" >buy</button>
+                                        <button class="btn btn-default btn--brown text-uppercase " ng-click="forgot(); ">buy</button>
                                     </div>
                                 </div>
                             </div>
@@ -42,102 +42,107 @@
         </div>
     </div>
 </div>
-<!--<div class="col-md-4">
-                        <div class="buy-slider">
-                            <flex-slider flex-slide="buy in trouser track by $index" prev-text="" next-text="" animation="slide" min-items="3">
-                                <li> <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    <img ng-src="{{buy .img}}" class="img-responsive">
+<!--<div class="col-md-4 ">
+                        <div class="buy-slider ">
+                            <flex-slider flex-slide="buy in trouser track by $index " prev-text=" " next-text="
+                                                " animation="slide " min-items="3 ">
+                                <li> <i class="fa fa-heart-o " aria-hidden="true "></i>
+                                    <img ng-src="{{buy .img}} " class="img-responsive ">
                                 </li>
                             </flex-slider>
                         </div>
-                        <div class="buy-info">
-                            <div class="buy-para">
+                        <div class="buy-info ">
+                            <div class="buy-para ">
                                 <h5>Rs 3000</h5>
                                 <h5>OFF WHITE SLIM FIT FORMA TROUSER</h5>
                                 <span></span>
-                                <p><input type="checkbox"> Add to compare</p>
+                                <p><input type="checkbox "> Add to compare</p>
                             </div>
-                            <button class="btn btn-default btn--brown text-uppercase">buy</button>
+                            <button class="btn btn-default btn--brown text-uppercase ">buy</button>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="buy-info">
-                            <div class="buy-slider">
-                                <flex-slider flex-slide="buy in blazer track by $index" prev-text="" next-text="" animation="slide" min-items="3">
+                    <div class="col-md-4 ">
+                        <div class="buy-info ">
+                            <div class="buy-slider ">
+                                <flex-slider flex-slide="buy in blazer track by $index " prev-text=" " next-text="
+                                                " animation="slide " min-items="3 ">
                                     <li>
-                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                        <img ng-src="{{buy .img}}" class="img-responsive">
+                                        <i class="fa fa-heart-o " aria-hidden="true "></i>
+                                        <img ng-src="{{buy .img}} " class="img-responsive ">
                                     </li>
                                 </flex-slider>
                             </div>
-                            <div class="buy-para">
+                            <div class="buy-para ">
                                 <h5>Rs 3000</h5>
                                 <h5>LINEN LIGHT BLUE CASUAL BLAZER</h5>
                                 <span></span>
-                                <p><input type="checkbox"> Add to compare</p>
+                                <p><input type="checkbox "> Add to compare</p>
                             </div>
-                            <button class="btn btn-default btn--brown text-uppercase">buy</button>
+                            <button class="btn btn-default btn--brown text-uppercase ">buy</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="sub-row">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="buy-info">
-                            <div class="buy-slider">
-                                <flex-slider flex-slide="buy in derbys track by $index" prev-text="" next-text="" animation="slide" min-items="3">
+            <div class="sub-row ">
+                <div class="row ">
+                    <div class="col-md-4 ">
+                        <div class="buy-info ">
+                            <div class="buy-slider ">
+                                <flex-slider flex-slide="buy in derbys track by $index " prev-text=" " next-text="
+                                                " animation="slide " min-items="3 ">
                                     <li>
-                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                        <img ng-src="{{buy .img}}" class="img-responsive">
+                                        <i class="fa fa-heart-o " aria-hidden="true "></i>
+                                        <img ng-src="{{buy .img}} " class="img-responsive ">
                                     </li>
                                 </flex-slider>
                             </div>
-                            <div class="buy-para">
+                            <div class="buy-para ">
                                 <h5>Rs 3000</h5>
                                 <h5>MEN WHITE GENUINE LEATHER DERBYS</h5>
                                 <span></span>
-                                <p><input type="checkbox"> Add to compare</p>
+                                <p><input type="checkbox "> Add to compare</p>
                             </div>
-                            <button class="btn btn-default btn--brown text-uppercase">buy</button>
+                            <button class="btn btn-default btn--brown text-uppercase ">buy</button>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="buy-info">
-                            <div class="buy-slider">
-                                <flex-slider flex-slide="buy in belt track by $index" prev-text="" next-text="" animation="slide" min-items="3">
+                    <div class="col-md-4 ">
+                        <div class="buy-info ">
+                            <div class="buy-slider ">
+                                <flex-slider flex-slide="buy in belt track by $index " prev-text=" " next-text="
+                                                " animation="slide " min-items="3 ">
                                     <li>
-                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                        <img ng-src="{{buy .img}}" class="img-responsive">
+                                        <i class="fa fa-heart-o " aria-hidden="true "></i>
+                                        <img ng-src="{{buy .img}} " class="img-responsive ">
                                     </li>
                                 </flex-slider>
                             </div>
-                            <div class="buy-para">
+                            <div class="buy-para ">
                                 <h5>Rs 3000</h5>
                                 <h5>LEATHER MEN BLACK GENUINE LEATHER BELT</h5>
                                 <span></span>
-                                <p><input type="checkbox"> Add to compare</p>
+                                <p><input type="checkbox "> Add to compare</p>
                             </div>
-                            <button class="btn btn-default btn--brown text-uppercase">buy</button>
+                            <button class="btn btn-default btn--brown text-uppercase ">buy</button>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="buy-info">
-                            <div class="buy-slider">
-                                <flex-slider flex-slide="buy in glasses track by $index" prev-text="" next-text="" animation="slide" min-items="3">
+                    <div class="col-md-4 ">
+                        <div class="buy-info ">
+                            <div class="buy-slider ">
+                                <flex-slider flex-slide="buy in glasses track by $index " prev-text=" " next-text="
+                                                " animation="slide " min-items="3 ">
                                     <li>
-                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                        <img ng-src="{{buy .img}}" class="img-responsive">
+                                        <i class="fa fa-heart-o " aria-hidden="true "></i>
+                                        <img ng-src="{{buy .img}} " class="img-responsive ">
                                     </li>
                                 </flex-slider>
                             </div>
-                            <div class="buy-para">
+                            <div class="buy-para ">
                                 <h5>Rs 3000</h5>
                                 <h5>GRAVIATE BLACK FULL FRAME ROUNDGLASSES</h5>
                                 <span></span>
-                                <p><input type="checkbox"> Add to compare</p>
+                                <p><input type="checkbox "> Add to compare</p>
                             </div>
-                            <button class="btn btn-default btn--brown text-uppercase">buy</button>
+                            <button class="btn btn-default btn--brown text-uppercase ">buy</button>
                         </div>
                     </div>
                 </div>

@@ -72,9 +72,11 @@
                                 </h5>
                             </uib-accordion-heading>
                             <div class="range-slider">
-                                <rzslider rz-slider-model="filters.priceRange[0].min" rz-slider-high="filters.priceRange[0].max" rz-slider-options="slider_translate.options"></rzslider>
-                                <span class="rupee-count pull-left">Rs{{filters.priceRange[0].min}}-&#8377;</span>
-                                <span class="rupee-count pull-right">Rs{{filters.priceRange[0].max}}</span>
+                                <pre>{{min+"max:"+max}}</pre>
+                                <rzslider rz-slider-model="min" rz-slider-high="max" rz-slider-options="slider_translate.options"></rzslider>
+                                <span class="rupee-count pull-left">Rs{{min}}</span>
+                                <!---&#8377;-->
+                                <span class="rupee-count pull-right">Rs{{max}}</span>
                             </div>
                         </div>
                     </uib-accordion>
