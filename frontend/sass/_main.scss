@@ -1958,7 +1958,6 @@
     .item-code {
         font-size: 12px;
         color: $darkGray;
-        margin-bottom: 0;
     }
 
     .item-cost {
@@ -1986,15 +1985,21 @@
         }
         .account-order-table {
             thead> {
+                tr>th {
+                    padding-left: 40px;
+                    font-weight: normal;
+                }
                 tr:first-child {
                     border-top: 1px solid $borderColor;
                     background: $lightGray1;
+                    color: $darkBrown1;
                 }
             }
-            tbody>tr {
-                td {
+            tbody {
+                tr>td {
                     border: 1px solid $borderColor;
                     border-right: none;
+                    border-bottom: none;
                     text-transform: uppercase;
                 }
                 td+td {
@@ -2005,6 +2010,11 @@
                     border-right: 1px solid $borderColor;
                 }
             }
+            hr {
+                @include size(85%,
+                auto);
+                @include margin(10px auto);
+            }
         }
         .order-list--btn {
             @extend .btn--list;
@@ -2012,6 +2022,11 @@
         }
         .order-action--btn {
             @extend .btn--list;
+            margin-right: 15px;
+            display: block;
+        }
+        p.item-code {
+            margin-bottom: 0;
         }
         p.item-cost {
             line-height: 1;

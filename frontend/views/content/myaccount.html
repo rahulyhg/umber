@@ -189,11 +189,11 @@
                             <table class="table account-order-table">
                                 <thead>
                                     <tr class="text-uppercase">
-                                        <th><span class="order-status">order placed</span><br><span class="order-date">1 march 2017</span></th>
-                                        <th>order no.<br>#123-45678 90123</th>
-                                        <th>order-satus<br>returned</th>
-                                        <th>tracking id<br>updating</th>
-                                        <th>Grand total<br>&#8377; 2899</th>
+                                        <th>order placed<br><strong>1 march 2017</strong></th>
+                                        <th>order no.<br><strong>#123-45678 90123</strong></th>
+                                        <th>order-satus<br><strong>returned</strong></th>
+                                        <th>tracking id<br><strong>updating</strong></th>
+                                        <th>Grand total<br><strong>&#8377; 2899</strong></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -202,6 +202,7 @@
                                             <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
                                             <div class="item-img" style="background: url('frontend/img/individual/6.jpg') no-repeat 50% 50%">
                                             </div>
+
                                         </td>
                                         <td>
                                             <h4 class="item-name text-uppercase">Linen Full Sleeve Shirt With Rollup</h4>
@@ -210,8 +211,8 @@
                                             <p class="item-cost"><i class="fa fa-inr"></i>2,899</p>
 
                                         </td>
-                                        <td>
-                                            <div>
+                                        <td colspan="3">
+                                            <div class="pull-right">
                                                 <button class="btn order-action--btn text-uppercase">Cancel purchase
                                                 </button>
                                                 <button class="btn order-action--btn text-uppercase">order details
@@ -221,18 +222,23 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr></tr>
+                                    <tr>
+                                        <td>
+                                            <p class="item-code">Comment: Tailor it to 116 cm height.</p>
+                                            <hr>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="table-responsive" ng-if="view == 'return'">
-                            <table class="table">
+                            <table class="table account-order-table">
                                 <thead>
                                     <tr class="text-uppercase">
-                                        <th><span class="order-status">order placed</span><br><span class="order-date">1 march 2017</span></th>
-                                        <th>order no.<br>#123-45678 90123</th>
-                                        <th>order-satus<br>returned</th>
-                                        <th>Grand total<br>&#8377; 2899</th>
+                                        <th>order placed</span><br><strong>1 march 2017</strong></th>
+                                        <th>order no.<br><strong>#123-45678 90123</strong></th>
+                                        <th>order-satus<br><strong>returned</strong></th>
+                                        <th>Grand total<br><strong>&#8377; 2899</strong></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -249,8 +255,8 @@
                                             <p class="item-cost"><i class="fa fa-inr"></i>2,899</p>
 
                                         </td>
-                                        <td>
-                                            <div>
+                                        <td colspan="3">
+                                            <div class="pull-right">
                                                 <button class="btn order-action--btn text-uppercase">order details
                                                 </button>
                                                 <button class="btn order-action--btn text-uppercase">buy it again
@@ -263,13 +269,13 @@
                             </table>
                         </div>
                         <div class="table-responsive" ng-if="view == 'cancel'">
-                            <table class="table">
+                            <table class="table account-order-table">
                                 <thead>
                                     <tr class="text-uppercase">
-                                        <th><span class="order-status">order placed</span><br><span class="order-date">1 march 2017</span></th>
-                                        <th>order no.<br>#123-45678 90123</th>
-                                        <th>order-satus<br>returned</th>
-                                        <th>Grand total<br>&#8377; 2899</th>
+                                        <th>order placed<br><strong>1 march 2017</strong></th>
+                                        <th>order no.<br><strong>#123-45678 90123</strong></th>
+                                        <th>order-satus<br><strong>returned</strong></th>
+                                        <th>Grand total<br><strong>&#8377; 2899</strong></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -287,8 +293,8 @@
                                                 <i class="fa fa-inr"></i>2,899
                                             </p>
                                         </td>
-                                        <td>
-                                            <div>
+                                        <td colspan="3">
+                                            <div class="pull-right">
                                                 <button class="btn order-action--btn text-uppercase">buy it again
                                                 </button>
                                             </div>
