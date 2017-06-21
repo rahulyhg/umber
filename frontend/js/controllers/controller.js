@@ -1004,7 +1004,7 @@ myApp
             $scope.compareproduct = $.jStorage.get('compareproduct')
         }
         NavigationService.getEnabledCategories(function (data) {
-
+            console.log('getProductsWithFilters', data);
             $scope.categories = data.data.data;
 
         });
