@@ -561,14 +561,16 @@ myApp
         var input = {
             "userId": $.jStorage.get("userId")
         }
-        ProductService.createOrderFromCart(input, function (data) {
-            console.log("oderplaced", data);
-            if (data.data.data) {
-                toastr.success('Thank You your order was placed successfully', 'success');
-            } else {
-                toastr.error('Sorry there was some problem in placing your order', 'Error');
-            }
-        })
+        if (input.userId) {
+            ProductService.createOrderFromCart(input, function (data) {
+                console.log("oderplaced", data);
+                if (data.data.data) {
+                    toastr.success('Thank You your order was placed successfully', 'success');
+                } else {
+                    toastr.error('Sorry there was some problem in placing your order', 'Error');
+                }
+            })
+        }
     })
     .controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $stateParams, $state, $uibModal, UserService, WishlistService,
         TemplateService, NavigationService, ProductService, CartService, $timeout) {

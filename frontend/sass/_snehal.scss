@@ -335,6 +335,11 @@
                         border: 1px solid;
                         padding: 2px;
                         display: inline-block;
+                        margin-right: 5px;
+                    }
+                    p.active {
+                        background: $darkBrown1;
+                        color: #fff;
                     }
                 } //SCSS FOR INDIVIDUAL PAGE
                 .customer-choice {
