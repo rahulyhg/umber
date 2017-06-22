@@ -334,6 +334,10 @@
         display: inline-block;
     }
 
+    .text-capitalize {
+        text-transform: capitalize;
+    }
+
     .line--height {
         line-height: 1;
     }
@@ -1948,6 +1952,21 @@
             padding: 20px 0;
         }
     } //Start of My account(myaccount.html)
+    .tab-title {
+        // Used For all Tabs title which uses h3
+        color: $darkBrown1;
+        font-family: 'fjalla-reg';
+        margin-top: 0;
+    }
+
+    .linking {
+        // For anchor Tag
+        font-size: 14px;
+        font-family: 'vadodara-regular';
+        letter-spacing: 1px;
+        text-decoration: underline;
+    }
+
     .item-name {
         font-size: 15px;
         font-family: 'vadodara-md';
@@ -1956,7 +1975,7 @@
     }
 
     .item-code {
-        font-size: 12px;
+        font-size: 10px;
         color: $darkGray;
     }
 
@@ -1970,6 +1989,74 @@
     }
 
     .usr-account {
+        .usrdtl-info {
+            color: $darkGray;
+            font-size: 16px;
+        }
+        .usrdtl-title {
+            .linking {
+                color: $darkBrown1;
+                margin-left: 10px;
+            }
+        }
+        .usrdtl {
+            p {
+                margin-bottom: 15px;
+            }
+            span.left-space {
+                margin-left: 15px;
+            }
+            .linking {
+                font-family: 'vadodara-semibld';
+                color: inherit;
+                letter-spacing: 0;
+            }
+        }
+        .manage-addrs {
+            .usr-name {
+                font-size: 21px;
+            }
+            span.city:after {}
+        }
+        .usr-edit-detail {
+            margin-bottom: 50px;
+        }
+        .address-edit-btn,
+        .address-delt-btn,
+        .save--btn,
+        .delt--btn {
+            @extend .btn--brown;
+            @include padding(3px 12px);
+            margin-right: 10px;
+        }
+        .address-edit-btn,
+        .save--btn {
+            width: 70px;
+        }
+        .address-delt-btn,
+        .delt--btn {
+            width: 90px;
+        }
+        .state-dropdown {
+            padding-top: 11px;
+            .state-dropdown--btn {
+                position: relative;
+                width: 100%;
+                color: #999;
+                font-size: 14px;
+                text-align: left;
+                background-color: transparent;
+                border-bottom: 1px solid $darkBrown1;
+            }
+            .dropdown-menu {
+                width: 100%;
+            }
+            .caret {
+                @include position(absolute,
+                50% 8px null null);
+                color: $darkBrown1;
+            }
+        }
         .btn--list {
             margin-bottom: 10px;
             padding: 3px 0;
@@ -1985,21 +2072,26 @@
         }
         .account-order-table {
             thead> {
-                tr>th {
-                    padding-left: 40px;
-                    font-weight: normal;
-                }
                 tr:first-child {
                     border-top: 1px solid $borderColor;
                     background: $lightGray1;
                     color: $darkBrown1;
                 }
+                tr>th {
+                    padding-left: 40px;
+                    font-weight: normal;
+                }
+                tr>th:first-child {
+                    border-left: 1px solid $borderColor;
+                }
+                tr>th:last-child {
+                    border-right: 1px solid $borderColor;
+                }
             }
             tbody {
                 tr>td {
                     border: 1px solid $borderColor;
-                    border-right: none;
-                    border-bottom: none;
+                    border-right: none; // border-bottom: none;
                     text-transform: uppercase;
                 }
                 td+td {
@@ -2009,11 +2101,43 @@
                     color: $darkBrown1;
                     border-right: 1px solid $borderColor;
                 }
+                tr:nth-child(2) {
+                    td {
+                        border-top: none;
+                        border-bottom: 1px solid $borderColor;
+                    }
+                }
             }
-            hr {
-                @include size(85%,
-                auto);
+            .item-img {
+                vertical-align: top;
+                @include padding(10px 15px);
+                margin-right: 10px;
+                img {
+                    width: 90px;
+                    @include margin (0 auto);
+                }
+            }
+            .comment {
+                padding-left: 10px;
+            }
+            hr.table-divider {
+                @include position(absolute,
+                null 12% 10px 12%);
                 @include margin(10px auto);
+                @include linear-gradient(to right,
+                rgba(255,
+                255,
+                255,
+                1) 0%,
+                rgba(255,
+                255,
+                255,
+                0) 49%,
+                rgba(255,
+                255,
+                255,
+                1) 100%);
+                border-top: 1px solid $borderColor;
             }
         }
         .order-list--btn {
@@ -2024,6 +2148,11 @@
             @extend .btn--list;
             margin-right: 15px;
             display: block;
+            &:focus {
+                background-color: $darkBrown1;
+                color: $white;
+                border: 1px dashed $white;
+            }
         }
         p.item-code {
             margin-bottom: 0;

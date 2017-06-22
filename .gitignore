@@ -1,9 +1,6 @@
 bower_components/
 node_modules/
-w/
 .sass-cache/
 *.tar
 *.zip
-css/
-img2/
 .tmp/

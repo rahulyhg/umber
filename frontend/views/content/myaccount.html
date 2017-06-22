@@ -27,18 +27,19 @@
                     <!--To open profile Tab-->
                     <div class="col-md-5">
                         <div class="usrdtl-title">
-                            <span>YOUR DETAILS</span>
-                            <a href=""><span ng-click="edit()" ng-if="!save">edit</span></a>
-                            <a href=""><span ng-if="save" ng-click="edit()">save</span></a>
+                            <h3 class="tab-title">YOUR DETAILS
+                                <a href="" class="linking"><span ng-click="edit()" ng-if="!save">edit</span></a>
+                                <a href="" class="linking"><span ng-if="save" ng-click="edit()">save</span></a>
+                            </h3>
                         </div>
-                        <div ng-if="!save">
-                            <div class="usrdtl">
-                                <span>Name: {{userDetails.firstName}} {{userDetails.lastName}}</span><br>
-                                <span>Email id: {{userDetails.email}}</span><br>
-                                <span>Mobile: {{userDetails.mobNo}}</span>
-                            </div>
-                            <p>Member’s Current Status : <span class="text-uppercase">gold</span></p>
-                            <p>Want to change your password? <a href="#">CLICK HERE</a></p>
+
+                        <div class="usrdtl" ng-if="!save">
+                            <p class="usrdtl-info">Name: <span class="text-capitalize left-space">{{userDetails.firstName}} {{userDetails.lastName}}</span><br>                                Email id: <span class="text-capitalize left-space">{{userDetails.email}}</span><br> Mobile:
+                                <span class="text-capitalize left-space">{{userDetails.mobNo}}</span>
+                            </p>
+
+                            <p class="usrdtl-info">Member’s Current Status : <strong class="text-uppercase">gold</strong></p>
+                            <p class="usrdtl-info">Want to change your password? <a href="#" class="linking">CLICK HERE</a></p>
                         </div>
                         <div class="edit-dtl" ng-if="save">
                             <div class="row">
@@ -71,11 +72,14 @@
                 <div class="addr-tab" ng-if="view == 'addrTab' ">
                     <!--To open Manage Address Tab-->
                     <div class="col-md-4" ng-if="!save">
-                        <div class="manage-addrs">
-                            <p><span class="user-name">{{userDetails.firstName}}</span>, {{userDetails.mobNo}}<br>{{userDetails.email}}</p>
-                            <address>{{userDetails.address1}}<br>{{userDetails.city}}-{{userDetails.pinCode}}<br>{{userDetails.country}}</address>
-                            <div class="checkbox custom-checkbox">
-                                <label for=""><input type="checkbox">Use this as default shippiong address</label>
+                        <div class="manage-addrs custom-checkbox">
+                            <p class="usrdtl-info"><span class="usr-name text-capitalize">{{userDetails.firstName}} {{userDetails.firstName}}</span>                                {{userDetails.mobNo}}
+                                <br>{{userDetails.email}}</p>
+                            <address class="usrdtl-info">{{userDetails.address1}}<br>
+                                <span class="text-capitalize city">{{userDetails.city}}</span>{{userDetails.pinCode}}<br>{{userDetails.country}}</address>
+                            <div class="checkbox usrdtl-info">
+                                <input type="checkbox" id="x1">
+                                <label for="x1">Use this as default shipping address</label>
                             </div>
                             <p><button class="btn address-edit-btn" ng-click="edit()">Edit</button> <button class="btn address-delt-btn">Delete</button></p>
                         </div>
@@ -83,36 +87,37 @@
                     <div class="edit-addrs" ng-if="save">
                         <!--To open Edit Address Tab-->
                         <div class="col-md-9">
-                            <span class="text-uppercase">your details</span>
+                            <h3 class="tab-title text-uppercase">your details</h3>
                             <form class="customized-form">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <input type="text" placeholder="First Name" class="form-control" ng-model="userDetails.firstName">
+                                <div class="usr-edit-detail">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="First Name" class="form-control" ng-model="userDetails.firstName">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Last Name" class="form-control" ng-model="userDetails.lastName">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <input type="text" placeholder="Last Name" class="form-control" ng-model="userDetails.lastName">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Mobile Number" class="form-control" ng-model="userDetails.mobNo">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <input type="email" placeholder="Email Address" class="form-control" ng-model="userDetails.email">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <input type="text" placeholder="Mobile Number" class="form-control" ng-model="userDetails.mobNo">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <input type="email" placeholder="Email Address" class="form-control" ng-model="userDetails.email">
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <span class="text-uppercase">shipping address</span>
+                                        <h3 class="tab-title text-uppercase">shipping address</h3>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -151,8 +156,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <div class="form-group" uib-dropdown>
-                                            <button class="btn" type="button" uib-dropdown-toggle>State <span class="caret"></span></button>
+                                        <div class="form-group state-dropdown" uib-dropdown>
+                                            <button class="btn state-dropdown--btn" type="button" uib-dropdown-toggle>State <span class="caret"></span></button>
                                             <ul class="dropdown-menu" uib-dropdown-menu role="menu">
                                                 <li role="menuitem"><a href="#">Action</a></li>
                                                 <li role="menuitem"><a href="#">Another action</a></li>
@@ -168,7 +173,7 @@
                                     </div>
                                 </div>
                                 <p><button class="btn save--btn text-uppercase" ng-if="save" ng-click="edit()">save</button>
-                                    <button class="btn --btn text-uppercase">delete</button>
+                                    <button class="btn delt--btn text-uppercase">delete</button>
                                 </p>
                             </form>
                         </div>
@@ -185,8 +190,8 @@
                             <button class="btn order-list--btn" ng-click="view='cancel'" ng-class="{
                         'btn--brownActive': view=='cancel' }">cancelled</button>
                         </p>
-                        <div class="table-responsive" ng-if="view == 'orders'">
-                            <table class="table account-order-table">
+                        <div class="account-order-table" ng-if="view == 'orders'">
+                            <table class="table">
                                 <thead>
                                     <tr class="text-uppercase">
                                         <th>order placed<br><strong>1 march 2017</strong></th>
@@ -197,19 +202,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
+                                    <tr class="relate">
+                                        <td colspan="3">
                                             <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
-                                            <div class="item-img" style="background: url('frontend/img/individual/6.jpg') no-repeat 50% 50%">
+                                            <div class="item-img inline-block">
+                                                <img src="frontend/img/individual/6.jpg" alt="Ordered Item" class="img-responsive">
                                             </div>
-
-                                        </td>
-                                        <td>
-                                            <h4 class="item-name text-uppercase">Linen Full Sleeve Shirt With Rollup</h4>
-                                            <p class="item-code">Product Code:<span class="text-uppercase"> G000278-GMSHHS0198-AMTEN-02</span>
-                                            </p>
-                                            <p class="item-cost"><i class="fa fa-inr"></i>2,899</p>
-
+                                            <div class="inline-block">
+                                                <h4 class="item-name text-uppercase">Linen Full Sleeve Shirt With Rollup</h4>
+                                                <p class="item-code"><span class="text-capitalize">Product Code:</span><span class="text-uppercase"> G000278-GMSHHS0198-AMTEN-02</span>
+                                                </p>
+                                                <p class="item-cost"><i class="fa fa-inr"></i>2,899</p>
+                                            </div>
+                                            <div class="comment">
+                                                <p class="item-code">Comment: Tailor it to 116 cm height.</p>
+                                                <hr class="table-divider">
+                                            </div>
                                         </td>
                                         <td colspan="3">
                                             <div class="pull-right">
@@ -221,18 +229,13 @@
                                                 </button>
                                             </div>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p class="item-code">Comment: Tailor it to 116 cm height.</p>
-                                            <hr>
-                                        </td>
+
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <div class="table-responsive" ng-if="view == 'return'">
-                            <table class="table account-order-table">
+                        <div class="account-order-table" ng-if="view == 'return'">
+                            <table class="table">
                                 <thead>
                                     <tr class="text-uppercase">
                                         <th>order placed</span><br><strong>1 march 2017</strong></th>
@@ -245,7 +248,8 @@
                                     <tr>
                                         <td>
                                             <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
-                                            <div class="item-img" style="background: url('frontend/img/individual/6.jpg') no-repeat 50% 50%">
+                                            <div class="item-img">
+                                                <img src="frontend/img/individual/6.jpg" alt="Ordered Item" class="img-responsive">
                                             </div>
                                         </td>
                                         <td>
@@ -268,8 +272,8 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="table-responsive" ng-if="view == 'cancel'">
-                            <table class="table account-order-table">
+                        <div class="account-order-table" ng-if="view == 'cancel'">
+                            <table class="table">
                                 <thead>
                                     <tr class="text-uppercase">
                                         <th>order placed<br><strong>1 march 2017</strong></th>
@@ -282,7 +286,8 @@
                                     <tr>
                                         <td>
                                             <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
-                                            <div class="item-img" style="background: url('frontend/img/individual/6.jpg') no-repeat 50% 50%">
+                                            <div class="item-img">
+                                                <img src="frontend/img/individual/6.jpg" alt="Ordered Item" class="img-responsive">
                                             </div>
                                         </td>
                                         <td>
