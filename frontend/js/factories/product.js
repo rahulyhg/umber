@@ -34,15 +34,6 @@ myApp.factory('ProductService', function ($http, $timeout) {
             }).then(callback);
         },
 
-        createOrderFromCart: function (input, callback) {
-            $http({
-                url: adminurl + 'Order/createOrderFromCart',
-                data: input,
-                method: 'POST',
-                withCredentials: false
-            }).then(callback);
-        },
-
         getProductsWithAppliedFilters: function (input, callback) {
             console.log("Get products with filters: ", input);
             $http({
