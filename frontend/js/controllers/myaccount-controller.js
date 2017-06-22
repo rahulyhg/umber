@@ -1,7 +1,23 @@
-myApp.controller('MyAccountCtrl', function ($scope, TemplateService, $translate, $rootScope) {
+myApp.controller('MyAccountCtrl', function ($scope, OrderService, WishlistService, TemplateService, $translate, $rootScope) {
     $scope.template = TemplateService.getHTML("content/myaccount.html");
     TemplateService.title = "My Account"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
+
+    var input = {
+        "userId": $.jStorage.get("userId")
+    }
+    console.log("input:", input)
+    OrderService.getUserOrders(input, function (data) {
+        console.log("order::", data.data.data);
+        $scope.orders = data.data.data;
+    })
+
+    /*****whishlist data***** */
+    WishlistService.getWishlist(input, function (data) {
+        console.log("wishlist:", data);
+        $scope.wishlists = data.data.data;
+        $scope.wl = _.chunk($scope.wishlists, 3)
+    })
 
     $scope.save = false; // used for Edit tab on profile button to save user's details
     $scope.edit = function () { // Function is used to show & hide edit & save tab
