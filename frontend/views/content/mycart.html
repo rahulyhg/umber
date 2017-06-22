@@ -7,7 +7,7 @@
     <div class="container">
         <div class="mycart-container">
             <table class="table mycart-table">
-                <caption class="text-uppercase">
+                <caption class="text-uppercase" ng-if="product.quantity>product.product.quantity">
                     there are items in your cart which are currently not avaliable.please remove to proceed to checkout
                 </caption>
                 <thead>
@@ -20,14 +20,15 @@
                     </tr>
                 </thead>
                 <tbody ng-repeat="product in mycartTable.products track by $index">
-                    <tr>
+                    <tr ng-class="checkStockStatus(product)">
+
                         <td rowspan="2">
                             <div class="item relate">
                                 <img ng-src="{{product.product.images[0].image | serverimage}}" alt="" class="img-responsive item__img">
                                 <div class="mycart-info">
                                     <p class="item__title1">{{product.product.productName}}</p>
                                 </div>
-                                <div class="outofstock">OUT OF STOCK</div>
+                                <div class="outofstock" ng-if="product.quantity>product.product.quantity">OUT OF STOCK</div>
                             </div>
                         </td>
                         <td>{{product.product.color.name}}</td>

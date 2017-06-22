@@ -402,7 +402,7 @@ myApp
             $scope.form = false;
         };
     })
-    .controller('CheckoutCtrl', function ($scope, $state, myService, BannerService, TemplateService, NavigationService, UserService, CartService, WishlistService, $timeout) {
+    .controller('CheckoutCtrl', function ($scope, OrderService, ProductService, toastr, $state, myService, BannerService, TemplateService, NavigationService, UserService, CartService, WishlistService, $timeout) {
         $scope.template = TemplateService.getHTML("content/checkout.html");
         TemplateService.title = "Checkout"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -531,6 +531,7 @@ myApp
         if (userData.userId) {
             UserService.getUserDetails(userData, function (data) {
                 $scope.user = data.data.data;
+                console.log("userdetails::", $scope.user)
             });
         }
 
@@ -557,9 +558,22 @@ myApp
                 }
             });
         }
+        var input = {
+            "userId": $.jStorage.get("userId")
+        }
+        if (input.userId) {
+            OrderService.createOrderFromCart(input, function (data) {
+                console.log("oderplaced", data);
+                if (data.data.data) {
+                    toastr.success('Thank You your order was placed successfully', 'success');
+                } else {
+                    toastr.error('Sorry there was some problem in placing your order', 'Error');
+                }
+            })
+        }
     })
     .controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $stateParams, $state, $uibModal, UserService, WishlistService,
-        TemplateService, NavigationService, ProductService, CartService, $timeout) {
+        TemplateService, NavigationService, ProductService, CartService, $timeout, myService) {
         $scope.template = TemplateService.getHTML("content/individual-page.html");
         TemplateService.title = "individual-page"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -571,9 +585,9 @@ myApp
             $scope.formSubmitted = true;
         };
         $scope.updateQuantity = function (oper) {
-            console.log("fiunctioncalled", oper);
+
             $scope.reqQuantity += parseInt(oper);
-            console.log($scope.reqQuantity)
+
         }
         $scope.loggedUser = $.jStorage.get("userId");
         var data = {
@@ -587,23 +601,35 @@ myApp
                 $scope.productImages = _.sortBy($scope.product.images, ['order']);
                 $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
                 $scope.sizes = $scope.product.sizes;
-                console.log($scope.sizes);
+
                 $scope.selectedSize = $scope.sizes[0];
+                $scope.activeButton = $scope.selectedSize.name;
             } else {
                 console.log(data.data.error);
                 $scope.product = {};
             }
         });
-
+        $scope.selectSize = function (sizeObj) {
+            console.log(sizeObj)
+            $scope.activeButton = sizeObj.name;
+            $scope.selectedSize = sizeObj;
+        }
+        // $scope.addToCart = function () {
+        //     myService.addToCart($scope.product, $scope.reqQuantity, $scope.selectedSize, function (data) {
+        //         $state.reload();
+        //     })
+        // }
         $scope.addToCart = function () {
             console.log($scope.product);
             $scope.product.selectedSize = $scope.selectedSize._id;
             $scope.product.reqQuantity = $scope.reqQuantity;
             var accessToken = $.jStorage.get("accessToken");
             if (!_.isEmpty(accessToken)) {
+
                 $scope.product.accessToken = accessToken;
                 $scope.product.userId = $.jStorage.get("userId");
                 //if (ProductService.isProductAvailable($scope.product.reqQuantity, $scope.product)) {
+                console.log($scope.product)
                 CartService.saveProduct($scope.product, function (data) {
                     if (data.data.error) {
                         console.log("Error: ", data.data.error);
@@ -636,77 +662,6 @@ myApp
                 console.log("Scope cart: ", $scope.cart);
                 $state.reload();
 
-            }
-        }
-
-        $scope.addToWishlist = function () {
-            console.log("wishlissssststststststststst", $scope.product)
-            $scope.product.selectedSize = $scope.selectedSize._id;
-            $scope.product.reqQuantity = $scope.reqQuantity;
-            console.log("wishlissssstststststststststafter", $scope.product)
-            var accessToken = $.jStorage.get("accessToken");
-            if (!_.isEmpty(accessToken)) {
-                $scope.product.accessToken = accessToken;
-                $scope.product.userId = $.jStorage.get("userId");
-                $scope.wishlist = {
-                    accessToken: accessToken,
-                    userId: $.jStorage.get("userId"),
-                    products: [$scope.product.productId]
-                }
-                console.log("whislist product:::::::::", $scope.wishlist)
-                //if (ProductService.isProductAvailable($scope.product.reqQuantity, $scope.product)) {
-                WishlistService.saveProduct($scope.wishlist, function (data) {
-                    console.log(data);
-                    if (data.data.error) {
-                        console.log("Error: ", data.data.error);
-                    } else {
-                        console.log("Success");
-                        // $state.reload();
-
-                        $scope.addwishlist = function () {
-                            $scope.addwishlistmodal = $uibModal.open({
-                                animation: true,
-                                templateUrl: 'views/modal/wishlistadd.html',
-                                size: 'md',
-                                scope: $scope
-                            });
-                        };
-                        $scope.addwishlist()
-                    }
-                });
-
-            } else {
-                console.log("User not logged in");
-                // TODO: goto login. can't route to modal or checkkout
-                //todo: offline wishlist add
-                $scope.productId = $.jStorage.get('wishlist') ? $.jStorage.get('wishlist') : [];
-                $scope.productId.push($scope.product);
-                $.jStorage.set('wishlist', $scope.productId);
-                console.log("offflinewishlist:::::::", $.jStorage.set('wishlist', $scope.productId))
-
-                $scope.addwishlist = function () {
-                    $scope.addwishlistmodal = $uibModal.open({
-                        animation: true,
-                        templateUrl: 'views/modal/wishlistadd.html',
-                        size: 'md',
-                        scope: $scope
-                    });
-                };
-                $scope.addwishlist()
-            }
-        }
-
-        $scope.openLoginModal = function () {
-            var userId = $.jStorage.get("userId");
-            if (!userId) {
-                $scope.loginModal = $uibModal.open({
-                    animation: true,
-                    templateUrl: 'views/modal/login.html',
-                    scope: $scope,
-                    size: 'md',
-                    controller: 'loginModalCtrl'
-                    // windowClass: 'modal-content-radi0'
-                });
             }
         }
 
@@ -750,73 +705,7 @@ myApp
             }
         }
 
-        /* $scope.featured = [{
-            img: '../img/home/11.jpg',
-            price: '2,899',
-            type: 'LINEN FULL SLEEVE SHIRT WITH ROLLUP'
 
-        }, {
-            img: '../img/home/12.jpg',
-            price: '2,899 ',
-            type: 'LINEN FULL SLEEVE SHIRT WITH ROLLUP'
-
-        }, {
-            img: '../img/home/13.jpg',
-            price: '2,899',
-            type: 'MARATHON PLAIN FRONT TROUSER'
-
-        }, {
-            img: '../img/home/14.jpg',
-            price: '2,899',
-            type: 'MARATHON PLAIN FRONT TROUSER'
-
-        }, {
-            img: '../img/home/11.jpg',
-            price: '2,899 ',
-            type: 'LINEN FULL SLEEVE SHIRT WITH ROLLUP'
-
-        }, {
-            img: '../img/home/12.jpg',
-            price: '2,899',
-            type: 'LINEN FULL SLEEVE SHIRT WITH ROLLUP'
-
-        }, {
-            img: '../img/home/13.jpg',
-            price: '2,899 ',
-            type: 'MARATHON PLAIN FRONT TROUSER'
-
-        }, {
-            img: '../img/home/14.jpg',
-            price: '2,899',
-            type: 'MARATHON PLAIN FRONT TROUSER'
-
-        }];
-
-        $scope.individual = [{
-            bigImg: '../img/individual/66.png',
-            img: '../img/individual/2.jpg'
-
-        }, {
-            bigImg: '../img/individual/7.jpg',
-            img: '../img/individual/3.jpg'
-
-        }, {
-            bigImg: '../img/individual/66.png',
-            img: '../img/individual/4.jpg'
-
-        }, {
-            bigImg: '../img/individual/7.jpg',
-            img: '../img/individual/5.jpg'
-
-        }, {
-            bigImg: '../img/individual/66.png',
-            img: '../img/individual/2.jpg'
-
-        }, {
-            bigImg: '../img/individual/7.jpg',
-            img: '../img/individual/3.jpg'
-
-        }];*/
         $scope.changeImage = function (index) {
             $scope.selectedImage = $scope.product.images[index];
         };
@@ -945,6 +834,19 @@ myApp
                 $scope.addwishlist()
             }
         }
+
+        $scope.checkStockStatus = function (prod) {
+            if (prod.quantity > prod.product.quantity) {
+
+                angular.element(document.getElementsByClassName('checkout--btn'))[0].disabled = true;
+                return "disabled-outofstock";
+
+            } else {
+                return "";
+            }
+
+        }
+
 
     })
     .controller('compareProductsCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -1296,6 +1198,10 @@ myApp
         $scope.quickviewProduct = function (prod) {
             $scope.product = prod;
             $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
+            $scope.selectSize = function (sizeObj) {
+                $scope.activeButton = sizeObj.name;
+                $scope.selectedSize = sizeObj;
+            }
             $scope.changeImage = function (index) {
                 $scope.selectedImage = $scope.product.images[index];
             };
@@ -1309,6 +1215,7 @@ myApp
                 templateUrl: 'views/modal/quickview-product.html',
                 scope: $scope,
                 size: 'lg'
+
             });
 
         };
@@ -1357,6 +1264,12 @@ myApp
         $scope.template = TemplateService.getHTML("content/coming-soon.html");
         TemplateService.title = "Coming Soon"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
+    })
+    .controller('MyAccountCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.getHTML("content/myaccount.html");
+        TemplateService.title = "Coming Soon"; //This is the Title of the Website
+        $scope.navigation = NavigationService.getNavigation();
+
     })
     //Example API Controller
     .controller('DemoAPICtrl', function ($scope, TemplateService, apiService, NavigationService, $timeout) {

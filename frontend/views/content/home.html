@@ -98,7 +98,9 @@
                                         <h3><i class="fa fa-inr" aria-hidden="true"></i>{{newArrival.price}}</h3>
                                         <h4>{{newArrival.productName}}</h4>
                                     </div>
-                                    <i class="fa fa-shopping-cart"></i>
+                                    <div class="featured__icon-cart" ng-if="checkInCart(newArrival.productId)">
+                                        <i class="fa fa-shopping-cart"></i>
+                                    </div>
                                 </div>
                             </li>
                         </flex-slider>

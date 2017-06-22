@@ -40,9 +40,10 @@ var schema = new Schema({
         price: Number,
         status: {
             type: String,
-            enum: ['returned', 'cancelled'],
-            default: ''
-        }
+            enum: ['accept', 'returned', 'cancelled'],
+            default: 'accept'
+        },
+        returnQuantity: Number
     }],
     totalAmount: {
         type: Number,
@@ -85,6 +86,7 @@ var model = {
         } else {
             Cart.getCart(data, function (err, cart) {
                 if (!_.isEmpty(cart)) {
+                    console.log("cart: ", cart);
                     var order = {};
                     order.orderNo = Math.ceil(Math.random() * 10000000000000);
                     order.totalAmount = 0;
@@ -95,12 +97,16 @@ var model = {
                             quantity: product.quantity,
                             price: product.quantity * product.product.price
                         };
-                        order.products.push(data);
-                        order.totalAmount += data.price;
-                        order.status = 'processing';
-                        order.shippingAmount = 0;
-                        order.discountAmount = 0;
+                        if (!order.products) {
+                            order.products = [];
+                        }
+                        order.products.push(orderData);
+                        order.totalAmount += orderData.price;
                     }
+                    order.user = mongoose.Types.ObjectId(data.userId);
+                    order.shippingAmount = 0;
+                    order.discountAmount = 0;
+                    console.log("order: ", order);
                     Order.saveData(order, callback);
                 } else {
                     callback(err, null);

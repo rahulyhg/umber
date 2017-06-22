@@ -65,7 +65,7 @@
                             <div class="viewSize inline-block">
                                 <h5>SIZE </h5>
                                 <div class="inline-block buy-para__sizes" ng-repeat="size in product.sizes">
-                                    <p>{{size.name}}</p>
+                                    <p ng-click="selectSize(size)" ng-class="{ 'active':activeButton=={{size.name}} }">{{size.name}}</p>
                                     <!--<p>38</p>
                                     <p>40</p>
                                     <p>42</p>
