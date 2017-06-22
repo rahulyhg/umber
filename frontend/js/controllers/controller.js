@@ -1012,16 +1012,15 @@ myApp
         var appliedFilters = {};
 
         $scope.applyFilters = function (key, filter) {
-            var appliedFilters = $.jStorage.get('appliedFilters') ? $.jStorage.get('appliedFilters') : {
-                appliedFilters: {
-                    category: [],
-                    type: [],
-                    style: [],
-                    color: [],
-                    collection: [],
-                    size: [],
-                    fabric: [],
-                },
+            var appliedFilters = {};
+            appliedFilters.appliedFilters = $.jStorage.get('appliedFilters') ? $.jStorage.get('appliedFilters') : {
+                category: [],
+                type: [],
+                style: [],
+                color: [],
+                collection: [],
+                size: [],
+                fabric: [],
             };
             console.log(filter, key)
             appliedFilters.appliedFilters.category = [$.jStorage.get("selectedCategory")];
@@ -1031,14 +1030,23 @@ myApp
             if (result != -1) {
                 _.pullAt(appliedFilters.appliedFilters[key], result);
             } else {
+                if (!_.isArrayLike(appliedFilters.appliedFilters[key])) {
+                    appliedFilters.appliedFilters[key] = [];
+                }
                 appliedFilters.appliedFilters[key].push(filter._id);
             }
             appliedFilters.page = 1;
             $.jStorage.set('appliedFilters', appliedFilters)
 
             console.log("Jstoragefor filters::", $.jStorage.get("appliedFilters"))
-
-            ProductService.getProductsWithAppliedFilters(filters, function (data) {
+            _.forIn(appliedFilters.appliedFilters, function (val, key, obj) {
+                if (_.isEmpty(val)) {
+                    console.log("key: ", key);
+                    delete appliedFilters.appliedFilters[key];
+                }
+            });
+            console.log("apply filters: ", appliedFilters);
+            ProductService.getProductsWithAppliedFilters(appliedFilters, function (data) {
                 console.log("filtersretrived:::", data.data.data);
                 $scope.products = _.chunk(data.data.data.products, 3);
                 $scope.filters = data.data.data.filters;
