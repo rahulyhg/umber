@@ -603,12 +603,16 @@ myApp
                 $scope.sizes = $scope.product.sizes;
                 console.log($scope.sizes);
                 $scope.selectedSize = $scope.sizes[0];
+                $scope.activeButton = $scope.selectedSize.name;
             } else {
                 console.log(data.data.error);
                 $scope.product = {};
             }
         });
-
+        $scope.selectSize = function (sizeObj) {
+            $scope.activeButton = sizeObj.name;
+            $scope.selectedSize = sizeObj;
+        }
         $scope.addToCart = function () {
             console.log($scope.product);
             $scope.product.selectedSize = $scope.selectedSize._id;
@@ -653,62 +657,6 @@ myApp
             }
         }
 
-        $scope.addToWishlist = function () {
-            console.log("wishlissssststststststststst", $scope.product)
-            $scope.product.selectedSize = $scope.selectedSize._id;
-            $scope.product.reqQuantity = $scope.reqQuantity;
-            console.log("wishlissssstststststststststafter", $scope.product)
-            var accessToken = $.jStorage.get("accessToken");
-            if (!_.isEmpty(accessToken)) {
-                $scope.product.accessToken = accessToken;
-                $scope.product.userId = $.jStorage.get("userId");
-                $scope.wishlist = {
-                    accessToken: accessToken,
-                    userId: $.jStorage.get("userId"),
-                    products: [$scope.product.productId]
-                }
-                console.log("whislist product:::::::::", $scope.wishlist)
-                //if (ProductService.isProductAvailable($scope.product.reqQuantity, $scope.product)) {
-                WishlistService.saveProduct($scope.wishlist, function (data) {
-                    console.log(data);
-                    if (data.data.error) {
-                        console.log("Error: ", data.data.error);
-                    } else {
-                        console.log("Success");
-                        // $state.reload();
-
-                        $scope.addwishlist = function () {
-                            $scope.addwishlistmodal = $uibModal.open({
-                                animation: true,
-                                templateUrl: 'views/modal/wishlistadd.html',
-                                size: 'md',
-                                scope: $scope
-                            });
-                        };
-                        $scope.addwishlist()
-                    }
-                });
-
-            } else {
-                console.log("User not logged in");
-                // TODO: goto login. can't route to modal or checkkout
-                //todo: offline wishlist add
-                $scope.productId = $.jStorage.get('wishlist') ? $.jStorage.get('wishlist') : [];
-                $scope.productId.push($scope.product);
-                $.jStorage.set('wishlist', $scope.productId);
-                console.log("offflinewishlist:::::::", $.jStorage.set('wishlist', $scope.productId))
-
-                $scope.addwishlist = function () {
-                    $scope.addwishlistmodal = $uibModal.open({
-                        animation: true,
-                        templateUrl: 'views/modal/wishlistadd.html',
-                        size: 'md',
-                        scope: $scope
-                    });
-                };
-                $scope.addwishlist()
-            }
-        }
 
         $scope.openLoginModal = function () {
             var userId = $.jStorage.get("userId");
@@ -1323,6 +1271,10 @@ myApp
         $scope.quickviewProduct = function (prod) {
             $scope.product = prod;
             $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
+            $scope.selectSize = function (sizeObj) {
+                $scope.activeButton = sizeObj.name;
+                $scope.selectedSize = sizeObj;
+            }
             $scope.changeImage = function (index) {
                 $scope.selectedImage = $scope.product.images[index];
             };
@@ -1336,6 +1288,7 @@ myApp
                 templateUrl: 'views/modal/quickview-product.html',
                 scope: $scope,
                 size: 'lg'
+
             });
 
         };
@@ -1384,6 +1337,12 @@ myApp
         $scope.template = TemplateService.getHTML("content/coming-soon.html");
         TemplateService.title = "Coming Soon"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
+    })
+    .controller('MyAccountCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.getHTML("content/myaccount.html");
+        TemplateService.title = "Coming Soon"; //This is the Title of the Website
+        $scope.navigation = NavigationService.getNavigation();
+
     })
     //Example API Controller
     .controller('DemoAPICtrl', function ($scope, TemplateService, apiService, NavigationService, $timeout) {
