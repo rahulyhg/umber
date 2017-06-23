@@ -573,7 +573,7 @@ myApp
         }
     })
     .controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $stateParams, $state, $uibModal, UserService, WishlistService,
-        TemplateService, NavigationService, ProductService, CartService, $timeout, myService) {
+        TemplateService, NavigationService, ProductService, CartService, $timeout, myService, ModalService) {
         $scope.template = TemplateService.getHTML("content/individual-page.html");
         TemplateService.title = "individual-page"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -588,6 +588,15 @@ myApp
 
             $scope.reqQuantity += parseInt(oper);
 
+        }
+        $scope.addToWishlist = function (prod) {
+            var data = {
+                "product": prod
+            }
+            myService.addToWishlist(data, function (data) {
+
+                ModalService.addwishlist();
+            })
         }
         $scope.loggedUser = $.jStorage.get("userId");
         var data = {
@@ -662,7 +671,7 @@ myApp
             $scope.selectedImage = $scope.product.images[index];
         };
     })
-    .controller('MycartCtrl', function ($scope, myService, $state, TemplateService, NavigationService, BannerService, CartService, $timeout, $uibModal, WishlistService) {
+    .controller('MycartCtrl', function ($scope, myService, ModalService, $state, TemplateService, NavigationService, BannerService, CartService, $timeout, $uibModal, WishlistService) {
         $scope.template = TemplateService.getHTML("content/mycart.html");
         TemplateService.title = "Mycart"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -733,15 +742,8 @@ myApp
         }
         $scope.addToWishlist = function (prod) {
             myService.addToWishlist(prod, function (data) {
-                $scope.addwishlist = function () {
-                    $scope.addwishlistmodal = $uibModal.open({
-                        animation: true,
-                        templateUrl: 'views/modal/wishlistadd.html',
-                        size: 'md',
-                        scope: $scope
-                    });
-                };
-                $scope.addwishlist()
+
+                ModalService.addwishlist();
             })
         }
 
@@ -800,7 +802,7 @@ myApp
     })
 
     .controller('ListingPageCtrl', function ($scope, toastr, CartService, $rootScope, $stateParams, $state, WishlistService, TemplateService, NavigationService,
-        SizeService, BannerService, CategoryService, myService, ProductService, $timeout, $uibModal) {
+        SizeService, BannerService, CategoryService, myService, ProductService, $timeout, $uibModal, ModalService) {
         $scope.template = TemplateService.getHTML("content/listing-page.html");
         TemplateService.title = "Form"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -1112,6 +1114,9 @@ myApp
                 }
             }
         }
+        $scope.reload = function () {
+            $state.reload();
+        }
         // This function is used to display the modal on quck view button
         $scope.quickviewProduct = function (prod) {
             $scope.product = prod;
@@ -1119,6 +1124,35 @@ myApp
             $scope.selectSize = function (sizeObj) {
                 $scope.activeButton = sizeObj.name;
                 $scope.selectedSize = sizeObj;
+                var data = {
+                    productId: $scope.product.productId,
+                    size: sizeObj._id,
+                    color: $scope.product.color._id
+                }
+                console.log("SKUdetails:", data)
+                ProductService.getSKUWithParameter(data, function (data) {
+                    console.log("SKU:", data)
+                    if (data.data.value) {
+                        $scope.product = data.data.data;
+                    } else {
+                        $scope.product = {};
+                        // TODO: show out of stock
+                    }
+                })
+            }
+            $scope.addToCart = function () {
+                myService.addToCart($scope.product, $scope.reqQuantity, $scope.selectedSize, function (data) {
+                    $scope.reload();
+                })
+            }
+            $scope.addToWishlist = function () {
+                var data = {
+                    "product": $scope.product
+                }
+                myService.addToWishlist(data, function (data) {
+
+                    ModalService.addwishlist();
+                })
             }
             $scope.changeImage = function (index) {
                 $scope.selectedImage = $scope.product.images[index];
@@ -1132,8 +1166,7 @@ myApp
                 animation: true,
                 templateUrl: 'views/modal/quickview-product.html',
                 scope: $scope,
-                size: 'lg'
-
+                size: 'lg',
             });
 
         };
