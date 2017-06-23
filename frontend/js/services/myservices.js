@@ -1,4 +1,4 @@
-myApp.service('myService', function ($http, BannerService, CartService) {
+myApp.service('myService', function ($http, WishlistService, BannerService, CartService) {
     this.ctrlBanners = function (pagename, callback) {
             var banner = {
                 pageName: pagename
@@ -9,6 +9,8 @@ myApp.service('myService', function ($http, BannerService, CartService) {
 
             });
         },
+
+        /*************Adding Products To Cart**************** */
         this.addToCart = function (prod, reqQuantity, size, callback) {
             console.log("product:", prod, "size:", size, "quanti:", reqQuantity)
             prod.selectedSize = size._id;
@@ -49,5 +51,36 @@ myApp.service('myService', function ($http, BannerService, CartService) {
 
             }
             callback("sucess");
+        },
+
+        /*******Add Product To Wishlist******** */
+        this.addToWishlist = function (prod, callback) {
+            var accessToken = $.jStorage.get("accessToken");
+            if (!_.isEmpty(accessToken)) {
+                var wishlist = {
+                    accessToken: accessToken,
+                    userId: $.jStorage.get("userId"),
+                    products: [prod.product.productId]
+                }
+                WishlistService.saveProduct(wishlist, function (data) {
+                    console.log(data);
+                    if (data.data.error) {
+                        console.log("Error: ", data.data.error);
+                    } else {
+                        console.log("Success");
+                        // $state.reload();
+
+                    };
+
+                });
+            } else {
+                console.log("User not logged in");
+                var productId = $.jStorage.get('wishlist') ? $.jStorage.get('wishlist') : [];
+                productId.push(prod.product);
+                $.jStorage.set('wishlist', productId);
+                console.log("offflinewishlist:::::::")
+
+            }
+            callback("success");
         }
 })

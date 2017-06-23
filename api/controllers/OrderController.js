@@ -11,6 +11,19 @@ var controller = {
                 }
             });
         }
+    },
+
+    getUserOrders: function (req, res) {
+        if (req.body) {
+            Order.getUserOrders(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid request!"
+                }
+            });
+        }
     }
 };
 module.exports = _.assign(module.exports, controller);

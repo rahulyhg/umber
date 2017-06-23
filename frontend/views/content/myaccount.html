@@ -35,7 +35,7 @@
 
                         <div class="usrdtl" ng-if="!save">
                             <p class="usrdtl-info">Name: <span class="text-capitalize left-space">{{userDetails.firstName}} {{userDetails.lastName}}</span><br>                                Email id: <span class="text-capitalize left-space">{{userDetails.email}}</span><br> Mobile:
-                                <span class="text-capitalize left-space">{{userDetails.mobNo}}</span>
+                                <span class="text-capitalize left-space">{{userDetails.mobile}}</span>
                             </p>
 
                             <p class="usrdtl-info">Member’s Current Status : <strong class="text-uppercase">gold</strong></p>
@@ -191,28 +191,28 @@
                         'btn--brownActive': view=='cancel' }">cancelled</button>
                         </p>
                         <div class="account-order-table" ng-if="view == 'orders'">
-                            <table class="table">
+                            <table class="table" ng-repeat="order in orders">
                                 <thead>
                                     <tr class="text-uppercase">
-                                        <th>order placed<br><strong>1 march 2017</strong></th>
-                                        <th>order no.<br><strong>#123-45678 90123</strong></th>
-                                        <th>order-satus<br><strong>returned</strong></th>
+                                        <th>order placed<br><strong>{{order.createdAt | date:'dd/MM/yyyy'}}</strong></th>
+                                        <th>order no.<br><strong>{{order.orderNo}}</strong></th>
+                                        <th>order-satus<br><strong>{{order.orderStatus}}</strong></th>
                                         <th>tracking id<br><strong>updating</strong></th>
-                                        <th>Grand total<br><strong>&#8377; 2899</strong></th>
+                                        <th>Grand total<br><strong>&#8377; {{order.totalAmount}}</strong></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="relate">
+                                    <tr class="relate" ng-repeat="product in order.products">
                                         <td colspan="3">
                                             <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
                                             <div class="item-img inline-block">
-                                                <img src="frontend/img/individual/6.jpg" alt="Ordered Item" class="img-responsive">
+                                                <img ng-src="{{product.product.images[0].image|serverimage}}" alt="Ordered Item" class="img-responsive">
                                             </div>
                                             <div class="inline-block">
-                                                <h4 class="item-name text-uppercase">Linen Full Sleeve Shirt With Rollup</h4>
-                                                <p class="item-code"><span class="text-capitalize">Product Code:</span><span class="text-uppercase"> G000278-GMSHHS0198-AMTEN-02</span>
+                                                <h4 class="item-name text-uppercase">{{product.product.productName}}</h4>
+                                                <p class="item-code"><span class="text-capitalize">Product Code:</span><span class="text-uppercase"> {{product.product.name}}</span>
                                                 </p>
-                                                <p class="item-cost"><i class="fa fa-inr"></i>2,899</p>
+                                                <p class="item-cost"><i class="fa fa-inr"></i>{{product.product.price}}</p>
                                             </div>
                                             <div class="comment">
                                                 <p class="item-code">Comment: Tailor it to 116 cm height.</p>
@@ -312,23 +312,23 @@
                 </div>
                 <div class="wishlist-tab" ng-if="view == 'wishlistTab' ">
                     <div class="col-md-9">
-                        <div class="row" ng-repeat="abc in myShirt11">
-                            <div class="col-md-3" ng-repeat="xyz in abc" ng-init="parentIndex = $index">
+                        <div class="row" ng-repeat="wishlist in wl">
+                            <div class="col-md-3" ng-repeat="xyz in wishlist" ng-init="parentIndex = $index">
                                 <div class="buy-info">
                                     <div class="buy-slider">
-                                        <flex-slider flex-slide="buy in xyz track by $index" prev-text="" next-text="" animation="slide" min-items="3">
+                                        <flex-slider flex-slide="buy in xyz.images track by $index" prev-text="" next-text="" animation="slide" min-items="3">
                                             <li>
-                                                <i class="fa fa-heart-o" aria-hidden="true" ng-click="addwishlist();"></i>
-                                                <img ng-src="{{buy.img}}" class="img-responsive" ng-click="addcart();">
+                                                <i class="fa fa-heart" aria-hidden="true" ng-click="addwishlist();"></i>
+                                                <img ng-src="{{buy.image | serverimage}}" class="img-responsive" ng-click="addcart();">
                                             </li>
                                         </flex-slider>
                                         <div class="buy-para custom-checkbox">
-                                            <h4><i class="fa fa-inr" aria-hidden="true"></i> {{xyz[0].rupee}}</h4>
-                                            <h5 class="text-uppercase">{{xyz[0].title}}</h5>
+                                            <h4><i class="fa fa-inr" aria-hidden="true"></i> {{xyz.price}}</h4>
+                                            <h5 class="text-uppercase">{{xyz.productName}}</h5>
                                             <hr>
                                             <div class="checkbox inline-block marg0" ng-click="remove();">
-                                                <input type="checkbox" id="{{xyz[0].id}}">
-                                                <label for="{{xyz[0].id}}">
+                                                <input type="checkbox" id="{{xyz.productId}}">
+                                                <label for="{{xyz.productId}}">
                                           Add to compare
                                         </label>
                                             </div>

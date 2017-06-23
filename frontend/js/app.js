@@ -81,7 +81,8 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
         .state('myaccount', {
             url: "/myaccount",
             templateUrl: tempateURL,
-            controller: 'MyAccountCtrl'
+            controller: 'MyAccountCtrl',
+
         })
 
         .state('orderdetail', {

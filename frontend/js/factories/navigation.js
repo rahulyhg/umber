@@ -73,7 +73,7 @@ myApp.factory('NavigationService', function ($http) {
             }).then(callback);
         },
 
-        getEnabledCategories: function (callback) {
+        getListingCategories: function (callback) {
             $http({
                 url: adminurl + 'Category/getEnabledCategories',
                 method: 'POST',

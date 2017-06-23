@@ -57,12 +57,14 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
             console.log("Cart: ", cartId);
             console.log("Removing product: ", productId);
             if ($.jStorage.get('userId')) {
-                var data = {
+                var inputdata = {
                     cartId: cartId,
                     productId: productId
                 }
-                CartService.removeProduct(data, function (data) {
-                    $scope.mycartTable = data.data.data;
+                console.log("executing cart service");
+                CartService.removeProduct(inputdata, function (data) {
+                    console.log(data)
+                    //$scope.mycartTable = data.data.data;
                     $state.reload();
                 });
             } else {
