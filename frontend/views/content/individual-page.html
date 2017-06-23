@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     <div class="second-sec border-div pd-bottom">
-                        <div class="viewSize inline-block">
+                        <div class="viewSize inline-block relate">
                             <h5>SIZE </h5>
                             <div class="inline-block buy-para__sizes" ng-repeat="size in product.sizes">
                                 <p ng-click="selectSize(size)" ng-class="{ 'active':activeButton=={{size.name}} }">{{size.name}}</p>
@@ -71,14 +71,15 @@
                                 <p>42</p>
                                 <p>44</p>-->
                             </div>
-                            <a href="" class="link">Size Chart</a>
+                            <a href="" class="linking ">Size Chart</a>
                         </div>
+
                         <div class="inline-block quantity">
                             <h5>QUANTITY </h5>
                             <a ng-click="updateQuantity(-1)" ng-if="reqQuantity>1">
-                                <i class="fa fa-minus display-inblock square__bg" aria-hidden="true"></i>
+                                <i class="fa fa-minus square__bg" aria-hidden="true"></i>
                             </a>
-                            <div class="display-inblock">
+                            <div class="inline-block">
                                 <form>
                                     <div class="form-group marg0">
                                         <input type="text" readonly class="form-control quantity__input" ng-model="reqQuantity">
@@ -86,7 +87,7 @@
                                 </form>
                             </div>
                             <a ng-click="updateQuantity(1)" ng-if="reqQuantity < product.quantity">
-                                <i class="fa fa-plus display-inblock square__bg" aria-hidden="true"></i>
+                                <i class="fa fa-plus square__bg" aria-hidden="true"></i>
                             </a>
                         </div>
                         <!--<div class="dropdown inline-block">
@@ -223,60 +224,77 @@
                             </div>
                         </uib-accordion>
                     </div>
-                    <div class="fifth-sec custom-checkbox">
-                        <div class="checkbox inline-block">
-                            <input type="checkbox" id="f2" ng-model="myVarss" ng-checked="checkStateOnReload(product.productId)" ng-click="clickfun(product);">
-                            <label for="f2"> Add to compare</label>
+                    <div class="sixth-sec  border-div common-Accordian">
+                        <uib-accordion close-others="oneAtATime">
+                            <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
+                                <uib-accordion-heading>
+                                    <h4 class="text-uppercase">comment
+                                        <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                    </h4>
+                                </uib-accordion-heading>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group test-focus relate">
+                                            <textarea class="usr-comment form-control" rows="2" id="comment"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                        </uib-accordion>
                         </div>
-                        <!--<p class="inline-block"><input type="checkbox">Add to compare</p>-->
-                        <div class="inline-block ml-10">
-                            <img src="img/listing/sale.png" class="img-responsive inline-block"><a>Offer?</a>
+                        <div class="fifth-sec custom-checkbox">
+                            <div class="checkbox inline-block">
+                                <input type="checkbox" id="f2" ng-model="myVarss" ng-checked="checkStateOnReload(product.productId)" ng-click="clickfun(product);">
+                                <label for="f2"> Add to compare</label>
+                            </div>
+                            <!--<p class="inline-block"><input type="checkbox">Add to compare</p>-->
+                            <div class="inline-block ml-10">
+                                <img src="img/listing/sale.png" class="img-responsive inline-block"><a>Offer?</a>
+                            </div>
+                            <p class="inline-block">Buy 1 Get 1 Free</p>
                         </div>
-                        <p class="inline-block">Buy 1 Get 1 Free</p>
-                    </div>
-                    <div class="individual-btn">
-                        <button class=" btn btn-default btn--brown text-uppercase btn-add" ng-disabled="product.quantity < 1" ng-click="addToCart()"><i class="fa fa-shopping-cart" aria-hidden="true"></i>  ADD TO CART</button>
-                        <button class="btn btn-default btn--brown text-uppercase btn-wish" ng-click="addToWishlist()"><i class="fa fa-heart" aria-hidden="true"></i>  ADD TO WISHLIST</button>
+                        <div class="individual-btn">
+                            <button class=" btn btn-default btn--brown text-uppercase btn-add" ng-disabled="product.quantity < 1" ng-click="addToCart()"><i class="fa fa-shopping-cart" aria-hidden="true"></i>  ADD TO CART</button>
+                            <button class="btn btn-default btn--brown text-uppercase btn-wish" ng-click="addToWishlist()"><i class="fa fa-heart" aria-hidden="true"></i>  ADD TO WISHLIST</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="image-individual">
-    <img src="img/home/Individual_Product Page.png" class="img-responsive">
-</div>
+    <div class="image-individual">
+        <img src="img/home/Individual_Product Page.png" class="img-responsive">
+    </div>
 
-<section class="">
-    <div class="customer-choice relate">
-        <div class="container">
-            <div class="customer-choice-container">
-                <div class="row">
-                    <div class="customer-choice__title text-center">
-                        <h1 class="text-uppercase individual--border--line">you may also like</h1>
+    <section class="">
+        <div class="customer-choice relate">
+            <div class="container">
+                <div class="customer-choice-container">
+                    <div class="row">
+                        <div class="customer-choice__title text-center">
+                            <h1 class="text-uppercase individual--border--line">you may also like</h1>
+                        </div>
                     </div>
-                </div>
-                <div class="customer-choice__slider">
-                    <flex-slider flex-slide="new in featured track by $index" prev-text="" next-text="" animation="slide" item-width="270" item-margin="25"
-                        min-items="3">
-                        <li class="relate">
-                            <div class="customer-choice__banner-detail relate">
-                                <img ng-src="{{new.img}}" alt="" class="img-responsive">
-                                <div class="customer-choiced__cloth-desc">
-                                    <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
-                                    <h4>{{new.type}}</h4>
-                                </div>
-                                <!--<div class="customer-choice__icon-heart">
+                    <div class="customer-choice__slider">
+                        <flex-slider flex-slide="new in featured track by $index" prev-text="" next-text="" animation="slide" item-width="270" item-margin="25"
+                            min-items="3">
+                            <li class="relate">
+                                <div class="customer-choice__banner-detail relate">
+                                    <img ng-src="{{new.img}}" alt="" class="img-responsive">
+                                    <div class="customer-choiced__cloth-desc">
+                                        <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
+                                        <h4>{{new.type}}</h4>
+                                    </div>
+                                    <!--<div class="customer-choice__icon-heart">
                                     <i class="fa fa-heart" aria-hidden="true"></i>
                                 </div>
                                 <div class="customer-choice__icon-cart">
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 </div>-->
-                            </div>
-                        </li>
-                    </flex-slider>
+                                </div>
+                            </li>
+                        </flex-slider>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>

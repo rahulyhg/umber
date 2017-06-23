@@ -1214,7 +1214,8 @@ myApp
                 animation: true,
                 templateUrl: 'views/modal/quickview-product.html',
                 scope: $scope,
-                size: 'lg'
+                size: 'lg',
+                windowClass: 'quickview-modal-size'
 
             });
 
