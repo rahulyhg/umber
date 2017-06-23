@@ -613,68 +613,14 @@ myApp
             console.log(sizeObj)
             $scope.activeButton = sizeObj.name;
             $scope.selectedSize = sizeObj;
-        }
-        // $scope.addToCart = function () {
-        //     myService.addToCart($scope.product, $scope.reqQuantity, $scope.selectedSize, function (data) {
-        //         $state.reload();
-        //     })
-        // }
-        $scope.addToCart = function () {
-            console.log($scope.product);
-            $scope.product.selectedSize = $scope.selectedSize._id;
-            $scope.product.reqQuantity = $scope.reqQuantity;
-            var accessToken = $.jStorage.get("accessToken");
-            if (!_.isEmpty(accessToken)) {
-
-                $scope.product.accessToken = accessToken;
-                $scope.product.userId = $.jStorage.get("userId");
-                //if (ProductService.isProductAvailable($scope.product.reqQuantity, $scope.product)) {
-                console.log($scope.product)
-                CartService.saveProduct($scope.product, function (data) {
-                    if (data.data.error) {
-                        console.log("Error: ", data.data.error);
-                    } else {
-                        console.log("Success");
-                        $state.reload();
-                    }
-                });
-                // } else {
-                //     // TODO: Add product not available error
-                // }
-            } else {
-                console.log("User not logged in");
-                // TODO: add product without login
-                $scope.cart = {};
-                $scope.cart = $.jStorage.get('cart') ? $.jStorage.get('cart') : {};
-                if (_.isEmpty($scope.cart))
-                    $scope.cart.products = [];
-
-                $scope.product.size = {};
-                $scope.product.size.name = $scope.selectedSize.name;
-                console.log($scope.product)
-                console.log($scope.cart)
-                $scope.cart.products.push({
-                    product: $scope.product
-                });
-                var len = $scope.cart.products.length;
-                $scope.cart.products[len - 1].quantity = $scope.reqQuantity;
-                $.jStorage.set('cart', $scope.cart);
-                console.log("Scope cart: ", $scope.cart);
-                $state.reload();
-
-            }
-        }
-
-        $scope.selectedSize = {};
-        $scope.selectedSize.name = "Select Size";
-        $scope.setSelectedSize = function (size) {
-            $scope.selectedSize = size;
             var data = {
                 productId: $scope.product.productId,
-                size: size._id,
+                size: sizeObj._id,
                 color: $scope.product.color._id
             }
+            console.log("SKUdetails:", data)
             ProductService.getSKUWithParameter(data, function (data) {
+                console.log("SKU:", data)
                 if (data.data.value) {
                     $scope.product = data.data.data;
                 } else {
@@ -683,6 +629,12 @@ myApp
                 }
             })
         }
+        $scope.addToCart = function () {
+            myService.addToCart($scope.product, $scope.reqQuantity, $scope.selectedSize, function (data) {
+                $state.reload();
+            })
+        }
+
         $scope.setQuantity = function (quantity) {
 
             if ($scope.product.quantity >= quantity) {
@@ -779,50 +731,8 @@ myApp
                 $state.reload();
             }
         }
-
         $scope.addToWishlist = function (prod) {
-            // $scope.product = {}
-            // $scope.product.selectedSize = prod.product.selectedSize;
-            // $scope.product.reqQuantity = prod.quantity;
-            console.log($scope.product)
-            var accessToken = $.jStorage.get("accessToken");
-            if (!_.isEmpty(accessToken)) {
-                // $scope.product.accessToken = accessToken;
-                // $scope.product.userId = $.jStorage.get("userId");
-                $scope.wishlist = {
-                    accessToken: accessToken,
-                    userId: $.jStorage.get("userId"),
-                    products: [prod.product.productId]
-                }
-                console.log("whislist product:::::::::", $scope.wishlist)
-                //if (ProductService.isProductAvailable($scope.product.reqQuantity, $scope.product)) {
-                WishlistService.saveProduct($scope.wishlist, function (data) {
-                    console.log(data);
-                    if (data.data.error) {
-                        console.log("Error: ", data.data.error);
-                    } else {
-                        console.log("Success");
-                        // $state.reload();
-
-                        $scope.addwishlist = function () {
-                            $scope.addwishlistmodal = $uibModal.open({
-                                animation: true,
-                                templateUrl: 'views/modal/wishlistadd.html',
-                                size: 'md',
-                                scope: $scope
-                            });
-                        };
-                        $scope.addwishlist()
-                    }
-                });
-
-            } else {
-                console.log("User not logged in");
-                $scope.productId = $.jStorage.get('wishlist') ? $.jStorage.get('wishlist') : [];
-                $scope.productId.push(prod.product);
-                $.jStorage.set('wishlist', $scope.productId);
-                console.log("offflinewishlist:::::::")
-
+            myService.addToWishlist(prod, function (data) {
                 $scope.addwishlist = function () {
                     $scope.addwishlistmodal = $uibModal.open({
                         animation: true,
@@ -832,7 +742,7 @@ myApp
                     });
                 };
                 $scope.addwishlist()
-            }
+            })
         }
 
         $scope.checkStockStatus = function (prod) {
@@ -905,7 +815,7 @@ myApp
             $scope.showCheck = true
             $scope.compareproduct = $.jStorage.get('compareproduct')
         }
-        NavigationService.getEnabledCategories(function (data) {
+        NavigationService.getListingCategories(function (data) {
             console.log('getProductsWithFilters', data);
             $scope.categories = data.data.data;
 
