@@ -43,7 +43,8 @@ var schema = new Schema({
             enum: ['accept', 'returned', 'cancelled'],
             default: 'accept'
         },
-        returnQuantity: Number
+        returnQuantity: Number,
+        comment: String
     }],
     totalAmount: {
         type: Number,
@@ -95,7 +96,8 @@ var model = {
                         var orderData = {
                             product: mongoose.Types.ObjectId(product.product._id),
                             quantity: product.quantity,
-                            price: product.quantity * product.product.price
+                            price: product.quantity * product.product.price,
+                            comment: product.comment
                         };
                         if (!order.products) {
                             order.products = [];

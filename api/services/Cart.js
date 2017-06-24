@@ -10,7 +10,10 @@ var schema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Product'
         },
-        quantity: Number
+        quantity: Number,
+        comment: {
+            type: String
+        }
     }]
 });
 
@@ -33,7 +36,8 @@ var model = {
         cart.products = [];
         cart.products.push({
             product: mongoose.Types.ObjectId(product._id),
-            quantity: product.reqQuantity
+            quantity: product.reqQuantity,
+            comment: product.comment
         });
         cart.userId = userId;
 
@@ -88,7 +92,8 @@ var model = {
                                 // Insert if proudct isn't present
                                 foundCart.products.push({
                                     product: mongoose.Types.ObjectId(product._id),
-                                    quantity: product.reqQuantity
+                                    quantity: product.reqQuantity,
+                                    comment: product.comment
                                 });
                                 foundCart.userId = userId;
                                 Cart.saveData(foundCart, function (err, data) {
@@ -109,6 +114,7 @@ var model = {
                                 // Update cart product quantity if present
                                 // console.log("Matching product: ", data.products[idx]);
                                 foundCart.products[idx].quantity += product.reqQuantity;
+                                foundCart.products[idx].comment = product.comment;
                                 Cart.saveData(foundCart, function (err, data) {
                                     if (err) {
                                         cbWaterfall2(err, null);
