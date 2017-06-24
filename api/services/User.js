@@ -399,9 +399,7 @@ var model = {
                             });
                         });
 
-                        if (idx >= 0) {
-                            user.shippingAddresses[idx] = data.shippingAddress;
-                        } else {
+                        if (idx < 0) {
                             user.shippingAddresses.push(data.shippingAddress);
                         }
                     }
@@ -415,7 +413,7 @@ var model = {
     },
 
     // API to edit/save current billing & shipping address
-    // Designed mainly for account page & details page on checkout
+    // Designed mainly for account page 
     // input: address: {accessToken, type, shippingAddress/billingAddress}
     // input details: type - which address to be saved billingAddress or shippingAddress
     //                shippingAddress/billingAddress - object to be stored/edit
