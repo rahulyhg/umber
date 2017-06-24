@@ -425,6 +425,43 @@
         }
     }
 
+    .btn-circle {
+        @include size(15px,
+        15px);
+        text-align: center;
+        @include padding(0);
+        font-size: 10px;
+        border: 1px solid $darkBrown1;
+        border-radius: 15px;
+        line-height: 1.428571429;
+        color: white;
+        background-color: $darkBrown1;
+    } // This design is used for plus & minus quantity
+    /*Note: You need to extend this class by using @extend method */
+
+    .plus-minus-btn {
+        .square__bg {
+            border: 1px solid $borderColor;
+            color: $darkGray;
+            @include padding(5px);
+            font-size: 10px;
+        }
+        .quantity__input {
+            text-align: center;
+            @include size(47px,
+            40px);
+            @include margin(0 4px);
+            font-size: 20px;
+            color: $darkGray;
+            &:focus {
+                border: 1px solid $borderColor
+            }
+        }
+        .square__bg,
+        .quantity__input {
+            background-color: white;
+        }
+    } //End of  plus & minus quantity
     .customized-form {
         .form-control {
             height: 45px;
@@ -2162,6 +2199,49 @@
         }
     } //End of My account(myaccount.html)
     // All modals html
+    /*****NOTE: We can extend this class by using @extend method. Please don't customise the main class(Parent class) .close-modal--btn-circle ****/
+
+    .close-modal--btn-circle {
+        @include size(25px,
+        25px);
+        text-align: center;
+        @include padding(0);
+        font-size: 15px;
+        border: 1px solid #ccc;
+        border-radius: 15px;
+        line-height: 1.428571429;
+        color: #333;
+        background-color: $white;
+    }
+
+    .close-modal {
+        display: inline-block;
+        @include position(absolute,
+        0 0 null null);
+    }
+
+    .quickview-modal-size .modal-dialog {
+        // Used this class in listing-ctrl.js in modal
+        width: 1195px;
+    }
+
     .quick-view-product {
-        @extend .individual-container; // This class is extended from snehal.scss
+        @include padding(30px 20px);
+        .individual-first {
+            min-height: 350px;
+            background-size: cover!important;
+        }
+        .individual-first__zoom {
+            @include position(absolute,
+            50% 12% null null);
+            @include size(35px,
+            auto);
+        }
+        .qv-close-modal {
+            button {
+                @extend .close-modal--btn-circle;
+                border: 1px solid $darkBrown1;
+                color: $darkBrown1;
+            }
+        }
     } //End of all modals html

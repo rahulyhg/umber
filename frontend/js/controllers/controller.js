@@ -1167,6 +1167,7 @@ myApp
                 templateUrl: 'views/modal/quickview-product.html',
                 scope: $scope,
                 size: 'lg',
+                windowClass: 'quickview-modal-size'
             });
 
         };
