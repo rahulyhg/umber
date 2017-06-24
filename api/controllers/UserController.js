@@ -132,7 +132,50 @@ var controller = {
                     data: "Invalid request!"
                 }
             })
-    }
-
+    },
+    saveAddresses: function (req, res) {
+        if (req.body) {
+            User.saveAddresses(req.body, res.callback);
+        } else {
+            res.json({
+                message: {
+                    data: "Invalid request!"
+                }
+            });
+        }
+    },
+    saveAddress: function (req, res) {
+        if (req.body) {
+            User.saveAddress(req.body, res.callback);
+        } else {
+            res.json({
+                message: {
+                    data: "Invalid request!"
+                }
+            });
+        }
+    },
+    changeDefaultAddress: function (req, res) {
+        if (req.body) {
+            User.changeDefaultAddress(req.body, res.callback);
+        } else {
+            res.json({
+                message: {
+                    data: "Invalid request!"
+                }
+            });
+        }
+    },
+    getDefaultAddress: function (req, res) {
+        if (req.body) {
+            User.getDefaultAddress(req.body, res.callback);
+        } else {
+            res.json({
+                message: {
+                    data: "Invalid request!"
+                }
+            });
+        }
+    },
 };
 module.exports = _.assign(module.exports, controller);
