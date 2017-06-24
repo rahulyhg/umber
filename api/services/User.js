@@ -17,7 +17,8 @@ var schema = new Schema({
         unique: true,
         uniqueCaseInsensitive: true
     },
-    deliveryAddresses: [{
+    shippingAddresses: [{
+        name: String,
         line1: {
             type: String
         },
@@ -329,9 +330,9 @@ var model = {
                 callback(err, null);
             } else if (data) {
                 if (!_.isEmpty(data)) {
-                    if (!_.isEmpty(data.deliveryAddresses)) {
-                        data.deliveryAddress = JSON.parse(JSON.stringify(data.deliveryAddresses[0]));
-                        delete data.deliveryAddresses;
+                    if (!_.isEmpty(data.shippingAddresses)) {
+                        data.shippingAddress = JSON.parse(JSON.stringify(data.shippingAddresses[0]));
+                        delete data.shippingAddresses;
                     }
                     callback(null, data);
                 } else {
@@ -356,7 +357,7 @@ var model = {
             accessToken: {
                 '$in': [accessToken]
             }
-        }).exec(function (err, user) {
+        }).lean().exec(function (err, user) {
             if (err)
                 callback(err, null);
             else if (!_.isEmpty(user))
@@ -366,7 +367,136 @@ var model = {
                     message: "userNotFound"
                 }, null);
         })
-    }
+    },
 
+    // API for order details checkout page
+    // When user goes to checkout page to create an order & enters the addresses, call this API
+    // to store/edit addresses.
+    // for shippingAddress if entered address match stored shipping address it's edited
+    // input: data: {billingAddress, shippingAddress}
+    saveAddresses: function (data, callback) {
+        var updateObj = {};
+        if (_.isEmpty(data.user)) {
+            callback({
+                message: "noUserFound"
+            }, null);
+        } else {
+            async.waterfall([
+                function findUser(cbWaterfall) {
+                    User.findOne({
+                        _id: mongoose.Types.ObjectId(data.user)
+                    }).lean().exec(cbWaterfall);
+                },
+                function updateAddress(user, cbWaterfall1) {
+                    if (data.billingAddress) {
+                        user.billingAddress = data.billingAddress;
+                    }
+
+                    if (data.shippingAddress) {
+                        var idx = _.findIndex(user.shippingAddresses, function (userAddress) {
+                            return Object.keys(userAddress).every(function (key) {
+                                return userAddress[key] == data.shippingAddress[key];
+                            });
+                        });
+
+                        if (idx >= 0) {
+                            user.shippingAddresses[idx] = data.shippingAddress;
+                        } else {
+                            user.shippingAddresses.push(data.shippingAddress);
+                        }
+                    }
+
+                    User.saveData(user).exec(cbWaterfall1);
+                }
+            ], function (err, data) {
+                callback(err, data);
+            });
+        }
+    },
+
+    // API to edit/save current billing & shipping address
+    // Designed mainly for account page & details page on checkout
+    // input: address: {accessToken, type, shippingAddress/billingAddress}
+    // input details: type - which address to be saved billingAddress or shippingAddress
+    //                shippingAddress/billingAddress - object to be stored/edit
+    saveAddress: function (address, callback) {
+        async.waterfall([
+            function checkUser(cbWaterfall) {
+                User.isUserLoggedIn(address.accessToken, cbWaterfall);
+            },
+
+            function saveUserAddress(user, cbWaterfall1) {
+                if (address.type == 'billingAddress') {
+                    user.billingAddress = address.billingAddress;
+                } else {
+                    var idx = _.findIndex(user.shippingAddresses, function (userAddress) {
+                        return mongoose.Types.ObjectId(userAddress._id) == mongoose.Types.ObjectId(address.shippingAddress._id);
+                    });
+
+                    if (idx >= 0) {
+                        user.shippingAddresses[idx] = address.shippingAddress;
+                    } else {
+                        user.shippingAddresses.push(address.shippingAddress);
+                    }
+                }
+
+                User.saveData(user, cbWaterfall1);
+            }
+        ], function (err, data) {
+            callback(err, data);
+        });
+    },
+
+
+    // API to change default shipping address.
+    // Designed for my account page.
+    // input -> address: {accessToken, _id}
+    // input details: _id is shipping address id & accessToken is user's accessToken
+    changeDefaultAddress: function (address, callback) {
+        async.waterfall([
+            function checkUser(cbWaterfall) {
+                User.isUserLoggedIn(address.accessToken, cbWaterfall);
+            },
+
+            function changePrevDefault(user, cbWaterfall1) {
+                User.findOneAndUpdate({
+                    _id: mongoose.Types.ObjectId(user._id),
+                    "shippingAddresses.isDefault": true
+                }, {
+                    $set: {
+                        "shippingAddresses.$.isDefault": false
+                    }
+                }, {
+                    new: true
+                }).exec(cbWaterfall1);
+            },
+
+            function createNewDefault(user, cbWaterfall2) {
+                User.findOneAndUpdate({
+                    _id: mongoose.Types.ObjectId(user._id),
+                    "shippingAddresses._id": mongoose.Types.ObjectId(address._id)
+                }, {
+                    $set: {
+                        "shippingAddresses.$.isDefault": true
+                    }
+                }, {
+                    new: true
+                }).exec(cbWaterfall2);
+            }
+        ], function (err, data) {
+            callback(err, data);
+        });
+    },
+
+    // API to get default shipping address for order page
+    // input: user: {_id}
+    getDefaultAddress: function (user, callback) {
+        User.findOne({
+            _id: mongoose.Types.ObjectId(user._id),
+            "shippingAddresses.isDefault": true
+        }, {
+            "shippingAddresses.$": 1
+        }).exec(callback);
+    }
 };
 module.exports = _.assign(module.exports, exports, model);

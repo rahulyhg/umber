@@ -16,6 +16,7 @@ var schema = new Schema({
         country: String
     },
     shippingAddress: {
+        name: String,
         line1: String,
         line2: String,
         line3: String,
@@ -123,8 +124,10 @@ var model = {
         }, {
             billingAddress: data.billingAddress,
             shippingAddress: data.shippingAddress
+        }, {
+            new: true
         }, function (err, data) {
-            callback(err, data);
+            User.saveAddresses(data, callback);
         });
     },
 
