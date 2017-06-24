@@ -375,6 +375,16 @@ myApp
             });
         }
 
+        $scope.updateAddress = function () {
+            var updateAdd = {
+                user: $.jStorage.get("userId"),
+                billingAddress: $scope.user.billingAddress,
+                shippingAddress: $scope.user.deliveryAddress
+            }
+            UserService.saveAddressCheckout(updateAdd, function (data) {
+                console.log("saveuserdetails", data);
+            })
+        }
 
         $scope.login = function () {
             UserService.login($scope.loginData, function (data) {
