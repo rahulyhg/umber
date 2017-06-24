@@ -11,10 +11,11 @@ myApp.service('myService', function ($http, WishlistService, BannerService, Cart
         },
 
         /*************Adding Products To Cart**************** */
-        this.addToCart = function (prod, reqQuantity, size, callback) {
+        this.addToCart = function (prod, reqQuantity, size, com, callback) {
             console.log("product:", prod, "size:", size, "quanti:", reqQuantity)
             prod.selectedSize = size._id;
             prod.reqQuantity = reqQuantity;
+            prod.comment = com;
             var accessToken = $.jStorage.get("accessToken");
             if (!_.isEmpty(accessToken)) {
                 console.log("inside if in addtcart service")
