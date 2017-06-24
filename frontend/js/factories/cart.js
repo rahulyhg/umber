@@ -50,6 +50,7 @@ myApp.factory('CartService', function ($http) {
                 url: adminurl + 'Cart/removeProduct',
                 method: 'POST',
                 data: data,
+                ignoreLoadingBar: true,
                 withCredentials: false
             }).then(callback);
         }

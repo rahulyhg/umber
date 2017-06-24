@@ -205,7 +205,7 @@ myApp
             $scope.myShirt = [];
             $scope.myShirt11 = [];
             $scope.myShirt = _.chunk($scope.buyshirt, 3);
-            console.log($scope.myShirt)
+            console.log(data)
             // console.log("myshirt", $scope.myShirt);
             // _.each($scope.myShirt, function (n) {
             //     $scope.myShirt1 = _.chunk(n, 3);
@@ -961,7 +961,7 @@ myApp
             ProductService.getProductsWithAppliedFilters(appliedFilters, function (data) {
                 console.log("filtersretrived:::", data.data.data);
                 $scope.products = _.chunk(data.data.data.products, 3);
-                $scope.filters = data.data.data.filters;
+                // $scope.filters = data.data.data.filters;
 
             })
 

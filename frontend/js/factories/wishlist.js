@@ -13,6 +13,7 @@ myApp.factory('WishlistService', function ($http) {
                 url: adminurl + 'Wishlist/getWishlist',
                 data: product,
                 method: 'POST',
+                ignoreLoadingBar: true,
                 withCredentials: false
             }).then(callback);
         },
@@ -21,6 +22,7 @@ myApp.factory('WishlistService', function ($http) {
                 url: adminurl + 'Wishlist/removeProductFromWishlist',
                 data: product,
                 method: 'POST',
+                ignoreLoadingBar: true,
                 withCredentials: false
             }).then(callback);
         }

@@ -1,8 +1,9 @@
-myApp.controller('MyAccountCtrl', function ($scope, $state, OrderService, WishlistService, TemplateService, $translate, $rootScope, UserService) {
+myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService, WishlistService, TemplateService, $translate, $rootScope, UserService) {
     $scope.template = TemplateService.getHTML("content/myaccount.html");
     TemplateService.title = "My Account"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
     if (_.isEmpty($.jStorage.get("accessToken"))) {
+        toastr.error("Please login to access your details", "Error:")
         $state.go("home");
     }
     var input = {
