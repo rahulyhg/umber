@@ -44,7 +44,6 @@ var schema = new Schema({
             enum: ['accept', 'returned', 'cancelled'],
             default: 'accept'
         },
-        returnQuantity: Number,
         comment: String
     }],
     totalAmount: {
@@ -66,6 +65,21 @@ var schema = new Schema({
     returnReason: {
         type: String
     },
+    returnedProducts: [{
+        product: {
+            type: Schema.Types.ObjectId,
+            ref: 'Product',
+            required: true
+        },
+        quantity: Number,
+        price: Number,
+        status: {
+            type: String,
+            enum: ['returned', 'cancelled'],
+            default: 'returned'
+        },
+        comment: String
+    }],
     comment: String
 });
 
@@ -136,6 +150,101 @@ var model = {
             user: data.userId
         }).deepPopulate('products.product products.product.size products.product.color').exec(function (err, orders) {
             callback(err, orders);
+        });
+    },
+
+    // API to cancel/return order products
+    // input: data: {accessToken, user, products}
+    // inputDetails: user - unique user id
+    //               products - list of product objects to be cancelled/returned. Contains following fields
+    //                        - product: product unique id
+    //                        - quantity: cancelled/returned quantity
+    //                        - status: status of the product 'returned/cancelled'
+    //                        - comment: comment associated with product if any
+    //               status - 'returned/cancelled'
+    cancelProducts: function (data, callback) {
+        var cancelledProducts = [];
+        async.waterfall([
+            function checkUser(cbWaterfall) {
+                User.isUserLoggedIn(data.accessToken).exec(cbWaterfall);
+            },
+            function cancelProducts(user, cbWaterfall1) {
+                if (user._id == data.user) {
+                    async.each(data.products, function (product, eachCallback) {
+                        async.waterfall([
+                            function findProduct(cbSubWaterfall) {
+                                Product.findOne({
+                                    _id: mongoose.Types.ObjectId(product.product)
+                                }).exec(cbSubWaterfall);
+                            },
+                            function deductQuantity(foundProduct, cbSubWaterfall1) {
+                                var deductPrice = foundProduct.price * product.quantity;
+
+                                Order.findOneAndUpdate({
+                                    _id: mongoose.Types.ObjectId(data.orderId),
+                                    "products.product": mongoose.Types.ObjectId(product.product)
+                                }, {
+                                    $inc: {
+                                        "products.$.quantity": -product.quantity,
+                                        "products.$.price": -deductPrice
+                                    },
+                                    $addToSet: {
+                                        returnedProducts: {
+                                            product: mpongoose.Types.ObjectId(product.product),
+                                            quantity: product.quantity,
+                                            price: deductPrice,
+                                            status: product.status,
+                                            comment: product.comment
+                                        }
+                                    }
+                                }, {
+                                    new: true
+                                }).exec(function (err, updatedProduct) {
+                                    if (!_.isEmpty(updatedProduct)) {
+                                        cancelledProducts.push(updatedProduct);
+                                    }
+                                    cbSubWaterfall1(null, cancelledProducts);
+                                });
+                            }
+                        ], function (err, data) {
+                            eachCallback(err, data);
+                        });
+                    }, function (err) {
+                        cbWaterfall1(null, cancelledProducts);
+                    });
+                } else {
+                    cbWaterfall1("userNotFound", null);
+                }
+            }
+        ], function (err, data) {
+            callback(err, cancelledProducts);
+        });
+    },
+
+    // API for cancel/return orders page
+    // This API returns all the cancelled/returned orders for the user
+    // input: data: {accessToken, user, status}
+    // inputDetails: user - user unique id
+    //               status - status of orders to be retrieved - cancelled/returned
+    getCancelledOrdersForUser: function (data, callback) {
+        async.waterfall([
+            function checkUser(cbWaterfall) {
+                User.isUserLoggedIn(data.accessToken, cbWaterfall);
+            },
+            function getOrders(user, cbWaterfall1) {
+                if (mongoose.Types.ObjectId(user._id) == mongoose.Types.ObjectId(data.user)) {
+                    Order.findOne({
+                        user: mongoose.Types.ObjectId(data.user),
+                        "returnedProducts.status": data.status
+                    }, {
+                        returnedProducts: 1
+                    }).deepPopulate("returnedProducts.product returnedProducts.product.size returnedProducts.product.color").exec(cbWaterfall1);
+                } else {
+                    cbWaterfall1("noUserFound", null);
+                }
+            }
+        ], function (err, data) {
+            callback(err, data);
         });
     }
 };

@@ -24,6 +24,32 @@ var controller = {
                 }
             });
         }
+    },
+
+    cancelProducts: function (req, res) {
+        if (req.body) {
+            Order.cancelProducts(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid request!"
+                }
+            });
+        }
+    },
+
+    getCancelledOrdersForUser: function (req, res) {
+        if (req.body) {
+            Order.getCancelledOrdersForUser(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid request!"
+                }
+            });
+        }
     }
 };
 module.exports = _.assign(module.exports, controller);
