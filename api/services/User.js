@@ -400,11 +400,16 @@ var model = {
                         });
 
                         if (idx < 0) {
+                            if (!_.isArrayLike(user.shippingAddresses)) {
+                                user.shippingAddresses = [];
+                            }
                             user.shippingAddresses.push(data.shippingAddress);
                         }
                     }
 
-                    User.saveData(user).exec(cbWaterfall1);
+                    User.saveData(user, function (err, updatedUser) {
+                        cbWaterfall1(err, updatedUser);
+                    });
                 }
             ], function (err, data) {
                 callback(err, data);

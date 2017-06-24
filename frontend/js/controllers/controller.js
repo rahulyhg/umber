@@ -250,98 +250,6 @@ myApp
             }
         }
 
-        // $scope.buyshirt = [{
-        //     img: 'img/buy/2.jpg',
-        //     rupee: '3,000',
-        //     title: 'linen FULL SLEEVE SHIRT WITH ROLL UP',
-        //     id: 0
-        // }, {
-        //     img: 'img/buy/3.jpg',
-        //     rupee: '3,000',
-        //     title: 'linen FULL SLEEVE SHIRT WITH ROLL UP',
-        //     id: 1
-        // }, {
-        //     img: 'img/buy/4.jpg',
-        //     rupee: '3,000',
-        //     title: 'linen FULL SLEEVE SHIRT WITH ROLL UP',
-        //     id: 2
-        // }, {
-        //     img: 'img/buy/5.jpg',
-        //     rupee: '3,000',
-        //     title: 'OFF WHITE SLIM FIT FORMA TROUSER',
-        //     id: 3
-        // }, {
-        //     img: 'img/buy/6.jpg',
-        //     rupee: '3,000',
-        //     title: 'OFF WHITE SLIM FIT FORMA TROUSER',
-        //     id: 4
-        // }, {
-        //     img: 'img/buy/7.jpg',
-        //     rupee: '3,000',
-        //     title: 'OFF WHITE SLIM FIT FORMA TROUSER',
-        //     id: 5
-        // }, {
-        //     img: 'img/buy/2.jpg',
-        //     rupee: '3,000',
-        //     title: 'Linen LIGHT BLUE CASUAL BLAZER',
-        //     id: 6
-        // }, {
-        //     img: 'img/buy/3.jpg',
-        //     rupee: '3,000',
-        //     title: 'linen LIGHT BLUE CASUAL BLAZER',
-        //     id: 7
-        // }, {
-        //     img: 'img/buy/4.jpg',
-        //     rupee: '3,000',
-        //     title: 'linen LIGHT BLUE CASUAL BLAZER',
-        //     id: 8
-        // }, {
-        //     img: 'img/buy/5.jpg',
-        //     rupee: '3,000',
-        //     title: 'MEN WHITE GENUINE LEATHER DERBYS',
-        //     id: 9
-        // }, {
-        //     img: 'img/buy/6.jpg',
-        //     rupee: '3,000',
-        //     title: 'MEN WHITE GENUINE LEATHER DERBYS',
-        //     id: 10
-        // }, {
-        //     img: 'img/buy/7.jpg',
-        //     rupee: '3,000',
-        //     title: 'MEN WHITE GENUINE LEATHER DERBYS',
-        //     id: 11
-        // }, {
-        //     img: 'img/buy/3.jpg',
-        //     rupee: '3,000',
-        //     title: 'LETHER MEN BLACK GENUINE LEATHER BELT',
-        //     id: 12
-        // }, {
-        //     img: 'img/buy/4.jpg',
-        //     rupee: '3,000',
-        //     title: 'LETHER MEN BLACK GENUINE LEATHER BELT',
-        //     id: 13
-        // }, {
-        //     img: 'img/buy/5.jpg',
-        //     rupee: '3,000',
-        //     title: 'LETHER MEN BLACK GENUINE LEATHER BELT',
-        //     id: 14
-        // }, {
-        //     img: 'img/buy/6.jpg',
-        //     rupee: '3,000',
-        //     title: 'GRAVIATE BLACK FULL FRAME ROUNDGLASSES',
-        //     id: 15
-        // }, {
-        //     img: 'img/buy/7.jpg',
-        //     rupee: '3,000',
-        //     title: 'GRAVIATE BLACK FULL FRAME ROUNDGLASSES',
-        //     id: 16
-        // }, {
-        //     img: 'img/buy/5.jpg',
-        //     rupee: '3,000',
-        //     title: 'GRAVIATE BLACK FULL FRAME ROUNDGLASSES',
-        //     id: 17
-        // }];
-
 
 
 
@@ -467,6 +375,16 @@ myApp
             });
         }
 
+        $scope.updateAddress = function () {
+            var updateAdd = {
+                user: $.jStorage.get("userId"),
+                billingAddress: $scope.user.billingAddress,
+                shippingAddress: $scope.user.deliveryAddress
+            }
+            UserService.saveAddressCheckout(updateAdd, function (data) {
+                console.log("saveuserdetails", data);
+            })
+        }
 
         $scope.login = function () {
             UserService.login($scope.loginData, function (data) {
@@ -580,6 +498,8 @@ myApp
         $scope.formSubmitted = false;
         $scope.oneAtATime = true;
         $scope.reqQuantity = 1;
+        $scope.productComment = {};
+        $scope.productComment.name = null;
         $scope.submitForm = function (data) {
             console.log(data);
             $scope.formSubmitted = true;
@@ -589,19 +509,12 @@ myApp
             $scope.reqQuantity += parseInt(oper);
 
         }
-        $scope.addToWishlist = function (prod) {
-            var data = {
-                "product": prod
-            }
-            myService.addToWishlist(data, function (data) {
 
-                ModalService.addwishlist();
-            })
-        }
         $scope.loggedUser = $.jStorage.get("userId");
         var data = {
             productId: $stateParams.id
         };
+
 
         ProductService.getProductDetails(data, function (data) {
 
@@ -618,6 +531,17 @@ myApp
                 $scope.product = {};
             }
         });
+
+        $scope.addToWishlist = function (prod) {
+            var data = {
+                "product": $scope.product,
+            }
+            myService.addToWishlist(data, function (data) {
+
+                ModalService.addwishlist();
+            })
+        }
+
         $scope.selectSize = function (sizeObj) {
             console.log(sizeObj)
             $scope.activeButton = sizeObj.name;
@@ -638,8 +562,8 @@ myApp
                 }
             })
         }
-        $scope.addToCart = function () {
-            myService.addToCart($scope.product, $scope.reqQuantity, $scope.selectedSize, function (data) {
+        $scope.addToCart = function (pc) {
+            myService.addToCart($scope.product, $scope.reqQuantity, $scope.selectedSize, $scope.productComment.name, function (data) {
                 $state.reload();
             })
         }

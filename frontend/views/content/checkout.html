@@ -122,7 +122,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="order-tab">
+                    <div class="order-tab" ng-if="loggedUser&&view=='orderTab' ">
                         <div class="col-md-9 ">
                             <table class="table order-table table-bottom ">
                                 <thead>
@@ -166,7 +166,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="detail-tab " ng-if="view=='detailTab' ">
+                    <div class="detail-tab " ng-if="loggedUser&&view=='detailTab' ">
                         <div class="col-md-8 col-md-offset-1 ">
                             <div class="details-form ">
                                 <div>
@@ -464,7 +464,7 @@
                                     </form>
                                 </div>
                                 <div class="text-center ">
-                                    <button class="btn btn-default checkout__cont-btn " ng-click="updateUser() ">Continue</button>
+                                    <button class="btn btn-default checkout__cont-btn " ng-click="updateAddress()">Continue</button>
                                 </div>
                             </div>
                         </div>
