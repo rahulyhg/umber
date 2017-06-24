@@ -34,8 +34,8 @@
                         </div>
 
                         <div class="usrdtl" ng-if="!save">
-                            <p class="usrdtl-info">Name: <span class="text-capitalize left-space">{{userDetails.firstName}} {{userDetails.lastName}}</span><br>                                Email id: <span class="text-capitalize left-space">{{userDetails.email}}</span><br> Mobile:
-                                <span class="text-capitalize left-space">{{userDetails.mobile}}</span>
+                            <p class="usrdtl-info">Name: <span class="text-capitalize left-space">{{userDetails.data.firstName}} {{userDetails.data.lastName}}</span><br>                                Email id: <span class="text-capitalize left-space">{{userDetails.data.email}}</span><br>                                Mobile:
+                                <span class="text-capitalize left-space">{{userDetails.data.mobile}}</span>
                             </p>
 
                             <p class="usrdtl-info">Member’s Current Status : <strong class="text-uppercase">gold</strong></p>
@@ -46,22 +46,22 @@
                                 <form class="customized-form">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" placeholder="First Name" class="form-control" ng-model="userDetails.firstName">
+                                            <input type="text" placeholder="First Name" class="form-control" ng-model="userDetails.data.firstName">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" placeholder="Last Name" class="form-control" ng-model="userDetails.lastName">
+                                            <input type="text" placeholder="Last Name" class="form-control" ng-model="userDetails.data.lastName">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" placeholder="Mobile No" class="form-control" ng-model="userDetails.mobNo">
+                                            <input type="text" placeholder="Mobile No" class="form-control" ng-model="userDetails.data.mobile">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="email" placeholder="Email Address" class="form-control" ng-model="userDetails.email">
+                                            <input type="email" placeholder="Email Address" class="form-control" ng-model="userDetails.data.email">
                                         </div>
                                     </div>
                                 </form>
@@ -73,8 +73,8 @@
                     <!--To open Manage Address Tab-->
                     <div class="col-md-4" ng-if="!save">
                         <div class="manage-addrs custom-checkbox">
-                            <p class="usrdtl-info"><span class="usr-name text-capitalize">{{userDetails.firstName}} {{userDetails.firstName}}</span>                                {{userDetails.mobNo}}
-                                <br>{{userDetails.email}}</p>
+                            <p class="usrdtl-info"><span class="usr-name text-capitalize">{{userDetails.data.firstName}} {{userDetails.data.lastName}}</span>                                {{userDetails.mobNo}}
+                                <br>{{userDetails.data.email}}</p>
                             <address class="usrdtl-info">{{userDetails.address1}}<br>
                                 <span class="text-capitalize city">{{userDetails.city}}</span>{{userDetails.pinCode}}<br>{{userDetails.country}}</address>
                             <div class="checkbox usrdtl-info">
@@ -93,24 +93,24 @@
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <input type="text" placeholder="First Name" class="form-control" ng-model="userDetails.firstName">
+                                                <input type="text" placeholder="First Name" class="form-control" ng-model="userDetails.data.firstName">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <input type="text" placeholder="Last Name" class="form-control" ng-model="userDetails.lastName">
+                                                <input type="text" placeholder="Last Name" class="form-control" ng-model="userDetails.data.lastName">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <input type="text" placeholder="Mobile Number" class="form-control" ng-model="userDetails.mobNo">
+                                                <input type="text" placeholder="Mobile Number" class="form-control" ng-model="userDetails.data.mobile">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <input type="email" placeholder="Email Address" class="form-control" ng-model="userDetails.email">
+                                                <input type="email" placeholder="Email Address" class="form-control" ng-model="userDetails.data.email">
                                             </div>
                                         </div>
                                     </div>
@@ -121,36 +121,36 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <input type="text" placeholder="Line 1*" class="form-control" ng-model="userDetails.address1">
+                                            <input type="text" placeholder="Line 1*" class="form-control" ng-model="userDetails.data.shippingAddresses[0].line1">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <input type="text" placeholder="Line 2" class="form-control" ng-model="userDetails.address2">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <input type="text" placeholder="Line 3" class="form-control" ng-model="userDetails.address3">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <input type="text" placeholder="Line 4" class="form-control" ng-model="userDetails.address4">
+                                            <input type="text" placeholder="Line 2" class="form-control" ng-model="userDetails.data.shippingAddresses[0].line2">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <input type="text" placeholder="City" class="form-control" ng-model="userDetails.city">
+                                            <input type="text" placeholder="Line 3" class="form-control" ng-model="userDetails.data.shippingAddresses[0].line3">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <input type="number" placeholder="Pincode" class="form-control" ng-model="userDetails. pinCode">
+                                            <input type="text" placeholder="Line 4" class="form-control" ng-model="userDetails.data.shippingAddresses[0].line4">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="City" class="form-control" ng-model="userDetails.data.shippingAddresses[0].city">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="number" placeholder="Pincode" class="form-control" ng-model="userDetails.data.shippingAddresses[0].pincode">
                                         </div>
                                     </div>
                                 </div>
@@ -168,7 +168,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <input type="text" placeholder="Country" class="form-control" ng-model="userDetails.country">
+                                            <input type="text" placeholder="Country" class="form-control" ng-model="userDetails.data.shippingAddresses[0].country">
                                         </div>
                                     </div>
                                 </div>

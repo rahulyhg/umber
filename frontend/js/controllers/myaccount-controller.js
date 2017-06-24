@@ -25,8 +25,8 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
     /******userdetails***** */
     if (input.userId) {
         UserService.getUserDetails(input, function (data) {
-            $scope.userDetails = data.data.data;
-            console.log("userdetails::", $scope.userDetails)
+            $scope.userDetails = data.data;
+            console.log("userdetails::", data)
         });
     }
     $scope.save = false; // used for Edit tab on profile button to save user's details
