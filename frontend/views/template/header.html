@@ -39,13 +39,6 @@
                     </div>
                 </div>
             </div>
-            <div class="navbar__search-bar" style="display:none">
-                <form>
-                    <div class="form-group">
-                        <input type="text" class="form-control">
-                    </div>
-                </form>
-            </div>
             <div class="collapse navbar-collapse" id="nav-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#"><i class="fa fa-search"></i></a>
@@ -95,7 +88,18 @@
 
                     </li>
                     <li ng-if="!loggedUser "><button class="btn header--login " ng-click="openLoginModal10(); ">LOGIN</button></li>
-                    <li ng-if="loggedUser "><button class=" btn header--login " ng-click="logout(); " ng-if="userId !='' ">LOGOUT</button></li>
+                    <li ng-if="loggedUser ">
+                        <a href="" class="user-name" ng-click="logout(); " ng-if="userId !='' ">hi, siddhesh <i class="fa fa-caret-down"></i></a>
+                        <!--<button class=" btn header--logout" ng-click="logout(); " ng-if="userId !='' ">Hi, siddhesh</button>-->
+                        <ul class="header-top-right-dropdown list-unstyled">
+                            <li class="text-uppercase"><a href="">profile</a> </li>
+                            <li class="text-uppercase"><a href="">manage address</a> </li>
+                            <li class="text-uppercase"><a href="">order</a> </li>
+                            <li class="text-uppercase"><a href="">Wishlist</a> </li>
+                            <li class="text-uppercase"><a href="">forgot password?</a> </li>
+                            <li class="text-uppercase"><a href="">log out</a> </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <!--<div class="collapse navbar-collapse " id="nav-collapse ">

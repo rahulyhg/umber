@@ -11140,30 +11140,67 @@ header {
       background-color: #341314;
       margin-top: 4px;
       border-radius: 1px; }
-  .navbar .navbar__search-bar {
-    width: 45%;
-    margin-left: 70px;
-    float: left; }
-    .navbar .navbar__search-bar .form-group {
-      margin: 15px 0; }
-    .navbar .navbar__search-bar .form-control:focus {
-      border-color: #341314;
-      outline: 0;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(52, 19, 20, 0.6); }
+  .navbar li:hover .search-box-area {
+    opacity: 1;
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1); }
+  .navbar .search-box-area {
+    margin-top: -15px;
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: right center;
+    transform-origin: right center;
+    transition: all 0.35s ease 0s; }
+    .navbar .search-box-area input {
+      border: 1px solid #ccc;
+      width: 250px;
+      height: 35px;
+      padding: 5px 10px;
+      text-align: center;
+      text-transform: capitalize;
+      color: #252525; }
+      .navbar .search-box-area input:focus {
+        border-color: #341314;
+        outline: 0;
+        box-shadow: none;
+        transition-property: border-color;
+        transition-duration: 0.15s;
+        transition-timing-function: ease-in-out;
+        transition-delay: initial; }
   .navbar .navbar-right {
     margin-right: 15px; }
     .navbar .navbar-right .fa {
       font-size: 18px; }
-    .navbar .navbar-right .fa-search,
-    .navbar .navbar-right .fa-heart,
-    .navbar .navbar-right .fa-shopping-cart {
-      color: #341314;
-      margin: 14px 0 0; }
     .navbar .navbar-right .header--login {
       font-size: 15px;
       padding: 3px 0;
       width: 85px;
       margin-top: 25px; }
+    .navbar .navbar-right a.user-name {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 16px;
+      line-height: 1.5; }
+      .navbar .navbar-right a.user-name:after {
+        content: '';
+        opacity: 0;
+        visibility: hidden;
+        border: 1px solid #341314;
+        width: 70%;
+        position: absolute;
+        right: 15px;
+        bottom: 0;
+        -webkit-transform: scaleX(0);
+        transform: scaleX(0);
+        -webkit-transform-origin: right center;
+        transform-origin: right center;
+        transition: all 0.35s ease 0s; }
     .navbar .navbar-right ::-webkit-scrollbar {
       width: 5px; }
     .navbar .navbar-right ::-webkit-scrollbar-track {
@@ -11208,6 +11245,52 @@ header {
             .navbar .navbar-right .dropdown-menu .dropdown-menu__dropdown-cart .inline-block.desc .remove--btn i.fa-trash-o {
               font-size: 16px;
               padding-right: 3px; }
+    .navbar .navbar-right a {
+      text-decoration: none;
+      font-size: 20px;
+      transition: all 0.3s ease 0s; }
+    .navbar .navbar-right li:hover > a.user-name:after {
+      opacity: 1;
+      visibility: visible;
+      -webkit-transform: scaleX(1);
+      transform: scaleX(1); }
+    .navbar .navbar-right li:hover .header-top-right-dropdown {
+      visibility: visible;
+      opacity: 1;
+      -webkit-transform: Sale(1);
+      transform: Sale(1);
+      -webkit-transform: translate(0);
+      transform: translate(0); }
+    .navbar .navbar-right .header-top-right-dropdown {
+      background: #ffffff none repeat scroll 0 0;
+      box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
+      min-width: 200px;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      padding: 15px 0;
+      visibility: hidden;
+      opacity: 0;
+      -webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(0px, 49px);
+      transform: rotate(0deg) scale(1) skew(0deg) translate(0px, 49px);
+      -webkit-transform-origin: right center;
+      transform-origin: right center;
+      transition: all 0.35s ease;
+      z-index: 9999; }
+    .navbar .navbar-right .header-top-right-dropdown li > a {
+      color: #341314;
+      font-size: 16px;
+      display: block;
+      padding: 2px 15px;
+      text-align: left;
+      text-transform: uppercase; }
+      .navbar .navbar-right .header-top-right-dropdown li > a:hover {
+        background-color: #341314;
+        color: #ffffff; }
+
+.navbar-right > li > a {
+  margin-top: 14.5px;
+  margin-bottom: 14.5px; }
 
 .dropdown-menu__btn .btn--brown-checkout {
   width: 105px;
@@ -11513,6 +11596,17 @@ header {
       font-weight: normal;
       font-size: 15px;
       margin-top: 15px; }
+    .cloth-buy .cloth-buy__desc:after {
+      content: '';
+      border-bottom: 2px dashed #341314;
+      border-right: 2px dashed #341314;
+      width: 600px;
+      height: 330px;
+      margin-top: -25px;
+      position: absolute;
+      top: 30px;
+      right: 25px;
+      margin-top: -25px; }
   .cloth-buy .absolute {
     position: absolute;
     top: 16%;
@@ -11551,21 +11645,29 @@ header {
 .blog .blog__slider .blog__banner-detail .blog__desc {
   color: #ffffff;
   background-color: #341314;
-  padding: 1px 35px;
-  height: 176px; }
-  .blog .blog__slider .blog__banner-detail .blog__desc p:last-child:after {
-    content: '\02192';
-    position: relative;
-    top: 6px;
-    font-size: 28px;
-    padding: 0 4px; }
-  .blog .blog__slider .blog__banner-detail .blog__desc a {
-    color: #ffffff; }
+  padding: 1px 35px 15px; }
   .blog .blog__slider .blog__banner-detail .blog__desc h3 {
     font-size: 20px;
     font-weight: 600; }
   .blog .blog__slider .blog__banner-detail .blog__desc p {
     line-height: 1; }
+  .blog .blog__slider .blog__banner-detail .blog__desc .typedin-desc {
+    max-height: 72px;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+  .blog .blog__slider .blog__banner-detail .blog__desc p:last-child:after {
+    content: '\02192';
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: 26px;
+    padding: 0 4px; }
+  .blog .blog__slider .blog__banner-detail .blog__desc a {
+    color: #ffffff; }
 
 .sale {
   background-color: #ededed; }
