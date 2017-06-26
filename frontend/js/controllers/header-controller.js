@@ -43,6 +43,7 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
             $.jStorage.deleteKey('accessToken');
             $.jStorage.deleteKey('cart');
             $.jStorage.deleteKey('wishlist');
+            $.jStorage.deleteKey('compareproduct');
             //$.jStorage.flush();
             UserService.logout(data, function (data) {
                 $scope.loggedUser = "";
