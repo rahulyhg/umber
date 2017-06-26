@@ -395,7 +395,11 @@ var model = {
                     if (data.shippingAddress) {
                         var idx = _.findIndex(user.shippingAddresses, function (userAddress) {
                             return Object.keys(userAddress).every(function (key) {
-                                return userAddress[key] == data.shippingAddress[key];
+                                if (key == "_id") {
+                                    return true;
+                                } else {
+                                    return userAddress[key] == data.shippingAddress[key];
+                                }
                             });
                         });
 
