@@ -92,10 +92,10 @@
                         <a href="" class="user-name" ui-sref="myaccount" ng-if="userId !='' ">hi, {{firstname}} <i class="fa fa-caret-down"></i></a>
                         <!--<button class=" btn header--logout" ng-click="logout(); " ng-if="userId !='' ">Hi, siddhesh</button>-->
                         <ul class="header-top-right-dropdown list-unstyled">
-                            <li class="text-uppercase"><a href="">profile</a> </li>
-                            <li class="text-uppercase"><a href="">manage address</a> </li>
-                            <li class="text-uppercase"><a href="">order</a> </li>
-                            <li class="text-uppercase"><a href="">Wishlist</a> </li>
+                            <li class="text-uppercase"><a ui-sref="myaccount({view: 'profTab'})">profile</a> </li>
+                            <li class="text-uppercase"><a ui-sref="myaccount({view: 'addrTab'})">manage address</a> </li>
+                            <li class="text-uppercase"><a ui-sref="myaccount({view: 'orderTab'})">order</a> </li>
+                            <li class="text-uppercase"><a ui-sref="myaccount({view: 'wishlistTab'})">Wishlist</a> </li>
                             <li class="text-uppercase"><a href="">forgot password?</a> </li>
                             <li class="text-uppercase"><a ng-click="logout(); ">logout</a> </li>
                         </ul>
