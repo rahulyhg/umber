@@ -71,12 +71,12 @@
                 </div>
                 <div class="addr-tab" ng-if="view == 'addrTab' ">
                     <!--To open Manage Address Tab-->
-                    <div class="col-md-4" ng-if="!save">
+                    <div class="col-md-4" ng-if="!save" ng-repeat="shippingAdd in userDetails.data.shippingAddresses">
                         <div class="manage-addrs custom-checkbox">
-                            <p class="usrdtl-info"><span class="usr-name text-capitalize">{{userDetails.data.firstName}} {{userDetails.data.lastName}}</span>                                {{userDetails.mobNo}}
+                            <p class="usrdtl-info"><span class="usr-name text-capitalize">{{userDetails.data.firstName}} {{userDetails.data.lastName}}</span>                                {{userDetails.data.mobile}}
                                 <br>{{userDetails.data.email}}</p>
-                            <address class="usrdtl-info">{{userDetails.address1}}<br>
-                                <span class="text-capitalize city">{{userDetails.city}}</span>{{userDetails.pinCode}}<br>{{userDetails.country}}</address>
+                            <address class="usrdtl-info">{{shippingAdd.line1}}<br>
+                                <span class="text-capitalize city">{{shippingAdd.city}}</span>{{shippingAdd.pinCode}}<br>{{shippingAdd.country}}</address>
                             <div class="checkbox usrdtl-info">
                                 <input type="checkbox" id="x1">
                                 <label for="x1">Use this as default shipping address</label>

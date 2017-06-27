@@ -4,7 +4,9 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
             $(window).scrollTop(0);
         });
         $.fancybox.close(true);
-
+        if ($.jStorage.get("username")) {
+            $scope.firstname = $.jStorage.get("username");
+        }
         $scope.loggedUser = $.jStorage.get("userId");
         $scope.accessToken = $.jStorage.get("accessToken");
 
@@ -43,6 +45,8 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
             $.jStorage.deleteKey('accessToken');
             $.jStorage.deleteKey('cart');
             $.jStorage.deleteKey('wishlist');
+            $.jStorage.deleteKey('compareproduct');
+            $.jStorage.deleteKey("username")
             //$.jStorage.flush();
             UserService.logout(data, function (data) {
                 $scope.loggedUser = "";
@@ -163,9 +167,12 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
         $scope.login = function () {
             console.log("Header login");
             UserService.login($scope.loginData, function (data) {
+                console.log("logindata", data)
                 if (!_.isEmpty(data.data.data)) {
                     $scope.userData = data.data.data;
 
+                    $.jStorage.set("username", data.data.data.firstName)
+                    console.log("username", $.jStorage.get("username"))
                     $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
                     $.jStorage.set("userId", $scope.userData._id);
 

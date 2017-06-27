@@ -1,4 +1,4 @@
-myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService, WishlistService, TemplateService, $translate, $rootScope, UserService) {
+myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService, WishlistService, TemplateService, $translate, $rootScope, UserService, $stateParams) {
     $scope.template = TemplateService.getHTML("content/myaccount.html");
     TemplateService.title = "My Account"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
@@ -6,6 +6,12 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
         toastr.error("Please login to access your details", "Error:")
         $state.go("home");
     }
+    if ($stateParams.view) {
+        $scope.view = $stateParams.view;
+    } else {
+        $scope.view = "profTab";
+    }
+
     var input = {
         "userId": $.jStorage.get("userId")
     }

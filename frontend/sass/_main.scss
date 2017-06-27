@@ -1317,9 +1317,22 @@
             }
             .blog__banner-detail {
                 .blog__desc {
+                    p:last-child {
+                        &:after {
+                            content: '\02192';
+                            @include position(relative,
+                            6px null null null);
+                            font-size: 28px;
+                            padding: 0 4px;
+                        }
+                    }
+                    a {
+                        color: $white;
+                    }
                     color: $white;
                     background-color: $darkBrown1;
-                    @include padding(1px 35px 15px);
+                    @include padding(1px 35px);
+                    height: 176px;
                     h3 {
                         font-size: 20px;
                         font-weight: 600;

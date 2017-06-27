@@ -9,7 +9,7 @@ myApp
 
         ProductService.getthelook(function (data) {
             $scope.getthelook = data.data.data;
-            //console.log("new look", data.data.data);
+            console.log("new look", data.data.data);
         })
         $scope.userId = $.jStorage.get('userId');
         NavigationService.EnabledHomeScreen(function (data) {

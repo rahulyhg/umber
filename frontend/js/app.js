@@ -79,7 +79,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
         })
 
         .state('myaccount', {
-            url: "/myaccount",
+            url: "/myaccount/:view",
             templateUrl: tempateURL,
             controller: 'MyAccountCtrl',
 

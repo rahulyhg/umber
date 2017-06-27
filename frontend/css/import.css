@@ -11492,7 +11492,16 @@ header {
 .blog .blog__slider .blog__banner-detail .blog__desc {
   color: #ffffff;
   background-color: #341314;
-  padding: 1px 35px 15px; }
+  padding: 1px 35px;
+  height: 176px; }
+  .blog .blog__slider .blog__banner-detail .blog__desc p:last-child:after {
+    content: '\02192';
+    position: relative;
+    top: 6px;
+    font-size: 28px;
+    padding: 0 4px; }
+  .blog .blog__slider .blog__banner-detail .blog__desc a {
+    color: #ffffff; }
   .blog .blog__slider .blog__banner-detail .blog__desc h3 {
     font-size: 20px;
     font-weight: 600; }
