@@ -1,0 +1,62 @@
+<div>
+    <div class="container">
+        <div class="order-return-table">
+            <table class="table">
+                <caption>
+                    <h2 class="order-status-title text-center">Return / exchange
+                    </h2>
+                </caption>
+                <thead>
+                    <tr class="text-uppercase">
+                        <th>order placed<br><strong>{{order.createdAt | date:'dd/MM/yyyy'}}</strong></th>
+                        <th>order no.<br><strong>{{order.orderNo}}</strong></th>
+                        <th>Grand total<br><strong>&#8377; {{order.totalAmount}}</strong></th>
+                    </tr>
+                    <tr>
+                        <th colspan="3"></th>
+                    </tr>
+                    <tr class="text-uppercase">
+                        <th>item ordered</th>
+                        <th>price</th>
+                        <th>return item</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="relate">
+                        <td>
+                            <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
+                            <div class="item-img inline-block">
+                                <img src="frontend/img/individual/product-test.jpg" alt="Ordered Item" class="img-responsive">
+                            </div>
+                            <div class="inline-block item-desc">
+                                <h4 class="item-name text-uppercase">marathon plain front trouser
+                                </h4>
+                                <p class="item-code"><span class="text-capitalize">Product Code:</span><span class="text-uppercase"> 0000adafafaa</span>
+                                </p>
+                                <!--<p class="item-code"><span class="text-capitalize">size:</span><span class="text-uppercase">M</span>
+                                </p>
+                                <p class="item-code"><span class="text-capitalize">color</span><span class="text-uppercase"> black</span>
+                                </p>-->
+                            </div>
+                            <div class="comment">
+                                <p class="item-code">Comment: {{product.comment}}.</p>
+                                <hr class="table-divider">
+                            </div>
+                        </td>
+                        <td class="text-center relate">
+                            <h4 class="item-name"><i class="fa fa-inr"></i>2300</h4>
+                        </td>
+                        <td>
+                            <div class=" custom-checkbox">
+                                <div class="inline-block checkbox">
+                                    <input type="checkbox" id="x1">
+                                    <label for="x1"></label>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

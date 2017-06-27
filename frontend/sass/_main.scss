@@ -2151,179 +2151,281 @@
         }
     }
 
-    .usr-account {
-        .usrdtl-info {
-            color: $darkGray;
-            font-size: 16px;
-        }
-        .usrdtl-title {
-            .linking {
-                color: $darkBrown1;
-                margin-left: 10px;
-            }
-        }
-        .usrdtl {
-            p {
-                margin-bottom: 15px;
-            }
-            span.left-space {
-                margin-left: 15px;
-            }
-            .linking {
-                font-family: 'vadodara-semibld';
-                color: inherit;
-                letter-spacing: 0;
-            }
-        }
-        .manage-addrs {
-            .usr-name {
-                font-size: 21px;
-            }
-            span.city:after {}
-        }
-        .usr-edit-detail {
-            margin-bottom: 50px;
-        }
-        .address-edit-btn,
-        .address-delt-btn,
-        .save--btn,
-        .delt--btn {
-            @extend .btn--brown;
-            @include padding(3px 12px);
-            margin-right: 10px;
-        }
-        .address-edit-btn,
-        .save--btn {
-            width: 70px;
-        }
-        .address-delt-btn,
-        .delt--btn {
-            width: 90px;
-        }
-        .state-dropdown {
-            padding-top: 11px;
-            .state-dropdown--btn {
-                position: relative;
-                width: 100%;
-                color: #999;
-                font-size: 14px;
-                text-align: left;
-                background-color: transparent;
-                border-bottom: 1px solid $darkBrown1;
-            }
-            .dropdown-menu {
-                width: 100%;
-            }
-            .caret {
-                @include position(absolute,
-                50% 8px null null);
-                color: $darkBrown1;
-            }
-        }
-        .btn--list {
-            margin-bottom: 10px;
-            padding: 3px 0;
-            width: 175px;
-            text-transform: uppercase;
+    .usrdtl-info {
+        color: $darkGray;
+        font-size: 16px;
+    }
+
+    .usrdtl-title {
+        .linking {
             color: $darkBrown1;
-            border: 1px dashed $darkBrown1;
-            letter-spacing: 1px;
-            &:focus,
-            &:active {
-                color: white;
-            }
+            margin-left: 10px;
         }
-        .account-order-table {
-            thead> {
-                tr:first-child {
-                    border-top: 1px solid $borderColor;
-                    background: $lightGray1;
-                    color: $darkBrown1;
-                }
-                tr>th {
-                    padding-left: 40px;
-                    font-weight: normal;
-                }
-                tr>th:first-child {
-                    border-left: 1px solid $borderColor;
-                }
-                tr>th:last-child {
-                    border-right: 1px solid $borderColor;
-                }
-            }
-            tbody {
-                tr>td {
-                    border: 1px solid $borderColor;
-                    border-right: none; // border-bottom: none;
-                    text-transform: uppercase;
-                }
-                td+td {
-                    border-left: none;
-                }
-                td:last-child {
-                    color: $darkBrown1;
-                    border-right: 1px solid $borderColor;
-                }
-                tr:nth-child(2) {
-                    td {
-                        border-top: none;
-                        border-bottom: 1px solid $borderColor;
-                    }
-                }
-            }
-            .item-img {
-                vertical-align: top;
-                @include padding(10px 15px);
-                margin-right: 10px;
-                img {
-                    width: 90px;
-                    @include margin (0 auto);
-                }
-            }
-            .comment {
-                padding-left: 10px;
-            }
-            hr.table-divider {
-                @include position(absolute,
-                null 12% 10px 12%);
-                @include margin(10px auto);
-                @include linear-gradient(to right,
-                rgba(255,
-                255,
-                255,
-                1) 0%,
-                rgba(255,
-                255,
-                255,
-                0) 49%,
-                rgba(255,
-                255,
-                255,
-                1) 100%);
+    }
+
+    .usrdtl {
+        p {
+            margin-bottom: 15px;
+        }
+        span.left-space {
+            margin-left: 15px;
+        }
+        .linking {
+            font-family: 'vadodara-semibld';
+            color: inherit;
+            letter-spacing: 0;
+        }
+    }
+
+    .manage-addrs {
+        .usr-name {
+            font-size: 21px;
+        }
+        span.city:after {}
+    }
+
+    .usr-edit-detail {
+        margin-bottom: 50px;
+    }
+
+    .address-edit-btn,
+    .address-delt-btn,
+    .save--btn,
+    .delt--btn,
+    .invoice--btn {
+        @extend .btn--brown;
+        @include padding(3px 12px);
+        margin-right: 10px;
+    }
+
+    .address-edit-btn,
+    .save--btn {
+        width: 70px;
+    }
+
+    .address-delt-btn,
+    .delt--btn {
+        width: 90px;
+    }
+
+    .state-dropdown {
+        padding-top: 11px;
+        .state-dropdown--btn {
+            position: relative;
+            width: 100%;
+            color: #999;
+            font-size: 14px;
+            text-align: left;
+            background-color: transparent;
+            border-bottom: 1px solid $darkBrown1;
+        }
+        .dropdown-menu {
+            width: 100%;
+        }
+        .caret {
+            @include position(absolute,
+            50% 8px null null);
+            color: $darkBrown1;
+        }
+    }
+
+    .btn--list {
+        margin-bottom: 10px;
+        padding: 3px 0;
+        width: 175px;
+        text-transform: uppercase;
+        color: $darkBrown1;
+        border: 1px dashed $darkBrown1;
+        letter-spacing: 1px;
+        &:focus,
+        &:active {
+            color: white;
+        }
+    }
+    /*NOTE:.account-order-table class has been extended in order-detail.html & return-order.html*/
+
+    .account-order-table {
+        thead> {
+            tr:first-child,
+            tr:last-child {
                 border-top: 1px solid $borderColor;
+                background: $lightGray1;
+                color: $darkBrown1;
+            }
+            tr>th {
+                padding-left: 40px;
+                font-weight: normal;
+            }
+            tr>th:first-child {
+                border-left: 1px solid $borderColor;
+            }
+            tr>th:last-child {
+                border-right: 1px solid $borderColor;
             }
         }
-        .order-list--btn {
-            @extend .btn--list;
-            margin-right: 15px;
-        }
-        .order-action--btn {
-            @extend .btn--list;
-            margin-right: 15px;
-            display: block;
-            &:focus {
-                background-color: $darkBrown1;
-                color: $white;
-                border: 1px dashed $white;
+        tbody {
+            tr>td {
+                border: 1px solid $borderColor;
+                border-right: none; // border-bottom: none;
+                text-transform: uppercase;
+            }
+            td+td {
+                border-left: none;
+            }
+            td:last-child {
+                color: $darkBrown1;
+                border-right: 1px solid $borderColor;
+            }
+            tr:nth-child(2) {
+                td {
+                    border-top: none;
+                    border-bottom: 1px solid $borderColor;
+                }
             }
         }
-        p.item-code {
-            margin-bottom: 0;
+        .item-img {
+            vertical-align: top;
+            @include padding(10px 15px);
+            margin-right: 10px;
+            img {
+                width: 90px;
+                @include margin (0 auto);
+            }
         }
-        p.item-cost {
-            line-height: 1;
+        .comment {
+            padding-left: 10px;
         }
+        hr.table-divider {
+            @include position(absolute,
+            null 12% 10px 12%);
+            @include margin(10px auto);
+            @include linear-gradient(to right,
+            rgba(255,
+            255,
+            255,
+            1) 0%,
+            rgba(255,
+            255,
+            255,
+            0) 49%,
+            rgba(255,
+            255,
+            255,
+            1) 100%);
+            border-top: 1px solid $borderColor;
+        }
+    }
+
+    .order-list--btn {
+        @extend .btn--list;
+        margin-right: 15px;
+    }
+
+    .order-action--btn {
+        @extend .btn--list;
+        margin-right: 15px;
+        display: block;
+        &:focus {
+            background-color: $darkBrown1;
+            color: $white;
+            border: 1px dashed $white;
+        }
+    }
+
+    p.item-code {
+        margin-bottom: 0;
+    }
+
+    p.item-cost {
+        line-height: 1;
     } //End of My account(myaccount.html)
+    //Start of orderdetail.html
+    .order-status-title {
+        // This class is used in return, order, return successful & cancel, cancel successful msg.html
+        font-family: 'vadodara-md';
+        color: $darkGray;
+        text-transform: uppercase;
+        @include margin(25px 0);
+    }
+
+    .order-details-table {
+        // This class has been extended in order-return-table
+        @include padding(0 85px 35px);
+        @extend .account-order-table;
+        tbody {
+            tr {
+                td:last-child {
+                    vertical-align: bottom;
+                    text-align: center;
+                }
+            }
+        }
+        .item-name {
+            font-size: 22px;
+        }
+        .item-img img {
+            width: 105px;
+        }
+        .item-desc {
+            width: 60%;
+        }
+        .item-cost {
+            margin-top: 20px;
+        }
+        .quantity__input {
+            @include position(absolute,
+            null null -80px 50%);
+            @include transform(translateX(-50%));
+        }
+        .grand-total {
+            margin-bottom: 33px;
+        }
+        .usr-status-title {
+            font-size: 19px;
+            margin-top: 15px;
+            color: $darkBrown1;
+            text-transform: uppercase;
+            .usr-addrs-title {
+                letter-spacing: 1px;
+            }
+        }
+        .order-payment-info {
+            font-size: 17px;
+        }
+        address {
+            font-size: 17px;
+            text-transform: capitalize;
+            padding-right: 55px;
+        }
+        .return-table {
+            margin-bottom: 35px;
+        }
+    }
+
+    .order-return-table {
+        @extend .order-details-table;
+        thead> {
+            tr:nth-child(2) {
+                th {
+                    padding: 3px;
+                }
+            }
+        }
+        tbody {
+            tr {
+                td:last-child {
+                    vertical-align: top;
+                    text-align: center;
+                }
+            }
+        }
+        .item-name .fa-inr {
+            margin-right: 5px;
+        }
+        .checkbox {
+            margin-top: 15px;
+        }
+    } //End of orderdetail.html
     // All modals html
     /*****NOTE: We can extend this class by using @extend method. Please don't customise the main class(Parent class) .close-modal--btn-circle ****/
 

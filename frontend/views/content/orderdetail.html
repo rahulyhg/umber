@@ -1,4 +1,161 @@
 <div>
+    <div>
+        <img src="" alt="background Image">
+    </div>
+    <div class="container">
+        <div class="order-details-table">
+            <table class="table">
+                <caption>
+                    <h2 class="order-status-title text-center">order details</h2>
+                </caption>
+                <thead>
+                    <tr class="text-uppercase">
+                        <th>order placed<br><strong>{{order.createdAt | date:'dd/MM/yyyy'}}</strong></th>
+                        <th>order no.<br><strong>{{order.orderNo}}</strong></th>
+                        <th>payment method<br><strong>{{order.orderStatus}}</strong></th>
+                        <th>tracking id<br><strong class="text-capitalize">Cash on Delivery</strong></th>
+                        <th>Grand total<br><strong>&#8377; {{order.totalAmount}}</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="relate">
+                        <td colspan="3">
+                            <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
+                            <div class="item-img inline-block">
+                                <img src="frontend/img/individual/product-test.jpg" alt="Ordered Item" class="img-responsive">
+                            </div>
+                            <div class="inline-block item-desc">
+                                <h4 class="item-name text-uppercase">marathon plain front trouser
+                                </h4>
+                                <p class="item-code"><span class="text-capitalize">Product Code:</span><span class="text-uppercase"> 0000adafafaa</span>
+                                </p>
+                                <p class="item-code"><span class="text-capitalize">size:</span><span class="text-uppercase">M</span>
+                                </p>
+                                <p class="item-code"><span class="text-capitalize">color</span><span class="text-uppercase"> black</span>
+                                </p>
+                                <p class="item-cost"><i class="fa fa-inr"></i>2300</p>
+                            </div>
+                            <div class="comment">
+                                <p class="item-code">Comment: {{product.comment}}.</p>
+                                <hr class="table-divider">
+                            </div>
+                        </td>
+                        <td class="text-center relate">
+                            <h4 class=" usr-status-title">quantity</h4>
+                            <div class="plus-minus-btn">
+                                <!--<a ng-click="updateQuantity($index, -1)">
+                                    <i class="fa fa-minus square__bg" aria-hidden="true"></i>
+                                </a>-->
+                                <div class="inline-block">
+                                    <form>
+                                        <div class="form-group marg0">
+                                            <input type="text" readonly class="form-control quantity__input" ng-model="product.quantity">
+                                        </div>
+                                    </form>
+                                </div>
+                                <!--<a ng-click="updateQuantity($index, 1)" ng-if="product.quantity< product.product.quantity">
+                                    <i class="fa fa-plus square__bg" aria-hidden="true"></i>
+                                </a>-->
+                            </div>
+                        </td>
+                        <td>
+                            <p class="item-cost grand-total"><i class="fa fa-inr"></i>2300</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="ordertable-footer">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4 class="usr-status-title usr-addrs-title">BILLING ADDRESS</h4>
+                        <address>1308, Panchratna Building, Next to Roxy Cinema, Opera House, Mumbai - 400004. Maharashtra, India</address>
+                    </div>
+                    <div class="col-md-4">
+                        <h4 class="usr-status-title usr-addrs-title">SHIPPING ADDRESS</h4>
+                        <address>
+                            1308, Panchratna Building, Next to Roxy Cinema, Opera House, Mumbai - 400004. Maharashtra, India
+                        </address>
+                    </div>
+                    <div class="col-md-4">
+                        <h4 class="text-center usr-status-title usr-addrs-title">PAYMENT INFORMATION</h4>
+                        <p class="text-right order-payment-info">Item(s) Subtotal: <span>&#8377; 8697</span><br> Shipping: <span>&#8377; 00</span><br> Disscount:
+                            <span>&#8377; 00</span><br> Total: <span>&#8377; 8697</span><br> TAX: <span>&#8377; 00</span><br>                            Grand Total: <span>&#8377; 00</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <table class="table return-table">
+                <caption>
+                    <h2 class="order-status-title text-center">Returned
+                    </h2>
+                </caption>
+                <thead>
+                    <tr class="text-uppercase">
+                        <th>order placed<br><strong>{{order.createdAt | date:'dd/MM/yyyy'}}</strong></th>
+                        <th>order no.<br><strong>{{order.orderNo}}</strong></th>
+                        <th>payment method<br><strong>{{order.orderStatus}}</strong></th>
+                        <th>tracking id<br><strong class="text-capitalize">Cash on Delivery</strong></th>
+                        <th>Grand total<br><strong>&#8377; {{order.totalAmount}}</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="relate">
+                        <td colspan="3">
+                            <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
+                            <div class="item-img inline-block">
+                                <img src="frontend/img/individual/product-test.jpg" alt="Ordered Item" class="img-responsive">
+                            </div>
+                            <div class="inline-block item-desc">
+                                <h4 class="item-name text-uppercase">marathon plain front trouser
+                                </h4>
+                                <p class="item-code"><span class="text-capitalize">Product Code:</span><span class="text-uppercase"> 0000adafafaa</span>
+                                </p>
+                                <p class="item-code"><span class="text-capitalize">size:</span><span class="text-uppercase">M</span>
+                                </p>
+                                <p class="item-code"><span class="text-capitalize">color</span><span class="text-uppercase"> black</span>
+                                </p>
+                                <p class="item-cost"><i class="fa fa-inr"></i>2300</p>
+                            </div>
+                            <div class="comment">
+                                <p class="item-code">Comment: {{product.comment}}.</p>
+                                <hr class="table-divider">
+                            </div>
+                        </td>
+                        <td class="relate text-center">
+                            <h4 class="usr-status-title">quantity</h4>
+                            <div class="plus-minus-btn">
+                                <!--<a ng-click="updateQuantity($index, -1)">
+                                    <i class="fa fa-minus display-inblock square__bg" aria-hidden="true"></i>
+                                </a>-->
+                                <div class="inline-block">
+                                    <form>
+                                        <div class="form-group marg0">
+                                            <input type="text" readonly class="form-control quantity__input" ng-model="product.quantity">
+                                        </div>
+                                    </form>
+                                </div>
+                                <!--<a ng-click="updateQuantity($index, 1)" ng-if="product.quantity< product.product.quantity">
+                                    <i class="fa fa-plus display-inblock square__bg" aria-hidden="true"></i>
+                                </a>-->
+                            </div>
+                        </td>
+                        <td>
+                            <p class="item-cost grand-total"><i class="fa fa-inr"></i>2300</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="text-center text-uppercase"><button class="btn invoice--btn">download invoice </button></p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!--<div>
     <div class="orderdetail-bg">
         <img src="" alt="MyAccount" class="img-responsive">
     </div>
@@ -81,4 +238,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->

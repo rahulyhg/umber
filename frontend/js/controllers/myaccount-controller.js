@@ -162,3 +162,6 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
     });
 
 });
+myApp.controller('ProductReturnCtrl', function ($scope, toastr, $state, OrderService, WishlistService, TemplateService, $translate, $rootScope, UserService) {
+    $scope.template = TemplateService.getHTML("content/product-return.html");
+});

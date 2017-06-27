@@ -84,6 +84,12 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             controller: 'MyAccountCtrl',
 
         })
+        .state('product-return', {
+            url: "/product-return",
+            templateUrl: tempateURL,
+            controller: 'ProductReturnCtrl',
+
+        })
 
         .state('orderdetail', {
             url: "/orderdetail",
