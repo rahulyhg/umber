@@ -1141,6 +1141,11 @@ myApp
         TemplateService.title = "Coming Soon"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
     })
+    .controller('ContactUsCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.getHTML("content/contactus.html");
+        TemplateService.title = "Coming Soon"; //This is the Title of the Website
+        $scope.navigation = NavigationService.getNavigation();
+    })
     //Example API Controller
     .controller('DemoAPICtrl', function ($scope, TemplateService, apiService, NavigationService, $timeout) {
         apiService.getDemo($scope.formData, function (data) {

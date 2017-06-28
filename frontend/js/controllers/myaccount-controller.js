@@ -170,4 +170,15 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
 });
 myApp.controller('ProductReturnCtrl', function ($scope, toastr, $state, OrderService, WishlistService, TemplateService, $translate, $rootScope, UserService) {
     $scope.template = TemplateService.getHTML("content/product-return.html");
+
+});
+myApp.controller('ReturnSuccessCtrl', function ($scope, TemplateService, $translate, $rootScope) {
+    $scope.template = TemplateService.getHTML("content/return-success.html");
+    TemplateService.title = "Return Successful"; //This is the Title of the Website
+    //  $scope.navigation = NavigationService.getNavigation();
+});
+myApp.controller('CancelMsgCtrl', function ($scope, TemplateService, $translate, $rootScope) {
+    $scope.template = TemplateService.getHTML("content/cancel-msg.html");
+    TemplateService.title = "Canceld Oreder"; //This is the Title of the Website
+    //  $scope.navigation = NavigationService.getNavigation();
 });

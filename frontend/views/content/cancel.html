@@ -1,179 +1,101 @@
-<div class="container">
-  <div class="content-spacing">
-    <h1 class="text-center text-uppercase custom-cancel-head"> Return/Exchange</h1>
-    <div class="ext-pad">
-      <div class="ext-pad-section">
-        <div class="cancel-section ">
-          <div class="cancel-content">
-            <ul class="list-inline">
-              <li>
-                <div class="cancel-content-1 ">
-                  <h4 class="text-uppercase">Order Placed</h4>
-                  <span>31 January 2017</span>
+<div>
+  <div class="container">
+    <div class="order-cancel-table">
+      <table class="table">
+        <caption>
+          <h2 class="order-status-title text-center">CancelLation
+          </h2>
+        </caption>
+        <thead>
+          <tr class="text-uppercase">
+            <th colspan="2">order placed<br><strong>{{order.createdAt | date:'dd/MM/yyyy'}}</strong></th>
+            <th>order no.<br><strong>{{order.orderNo}}</strong></th>
+            <th>Grand total<br><strong>&#8377; {{order.totalAmount}}</strong></th>
+          </tr>
+          <tr>
+            <th colspan="4"></th>
+          </tr>
+          <tr class="text-uppercase">
+            <th>item ordered</th>
+            <th>price</th>
+            <th>quantity</th>
+            <th>return item</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="relate">
+              <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
+              <div class="item-img inline-block">
+                <img src="frontend/img/individual/product-test.jpg" alt="Ordered Item" class="img-responsive">
+              </div>
+              <div class="inline-block item-desc">
+                <h4 class="item-name text-uppercase">marathon plain front trouser
+                </h4>
+                <p class="item-code"><span class="text-capitalize">Product Code:</span><span class="text-uppercase"> 0000adafafaa</span>
+                </p>
+                <!--<p class="item-code"><span class="text-capitalize">size:</span><span class="text-uppercase">M</span>
+                                </p>
+                                <p class="item-code"><span class="text-capitalize">color</span><span class="text-uppercase"> black</span>
+                                </p>-->
+              </div>
+              <!--<div class="comment">
+                                <p class="item-code">Comment: {{product.comment}}.</p>
+                                <hr class="table-divider">
+                            </div>-->
+            </td>
+            <td class="text-center relate">
+              <h4 class="item-name"><i class="fa fa-inr"></i>2300</h4>
+            </td>
+
+            <td class="text-center">
+              <div class="order-return plus-minus-btn">
+                <!--<a ng-click="updateQuantity($index, -1)">
+                                    <i class="fa fa-minus square__bg" aria-hidden="true"></i>
+                                </a>-->
+                <div class="inline-block">
+                  <form>
+                    <div class="form-group marg0">
+                      <input type="text" readonly class="form-control quantity__input" ng-model="product.quantity">
+                    </div>
+                  </form>
                 </div>
-              </li>
-              <li>
-                <div class="cancel-content-2">
-                  <h4 class="text-uppercase">Order NO</h4>
-                  <span># 132-423-56789</span>
+                <!--<a ng-click="updateQuantity($index, 1)" ng-if="product.quantity< product.product.quantity">
+                                    <i class="fa fa-plus square__bg" aria-hidden="true"></i>
+                                </a>-->
+              </div>
+            </td>
+            <td>
+              <div class=" custom-checkbox">
+                <div class="inline-block checkbox">
+                  <input type="checkbox" id="x1">
+                  <label for="x1"></label>
                 </div>
-              </li>
-              <li class="pull-right">
-                <div class="cancel-content-3">
-                  <h4 class="text-uppercase">Grand total</h4>
-                  <span> <i class="fa fa-inr" aria-hidden="true"></i>&ensp;8,678</span>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class=cancel-table>
-          <table class=table>
-            <tr class="text-uppercase grey-cancel text-center">
-              <td class="ord-item tl-left">Item Ordered</td>
-              <td class="wd50"></td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Return Item</td>
-            </tr>
-            <tr class="text-center ">
-              <td class="ord-item tl-left">
-                <img src="img/compare/2.jpg" class="img-responsive item-order-img">
-              </td>
-              <td>
-                <div class="cancel-desc">
-                  <p>Marathon plain front trouser
-                    <p>
-                      <p>Product code:G000278-GMSHHS0202-FP-16-22</p>
-                </div>
-              </td>
-              <td class="cancel-price">
-                <p><i class="fa fa-inr" aria-hidden="true"></i>&ensp;2,899</p>
-              </td>
-              <td>
-                <div class="cancel-quant text-center">
-                  02
-                </div>
-              </td>
-              <td cancel-rtn>
-                <div class="checkbox-cancel">
-                  <label><input type="checkbox" value=""></label>
-                </div>
-              </td>
-            </tr>
-            <tr class="text-center ">
-              <td class="ord-item tl-left">
-                <img src="img/compare/2.jpg" class="img-responsive item-order-img">
-              </td>
-              <td>
-                <div class="cancel-desc">
-                  <p>Marathon plain front trouser
-                    <p>
-                      <p>Product code:G000278-GMSHHS0202-FP-16-22</p>
-                </div>
-              </td>
-              <td class="cancel-price">
-                <p><i class="fa fa-inr" aria-hidden="true"></i>&ensp;2,899</p>
-              </td>
-              <td>
-                <div class="cancel-quant text-center">
-                  02
-                </div>
-              </td>
-              <td cancel-rtn>
-                <div class="checkbox-cancel">
-                  <label><input type="checkbox" value=""></label>
-                </div>
-              </td>
-            </tr>
-            <tr class="text-center ">
-              <td class="ord-item tl-left">
-                <img src="img/compare/2.jpg" class="img-responsive item-order-img">
-              </td>
-              <td>
-                <div class="cancel-desc">
-                  <p>Marathon plain front trouser
-                    <p>
-                      <p>Product code:G000278-GMSHHS0202-FP-16-22</p>
-                </div>
-              </td>
-              <td class="cancel-price">
-                <p><i class="fa fa-inr" aria-hidden="true"></i>&ensp;2,899</p>
-              </td>
-              <td>
-                <div class="cancel-quant text-center">
-                  02
-                </div>
-              </td>
-              <td cancel-rtn>
-                <div class="checkbox-cancel">
-                  <label><input type="checkbox" value=""></label>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
-      <div class="reason-rtn">
-        <ul class="list-inline">
-          <li>
-            Reason for Return
-          </li>
-          <li> :</li>
-          <li>
-            <!--<div class="dropdown inline-block ">
-              <button class=" btn dropdown-toggle" type="button" data-toggle="dropdown"><span>Select Return reason<span>
-                            <i class="fa fa-angle-down" aria-hidden="true"></i></button>
-              <ul class="dropdown-menu">
-                <li><a>1</a></li>
-                <li><a>2</a></li>
-                <li><a>3</a></li>
-                <li><a>4</a></li>
-                <li><a>5</a></li>
-              </ul>
-            </div>-->
-            <!--<div class="dropdown inline-block btn-block btn-grp">
-              <button class="btn btn-block  dropdown-toggle btn-select" type="button" data-toggle="dropdown"><span class="pull-left">Select Return Reason </span>
-                            <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></button>
-              <ul class="dropdown-menu">
-                <li ng-repeat="size in product.size | orderBy:size.order"> <a ng-click="setSelectedSize(size)">{{size.name}}</a></li>
-                <!--<li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">6</a></li>-->
-              <!--</ul>
-            </div>-->
-                                    <div class="dropdown inline-block">
-                            <button class="btn dropdown-toggle btn-select" type="button" data-toggle="dropdown">Select Return Reason
-                            <i class="fa fa-angle-down" aria-hidden="true"></i></button>
-                            <ul class="dropdown-menu">
-                                <li ng-repeat="size in sizes"> <a ng-click="setSelectedSize(size)">{{size.name}}</a></li>
-                                <!--<li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">6</a></li>-->
-                            </ul>
-                        </div>
-          </li>
-        </ul>
-        <div class="comment-cancel">
-          <div class="customized-form">
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="col-md-5">
+          <form>
             <div class="form-group">
-              <input type="text" placeholder="Comments"class="form-control">
+              <label class="item-code">Reason for cancel :</label>
+              <div class=" inline-block order-return-dropdown" uib-dropdown>
+                <button type="button" class="btn text-capitalize item-return--btn" uib-dropdown-toggle ng-click="openDropdown()">Select Cancel Reason  <span class="caret"></button>
+                <ul class="return-dropdown-menu dropdown-menu" uib-dropdown-menu role="menu">
+                  <li role="menuitem"><a href="">Test</a></li>
+                  <li role="menuitem"><a href="">Test</a></li>
+                  <li role="menuitem"><a href="">Test</a></li>
+                </ul>
+              </div>
             </div>
             <div class="form-group">
-              <input type="text" placeholder=""  class="form-control">
+              <textarea name="" id="" cols="5" rows="5" class="form-control" placeholder="Comment"></textarea>
             </div>
-            <div class="form-group">
-              <input type="text" placeholder=""  class="form-control">
-            </div>
-          </div>
+            <p><button class="btn comnt-submit--btn" type="submit">SUBMIT</button></p>
+          </form>
         </div>
-        <button class="cancel-submit btn header--login ">Submit</button>
       </div>
     </div>
   </div>

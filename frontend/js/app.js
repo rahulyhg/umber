@@ -90,6 +90,23 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             controller: 'ProductReturnCtrl',
 
         })
+        .state('return-success', {
+            url: "/return-success",
+            templateUrl: tempateURL,
+            controller: 'ReturnSuccessCtrl',
+
+        })
+        .state('cancel-msg', {
+            url: "/cancel-msg",
+            templateUrl: tempateURL,
+            controller: 'CancelMsgCtrl',
+
+        })
+        .state('contactus', {
+            url: "/contactus",
+            templateUrl: tempateURL,
+            controller: 'ContactUsCtrl'
+        })
 
         .state('orderdetail', {
             url: "/orderdetail",

@@ -8,22 +8,23 @@
                 </caption>
                 <thead>
                     <tr class="text-uppercase">
-                        <th>order placed<br><strong>{{order.createdAt | date:'dd/MM/yyyy'}}</strong></th>
+                        <th colspan="2">order placed<br><strong>{{order.createdAt | date:'dd/MM/yyyy'}}</strong></th>
                         <th>order no.<br><strong>{{order.orderNo}}</strong></th>
                         <th>Grand total<br><strong>&#8377; {{order.totalAmount}}</strong></th>
                     </tr>
                     <tr>
-                        <th colspan="3"></th>
+                        <th colspan="4"></th>
                     </tr>
                     <tr class="text-uppercase">
                         <th>item ordered</th>
                         <th>price</th>
+                        <th>quantity</th>
                         <th>return item</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="relate">
-                        <td>
+                    <tr>
+                        <td class="relate">
                             <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
                             <div class="item-img inline-block">
                                 <img src="frontend/img/individual/product-test.jpg" alt="Ordered Item" class="img-responsive">
@@ -38,13 +39,31 @@
                                 <p class="item-code"><span class="text-capitalize">color</span><span class="text-uppercase"> black</span>
                                 </p>-->
                             </div>
-                            <div class="comment">
+                            <!--<div class="comment">
                                 <p class="item-code">Comment: {{product.comment}}.</p>
                                 <hr class="table-divider">
-                            </div>
+                            </div>-->
                         </td>
                         <td class="text-center relate">
                             <h4 class="item-name"><i class="fa fa-inr"></i>2300</h4>
+                        </td>
+
+                        <td class="text-center">
+                            <div class="order-return plus-minus-btn">
+                                <!--<a ng-click="updateQuantity($index, -1)">
+                                    <i class="fa fa-minus square__bg" aria-hidden="true"></i>
+                                </a>-->
+                                <div class="inline-block">
+                                    <form>
+                                        <div class="form-group marg0">
+                                            <input type="text" readonly class="form-control quantity__input" ng-model="product.quantity">
+                                        </div>
+                                    </form>
+                                </div>
+                                <!--<a ng-click="updateQuantity($index, 1)" ng-if="product.quantity< product.product.quantity">
+                                    <i class="fa fa-plus square__bg" aria-hidden="true"></i>
+                                </a>-->
+                            </div>
                         </td>
                         <td>
                             <div class=" custom-checkbox">
@@ -57,6 +76,27 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="row">
+                <div class="col-md-5">
+                    <form>
+                        <div class="form-group">
+                            <label class="item-code">Reason for return :</label>
+                            <div class=" inline-block order-return-dropdown" uib-dropdown>
+                                <button type="button" class="btn text-capitalize item-return--btn" uib-dropdown-toggle ng-click="openDropdown()">Select Return Reason  <span class="caret"></button>
+                                <ul class="return-dropdown-menu dropdown-menu" uib-dropdown-menu role="menu">
+                                    <li role="menuitem"><a href="">Test</a></li>
+                                    <li role="menuitem"><a href="">Test</a></li>
+                                    <li role="menuitem"><a href="">Test</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="" id="" cols="5" rows="5" class="form-control" placeholder="Comment"></textarea>
+                        </div>
+                        <p><button class="btn comnt-submit--btn" type="submit">SUBMIT</button></p>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
