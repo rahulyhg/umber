@@ -61,4 +61,8 @@ module.exports = [
   'js/controllers/language-controller.js',
   'js/controllers/orderdetail-controller.js',
   'js/controllers/myaccount-controller.js',
+  'js/controllers/listingpageCtrl.js',
+  'js/controllers/individualCtrl.js',
+  'js/controllers/checkoutCtrl.js',
+  'js/controllers/myCartCtrl.js',
 ];
