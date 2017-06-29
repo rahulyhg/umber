@@ -21,6 +21,7 @@
         "id": "imgLink",
         "option": "single",
         "validation": ["", "trim", ""],
+        "view": true,
         "url": ""
     }, {
         "name": "Inside Image",
@@ -30,6 +31,7 @@
         "id": "imgLink1",
         "option": "single",
         "validation": ["", "trim", ""],
+        "view": true,
         "url": ""
     }, {
         "name": "Description",
@@ -54,7 +56,7 @@
             "tableRef": "product",
             "placeholder": "Select Lot No",
             "id": "productId",
-            "dropDownField": "productId",
+            "dropDownField": "productName",
             "dropDownType": "single",
             "searchApi": "searchCall",
             "url": "Product/getUniqueProducts",
