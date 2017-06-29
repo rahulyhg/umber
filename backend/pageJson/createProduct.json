@@ -32,6 +32,19 @@
                 ""
             ],
             "url": ""
+        }, {
+            "name": "Category",
+            "type": "tags",
+            "tableRef": "homeCategory",
+            "placeholder": "Select Category",
+            "id": "category",
+            "searchApi": "searchCall",
+            "fieldType": "",
+            "url": "HomeCategory/search",
+            "dropDownField": "name",
+            "view": true,
+            "dropDownType": "single",
+            "validation": ["required", "", "trim"]
         },
         {
             "name": "Subcategory",
@@ -47,20 +60,7 @@
             "dropDownType": "single",
             "validation": ["required", "", "trim"]
         },
-        {
-            "name": "Category",
-            "type": "tags",
-            "tableRef": "homeCategory",
-            "placeholder": "Select Category",
-            "id": "category",
-            "searchApi": "searchCall",
-            "fieldType": "",
-            "url": "HomeCategory/search",
-            "dropDownField": "name",
-            "view": true,
-            "dropDownType": "single",
-            "validation": ["required", "", "trim"]
-        },
+
         {
             "name": "Brand",
             "type": "tags",
