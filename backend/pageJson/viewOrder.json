@@ -1,0 +1,74 @@
+{
+    "title": "Order",
+    "description": "List of Order",
+    "pageType": "view",
+    "sendIdWithCreate": true,
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "Order No",
+        "isSort": "",
+        "tableRef": "orderNo"
+    }, {
+        "name": "User",
+        "isSort": "",
+        "tableRef": "user",
+        "field": "email"
+    }, {
+        "name": "Payment Method",
+        "isSort": "",
+        "tableRef": "paymentMethod"
+    }, {
+        "name": "Order Status",
+        "isSort": "",
+        "tableRef": "orderStatus"
+    }, {
+        "name": "Discount Amount",
+        "isSort": "",
+        "tableRef": "discountAmount"
+    }, {
+        "name": "Total Amount",
+        "isSort": "",
+        "tableRef": "totalAmount"
+    }],
+    "action": [{
+        "name": "edit",
+        "icon": "fa-pencil",
+        "buttonClass": "btn-primary",
+        "type": "page",
+        "action": "editOrder",
+        "fieldsToSend": {
+            "_id": "_id"
+        }
+    }, {
+        "name": "delete",
+        "icon": "fa-trash",
+        "buttonClass": "btn-danger",
+        "type": "apiCallConfirm",
+        "title": "Delete Order",
+        "content": "Are you sure you want to delete Order?",
+        "api": "Order/delete",
+        "fieldsToSend": {
+            "name": "_id",
+            "value": "_id"
+        }
+    }],
+    "button": [{
+        "name": "Excel Export",
+        "icon": "print",
+        "class": "btn-danger",
+        "type": "redirect",
+        "action": "Order/generateExcel",
+        "linkType": "admin"
+    }, {
+        "name": "Upload Excel",
+        "icon": "delete",
+        "class": "btn-warning",
+        "type": "redirect",
+        "action": "excel-upload/Buythelook",
+        "linkType": "internal"
+    }],
+    "apiCall": {
+        "url": "Order/search",
+        "params": "_id"
+    }
+}
