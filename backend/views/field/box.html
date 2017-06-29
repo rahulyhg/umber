@@ -17,13 +17,13 @@
             <tbody>
 
                 <tr ng-repeat="data in model | filter:search.text ">
-                    <div ng-repeat="field2 in type.fields">
-                        <td ng-if="field2.onView && field2.type !='image'">{{data[field2.tableRef]}}</td>
-                        <td ng-if="field2.onView && field2.type=='image'"><img src="{{data[field2.tableRef] | serverimage}} "></td>
-                    </div>
-                    <!--<td ng-repeat="field2 in type.fields" ng-if="field2.onView">{{data[field2.tableRef]}}</td>
-                    <td ng-if="type.fields[0].onView"><img ng-src="{{data[type.fields[0].tableRef] | serverimage}}" </td>
-                        <td ng-if="type.fields[1].onView">{{data[type.fields[1].tableRef]}} </td>-->
+                    <td ng-if="field2.onView" ng-repeat="field2 in type.fields track by $index">
+                        <img ng-if="field2.type == 'image'" ng-src="{{data[field2.tableRef] | serverimage}}">
+                        <div ng-if="field2.type != 'image' && !field2.dropDownField && field2.dropDownField != 'productName'">
+                            {{data[field2.tableRef]}}</div>
+                        <div ng-if="field2.type != 'image' && field2.dropDownField && field2.dropDownField == 'productName'">
+                            {{data.product.productName}}</div>
+                    </td>
                     <td>
                         <a class="btn btn-primary" ng-click="editBox('Edit',data)">
                                 <i class="fa fa-pencil"></i>

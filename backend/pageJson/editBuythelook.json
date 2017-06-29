@@ -54,12 +54,13 @@
             "name": "Product",
             "type": "tags",
             "tableRef": "product",
-            "placeholder": "Select Lot No",
+            "placeholder": "Select Product",
             "id": "productId",
             "dropDownField": "productName",
             "dropDownType": "single",
             "searchApi": "searchCall",
             "url": "Product/getUniqueProducts",
+            "onView": true,
             "validation": ["", "trim", ""]
         }]
     }, {

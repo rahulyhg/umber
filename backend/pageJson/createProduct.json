@@ -325,6 +325,7 @@
                 "option": "single",
                 "validation": ["", "trim", ""],
                 "onView": true,
+                "view": true,
                 "url": ""
             }, {
                 "name": "Image Order",
@@ -334,6 +335,7 @@
                 "id": "imageorder",
                 "validation": ["", "trim", ""],
                 "onView": true,
+                "view": true,
                 "url": ""
             }]
         }
