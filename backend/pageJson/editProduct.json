@@ -315,6 +315,7 @@
             "fields": [{
                 "name": "Image",
                 "type": "image",
+                "size": "800 x 1000px",
                 "tableRef": "image",
                 "tableValue": "image",
                 "placeholder": "Enter image",

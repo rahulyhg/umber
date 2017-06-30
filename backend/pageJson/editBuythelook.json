@@ -16,6 +16,7 @@
     }, {
         "name": "Major Image",
         "type": "image",
+        "size": "978 x 753px",
         "tableRef": "majorImage",
         "placeholder": "Enter Image Link",
         "id": "imgLink",

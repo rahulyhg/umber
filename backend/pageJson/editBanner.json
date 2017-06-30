@@ -8,6 +8,7 @@
     "fields": [{
             "name": "Image",
             "type": "image",
+            "size": "1600 x 379px",
             "tableRef": "image",
             "placeholder": "Enter Image",
             "id": "image",
