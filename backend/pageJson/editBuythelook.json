@@ -39,6 +39,8 @@
         "tableRef": "description",
         "placeholder": "Enter Look Description",
         "id": "description",
+        "onView": true,
+        "view": true,
         "validation": ["required", "trim", ""],
         "url": ""
     }, {
