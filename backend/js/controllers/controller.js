@@ -82,7 +82,7 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
         var i = 0;
         $scope.getValues = function (filter, insertFirst) {
 
-            if (filter.homeCategory) {
+            if (filter && filter.homeCategory) {
                 filter.category = filter.homeCategory;
                 delete filter.homeCategory;
             }
@@ -150,11 +150,10 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
 
         $scope.$watch('filter', function (newVal, oldVal) {
             var filter = {};
-            console.log("Filter: ", $scope.filter);
             if ($scope.filter) {
                 filter = JSON.parse($scope.filter);
 
-                if (filter.homeCategory) {
+                if (filter && filter.homeCategory) {
                     filter.category = filter.homeCategory;
                     delete filter.homeCategory;
                 }
