@@ -181,7 +181,8 @@
      /********check selected category******** */
      $scope.checkRadioCategory = function (catid) {
 
-         var selectedId = $.jStorage.get("selectedCategory")
+         var selectedId = $.jStorage.get("selectedCategory").category;
+
          if (selectedId) {
 
 
@@ -338,7 +339,9 @@
              })
          }
          $scope.addToCart = function () {
-             myService.addToCart($scope.product, $scope.reqQuantity, $scope.selectedSize, function (data) {
+             var comment = "";
+             myService.addToCart($scope.product, $scope.reqQuantity, $scope.selectedSize, comment, function (data) {
+                 ModalService.addcart();
                  $scope.reload();
              })
          }

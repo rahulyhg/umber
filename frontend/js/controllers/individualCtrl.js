@@ -72,6 +72,7 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
     }
     $scope.addToCart = function (pc) {
         myService.addToCart($scope.product, $scope.reqQuantity, $scope.selectedSize, $scope.productComment.name, function (data) {
+            ModalService.addcart();
             $state.reload();
         })
     }

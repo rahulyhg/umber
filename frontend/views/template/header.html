@@ -48,7 +48,7 @@
                             </form>
                         </div>
                     </li>
-                    <li ng-click="openWishlistModal10();"><a href=""><i class="fa fa-heart "></i> Wishlist</a></li>
+                    <li ui-sref="myaccount({view: 'wishlistTab'})"><a href=""><i class="fa fa-heart "></i> Wishlist</a></li>
                     <li uib-dropdown>
                         <a href="# " uib-dropdown-toggle ui-sref="mycart ">
                             <i class="fa fa-shopping-cart "></i> Cart ( <span ng-if="cart.products.length ">{{cart.products.length}}</span>
