@@ -42,6 +42,7 @@ module.exports = [
   'frontend/js/services/template.js',
   'frontend/js/services/myservices.js',
   'frontend/js/services/modal.js',
+  'frontend/js/services/listingService.js',
 
   //Factories
   'frontend/js/factories/navigation.js',

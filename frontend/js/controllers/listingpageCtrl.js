@@ -1,5 +1,5 @@
  myApp.controller('ListingPageCtrl', function ($scope, toastr, CartService, $rootScope, $stateParams, $state, WishlistService, TemplateService, NavigationService,
-     SizeService, BannerService, CategoryService, myService, ProductService, $timeout, $uibModal, ModalService) {
+     SizeService, BannerService, CategoryService, myService, ProductService, $timeout, $uibModal, ModalService, ListingService) {
      $scope.template = TemplateService.getHTML("content/listing-page.html");
      TemplateService.title = "Form"; //This is the Title of the Website
      $scope.navigation = NavigationService.getNavigation();
@@ -21,27 +21,27 @@
      });
      /******getting products based on category******* */
      $scope.filteredProducts = function (selectedCategory) {
-         $.jStorage.set("selectedCategory", selectedCategory);
+
          $.jStorage.deleteKey("appliedFilters");
          var input = {
 
              "category": selectedCategory,
              "page": 1
          }
-
-         ProductService.getProductsWithFilters(input, function (data) {
+         $.jStorage.set("selectedCategory", input);
+         /***************retriving filters based on categories and respective filters**************** */
+         ListingService.retriveProductsWithCategory(function (data) {
 
              if (data.data.data.length == 0) {
                  $scope.displayMessage = "No Data Found";
+                 $scope.products = ""
 
              } else if (!_.isEmpty(data.data.data)) {
                  $scope.displayMessage = "";
                  $scope.products = _.chunk(data.data.data, 3);
                  console.log(data)
-                 var input = {
-                     "category": selectedCategory,
-                 }
-                 ProductService.getFiltersWithCategory(input, function (data) {
+
+                 ListingService.retriveFiltersWithCategory(function (data) {
                      console.log("product category on basis of category", data.data.data)
                      $scope.filters = data.data.data;
                      $scope.min = $scope.filters.priceRange[0].min;
@@ -119,7 +119,7 @@
      }
 
      var appliedFilters = {};
-
+     /*******retriving products based on filters********* */
      $scope.applyFilters = function (key, filter) {
          var appliedFilters = {};
          appliedFilters.appliedFilters = $.jStorage.get('appliedFilters') ? $.jStorage.get('appliedFilters') : {
