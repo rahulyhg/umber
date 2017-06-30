@@ -40,7 +40,7 @@ module.exports = [
 
   // Services
   'frontend/js/services/template.js',
-  'frontend/js/services/myservices.js',
+  'frontend/js/services/cartandwishlistservice.js',
   'frontend/js/services/modal.js',
   'frontend/js/services/listingService.js',
 
