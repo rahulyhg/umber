@@ -25,45 +25,45 @@ module.exports = [
   'bower_components/angular-toastr/dist/angular-toastr.tpls.js',
   'bower_components/angular-loading-bar/build/loading-bar.js',
   //App.js
-  'js/app.js',
+  'frontend/js/app.js',
 
   // Languages
-  'js/languages/language.js',
+  'frontend/js/languages/language.js',
 
 
   // Directives
-  'js/directives/directive.js',
-  'js/directives/passwordVerifier.js',
+  'frontend/js/directives/directive.js',
+  'frontend/js/directives/passwordVerifier.js',
 
   // Filters
-  'js/filters/filter.js',
+  'frontend/js/filters/filter.js',
 
   // Services
-  'js/services/template.js',
-  'js/services/myservices.js',
-  'js/services/modal.js',
-  'js/services/listingService.js',
+  'frontend/js/services/template.js',
+  'frontend/js/services/myservices.js',
+  'frontend/js/services/modal.js',
+  'frontend/js/services/listingService.js',
 
   //Factories
-  'js/factories/navigation.js',
-  'js/factories/api.js',
-  'js/factories/cart.js',
-  'js/factories/user.js',
-  'js/factories/product.js',
-  'js/factories/category.js',
-  'js/factories/banner.js',
-  'js/factories/wishlist.js',
-  'js/factories/size.js',
-  'js/factories/order.js',
+  'frontend/js/factories/navigation.js',
+  'frontend/js/factories/api.js',
+  'frontend/js/factories/cart.js',
+  'frontend/js/factories/user.js',
+  'frontend/js/factories/product.js',
+  'frontend/js/factories/category.js',
+  'frontend/js/factories/banner.js',
+  'frontend/js/factories/wishlist.js',
+  'frontend/js/factories/size.js',
+  'frontend/js/factories/order.js',
 
   // Contorllers
-  'js/controllers/controller.js',
-  'js/controllers/header-controller.js',
-  'js/controllers/language-controller.js',
-  'js/controllers/orderdetail-controller.js',
-  'js/controllers/myaccount-controller.js',
-  'js/controllers/listingpageCtrl.js',
-  'js/controllers/individualCtrl.js',
-  'js/controllers/checkoutCtrl.js',
-  'js/controllers/myCartCtrl.js',
+  'frontend/js/controllers/controller.js',
+  'frontend/js/controllers/header-controller.js',
+  'frontend/js/controllers/language-controller.js',
+  'frontend/js/controllers/orderdetail-controller.js',
+  'frontend/js/controllers/myaccount-controller.js',
+  'frontend/js/controllers/listingpageCtrl.js',
+  'frontend/js/controllers/individualCtrl.js',
+  'frontend/js/controllers/checkoutCtrl.js',
+  'frontend/js/controllers/myCartCtrl.js',
 ];

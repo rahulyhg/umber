@@ -32,24 +32,9 @@
                 ""
             ],
             "url": ""
-        },
-        {
-            "name": "Subcategory",
-            "type": "tags",
-            "tableRef": "category",
-            "placeholder": "Select Sub-Category",
-            "id": "category",
-            "searchApi": "searchCall",
-            "fieldType": "",
-            "url": "Category/search",
-            "dropDownField": "name",
-            "view": true,
-            "dropDownType": "single",
-            "validation": ["required", "", "trim"]
-        },
-        {
+        }, {
             "name": "Category",
-            "type": "tags",
+            "type": "selectFromTable",
             "tableRef": "homeCategory",
             "placeholder": "Select Category",
             "id": "category",
@@ -61,6 +46,23 @@
             "dropDownType": "single",
             "validation": ["required", "", "trim"]
         },
+        {
+            "name": "Subcategory",
+            "type": "selectFromTable",
+            "tableRef": "category",
+            "placeholder": "Select Sub-Category",
+            "id": "category",
+            "searchApi": "searchCall",
+            "fieldType": "",
+            "filterField": "homeCategory",
+            "filterValue": "homeCategory",
+            "url": "Category/search",
+            "dropDownField": "name",
+            "view": true,
+            "dropDownType": "single",
+            "validation": ["required", "", "trim"]
+        },
+
         {
             "name": "Brand",
             "type": "tags",
@@ -323,6 +325,7 @@
                 "option": "single",
                 "validation": ["", "trim", ""],
                 "onView": true,
+                "view": true,
                 "url": ""
             }, {
                 "name": "Image Order",
@@ -332,6 +335,7 @@
                 "id": "imageorder",
                 "validation": ["", "trim", ""],
                 "onView": true,
+                "view": true,
                 "url": ""
             }]
         }

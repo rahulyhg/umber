@@ -21,6 +21,7 @@
         "id": "imgLink",
         "option": "single",
         "validation": ["", "trim", ""],
+        "view": true,
         "url": ""
     }, {
         "name": "Inside Image",
@@ -30,6 +31,7 @@
         "id": "imgLink1",
         "option": "single",
         "validation": ["", "trim", ""],
+        "view": true,
         "url": ""
     }, {
         "name": "Description",
@@ -52,9 +54,10 @@
             "name": "Product",
             "type": "tags",
             "tableRef": "product",
-            "placeholder": "Select Lot No",
+            "onView": true,
+            "placeholder": "Select Product",
             "id": "productId",
-            "dropDownField": "productId",
+            "dropDownField": "productName",
             "dropDownType": "single",
             "searchApi": "searchCall",
             "url": "Product/getUniqueProducts",

@@ -92,7 +92,7 @@ schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('Order', schema);
 
-var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "user", "user"));
+var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "user", "user", "createdAt", "desc"));
 var model = {
     createOrderFromCart: function (data, callback) {
         if (_.isEmpty(data.userId)) {
