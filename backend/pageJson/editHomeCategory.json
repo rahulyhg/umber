@@ -33,6 +33,8 @@
             "placeholder": "Enter Image Link",
             "id": "imgLink",
             "option": "single",
+            "onView": true,
+            "view": true,
             "validation": ["", "trim", ""],
             "url": ""
         }, {
