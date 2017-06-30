@@ -250,6 +250,7 @@
          $scope.wishlist = $.jStorage.get("wishlist")
 
          if ($scope.mycart) {
+             myservices
              $scope.mycart = $scope.mycart.products;
              console.log("mycartfor offlinetooltip::::", $scope.mycart)
              $scope.tempcart = [];
