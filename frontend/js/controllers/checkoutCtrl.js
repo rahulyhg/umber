@@ -64,6 +64,7 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
     }
 
     $scope.updateAddress = function () {
+        angular.element(document.getElementById('ordergenerate')).disabled = true;
         var updateAdd = {
             user: $.jStorage.get("userId"),
             billingAddress: $scope.user.billingAddress,
@@ -71,6 +72,17 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
         }
         UserService.saveAddressCheckout(updateAdd, function (data) {
             console.log("saveuserdetails", data);
+            if (input.userId) {
+                OrderService.createOrderFromCart(input, function (data) {
+                    console.log("oderplaced", data);
+                    if (data.data.data) {
+                        toastr.success('Thank You your order was placed successfully', 'success');
+                    } else {
+                        toastr.error('Sorry there was some problem in placing your order', 'Error');
+                    }
+                    angular.element(document.getElementById('ordergenerate')).disabled = false;
+                })
+            }
         })
     }
 
@@ -167,14 +179,5 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
     var input = {
         "userId": $.jStorage.get("userId")
     }
-    if (input.userId) {
-        OrderService.createOrderFromCart(input, function (data) {
-            console.log("oderplaced", data);
-            if (data.data.data) {
-                toastr.success('Thank You your order was placed successfully', 'success');
-            } else {
-                toastr.error('Sorry there was some problem in placing your order', 'Error');
-            }
-        })
-    }
+
 })
