@@ -15,7 +15,6 @@
                 </tr>
             </thead>
             <tbody>
-
                 <tr ng-repeat="data in model | filter:search.text ">
                     <td ng-if="field2.onView" ng-repeat="field2 in type.fields track by $index">
                         <img ng-if="field2.type == 'image'" ng-src="{{data[field2.tableRef] | serverimage}}">
@@ -26,11 +25,11 @@
                     </td>
                     <td>
                         <a class="btn btn-primary" ng-click="editBox('Edit',data)">
-                                <i class="fa fa-pencil"></i>
-                            </a>
+                            <i class="fa fa-pencil"></i>
+                        </a>
                         <a class="btn btn-danger" ng-click="deleteBox($index, model)">
-                                <i class="fa fa-trash"></i>
-                            </a>
+                            <i class="fa fa-trash"></i>
+                        </a>
                     </td>
                 </tr>
             </tbody>

@@ -34,7 +34,7 @@
             "url": ""
         }, {
             "name": "Category",
-            "type": "tags",
+            "type": "selectFromTable",
             "tableRef": "homeCategory",
             "placeholder": "Select Category",
             "id": "category",
@@ -48,12 +48,14 @@
         },
         {
             "name": "Subcategory",
-            "type": "tags",
+            "type": "selectFromTable",
             "tableRef": "category",
             "placeholder": "Select Sub-Category",
             "id": "category",
             "searchApi": "searchCall",
             "fieldType": "",
+            "filterField": "homeCategory",
+            "filterValue": "homeCategory",
             "url": "Category/search",
             "dropDownField": "name",
             "view": true,
