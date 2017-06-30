@@ -466,7 +466,24 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
                         $scope.model = $scope.formData[$scope.type.tableRef][$scope.type.tableValue];
                     } else {
                         $scope.model = $scope.formData[$scope.type.tableRef];
-                        console.log($scope.model);
+                        // This is for edit buy the look page.
+                        // In edit buy the look, only product ids stored in documents are retrieved.
+                        // So to retrieve it's details we need to get the product details with help of it's id.
+                        if ($scope.model[0].product && !$scope.model[0].product.images) {
+                            var oldProducts = $scope.model;
+                            $scope.model = [];
+                            for (var idx = 0; idx < oldProducts.length; idx++) {
+                                // get product details
+                                NavigationService.apiCall('Product/getProductDetails', oldProducts[idx].product, function (data) {
+                                    if (data.value) {
+                                        // In box.html product details are stored in product object
+                                        var product = {};
+                                        product.product = data.data;
+                                        $scope.model.push(product);
+                                    }
+                                });
+                            }
+                        }
                     }
                 }
             }
