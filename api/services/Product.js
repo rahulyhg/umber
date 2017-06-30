@@ -371,6 +371,9 @@ var model = {
                         },
                         category: {
                             $exists: true
+                        },
+                        images: {
+                            $exists: true
                         } //,
                         // brand: {
                         //     $exists: true
