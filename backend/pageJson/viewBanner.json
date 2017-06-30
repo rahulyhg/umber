@@ -5,9 +5,9 @@
     "sendIdWithCreate": true,
     "urlFields": ["_id"],
     "fields": [{
-            "name": "Name",
+            "name": "Page",
             "isSort": "",
-            "tableRef": "name"
+            "tableRef": "page"
         },
         {
             "name": "Status",
