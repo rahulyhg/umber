@@ -12,28 +12,28 @@
                     <tr class="text-uppercase">
                         <th>order placed<br><strong>{{order.createdAt | date:'dd/MM/yyyy'}}</strong></th>
                         <th>order no.<br><strong>{{order.orderNo}}</strong></th>
-                        <th>payment method<br><strong>{{order.orderStatus}}</strong></th>
-                        <th>tracking id<br><strong class="text-capitalize">Cash on Delivery</strong></th>
+                        <th>payment method<br><strong>{{order.paymentMethod}}</strong></th>
+                        <th>tracking id<br><strong class="text-capitalize">{{order.orderStatus}}</strong></th>
                         <th>Grand total<br><strong>&#8377; {{order.totalAmount}}</strong></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="relate">
+                    <tr class="relate" ng-repeat="product in order.products">
                         <td colspan="3">
-                            <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
+                            <!--style="background: url('{{product.product.images[0].image | serverimage}}') no-repeat 50% 50%"-->
                             <div class="item-img inline-block">
-                                <img src="frontend/img/individual/product-test.jpg" alt="Ordered Item" class="img-responsive">
+                                <img ng-src="{{product.product.images[0].image | serverimage}}" alt="Ordered Item" class="img-responsive">
                             </div>
                             <div class="inline-block item-desc">
-                                <h4 class="item-name text-uppercase">marathon plain front trouser
+                                <h4 class="item-name text-uppercase">{{product.product.productName}}
                                 </h4>
-                                <p class="item-code"><span class="text-capitalize">Product Code:</span><span class="text-uppercase"> 0000adafafaa</span>
+                                <p class="item-code"><span class="text-capitalize">Product Code:</span><span class="text-uppercase"> {{product.product.productCode}}</span>
                                 </p>
-                                <p class="item-code"><span class="text-capitalize">size:</span><span class="text-uppercase">M</span>
+                                <p class="item-code"><span class="text-capitalize">size:</span><span class="text-uppercase">{{product.product.size.name}}</span>
                                 </p>
-                                <p class="item-code"><span class="text-capitalize">color</span><span class="text-uppercase"> black</span>
+                                <p class="item-code"><span class="text-capitalize">color</span><span class="text-uppercase"> {{product.product.color.name}}</span>
                                 </p>
-                                <p class="item-cost"><i class="fa fa-inr"></i>2300</p>
+                                <p class="item-cost"><i class="fa fa-inr"></i>{{product.product.price}}</p>
                             </div>
                             <div class="comment">
                                 <p class="item-code">Comment: {{product.comment}}.</p>
@@ -59,7 +59,7 @@
                             </div>
                         </td>
                         <td>
-                            <p class="item-cost grand-total"><i class="fa fa-inr"></i>2300</p>
+                            <p class="item-cost grand-total"><i class="fa fa-inr"></i>{{order.totalAmount}}</p>
                         </td>
                     </tr>
                 </tbody>

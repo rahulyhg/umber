@@ -30,30 +30,31 @@
                 ""
             ],
             "url": ""
-        },
-        {
-            "name": "Subcategory",
-            "type": "tags",
-            "tableRef": "category",
-            "placeholder": "Select Sub-Category",
-            "id": "category",
-            "searchApi": "searchCall",
-            "fieldType": "",
-            "url": "Category/search",
-            "dropDownField": "name",
-            "view": true,
-            "dropDownType": "single",
-            "validation": ["required", "", "trim"]
-        },
-        {
+        }, {
             "name": "Category",
-            "type": "tags",
+            "type": "selectFromTable",
             "tableRef": "homeCategory",
             "placeholder": "Select Category",
             "id": "category",
             "searchApi": "searchCall",
             "fieldType": "",
             "url": "HomeCategory/search",
+            "dropDownField": "name",
+            "view": true,
+            "dropDownType": "single",
+            "validation": ["required", "", "trim"]
+        },
+        {
+            "name": "Subcategory",
+            "type": "selectFromTable",
+            "tableRef": "category",
+            "placeholder": "Select Sub-Category",
+            "id": "category",
+            "searchApi": "searchCall",
+            "fieldType": "",
+            "filterField": "homeCategory",
+            "filterValue": "homeCategory",
+            "url": "Category/search",
             "dropDownField": "name",
             "view": true,
             "dropDownType": "single",
@@ -314,6 +315,7 @@
             "fields": [{
                 "name": "Image",
                 "type": "image",
+                "size": "800 x 1000px",
                 "tableRef": "image",
                 "tableValue": "image",
                 "placeholder": "Enter image",

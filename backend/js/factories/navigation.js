@@ -7,76 +7,88 @@ var uploadurl = imgurl;
 
 myApp.factory('NavigationService', function ($http) {
     var navigation = [{
-        name: "Users",
-        classis: "active",
-        sref: "#!/page/viewUser//",
-        icon: "user"
-    }, {
-        name: "Home Category",
-        classis: "active",
-        sref: "#!/page/viewHomeCategory//",
-        icon: "tree"
-    }, {
-        name: "Category",
-        classis: "active",
-        sref: "#!/page/viewCategory//",
-        icon: "leaf"
-    }, {
-        name: "Home Screen",
-        classis: "active",
-        sref: "#!/page/viewHomeScreen//",
-        icon: "screen"
-    }, {
-        name: "Products",
-        classis: "active",
-        sref: "#!/page/viewProduct//",
-        icon: "shirt"
-    }, {
-        name: "Sizes",
-        classis: "active",
-        sref: "#!/page/viewSize//",
-        icon: "shirt"
-    }, {
-        name: "Buy the look",
-        classis: "active",
-        sref: "#!/page/viewBuythelook//",
-        icon: "shirt"
-    }, {
-        name: "Blogs",
-        classis: "active",
-        sref: "#!/page/viewBlog//",
-        icon: "document"
-    }, {
-        name: "Brand",
-        classis: "active",
-        sref: "#!/page/viewBrand//",
-        icon: "document"
-    }, {
-        name: "Collection",
-        classis: "active",
-        sref: "#!/page/viewCollection//",
-        icon: "document"
-    }, {
-        name: "BaseColor",
-        classis: "active",
-        sref: "#!/page/viewBaseColor//",
-        icon: "document"
-    }, {
-        name: "Fabric",
-        classis: "active",
-        sref: "#!/page/viewFabric//",
-        icon: "document"
-    }, {
-        name: "Type",
-        classis: "active",
-        sref: "#!/page/viewType//",
-        icon: "document"
-    }, {
-        name: "Banner",
-        classis: "active",
-        sref: "#!/page/viewBanner//",
-        icon: "document"
-    }];
+            name: "Users",
+            classis: "active",
+            sref: "#!/page/viewUser//",
+            icon: "user"
+        }, {
+            name: "User Membership",
+            classis: "active",
+            sref: "#!/page/viewMembership//",
+            icon: "user"
+        }, {
+            name: "Home Category",
+            classis: "active",
+            sref: "#!/page/viewHomeCategory//",
+            icon: "tree"
+        }, {
+            name: "Category",
+            classis: "active",
+            sref: "#!/page/viewCategory//",
+            icon: "leaf"
+        }, {
+            name: "Home Screen",
+            classis: "active",
+            sref: "#!/page/viewHomeScreen//",
+            icon: "screen"
+        }, {
+            name: "Products",
+            classis: "active",
+            sref: "#!/page/viewProduct//",
+            icon: "shirt"
+        }, {
+            name: "Sizes",
+            classis: "active",
+            sref: "#!/page/viewSize//",
+            icon: "shirt"
+        }, {
+            name: "Buy the look",
+            classis: "active",
+            sref: "#!/page/viewBuythelook//",
+            icon: "shirt"
+        },
+        {
+            name: "Order",
+            classis: "active",
+            sref: "#!/page/viewOrder//",
+            icon: "document"
+        }, {
+            name: "Blogs",
+            classis: "active",
+            sref: "#!/page/viewBlog//",
+            icon: "document"
+        }, {
+            name: "Brand",
+            classis: "active",
+            sref: "#!/page/viewBrand//",
+            icon: "document"
+        }, {
+            name: "Collection",
+            classis: "active",
+            sref: "#!/page/viewCollection//",
+            icon: "document"
+        }, {
+            name: "BaseColor",
+            classis: "active",
+            sref: "#!/page/viewBaseColor//",
+            icon: "document"
+        }, {
+            name: "Fabric",
+            classis: "active",
+            sref: "#!/page/viewFabric//",
+            icon: "document"
+        }, {
+            name: "Type",
+            classis: "active",
+            sref: "#!/page/viewType//",
+            icon: "document"
+        }, {
+            name: "Banner",
+            classis: "active",
+            sref: "#!/page/viewBanner//",
+            icon: "document"
+        }
+    ];
 
     return {
         getnav: function () {

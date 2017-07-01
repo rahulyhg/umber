@@ -22,6 +22,7 @@
         "size": "540 x 435",
         "option": "single",
         "validation": ["", "trim", ""],
+        "view": true,
         "url": ""
     }, {
         "name": "Description",

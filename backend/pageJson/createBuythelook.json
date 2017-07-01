@@ -16,11 +16,13 @@
     }, {
         "name": "Major Image",
         "type": "image",
+        "size": "978 x 753px",
         "tableRef": "majorImage",
         "placeholder": "Enter Image Link",
         "id": "imgLink",
         "option": "single",
         "validation": ["", "trim", ""],
+        "view": true,
         "url": ""
     }, {
         "name": "Inside Image",
@@ -30,11 +32,12 @@
         "id": "imgLink1",
         "option": "single",
         "validation": ["", "trim", ""],
+        "view": true,
         "url": ""
     }, {
         "name": "Description",
         "type": "textarea",
-        "tableRef": "desc",
+        "tableRef": "description",
         "placeholder": "Enter Look Description",
         "id": "desc",
         "validation": ["required", "trim", ""],
@@ -46,15 +49,16 @@
         "placeholder": "Add product for look",
         "id": "look",
         "onView": true,
-        "validation": ["", "trim", ""],
+        "validation": ["required", "trim", ""],
         "url": "",
         "fields": [{
             "name": "Product",
             "type": "tags",
             "tableRef": "product",
-            "placeholder": "Select Lot No",
+            "onView": true,
+            "placeholder": "Select Product",
             "id": "productId",
-            "dropDownField": "productId",
+            "dropDownField": "productName",
             "dropDownType": "single",
             "searchApi": "searchCall",
             "url": "Product/getUniqueProducts",

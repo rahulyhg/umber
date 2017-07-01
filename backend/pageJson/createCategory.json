@@ -12,6 +12,8 @@
         "placeholder": "Enter Category Name",
         "id": "name",
         "validation": ["required", "trim", "unique"],
+        "onView": true,
+        "view": true,
         "url": ""
     }, {
         "name": "Image",
@@ -21,6 +23,8 @@
         "id": "imgLink",
         "option": "single",
         "validation": ["", "trim", "unique"],
+        "onView": true,
+        "view": true,
         "url": ""
     }, {
         "name": "ParentCategory",
@@ -32,7 +36,9 @@
         "fieldType": "",
         "url": "HomeCategory/search",
         "dropDownField": "name",
-        "dropDownType": "single"
+        "dropDownType": "single",
+        "onView": true,
+        "view": true
     }, {
         "name": "Status",
         "type": "tags",
@@ -44,6 +50,7 @@
         "dropDownField": "",
         "dropDownType": "single",
         "onView": true,
+        "view": true,
         "dropDown": ["Enabled", "Disabled"]
     }],
     "action": [{

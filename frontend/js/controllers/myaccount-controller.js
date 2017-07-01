@@ -166,6 +166,10 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
         $scope.myShirt1 = _.chunk(n, 4);
         $scope.myShirt11.push($scope.myShirt1);
     });
+    $scope.gotoOrder = function (orderDetails) {
+        $.jStorage.set("orderDetails", orderDetails);
+        $state.go("orderdetail");
+    }
 
 });
 myApp.controller('ProductReturnCtrl', function ($scope, toastr, $state, OrderService, WishlistService, TemplateService, $translate, $rootScope, UserService) {

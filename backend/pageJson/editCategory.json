@@ -11,6 +11,8 @@
         "tableRef": "name",
         "placeholder": "Enter Category Name",
         "id": "name",
+        "onView": true,
+        "view": true,
         "validation": ["required", "trim", "unique"],
         "url": ""
     }, {
@@ -19,6 +21,8 @@
         "tableRef": "imgLink",
         "placeholder": "Enter Image Link",
         "id": "imgLink",
+        "onView": true,
+        "view": true,
         "option": "single",
         "validation": ["", "trim", ""],
         "url": ""
@@ -30,10 +34,11 @@
         "id": "parCategory",
         "searchApi": "searchCall",
         "fieldType": "",
+        "onView": true,
+        "view": true,
         "url": "HomeCategory/search",
         "dropDownField": "name",
-        "dropDownType": "single",
-        "onView": true
+        "dropDownType": "single"
     }, {
         "name": "Status",
         "type": "tags",
@@ -45,6 +50,7 @@
         "dropDownField": "",
         "dropDownType": "single",
         "onView": true,
+        "view": true,
         "dropDown": ["Enabled", "Disabled"]
     }],
     "action": [{

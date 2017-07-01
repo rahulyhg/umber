@@ -7,8 +7,7 @@
     "urlFields": [
         "HomeCategory"
     ],
-    "fields": [
-        {
+    "fields": [{
             "name": "Name",
             "type": "text",
             "tableRef": "name",
@@ -41,6 +40,7 @@
             "placeholder": "Enter Image Link",
             "id": "imgLink",
             "option": "single",
+            "onView": true,
             "view": true,
             "validation": [
                 "",
@@ -82,8 +82,7 @@
             ]
         }
     ],
-    "action": [
-        {
+    "action": [{
             "name": "submit",
             "action": "submitHomeCategory",
             "stateName": {

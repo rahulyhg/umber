@@ -110,7 +110,7 @@ schema.plugin(timestamps);
 module.exports = mongoose.model('Product', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "homeCategory category brand prodCollection fabric type color size",
-    "homeCategory category brand prodCollection fabric type color size"));
+    "homeCategory category brand prodCollection fabric type color size", "createdAt", "desc"));
 var model = {
     manageForeignKey: function (model, data, callback) {
         model.getIdByName(data, function (err, id) {
@@ -370,6 +370,9 @@ var model = {
                             $exists: true
                         },
                         category: {
+                            $exists: true
+                        },
+                        images: {
                             $exists: true
                         } //,
                         // brand: {
