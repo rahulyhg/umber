@@ -2,4 +2,6 @@ myApp.controller('OrderDetailCtrl', function ($scope, TemplateService, $translat
     $scope.template = TemplateService.getHTML("content/orderdetail.html");
     TemplateService.title = "Order Detail"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
+    $scope.order = $.jStorage.get("orderDetails");
+    console.log($scope.order);
 });

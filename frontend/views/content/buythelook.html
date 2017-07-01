@@ -17,7 +17,7 @@
                                 <div class="buy-slider">
                                     <flex-slider flex-slide="buy in xyz.images track by $index" prev-text="" next-text="" animation="slide" min-items="3">
                                         <li>
-                                            <i class="fa fa-heart-o" aria-hidden="true" ng-click="addwishlist();"></i>
+                                            <i class="fa fa-heart-o" aria-hidden="true" ng-click="addWishlist(xyz);"></i>
                                             <img ng-src="{{buy.image | serverimage}}" class="img-responsive" ng-click="addcart();">
                                         </li>
                                     </flex-slider>
@@ -31,7 +31,7 @@
                                           Add to compare
                                         </label>
                                         </div>
-                                        <button class="btn btn-default btn--brown text-uppercase " ng-click="forgot(); ">buy</button>
+                                        <button class="btn btn-default btn--brown text-uppercase " ui-sref="individual-page({id:xyz.productId})">buy</button>
                                     </div>
                                 </div>
                             </div>

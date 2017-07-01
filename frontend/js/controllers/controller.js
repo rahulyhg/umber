@@ -191,7 +191,7 @@ myApp
 
         }];
     })
-    .controller('BuythelookCtrl', function ($scope, $rootScope, $stateParams, ProductService, TemplateService, NavigationService, $timeout, $uibModal) {
+    .controller('BuythelookCtrl', function ($scope, $rootScope, $stateParams, ProductService, TemplateService, NavigationService, $timeout, $uibModal, myService, ModalService) {
         $scope.template = TemplateService.getHTML("content/buythelook.html");
         TemplateService.title = "Buythelook"; //This is the Title of the Website
         //$scope.navigation = NavigationService.getEnabledCtNavigation();
@@ -278,13 +278,23 @@ myApp
             });
         };
 
-        $scope.addwishlist = function () {
-            $uibModal.open({
-                animation: true,
-                templateUrl: 'views/modal/wishlistadd.html',
-                scope: $scope
-            });
-        };
+        // $scope.addwishlist = function () {
+        //     $uibModal.open({
+        //         animation: true,
+        //         templateUrl: 'views/modal/wishlistadd.html',
+        //         scope: $scope
+        //     });
+        // };
+        $scope.addWishlist = function (prod) {
+            console.log("wishlist", prod)
+            var data = {
+                "product": prod,
+            }
+            myService.addToWishlist(data, function (data) {
+
+                ModalService.addwishlist();
+            })
+        }
 
         $scope.addcart = function () {
 

@@ -19,10 +19,12 @@
          $scope.categories = data.data.data;
 
      });
+
      /******getting products based on category******* */
      $scope.filteredProducts = function (selectedCategory) {
-
-         $.jStorage.deleteKey("appliedFilters");
+         if ($.jStorage.get("selectedCategory") && selectedCategory != $.jStorage.get("selectedCategory").category) {
+             $.jStorage.deleteKey("appliedFilters");
+         }
          var input = {
 
              "category": selectedCategory,
@@ -65,6 +67,9 @@
                  toastr.error('There was some error', 'Error');
              }
          })
+     }
+     if ($.jStorage.get('selectedCategory')) {
+         $scope.filteredProducts($.jStorage.get('selectedCategory').category)
      }
      $rootScope.clickfun = function (product) {
          console.log(product)
@@ -132,7 +137,7 @@
              fabric: [],
          };
          console.log(filter, key)
-         appliedFilters.appliedFilters.category = [$.jStorage.get("selectedCategory")];
+         appliedFilters.appliedFilters.category = [$.jStorage.get("selectedCategory").category];
 
          var result = _.indexOf(appliedFilters.appliedFilters[key], filter._id);
          console.log("check result", result)
@@ -180,8 +185,8 @@
      }
      /********check selected category******** */
      $scope.checkRadioCategory = function (catid) {
-
-         var selectedId = $.jStorage.get("selectedCategory").category;
+         if ($.jStorage.get("selectedCategory"))
+             var selectedId = $.jStorage.get("selectedCategory").category;
 
          if (selectedId) {
 
@@ -241,7 +246,8 @@
              }
          })
          WishlistService.getWishlist(userId, function (data) {
-             $scope.wishlist = data.data.data;
+             if (data.data.data)
+                 $scope.wishlist = data.data.data;
              console.log("Wishlist data::::::::", $scope.wishlist);
          });
      } else {
