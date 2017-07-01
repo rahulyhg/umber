@@ -182,3 +182,13 @@ myApp.controller('CancelMsgCtrl', function ($scope, TemplateService, $translate,
     TemplateService.title = "Canceld Oreder"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
 });
+myApp.controller('GiftCardCtrl', function ($scope, TemplateService, $translate, $rootScope) {
+    $scope.template = TemplateService.getHTML("content/giftcard.html");
+    TemplateService.title = "Your Gift Card"; //This is the Title of the Website
+    //  $scope.navigation = NavigationService.getNavigation();
+});
+myApp.controller('StoreLocatorCtrl', function ($scope, TemplateService, $translate, $rootScope) {
+    $scope.template = TemplateService.getHTML("content/storelocator.html");
+    TemplateService.title = "Stores"; //This is the Title of the Website
+    //  $scope.navigation = NavigationService.getNavigation();
+});

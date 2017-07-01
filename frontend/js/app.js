@@ -108,6 +108,12 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             controller: 'ContactUsCtrl'
         })
 
+        .state('giftcard', {
+            url: "/giftcard",
+            templateUrl: tempateURL,
+            controller: 'GiftCardCtrl'
+        })
+
         .state('orderdetail', {
             url: "/orderdetail",
             templateUrl: tempateURL,
@@ -129,6 +135,11 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             url: "/orders",
             templateUrl: tempateURL,
             controller: 'OrdersCtrl'
+        })
+        .state('storelocator', {
+            url: "/storelocator",
+            templateUrl: tempateURL,
+            controller: 'StoreLocatorCtrl'
         })
 
         .state('coming-soon', {

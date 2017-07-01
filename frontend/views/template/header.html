@@ -49,11 +49,11 @@
                         </div>
                     </li>
                     <li ng-click="openWishlistModal10();"><a href=""><i class="fa fa-heart "></i> Wishlist</a></li>
-                    <li uib-dropdown>
-                        <a href="# " uib-dropdown-toggle ui-sref="mycart ">
+                    <li>
+                        <a href="# " ui-sref="mycart ">
                             <i class="fa fa-shopping-cart "></i> Cart ( <span ng-if="cart.products.length ">{{cart.products.length}}</span>
                             <span ng-if="!cart.products.length ">0</span> )</a>
-                        <ul class="dropdown-menu " uib-dropdown-menu aria-labelledby="simple-dropdown ">
+                        <ul class="cart-dropdown-menu dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown ">
                             <li ng-repeat="product in cart.products ">
                                 <div class="dropdown-menu__dropdown-cart ">
                                     <div class="inline-block img ">
