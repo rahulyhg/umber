@@ -126,15 +126,17 @@
      var appliedFilters = {};
      /*******retriving products based on filters********* */
      $scope.applyFilters = function (key, filter) {
-         var appliedFilters = {};
-         appliedFilters.appliedFilters = $.jStorage.get('appliedFilters') ? $.jStorage.get('appliedFilters') : {
-             category: [],
-             type: [],
-             style: [],
-             color: [],
-             collection: [],
-             size: [],
-             fabric: [],
+
+         appliedFilters = $.jStorage.get('appliedFilters') ? $.jStorage.get('appliedFilters') : {
+             appliedFilters: {
+                 category: [],
+                 type: [],
+                 style: [],
+                 color: [],
+                 collection: [],
+                 size: [],
+                 fabric: [],
+             }
          };
          console.log(filter, key)
          appliedFilters.appliedFilters.category = [$.jStorage.get("selectedCategory").category];
@@ -325,6 +327,10 @@
      // This function is used to display the modal on quck view button
      $scope.quickviewProduct = function (prod) {
          $scope.product = prod;
+         $scope.sizes = $scope.product.sizes;
+         $scope.activeButton = $scope.sizes[0].name;
+         $scope.selectedSize = $scope.sizes[0];
+         console.log($scope.sizes);
          $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
          $scope.selectSize = function (sizeObj) {
              $scope.activeButton = sizeObj.name;
@@ -334,7 +340,7 @@
                  size: sizeObj._id,
                  color: $scope.product.color._id
              }
-             console.log("SKUdetails:", data)
+
              ProductService.getSKUWithParameter(data, function (data) {
                  console.log("SKU:", data)
                  if (data.data.value) {
