@@ -171,6 +171,25 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
         $state.go("orderdetail");
     }
 
+    //For Manage address's dropdown to select country'
+    $scope.countryButton = 'Country';
+    $scope.selectCounteries = ['india', 'usa', 'uk', 'test'];
+    $scope.changeCountry = function (name) {
+        $scope.countryButton = name;
+        var countryButton = angular.element(document.getElementsByClassName('state-dropdown--btn'));
+        console.log(countryButton);
+        countryButton[0].disabled = false;
+    };
+
+    //For Manage address's dropdown to select state
+    $scope.stateButton = 'State';
+    $scope.selectState = {
+        state: ['mumbai', 'maharashtra', 'banglore', 'test1']
+    };
+    $scope.changeState = function (name) {
+        $scope.countryButton = name;
+    };
+
 });
 myApp.controller('ProductReturnCtrl', function ($scope, toastr, $state, OrderService, WishlistService, TemplateService, $translate, $rootScope, UserService) {
     $scope.template = TemplateService.getHTML("content/product-return.html");
@@ -195,4 +214,31 @@ myApp.controller('StoreLocatorCtrl', function ($scope, TemplateService, $transla
     $scope.template = TemplateService.getHTML("content/storelocator.html");
     TemplateService.title = "Stores"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
+    $scope.storeLocation = [{
+            address: 'Shop No 2, Morya Mahal,Linking Road,  Bandra West, Mumbai - 400050',
+            contactNo: '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            email: 'info@burntum'
+        },
+        {
+            address: 'Delphi Building, Orchard Ave, Hiranandani Gardens, Powai,Mumbai, Maharashtra 400076',
+            contactNo: '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            email: 'info@burntum'
+        },
+        {
+            address: 'Delphi Building, Orchard Ave, Hiranandani Gardens, Powai,Mumbai, Maharashtra 400076',
+            contactNo: '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            email: 'info@burntum'
+        },
+        {
+            address: 'Delphi Building, Orchard Ave, Hiranandani Gardens, Powai,Mumbai, Maharashtra 400076',
+            contactNo: '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            email: 'info@burntum'
+        },
+        {
+            address: 'Delphi Building, Orchard Ave, Hiranandani Gardens, Powai,Mumbai, Maharashtra 400076',
+            contactNo: '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            email: 'info@burntum'
+        }
+    ];
+    $scope.storeLocation = _.chunk($scope.storeLocation, 4);
 });
