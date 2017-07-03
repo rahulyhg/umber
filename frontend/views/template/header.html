@@ -49,62 +49,60 @@
                         </div>
                     </li>
                     <!--<li ng-click="openWishlistModal10();"><a href=""><i class="fa fa-heart "></i> Wishlist</a></li>-->
-                    <li>
-                        <a href="# " ui-sref="mycart ">
 
-                            <li ui-sref="myaccount({view: 'wishlistTab'})"><a href=""><i class="fa fa-heart "></i> Wishlist</a></li>
-                            <li uib-dropdown>
-                                <a href="# " uib-dropdown-toggle ui-sref="mycart " class="mycart">
+                    <li ui-sref="myaccount({view: 'wishlistTab'})"><a href=""><i class="fa fa-heart "></i> Wishlist</a></li>
+                    <li uib-dropdown>
+                        <a href="# " uib-dropdown-toggle ui-sref="mycart " class="mycart">
 
-                                    <i class="fa fa-shopping-cart "></i> Cart ( <span ng-if="cart.products.length ">{{cart.products.length}}</span>
-                                    <span ng-if="!cart.products.length ">0</span> )</a>
-                                <ul class="cart-dropdown-menu dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown ">
-                                    <li ng-repeat="product in cart.products ">
-                                        <div class="dropdown-menu__dropdown-cart ">
-                                            <div class="inline-block img ">
-                                                <img ng-src="{{product.product.images[0].image | serverimage}} " alt="shirt_img
+                            <i class="fa fa-shopping-cart "></i> Cart ( <span ng-if="cart.products.length ">{{cart.products.length}}</span>
+                            <span ng-if="!cart.products.length ">0</span> )</a>
+                        <ul class="cart-dropdown-menu dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown ">
+                            <li ng-repeat="product in cart.products ">
+                                <div class="dropdown-menu__dropdown-cart ">
+                                    <div class="inline-block img ">
+                                        <img ng-src="{{product.product.images[0].image | serverimage}} " alt="shirt_img
                         " class="img-responsive ">
-                                            </div>
-                                            <div class="inline-block desc ">
-                                                <h5>{{product.product.productName}}</h5>
-                                                <p><i class="fa fa-inr " aria-hidden="true ">{{product.product.price}}</i></p>
-                                                <p></p>
+                                    </div>
+                                    <div class="inline-block desc ">
+                                        <h5>{{product.product.productName}}</h5>
+                                        <p><i class="fa fa-inr " aria-hidden="true ">{{product.product.price}}</i></p>
+                                        <p></p>
 
-                                                <div class="inline-block__size ">
-                                                    <div class="inline-block ">
-                                                        <div class="size ">
-                                                            <span>{{product.product.size.name}}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="inline-block ">
-                                                        <span>Size</span>
-                                                    </div>
+                                        <div class="inline-block__size ">
+                                            <div class="inline-block ">
+                                                <div class="size ">
+                                                    <span>{{product.product.size.name}}</span>
                                                 </div>
-                                                <p><button class="btn remove--btn " ng-click="removeProductFromCart(cart._id, product.product._id)
-                        "><i class="fa fa-trash-o " aria-hidden="true "></i>Remove</button></p>
+                                            </div>
+                                            <div class="inline-block ">
+                                                <span>Size</span>
                                             </div>
                                         </div>
-
-                                    </li>
-                                    <div class="dropdown-menu__btn text-center ">
-                                        <a ui-sref="checkout "><button class="btn btn--brown-checkout ">CHECKOUT</button></a>
+                                        <p><button class="btn remove--btn " ng-click="removeProductFromCart(cart._id, product.product._id)
+                        "><i class="fa fa-trash-o " aria-hidden="true "></i>Remove</button></p>
                                     </div>
-                                </ul>
+                                </div>
 
                             </li>
-                            <li ng-if="!loggedUser "><button class="btn header--login " ng-click="openLoginModal10(); ">LOGIN</button></li>
-                            <li ng-if="loggedUser ">
-                                <a href="" class="user-name" ui-sref="myaccount" ng-if="userId !='' ">hi, {{firstname}} <i class="fa fa-caret-down"></i></a>
-                                <!--<button class=" btn header--logout" ng-click="logout(); " ng-if="userId !='' ">Hi, siddhesh</button>-->
-                                <ul class="header-top-right-dropdown list-unstyled">
-                                    <li class="text-uppercase"><a ui-sref="myaccount({view: 'profTab'})">profile</a> </li>
-                                    <li class="text-uppercase"><a ui-sref="myaccount({view: 'addrTab'})">manage address</a> </li>
-                                    <li class="text-uppercase"><a ui-sref="myaccount({view: 'orderTab'})">order</a> </li>
-                                    <li class="text-uppercase"><a ui-sref="myaccount({view: 'wishlistTab'})">Wishlist</a> </li>
-                                    <li class="text-uppercase"><a href="">forgot password?</a> </li>
-                                    <li class="text-uppercase"><a ng-click="logout(); ">logout</a> </li>
-                                </ul>
-                            </li>
+                            <div class="dropdown-menu__btn text-center ">
+                                <a ui-sref="checkout "><button class="btn btn--brown-checkout ">CHECKOUT</button></a>
+                            </div>
+                        </ul>
+
+                    </li>
+                    <li ng-if="!loggedUser "><button class="btn header--login " ng-click="openLoginModal10(); ">LOGIN</button></li>
+                    <li ng-if="loggedUser ">
+                        <a href="" class="user-name" ui-sref="myaccount" ng-if="userId !='' ">hi, {{firstname}} <i class="fa fa-caret-down"></i></a>
+                        <!--<button class=" btn header--logout" ng-click="logout(); " ng-if="userId !='' ">Hi, siddhesh</button>-->
+                        <ul class="header-top-right-dropdown list-unstyled">
+                            <li class="text-uppercase"><a ui-sref="myaccount({view: 'profTab'})">profile</a> </li>
+                            <li class="text-uppercase"><a ui-sref="myaccount({view: 'addrTab'})">manage address</a> </li>
+                            <li class="text-uppercase"><a ui-sref="myaccount({view: 'orderTab'})">order</a> </li>
+                            <li class="text-uppercase"><a ui-sref="myaccount({view: 'wishlistTab'})">Wishlist</a> </li>
+                            <li class="text-uppercase"><a href="">forgot password?</a> </li>
+                            <li class="text-uppercase"><a ng-click="logout(); ">logout</a> </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <!--<div class="collapse navbar-collapse " id="nav-collapse ">
