@@ -238,20 +238,21 @@ var model = {
                 if (_.isEmpty(data.products)) {
                     Cart.findOne({
                         _id: data._id
-                    }).remove().exec(function (err, datat) {
-                        if (err)
+                    }).remove().exec(function (err, data) {
+                        if (err) {
                             console.log("Error: ", err);
-                        else if (data) {
+                            callback(err, null);
+                        } else if (data) {
                             console.log("Data: ", data);
-
+                            callback(null, data);
                         }
                     });
                 } else {
-                    Cart.saveData(data, function (err, data) {
+                    Cart.saveData(data, function (err, cart) {
                         if (err) {
                             callback(err, null);
-                        } else if (data) {
-                            callback(null, data);
+                        } else if (cart) {
+                            callback(null, cart);
                         } else {
                             callback({
                                 message: {
