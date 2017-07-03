@@ -100,7 +100,7 @@
                             }
                             .add-cart--btn {
                                 @extend .btn--brown;
-                                font-size: 14px;
+                                font-size: 12px;
                                 letter-spacing: 1px;
                                 padding: 3px 0; // width: 126px;
                             }
@@ -147,7 +147,7 @@
                         }
 
                         .mycart-modal {
-                            padding: 15px 10px;
+                            padding: 15px 5px;
                             p {
                                 margin: 10px 0;
                                 line-height: 1;
@@ -323,7 +323,7 @@
                             }
                         } // we have kept this class out because it is used in individual page design. so to use this class, write @extend to extend this class in your own class.
                         .buy-para__sizes {
-                            @include margin(5px null 5px null);
+                            margin-top: 5px;
                             p {
                                 font-size: 14px;
                                 box-sizing: border-box;
@@ -576,14 +576,12 @@
                             }
                             .viewSize {
                                 vertical-align: top;
+                                max-width: 50%;
                                 @extend .buy-para__sizes;
                                 @include margin(0);
                                 padding-right: 20px;
                                 p {
                                     @include padding(2px 5px);
-                                }
-                                .buy-para__sizes {
-                                    width: 30%;
                                 }
                                 &:after {
                                     content: '';
