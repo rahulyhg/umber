@@ -201,7 +201,8 @@ myApp
             _id: $scope.currentId
         }
         ProductService.getBuyTheLookDetails(input, function (data) {
-            $scope.buyshirt = data.data.data;
+            $scope.buyshirt = data.data.data.products;
+            $scope.insideImage = data.data.data.look.insideImage;
             $scope.myShirt = [];
             $scope.myShirt11 = [];
             $scope.myShirt = _.chunk($scope.buyshirt, 3);

@@ -165,7 +165,7 @@
          ProductService.getProductsWithAppliedFilters(appliedFilters, function (data) {
              console.log("filtersretrived:::", data.data.data);
              $scope.products = _.chunk(data.data.data.products, 3);
-             // $scope.filters = data.data.data.filters;
+             $scope.filters = data.data.data.filters;
 
          })
 
