@@ -794,40 +794,127 @@ var model = {
         async.waterfall([
                 function applyFilters(cbWaterfall1) {
                     console.log("filters: ", filters);
-                    var updatedFilters = _.mapValues(filters.appliedFilters, function (value) {
-                        // If filter is applied with blank array 
-                        // check if field exists & return all products
-                        if (_.isEmpty(value)) {
-                            return {
-                                '$exists': true
-                            }
-                        }
-                        var newVal = _.each(value, function (singleValue) {
-                            console.log("singlevalue", singleValue);
-                            return mongoose.Types.ObjectId(singleValue);
-                        });
-                        // convert to queryable object
-                        return {
-                            "$in": newVal
-                        }
+
+                    var pipeline = [];
+                    var filterType = [];
+                    var filterCategory = [];
+                    var filterCollection = [];
+                    var filterColor = [];
+                    var filterSize = [];
+                    var filterFabric = [];
+
+                    _.each(filters.appliedFilters.category, function (cat) {
+                        filterCategory.push(ObjectId(cat));
                     });
-                    console.log("new filters: ", updatedFilters);
-                    Product.aggregate([{
-                        $match: updatedFilters
-                    }, {
+                    _.each(filters.appliedFilters.type, function (type) {
+                        filterType.push(ObjectId(type));
+                    });
+                    _.each(filters.appliedFilters.color, function (color) {
+                        filterColor.push(ObjectId(color));
+                    });
+                    _.each(filters.appliedFilters.collection, function (collection) {
+                        filterCollection.push(ObjectId(collection));
+                    });
+                    _.each(filters.appliedFilters.size, function (size) {
+                        filterSize.push(ObjectId(size));
+                    });
+                    _.each(filters.appliedFilters.fabric, function (fabric) {
+                        filterFabric.push(ObjectId(fabric));
+                    });
+
+                    // old code is here
+
+
+                    if (!_.isEmpty(filters.appliedFilters.category)) {
+
+                        pipeline.push({
+                            $match: {
+                                "category": {
+                                    $in: filterCategory
+                                }
+                            }
+                        });
+                    }
+                    if (!_.isEmpty(filters.appliedFilters.type)) {
+
+                        pipeline.push({
+                            $match: {
+                                "type": {
+                                    $in: filterType
+                                }
+                            }
+                        });
+                    }
+                    if (!_.isEmpty(filters.appliedFilters.color)) {
+
+                        pipeline.push({
+                            $match: {
+                                "color": {
+                                    $in: filterColor
+                                },
+                            }
+                        })
+                    }
+                    if (!_.isEmpty(filters.appliedFilters.collection)) {
+
+                        pipeline.push({
+                            $match: {
+                                "prodCollection": {
+                                    $in: filterCollection
+                                }
+                            }
+                        });
+                    }
+                    if (!_.isEmpty(filters.appliedFilters.size)) {
+
+                        pipeline.push({
+                            $match: {
+                                "size": {
+                                    $in: filterSize
+                                }
+                            }
+                        });
+                    }
+                    if (!_.isEmpty(filters.appliedFilters.fabric)) {
+
+                        pipeline.push({
+                            $match: {
+                                "fabric": {
+                                    $in: filterFabric
+                                }
+                            }
+                        });
+                    }
+
+                    pipeline.push({
                         $sort: {
                             createdAt: -1
                         }
-                    }, {
+                    });
+                    pipeline.push({
                         $group: {
                             _id: '$productId'
                         }
-                    }, {
+                    });
+                    pipeline.push({
                         $project: {
                             productId: '$_id'
                         }
-                    }]).
+                    });
+
+
+                    // console.log("**filterType**", filterType);
+                    // console.log("**category**", filterCategory);
+                    // console.log("**size**", filterSize);
+                    // console.log("**color**", filterColor);
+                    // console.log("**collection**", filterCollection);
+                    // console.log("**fabric**", filterFabric);
+
+
+                    // console.log("new filters: ", newVal1);
+                    Product.aggregate(pipeline).
                     skip((filters.page - 1) * Config.maxRow).limit(Config.maxRow).exec(function (err, products) {
+                        console.log("*** inside final response of aggregate ***** ", products);
                         cbWaterfall1(err, products);
                     });
                 },

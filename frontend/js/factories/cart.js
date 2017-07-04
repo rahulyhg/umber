@@ -1,4 +1,4 @@
-myApp.factory('CartService', function ($http) {
+myApp.factory('CartService', function ($http, cfpLoadingBar) {
     return {
         saveProduct: function (product, callback) {
             console.log("CartService->saveProduct: ", product);
@@ -24,6 +24,8 @@ myApp.factory('CartService', function ($http) {
             for (var productIdx = 0; productIdx < products.length; productIdx++) {
                 total += products[productIdx].product.price * products[productIdx].quantity;
             }
+
+            cfpLoadingBar.complete()
             return total;
         },
 

@@ -99,6 +99,8 @@ global["FacebookStrategy"] = require('passport-facebook').Strategy;
 global["TwitterStrategy"] = require('passport-twitter').Strategy;
 global["GoogleStrategy"] = require('passport-google-auth').Strategy;
 
+global["ObjectId"] = mongoose.Types.ObjectId;
+
 // Files to Import
 global["jsFiles"] = require("../frontend/files.js");
 global["jsFilesBackend"] = require("../backend/files.js");
