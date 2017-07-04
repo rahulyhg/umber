@@ -470,10 +470,11 @@
     /*NOTE: extend this class in dropdown's by using @extend */
 
     .dropdown-hidden-anim {
+        display: block;
         visibility: hidden;
         opacity: 0;
         @include transform(rotate(0deg) scale(1) skew(0deg) translate(0px,
-        49px));
+        -49px));
         @include transform-origin(right center);
         @include transition(all 0.35s ease);
         z-index: 9999;
@@ -482,9 +483,34 @@
     .dropdown-visible-anim {
         visibility: visible;
         opacity: 1;
-        @include transform(Sale(1));
-        @include transform(translate(0));
+        @include transform(rotate(0deg) scale(1) skew(0deg) translate(0px,
+        0px));
+        li>a:hover {
+            background-color: $darkBrown1;
+            color: $white;
+        }
     } //End of Drop Down animation
+    //Start of Bottom-Border-Line animation
+    /*NOTE: extend this class for border-bottom-line animation by using @extend */
+
+    .border-btm-hidden-anim {
+        content: '';
+        opacity: 0;
+        visibility: hidden;
+        border: 1px solid $darkBrown1;
+        width: 70%;
+        @include position(absolute,
+        null 15px 0 null);
+        @include transform(scaleX(0));
+        @include transform-origin(right center);
+        @include transition(all 0.35s ease 0s);
+    }
+
+    .border-btm-visible-anim {
+        opacity: 1;
+        visibility: visible;
+        @include transform(scaleX(0.8));
+    } //End of Bottom-Border-Line animation
     //To make your input type number's corner button disable
     input[type=number]::-webkit-inner-spin-button,
     input[type=number]::-webkit-outer-spin-button {
@@ -763,16 +789,7 @@
                 font-size: 16px;
                 line-height: 1.5;
                 &:after {
-                    content: '';
-                    opacity: 0;
-                    visibility: hidden;
-                    border: 1px solid $darkBrown1;
-                    width: 70%;
-                    @include position(absolute,
-                    null 15px 0 null);
-                    @include transform(scaleX(0));
-                    @include transform-origin(right center);
-                    @include transition(all 0.35s ease 0s);
+                    @extend .border-btm-hidden-anim;
                 }
             }
              ::-webkit-scrollbar {
@@ -794,6 +811,8 @@
             }
             .cart-dropdown-menu {
                 @extend .dropdown-hidden-anim;
+                @include transform(rotate(0deg) scale(1) skew(0deg) translate(0px,
+                49px));
                 min-width: 310px;
                 height: 360px;
                 overflow-y: scroll;
@@ -846,10 +865,16 @@
                 font-size: 20px;
                 @include transition(all 0.3s ease 0s);
             }
-            li:hover>a.user-name:after {
-                opacity: 1;
-                visibility: visible;
-                @include transform(scaleX(1));
+            a.mycart {
+                &:after {
+                    @extend .border-btm-hidden-anim;
+                }
+            }
+            li:hover {
+                a.user-name:after,
+                a.mycart:after {
+                    @extend .border-btm-visible-anim;
+                }
             } // li:hover>a.user-name:before {
             //     content: '';
             //     border-right: 10px solid rgba(0, 0, 0, 0);
@@ -962,6 +987,7 @@
             60% null null 50%);
             @include transform(translate(20%,
             -50%));
+            width: 40%;
             h1 {
                 @include margin(null null 0 null);
                 color: $darkBrown1;
@@ -1296,16 +1322,19 @@
                 font-size: 15px;
                 @include margin(15px null null null);
             }
-            &:after {
+            &:before {
                 content: '';
                 border-bottom: 2px dashed $darkBrown1;
-                border-right: 2px dashed $darkBrown1;
-                @include size(600px,
-                330px);
-                margin-top: -25px;
+                width: 615px;
                 @include position(absolute,
-                30px 25px null null);
-                margin-top: -25px;
+                null null 60px -170px);
+            }
+            &:after {
+                content: '';
+                border-right: 2px dashed $darkBrown1;
+                @include position(absolute,
+                0 25px null null);
+                height: 340px;
             }
         }
         .absolute {
@@ -1635,6 +1664,10 @@
     //Homepage login css
     .modal__customized-form {
         @extend .customized-form;
+        .form-control {
+            height: 37px;
+            margin-bottom: 9px;
+        }
     }
 
     .orCircle {
@@ -1642,6 +1675,7 @@
         50% null null 50%);
         @include transform(translate(-50%,
         -50%));
+        text-align: center;
         width: 50px;
         height: 50px;
         color: #341314;
@@ -2265,9 +2299,11 @@
         width: 90px;
     }
 
-    .state-dropdown {
+    .state-dropdown,
+    .country-dropdown {
         padding-top: 11px;
-        .state-dropdown--btn {
+        .state-dropdown--btn,
+        .country-dropdown--btn {
             position: relative;
             width: 100%;
             color: #999;
@@ -2276,14 +2312,22 @@
             background-color: transparent;
             border-bottom: 1px solid $darkBrown1;
         }
-        .dropdown-menu {
-            width: 100%;
-        }
         .caret {
             @include position(absolute,
             50% 8px null null);
             color: $darkBrown1;
         }
+    }
+
+    .state-dropdown-menu,
+    .country-dropdown-menu {
+        width: 100%;
+        @extend .dropdown-hidden-anim;
+    }
+
+    .open .state-dropdown-menu,
+    .open .country-dropdown-menu {
+        @extend .dropdown-visible-anim;
     }
 
     .btn--list {
@@ -2495,23 +2539,10 @@
             text-align: left;
         }
         .return-dropdown-menu {
-            display: block;
-            visibility: hidden;
-            opacity: 0;
-            @include transform(rotate(0deg) scale(1) skew(0deg) translate(0px,
-            -30px));
-            @include transform-origin(right center);
-            @include transition(all 0.35s ease);
-            li>a:hover {
-                background-color: $darkBrown1;
-                color: $white;
-            }
+            @extend .dropdown-hidden-anim;
         }
         .open .return-dropdown-menu {
-            visibility: visible;
-            opacity: 1;
-            @include transform(Sale(1));
-            @include transform(translate(0));
+            @extend .dropdown-visible-anim;
         }
     } //End of orderdetail.html
     //Start of return-success.html  cancel-msg.html
@@ -2617,6 +2648,22 @@
             width: 200px;
         }
     } //End of giftcard .html
+    //Start of Store locator.html
+    .store-locator {
+        @include margin(60px 0);
+        .store-map {
+            @include padding(25px 25px 25px 120px);
+            iframe {
+                position: relative;
+                z-index: 99999;
+            }
+        }
+        .store-location-padd {
+            @include block($inlineBlock: inline-block);
+            vertical-align: top;
+            width: 40%;
+        }
+    } //End of store locator.html
     // All modals html
     /*****NOTE: We can extend this class by using @extend method. Please don't customise the main class(Parent class) .close-modal--btn-circle ****/
 
@@ -2642,6 +2689,10 @@
     .quickview-modal-size .modal-dialog {
         // Used this class in listing-ctrl.js in modal
         width: 1195px;
+    }
+
+    .loginModalSize .modal-dialog {
+        width: 750px;
     }
 
     .quick-view-product {

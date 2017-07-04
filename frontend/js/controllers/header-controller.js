@@ -17,7 +17,7 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
                 animation: true,
                 templateUrl: 'views/modal/login.html',
                 scope: $scope,
-                size: 'md',
+                windowClass: 'loginModalSize',
                 controller: 'loginModalCtrl'
                 // windowClass: 'modal-content-radi0'
             });
