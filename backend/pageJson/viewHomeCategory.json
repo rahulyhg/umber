@@ -32,18 +32,6 @@
         "fieldsToSend": {
             "_id": "_id"
         }
-    }, {
-        "name": "delete",
-        "icon": "fa-trash",
-        "buttonClass": "btn-danger",
-        "type": "apiCallConfirm",
-        "title": "Delete HomeCategory",
-        "content": "Are you sure you want to delete HomeCategory?",
-        "api": "HomeCategory/delete",
-        "fieldsToSend": {
-            "name": "_id",
-            "value": "_id"
-        }
     }],
     "button": [{
         "name": "Excel Export",
@@ -59,12 +47,6 @@
         "type": "redirect",
         "action": "excel-upload/HomeCategory",
         "linkType": "internal"
-    }, {
-        "name": "Create",
-        "icon": "plus",
-        "class": "btn-success",
-        "type": "page",
-        "action": "createHomeCategory"
     }],
     "apiCall": {
         "url": "HomeCategory/search",

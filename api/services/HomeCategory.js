@@ -8,6 +8,7 @@ var schema = new Schema({
     // Not needed. Instead urlSlug package is installed
     //urlSlug: String,
     priority: Number,
+    imageSize: String,
     imgLink: String,
     extLink: String,
     status: String
