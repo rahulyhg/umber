@@ -52,7 +52,10 @@ var model = {
 
                     });
                 }, function (err) {
-                    callback(null, lookProducts);
+                    var lookData = {};
+                    lookData.products = lookProducts;
+                    lookData.look = look;
+                    callback(null, lookData);
                 });
             }
         });
