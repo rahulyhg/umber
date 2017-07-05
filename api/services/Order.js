@@ -125,11 +125,13 @@ var model = {
                     order.discountAmount = 0;
                     console.log("order: ", order);
                     Order.saveData(order, callback);
-                } else if (err) {
-                    callback(err, null);
                 } else if (data) {
                     Product.subtractQuantity(product, null);
                     callback(null, data);
+
+
+                } else if (err) {
+                    callback(err, null);
                 }
             });
         }

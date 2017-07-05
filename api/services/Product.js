@@ -950,7 +950,7 @@ var model = {
     },
 
     subtractQuantity: function (product, callback) {
-        console.log(product);
+        console.log("*******product", product);
         Product.findOneAndUpdate({
             _id: product._id
         }, {
