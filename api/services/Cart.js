@@ -39,6 +39,7 @@ var model = {
             quantity: product.reqQuantity,
             comment: product.comment
         });
+        console.log("#########product in cart#####", cart.products);
         cart.userId = userId;
 
         async.waterfall([
@@ -99,10 +100,12 @@ var model = {
                                 Cart.saveData(foundCart, function (err, data) {
                                     if (err) {
                                         cbWaterfall2(err, null);
-                                    } else if (data) {
-                                        Product.subtractQuantity(product, null);
-                                        cbWaterfall2(null, data);
-                                    } else {
+                                    }
+                                    // else if (data) {
+                                    //     Product.subtractQuantity(product, null);
+                                    //     cbWaterfall2(null, data);
+                                    // } 
+                                    else {
                                         cbWaterfall2({
                                             message: {
                                                 data: "Invalid credentials2!"
