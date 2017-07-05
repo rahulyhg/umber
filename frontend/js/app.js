@@ -12,7 +12,8 @@ var myApp = angular.module('myApp', [
     'rzModule',
     'ui.swiper',
     'toastr',
-    'angular-loading-bar'
+    'angular-loading-bar',
+    'infinite-scroll'
 
 ]);
 

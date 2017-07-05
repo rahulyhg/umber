@@ -153,7 +153,7 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
             $scope.orderTable = data.data.data;
         for (var i = 0; i <= $scope.orderTable.products.length - 1; i++) {
             if ($scope.orderTable.products[i].quantity > $scope.orderTable.products[i].product.quantity) {
-                console.log("ifran insidefor")
+
                 $state.go("mycart");
             }
         }
