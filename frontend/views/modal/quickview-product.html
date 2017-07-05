@@ -46,7 +46,7 @@
                         </div>
                         <div class="pull-right">
                             <p class="prod-code__right"><span> AVAILABILITY </span>: <span ng-show="product.quantity > 0">In Stock</span>
-                                <span ng-show="product.quantity < 1">Out Of Stock</span></p>
+                                <span ng-show="product.quantity < 1" style="color:red">Out Of Stock</span></p>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -63,16 +63,18 @@
                         <div class="second-sec border-div pd-bottom">
                             <div class="viewSize inline-block relate">
                                 <h5>SIZE </h5>
-                                <div class="inline-block buy-para__sizes" ng-repeat="size in sizes">
-                                    <p ng-click="selectSize(size)" ng-class="{ 'active':activeButton=={{size.name}} }">{{size.name}}</p>
+                                <div class="inline-block buy-para__sizes">
+                                    <p ng-click="selectSize(size)" ng-class="{ 'active':activeButton=={{size.name}} }" ng-repeat="size in sizes">{{size.name}}</p>
                                     <!--<p>38</p>
                                     <p>40</p>
                                     <p>42</p>
                                     <p>44</p>-->
                                 </div>
-                                <a href="" class="linking ">Size Chart</a>
+                                <div>
+                                    <a href="" class="linking ">Size Chart</a>
+                                </div>
                             </div>
-                            <div class="inline-block quantity relate">
+                            <div class="inline-block quantity relate text-center">
                                 <h5>QUANTITY </h5>
                                 <a ng-click="updateQuantity(-1)" ng-if="reqQuantity>1">
                                     <i class="fa fa-minus square__bg" aria-hidden="true"></i>
@@ -261,6 +263,6 @@
             </div>
         </div>
         <div class="close-modal qv-close-modal">
-            <button type="button" class="btn close-modal--btn-circle">X</button>
+            <button type="button" class="btn close-modal--btn-circle" ng-click="closeModal()">X</button>
         </div>
     </div>

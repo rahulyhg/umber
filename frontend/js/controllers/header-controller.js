@@ -111,6 +111,28 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
         $scope.viewLogin = function () {
             $scope.view = !$scope.view;
         }
+        //To open side nav
+        $scope.sideNav = false; // For toggle sidenavigation
+        $scope.openSideNav = function () {
+            if (!$scope.sideNav) {
+                $('.side-nav').toggleClass('side-nav-menu-in');
+                // $('.navbar__sideNav').toggleClass(' hamburger-cross');
+                $scope.sideNav = true;
+            } else {
+                $('.side-nav').toggleClass('side-nav-menu-in');
+                // $('.navbar__sideNav').toggleClass(' hamburger-cross');
+                $scope.sideNav = false;
+            }
+
+        };
+        //End of side nav
+        //To Close side nav when hovering online
+        $scope.slideUpSideNav = function () {
+            //  alert('enter');
+            $('.side-nav').removeClass('side-nav-menu-in');
+            $('.side-nav').addClass('side-nav-menu-out');
+        };
+        //End of close side nav
     })
     .controller('wishlistModalCtrl', function ($scope, $state, $uibModalInstance, UserService, CartService, WishlistService) {
         $scope.userId = {

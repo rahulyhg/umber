@@ -284,28 +284,19 @@
                                     @extend .btn--brown;
                                     width: 115px;
                                     @include padding(3px 0px); // display: none;
-                                } // &:hover {
-                                //     .buy-para__sizes {
-                                //         display: block;
-                                //     }
-                                //     .view--btn {
-                                //         display: block
-                                //     } // span {
-                                // } //     display: block;
-                                //     padding-top: 5px;
-                                // }
-                                // span:before {
-                                //     content: "";
-                                //     border-bottom: 1px solid #ddd;
-                                //     width: 87%;
-                                //     height: auto;
-                                //     position: absolute;
-                                // }
+                                }
+                                .buy-para__sizes {
+                                    width: 80%;
+                                    vertical-align: top;
+                                }
                                 .buy-para__button {
                                     .buy--btn {
                                         @extend .btn--brown;
                                         width: 107px;
                                     }
+                                }
+                                .size-text {
+                                    vertical-align: top;
                                 }
                             }
                             &:hover {
@@ -331,6 +322,8 @@
                                 padding: 2px;
                                 display: inline-block;
                                 margin-right: 5px;
+                                margin-bottom: 5px;
+                                cursor: pointer;
                             }
                             p.active {
                                 background: $darkBrown1;
@@ -578,6 +571,9 @@
                                 vertical-align: top;
                                 max-width: 50%;
                                 @extend .buy-para__sizes;
+                                .buy-para__sizes {
+                                    width: 100%;
+                                }
                                 @include margin(0);
                                 padding-right: 20px;
                                 p {
@@ -604,6 +600,7 @@
                                 @include size(35px,
                                 30px);
                                 font-size: 16px;
+                                padding: 0 2px;
                             } // End of custom plus minus btn design 
                         }
 
