@@ -102,7 +102,7 @@ var model = {
         } else {
             Cart.getCart(data, function (err, cart) {
                 if (!_.isEmpty(cart)) {
-                    console.log("cart: ", cart);
+                    console.log("&&&&&&cart: ", cart);
                     var order = {};
                     order.orderNo = Math.ceil(Math.random() * 10000000000000);
                     order.totalAmount = 0;
@@ -124,16 +124,27 @@ var model = {
                     order.shippingAmount = 0;
                     order.discountAmount = 0;
                     console.log("order: ", order);
-                    Order.saveData(order, callback);
-                } else if (data) {
-                    Product.subtractQuantity(product, null);
-                    callback(null, data);
+                    Order.saveData(order, function (err, data) {
+                        console.log("$$$$$$$$$order: ", order);
+                        if (err) {
+                            callback(err, null);
+                        } else if (data) {
+                            console.log("*****DATA:***** ", data.products);
 
-
-                } else if (err) {
-                    callback(err, null);
+                            Product.subtractQuantity(data.products, null);
+                            callback(null, data);
+                        }
+                    });
                 }
             });
+
+            // if (order) {
+            //                 console.log("$$$$$$$$$order: ", order);
+            //                 Product.subtractQuantity(product, null);
+            //                 callback(null, order);
+
+
+            //             } else 
         }
     },
 

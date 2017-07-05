@@ -949,45 +949,47 @@ var model = {
             });
     },
 
-    subtractQuantity: function (product, callback) {
-        console.log("*******product", product);
-        Product.findOneAndUpdate({
-            _id: product._id
-        }, {
-            $inc: {
-                quantity: -product.reqQuantity
-            }
-        }, {
-            new: true
-        }).exec(function (err, data) {
-            console.log(data);
-            if (data.quantity < 0) {
-                Product.update({
-                    _id: product._id
-                }, {
-                    $inc: {
-                        quantity: product.reqQuantity
-                    }
-                }).exec(function (err, data) {
-                    if (callback) {
-                        if (data) {
-                            callback({
-                                message: {
-                                    data: "productOutOfStock " + product._id
-                                }
-                            }, null);
-                        } else {
-                            callback(err, null);
+    subtractQuantity: function (products, callback) {
+        console.log("*******product", products);
+        _.each(products, function (product) {
+            Product.findOneAndUpdate({
+                _id: mongoose.Types.ObjectId(product.product)
+            }, {
+                $inc: {
+                    quantity: -product.quantity
+                }
+            }, {
+                new: true
+            }).exec(function (err, data) {
+                console.log("^^^^^^^^data^^^^^^^", data);
+                if (data.quantity < 0) {
+                    Product.update({
+                        _id: product._id
+                    }, {
+                        $inc: {
+                            quantity: product.quantity
                         }
-                    }
-                });
-            } else {
-                if (callback)
-                    callback(null, {
-                        message: "success"
+                    }).exec(function (err, data) {
+                        if (callback) {
+                            if (data) {
+                                callback({
+                                    message: {
+                                        data: "productOutOfStock " + product._id
+                                    }
+                                }, null);
+                            } else {
+                                callback(err, null);
+                            }
+                        }
                     });
-            }
-        });
+                } else {
+                    if (callback)
+                        callback(null, {
+                            message: "success"
+                        });
+                }
+            });
+        })
     }
 };
 module.exports = _.assign(module.exports, exports, model);
