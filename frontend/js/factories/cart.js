@@ -35,6 +35,7 @@ myApp.factory('CartService', function ($http, cfpLoadingBar) {
                 url: adminurl + 'Cart/updateCartQuantity',
                 method: 'POST',
                 data: cart,
+                ignoreLoadingBar: true,
                 withCredentials: false
             });
         },

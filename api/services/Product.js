@@ -903,18 +903,13 @@ var model = {
                     });
 
 
-                    // console.log("**filterType**", filterType);
-                    // console.log("**category**", filterCategory);
-                    // console.log("**size**", filterSize);
-                    // console.log("**color**", filterColor);
-                    // console.log("**collection**", filterCollection);
-                    // console.log("**fabric**", filterFabric);
 
 
-                    // console.log("new filters: ", newVal1);
+
+
                     Product.aggregate(pipeline).
                     skip((filters.page - 1) * Config.maxRow).limit(Config.maxRow).exec(function (err, products) {
-                        console.log("*** inside final response of aggregate ***** ", products);
+
                         cbWaterfall1(err, products);
                     });
                 },
@@ -955,7 +950,7 @@ var model = {
     },
 
     subtractQuantity: function (product, callback) {
-        console.log(product);
+        console.log("*******product", product);
         Product.findOneAndUpdate({
             _id: product._id
         }, {

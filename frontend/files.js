@@ -24,6 +24,7 @@ module.exports = [
   'bower_components/angularjs-slider/dist/rzslider.min.js',
   'bower_components/angular-toastr/dist/angular-toastr.tpls.js',
   'bower_components/angular-loading-bar/build/loading-bar.js',
+  'bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js',
   //App.js
   'frontend/js/app.js',
 

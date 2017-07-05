@@ -122,7 +122,7 @@
      $scope.gotoComparePage = function () {
          $state.go("compare-products");
      }
-
+     //  console.log("******************************************sl", $.jStorage.get("selectedCategory").category);
      var appliedFilters = {};
      /*******retriving products based on filters********* */
      $scope.applyFilters = function (key, filter) {
@@ -138,8 +138,10 @@
                  fabric: [],
              }
          };
-         console.log(filter, key)
-         appliedFilters.appliedFilters.category = [$.jStorage.get("selectedCategory").category];
+         console.log(filter, key);
+         console.log("******************************************sl", $.jStorage.get("selectedCategory").category);
+         var cat = $.jStorage.get("selectedCategory").category;
+         appliedFilters.appliedFilters.category = [cat];
 
          var result = _.indexOf(appliedFilters.appliedFilters[key], filter._id);
          console.log("check result", result)
@@ -165,7 +167,7 @@
          ProductService.getProductsWithAppliedFilters(appliedFilters, function (data) {
              console.log("filtersretrived:::", data.data.data);
              $scope.products = _.chunk(data.data.data.products, 3);
-             // $scope.filters = data.data.data.filters;
+             $scope.filters = data.data.data.filters;
 
          })
 
@@ -382,7 +384,9 @@
              size: 'lg',
              windowClass: 'quickview-modal-size'
          });
-
+         $scope.closeModal = function () {
+             quickviewProduct.close();
+         }
      };
      //End of  modal on quck view button
 

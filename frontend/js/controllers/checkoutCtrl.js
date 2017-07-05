@@ -22,6 +22,10 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
             if (!_.isEmpty(data.data.data)) {
                 console.log("Login data: ", data);
                 $scope.userData = data.data.data;
+                $.jStorage.set("username", $scope.userData.firstName)
+                if ($.jStorage.get("username")) {
+                    $scope.firstname = $.jStorage.get("username");
+                }
                 $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
                 $.jStorage.set("userId", $scope.userData._id);
                 var tokken = $.jStorage.get("accessToken");
@@ -93,6 +97,10 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                 console.log("in if");
                 var cart = {};
                 $scope.userData = data.data.data;
+                $.jStorage.set("username", $scope.userData.firstName)
+                if ($.jStorage.get("username")) {
+                    $scope.firstname = $.jStorage.get("username");
+                }
                 $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
                 $.jStorage.set("userId", $scope.userData._id);
                 cart.userId = $.jStorage.get("userId");
@@ -140,8 +148,15 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
     }
 
     CartService.getCart(userData, function (data) {
+
         if (data.data.data)
             $scope.orderTable = data.data.data;
+        for (var i = 0; i <= $scope.orderTable.products.length - 1; i++) {
+            if ($scope.orderTable.products[i].quantity > $scope.orderTable.products[i].product.quantity) {
+
+                $state.go("mycart");
+            }
+        }
         if ($scope.orderTable && $scope.orderTable.products)
             $scope.grandTotal = CartService.getTotal($scope.orderTable.products);
     });

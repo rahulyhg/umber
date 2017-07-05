@@ -46,7 +46,7 @@
                     </div>
                     <div class="pull-right">
                         <p class="prod-code__right"><span> AVAILABILITY </span>: <span ng-show="product.quantity > 0">In Stock</span>
-                            <span ng-show="product.quantity < 1">Out Of Stock</span></p>
+                            <span ng-show="product.quantity < 1" style="color:red">Out Of Stock</span></p>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -66,7 +66,7 @@
                             <h5>SIZE </h5>
 
                             <div class="inline-block buy-para__sizes ">
-                                <p ng-repeat="size in product.sizes " ng-click="selectSize(size) " ng-class="{ 'active':activeButton=={{size.name}} } ">{{size.name}}</p>
+                                <p ng-repeat="size in sizes " ng-click="selectSize(size) " ng-class="{ 'active':activeButton=={{size.name}} } ">{{size.name}}</p>
                                 <div>
                                     <a href=" " class="linking ">Size Chart</a>
                                 </div>

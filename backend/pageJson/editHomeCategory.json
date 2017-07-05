@@ -27,6 +27,14 @@
             ],
             "url": ""
         }, {
+            "name": "Image size",
+            "type": "readonly",
+            "tableRef": "imageSize",
+            "placeholder": "Enter Image Size",
+            "id": "imageSize",
+            "validation": ["", "trim", ""],
+            "url": ""
+        }, {
             "name": "Image",
             "type": "image",
             "tableRef": "imgLink",
@@ -37,7 +45,8 @@
             "view": true,
             "validation": ["", "trim", ""],
             "url": ""
-        }, {
+        },
+        {
             "name": "Priority",
             "type": "number",
             "tableRef": "priority",
