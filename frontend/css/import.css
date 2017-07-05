@@ -12747,6 +12747,9 @@ input[type=number]::-webkit-outer-spin-button {
   color: #341314;
   margin-left: 10px; }
 
+.userdtl-main {
+  margin-bottom: 15px; }
+
 .usrdtl p {
   margin-bottom: 15px; }
 
