@@ -47,6 +47,8 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
             $.jStorage.deleteKey('wishlist');
             $.jStorage.deleteKey('compareproduct');
             $.jStorage.deleteKey("username")
+            $.jStorage.deleteKey("selectedCategory");
+            $.jStorage.deleteKey("appliedFilters");
             //$.jStorage.flush();
             UserService.logout(data, function (data) {
                 $scope.loggedUser = "";
@@ -172,6 +174,9 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
                     $scope.userData = data.data.data;
                     $scope.firstname = data.data.data.firstName
                     $.jStorage.set("username", data.data.data.firstName)
+                    if ($.jStorage.get("username")) {
+                        $scope.firstname = $.jStorage.get("username");
+                    }
                     console.log("username", $.jStorage.get("username"))
                     $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
                     $.jStorage.set("userId", $scope.userData._id);
@@ -232,7 +237,10 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
                     $scope.errormsg = "User already exists with the given emailId.<br /> Please login to proced"
                 }
                 $scope.userData = data.data.data;
-
+                $.jStorage.set("username", $scope.userData.firstName);
+                if ($.jStorage.get("username")) {
+                    $scope.firstname = $.jStorage.get("username");
+                }
                 console.log("firstname")
                 $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
                 $.jStorage.set("userId", $scope.userData._id);

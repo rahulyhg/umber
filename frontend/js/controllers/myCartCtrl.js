@@ -73,10 +73,10 @@
              ModalService.addwishlist();
          })
      }
-
+     $scope.flag = 0;
      $scope.checkStockStatus = function (prod) {
          if (prod.quantity > prod.product.quantity) {
-
+             $scope.flag++;
              angular.element(document.getElementsByClassName('checkout--btn'))[0].disabled = true;
              return "disabled-outofstock";
 
