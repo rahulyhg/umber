@@ -269,9 +269,7 @@
                                             <h4><i class="fa fa-inr" aria-hidden="true"></i> {{product.price}}</h4>
                                             <h5>{{product.productName}} <br>{{product.type.name}}</h5>
                                             <div class="viewSize">
-                                                <div class="inline-block">
-                                                    <p>Sizes:</p>
-                                                </div>
+                                                <p class="inline-block size-text">Sizes:</p>
                                                 <div class="inline-block buy-para__sizes">
                                                     <p ng-repeat="size in product.sizes"> {{size.name}}</p>
                                                     <!--<p>38</p>

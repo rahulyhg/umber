@@ -28,7 +28,7 @@
                 </button>
                 <div>
                     <div class="inline-block" style="vertical-align:super">
-                        <div class="navbar__sideNav">
+                        <div class="navbar__sideNav" ng-click="openSideNav();">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -50,8 +50,8 @@
                     </li>
                     <!--<li ng-click="openWishlistModal10();"><a href=""><i class="fa fa-heart "></i> Wishlist</a></li>-->
 
-                    <li ui-sref="myaccount({view: 'wishlistTab'})"><a href=""><i class="fa fa-heart "></i> Wishlist</a></li>
-                    <li uib-dropdown>
+                    <li ui-sref="myaccount({view: 'wishlistTab'})"><a href="" class="wish-list"><i class="fa fa-heart hvr-pulse"></i> Wishlist</a></li>
+                    <li uib-dropdown ng-mouseenter="slideUpSideNav()">
                         <a href="# " uib-dropdown-toggle ui-sref="mycart " class="mycart">
 
                             <i class="fa fa-shopping-cart "></i> Cart ( <span ng-if="cart.products.length ">{{cart.products.length}}</span>
@@ -91,7 +91,7 @@
 
                     </li>
                     <li ng-if="!loggedUser "><button class="btn header--login " ng-click="openLoginModal10(); ">LOGIN</button></li>
-                    <li ng-if="loggedUser ">
+                    <li ng-if="loggedUser" ng-mouseenter="slideUpSideNav()">
                         <a href="" class="user-name" ui-sref="myaccount" ng-if="userId !='' ">hi, {{firstname}} <i class="fa fa-caret-down"></i></a>
                         <!--<button class=" btn header--logout" ng-click="logout(); " ng-if="userId !='' ">Hi, siddhesh</button>-->
                         <ul class="header-top-right-dropdown list-unstyled">
@@ -110,4 +110,160 @@
             </div>-->
         </div>
     </nav>
+    <div class="side-nav relate side-nav-menu-out">
+        <div class="container">
+            <div class="links inline-block">
+                <ul class="list-unstyled text-capitalize">
+                    <li><a href="">home</a></li>
+                    <li class="visible-xs" ng-click="closeCategires();"><a href="">products</a></li>
+                    <li><a href="">about us</a></li>
+                    <li><a href="">contact us</a></li>
+                    <li><a href="">store locator</a></li>
+                    <li><a href="">blogs</a></li>
+                </ul>
+            </div>
+
+            <div class="mobview-categories visible-xs">
+                <uib-accordion close-others="oneAtATime">
+                    <div uib-accordion-group is-open="">
+                        <uib-accordion-heading>
+                            Casual Shirts <i class="pull-right fa" ng-class="{'fa fa-minus': status.isCustomHeaderOpen, 'fa fa-plus': !status.isCustomHeaderOpen}"></i>
+                        </uib-accordion-heading>
+
+                    </div>
+
+                    <div uib-accordion-group is-open="">
+                        <uib-accordion-heading>
+                            Trousers <i class="pull-right fa " ng-class="{'fa fa-minus': status.isCustomHeaderOpen, 'fa fa-plus': !status.isCustomHeaderOpen}"></i>
+                        </uib-accordion-heading>
+
+                    </div>
+
+                    <div uib-accordion-group is-open="">
+                        <uib-accordion-heading>
+                            Tees <i class="pull-right fa" ng-class="{'fa fa-minus': status.isCustomHeaderOpen, 'fa fa-plus': !status.isCustomHeaderOpen}"></i>
+                        </uib-accordion-heading>
+
+                    </div>
+
+                    <div uib-accordion-group is-open="">
+                        <uib-accordion-heading>
+                            Linen Store <i class="pull-right fa" ng-class="{'fa fa-minus': status.isCustomHeaderOpen, 'fa fa-plus': !status.isCustomHeaderOpen}"></i>
+                        </uib-accordion-heading>
+
+                    </div>
+
+                    <div uib-accordion-group is-open="">
+                        <uib-accordion-heading>
+                            White Bar <i class="pull-right fa" ng-class="{'fa fa-minus': status.isCustomHeaderOpen, 'fa fa-plus': !status.isCustomHeaderOpen}"></i>
+                        </uib-accordion-heading>
+
+                    </div>
+                    <div uib-accordion-group is-open="">
+                        <uib-accordion-heading>
+                            Lorem Ipsum <i class="pull-right fa " ng-class="{'fa fa-minus': status.isCustomHeaderOpen, 'fa fa-plus': !status.isCustomHeaderOpen}"></i>
+                        </uib-accordion-heading>
+                    </div>
+                </uib-accordion>
+            </div>
+
+            <div class="product-categories inline-block">
+                <ul class="list-unstyled list-inline text-capitalize">
+                    <li ng-click="view = 'casulShirts'" ng-class="{
+                        'active': view =='casulShirts'}"><a href="">casual shirts</a>
+                        <div class="underline"></div>
+                    </li>
+                    <li ng-click="view = 'trousers'" ng-class="{
+                        'active': view =='trousers' }">
+                        <a href="">trousers</a>
+                        <div class="underline"></div>
+                    </li>
+                    <li ng-click="view = 'tees'" ng-class="{
+                        'active': view =='tees' }">
+                        <a href="">tees</a>
+                        <div class="underline"></div>
+                    </li>
+                    <li ng-click="view = 'linenStore'" ng-class="{
+                        'active': view =='linenStore' }">
+                        <a href="">linen store</a>
+                        <div class="underline"></div>
+                    </li>
+                    <li ng-click="view = 'whiteBar'" ng-class="{
+                        'active': view =='whiteBar' }">
+                        <a href="">white bar</a>
+                        <div class="underline"></div>
+                    </li>
+                    <li ng-click="view = 'test'" ng-class="{
+                        'active': view =='test'}">
+                        <a href="">lorem ipsum</a>
+                        <div class="underline"></div>
+                    </li>
+                </ul>
+                <div ng-if="view == 'casulShirts'">
+                    <div class="sub-categorie">
+                        <ul class="list-unstyled list-inline">
+                            <li>inner test1</li>
+                            <li>inner test1</li>
+                            <li>inner test1</li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div ng-if="view == 'trousers'">
+                    <div class="sub-categorie">
+                        <ul class="list-unstyled list-inline">
+                            <li>inner test2</li>
+                            <li>inner test2</li>
+                            <li>inner test2</li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div ng-if="view == 'tees'">
+                    <div class="sub-categorie">
+
+                        <ul class="list-unstyled list-inline">
+                            <li>inner test3</li>
+                            <li>inner test3</li>
+                            <li>inner test3</li>
+                        </ul>
+                    </div>
+                </div>
+                <div ng-if="view == 'linenStore'">
+                    <div class="sub-categorie">
+                        <ul class="list-unstyled list-inline">
+                            <li>inner test4</li>
+                            <li>inner test4</li>
+                            <li>inner test4</li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div ng-if="view == 'whiteBar'">
+                    <div class="sub-categorie">
+
+                        <ul class="list-unstyled list-inline">
+                            <li>inner test5</li>
+                            <li>inner test5</li>
+                            <li>inner test5</li>
+                        </ul>
+                    </div>
+                </div>
+                <div ng-if="view == 'test'">
+                    <div class="sub-categorie">
+                        <ul class="list-unstyled list-inline">
+                            <li>inner test6</li>
+                            <li>inner test6</li>
+                            <li>inner test6</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="man-img">
+                <img src="frontend/img/home/sidenav.png" alt="" class="img-responsive">
+            </div>
+
+        </div>
+    </div>
 </header>
