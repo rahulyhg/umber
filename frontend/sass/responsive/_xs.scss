@@ -1,3 +1,23 @@
  @media (max-width: $screen-xs-max) {
      // Mobile
+     .side-nav {
+         .links {
+             width: 100%;
+         }
+     }
+     .mobview-categories-display {
+         display: inline-block;
+         width: 50%;
+         max-height: 180px;
+         overflow: auto;
+     }
+     .mobview-links {
+         display: inline-block;
+         width: 40%;
+         max-height: auto;
+         vertical-align: top;
+     }
+     .mobview-categories {
+         vertical-align: top;
+     }
  }

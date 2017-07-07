@@ -1061,6 +1061,46 @@
             bottom: 15px;
             width: 30%;
         }
+    }
+
+    .mobview-categories-menu-out {
+        @include transform(translateX(1000px));
+        @include transform-origin(right center);
+        @include transition(all 0.5s ease);
+        width: 50%;
+    }
+
+    .mobview-links-display-out {
+        @include transform(translateX(-1000px));
+        @include transform-origin(left center);
+        @include transition-property(all);
+        @include transition-duration(0.5s);
+        @include transition-timing-function(ease); // @include transition-delay(0.5s);
+    }
+
+    .mobview-categories-menu-in,
+    .mobview-links-display-in {
+        @include transform(translateX(0));
+    }
+
+    .mobview-categories-display {
+        display: none;
+        max-height: 480px;
+        overflow: auto;
+    }
+
+    .mobview-categories {
+        vertical-align: top;
+        .fa-arrow-left {
+            padding-left: 15px;
+            @include transition-property(transform);
+            @include transition-duration( 0.1s);
+            @include transition-timing-function(ease-out);
+            &:hover,
+            &:active {
+                @include transform(translateX(-4px));
+            }
+        }
     } //END of navigation menu
     //Start of Clothes Categories
     .cloth-cat {

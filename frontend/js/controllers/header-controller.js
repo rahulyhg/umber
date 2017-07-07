@@ -133,6 +133,17 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
             $('.side-nav').addClass('side-nav-menu-out');
         };
         //End of close side nav
+        $scope.closeCategires = function () {
+            $('.mobview-links').removeClass('mobview-links-display-in');
+            $('.mobview-links').addClass('mobview-links-display-out');
+            $('.mobview-categories-display ').toggleClass('mobview-categories-menu-in');
+        };
+        $scope.slidebackToMobview = function () {
+            $('.mobview-links').removeClass('mobview-links-display-out');
+            $('.mobview-links').addClass('mobview-links-display-in');
+            $('.mobview-categories-display ').removeClass('mobview-categories-menu-in');
+            $('.mobview-categories-display ').addClass('mobview-categories-menu-out');
+        };
     })
     .controller('wishlistModalCtrl', function ($scope, $state, $uibModalInstance, UserService, CartService, WishlistService) {
         $scope.userId = {

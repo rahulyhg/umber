@@ -10,7 +10,7 @@
                         <button class="btn btn--list" ng-disabled="loggedUser" ng-click="view='profTab'" ng-class="{
                         'btn--brownActive': view=='profTab' }">PROFILE</button>
                         <div>
-                            <button class="btn btn--list" ng-click="view='addrTab'" ng-class="{
+                            <button class="btn btn--list " ng-click="view='addrTab'" ng-class="{
                         'btn--brownActive': view=='addrTab' }">MANAGE ADDRESS</button>
                         </div>
                         <div>
@@ -88,7 +88,7 @@
                                         <input type="checkbox" id="x1">
                                         <label for="x1">Use this as default shipping address</label>
                                     </div>
-                                    <p><button class="btn address-edit-btn" ng-click="edit()">Edit</button> <button class="btn address-delt-btn">Delete</button></p>
+                                    <p><button class="btn address-edit-btn " ng-click="edit()">Edit</button> <button class="btn address-delt-btn">Delete</button></p>
                                 </div>
                             </div>
                             <div class="edit-addrs" ng-if="save">
@@ -193,7 +193,7 @@
                     <!--To open an Order Tab-->
                     <div class="col-md-9">
                         <p class="text-uppercase text-center">
-                            <button class="btn order-list--btn" ng-click="view='orders'" ng-class="{
+                            <button class="btn order-list--btn " ng-click="view='orders'" ng-class="{
                         'btn--brownActive': view=='orders' }">orders </button>
                             <button class="btn order-list--btn" ng-click="view='return'" ng-class="{
                         'btn--brownActive': view=='return' }">return/exchange</button>
