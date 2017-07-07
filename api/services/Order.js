@@ -182,9 +182,10 @@ var model = {
         var cancelledProducts = [];
         async.waterfall([
             function checkUser(cbWaterfall) {
-                User.isUserLoggedIn(data.accessToken).exec(cbWaterfall);
+                User.isUserLoggedIn(data.accessToken, cbWaterfall);
             },
             function cancelProducts(user, cbWaterfall1) {
+
                 if (user._id == data.user) {
                     async.each(data.products, function (product, eachCallback) {
                         async.waterfall([
@@ -202,11 +203,12 @@ var model = {
                                 }, {
                                     $inc: {
                                         "products.$.quantity": -product.quantity,
-                                        "products.$.price": -deductPrice
+                                        "products.$.price": -deductPrice,
+                                        'totalAmount': -deductPrice
                                     },
                                     $addToSet: {
                                         returnedProducts: {
-                                            product: mpongoose.Types.ObjectId(product.product),
+                                            product: mongoose.Types.ObjectId(product.product),
                                             quantity: product.quantity,
                                             price: deductPrice,
                                             status: product.status,

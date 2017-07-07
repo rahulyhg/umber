@@ -8,6 +8,14 @@ myApp.factory('OrderService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
+        cancelOrder: function (input, callback) {
+            $http({
+                url: adminurl + 'Order/cancelProducts',
+                data: input,
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
         getUserOrders: function (input, callback) {
             $http({
                 url: adminurl + 'Order/getUserOrders',

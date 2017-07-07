@@ -37,8 +37,7 @@
                             </div>
                             <div class="comment">
                                 <p class="item-code">Comment: {{product.comment}}.</p>
-                                <hr class="table-divider">
-                            </div>
+
                         </td>
                         <td class="text-center relate">
                             <h4 class=" usr-status-title">quantity</h4>
@@ -59,7 +58,7 @@
                             </div>
                         </td>
                         <td>
-                            <p class="item-cost grand-total"><i class="fa fa-inr"></i>{{order.totalAmount}}</p>
+                            <p class="item-cost grand-total"><i class="fa fa-inr"></i>{{product.product.price * product.quantity}}</p>
                         </td>
                     </tr>
                 </tbody>
@@ -78,8 +77,8 @@
                     </div>
                     <div class="col-md-4">
                         <h4 class="text-center usr-status-title usr-addrs-title">PAYMENT INFORMATION</h4>
-                        <p class="text-right order-payment-info">Item(s) Subtotal: <span>&#8377; 8697</span><br> Shipping: <span>&#8377; 00</span><br> Disscount:
-                            <span>&#8377; 00</span><br> Total: <span>&#8377; 8697</span><br> TAX: <span>&#8377; 00</span><br>                            Grand Total: <span>&#8377; 00</span>
+                        <p class="text-right order-payment-info">Item(s) Subtotal: <span>&#8377; {{order.totalAmount}}</span><br> Shipping: <span>&#8377; {{order.shippingAmount}}</span><br>                            Disscount:
+                            <span>&#8377; {{order.discountAmount}}</span><br> Total: <span>&#8377; {{order.shippingAmount+order.totalAmount-order.discountAmount}}</span><br>                            TAX: <span>&#8377; 00</span><br> Grand Total: <span>&#8377; {{order.totalAmount}}</span>
                         </p>
                     </div>
                 </div>
@@ -118,7 +117,7 @@
                             </div>
                             <div class="comment">
                                 <p class="item-code">Comment: {{product.comment}}.</p>
-                                <hr class="table-divider">
+
                             </div>
                         </td>
                         <td class="relate text-center">
@@ -146,16 +145,16 @@
                 </tbody>
             </table>
             <p class="text-center text-uppercase"><button class="btn invoice--btn">download invoice </button></p>
+            </div>
         </div>
     </div>
-</div>
 
 
 
 
 
 
-<!--<div>
+    <!--<div>
     <div class="orderdetail-bg">
         <img src="" alt="MyAccount" class="img-responsive">
     </div>

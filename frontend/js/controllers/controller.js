@@ -375,11 +375,7 @@ myApp
         TemplateService.title = "Login"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
     })
-    .controller('CancelCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
-        $scope.template = TemplateService.getHTML("content/cancel.html");
-        TemplateService.title = "Return-Cancellation"; //This is the Title of the Website
-        $scope.navigation = NavigationService.getNavigation();
-    })
+
 
     .controller('GiftCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.getHTML("content/gift.html");

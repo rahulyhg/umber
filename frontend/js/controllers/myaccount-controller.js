@@ -189,6 +189,11 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
     $scope.changeState = function (name) {
         $scope.countryButton = name;
     };
+    //For cancellation of product
+    $scope.cancellation = function (orderDetails) {
+        $.jStorage.set("orderDetails", orderDetails);
+        $state.go("cancel");
+    }
 
 });
 myApp.controller('ProductReturnCtrl', function ($scope, toastr, $state, OrderService, WishlistService, TemplateService, $translate, $rootScope, UserService) {

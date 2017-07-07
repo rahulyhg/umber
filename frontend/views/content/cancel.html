@@ -6,6 +6,7 @@
           <h2 class="order-status-title text-center">CancelLation
           </h2>
         </caption>
+
         <thead>
           <tr class="text-uppercase">
             <th colspan="2">order placed<br><strong>{{order.createdAt | date:'dd/MM/yyyy'}}</strong></th>
@@ -22,17 +23,17 @@
             <th>return item</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody ng-repeat="product in order.products">
           <tr>
             <td class="relate">
               <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
               <div class="item-img inline-block">
-                <img src="frontend/img/individual/product-test.jpg" alt="Ordered Item" class="img-responsive">
+                <img ng-src="{{product.product.images[0].image | serverimage}}" alt="Ordered Item" class="img-responsive">
               </div>
               <div class="inline-block item-desc">
-                <h4 class="item-name text-uppercase">marathon plain front trouser
+                <h4 class="item-name text-uppercase">{{product.product.productName}}
                 </h4>
-                <p class="item-code"><span class="text-capitalize">Product Code:</span><span class="text-uppercase"> 0000adafafaa</span>
+                <p class="item-code"><span class="text-capitalize">Product Code:</span><span class="text-uppercase"> {{product.product.productCode}}</span>
                 </p>
                 <!--<p class="item-code"><span class="text-capitalize">size:</span><span class="text-uppercase">M</span>
                                 </p>
@@ -45,7 +46,7 @@
                             </div>-->
             </td>
             <td class="text-center relate">
-              <h4 class="item-name"><i class="fa fa-inr"></i>2300</h4>
+              <h4 class="item-name"><i class="fa fa-inr"></i>{{product.product.price * product.quantity}}</h4>
             </td>
 
             <td class="text-center">
@@ -68,13 +69,14 @@
             <td>
               <div class=" custom-checkbox">
                 <div class="inline-block checkbox">
-                  <input type="checkbox" id="x1">
-                  <label for="x1"></label>
+                  <input type="checkbox" id="{{product.product.productCode}}" ng-click="selectedProduct(product)" ng-checked="check(product.product._id)">
+                  <label for="{{product.product.productCode}}"></label>
                 </div>
               </div>
             </td>
           </tr>
         </tbody>
+
       </table>
       <div class="row">
         <div class="col-md-5">
@@ -93,7 +95,7 @@
             <div class="form-group">
               <textarea name="" id="" cols="5" rows="5" class="form-control" placeholder="Comment"></textarea>
             </div>
-            <p><button class="btn comnt-submit--btn" type="submit">SUBMIT</button></p>
+            <p><button class="btn comnt-submit--btn" type="submit" ng-click="cancelOrder()">SUBMIT</button></p>
           </form>
         </div>
       </div>
