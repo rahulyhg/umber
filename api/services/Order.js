@@ -267,6 +267,17 @@ var model = {
         ], function (err, data) {
             callback(err, data);
         });
+    },
+
+    getAnOrderDetail: function (data, callback) {
+        Order.findOne({
+                _id: mongoose.Types.ObjectId(data._id)
+            })
+            .lean("products.product products.product.size products.product.color " +
+                "returnedProducts.product returnedProducts.product.size returnedProducts.product.color")
+            .exec(function (err, order) {
+                callback(err, order)
+            });
     }
 };
 module.exports = _.assign(module.exports, exports, model);
