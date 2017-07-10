@@ -201,8 +201,9 @@ var model = {
     },
 
     getCart: function (userId, callback) {
+        console.log("In getCart");
         Cart.findOne({
-            userId: userId.userId
+            userId: mongoose.Types.ObjectId(userId.userId)
         }).deepPopulate("products.product products.product.size products.product.color").exec(function (err, data) {
             if (err) {
                 callback(err, null);

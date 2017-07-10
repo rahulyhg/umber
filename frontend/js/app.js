@@ -116,13 +116,13 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
         })
 
         .state('orderdetail', {
-            url: "/orderdetail",
+            url: "/orderdetail/:id",
             templateUrl: tempateURL,
             controller: 'OrderDetailCtrl'
         })
 
         .state('cancel', {
-            url: "/cancel",
+            url: "/cancel/:id",
             templateUrl: tempateURL,
             controller: 'CancelCtrl'
         })

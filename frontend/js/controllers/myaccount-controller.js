@@ -12,6 +12,22 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
         $scope.view = "profTab";
     }
 
+    $scope.retriveCancelledProducts = function (view) {
+
+
+        var data = {
+            user: $.jStorage.get("userId"),
+            accessToken: $.jStorage.get("accessToken"),
+            status: view
+        }
+
+
+        console.log("data", data)
+        OrderService.cancelledProduct(data, function (output) {
+            console.log(output);
+        })
+    }
+
     var input = {
         "userId": $.jStorage.get("userId")
     }
@@ -166,10 +182,10 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
         $scope.myShirt1 = _.chunk(n, 4);
         $scope.myShirt11.push($scope.myShirt1);
     });
-    $scope.gotoOrder = function (orderDetails) {
-        $.jStorage.set("orderDetails", orderDetails);
-        $state.go("orderdetail");
-    }
+    // $scope.gotoOrder = function (orderDetails) {
+    //     $.jStorage.set("orderDetails", orderDetails);
+    //     $state.go("orderdetail");
+    // }
 
     //For Manage address's dropdown to select country'
     $scope.countryButton = 'Country';

@@ -376,6 +376,7 @@ var model = {
     // input: data: {billingAddress, shippingAddress}
     saveAddresses: function (data, callback) {
         var updateObj = {};
+        console.log("User->saveAddresses: ", data);
         if (_.isEmpty(data.user)) {
             callback({
                 message: "noUserFound"

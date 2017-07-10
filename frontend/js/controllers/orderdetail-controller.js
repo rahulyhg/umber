@@ -1,15 +1,31 @@
-myApp.controller('OrderDetailCtrl', function ($scope, TemplateService, $translate, $rootScope) {
+myApp.controller('OrderDetailCtrl', function ($scope, TemplateService, $translate, $rootScope, OrderService, $stateParams) {
         $scope.template = TemplateService.getHTML("content/orderdetail.html");
         TemplateService.title = "Order Detail"; //This is the Title of the Website
         //  $scope.navigation = NavigationService.getNavigation();
-        $scope.order = $.jStorage.get("orderDetails");
+        // $scope.order = $.jStorage.get("orderDetails");
         console.log($scope.order);
+        var input = {
+            _id: $stateParams.id
+        }
+        OrderService.getDetailsOfOrder(input, function (output) {
+            $scope.order = output.data.data;
+            console.log(output);
+        })
+
     })
-    .controller('CancelCtrl', function ($scope, TemplateService, NavigationService, $timeout, OrderService) {
+    .controller('CancelCtrl', function ($scope, TemplateService, NavigationService, $timeout, OrderService, $stateParams) {
         $scope.template = TemplateService.getHTML("content/cancel.html");
         TemplateService.title = "Return-Cancellation"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
-        $scope.order = $.jStorage.get("orderDetails");
+        // $scope.order = $.jStorage.get("orderDetails");
+
+        var input = {
+            _id: $stateParams.id
+        }
+        OrderService.getDetailsOfOrder(input, function (output) {
+            $scope.order = output.data.data;
+            console.log(output);
+        })
 
         $scope.selectedProduct = function (product) {
             var products = $.jStorage.get('cancellation') ? $.jStorage.get('cancellation') : [];
@@ -51,6 +67,12 @@ myApp.controller('OrderDetailCtrl', function ($scope, TemplateService, $translat
             data.accessToken = $.jStorage.get("accessToken");
             OrderService.cancelOrder(data, function (data) {
                 console.log(data);
+                OrderService.getDetailsOfOrder(input, function (output) {
+                    $scope.order = output.data.data;
+                    $.jStorage.deleteKey("cancellation");
+                    console.log(output);
+                })
+                // $.jStorage.deleteKey("cancellation");
             })
             console.log("data", data);
 

@@ -15,6 +15,22 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
     } else {
         $scope.view = "loginTab";
     }
+    $scope.createOrder = function () {
+        var data = {};
+        data.userId = $scope.loggedUser;
+        OrderService.createOrderFromCart(data, function (data) {
+            console.log("created order: ", data);
+            if (data.data.value) {
+                $scope.orders = data.data.data;
+                $scope.grandTotal = CartService.getTotal($scope.orders.products);
+                console.log("Orders: ", $scope.orders);
+            } else {
+                console.log("Error in creating order: ", data.data.error);
+            }
+        });
+    }
+
+    $scope.createOrder();
 
     $scope.registerUser = function () {
         UserService.userRegistration($scope.registerData, function (data) {
@@ -74,20 +90,15 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
             billingAddress: $scope.user.billingAddress,
             shippingAddress: $scope.user.deliveryAddress
         }
-        UserService.saveAddressCheckout(updateAdd, function (data) {
-            console.log("saveuserdetails", data);
-            if (input.userId) {
-                OrderService.createOrderFromCart(input, function (data) {
-                    console.log("oderplaced", data);
-                    if (data.data.data) {
-                        toastr.success('Thank You your order was placed successfully', 'success');
-                    } else {
-                        toastr.error('Sorry there was some problem in placing your order', 'Error');
-                    }
-                    angular.element(document.getElementById('ordergenerate')).disabled = false;
-                })
+        OrderService.updateOrderAddress(updateAdd, function (data) {
+            console.log("oderplaced", data);
+            if (data.data.data) {
+                toastr.success('Thank You your order was placed successfully', 'success');
+            } else {
+                toastr.error('Sorry there was some problem in placing your order', 'Error');
             }
-        })
+            angular.element(document.getElementById('ordergenerate')).disabled = false;
+        });
     }
 
     $scope.login = function () {
@@ -147,19 +158,19 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
         userId: $.jStorage.get("userId")
     }
 
-    CartService.getCart(userData, function (data) {
+    // CartService.getCart(userData, function (data) {
 
-        if (data.data.data)
-            $scope.orderTable = data.data.data;
-        for (var i = 0; i <= $scope.orderTable.products.length - 1; i++) {
-            if ($scope.orderTable.products[i].quantity > $scope.orderTable.products[i].product.quantity) {
+    //     if (data.data.data)
+    //         $scope.orderTable = data.data.data;
+    //     for (var i = 0; i <= $scope.orderTable.products.length - 1; i++) {
+    //         if ($scope.orderTable.products[i].quantity > $scope.orderTable.products[i].product.quantity) {
 
-                $state.go("mycart");
-            }
-        }
-        if ($scope.orderTable && $scope.orderTable.products)
-            $scope.grandTotal = CartService.getTotal($scope.orderTable.products);
-    });
+    //             $state.go("mycart");
+    //         }
+    //     }
+    //     if ($scope.orderTable && $scope.orderTable.products)
+    //         $scope.grandTotal = CartService.getTotal($scope.orderTable.products);
+    // });
 
     if (userData.userId) {
         UserService.getUserDetails(userData, function (data) {

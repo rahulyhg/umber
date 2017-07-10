@@ -39,9 +39,35 @@ var controller = {
         }
     },
 
+    updateOrderAddress: function (req, res) {
+        if (req.body) {
+            Order.updateOrderAddress(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid request!"
+                }
+            });
+        }
+    },
+
     getCancelledOrdersForUser: function (req, res) {
         if (req.body) {
             Order.getCancelledOrdersForUser(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid request!"
+                }
+            });
+        }
+    },
+
+    getAnOrderDetail: function (req, res) {
+        if (req.body) {
+            Order.getAnOrderDetail(req.body, res.callback);
         } else {
             res.json({
                 value: false,
