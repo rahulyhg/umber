@@ -270,12 +270,14 @@ var model = {
     },
 
     getAnOrderDetail: function (data, callback) {
+
         Order.findOne({
                 _id: mongoose.Types.ObjectId(data._id)
             })
-            .lean("products.product products.product.size products.product.color " +
+            .deepPopulate("products.product products.product.size products.product.color " +
                 "returnedProducts.product returnedProducts.product.size returnedProducts.product.color")
             .exec(function (err, order) {
+
                 callback(err, order)
             });
     }

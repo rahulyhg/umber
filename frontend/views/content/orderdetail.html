@@ -67,12 +67,22 @@
                 <div class="row">
                     <div class="col-md-4">
                         <h4 class="usr-status-title usr-addrs-title">BILLING ADDRESS</h4>
-                        <address>1308, Panchratna Building, Next to Roxy Cinema, Opera House, Mumbai - 400004. Maharashtra, India</address>
+                        <address>
+                            <p style="margin:0px">{{order.billingAddress.line1}}</p>
+                            <p style="margin:0px" ng-if="order.billingAddress.line2">{{order.billingAddress.line2}}</p>
+                            <p style="margin:0px" ng-if="order.billingAddress.line3"> {{order.billingAddress.line3}}</p>
+                            <p style="margin:0px">{{order.billingAddress.city}}-{{order.billingAddress.pincode}}.</p>
+                            <p style="margin:0px">{{order.billingAddress.state}}, {{order.billingAddress.country}}</p>
+                        </address>
                     </div>
                     <div class="col-md-4">
                         <h4 class="usr-status-title usr-addrs-title">SHIPPING ADDRESS</h4>
                         <address>
-                            1308, Panchratna Building, Next to Roxy Cinema, Opera House, Mumbai - 400004. Maharashtra, India
+                            <p style="margin:0px">{{order.shippingAddress.line1}}</p>
+                            <p style="margin:0px" ng-if="order.shippingAddress.line2">{{order.shippingAddress.line2}}</p>
+                            <p style="margin:0px" ng-if="order.shippingAddress.line3"> {{order.shippingAddress.line3}}</p>
+                            <p style="margin:0px">{{order.shippingAddress.city}}-{{order.shippingAddress.pincode}}.</p>
+                            <p style="margin:0px">{{order.shippingAddress.state}}, {{order.shippingAddress.country}}</p>
                         </address>
                     </div>
                     <div class="col-md-4">
@@ -98,20 +108,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="relate">
+                    <tr class="relate" ng-repeat="product in order.returnedProducts">
                         <td colspan="3">
                             <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
                             <div class="item-img inline-block">
-                                <img src="frontend/img/individual/product-test.jpg" alt="Ordered Item" class="img-responsive">
+                                <img ng-src="{{product.product.images[0].image | serverimage}}" alt="Ordered Item" class="img-responsive">
                             </div>
                             <div class="inline-block item-desc">
-                                <h4 class="item-name text-uppercase">marathon plain front trouser
+                                <h4 class="item-name text-uppercase">{{product.product.productName}}
                                 </h4>
-                                <p class="item-code"><span class="text-capitalize">Product Code:</span><span class="text-uppercase"> 0000adafafaa</span>
+                                <p class="item-code"><span class="text-capitalize">Product Code:</span><span class="text-uppercase"> {{product.product.productCode}}</span>
                                 </p>
-                                <p class="item-code"><span class="text-capitalize">size:</span><span class="text-uppercase">M</span>
+                                <p class="item-code"><span class="text-capitalize">size:</span><span class="text-uppercase">{{product.product.size.name}}</span>
                                 </p>
-                                <p class="item-code"><span class="text-capitalize">color</span><span class="text-uppercase"> black</span>
+                                <p class="item-code"><span class="text-capitalize">color</span><span class="text-uppercase"> {{product.product.color.name}}</span>
                                 </p>
                                 <p class="item-cost"><i class="fa fa-inr"></i>2300</p>
                             </div>
@@ -139,7 +149,7 @@
                             </div>
                         </td>
                         <td>
-                            <p class="item-cost grand-total"><i class="fa fa-inr"></i>2300</p>
+                            <p class="item-cost grand-total"><i class="fa fa-inr"></i>{{product.product.price}}</p>
                         </td>
                     </tr>
                 </tbody>

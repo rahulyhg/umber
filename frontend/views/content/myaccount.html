@@ -231,9 +231,9 @@
                                         </td>
                                         <td colspan="3">
                                             <div class="pull-right" ng-if="$index==0">
-                                                <button class="btn order-action--btn text-uppercase" ng-click="cancellation(order)">Cancel purchase
+                                                <button class="btn order-action--btn text-uppercase" ui-sref="cancel({id:order._id})">Cancel purchase
                                                 </button>
-                                                <button class="btn order-action--btn text-uppercase" ng-click="gotoOrder(order)">order details
+                                                <button class="btn order-action--btn text-uppercase" ui-sref="orderdetail({id:order._id})">order details
                                                 </button>
                                                 <button class="btn order-action--btn text-uppercase">download Invoice
                                                 </button>

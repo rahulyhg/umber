@@ -80,6 +80,14 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                 OrderService.createOrderFromCart(input, function (data) {
                     console.log("oderplaced", data);
                     if (data.data.data) {
+                        var input = {
+                            _id: data.data.data._id,
+                            billingAddress: $scope.user.billingAddress,
+                            shippingAddress: $scope.user.deliveryAddress
+                        }
+                        OrderService.updateOrderAddress(input, function (data) {
+                            console.log("updateaddreesss: ", data);
+                        })
                         toastr.success('Thank You your order was placed successfully', 'success');
                     } else {
                         toastr.error('Sorry there was some problem in placing your order', 'Error');

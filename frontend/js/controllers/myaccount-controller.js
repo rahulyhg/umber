@@ -182,10 +182,10 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
         $scope.myShirt1 = _.chunk(n, 4);
         $scope.myShirt11.push($scope.myShirt1);
     });
-    $scope.gotoOrder = function (orderDetails) {
-        $.jStorage.set("orderDetails", orderDetails);
-        $state.go("orderdetail");
-    }
+    // $scope.gotoOrder = function (orderDetails) {
+    //     $.jStorage.set("orderDetails", orderDetails);
+    //     $state.go("orderdetail");
+    // }
 
     //For Manage address's dropdown to select country'
     $scope.countryButton = 'Country';
