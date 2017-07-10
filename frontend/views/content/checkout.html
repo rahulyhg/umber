@@ -135,21 +135,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="order in orderTable.products ">
-                                        {{order}}
+                                    <tr ng-repeat="product in orders.products ">
                                         <td>
                                             <div class="item ">
-                                                <img ng-src="{{order.product.images[0].image | serverimage}} " alt="
+                                                <img ng-src="{{product.product.images[0].image | serverimage}} " alt="
                         " class="img-responsive item__img-checkout ">
                                                 <div class="mycart-info ">
-                                                    <p class="item__title1 ">{{order.productName}}</p>
+                                                    <p class="item__title1 ">{{product.product.productName}}</p>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>{{order.product.color.name}}</td>
-                                        <td>{{order.product.size.name}}</td>
-                                        <td>{{order.quantity}}</td>
-                                        <td>&#x20b9{{order.product.price * order.quantity}}</td>
+                                        <td>{{product.product.color.name}}</td>
+                                        <td>{{product.product.size.name}}</td>
+                                        <td>{{product.quantity}}</td>
+                                        <td>&#x20b9{{product.product.price * product.quantity}}</td>
                                     </tr>
                                 </tbody>
                                 <!--<tfoot>

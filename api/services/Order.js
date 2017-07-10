@@ -96,14 +96,16 @@ module.exports = mongoose.model('Order', schema);
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "user", "user", "createdAt", "desc"));
 var model = {
     createOrderFromCart: function (data, callback) {
+        console.log("In createorderfromcart");
         if (_.isEmpty(data.userId)) {
+            console.log("No user found for order");
             callback({
                 message: "noUserFound"
             }, null);
         } else {
             Cart.getCart(data, function (err, cart) {
                 if (!_.isEmpty(cart)) {
-                    console.log("&&&&&&cart: ", cart);
+                    console.log("cart: ", cart);
                     var order = {};
                     order.orderNo = Math.ceil(Math.random() * 10000000000000);
                     order.totalAmount = 0;
@@ -130,22 +132,18 @@ var model = {
                         if (err) {
                             callback(err, null);
                         } else if (data) {
-                            console.log("*****DATA:***** ", data.products);
+                            Order.findOne({
+                                _id: mongoose.Types.ObjectId(data._id)
+                            }).deepPopulate("products.product products.product.size products.product.color").exec(function (err, order) {
+                                console.log("*****DATA:***** ", order);
 
-                            Product.subtractQuantity(data.products, null);
-                            callback(null, data);
+                                Product.subtractQuantity(data.products, null);
+                                callback(null, order);
+                            });
                         }
                     });
                 }
             });
-
-            // if (order) {
-            //                 console.log("$$$$$$$$$order: ", order);
-            //                 Product.subtractQuantity(product, null);
-            //                 callback(null, order);
-
-
-            //             } else 
         }
     },
 
@@ -157,7 +155,7 @@ var model = {
             shippingAddress: data.shippingAddress
         }, {
             new: true
-        }, function (err, data) {
+        }, function (err, order) {
             User.saveAddresses(data, callback);
         });
     },
@@ -180,7 +178,7 @@ var model = {
     //                        - comment: comment associated with product if any
     //               status - 'returned/cancelled'
     cancelProducts: function (data, callback) {
-        var cancelledProducts = [];
+        var updatedOrder = [];
         async.waterfall([
             function checkUser(cbWaterfall) {
                 User.isUserLoggedIn(data.accessToken, cbWaterfall);
@@ -205,7 +203,7 @@ var model = {
                                     $inc: {
                                         "products.$.quantity": -product.quantity,
                                         "products.$.price": -deductPrice,
-                                        'totalAmount': -deductPrice
+                                        'totalAmount': -deductPrice,
                                     },
                                     $addToSet: {
                                         returnedProducts: {
@@ -220,23 +218,30 @@ var model = {
                                     new: true
                                 }).exec(function (err, updatedProduct) {
                                     if (!_.isEmpty(updatedProduct)) {
-                                        cancelledProducts.push(updatedProduct);
+                                        var cancelProduct = _.remove(updatedProduct.products, function (product) {
+                                            return product.quantity == 0;
+                                        });
+                                        console.log("Cancelled product: ", updatedProduct);
+                                        Order.saveData(updatedProduct, function (err, order) {
+                                            console.log("Saving updated order: ", err, order);
+                                            updatedOrder.push(updatedProduct);
+                                            cbSubWaterfall1(null, order);
+                                        });
                                     }
-                                    cbSubWaterfall1(null, cancelledProducts);
                                 });
                             }
                         ], function (err, data) {
                             eachCallback(err, data);
                         });
                     }, function (err) {
-                        cbWaterfall1(null, cancelledProducts);
+                        cbWaterfall1(null, updatedOrder);
                     });
                 } else {
                     cbWaterfall1("userNotFound", null);
                 }
             }
         ], function (err, data) {
-            callback(err, cancelledProducts);
+            callback(err, updatedOrder);
         });
     },
 
