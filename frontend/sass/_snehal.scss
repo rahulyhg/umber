@@ -296,7 +296,7 @@
                                     }
                                 }
                                 .size-text {
-                                    vertical-align: top;
+                                    vertical-align: middle;
                                 }
                             }
                             &:hover {
@@ -310,6 +310,29 @@
                                     opacity: 1;
                                     visibility: visible;
                                     @include transform(scaleX(1));
+                                }
+                            }
+                        }
+
+                        .listview {
+                            .item-img {
+                                img {
+                                    width: 90px;
+                                    margin: 0 auto
+                                }
+                            }
+                            .size-text {
+                                color: $darkBrown1;
+                                vertical-align: top;
+                            }
+                            .item-desc {
+                                width: 40%;
+                            }
+                            .buy-para__sizes {
+                                width: 80%;
+                                margin-top: 0;
+                                p {
+                                    padding: 2px 5px;
                                 }
                             }
                         } // we have kept this class out because it is used in individual page design. so to use this class, write @extend to extend this class in your own class.
@@ -1192,10 +1215,12 @@
                         }
 
                         .brand1 {
-                            padding: 20px;
+                            padding: 25px 45px;
                             figure {
+                                height: 70px;
                                 img {
                                     margin: 0 auto;
+                                    max-height: 70px;
                                 }
                             }
                         }

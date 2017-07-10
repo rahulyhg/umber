@@ -220,6 +220,7 @@ var models = {
                 filename: filename2
             });
             readstream2.on('error', function (err) {
+                console.log("Readstream error: ", err);
                 res.json({
                     value: false,
                     error: err

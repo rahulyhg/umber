@@ -238,16 +238,17 @@
                             </ul>
                             <div class="pull-right">
                                 <div class="inline-block img-w">
-                                    <img src="img/listing/listing.png" class="img-responsive">
+                                    <a ng-click="view = 'listView'"><img src="img/listing/listing.png" class="img-responsive" alt="Click for list-view"></a>
+
                                 </div>
                                 <div class="inline-block img-w">
-                                    <img src="img/listing/squares30.png" class="img-responsive">
+                                    <a ng-click="view = 'thumbnailView'"><img src="img/listing/squares30.png" class="img-responsive" alt="Click for thumbnail-view"></a>
                                 </div>
                             </div>
                         </div>
                         {{displayMessage}}
 
-                        <div class="row" ng-repeat="row in products">
+                        <div class="row" ng-repeat="row in products" ng-if="view == 'thumbnailView'">
                             <div class="col-md-4" ng-repeat="product in row" ng-init="parentIndex = $index">
                                 <div class="buy-info custom-checkbox">
                                     <div class="buy-slider slider-individual list-slider">
@@ -272,10 +273,6 @@
                                                 <p class="inline-block size-text">Sizes:</p>
                                                 <div class="inline-block buy-para__sizes">
                                                     <p ng-repeat="size in product.sizes"> {{size.name}}</p>
-                                                    <!--<p>38</p>
-                                                    <p>40</p>
-                                                    <p>42</p>
-                                                    <p>44</p>-->
                                                 </div>
                                             </div>
                                             <hr>
@@ -296,9 +293,46 @@
 
                                                     <button class="btn btn-default view--btn text-uppercase " ng-click="quickviewProduct(product)">QUICK VIEW</button>
 
-
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9" ng-if="view == 'listView'">
+                            <div class="listview display-table">
+                                <div class="display-row">
+                                    <div class="display-cell">
+                                        <div class="item-img">
+                                            <img src="frontend/img/individual/product-test.jpg" alt="Ordered Item" class="img-responsive">
+                                        </div>
+
+                                    </div>
+                                    <div class="display-cell align-top item-desc">
+                                        <div>
+                                            <h4 class="item-name text-uppercase">{{product.product.productName}}</h4>
+                                            <p class="item-cost"><i class="fa fa-inr"></i>2300</p>
+                                            <div class="viewSize">
+                                                <p class="inline-block size-text">Sizes:</p>
+                                                <div class="inline-block buy-para__sizes">
+                                                    <p>32</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="display-cell align-top">
+                                        <div class="custom-checkbox">
+                                            <div class="checkbox">
+                                                <input type="checkbox" id="test">
+                                                <label for="test">Add to compare</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="display-cell text-center align-middle">
+                                        <div class="btn-group-vertical" role="group">
+                                            <button type="button" class="btn text-uppercase buy--btn">buy</button>
+                                            <button type="button" class="btn text-uppercase buy--btn">quick view</button>
                                         </div>
                                     </div>
                                 </div>
