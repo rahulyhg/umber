@@ -76,7 +76,8 @@ var schema = new Schema({
         status: {
             type: String,
             enum: ['returned', 'cancelled'],
-            default: 'returned'
+            default: 'returned',
+            index: true
         },
         comment: String
     }],
@@ -250,8 +251,10 @@ var model = {
                 User.isUserLoggedIn(data.accessToken, cbWaterfall);
             },
             function getOrders(user, cbWaterfall1) {
-                if (mongoose.Types.ObjectId(user._id) == mongoose.Types.ObjectId(data.user)) {
-                    Order.findOne({
+                console.log("found: ", user._id);
+                console.log("sent: ", data.user);
+                if (user._id == data.user) {
+                    Order.find({
                         user: mongoose.Types.ObjectId(data.user),
                         "returnedProducts.status": data.status
                     }, {

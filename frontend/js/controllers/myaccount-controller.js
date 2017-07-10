@@ -12,6 +12,22 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
         $scope.view = "profTab";
     }
 
+    $scope.retriveCancelledProducts = function (view) {
+
+
+        var data = {
+            user: $.jStorage.get("userId"),
+            accessToken: $.jStorage.get("accessToken"),
+            status: view
+        }
+
+
+        console.log("data", data)
+        OrderService.cancelledProduct(data, function (output) {
+            console.log(output);
+        })
+    }
+
     var input = {
         "userId": $.jStorage.get("userId")
     }

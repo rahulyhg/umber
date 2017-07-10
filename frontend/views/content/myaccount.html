@@ -195,9 +195,9 @@
                         <p class="text-uppercase text-center">
                             <button class="btn order-list--btn " ng-click="view='orders'" ng-class="{
                         'btn--brownActive': view=='orders' }">orders </button>
-                            <button class="btn order-list--btn" ng-click="view='return'" ng-class="{
+                            <button class="btn order-list--btn" ng-click="view='return'; retriveCancelledProducts('returned')" ng-class="{
                         'btn--brownActive': view=='return' }">return/exchange</button>
-                            <button class="btn order-list--btn" ng-click="view='cancel'" ng-class="{
+                            <button class="btn order-list--btn" ng-click="view='cancel';retriveCancelledProducts('cancelled')" ng-class="{
                         'btn--brownActive': view=='cancel' }">cancelled</button>
                         </p>
                         <div class="account-order-table" ng-if="view == 'orders'">
