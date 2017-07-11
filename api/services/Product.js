@@ -990,6 +990,229 @@ var model = {
                 }
             });
         })
+    },
+    //for global search
+    getAggregatePipeLine: function (data) {
+
+        var pipeline = [
+            // Stage 1
+            {
+                $lookup: {
+                    "from": "categories",
+                    "localField": "category",
+                    "foreignField": "_id",
+                    "as": "category"
+                }
+            },
+
+            // Stage 2
+            {
+                $unwind: {
+                    path: "$category",
+
+                }
+            },
+
+            // Stage 3
+            {
+                $lookup: {
+                    "from": "homecategories",
+                    "localField": "homeCategory",
+                    "foreignField": "_id",
+                    "as": "homeCategory"
+                }
+            },
+
+            // Stage 4
+            {
+                $unwind: {
+                    path: "$homeCategory",
+
+                }
+            },
+
+            // Stage 5
+            {
+                $lookup: {
+                    "from": "collections",
+                    "localField": "prodCollection",
+                    "foreignField": "_id",
+                    "as": "prodCollection"
+                }
+            },
+
+            // Stage 6
+            {
+                $unwind: {
+                    path: "$prodCollection",
+
+                }
+            },
+
+            // Stage 7
+            {
+                $lookup: {
+                    "from": "basecolors",
+                    "localField": "color",
+                    "foreignField": "_id",
+                    "as": "color"
+                }
+            },
+
+            // Stage 8
+            {
+                $unwind: {
+                    path: "$color",
+
+                }
+            },
+
+            // Stage 9
+            {
+                $lookup: {
+                    "from": "sizes",
+                    "localField": "size",
+                    "foreignField": "_id",
+                    "as": "size"
+                }
+            },
+
+            // Stage 10
+            {
+                $unwind: {
+                    path: "$size",
+
+                }
+            },
+
+            // Stage 11
+            {
+                $lookup: {
+                    "from": "fabrics",
+                    "localField": "fabric",
+                    "foreignField": "_id",
+                    "as": "fabric"
+                }
+            },
+
+            // Stage 12
+            {
+                $lookup: {
+                    "from": "types",
+                    "localField": "type",
+                    "foreignField": "_id",
+                    "as": "type"
+                }
+            },
+
+            // Stage 13
+            {
+                $lookup: {
+                    "from": "brands",
+                    "localField": "brand",
+                    "foreignField": "_id",
+                    "as": "brand"
+                }
+            },
+
+            // Stage 14
+            {
+                $unwind: {
+                    path: "$fabric",
+                    preserveNullAndEmptyArrays: true // optional
+
+                }
+            },
+
+            // Stage 15
+            {
+                $unwind: {
+                    path: "$type",
+                    preserveNullAndEmptyArrays: true // optional
+                }
+            },
+
+            // Stage 16
+            {
+                $unwind: {
+                    path: "$brand",
+                }
+            },
+
+            // Stage 17
+            {
+                $match: {
+                    $or: [{
+                            "category.name": {
+                                $regex: data.keyword,
+                                $options: "i"
+                            }
+                        },
+                        {
+                            "homeCategory.name": {
+                                $regex: data.keyword,
+                                $options: "i"
+                            }
+                        },
+                        {
+                            "prodCollection.name": {
+                                $regex: data.keyword,
+                                $options: "i"
+                            }
+                        },
+                        {
+                            "color.name": {
+                                $regex: data.keyword,
+                                $options: "i"
+                            }
+                        },
+                        {
+                            "size.name": {
+                                $regex: data.keyword,
+                                $options: "i"
+                            }
+                        },
+                        {
+                            "fabric.name": {
+                                $regex: data.keyword,
+                                $options: "i"
+                            }
+                        },
+                        {
+                            "type.name": {
+                                $regex: data.keyword,
+                                $options: "i"
+                            }
+                        },
+                        {
+                            "brand.name": {
+                                $regex: data.keyword,
+                                $options: "i"
+                            }
+                        }
+                    ]
+                }
+            },
+
+        ];
+        return pipeline;
+    },
+
+    globalSearch: function (data, callback) {
+        var pipeLine = Product.getAggregatePipeLine(data);
+        Product.aggregate(pipeLine, function (err, found) {
+            if (err) {
+                callback(err, "error in mongoose");
+            } else {
+                if (_.isEmpty(found)) {
+                    callback(null, []);
+                } else {
+
+                    callback(null, found);
+                }
+            }
+        });
+
     }
 };
 module.exports = _.assign(module.exports, exports, model);

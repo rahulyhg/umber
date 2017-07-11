@@ -10063,6 +10063,56 @@ a {
   -webkit-transform: scaleX(0.8);
   transform: scaleX(0.8); }
 
+.full-border-hidden-anim-bfr {
+  border-bottom: 1px solid transparent;
+  border-left: 1px solid transparent;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+  z-index: 1111;
+  box-sizing: border-box; }
+
+.full-border-hidden-anim-afr {
+  border-top: 1px solid transparent;
+  border-right: 1px solid transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+  z-index: 1111;
+  box-sizing: border-box; }
+
+.full-border-visible-anim-bfr {
+  border-color: #341314;
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  height: 100%;
+  transition-property: height, -webkit-transform;
+  transition-property: transform, height;
+  transition-property: transform, height, -webkit-transform;
+  transition-duration: 0.1s, 0.1s;
+  transition-delay: 0s 0.1s;
+  transition-timing-function: linear linear; }
+
+.full-border-visible-anim-afr {
+  border-color: #341314;
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  height: 100%;
+  transition-property: height, -webkit-transform;
+  transition-property: transform, height;
+  transition-property: transform, height, -webkit-transform;
+  transition-duration: 0.1s, 0.1s;
+  transition-delay: 0.2s 0.3s;
+  transition-timing-function: linear linear; }
+
 /* Pulse */
 @-webkit-keyframes hvr-pulse {
   25% {

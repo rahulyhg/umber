@@ -543,6 +543,56 @@
         visibility: visible;
         @include transform(scaleX(0.8));
     }
+
+    .full-border-hidden-anim-bfr {
+        border-bottom: 1px solid rgba(0, 0, 0, 0);
+        border-left: 1px solid rgba(0, 0, 0, 0);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        @include size(100%,
+        1px);
+        @include transform(translateX(100%));
+        z-index: 1111;
+        box-sizing: border-box;
+    }
+
+    .full-border-hidden-anim-afr {
+        border-top: 1px solid rgba(0, 0, 0, 0);
+        border-right: 1px solid rgba(0, 0, 0, 0);
+        position: absolute;
+        top: 0;
+        left: 0;
+        @include size(100%,
+        1px);
+        @include transform(translateX(-100%));
+        z-index: 1111;
+        box-sizing: border-box;
+    }
+
+    .full-border-visible-anim-bfr {
+        border-color: $darkBrown1;
+        @include transform(translateX(0));
+        height: 100%;
+        @include transition-property(transform,
+        height);
+        @include transition-duration(0.1s,
+        0.1s);
+        @include transition-delay(0s 0.1s);
+        @include transition-timing-function(linear linear);
+    }
+
+    .full-border-visible-anim-afr {
+        border-color: $darkBrown1;
+        @include transform(translateX(0));
+        height: 100%;
+        @include transition-property(transform,
+        height);
+        @include transition-duration(0.1s,
+        0.1s);
+        @include transition-delay(0.2s 0.3s);
+        @include transition-timing-function(linear linear);
+    }
     /* Pulse */
 
     @include keyframes( hvr-pulse) {

@@ -148,15 +148,33 @@ var model = {
     },
 
     updateOrderAddress: function (data, callback) {
+        var billingAddress = {};
+        var shippingAddress = {};
+        var keys = _.keys(data.billingAddress);
+
+        for (var key of keys) {
+            console.log("155: ", key);
+            billingAddress[key] = data.billingAddress[key];
+        }
+
+        keys = _.keys(data.shippingAddress);
+        for (var key of keys) {
+            shippingAddress[key] = data.shippingAddress[key];
+        }
+
         console.log("@@@@@data@@@@", data)
         Order.findOneAndUpdate({
-            _id: data._id
+            _id: mongoose.Types.ObjectId(data._id)
         }, {
-            billingAddress: data.billingAddress,
-            shippingAddress: data.shippingAddress
+            $set: {
+                billingAddress: billingAddress,
+                shippingAddress: shippingAddress
+            }
+
         }, {
             new: true
         }, function (err, order) {
+            console.log("Order update address error: ", err);
             User.saveAddresses(data, callback);
         });
     },
