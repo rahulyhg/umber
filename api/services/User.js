@@ -424,6 +424,33 @@ var model = {
         }
     },
 
+    // function to check whether two addresses match
+    checkShippingAddress: function (address1, address2) {
+        console.log("!!!!address1", address1);
+        console.log("!!!!address2", address2);
+        var keys1 = _.keys(address1);
+        var keys2 = _.keys(address2);
+        var idIndex = keys1.indexOf('_id');
+        console.log("!!!!keys1", keys1);
+        console.log("!!!!keys2", keys2);
+        console.log("!!!!idIndex", idIndex);
+
+        if (idIndex > -1) {
+            keys1.splice(idIndex, 1);
+        }
+
+        if (keys1.length != keys2.length) {
+            return false;
+        } else {
+            for (var idx = 0; idx < keys1.length; idx++) {
+                if (address1[keys1[idx]] != address2[keys2[idx]]) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    },
+
     // API to edit/save current billing & shipping address
     // Designed mainly for account page 
     // input: address: {accessToken, type, shippingAddress/billingAddress}
@@ -440,7 +467,7 @@ var model = {
                     user.billingAddress = address.billingAddress;
                 } else {
                     var idx = _.findIndex(user.shippingAddresses, function (userAddress) {
-                        return mongoose.Types.ObjectId(userAddress._id) == mongoose.Types.ObjectId(address.shippingAddress._id);
+                        return User.checkShippingAddress(userAddress, address.shippingAddress);
                     });
 
                     if (idx >= 0) {

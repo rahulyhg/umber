@@ -86,6 +86,7 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
     $scope.updateAddress = function () {
         angular.element(document.getElementById('ordergenerate')).disabled = true;
         var updateAdd = {
+            _id: $scope.orders._id,
             user: $.jStorage.get("userId"),
             billingAddress: $scope.user.billingAddress,
             shippingAddress: $scope.user.deliveryAddress
