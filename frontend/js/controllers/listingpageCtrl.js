@@ -4,6 +4,8 @@
      TemplateService.title = "Form"; //This is the Title of the Website
      $scope.navigation = NavigationService.getNavigation();
      $scope.formSubmitted = false;
+
+     $.jStorage.deleteKey("selectedCategory")
      myService.ctrlBanners("listing-page", function (data) {
          $scope.banner = data;
      });
@@ -14,12 +16,20 @@
          $scope.showCheck = true
          $scope.compareproduct = $.jStorage.get('compareproduct')
      }
-     NavigationService.getListingCategories(function (data) {
-         console.log('getProductsWithFilters', data);
+     //  NavigationService.getListingCategories(function (data) {
+     //      console.log('getProductsWithFilters', data);
+     //      $scope.categories = data.data.data;
+
+     //  });
+     var parentCat = $stateParams.id;
+     var data = {
+         category: $stateParams.id
+     }
+     CategoryService.getCategoryWithParent(data, function (data) {
+         console.log("cat from parentctrl", data)
          $scope.categories = data.data.data;
-
-     });
-
+         $scope.filteredProducts($scope.categories[0]._id)
+     })
      /******getting products based on category******* */
      $scope.filteredProducts = function (selectedCategory) {
          if ($.jStorage.get("selectedCategory") && selectedCategory != $.jStorage.get("selectedCategory").category) {
@@ -389,6 +399,7 @@
          }
      };
      //End of  modal on quck view button
-
+     if (_.isEmpty($scope.products))
+         $scope.displayMessage = "No Data Found";
 
  })

@@ -1,4 +1,4 @@
-myApp.controller('headerCtrl', function ($scope, $state, WishlistService, TemplateService, CartService, UserService, $uibModal) {
+myApp.controller('headerCtrl', function ($scope, NavigationService, $state, WishlistService, TemplateService, CartService, UserService, $uibModal) {
         $scope.template = TemplateService;
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             $(window).scrollTop(0);
@@ -142,6 +142,16 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
             $('.mobview-categories-display ').removeClass('mobview-categories-menu-in');
             $('.mobview-categories-display ').addClass('mobview-categories-menu-out');
         };
+
+        /*******menu code****** */
+        NavigationService.getEnabledCategories(function (data) {
+
+            $scope.categories = data.data.data;
+            console.log($scope.categories)
+
+
+        });
+
     })
     .controller('wishlistModalCtrl', function ($scope, $state, $uibModalInstance, UserService, CartService, WishlistService) {
         $scope.userId = {
@@ -191,6 +201,7 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
 
             }
         }
+
     })
     .controller('loginModalCtrl', function ($scope, $state, $uibModalInstance, UserService, CartService, WishlistService) {
 
