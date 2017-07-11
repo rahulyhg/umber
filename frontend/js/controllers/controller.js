@@ -9,25 +9,25 @@ myApp
 
         ProductService.getthelook(function (data) {
             $scope.getthelook = data.data.data;
-            console.log("new look", data.data.data);
+
         })
         $scope.userId = $.jStorage.get('userId');
         NavigationService.EnabledHomeScreen(function (data) {
-            console.log("Frontend->controller.js->data: ", data);
+
             $scope.clothCat = data.data.data;
-            console.log("clothCat: ", $scope.clothCat);
+
         });
 
         NavigationService.getEnabledCategories(function (data) {
-            console.log("Getting categories: ", data);
+
             $scope.categories = data.data.data;
-            console.log("Retrieved categories: ", $scope.categories);
+
         });
 
         ProductService.getNewArrivals(function (data) {
-            console.log("Getting new arrivals: ", data);
+
             $scope.newArrivals = data.data.data;
-            console.log("New arrivals: ", $scope.newArrivals);
+
         });
 
         /******************todo:for showing cart logo  infinite loop issue******************** */
@@ -35,7 +35,7 @@ myApp
             userId: $.jStorage.get("userId"),
             accessToken: $.jStorage.get("accessToken")
         }
-        console.log("before check")
+
         /****************for cart tooltip after login***************** */
         if (userId.userId) {
 
@@ -57,26 +57,26 @@ myApp
 
             WishlistService.getWishlist(userId, function (result) {
 
-                console.log("***************************wishlistran*****************************")
+
                 $scope.wishlist = result.data.data;
-                console.log("Wishlist data::::::::", $scope.wishlist);
+
 
             });
 
             ProductService.getFeatured(function (data) {
-                console.log("***************************************productran***********************")
+
                 $scope.featured = data.data.data;
-                console.log("Featured: ", $scope.featured);
+
             })
 
         } else {
             $scope.mycart = []
             $scope.mycart = $.jStorage.get("cart");
             $scope.wishlist = $.jStorage.get("wishlist")
-            console.log("offline wishlist check:::::::", $scope.wishlist)
+
             if ($scope.mycart) {
                 $scope.mycart = $scope.mycart.products;
-                console.log("mycartfor offlinetooltip::::", $scope.mycart)
+
                 $scope.tempcart = [];
                 if ($scope.mycart) {
                     for (var i = 0; i < $scope.mycart.length; i++) {
@@ -125,7 +125,7 @@ myApp
                 var result = _.find($scope.wishlist, {
                     "productId": productId
                 });
-                console.log("result:::::", result)
+
                 if (result) {
                     return "fa fa-heart";
                 } else {
@@ -146,7 +146,7 @@ myApp
 
         NavigationService.getEnabledBlogs(function (data) {
             $scope.blogs = data.data.data;
-            console.log("Enabled blogs retrieved: ", $scope.blogs);
+
         });
 
         $scope.sale = [{

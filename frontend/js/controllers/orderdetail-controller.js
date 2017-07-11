@@ -18,7 +18,7 @@ myApp.controller('OrderDetailCtrl', function ($scope, TemplateService, $translat
         TemplateService.title = "Return-Cancellation"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
         // $scope.order = $.jStorage.get("orderDetails");
-
+        $.jStorage.deleteKey("cancellation");
         var input = {
             _id: $stateParams.id
         }
