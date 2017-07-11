@@ -41,7 +41,7 @@
              } else if (!_.isEmpty(data.data.data)) {
                  $scope.displayMessage = "";
                  $scope.products = _.chunk(data.data.data, 3);
-                 console.log(data)
+                 console.log("productretruved based on category", data)
 
                  ListingService.retriveFiltersWithCategory(function (data) {
                      console.log("product category on basis of category", data.data.data)

@@ -228,7 +228,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="listing-main">
+                    <div class="listing-main" ng-init="view ='thumbnailView'">
                         <div class="dropdown listing-dropdown">
                             <button type="button" class="btn btn-listing dropdown-toggle" data-toggle="dropdown">Sort by<i class="fa fa-reg" aria-hidden="true"></i><required></required></button>
                             <ul class="dropdown-menu">
@@ -300,18 +300,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-9" ng-if="view == 'listView'">
+                        <div ng-if="view == 'listView'">
                             <div class="listview display-table">
                                 <div class="display-row">
                                     <div class="display-cell">
-                                        <div class="item-img">
+                                        <div class="item-img relate">
                                             <img src="frontend/img/individual/product-test.jpg" alt="Ordered Item" class="img-responsive">
+                                            <div class="inline-block wishlist-icon">
+                                                <i class="fa fa-heart "></i>
+                                            </div>
                                         </div>
 
                                     </div>
                                     <div class="display-cell align-top item-desc">
                                         <div>
-                                            <h4 class="item-name text-uppercase">{{product.product.productName}}</h4>
+                                            <h4 class="item-name text-uppercase">Mens Half Sleeve Shirt</h4>
                                             <p class="item-cost"><i class="fa fa-inr"></i>2300</p>
                                             <div class="viewSize">
                                                 <p class="inline-block size-text">Sizes:</p>
@@ -329,7 +332,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="display-cell text-center align-middle">
+                                    <div class="display-cell text-right align-middle">
                                         <div class="btn-group-vertical" role="group">
                                             <button type="button" class="btn text-uppercase buy--btn">buy</button>
                                             <button type="button" class="btn text-uppercase buy--btn">quick view</button>
