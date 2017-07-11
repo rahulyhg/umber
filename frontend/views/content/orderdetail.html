@@ -20,7 +20,7 @@
                 <tbody>
                     <tr class="relate" ng-repeat="product in order.products">
 
-                        <td colspan="3" ng-if="product.quantity>0">
+                        <td colspan="3">
                             <!--style="background: url('{{product.product.images[0].image | serverimage}}') no-repeat 50% 50%"-->
                             <div class="item-img inline-block">
                                 <img ng-src="{{product.product.images[0].image | serverimage}}" alt="Ordered Item" class="img-responsive">
@@ -42,7 +42,7 @@
                                 <p class="item-code">Comment: {{product.comment}}.</p>
 
                         </td>
-                        <td class="text-center relate" ng-if="product.quantity>0">
+                        <td class="text-center relate">
                             <h4 class=" usr-status-title">quantity</h4>
                             <div class="usr-status plus-minus-btn">
                                 <!--<a ng-click="updateQuantity($index, -1)">
@@ -60,7 +60,7 @@
                                 </a>-->
                             </div>
                         </td>
-                        <td ng-if="product.quantity>0">
+                        <td>
                             <p class="item-cost grand-total"><i class="fa fa-inr"></i>{{product.product.price * product.quantity}}</p>
                         </td>
                     </tr>
