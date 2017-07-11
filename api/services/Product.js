@@ -629,65 +629,71 @@ var model = {
     },
 
     getNewArrivals: function (callback) {
-        async.waterfall([
-            function (callback1) {
-                Product.aggregate([{
-                    $group: {
-                        _id: '$productId'
-                    }
-                }]).exec(function (err, products) {
-                    callback1(err, products);
-                });
-            },
-            function (products, callback2) {
-                var newArrivals = [];
-                async.each(products, function (product, eachCallback) {
-                    Product.findOne({
-                        productId: product._id,
-                        newArrival: true
-                    }).exec(function (err, product) {
-                        if (!_.isEmpty(product))
-                            newArrivals.push(product);
-                        eachCallback(err, product);
-                    });
-                }, function (err) {
-                    callback2(err, newArrivals);
-                });
-            }
-        ], function (err, results) {
-            callback(err, results);
-        });
+        Product.find({
+            newArrival: true
+        }).exec(callback);
+        // async.waterfall([
+        //     function (callback1) {
+        //         Product.aggregate([{
+        //             $group: {
+        //                 _id: '$productId'
+        //             }
+        //         }]).exec(function (err, products) {
+        //             callback1(err, products);
+        //         });
+        //     },
+        //     function (products, callback2) {
+        //         var newArrivals = [];
+        //         async.each(products, function (product, eachCallback) {
+        //             Product.findOne({
+        //                 productId: product._id,
+        //                 newArrival: true
+        //             }).exec(function (err, product) {
+        //                 if (!_.isEmpty(product))
+        //                     newArrivals.push(product);
+        //                 eachCallback(err, product);
+        //             });
+        //         }, function (err) {
+        //             callback2(err, newArrivals);
+        //         });
+        //     }
+        // ], function (err, results) {
+        //     callback(err, results);
+        // });
     },
 
     getFeatured: function (callback) {
-        async.waterfall([
-            function (callback1) {
-                Product.aggregate([{
-                    $group: {
-                        _id: '$productId'
-                    }
-                }]).exec(function (err, products) {
-                    callback1(err, products);
-                });
-            },
-            function (products, callback2) {
-                var featureds = [];
-                async.each(products, function (product, eachCallback) {
-                    Product.findOne({
-                        productId: product._id,
-                        newArrival: true
-                    }).exec(function (err, product) {
-                        if (!_.isEmpty(product))
-                            featureds.push(product);
-                        eachCallback(err, product);
-                    });
-                }, function (err) {
-                    callback2(err, featureds);
-                });
-            }
-        ], function (err, results) {
-            callback(err, results);
-        });
+        Product.find({
+            featured: true
+        }).exec(callback);
+        // async.waterfall([
+        //     function (callback1) {
+        //         Product.aggregate([{
+        //             $group: {
+        //                 _id: '$productId'
+        //             }
+        //         }]).exec(function (err, products) {
+        //             callback1(err, products);
+        //         });
+        //     },
+        //     function (products, callback2) {
+        //         var featureds = [];
+        //         async.each(products, function (product, eachCallback) {
+        //             Product.findOne({
+        //                 productId: product._id,
+        //                 newArrival: true
+        //             }).exec(function (err, product) {
+        //                 if (!_.isEmpty(product))
+        //                     featureds.push(product);
+        //                 eachCallback(err, product);
+        //             });
+        //         }, function (err) {
+        //             callback2(err, featureds);
+        //         });
+        //     }
+        // ], function (err, results) {
+        //     callback(err, results);
+        // });
     },
 
     getProductWithId: function (data, callback) {
