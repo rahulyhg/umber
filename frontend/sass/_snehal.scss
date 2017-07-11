@@ -315,18 +315,28 @@
                         }
 
                         .listview {
+                            @include margin(15px 0);
                             .item-img {
                                 img {
                                     width: 90px;
                                     margin: 0 auto
                                 }
                             }
+                            .wishlist-icon {
+                                @include size(30px, 30px);
+                                @include position(absolute, 0 12px null null);
+                                @include padding(6px);
+                                text-align: center;
+                                color: #341314;
+                                font-style: normal;
+                                font-size: 13px;
+                            }
                             .size-text {
                                 color: $darkBrown1;
                                 vertical-align: top;
                             }
                             .item-desc {
-                                width: 40%;
+                                width: 30%;
                             }
                             .buy-para__sizes {
                                 width: 80%;
@@ -334,6 +344,15 @@
                                 p {
                                     padding: 2px 5px;
                                 }
+                            }
+                            .checkbox {
+                                margin-top: 15px;
+                            }
+                            .buy--btn {
+                                @extend .btn--brown;
+                                width: 175px;
+                                @include padding(3px 0);
+                                margin-bottom: 10px; //  @extend .btn--brownActive;
                             }
                         } // we have kept this class out because it is used in individual page design. so to use this class, write @extend to extend this class in your own class.
                         .buy-para__sizes {

@@ -117,11 +117,11 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
         $scope.openSideNav = function () {
             if (!$scope.sideNav) {
                 $('.side-nav').toggleClass('side-nav-menu-in');
-                // $('.navbar__sideNav').toggleClass(' hamburger-cross');
+                $('.navbar__sideNav').toggleClass(' hamburger-cross');
                 $scope.sideNav = true;
             } else {
                 $('.side-nav').toggleClass('side-nav-menu-in');
-                // $('.navbar__sideNav').toggleClass(' hamburger-cross');
+                $('.navbar__sideNav').toggleClass(' hamburger-cross');
                 $scope.sideNav = false;
             }
 
