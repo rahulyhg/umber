@@ -17,12 +17,12 @@ myApp.factory('NavigationService', function ($http) {
             sref: "#!/page/viewMembership//",
             icon: "user"
         }, {
-            name: "Home Category",
+            name: "Category",
             classis: "active",
             sref: "#!/page/viewHomeCategory//",
             icon: "tree"
         }, {
-            name: "Category",
+            name: "Sub Category",
             classis: "active",
             sref: "#!/page/viewCategory//",
             icon: "leaf"
