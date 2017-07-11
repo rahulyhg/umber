@@ -132,13 +132,13 @@ myApp.controller('headerCtrl', function ($scope, $state, WishlistService, Templa
         };
         //End of close side nav
         $scope.closeCategires = function () {
-            $('.mobview-links').removeClass('mobview-links-display-in');
-            $('.mobview-links').addClass('mobview-links-display-out');
+            $('.mobview-links').removeClass('mobview-links-menu-in');
+            $('.mobview-links').addClass('mobview-links-menu-out');
             $('.mobview-categories-display ').toggleClass('mobview-categories-menu-in');
         };
         $scope.slidebackToMobview = function () {
-            $('.mobview-links').removeClass('mobview-links-display-out');
-            $('.mobview-links').addClass('mobview-links-display-in');
+            $('.mobview-links').removeClass('mobview-links-menu-out');
+            $('.mobview-links').addClass('mobview-links-menu-in');
             $('.mobview-categories-display ').removeClass('mobview-categories-menu-in');
             $('.mobview-categories-display ').addClass('mobview-categories-menu-out');
         };
