@@ -148,6 +148,7 @@ var model = {
     },
 
     updateOrderAddress: function (data, callback) {
+        console.log("@@@@@data@@@@", data)
         Order.findOneAndUpdate({
             _id: data._id
         }, {
@@ -260,11 +261,16 @@ var model = {
                 console.log("sent: ", data.user);
                 if (user._id == data.user) {
                     Order.find({
-                        user: mongoose.Types.ObjectId(data.user),
-                        "returnedProducts.status": data.status
-                    }, {
-                        returnedProducts: 1
-                    }).deepPopulate("returnedProducts.product returnedProducts.product.size returnedProducts.product.color").exec(cbWaterfall1);
+                            user: mongoose.Types.ObjectId(data.user),
+                            "returnedProducts.status": data.status
+                        }
+                        // {
+                        //     returnedProducts: 1
+                        // }
+                    ).deepPopulate("returnedProducts.product returnedProducts.product.size returnedProducts.product.color").exec(function (err, orders) {
+                        console.log("%%%%%%%OrderDetails", orders);
+                        cbWaterfall1(null, orders)
+                    })
                 } else {
                     cbWaterfall1("noUserFound", null);
                 }
