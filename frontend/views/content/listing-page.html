@@ -229,12 +229,12 @@
                 </div>
                 <div class="row">
                     <div class="listing-main" ng-init="view ='thumbnailView'">
-                        <div class="dropdown listing-dropdown">
-                            <button type="button" class="btn btn-listing dropdown-toggle" data-toggle="dropdown">Sort by<i class="fa fa-reg" aria-hidden="true"></i><required></required></button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">brand</a></li>
-                                <li><a href="#">color</a></li>
-                                <li><a href="#">price</a></li>
+                        <div class="dropdown listing-dropdown" uib-dropdown>
+                            <button type="button" class="btn btn-listing" uib-dropdown-toggle>Sort by<i class="fa fa-reg" aria-hidden="true"></i><required></required></button>
+                            <ul class="dropdown-menu" uib-dropdown-menu role="menu">
+                                <li role="menuitem"><a href="#">brand</a></li>
+                                <li role="menuitem"><a href="#">color</a></li>
+                                <li role="menuitem"><a href="#">price</a></li>
                             </ul>
                             <div class="pull-right">
                                 <div class="inline-block img-w">
