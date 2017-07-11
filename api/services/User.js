@@ -412,7 +412,9 @@ var model = {
                         }
                     }
 
-                    User.saveData(user, function (err, updatedUser) {
+                    User.findOneAndUpdate({
+                        _id: mongoose.Types.ObjectId(user._id)
+                    }, user, function (err, updatedUser) {
                         cbWaterfall1(err, updatedUser);
                     });
                 }

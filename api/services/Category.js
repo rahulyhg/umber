@@ -46,7 +46,7 @@ var model = {
 
     getCategoriesWithParent: function (data, callback) {
         Category.find({
-            category: data.category
+            category: mongoose.Types.ObjectId(data.category)
         }).exec(function (err, categories) {
             callback(err, categories);
         });
