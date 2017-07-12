@@ -10016,7 +10016,7 @@ a {
 /*NOTE: extend this class in dropdown's by using @extend */
 .dropdown-hidden-anim, .navbar .navbar-right .cart-dropdown-menu, .state-dropdown-menu,
 .country-dropdown-menu, .order-return-table .return-dropdown-menu,
-.order-cancel-table .return-dropdown-menu {
+.order-cancel-table .return-dropdown-menu, .listing-dropdown .listing-dropdown-menu {
   display: block;
   visibility: hidden;
   opacity: 0;
@@ -10029,14 +10029,14 @@ a {
 
 .dropdown-visible-anim, .navbar .navbar-right li:hover .cart-dropdown-menu, .open .state-dropdown-menu,
 .open .country-dropdown-menu, .order-return-table .open .return-dropdown-menu,
-.order-cancel-table .open .return-dropdown-menu {
+.order-cancel-table .open .return-dropdown-menu, .listing-dropdown .open .listing-dropdown-menu {
   visibility: visible;
   opacity: 1;
   -webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(0px, 0px);
   transform: rotate(0deg) scale(1) skew(0deg) translate(0px, 0px); }
   .dropdown-visible-anim li > a:hover, .navbar .navbar-right li:hover .cart-dropdown-menu li > a:hover, .open .state-dropdown-menu li > a:hover,
   .open .country-dropdown-menu li > a:hover, .order-return-table .open .return-dropdown-menu li > a:hover,
-  .order-cancel-table .open .return-dropdown-menu li > a:hover {
+  .order-cancel-table .open .return-dropdown-menu li > a:hover, .listing-dropdown .open .listing-dropdown-menu li > a:hover {
     background-color: #341314;
     color: #ffffff; }
 
@@ -13963,7 +13963,7 @@ img.loading {
     white-space: nowrap;
     z-index: 20; }
 
-.listing-dropdown .dropdown-menu {
+.listing-dropdown .listing-dropdown-menu {
   min-width: 215px; }
 
 .list-breadcrumb {
