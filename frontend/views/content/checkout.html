@@ -205,86 +205,87 @@
                                 </div>
                             </div>
                             <div class="details-form ">
-                                <div class="row ">
-                                    <div class="col-md-6 ">
-                                        <div>
-                                            <h3 class="marg0 detail-tab__head ">billing address</h3>
-                                        </div>
-                                        <div class="row ">
-                                            <div class="customized-form ">
-                                                <div class="form-group ">
-                                                    <div class="col-md-10 ">
-                                                        <input type="text " placeholder="Line 1* " ng-model="user.billingAddress.line1
-                        " class="form-control ">
+                                <form name="address">
+                                    <div class="row ">
+                                        <div class="col-md-6 ">
+                                            <div>
+                                                <h3 class="marg0 detail-tab__head ">billing address</h3>
+                                            </div>
+                                            <div class="row ">
+                                                <div class="customized-form ">
+                                                    <div class="form-group ">
+                                                        <div class="col-md-10 ">
+                                                            <input type="text " placeholder="Line 1* " ng-model="user.billingAddress.line1
+                        " class="form-control " ng-required="true">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row ">
-                                            <div class="customized-form ">
-                                                <div class="form-group ">
-                                                    <div class="col-md-10 ">
-                                                        <input type="text " placeholder="Line 2 " ng-model="user.billingAddress.line2
+                                            <div class="row ">
+                                                <div class="customized-form ">
+                                                    <div class="form-group ">
+                                                        <div class="col-md-10 ">
+                                                            <input type="text " placeholder="Line 2 " ng-model="user.billingAddress.line2
                         " class="form-control ">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row ">
-                                            <div class="customized-form ">
-                                                <div class="form-group ">
-                                                    <div class="col-md-10 ">
-                                                        <input type="text " placeholder="Line 3 " ng-model="user.billingAddress.line3
+                                            <div class="row ">
+                                                <div class="customized-form ">
+                                                    <div class="form-group ">
+                                                        <div class="col-md-10 ">
+                                                            <input type="text " placeholder="Line 3 " ng-model="user.billingAddress.line3
                         " class="form-control ">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row ">
-                                            <div class="customized-form ">
-                                                <div class="form-group ">
-                                                    <div class="col-md-10 ">
-                                                        <input type="text " placeholder="City* " ng-model="user.billingAddress.city
-                        " class="form-control ">
+                                            <div class="row ">
+                                                <div class="customized-form ">
+                                                    <div class="form-group ">
+                                                        <div class="col-md-10 ">
+                                                            <input type="text " placeholder="City* " ng-model="user.billingAddress.city
+                        " class="form-control " ng-required="true">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row ">
-                                            <div class="customized-form ">
-                                                <div class="form-group ">
-                                                    <div class="col-md-10 ">
-                                                        <input type="text " placeholder="Pincode " ng-model="user.billingAddress.pincode
-                        " class="form-control ">
+                                            <div class="row ">
+                                                <div class="customized-form ">
+                                                    <div class="form-group ">
+                                                        <div class="col-md-10 ">
+                                                            <input type="text " placeholder="Pincode " ng-model="user.billingAddress.pincode
+                        " class="form-control " ng-required="true">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row ">
-                                            <div class="customized-form ">
-                                                <div class="form-group ">
-                                                    <div class="col-md-10 ">
-                                                        <input type="text " placeholder="State " ng-model="user.billingAddress.state
-                        " class="form-control ">
+                                            <div class="row ">
+                                                <div class="customized-form ">
+                                                    <div class="form-group ">
+                                                        <div class="col-md-10 ">
+                                                            <input type="text " placeholder="State " ng-model="user.billingAddress.state
+                        " class="form-control " ng-required="true">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row ">
-                                            <div class="customized-form ">
-                                                <div class="form-group ">
-                                                    <div class="col-md-10 ">
-                                                        <div class=" form-control relate country-selection ">
-                                                            <i class="fa fa-angle-down pull-right " aria-hidden="true "></i>
-                                                            <select ng-model="user.billingAddress.country " class="checkout-drop
+                                            <div class="row ">
+                                                <div class="customized-form ">
+                                                    <div class="form-group ">
+                                                        <div class="col-md-10 ">
+                                                            <div class=" form-control relate country-selection ">
+                                                                <i class="fa fa-angle-down pull-right " aria-hidden="true "></i>
+                                                                <select ng-model="user.billingAddress.country " class="checkout-drop
                         relate "> 
                                                            <option style="display: none ">COUNTRY</option>
                                                             <option>INDIA</option>
                                                             <option>USA</option>
                                                             <option>LONDON</option>
                                                             </select>
-                                                        </div>
-                                                        <!--<div class="dropdown country-selection form-control custom-checkbox ">
+                                                            </div>
+                                                            <!--<div class="dropdown country-selection form-control custom-checkbox ">
                                                             <button class="btn checkout-drop dropdown-toggle " type="button
                         " data-toggle="dropdown ">Country
                                                               <i class="fa fa-angle-down pull-right " aria-hidden="true "></i></button>
@@ -315,93 +316,93 @@
                                                                 </li>
                                                             </ul>
                                                         </div>-->
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6 ">
-                                        <div class="custom-checkbox ">
-                                            <h3 class="marg0 detail-tab__head ">shipping address</h3>
-                                            <div class="checkbox ">
-                                                <input type="checkbox" id="a1 " ng-click="setDeliveryAddress() ">
-                                                <label for="a1 ">Same as BIlling Address</label>
+                                        <div class="col-md-6 ">
+                                            <div class="custom-checkbox ">
+                                                <h3 class="marg0 detail-tab__head ">shipping address</h3>
+                                                <div class="checkbox ">
+                                                    <input type="checkbox" id="a1 " ng-click="setDeliveryAddress() ">
+                                                    <label for="a1 ">Same as BIlling Address</label>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row ">
-                                            <div class="customized-form ">
-                                                <div class="form-group ">
-                                                    <div class="col-md-10 ">
-                                                        <input type="text " placeholder="Line 1* " ng-model="user.deliveryAddress.line1
+                                            <div class="row ">
+                                                <div class="customized-form ">
+                                                    <div class="form-group ">
+                                                        <div class="col-md-10 ">
+                                                            <input type="text " placeholder="Line 1* " ng-model="user.deliveryAddress.line1
+                        " class="form-control " ng-required="true">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row ">
+                                                <div class="customized-form ">
+                                                    <div class="form-group ">
+                                                        <div class="col-md-10 ">
+                                                            <input type="text " placeholder="Line 2 " ng-model="user.deliveryAddress.line2
                         " class="form-control ">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row ">
-                                            <div class="customized-form ">
-                                                <div class="form-group ">
-                                                    <div class="col-md-10 ">
-                                                        <input type="text " placeholder="Line 2 " ng-model="user.deliveryAddress.line2
+                                            <div class="row ">
+                                                <div class="customized-form ">
+                                                    <div class="form-group ">
+                                                        <div class="col-md-10 ">
+                                                            <input type="text " placeholder="Line 3 " ng-model="user.deliveryAddress.line3
                         " class="form-control ">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row ">
-                                            <div class="customized-form ">
-                                                <div class="form-group ">
-                                                    <div class="col-md-10 ">
-                                                        <input type="text " placeholder="Line 3 " ng-model="user.deliveryAddress.line3
-                        " class="form-control ">
+                                            <div class="row ">
+                                                <div class="customized-form ">
+                                                    <div class="form-group ">
+                                                        <div class="col-md-10 ">
+                                                            <input type="text " placeholder="City* " ng-model="user.deliveryAddress.city
+                        " class="form-control " ng-required='true'>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row ">
-                                            <div class="customized-form ">
-                                                <div class="form-group ">
-                                                    <div class="col-md-10 ">
-                                                        <input type="text " placeholder="City* " ng-model="user.deliveryAddress.city
-                        " class="form-control ">
+                                            <div class="row ">
+                                                <div class="customized-form ">
+                                                    <div class="form-group ">
+                                                        <div class="col-md-10 ">
+                                                            <input type="text " placeholder="Pincode " ng-model="user.deliveryAddress.pincode
+                        " class="form-control " ng-required="true">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row ">
-                                            <div class="customized-form ">
-                                                <div class="form-group ">
-                                                    <div class="col-md-10 ">
-                                                        <input type="text " placeholder="Pincode " ng-model="user.deliveryAddress.pincode
-                        " class="form-control ">
+                                            <div class="row ">
+                                                <div class="customized-form ">
+                                                    <div class="form-group ">
+                                                        <div class="col-md-10 ">
+                                                            <input type="text " placeholder="State " ng-model="user.deliveryAddress.state
+                        " class="form-control " ng-required="true">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row ">
-                                            <div class="customized-form ">
-                                                <div class="form-group ">
-                                                    <div class="col-md-10 ">
-                                                        <input type="text " placeholder="State " ng-model="user.deliveryAddress.state
-                        " class="form-control ">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row ">
-                                            <div class="customized-form ">
-                                                <div class="form-group ">
-                                                    <div class="col-md-10 ">
-                                                        <div class=" form-control relate country-selection ">
-                                                            <i class="fa fa-angle-down pull-right " aria-hidden="true "></i>
-                                                            <select class="checkout-drop relate " ng-model="user.deliveryAddress.country "> 
+                                            <div class="row ">
+                                                <div class="customized-form ">
+                                                    <div class="form-group ">
+                                                        <div class="col-md-10 ">
+                                                            <div class=" form-control relate country-selection ">
+                                                                <i class="fa fa-angle-down pull-right " aria-hidden="true "></i>
+                                                                <select class="checkout-drop relate " ng-model="user.deliveryAddress.country "> 
                                                             <option style="display: none ">COUNTRY</option>
                                                             <option>INDIA</option>
                                                             <option>USA</option>
                                                             <option>LONDON</option>
                                                             </select>
-                                                        </div>
-                                                        <!--<div class="dropdown country-selection form-control custom-checkbox ">
+                                                            </div>
+                                                            <!--<div class="dropdown country-selection form-control custom-checkbox ">
                                                             <button class="btn checkout-drop dropdown-toggle " type="button
                         " data-toggle="dropdown ">Country
                                                               <i class="fa fa-angle-down pull-right " aria-hidden="true "></i></button>
@@ -431,12 +432,13 @@
                                                                 </li>
                                                             </ul>
                                                         </div>-->
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                             <div class="details-form ">
                                 <div>
@@ -463,7 +465,7 @@
                                     </form>
                                 </div>
                                 <div class="text-center ">
-                                    <button id="ordergenerate" class="btn btn-default checkout__cont-btn " ng-click="updateAddress()">Continue</button>
+                                    <button id="ordergenerate" class="btn btn-default checkout__cont-btn " ng-click="updateAddress()" ng-disabled="!address.$valid">Continue</button>
                                 </div>
                             </div>
                         </div>

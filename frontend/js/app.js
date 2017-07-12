@@ -55,6 +55,9 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
         .state('listing-page', {
             url: "/listing-page/:id",
             templateUrl: tempateURL,
+            Params: {
+                'cat': null
+            },
             controller: 'ListingPageCtrl'
         })
         .state('individual-page', {

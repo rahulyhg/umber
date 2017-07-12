@@ -33,6 +33,14 @@ myApp.factory('ProductService', function ($http, $timeout) {
                 withCredentials: false
             }).then(callback);
         },
+        globalSearch: function (input, callback) {
+            $http({
+                url: adminurl + 'Product/globalSearch',
+                data: input,
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
 
         getProductsWithAppliedFilters: function (input, callback) {
             console.log("Get products with filters: ", input);

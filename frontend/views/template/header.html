@@ -43,8 +43,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#"><i class="fa fa-search"></i></a>
                         <div class="search-box-area">
-                            <form action="#">
-                                <input type="search" placeholder="search">
+                            <form>
+                                <input type="search" placeholder="search" ng-keypress="search($event,keyword)" ng-model="keyword">
                             </form>
                         </div>
                     </li>
@@ -216,14 +216,14 @@
                 <!--<div ng-if="view == 'casulShirts'">-->
                 <div class="sub-categorie">
                     <ul class="list-unstyled list-inline">
-                        <li ng-repeat="subCategory in subCategories"><a>{{subCategory.name}}</a></li>
+                        <li ng-repeat="subCategory in subCategories" ui-sref="listing-page({id: id, cat:subCategory._id})"><a>{{subCategory.name}}</a></li>
 
 
                     </ul>
 
                 </div>
                 <!--</div>-->
-                <div ng-if="view == 'trousers'">
+                <!-- <div ng-if="view == 'trousers'">
                     <div class="sub-categorie">
                         <ul class="list-unstyled list-inline">
                             <li>inner test2</li>
@@ -271,7 +271,7 @@
                             <li>inner test6</li>
                         </ul>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <div class="man-img hidden-xs">

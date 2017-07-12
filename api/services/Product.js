@@ -1203,7 +1203,7 @@ var model = {
         ];
         return pipeline;
     },
-
+    //data.keyword
     globalSearch: function (data, callback) {
         var pipeLine = Product.getAggregatePipeLine(data);
         Product.aggregate(pipeLine, function (err, found) {
