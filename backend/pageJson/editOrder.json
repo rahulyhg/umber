@@ -1,158 +1,19 @@
 {
-    "title": "Edit Ordr",
+    "title": "Edit Order",
     "name": "Order",
-    "jsonPage": "viewOeder",
+    "jsonPage": "viewOrder",
     "desciption": "",
     "pageType": "edit",
     "urlFields": ["_id"],
     "fields": [{
             "name": "Order No",
-            "type": "number",
+            "type": "text",
             "tableRef": "orderNo",
             "placeholder": "Enter order No",
             "id": "orderNo",
             "validation": ["", "trim", "unique"],
             "url": ""
         }, {
-            "name": "Billing Address",
-            "type": "box",
-            "tableRef": "billingAddress",
-            "validation": ["required", "trim", ""],
-            "fields": [{
-                "name": "line1",
-                "type": "text",
-                "tableRef": "line1",
-                "placeholder": "Enter line1",
-                "id": "line1",
-                "validation": ["", "trim", ""],
-                "url": "",
-                "onView": true
-            }, {
-                "name": "line2",
-                "type": "text",
-                "tableRef": "line2",
-                "placeholder": "Enter line2",
-                "id": "line2",
-                "validation": ["", "trim", ""],
-                "url": "",
-                "onView": true
-            }, {
-                "name": "line3",
-                "type": "text",
-                "tableRef": "line3",
-                "placeholder": "Enter line3",
-                "id": "line3",
-                "validation": ["", "trim", ""],
-                "url": "",
-                "onView": true
-            }, {
-                "name": "city",
-                "type": "text",
-                "tableRef": "city",
-                "placeholder": "Enter city",
-                "id": "city",
-                "validation": ["", "trim", ""],
-                "url": "",
-                "onView": true
-            }, {
-                "name": "state",
-                "type": "text",
-                "tableRef": "state",
-                "placeholder": "Enter state",
-                "id": "state",
-                "validation": ["", "trim", ""],
-                "url": "",
-                "onView": true
-            }, {
-                "name": "pincode",
-                "type": "number",
-                "tableRef": "pincode",
-                "placeholder": "Enter pincode",
-                "id": "pincode",
-                "validation": ["", "trim", ""],
-                "url": "",
-                "onView": true
-            }, {
-                "name": "country",
-                "type": "text",
-                "tableRef": "country",
-                "placeholder": "Enter country",
-                "id": "country",
-                "validation": ["", "trim", ""],
-                "url": "",
-                "onView": true
-            }]
-        }, {
-            "name": "Shipping Address",
-            "type": "box",
-            "tableRef": "billingAddress",
-            "validation": ["required", "trim", ""],
-            "fields": [{
-                "name": "line1",
-                "type": "text",
-                "tableRef": "line1",
-                "placeholder": "Enter line1",
-                "id": "line1",
-                "validation": ["", "trim", ""],
-                "url": "",
-                "onView": true
-            }, {
-                "name": "line2",
-                "type": "text",
-                "tableRef": "line2",
-                "placeholder": "Enter line2",
-                "id": "line2",
-                "validation": ["", "trim", ""],
-                "url": "",
-                "onView": true
-            }, {
-                "name": "line3",
-                "type": "text",
-                "tableRef": "line3",
-                "placeholder": "Enter line3",
-                "id": "line3",
-                "validation": ["", "trim", ""],
-                "url": "",
-                "onView": true
-            }, {
-                "name": "city",
-                "type": "text",
-                "tableRef": "city",
-                "placeholder": "Enter city",
-                "id": "city",
-                "validation": ["", "trim", ""],
-                "url": "",
-                "onView": true
-            }, {
-                "name": "state",
-                "type": "text",
-                "tableRef": "state",
-                "placeholder": "Enter state",
-                "id": "state",
-                "validation": ["", "trim", ""],
-                "url": "",
-                "onView": true
-            }, {
-                "name": "pincode",
-                "type": "number",
-                "tableRef": "pincode",
-                "placeholder": "Enter pincode",
-                "id": "pincode",
-                "validation": ["", "trim", ""],
-                "url": "",
-                "onView": true
-            }, {
-                "name": "country",
-                "type": "text",
-                "tableRef": "country",
-                "placeholder": "Enter country",
-                "id": "country",
-                "validation": ["", "trim", ""],
-                "url": "",
-                "onView": true
-            }]
-        },
-        {
             "name": "User",
             "type": "tags",
             "tableRef": "user",
@@ -167,58 +28,48 @@
         {
             "name": "Products",
             "type": "box",
-            "tableRef": "billingAddress",
+            "tableRef": "products",
             "validation": ["required", "trim", ""],
             "fields": [{
-                    "name": "Product",
-                    "type": "text",
-                    "tableRef": "product",
-                    "placeholder": "Enter product",
-                    "id": "product",
-                    "validation": ["", "trim", ""],
-                    "url": "",
-                    "onView": true
-                }, {
-                    "name": "Quantity",
-                    "type": "number",
-                    "tableRef": "quantity",
-                    "placeholder": "Enter quantity",
-                    "id": "quantity",
-                    "validation": ["", "trim", ""],
-                    "url": "",
-                    "onView": true
-                }, {
-                    "name": "Price",
-                    "type": "number",
-                    "tableRef": "price",
-                    "placeholder": "Enter price",
-                    "id": "price",
-                    "validation": ["", "trim", ""],
-                    "url": "",
-                    "onView": true
-                }, {
-                    "name": "Status",
-                    "type": "tags",
-                    "tableRef": "status",
-                    "placeholder": "Enter Status",
-                    "id": "status",
-                    "validation": ["", "trim", ""],
-                    "url": "",
-                    "dropDownField": "",
-                    "dropDownType": "single",
-                    "dropDown": ["accept", "returned", "cancelled"]
-                },
-                {
-                    "name": "Product",
-                    "type": "text",
-                    "tableRef": "product",
-                    "placeholder": "Enter product",
-                    "id": "product",
-                    "validation": ["", "trim", ""],
-                    "url": "",
-                    "onView": true
-                }
-            ]
+                "name": "Product",
+                "type": "text",
+                "tableRef": "product",
+                "placeholder": "Enter product",
+                "dropDownField": "productName",
+                "id": "product",
+                "validation": ["", "trim", ""],
+                "url": "",
+                "onView": true
+            }, {
+                "name": "Quantity",
+                "type": "number",
+                "tableRef": "quantity",
+                "placeholder": "Enter quantity",
+                "id": "quantity",
+                "validation": ["", "trim", ""],
+                "url": "",
+                "onView": true
+            }, {
+                "name": "Price",
+                "type": "number",
+                "tableRef": "price",
+                "placeholder": "Enter price",
+                "id": "price",
+                "validation": ["", "trim", ""],
+                "url": "",
+                "onView": true
+            }, {
+                "name": "Status",
+                "type": "tags",
+                "tableRef": "status",
+                "placeholder": "Enter Status",
+                "id": "status",
+                "validation": ["", "trim", ""],
+                "url": "",
+                "dropDownField": "",
+                "dropDownType": "single",
+                "dropDown": ["accept", "returned", "cancelled"]
+            }]
         },
         {
             "name": "Total Amount",
@@ -272,16 +123,15 @@
             "tableRef": "returnedProducts",
             "validation": ["required", "trim", ""],
             "fields": [{
-                    "name": "product",
-                    "type": "tags",
+                    "name": "Product",
+                    "type": "text",
                     "tableRef": "product",
-                    "placeholder": "Select product",
-                    "id": "product",
+                    "placeholder": "Enter product",
                     "dropDownField": "productName",
-                    "dropDownType": "single",
-                    "searchApi": "searchCall",
-                    "url": "Product/search",
-                    "validation": ["", "trim", ""]
+                    "id": "product",
+                    "validation": ["", "trim", ""],
+                    "url": "",
+                    "onView": true
                 }, {
                     "name": "Quantity",
                     "type": "number",

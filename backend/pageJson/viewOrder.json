@@ -64,7 +64,7 @@
         "icon": "delete",
         "class": "btn-warning",
         "type": "redirect",
-        "action": "excel-upload/Buythelook",
+        "action": "excel-upload/Order",
         "linkType": "internal"
     }],
     "apiCall": {
