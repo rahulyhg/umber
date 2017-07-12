@@ -45,7 +45,7 @@
          ListingService.retriveProductsWithCategory(function (data) {
 
              if (data.data.data.length == 0) {
-                 $scope.displayMessage = "No Data Found";
+                 $scope.displayMessage = "No Product Found";
                  $scope.products = ""
 
              } else if (!_.isEmpty(data.data.data)) {
@@ -400,6 +400,6 @@
      };
      //End of  modal on quck view button
      if (_.isEmpty($scope.products))
-         $scope.displayMessage = "No Data Found";
+         $scope.displayMessage = "No Product Found";
 
  })

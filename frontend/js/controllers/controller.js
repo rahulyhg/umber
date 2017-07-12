@@ -355,7 +355,7 @@ myApp
             if (data.data.data) {
                 $scope.brands = data.data.data;
             } else {
-                $scope.message = "No Data Found";
+                $scope.message = "No Product Found";
             }
         })
 
