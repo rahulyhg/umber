@@ -14,6 +14,9 @@ var schema = new Schema({
     status: String
 });
 
+schema.plugin(URLSlugs('name'), {
+    update: true
+});
 schema.plugin(deepPopulate, {});
 schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
@@ -61,6 +64,22 @@ var model = {
     getCategoryWithId: function (data, callback) {
         HomeCategory.find({
             '_id': data
+        }).exec(function (err, data) {
+            if (err) {
+                callback(err, null);
+            } else if (data) {
+                callback(null, data);
+            } else {
+                callback({
+                    message: "Incorrect Credentials!"
+                }, null);
+            }
+        });
+    },
+
+    getCategoryByName: function (data, callback) {
+        HomeCategory.findOne({
+            name: data.name
         }).exec(function (err, data) {
             if (err) {
                 callback(err, null);

@@ -5,7 +5,6 @@ var schema = new Schema({
         unique: true,
         uniqueCaseInsensitive: true
     },
-    //urlSlug: String,
     imgLink: String,
     category: {
         type: Schema.Types.ObjectId,
@@ -14,12 +13,17 @@ var schema = new Schema({
     status: String
 });
 
+
+
 schema.plugin(deepPopulate, {
     populate: {
         category: {
             select: "name"
         }
     }
+});
+schema.plugin(URLSlugs('name'), {
+    update: true
 });
 schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
@@ -55,6 +59,22 @@ var model = {
     getAllCategories: function (callback) {
         Category.find().exec(function (err, categories) {
             callback(err, categories);
+        });
+    },
+
+    getCategoryByName: function (data, callback) {
+        Category.findOne({
+            name: data.name
+        }).exec(function (err, data) {
+            if (err) {
+                callback(err, null);
+            } else if (data) {
+                callback(null, data);
+            } else {
+                callback({
+                    message: "Incorrect Credentials!"
+                }, null);
+            }
         });
     }
 };
