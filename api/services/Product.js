@@ -802,166 +802,168 @@ var model = {
     // req.body-> {appliedFilters: {key: [val1, val2, ...], key1: [val1, val2, ..], ..}, page: n}
     // Converts this object into queryable object
     getProductsWithFilters: function (filters, callback) {
-        console.log("Filters: ", filters);
+        console.log("Filters: ", filters.appliedFilters.slug[0]);
         if (!filters.page) {
             filters.page = 1;
         }
-        async.waterfall([
-                function applyFilters(cbWaterfall1) {
-                    console.log("filters: ", filters);
+        Category.findOne({
+            slug: filters.appliedFilters.slug[0]
+        }).exec(function (err, category) {
+            if (!_.isEmpty(category)) {
+                async.waterfall([
+                        function applyFilters(cbWaterfall1) {
+                            console.log("filters: ", filters);
 
-                    var pipeline = [];
-                    var filterType = [];
-                    var filterCategory = [];
-                    var filterCollection = [];
-                    var filterColor = [];
-                    var filterSize = [];
-                    var filterFabric = [];
+                            var pipeline = [];
+                            var filterType = [];
+                            var filterCategory = [];
+                            var filterCollection = [];
+                            var filterColor = [];
+                            var filterSize = [];
+                            var filterFabric = [];
+                            filterCategory.push(ObjectId(category._id));
+                            // _.each(filters.appliedFilters.category, function (cat) {
+                            //     filterCategory.push(ObjectId(cat));
+                            // });
+                            _.each(filters.appliedFilters.type, function (type) {
+                                filterType.push(ObjectId(type));
+                            });
+                            _.each(filters.appliedFilters.color, function (color) {
+                                filterColor.push(ObjectId(color));
+                            });
+                            _.each(filters.appliedFilters.collection, function (collection) {
+                                filterCollection.push(ObjectId(collection));
+                            });
+                            _.each(filters.appliedFilters.size, function (size) {
+                                filterSize.push(ObjectId(size));
+                            });
+                            _.each(filters.appliedFilters.fabric, function (fabric) {
+                                filterFabric.push(ObjectId(fabric));
+                            });
 
-                    _.each(filters.appliedFilters.category, function (cat) {
-                        filterCategory.push(ObjectId(cat));
-                    });
-                    _.each(filters.appliedFilters.type, function (type) {
-                        filterType.push(ObjectId(type));
-                    });
-                    _.each(filters.appliedFilters.color, function (color) {
-                        filterColor.push(ObjectId(color));
-                    });
-                    _.each(filters.appliedFilters.collection, function (collection) {
-                        filterCollection.push(ObjectId(collection));
-                    });
-                    _.each(filters.appliedFilters.size, function (size) {
-                        filterSize.push(ObjectId(size));
-                    });
-                    _.each(filters.appliedFilters.fabric, function (fabric) {
-                        filterFabric.push(ObjectId(fabric));
-                    });
-
-                    // old code is here
+                            // old code is here
 
 
-                    if (!_.isEmpty(filters.appliedFilters.category)) {
+                            if (!_.isEmpty(category)) {
 
-                        pipeline.push({
-                            $match: {
-                                "category": {
-                                    $in: filterCategory
+                                pipeline.push({
+                                    $match: {
+                                        "category": {
+                                            $in: filterCategory
+                                        }
+                                    }
+                                });
+                            }
+                            if (!_.isEmpty(filters.appliedFilters.type)) {
+
+                                pipeline.push({
+                                    $match: {
+                                        "type": {
+                                            $in: filterType
+                                        }
+                                    }
+                                });
+                            }
+                            if (!_.isEmpty(filters.appliedFilters.color)) {
+
+                                pipeline.push({
+                                    $match: {
+                                        "color": {
+                                            $in: filterColor
+                                        },
+                                    }
+                                })
+                            }
+                            if (!_.isEmpty(filters.appliedFilters.collection)) {
+
+                                pipeline.push({
+                                    $match: {
+                                        "prodCollection": {
+                                            $in: filterCollection
+                                        }
+                                    }
+                                });
+                            }
+                            if (!_.isEmpty(filters.appliedFilters.size)) {
+
+                                pipeline.push({
+                                    $match: {
+                                        "size": {
+                                            $in: filterSize
+                                        }
+                                    }
+                                });
+                            }
+                            if (!_.isEmpty(filters.appliedFilters.fabric)) {
+
+                                pipeline.push({
+                                    $match: {
+                                        "fabric": {
+                                            $in: filterFabric
+                                        }
+                                    }
+                                });
+                            }
+
+                            pipeline.push({
+                                $sort: {
+                                    createdAt: -1
                                 }
-                            }
-                        });
-                    }
-                    if (!_.isEmpty(filters.appliedFilters.type)) {
-
-                        pipeline.push({
-                            $match: {
-                                "type": {
-                                    $in: filterType
+                            });
+                            pipeline.push({
+                                $group: {
+                                    _id: '$productId'
                                 }
-                            }
-                        });
-                    }
-                    if (!_.isEmpty(filters.appliedFilters.color)) {
-
-                        pipeline.push({
-                            $match: {
-                                "color": {
-                                    $in: filterColor
-                                },
-                            }
-                        })
-                    }
-                    if (!_.isEmpty(filters.appliedFilters.collection)) {
-
-                        pipeline.push({
-                            $match: {
-                                "prodCollection": {
-                                    $in: filterCollection
+                            });
+                            pipeline.push({
+                                $project: {
+                                    productId: '$_id'
                                 }
-                            }
-                        });
-                    }
-                    if (!_.isEmpty(filters.appliedFilters.size)) {
+                            });
+                            Product.aggregate(pipeline).
+                            skip((filters.page - 1) * Config.maxRow).limit(Config.maxRow).exec(function (err, products) {
 
-                        pipeline.push({
-                            $match: {
-                                "size": {
-                                    $in: filterSize
-                                }
-                            }
-                        });
-                    }
-                    if (!_.isEmpty(filters.appliedFilters.fabric)) {
-
-                        pipeline.push({
-                            $match: {
-                                "fabric": {
-                                    $in: filterFabric
-                                }
-                            }
-                        });
-                    }
-
-                    pipeline.push({
-                        $sort: {
-                            createdAt: -1
+                                cbWaterfall1(err, products);
+                            });
+                        },
+                        function getProductDetails(products, cbWaterfall2) {
+                            var filteredProductsDetails = [];
+                            async.each(products, function (product, eachCallback) {
+                                Product.getProductDetails(product, function (err, productDetails) {
+                                    if (productDetails && !_.isEmpty(productDetails))
+                                        filteredProductsDetails.push(productDetails);
+                                    eachCallback(err, productDetails);
+                                });
+                            }, function (err) {
+                                cbWaterfall2(err, filteredProductsDetails);
+                            });
+                        },
+                        function getProductFilters(products, cbWaterfall3) {
+                            var data = {};
+                            data.products = [];
+                            var filterDetails = {};
+                            filterDetails.products = products;
+                            async.each(products, function (product, eachCallback) {
+                                data.products.push(product.productId);
+                                eachCallback(null);
+                            }, function (err) {
+                                data.slug = filters.appliedFilters.slug[0];
+                                Product.getFiltersWithCategory(data, function (err, filters) {
+                                    if (filters && !_.isEmpty(filters)) {
+                                        filterDetails.filters = filters;
+                                    }
+                                    cbWaterfall3(null, filterDetails);
+                                });
+                            });
                         }
+                    ],
+                    function (err, products) {
+                        callback(err, products);
                     });
-                    pipeline.push({
-                        $group: {
-                            _id: '$productId'
-                        }
-                    });
-                    pipeline.push({
-                        $project: {
-                            productId: '$_id'
-                        }
-                    });
-
-
-
-
-
-
-                    Product.aggregate(pipeline).
-                    skip((filters.page - 1) * Config.maxRow).limit(Config.maxRow).exec(function (err, products) {
-
-                        cbWaterfall1(err, products);
-                    });
-                },
-                function getProductDetails(products, cbWaterfall2) {
-                    var filteredProductsDetails = [];
-                    async.each(products, function (product, eachCallback) {
-                        Product.getProductDetails(product, function (err, productDetails) {
-                            if (productDetails && !_.isEmpty(productDetails))
-                                filteredProductsDetails.push(productDetails);
-                            eachCallback(err, productDetails);
-                        });
-                    }, function (err) {
-                        cbWaterfall2(err, filteredProductsDetails);
-                    });
-                },
-                function getProductFilters(products, cbWaterfall3) {
-                    var data = {};
-                    data.products = [];
-                    var filterDetails = {};
-                    filterDetails.products = products;
-                    async.each(products, function (product, eachCallback) {
-                        data.products.push(product.productId);
-                        eachCallback(null);
-                    }, function (err) {
-                        data.category = filters.appliedFilters.category[0];
-                        Product.getFiltersWithCategory(data, function (err, filters) {
-                            if (filters && !_.isEmpty(filters)) {
-                                filterDetails.filters = filters;
-                            }
-                            cbWaterfall3(null, filterDetails);
-                        });
-                    });
-                }
-            ],
-            function (err, products) {
-                callback(err, products);
-            });
+            } else {
+                callback("Invalid category", null);
+            }
+        });
     },
 
     subtractQuantity: function (products, callback) {

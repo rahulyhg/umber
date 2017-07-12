@@ -32,6 +32,7 @@
      })
      /******getting products based on category******* */
      $scope.filteredProducts = function (selectedCategory) {
+         $.jStorage.deleteKey("appliedFilters");
          if ($.jStorage.get("selectedCategory") && selectedCategory != $.jStorage.get("selectedCategory").slug) {
              $.jStorage.deleteKey("appliedFilters");
          }
@@ -137,7 +138,7 @@
 
          appliedFilters = $.jStorage.get('appliedFilters') ? $.jStorage.get('appliedFilters') : {
              appliedFilters: {
-                 category: [],
+                 slug: [],
                  type: [],
                  style: [],
                  color: [],
@@ -148,7 +149,7 @@
          };
          console.log(filter, key);
          var cat = $.jStorage.get("selectedCategory").slug;
-         appliedFilters.appliedFilters.category = [cat];
+         appliedFilters.appliedFilters.slug = [cat];
 
          var result = _.indexOf(appliedFilters.appliedFilters[key], filter._id);
          console.log("check result", result)
