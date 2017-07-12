@@ -440,20 +440,24 @@ var model = {
     // For listing page
     // This function will retrieve products grouped by product id and 
     // with available details
-    // req-> {category: category._id}
+    // req-> {category: category.slug}
     getProductsWithCategory: function (data, callback) {
         if (!data.page) {
             data.page = 1;
         }
+
         async.waterfall([
+            function getCategoryBySlug(callback) {
+                Category.getCategoryBySlug(data, callback);
+            },
             // Gets all the unique product ids related to the category
-            function getCategoryProducts(callback1) {
+            function getCategoryProducts(category, callback1) {
                 var pipeline = [];
                 // If category filter is applied
-                if (data.category)
+                if (category)
                     pipeline.push({
                         $match: {
-                            category: mongoose.Types.ObjectId(data.category)
+                            category: mongoose.Types.ObjectId(category._id)
                         }
                     });
                 // Get products sorted on creation date
@@ -516,86 +520,91 @@ var model = {
     // Function to retrieve filters on listing page
     // req -> {category: category._id}
     getFiltersWithCategory: function (data, callback) {
-        var match = {
-            category: mongoose.Types.ObjectId(data.category)
-        };
+        console.log("Filters with category data: ", data);
+        Category.findOne({
+            slug: data.slug
+        }).exec(function (err, category) {
+            var match = {
+                category: mongoose.Types.ObjectId(category._id)
+            };
 
-        if (data.products) {
-            match.productId = {
-                $in: data.products
-            }
-        }
-
-        async.parallel({
-                types: function (cbParallel1) {
-                    Product.distinct("type", match).exec(function (err, types) {
-                        Type.find({
-                            _id: {
-                                $in: types
-                            }
-                        }).sort("name").exec(cbParallel1);
-                    });
-                },
-                collections: function (cbParallel2) {
-                    Product.distinct("prodCollection", match).exec(function (err, collections) {
-                        Collection.find({
-                            _id: {
-                                $in: collections
-                            }
-                        }).sort("name").exec(cbParallel2);
-                    });
-                },
-                sizes: function (cbParallel3) {
-                    Product.distinct("size", match).exec(function (err, sizes) {
-                        Size.find({
-                            _id: {
-                                $in: sizes
-                            }
-                        }).sort("name").exec(cbParallel3);
-                    });
-                },
-                colors: function (cbParallel4) {
-                    Product.distinct("color", match).exec(function (err, colors) {
-                        BaseColor.find({
-                            _id: {
-                                $in: colors
-                            }
-                        }).sort("name").exec(cbParallel4);
-                    });
-                },
-                fabrics: function (cbParallel5) {
-                    Product.distinct("fabric", match).exec(function (err, fabrics) {
-                        Fabric.find({
-                            _id: {
-                                $in: fabrics
-                            }
-                        }).sort("name").exec(cbParallel5);
-                    });
-                },
-                priceRange: function (cbParallel6) {
-                    Product.aggregate([{
-                        $match: match
-                    }, {
-                        $group: {
-                            _id: null,
-                            min: {
-                                $min: '$price'
-                            },
-                            max: {
-                                $max: '$price'
-                            }
-                        }
-                    }]).exec(cbParallel6);
-                },
-                styles: function (cbParallel7) {
-                    Product.distinct("style", match).exec(function (err, styles) {
-                        cbParallel7(err, styles);
-                    });
+            if (data.products) {
+                match.productId = {
+                    $in: data.products
                 }
-            },
-            function (err, filters) {
-                callback(err, filters);
-            });
+            }
+
+            async.parallel({
+                    types: function (cbParallel1) {
+                        Product.distinct("type", match).exec(function (err, types) {
+                            Type.find({
+                                _id: {
+                                    $in: types
+                                }
+                            }).sort("name").exec(cbParallel1);
+                        });
+                    },
+                    collections: function (cbParallel2) {
+                        Product.distinct("prodCollection", match).exec(function (err, collections) {
+                            Collection.find({
+                                _id: {
+                                    $in: collections
+                                }
+                            }).sort("name").exec(cbParallel2);
+                        });
+                    },
+                    sizes: function (cbParallel3) {
+                        Product.distinct("size", match).exec(function (err, sizes) {
+                            Size.find({
+                                _id: {
+                                    $in: sizes
+                                }
+                            }).sort("name").exec(cbParallel3);
+                        });
+                    },
+                    colors: function (cbParallel4) {
+                        Product.distinct("color", match).exec(function (err, colors) {
+                            BaseColor.find({
+                                _id: {
+                                    $in: colors
+                                }
+                            }).sort("name").exec(cbParallel4);
+                        });
+                    },
+                    fabrics: function (cbParallel5) {
+                        Product.distinct("fabric", match).exec(function (err, fabrics) {
+                            Fabric.find({
+                                _id: {
+                                    $in: fabrics
+                                }
+                            }).sort("name").exec(cbParallel5);
+                        });
+                    },
+                    priceRange: function (cbParallel6) {
+                        Product.aggregate([{
+                            $match: match
+                        }, {
+                            $group: {
+                                _id: null,
+                                min: {
+                                    $min: '$price'
+                                },
+                                max: {
+                                    $max: '$price'
+                                }
+                            }
+                        }]).exec(cbParallel6);
+                    },
+                    styles: function (cbParallel7) {
+                        Product.distinct("style", match).exec(function (err, styles) {
+                            cbParallel7(err, styles);
+                        });
+                    }
+                },
+                function (err, filters) {
+                    callback(err, filters);
+                });
+        });
     },
 
     getAllProducts: function (data, callback) {
@@ -1203,7 +1212,7 @@ var model = {
         ];
         return pipeline;
     },
-
+    //data.keyword
     globalSearch: function (data, callback) {
         var pipeLine = Product.getAggregatePipeLine(data);
         Product.aggregate(pipeLine, function (err, found) {

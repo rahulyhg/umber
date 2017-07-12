@@ -49,11 +49,20 @@ var model = {
     },
 
     getCategoriesWithParent: function (data, callback) {
-        Category.find({
-            category: mongoose.Types.ObjectId(data.category)
-        }).exec(function (err, categories) {
-            callback(err, categories);
-        });
+        console.log("Category with parent: ", data);
+        HomeCategory.findOne({
+            slug: data.slug
+        }).exec(function (err, category) {
+            if (!_.isEmpty(category)) {
+                Category.find({
+                    category: mongoose.Types.ObjectId(category._id)
+                }).exec(function (err, categories) {
+                    callback(err, categories);
+                });
+            } else {
+                callback("No Primary category found", null);
+            }
+        })
     },
 
     getAllCategories: function (callback) {
@@ -76,6 +85,16 @@ var model = {
                 }, null);
             }
         });
+    },
+
+    getCategoryBySlug: function (data, callback) {
+        if (data.slug) {
+            Category.findOne({
+                slug: data.slug
+            }).exec(callback);
+        } else {
+            callback("Invalid parameters", null);
+        }
     }
 };
 module.exports = _.assign(module.exports, exports, model);
