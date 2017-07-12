@@ -23,21 +23,20 @@
      //  });
      var parentCat = $stateParams.id;
      var data = {
-         category: $stateParams.id
+         slug: $stateParams.id
      }
      CategoryService.getCategoryWithParent(data, function (data) {
          console.log("cat from parentctrl", data)
          $scope.categories = data.data.data;
-         $scope.filteredProducts($scope.categories[0]._id)
+         $scope.filteredProducts($scope.categories[0].slug)
      })
      /******getting products based on category******* */
      $scope.filteredProducts = function (selectedCategory) {
-         if ($.jStorage.get("selectedCategory") && selectedCategory != $.jStorage.get("selectedCategory").category) {
+         if ($.jStorage.get("selectedCategory") && selectedCategory != $.jStorage.get("selectedCategory").slug) {
              $.jStorage.deleteKey("appliedFilters");
          }
          var input = {
-
-             "category": selectedCategory,
+             "slug": selectedCategory,
              "page": 1
          }
          $.jStorage.set("selectedCategory", input);
@@ -79,7 +78,7 @@
          })
      }
      if ($.jStorage.get('selectedCategory')) {
-         $scope.filteredProducts($.jStorage.get('selectedCategory').category)
+         $scope.filteredProducts($.jStorage.get('selectedCategory').slug)
      }
      $rootScope.clickfun = function (product) {
          console.log(product)
@@ -132,7 +131,6 @@
      $scope.gotoComparePage = function () {
          $state.go("compare-products");
      }
-     //  console.log("******************************************sl", $.jStorage.get("selectedCategory").category);
      var appliedFilters = {};
      /*******retriving products based on filters********* */
      $scope.applyFilters = function (key, filter) {
@@ -149,8 +147,7 @@
              }
          };
          console.log(filter, key);
-         console.log("******************************************sl", $.jStorage.get("selectedCategory").category);
-         var cat = $.jStorage.get("selectedCategory").category;
+         var cat = $.jStorage.get("selectedCategory").slug;
          appliedFilters.appliedFilters.category = [cat];
 
          var result = _.indexOf(appliedFilters.appliedFilters[key], filter._id);
@@ -200,11 +197,9 @@
      /********check selected category******** */
      $scope.checkRadioCategory = function (catid) {
          if ($.jStorage.get("selectedCategory"))
-             var selectedId = $.jStorage.get("selectedCategory").category;
+             var selectedId = $.jStorage.get("selectedCategory").slug;
 
          if (selectedId) {
-
-
              if (selectedId == catid) {
                  return true;
              } else {

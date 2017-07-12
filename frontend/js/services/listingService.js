@@ -12,11 +12,10 @@ myApp.service('ListingService', function ($http, WishlistService, BannerService,
 
     this.retriveFiltersWithCategory = function (callback) {
         var input = {
-            category: $.jStorage.get("selectedCategory").category
+            slug: $.jStorage.get("selectedCategory").slug
         }
         ProductService.getFiltersWithCategory(input, function (data) {
             callback(data);
-
         })
     }
 })

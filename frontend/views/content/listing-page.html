@@ -28,8 +28,8 @@
                             </div>-->
                             <div class="checkbox" ng-repeat="category in categories">
                                 <div class="radio">
-                                    <input type="radio" class="form-control" name="category" id="{{category._id}}" ng-checked="checkRadioCategory(category._id)"
-                                        value="{{category.name}}" ng-click="filteredProducts(category._id)">
+                                    <input type="radio" class="form-control" name="category" id="{{category._id}}" ng-checked="checkRadioCategory(category.slug)"
+                                        value="{{category.name}}" ng-click="filteredProducts(category.slug)">
                                     <label for="{{category._id}}"> <span ></span>{{category.name}}
                                          
                                        </label>
