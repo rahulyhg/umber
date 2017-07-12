@@ -343,11 +343,12 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
 
     })
 
-    .controller('DetailCtrl', function ($scope, TemplateService, NavigationService, JsonService, $timeout, $state, $stateParams, toastr) {
+    .controller('DetailCtrl', function ($rootScope, $scope, TemplateService, NavigationService, JsonService, $timeout, $state, $stateParams, toastr) {
         $scope.json = JsonService;
         JsonService.setKeyword($stateParams.keyword);
         $scope.template = TemplateService;
         $scope.data = {};
+        $rootScope.pageTitle = $scope.json.json.name;
 
         //  START FOR EDIT
         if ($scope.json.json.preApi) {
@@ -392,7 +393,7 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
         };
     })
 
-    .controller('DetailFieldCtrl', function ($scope, TemplateService, NavigationService, JsonService, $timeout, $state, $stateParams, $uibModal, toastr) {
+    .controller('DetailFieldCtrl', function ($rootScope, $scope, TemplateService, NavigationService, JsonService, $timeout, $state, $stateParams, $uibModal, toastr) {
         if (!$scope.type.type) {
             $scope.type.type = "text";
         }
@@ -465,23 +466,26 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
                         console.log($scope.formData[$scope.type.tableRef][$scope.type.tableValue]);
                         $scope.model = $scope.formData[$scope.type.tableRef][$scope.type.tableValue];
                     } else {
+                        console.log("TableRef: ", $scope.type.tableRef);
                         $scope.model = $scope.formData[$scope.type.tableRef];
                         // This is for edit buy the look page.
                         // In edit buy the look, only product ids stored in documents are retrieved.
                         // So to retrieve it's details we need to get the product details with help of it's id.
-                        if ($scope.model[0].product && !$scope.model[0].product.images) {
-                            var oldProducts = $scope.model;
-                            $scope.model = [];
-                            for (var idx = 0; idx < oldProducts.length; idx++) {
-                                // get product details
-                                NavigationService.apiCall('Product/getProductDetails', oldProducts[idx].product, function (data) {
-                                    if (data.value) {
-                                        // In box.html product details are stored in product object
-                                        var product = {};
-                                        product.product = data.data;
-                                        $scope.model.push(product);
-                                    }
-                                });
+                        if ($rootScope.pageTitle == 'Buythelook') {
+                            if ($scope.model[0].product && !$scope.model[0].product.images) {
+                                var oldProducts = $scope.model;
+                                $scope.model = [];
+                                for (var idx = 0; idx < oldProducts.length; idx++) {
+                                    // get product details
+                                    NavigationService.apiCall('Product/getProductDetails', oldProducts[idx].product, function (data) {
+                                        if (data.value) {
+                                            // In box.html product details are stored in product object
+                                            var product = {};
+                                            product.product = data.data;
+                                            $scope.model.push(product);
+                                        }
+                                    });
+                                }
                             }
                         }
                     }

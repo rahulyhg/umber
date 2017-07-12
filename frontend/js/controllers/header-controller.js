@@ -1,5 +1,5 @@
 myApp.controller('headerCtrl', function ($scope, NavigationService, $state, WishlistService,
-        TemplateService, CartService, UserService, $uibModal, CategoryService) {
+        TemplateService, CartService, UserService, $uibModal, CategoryService, ProductService) {
         $scope.template = TemplateService;
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             $(window).scrollTop(0);
@@ -34,6 +34,20 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
                 // windowClass: 'modal-content-radi0'
             });
         };
+        // $scope.search = function ($event) {
+        //     console.log($event.charCode)
+
+        //     if ($event.charCode === 13) {
+        //         // Do that thing you finally wanted to do
+
+        //         var data = {};
+        //         data.keyword = $scope.keyword;
+        //         ProductService.globalSearch(data, function (data) {
+        //             console.log(data);
+        //         })
+        //     }
+
+        // };
 
         $scope.logout = function () {
 
@@ -146,6 +160,7 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
 
         $scope.getSubCategories = function (category) {
             var data = {};
+            $scope.id = category._id;
             data.category = category._id;
             CategoryService.getCategoryWithParent(data, function (data) {
                 console.log("subcatretrived", data);

@@ -925,8 +925,12 @@
                         }
 
                         .listing-dropdown {
-                            .dropdown-menu {
+                            .listing-dropdown-menu {
                                 min-width: 215px;
+                                @extend .dropdown-hidden-anim;
+                            }
+                            .open .listing-dropdown-menu {
+                                @extend .dropdown-visible-anim;
                             }
                         }
 
