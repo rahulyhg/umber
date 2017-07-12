@@ -84,29 +84,39 @@
                         <div>
                             <form class="modal__customized-form" name="registerForm">
                                 <div class="form-group">
-                                    <input type="text" placeholder="First Name" ng-model="formData.firstname" class="form-control" required>
+                                    <input type="text" placeholder="First Name" name="firstname" ng-model="formData.firstname" class="form-control" required
+                                        uib-popover="{{registerForm.firstname.$touched && registerForm.firstname.$error.required}}"
+                                        popover-title="Please enter your first name" popover-placement="bottom" popover-class="login-popover">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" placeholder="Last Name" ng-model="formData.lastname" class="form-control" required>
+                                    <input type="text" placeholder="Last Name" name="lastname" ng-model="formData.lastname" class="form-control" required uib-popover="{{registerForm.lastname.$touched && registerForm.lastname.$invalid.required}}}"
+                                        popover-title="Please enter your last name" popover-placement="bottom" popover-class="login-popover">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" placeholder="Email Address" ng-model="formData.email" class="form-control" required>
+                                    <input type="email" placeholder="Email Address" name="email" ng-model="formData.email" class="form-control" required uib-popover="{{registerForm.email.$touched && registerForm.email.$invalid.required}}"
+                                        popover-title="Please enter your email" popover-placement="bottom" popover-class="login-popover"
+                                        uib-popover="{{registerForm.email.$error.email}}" popover-title="Invalid email address"
+                                        popover-placement="bottom" popover-class="login-popover">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" placeholder="Mobile No." ng-model="formData.mobile" class="form-control" required>
+                                    <input type="number" placeholder="Mobile No." name="mobile" ng-model="formData.mobile" class="form-control" required uib-popover="{{registerForm.mobile.$touched && registerForm.mobile.$invalid}}"
+                                        popover-title="Please enter your mobile number" popover-placement="bottom" popover-class="login-popover">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" placeholder="Password" ng-model="formData.password" class="form-control" required>
+                                    <input type="password" placeholder="Password" name="password" ng-model="formData.password" class="form-control" required
+                                        uib-popover="{{registerForm.password.$touched && registerForm.password.$invalid}}" popover-title="Please enter your password"
+                                        popover-placement="bottom" popover-class="login-popover">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" placeholder="Confirm Password" ng-model="formData.confirm" class="form-control" hs-password-verifier="formData.password"
-                                        required>
-                                    <span ng-show='registerForm.formData.confirm.$error.hsPswdMatch'>Passwords don't match</span>
+                                    <input type="password" placeholder="Confirm Password" name="confirm" ng-model="formData.confirm" class="form-control" hs-password-verifier="formData.password"
+                                        required uib-popover="{{registerForm.formData.confirm.$touched.hsPswdMatch && registerForm.formData.confirm.$error.hsPswdMatch}}"
+                                        popover-title="Password don't match" popover-placement="bottom" popover-class="login-popover">
+                                    <!-- <span ng-show='registerForm.formData.confirm.$error.hsPswdMatch'>Passwords don't match</span> -->
                                 </div>
                                 <div class="marginTop">
-                                    <button class="btn btn-login btn-block" ng-click="registerForm.$valid && registerUser()">Sign in</button>
+                                    <button type="submit" class="btn btn-login btn-block" ng-click="registerForm.$valid && registerUser()" ng-disabled="">Sign in</button>
                                 </div>
-                                <p style="color:red" ng-bind-html="errormsg"></p>
+                                <strong style="color:red" ng-bind-html="errormsg"></strong>
                             </form>
                         </div>
                     </div>

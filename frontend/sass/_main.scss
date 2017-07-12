@@ -2027,6 +2027,25 @@
                 margin: 0 5px;
             }
         }
+        .login-popover {
+            background: $darkBrown1;
+            border-color: $darkBrown1;
+            .popover-content {
+                display: none;
+            }
+            .popover-title {
+                background-color: $darkBrown1;
+                color: white;
+                border-radius: 6px;
+                border-color: $darkBrown1;
+            }
+            .arrow {
+                border-bottom-color: $darkBrown1;
+                &:after {
+                    border-bottom-color: $darkBrown1;
+                }
+            }
+        }
     }
 
     .btn-login {
