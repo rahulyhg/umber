@@ -267,14 +267,6 @@
             "dropDownType": "single",
             "dropDown": ["processing", "shipped", "delivered", "returned", "cancelled"]
         }, {
-            "name": "Order No",
-            "type": "number",
-            "tableRef": "orderNo",
-            "placeholder": "Enter order No",
-            "id": "orderNo",
-            "validation": ["", "trim", "unique"],
-            "url": ""
-        }, {
             "name": "Returned Products",
             "type": "box",
             "tableRef": "returnedProducts",
