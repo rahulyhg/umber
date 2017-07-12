@@ -463,7 +463,7 @@ var model = {
                 // Get products sorted on creation date
                 pipeline.push({
                     $sort: {
-                        createdAt: -1
+                        price: 1
                     }
                 });
 
@@ -919,7 +919,7 @@ var model = {
 
                             pipeline.push({
                                 $sort: {
-                                    createdAt: -1
+                                    price: 1
                                 }
                             });
                             pipeline.push({
