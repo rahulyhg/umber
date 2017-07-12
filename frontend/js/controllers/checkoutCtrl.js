@@ -125,6 +125,7 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                         if (!data.data.value) {
                             console.log("Error: in ofline storage ", data.data.error);
                         } else {
+                            $scope.createOrder();
                             console.log("Success");
                             $state.reload();
                         }

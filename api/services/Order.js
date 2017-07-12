@@ -136,7 +136,9 @@ var model = {
                                 _id: mongoose.Types.ObjectId(data._id)
                             }).deepPopulate("products.product products.product.size products.product.color").exec(function (err, order) {
                                 console.log("*****DATA:***** ", order);
-
+                                Cart.remove({
+                                    _id: mongoose.Types.ObjectId(cart._id)
+                                }).exec(function (err, result) {})
                                 Product.subtractQuantity(data.products, null);
                                 callback(null, order);
                             });
