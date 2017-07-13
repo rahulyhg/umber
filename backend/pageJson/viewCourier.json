@@ -1,45 +1,24 @@
 {
-    "title": "Order",
-    "description": "List of Order",
+    "title": "Courier",
+    "description": "List of Courier",
     "pageType": "view",
     "sendIdWithCreate": true,
     "urlFields": ["_id"],
     "fields": [{
-        "name": "Order No",
+        "name": "Name",
         "isSort": "",
-        "tableRef": "orderNo"
+        "tableRef": "name"
     }, {
-        "name": "User",
+        "name": "Courier Link",
         "isSort": "",
-        "tableRef": "user",
-        "field": "email"
-    }, {
-        "name": "Payment Method",
-        "isSort": "",
-        "tableRef": "paymentMethod"
-    }, {
-        "name": "Order Status",
-        "isSort": "",
-        "tableRef": "orderStatus"
-    }, {
-        "name": "Tracking Id",
-        "isSort": "",
-        "tableRef": "trackingId"
-    }, {
-        "name": "Discount Amount",
-        "isSort": "",
-        "tableRef": "discountAmount"
-    }, {
-        "name": "Total Amount",
-        "isSort": "",
-        "tableRef": "totalAmount"
+        "tableRef": "courierLink"
     }],
     "action": [{
         "name": "edit",
         "icon": "fa-pencil",
         "buttonClass": "btn-primary",
         "type": "page",
-        "action": "editOrder",
+        "action": "editCourier",
         "fieldsToSend": {
             "_id": "_id"
         }
@@ -48,9 +27,9 @@
         "icon": "fa-trash",
         "buttonClass": "btn-danger",
         "type": "apiCallConfirm",
-        "title": "Delete Order",
-        "content": "Are you sure you want to delete Order?",
-        "api": "Order/delete",
+        "title": "Delete Courier",
+        "content": "Are you sure you want to delete Courier?",
+        "api": "Courier/delete",
         "fieldsToSend": {
             "name": "_id",
             "value": "_id"
@@ -61,18 +40,24 @@
         "icon": "print",
         "class": "btn-danger",
         "type": "redirect",
-        "action": "Order/generateExcel",
+        "action": "Courier/generateExcel",
         "linkType": "admin"
     }, {
         "name": "Upload Excel",
         "icon": "delete",
         "class": "btn-warning",
         "type": "redirect",
-        "action": "excel-upload/Order",
+        "action": "excel-upload/Courier",
         "linkType": "internal"
+    }, {
+        "name": "Create",
+        "icon": "plus",
+        "class": "btn-success",
+        "type": "page",
+        "action": "createCourier"
     }],
     "apiCall": {
-        "url": "Order/search",
+        "url": "Courier/search",
         "params": "_id"
     }
 }
