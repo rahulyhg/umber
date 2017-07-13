@@ -57,6 +57,7 @@ var schema = new Schema({
         enum: ['cod', 'cc', 'dc', 'netbank'],
         default: 'cod'
     },
+    trackingId: String,
     orderStatus: {
         type: String,
         enum: ['processing', 'shipped', 'delivered', 'returned', 'cancelled'],

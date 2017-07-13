@@ -118,6 +118,14 @@
             "dropDownType": "single",
             "dropDown": ["processing", "shipped", "delivered", "returned", "cancelled"]
         }, {
+            "name": "Tracking Id",
+            "type": "text",
+            "tableRef": "trackingId",
+            "placeholder": "Enter trackingId",
+            "id": "trackingId",
+            "validation": ["", "trim", ""],
+            "url": ""
+        }, {
             "name": "Returned Products",
             "type": "box",
             "tableRef": "returnedProducts",

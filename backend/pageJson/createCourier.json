@@ -1,0 +1,51 @@
+{
+    "title": "Create Courier",
+    "name": "Courier",
+    "jsonPage": "viewCourier",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": ["Courier"],
+    "fields": [{
+            "name": "Name",
+            "type": "text",
+            "tableRef": "name",
+            "placeholder": "Enter Courier Name",
+            "id": "name",
+            "validation": ["required", "trim", ""],
+            "url": ""
+        },
+        {
+            "name": "Courier Link",
+            "type": "url",
+            "tableRef": "courierLink",
+            "placeholder": "Enter courier Link",
+            "id": "courierLink",
+            "validation": ["required", "trim", ""],
+            "url": ""
+        }
+    ],
+    "action": [{
+            "name": "submit",
+            "action": "submitCourier",
+            "stateName": {
+                "page": "page",
+                "json": {
+                    "id": "viewCourier"
+                }
+            }
+        },
+        {
+            "name": "cancel",
+            "sideMenuRedirect": true,
+            "stateName": {
+                "page": "page",
+                "json": {
+                    "id": "viewCourier"
+                }
+            }
+        }
+    ],
+    "apiCall": {
+        "url": "Courier/save"
+    }
+}
