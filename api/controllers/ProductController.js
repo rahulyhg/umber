@@ -143,6 +143,19 @@ var controller = {
         }
     },
 
+    cloneProduct: function (req, res) {
+        if (req.body) {
+            Product.cloneProduct(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid request"
+                }
+            });
+        }
+    },
+
     subtractQuantity: function (req, res) {
         if (req.body) {
             Product.subtractQuantity(req.body, res.callback);

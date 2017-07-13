@@ -978,6 +978,10 @@ var model = {
         });
     },
 
+    cloneProduct: function (formData, callback) {
+        delete formData._id;
+        Product.saveData(formData, callback)
+    },
     subtractQuantity: function (products, callback) {
         console.log("*******product", products);
         _.each(products, function (product) {

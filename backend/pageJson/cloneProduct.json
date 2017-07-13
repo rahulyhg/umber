@@ -1,0 +1,297 @@
+{
+    "title": "clone Product",
+    "name": "Product",
+    "jsonPage": "viewProduct",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": [""],
+    "fields": [{
+            "name": "Name",
+            "type": "text",
+            "tableRef": "name",
+            "placeholder": "Enter SKU code",
+            "id": "name",
+            "validation": ["required", "trim", "unique"],
+            "url": ""
+        },
+        {
+            "name": "Product Id",
+            "type": "text",
+            "tableRef": "productId",
+            "placeholder": "Enter Lot ID",
+            "id": "productId",
+            "validation": ["required", "trim", ""],
+            "url": ""
+        }, {
+            "name": "Category",
+            "type": "selectFromTable",
+            "tableRef": "homeCategory",
+            "placeholder": "Select Category",
+            "id": "category",
+            "searchApi": "searchCall",
+            "fieldType": "",
+            "url": "HomeCategory/search",
+            "dropDownField": "name",
+            "view": true,
+            "dropDownType": "single",
+            "validation": ["required", "", "trim"]
+        },
+        {
+            "name": "Subcategory",
+            "type": "selectFromTable",
+            "tableRef": "category",
+            "placeholder": "Select Sub-Category",
+            "id": "category",
+            "searchApi": "searchCall",
+            "fieldType": "",
+            "filterField": "homeCategory",
+            "filterValue": "homeCategory",
+            "url": "Category/search",
+            "dropDownField": "name",
+            "view": true,
+            "dropDownType": "single",
+            "validation": ["required", "", "trim"]
+        },
+        {
+            "name": "Brand",
+            "type": "tags",
+            "tableRef": "brand",
+            "placeholder": "Select Brand",
+            "id": "brand",
+            "searchApi": "searchCall",
+            "fieldType": "",
+            "url": "Brand/search",
+            "validation": ["", "trim", ""],
+            "dropDownField": "name",
+            "dropDownType": "single"
+        },
+        {
+            "name": "Collection",
+            "type": "tags",
+            "tableRef": "prodCollection",
+            "placeholder": "Select Collection",
+            "id": "collection",
+            "searchApi": "searchCall",
+            "fieldType": "",
+            "url": "Collection/search",
+            "validation": ["trim"],
+            "dropDownField": "name",
+            "dropDownType": "single"
+        },
+        {
+            "name": "Type",
+            "type": "tags",
+            "tableRef": "type",
+            "placeholder": "Set type",
+            "id": "type",
+            "searchApi": "searchCall",
+            "url": "Type/search",
+            "dropDownField": "name",
+            "dropDownType": "single",
+            "validation": ["", "trim"]
+        },
+        {
+            "name": "New Arrival",
+            "type": "checkbox",
+            "tableRef": "newArrival",
+            "id": "newArrival",
+            "url": "",
+            "validation": [""]
+        },
+        {
+            "name": "Featured",
+            "type": "checkbox",
+            "tableRef": "featured",
+            "id": "featured",
+            "url": "",
+            "validation": [""]
+        },
+        {
+            "name": "Style",
+            "type": "text",
+            "tableRef": "style",
+            "placeholder": "Style description",
+            "id": "style",
+            "url": "",
+            "validation": ["", "trim"]
+        },
+        {
+            "name": "Style Number",
+            "type": "text",
+            "tableRef": "styleNo",
+            "placeholder": "Style Number",
+            "id": "styleNo",
+            "url": "",
+            "validation": ["", "trim"]
+        },
+        {
+            "name": "Fabric",
+            "type": "tags",
+            "tableRef": "fabric",
+            "placeholder": "Fabric description",
+            "id": "price",
+            "dropDownField": "name",
+            "dropDownType": "single",
+            "searchApi": "searchCall",
+            "url": "Fabric/search",
+            "validation": ["", "trim"]
+        },
+        {
+            "name": "Washcare",
+            "type": "textarea",
+            "tableRef": "washcare",
+            "placeholder": "Washcare description",
+            "id": "washcare",
+            "url": "",
+            "validation": ["", "trim"]
+        },
+        {
+            "name": "Description",
+            "type": "textarea",
+            "tableRef": "description",
+            "placeholder": "Product description",
+            "id": "descript",
+            "url": "",
+            "validation": ["", "trim"]
+        },
+        {
+            "name": "Product Name",
+            "type": "text",
+            "tableRef": "productName",
+            "tableValue": "",
+            "placeholder": "Enter Product Name",
+            "id": "prodName",
+            "option": "single",
+            "validation": ["", "trim", ""],
+            "onView": true,
+            "url": ""
+        },
+        {
+            "name": "Product Code",
+            "type": "text",
+            "tableRef": "productCode",
+            "tableValue": "",
+            "placeholder": "Enter Product Code",
+            "id": "prodCode",
+            "option": "single",
+            "validation": ["", "trim", ""],
+            "onView": true,
+            "url": ""
+        },
+        {
+            "name": "Color",
+            "type": "tags",
+            "tableRef": "color",
+            "placeholder": "Enter Product Color",
+            "id": "color",
+            "dropDownField": "name",
+            "dropDownType": "single",
+            "searchApi": "searchCall",
+            "url": "BaseColor/search",
+            "validation": ["required", "trim", ""],
+            "onView": true
+        },
+        {
+            "name": "Size",
+            "type": "tags",
+            "tableRef": "size",
+            "placeholder": "Enter Product Color",
+            "id": "size",
+            "dropDownField": "name",
+            "dropDownType": "single",
+            "searchApi": "searchCall",
+            "url": "Size/search",
+            "validation": ["required", "trim", ""],
+            "onView": true
+        },
+        {
+            "name": "Quantity",
+            "type": "text",
+            "tableRef": "quantity",
+            "tableValue": "",
+            "placeholder": "Enter quantity",
+            "id": "quantity",
+            "validation": ["", "trim", ""],
+            "url": ""
+        },
+        {
+            "name": "Price",
+            "type": "text",
+            "tableRef": "price",
+            "tableValue": "",
+            "placeholder": "Enter Price",
+            "id": "price",
+            "validation": ["", "trim", ""],
+            "url": ""
+        },
+        {
+            "name": "Status",
+            "type": "tags",
+            "tableRef": "status",
+            "placeholder": "Select Status",
+            "id": "status",
+            "validation": ["required", "trim"],
+            "url": "",
+            "dropDownField": "",
+            "dropDownType": "single",
+            "onView": true,
+            "dropDown": ["Enabled", "Disabled"]
+        },
+        {
+            "name": "Images",
+            "type": "box",
+            "tableRef": "images",
+            "validation": ["required", "trim", ""],
+            "fields": [{
+                "name": "Image",
+                "type": "image",
+                "size": "800 x 1000px",
+                "tableRef": "image",
+                "tableValue": "image",
+                "placeholder": "Enter image",
+                "id": "productimage",
+                "option": "single",
+                "validation": ["", "trim", ""],
+                "onView": true,
+                "view": true,
+                "url": ""
+            }, {
+                "name": "Image Order",
+                "type": "text",
+                "tableRef": "order",
+                "placeholder": "Enter Image Order",
+                "id": "imageorder",
+                "validation": ["", "trim", ""],
+                "onView": true,
+                "url": ""
+            }]
+        }
+    ],
+    "action": [{
+        "name": "submit",
+        "action": "submitProduct",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewProduct"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewProduct"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "Product/cloneProduct",
+        "params": ""
+    },
+    "preApi": {
+        "url": "Product/getOne",
+        "params": "_id"
+    }
+}
