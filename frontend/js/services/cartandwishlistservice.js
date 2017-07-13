@@ -22,8 +22,9 @@ myApp.service('myService', function ($http, WishlistService, BannerService, Cart
                 prod.accessToken = $.jStorage.get("accessToken");
                 prod.userId = $.jStorage.get("userId");
                 console.log("productbeforesending:", prod)
+
                 CartService.saveProduct(prod, function (data) {
-                    console.log("Error: ", data);
+
                     if (data.data.error) {
                         console.log("Error: ", data.data.error);
 

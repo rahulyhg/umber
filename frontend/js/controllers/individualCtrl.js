@@ -65,15 +65,16 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
             if (data.data.value) {
                 $scope.product = data.data.data;
             } else {
-                $scope.product = {};
+
                 // TODO: show out of stock
             }
         })
     }
     $scope.addToCart = function (pc) {
+        console.log("product", $scope.product)
         myService.addToCart($scope.product, $scope.reqQuantity, $scope.selectedSize, $scope.productComment.name, function (data) {
             ModalService.addcart();
-            $state.reload();
+
         })
     }
 
