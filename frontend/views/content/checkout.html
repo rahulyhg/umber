@@ -135,7 +135,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="product in orders.products ">
+                                    <tr ng-repeat="product in orderTable.products ">
                                         <td>
                                             <div class="item ">
                                                 <img ng-src="{{product.product.images[0].image | serverimage}} " alt="
@@ -465,7 +465,7 @@
                                     </form>
                                 </div>
                                 <div class="text-center ">
-                                    <button id="ordergenerate" class="btn btn-default checkout__cont-btn " ng-click="updateAddress()" ng-disabled="!address.$valid">Continue</button>
+                                    <button id="ordergenerate" class="btn btn-default checkout__cont-btn " ng-click="generateOrder()" ng-disabled="!address.$valid">Continue</button>
                                 </div>
                             </div>
                         </div>

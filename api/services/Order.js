@@ -272,6 +272,7 @@ var model = {
     // inputDetails: user - user unique id
     //               status - status of orders to be retrieved - cancelled/returned
     getCancelledOrdersForUser: function (data, callback) {
+        console.log("data", data);
         async.waterfall([
             function checkUser(cbWaterfall) {
                 User.isUserLoggedIn(data.accessToken, cbWaterfall);
@@ -279,15 +280,17 @@ var model = {
             function getOrders(user, cbWaterfall1) {
                 console.log("found: ", user._id);
                 console.log("sent: ", data.user);
+
                 if (user._id == data.user) {
+                    console.log("inside")
                     Order.find({
                             user: mongoose.Types.ObjectId(data.user),
                             "returnedProducts.status": data.status
+                        }, {
+                            returnedProducts: 1
                         }
-                        // {
-                        //     returnedProducts: 1
-                        // }
-                    ).deepPopulate("returnedProducts.product returnedProducts.product.size returnedProducts.product.color").exec(function (err, orders) {
+
+                    ).deepPopulate("returnedProducts.product order._id returnedProducts.product.size returnedProducts.product.color").exec(function (err, orders) {
                         console.log("%%%%%%%OrderDetails", orders);
                         cbWaterfall1(null, orders)
                     })

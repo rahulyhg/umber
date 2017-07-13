@@ -24,7 +24,7 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
 
         console.log("data", data)
         OrderService.cancelledProduct(data, function (output) {
-            console.log(output);
+            console.log(output.data.data);
         })
     }
 
