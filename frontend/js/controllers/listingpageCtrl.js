@@ -60,11 +60,12 @@
                      $scope.max = $scope.filters.priceRange[0].max;
                      console.log("filters", $scope.filters.priceRange[0].max)
                      $scope.slider_translate = {
-                         minValue: 80,
+                         minValue: 0,
                          maxValue: 100,
                          options: {
-                             ceil: $scope.filters.priceRange[0].max,
+
                              floor: $scope.filters.priceRange[0].min,
+                             ceil: $scope.filters.priceRange[0].max,
                              id: 'translate-slider'
                              // translate: function (value, id, which) {
                              //     return '$' + value;
@@ -189,8 +190,12 @@
              $scope.filters = data.data.data.filters;
 
          })
-
      }
+     $scope.priceSet = function (min, max) {
+         console.log(min, max)
+     }
+
+
      /******checking filters after reload***** */
      $scope.checkFilterStatus = function (key, filter) {
          var appliedFilters = $.jStorage.get("appliedFilters");

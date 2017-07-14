@@ -72,8 +72,8 @@
                                 </h5>
                             </uib-accordion-heading>
                             <div class="range-slider">
-                                <pre>{{min+"max:"+max}}</pre>
-                                <rzslider rz-slider-model="min" rz-slider-high="max" rz-slider-options="slider_translate.options"></rzslider>
+
+                                <rzslider rz-slider-model="min" rz-slider-high="max" rz-slider-options="slider_translate.options" ng-mouseup="priceSet(min,max)"></rzslider>
                                 <span class="rupee-count pull-left">Rs{{min}}</span>
                                 <!---&#8377;-->
                                 <span class="rupee-count pull-right">Rs{{max}}</span>

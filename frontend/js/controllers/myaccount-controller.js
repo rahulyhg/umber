@@ -21,10 +21,15 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
             status: view
         }
 
-
+        $scope.paramview = view;
         console.log("data", data)
         OrderService.cancelledProduct(data, function (output) {
             console.log(output.data.data);
+
+            $scope.returned = output.data.data;
+            console.log("dasdsadasdsad", $scope.returned)
+
+
         })
     }
 
