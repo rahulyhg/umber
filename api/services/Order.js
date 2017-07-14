@@ -274,6 +274,8 @@ var model = {
     //               status - status of orders to be retrieved - cancelled/returned
     getCancelledOrdersForUser: function (data, callback) {
         console.log("data", data);
+        var returnCanelProduct = [];
+        var order = {};
         async.waterfall([
             function checkUser(cbWaterfall) {
                 User.isUserLoggedIn(data.accessToken, cbWaterfall);
@@ -285,9 +287,35 @@ var model = {
                 if (user._id == data.user) {
                     console.log("inside")
                     Order.find({
-                            user: mongoose.Types.ObjectId(data.user),
-                            "returnedProducts.status": data.status
+
+                        user: mongoose.Types.ObjectId(data.user),
+                        // "returnedProducts.status": data.status
+                    }).deepPopulate("returnedProducts.product order._id returnedProducts.product.size returnedProducts.product.color").exec(function (err, orders) {
+                        console.log("in deepPopulate", orders);
+                        if (_.isObject(orders)) {
+                            _.each(orders, function (value) {
+                                console.log("in returnedProducts object", value);
+                                // _.each(returnedProducts, function (value) {
+                                _.each(value.returnedProducts, function (returnProduct) {
+                                    console.log("status", returnProduct.status);
+                                    if (returnProduct.status == data.status) {
+                                        console.log("match");
+                                        returnCanelProduct.push(returnProduct);
+                                        console.log("match2", returnCanelProduct);
+                                    }
+                                    // });
+
+                                });
+                                order['_id'] = value._id;
+                                order['returnCancelProduct'] = returnCanelProduct;
+                                order['createdAt'] = value.createdAt;
+                                order['orderNo'] = value.orderNo;
+                                order['orderStatus'] = value.orderStatus;
+                                order['totalAmount'] = value.totalAmount;
+                            });
+                            // console.log("&&&&&&&&&&order", );
                         }
+<<<<<<< HEAD
                         //  {
                         //     returnedProducts: 1
                         // }
@@ -295,6 +323,14 @@ var model = {
                     ).deepPopulate("returnedProducts.product order returnedProducts.product.size returnedProducts.product.color").exec(function (err, orders) {
                         console.log("%%%%%%%OrderDetails", orders);
                         cbWaterfall1(null, orders)
+=======
+                        console.log("&&&&&&&&&&order", order);
+                        cbWaterfall1(null, order);
+
+
+                        // console.log("%%%%%%%OrderDetails", orders);
+                        // cbWaterfall1(null, orders)
+>>>>>>> d252e4d1bde59b33f1fc9dec240cd8613c362d51
                     })
                 } else {
                     cbWaterfall1("noUserFound", null);
