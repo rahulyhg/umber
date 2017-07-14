@@ -287,6 +287,7 @@ var model = {
                 if (user._id == data.user) {
                     console.log("inside")
                     Order.find({
+
                         user: mongoose.Types.ObjectId(data.user),
                         // "returnedProducts.status": data.status
                     }).deepPopulate("returnedProducts.product order._id returnedProducts.product.size returnedProducts.product.color").exec(function (err, orders) {
@@ -316,6 +317,7 @@ var model = {
                         }
                         console.log("&&&&&&&&&&order", order);
                         cbWaterfall1(null, order);
+
 
                         // console.log("%%%%%%%OrderDetails", orders);
                         // cbWaterfall1(null, orders)

@@ -64,6 +64,8 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
             console.log("SKU:", data)
             if (data.data.value) {
                 $scope.product = data.data.data;
+                $scope.productImages = _.sortBy($scope.product.images, ['order']);
+                $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
             } else {
 
                 // TODO: show out of stock
