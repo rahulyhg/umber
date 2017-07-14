@@ -287,9 +287,10 @@ var model = {
                     Order.find({
                             user: mongoose.Types.ObjectId(data.user),
                             "returnedProducts.status": data.status
-                        }, {
-                            returnedProducts: 1
                         }
+                        // {
+                        //     returnedProducts: 1
+                        // }
 
                     ).deepPopulate("returnedProducts.product order._id returnedProducts.product.size returnedProducts.product.color").exec(function (err, orders) {
                         console.log("%%%%%%%OrderDetails", orders);
