@@ -315,22 +315,12 @@ var model = {
                             });
                             // console.log("&&&&&&&&&&order", );
                         }
-<<<<<<< HEAD
-                        //  {
-                        //     returnedProducts: 1
-                        // }
-
-                    ).deepPopulate("returnedProducts.product order returnedProducts.product.size returnedProducts.product.color").exec(function (err, orders) {
-                        console.log("%%%%%%%OrderDetails", orders);
-                        cbWaterfall1(null, orders)
-=======
                         console.log("&&&&&&&&&&order", order);
                         cbWaterfall1(null, order);
 
 
                         // console.log("%%%%%%%OrderDetails", orders);
                         // cbWaterfall1(null, orders)
->>>>>>> d252e4d1bde59b33f1fc9dec240cd8613c362d51
                     })
                 } else {
                     cbWaterfall1("noUserFound", null);

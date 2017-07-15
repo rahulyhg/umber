@@ -830,6 +830,7 @@ var model = {
                             var filterType = [];
                             var filterCategory = [];
                             var filterCollection = [];
+                            var filterPriceRange = [];
                             var filterColor = [];
                             var filterSize = [];
                             var filterFabric = [];
@@ -842,6 +843,9 @@ var model = {
                             });
                             _.each(filters.appliedFilters.color, function (color) {
                                 filterColor.push(ObjectId(color));
+                            });
+                            _.each(filters.appliedFilters.priceRange, function (priceRange) {
+                                filterColor.push(ObjectId(priceRange));
                             });
                             _.each(filters.appliedFilters.collection, function (collection) {
                                 filterCollection.push(ObjectId(collection));
@@ -886,6 +890,27 @@ var model = {
                                     }
                                 })
                             }
+                            if (!_.isEmpty(filters.appliedFilters.priceRange)) {
+
+                                pipeline.push({
+
+                                    $match: {
+
+                                        $and: [{
+                                                "price": {
+                                                    $lte: filterPriceRange
+                                                }
+                                            },
+                                            {
+                                                "price": {
+                                                    $gte: filterPriceRange
+                                                }
+                                            }
+                                        ]
+                                    }
+                                })
+                            }
+
                             if (!_.isEmpty(filters.appliedFilters.collection)) {
 
                                 pipeline.push({
@@ -934,7 +959,7 @@ var model = {
                             });
                             Product.aggregate(pipeline).
                             skip((filters.page - 1) * Config.maxRow).limit(Config.maxRow).exec(function (err, products) {
-
+                                console.log("aggregate product in pipeline", products)
                                 cbWaterfall1(err, products);
                             });
                         },
