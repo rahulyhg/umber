@@ -193,7 +193,7 @@ var model = {
                             cbWaterfall1(null, newProduct);
                         },
                         function UpdateCategory(newProduct, cbWaterfall2) {
-                            console.log(newProduct);
+                            console.log("newProduct", newProduct);
                             if (product.Category) {
                                 Product.manageForeignKey(HomeCategory, {
                                     name: product.Category
@@ -824,7 +824,7 @@ var model = {
             if (!_.isEmpty(category)) {
                 async.waterfall([
                         function applyFilters(cbWaterfall1) {
-                            console.log("filters: ", filters);
+                            console.log("!!!!!!filters: ", filters);
 
                             var pipeline = [];
                             var filterType = [];
@@ -897,16 +897,14 @@ var model = {
                                     $match: {
 
                                         $and: [{
-                                                "price": {
-                                                    $lte: filterPriceRange
-                                                }
-                                            },
-                                            {
-                                                "price": {
-                                                    $gte: filterPriceRange
-                                                }
+                                            "price": {
+                                                $lte: filterPriceRange.max
                                             }
-                                        ]
+                                        }, {
+                                            "price": {
+                                                $gte: filterPriceRange.min
+                                            }
+                                        }]
                                     }
                                 })
                             }

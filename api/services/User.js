@@ -384,16 +384,24 @@ var model = {
         } else {
             async.waterfall([
                 function findUser(cbWaterfall) {
+                    console.log("in findUser:");
                     User.findOne({
                         _id: mongoose.Types.ObjectId(data.user)
                     }).lean().exec(cbWaterfall);
                 },
                 function updateAddress(user, cbWaterfall1) {
+                    console.log("in updateAddress:", user.shippingAddresses);
                     if (data.billingAddress) {
                         user.billingAddress = data.billingAddress;
                     }
 
                     if (data.shippingAddress) {
+                        console.log("in shippingAddress:", data.shippingAddress);
+                        console.log("in user shippingAddress:", user.shippingAddresses);
+                        _.each(user.shippingAddresses, function (singleShippingAddress) {
+                            console.log("in single shippingAddress:", singleShippingAddress);
+                            User.checkShippingAddress(user.shippingAddress, data.shippingAddress);
+                        })
                         var idx = _.findIndex(user.shippingAddresses, function (userAddress) {
                             return Object.keys(userAddress).every(function (key) {
                                 if (key == "_id") {
