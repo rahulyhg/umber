@@ -72,8 +72,8 @@
                                 </h5>
                             </uib-accordion-heading>
                             <div class="range-slider">
-                                <pre>{{min+"max:"+max}}</pre>
-                                <rzslider rz-slider-model="min" rz-slider-high="max" rz-slider-options="slider_translate.options"></rzslider>
+
+                                <rzslider rz-slider-model="min" rz-slider-high="max" rz-slider-options="slider_translate.options" ng-mouseup="priceSet(min,max)"></rzslider>
                                 <span class="rupee-count pull-left">Rs{{min}}</span>
                                 <!---&#8377;-->
                                 <span class="rupee-count pull-right">Rs{{max}}</span>
@@ -247,7 +247,7 @@
                             </div>
                         </div>
                         {{displayMessage}}
-
+                        <!-- <div infinite-scroll='loadMore()' infinite-scroll-distance='3'> -->
                         <div class="row" ng-repeat="row in products" ng-if="view == 'thumbnailView'">
                             <div class="col-md-4" ng-repeat="product in row" ng-init="parentIndex = $index">
                                 <div class="buy-info custom-checkbox">
@@ -300,8 +300,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div ng-if="view == 'listView'">
-                            <div class="listview display-table">
+                        <!-- </div> -->
+                        <div ng-if="view == 'listView'" ng-repeat="row in products">
+                            <div class="listview display-table" ng-repeat="product in row">
                                 <div class="display-row">
                                     <div class="display-cell">
                                         <div class="item-img relate">
