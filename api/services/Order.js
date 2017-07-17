@@ -304,16 +304,16 @@ var model = {
                                         console.log("match2", returnCanelProduct);
                                     }
                                     // });
-                                    order.push({
-                                        _id: value._id,
-                                        createdAt: value.createdAt,
-                                        orderNo: value.orderNo,
-                                        orderStatus: value.orderStatus,
-                                        totalAmount: value.totalAmount,
-                                        returnCancelProduct: returnCanelProduct
-                                    });
-                                });
 
+                                });
+                                order.push({
+                                    _id: value._id,
+                                    createdAt: value.createdAt,
+                                    orderNo: value.orderNo,
+                                    orderStatus: value.orderStatus,
+                                    totalAmount: value.totalAmount,
+                                    returnCancelProduct: returnCanelProduct
+                                });
 
 
 
