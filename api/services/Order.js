@@ -275,7 +275,7 @@ var model = {
     getCancelledOrdersForUser: function (data, callback) {
         console.log("data", data);
         var returnCanelProduct = [];
-        var order = {};
+        var order = [];
         async.waterfall([
             function checkUser(cbWaterfall) {
                 User.isUserLoggedIn(data.accessToken, cbWaterfall);
@@ -304,14 +304,25 @@ var model = {
                                         console.log("match2", returnCanelProduct);
                                     }
                                     // });
-
+                                    order.push({
+                                        _id: value._id,
+                                        createdAt: value.createdAt,
+                                        orderNo: value.orderNo,
+                                        orderStatus: value.orderStatus,
+                                        totalAmount: value.totalAmount,
+                                        returnCancelProduct: returnCanelProduct
+                                    });
                                 });
-                                order['_id'] = value._id;
-                                order['returnCancelProduct'] = returnCanelProduct;
-                                order['createdAt'] = value.createdAt;
-                                order['orderNo'] = value.orderNo;
-                                order['orderStatus'] = value.orderStatus;
-                                order['totalAmount'] = value.totalAmount;
+
+
+
+
+                                // order['_id'] = value._id;
+                                // order['returnCancelProduct'] = returnCanelProduct;
+                                // order['createdAt'] = value.createdAt;
+                                // order['orderNo'] = value.orderNo;
+                                // order['orderStatus'] = value.orderStatus;
+                                // order['totalAmount'] = value.totalAmount;
                             });
                             // console.log("&&&&&&&&&&order", );
                         }
@@ -327,7 +338,7 @@ var model = {
                 }
             }
         ], function (err, data) {
-            callback(err, data);
+            callback(err, order);
         });
     },
 
