@@ -276,70 +276,56 @@ var model = {
         console.log("data", data);
         var returnCanelProduct = [];
         var order = [];
+        var index = 0;
         async.waterfall([
-            function checkUser(cbWaterfall) {
-                User.isUserLoggedIn(data.accessToken, cbWaterfall);
-            },
-            function getOrders(user, cbWaterfall1) {
-                console.log("found: ", user._id);
-                console.log("sent: ", data.user);
+                function checkUser(cbWaterfall) {
+                    User.isUserLoggedIn(data.accessToken, cbWaterfall);
+                },
+                function getOrders(user, cbWaterfall1) {
+                    console.log("found: ", user._id);
+                    console.log("sent: ", data.user);
 
-                if (user._id == data.user) {
-                    console.log("inside")
-                    Order.find({
+                    // Is user same
+                    if (user._id == data.user) {
+                        console.log("inside")
+                        Order.find({
+                                user: mongoose.Types.ObjectId(data.user)
+                            }).deepPopulate("returnedProducts.product order._id returnedProducts.product.size returnedProducts.product.color")
+                            .exec(function (err, orders) {
+                                console.log("in exec", orders);
+                                if (!_.isEmpty(orders)) {
+                                    _.each(orders, function (value) {
+                                        console.log("in returnedProducts object", value);
 
-                        user: mongoose.Types.ObjectId(data.user),
-                        // "returnedProducts.status": data.status
-                    }).deepPopulate("returnedProducts.product order._id returnedProducts.product.size returnedProducts.product.color").exec(function (err, orders) {
-                        console.log("in deepPopulate", orders);
-                        if (_.isObject(orders)) {
-                            _.each(orders, function (value) {
-                                console.log("in returnedProducts object", value);
-                                // _.each(returnedProducts, function (value) {
-                                _.each(value.returnedProducts, function (returnProduct) {
-                                    console.log("status", returnProduct.status);
-                                    if (returnProduct.status == data.status) {
-                                        console.log("match");
-                                        returnCanelProduct.push(returnProduct);
-                                        console.log("match2", returnCanelProduct);
-                                    }
-                                    // });
+                                        order[index]._id = value._id;
+                                        order[index].createdAt = value.createdAt;
+                                        order[index].orderNo = value.orderNo;
+                                        order[index].orderStatus = value.orderStatus;
+                                        order[index].totalAmount = value.totalAmount;
 
-                                });
-                                order.push({
-                                    _id: value._id,
-                                    createdAt: value.createdAt,
-                                    orderNo: value.orderNo,
-                                    orderStatus: value.orderStatus,
-                                    totalAmount: value.totalAmount,
-                                    returnCancelProduct: returnCanelProduct
-                                });
-
-
-
-                                // order['_id'] = value._id;
-                                // order['returnCancelProduct'] = returnCanelProduct;
-                                // order['createdAt'] = value.createdAt;
-                                // order['orderNo'] = value.orderNo;
-                                // order['orderStatus'] = value.orderStatus;
-                                // order['totalAmount'] = value.totalAmount;
-                            });
-                            // console.log("&&&&&&&&&&order", );
-                        }
-                        console.log("&&&&&&&&&&order", order);
-                        cbWaterfall1(null, order);
-
-
-                        // console.log("%%%%%%%OrderDetails", orders);
-                        // cbWaterfall1(null, orders)
-                    })
-                } else {
-                    cbWaterfall1("noUserFound", null);
+                                        _.each(value.returnedProducts, function (returnProduct) {
+                                            console.log("status", returnProduct.status);
+                                            if (returnProduct.status == data.status) {
+                                                console.log("match");
+                                                order[index].returnCancelProduct.push(returnProduct);
+                                                console.log("match2", order[index].returnCancelProduct);
+                                            }
+                                        });
+                                        index++;
+                                    });
+                                    cbWaterfall1(null, order);
+                                } else {
+                                    cbWaterfall1(err, null);
+                                }
+                            })
+                    } else {
+                        cbWaterfall1("noUserFound", null);
+                    }
                 }
-            }
-        ], function (err, data) {
-            callback(err, order);
-        });
+            ],
+            function (err, data) {
+                callback(err, order);
+            });
     },
 
     getAnOrderDetail: function (data, callback) {
