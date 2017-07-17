@@ -12463,7 +12463,8 @@ input[type=number]::-webkit-outer-spin-button {
     text-transform: uppercase;
     font-family: 'fjalla-reg';
     font-size: 35px;
-    margin-bottom: 5px; }
+    margin-bottom: 5px;
+    cursor: pointer; }
   .modal-container .login-head h1.brown--color, .modal-container-right .login-head h1.brown--color {
     color: #341314; }
   .modal-container .login-head p, .modal-container-right .login-head p {
