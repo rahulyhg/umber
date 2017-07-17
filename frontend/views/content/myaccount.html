@@ -254,7 +254,7 @@
                                         <th>Grand total<br><strong>&#8377; {{return.totalAmount}}</strong></th>
                                     </tr>
                                 </thead>
-                                <tbody ng-repeat="product in return.returnedProducts">
+                                <tbody ng-repeat="product in return.returnCancelProduct">
                                     <tr ng-if="product.status=='returned'">
                                         <td>
                                             <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
@@ -288,11 +288,11 @@
                                     <tr class="text-uppercase">
                                         <th>order placed</span><br><strong>{{return.createdAt | date:'dd/MM/yyyy'}}</strong></th>
                                         <th>order no.<br><strong>{{return.orderNo}}</strong></th>
-                                        <th>order-satus<br><strong>returned</strong></th>
+                                        <th>order-satus<br><strong>cancelled</strong></th>
                                         <th>Grand total<br><strong>&#8377; {{return.totalAmount}}</strong></th>
                                     </tr>
                                 </thead>
-                                <tbody ng-repeat="product in return.returnedProducts">
+                                <tbody ng-repeat="product in return.returnCancelProduct track by $index">
                                     <tr ng-if="product.status=='cancelled'">
                                         <td>
                                             <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->

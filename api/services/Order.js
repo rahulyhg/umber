@@ -296,13 +296,13 @@ var model = {
                                 if (!_.isEmpty(orders)) {
                                     _.each(orders, function (value) {
                                         console.log("in returnedProducts object", value);
-
+                                        order[index] = {};
                                         order[index]._id = value._id;
                                         order[index].createdAt = value.createdAt;
                                         order[index].orderNo = value.orderNo;
                                         order[index].orderStatus = value.orderStatus;
                                         order[index].totalAmount = value.totalAmount;
-
+                                        order[index].returnCancelProduct = [];
                                         _.each(value.returnedProducts, function (returnProduct) {
                                             console.log("status", returnProduct.status);
                                             if (returnProduct.status == data.status) {
@@ -311,7 +311,11 @@ var model = {
                                                 console.log("match2", order[index].returnCancelProduct);
                                             }
                                         });
-                                        index++;
+                                        if (_.isEmpty(order[index].returnCancelProduct)) {
+                                            order.splice(index)
+                                        } else {
+                                            index++;
+                                        }
                                     });
                                     cbWaterfall1(null, order);
                                 } else {

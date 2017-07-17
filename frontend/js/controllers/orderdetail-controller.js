@@ -13,7 +13,7 @@ myApp.controller('OrderDetailCtrl', function ($scope, TemplateService, $translat
         })
 
     })
-    .controller('CancelCtrl', function ($scope, TemplateService, NavigationService, $timeout, OrderService, $stateParams) {
+    .controller('CancelCtrl', function ($scope, TemplateService, NavigationService, $timeout, OrderService, $stateParams, $state) {
         $scope.template = TemplateService.getHTML("content/cancel.html");
         TemplateService.title = "Return-Cancellation"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -71,6 +71,7 @@ myApp.controller('OrderDetailCtrl', function ($scope, TemplateService, $translat
                     $scope.order = output.data.data;
                     $.jStorage.deleteKey("cancellation");
                     console.log(output);
+                    $state.go("return-success")
                 })
                 // $.jStorage.deleteKey("cancellation");
             })
@@ -78,4 +79,5 @@ myApp.controller('OrderDetailCtrl', function ($scope, TemplateService, $translat
 
         }
         console.log($scope.order);
+
     });
