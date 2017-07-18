@@ -72,6 +72,13 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
             $scope.userDetails.pinCode = '';
             $scope.userDetails.country = '';
         }
+        // var data = {};
+        // data.accessToken = $.jStorage.get("accessToken");
+        // data.type = "shippingAddress";
+        // data.shippingAddress = $scope.userDetails;
+        // UserService.saveAddressMyaccount(data, function (data) {
+        //     console.log(data)
+        // })
     };
 
     $scope.userDetails = { // an object to store user details on edit tab

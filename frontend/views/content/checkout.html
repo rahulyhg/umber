@@ -465,7 +465,8 @@
                                     </form>
                                 </div>
                                 <div class="text-center ">
-                                    <button id="ordergenerate" class="btn btn-default checkout__cont-btn " ng-click="generateOrder()" ng-disabled="!address.$valid">Continue</button>
+                                    <button id="ordergenerate" class="btn btn-default checkout__cont-btn " ng-if="!address.$valid" ng-disabled="true">Continue</button>
+                                    <button id="ordergenerate" class="btn btn-default checkout__cont-btn " ng-click="generateOrder()" ng-if="address.$valid">Continue</button>
                                 </div>
                             </div>
                         </div>
