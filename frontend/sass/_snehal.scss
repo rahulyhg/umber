@@ -861,7 +861,93 @@
                             //     @include transition-timing-function(linear);
                             //     @include transition-delay(0.2s 0.3s);
                             // }
-                        } ////SCSS for LISTING PAGE
+                        } // Used to show compare products
+                        .compareProductMenuOut {
+                            @include transform(rotate(0deg) scale(1) skew(0deg) translate(-50%,
+                            1000px));
+                            @include transform-origin(center top);
+                            @include transition(all 800ms ease);
+                        }
+
+                        .compareProductMenuIn {
+                            @include transform(rotate(0deg) scale(1) skew(0deg) translate(-50%,
+                            0));
+                            @include transform-origin(center bottom);
+                            @include transition(all 800ms ease);
+                        }
+
+                        .compare-product-list {
+                            margin-bottom: 0;
+                            li {
+                                vertical-align: middle;
+                            }
+                        }
+
+                        .compare-product {
+                            width: 710px;
+                            @include padding(0 5px);
+                            background-color: #F5F5F5;
+                            position: fixed;
+                            bottom: 0;
+                            left: 50%; //  @include transform(translateX(-50%));
+                            z-index: 9999;
+                        }
+
+                        .compare-products {
+                            width: 120px;
+                            @include padding(10px);
+                            border: 1px dashed $darkBrown1;
+                            @include margin(15px 5px);
+                            background-color: #F5F5F5;
+                            .compare-product-img {
+                                width: 70px;
+                                max-height: 100px;
+                                overflow: hidden;
+                            }
+                            .compare-product-title {
+                                vertical-align: top;
+                                h5 {
+                                    margin-bottom: 0;
+                                }
+                            }
+                            .close-modal {
+                                top: -10px;
+                                right: -10px;
+                            }
+                            .close-modal--btn-circle {
+                                @include size(20px,
+                                20px);
+                                border: 1px solid $darkBrown1;
+                                background-color: $darkBrown1;
+                                color: #ffffff;
+                                font-size: 11px;
+                            }
+                        }
+
+                        .close-compare-btn {
+                            @include size(20px,
+                            20px);
+                            @include margin(5px);
+                            position: absolute;
+                            right: 5px;
+                            line-height: 1;
+                            text-align: center;
+                            .fa-minus-circle {
+                                font-size: 18px;
+                                color: $darkBrown1
+                            }
+                        }
+
+                        .product-compare-btnblock {
+                            vertical-align: middle;
+                        }
+
+                        .product-compare--btn {
+                            @extend .btn--brown;
+                            width: 125px;
+                            @include margin(0 5px);
+                        } //End of compare products
+                        ////SCSS for LISTING PAGE
                         .listing-img {
                             // background: url("../img/listing/common.jpg");
                             background-repeat: no-repeat;

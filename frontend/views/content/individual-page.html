@@ -271,7 +271,7 @@
     <img src="img/home/Individual_Product Page.png" class="img-responsive">
 </div>
 
-<section class="">
+<section>
     <div class="customer-choice relate">
         <div class="container">
             <div class="customer-choice-container">
@@ -302,5 +302,39 @@
                 </div>
             </div>
         </div>
+    </div>
+</section>
+<section>
+    <div class="compare-product-main" ng-class="{compareProductMenuIn: myVarss == true ,compareProductMenuOut: myVarss != true}">
+        <div class="close-compare-btn inline-block">
+            <a href="" title="Close" ng-click="compareProductModal()"> <i class="fa fa-minus-circle"></i></a>
+        </div>
+        <ul class="list-inline list-unstyled compare-product-list">
+            <li>
+                <div class="compare-products-size">
+                    <div class="compare-products relate text-center">
+                        <div class="compare-product-img inline-block">
+                            <a href="">
+                        <img src="frontend/img/individual/product-test.jpg" alt="Your added product" class="img-responsive">
+                        </a>
+                        </div>
+                        <div class="compare-product-title ">
+                            <h5>Mens Half Sleeve Shirt</h5>
+                        </div>
+                        <div class="close-modal">
+                            <button type="button" class="btn close-modal--btn-circle" title="Remove your product">X</button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="product-compare-btnblock">
+                    <div class="btn-group-vertical" role="group">
+                        <button type="button" class="btn text-uppercase product-compare--btn">compare</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
     </div>
 </section>
