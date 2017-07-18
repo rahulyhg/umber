@@ -186,14 +186,14 @@
             <div class="blog__slider">
                 <flex-slider flex-slide="blog in blogs track by $index" prev-text="" next-text="" animation="slide" item-width="400" min-items="3">
                     <li class="relate">
-                        <div class="blog__banner-detail relate">
+                        <article class="blog__banner-detail relate">
                             <img ng-src="{{blog.image | serverimage}}" alt="" class="img-responsive">
                             <div class="blog__desc">
                                 <h3 class="text-uppercase">{{blog.name}}</h3>
                                 <p class="typedin-desc">{{blog.description}}</p>
                                 <p class="relate"><a href="{{blog.link}}">Read more</a></p>
                             </div>
-                        </div>
+                        </article>
                     </li>
                 </flex-slider>
             </div>

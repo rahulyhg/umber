@@ -865,7 +865,6 @@
                         .listing-img {
                             // background: url("../img/listing/common.jpg");
                             background-repeat: no-repeat;
-                            min-height: 305px;
                             background-size: cover;
                             background-position: 100% 100%;
                             margin-top: 15px;
@@ -1266,15 +1265,29 @@
                                         &:before {
                                             content: "";
                                             height: 50px;
-                                            width: 50px;
+                                            width: 70px;
                                             background: url(../img/about/qoutes.png) no-repeat;
                                             background-position: center center;
                                             background-size: cover;
                                             position: absolute;
                                             top: -80px;
-                                            left: 15px;
+                                            left: 0;
                                         }
                                     }
+                                    &:before{
+                                        @include position(absolute,
+                null null 60px -181px);
+                                    }
+                                    &:after {
+                content: '';
+                border-right: 2px dashed $darkBrown1;
+                @include position(absolute,
+                60px 53px null null);
+                height: 277px;
+            }
+            p.line--height {
+                                            text-align: justify;
+                                        }
                                 }
                             }
                         }
@@ -1284,7 +1297,8 @@
                         }
 
                         .about-info {
-                            padding-left: 20px;
+                            padding-right: 30px;
+                            padding-left: 30px;
                         } //about ended
                         //gift started
                         .gift-form {

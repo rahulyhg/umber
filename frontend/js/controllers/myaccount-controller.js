@@ -246,12 +246,12 @@ myApp.controller('StoreLocatorCtrl', function ($scope, TemplateService, $transla
             email: 'info@burntum'
         },
         {
-            address: 'Delphi Building, Orchard Ave, Hiranandani Gardens, Powai,Mumbai, Maharashtra 400076',
+            address: 'Shop No 2, Morya Mahal, Linking Road,  Bandra West, Mumbai - 400050',
             contactNo: '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            email: 'info@burntum'
+            email: 'info@burntumber.in'
         },
         {
-            address: 'Delphi Building, Orchard Ave, Hiranandani Gardens, Powai,Mumbai, Maharashtra 400076',
+            address: 'Delphi Building, Orchard Ave, Hiranandani Gardens, Powai, Mumbai, Maharashtra 400076',
             contactNo: '+(91)-22-26559556 +(91)-9769422251, 9821593786',
             email: 'info@burntum'
         },
