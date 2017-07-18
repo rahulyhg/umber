@@ -384,24 +384,23 @@ var model = {
         } else {
             async.waterfall([
                 function findUser(cbWaterfall) {
+                    console.log("in findUser:");
                     User.findOne({
                         _id: mongoose.Types.ObjectId(data.user)
                     }).lean().exec(cbWaterfall);
                 },
                 function updateAddress(user, cbWaterfall1) {
+                    console.log("in updateAddress:", user.shippingAddresses);
                     if (data.billingAddress) {
                         user.billingAddress = data.billingAddress;
                     }
 
                     if (data.shippingAddress) {
+                        console.log("in shippingAddress:", data.shippingAddress);
+                        console.log("in user shippingAddress:", user.shippingAddresses);
+
                         var idx = _.findIndex(user.shippingAddresses, function (userAddress) {
-                            return Object.keys(userAddress).every(function (key) {
-                                if (key == "_id") {
-                                    return true;
-                                } else {
-                                    return userAddress[key] == data.shippingAddress[key];
-                                }
-                            });
+                            return User.checkShippingAddress(userAddress, data.shippingAddress);
                         });
 
                         if (idx < 0) {
@@ -438,6 +437,12 @@ var model = {
         if (idIndex > -1) {
             keys1.splice(idIndex, 1);
         }
+
+        idIndex = keys1.indexOf('status');
+        if (idIndex > -1) {
+            keys1.splice(idIndex, 1);
+        }
+        console.log("keys1 after: ", keys1);
 
         if (keys1.length != keys2.length) {
             return false;
