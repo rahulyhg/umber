@@ -112,5 +112,59 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
         }
 
     };
-    //
+
+    $scope.myVarss = false;
+    $scope.compareproduct = $.jStorage.get('compareproduct')
+    if (!_.isEmpty($scope.compareproduct)) {
+        $scope.myVarss = true;
+    }
+    $rootScope.checkStateOnReload = function (prodid) {
+        var cp = $.jStorage.get("compareproduct")
+        var result = _.find(cp, {
+            productId: prodid
+        });
+        if (result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    $rootScope.clickfun = function (product) {
+        console.log(product)
+        $scope.compareproduct = $.jStorage.get('compareproduct') ? $.jStorage.get('compareproduct') : [];
+        var result = _.find($scope.compareproduct, {
+            productId: product.productId
+        });
+        if (result) {
+            _.remove($scope.compareproduct, {
+                productId: product.productId
+            });
+            $.jStorage.set('compareproduct', $scope.compareproduct);
+        } else if ($.jStorage.get("compareproduct").length >= 4) {
+            toastr.error("You can compare only 4 products");
+        } else {
+            $scope.compareproduct.push(product);
+            $.jStorage.set('compareproduct', $scope.compareproduct);
+            console.log($.jStorage.get('compareproduct'))
+        }
+
+        if (_.isEmpty($.jStorage.get('compareproduct'))) {
+            $scope.myVarss = false
+
+        } else {
+            $scope.myVarss = true
+        }
+    }
+
+    $scope.removeFromCompare = function (prodId) {
+
+        var removeCompare = $.jStorage.get("compareproduct");
+        var result = _.remove(removeCompare, {
+            productId: prodId
+        });
+
+        $.jStorage.set("compareproduct", removeCompare);
+        $state.reload();
+    }
+
 })

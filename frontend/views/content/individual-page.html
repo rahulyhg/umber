@@ -245,7 +245,7 @@
                     </div>
                     <div class="fifth-sec custom-checkbox">
                         <div class="checkbox inline-block">
-                            <input type="checkbox" id="f2" ng-model="myVarss" ng-checked="checkStateOnReload(product.productId)" ng-click="clickfun(product);">
+                            <input type="checkbox" id="f2" ng-checked="checkStateOnReload(product.productId)" ng-click="clickfun(product);">
                             <label for="f2"> Add to compare</label>
                         </div>
                         <!--<p class="inline-block"><input type="checkbox">Add to compare</p>-->
@@ -310,27 +310,27 @@
             <a href="" title="Close" ng-click="compareProductModal()"> <i class="fa fa-minus-circle"></i></a>
         </div>
         <ul class="list-inline list-unstyled compare-product-list">
-            <li>
-                <div class="compare-products-size">
-                    <div class="compare-products relate text-center">
-                        <div class="compare-product-img inline-block">
-                            <a href="">
-                        <img src="frontend/img/individual/product-test.jpg" alt="Your added product" class="img-responsive">
+            <li ng-repeat="compare in compareproduct track by $index | limitTo: 4">
+                <div class=" compare-products-size ">
+                    <div class="compare-products relate text-center ">
+                        <div class="compare-product-img inline-block ">
+                            <a href=" ">
+                        <img ng-src="{{compare.images[0].image | serverimage}}" alt="Your added product " class="img-responsive ">
                         </a>
                         </div>
                         <div class="compare-product-title ">
-                            <h5>Mens Half Sleeve Shirt</h5>
+                            <h5>{{compare.productName}}</h5>
                         </div>
-                        <div class="close-modal">
-                            <button type="button" class="btn close-modal--btn-circle" title="Remove your product">X</button>
+                        <div class="close-modal ">
+                            <button type="button " class="btn close-modal--btn-circle " title="Remove your product " ng-click="removeFromCompare(compare.productId)">X</button>
                         </div>
                     </div>
                 </div>
             </li>
             <li>
-                <div class="product-compare-btnblock">
-                    <div class="btn-group-vertical" role="group">
-                        <button type="button" class="btn text-uppercase product-compare--btn">compare</button>
+                <div class="product-compare-btnblock ">
+                    <div class="btn-group-vertical " role="group ">
+                        <button type="button " class="btn text-uppercase product-compare--btn " ui-sref="compare-products">compare</button>
                     </div>
                 </div>
             </li>
