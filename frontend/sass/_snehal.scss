@@ -862,6 +862,21 @@
                             //     @include transition-delay(0.2s 0.3s);
                             // }
                         } // Used to show compare products
+                        .compare-product-main {
+                            width: 700px;
+                            min-height: 5px;
+                            @include padding(5px);
+                            border: 1px solid transparent;
+                            border-radius: 0;
+                            box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
+                            @include margin(0 auto);
+                            position: fixed;
+                            left: 50%;
+                            bottom: 0;
+                            background-color: #F5F5F5;
+                            z-index: 9999;
+                        }
+
                         .compareProductMenuOut {
                             @include transform(rotate(0deg) scale(1) skew(0deg) translate(-50%,
                             1000px));

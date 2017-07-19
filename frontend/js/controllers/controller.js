@@ -9,42 +9,26 @@ myApp
 
         ProductService.getthelook(function (data) {
             $scope.getthelook = data.data.data;
-
         })
         $scope.userId = $.jStorage.get('userId');
         NavigationService.EnabledHomeScreen(function (data) {
-
             $scope.clothCat = data.data.data;
-
         });
-
         NavigationService.getEnabledCategories(function (data) {
-
             $scope.categories = data.data.data;
-
         });
-
         ProductService.getNewArrivals(function (data) {
-
             $scope.newArrivals = data.data.data;
-
         });
-
         /******************todo:for showing cart logo  infinite loop issue******************** */
         var userId = {
             userId: $.jStorage.get("userId"),
             accessToken: $.jStorage.get("accessToken")
         }
-
         /****************for cart tooltip after login***************** */
         if (userId.userId) {
-
-
             CartService.getCart(userId, function (data) {
-
-
                 if (data.data.data) {
-
                     $scope.mycart = data.data.data.products;
                     $scope.tempcart = [];
                     for (var i = 0; i < $scope.mycart.length; i++) {
@@ -65,10 +49,8 @@ myApp
             $scope.mycart = []
             $scope.mycart = $.jStorage.get("cart");
             $scope.wishlist = $.jStorage.get("wishlist")
-
             if ($scope.mycart) {
                 $scope.mycart = $scope.mycart.products;
-
                 $scope.tempcart = [];
                 if ($scope.mycart) {
                     for (var i = 0; i < $scope.mycart.length; i++) {
