@@ -3081,6 +3081,26 @@
         width: 750px;
     }
 
+    .coupon-discount {
+        .close-modal {
+            display: inline-block;
+            @include position(absolute,
+            15px 15px null null);
+            color: $darkBrown1;
+        }
+        .close-modal--btn-circle {
+            border: 1px solid $darkBrown1;
+            color: $darkBrown1;
+        }
+        .coupon-discount-text {
+            color: $darkBrown1;
+            p {
+                margin-top: 30px;
+                margin-bottom: 5px;
+            }
+        }
+    }
+
     .quick-view-product {
         @include padding(30px 20px);
         .individual-first {
