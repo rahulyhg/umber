@@ -273,32 +273,63 @@ var model = {
     // inputDetails: user - user unique id
     //               status - status of orders to be retrieved - cancelled/returned
     getCancelledOrdersForUser: function (data, callback) {
+        console.log("data", data);
+        var returnCanelProduct = [];
+        var order = [];
+        var index = 0;
         async.waterfall([
-            function checkUser(cbWaterfall) {
-                User.isUserLoggedIn(data.accessToken, cbWaterfall);
-            },
-            function getOrders(user, cbWaterfall1) {
-                console.log("found: ", user._id);
-                console.log("sent: ", data.user);
-                if (user._id == data.user) {
-                    Order.find({
-                            user: mongoose.Types.ObjectId(data.user),
-                            "returnedProducts.status": data.status
-                        }
-                        // {
-                        //     returnedProducts: 1
-                        // }
-                    ).deepPopulate("returnedProducts.product returnedProducts.product.size returnedProducts.product.color").exec(function (err, orders) {
-                        console.log("%%%%%%%OrderDetails", orders);
-                        cbWaterfall1(null, orders)
-                    })
-                } else {
-                    cbWaterfall1("noUserFound", null);
+                function checkUser(cbWaterfall) {
+                    User.isUserLoggedIn(data.accessToken, cbWaterfall);
+                },
+                function getOrders(user, cbWaterfall1) {
+                    console.log("found: ", user._id);
+                    console.log("sent: ", data.user);
+
+                    // Is user same
+                    if (user._id == data.user) {
+                        console.log("inside")
+                        Order.find({
+                                user: mongoose.Types.ObjectId(data.user)
+                            }).deepPopulate("returnedProducts.product order._id returnedProducts.product.size returnedProducts.product.color")
+                            .exec(function (err, orders) {
+                                console.log("in exec", orders);
+                                if (!_.isEmpty(orders)) {
+                                    _.each(orders, function (value) {
+                                        console.log("in returnedProducts object", value);
+                                        order[index] = {};
+                                        order[index]._id = value._id;
+                                        order[index].createdAt = value.createdAt;
+                                        order[index].orderNo = value.orderNo;
+                                        order[index].orderStatus = value.orderStatus;
+                                        order[index].totalAmount = value.totalAmount;
+                                        order[index].returnCancelProduct = [];
+                                        _.each(value.returnedProducts, function (returnProduct) {
+                                            console.log("status", returnProduct.status);
+                                            if (returnProduct.status == data.status) {
+                                                console.log("match");
+                                                order[index].returnCancelProduct.push(returnProduct);
+                                                console.log("match2", order[index].returnCancelProduct);
+                                            }
+                                        });
+                                        if (_.isEmpty(order[index].returnCancelProduct)) {
+                                            order.splice(index)
+                                        } else {
+                                            index++;
+                                        }
+                                    });
+                                    cbWaterfall1(null, order);
+                                } else {
+                                    cbWaterfall1(err, null);
+                                }
+                            })
+                    } else {
+                        cbWaterfall1("noUserFound", null);
+                    }
                 }
-            }
-        ], function (err, data) {
-            callback(err, data);
-        });
+            ],
+            function (err, data) {
+                callback(err, order);
+            });
     },
 
     getAnOrderDetail: function (data, callback) {

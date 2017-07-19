@@ -64,16 +64,19 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
             console.log("SKU:", data)
             if (data.data.value) {
                 $scope.product = data.data.data;
+                $scope.productImages = _.sortBy($scope.product.images, ['order']);
+                $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
             } else {
-                $scope.product = {};
+
                 // TODO: show out of stock
             }
         })
     }
     $scope.addToCart = function (pc) {
+        console.log("product", $scope.product)
         myService.addToCart($scope.product, $scope.reqQuantity, $scope.selectedSize, $scope.productComment.name, function (data) {
             ModalService.addcart();
-            $state.reload();
+
         })
     }
 

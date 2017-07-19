@@ -15,22 +15,22 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
     } else {
         $scope.view = "loginTab";
     }
-    $scope.createOrder = function () {
-        var data = {};
-        data.userId = $scope.loggedUser;
-        OrderService.createOrderFromCart(data, function (data) {
-            console.log("created order: ", data);
-            if (data.data.value) {
-                $scope.orders = data.data.data;
-                $scope.grandTotal = CartService.getTotal($scope.orders.products);
-                console.log("Orders: ", $scope.orders);
-            } else {
-                console.log("Error in creating order: ", data.data.error);
-            }
-        });
-    }
+    // $scope.createOrder = function () {
+    //     var data = {};
+    //     data.userId = $scope.loggedUser;
+    //     OrderService.createOrderFromCart(data, function (data) {
+    //         console.log("created order: ", data);
+    //         if (data.data.value) {
+    //             $scope.orders = data.data.data;
+    //             $scope.grandTotal = CartService.getTotal($scope.orders.products);
+    //             console.log("Orders: ", $scope.orders);
+    //         } else {
+    //             console.log("Error in creating order: ", data.data.error);
+    //         }
+    //     });
+    // }
 
-    $scope.createOrder();
+    // $scope.createOrder();
 
     $scope.registerUser = function () {
         UserService.userRegistration($scope.registerData, function (data) {
@@ -83,24 +83,24 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
         });
     }
 
-    $scope.updateAddress = function () {
-        angular.element(document.getElementById('ordergenerate')).disabled = true;
-        var updateAdd = {
-            _id: $scope.orders._id,
-            user: $.jStorage.get("userId"),
-            billingAddress: $scope.user.billingAddress,
-            shippingAddress: $scope.user.deliveryAddress
-        }
-        OrderService.updateOrderAddress(updateAdd, function (data) {
-            console.log("oderplaced", data);
-            if (data.data.data) {
-                toastr.success('Thank You your order was placed successfully', 'success');
-            } else {
-                toastr.error('Sorry there was some problem in placing your order', 'Error');
-            }
-            angular.element(document.getElementById('ordergenerate')).disabled = false;
-        });
-    }
+    // $scope.updateAddress = function () {
+    //     angular.element(document.getElementById('ordergenerate')).disabled = true;
+    //     var updateAdd = {
+    //         _id: $scope.orders._id,
+    //         user: $.jStorage.get("userId"),
+    //         billingAddress: $scope.user.billingAddress,
+    //         shippingAddress: $scope.user.deliveryAddress
+    //     }
+    //     OrderService.updateOrderAddress(updateAdd, function (data) {
+    //         console.log("oderplaced", data);
+    //         if (data.data.data) {
+    //             toastr.success('Thank You your order was placed successfully', 'success');
+    //         } else {
+    //             toastr.error('Sorry there was some problem in placing your order', 'Error');
+    //         }
+    //         angular.element(document.getElementById('ordergenerate')).disabled = false;
+    //     });
+    // }
 
     $scope.login = function () {
         UserService.login($scope.loginData, function (data) {
@@ -155,24 +155,63 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
             }
         });
     }
+    /************order generation and ADDRESSSS UPDATION IN USERTABLE AS WELL AS ORDER TABLE************* */
+    $scope.generateOrder = function () {
+
+        var data = {};
+        data.userId = $scope.loggedUser;
+        OrderService.createOrderFromCart(data, function (data) {
+            console.log("created order: ", data);
+            if (data.data.value) {
+                $scope.orders = data.data.data;
+                $scope.grandTotal = CartService.getTotal($scope.orders.products);
+                console.log("Orders: ", $scope.orders);
+                var updateAdd = {
+                    _id: $scope.orders._id,
+                    user: $.jStorage.get("userId"),
+                    billingAddress: $scope.user.billingAddress,
+                    shippingAddress: $scope.user.deliveryAddress
+                }
+                OrderService.updateOrderAddress(updateAdd, function (data) {
+                    console.log("oderplaced", data);
+                    if (data.data.data) {
+                        toastr.success('Thank You your order was placed successfully', 'success');
+                        $state.reload();
+                    } else {
+                        toastr.error('Sorry there was some problem in placing your order', 'Error');
+                    }
+                    angular.element(document.getElementById('ordergenerate')).disabled = false;
+                });
+            } else {
+                console.log("Error in creating order: ", data.data.error);
+            }
+        });
+
+
+
+    }
 
     var userData = {
         userId: $.jStorage.get("userId")
     }
 
-    // CartService.getCart(userData, function (data) {
+    CartService.getCart(userData, function (data) {
 
-    //     if (data.data.data)
-    //         $scope.orderTable = data.data.data;
-    //     for (var i = 0; i <= $scope.orderTable.products.length - 1; i++) {
-    //         if ($scope.orderTable.products[i].quantity > $scope.orderTable.products[i].product.quantity) {
+        if (data.data.data)
+            $scope.orderTable = data.data.data;
+        if ($scope.orderTable) {
+            for (var i = 0; i <= $scope.orderTable.products.length - 1; i++) {
+                if ($scope.orderTable.products[i].quantity > $scope.orderTable.products[i].product.quantity) {
 
-    //             $state.go("mycart");
-    //         }
-    //     }
-    //     if ($scope.orderTable && $scope.orderTable.products)
-    //         $scope.grandTotal = CartService.getTotal($scope.orderTable.products);
-    // });
+                    $state.go("mycart");
+                }
+            }
+        } else {
+            $state.go("mycart");
+        }
+        if ($scope.orderTable && $scope.orderTable.products)
+            $scope.grandTotal = CartService.getTotal($scope.orderTable.products);
+    });
 
     if (userData.userId) {
         UserService.getUserDetails(userData, function (data) {

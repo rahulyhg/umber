@@ -36,6 +36,15 @@ myApp.factory('UserService', function ($http) {
             }).then(callback);
         },
 
+        saveAddressMyaccount: function (data, callback) {
+            $http({
+                url: adminurl + 'User/saveAddress',
+                method: 'POST',
+                data: data,
+                withCredentials: false
+            }).then(callback);
+        },
+
         saveAddressCheckout: function (data, callback) {
             $http({
                 url: adminurl + 'User/saveAddresses',

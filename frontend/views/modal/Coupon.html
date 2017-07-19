@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+</div>
+<div class="modal-body text-center" id="modal-body">
+    <ul>
+        <li>
+            <h3>Apply Coupon</h3>
+            <p>Enter coupon code</p>
+            <input type="number" maxlength="4" placeholder="Type coupon code here">
+            <p>Discount</p>
+            <p><label for="check1"><input type="checkbox" id="check1">Buy 1 get 1 Free</label><label for="check2"><input type="checkbox" id="check2">Buy 2 get 20% Off</label></p>
+            <p><label for="check1"><input type="checkbox" id="check1">Buy 1 get 1 Free</label><label for="check2"><input type="checkbox" id="check2">Buy 2 get 20% Off</label></p>
+        </li>
+    </ul>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+</div>

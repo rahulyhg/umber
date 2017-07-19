@@ -43,63 +43,32 @@ var model = {
         cart.userId = userId;
 
         async.waterfall([
-            function checkProduct(cbWaterfall1) {
-                // Check if product is available
-                Product.findById(product._id).exec(function (err, foundProd) {
-                    if (foundProd && (foundProd.quantity >= product.reqQuantity)) {
-                        cbWaterfall1(null);
-                    } else {
-                        cbWaterfall1({
-                            message: {
-                                data: "productOutOfStock " + product._id + " " + product.reqQuantity
-                            }
-                        });
-                    }
-                });
-            },
-
-            function saveIntoCart(cbWaterfall2) {
-                // If user is same retrieve its cart
-                Cart.findOne({
-                    userId: cart.userId
-                }).lean().exec(function (err, foundCart) {
-                    if (err) {
-                        cbWaterfall2(err, null);
-                    } else {
-                        // If cart is not present, create cart
-                        if (_.isEmpty(foundCart)) {
-                            Cart.saveData(cart, function (err, data) {
-                                if (err) {
-                                    cbWaterfall2(err, null);
-                                }
-                                // else if (data) {
-                                //     Product.subtractQuantity(product, null);
-                                //     cbWaterfall2(null, data);
-                                // } 
-                                else {
-                                    cbWaterfall2({
-                                        message: {
-                                            data: "Invalid credentials1!"
-                                        }
-                                    }, null);
-                                }
-                            });
+                function checkProduct(cbWaterfall1) {
+                    // Check if product is available
+                    Product.findById(product._id).exec(function (err, foundProd) {
+                        if (foundProd && (foundProd.quantity >= product.reqQuantity)) {
+                            cbWaterfall1(null);
                         } else {
-                            // Cart is present. Check if product is already added
-                            // console.log("Product: ", product);
-                            var idx = _.findIndex(foundCart.products, function (prodVal) {
-                                return prodVal.product == product._id;
+                            cbWaterfall1({
+                                message: {
+                                    data: "productOutOfStock " + product._id + " " + product.reqQuantity
+                                }
                             });
-                            // console.log("Index: ", idx);
-                            if (idx < 0) {
-                                // Insert if proudct isn't present
-                                foundCart.products.push({
-                                    product: mongoose.Types.ObjectId(product._id),
-                                    quantity: product.reqQuantity,
-                                    comment: product.comment
-                                });
-                                foundCart.userId = userId;
-                                Cart.saveData(foundCart, function (err, data) {
+                        }
+                    });
+                },
+
+                function saveIntoCart(cbWaterfall2) {
+                    // If user is same retrieve its cart
+                    Cart.findOne({
+                        userId: cart.userId
+                    }).lean().exec(function (err, foundCart) {
+                        if (err) {
+                            cbWaterfall2(err, null);
+                        } else {
+                            // If cart is not present, create cart
+                            if (_.isEmpty(foundCart)) {
+                                Cart.saveData(cart, function (err, data) {
                                     if (err) {
                                         cbWaterfall2(err, null);
                                     }
@@ -110,42 +79,73 @@ var model = {
                                     else {
                                         cbWaterfall2({
                                             message: {
-                                                data: "Invalid credentials2!"
+                                                data: "Invalid credentials1!"
                                             }
                                         }, null);
                                     }
                                 });
                             } else {
-                                // Update cart product quantity if present
-                                // console.log("Matching product: ", data.products[idx]);
-                                foundCart.products[idx].quantity += product.reqQuantity;
-                                foundCart.products[idx].comment = product.comment;
-                                Cart.saveData(foundCart, function (err, data) {
-                                    if (err) {
-                                        cbWaterfall2(err, null);
-                                    } else if (data) {
-                                        Product.subtractQuantity(product, null);
-                                        cbWaterfall2(null, data);
-                                    } else {
-                                        cbWaterfall2({
-                                            message: {
-                                                data: "Invalid credentials!"
-                                            }
-                                        }, null);
-                                    }
+                                // Cart is present. Check if product is already added
+                                // console.log("Product: ", product);
+                                var idx = _.findIndex(foundCart.products, function (prodVal) {
+                                    return prodVal.product == product._id;
                                 });
+                                // console.log("Index: ", idx);
+                                if (idx < 0) {
+                                    // Insert if proudct isn't present
+                                    foundCart.products.push({
+                                        product: mongoose.Types.ObjectId(product._id),
+                                        quantity: product.reqQuantity,
+                                        comment: product.comment
+                                    });
+                                    foundCart.userId = userId;
+                                    Cart.saveData(foundCart, function (err, data) {
+                                        console.log("!!!!!!foundcart in saveData", foundCart)
+                                        if (err) {
+                                            cbWaterfall2(err, null);
+                                        } else if (data) {
+                                            // Product.subtractQuantity(product, null);
+                                            cbWaterfall2(null, data);
+                                        } else {
+                                            cbWaterfall2({
+                                                message: {
+                                                    data: "Invalid credentials2!"
+                                                }
+                                            }, null);
+                                        }
+                                    });
+                                } else {
+                                    // Update cart product quantity if present
+                                    // console.log("Matching product: ", data.products[idx]);
+                                    foundCart.products[idx].quantity += product.reqQuantity;
+                                    foundCart.products[idx].comment = product.comment;
+                                    Cart.saveData(foundCart, function (err, data) {
+                                        if (err) {
+                                            cbWaterfall2(err, null);
+                                        } else if (data) {
+                                            // Product.subtractQuantity(product, null);
+                                            cbWaterfall2(null, data);
+                                        } else {
+                                            cbWaterfall2({
+                                                message: {
+                                                    data: "Invalid credentials!in update cart"
+                                                }
+                                            }, null);
+                                        }
+                                    });
+                                }
                             }
                         }
-                    }
-                });
-            }
-        ], function (err, data) {
-            console.log("ERror: ", err);
-            if (err)
-                callback(err, null);
-            else
-                callback(null, data);
-        });
+                    });
+                }
+            ],
+            function (err, data) {
+                console.log("ERror: ", err);
+                if (err)
+                    callback(err, null);
+                else
+                    callback(null, data);
+            });
     },
 
     saveProduct: function (product, callback) {
@@ -212,7 +212,7 @@ var model = {
             } else {
                 callback({
                     message: {
-                        data: "Invalid credentials!"
+                        data: "Invalid credentials! in cart"
                     }
                 }, null);
             }
@@ -262,7 +262,7 @@ var model = {
                         } else {
                             callback({
                                 message: {
-                                    data: "Invalid credentials!"
+                                    data: "Invalid credentials!for remove product"
                                 }
                             }, null);
                         }

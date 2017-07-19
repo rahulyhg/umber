@@ -1,4 +1,4 @@
-myApp.service('ModalService', function ($http, $uibModal, WishlistService, BannerService, CartService, $timeout) {
+myApp.service('ModalService', function ($http, $state, $uibModal, WishlistService, BannerService, CartService, $timeout) {
 
     this.addwishlist = function () {
         var addwishlistmodal = $uibModal.open({
@@ -9,6 +9,7 @@ myApp.service('ModalService', function ($http, $uibModal, WishlistService, Banne
         });
         $timeout(function () {
             addwishlistmodal.close();
+            $state.reload();
         }, 2000)
     };
     this.addcart = function () {
@@ -20,6 +21,7 @@ myApp.service('ModalService', function ($http, $uibModal, WishlistService, Banne
         });
         $timeout(function () {
             addcartmodal.close();
+            $state.reload();
         }, 2000)
     };
 })

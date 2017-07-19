@@ -790,6 +790,10 @@
             }
         }
         .mycart-footer {
+            .linking {
+                text-decoration: none;
+                color: #cfcfcf;
+            }
             ul {
                 color: $darkBrown1;
             }
@@ -1564,11 +1568,11 @@
                 color: $darkGray;
                 word-wrap: break-word;
                 display: -webkit-box;
-    max-height: 150px;
-    -webkit-line-clamp: 7;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+                max-height: 150px;
+                -webkit-line-clamp: 7;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             .buy--now {
                 // button-design
@@ -1966,6 +1970,7 @@
                 font-family: 'fjalla-reg';
                 font-size: 35px;
                 margin-bottom: 5px;
+                cursor: pointer;
             }
             h1.brown--color {
                 color: $darkBrown1;
@@ -2927,82 +2932,79 @@
             width: 200px;
         }
     } //End of giftcard .html
-
     //start of About.html
-    .about-info{
-        column-gap:50px;
+    .about-info {
+        column-gap: 50px;
         -moz-column-count: 2;
         -webkit-column-count: 2;
         column-count: 2;
-
-    }
-     //start of About.html
-
+    } //start of About.html
     //Start of Store locator.html
-    .row-margin{
+    .row-margin {
         margin-bottom: 50px;
-    margin-top: 50px;
-    .map-place{
-        position: absolute;
-    left: -216px;
-    top: 41px;
-    z-index: 1;
+        margin-top: 50px;
+        .map-place {
+            position: absolute;
+            left: -216px;
+            top: 41px;
+            z-index: 1;
+        }
     }
-    }
-.custom-slider{
-    margin: 0;
-    background: #341314;
-    border: 0;
-    border-radius: 0;
-    padding: 20px;
-    .border{
-border: 1px dashed #fff;
-.location-title{
-    position: absolute;
-    top: 66px;
-    left: 334px;
-    z-index: 2;
-    display: flex;
-}
-.location--btn{
-    @extend .btn--brown;
-    border: 0px;
-    border-bottom: solid 1px white;
-    width: 200px;
-    text-align: left;
-    span{
-        position: absolute;
-        right: 0;
-    }
-    &:focus{
-        background-color: $darkBrown1 !important;
-        color: white;
-    }
-}
-.location-dropdown{
-        min-width: 200px;
-    }
-.tab-title{
-    color: white;
-    padding-left: 55px;
-    margin-top: 10px;
-}
-    }
-    .flex-control-paging li a {
-    display: none;
-}
-.flexslider{
-    margin: 0;
-    background: #341314;
-    border: 0px dashed #fff;
-    padding-top: 90px;
-    padding-bottom: 30px;
-    padding-left: 300px;
-    padding-right: 140px;
-    border-radius: 0px !important;
-    color: white;
-    height: 440px;
-.flex-prev {
+
+    .custom-slider {
+        margin: 0;
+        background: #341314;
+        border: 0;
+        border-radius: 0;
+        padding: 20px;
+        .border {
+            border: 1px dashed #fff;
+            .location-title {
+                position: absolute;
+                top: 66px;
+                left: 334px;
+                z-index: 2;
+                display: flex;
+            }
+            .location--btn {
+                @extend .btn--brown;
+                border: 0px;
+                border-bottom: solid 1px white;
+                width: 200px;
+                text-align: left;
+                span {
+                    position: absolute;
+                    right: 0;
+                }
+                &:focus {
+                    background-color: $darkBrown1 !important;
+                    color: white;
+                }
+            }
+            .location-dropdown {
+                min-width: 200px;
+            }
+            .tab-title {
+                color: white;
+                padding-left: 55px;
+                margin-top: 10px;
+            }
+        }
+        .flex-control-paging li a {
+            display: none;
+        }
+        .flexslider {
+            margin: 0;
+            background: #341314;
+            border: 0px dashed #fff;
+            padding-top: 90px;
+            padding-bottom: 30px;
+            padding-left: 300px;
+            padding-right: 140px;
+            border-radius: 0px !important;
+            color: white;
+            height: 440px;
+            .flex-prev {
                 opacity: 1;
                 left: 210px!important;
                 @include size(32px,
@@ -3037,17 +3039,17 @@ border: 1px dashed #fff;
                 }
             }
         }
- }
-    .store-location-details{
-        @include padding(30px 30px 0px 0px);
-        .address{
-            margin-bottom:5px !important;
-        }
-        p{
-             margin-bottom:5px;
-        }
     }
-    //End of store locator.html
+
+    .store-location-details {
+        @include padding(30px 30px 0px 0px);
+        .address {
+            margin-bottom: 5px !important;
+        }
+        p {
+            margin-bottom: 5px;
+        }
+    } //End of store locator.html
     // All modals html
     /*****NOTE: We can extend this class by using @extend method. Please don't customise the main class(Parent class) .close-modal--btn-circle ****/
 

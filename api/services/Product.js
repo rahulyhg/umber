@@ -193,7 +193,7 @@ var model = {
                             cbWaterfall1(null, newProduct);
                         },
                         function UpdateCategory(newProduct, cbWaterfall2) {
-                            console.log(newProduct);
+                            console.log("newProduct", newProduct);
                             if (product.Category) {
                                 Product.manageForeignKey(HomeCategory, {
                                     name: product.Category
@@ -824,12 +824,13 @@ var model = {
             if (!_.isEmpty(category)) {
                 async.waterfall([
                         function applyFilters(cbWaterfall1) {
-                            console.log("filters: ", filters);
+                            console.log("!!!!!!filters: ", filters);
 
                             var pipeline = [];
                             var filterType = [];
                             var filterCategory = [];
                             var filterCollection = [];
+                            var filterPriceRange = [];
                             var filterColor = [];
                             var filterSize = [];
                             var filterFabric = [];
@@ -842,6 +843,9 @@ var model = {
                             });
                             _.each(filters.appliedFilters.color, function (color) {
                                 filterColor.push(ObjectId(color));
+                            });
+                            _.each(filters.appliedFilters.priceRange, function (priceRange) {
+                                filterColor.push(ObjectId(priceRange));
                             });
                             _.each(filters.appliedFilters.collection, function (collection) {
                                 filterCollection.push(ObjectId(collection));
@@ -886,6 +890,25 @@ var model = {
                                     }
                                 })
                             }
+                            if (!_.isEmpty(filters.appliedFilters.priceRange)) {
+
+                                pipeline.push({
+
+                                    $match: {
+
+                                        $and: [{
+                                            "price": {
+                                                $lte: filterPriceRange.max
+                                            }
+                                        }, {
+                                            "price": {
+                                                $gte: filterPriceRange.min
+                                            }
+                                        }]
+                                    }
+                                })
+                            }
+
                             if (!_.isEmpty(filters.appliedFilters.collection)) {
 
                                 pipeline.push({
@@ -934,7 +957,7 @@ var model = {
                             });
                             Product.aggregate(pipeline).
                             skip((filters.page - 1) * Config.maxRow).limit(Config.maxRow).exec(function (err, products) {
-
+                                console.log("aggregate product in pipeline", products)
                                 cbWaterfall1(err, products);
                             });
                         },
@@ -978,6 +1001,10 @@ var model = {
         });
     },
 
+    cloneProduct: function (formData, callback) {
+        delete formData._id;
+        Product.saveData(formData, callback)
+    },
     subtractQuantity: function (products, callback) {
         console.log("*******product", products);
         _.each(products, function (product) {

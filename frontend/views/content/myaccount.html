@@ -14,7 +14,7 @@
                         'btn--brownActive': view=='addrTab' }">MANAGE ADDRESS</button>
                         </div>
                         <div>
-                            <button class="btn btn--list" ng-click="view='orderTab'" ng-class="{
+                            <button class="btn btn--list" ng-click="view='orderTab'" ng-init="subview='orders'" ng-class="{
                         'btn--brownActive': view=='orderTab' }"> ORDER</button>
                         </div>
                         <div>
@@ -193,14 +193,14 @@
                     <!--To open an Order Tab-->
                     <div class="col-md-9">
                         <p class="text-uppercase text-center">
-                            <button class="btn order-list--btn " ng-click="view='orders'" ng-class="{
-                        'btn--brownActive': view=='orders' }">orders </button>
-                            <button class="btn order-list--btn" ng-click="view='return'; retriveCancelledProducts('returned')" ng-class="{
-                        'btn--brownActive': view=='return' }">return/exchange</button>
-                            <button class="btn order-list--btn" ng-click="view='cancel';retriveCancelledProducts('cancelled')" ng-class="{
-                        'btn--brownActive': view=='cancel' }">cancelled</button>
+                            <button class="btn order-list--btn " ng-click="subview='orders'" ng-class="{
+                        'btn--brownActive': subview=='orders' }">orders </button>
+                            <button class="btn order-list--btn" ng-click="subview='return'; retriveCancelledProducts('returned')" ng-class="{
+                        'btn--brownActive': subview=='return' }">return/exchange</button>
+                            <button class="btn order-list--btn" ng-click="subview='cancel';retriveCancelledProducts('cancelled')" ng-class="{
+                        'btn--brownActive': subview=='cancel' }">cancelled</button>
                         </p>
-                        <div class="account-order-table" ng-if="view == 'orders'">
+                        <div class="account-order-table" ng-if="subview == 'orders'">
                             <table class="table" ng-repeat="order in orders">
                                 <thead>
                                     <tr class="text-uppercase">
@@ -244,36 +244,36 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="account-order-table" ng-if="view == 'return'">
-                            <table class="table">
+                        <div class="account-order-table" ng-if="subview == 'return'">
+                            <table class="table" ng-repeat="return in returned">
                                 <thead>
                                     <tr class="text-uppercase">
-                                        <th>order placed</span><br><strong>1 march 2017</strong></th>
-                                        <th>order no.<br><strong>#123-45678 90123</strong></th>
+                                        <th>order placed</span><br><strong>{{return.createdAt | date:'dd/MM/yyyy'}}</strong></th>
+                                        <th>order no.<br><strong>{{return.orderNo}}</strong></th>
                                         <th>order-satus<br><strong>returned</strong></th>
-                                        <th>Grand total<br><strong>&#8377; 2899</strong></th>
+                                        <th>Grand total<br><strong>&#8377; {{return.totalAmount}}</strong></th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
+                                <tbody ng-repeat="product in return.returnCancelProduct">
+                                    <tr ng-if="product.status=='returned'">
                                         <td>
                                             <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
                                             <div class="item-img">
-                                                <img src="frontend/img/individual/6.jpg" alt="Ordered Item" class="img-responsive">
+                                                <img ng-src="{{product.product.images[0].image|serverimage}}" alt="Ordered Item" class="img-responsive">
                                             </div>
                                         </td>
                                         <td>
-                                            <h4 class="item-name text-uppercase">Linen Full Sleeve Shirt With Rollup</h4>
-                                            <p class="item-code">Product Code:<span class="text-uppercase"> G000278-GMSHHS0198-AMTEN-02</span>
+                                            <h4 class="item-name text-uppercase">{{product.product.productName}}</h4>
+                                            <p class="item-code">Product Code:<span class="text-uppercase"> {{product.product.name}}</span>
                                             </p>
-                                            <p class="item-cost"><i class="fa fa-inr"></i>2,899</p>
+                                            <p class="item-cost"><i class="fa fa-inr"></i>{{product.product.price}}</p>
 
                                         </td>
                                         <td colspan="3">
                                             <div class="pull-right">
-                                                <button class="btn order-action--btn text-uppercase">order details
+                                                <button class="btn order-action--btn text-uppercase" ui-sref="orderdetail({id:return._id})">order details
                                                 </button>
-                                                <button class="btn order-action--btn text-uppercase">buy it again
+                                                <button class="btn order-action--btn text-uppercase" ui-sref="individual-page({id: product.product.productId})">buy it again
                                                 </button>
 
                                             </div>
@@ -282,35 +282,34 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="account-order-table" ng-if="view == 'cancel'">
-                            <table class="table">
+                        <div class="account-order-table" ng-if="subview == 'cancel'">
+                            <table class="table" ng-repeat="return in returned">
                                 <thead>
                                     <tr class="text-uppercase">
-                                        <th>order placed<br><strong>1 march 2017</strong></th>
-                                        <th>order no.<br><strong>#123-45678 90123</strong></th>
-                                        <th>order-satus<br><strong>returned</strong></th>
-                                        <th>Grand total<br><strong>&#8377; 2899</strong></th>
+                                        <th>order placed</span><br><strong>{{return.createdAt | date:'dd/MM/yyyy'}}</strong></th>
+                                        <th>order no.<br><strong>{{return.orderNo}}</strong></th>
+                                        <th>order-satus<br><strong>cancelled</strong></th>
+                                        <th>Grand total<br><strong>&#8377; {{return.totalAmount}}</strong></th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
+                                <tbody ng-repeat="product in return.returnCancelProduct track by $index">
+                                    <tr ng-if="product.status=='cancelled'">
                                         <td>
                                             <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
                                             <div class="item-img">
-                                                <img src="frontend/img/individual/6.jpg" alt="Ordered Item" class="img-responsive">
+                                                <img ng-src="{{product.product.images[0].image|serverimage}}" alt="Ordered Item" class="img-responsive">
                                             </div>
                                         </td>
                                         <td>
-                                            <h4 class="item-name text-uppercase">Linen Full Sleeve Shirt With Rollup</h4>
-                                            <p class="item-code">Product Code:<span class="text-uppercase"> G000278-GMSHHS0198-AMTEN-02</span>
+                                            <h4 class="item-name text-uppercase">{{product.product.productName}}</h4>
+                                            <p class="item-code">Product Code:<span class="text-uppercase"> {{product.product.name}}</span>
                                             </p>
-                                            <p class="item-cost">
-                                                <i class="fa fa-inr"></i>2,899
-                                            </p>
+                                            <p class="item-cost"><i class="fa fa-inr"></i>{{product.product.price}}</p>
+
                                         </td>
                                         <td colspan="3">
                                             <div class="pull-right">
-                                                <button class="btn order-action--btn text-uppercase">buy it again
+                                                <button class="btn order-action--btn text-uppercase" ui-sref="individual-page({id: product.product.productId})">buy it again
                                                 </button>
                                             </div>
                                         </td>

@@ -50,6 +50,15 @@
             "name": "_id",
             "value": "_id"
         }
+    }, {
+        "name": "clone",
+        "icon": "fa-pencil",
+        "buttonClass": "btn-warning",
+        "type": "page",
+        "action": "cloneProduct",
+        "fieldsToSend": {
+            "_id": "_id"
+        }
     }],
     "button": [{
         "name": "Excel Export",

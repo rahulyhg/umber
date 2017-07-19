@@ -53,22 +53,14 @@ myApp
                         })
                     }
                 }
-            })
-
-            WishlistService.getWishlist(userId, function (result) {
-
-
-                $scope.wishlist = result.data.data;
-
-
-            });
-
-            ProductService.getFeatured(function (data) {
-
-                $scope.featured = data.data.data;
+                WishlistService.getWishlist(userId, function (result) {
+                    $scope.wishlist = result.data.data;
+                    ProductService.getFeatured(function (data) {
+                        $scope.featured = data.data.data;
+                    })
+                });
 
             })
-
         } else {
             $scope.mycart = []
             $scope.mycart = $.jStorage.get("cart");
@@ -93,7 +85,6 @@ myApp
             });
         }
         $scope.checkInCart = function (productId) {
-
             if (userId.userId) {
 
                 var result = _.find($scope.tempcart, {
