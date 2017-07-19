@@ -182,6 +182,15 @@
 
          //api call
      }
+     /******filters applied automatic if already applied****** */
+     if ($.jStorage.get("appliedFilters")) {
+         ProductService.getProductsWithAppliedFilters($.jStorage.get("appliedFilters"), function (data) {
+             console.log("filtersretrived:::", data.data.data);
+             $scope.products = _.chunk(data.data.data.products, 3);
+             $scope.filters = data.data.data.filters;
+
+         })
+     }
      $scope.loadMore = function () {
          appliedFilters.page++;
          ProductService.getProductsWithAppliedFilters(appliedFilters, function (data) {
