@@ -106,4 +106,17 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
     $scope.changeImage = function (index) {
         $scope.selectedImage = $scope.product.images[index];
     };
+
+    //To close compare-section modal
+    $scope.compareProduct = false; // For toggle sidenavigation
+    $scope.compareProductModal = function () {
+        if (!$scope.compareProduct) {
+            $('.compare-product-main').removeClass('compareProductMenuIn');
+            $('.compare-product-main').addClass('compareProductMenuOut');
+
+            // $compareProduct = true;
+        }
+
+    };
+    //
 })
