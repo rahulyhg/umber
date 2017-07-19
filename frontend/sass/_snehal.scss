@@ -862,6 +862,21 @@
                             //     @include transition-delay(0.2s 0.3s);
                             // }
                         } // Used to show compare products
+                        .compare-product-main {
+                            width: 700px;
+                            min-height: 5px;
+                            @include padding(5px);
+                            border: 1px solid transparent;
+                            border-radius: 0;
+                            box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
+                            @include margin(0 auto);
+                            position: fixed;
+                            left: 50%;
+                            bottom: 0;
+                            background-color: #F5F5F5;
+                            z-index: 9999;
+                        }
+
                         .compareProductMenuOut {
                             @include transform(rotate(0deg) scale(1) skew(0deg) translate(-50%,
                             1000px));
@@ -951,7 +966,6 @@
                         .listing-img {
                             // background: url("../img/listing/common.jpg");
                             background-repeat: no-repeat;
-                            min-height: 305px;
                             background-size: cover;
                             background-position: 100% 100%;
                             margin-top: 15px;
@@ -1352,15 +1366,29 @@
                                         &:before {
                                             content: "";
                                             height: 50px;
-                                            width: 50px;
+                                            width: 70px;
                                             background: url(../img/about/qoutes.png) no-repeat;
                                             background-position: center center;
                                             background-size: cover;
                                             position: absolute;
                                             top: -80px;
-                                            left: 15px;
+                                            left: 0;
                                         }
                                     }
+                                    &:before{
+                                        @include position(absolute,
+                null null 60px -181px);
+                                    }
+                                    &:after {
+                content: '';
+                border-right: 2px dashed $darkBrown1;
+                @include position(absolute,
+                60px 53px null null);
+                height: 277px;
+            }
+            p.line--height {
+                                            text-align: justify;
+                                        }
                                 }
                             }
                         }
@@ -1370,7 +1398,8 @@
                         }
 
                         .about-info {
-                            padding-left: 20px;
+                            padding-right: 30px;
+                            padding-left: 30px;
                         } //about ended
                         //gift started
                         .gift-form {

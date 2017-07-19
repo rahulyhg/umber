@@ -86,5 +86,12 @@
 
      }
 
+     $scope.openCoupon = function () {
+         var Couponmodal = $uibModal.open({
+             animation: true,
+             templateUrl: 'views/modal/Coupon.html',
+             size: 'md',
 
+         });
+     }
  })

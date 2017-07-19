@@ -13,17 +13,12 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
         $scope.formSubmitted = true;
     };
     $scope.updateQuantity = function (oper) {
-
         $scope.reqQuantity += parseInt(oper);
-
     }
-
     $scope.loggedUser = $.jStorage.get("userId");
     var data = {
         productId: $stateParams.id
     };
-
-
     ProductService.getProductDetails(data, function (data) {
 
         if (data.data.value) {
@@ -45,7 +40,6 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
             "product": $scope.product,
         }
         myService.addToWishlist(data, function (data) {
-
             ModalService.addwishlist();
         })
     }
