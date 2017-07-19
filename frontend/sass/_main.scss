@@ -790,6 +790,10 @@
             }
         }
         .mycart-footer {
+            .linking {
+                text-decoration: none;
+                color: #cfcfcf;
+            }
             ul {
                 color: $darkBrown1;
             }
@@ -1563,6 +1567,12 @@
                 line-height: 1;
                 color: $darkGray;
                 word-wrap: break-word;
+                display: -webkit-box;
+                max-height: 150px;
+                -webkit-line-clamp: 7;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             .buy--now {
                 // button-design
@@ -2922,20 +2932,122 @@
             width: 200px;
         }
     } //End of giftcard .html
+    //start of About.html
+    .about-info {
+        column-gap: 50px;
+        -moz-column-count: 2;
+        -webkit-column-count: 2;
+        column-count: 2;
+    } //start of About.html
     //Start of Store locator.html
-    .store-locator {
-        @include margin(60px 0);
-        .store-map {
-            @include padding(25px 25px 25px 120px);
-            iframe {
-                position: relative;
-                z-index: 99999;
+    .row-margin {
+        margin-bottom: 50px;
+        margin-top: 50px;
+        .map-place {
+            position: absolute;
+            left: -216px;
+            top: 41px;
+            z-index: 1;
+        }
+    }
+
+    .custom-slider {
+        margin: 0;
+        background: #341314;
+        border: 0;
+        border-radius: 0;
+        padding: 20px;
+        .border {
+            border: 1px dashed #fff;
+            .location-title {
+                position: absolute;
+                top: 66px;
+                left: 334px;
+                z-index: 2;
+                display: flex;
+            }
+            .location--btn {
+                @extend .btn--brown;
+                border: 0px;
+                border-bottom: solid 1px white;
+                width: 200px;
+                text-align: left;
+                span {
+                    position: absolute;
+                    right: 0;
+                }
+                &:focus {
+                    background-color: $darkBrown1 !important;
+                    color: white;
+                }
+            }
+            .location-dropdown {
+                min-width: 200px;
+            }
+            .tab-title {
+                color: white;
+                padding-left: 55px;
+                margin-top: 10px;
             }
         }
-        .store-location-padd {
-            @include block($inlineBlock: inline-block);
-            vertical-align: top;
-            width: 40%;
+        .flex-control-paging li a {
+            display: none;
+        }
+        .flexslider {
+            margin: 0;
+            background: #341314;
+            border: 0px dashed #fff;
+            padding-top: 90px;
+            padding-bottom: 30px;
+            padding-left: 300px;
+            padding-right: 140px;
+            border-radius: 0px !important;
+            color: white;
+            height: 440px;
+            .flex-prev {
+                opacity: 1;
+                left: 210px!important;
+                @include size(32px,
+                32px);
+                &:before {
+                    content: '\02190';
+                    color: $darkBrown1;
+                    font-size: 38px;
+                    background-color: $white;
+                    @include position(absolute,
+                    -14px null null -2px);
+                }
+                &:hover {
+                    opacity: 0.5;
+                }
+            }
+            .flex-next {
+                right: 50px!important;
+                @include size(32px,
+                32px);
+                opacity: 1;
+                &:before {
+                    content: '\02192'!important;
+                    color: black;
+                    font-size: 38px;
+                    background-color: white;
+                    @include position(absolute,
+                    -14px null null -4px);
+                }
+                &:hover {
+                    opacity: 0.5;
+                }
+            }
+        }
+    }
+
+    .store-location-details {
+        @include padding(30px 30px 0px 0px);
+        .address {
+            margin-bottom: 5px !important;
+        }
+        p {
+            margin-bottom: 5px;
         }
     } //End of store locator.html
     // All modals html
