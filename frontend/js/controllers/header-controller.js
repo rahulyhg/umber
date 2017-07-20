@@ -55,15 +55,16 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
                 userId: $.jStorage.get("userId"),
                 accessToken: $.jStorage.get("accessToken")
             }
-            $.jStorage.deleteKey('userId');
-            $.jStorage.deleteKey('accessToken');
-            $.jStorage.deleteKey('cart');
-            $.jStorage.deleteKey('wishlist');
-            $.jStorage.deleteKey('compareproduct');
-            $.jStorage.deleteKey("username")
-            $.jStorage.deleteKey("selectedCategory");
-            $.jStorage.deleteKey("appliedFilters");
-            $.jStorage.deleteKey("orderDetails");
+            // $.jStorage.deleteKey('userId');
+            // $.jStorage.deleteKey('accessToken');
+            // $.jStorage.deleteKey('cart');
+            // $.jStorage.deleteKey('wishlist');
+            // $.jStorage.deleteKey('compareproduct');
+            // $.jStorage.deleteKey("username")
+            // $.jStorage.deleteKey("selectedCategory");
+            // $.jStorage.deleteKey("appliedFilters");
+            // $.jStorage.deleteKey("orderDetails");
+            $.jStorage.flush();
 
             UserService.logout(data, function (data) {
                 $scope.loggedUser = "";

@@ -93,7 +93,7 @@ var model = {
             }
         });
     },
-
+    //input accessToken,productId
     removeProductFromWishlist: function (products, callback) {
         async.waterfall([
             function findUserWithAccessToken(cbWaterfall1) {

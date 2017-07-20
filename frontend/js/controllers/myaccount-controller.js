@@ -222,6 +222,15 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
         $.jStorage.set("orderDetails", orderDetails);
         $state.go("cancel");
     }
+    $scope.removeWishlist = function (prodId) {
+        var data = {};
+        data.accessToken = $.jStorage.get("accessToken");
+        data.productId = prodId;
+        WishlistService.removeProduct(data, function (data) {
+            console.log(data);
+            $state.reload();
+        })
+    }
 
 });
 myApp.controller('ProductReturnCtrl', function ($scope, toastr, $state, OrderService, WishlistService, TemplateService, $translate, $rootScope, UserService) {
