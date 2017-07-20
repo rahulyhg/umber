@@ -1,45 +1,51 @@
 <div class="modal-body text-center">
     <div class="coupon-discount">
-        <div class="close-modal"><button class="btn close-modal--btn-circle">X</button></div>
+        <div class="close-modal" ng-click="$dismiss()"><button class="btn close-modal--btn-circle">X</button></div>
         <div class="coupon-discount-title">
-            <h2>Apply Coupon</h2>
+            <h1>Apply Coupon</h1>
         </div>
         <div class="coupon-code-num">
             <h4>Enter coupon code</h4>
-            <input type="number" maxlength="4" placeholder="Type coupon code here">
+            <input class="form-control" type="number" maxlength="4" placeholder="Type coupon code here">
         </div>
         <div class="coupon-code-offer">
             <h4 class="text-capatilize">Discount</h4>
             <div class="form-group">
-                <label class="radio-inline"><input type="radio" name="select">Buy 1 get 1 Free 
+                <div class="text-left">
+                    <div class="radio-wdth inline-block">
+                        <input class="radio-custom" id="radio1" type="radio" name="select" hidden><label for="radio1" class="radio-inline radio-custom-label">Buy 1 get 1 Free 
                    </label>
-                <div class="inline-block">
-                    <img src="frontend/img/listing/shirt.png" width="15" height="15" alt="Shirt Discount">
-                </div>
-                <label class="radio-inline"><input type="radio" name="select">Buy 2 get 20% Off 
+                        <div class="inline-block">
+                            <img src="frontend/img/listing/shirt.png" width="15" height="15" alt="Shirt Discount">
+                        </div>
+                    </div>
+                    <div class="radio-wdth inline-block">
+                        <input class="radio-custom" id="radio2" type="radio" name="select" hidden><label for="radio2" class="radio-inline radio-custom-label">Buy 2 get 20% Off 
                    </label>
-                <div class="inline-block">
-                    <img src="frontend/img/listing/lable.png" alt="Offer" width="15" height="15">
+                        <div class="inline-block">
+                            <img src="frontend/img/listing/lable.png" alt="Offer" width="15" height="15">
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="radio-inline"><input type="radio" name="select">Free Gifts </label>
-                <div class="inline-block">
-                    <img src="frontend/img/listing/gift.png" width="15" height="15">
-                </div>
-                <label class="radio-inline"><input type="radio" name="select">Flat 50% Off </label>
-                <div class="inline-block">
-                    <img src="frontend/img/listing/percent.png" width="15" height="15">
+                <div class="text-left">
+                    <div class="radio-wdth inline-block">
+                        <input class="radio-custom" id="radio3" type="radio" name="select" hidden><label for="radio3" class="radio-inline radio-custom-label">Free Gifts </label>
+                        <div class="inline-block">
+                            <img src="frontend/img/listing/gift.png" width="15" height="15">
+                        </div>
+                    </div>
+                    <div class="radio-wdth inline-block">
+                        <input class="radio-custom" id="radio4" type="radio" name="select" hidden><label for="radio4" class="radio-inline radio-custom-label">Flat 50% Off </label>
+                        <div class="inline-block">
+                            <img src="frontend/img/listing/percent.png" width="15" height="15">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-
-
-
     </div>
 </div>
 <div class="modal-footer modal-bottom">
-    <button class="btn text-uppercase" type="button" ng-click="$ctrl.ok()">CANCEL</button>
-    <button class="btn text-uppercase checkout--btn" type="button" ng-click="$ctrl.cancel()">APPLY COUPON</button>
+    <button class="btn text-uppercase cancel--btn" type="button" ng-click="$dismiss()">CANCEL</button>
+    <button class="btn text-uppercase apply--btn" type="button" ng-click="">APPLY COUPON</button>
 </div>
