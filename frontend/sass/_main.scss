@@ -2983,6 +2983,10 @@
                                                     }
                                                     .location-dropdown {
                                                         min-width: 200px;
+                                                        @extend .dropdown-hidden-anim;
+                                                    }
+                                                    .open .location-dropdown {
+                                                        @extend .dropdown-visible-anim;
                                                     }
                                                     .tab-title {
                                                         color: white;
@@ -3049,6 +3053,15 @@
                                                 p {
                                                     margin-bottom: 5px;
                                                 }
+                                            }
+
+                                            .listing-dropdown-menu {
+                                                width: 220px;
+                                                @extend .dropdown-hidden-anim;
+                                            }
+
+                                            .open .listing-dropdown-menu {
+                                                @extend .dropdown-visible-anim;
                                             } //End of store locator.html
                                             // All modals html
                                             /*****NOTE: We can extend this class by using @extend method. Please don't customise the main class(Parent class) .close-modal--btn-circle ****/

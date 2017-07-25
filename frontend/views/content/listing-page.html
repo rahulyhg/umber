@@ -229,12 +229,10 @@
                 </div>
                 <div class="row">
                     <div class="listing-main" ng-init="view ='thumbnailView'">
-                        <div class="btn-grp dropdown listing-dropdown-menu" uib-dropdown>
-                            <button type="button" class="btn btn-listing" uib-dropdown-toggle>Sort by<i class="fa fa-reg" aria-hidden="true"></i><required></required></button>
+                        <div class="btn-grp dropdown" uib-dropdown>
+                            <button type="button" class="btn btn-listing" uib-dropdown-toggle>{{sortButton}}<i class="fa fa-reg" aria-hidden="true"></i><required></required></button>
                             <ul class="listing-dropdown-menu dropdown-menu" uib-dropdown-menu role="menu">
-                                <li role="menuitem"><a href="#">brand</a></li>
-                                <li role="menuitem"><a href="#">color</a></li>
-                                <li role="menuitem"><a href="#">price</a></li>
+                                <li role="menuitem" ng-repeat="item in menu" ng-click="changeSorting(item)"><a href="#">{{item}}</a></li>
                             </ul>
                             <div class="pull-right">
                                 <div class="inline-block img-w">
@@ -247,52 +245,53 @@
                             </div>
                         </div>
                         {{displayMessage}}
-                        <!-- <div infinite-scroll='loadMore()' infinite-scroll-distance='3'> -->
-                        <div class="row" ng-repeat="row in products" ng-if="view == 'thumbnailView'">
-                            <div class="col-md-4" ng-repeat="product in row" ng-init="parentIndex = $index">
-                                <div class="buy-info custom-checkbox">
-                                    <div class="buy-slider slider-individual list-slider">
-                                        <flex-slider flex-slide="image in product.images track by $index" prev-text="" next-text="" animation="slide" min-items="3">
-                                            <li class="relate">
-                                                <div class="list-slider__toolTip">
-                                                    <!--<a toolTip="{{buy.toolTip}}"><img ng-src="{{image | serverimage}}" class="img-rsponsive img1">
+                        <div infinite-scroll='loadMore()' infinite-scroll-distance='3'>
+                            <div class="row" ng-repeat="row in products" ng-if="view == 'thumbnailView'">
+                                <div class="col-md-4" ng-repeat="product in row" ng-init="parentIndex = $index">
+                                    <div class="buy-info custom-checkbox">
+                                        <div class="buy-slider slider-individual list-slider">
+                                            <flex-slider flex-slide="image in product.images track by $index" prev-text="" next-text="" animation="slide" min-items="3">
+                                                <li class="relate">
+                                                    <div class="list-slider__toolTip">
+                                                        <!--<a toolTip="{{buy.toolTip}}"><img ng-src="{{image | serverimage}}" class="img-rsponsive img1">
                                                     </a>-->
-                                                </div>
-                                                <a ui-sref="individual-page({id: product.productId})">
+                                                    </div>
+                                                    <a ui-sref="individual-page({id: product.productId})">
                                                     <img ng-src="{{image.image | serverimage}}" class="img-rsponsive img1" title="{{product.productName}}">
                                                 </a>
-                                                <i ng-class="checkWishlist(product.productId)" aria-hidden="true"></i>
-                                                <img ng-src="{{buy.img}}" class="img-responsive" ng-mouseover="displayCntent();" ng-mouseleave="hideContent();">
-                                                <i class="fa fa-shopping-cart" ng-if="checkInCart(product.productId)"></i>
-                                            </li>
-                                        </flex-slider>
-                                        <div class="buy-para">
-                                            <h4><i class="fa fa-inr" aria-hidden="true"></i> {{product.price}}</h4>
-                                            <h5>{{product.productName}} <br>{{product.type.name}}</h5>
-                                            <div class="viewSize">
-                                                <p class="inline-block size-text">Sizes:</p>
-                                                <div class="inline-block buy-para__sizes">
-                                                    <p ng-repeat="size in product.sizes"> {{size.name}}</p>
+                                                    <i ng-class="checkWishlist(product.productId)" aria-hidden="true"></i>
+                                                    <img ng-src="{{buy.img}}" class="img-responsive" ng-mouseover="displayCntent();" ng-mouseleave="hideContent();">
+                                                    <i class="fa fa-shopping-cart" ng-if="checkInCart(product.productId)"></i>
+                                                </li>
+                                            </flex-slider>
+                                            <div class="buy-para">
+                                                <h4><i class="fa fa-inr" aria-hidden="true"></i> {{product.price}}</h4>
+                                                <h5>{{product.productName}} <br>{{product.type.name}}</h5>
+                                                <div class="viewSize">
+                                                    <p class="inline-block size-text">Sizes:</p>
+                                                    <div class="inline-block buy-para__sizes">
+                                                        <p ng-repeat="size in product.sizes"> {{size.name}}</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <hr>
-                                            <!--<p><input type="checkbox"> Add to compare</p>-->
-                                            <div class="checkbox inline-block marg0">
-                                                <input type="checkbox" id="{{product._id}}" ng-model="myVarss" ng-checked="checkStateOnReload(product.productId)" ng-click="clickfun(product);">
-                                                <label for="{{product._id}}">
+                                                <hr>
+                                                <!--<p><input type="checkbox"> Add to compare</p>-->
+                                                <div class="checkbox inline-block marg0">
+                                                    <input type="checkbox" id="{{product._id}}" ng-model="myVarss" ng-checked="checkStateOnReload(product.productId)" ng-click="clickfun(product);">
+                                                    <label for="{{product._id}}">
                                           Add to compare
                                         </label>
-                                            </div>
-                                            <div class="buy-para__button">
-                                                <div class="inline-block ">
-                                                    <a ui-sref="individual-page({id: product.productId})">
+                                                </div>
+                                                <div class="buy-para__button">
+                                                    <div class="inline-block ">
+                                                        <a ui-sref="individual-page({id: product.productId})">
                                                         <button class="btn btn-default buy--btn text-uppercase">buy</button>
                                                     </a>
-                                                </div>
-                                                <div class=" inline-block ">
+                                                    </div>
+                                                    <div class=" inline-block">
 
-                                                    <button class="btn btn-default view--btn text-uppercase " ng-click="quickviewProduct(product)">QUICK VIEW</button>
+                                                        <button class="btn btn-default view--btn text-uppercase" ng-click="quickviewProduct(product)">QUICK VIEW</button>
 
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -300,27 +299,26 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- </div> -->
                         <div ng-if="view == 'listView'" ng-repeat="row in products">
                             <div class="listview display-table" ng-repeat="product in row">
                                 <div class="display-row">
                                     <div class="display-cell">
                                         <div class="item-img relate">
-                                            <img src="frontend/img/individual/product-test.jpg" alt="Ordered Item" class="img-responsive">
+                                            <img ng-src="{{product.images[0].image | serverimage}}" alt="Ordered Item" class="img-responsive">
                                             <div class="inline-block wishlist-icon">
-                                                <i class="fa fa-heart "></i>
+                                                <i class="fa fa-heart"></i>
                                             </div>
                                         </div>
 
                                     </div>
                                     <div class="display-cell align-top item-desc">
                                         <div>
-                                            <h4 class="item-name text-uppercase">Mens Half Sleeve Shirt</h4>
-                                            <p class="item-cost"><i class="fa fa-inr"></i>2300</p>
+                                            <h4 class="item-name text-uppercase">{{product.productName}}</h4>
+                                            <p class="item-cost"><i class="fa fa-inr"></i>{{product.price}}</p>
                                             <div class="viewSize">
                                                 <p class="inline-block size-text">Sizes:</p>
                                                 <div class="inline-block buy-para__sizes">
-                                                    <p>32</p>
+                                                    <p ng-repeat="size in product.sizes">{{size.name}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -328,15 +326,17 @@
                                     <div class="display-cell align-top">
                                         <div class="custom-checkbox">
                                             <div class="checkbox">
-                                                <input type="checkbox" id="test">
-                                                <label for="test">Add to compare</label>
+                                                <input type="checkbox" id="{{product._id}}">
+                                                <label for="{{product._id}}">Add to compare</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="display-cell text-right align-middle">
                                         <div class="btn-group-vertical" role="group">
-                                            <button type="button" class="btn text-uppercase buy--btn">buy</button>
-                                            <button type="button" class="btn text-uppercase buy--btn">quick view</button>
+                                            <a ui-sref="individual-page({id: product.productId})">
+                                                        <button class="btn btn-default buy--btn text-uppercase">buy</button>
+                                                    </a>
+                                            <button type="button" class="btn text-uppercase buy--btn" ng-click="quickviewProduct(product)">quick view</button>
                                         </div>
                                     </div>
                                 </div>

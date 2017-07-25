@@ -14,16 +14,14 @@
                     <div class="location-title text-center">
                         <div class="btn-group" uib-dropdown is-open="status.isopen">
                             <button id="single-button" type="button" class="btn location--btn" uib-dropdown-toggle ng-disabled="disabled">
-        Location <span><img width="15" height="15" src="frontend/img/home/whitearrow.png"></span>
+        {{locationButton}} <span><img width="15" height="15" src="frontend/img/home/whitearrow.png"></span>
       </button>
-                            <ul class="location-dropdown dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                                <li role="menuitem"><a href="#">Mumbai</a></li>
-                                <li role="menuitem"><a href="#">Mumbai</a></li>
-                                <li role="menuitem"><a href="#">Mumbai</a></li>
+                            <ul class="location-dropdown location-dropdown-menu dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                                <li role="menuitem" ng-repeat="place in location" ng-click="changePlaces(place)"><a href="#">{{place}}</a></li>
                             </ul>
                         </div>
                         <div class="inline-block">
-                        <h3 class="tab-title text-uppercase">MUMBAI</h3>
+                            <h3 class="tab-title text-uppercase">MUMBAI</h3>
                         </div>
                     </div>
                     <flex-slider class="slider" flex-slide="slocation in storeLocation track by $index" prev-text="" next-text="" animation="slide">
