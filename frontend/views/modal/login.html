@@ -23,9 +23,10 @@
                                 </div>
                                 <div class="marginTop">
                                     <button type="button" class="btn btn-login btn-block" ng-disabled="loginform.email.$invalid || loginform.password.$invalid"
-                                        ng-click="login()">log in</button>
+                                        ng-click="login()" uib-popover="{{message}}" popover-title="Invalid credential" popover-placement="bottom"
+                                        popover-class="login-popover" popover-is-open="message" popover-trigger="'none'">log in</button>
                                 </div>
-                                <p style="color:red">{{message}}</p>
+
                             </form>
                         </div>
                     </div>

@@ -27,14 +27,14 @@
                   <span class="icon-bar"></span>
                 </button>
                 <div>
-                    <div class="inline-block" style="vertical-align:super">
-                        <div class="navbar__sideNav" ng-click="openSideNav();">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </div>
+
+                    <div class="navbar__sideNav inline-block" ng-click="openSideNav();">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
                     </div>
-                    <div class="inline-block">
+
+                    <div class="navbar-brand-wrap inline-block">
                         <a class="navbar-brand" ui-sref="home"><img src="../img/home/logo.png" alt="logo" width="130px" class="img-responsive"> </a>
                     </div>
                 </div>
@@ -112,18 +112,19 @@
     </nav>
     <div class="side-nav relate side-nav-menu-out">
         <div class="container">
-            <div class="links relate inline-block">
-                <div class="mobview-links mobview-links-menu-in">
-                    <ul class="list-unstyled text-capitalize">
-                        <li><a ui-sref="home">home</a></li>
-                        <li class="visible-xs" ng-click="closeCategires();"><a href="">products</a></li>
-                        <li><a ui-sref="about">about us</a></li>
-                        <li><a ui-sref="contactus">contact us</a></li>
-                        <li><a ui-sref="storelocator">store locator</a></li>
-                        <li><a href="">blogs</a></li>
-                    </ul>
-                </div>
-                <!--<div class="mobview-categories-display mobview-categories-menu-out">
+            <nav>
+                <div class="links relate inline-block">
+                    <div class="mobview-links mobview-links-menu-in">
+                        <ul class="list-unstyled text-capitalize">
+                            <li><a ui-sref="home">home</a></li>
+                            <li class="visible-xs" ng-click="closeCategires();"><a href="">products</a></li>
+                            <li><a ui-sref="about">about us</a></li>
+                            <li><a ui-sref="contactus">contact us</a></li>
+                            <li><a ui-sref="storelocator">store locator</a></li>
+                            <li><a href="">blogs</a></li>
+                        </ul>
+                    </div>
+                    <!--<div class="mobview-categories-display mobview-categories-menu-out">
                     <div class="mobview-categories">
                         <p><a href="" ng-click="slidebackToMobview()"><i class="fa fa-arrow-left"></i></a></p>
                         <uib-accordion close-others="oneAtATime">
@@ -177,13 +178,14 @@
                 </div>-->
 
 
-            </div>
-            <div class="product-categories inline-block hidden-xs">
-                <ul class="list-unstyled list-inline text-capitalize" ng-init="view='casulShirts'">
-                    <li ng-repeat="category in categories" ng-click="getSubCategories(category)">
-                        <a href="">{{category.name}}</a>
-                    </li>
-                    <!--<li ng-click="view = 'casulShirts'" ng-class="{
+                </div>
+                <div class="product-categories inline-block hidden-xs">
+                    <ul class="list-unstyled list-inline text-capitalize">
+                        <li ng-repeat="category in categories" ng-init="view='{{category.name}}'" ng-click="getSubCategories(category)" ng-class="{
+                        'active': view =='{{category.name}}'}">
+                            <a href="">{{category.name}}</a>
+                        </li>
+                        <!--<li ng-click="view = 'casulShirts'" ng-class="{
                         'active': view =='casulShirts'}"><a href="">casual shirts</a>
                         <div class="underline"></div>
                     </li>
@@ -212,18 +214,18 @@
                         <a href="">lorem ipsum</a>
                         <div class="underline"></div>
                     </li>-->
-                </ul>
-                <!--<div ng-if="view == 'casulShirts'">-->
-                <div class="sub-categorie">
-                    <ul class="list-unstyled list-inline">
-                        <li ng-repeat="subCategory in subCategories" ui-sref="listing-page({id: id, cat:subCategory._id})"><a>{{subCategory.name}}</a></li>
-
-
                     </ul>
+                    <!--<div ng-if="view == 'casulShirts'">-->
+                    <div class="sub-categorie">
+                        <ul class="list-unstyled list-inline">
+                            <li ng-repeat="subCategory in subCategories" ui-sref="listing-page({id: id, cat:subCategory._id})"><a>{{subCategory.name}}</a></li>
 
-                </div>
-                <!--</div>-->
-                <!-- <div ng-if="view == 'trousers'">
+
+                        </ul>
+
+                    </div>
+                    <!--</div>-->
+                    <!-- <div ng-if="view == 'trousers'">
                     <div class="sub-categorie">
                         <ul class="list-unstyled list-inline">
                             <li>inner test2</li>
@@ -272,12 +274,12 @@
                         </ul>
                     </div>
                 </div> -->
-            </div>
+                </div>
 
-            <div class="man-img hidden-xs">
-                <img src="frontend/img/home/sidenav.png" alt="" class="img-responsive">
-            </div>
-
+                <div class="man-img hidden-xs">
+                    <img src="frontend/img/home/sidenav.png" alt="" class="img-responsive">
+                </div>
+            </nav>
         </div>
     </div>
 </header>
