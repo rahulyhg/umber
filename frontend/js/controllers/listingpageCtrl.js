@@ -1,4 +1,4 @@
- myApp.controller('ListingPageCtrl', function ($scope, toastr, CartService, $rootScope, $stateParams, $state, WishlistService, TemplateService, NavigationService,
+ myApp.controller('ListingPageCtrl', function ($scope, toastr, CartService, $rootScope, $stateParams, $state, $filter, WishlistService, TemplateService, NavigationService,
      SizeService, BannerService, CategoryService, myService, ProductService, $timeout, $uibModal, ModalService, ListingService) {
      $scope.template = TemplateService.getHTML("content/listing-page.html");
      TemplateService.title = "Form"; //This is the Title of the Website
@@ -192,12 +192,15 @@
          })
      }
      $scope.loadMore = function () {
+         var appliedFilters = $.jStorage.get("appliedFilters");
          appliedFilters.page++;
          ProductService.getProductsWithAppliedFilters(appliedFilters, function (data) {
              console.log("filtersretrived:::", data.data.data);
-             $scope.products.push(_.chunk(data.data.data.products, 3));
+             //  $scope.products.push(_.chunk(data.data.data.products, 3));
+             var arrray = _.flattenDeep($scope.products);
+             arrray.push(data.data.data.products);
+             $scope.products = _.chunk(arrray, 3);
              $scope.filters = data.data.data.filters;
-
          })
      }
      $scope.priceSet = function (min, max) {
@@ -356,6 +359,29 @@
      $scope.reload = function () {
          $state.reload();
      }
+
+     $scope.sortButton = 'Sort By';
+     $scope.menu = ['Name', 'Price Low to High', 'Price High to Low'];
+     $scope.changeSorting = function (name) {
+         $scope.sortButton = name;
+         console.log("Hi", $scope.products);
+         if (name == 'Name') {
+             var arrray = _.flattenDeep($scope.products);
+             var test = $filter('orderBy')(arrray, 'productName');
+             $scope.products = _.chunk(test, 3);
+         } else if (name == 'Price Low to High') {
+             var arrray = _.flattenDeep($scope.products);
+             var test = $filter('orderBy')(arrray, 'price');
+             $scope.products = _.chunk(test, 3);
+         } else if (name == 'Price High to Low') {
+             var arrray = _.flattenDeep($scope.products);
+             var test = $filter('orderBy')(arrray, '-price');
+             $scope.products = _.chunk(test, 3);
+         }
+     };
+
+
+
      // This function is used to display the modal on quck view button
      $scope.quickviewProduct = function (prod) {
          $scope.product = prod;

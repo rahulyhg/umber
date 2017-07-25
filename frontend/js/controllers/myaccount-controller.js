@@ -1,4 +1,4 @@
-myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService, WishlistService, TemplateService, $translate, $rootScope, UserService, $stateParams) {
+myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService, WishlistService, TemplateService, $translate, $rootScope, UserService, $stateParams, $filter) {
     $scope.template = TemplateService.getHTML("content/myaccount.html");
     TemplateService.title = "My Account"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
@@ -252,7 +252,7 @@ myApp.controller('GiftCardCtrl', function ($scope, TemplateService, $translate, 
     TemplateService.title = "Your Gift Card"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
 });
-myApp.controller('StoreLocatorCtrl', function ($scope, TemplateService, $translate, $rootScope) {
+myApp.controller('StoreLocatorCtrl', function ($scope, TemplateService, $translate, $rootScope, $filter) {
     $scope.template = TemplateService.getHTML("content/storelocator.html");
     TemplateService.title = "Stores"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
@@ -283,4 +283,9 @@ myApp.controller('StoreLocatorCtrl', function ($scope, TemplateService, $transla
         }
     ];
     $scope.storeLocation = _.chunk($scope.storeLocation, 4);
+    $scope.locationButton = 'Location';
+    $scope.location = ['Mumbai', 'Pune', 'Hyderabad', 'Chennai'];
+    $scope.changePlaces = function (name) {
+        $scope.locationButton = name;
+    };
 });
