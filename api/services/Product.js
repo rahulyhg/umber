@@ -1049,6 +1049,7 @@ var model = {
     },
     //for global search
     getAggregatePipeLine: function (data) {
+        console.log("**** in  getAggregatePipeLine***", data)
 
         var pipeline = [
             // Stage 1
@@ -1199,6 +1200,12 @@ var model = {
             {
                 $match: {
                     $or: [{
+                            "productName": {
+                                $regex: data.keyword,
+                                $options: "i"
+                            }
+                        },
+                        {
                             "category.name": {
                                 $regex: data.keyword,
                                 $options: "i"
@@ -1255,6 +1262,7 @@ var model = {
     },
     //data.keyword
     globalSearch: function (data, callback) {
+        console.log("**** in global search***", data)
         var pipeLine = Product.getAggregatePipeLine(data);
         Product.aggregate(pipeLine, function (err, found) {
             if (err) {
