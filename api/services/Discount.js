@@ -2,11 +2,32 @@ var schema = new Schema({
     name: {
         type: String,
         required: true,
-        unique: true,
-        uniqueCaseInsensitive: true,
+        index: true,
         excel: {
-            name: Name
+            name: "Name"
         }
+    },
+    variables: Number,
+    products: [{
+        type: Schema.Types.ObjectId,
+        Ref: 'Product'
+    }],
+    coupons: [{
+        type: String
+    }],
+    gifts: [{
+        photo: {
+            type: String
+        },
+        name: String
+    }],
+    amount: Number,
+    percent: Number,
+    minAmount: Number,
+    minDiscountAmount: Number,
+    type: {
+        type: Schema.Types.ObjectId,
+        Ref: 'DiscountType'
     }
 });
 
