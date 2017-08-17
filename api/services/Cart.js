@@ -71,12 +71,9 @@ var model = {
                                 Cart.saveData(cart, function (err, data) {
                                     if (err) {
                                         cbWaterfall2(err, null);
-                                    }
-                                    // else if (data) {
-                                    //     Product.subtractQuantity(product, null);
-                                    //     cbWaterfall2(null, data);
-                                    // } 
-                                    else {
+                                    } else if (data) {
+                                        cbWaterfall2(null, data);
+                                    } else {
                                         cbWaterfall2({
                                             message: {
                                                 data: "Invalid credentials1!"
@@ -104,7 +101,6 @@ var model = {
                                         if (err) {
                                             cbWaterfall2(err, null);
                                         } else if (data) {
-                                            // Product.subtractQuantity(product, null);
                                             cbWaterfall2(null, data);
                                         } else {
                                             cbWaterfall2({
