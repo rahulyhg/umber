@@ -241,19 +241,6 @@
          $scope.formSubmitted = true;
      };
 
-     $scope.displayCntent = function () {
-         //$('.viewSize, .view--btn').css('opacity', '1');
-         $('.viewSize, .view--btn').css('display', 'block');
-         $(' .view--btn').css({
-             'position': 'relative',
-             'top': '3px'
-         });
-
-     }
-     $scope.hideContent = function () {
-         $('.viewSize, .view--btn').css('display', 'none');
-     };
-
      // var filter = {
      //     category: "",
      //     page: 1
@@ -447,5 +434,26 @@
      //End of  modal on quck view button
      if (_.isEmpty($scope.products))
          $scope.displayMessage = "No Product Found";
+
+     // Start of UIB Carousel slider's function for gird view
+     $scope.gridViewSlideInterval = 5000;
+     $scope.active = 0;
+     $scope.currentGridViewSlideIndex = 0;
+     $scope.gridViewSlide = [{
+         img: 'frontend/img/individual/product-test.jpg',
+         text: 'Cool Shirt',
+         id: 1
+     }, {
+         img: 'frontend/img/individual/7.jpg',
+         text: 'Nice Shirt',
+         id: 2
+     }];
+     //   $scope.addgridViewSlide = function () {
+     //       slides.push({
+
+     //       })
+     //   };
+
+     //End of UIB Carousel slider's function for gird view
 
  })

@@ -150,13 +150,14 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
         $scope.closeCategires = function () {
             $('.mobview-links').removeClass('mobview-links-menu-in');
             $('.mobview-links').addClass('mobview-links-menu-out');
-            $('.mobview-categories-display ').toggleClass('mobview-categories-menu-in');
+            $('.mobview-categories').removeClass('mobview-categories-menu-out');
+            $('.mobview-categories').addClass('mobview-categories-menu-in');
         };
         $scope.slidebackToMobview = function () {
             $('.mobview-links').removeClass('mobview-links-menu-out');
             $('.mobview-links').addClass('mobview-links-menu-in');
-            $('.mobview-categories-display ').removeClass('mobview-categories-menu-in');
-            $('.mobview-categories-display ').addClass('mobview-categories-menu-out');
+            $('.mobview-categories ').removeClass('mobview-categories-menu-in');
+            $('.mobview-categories ').addClass('mobview-categories-menu-out');
         };
 
         $scope.getSubCategories = function (category) {
