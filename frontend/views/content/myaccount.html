@@ -214,7 +214,6 @@
                                 <tbody>
                                     <tr class="relate" ng-repeat="product in order.products">
                                         <td colspan="3">
-                                            <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
                                             <div class="item-img inline-block">
                                                 <img ng-src="{{product.product.images[0].image|serverimage}}" alt="Ordered Item" class="img-responsive">
                                             </div>
@@ -257,7 +256,6 @@
                                 <tbody ng-repeat="product in return.returnCancelProduct">
                                     <tr ng-if="product.status=='returned'">
                                         <td>
-                                            <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
                                             <div class="item-img">
                                                 <img ng-src="{{product.product.images[0].image|serverimage}}" alt="Ordered Item" class="img-responsive">
                                             </div>
@@ -295,7 +293,6 @@
                                 <tbody ng-repeat="product in return.returnCancelProduct track by $index">
                                     <tr ng-if="product.status=='cancelled'">
                                         <td>
-                                            <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
                                             <div class="item-img">
                                                 <img ng-src="{{product.product.images[0].image|serverimage}}" alt="Ordered Item" class="img-responsive">
                                             </div>
@@ -328,7 +325,7 @@
                                         <flex-slider flex-slide="buy in xyz.images track by $index" prev-text="" next-text="" animation="slide" min-items="3">
                                             <li>
                                                 <i class="fa fa-heart" aria-hidden="true" ng-click="removeWishlist(xyz.productId);"></i>
-                                                <img ng-src="{{buy.image | serverimage}}" class="img-responsive" ng-click="addcart();">
+                                                <img ng-src="{{buy.image}}" class="img-responsive" ng-click="addcart();">
                                             </li>
                                         </flex-slider>
                                         <div class="buy-para custom-checkbox">

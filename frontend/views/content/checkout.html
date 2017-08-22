@@ -138,7 +138,7 @@
                                     <tr ng-repeat="product in orderTable.products ">
                                         <td>
                                             <div class="item ">
-                                                <img ng-src="{{product.product.images[0].image | serverimage}} " alt="
+                                                <img ng-src="{{product.product.images[0].image}} " alt="
                         " class="img-responsive item__img-checkout ">
                                                 <div class="mycart-info ">
                                                     <p class="item__title1 ">{{product.product.productName}}</p>
@@ -160,7 +160,7 @@
                             <div class="pull-right ">
                                 <p class="text-right ">GRAND TOTAL : <span>&#x20b9 {{grandTotal}}</span></p>
                                 <p>
-                                    <button class="btn next--btn btn-default " ng-click="gotoDetails() ">Next</button>
+                                    <button class="btn next--btn btn-default " ng-click="view='detailTab'">Next</button>
                                 </p>
                             </div>
                         </div>

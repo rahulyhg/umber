@@ -199,16 +199,16 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
 
         if (data.data.data)
             $scope.orderTable = data.data.data;
-        if ($scope.orderTable) {
-            for (var i = 0; i <= $scope.orderTable.products.length - 1; i++) {
-                if ($scope.orderTable.products[i].quantity > $scope.orderTable.products[i].product.quantity) {
+        // if ($scope.orderTable) {
+        //     for (var i = 0; i <= $scope.orderTable.products.length - 1; i++) {
+        //         if ($scope.orderTable.products[i].quantity > $scope.orderTable.products[i].product.quantity) {
 
-                    $state.go("mycart");
-                }
-            }
-        } else {
-            $state.go("mycart");
-        }
+        //             $state.go("mycart");
+        //         }
+        //     }
+        // } else {
+        //     $state.go("mycart");
+        // }
         if ($scope.orderTable && $scope.orderTable.products)
             $scope.grandTotal = CartService.getTotal($scope.orderTable.products);
     });

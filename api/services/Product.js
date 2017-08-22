@@ -148,10 +148,10 @@ var model = {
                                 newProduct.productId = product.LOTNO;
 
                             if (product.Featured)
-                                newProduct.featured = product.Featured;
+                                newProduct.featured = (product.Featured == 'Y' || product.Featured == 'y') ? true : false;
 
                             if (product.NewArrival)
-                                newProduct.newArrival = product.NewArrival;
+                                newProduct.newArrival = (product.NewArrival == 'Y' || product.NewArrival == 'y') ? true : false;
 
                             if (product.STYLE1)
                                 newProduct.style = product.STYLE1;
@@ -189,6 +189,16 @@ var model = {
                                 newProduct.images.push({
                                     image: product.IMAGE4,
                                     order: 4
+                                });
+                            if (product.IMAGE5)
+                                newProduct.images.push({
+                                    image: product.IMAGE4,
+                                    order: 5
+                                });
+                            if (product.IMAGE6)
+                                newProduct.images.push({
+                                    image: product.IMAGE4,
+                                    order: 6
                                 });
                             cbWaterfall1(null, newProduct);
                         },

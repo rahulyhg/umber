@@ -21,9 +21,8 @@
                     <tr class="relate" ng-repeat="product in order.products">
 
                         <td colspan="3">
-                            <!--style="background: url('{{product.product.images[0].image | serverimage}}') no-repeat 50% 50%"-->
                             <div class="item-img inline-block">
-                                <img ng-src="{{product.product.images[0].image | serverimage}}" alt="Ordered Item" class="img-responsive">
+                                <img ng-src="{{product.product.images[0].image}}" alt="Ordered Item" class="img-responsive">
                             </div>
 
 
@@ -114,9 +113,8 @@
                     <tr class="relate" ng-repeat="product in order.returnedProducts">
 
                         <td colspan="3">
-                            <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
                             <div class="item-img inline-block">
-                                <img ng-src="{{product.product.images[0].image | serverimage}}" alt="Ordered Item" class="img-responsive">
+                                <img ng-src="{{product.product.images[0].image}}" alt="Ordered Item" class="img-responsive">
                             </div>
                             <div class="inline-block item-desc">
                                 <h4 class="item-name text-uppercase">{{product.product.productName}}
