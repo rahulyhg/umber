@@ -1134,7 +1134,7 @@
                                                 }
                                                 .sub-categorie {
                                                     background: $lightGray1;
-                                                    @include padding(5px 10px);
+                                                    @include padding(0 10px);
                                                     @include margin(5px 110px 5px 15px);
                                                     overflow: auto;
                                                     max-height: 45px;

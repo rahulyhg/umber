@@ -162,14 +162,14 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
 
         $scope.getSubCategories = function (category) {
             var data = {};
-            $scope.id = category._id;
-            data.category = category._id;
+            $scope.slug = category.slug;
+            data.slug = category.slug;
             CategoryService.getCategoryWithParent(data, function (data) {
                 console.log("subcatretrived", data);
                 if (data.data.value) {
                     $scope.subCategories = data.data.data;
                 } else {
-                    console.log("subcatretrived", data);
+                    console.log("subcatretrived", data.data.error);
                 }
             })
         }
@@ -178,7 +178,7 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
         NavigationService.getEnabledCategories(function (data) {
 
             $scope.categories = data.data.data;
-            console.log($scope.categories)
+            console.log('cat', $scope.categories)
 
 
         });
