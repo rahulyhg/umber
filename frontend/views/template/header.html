@@ -110,7 +110,7 @@
             </div>-->
         </div>
     </nav>
-    <div class="side-nav relate side-nav-menu-out">
+    <div class="side-nav relate side-nav-menu-out hidden-xs">
         <div class="container">
             <nav>
                 <div class="links relate inline-block">
@@ -124,60 +124,6 @@
                             <li><a href="">blogs</a></li>
                         </ul>
                     </div>
-                    <!--<div class="mobview-categories-display mobview-categories-menu-out">
-                    <div class="mobview-categories">
-                        <p><a href="" ng-click="slidebackToMobview()"><i class="fa fa-arrow-left"></i></a></p>
-                        <uib-accordion close-others="oneAtATime">
-                            <div uib-accordion-group is-open="">
-                                <uib-accordion-heading>
-                                    Casual Shirts <i class="pull-right fa" ng-class="{'fa fa-minus': status.isCustomHeaderOpen, 'fa fa-plus': !status.isCustomHeaderOpen}"></i>
-                                </uib-accordion-heading>
-                                <p>Test1</p>
-
-                            </div>
-
-                            <div uib-accordion-group is-open="">
-                                <uib-accordion-heading>
-                                    Trousers <i class="pull-right fa " ng-class="{'fa fa-minus': status.isCustomHeaderOpen, 'fa fa-plus': !status.isCustomHeaderOpen}"></i>
-                                </uib-accordion-heading>
-                                <p>Test1</p>
-
-                            </div>
-
-                            <div uib-accordion-group is-open="">
-                                <uib-accordion-heading>
-                                    Tees <i class="pull-right fa" ng-class="{'fa fa-minus': status.isCustomHeaderOpen, 'fa fa-plus': !status.isCustomHeaderOpen}"></i>
-                                </uib-accordion-heading>
-                                <p>Test1</p>
-
-                            </div>
-
-                            <div uib-accordion-group is-open="">
-                                <uib-accordion-heading>
-                                    Linen Store <i class="pull-right fa" ng-class="{'fa fa-minus': status.isCustomHeaderOpen, 'fa fa-plus': !status.isCustomHeaderOpen}"></i>
-                                </uib-accordion-heading>
-                                <p>Test1</p>
-
-                            </div>
-
-                            <div uib-accordion-group is-open="">
-                                <uib-accordion-heading>
-                                    White Bar <i class="pull-right fa" ng-class="{'fa fa-minus': status.isCustomHeaderOpen, 'fa fa-plus': !status.isCustomHeaderOpen}"></i>
-                                </uib-accordion-heading>
-                                <p>Test1</p>
-
-                            </div>
-                            <div uib-accordion-group is-open="">
-                                <uib-accordion-heading>
-                                    Lorem Ipsum <i class="pull-right fa " ng-class="{'fa fa-minus': status.isCustomHeaderOpen, 'fa fa-plus': !status.isCustomHeaderOpen}"></i>
-                                </uib-accordion-heading>
-                                <p>Test1</p>
-                            </div>
-                        </uib-accordion>
-                    </div>
-                </div>-->
-
-
                 </div>
                 <div class="product-categories inline-block hidden-xs">
                     <ul class="list-unstyled list-inline text-capitalize">
@@ -194,86 +140,14 @@
                         <a href="">trousers</a>
                         <div class="underline"></div>
                     </li>
-                    <li ng-click="view = 'tees'" ng-class="{
-                        'active': view =='tees' }">
-                        <a href="">tees</a>
-                        <div class="underline"></div>
-                    </li>
-                    <li ng-click="view = 'linenStore'" ng-class="{
-                        'active': view =='linenStore' }">
-                        <a href="">linen store</a>
-                        <div class="underline"></div>
-                    </li>
-                    <li ng-click="view = 'whiteBar'" ng-class="{
-                        'active': view =='whiteBar' }">
-                        <a href="">white bar</a>
-                        <div class="underline"></div>
-                    </li>
-                    <li ng-click="view = 'test'" ng-class="{
-                        'active': view =='test'}">
-                        <a href="">lorem ipsum</a>
-                        <div class="underline"></div>
-                    </li>-->
+                   \
                     </ul>
                     <!--<div ng-if="view == 'casulShirts'">-->
-                    <div class="sub-categorie">
-                        <ul class="list-unstyled list-inline">
-                            <li ng-repeat="subCategory in subCategories" ui-sref="listing-page({id: id, cat:subCategory._id})"><a>{{subCategory.name}}</a></li>
-
-
-                        </ul>
-
-                    </div>
-                    <!--</div>-->
-                    <!-- <div ng-if="view == 'trousers'">
-                    <div class="sub-categorie">
-                        <ul class="list-unstyled list-inline">
-                            <li>inner test2</li>
-                            <li>inner test2</li>
-                            <li>inner test2</li>
-                        </ul>
-
-                    </div>
-                </div>
-                <div ng-if="view == 'tees'">
-                    <div class="sub-categorie">
-
-                        <ul class="list-unstyled list-inline">
-                            <li>inner test3</li>
-                            <li>inner test3</li>
-                            <li>inner test3</li>
-                        </ul>
-                    </div>
-                </div>
-                <div ng-if="view == 'linenStore'">
-                    <div class="sub-categorie">
-                        <ul class="list-unstyled list-inline">
-                            <li>inner test4</li>
-                            <li>inner test4</li>
-                            <li>inner test4</li>
-                        </ul>
-
-                    </div>
-                </div>
-                <div ng-if="view == 'whiteBar'">
-                    <div class="sub-categorie">
-
-                        <ul class="list-unstyled list-inline">
-                            <li>inner test5</li>
-                            <li>inner test5</li>
-                            <li>inner test5</li>
-                        </ul>
-                    </div>
-                </div>
-                <div ng-if="view == 'test'">
-                    <div class="sub-categorie">
-                        <ul class="list-unstyled list-inline">
-                            <li>inner test6</li>
-                            <li>inner test6</li>
-                            <li>inner test6</li>
-                        </ul>
-                    </div>
-                </div> -->
+                        <div class="sub-categorie">
+                            <ul class="list-unstyled list-inline">
+                                <li ng-repeat="subCategory in subCategories" ui-sref="listing-page({id: id, cat:subCategory._id})"><a>{{subCategory.name}}</a></li>
+                            </ul>
+                        </div>
                 </div>
 
                 <div class="man-img hidden-xs">
@@ -281,5 +155,71 @@
                 </div>
             </nav>
         </div>
+    </div>
+    <div class="mobview-side-nav mobview-side-nav-menu-out visible-xs">
+        <nav>
+            <div class="mobview-links mobview-links-menu-in">
+                <ul class="list-unstyled text-capitalize">
+                    <li><a ui-sref="home">home</a></li>
+                    <li ng-click="closeCategires();"><a href="">products</a></li>
+                    <li><a ui-sref="about">about us</a></li>
+                    <li><a ui-sref="contactus">contact us</a></li>
+                    <li><a ui-sref="storelocator">store locator</a></li>
+                    <li><a href="">blogs</a></li>
+                </ul>
+            </div>
+            <div class="mobview-categories mobview-categories-menu-out">
+
+                <p><a href="" ng-click="slidebackToMobview()"><i class="fa fa-arrow-left"></i></a></p>
+                <uib-accordion close-others="oneAtATime">
+                    <div uib-accordion-group is-open="">
+                        <uib-accordion-heading>
+                            Casual Shirts <i class="pull-right fa" ng-class="{'fa fa-minus': status.isCustomHeaderOpen, 'fa fa-plus': !status.isCustomHeaderOpen}"></i>
+                        </uib-accordion-heading>
+                        <p>Test1</p>
+
+                    </div>
+
+                    <div uib-accordion-group is-open="">
+                        <uib-accordion-heading>
+                            Trousers <i class="pull-right fa " ng-class="{'fa fa-minus': status.isCustomHeaderOpen, 'fa fa-plus': !status.isCustomHeaderOpen}"></i>
+                        </uib-accordion-heading>
+                        <p>Test1</p>
+
+                    </div>
+
+                    <div uib-accordion-group is-open="">
+                        <uib-accordion-heading>
+                            Tees <i class="pull-right fa" ng-class="{'fa fa-minus': status.isCustomHeaderOpen, 'fa fa-plus': !status.isCustomHeaderOpen}"></i>
+                        </uib-accordion-heading>
+                        <p>Test1</p>
+
+                    </div>
+
+                    <div uib-accordion-group is-open="">
+                        <uib-accordion-heading>
+                            Linen Store <i class="pull-right fa" ng-class="{'fa fa-minus': status.isCustomHeaderOpen, 'fa fa-plus': !status.isCustomHeaderOpen}"></i>
+                        </uib-accordion-heading>
+                        <p>Test1</p>
+
+                    </div>
+
+                    <div uib-accordion-group is-open="">
+                        <uib-accordion-heading>
+                            White Bar <i class="pull-right fa" ng-class="{'fa fa-minus': status.isCustomHeaderOpen, 'fa fa-plus': !status.isCustomHeaderOpen}"></i>
+                        </uib-accordion-heading>
+                        <p>Test1</p>
+
+                    </div>
+                    <div uib-accordion-group is-open="">
+                        <uib-accordion-heading>
+                            Lorem Ipsum <i class="pull-right fa " ng-class="{'fa fa-minus': status.isCustomHeaderOpen, 'fa fa-plus': !status.isCustomHeaderOpen}"></i>
+                        </uib-accordion-heading>
+                        <p>Test1</p>
+                    </div>
+                </uib-accordion>
+
+            </div>
+        </nav>
     </div>
 </header>

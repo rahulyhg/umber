@@ -301,42 +301,47 @@
                             <div class="listview display-table" ng-repeat="product in row">
                                 <div class="display-row">
                                     <div class="display-cell">
-                                        <div uib-carousel active="active" interval="cl">
-                                        </div>
-                                        <div class="item-img relate">
-                                            <img ng-src="{{product.images[0].image}}" alt="Ordered Item" class="img-responsive">
-                                            <div class="inline-block wishlist-icon">
-                                                <i class="fa fa-heart"></i>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="display-cell align-top item-desc">
-                                        <div>
-                                            <h4 class="item-name text-uppercase">{{product.productName}}</h4>
-                                            <p class="item-cost"><i class="fa fa-inr"></i>{{product.price}}</p>
-                                            <div class="viewSize">
-                                                <p class="inline-block size-text">Sizes:</p>
-                                                <div class="inline-block buy-para__sizes">
-                                                    <p ng-repeat="size in product.sizes">{{size.name}}</p>
+                                        <div uib-carousel active="active" interval="gridViewSlideInterval">
+                                            <div uib-slide ng-repeat="test in gridViewSlide track by test.id" index="test.id">
+                                                <div class="item-img relate">
+                                                    <img ng-src="{{test.img}}" alt="Ordered Item" class="img-responsive">
+                                                    <div class="inline-block wishlist-icon">
+                                                        <i class="fa fa-heart"></i>
+                                                    </div>
+                                                    <!--<div class="carousel-caption">
+                                                        <h4>test {{slide.id}}</h4>
+                                                        <p>{{slide.text}}</p>
+                                                    </div>-->
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="display-cell align-top">
-                                        <div class="custom-checkbox">
-                                            <div class="checkbox">
-                                                <input type="checkbox" id="{{product._id}}">
-                                                <label for="{{product._id}}">Add to compare</label>
+                                        <div class="display-cell align-top item-desc">
+                                            <div>
+                                                <h4 class="item-name text-uppercase">{{product.productName}}</h4>
+                                                <p class="item-cost"><i class="fa fa-inr"></i>{{product.price}}</p>
+                                                <div class="viewSize">
+                                                    <p class="inline-block size-text">Sizes:</p>
+                                                    <div class="inline-block buy-para__sizes">
+                                                        <p ng-repeat="size in product.sizes">{{size.name}}</p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="display-cell text-right align-middle">
-                                        <div class="btn-group-vertical" role="group">
-                                            <a ui-sref="individual-page({id: product.productId})">
+                                        <div class="display-cell align-top">
+                                            <div class="custom-checkbox">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" id="{{product._id}}">
+                                                    <label for="{{product._id}}">Add to compare</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="display-cell text-right align-middle">
+                                            <div class="btn-group-vertical" role="group">
+                                                <a ui-sref="individual-page({id: product.productId})">
                                                 <button class="btn btn-default buy--btn text-uppercase">buy</button>
                                             </a>
-                                            <button type="button" class="btn text-uppercase buy--btn" ng-click="quickviewProduct(product)">quick view</button>
+                                                <button type="button" class="btn text-uppercase buy--btn" ng-click="quickviewProduct(product)">quick view</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -347,5 +352,4 @@
             </div>
         </div>
     </div>
-</div>
 </div>

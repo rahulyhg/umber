@@ -150,25 +150,26 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
         $scope.closeCategires = function () {
             $('.mobview-links').removeClass('mobview-links-menu-in');
             $('.mobview-links').addClass('mobview-links-menu-out');
-            $('.mobview-categories-display ').toggleClass('mobview-categories-menu-in');
+            $('.mobview-categories').removeClass('mobview-categories-menu-out');
+            $('.mobview-categories').addClass('mobview-categories-menu-in');
         };
         $scope.slidebackToMobview = function () {
             $('.mobview-links').removeClass('mobview-links-menu-out');
             $('.mobview-links').addClass('mobview-links-menu-in');
-            $('.mobview-categories-display ').removeClass('mobview-categories-menu-in');
-            $('.mobview-categories-display ').addClass('mobview-categories-menu-out');
+            $('.mobview-categories ').removeClass('mobview-categories-menu-in');
+            $('.mobview-categories ').addClass('mobview-categories-menu-out');
         };
 
         $scope.getSubCategories = function (category) {
             var data = {};
-            $scope.id = category._id;
-            data.category = category._id;
+            $scope.slug = category.slug;
+            data.slug = category.slug;
             CategoryService.getCategoryWithParent(data, function (data) {
                 console.log("subcatretrived", data);
                 if (data.data.value) {
                     $scope.subCategories = data.data.data;
                 } else {
-                    console.log("subcatretrived", data);
+                    console.log("subcatretrived", data.data.error);
                 }
             })
         }
@@ -177,7 +178,7 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
         NavigationService.getEnabledCategories(function (data) {
 
             $scope.categories = data.data.data;
-            console.log($scope.categories)
+            console.log('cat', $scope.categories)
 
 
         });

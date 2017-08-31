@@ -11938,7 +11938,8 @@ input[type=number]::-webkit-outer-spin-button {
 
 .navbar {
   background-color: #ffffff;
-  border-color: transparent; }
+  border-color: transparent;
+  box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26); }
   .navbar .navbar-header .navbar-brand {
     padding: 10px;
     height: auto; }
@@ -12192,6 +12193,64 @@ input[type=number]::-webkit-outer-spin-button {
     right: 40px;
     bottom: 15px;
     width: 30%; }
+
+.mobview-links-menu-in {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  -webkit-transform-origin: left center;
+  transform-origin: left center;
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function: ease; }
+
+.mobview-links-menu-out {
+  -webkit-transform: translateX(-1000px);
+  transform: translateX(-1000px);
+  -webkit-transform-origin: center left;
+  transform-origin: center left;
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function: ease; }
+
+.mobview-categories-menu-in {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  -webkit-transform-origin: right center;
+  transform-origin: right center;
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+  transition-delay: 0.1s; }
+
+.mobview-categories-menu-out {
+  -webkit-transform: translateX(1000px);
+  transform: translateX(1000px);
+  -webkit-transform-origin: right center;
+  transform-origin: right center;
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function: ease; }
+
+.mobview-side-nav {
+  width: 550px;
+  height: 100%;
+  padding: 15px;
+  border: 1px solid #e7dada;
+  box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
+  position: fixed;
+  background-color: #ffffff;
+  z-index: 9999; }
+
+.mobview-categories .fa-arrow-left {
+  padding-left: 15px;
+  transition-property: -webkit-transform;
+  transition-property: transform;
+  transition-property: transform, -webkit-transform;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-out; }
+  .mobview-categories .fa-arrow-left:hover, .mobview-categories .fa-arrow-left:active {
+    -webkit-transform: translateX(-4px);
+    transform: translateX(-4px); }
 
 .cloth-cat .flexslider {
   margin: 0;
