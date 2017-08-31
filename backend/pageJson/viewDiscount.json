@@ -1,0 +1,81 @@
+{
+    "title": "Discounts",
+    "description": "List of Discounts",
+    "pageType": "view",
+    "sendIdWithCreate": true,
+    "urlFields": ["_id"],
+    "fields": [{
+            "name": "Name",
+            "isSort": "",
+            "tableRef": "name"
+        },
+        {
+            "name": "Discount Type",
+            "isSort": "",
+            "tableRef": "discountType",
+            "field": "name"
+        },
+        {
+            "name": "Variable",
+            "isSort": "",
+            "tableRef": "variable"
+        },
+        {
+            "name": "Amount",
+            "isSort": "",
+            "tableRef": "amount"
+        },
+        {
+            "name": "Percent",
+            "isSort": "",
+            "tableRef": "percent"
+        }
+    ],
+    "action": [{
+        "name": "edit",
+        "icon": "fa-pencil",
+        "buttonClass": "btn-primary",
+        "type": "page",
+        "action": "editDiscount",
+        "fieldsToSend": {
+            "_id": "_id"
+        }
+    }, {
+        "name": "delete",
+        "icon": "fa-trash",
+        "buttonClass": "btn-danger",
+        "type": "apiCallConfirm",
+        "title": "Delete Discount",
+        "content": "Are you sure you want to delete Discount?",
+        "api": "Discount/delete",
+        "fieldsToSend": {
+            "name": "_id",
+            "value": "_id"
+        }
+    }],
+    "button": [{
+        "name": "Excel Export",
+        "icon": "print",
+        "class": "btn-danger",
+        "type": "redirect",
+        "action": "Discount/generateExcel",
+        "linkType": "admin"
+    }, {
+        "name": "Upload Excel",
+        "icon": "delete",
+        "class": "btn-warning",
+        "type": "redirect",
+        "action": "excel-upload/Discount",
+        "linkType": "internal"
+    }, {
+        "name": "Create",
+        "icon": "plus",
+        "class": "btn-success",
+        "type": "page",
+        "action": "createDiscount"
+    }],
+    "apiCall": {
+        "url": "Discount/search",
+        "params": "_id"
+    }
+}
