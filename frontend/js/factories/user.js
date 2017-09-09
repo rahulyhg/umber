@@ -44,10 +44,25 @@ myApp.factory('UserService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
-
         saveAddressCheckout: function (data, callback) {
             $http({
                 url: adminurl + 'User/saveAddresses',
+                method: 'POST',
+                data: data,
+                withCredentials: false
+            }).then(callback);
+        },
+        deleteShippingAddress: function (data, callback) {
+            $http({
+                url: adminurl + 'User/deleteShippingAddress',
+                method: 'POST',
+                data: data,
+                withCredentials: false
+            }).then(callback);
+        },
+        updateUser: function (data, callback) {
+            $http({
+                url: adminurl + 'User/updateUser',
                 method: 'POST',
                 data: data,
                 withCredentials: false

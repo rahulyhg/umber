@@ -72,15 +72,48 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
             $scope.userDetails.pinCode = '';
             $scope.userDetails.country = '';
         }
-        // var data = {};
-        // data.accessToken = $.jStorage.get("accessToken");
-        // data.type = "shippingAddress";
-        // data.shippingAddress = $scope.userDetails;
-        // UserService.saveAddressMyaccount(data, function (data) {
-        //     console.log(data)
-        // })
+        var data = {};
+        data.accessToken = $.jStorage.get("accessToken");
+        data.type = "shippingAddress";
+        data.shippingAddress = $scope.userDetails;
+        console.log("data for  delete", data)
+        UserService.updateUser(data, function (data) {
+            console.log(data)
+        })
     };
 
+
+    $scope.edit1 = function (id) { // Function is used to show & hide edit & save tab
+
+
+        // $scope.save = !$scope.save;
+        // if ($scope.save) {
+        //     $scope.userDetails.firstName = ''; // to make it all fields empty in tnput text after save
+        //     $scope.userDetails.lastName = '';
+        //     $scope.userDetails.email = '';
+        //     $scope.userDetails.mobNo = '';
+        //     $scope.userDetails.address1 = '';
+        //     $scope.userDetails.address2 = '';
+        //     $scope.userDetails.address3 = '';
+        //     $scope.userDetails.address4 = '';
+        //     $scope.userDetails.city = '';
+        //     $scope.userDetails.pinCode = '';
+        //     $scope.userDetails.country = '';
+        // }
+        $scope.data = {};
+        console.log("data for  delete", $scope.userDetails.data._id);
+
+        console.log("data for  delete**************************", id);
+        $scope.data = {
+            user_id: $scope.userDetails.data._id,
+            shippingAddress_id: id
+        };
+
+        UserService.deleteShippingAddress($scope.data, function (data) {
+            console.log(data);
+        })
+
+    };
     $scope.userDetails = { // an object to store user details on edit tab
         firstName: '',
         lastName: '',
@@ -200,13 +233,34 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
     // }
 
     //For Manage address's dropdown to select country'
-    $scope.countryButton = 'Country';
+    $scope.countryButton = 'india';
+    $scope.selectedState = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Dadra and Nagar Haveli', 'Daman and Diu', 'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir', 'Jharkhand', 'Karnataka',
+        'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Orissa', 'Puducherry', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu',
+        'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal'
+    ];
+    $scope.visible = true;
+    $scope.hidden = false;
     $scope.selectCounteries = ['india', 'usa', 'uk', 'test'];
     $scope.changeCountry = function (name) {
         $scope.countryButton = name;
-        var countryButton = angular.element(document.getElementsByClassName('state-dropdown--btn'));
-        console.log(countryButton);
-        countryButton[0].disabled = false;
+        if (_.isEqual(name, 'india') && $scope.countryButton == 'india') {
+            $scope.visible = true;
+            $scope.hidden = false;
+            // $scope.selectedState = 'state';
+            console.log("*******inside if***")
+            $scope.selectedState = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Dadra and Nagar Haveli', 'Daman and Diu', 'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir', 'Jharkhand', 'Karnataka',
+                'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Orissa', 'Puducherry', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu',
+                'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal'
+            ];
+        } else {
+            $scope.visible = false;
+            $scope.hidden = true;
+        }
+
+        // $scope.countryButton = name;
+        // var countryButton = angular.element(document.getElementsByClassName('state-dropdown--btn'));
+        // console.log(countryButton);
+        // countryButton[0].disabled = false;
     };
 
     //For Manage address's dropdown to select state
@@ -215,7 +269,7 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
         state: ['mumbai', 'maharashtra', 'banglore', 'test1']
     };
     $scope.changeState = function (name) {
-        $scope.countryButton = name;
+        $scope.stateButton = name;
     };
     //For cancellation of product
     $scope.cancellation = function (orderDetails) {
