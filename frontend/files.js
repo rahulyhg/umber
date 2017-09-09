@@ -25,6 +25,7 @@ module.exports = [
   'bower_components/angular-toastr/dist/angular-toastr.tpls.js',
   'bower_components/angular-loading-bar/build/loading-bar.js',
   'bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js',
+  'bower_components/async/dist/async.min.js',
   //App.js
   'frontend/js/app.js',
 

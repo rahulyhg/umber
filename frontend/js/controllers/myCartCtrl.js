@@ -1,9 +1,12 @@
- myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state, TemplateService, NavigationService, BannerService, CartService, $timeout, $uibModal, WishlistService) {
+ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state, toastr, TemplateService, NavigationService, BannerService, CartService, $timeout, $uibModal, WishlistService) {
      $scope.template = TemplateService.getHTML("content/mycart.html");
      TemplateService.title = "Mycart"; //This is the Title of the Website
      $scope.navigation = NavigationService.getNavigation();
      myService.ctrlBanners("mycart", function (data) {
+         console.log("called api");
          $scope.banner = data;
+         console.log("$scope.banner", $scope.banner)
+
      });
      $scope.newA = _.chunk($scope.mycartmodal, 4);
      // console.log("$scope.newA ", $scope.newA);
@@ -15,6 +18,10 @@
              console.log("getcart->data: ", data);
              //TODO: Instead of array this will be single doc when query changes to findOneAndUpdate
              $scope.mycartTable = data.data.data;
+             if ($scope.mycartTable == undefined) {
+                 toastr.error("add product to cart", "Error:")
+                 $state.go("home");
+             }
              console.log("mycarttableof if: ", $scope.mycartTable);
              //TODO: Calculate actual grand total
              if ($scope.mycartTable)

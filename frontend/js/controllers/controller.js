@@ -38,13 +38,57 @@ myApp
                     }
                 }
                 WishlistService.getWishlist(userId, function (result) {
+                    console.log("inside home contrller after getWishlist api called")
                     $scope.wishlist = result.data.data;
+                    console.log("inside home contrller after getWishlist api called", $scope.wishlist)
                     ProductService.getFeatured(function (data) {
+                        console.log("inside home contrller after getfeatured api called")
                         $scope.featured = data.data.data;
+                        if ($scope.featured.length < 0 || $scope.featured == undefined) {
+                            $scope.visible = false;
+                        } else {
+                            $scope.visible = true;
+                        }
+                        console.log("inside home contrller after getfeatured api called", $scope.featured.length)
                     })
                 });
 
             })
+            // async.waterfall([
+            //     function (callback) {
+            //         CartService.getCart(userId, function (data) {
+            //             if (data.data.data) {
+            //                 $scope.mycart = data.data.data.products;
+            //                 $scope.tempcart = [];
+            //                 for (var i = 0; i < $scope.mycart.length; i++) {
+            //                     $scope.tempcart.push({
+            //                         productId: $scope.mycart[i].product.productId
+            //                     })
+            //                 }
+            //             }
+            //             callback(null, null);
+            //         })
+            //     },
+            //     function (callback) {
+            //         WishlistService.getWishlist(userId, function (result) {
+            //             console.log("inside home contrller after getWishlist api called")
+            //             $scope.wishlist = result.data.data;
+            //             console.log("inside home contrller after getWishlist api called", $scope.wishlist);
+            //             callback(null, null);
+            //         })
+            //     },
+            //     function (callback) {
+            //         ProductService.getFeatured(function (data) {
+            //             console.log("inside home contrller after getfeatured api called")
+            //             $scope.featured = data.data.data;
+            //             console.log("inside home contrller after getfeatured api called", $scope.featured)
+            //             callback(null, null);
+            //         })
+            //     }
+
+            // ], function (err, result) {
+            //     console.log(result);
+            // })
         } else {
             $scope.mycart = []
             $scope.mycart = $.jStorage.get("cart");
