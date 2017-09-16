@@ -25,6 +25,56 @@
      var data = {
          slug: $stateParams.id
      }
+
+     $scope.data1 = {};
+     $scope.data1.keyword = $stateParams.id
+     $scope.products = [];
+     $scope.product = [];
+     $scope.data1.skip = 0;
+     $scope.data1.limit = 9;
+     $scope.loadingDisable = false;
+     $scope.fetching = false;
+
+     $scope.globalsSearch = function () {
+         console.log("in global search****")
+         ProductService.globalSearch($scope.data1, function (data) {
+             console.log("########################### data.data.data", data.data.data)
+             if (!_.isEmpty(data.data.data)) {
+                 //  alert("hiiii")
+                 $scope.product = _.chunk(data.data.data, 3);
+                 _.each($scope.product, function (n) {
+                     $scope.products.push(n);
+                 })
+                 $scope.loadingDisable = false;
+                 $scope.data1.skip = $scope.data1.skip + 9;
+             }
+             //  else if ($scope.products.length > 0 && data.data.data.length == 0) {
+             //      $scope.fetching = false;
+             //  } else {
+             //      $scope.fetching = false;
+             //      $scope.displayMessage = "No Product Found";
+             //  }
+         })
+     }
+
+
+
+     $scope.loadMore1 = function () {
+         console.log("$scope.data1.skip", $scope.data1.skip)
+         $scope.globalsSearch();
+         $scope.loadingDisable = true;
+     }
+
+
+
+     //  if ($stateParams.id === "search") {
+     //      console.log("rootscope", $rootScope.searchedProduct)
+     //      $scope.products = _.chunk($.jStorage.get("searchedProduct"), 3)
+
+     //      console.log($scope.products)
+
+     //  }
+
      CategoryService.getCategoryWithParent(data, function (data) {
          console.log("cat from parentctrl", data)
          $scope.categories = data.data.data;
