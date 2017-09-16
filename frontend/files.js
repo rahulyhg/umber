@@ -68,4 +68,5 @@ module.exports = [
   'frontend/js/controllers/individualCtrl.js',
   'frontend/js/controllers/checkoutCtrl.js',
   'frontend/js/controllers/myCartCtrl.js',
+  'frontend/js/controllers/searchCtrl.js'
 ];

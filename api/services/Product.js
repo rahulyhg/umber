@@ -530,10 +530,11 @@ var model = {
     // Function to retrieve filters on listing page
     // req -> {category: category._id}
     getFiltersWithCategory: function (data, callback) {
-        console.log("Filters with category data: ", data);
+        // console.log("Filters with category data: ", data);
         Category.findOne({
             slug: data.slug
         }).exec(function (err, category) {
+            // console.log("Filters with category data:category ", category);
             var match = {
                 category: mongoose.Types.ObjectId(category._id)
             };
@@ -824,7 +825,7 @@ var model = {
     // req.body-> {appliedFilters: {key: [val1, val2, ...], key1: [val1, val2, ..], ..}, page: n}
     // Converts this object into queryable object
     getProductsWithFilters: function (filters, callback) {
-        console.log("Filters: ", filters.appliedFilters.slug[0]);
+        // console.log("Filters: ", filters);
         if (!filters.page) {
             filters.page = 1;
         }
@@ -834,7 +835,7 @@ var model = {
             if (!_.isEmpty(category)) {
                 async.waterfall([
                         function applyFilters(cbWaterfall1) {
-                            console.log("!!!!!!filters: ", filters);
+                            // console.log("!!!!!!filters: ", filters);
 
                             var pipeline = [];
                             var filterType = [];
@@ -1059,7 +1060,7 @@ var model = {
     },
     //for global search
     getAggregatePipeLine: function (data) {
-        console.log("**** in  getAggregatePipeLine***", data)
+        // console.log("**** in  getAggregatePipeLine***", data)
 
         var pipeline = [
             // Stage 1
@@ -1289,10 +1290,10 @@ var model = {
     },
     //data.keyword
     globalSearch: function (data, callback) {
-        console.log("**** in global search***", data)
+        // console.log("**** in global search***", data);
         var pipeLine = Product.getAggregatePipeLine(data);
-        console.log("**** in global search***", pipeLine)
         Product.aggregate(pipeLine, function (err, found) {
+            // console.log("**** in global search***", found)
             if (err) {
                 callback(err, "error in mongoose");
             } else {
@@ -1304,6 +1305,10 @@ var model = {
                 }
             }
         });
+
+    },
+
+    searchWithFilters: function (data, callback) {
 
     }
 };

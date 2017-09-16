@@ -1,0 +1,356 @@
+<div class="listing-img">
+    <img ng-src="{{banner.image | serverimage}}">
+</div>
+<div class="container">
+    <div class="listing-container">
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="border-div">
+                    <ul class="list-breadcrumb list-unstyled list-inline">
+                        <li class="text-uppercase" ui-sref="home" href="#!/">HOME</li> <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        <li class="text-uppercase">Mens Wear</li> <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        <li class="text-uppercase">casual shirt</li>
+                    </ul>
+                </div>
+                <div class="sec-one common-Accordian border-div custom-checkbox relate">
+                    <uib-accordion close-others="oneAtATime">
+                        <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
+                            <uib-accordion-heading>
+                                <h5 class="text-uppercase">category
+                                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </h5>
+                            </uib-accordion-heading>
+                            <!--<div ng-repeat="category in categories" class="checkbox">
+                                <input type="checkbox" id="{{category._id}}">
+                                <label for="{{category._id}}"> {{category.name}}
+                               </label>
+                            </div>-->
+                            <div class="checkbox" ng-repeat="category in categories">
+                                <div class="radio">
+                                    <input type="radio" class="form-control" name="category" id="{{category._id}}" ng-checked="checkRadioCategory(category.slug)"
+                                        value="{{category.name}}" ng-click="filteredProducts(category.slug)">
+                                    <label for="{{category._id}}"> <span ></span>{{category.name}}
+                                         
+                                       </label>
+                                    <!--<input type="radio" class="form-control" name="radio">
+                                    <label for="radio2"> <span></span> Tshirt
+                                        
+                                       </label>
+                                    <input type="radio" class="form-control" name="radio">
+                                    <label for="radio3">  <span></span>   Trouser
+                                     
+                                       </label>-->
+                                </div>
+                                </label>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+                <div class="sec-second common-Accordian border-div scoll-on custom-checkbox relate">
+                    <uib-accordion close-others="oneAtATime">
+                        <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
+                            <uib-accordion-heading>
+                                <h5 class="text-uppercase">type
+                                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </h5>
+                            </uib-accordion-heading>
+                            <div class="checkbox" ng-repeat="type in filters.types">
+                                <input type="checkbox" id="{{type._id}}" ng-checked="checkFilterStatus('type',type._id)" ng-click="applyFilters('type', type)">
+                                <label for="{{type._id}}">{{type.name}}
+                                </label>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+                <div class="sec-third common-Accordian border-div relate">
+                    <uib-accordion close-others="oneAtATime">
+                        <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
+                            <uib-accordion-heading>
+                                <h5 class="text-uppercase">price range
+                                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </h5>
+                            </uib-accordion-heading>
+                            <div class="range-slider">
+
+                                <rzslider rz-slider-model="min" rz-slider-high="max" rz-slider-options="slider_translate.options" ng-mouseup="priceSet(min,max)"></rzslider>
+                                <span class="rupee-count pull-left">Rs{{min}}</span>
+                                <!---&#8377;-->
+                                <span class="rupee-count pull-right">Rs{{max}}</span>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+                <div class="sec-fourth common-Accordian border-div scoll-on custom-checkbox relate">
+                    <uib-accordion close-others="oneAtATime">
+                        <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
+                            <uib-accordion-heading>
+                                <h5 class="text-uppercase">Collections
+                                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </h5>
+                            </uib-accordion-heading>
+                            <div class="checkbox" ng-repeat="collection in filters.collections">
+                                <input type="checkbox" id="{{collection._id}}" ng-checked="checkFilterStatus('collection',collection._id)" ng-click="applyFilters('collection', collection)">
+                                <label for="{{collection._id}}">{{collection.name}}
+                               </label>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+                <div class="sec-fifth common-Accordian border-div custom-checkbox relate">
+                    <uib-accordion close-others="oneAtATime">
+                        <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
+                            <uib-accordion-heading>
+                                <h5 class="text-uppercase">Choose Size
+                                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </h5>
+                            </uib-accordion-heading>
+                            <div class="checkbox" ng-repeat="size in filters.sizes">
+                                <input type="checkbox" id="{{size._id}}" ng-checked="checkFilterStatus('size',size._id)" ng-click="applyFilters('size', size)">
+                                <label for="{{size._id}}">
+                                     {{size.description}}
+                                </label>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+                <div class="sec-six common-Accordian border-div custom-checkbox relate">
+                    <uib-accordion close-others="oneAtATime">
+                        <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
+                            <uib-accordion-heading>
+                                <h5 class="text-uppercase">Style
+                                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </h5>
+                            </uib-accordion-heading>
+                            <div class="checkbox" ng-repeat="style in filters.styles">
+                                <input type="checkbox" id="{{style}}" ng-checked="checkFilterStatus('style',style)" ng-click="applyFilters('style', style)">
+                                <label for="{{style}}">
+                                     {{style}}
+                               </label>
+                            </div>
+                            <!--<div class="checkbox">
+                                <input type="checkbox" id="e2">
+                                <label for="e2">
+                                    Half Sleeve
+                                </label>
+                            </div>-->
+                        </div>
+                    </uib-accordion>
+                </div>
+                <div class="sec-seven common-Accordian border-div scoll-on custom-checkbox relate">
+                    <uib-accordion close-others="oneAtATime">
+                        <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
+                            <uib-accordion-heading>
+                                <h5 class="text-uppercase">Base color
+                                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </h5>
+                            </uib-accordion-heading>
+                            <div class="checkbox" ng-repeat="baseColor in filters.colors">
+                                <input type="checkbox" id="{{baseColor._id}}" ng-checked="checkFilterStatus('color',baseColor._id)" ng-click="applyFilters('color', baseColor)">
+                                <label for="{{baseColor._id}}">
+                                 {{baseColor.name}}
+                               </label>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+                <div class="sec-eight common-Accordian border-div custom-checkbox relate">
+                    <uib-accordion close-others="oneAtATime">
+                        <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
+                            <uib-accordion-heading>
+                                <h5 class="text-uppercase">Fabric
+                                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </h5>
+                            </uib-accordion-heading>
+                            <div class="checkbox" ng-repeat="fabric in filters.fabrics">
+
+                                <input type="checkbox" id="{{fabric._id}}" ng-checked="checkFilterStatus('fabric',fabric._id)" ng-click="applyFilters('fabric', fabric)">
+                                <label for="{{fabric._id}}">
+                                    {{fabric.name}}
+                                </label>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+                <div class="sec-nine common-Accordian custom-checkbox relate">
+                    <uib-accordion close-others="oneAtATime">
+                        <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
+                            <uib-accordion-heading>
+                                <h5 class="text-uppercase">Discount
+                                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </h5>
+                            </uib-accordion-heading>
+                            <div class="checkbox">
+
+                                <input type="checkbox" id="h1">
+                                <label for="h1"> Buy 1 Get 1 Free<img src="img/listing/shirt.png" class="img-responsive">
+                                </label>
+                            </div>
+                            <div class="checkbox">
+
+                                <input type="checkbox" id="h2">
+                                <label for="h2"> Buy 2 Get 20% Off<img src="img/listing/lable.png" class="img-responsive">
+                                </label>
+                            </div>
+                            <div class="checkbox">
+
+                                <input type="checkbox" id="h3">
+                                <label for="h3">Free gift<img src="img/listing/gift.png" class="img-responsive">
+                                </label>
+                            </div>
+                            <div class="checkbox">
+
+                                <input type="checkbox" id="h4">
+                                <label for="h4"> Flat 50% off<img src="img/listing/percent.png" class="img-responsive">
+                                </label>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="Addtocompare relate" ng-if="showCheck">
+                    <div class="row">
+                        <div class="col-md-3" ng-repeat="compare in compareproduct track by $index">
+                            <div class="compare-img-list relate">
+                                <img ng-src="{{compare.images[0].image}}" class="img-responsive">
+                                <p>{{compare.productName}}</p>
+                                <div class="remove-item">
+                                    <button type="button" class="btn btn-circle" ng-click="removeFromCompare(compare.productId)">X</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix visible-md"></div>
+                        <p class="compare-btn text-center">
+                            <button class="btn btn--compare" ui-sref="compare-products">COMPARE</button>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="listing-main" ng-init="view ='thumbnailView'">
+                        <div class="btn-grp dropdown" uib-dropdown>
+                            <button type="button" class="btn btn-listing" uib-dropdown-toggle>{{sortButton}}<i class="fa fa-reg" aria-hidden="true"></i><required></required></button>
+                            <ul class="listing-dropdown-menu dropdown-menu" uib-dropdown-menu role="menu">
+                                <li role="menuitem" ng-repeat="item in menu" ng-click="changeSorting(item)"><a href="#">{{item}}</a></li>
+                            </ul>
+                            <div class="pull-right">
+                                <div class="inline-block img-w">
+                                    <a ng-click="view = 'listView'"><img src="img/listing/listing.png" class="img-responsive" alt="Click for list-view"></a>
+
+                                </div>
+                                <div class="inline-block img-w">
+                                    <a ng-click="view = 'thumbnailView'"><img src="img/listing/squares30.png" class="img-responsive" alt="Click for thumbnail-view"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--{{displayMessage}}-->
+                        <!--<div infinite-scroll='loadMore()' infinite-scroll-distance='3'>-->
+                        <div class="row" ng-repeat="row in products" ng-if="view == 'thumbnailView'">
+                            <div class="col-md-4" ng-repeat="product in row" ng-init="parentIndex = $index">
+                                <div class="buy-info custom-checkbox">
+                                    <div class="buy-slider slider-individual list-slider">
+                                        <flex-slider flex-slide="image in product.images track by $index" prev-text="" next-text="" animation="slide" min-items="3">
+                                            <li class="relate">
+                                                <div class="list-slider__toolTip">
+                                                </div>
+                                                <a ui-sref="individual-page({id: product.productId})">
+                                                    <img ng-src="{{image.image}}" class="img-rsponsive img1" title="{{product.productName}}">
+                                                </a>
+                                                <i ng-class="checkWishlist(product.productId)" aria-hidden="true"></i>
+                                                <img ng-src="{{buy.img}}" class="img-responsive" ng-mouseover="displayCntent();" ng-mouseleave="hideContent();">
+                                                <i class="fa fa-shopping-cart" ng-if="checkInCart(product.productId)"></i>
+                                            </li>
+                                        </flex-slider>
+                                        <div class="buy-para">
+                                            <h4><i class="fa fa-inr" aria-hidden="true"></i> {{product.price}}</h4>
+                                            <h5>{{product.productName}} <br>{{product.type.name}}</h5>
+                                            <div class="viewSize">
+                                                <p class="inline-block size-text">Sizes:</p>
+                                                <div class="inline-block buy-para__sizes">
+                                                    <p ng-repeat="size in product.sizes"> {{size.name}}</p>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <!--<p><input type="checkbox"> Add to compare</p>-->
+                                            <div class="checkbox inline-block marg0">
+                                                <input type="checkbox" id="{{product._id}}" ng-model="myVarss" ng-checked="checkStateOnReload(product.productId)" ng-click="clickfun(product);">
+                                                <label for="{{product._id}}">
+                                          Add to compare
+                                        </label>
+                                            </div>
+                                            <div class="buy-para__button">
+                                                <div class="inline-block ">
+                                                    <a ui-sref="individual-page({id: product.productId})">
+                                                        <button class="btn btn-default buy--btn text-uppercase">buy</button>
+                                                    </a>
+                                                </div>
+                                                <div class=" inline-block">
+
+                                                    <button class="btn btn-default view--btn text-uppercase" ng-click="quickviewProduct(product)">QUICK VIEW</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--</div>-->
+                        <div ng-if="view == 'listView'" ng-repeat="row in products">
+                            <div class="listview display-table" ng-repeat="product in row">
+                                <div class="display-row">
+                                    <div class="display-cell">
+                                        <div uib-carousel active="active" interval="gridViewSlideInterval">
+                                            <div uib-slide ng-repeat="test in gridViewSlide track by test.id" index="test.id">
+                                                <div class="item-img relate">
+                                                    <img ng-src="{{test.img}}" alt="Ordered Item" class="img-responsive">
+                                                    <div class="inline-block wishlist-icon">
+                                                        <i class="fa fa-heart"></i>
+                                                    </div>
+                                                    <!--<div class="carousel-caption">
+                                                        <h4>test {{slide.id}}</h4>
+                                                        <p>{{slide.text}}</p>
+                                                    </div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="display-cell align-top item-desc">
+                                            <div>
+                                                <h4 class="item-name text-uppercase">{{product.productName}}</h4>
+                                                <p class="item-cost"><i class="fa fa-inr"></i>{{product.price}}</p>
+                                                <div class="viewSize">
+                                                    <p class="inline-block size-text">Sizes:</p>
+                                                    <div class="inline-block buy-para__sizes">
+                                                        <p ng-repeat="size in product.sizes">{{size.name}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="display-cell align-top">
+                                            <div class="custom-checkbox">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" id="{{product._id}}">
+                                                    <label for="{{product._id}}">Add to compare</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="display-cell text-right align-middle">
+                                            <div class="btn-group-vertical" role="group">
+                                                <a ui-sref="individual-page({id: product.productId})">
+                                                <button class="btn btn-default buy--btn text-uppercase">buy</button>
+                                            </a>
+                                                <button type="button" class="btn text-uppercase buy--btn" ng-click="quickviewProduct(product)">quick view</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div infinite-scroll="loadMore1()" infinite-scroll-distance="1" infinite-scroll-disabled="loadingDisable">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

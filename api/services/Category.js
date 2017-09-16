@@ -49,7 +49,7 @@ var model = {
     },
 
     getCategoriesWithParent: function (data, callback) {
-        console.log("Category with parent: ", data);
+        // console.log("Category with parent: ", data);
         HomeCategory.findOne({
             slug: data.slug
         }).exec(function (err, category) {
