@@ -60,10 +60,23 @@
                             </div>
                         </div>
                         <div class="second-sec border-div pd-bottom">
-                            <div class="viewSize inline-block relate">
+                            <div class="viewSize inline-block relate" ng-if="arrayCheck">
                                 <h5>SIZE </h5>
                                 <div class="inline-block buy-para__sizes">
-                                    <p ng-click="selectSize(size)" ng-class="{ 'active':activeButton=={{size.name}} }" ng-repeat="size in sizes">{{size.name}}</p>
+                                    <p ng-click="selectSize(size)" ng-class="{'active':activeButton=={{size.name}}}" ng-repeat="size in sizes">{{size.name}}</p>
+                                    <!--<p>38</p>
+                                    <p>40</p>
+                                    <p>42</p>
+                                    <p>44</p>-->
+                                </div>
+                                <div>
+                                    <a href="" class="linking ">Size Chart</a>
+                                </div>
+                            </div>
+                            <div class="viewSize inline-block relate" ng-if="!arrayCheck">
+                                <h5>SIZE</h5>
+                                <div class="inline-block buy-para__sizes">
+                                    <p ng-click="selectSize(sizes)" ng-class="{'active':activeButton=={{sizes.name}}}">{{sizes.name}}</p>
                                     <!--<p>38</p>
                                     <p>40</p>
                                     <p>42</p>

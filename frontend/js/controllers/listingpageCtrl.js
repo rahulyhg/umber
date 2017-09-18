@@ -426,6 +426,8 @@
          $scope.activeButton = $scope.sizes[0].name;
          $scope.selectedSize = $scope.sizes[0];
          console.log($scope.sizes);
+         $scope.arrayCheck = angular.isArray($scope.sizes);
+         //  console.log("$scope.arrayCheck", $scope.arrayCheck);
          $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
          $scope.selectSize = function (sizeObj) {
              $scope.activeButton = sizeObj.name;

@@ -45,6 +45,8 @@
                  })
                  $scope.loadingDisable = false;
                  $scope.data1.skip = $scope.data1.skip + 9;
+             } else {
+                 $scope.displayMessage = "no product found"
              }
              $scope.searchFilters();
          })
@@ -86,11 +88,11 @@
 
              if (data.data.data.length == 0) {
                  $scope.displayMessage = "No Product Found";
-                 $scope.products = ""
+                 //  $scope.products = ""
 
              } else if (!_.isEmpty(data.data.data)) {
                  $scope.displayMessage = "";
-                 $scope.products = _.chunk(data.data.data, 3);
+                 $scope.productss = _.chunk(data.data.data, 3);
                  //  console.log("productretruved based on category", data);
 
                  ListingService.retriveFiltersWithCategory(function (data) {
@@ -411,11 +413,16 @@
 
      // This function is used to display the modal on quck view button
      $scope.quickviewProduct = function (prod) {
+         //  console.log("prod", prod);
          $scope.product = prod;
-         $scope.sizes = $scope.product.sizes;
-         $scope.activeButton = $scope.sizes[0].name;
-         $scope.selectedSize = $scope.sizes[0];
-         console.log($scope.sizes);
+         $scope.sizes = $scope.product.size;
+         //  console.log("$scope.sizes", $scope.sizes);
+         //  $scope.activeButton = $scope.sizes[0].name;
+         $scope.activeButton = $scope.sizes.name;
+         $scope.selectedSize = $scope.sizes;
+         $scope.arrayCheck = angular.isArray($scope.sizes);
+         //  console.log("$scope.arrayCheck", $scope.arrayCheck);
+         //  console.log("$scope.selectedSize", $scope.selectedSize);
          $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
          $scope.selectSize = function (sizeObj) {
              $scope.activeButton = sizeObj.name;
