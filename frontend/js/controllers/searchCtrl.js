@@ -46,7 +46,7 @@
                  $scope.loadingDisable = false;
                  $scope.data1.skip = $scope.data1.skip + 9;
              } else {
-                 $scope.displayMessage = "no product found"
+                 $scope.displayMessage = "no products found"
              }
              $scope.searchFilters();
          })
