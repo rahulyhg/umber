@@ -110,7 +110,8 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
         };
 
         UserService.deleteShippingAddress($scope.data, function (data) {
-            console.log(data);
+            console.log("deletion",data);
+            $state.reload();
         })
 
     };
@@ -1677,20 +1678,8 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
 ];
     $scope.changeCountry = function (name) {
         $scope.countryButton = name;
-        if (_.isEqual(name, 'india') && $scope.countryButton == 'india') {
-            $scope.visible = true;
-            $scope.hidden = false;
-            // $scope.selectedState = 'state';
-            console.log("*******inside if***")
-            $scope.selectedState = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Dadra and Nagar Haveli', 'Daman and Diu', 'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir', 'Jharkhand', 'Karnataka',
-                'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Orissa', 'Puducherry', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu',
-                'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal'
-            ];
-        } else {
-            $scope.visible = false;
-            $scope.hidden = true;
-        }
-
+        $scope.userDetails.data.shippingAddresses[0].country = name;
+       
         // $scope.countryButton = name;
         // var countryButton = angular.element(document.getElementsByClassName('state-dropdown--btn'));
         // console.log(countryButton);
@@ -1702,6 +1691,7 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
     
     $scope.changeState = function (name) {
         $scope.stateButton = name;
+        $scope.userDetails.data.shippingAddresses[0].state = name;
     };
     //For cancellation of product
     $scope.cancellation = function (orderDetails) {

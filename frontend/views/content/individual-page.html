@@ -284,7 +284,7 @@
                         min-items="3">
                         <li class="relate">
                             <div class="customer-choice__banner-detail relate">
-                                <img ng-src="{{new.img}}" alt="" class="img-responsive">
+                                <img ng-src="{{new.img | serverimage}}" alt="" class="img-responsive">
                                 <div class="customer-choiced__cloth-desc">
                                     <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
                                     <h4>{{new.type}}</h4>
@@ -314,7 +314,7 @@
                     <div class="compare-products relate text-center ">
                         <div class="compare-product-img inline-block ">
                             <a href=" ">
-                                <img ng-src="{{compare.images[0].image}}" alt="Your added product " class="img-responsive ">
+                                <img ng-src="{{compare.images[0].image | serverimage}}" alt="Your added product " class="img-responsive ">
                             </a>
                         </div>
                         <div class="compare-product-title ">
