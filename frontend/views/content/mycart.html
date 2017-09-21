@@ -1,8 +1,8 @@
 <div>
     <div class="bg-mycart" style="background: url('{{banner.image | serverimage}}') no-repeat 50% 50%">
-        <!--<div class="mycart-img">
+        <div class="mycart-img">
             <img ng-src="{{banner.image | serverimage}}">>
-        </div>-->
+        </div>
     </div>
     <div class="container">
         <div class="mycart-container">
@@ -24,7 +24,7 @@
 
                         <td rowspan="2">
                             <div class="item relate">
-                                <img ng-src="{{product.product.images[0].image}}" alt="" class="img-responsive item__img">
+                                <img ng-src="{{product.product.images[0].image | serverimage}}" alt="" class="img-responsive item__img">
                                 <div class="mycart-info">
                                     <p class="item__title1">{{product.product.productName}}</p>
                                 </div>
