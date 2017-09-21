@@ -14064,6 +14064,9 @@ p.item-cost {
 .toast-success button {
   color: #341314; }
 
+.wd200 {
+  width: auto; }
+
 .mycart-table > thead > tr > th {
   text-align: center; }
 
