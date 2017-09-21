@@ -159,11 +159,13 @@
                             </table>
                             <div class="pull-right ">
                                 <p class="text-right ">GRAND TOTAL : <span>&#x20b9 {{grandTotal}}</span></p>
-                                <p>
-                                    <button class="btn next--btn btn-default " ng-click="view='detailTab'">Next</button>
-                                </p>
+
                             </div>
                         </div>
+                    </div>
+                    <div class=text-right ng-hide="view=='detailTab'">
+                        <button class="btn btn--list" ng-disabled="!loggedUser" ng-click="view='detailTab'" ng-class="{
+                        'btn--brownActive': view=='detailTab' }"> Next</button>
                     </div>
                     <div class="detail-tab " ng-if="loggedUser&&view=='detailTab' ">
                         <div class="col-md-8 col-md-offset-1 ">

@@ -60,6 +60,14 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             },
             controller: 'ListingPageCtrl'
         })
+        .state('search', {
+            url: "/search/:id",
+            templateUrl: tempateURL,
+            Params: {
+                'cat': null
+            },
+            controller: 'searchCtrl'
+        })
         .state('individual-page', {
             url: "/individual-page/:id",
             templateUrl: tempateURL,

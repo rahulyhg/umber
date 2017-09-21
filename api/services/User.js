@@ -368,7 +368,56 @@ var model = {
                 }, null);
         })
     },
+    updateUser: function (data, callback) {
+        console.log("data inside removeWishListFromUser: ", data.shippingAddress.data);
+        // console.log("data inside removeWishListFromUser: ", data.product);
+        User.update({
+            _id: mongoose.Types.ObjectId(data.shippingAddress.data._id)
+        }, {
+            $set: {
+                email: data.shippingAddress.data.email,
+                firstName: data.shippingAddress.data.firstName,
+                lastName: data.shippingAddress.data.lastName,
+                mobile: data.shippingAddress.data.mobile
+            }
+        }).exec(function (err, found) {
+            if (err) {
+                console.log("inside error")
+                callback(err, null);
+            } else if (_.isEmpty(found)) {
+                callback(null, "noDataound");
+            } else {
+                console.log("found", found)
+                callback(null, found);
+            }
 
+        });
+    },
+    deleteShippingAddress: function (data, callback) {
+        console.log("data inside rdeleteShippingAddress: ", data);
+        // console.log("data inside removeWishListFromUser: ", data.product);
+
+        User.update({
+            _id: data.user_id
+        }, {
+            $pull: {
+                'shippingAddresses': {
+                    _id: data.shippingAddress_id,
+                }
+            }
+        }).exec(function (err, found) {
+            if (err) {
+                console.log("inside error");
+                callback(err, null);
+            } else if (_.isEmpty(found)) {
+                callback(null, "noDataound");
+            } else {
+                console.log("found", found);
+                callback(null, found);
+            }
+
+        });
+    },
     // API for order details checkout page
     // When user goes to checkout page to create an order & enters the addresses, call this API
     // to store/edit addresses.

@@ -62871,6 +62871,14 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             },
             controller: 'ListingPageCtrl'
         })
+        .state('search', {
+            url: "/search/:id",
+            templateUrl: tempateURL,
+            Params: {
+                'cat': null
+            },
+            controller: 'searchCtrl'
+        })
         .state('individual-page', {
             url: "/individual-page/:id",
             templateUrl: tempateURL,
@@ -63505,10 +63513,25 @@ myApp.factory('UserService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
-
         saveAddressCheckout: function (data, callback) {
             $http({
                 url: adminurl + 'User/saveAddresses',
+                method: 'POST',
+                data: data,
+                withCredentials: false
+            }).then(callback);
+        },
+        deleteShippingAddress: function (data, callback) {
+            $http({
+                url: adminurl + 'User/deleteShippingAddress',
+                method: 'POST',
+                data: data,
+                withCredentials: false
+            }).then(callback);
+        },
+        updateUser: function (data, callback) {
+            $http({
+                url: adminurl + 'User/updateUser',
                 method: 'POST',
                 data: data,
                 withCredentials: false
@@ -63807,13 +63830,57 @@ myApp
                     }
                 }
                 WishlistService.getWishlist(userId, function (result) {
+                    console.log("inside home contrller after getWishlist api called")
                     $scope.wishlist = result.data.data;
+                    console.log("inside home contrller after getWishlist api called", $scope.wishlist)
                     ProductService.getFeatured(function (data) {
+                        console.log("inside home contrller after getfeatured api called")
                         $scope.featured = data.data.data;
+                        if ($scope.featured.length < 0 || $scope.featured == undefined) {
+                            $scope.visible = false;
+                        } else {
+                            $scope.visible = true;
+                        }
+                        console.log("inside home contrller after getfeatured api called", $scope.featured.length)
                     })
                 });
 
             })
+            // async.waterfall([
+            //     function (callback) {
+            //         CartService.getCart(userId, function (data) {
+            //             if (data.data.data) {
+            //                 $scope.mycart = data.data.data.products;
+            //                 $scope.tempcart = [];
+            //                 for (var i = 0; i < $scope.mycart.length; i++) {
+            //                     $scope.tempcart.push({
+            //                         productId: $scope.mycart[i].product.productId
+            //                     })
+            //                 }
+            //             }
+            //             callback(null, null);
+            //         })
+            //     },
+            //     function (callback) {
+            //         WishlistService.getWishlist(userId, function (result) {
+            //             console.log("inside home contrller after getWishlist api called")
+            //             $scope.wishlist = result.data.data;
+            //             console.log("inside home contrller after getWishlist api called", $scope.wishlist);
+            //             callback(null, null);
+            //         })
+            //     },
+            //     function (callback) {
+            //         ProductService.getFeatured(function (data) {
+            //             console.log("inside home contrller after getfeatured api called")
+            //             $scope.featured = data.data.data;
+            //             console.log("inside home contrller after getfeatured api called", $scope.featured)
+            //             callback(null, null);
+            //         })
+            //     }
+
+            // ], function (err, result) {
+            //     console.log(result);
+            // })
         } else {
             $scope.mycart = []
             $scope.mycart = $.jStorage.get("cart");
@@ -64195,9 +64262,50 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
 
                 var data = {};
                 data.keyword = $scope.keyword;
-                ProductService.globalSearch(data, function (data) {
-                    console.log(data);
-                })
+                data.skip = 0;
+                data.limit = 10;
+                $state.go('search', {
+                    'id': $scope.keyword
+                });
+                // $rootScope.$emit('globalsSearch', null);
+
+                // ProductService.globalSearch(data, function (data) {
+                //     console.log("in globalSearch*****", data.data.data);
+                //     $.jStorage.set("searchedProduct", data.data.data);
+                //     $.jStorage.set("searchedKeyword", $scope.keyword);
+                //     console.log($state.current);
+                //     if (!_.isEmpty($.jStorage.get("searchedProduct"))) {
+                //         console.log("insidre if")
+                //         if ($state.current.name == 'listing-page') {
+                //             $state.go('listing-page', {
+                //                 'id': $scope.keyword
+                //             });
+
+
+
+                //         } else {
+                //             $state.go('listing-page', {
+                //                 'id': $scope.keyword
+                //             });
+
+                //         }
+                //         // $scope.searchNotFound = "Data Not Found"
+                //     } else {
+                //         console.log("in globalSearch***SearchedProduct**", $scope.newA);
+                //         $.jStorage.set("searchedProduct", []);
+                //         if ($state.current.name == 'listing-page') {
+                //             $state.go('listing-page', {
+                //                 'id': $scope.keyword
+                //             });
+                //         } else {
+                //             $state.go('listing-page', {
+                //                 'id': $scope.keyword
+                //             });
+                //             // $state.reload();
+                //         }
+
+                //     }
+                // });
             }
 
         };
@@ -64685,15 +64793,48 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
             $scope.userDetails.pinCode = '';
             $scope.userDetails.country = '';
         }
-        // var data = {};
-        // data.accessToken = $.jStorage.get("accessToken");
-        // data.type = "shippingAddress";
-        // data.shippingAddress = $scope.userDetails;
-        // UserService.saveAddressMyaccount(data, function (data) {
-        //     console.log(data)
-        // })
+        var data = {};
+        data.accessToken = $.jStorage.get("accessToken");
+        data.type = "shippingAddress";
+        data.shippingAddress = $scope.userDetails;
+        console.log("data for  delete", data)
+        UserService.updateUser(data, function (data) {
+            console.log(data)
+        })
     };
 
+
+    $scope.edit1 = function (id) { // Function is used to show & hide edit & save tab
+
+
+        // $scope.save = !$scope.save;
+        // if ($scope.save) {
+        //     $scope.userDetails.firstName = ''; // to make it all fields empty in tnput text after save
+        //     $scope.userDetails.lastName = '';
+        //     $scope.userDetails.email = '';
+        //     $scope.userDetails.mobNo = '';
+        //     $scope.userDetails.address1 = '';
+        //     $scope.userDetails.address2 = '';
+        //     $scope.userDetails.address3 = '';
+        //     $scope.userDetails.address4 = '';
+        //     $scope.userDetails.city = '';
+        //     $scope.userDetails.pinCode = '';
+        //     $scope.userDetails.country = '';
+        // }
+        $scope.data = {};
+        console.log("data for  delete", $scope.userDetails.data._id);
+
+        console.log("data for  delete**************************", id);
+        $scope.data = {
+            user_id: $scope.userDetails.data._id,
+            shippingAddress_id: id
+        };
+
+        UserService.deleteShippingAddress($scope.data, function (data) {
+            console.log(data);
+        })
+
+    };
     $scope.userDetails = { // an object to store user details on edit tab
         firstName: '',
         lastName: '',
@@ -64813,13 +64954,34 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
     // }
 
     //For Manage address's dropdown to select country'
-    $scope.countryButton = 'Country';
+    $scope.countryButton = 'india';
+    $scope.selectedState = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Dadra and Nagar Haveli', 'Daman and Diu', 'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir', 'Jharkhand', 'Karnataka',
+        'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Orissa', 'Puducherry', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu',
+        'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal'
+    ];
+    $scope.visible = true;
+    $scope.hidden = false;
     $scope.selectCounteries = ['india', 'usa', 'uk', 'test'];
     $scope.changeCountry = function (name) {
         $scope.countryButton = name;
-        var countryButton = angular.element(document.getElementsByClassName('state-dropdown--btn'));
-        console.log(countryButton);
-        countryButton[0].disabled = false;
+        if (_.isEqual(name, 'india') && $scope.countryButton == 'india') {
+            $scope.visible = true;
+            $scope.hidden = false;
+            // $scope.selectedState = 'state';
+            console.log("*******inside if***")
+            $scope.selectedState = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Dadra and Nagar Haveli', 'Daman and Diu', 'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir', 'Jharkhand', 'Karnataka',
+                'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Orissa', 'Puducherry', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu',
+                'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal'
+            ];
+        } else {
+            $scope.visible = false;
+            $scope.hidden = true;
+        }
+
+        // $scope.countryButton = name;
+        // var countryButton = angular.element(document.getElementsByClassName('state-dropdown--btn'));
+        // console.log(countryButton);
+        // countryButton[0].disabled = false;
     };
 
     //For Manage address's dropdown to select state
@@ -64828,7 +64990,7 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
         state: ['mumbai', 'maharashtra', 'banglore', 'test1']
     };
     $scope.changeState = function (name) {
-        $scope.countryButton = name;
+        $scope.stateButton = name;
     };
     //For cancellation of product
     $scope.cancellation = function (orderDetails) {
@@ -64929,6 +65091,56 @@ myApp.controller('StoreLocatorCtrl', function ($scope, TemplateService, $transla
      var data = {
          slug: $stateParams.id
      }
+
+     $scope.data1 = {};
+     $scope.data1.keyword = $stateParams.id
+     $scope.products = [];
+     $scope.product = [];
+     $scope.data1.skip = 0;
+     $scope.data1.limit = 9;
+     $scope.loadingDisable = false;
+     $scope.fetching = false;
+
+     $scope.globalsSearch = function () {
+         console.log("in global search****")
+         ProductService.globalSearch($scope.data1, function (data) {
+             console.log("########################### data.data.data", data.data.data)
+             if (!_.isEmpty(data.data.data)) {
+                 //  alert("hiiii")
+                 $scope.product = _.chunk(data.data.data, 3);
+                 _.each($scope.product, function (n) {
+                     $scope.products.push(n);
+                 })
+                 $scope.loadingDisable = false;
+                 $scope.data1.skip = $scope.data1.skip + 9;
+             }
+             //  else if ($scope.products.length > 0 && data.data.data.length == 0) {
+             //      $scope.fetching = false;
+             //  } else {
+             //      $scope.fetching = false;
+             //      $scope.displayMessage = "No Product Found";
+             //  }
+         })
+     }
+
+
+
+     $scope.loadMore1 = function () {
+         console.log("$scope.data1.skip", $scope.data1.skip)
+         $scope.globalsSearch();
+         $scope.loadingDisable = true;
+     }
+
+
+
+     //  if ($stateParams.id === "search") {
+     //      console.log("rootscope", $rootScope.searchedProduct)
+     //      $scope.products = _.chunk($.jStorage.get("searchedProduct"), 3)
+
+     //      console.log($scope.products)
+
+     //  }
+
      CategoryService.getCategoryWithParent(data, function (data) {
          console.log("cat from parentctrl", data)
          $scope.categories = data.data.data;
@@ -65280,6 +65492,8 @@ myApp.controller('StoreLocatorCtrl', function ($scope, TemplateService, $transla
          $scope.activeButton = $scope.sizes[0].name;
          $scope.selectedSize = $scope.sizes[0];
          console.log($scope.sizes);
+         $scope.arrayCheck = angular.isArray($scope.sizes);
+         //  console.log("$scope.arrayCheck", $scope.arrayCheck);
          $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
          $scope.selectSize = function (sizeObj) {
              $scope.activeButton = sizeObj.name;
@@ -65781,12 +65995,15 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
     }
 
 })
- myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state, TemplateService, NavigationService, BannerService, CartService, $timeout, $uibModal, WishlistService) {
+ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state, toastr, TemplateService, NavigationService, BannerService, CartService, $timeout, $uibModal, WishlistService) {
      $scope.template = TemplateService.getHTML("content/mycart.html");
      TemplateService.title = "Mycart"; //This is the Title of the Website
      $scope.navigation = NavigationService.getNavigation();
      myService.ctrlBanners("mycart", function (data) {
+         console.log("called api");
          $scope.banner = data;
+         console.log("$scope.banner", $scope.banner)
+
      });
      $scope.newA = _.chunk($scope.mycartmodal, 4);
      // console.log("$scope.newA ", $scope.newA);
@@ -65798,6 +66015,10 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
              console.log("getcart->data: ", data);
              //TODO: Instead of array this will be single doc when query changes to findOneAndUpdate
              $scope.mycartTable = data.data.data;
+             if ($scope.mycartTable == undefined) {
+                 toastr.error("add product to cart", "Error:")
+                 $state.go("home");
+             }
              console.log("mycarttableof if: ", $scope.mycartTable);
              //TODO: Calculate actual grand total
              if ($scope.mycartTable)
@@ -65877,4 +66098,510 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
 
          });
      }
+ })
+ myApp.controller('searchCtrl', function ($scope, toastr, CartService, $rootScope, $stateParams, $state, $filter, WishlistService, TemplateService, NavigationService,
+     SizeService, BannerService, CategoryService, myService, ProductService, $timeout, $uibModal, ModalService, ListingService) {
+     $scope.template = TemplateService.getHTML("content/search.html");
+     TemplateService.title = "Form"; //This is the Title of the Website
+     $scope.navigation = NavigationService.getNavigation();
+     $scope.formSubmitted = false;
+
+     $.jStorage.deleteKey("selectedCategory")
+     myService.ctrlBanners("listing-page", function (data) {
+         $scope.banner = data;
+     });
+     if (_.isEmpty($.jStorage.get('compareproduct'))) {
+         $scope.showCheck = false
+
+     } else {
+         $scope.showCheck = true
+         $scope.compareproduct = $.jStorage.get('compareproduct')
+     }
+     //  NavigationService.getListingCategories(function (data) {
+     //      console.log('getProductsWithFilters', data);
+     //      $scope.categories = data.data.data;
+
+     //  });
+     var parentCat = $stateParams.id;
+     //  var data = {
+     //      slug: $stateParams.id
+     //  }
+
+     $scope.data1 = {};
+     $scope.data1.keyword = $stateParams.id
+     $scope.products = [];
+     $scope.product = [];
+     $scope.data1.skip = 0;
+     $scope.data1.limit = 9;
+     $scope.loadingDisable = false;
+     $scope.fetching = false;
+
+     $scope.globalsSearch = function () {
+         //  console.log("in global search****")
+         ProductService.globalSearch($scope.data1, function (data) {
+             if (!_.isEmpty(data.data.data)) {
+                 $scope.product = _.chunk(data.data.data, 3);
+                 _.each($scope.product, function (n) {
+                     $scope.products.push(n);
+                 })
+                 $scope.loadingDisable = false;
+                 $scope.data1.skip = $scope.data1.skip + 9;
+             } else {
+                 $scope.displayMessage = "no products found"
+             }
+             $scope.searchFilters();
+         })
+     }
+
+
+
+     $scope.loadMore1 = function () {
+         $scope.globalsSearch();
+         $scope.loadingDisable = true;
+     }
+     $scope.searchFilters = function () {
+         var data = {};
+         $scope.pro = _.flattenDeep($scope.products)
+         _.each($scope.pro, function (n) {
+             data.slug = n.homeCategory.slug;
+
+             CategoryService.getCategoryWithParent(data, function (data) {
+                 $scope.categories = data.data.data;
+                 $scope.filteredProducts($scope.categories[0].slug)
+             })
+         })
+
+     }
+
+     /******getting products based on category******* */
+     $scope.filteredProducts = function (selectedCategory) {
+         $.jStorage.deleteKey("appliedFilters");
+         if ($.jStorage.get("selectedCategory") && selectedCategory != $.jStorage.get("selectedCategory").slug) {
+             $.jStorage.deleteKey("appliedFilters");
+         }
+         var input = {
+             "slug": selectedCategory,
+             "page": 1
+         }
+         $.jStorage.set("selectedCategory", input);
+         /***************retriving filters based on categories and respective filters**************** */
+         ListingService.retriveProductsWithCategory(function (data) {
+
+             if (data.data.data.length == 0) {
+                 $scope.displayMessage = "No Product Found";
+                 //  $scope.products = ""
+
+             } else if (!_.isEmpty(data.data.data)) {
+                 $scope.displayMessage = "";
+                 $scope.productss = _.chunk(data.data.data, 3);
+                 //  console.log("productretruved based on category", data);
+
+                 ListingService.retriveFiltersWithCategory(function (data) {
+                     //  console.log("product category on basis of category", data.data.data)
+                     $scope.filters = data.data.data;
+                     $scope.min = $scope.filters.priceRange[0].min;
+                     $scope.max = $scope.filters.priceRange[0].max;
+                     //  console.log("filters", $scope.filters.priceRange[0].max)
+                     $scope.slider_translate = {
+                         minValue: 0,
+                         maxValue: 100,
+                         options: {
+
+                             floor: $scope.filters.priceRange[0].min,
+                             ceil: $scope.filters.priceRange[0].max,
+                             id: 'translate-slider'
+                             // translate: function (value, id, which) {
+                             //     return '$' + value;
+                             // }
+                         }
+                     };
+                 })
+
+             } else {
+                 toastr.error('There was some error', 'Error');
+             }
+         })
+     }
+     if ($.jStorage.get('selectedCategory')) {
+         $scope.filteredProducts($.jStorage.get('selectedCategory').slug)
+     }
+     $rootScope.clickfun = function (product) {
+         console.log(product)
+         $scope.compareproduct = $.jStorage.get('compareproduct') ? $.jStorage.get('compareproduct') : [];
+         var result = _.find($scope.compareproduct, {
+             productId: product.productId
+         });
+         if (result) {
+             _.remove($scope.compareproduct, {
+                 productId: product.productId
+             });
+             $.jStorage.set('compareproduct', $scope.compareproduct);
+         } else {
+             $scope.compareproduct.push(product);
+             $.jStorage.set('compareproduct', $scope.compareproduct);
+             console.log($.jStorage.get('compareproduct'))
+         }
+
+         if (_.isEmpty($.jStorage.get('compareproduct'))) {
+             $scope.showCheck = false
+
+         } else {
+             $scope.showCheck = true
+         }
+     }
+     /******function to remove product from compare list******* */
+     $scope.removeFromCompare = function (prodId) {
+
+         var removeCompare = $.jStorage.get("compareproduct");
+         var result = _.remove(removeCompare, {
+             productId: prodId
+         });
+
+         $.jStorage.set("compareproduct", removeCompare);
+         $state.reload();
+     }
+
+     /**********logic for checkbox on reload************ */
+     $rootScope.checkStateOnReload = function (prodid) {
+         var cp = $.jStorage.get("compareproduct")
+         var result = _.find(cp, {
+             productId: prodid
+         });
+         if (result) {
+             return true;
+         } else {
+             return false;
+         }
+     }
+     $scope.gotoComparePage = function () {
+         $state.go("compare-products");
+     }
+     var appliedFilters = {};
+     /*******retriving products based on filters********* */
+     $scope.applyFilters = function (key, filter) {
+
+         appliedFilters = $.jStorage.get('appliedFilters') ? $.jStorage.get('appliedFilters') : {
+             appliedFilters: {
+                 slug: [],
+                 type: [],
+                 style: [],
+                 color: [],
+                 collection: [],
+                 size: [],
+                 fabric: [],
+             }
+         };
+         console.log(filter, key);
+         var cat = $.jStorage.get("selectedCategory").slug;
+         appliedFilters.appliedFilters.slug = [cat];
+
+         var result = _.indexOf(appliedFilters.appliedFilters[key], filter._id);
+         console.log("check result", result)
+         if (result != -1) {
+             _.pullAt(appliedFilters.appliedFilters[key], result);
+         } else {
+             if (!_.isArrayLike(appliedFilters.appliedFilters[key])) {
+                 appliedFilters.appliedFilters[key] = [];
+             }
+             appliedFilters.appliedFilters[key].push(filter._id);
+         }
+         appliedFilters.page = 1;
+         $.jStorage.set('appliedFilters', appliedFilters)
+
+         console.log("Jstoragefor filters::", $.jStorage.get("appliedFilters"))
+         _.forIn(appliedFilters.appliedFilters, function (val, key, obj) {
+             if (_.isEmpty(val)) {
+                 console.log("key: ", key);
+                 delete appliedFilters.appliedFilters[key];
+             }
+         });
+         console.log("apply filters: ", appliedFilters);
+         ProductService.getProductsWithAppliedFilters(appliedFilters, function (data) {
+             //  console.log("filtersretrived:::", data.data.data);
+             $scope.products = _.chunk(data.data.data.products, 3);
+             $scope.filters = data.data.data.filters;
+
+         })
+
+         //api call
+     }
+     /******filters applied automatic if already applied****** */
+     if ($.jStorage.get("appliedFilters")) {
+         ProductService.getProductsWithAppliedFilters($.jStorage.get("appliedFilters"), function (data) {
+             //  console.log("filtersretrived:::", data.data.data);
+             $scope.products = _.chunk(data.data.data.products, 3);
+             $scope.filters = data.data.data.filters;
+
+         })
+     }
+     $scope.loadMore = function () {
+         var appliedFilters = $.jStorage.get("appliedFilters");
+         appliedFilters.page++;
+         ProductService.getProductsWithAppliedFilters(appliedFilters, function (data) {
+             //  console.log("filtersretrived:::", data.data.data);
+             //  $scope.products.push(_.chunk(data.data.data.products, 3));
+             var arrray = _.flattenDeep($scope.products);
+             arrray.push(data.data.data.products);
+             $scope.products = _.chunk(arrray, 3);
+             $scope.filters = data.data.data.filters;
+         })
+     }
+     $scope.priceSet = function (min, max) {
+         console.log(min, max)
+     }
+
+
+     /******checking filters after reload***** */
+     $scope.checkFilterStatus = function (key, filter) {
+         var appliedFilters = $.jStorage.get("appliedFilters");
+
+         if (appliedFilters) {
+             var result = _.indexOf(appliedFilters.appliedFilters[key], filter);
+
+             if (result != -1) {
+                 return true;
+             } else {
+                 return false;
+             }
+         }
+     }
+     /********check selected category******** */
+     $scope.checkRadioCategory = function (catid) {
+         if ($.jStorage.get("selectedCategory"))
+             var selectedId = $.jStorage.get("selectedCategory").slug;
+
+         if (selectedId) {
+             if (selectedId == catid) {
+                 return true;
+             } else {
+                 return false;
+             }
+         }
+     }
+
+     $scope.submitForm = function (data) {
+         console.log(data);
+         $scope.formSubmitted = true;
+     };
+
+     // var filter = {
+     //     category: "",
+     //     page: 1
+     // };
+     // //TODO: For demo purpose. Use category with id in production
+     // ProductService.getProductsWithCategory(filter, function (data) {
+     //     console.log(data)
+     //     $scope.products = _.chunk(data.data.data, 3);
+
+     // });
+     var userId = {
+         userId: $.jStorage.get("userId"),
+         accessToken: $.jStorage.get("accessToken")
+     }
+     if (userId.userId) {
+         CartService.getCart(userId, function (data) {
+
+             if (data.data.data) {
+
+                 $scope.mycart = data.data.data.products;
+                 $scope.tempcart = [];
+                 for (var i = 0; i < $scope.mycart.length; i++) {
+                     $scope.tempcart.push({
+                         productId: $scope.mycart[i].product.productId
+                     })
+                 }
+             }
+         })
+         WishlistService.getWishlist(userId, function (data) {
+             if (data.data.data)
+                 $scope.wishlist = data.data.data;
+             console.log("Wishlist data::::::::", $scope.wishlist);
+         });
+     } else {
+         $scope.mycart = []
+         $scope.mycart = $.jStorage.get("cart");
+         $scope.wishlist = $.jStorage.get("wishlist")
+
+         if ($scope.mycart) {
+
+             $scope.mycart = $scope.mycart.products;
+             console.log("mycartfor offlinetooltip::::", $scope.mycart)
+             $scope.tempcart = [];
+             if ($scope.mycart) {
+                 for (var i = 0; i < $scope.mycart.length; i++) {
+                     $scope.tempcart.push({
+                         productId: $scope.mycart[i].product.productId
+                     })
+                 }
+             }
+         }
+     }
+     $scope.checkWishlist = function (productId) {
+         if (userId.userId) {
+
+             var result = _.find($scope.wishlist, {
+                 "productId": productId
+             });
+
+             if (result) {
+                 return "fa fa-heart";
+             } else {
+                 return "fa fa-heart-o";
+             }
+         } else {
+             var result = _.find($scope.wishlist, {
+                 "productId": productId
+             });
+
+             if (result) {
+                 return "fa fa-heart";
+             } else {
+                 return "fa fa-heart-o";
+             }
+         }
+     }
+
+     $scope.checkInCart = function (productId) {
+
+         if (userId.userId) {
+
+             var result = _.find($scope.tempcart, {
+                 "productId": productId
+             });
+
+             if (result) {
+                 return true
+             } else {
+                 return false
+             }
+         } else {
+             var result = _.find($scope.tempcart, {
+                 "productId": productId
+             });
+
+             if (result) {
+                 return true
+             } else {
+                 return false
+             }
+         }
+     }
+     $scope.reload = function () {
+         $state.reload();
+     }
+
+     $scope.sortButton = 'Sort By';
+     $scope.menu = ['Name', 'Price Low to High', 'Price High to Low'];
+     $scope.changeSorting = function (name) {
+         $scope.sortButton = name;
+         console.log("Hi", $scope.products);
+         if (name == 'Name') {
+             var arrray = _.flattenDeep($scope.products);
+             var test = $filter('orderBy')(arrray, 'productName');
+             $scope.products = _.chunk(test, 3);
+         } else if (name == 'Price Low to High') {
+             var arrray = _.flattenDeep($scope.products);
+             var test = $filter('orderBy')(arrray, 'price');
+             $scope.products = _.chunk(test, 3);
+         } else if (name == 'Price High to Low') {
+             var arrray = _.flattenDeep($scope.products);
+             var test = $filter('orderBy')(arrray, '-price');
+             $scope.products = _.chunk(test, 3);
+         }
+     };
+
+
+
+     // This function is used to display the modal on quck view button
+     $scope.quickviewProduct = function (prod) {
+         //  console.log("prod", prod);
+         $scope.product = prod;
+         $scope.sizes = $scope.product.size;
+         //  console.log("$scope.sizes", $scope.sizes);
+         //  $scope.activeButton = $scope.sizes[0].name;
+         $scope.activeButton = $scope.sizes.name;
+         $scope.selectedSize = $scope.sizes;
+         $scope.arrayCheck = angular.isArray($scope.sizes);
+         //  console.log("$scope.arrayCheck", $scope.arrayCheck);
+         //  console.log("$scope.selectedSize", $scope.selectedSize);
+         $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
+         $scope.selectSize = function (sizeObj) {
+             $scope.activeButton = sizeObj.name;
+             $scope.selectedSize = sizeObj;
+             var data = {
+                 productId: $scope.product.productId,
+                 size: sizeObj._id,
+                 color: $scope.product.color._id
+             }
+
+             ProductService.getSKUWithParameter(data, function (data) {
+                 console.log("SKU:", data)
+                 if (data.data.value) {
+                     $scope.product = data.data.data;
+                 } else {
+                     $scope.product = {};
+                     // TODO: show out of stock
+                 }
+             })
+         }
+         $scope.addToCart = function () {
+             var comment = "";
+             myService.addToCart($scope.product, $scope.reqQuantity, $scope.selectedSize, comment, function (data) {
+                 ModalService.addcart();
+                 $scope.reload();
+             })
+         }
+         $scope.addToWishlist = function () {
+             var data = {
+                 "product": $scope.product
+             }
+             myService.addToWishlist(data, function (data) {
+
+                 ModalService.addwishlist();
+             })
+         }
+         $scope.changeImage = function (index) {
+             $scope.selectedImage = $scope.product.images[index];
+         };
+         $scope.reqQuantity = 1;
+         $scope.updateQuantity = function (oper) {
+             $scope.reqQuantity += parseInt(oper);
+             console.log($scope.reqQuantity)
+         }
+         var quickviewProduct = $uibModal.open({
+             animation: true,
+             templateUrl: 'views/modal/quickview-product.html',
+             scope: $scope,
+             size: 'lg',
+             windowClass: 'quickview-modal-size'
+         });
+         $scope.closeModal = function () {
+             quickviewProduct.close();
+         }
+     };
+     //End of  modal on quck view button
+     if (_.isEmpty($scope.products))
+         $scope.displayMessage = "No Product Found";
+
+     // Start of UIB Carousel slider's function for gird view
+     $scope.gridViewSlideInterval = 5000;
+     $scope.active = 0;
+     $scope.currentGridViewSlideIndex = 0;
+     $scope.gridViewSlide = [{
+         img: 'frontend/img/individual/product-test.jpg',
+         text: 'Cool Shirt',
+         id: 1
+     }, {
+         img: 'frontend/img/individual/7.jpg',
+         text: 'Nice Shirt',
+         id: 2
+     }];
+     //   $scope.addgridViewSlide = function () {
+     //       slides.push({
+
+     //       })
+     //   };
+
+     //End of UIB Carousel slider's function for gird view
+
  })

@@ -42,9 +42,50 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
 
                 var data = {};
                 data.keyword = $scope.keyword;
-                ProductService.globalSearch(data, function (data) {
-                    console.log(data);
-                })
+                data.skip = 0;
+                data.limit = 10;
+                $state.go('search', {
+                    'id': $scope.keyword
+                });
+                // $rootScope.$emit('globalsSearch', null);
+
+                // ProductService.globalSearch(data, function (data) {
+                //     console.log("in globalSearch*****", data.data.data);
+                //     $.jStorage.set("searchedProduct", data.data.data);
+                //     $.jStorage.set("searchedKeyword", $scope.keyword);
+                //     console.log($state.current);
+                //     if (!_.isEmpty($.jStorage.get("searchedProduct"))) {
+                //         console.log("insidre if")
+                //         if ($state.current.name == 'listing-page') {
+                //             $state.go('listing-page', {
+                //                 'id': $scope.keyword
+                //             });
+
+
+
+                //         } else {
+                //             $state.go('listing-page', {
+                //                 'id': $scope.keyword
+                //             });
+
+                //         }
+                //         // $scope.searchNotFound = "Data Not Found"
+                //     } else {
+                //         console.log("in globalSearch***SearchedProduct**", $scope.newA);
+                //         $.jStorage.set("searchedProduct", []);
+                //         if ($state.current.name == 'listing-page') {
+                //             $state.go('listing-page', {
+                //                 'id': $scope.keyword
+                //             });
+                //         } else {
+                //             $state.go('listing-page', {
+                //                 'id': $scope.keyword
+                //             });
+                //             // $state.reload();
+                //         }
+
+                //     }
+                // });
             }
 
         };

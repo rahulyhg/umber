@@ -58,7 +58,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <input type="number" placeholder="Mobile No" class="form-control" ng-model="userDetails.data.mobile">
+                                                        <input type="text" placeholder="Mobile No" class="form-control" ng-model="userDetails.data.mobile">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -88,7 +88,8 @@
                                         <input type="checkbox" id="x1">
                                         <label for="x1">Use this as default shipping address</label>
                                     </div>
-                                    <p><button class="btn address-edit-btn " ng-click="edit()">Edit</button> <button class="btn address-delt-btn">Delete</button></p>
+                                    <p><button class="btn address-edit-btn " ng-click="edit()">Edit</button> <button class="btn address-delt-btn"
+                                            ng-click="edit1(shippingAdd._id)">Delete</button></p>
                                 </div>
                             </div>
                             <div class="edit-addrs" ng-if="save">
@@ -111,7 +112,7 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <input type="number" placeholder="Mobile Number" class="form-control" ng-model="userDetails.data.mobile">
+                                                    <input type="text" placeholder="Mobile Number" class="form-control" ng-model="userDetails.data.mobile">
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -163,25 +164,33 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group country-dropdown" uib-dropdown>
+
                                                 <button class="btn country-dropdown--btn text-capitalize" type="button" uib-dropdown-toggle>{{countryButton}} <span class="caret"></span></button>
+
                                                 <ul class="country-dropdown-menu dropdown-menu text-capitalize" uib-dropdown-menu role="menu">
-                                                    <li role="menuitem" ng-repeat="country in selectCounteries" ng-click="changeCountry(country)"><a href="#">{{country}}</a></li>
+                                                    <li role="menuitem" ng-repeat="country in selectCounteries" ng-click="changeCountry(country)"><a>{{country}}</a></li>
                                                 </ul>
                                                 <!--<input type="text" placeholder="Country" class="form-control" ng-model="userDetails.data.shippingAddresses[0].country">-->
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group state-dropdown" uib-dropdown>
-                                                <button class="btn state-dropdown--btn text-capitalize" disabled type="button" uib-dropdown-toggle>{{stateButton}} <span class="caret"></span></button>
-                                                <ul class="state-dropdown-menu dropdown-menu text-capitalize" uib-dropdown-menu role="menu">
-                                                    <li role="menuitem" ng-repeat="states in selectState track by $index" ng-click="changeState(states)"><a href="#">{{states.state}}</a></li>
+                                        <div class="col-md-4" ng-if="visible">
+                                            <div class="form-group country-dropdown" uib-dropdown>
+                                                <button class="btn country-dropdown--btn text-capitalize" type="button" uib-dropdown-toggle>{{stateButton}} <span class="caret"></span></button>
+                                                <ul class="country-dropdown-menu dropdown-menu text-capitalize" uib-dropdown-menu role="menu">
+                                                    <li role="menuitem" ng-repeat="state in selectedState" ng-click="changeState(state)"><a>{{state}}</a></li>
                                                 </ul>
+                                                <!--<input type="text" placeholder="Country" class="form-control" ng-model="userDetails.data.shippingAddresses[0].country">-->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4" ng-if="hidden">
+                                            <div class="form-group">
+                                                <input type="number" placeholder="state" class="form-control" ng-model="userDetails.data.shippingAddresses[0].pincode">
                                             </div>
                                         </div>
 
                                     </div>
                                     <p><button class="btn save--btn text-uppercase" ng-if="save" ng-click="edit()">save</button>
-                                        <button class="btn delt--btn text-uppercase">delete</button>
+                                        <button class="btn delt--btn text-uppercase" ng-click="edit1(shippingAdd._id)">delete</button>
                                     </p>
                                 </form>
 
