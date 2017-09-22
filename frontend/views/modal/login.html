@@ -11,15 +11,16 @@
                         <div>
                             <form class="modal__customized-form" name="loginform">
                                 <div class="form-group">
-                                    <input type="email" placeholder="Email" ng-model="loginData.email" class="form-control" required uib-popover="{{loginform.email.$touched && loginform.email.$invalid ||loginform.email.$error.email && loginform.email.$error.required }}"
+                                    <input type="email" placeholder="Email Address" name="email" ng-model="loginData.email" class="form-control" required uib-popover="{{loginform.email.$touched && loginform.email.$invalid ||loginform.email.$error.email && loginform.email.$error.required }}"
                                         popover-title="Please enter a valid email address" popover-placement="bottom" popover-class="login-popover"
                                         popover-is-open="loginform.email.$touched && loginform.email.$invalid ||loginform.email.$error.email && loginform.email.$error.required"
                                         popover-trigger="'none'">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" placeholder="Password" ng-model="loginData.password" class="form-control" required uib-popover="{{loginform.password.$touched && loginform.password.$invalid}}"
-                                        popover-title="Please enter your password" popover-placement="bottom" popover-class="login-popover"
-                                        popover-is-open="loginform.password.$touched && loginform.password.$invalid" popover-trigger="'none'">
+                                    <input type="password" placeholder="Password" name="password" ng-model="loginData.password" class="form-control" required
+                                        uib-popover="{{loginform.password.$touched && loginform.password.$invalid}}" popover-title="Please enter your password"
+                                        popover-placement="bottom" popover-class="login-popover" popover-is-open="loginform.password.$touched && loginform.password.$invalid"
+                                        popover-trigger="'none'">
                                 </div>
                                 <div class="marginTop">
                                     <button type="button" class="btn btn-login btn-block" ng-disabled="loginform.email.$invalid || loginform.password.$invalid"
@@ -109,7 +110,6 @@
                                         popover-title="Please enter a valid email address" popover-placement="bottom" popover-class="login-popover"
                                         popover-is-open="registerForm.email.$touched && registerForm.email.$invalid ||registerForm.email.$error.email && registerForm.email.$error.required"
                                         popover-trigger="'none'">
-
                                 </div>
                                 <div class="form-group">
                                     <input type="number" placeholder="Mobile No" name="mobile" ng-model="formData.mobile" class="form-control" required uib-popover="{{registerForm.mobile.$touched && registerForm.mobile.$invalid}}"
