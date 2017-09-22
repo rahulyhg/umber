@@ -45,10 +45,13 @@
                  })
                  $scope.loadingDisable = false;
                  $scope.data1.skip = $scope.data1.skip + 9;
+                 if($scope.product.length<=0){
+                    
+                        $scope.empty = "No Products Found"
+                    
+                 }
              }
-            //   else {
-            //      $scope.displayMessage = "no products found"
-            //  }
+            
              $scope.searchFilters();
          })
      }
@@ -93,7 +96,7 @@
 
              } else if (!_.isEmpty(data.data.data)) {
                  $scope.displayMessage = "";
-                 $scope.productss = _.chunk(data.data.data, 3);
+                 $scope.products = _.chunk(data.data.data, 3);
                  //  console.log("productretruved based on category", data);
 
                  ListingService.retriveFiltersWithCategory(function (data) {
@@ -496,6 +499,7 @@
          text: 'Nice Shirt',
          id: 2
      }];
+     
      //   $scope.addgridViewSlide = function () {
      //       slides.push({
 

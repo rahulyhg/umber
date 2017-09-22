@@ -18,7 +18,7 @@
                                     <flex-slider flex-slide="buy in xyz.images track by $index" prev-text="" next-text="" animation="slide" min-items="3">
                                         <li>
                                             <i class="fa fa-heart-o" aria-hidden="true" ng-click="addWishlist(xyz);"></i>
-                                            <img ng-src="{{buy.image}}" class="img-responsive" ng-click="addcart();">
+                                            <img ng-src="{{buy.image | serverimage}}" class="img-responsive" ng-click="addcart();">
                                         </li>
                                     </flex-slider>
                                     <div class="buy-para custom-checkbox">
