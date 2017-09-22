@@ -69,7 +69,7 @@
     <div class="all-categorie">
         <ul class="list-inline list-unstyled">
             <li class="all-categorie__dimension" ng-repeat="category in categories">
-                <div class="padd">
+                <div class="padd" style="margin-top:55px;">
                     <a ui-sref="listing-page({id: category.slug})"><img ng-src="{{category.imgLink | serverimage}}" alt="" class="img-responsive"></a>
                 </div>
             </li>
@@ -124,9 +124,9 @@
                 <flex-slider flex-slide="new in featured track by $index" prev-text="" next-text="" animation="slide" item-width="260" item-margin="25"
                     min-items="3">
                     <li class="relate">
-                        
+
                         <div class="featured__banner-detail relate">
-                            
+
                             <img ng-src="{{new.images[0].image | serverimage}}" alt="" class="img-responsive" ui-sref="individual-page({id: new.productId})">
                             <div class="featured__cloth-desc">
                                 <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
