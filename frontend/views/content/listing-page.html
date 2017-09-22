@@ -248,10 +248,12 @@
                         <!--<div infinite-scroll='loadMore()' infinite-scroll-distance='3'>-->
                         <div class="row" ng-repeat="row in products" ng-if="view == 'thumbnailView'">
                             <div class="col-md-4" ng-repeat="product in row" ng-init="parentIndex = $index">
+                                
                                 <div class="buy-info custom-checkbox">
                                     <div class="buy-slider slider-individual list-slider">
                                         <flex-slider flex-slide="image in product.images track by $index" prev-text="" next-text="" animation="slide" min-items="3">
                                             <li class="relate">
+                                                
                                                 <div class="list-slider__toolTip">
                                                 </div>
                                                 <a ui-sref="individual-page({id: product.productId})">
