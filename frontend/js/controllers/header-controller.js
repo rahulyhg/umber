@@ -34,20 +34,21 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
                 // windowClass: 'modal-content-radi0'
             });
         };
-        // $scope.search = function ($event) {
-        //     console.log($event.charCode)
+        $scope.search = function ($event) {
+            console.log("*****in global search", $event.charCode)
 
-        //     if ($event.charCode === 13) {
-        //         // Do that thing you finally wanted to do
+            if ($event.charCode === 13) {
+                // Do that thing you finally wanted to do
 
-        //         var data = {};
-        //         data.keyword = $scope.keyword;
-        //         ProductService.globalSearch(data, function (data) {
-        //             console.log(data);
-        //         })
-        //     }
+                var data = {};
+                data.keyword = $scope.keyword;
+                console.log("***after data keyword***", data);
+                ProductService.globalSearch(data, function (data) {
+                    console.log("******", data);
+                })
+            }
 
-        // };
+        };
 
         $scope.logout = function () {
 
