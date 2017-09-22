@@ -71,12 +71,9 @@ var model = {
                                 Cart.saveData(cart, function (err, data) {
                                     if (err) {
                                         cbWaterfall2(err, null);
-                                    }
-                                    // else if (data) {
-                                    //     Product.subtractQuantity(product, null);
-                                    //     cbWaterfall2(null, data);
-                                    // } 
-                                    else {
+                                    } else if (data) {
+                                        cbWaterfall2(null, data);
+                                    } else {
                                         cbWaterfall2({
                                             message: {
                                                 data: "Invalid credentials1!"
@@ -104,7 +101,6 @@ var model = {
                                         if (err) {
                                             cbWaterfall2(err, null);
                                         } else if (data) {
-                                            // Product.subtractQuantity(product, null);
                                             cbWaterfall2(null, data);
                                         } else {
                                             cbWaterfall2({
@@ -201,7 +197,7 @@ var model = {
     },
 
     getCart: function (userId, callback) {
-        console.log("In getCart");
+        // console.log("In getCart");
         Cart.findOne({
             userId: mongoose.Types.ObjectId(userId.userId)
         }).deepPopulate("products.product products.product.size products.product.color").exec(function (err, data) {

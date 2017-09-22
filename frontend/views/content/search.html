@@ -214,7 +214,7 @@
                     <div class="row">
                         <div class="col-md-3" ng-repeat="compare in compareproduct track by $index">
                             <div class="compare-img-list relate">
-                                <img ng-src="{{compare.images[0].image | serverimage}}" class="img-responsive">
+                                <img ng-src="{{compare.images[0].image}}" class="img-responsive">
                                 <p>{{compare.productName}}</p>
                                 <div class="remove-item">
                                     <button type="button" class="btn btn-circle" ng-click="removeFromCompare(compare.productId)">X</button>
@@ -244,20 +244,19 @@
                                 </div>
                             </div>
                         </div>
-                       
+                        <p>{{empty}}</p>
+                        <!--{{displayMessage}}-->
                         <!--<div infinite-scroll='loadMore()' infinite-scroll-distance='3'>-->
                         <div class="row" ng-repeat="row in products" ng-if="view == 'thumbnailView'">
                             <div class="col-md-4" ng-repeat="product in row" ng-init="parentIndex = $index">
-                                
                                 <div class="buy-info custom-checkbox">
                                     <div class="buy-slider slider-individual list-slider">
                                         <flex-slider flex-slide="image in product.images track by $index" prev-text="" next-text="" animation="slide" min-items="3">
                                             <li class="relate">
-                                                
                                                 <div class="list-slider__toolTip">
                                                 </div>
                                                 <a ui-sref="individual-page({id: product.productId})">
-                                                    <img ng-src="{{image.image | serverimage}}" class="img-rsponsive img1" title="{{product.productName}}">
+                                                    <img ng-src="{{image.image|serverimage}}" class="img-rsponsive img1" title="{{product.productName}}">
                                                 </a>
                                                 <i ng-class="checkWishlist(product.productId)" aria-hidden="true"></i>
                                                 <img ng-src="{{buy.img | serverimage}}" class="img-responsive" ng-mouseover="displayCntent();" ng-mouseleave="hideContent();">
@@ -306,7 +305,7 @@
                                         <div uib-carousel active="active" interval="gridViewSlideInterval">
                                             <div uib-slide ng-repeat="test in gridViewSlide track by test.id" index="test.id">
                                                 <div class="item-img relate">
-                                                    <img ng-src="{{test.img | serverimage}}" alt="Ordered Item" class="img-responsive">
+                                                    <img ng-src="{{test.img}}" alt="Ordered Item" class="img-responsive">
                                                     <div class="inline-block wishlist-icon">
                                                         <i class="fa fa-heart"></i>
                                                     </div>
@@ -350,10 +349,16 @@
                             </div>
                         </div>
                     </div>
-                    <!--<div infinite-scroll="loadMore1()" infinite-scroll-distance="1" infinite-scroll-disabled="loadingDisable">
-                    </div>-->
+                    <div infinite-scroll="loadMore1()" infinite-scroll-distance="1" infinite-scroll-disabled="loadingDisable">
+                    </div>
                 </div>
             </div>
+            <div class="col-md-9">
+                <!-- <div class="row">
+                    <div class="text-center displayMessage">
+                        <center> {{displayMessage}}</center>
+                    </div>
+                </div> -->
+            </div>
         </div>
-        
     </div>

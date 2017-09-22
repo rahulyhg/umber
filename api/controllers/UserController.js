@@ -1,5 +1,29 @@
 module.exports = _.cloneDeep(require("sails-wohlig-controller"));
 var controller = {
+    updateUser: function (req, res) {
+        if (req.body) {
+            User.updateUser(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
+    deleteShippingAddress: function (req, res) {
+        if (req.body) {
+            User.deleteShippingAddress(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
+    },
     loginFacebook: function (req, res) {
         passport.authenticate('facebook', {
             scope: ['public_profile', 'user_friends', 'email'],

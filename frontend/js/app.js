@@ -22,7 +22,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
     var tempateURL = "views/template/template.html"; //Default Template URL
     cfpLoadingBarProvider.includeSpinner = true;
     cfpLoadingBarProvider.includeBar = true;
-    cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
+    // cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
     cfpLoadingBarProvider.spinnerTemplate = '<div class="spinner-overlay"><img class="spinner" src="img/default.gif" /></div>';
     // for http request with session
     $httpProvider.defaults.withCredentials = true;
@@ -59,6 +59,14 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
                 'cat': null
             },
             controller: 'ListingPageCtrl'
+        })
+        .state('search', {
+            url: "/search/:id",
+            templateUrl: tempateURL,
+            Params: {
+                'cat': null
+            },
+            controller: 'searchCtrl'
         })
         .state('individual-page', {
             url: "/individual-page/:id",

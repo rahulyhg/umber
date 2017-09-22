@@ -35,17 +35,57 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
             });
         };
         $scope.search = function ($event) {
-            console.log("*****in global search", $event.charCode)
+            console.log($event.charCode)
 
             if ($event.charCode === 13) {
                 // Do that thing you finally wanted to do
 
                 var data = {};
                 data.keyword = $scope.keyword;
-                console.log("***after data keyword***", data);
-                ProductService.globalSearch(data, function (data) {
-                    console.log("******", data);
-                })
+                data.skip = 0;
+                data.limit = 10;
+                $state.go('search', {
+                    'id': $scope.keyword
+                });
+                // $rootScope.$emit('globalsSearch', null);
+
+                // ProductService.globalSearch(data, function (data) {
+                //     console.log("in globalSearch*****", data.data.data);
+                //     $.jStorage.set("searchedProduct", data.data.data);
+                //     $.jStorage.set("searchedKeyword", $scope.keyword);
+                //     console.log($state.current);
+                //     if (!_.isEmpty($.jStorage.get("searchedProduct"))) {
+                //         console.log("insidre if")
+                //         if ($state.current.name == 'listing-page') {
+                //             $state.go('listing-page', {
+                //                 'id': $scope.keyword
+                //             });
+
+
+
+                //         } else {
+                //             $state.go('listing-page', {
+                //                 'id': $scope.keyword
+                //             });
+
+                //         }
+                //         // $scope.searchNotFound = "Data Not Found"
+                //     } else {
+                //         console.log("in globalSearch***SearchedProduct**", $scope.newA);
+                //         $.jStorage.set("searchedProduct", []);
+                //         if ($state.current.name == 'listing-page') {
+                //             $state.go('listing-page', {
+                //                 'id': $scope.keyword
+                //             });
+                //         } else {
+                //             $state.go('listing-page', {
+                //                 'id': $scope.keyword
+                //             });
+                //             // $state.reload();
+                //         }
+
+                //     }
+                // });
             }
 
         };
@@ -151,25 +191,26 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
         $scope.closeCategires = function () {
             $('.mobview-links').removeClass('mobview-links-menu-in');
             $('.mobview-links').addClass('mobview-links-menu-out');
-            $('.mobview-categories-display ').toggleClass('mobview-categories-menu-in');
+            $('.mobview-categories').removeClass('mobview-categories-menu-out');
+            $('.mobview-categories').addClass('mobview-categories-menu-in');
         };
         $scope.slidebackToMobview = function () {
             $('.mobview-links').removeClass('mobview-links-menu-out');
             $('.mobview-links').addClass('mobview-links-menu-in');
-            $('.mobview-categories-display ').removeClass('mobview-categories-menu-in');
-            $('.mobview-categories-display ').addClass('mobview-categories-menu-out');
+            $('.mobview-categories ').removeClass('mobview-categories-menu-in');
+            $('.mobview-categories ').addClass('mobview-categories-menu-out');
         };
 
         $scope.getSubCategories = function (category) {
             var data = {};
-            $scope.id = category._id;
-            data.category = category._id;
+            $scope.slug = category.slug;
+            data.slug = category.slug;
             CategoryService.getCategoryWithParent(data, function (data) {
                 console.log("subcatretrived", data);
                 if (data.data.value) {
                     $scope.subCategories = data.data.data;
                 } else {
-                    console.log("subcatretrived", data);
+                    console.log("subcatretrived", data.data.error);
                 }
             })
         }
@@ -178,7 +219,7 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
         NavigationService.getEnabledCategories(function (data) {
 
             $scope.categories = data.data.data;
-            console.log($scope.categories)
+            console.log('cat', $scope.categories)
 
 
         });

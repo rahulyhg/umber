@@ -78,6 +78,7 @@ var model = {
         Wishlist.findOne({
             userId: user.userId
         }).exec(function (err, wishlist) {
+
             if (!_.isEmpty(wishlist)) {
                 async.each(wishlist.products, function (productId, eachCallback) {
                     Product.getProductDetails({
@@ -87,7 +88,9 @@ var model = {
                             wishlistProducts.push(productDetails);
                         eachCallback();
                     })
+
                 }, function (err) {
+
                     callback(null, wishlistProducts);
                 });
             }

@@ -23,7 +23,6 @@
                     </ul>
                 </div>-->
                     <div class="individual-first relate" style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%">
-                        <!--<img ng-src="{{selectedImage.image | serverimage}}" class="img-responsive bg">-->
                         <div class="individual-first__zoom">
                             <img ng-src="img/individual/zoom.png" alt="zoom" class="img-responsive">
                         </div>
@@ -33,7 +32,7 @@
                             item-margin="15" min-items="3">
                             <li class="relate">
                                 <div class="customer-choice__banner-detail relate" style="cursor:pointer;">
-                                    <img ng-src="{{image.image | serverimage }}" alt="" class="img-responsive" ng-click="changeImage($index)">
+                                    <img ng-src="{{image.image | serverimage}}" alt="" class="img-responsive" ng-click="changeImage($index)">
                                 </div>
                             </li>
                         </flex-slider>
@@ -61,10 +60,23 @@
                             </div>
                         </div>
                         <div class="second-sec border-div pd-bottom">
-                            <div class="viewSize inline-block relate">
+                            <div class="viewSize inline-block relate" ng-if="arrayCheck">
                                 <h5>SIZE </h5>
                                 <div class="inline-block buy-para__sizes">
-                                    <p ng-click="selectSize(size)" ng-class="{ 'active':activeButton=={{size.name}} }" ng-repeat="size in sizes">{{size.name}}</p>
+                                    <p ng-click="selectSize(size)" ng-class="{'active':activeButton=={{size.name}}}" ng-repeat="size in sizes">{{size.name}}</p>
+                                    <!--<p>38</p>
+                                    <p>40</p>
+                                    <p>42</p>
+                                    <p>44</p>-->
+                                </div>
+                                <div>
+                                    <a href="" class="linking ">Size Chart</a>
+                                </div>
+                            </div>
+                            <div class="viewSize inline-block relate" ng-if="!arrayCheck">
+                                <h5>SIZE</h5>
+                                <div class="inline-block buy-para__sizes">
+                                    <p ng-click="selectSize(sizes)" ng-class="{'active':activeButton=={{sizes.name}}}">{{sizes.name}}</p>
                                     <!--<p>38</p>
                                     <p>40</p>
                                     <p>42</p>

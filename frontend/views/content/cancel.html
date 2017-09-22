@@ -26,9 +26,8 @@
         <tbody ng-repeat="product in order.products">
           <tr>
             <td class="relate">
-              <!--style="background: url('{{selectedImage.image | serverimage}}') no-repeat 50% 50%"-->
               <div class="item-img inline-block">
-                <img ng-src="{{product.product.images[0].image | serverimage}}" alt="Ordered Item" class="img-responsive">
+                <img ng-src="{{product.product.images[0].image}}" alt="Ordered Item" class="img-responsive">
               </div>
               <div class="inline-block item-desc">
                 <h4 class="item-name text-uppercase">{{product.product.productName}}

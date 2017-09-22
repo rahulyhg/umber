@@ -1,6 +1,6 @@
- myApp.controller('ListingPageCtrl', function ($scope, toastr, CartService, $rootScope, $stateParams, $state, $filter, WishlistService, TemplateService, NavigationService,
+ myApp.controller('searchCtrl', function ($scope, toastr, CartService, $rootScope, $stateParams, $state, $filter, WishlistService, TemplateService, NavigationService,
      SizeService, BannerService, CategoryService, myService, ProductService, $timeout, $uibModal, ModalService, ListingService) {
-     $scope.template = TemplateService.getHTML("content/listing-page.html");
+     $scope.template = TemplateService.getHTML("content/search.html");
      TemplateService.title = "Form"; //This is the Title of the Website
      $scope.navigation = NavigationService.getNavigation();
      $scope.formSubmitted = false;
@@ -22,9 +22,9 @@
 
      //  });
      var parentCat = $stateParams.id;
-     var data = {
-         slug: $stateParams.id
-     }
+     //  var data = {
+     //      slug: $stateParams.id
+     //  }
 
      $scope.data1 = {};
      $scope.data1.keyword = $stateParams.id
@@ -36,50 +36,46 @@
      $scope.fetching = false;
 
      $scope.globalsSearch = function () {
-         console.log("in global search****")
+         //  console.log("in global search****")
          ProductService.globalSearch($scope.data1, function (data) {
-             console.log("########################### data.data.data", data.data.data)
              if (!_.isEmpty(data.data.data)) {
-                 //  alert("hiiii")
                  $scope.product = _.chunk(data.data.data, 3);
                  _.each($scope.product, function (n) {
                      $scope.products.push(n);
                  })
                  $scope.loadingDisable = false;
                  $scope.data1.skip = $scope.data1.skip + 9;
+                 if($scope.product.length<=0){
+                    
+                        $scope.empty = "No Products Found"
+                    
+                 }
              }
-             //  else if ($scope.products.length > 0 && data.data.data.length == 0) {
-             //      $scope.fetching = false;
-             //  } else {
-             //      $scope.fetching = false;
-             //      $scope.displayMessage = "No Product Found";
-             //  }
+            
+             $scope.searchFilters();
          })
      }
 
 
 
      $scope.loadMore1 = function () {
-         console.log("$scope.data1.skip", $scope.data1.skip)
          $scope.globalsSearch();
          $scope.loadingDisable = true;
      }
+     $scope.searchFilters = function () {
+         var data = {};
+         $scope.pro = _.flattenDeep($scope.products)
+         _.each($scope.pro, function (n) {
+             data.slug = n.homeCategory.slug;
 
+             CategoryService.getCategoryWithParent(data, function (data) {
+                 $scope.categories = data.data.data;
+                 $scope.filteredProducts($scope.categories[0].slug)
+             })
+         })
 
+     }
 
-     //  if ($stateParams.id === "search") {
-     //      console.log("rootscope", $rootScope.searchedProduct)
-     //      $scope.products = _.chunk($.jStorage.get("searchedProduct"), 3)
-
-     //      console.log($scope.products)
-
-     //  }
-
-     CategoryService.getCategoryWithParent(data, function (data) {
-         console.log("cat from parentctrl", data)
-         $scope.categories = data.data.data;
-         $scope.filteredProducts($scope.categories[0].slug)
-     })
      /******getting products based on category******* */
      $scope.filteredProducts = function (selectedCategory) {
          $.jStorage.deleteKey("appliedFilters");
@@ -96,19 +92,19 @@
 
              if (data.data.data.length == 0) {
                  $scope.displayMessage = "No Product Found";
-                 $scope.products = ""
+                 //  $scope.products = ""
 
              } else if (!_.isEmpty(data.data.data)) {
                  $scope.displayMessage = "";
                  $scope.products = _.chunk(data.data.data, 3);
-                 console.log("productretruved based on category", data)
+                 //  console.log("productretruved based on category", data);
 
                  ListingService.retriveFiltersWithCategory(function (data) {
-                     console.log("product category on basis of category", data.data.data)
+                     //  console.log("product category on basis of category", data.data.data)
                      $scope.filters = data.data.data;
                      $scope.min = $scope.filters.priceRange[0].min;
                      $scope.max = $scope.filters.priceRange[0].max;
-                     console.log("filters", $scope.filters.priceRange[0].max)
+                     //  console.log("filters", $scope.filters.priceRange[0].max)
                      $scope.slider_translate = {
                          minValue: 0,
                          maxValue: 100,
@@ -224,7 +220,7 @@
          });
          console.log("apply filters: ", appliedFilters);
          ProductService.getProductsWithAppliedFilters(appliedFilters, function (data) {
-             console.log("filtersretrived:::", data.data.data);
+             //  console.log("filtersretrived:::", data.data.data);
              $scope.products = _.chunk(data.data.data.products, 3);
              $scope.filters = data.data.data.filters;
 
@@ -235,7 +231,7 @@
      /******filters applied automatic if already applied****** */
      if ($.jStorage.get("appliedFilters")) {
          ProductService.getProductsWithAppliedFilters($.jStorage.get("appliedFilters"), function (data) {
-             console.log("filtersretrived:::", data.data.data);
+             //  console.log("filtersretrived:::", data.data.data);
              $scope.products = _.chunk(data.data.data.products, 3);
              $scope.filters = data.data.data.filters;
 
@@ -245,7 +241,7 @@
          var appliedFilters = $.jStorage.get("appliedFilters");
          appliedFilters.page++;
          ProductService.getProductsWithAppliedFilters(appliedFilters, function (data) {
-             console.log("filtersretrived:::", data.data.data);
+             //  console.log("filtersretrived:::", data.data.data);
              //  $scope.products.push(_.chunk(data.data.data.products, 3));
              var arrray = _.flattenDeep($scope.products);
              arrray.push(data.data.data.products);
@@ -421,13 +417,16 @@
 
      // This function is used to display the modal on quck view button
      $scope.quickviewProduct = function (prod) {
+         //  console.log("prod", prod);
          $scope.product = prod;
-         $scope.sizes = $scope.product.sizes;
-         $scope.activeButton = $scope.sizes[0].name;
-         $scope.selectedSize = $scope.sizes[0];
-         console.log($scope.sizes);
+         $scope.sizes = $scope.product.size;
+         //  console.log("$scope.sizes", $scope.sizes);
+         //  $scope.activeButton = $scope.sizes[0].name;
+         $scope.activeButton = $scope.sizes.name;
+         $scope.selectedSize = $scope.sizes;
          $scope.arrayCheck = angular.isArray($scope.sizes);
          //  console.log("$scope.arrayCheck", $scope.arrayCheck);
+         //  console.log("$scope.selectedSize", $scope.selectedSize);
          $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
          $scope.selectSize = function (sizeObj) {
              $scope.activeButton = sizeObj.name;
@@ -500,6 +499,7 @@
          text: 'Nice Shirt',
          id: 2
      }];
+     
      //   $scope.addgridViewSlide = function () {
      //       slides.push({
 

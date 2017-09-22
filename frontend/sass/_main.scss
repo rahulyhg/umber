@@ -803,6 +803,7 @@
                                             .navbar {
                                                 background-color: $white;
                                                 border-color: transparent;
+                                                box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
                                                 .navbar-header {
                                                     .navbar-brand {
                                                         @include padding(10px);
@@ -1133,7 +1134,7 @@
                                                 }
                                                 .sub-categorie {
                                                     background: $lightGray1;
-                                                    @include padding(5px 10px);
+                                                    @include padding(0 10px);
                                                     @include margin(5px 110px 5px 15px);
                                                     overflow: auto;
                                                     max-height: 45px;
@@ -1156,44 +1157,62 @@
                                             //     max-height: 50px;
                                             //     overflow: auto;
                                             // }
-                                            // .mobview-categories-menu-in {
-                                            //     width: 100%!important;
-                                            //     max-height: auto!important;
-                                            // }
-                                            // .mobview-links-menu-in {
-                                            //     width: 50%;
-                                            //     height: auto;
-                                            // }
-                                            // .mobview-links-menu-out {
-                                            //     @include transform(translateX(-1000px));
-                                            //     @include transform-origin(left center);
-                                            //     @include transition-property(all);
-                                            //     @include transition-duration(0.3s);
-                                            //     @include transition-timing-function(ease); // @include transition-delay(0.5s);
-                                            //     width: 0!important;
-                                            // }
-                                            // .mobview-categories-menu-in,
-                                            // .mobview-links-menu-in {
-                                            //     @include transform(translateX(0));
-                                            // }
-                                            // .mobview-categories-display {
-                                            //     display: none;
-                                            //     max-height: 480px;
-                                            //     overflow: auto;
-                                            // }
-                                            // .mobview-categories {
-                                            //     vertical-align: top;
-                                            //     .fa-arrow-left {
-                                            //         padding-left: 15px;
-                                            //         @include transition-property(transform);
-                                            //         @include transition-duration( 0.1s);
-                                            //         @include transition-timing-function(ease-out);
-                                            //         &:hover,
-                                            //         &:active {
-                                            //             @include transform(translateX(-4px));
-                                            //         }
-                                            //     }
-                                            // } //END of navigation menu
+                                            .mobview-links-menu-in {
+                                                @include transform(translateX(0));
+                                                @include transform-origin(left center);
+                                                @include transition-property(all);
+                                                @include transition-duration(0.2s);
+                                                @include transition-timing-function(ease);
+                                            }
+
+                                            .mobview-links-menu-out {
+                                                @include transform(translateX(-1000px));
+                                                @include transform-origin(center left);
+                                                @include transition-property(all);
+                                                @include transition-duration(0.2s);
+                                                @include transition-timing-function(ease);
+                                            }
+
+                                            .mobview-categories-menu-in {
+                                                @include transform(translateX(0));
+                                                @include transform-origin(right center);
+                                                @include transition-property(all);
+                                                @include transition-duration(0.2s);
+                                                @include transition-timing-function(ease);
+                                                @include transition-delay(0.1s);
+                                            }
+
+                                            .mobview-categories-menu-out {
+                                                @include transform(translateX(1000px));
+                                                @include transform-origin(right center);
+                                                @include transition-property(all);
+                                                @include transition-duration(0.2s);
+                                                @include transition-timing-function(ease);
+                                            }
+
+                                            .mobview-side-nav {
+                                                width: 550px;
+                                                height: 100%;
+                                                @include padding(15px);
+                                                border: 1px solid $borderColor;
+                                                box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
+                                                position: fixed;
+                                                background-color: $white;
+                                                z-index: 9999;
+                                            }
+
+                                            .mobview-categories {
+                                                .fa-arrow-left {
+                                                    padding-left: 15px;
+                                                    @include transition-property(transform);
+                                                    @include transition-duration( 0.1s);
+                                                    @include transition-timing-function(ease-out);
+                                                    &:hover,
+                                                    &:active {
+                                                        @include transform(translateX(-4px));
+                                                    }
+                                                }
+                                            } //END of navigation menu
                                             //Start of Clothes Categories
                                             .cloth-cat {
                                                 .flexslider {
@@ -3181,7 +3200,10 @@
                                                     }
                                                 }
                                             } //End of all modals html
-                                            //toastr
+                                            // display message
+                                            .displayMessage {
+                                                padding: 20px
+                                            } //toastr
                                             .toast-error {
                                                 background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGwSURBVEhLtZa9SgNBEMc9sUxxRcoUKSzSWIhXpFMhhYWFhaBg4yPYiWCXZxBLERsLRS3EQkEfwCKdjWJAwSKCgoKCcudv4O5YLrt7EzgXhiU3/4+b2ckmwVjJSpKkQ6wAi4gwhT+z3wRBcEz0yjSseUTrcRyfsHsXmD0AmbHOC9Ii8VImnuXBPglHpQ5wwSVM7sNnTG7Za4JwDdCjxyAiH3nyA2mtaTJufiDZ5dCaqlItILh1NHatfN5skvjx9Z38m69CgzuXmZgVrPIGE763Jx9qKsRozWYw6xOHdER+nn2KkO+Bb+UV5CBN6WC6QtBgbRVozrahAbmm6HtUsgtPC19tFdxXZYBOfkbmFJ1VaHA1VAHjd0pp70oTZzvR+EVrx2Ygfdsq6eu55BHYR8hlcki+n+kERUFG8BrA0BwjeAv2M8WLQBtcy+SD6fNsmnB3AlBLrgTtVW1c2QN4bVWLATaIS60J2Du5y1TiJgjSBvFVZgTmwCU+dAZFoPxGEEs8nyHC9Bwe2GvEJv2WXZb0vjdyFT4Cxk3e/kIqlOGoVLwwPevpYHT+00T+hWwXDf4AJAOUqWcDhbwAAAAASUVORK5CYII=") !important;
                                                 background-color: $darkBrown1;
@@ -3206,4 +3228,8 @@
 
                                             .toast-success button {
                                                 color: $darkBrown1;
+                                            }
+
+                                            .wd200 {
+                                                width: auto;
                                             }

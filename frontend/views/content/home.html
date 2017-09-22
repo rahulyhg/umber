@@ -112,7 +112,7 @@
 </section>
 <!--end of new arrivals-->
 <!--start of Featured Cloth section-->
-<section>
+<section ng-if="featuredVisible">
     <div class="featured relate">
         <div class="container">
             <div class="row">
@@ -124,7 +124,9 @@
                 <flex-slider flex-slide="new in featured track by $index" prev-text="" next-text="" animation="slide" item-width="260" item-margin="25"
                     min-items="3">
                     <li class="relate">
+                        
                         <div class="featured__banner-detail relate">
+                            
                             <img ng-src="{{new.images[0].image | serverimage}}" alt="" class="img-responsive" ui-sref="individual-page({id: new.productId})">
                             <div class="featured__cloth-desc">
                                 <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
@@ -222,9 +224,11 @@
                         </div>
                     </li>
                 </flex-slider>
-                <p class="text-center">
-                    <button class="btn text-uppercase view--more">view more</button>
-                </p>
+                <div ng-show="visible">
+                    <p class="text-center">
+                        <button class="btn text-uppercase view--more">view more</button>
+                    </p>
+                </div>
             </div>
 
         </div>

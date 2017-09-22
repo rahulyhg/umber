@@ -1,0 +1,47 @@
+{
+    "title": "Create DiscountType",
+    "name": "DiscountType",
+    "jsonPage": "viewDiscountType",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": [
+        "DiscountType"
+    ],
+    "fields": [{
+        "name": "Name",
+        "type": "text",
+        "tableRef": "name",
+        "placeholder": "Enter Discount Type Name",
+        "id": "name",
+        "validation": [
+            "required",
+            "trim",
+            "unique"
+        ],
+        "url": ""
+    }],
+    "action": [{
+            "name": "submit",
+            "action": "submitDiscountType",
+            "stateName": {
+                "page": "page",
+                "json": {
+                    "id": "viewDiscountType"
+                }
+            }
+        },
+        {
+            "name": "cancel",
+            "sideMenuRedirect": true,
+            "stateName": {
+                "page": "page",
+                "json": {
+                    "id": "viewDiscountType"
+                }
+            }
+        }
+    ],
+    "apiCall": {
+        "url": "DiscountType/save"
+    }
+}
