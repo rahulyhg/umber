@@ -32,17 +32,16 @@
 <section>
     <div class="cloth-cat">
         <flex-slider flex-slide="cloth in clothCat track by $index" prev-text="" next-text="" animation="slide">
-
             <li>
                 <div class=" cloth-cat__banner-detail relate">
                     <img ng-src="{{cloth.image | serverimage}}" alt="" class="img-responsive">
-                    <div class="get-center text-uppercase">
+                    <!--<div class="get-center text-uppercase">
                         <h1>{{cloth.name}}</h1>
                         <h3>{{cloth.desc}}</h3>
                         <p>
                             <a ng-href="{{cloth.extLink}}"> <button ng-href="{{cloth.extLink}}" class="btn shop--now">Shop Now</button></a>
                         </p>
-                    </div>
+                    </div>-->
                 </div>
             </li>
             <!--<div class="cloth-cat__descrp">
@@ -52,7 +51,6 @@
             </div>-->
         </flex-slider>
     </div>
-
     <!--<div class="flex-container">
 		<div class="block">
 			<img src="img/home/675273.jpg" alt="" class="img-responsive">
@@ -63,7 +61,6 @@
 		<div class="block">5</div>
 	</div>-->
 </section>
-
 <!--start of All Categorie-->
 <section>
     <div class="all-categorie">
@@ -92,13 +89,16 @@
                             <li>
                                 <div class=" new-arrival__banner-detail relate">
                                     <img ng-src="{{newArrival.images[0].image | serverimage}}" alt="" class="img-responsive" ui-sref="individual-page({id: newArrival.productId})">
-
                                     <div class="get-left">
                                         <h3><i class="fa fa-inr" aria-hidden="true"></i>{{newArrival.price}}</h3>
                                         <h4>{{newArrival.productName}}</h4>
+                                        <div class="abslt-buynow-btn"><buttton class="btn buynow--btn text-uppercase">buy now</buttton></div>
                                     </div>
                                     <div class="featured__icon-cart" ng-if="checkInCart(newArrival.productId)">
                                         <i class="fa fa-shopping-cart"></i>
+                                    </div>
+                                    <div class="featured__icon-heart">
+                                        <i ng-class="checkWishlist(new.productId)" aria-hidden="true" class="fa fa-heart-o"></i>
                                     </div>
                                 </div>
                             </li>
@@ -123,9 +123,7 @@
                 <flex-slider flex-slide="new in featured track by $index" prev-text="" next-text="" animation="slide" item-width="260" item-margin="25"
                     min-items="3">
                     <li class="relate">
-
                         <div class="featured__banner-detail relate">
-
                             <img ng-src="{{new.images[0].image | serverimage}}" alt="" class="img-responsive" ui-sref="individual-page({id: new.productId})">
                             <div class="featured__cloth-desc">
                                 <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
@@ -134,17 +132,16 @@
                             <div class="featured__icon-heart">
                                 <i ng-class="checkWishlist(new.productId)" aria-hidden="true"></i>
                             </div>
-
                             <div class="featured__icon-cart" ng-if="checkInCart(new.productId)">
                                 <i class="fa fa-shopping-cart" aria-hidden="true" data-toggle="tooltip" title="Added to cart"></i>
-
                             </div>
+                            <div class="abslt-buynow-btn"><buttton class="btn buy--btn text-uppercase">buy</buttton></div>
                         </div>
                     </li>
                 </flex-slider>
-                <p class="text-center">
+                <div class="viewmore-btn text-center">
                     <button class="btn text-uppercase view--more">view more</button>
-                </p>
+                </div>
             </div>
         </div>
     </div>
@@ -163,7 +160,7 @@
                         <h1 class="text-uppercase cloth-buy--border--line">buy the look</h1>
                     </div>
                     <div class="cloth-buy__desc relate">
-                        <h2>{{getthelook.title}}</h2>
+                        <h2 class="text-uppercase">{{getthelook.title}}</h2>
                         <p class="line--height">{{getthelook.description}}
                         </p>
                         <p>
@@ -171,7 +168,6 @@
                         </p>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -209,7 +205,6 @@
             <div class="sale__title text-center">
                 <h1 class="text-uppercase sale--border--line">sale</h1>
             </div>
-
             <div class="sale__slider">
                 <flex-slider flex-slide="new in sale track by $index" prev-text="" next-text="" animation="slide" item-width="215" item-margin="25"
                     min-items="3">
@@ -219,7 +214,9 @@
                             <div class="sale__cloth-desc">
                                 <h4 class="text-uppercase">{{new.type}}</h4>
                                 <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
+                                 <div class="abslt-buynow-btn"><buttton class="btn buy--btn text-uppercase">buy</buttton></div>
                             </div>
+                         
                         </div>
                     </li>
                 </flex-slider>
@@ -229,12 +226,10 @@
                     </p>
                 </div>
             </div>
-
         </div>
         <div class="absolute">
             <img src="../img/home/Individual_Product Page.png" alt="img" class="img-responsive">
         </div>
     </div>
 </section>
-
 <!--End of Sale section-->
