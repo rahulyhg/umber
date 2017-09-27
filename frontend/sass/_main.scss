@@ -1414,7 +1414,7 @@
                                                             25px);
                                                             @include padding(5px);
                                                             @include position(absolute,
-                                                            null 0% 16.5% null);
+                                                            null 0% 120px null);
                                                             font-size: 16px;
                                                             color: white;
                                                             background-color: $darkBrown1;
@@ -1553,7 +1553,7 @@
                                                     }
                                                     .featured__icon-cart {
                                                         @include position(absolute,
-                                                        null 0 60px null);
+                                                        null 0 115px null);
                                                         @include size(35px,
                                                         35px);
                                                         padding: 6px;
