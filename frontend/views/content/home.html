@@ -132,7 +132,7 @@
                                 <h4 class="text-uppercase">{{new.productName}}</h4>
                             </div>
                             <div class="featured__icon-heart">
-                                <i ng-class="checkWishlist(new.productId)" aria-hidden="true"></i>
+                                <i ng-class="checkWishlist(new.productId)" aria-hidden="true" ng-click="addRemoveToWishlist(new)"></i>
                             </div>
 
                             <div class="featured__icon-cart" ng-if="checkInCart(new.productId)">

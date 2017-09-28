@@ -247,6 +247,7 @@
                         <p>{{empty}}</p>
                         <!--{{displayMessage}}-->
                         <!--<div infinite-scroll='loadMore()' infinite-scroll-distance='3'>-->
+                        <!--<pre> {{products|json}}</pre>-->
                         <div class="row" ng-repeat="row in products" ng-if="view == 'thumbnailView'">
                             <div class="col-md-4" ng-repeat="product in row" ng-init="parentIndex = $index">
                                 <div class="buy-info custom-checkbox">
@@ -258,7 +259,7 @@
                                                 <a ui-sref="individual-page({id: product.productId})">
                                                     <img ng-src="{{image.image|serverimage}}" class="img-rsponsive img1" title="{{product.productName}}">
                                                 </a>
-                                                <i ng-class="checkWishlist(product.productId)" aria-hidden="true"></i>
+                                                <i ng-class="checkWishlist(product.productId)" aria-hidden="true" ng-click="addRemoveToWishlist(product)"></i>
                                                 <img ng-src="{{buy.img | serverimage}}" class="img-responsive" ng-mouseover="displayCntent();" ng-mouseleave="hideContent();">
                                                 <i class="fa fa-shopping-cart" ng-if="checkInCart(product.productId)"></i>
                                             </li>

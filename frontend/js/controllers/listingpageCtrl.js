@@ -76,7 +76,7 @@
      //  }
 
      CategoryService.getCategoryWithParent(data, function (data) {
-         console.log("cat from parentctrl", data)
+         console.log("cat from parentctrl", data.data.data);
          $scope.categories = data.data.data;
          $scope.filteredProducts($scope.categories[0].slug)
      })
@@ -186,7 +186,7 @@
      var appliedFilters = {};
      /*******retriving products based on filters********* */
      $scope.applyFilters = function (key, filter) {
-
+         //  console.log("$.jStorage.get('selectedCategory').slug", $.jStorage.get("selectedCategory").slug);
          appliedFilters = $.jStorage.get('appliedFilters') ? $.jStorage.get('appliedFilters') : {
              appliedFilters: {
                  slug: [],
@@ -364,6 +364,40 @@
                  return "fa fa-heart";
              } else {
                  return "fa fa-heart-o";
+             }
+         }
+     }
+     $scope.addToWishlist = function (prod) {
+         var data = {
+             "product": prod,
+         }
+         myService.addToWishlist(data, function (data) {
+             ModalService.addwishlist();
+         })
+     }
+     $scope.removeWishlist = function (prodId) {
+         var data = {};
+         data.accessToken = $.jStorage.get("accessToken");
+         data.productId = prodId;
+         WishlistService.removeProduct(data, function (data) {
+             console.log(data);
+             $state.reload();
+         })
+     }
+
+     $scope.addRemoveToWishlist = function (product) {
+         if (userId.userId) {
+
+             var result = _.find($scope.wishlist, {
+                 "productId": product.productId
+             });
+             if (result) {
+                 console.log("#######1111111111##if")
+                 $scope.removeWishlist(product.productId);
+             } else {
+                 console.log("#########else")
+
+                 $scope.addToWishlist(product);
              }
          }
      }
