@@ -15,6 +15,15 @@ myApp.factory('CategoryService', function ($http) {
                 data: input,
                 withCredentials: false
             }).then(callback);
-        }
+        },
+        getCategorySlug: function (data, callback) {
+
+            $http({
+                url: adminurl + 'Category/getCategorySlug',
+                data: data,
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
     };
 });

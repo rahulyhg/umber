@@ -34,25 +34,44 @@
      $scope.data1.limit = 9;
      $scope.loadingDisable = false;
      $scope.fetching = false;
+     $scope.categories = [];
 
      $scope.globalsSearch = function () {
          //  console.log("in global search****")
-         ProductService.globalSearch($scope.data1, function (data) {
+         ProductService.searchWithFilters($scope.data1, function (data) {
              if (!_.isEmpty(data.data.data)) {
-                 $scope.product = _.chunk(data.data.data, 3);
+                 console.log("in global search****", data.data.data);
+                 $scope.product = _.chunk(data.data.data.products, 3);
+                 console.log("in global search****", $scope.product);
                  _.each($scope.product, function (n) {
                      $scope.products.push(n);
                  })
+                 $scope.filters = data.data.data.filters;
+                 _.each(data.data.data.products, function (cat) {
+                     $scope.category = cat.category;
+                     CategoryService.getCategorySlug($scope.category, function (data) {
+                         console.log("in global", data.data.data)
+                         $scope.categories.push(data.data.data[0])
+                     })
+                 })
+                 $scope.min = data.data.data.filters.priceRange[0].min;
+                 $scope.max = data.data.data.filters.priceRange[0].max;
                  $scope.loadingDisable = false;
                  $scope.data1.skip = $scope.data1.skip + 9;
-                 if($scope.product.length<=0){
-                    
-                        $scope.empty = "No Products Found"
-                    
+                 if ($scope.product.length <= 0) {
+
+                     $scope.empty = "No Products Found"
+
                  }
              }
-            
-             $scope.searchFilters();
+             var input = {
+                 "slug": $scope.categories[0].slug,
+                 "page": 1
+             }
+             console.log("input", input);
+             $.jStorage.set("selectedCategory", input);
+             //  console.log("$.jStorage.set('selectedCategory', input)", $.jStorage.get('selectedCategory'));
+             //  $scope.searchFilters();
          })
      }
 
@@ -67,8 +86,8 @@
          $scope.pro = _.flattenDeep($scope.products)
          _.each($scope.pro, function (n) {
              data.slug = n.homeCategory.slug;
-
              CategoryService.getCategoryWithParent(data, function (data) {
+                 //  console.log("in searchFilters", data);
                  $scope.categories = data.data.data;
                  $scope.filteredProducts($scope.categories[0].slug)
              })
@@ -182,7 +201,7 @@
      var appliedFilters = {};
      /*******retriving products based on filters********* */
      $scope.applyFilters = function (key, filter) {
-
+         //  console.log("$.jStorage.get('selectedCategory').slug", $.jStorage.get("selectedCategory").slug);
          appliedFilters = $.jStorage.get('appliedFilters') ? $.jStorage.get('appliedFilters') : {
              appliedFilters: {
                  slug: [],
@@ -270,6 +289,7 @@
      }
      /********check selected category******** */
      $scope.checkRadioCategory = function (catid) {
+         //  console.log("catid", catid)
          if ($.jStorage.get("selectedCategory"))
              var selectedId = $.jStorage.get("selectedCategory").slug;
 
@@ -363,7 +383,37 @@
              }
          }
      }
+     $scope.addToWishlist = function (prod) {
+         var data = {
+             "product": prod,
+         }
+         myService.addToWishlist(data, function (data) {
+             ModalService.addwishlist();
+         })
+     }
+     $scope.removeWishlist = function (prodId) {
+         var data = {};
+         data.accessToken = $.jStorage.get("accessToken");
+         data.productId = prodId;
+         WishlistService.removeProduct(data, function (data) {
+             console.log(data);
+             $state.reload();
+         })
+     }
 
+     $scope.addRemoveToWishlist = function (product) {
+         if (userId.userId) {
+
+             var result = _.find($scope.wishlist, {
+                 "productId": product.productId
+             });
+             if (result) {
+                 $scope.removeWishlist(product.productId);
+             } else {
+                 $scope.addToWishlist(product);
+             }
+         }
+     }
      $scope.checkInCart = function (productId) {
 
          if (userId.userId) {
@@ -499,7 +549,7 @@
          text: 'Nice Shirt',
          id: 2
      }];
-     
+
      //   $scope.addgridViewSlide = function () {
      //       slides.push({
 

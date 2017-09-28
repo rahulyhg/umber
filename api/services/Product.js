@@ -825,17 +825,23 @@ var model = {
     // req.body-> {appliedFilters: {key: [val1, val2, ...], key1: [val1, val2, ..], ..}, page: n}
     // Converts this object into queryable object
     getProductsWithFilters: function (filters, callback) {
-        // console.log("Filters: ", filters);
+        console.log("Filters: ", filters);
         if (!filters.page) {
             filters.page = 1;
         }
+        if (filters.appliedFilters) {
+            var slug = filters.appliedFilters.slug[0]
+        } else if (filters.slug) {
+            console.log("@@@@", filters.slug)
+            var slug = filters.slug
+        }
         Category.findOne({
-            slug: filters.appliedFilters.slug[0]
+            slug: slug
         }).exec(function (err, category) {
             if (!_.isEmpty(category)) {
                 async.waterfall([
                         function applyFilters(cbWaterfall1) {
-                            // console.log("!!!!!!filters: ", filters);
+                            console.log("!!!!!!filters: ", category);
 
                             var pipeline = [];
                             var filterType = [];
@@ -849,7 +855,12 @@ var model = {
                             // _.each(filters.appliedFilters.category, function (cat) {
                             //     filterCategory.push(ObjectId(cat));
                             // });
+                            _.each(filters.appliedFilters.category, function (categorys) {
+                                console.log("filters######", categorys)
+                                filterCategory.push(ObjectId(categorys));
+                            });
                             _.each(filters.appliedFilters.type, function (type) {
+                                console.log("filters", type)
                                 filterType.push(ObjectId(type));
                             });
                             _.each(filters.appliedFilters.color, function (color) {
@@ -862,6 +873,7 @@ var model = {
                                 filterCollection.push(ObjectId(collection));
                             });
                             _.each(filters.appliedFilters.size, function (size) {
+                                console.log("size", size)
                                 filterSize.push(ObjectId(size));
                             });
                             _.each(filters.appliedFilters.fabric, function (fabric) {
@@ -873,6 +885,16 @@ var model = {
 
                             if (!_.isEmpty(category)) {
 
+                                pipeline.push({
+                                    $match: {
+                                        "category": {
+                                            $in: filterCategory
+                                        }
+                                    }
+                                });
+                            }
+                            if (!_.isEmpty(filters.appliedFilters.category)) {
+                                // console.log("!_.isEmpty(filters.appliedFilters.category)")
                                 pipeline.push({
                                     $match: {
                                         "category": {
@@ -981,6 +1003,7 @@ var model = {
                                     eachCallback(err, productDetails);
                                 });
                             }, function (err) {
+                                console.log("filteredProductsDetails", filteredProductsDetails)
                                 cbWaterfall2(err, filteredProductsDetails);
                             });
                         },
@@ -1004,6 +1027,7 @@ var model = {
                         }
                     ],
                     function (err, products) {
+                        console.log("!!!!11", products)
                         callback(err, products);
                     });
             } else {
@@ -1293,7 +1317,7 @@ var model = {
         // console.log("**** in global search***", data);
         var pipeLine = Product.getAggregatePipeLine(data);
         Product.aggregate(pipeLine, function (err, found) {
-            // console.log("**** in global search***", found)
+            console.log("**** in global search***", found)
             if (err) {
                 callback(err, "error in mongoose");
             } else {
@@ -1308,8 +1332,95 @@ var model = {
 
     },
 
+
     searchWithFilters: function (data, callback) {
 
+        async.waterfall([
+            function globalsSearch(callback) {
+                // operation to be performed
+                var pipeLine = Product.getAggregatePipeLine(data);
+                Product.aggregate(pipeLine, function (err, found) {
+                    // console.log("**** in global search***", found)
+                    if (err) {
+                        callback(err, null);
+                    } else {
+                        if (_.isEmpty(found)) {
+                            callback(null, []);
+                        } else {
+                            callback(null, found);
+                        }
+                    }
+                });
+            },
+            function filtersP(found, callback) {
+                // operation to be performed
+                // console.log("found11111111111", found);
+                if (!_.isEmpty(found)) {
+                    var appliedFilters = {}
+                    appliedFilters.slug = [];
+                    appliedFilters.category = [];
+                    appliedFilters.type = [];
+                    appliedFilters.style = [];
+                    appliedFilters.color = [];
+                    appliedFilters.priceRange = [];
+                    appliedFilters.collection = [];
+                    appliedFilters.category = [];
+                    appliedFilters.size = [];
+                    appliedFilters.fabric = [];
+                    _.each(found, function (product) {
+                        console.log("product", product)
+                        appliedFilters.slug.push(product.category.slug);
+                        appliedFilters.category.push(product.category._id)
+                        if (product.type) {
+                            appliedFilters.type.push(product.type._id);
+                        }
+                        if (product.style) {
+                            appliedFilters.style.push(product.style);
+                        }
+                        if (product.color) {
+                            appliedFilters.color.push(product.color._id);
+                        }
+                        // if (product.price) {
+                        //     appliedFilters.priceRange = [product.price]
+                        // }
+                        if (product.prodCollection) {
+                            appliedFilters.collection.push(product.prodCollection._id);
+                        }
+                        if (product.size) {
+                            appliedFilters.size.push(product.size._id);
+                        }
+                        if (product.fabric) {
+                            appliedFilters.fabric.push(product.fabric._id);
+                        }
+
+                        var filters = {};
+                        filters.appliedFilters = appliedFilters;
+                        // console.log("filters111", filters);
+                        Product.getProductsWithFilters(filters, function (err, filterProduct) {
+                            if (err) {
+                                callback(err, "error in mongoose");
+                            } else {
+                                if (_.isEmpty(filterProduct)) {
+                                    callback(null, []);
+                                } else {
+
+                                    callback(null, filterProduct);
+                                }
+                            }
+                        })
+                    })
+                }
+                if (_.isEmpty(found)) {
+                    callback(null, [])
+                }
+            }
+        ], function (err, finalResult) {
+            if (err) {
+                console.log('***** error at final response of async.waterfall in searchWithFilters *****', err);
+            } else {
+                callback(null, finalResult);
+            }
+        });
     }
 };
 module.exports = _.assign(module.exports, exports, model);

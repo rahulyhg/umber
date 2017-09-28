@@ -48,6 +48,22 @@ var model = {
         });
     },
 
+    getCategorySlug: function (data, callback) {
+        Category.find({
+            _id: data._id
+        }).exec(function (err, data) {
+            if (err)
+                callback(err, null);
+            else if (data)
+                callback(null, data);
+            else
+                callback({
+                    message: {
+                        data: "Invalid credentials!"
+                    }
+                }, null);
+        })
+    },
     getCategoriesWithParent: function (data, callback) {
         // console.log("Category with parent: ", data);
         HomeCategory.findOne({
