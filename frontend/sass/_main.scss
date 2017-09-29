@@ -1,5 +1,5 @@
                                             /* Bootstrap Variables Goes Here */
-                                            
+
                                             $brand-primary: #0d9dff !default;
                                             $brand-success: #84ce3c !default;
                                             $brand-warning: #ffec39 !default;
@@ -18,33 +18,33 @@
                                                 font-family: 'vadodara-bld';
                                                 src: url('../fonts/HindVadodara-Bold.ttf');
                                             }
-                                            
+
                                             @font-face {
                                                 font-family: 'vadodara-lgt';
                                                 src: url('../fonts/HindVadodara-Light.ttf');
                                             }
-                                            
+
                                             @font-face {
                                                 font-family: 'vadodara-md';
                                                 src: url('../fonts/HindVadodara-Medium.ttf');
                                             }
-                                            
+
                                             @font-face {
                                                 font-family: 'vadodara-regular';
                                                 src: url('../fonts/HindVadodara-Regular.ttf');
                                             }
-                                            
+
                                             @font-face {
                                                 font-family: 'vadodara-semibld';
                                                 src: url('../fonts/HindVadodara-SemiBold.ttf');
                                             }
-                                            
+
                                             @font-face {
                                                 font-family: 'fjalla-reg';
                                                 src: url('../fonts/FjallaOne-Regular.otf');
                                             }
                                             /* Bootstrap Variables Goes Here */
-                                            
+
                                             // Mixins (CSS functions)
                                             @mixin flex($flex,
                                             $flexDirect,
@@ -73,7 +73,7 @@
                                                 align-content: $contentAlign;
                                                 align-self: $selfAlign;
                                             }
-                                            
+
                                             @mixin grid($flex) {
                                                 @if $flex {
                                                     @include flex;
@@ -91,7 +91,7 @@
                                                 font-size: $fontSize;
                                                 font-family: $fontFamily;
                                             }
-                                            
+
                                             @mixin headline($mgTp,
                                             $mgRt,
                                             $mgBt,
@@ -101,11 +101,11 @@
                                                 margin-bottom: $mgBt;
                                                 margin-left: $mgLt;
                                             }
-                                            
+
                                             @mixin inlineBlock($inlineBlock) {
                                                 display: inline-block;
                                             }
-                                            
+
                                             @mixin block($inlineBlock) {
                                                 @if $inlineBlock {
                                                     @include inline-block;
@@ -121,48 +121,49 @@
                                                 overflow-x: hidden!important;
                                                 -webkit-font-smoothing: antialiased !important;
                                                 -moz-font-smooth: always !important;
+                                                @extend .scroll-bar;
                                             }
-                                            
+
                                             img.loading {
                                                 text-align: center;
                                                 opacity: 1;
                                                 width: 32px !important;
                                                 height: auto;
                                             }
-                                            
+
                                             img {
                                                 opacity: 0;
                                                 transition: all 300ms ease;
                                             }
-                                            
+
                                             img.doneLoading {
                                                 opacity: 1;
                                             }
-                                            
+
                                             nav li:hover .dropdown-menu {
                                                 display: block;
                                             }
-                                            
+
                                             .navbar-default .navbar-nav>li>a {
                                                 color: $darkBrown1!important;
                                                 font-size: 20px;
                                             }
-                                            
+
                                             #map img {
                                                 opacity: 1;
                                             }
-                                            
+
                                             a,
                                             .btn,
                                             [ui-sref] {
                                                 cursor: pointer;
                                                 transition: all ease 300ms;
                                             }
-                                            
+
                                             textarea {
                                                 resize: none;
                                             }
-                                            
+
                                             .btn:focus,
                                             .btn.focus,
                                             .btn:active:focus,
@@ -172,7 +173,7 @@
                                                 outline: 0px auto -webkit-focus-ring-color;
                                                 outline-offset: 0px;
                                             }
-                                            
+
                                             footer {
                                                 font-size: 12px;
                                                 background-color: $lightBrown2;
@@ -279,17 +280,17 @@
                                                 border-radius: 0;
                                                 box-shadow: none;
                                             }
-                                            
+
                                             .form-control:focus {
                                                 border-color: $brand-primary;
                                                 outline: 0;
                                                 box-shadow: none;
                                             }
-                                            
+
                                             .form-group {
                                                 position: relative;
                                             }
-                                            
+
                                             .form-invalid {
                                                 color: $brand-danger;
                                                 .form-control {
@@ -300,7 +301,7 @@
                                                     }
                                                 }
                                             }
-                                            
+
                                             .form-submission {
                                                 min-height: 300px;
                                             } //FLEX SLIDER FIXES
@@ -315,20 +316,20 @@
                                                     right: 10px !important;
                                                 }
                                             }
-                                            
+
                                             .content {
                                                 min-height: 450px;
                                             }
-                                            
+
                                             .img-full {
                                                 width: 100%;
                                                 display: block;
                                             }
-                                            
+
                                             header {
                                                 transition: all 300ms ease;
                                             }
-                                            
+
                                             .nav-up {
                                                 transform: translateY(-100%);
                                             } // custom css starts here which uses BEM(Block Element Modifier) 
@@ -337,71 +338,91 @@
                                                 //@include block(true);
                                                 display: inline-block;
                                             }
-                                            
+
                                             .text-capitalize {
                                                 text-transform: capitalize;
                                             }
-                                            
+
                                             .line--height {
                                                 line-height: 1;
                                             }
-                                            
+
                                             .marg0 {
                                                 margin: 0;
                                             }
-                                            
+
                                             .relate {
                                                 position: relative;
                                             }
-                                            
+
                                             .padd0 {
                                                 padding: 0;
                                             }
-                                            
+
                                             .padd-rt0 {
                                                 @include padding(null 0 null null);
                                             }
-                                            
+
                                             .padd-lt0 {
                                                 @include padding(null null null 0);
                                             }
-                                            
+
                                             .padd-lt3 {
                                                 @include padding(null null null 3px);
                                             }
-                                            
+
                                             .width100 {
                                                 width: 100%;
                                             }
-                                            
+
                                             .display-table {
                                                 display: table;
                                                 width: 100%;
                                                 height: 100%;
                                             }
-                                            
+
                                             .display-cell {
                                                 display: table-cell;
                                                 padding: 8px 5px;
                                                 line-height: 1.428571429;
                                             }
-                                            
+
                                             .display-row {
                                                 display: table-row;
                                             }
-                                            
+
                                             .align-middle {
                                                 vertical-align: middle;
                                             }
-                                            
+
                                             .align-top {
                                                 vertical-align: top;
                                             }
-                                            
+
                                             .align-bottom {
                                                 vertical-align: bottom;
                                             }
-                                            
+
+                                            .scroll-bar {
+                                                 ::-webkit-scrollbar {
+                                                    width: 5px;
+                                                }
+                                                 ::-webkit-scrollbar-track {
+                                                    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+                                                    -webkit-border-radius: 10px;
+                                                    border-radius: 10px;
+                                                }
+                                                 ::-webkit-scrollbar-thumb {
+                                                    -webkit-border-radius: 10px;
+                                                    border-radius: 10px;
+                                                    background: $darkBrown1;
+                                                    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+                                                }
+                                                 ::-webkit-scrollbar-thumb:window-inactive {
+                                                    background: rgba(255, 0, 0, 0.4);
+                                                }
+                                            }
+
                                             .btn--brown {
                                                 // @include button-variant($darkBrown1,
                                                 // #ededed,
@@ -419,14 +440,14 @@
                                                     background-color: darken($darkBrown1, 0);
                                                 }
                                             }
-                                            
+
                                             .btn--brownActive {
                                                 color: $white !important;
                                                 font-weight: normal;
                                                 background-color: darken($darkBrown1, 0);
                                                 border: 1px dashed #fff !important;
                                             }
-                                            
+
                                             .border-line {
                                                 position: relative;
                                                 text-align: center;
@@ -449,14 +470,14 @@
                                                     right: 0;
                                                 }
                                             }
-                                            
+
                                             .login-form {
                                                 p.border-line {
                                                     font-size: 20px;
                                                     margin-top: 10px;
                                                 }
                                             }
-                                            
+
                                             .btn-circle {
                                                 @include size(15px,
                                                 15px);
@@ -469,12 +490,12 @@
                                                 color: white;
                                                 background-color: $darkBrown1;
                                             }
-                                            
+
                                             a {
                                                 @include transition(all 0.3s ease 0s);
                                             } // This design is used for plus & minus quantity
                                             /*Note: You need to extend this class by using @extend method */
-                                            
+
                                             .plus-minus-btn {
                                                 .square__bg {
                                                     border: 1px solid $borderColor;
@@ -500,7 +521,7 @@
                                             } //End of  plus & minus quantity
                                             //Drop Down animation 
                                             /*NOTE: extend this class in dropdown's by using @extend */
-                                            
+
                                             .dropdown-hidden-anim {
                                                 display: block;
                                                 visibility: hidden;
@@ -511,7 +532,7 @@
                                                 @include transition(all 0.35s ease);
                                                 z-index: 9999;
                                             }
-                                            
+
                                             .dropdown-visible-anim {
                                                 visibility: visible;
                                                 opacity: 1;
@@ -524,7 +545,7 @@
                                             } //End of Drop Down animation
                                             //Start of Bottom-Border-Line animation
                                             /*NOTE: extend this class for border-bottom-line animation by using @extend */
-                                            
+
                                             .border-btm-hidden-anim {
                                                 content: '';
                                                 opacity: 0;
@@ -537,13 +558,13 @@
                                                 @include transform-origin(right center);
                                                 @include transition(all 0.35s ease 0s);
                                             }
-                                            
+
                                             .border-btm-visible-anim {
                                                 opacity: 1;
                                                 visibility: visible;
                                                 @include transform(scaleX(0.8));
                                             }
-                                            
+
                                             .full-border-hidden-anim-bfr {
                                                 border-bottom: 1px solid rgba(0, 0, 0, 0);
                                                 border-left: 1px solid rgba(0, 0, 0, 0);
@@ -556,7 +577,7 @@
                                                 z-index: 1111;
                                                 box-sizing: border-box;
                                             }
-                                            
+
                                             .full-border-hidden-anim-afr {
                                                 border-top: 1px solid rgba(0, 0, 0, 0);
                                                 border-right: 1px solid rgba(0, 0, 0, 0);
@@ -569,7 +590,7 @@
                                                 z-index: 1111;
                                                 box-sizing: border-box;
                                             }
-                                            
+
                                             .full-border-visible-anim-bfr {
                                                 border-color: $darkBrown1;
                                                 @include transform(translateX(0));
@@ -581,7 +602,7 @@
                                                 @include transition-delay(0s 0.1s);
                                                 @include transition-timing-function(linear linear);
                                             }
-                                            
+
                                             .full-border-visible-anim-afr {
                                                 border-color: $darkBrown1;
                                                 @include transform(translateX(0));
@@ -594,7 +615,7 @@
                                                 @include transition-timing-function(linear linear);
                                             }
                                             /* Pulse */
-                                            
+
                                             @include keyframes( hvr-pulse) {
                                                 25% {
                                                     @include transform(scale(1.1));
@@ -603,7 +624,7 @@
                                                     @include transform(scale(0.9));
                                                 }
                                             }
-                                            
+
                                             .hvr-pulse {
                                                 @include animation-name( hvr-pulse);
                                                 @include animation-duration(1s);
@@ -619,7 +640,7 @@
                                                 appearance: none;
                                                 margin: 0;
                                             }
-                                            
+
                                             .customized-form {
                                                 .form-control {
                                                     height: 45px;
@@ -652,13 +673,13 @@
                                                     }
                                                 }
                                             }
-                                            
+
                                             .btn--login {
                                                 @extend .btn--brown;
                                                 padding: 3px 0;
                                                 font-size: 20px;
                                             }
-                                            
+
                                             .order-table {
                                                 .table-bottom {
                                                     margin-bottom: 12px;
@@ -728,16 +749,16 @@
                                                     }
                                                 }
                                             }
-                                            
+
                                             .fa-angle-down:before {
                                                 content: url('../img/home/down.png');
                                             }
-                                            
+
                                             .fa-dropdown {
                                                 position: absolute;
                                                 bottom: 10px;
                                             }
-                                            
+
                                             .mycart-table {
                                                 @extend .order-table;
                                                 tbody>tr {
@@ -790,7 +811,7 @@
                                                     }
                                                 }
                                                 .mycart-footer {
-                                                    .linking {
+                                                    a.linking {
                                                         text-decoration: none;
                                                         color: #cfcfcf;
                                                     }
@@ -1037,11 +1058,11 @@
                                                     }
                                                 }
                                             }
-                                            
+
                                             .navbar-right>li>a {
                                                 @include navbar-vertical-align(21px);
                                             }
-                                            
+
                                             .dropdown-menu__btn {
                                                 .btn--brown-checkout {
                                                     @extend .btn--brown;
@@ -1051,19 +1072,19 @@
                                                     margin-bottom: 20px;
                                                 }
                                             }
-                                            
+
                                             .side-nav-menu-out {
                                                 @include transform(rotate(0deg) scale(1) skew(0deg) translate(0px,
                                                 -1000px));
                                                 @include transform-origin(center top);
                                                 @include transition(all 0.50s ease);
                                             }
-                                            
+
                                             .side-nav-menu-in {
                                                 @include transform(rotate(0deg) scale(1) skew(0deg) translate(0));
                                                 @include transform-origin(center bottom);
                                             }
-                                            
+
                                             .hamburger-cross {
                                                 // this class is used for X button animation to close side nav
                                                 span:first-child {
@@ -1078,7 +1099,7 @@
                                                     @include transform-origin( 10% 10%);
                                                 }
                                             }
-                                            
+
                                             .side-nav {
                                                 @include padding(35px 0);
                                                 width: 100%;
@@ -1122,15 +1143,14 @@
                                                     @include transition(all 0.3s ease);
                                                     @include transform(scaleX(0));
                                                 }
-                                                
-                                                 .product-categories li a:focus  .underline{
-                                                        width: 85%;
-                                                        border: 1px solid $darkBrown1;
-                                                        @include margin(0 auto);
-                                                        opacity: 1;
-                                                        visibility: visible;
-                                                        @include transform(scaleX(1));
-                                                 }
+                                                .product-categories li a:focus .underline {
+                                                    width: 85%;
+                                                    border: 1px solid $darkBrown1;
+                                                    @include margin(0 auto);
+                                                    opacity: 1;
+                                                    visibility: visible;
+                                                    @include transform(scaleX(1));
+                                                }
                                                 .sub-categorie {
                                                     background: $lightGray1;
                                                     @include padding(0 10px);
@@ -1163,7 +1183,7 @@
                                                 @include transition-duration(0.2s);
                                                 @include transition-timing-function(ease);
                                             }
-                                            
+
                                             .mobview-links-menu-out {
                                                 @include transform(translateX(-1000px));
                                                 @include transform-origin(center left);
@@ -1171,7 +1191,7 @@
                                                 @include transition-duration(0.2s);
                                                 @include transition-timing-function(ease);
                                             }
-                                            
+
                                             .mobview-categories-menu-in {
                                                 @include transform(translateX(0));
                                                 @include transform-origin(right center);
@@ -1180,7 +1200,7 @@
                                                 @include transition-timing-function(ease);
                                                 @include transition-delay(0.1s);
                                             }
-                                            
+
                                             .mobview-categories-menu-out {
                                                 @include transform(translateX(1000px));
                                                 @include transform-origin(right center);
@@ -1188,7 +1208,7 @@
                                                 @include transition-duration(0.2s);
                                                 @include transition-timing-function(ease);
                                             }
-                                            
+
                                             .mobview-side-nav {
                                                 width: 550px;
                                                 height: 100%;
@@ -1199,7 +1219,7 @@
                                                 background-color: $white;
                                                 z-index: 9999;
                                             }
-                                            
+
                                             .mobview-categories {
                                                 .fa-arrow-left {
                                                     padding-left: 15px;
@@ -1406,7 +1426,7 @@
                                                         h3 {
                                                             @include margin(10px null 0 null);
                                                         }
-                                                        h4{
+                                                        h4 {
                                                             @include margin(0 null null null);
                                                         }
                                                         .fa-shopping-cart {
@@ -1532,7 +1552,7 @@
                                                             }
                                                         }
                                                         h4 {
-                                                             max-height: 40px;
+                                                            max-height: 40px;
                                                             color: $darkGray;
                                                             font-family: vadodara-md;
                                                             @include margin(0 null null null);
@@ -1838,7 +1858,7 @@
                                                             }
                                                         }
                                                         h4 {
-                                                                max-height: 40px;
+                                                            max-height: 40px;
                                                             color: $darkGray;
                                                             @include margin(null null 5px null);
                                                         }
@@ -1853,10 +1873,10 @@
                                                         overflow: hidden;
                                                     }
                                                 }
-                                                 .buy--btn{
-                                                      @extend .btn--brown;
-                                                      @include padding(3px 35px);
-                                                 }
+                                                .buy--btn {
+                                                    @extend .btn--brown;
+                                                    @include padding(3px 35px);
+                                                }
                                                 .view--more {
                                                     @extend .btn--brown;
                                                     width: 125px;
@@ -1879,7 +1899,7 @@
                                                 flex: 50%;
                                                 height: 150px;
                                             }
-                                            
+
                                             .block {
                                                 width: 60px;
                                                 /* width: calc(50% - 10px); */
@@ -1936,7 +1956,7 @@
                                                     color: #555554;
                                                 }
                                             }
-                                            
+
                                             .country-selection {
                                                 .fa-angle-down:before {
                                                     position: absolute;
@@ -1945,15 +1965,15 @@
                                                     cursor: pointer;
                                                 }
                                             }
-                                            
+
                                             .content-spacing {
                                                 margin: 40px 0 60px;
                                             }
-                                            
+
                                             .list-checkout {
                                                 padding-left: 70px;
                                             }
-                                            
+
                                             .checkout {
                                                 .content-spacing {
                                                     margin: 45px 0 70px;
@@ -1977,7 +1997,7 @@
                                                     padding: 2px 0;
                                                 }
                                             }
-                                            
+
                                             .social-icons {
                                                 text-align: center;
                                                 .social-icons__list {
@@ -2009,7 +2029,7 @@
                                                     margin-bottom: 9px;
                                                 }
                                             }
-                                            
+
                                             .orCircle {
                                                 @include position(absolute,
                                                 50% null null 50%);
@@ -2034,7 +2054,7 @@
                                                 position: absolute;
                                                 cursor: pointer;
                                             }
-                                            
+
                                             .modal-container {
                                                 padding: 10px 50px 20px; // margin-top: 40px;
                                                 .minHeight {
@@ -2138,14 +2158,14 @@
                                                     }
                                                 }
                                             }
-                                            
+
                                             .btn-login {
                                                 @extend .btn--brown;
                                                 width: 265px;
                                                 padding: 3px 0;
                                                 font-size: 20px;
                                             }
-                                            
+
                                             .modal-container-right {
                                                 @extend .modal-container;
                                                 background: url('../img/home/login.jpg');
@@ -2249,7 +2269,7 @@
                                                     color: #ababab;
                                                 }
                                             }
-                                            
+
                                             .pluse-icon {
                                                 @include position(absolute,
                                                 null null 5% -0.6%);
@@ -2257,7 +2277,7 @@
                                                 auto);
                                                 cursor: pointer;
                                             }
-                                            
+
                                             .compare--btn {
                                                 @extend .btn--brown;
                                                 @include padding(5px 0);
@@ -2271,7 +2291,7 @@
                                                     padding: 0 5px;
                                                 }
                                             }
-                                            
+
                                             .compare-section {
                                                 margin-top: 40px;
                                                 h1 {
@@ -2357,17 +2377,17 @@
                                                 margin-left: 70px;
                                                 margin-top: 50px;
                                             }
-                                            
+
                                             .ext-pad-section {
                                                 // margin-left: 70px;
                                                 border: 1px solid #c0bcbe;
                                             }
-                                            
+
                                             .custom-cancel-head {
                                                 font-weight: bold;
                                                 font-size: 30px;
                                             }
-                                            
+
                                             .cancel-content {
                                                 padding: 5px 20px 5px 36px;
                                                 background-color: #ededed;
@@ -2377,7 +2397,7 @@
                                                 color: #341314;
                                                 font-weight: 400;
                                             }
-                                            
+
                                             .cancel-content-2 {
                                                 padding-left: 60px;
                                                 h4 {
@@ -2387,7 +2407,7 @@
                                                     font-size: 16px;
                                                 }
                                             }
-                                            
+
                                             .cancel-content-1 {
                                                 h4 {
                                                     font-size: 14px;
@@ -2396,7 +2416,7 @@
                                                     font-size: 16px;
                                                 }
                                             }
-                                            
+
                                             .cancel-content-3 {
                                                 h4 {
                                                     font-size: 14px;
@@ -2405,12 +2425,12 @@
                                                     font-size: 16px;
                                                 }
                                             }
-                                            
+
                                             .cancel-table {
                                                 margin-top: 5px;
                                                 border-top: 1px solid #c0bcbe;
                                             }
-                                            
+
                                             .grey-cancel {
                                                 background-color: #ededed;
                                                 font-size: 13px;
@@ -2423,24 +2443,24 @@
                                                     border-top: none!important;
                                                 }
                                             }
-                                            
+
                                             .ord-item {
                                                 width: 15%;
                                                 padding-left: 4px !important;
                                             }
-                                            
+
                                             .wd50 {
                                                 width: 45%;
                                             }
-                                            
+
                                             .wd7 {
                                                 width: 7%;
                                             }
-                                            
+
                                             .wd120 {
                                                 width: 120px;
                                             }
-                                            
+
                                             .cancel-quant {
                                                 border: 1px solid #8e8e8e;
                                                 width: 40px;
@@ -2451,7 +2471,7 @@
                                                 font-size: 20px;
                                                 font-weight: bold;
                                             }
-                                            
+
                                             .checkbox-cancel {
                                                 margin-top: 32px;
                                                 input {
@@ -2459,12 +2479,12 @@
                                                     height: 17px;
                                                 }
                                             }
-                                            
+
                                             .item-order-img {
                                                 width: 120px;
                                                 margin: 10px 28px;
                                             }
-                                            
+
                                             .cancel-desc {
                                                 text-align: left;
                                                 padding-left: 20px;
@@ -2479,7 +2499,7 @@
                                                     margin: 0 0 0px !important;
                                                 }
                                             }
-                                            
+
                                             .cancel-price {
                                                 font-size: 20px;
                                                 p {
@@ -2489,7 +2509,7 @@
                                                     }
                                                 }
                                             }
-                                            
+
                                             .reason-rtn {
                                                 margin-top: 20px;
                                                 ul {
@@ -2516,7 +2536,7 @@
                                                     }
                                                 }
                                             }
-                                            
+
                                             .comment-cancel {
                                                 margin-top: 30px;
                                                 .customized-form {
@@ -2527,7 +2547,7 @@
                                                     }
                                                 }
                                             }
-                                            
+
                                             .cancel-submit {
                                                 color: #ffffff;
                                                 background-color: #341314;
@@ -2539,20 +2559,20 @@
                                                 margin-top: 15px;
                                                 font-size: 15px;
                                             }
-                                            
+
                                             .wish-modal {
                                                 padding: 10px;
                                                 p {
                                                     margin: 0;
                                                 }
                                             }
-                                            
+
                                             .cart-add {
                                                 p {
                                                     padding: 10px 0;
                                                 }
                                             }
-                                            
+
                                             .removes {
                                                 p {
                                                     padding: 20px 0;
@@ -2564,7 +2584,7 @@
                                                 font-family: 'fjalla-reg';
                                                 margin-top: 0;
                                             }
-                                            
+
                                             .linking {
                                                 // For anchor Tag
                                                 font-size: 14px;
@@ -2572,25 +2592,25 @@
                                                 letter-spacing: 1px;
                                                 text-decoration: underline;
                                             }
-                                            
+
                                             .font17 {
                                                 // This class is used for p elemment'font size
                                                 font-size: 17px;
                                             }
-                                            
+
                                             .item-name {
                                                 font-size: 18px;
                                                 font-family: 'vadodara-md';
                                                 color: $darkGray;
                                                 @include margin(15px null 2px null);
                                             }
-                                            
+
                                             .item-code {
                                                 font-size: 13px;
                                                 color: $darkGray;
                                                 font-weight: normal;
                                             }
-                                            
+
                                             .item-cost {
                                                 font-size: 25px;
                                                 color: $darkBrown1;
@@ -2599,23 +2619,23 @@
                                                     margin-right: 5px;
                                                 }
                                             }
-                                            
+
                                             .usrdtl-info {
                                                 color: $darkGray;
                                                 font-size: 16px;
                                             }
-                                            
+
                                             .usrdtl-title {
                                                 .linking {
                                                     color: $darkBrown1;
                                                     margin-left: 10px;
                                                 }
                                             }
-                                            
+
                                             .userdtl-main {
                                                 margin-bottom: 15px;
                                             }
-                                            
+
                                             .usrdtl {
                                                 p {
                                                     margin-bottom: 15px;
@@ -2629,18 +2649,18 @@
                                                     letter-spacing: 0;
                                                 }
                                             }
-                                            
+
                                             .manage-addrs {
                                                 .usr-name {
                                                     font-size: 21px;
                                                 }
                                                 span.city:after {}
                                             }
-                                            
+
                                             .usr-edit-detail {
                                                 margin-bottom: 50px;
                                             }
-                                            
+
                                             .address-edit-btn,
                                             .address-delt-btn,
                                             .save--btn,
@@ -2651,18 +2671,18 @@
                                                 @include padding(3px 12px);
                                                 margin-right: 10px;
                                             }
-                                            
+
                                             .address-edit-btn,
                                             .save--btn {
                                                 width: 70px;
                                             }
-                                            
+
                                             .address-delt-btn,
                                             .delt--btn,
                                             .comnt-submit--btn {
                                                 width: 90px;
                                             }
-                                            
+
                                             .state-dropdown,
                                             .country-dropdown {
                                                 padding-top: 11px;
@@ -2682,18 +2702,22 @@
                                                     color: $darkBrown1;
                                                 }
                                             }
-                                            
+
                                             .state-dropdown-menu,
                                             .country-dropdown-menu {
                                                 width: 100%;
+                                                height: 215px;
                                                 @extend .dropdown-hidden-anim;
+                                                @extend .scroll-bar;
+                                                overflow-y: auto;
+                                                overflow-x: hidden;
                                             }
-                                            
+
                                             .open .state-dropdown-menu,
                                             .open .country-dropdown-menu {
                                                 @extend .dropdown-visible-anim;
                                             }
-                                            
+
                                             .btn--list {
                                                 margin-bottom: 10px;
                                                 padding: 3px 0;
@@ -2708,7 +2732,7 @@
                                                 }
                                             }
                                             /*NOTE:.account-order-table class has been extended in order-detail.html & return-order.html*/
-                                            
+
                                             .account-order-table {
                                                 thead> {
                                                     tr:first-child,
@@ -2780,12 +2804,12 @@
                                                     border-top: 1px solid $borderColor;
                                                 }
                                             }
-                                            
+
                                             .order-list--btn {
                                                 @extend .btn--list;
                                                 margin-right: 15px;
                                             }
-                                            
+
                                             .order-action--btn {
                                                 @extend .btn--list;
                                                 margin-right: 15px;
@@ -2796,11 +2820,11 @@
                                                     border: 1px dashed $white;
                                                 }
                                             }
-                                            
+
                                             p.item-code {
                                                 margin-bottom: 0;
                                             }
-                                            
+
                                             p.item-cost {
                                                 line-height: 1;
                                             } //End of My account(myaccount.html)
@@ -2812,7 +2836,7 @@
                                                 text-transform: uppercase;
                                                 @include margin(25px 0);
                                             }
-                                            
+
                                             .order-details-table {
                                                 // This class has been extended in order-return-table
                                                 @include padding(0 85px 35px);
@@ -2865,7 +2889,7 @@
                                                     margin-bottom: 35px;
                                                 }
                                             }
-                                            
+
                                             .order-return-table,
                                             .order-cancel-table {
                                                 @include form-control-focus($color: $darkBrown1);
@@ -3030,7 +3054,7 @@
                                                     z-index: 1;
                                                 }
                                             }
-                                            
+
                                             .custom-slider {
                                                 margin: 0;
                                                 background: #341314;
@@ -3124,7 +3148,7 @@
                                                     }
                                                 }
                                             }
-                                            
+
                                             .store-location-details {
                                                 @include padding(30px 30px 0px 0px);
                                                 .address {
@@ -3134,18 +3158,18 @@
                                                     margin-bottom: 5px;
                                                 }
                                             }
-                                            
+
                                             .listing-dropdown-menu {
                                                 width: 220px;
                                                 @extend .dropdown-hidden-anim;
                                             }
-                                            
+
                                             .open .listing-dropdown-menu {
                                                 @extend .dropdown-visible-anim;
                                             } //End of store locator.html
                                             // All modals html
                                             /*****NOTE: We can extend this class by using @extend method. Please don't customise the main class(Parent class) .close-modal--btn-circle ****/
-                                            
+
                                             .close-modal--btn-circle {
                                                 @include size(25px,
                                                 25px);
@@ -3158,22 +3182,22 @@
                                                 color: #333;
                                                 background-color: $white;
                                             }
-                                            
+
                                             .close-modal {
                                                 display: inline-block;
                                                 @include position(absolute,
                                                 0 0 null null);
                                             }
-                                            
+
                                             .quickview-modal-size .modal-dialog {
                                                 // Used this class in listing-ctrl.js in modal
                                                 width: 1195px;
                                             }
-                                            
+
                                             .loginModalSize .modal-dialog {
                                                 width: 750px;
                                             }
-                                            
+
                                             .coupon-discount {
                                                 width: 355px;
                                                 margin: 0 auto;
@@ -3228,7 +3252,7 @@
                                                     }
                                                 }
                                             }
-                                            
+
                                             .modal-bottom {
                                                 border: 0px;
                                                 .cancel--btn,
@@ -3236,7 +3260,7 @@
                                                     @extend .btn--brown;
                                                 }
                                             }
-                                            
+
                                             .quick-view-product {
                                                 @include padding(30px 20px);
                                                 .individual-first {
@@ -3265,28 +3289,28 @@
                                                 background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGwSURBVEhLtZa9SgNBEMc9sUxxRcoUKSzSWIhXpFMhhYWFhaBg4yPYiWCXZxBLERsLRS3EQkEfwCKdjWJAwSKCgoKCcudv4O5YLrt7EzgXhiU3/4+b2ckmwVjJSpKkQ6wAi4gwhT+z3wRBcEz0yjSseUTrcRyfsHsXmD0AmbHOC9Ii8VImnuXBPglHpQ5wwSVM7sNnTG7Za4JwDdCjxyAiH3nyA2mtaTJufiDZ5dCaqlItILh1NHatfN5skvjx9Z38m69CgzuXmZgVrPIGE763Jx9qKsRozWYw6xOHdER+nn2KkO+Bb+UV5CBN6WC6QtBgbRVozrahAbmm6HtUsgtPC19tFdxXZYBOfkbmFJ1VaHA1VAHjd0pp70oTZzvR+EVrx2Ygfdsq6eu55BHYR8hlcki+n+kERUFG8BrA0BwjeAv2M8WLQBtcy+SD6fNsmnB3AlBLrgTtVW1c2QN4bVWLATaIS60J2Du5y1TiJgjSBvFVZgTmwCU+dAZFoPxGEEs8nyHC9Bwe2GvEJv2WXZb0vjdyFT4Cxk3e/kIqlOGoVLwwPevpYHT+00T+hWwXDf4AJAOUqWcDhbwAAAAASUVORK5CYII=") !important;
                                                 background-color: $darkBrown1;
                                             }
-                                            
+
                                             .toast-error .toast-title {
                                                 color: white;
                                             }
-                                            
+
                                             .toast-error button {
                                                 color: $darkBrown1;
                                             }
-                                            
+
                                             .toast-success {
                                                 background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGwSURBVEhLtZa9SgNBEMc9sUxxRcoUKSzSWIhXpFMhhYWFhaBg4yPYiWCXZxBLERsLRS3EQkEfwCKdjWJAwSKCgoKCcudv4O5YLrt7EzgXhiU3/4+b2ckmwVjJSpKkQ6wAi4gwhT+z3wRBcEz0yjSseUTrcRyfsHsXmD0AmbHOC9Ii8VImnuXBPglHpQ5wwSVM7sNnTG7Za4JwDdCjxyAiH3nyA2mtaTJufiDZ5dCaqlItILh1NHatfN5skvjx9Z38m69CgzuXmZgVrPIGE763Jx9qKsRozWYw6xOHdER+nn2KkO+Bb+UV5CBN6WC6QtBgbRVozrahAbmm6HtUsgtPC19tFdxXZYBOfkbmFJ1VaHA1VAHjd0pp70oTZzvR+EVrx2Ygfdsq6eu55BHYR8hlcki+n+kERUFG8BrA0BwjeAv2M8WLQBtcy+SD6fNsmnB3AlBLrgTtVW1c2QN4bVWLATaIS60J2Du5y1TiJgjSBvFVZgTmwCU+dAZFoPxGEEs8nyHC9Bwe2GvEJv2WXZb0vjdyFT4Cxk3e/kIqlOGoVLwwPevpYHT+00T+hWwXDf4AJAOUqWcDhbwAAAAASUVORK5CYII=") !important;
                                                 background-color: $darkBrown1;
                                             }
-                                            
+
                                             .toast-success .toast-title {
                                                 color: white;
                                             }
-                                            
+
                                             .toast-success button {
                                                 color: $darkBrown1;
                                             }
-                                            
+
                                             .wd200 {
                                                 width: auto;
                                             }

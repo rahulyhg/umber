@@ -265,14 +265,14 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="row ">
                                                 <div class="customized-form ">
                                                     <div class="form-group ">
                                                         <div class="col-md-10 ">
                                                             <div class=" form-control relate country-selection ">
                                                                 <i class="fa fa-angle-down pull-right " aria-hidden="true "></i>
-                                                                <select ng-model="user.billingAddress.country " ng-init="user.billingAddress.country = 'India'"  class="checkout-drop relate "> 
+                                                                <select ng-model="user.billingAddress.country " ng-init="user.billingAddress.country = 'India'" class="checkout-drop relate "> 
                                                                 <option ng-repeat="country in countries">{{country.name}}</option>
                                                            
                                                             </select>
@@ -313,22 +313,22 @@
                                                 </div>
                                             </div>
                                             <div class="row ">
-                                                    <div class="customized-form ">
-                                                        <div class="form-group ">
-                                                            <div class="col-md-10 ">
-                                                                <input type="text " placeholder="State " ng-model="user.billingAddress.state
+                                                <div class="customized-form ">
+                                                    <div class="form-group ">
+                                                        <div class="col-md-10 ">
+                                                            <input type="text " placeholder="State " ng-model="user.billingAddress.state
                             " class="form-control " ng-required="true" ng-if="user.billingAddress.country != 'India'">
-                            <div  ng-if ="user.billingAddress.country == 'India'" class=" form-control relate country-selection ">
-                                    <i class="fa fa-angle-down pull-right " aria-hidden="true "></i>
-                                    <select ng-model="user.billingAddress.state " ng-init="user.billingAddress.country = 'India'"  class="checkout-drop relate "> 
+                                                            <div ng-if="user.billingAddress.country == 'India'" class=" form-control relate country-selection ">
+                                                                <i class="fa fa-angle-down pull-right " aria-hidden="true "></i>
+                                                                <select ng-model="user.billingAddress.state " ng-init="user.billingAddress.country = 'India'" class="checkout-drop relate "> 
                                     <option ng-repeat="state in states">{{state}}</option>
                                
                                 </select>
-                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
                                         </div>
                                         <div class="col-md-6 ">
                                             <div class="custom-checkbox ">
@@ -393,11 +393,16 @@
                                                 <div class="customized-form ">
                                                     <div class="form-group ">
                                                         <div class="col-md-10 ">
-                                                            <div class=" form-control relate country-selection ">
+                                                            <div class=" form-control relate country-selection " uib-dropdown>
                                                                 <i class="fa fa-angle-down pull-right " aria-hidden="true "></i>
                                                                 <select class="checkout-drop relate " ng-init="user.deliveryAddress.country = 'India'" ng-model="user.deliveryAddress.country "> 
                                                                         <option ng-repeat="country in countries">{{country.name}}</option>
                                                             </select>
+                                                                <!-- <button class="btn country-dropdown--btn text-capitalize" ng-model="user.deliveryAddress.country " type="button" uib-dropdown-toggle>{{user.deliveryAddress.country = 'India'}} <span class="caret"></span></button>
+
+                                                                <ul class=" dropdown-menu text-capitalize" uib-dropdown-menu role="menu" ng-init="user.deliveryAddress.country = 'India'">
+                                                                    <li role="menuitem" ng-repeat="country in countries"><a ng-click="changeCountry(country.name)">{{country.name}}</a></li>
+                                                                </ul> -->
                                                             </div>
                                                             <!--<div class="dropdown country-selection form-control custom-checkbox ">
                                                             <button class="btn checkout-drop dropdown-toggle " type="button
@@ -440,12 +445,12 @@
                                                             <input type="text " placeholder="State" ng-if="user.deliveryAddress.country != 'India'" ng-model="user.deliveryAddress.state
                             " class="form-control " ng-required="true">
 
-                            <div class=" form-control relate country-selection " ng-if="user.deliveryAddress.country=='India'">
-                                    <i class="fa fa-angle-down pull-right " aria-hidden="true "></i>
-                                    <select class="checkout-drop relate " ng-init="user.deliveryAddress.country = 'India'" ng-model="user.deliveryAddress.state "> 
+                                                            <div class=" form-control relate country-selection " ng-if="user.deliveryAddress.country=='India'">
+                                                                <i class="fa fa-angle-down pull-right " aria-hidden="true "></i>
+                                                                <select class="checkout-drop relate " ng-init="user.deliveryAddress.country = 'India'" ng-model="user.deliveryAddress.state "> 
                                             <option ng-repeat="state in states">{{state}}</option>
                                 </select>
-                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
