@@ -174,7 +174,8 @@ myApp.filter('serverimage', function () {
     return function (image) {
         if (image && image !== null) {
            var imgarr= image.split("/")
-            if(imgarr.length>=0){
+        //    console.log("imageserver",imgarr)
+            if(imgarr.length>=2){
             return image;
             }else{
             return adminurl + "upload/readFile?file=" + image;
