@@ -1,12 +1,12 @@
 myApp
-    .controller('HomeCtrl', function ($scope, TemplateService, CartService, WishlistService, NavigationService, ProductService, $timeout, $location) {
+    .controller('HomeCtrl', function ($scope, TemplateService, CartService, $state, myService, ModalService, WishlistService, NavigationService, ProductService, $timeout, $location) {
         $scope.template = TemplateService.getHTML("content/home.html");
         TemplateService.title = "Home"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
         $scope.toggled = function (open) {
             alert('xd');
         };
-        $scope.featuredVisible=true;
+        $scope.featuredVisible = true;
         ProductService.getthelook(function (data) {
             $scope.getthelook = data.data.data;
         })
@@ -37,13 +37,13 @@ myApp
                         })
                     }
                 }
-              
+
 
             })
             WishlistService.getWishlist(userId, function (result) {
-                
+
                 $scope.wishlist = result.data.data;
-            
+
             });
         } else {
             $scope.mycart = []
@@ -61,7 +61,7 @@ myApp
                 }
             }
 
-            
+
         }
         $scope.checkInCart = function (productId) {
             if (userId.userId) {
@@ -114,6 +114,39 @@ myApp
             }
         }
 
+        $scope.addToWishlist = function (prod) {
+            var data = {
+                "product": prod,
+            }
+            myService.addToWishlist(data, function (data) {
+                ModalService.addwishlist();
+            })
+        }
+        $scope.removeWishlist = function (prodId) {
+            var data = {};
+            data.accessToken = $.jStorage.get("accessToken");
+            data.productId = prodId;
+            WishlistService.removeProduct(data, function (data) {
+                console.log(data);
+                $state.reload();
+            })
+        }
+        $scope.addRemoveToWishlist = function (product) {
+            if (userId.userId) {
+
+                var result = _.find($scope.wishlist, {
+                    "productId": product.productId
+                });
+                if (result) {
+                    console.log("#######1111111111##if")
+                    $scope.removeWishlist(product.productId);
+                } else {
+                    console.log("#########else")
+
+                    $scope.addToWishlist(product);
+                }
+            }
+        }
         NavigationService.getEnabledBlogs(function (data) {
             $scope.blogs = data.data.data;
 
@@ -162,12 +195,12 @@ myApp
         }];
         ProductService.getFeatured(function (data) {
             $scope.featured = data.data.data;
-           
-            if(_.isEmpty($scope.featured)){
-                
+
+            if (_.isEmpty($scope.featured)) {
+
                 $scope.featuredVisible = false;
             }
-            
+
         });
     })
     .controller('BuythelookCtrl', function ($scope, $rootScope, $stateParams, ProductService, TemplateService, NavigationService, $timeout, $uibModal, myService, ModalService) {
@@ -175,7 +208,7 @@ myApp
         TemplateService.title = "Buythelook"; //This is the Title of the Website
         //$scope.navigation = NavigationService.getEnabledCtNavigation();
         $scope.currentId = $stateParams.id;
-        
+
         var input = {
             _id: $scope.currentId
         }
@@ -185,7 +218,7 @@ myApp
             $scope.myShirt = [];
             $scope.myShirt11 = [];
             $scope.myShirt = _.chunk($scope.buyshirt, 3);
-            
+
             // console.log("myshirt", $scope.myShirt);
             // _.each($scope.myShirt, function (n) {
             //     $scope.myShirt1 = _.chunk(n, 3);
@@ -195,7 +228,7 @@ myApp
         })
 
         $rootScope.clickfun = function (product) {
-            
+
             $scope.compareproduct = $.jStorage.get('compareproduct') ? $.jStorage.get('compareproduct') : [];
             var result = _.find($scope.compareproduct, {
                 productId: product.productId
@@ -208,9 +241,9 @@ myApp
             } else {
                 $scope.compareproduct.push(product);
                 $.jStorage.set('compareproduct', $scope.compareproduct);
-               
+
             }
-            
+
             if (_.isEmpty($.jStorage.get('compareproduct'))) {
                 $scope.showCheck = false
 
@@ -266,7 +299,7 @@ myApp
         //     });
         // };
         $scope.addWishlist = function (prod) {
-           
+
             var data = {
                 "product": prod,
             }
@@ -306,7 +339,7 @@ myApp
         $scope.navigation = NavigationService.getNavigation();
 
         $scope.products = $.jStorage.get('compareproduct');
-        
+
 
         $scope.removeCompareProduct = function (product) {
             _.remove($scope.products, {
@@ -345,7 +378,7 @@ myApp
         $scope.navigation = NavigationService.getNavigation();
         $scope.formSubmitted = false;
         $scope.submitForm = function (data) {
-            
+
             $scope.formSubmitted = true;
         };
     })
@@ -385,6 +418,6 @@ myApp
     //Example API Controller
     .controller('DemoAPICtrl', function ($scope, TemplateService, apiService, NavigationService, $timeout) {
         apiService.getDemo($scope.formData, function (data) {
-          
+
         });
     });

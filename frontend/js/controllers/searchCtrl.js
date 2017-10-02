@@ -32,102 +32,121 @@
      $scope.product = [];
      $scope.data1.skip = 0;
      $scope.data1.limit = 9;
+     $scope.data1.appliedFilters = {};
      $scope.loadingDisable = false;
      $scope.fetching = false;
+     $scope.categories = [];
+
+     $scope.appliedFilters = {};
+     $scope.appliedFilters.category = [];
+     $scope.appliedFilters.type = []
+     $scope.appliedFilters.collection = []
+     $scope.appliedFilters.size = []
+     $scope.appliedFilters.style = []
+     $scope.appliedFilters.color = []
+     $scope.appliedFilters.fabric = []
+     $scope.appliedFilters.page = 1;
+     $scope.filter = {
+         keyword: $scope.data1.keyword,
+         limit: 9,
+         appliedFilters: $scope.appliedFilters
+     }
+     $scope.filter.skip = 0
 
      $scope.globalsSearch = function () {
-         //  console.log("in global search****")
-         ProductService.globalSearch($scope.data1, function (data) {
+         console.log("in global search****11111", $scope.filter)
+         //  $scope.filter = {
+         //      keyword: $scope.data1.keyword,
+         //      skip: 0,
+         //      limit: 9,
+         //      appliedFilters: $scope.appliedFilters
+         //  }
+         ProductService.searchWithFilters($scope.filter, function (data) {
+             console.log("in global search*222***", data.data.data);
              if (!_.isEmpty(data.data.data)) {
-                 $scope.product = _.chunk(data.data.data, 3);
-                 _.each($scope.product, function (n) {
-                     $scope.products.push(n);
-                 })
-                 $scope.loadingDisable = false;
-                 $scope.data1.skip = $scope.data1.skip + 9;
-                 if($scope.product.length<=0){
-                    
-                        $scope.empty = "No Products Found"
-                    
+                 $scope.product = _.chunk(data.data.data.products, 3);
+                 $scope.products = $scope.product;
+                 //  _.each($scope.product, function (n) {
+                 //      console.log("in global search**4444**", n);
+                 //      $scope.products.push(n);
+                 //      console.log("in global search**55555**", $scope.products);
+                 //  })
+                 $scope.filters = data.data.data
+                 $scope.price = {
+                     max: Math.max.apply(null, data.data.data.price),
+                     min: Math.min.apply(null, data.data.data.price)
                  }
+                 $scope.max = $scope.price.max
+                 $scope.min = $scope.price.min
+                 $scope.loadingDisable = false;
+                 //  $scope.data1.skip = $scope.data1.skip + 9;
+                 $scope.filter.skip = $scope.filter.skip + 9;
+                 if ($scope.product.length <= 0) {
+
+                     $scope.empty = "No Products Found"
+
+                 }
+             } else {
+                 //  $scope.empty = "No Products Found"
+
              }
-            
-             $scope.searchFilters();
+
          })
      }
-
-
 
      $scope.loadMore1 = function () {
          $scope.globalsSearch();
          $scope.loadingDisable = true;
      }
-     $scope.searchFilters = function () {
-         var data = {};
-         $scope.pro = _.flattenDeep($scope.products)
-         _.each($scope.pro, function (n) {
-             data.slug = n.homeCategory.slug;
 
-             CategoryService.getCategoryWithParent(data, function (data) {
-                 $scope.categories = data.data.data;
-                 $scope.filteredProducts($scope.categories[0].slug)
-             })
-         })
-
-     }
-
-     /******getting products based on category******* */
-     $scope.filteredProducts = function (selectedCategory) {
-         $.jStorage.deleteKey("appliedFilters");
-         if ($.jStorage.get("selectedCategory") && selectedCategory != $.jStorage.get("selectedCategory").slug) {
-             $.jStorage.deleteKey("appliedFilters");
-         }
-         var input = {
-             "slug": selectedCategory,
-             "page": 1
-         }
-         $.jStorage.set("selectedCategory", input);
-         /***************retriving filters based on categories and respective filters**************** */
-         ListingService.retriveProductsWithCategory(function (data) {
-
-             if (data.data.data.length == 0) {
-                 $scope.displayMessage = "No Product Found";
-                 //  $scope.products = ""
-
-             } else if (!_.isEmpty(data.data.data)) {
-                 $scope.displayMessage = "";
-                 $scope.products = _.chunk(data.data.data, 3);
-                 //  console.log("productretruved based on category", data);
-
-                 ListingService.retriveFiltersWithCategory(function (data) {
-                     //  console.log("product category on basis of category", data.data.data)
-                     $scope.filters = data.data.data;
-                     $scope.min = $scope.filters.priceRange[0].min;
-                     $scope.max = $scope.filters.priceRange[0].max;
-                     //  console.log("filters", $scope.filters.priceRange[0].max)
-                     $scope.slider_translate = {
-                         minValue: 0,
-                         maxValue: 100,
-                         options: {
-
-                             floor: $scope.filters.priceRange[0].min,
-                             ceil: $scope.filters.priceRange[0].max,
-                             id: 'translate-slider'
-                             // translate: function (value, id, which) {
-                             //     return '$' + value;
-                             // }
-                         }
-                     };
-                 })
-
-             } else {
-                 toastr.error('There was some error', 'Error');
+     $scope.applyFilters = function (key, filter, key1, filter1) {
+         console.log("in apply filters", key, "value", filter, "key1", key1, "filter1", filter1);
+         var result = _.indexOf($scope.appliedFilters[key], filter._id);
+         console.log("check result", result)
+         if (result != -1) {
+             _.pullAt($scope.appliedFilters[key], result);
+         } else {
+             if (!_.isArrayLike($scope.appliedFilters[key])) {
+                 $scope.appliedFilters[key] = [];
              }
-         })
+             if (!_.isArrayLike($scope.appliedFilters[key1])) {
+                 $scope.appliedFilters[key1] = [];
+             }
+             if (!filter._id) {
+                 $scope.appliedFilters[key].push(filter);
+             }
+             $scope.appliedFilters[key].push(filter._id);
+             $scope.appliedFilters[key1].push(filter1);
+             console.log("$$$$$$$$$$$$$in apply filters", $scope.appliedFilters)
+         }
+
+         //  ProductService.searchWithFilters($scope.filter, function (data) {
+         //      console.log("in apply filters searchWithFilters****", data.data);
+         //      if (!_.isEmpty(data.data.data)) {
+         //          $scope.product = _.chunk(data.data.data.products, 3);
+         //          console.log("in global search****", $scope.product);
+         //          _.each($scope.product, function (n) {
+         //              $scope.products.push(n);
+         //          })
+         //          //  $scope.filters = data.data.data
+         //          //  $scope.loadingDisable = false;
+         //          //  $scope.filter.skip = $scope.filter.skip + 9;
+         //          //  filter.skip = $scope.data1.skip
+         //          if ($scope.product.length <= 0) {
+
+         //              $scope.empty = "No Products Found"
+
+         //          }
+         //      } else {
+         //          //  $scope.empty = "No Products Found"
+
+         //      }
+
+         //  })
+         $scope.filter.skip = 0
+         $scope.globalsSearch();
      }
-     if ($.jStorage.get('selectedCategory')) {
-         $scope.filteredProducts($.jStorage.get('selectedCategory').slug)
-     }
+
      $rootScope.clickfun = function (product) {
          console.log(product)
          $scope.compareproduct = $.jStorage.get('compareproduct') ? $.jStorage.get('compareproduct') : [];
@@ -179,64 +198,9 @@
      $scope.gotoComparePage = function () {
          $state.go("compare-products");
      }
-     var appliedFilters = {};
-     /*******retriving products based on filters********* */
-     $scope.applyFilters = function (key, filter) {
 
-         appliedFilters = $.jStorage.get('appliedFilters') ? $.jStorage.get('appliedFilters') : {
-             appliedFilters: {
-                 slug: [],
-                 type: [],
-                 style: [],
-                 color: [],
-                 collection: [],
-                 size: [],
-                 fabric: [],
-             }
-         };
-         console.log(filter, key);
-         var cat = $.jStorage.get("selectedCategory").slug;
-         appliedFilters.appliedFilters.slug = [cat];
-
-         var result = _.indexOf(appliedFilters.appliedFilters[key], filter._id);
-         console.log("check result", result)
-         if (result != -1) {
-             _.pullAt(appliedFilters.appliedFilters[key], result);
-         } else {
-             if (!_.isArrayLike(appliedFilters.appliedFilters[key])) {
-                 appliedFilters.appliedFilters[key] = [];
-             }
-             appliedFilters.appliedFilters[key].push(filter._id);
-         }
-         appliedFilters.page = 1;
-         $.jStorage.set('appliedFilters', appliedFilters)
-
-         console.log("Jstoragefor filters::", $.jStorage.get("appliedFilters"))
-         _.forIn(appliedFilters.appliedFilters, function (val, key, obj) {
-             if (_.isEmpty(val)) {
-                 console.log("key: ", key);
-                 delete appliedFilters.appliedFilters[key];
-             }
-         });
-         console.log("apply filters: ", appliedFilters);
-         ProductService.getProductsWithAppliedFilters(appliedFilters, function (data) {
-             //  console.log("filtersretrived:::", data.data.data);
-             $scope.products = _.chunk(data.data.data.products, 3);
-             $scope.filters = data.data.data.filters;
-
-         })
-
-         //api call
-     }
      /******filters applied automatic if already applied****** */
-     if ($.jStorage.get("appliedFilters")) {
-         ProductService.getProductsWithAppliedFilters($.jStorage.get("appliedFilters"), function (data) {
-             //  console.log("filtersretrived:::", data.data.data);
-             $scope.products = _.chunk(data.data.data.products, 3);
-             $scope.filters = data.data.data.filters;
 
-         })
-     }
      $scope.loadMore = function () {
          var appliedFilters = $.jStorage.get("appliedFilters");
          appliedFilters.page++;
@@ -253,6 +217,16 @@
          console.log(min, max)
      }
 
+     //  var input = {
+     //      "slug": $scope.categories[0].slug,
+     //      "page": 1
+     //  }
+     //  console.log("input", input);
+     //  $.jStorage.set("selectedCategory", input);
+
+
+     //  console.log("$.jStorage.set('selectedCategory', input)", $.jStorage.get('selectedCategory'));
+     //  $scope.searchFilters();
 
      /******checking filters after reload***** */
      $scope.checkFilterStatus = function (key, filter) {
@@ -270,6 +244,7 @@
      }
      /********check selected category******** */
      $scope.checkRadioCategory = function (catid) {
+         //  console.log("catid", catid)
          if ($.jStorage.get("selectedCategory"))
              var selectedId = $.jStorage.get("selectedCategory").slug;
 
@@ -363,7 +338,38 @@
              }
          }
      }
+     $scope.addToWishlist = function (prod) {
+         console.log("addToWishlist", prod);
+         var data = {
+             "product": prod,
+         }
+         myService.addToWishlist(data, function (data) {
+             ModalService.addwishlist();
+         })
+     }
+     $scope.removeWishlist = function (prodId) {
+         var data = {};
+         data.accessToken = $.jStorage.get("accessToken");
+         data.productId = prodId;
+         WishlistService.removeProduct(data, function (data) {
+             console.log(data);
+             $state.reload();
+         })
+     }
 
+     $scope.addRemoveToWishlist = function (product) {
+         if (userId.userId) {
+
+             var result = _.find($scope.wishlist, {
+                 "productId": product.productId
+             });
+             if (result) {
+                 $scope.removeWishlist(product.productId);
+             } else {
+                 $scope.addToWishlist(product);
+             }
+         }
+     }
      $scope.checkInCart = function (productId) {
 
          if (userId.userId) {
@@ -417,7 +423,7 @@
 
      // This function is used to display the modal on quck view button
      $scope.quickviewProduct = function (prod) {
-         //  console.log("prod", prod);
+         console.log("prod", prod);
          $scope.product = prod;
          $scope.sizes = $scope.product.size;
          //  console.log("$scope.sizes", $scope.sizes);
@@ -429,6 +435,7 @@
          //  console.log("$scope.selectedSize", $scope.selectedSize);
          $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
          $scope.selectSize = function (sizeObj) {
+             console.log("$scope.selectedSize", sizeObj);
              $scope.activeButton = sizeObj.name;
              $scope.selectedSize = sizeObj;
              var data = {
@@ -499,7 +506,7 @@
          text: 'Nice Shirt',
          id: 2
      }];
-     
+
      //   $scope.addgridViewSlide = function () {
      //       slides.push({
 

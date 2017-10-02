@@ -143,6 +143,31 @@ var controller = {
         }
     },
 
+    searchWithFilters: function (req, res) {
+        if (req.body) {
+            Product.searchWithFilters(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid request"
+                }
+            });
+        }
+    },
+    productWithCategory: function (req, res) {
+        if (req.body) {
+            Product.productWithCategory(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid request"
+                }
+            });
+        }
+    },
+
     cloneProduct: function (req, res) {
         if (req.body) {
             Product.cloneProduct(req.body, res.callback);

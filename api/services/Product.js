@@ -1,5 +1,6 @@
 // Fields fabric, type, baseColor are converted 
 // into separate schemas for ease of query & retrieval.
+var objectid = require("mongodb").ObjectID;
 var schema = new Schema({
     // This is SKU no
     name: {
@@ -517,6 +518,24 @@ var model = {
         });
     },
 
+    //getProductWithCategory through nav
+    productWithCategory: function (data, callback) {
+        Product.find({
+            category: data.catId
+        }).exec(function (err, product) {
+            if (err) {
+                callback(err, "error in mongoose productWithCategory");
+            } else {
+                if (_.isEmpty(product)) {
+                    callback(null, []);
+                } else {
+
+                    callback(null, product);
+                }
+            }
+        })
+    },
+
     // Function to retrieve specific SKU with specified parameters
     // Parameters include color, size
     getSKUWithParameter: function (data, callback) {
@@ -825,17 +844,23 @@ var model = {
     // req.body-> {appliedFilters: {key: [val1, val2, ...], key1: [val1, val2, ..], ..}, page: n}
     // Converts this object into queryable object
     getProductsWithFilters: function (filters, callback) {
-        // console.log("Filters: ", filters);
+        console.log("Filters: ", filters);
         if (!filters.page) {
             filters.page = 1;
         }
+        if (filters.appliedFilters) {
+            var slug = filters.appliedFilters.slug[0]
+        } else if (filters.slug) {
+            console.log("@@@@", filters.slug)
+            var slug = filters.slug
+        }
         Category.findOne({
-            slug: filters.appliedFilters.slug[0]
+            slug: slug
         }).exec(function (err, category) {
             if (!_.isEmpty(category)) {
                 async.waterfall([
                         function applyFilters(cbWaterfall1) {
-                            // console.log("!!!!!!filters: ", filters);
+                            console.log("!!!!!!filters: ", category);
 
                             var pipeline = [];
                             var filterType = [];
@@ -849,7 +874,12 @@ var model = {
                             // _.each(filters.appliedFilters.category, function (cat) {
                             //     filterCategory.push(ObjectId(cat));
                             // });
+                            _.each(filters.appliedFilters.category, function (categorys) {
+                                console.log("filters######", categorys)
+                                filterCategory.push(ObjectId(categorys));
+                            });
                             _.each(filters.appliedFilters.type, function (type) {
+                                console.log("filters", type)
                                 filterType.push(ObjectId(type));
                             });
                             _.each(filters.appliedFilters.color, function (color) {
@@ -862,6 +892,7 @@ var model = {
                                 filterCollection.push(ObjectId(collection));
                             });
                             _.each(filters.appliedFilters.size, function (size) {
+                                console.log("size", size)
                                 filterSize.push(ObjectId(size));
                             });
                             _.each(filters.appliedFilters.fabric, function (fabric) {
@@ -873,6 +904,16 @@ var model = {
 
                             if (!_.isEmpty(category)) {
 
+                                pipeline.push({
+                                    $match: {
+                                        "category": {
+                                            $in: filterCategory
+                                        }
+                                    }
+                                });
+                            }
+                            if (!_.isEmpty(filters.appliedFilters.category)) {
+                                // console.log("!_.isEmpty(filters.appliedFilters.category)")
                                 pipeline.push({
                                     $match: {
                                         "category": {
@@ -966,6 +1007,7 @@ var model = {
                                     productId: '$_id'
                                 }
                             });
+                            console.log("filter pipeline", pipeline);
                             Product.aggregate(pipeline).
                             skip((filters.page - 1) * Config.maxRow).limit(Config.maxRow).exec(function (err, products) {
                                 console.log("aggregate product in pipeline", products)
@@ -978,6 +1020,7 @@ var model = {
                                 Product.getProductDetails(product, function (err, productDetails) {
                                     if (productDetails && !_.isEmpty(productDetails))
                                         filteredProductsDetails.push(productDetails);
+                                    console.log("filteredProductsDetails", filteredProductsDetails)
                                     eachCallback(err, productDetails);
                                 });
                             }, function (err) {
@@ -1004,6 +1047,7 @@ var model = {
                         }
                     ],
                     function (err, products) {
+                        console.log("!!!!11", products)
                         callback(err, products);
                     });
             } else {
@@ -1293,7 +1337,7 @@ var model = {
         // console.log("**** in global search***", data);
         var pipeLine = Product.getAggregatePipeLine(data);
         Product.aggregate(pipeLine, function (err, found) {
-            // console.log("**** in global search***", found)
+            console.log("**** in global search***", found)
             if (err) {
                 callback(err, "error in mongoose");
             } else {
@@ -1308,8 +1352,1129 @@ var model = {
 
     },
 
-    searchWithFilters: function (data, callback) {
 
-    }
+    searchWithFilters1: function (data, callback) {
+        async.waterfall([
+            function globalsSearch(callback) {
+                // operation to be performed
+                var pipeLine = Product.getAggregatePipeLine(data);
+                Product.aggregate(pipeLine, function (err, found) {
+                    // console.log("**** in global search***", found)
+                    if (err) {
+                        callback(err, null);
+                    } else {
+                        if (_.isEmpty(found)) {
+                            callback(null, []);
+                        } else {
+                            callback(null, found);
+                        }
+                    }
+                });
+            },
+            function filtersP(found, callback) {
+                // operation to be performed
+                // console.log("found11111111111", found);
+                if (!_.isEmpty(found)) {
+                    var appliedFilters = {}
+                    appliedFilters.slug = [];
+                    appliedFilters.category = [];
+                    appliedFilters.type = [];
+                    appliedFilters.style = [];
+                    appliedFilters.color = [];
+                    appliedFilters.priceRange = [];
+                    appliedFilters.collection = [];
+                    appliedFilters.category = [];
+                    appliedFilters.size = [];
+                    appliedFilters.fabric = [];
+                    _.each(found, function (product) {
+                        console.log("product", product)
+                        appliedFilters.slug.push(product.category.slug);
+                        appliedFilters.category.push(product.category._id)
+                        if (product.type) {
+                            appliedFilters.type.push(product.type._id);
+                        }
+                        if (product.style) {
+                            appliedFilters.style.push(product.style);
+                        }
+                        if (product.color) {
+                            appliedFilters.color.push(product.color._id);
+                        }
+                        // if (product.price) {
+                        //     appliedFilters.priceRange = [product.price]
+                        // }
+                        if (product.prodCollection) {
+                            appliedFilters.collection.push(product.prodCollection._id);
+                        }
+                        if (product.size) {
+                            appliedFilters.size.push(product.size._id);
+                        }
+                        if (product.fabric) {
+                            appliedFilters.fabric.push(product.fabric._id);
+                        }
+
+                        var filters = {};
+                        filters.appliedFilters = appliedFilters;
+                        // console.log("filters111", filters);
+                        Product.getProductsWithFilters(filters, function (err, filterProduct) {
+                            if (err) {
+                                callback(err, "error in mongoose");
+                            } else {
+                                if (_.isEmpty(filterProduct)) {
+                                    callback(null, []);
+                                } else {
+
+                                    callback(null, filterProduct);
+                                }
+                            }
+                        })
+                    })
+                }
+                if (_.isEmpty(found)) {
+                    callback(null, [])
+                }
+            }
+        ], function (err, finalResult) {
+            if (err) {
+                console.log('***** error at final response of async.waterfall in searchWithFilters *****', err);
+            } else {
+                callback(null, finalResult);
+            }
+        });
+    },
+
+    searchWithFilters: function (data, callback) {
+        console.log("in serachWithFilters", data)
+        if (!data.page) {
+            data.page = 1;
+        }
+        var pipeline = [];
+        if (!_.isEmpty(data.appliedFilters.category)) {
+            console.log("!_.isEmpty(filters.appliedFilters.category)", data.appliedFilters.category)
+            pipeline.push({
+                "category": {
+                    $in: _.map(data.appliedFilters.category, function (n) {
+                        return mongoose.Types.ObjectId(n)
+                    })
+                }
+            });
+        }
+        if (!_.isEmpty(data.appliedFilters.type)) {
+
+            pipeline.push({
+                "type": {
+                    $in: _.map(data.appliedFilters.type, function (n) {
+                        return mongoose.Types.ObjectId(n)
+                    })
+                }
+            });
+        }
+        if (!_.isEmpty(data.appliedFilters.color)) {
+
+            pipeline.push({
+                "color": {
+                    $in: _.map(data.appliedFilters.color, function (n) {
+                        return mongoose.Types.ObjectId(n)
+                    })
+                },
+            })
+        }
+        if (!_.isEmpty(data.appliedFilters.priceRange)) {
+
+            pipeline.push({
+
+
+                $and: [{
+                    "price": {
+                        $lte: data.appliedFilters.priceRange
+                    }
+                }, {
+                    "price": {
+                        $gte: data.appliedFilters.priceRange
+                    }
+                }]
+            })
+        }
+        if (!_.isEmpty(data.appliedFilters.max)) {
+
+            pipeline.push({
+
+
+                $and: [{
+                    "price": {
+                        $lte: data.appliedFilters.max[0]
+                    }
+                }, {
+                    "price": {
+                        $gte: data.appliedFilters.min[0]
+                    }
+                }]
+            })
+        }
+
+        if (!_.isEmpty(data.appliedFilters.collection)) {
+
+            pipeline.push({
+                "prodCollection": {
+                    $in: _.map(data.appliedFilters.collection, function (n) {
+                        return mongoose.Types.ObjectId(n)
+                    })
+                }
+            });
+        }
+        if (!_.isEmpty(data.appliedFilters.size)) {
+            console.log("in appliedFilters.size", data.appliedFilters.size)
+            pipeline.push({
+                "size": {
+                    $in: _.map(data.appliedFilters.size, function (n) {
+                        return mongoose.Types.ObjectId(n)
+                    })
+                }
+            });
+        }
+        if (!_.isEmpty(data.appliedFilters.fabric)) {
+
+            pipeline.push({
+                "fabric": {
+                    $in: _.map(data.appliedFilters.fabric, function (n) {
+                        return mongoose.Types.ObjectId(n)
+                    })
+                }
+            });
+        }
+        // console.log("$$$in pipeline", pipeline)
+        // var pagestartfrom = (data.pagenumber - 1) * data.pagesize;
+        // var pagestartfrom = 0;
+
+        // console.log("exclude ", objexcludeOutOfStock);
+        // if (data.sortby == "Popular Products") {
+        //     var sort = {
+        //         'popularity': -1
+        //     }
+        // } else if (data.sortby == "Low to High") {
+        //     var sort = {
+        //         'finalPrice': 1
+        //     }
+        // } else if (data.sortby == "High to Low") {
+        //     var sort = {
+        //         'finalPrice': -1
+        //     }
+        // } else {
+        //     var sort = {
+        //         'createdAt': -1
+        //     }
+        // }
+
+        // console.log("pipeline catArr", pipeline)
+        if (!_.isEmpty(pipeline)) {
+            console.log("pipeline is not empty")
+            var lookupArr = [{
+                    $match: {
+                        $and: pipeline
+                    }
+                },
+                {
+                    $lookup: {
+                        "from": "categories",
+                        "localField": "category",
+                        "foreignField": "_id",
+                        "as": "category"
+                    }
+                },
+
+                // Stage 2
+                {
+                    $unwind: {
+                        path: "$category",
+                        preserveNullAndEmptyArrays: true // optional
+
+                    }
+                },
+
+                // Stage 3
+                {
+                    $lookup: {
+                        "from": "homecategories",
+                        "localField": "homeCategory",
+                        "foreignField": "_id",
+                        "as": "homeCategory"
+                    }
+                },
+
+                // Stage 4
+                {
+                    $unwind: {
+                        path: "$homeCategory",
+                        preserveNullAndEmptyArrays: true // optional
+
+                    }
+                },
+
+                // Stage 5
+                {
+                    $lookup: {
+                        "from": "collections",
+                        "localField": "prodCollection",
+                        "foreignField": "_id",
+                        "as": "prodCollection"
+                    }
+                },
+
+                // Stage 6
+                {
+                    $unwind: {
+                        path: "$prodCollection",
+                        preserveNullAndEmptyArrays: true // optional
+
+                    }
+                },
+
+                // Stage 7
+                {
+                    $lookup: {
+                        "from": "basecolors",
+                        "localField": "color",
+                        "foreignField": "_id",
+                        "as": "color"
+                    }
+                },
+
+                // Stage 8
+                {
+                    $unwind: {
+                        path: "$color",
+                        preserveNullAndEmptyArrays: true // optional
+
+                    }
+                },
+
+                // Stage 9
+                {
+                    $lookup: {
+                        "from": "sizes",
+                        "localField": "size",
+                        "foreignField": "_id",
+                        "as": "size"
+                    }
+                },
+
+                // Stage 10
+                {
+                    $unwind: {
+                        path: "$size",
+                        preserveNullAndEmptyArrays: true // optional
+
+                    }
+                },
+
+                // Stage 11
+                {
+                    $lookup: {
+                        "from": "fabrics",
+                        "localField": "fabric",
+                        "foreignField": "_id",
+                        "as": "fabric"
+                    }
+                },
+
+                // Stage 12
+                {
+                    $lookup: {
+                        "from": "types",
+                        "localField": "type",
+                        "foreignField": "_id",
+                        "as": "type"
+                    }
+                },
+
+                // Stage 13
+                {
+                    $lookup: {
+                        "from": "brands",
+                        "localField": "brand",
+                        "foreignField": "_id",
+                        "as": "brand"
+                    }
+                },
+
+                // Stage 14
+                {
+                    $unwind: {
+                        path: "$fabric",
+                        preserveNullAndEmptyArrays: true // optional
+
+                    }
+                },
+
+                // Stage 15
+                {
+                    $unwind: {
+                        path: "$type",
+                        preserveNullAndEmptyArrays: true // optional
+                    }
+                },
+
+                // Stage 16
+                {
+                    $unwind: {
+                        path: "$brand",
+                        preserveNullAndEmptyArrays: true // optional
+                    }
+                }, {
+                    $match: {
+                        $or: [{
+                                "style": {
+                                    $regex: data.keyword,
+                                    $options: "i"
+                                }
+                            }, {
+                                "productName": {
+                                    $regex: data.keyword,
+                                    $options: "i"
+                                }
+                            },
+                            {
+                                "category.name": {
+                                    $regex: data.keyword,
+                                    $options: "i"
+                                }
+                            },
+                            {
+                                "homeCategory.name": {
+                                    $regex: data.keyword,
+                                    $options: "i"
+                                }
+                            },
+                            {
+                                "prodCollection.name": {
+                                    $regex: data.keyword,
+                                    $options: "i"
+                                }
+                            },
+                            {
+                                "color.name": {
+                                    $regex: data.keyword,
+                                    $options: "i"
+                                }
+                            },
+                            {
+                                "size.name": {
+                                    $regex: data.keyword,
+                                    $options: "i"
+                                }
+                            },
+                            {
+                                "fabric.name": {
+                                    $regex: data.keyword,
+                                    $options: "i"
+                                }
+                            },
+                            {
+                                "type.name": {
+                                    $regex: data.keyword,
+                                    $options: "i"
+                                }
+                            },
+                            {
+                                "brand.name": {
+                                    $regex: data.keyword,
+                                    $options: "i"
+                                }
+                            }
+                        ]
+                        // ,
+                        // $and: pipeline
+                    }
+                }
+            ];
+        } else
+        if (_.isEmpty(pipeline)) {
+            console.log("pipeline is empty")
+            var lookupArr = [{
+                    $lookup: {
+                        "from": "categories",
+                        "localField": "category",
+                        "foreignField": "_id",
+                        "as": "category"
+                    }
+                },
+
+                // Stage 2
+                {
+                    $unwind: {
+                        path: "$category",
+                        preserveNullAndEmptyArrays: true // optional
+
+                    }
+                },
+
+                // Stage 3
+                {
+                    $lookup: {
+                        "from": "homecategories",
+                        "localField": "homeCategory",
+                        "foreignField": "_id",
+                        "as": "homeCategory"
+                    }
+                },
+
+                // Stage 4
+                {
+                    $unwind: {
+                        path: "$homeCategory",
+                        preserveNullAndEmptyArrays: true // optional
+
+                    }
+                },
+
+                // Stage 5
+                {
+                    $lookup: {
+                        "from": "collections",
+                        "localField": "prodCollection",
+                        "foreignField": "_id",
+                        "as": "prodCollection"
+                    }
+                },
+
+                // Stage 6
+                {
+                    $unwind: {
+                        path: "$prodCollection",
+                        preserveNullAndEmptyArrays: true // optional
+
+                    }
+                },
+
+                // Stage 7
+                {
+                    $lookup: {
+                        "from": "basecolors",
+                        "localField": "color",
+                        "foreignField": "_id",
+                        "as": "color"
+                    }
+                },
+
+                // Stage 8
+                {
+                    $unwind: {
+                        path: "$color",
+                        preserveNullAndEmptyArrays: true // optional
+
+                    }
+                },
+
+                // Stage 9
+                {
+                    $lookup: {
+                        "from": "sizes",
+                        "localField": "size",
+                        "foreignField": "_id",
+                        "as": "size"
+                    }
+                },
+
+                // Stage 10
+                {
+                    $unwind: {
+                        path: "$size",
+                        preserveNullAndEmptyArrays: true // optional
+
+                    }
+                },
+
+                // Stage 11
+                {
+                    $lookup: {
+                        "from": "fabrics",
+                        "localField": "fabric",
+                        "foreignField": "_id",
+                        "as": "fabric"
+                    }
+                },
+
+                // Stage 12
+                {
+                    $lookup: {
+                        "from": "types",
+                        "localField": "type",
+                        "foreignField": "_id",
+                        "as": "type"
+                    }
+                },
+
+                // Stage 13
+                {
+                    $lookup: {
+                        "from": "brands",
+                        "localField": "brand",
+                        "foreignField": "_id",
+                        "as": "brand"
+                    }
+                },
+
+                // Stage 14
+                {
+                    $unwind: {
+                        path: "$fabric",
+                        preserveNullAndEmptyArrays: true // optional
+
+                    }
+                },
+
+                // Stage 15
+                {
+                    $unwind: {
+                        path: "$type",
+                        preserveNullAndEmptyArrays: true // optional
+                    }
+                },
+
+                // Stage 16
+                {
+                    $unwind: {
+                        path: "$brand",
+                        preserveNullAndEmptyArrays: true // optional
+                    }
+                }, {
+                    $match: {
+                        $or: [{
+                                "style": {
+                                    $regex: data.keyword,
+                                    $options: "i"
+                                }
+                            }, {
+                                "productName": {
+                                    $regex: data.keyword,
+                                    $options: "i"
+                                }
+                            },
+                            {
+                                "category.name": {
+                                    $regex: data.keyword,
+                                    $options: "i"
+                                }
+                            },
+                            {
+                                "homeCategory.name": {
+                                    $regex: data.keyword,
+                                    $options: "i"
+                                }
+                            },
+                            {
+                                "prodCollection.name": {
+                                    $regex: data.keyword,
+                                    $options: "i"
+                                }
+                            },
+                            {
+                                "color.name": {
+                                    $regex: data.keyword,
+                                    $options: "i"
+                                }
+                            },
+                            {
+                                "size.name": {
+                                    $regex: data.keyword,
+                                    $options: "i"
+                                }
+                            },
+                            {
+                                "fabric.name": {
+                                    $regex: data.keyword,
+                                    $options: "i"
+                                }
+                            },
+                            {
+                                "type.name": {
+                                    $regex: data.keyword,
+                                    $options: "i"
+                                }
+                            },
+                            {
+                                "brand.name": {
+                                    $regex: data.keyword,
+                                    $options: "i"
+                                }
+                            }
+                        ]
+                        // ,
+                        // $and: pipeline
+                    }
+                }
+            ];
+        }
+
+        console.log("inpipeline", pipeline);
+        async.parallel([
+                //Start Product
+                function (callback) {
+                    // console.log("data filter",objthickness);
+
+                    Product.aggregate(_.compact(_.concat(lookupArr, [{
+                            '$skip': data.skip
+                        }, {
+                            '$limit': data.limit
+                        }, {
+                            $group: {
+                                _id: "$productId",
+                                style: {
+                                    $first: "$style"
+                                },
+                                style: {
+                                    $first: "$style"
+                                },
+                                productName: {
+                                    $first: "$productName"
+                                },
+                                productId: {
+                                    $first: "$productId"
+                                },
+                                description: {
+                                    $first: "$description"
+                                },
+                                category: {
+                                    $first: "$category.name"
+                                },
+                                price: {
+                                    $first: "$price"
+                                },
+                                homeCategory: {
+                                    $first: "$homeCategory.name"
+                                },
+                                prodCollection: {
+                                    $first: "$prodCollection.name"
+                                },
+                                color: {
+                                    $first: "$color.name"
+                                },
+                                size: {
+                                    $push: "$size"
+                                },
+                                fabric: {
+                                    $first: "$fabric.name"
+                                },
+                                type: {
+                                    $first: "$type.name"
+                                },
+                                brand: {
+                                    $first: "$brand.name"
+                                },
+                                images: {
+                                    $first: "$images"
+                                }
+                            }
+                        }])),
+                        function (err, data1) {
+                            if (err) {
+                                console.log("error : ", err);
+                                callback(null, err);
+                            } else if (data1) {
+                                console.log("data1 length", data1);
+                                if (_.isEmpty(data1)) {
+                                    callback("No data found", null);
+                                } else {
+                                    callback(null, data1);
+                                }
+                            } else {
+                                callback("Invalid data", null);
+                            }
+                        });
+                },
+
+                function (callback) {
+                    Product.aggregate(_.compact(_.concat(lookupArr, [{
+                            $group: {
+                                _id: "$productId",
+                                style: {
+                                    $first: "$style"
+                                },
+                                style: {
+                                    $first: "$style"
+                                },
+                                productName: {
+                                    $first: "$productName"
+                                },
+                                productId: {
+                                    $first: "$productId"
+                                },
+                                description: {
+                                    $first: "$description"
+                                },
+                                category: {
+                                    $first: "$category._id"
+                                },
+                                price: {
+                                    $first: "$price"
+                                },
+                                homeCategory: {
+                                    $first: "$homeCategory._id"
+                                },
+                                prodCollection: {
+                                    $first: "$prodCollection._id"
+                                },
+                                color: {
+                                    $first: "$color._id"
+                                },
+                                size: {
+                                    $push: "$size._id"
+                                },
+                                fabric: {
+                                    $first: "$fabric._id"
+                                },
+                                type: {
+                                    $first: "$type._id"
+                                },
+                                brand: {
+                                    $first: "$brand._id"
+                                },
+                                images: {
+                                    $first: "$images"
+                                },
+                                count: {
+                                    $sum: 1
+                                }
+                            }
+                        }])),
+                        function (err, data2) {
+                            var countData = [];
+                            if (err) {
+                                console.log(err);
+                                callback(err, null);
+                            } else if (data2) {
+                                if (_.isEmpty(data2)) {
+                                    callback("No data found", null);
+                                } else {
+                                    console.log("data2@@@@", data2)
+                                    // countData.push(data2);
+                                    callback(null, data2);
+                                }
+                            } else {
+                                callback("Invalid data", null);
+                            }
+                        });
+                }
+            ],
+            function (err, data3) {
+                if (err) {
+                    callback(err, null);
+                }
+                // callback(null, data3);
+
+                var data4 = {};
+
+                if (_.isEmpty(data3[0])) {
+                    data3[0] = [];
+                } else if (_.isEmpty(data3[0])) {
+                    callback(null, "no data found");
+                } else {
+                    console.log("data3", data3[0]);
+                    data4.products = data3[0];
+                    data4.count = data3[1].count;
+                    var style = [];
+                    var price = [];
+                    var productName = [];
+                    var productId = [];
+                    var categoryIds = [];
+                    var homeCategoryIds = [];
+                    var prodCollectionIds = [];
+                    var colorIds = [];
+                    var sizeIds = [];
+                    var fabricIds = [];
+                    var typeIds = [];
+                    var brandIds = [];
+                    var categoryData = [];
+                    var homeCategoryData = [];
+                    var prodCollectionData = [];
+                    var colorData = [];
+                    var sizeData = [];
+                    var fabricData = [];
+                    var typeData = [];
+                    var brandData = [];
+                    var sizeArr = [];
+
+                    _.map(data3[1], function (key, value) {
+                        key.category = key.category.toString();
+                        key.homeCategory = key.homeCategory.toString();
+                        key.prodCollection = key.prodCollection.toString();
+                        key.color = key.color.toString();
+                        _.each(key.size, function (val) {
+                            sizeArr.push(val.toString())
+                        });
+
+                        if (!_.isEmpty(key.fabric)) {
+                            key.fabric = key.fabric.toString();
+                        }
+
+                        key.type = key.type.toString();
+                        key.brand = key.brand.toString();
+                    })
+
+                    //category = lodash.uniqBy(data3[1].product, 'category');
+                    category = _.uniqBy(data3[1], 'category');
+                    homeCategory = _.uniqBy(data3[1], 'homeCategory');
+                    prodCollection = _.uniqBy(data3[1], 'prodCollection');
+                    color = _.uniqBy(data3[1], 'color');
+                    size = _.uniqBy(sizeArr, 'size');
+                    fabric = _.uniqBy(data3[1], 'fabric');
+                    type = _.uniqBy(data3[1], 'type');
+                    brand = _.uniqBy(data3[1], 'brand');
+                    productId = _.uniqBy(data3[1], 'productId');
+
+
+                    // For removing empty type in array
+                    _.each(category, function (value1) {
+                        categoryIds.push(value1.category);
+                    });
+                    _.each(category, function (value1) {
+                        categoryIds.push(value1.category);
+                    });
+
+                    _.each(homeCategory, function (value2) {
+                        homeCategoryIds.push(value2.homeCategory);
+                    });
+
+                    _.each(prodCollection, function (value3) {
+                        prodCollectionIds.push(value3.prodCollection);
+                    });
+
+                    _.each(color, function (value4) {
+                        colorIds.push(value4.color);
+                    });
+                    // _.each(size, function (value1) {
+                    //     sizeIds.push(value1.size);
+                    // });
+
+                    _.each(fabric, function (value2) {
+                        fabricIds.push(value2.fabric);
+                    });
+
+                    _.each(type, function (value3) {
+                        typeIds.push(value3.type);
+                    });
+
+                    _.each(brand, function (value4) {
+                        brandIds.push(value4.brand);
+                    });
+                    _.each(data3[0], function (value5) {
+                        // var uniqStyle = _.uniqBy(value5, value5.style)
+                        style.push(value5.style);
+                    });
+                    _.each(data3[0], function (value6) {
+                        price.push(value6.price);
+                    });
+
+                    async.parallel([
+                        //Moc
+                        function (callback) {
+                            Category.find({
+                                _id: {
+                                    $in: categoryIds
+                                }
+                            }, {
+                                "_id": 1,
+                                "name": 1
+                            }).sort({
+                                name: 1
+                            }).lean().exec(function (err, data1) {
+                                if (err) {
+                                    console.log("error :", err);
+                                    callback(null, err);
+                                } else if (data1) {
+                                    categoryData.push(data1);
+                                    callback(null, data1);
+                                } else {
+                                    callback("Invalid data", null);
+                                }
+                            });
+                        },
+                        //End Moc
+
+                        //Type
+                        function (callback) {
+                            HomeCategory.find({
+                                _id: {
+                                    $in: homeCategoryIds
+                                }
+                            }, {
+                                "_id": 1,
+                                "name": 1
+                            }).sort({
+                                name: 1
+                            }).lean().exec(function (err, data2) {
+                                if (err) {
+                                    console.log("error :", err);
+                                    callback(null, err);
+                                } else if (data2) {
+                                    homeCategoryData.push(data2);
+                                    callback(null, data2);
+                                } else {
+                                    callback("Invalid data", null);
+                                }
+                            });
+                        },
+                        //End Type
+
+                        //GradesStandards
+                        function (callback) {
+                            Collection.find({
+                                _id: {
+                                    $in: prodCollectionIds
+                                }
+                            }, {
+                                "_id": 1,
+                                "name": 1
+                            }).sort({
+                                name: 1
+                            }).lean().exec(function (err, data3) {
+                                if (err) {
+                                    console.log("error :", err);
+                                    callback(null, err);
+                                } else if (data3) {
+                                    prodCollectionData.push(data3);
+                                    callback(null, data3);
+                                } else {
+                                    callback("Invalid data", null);
+                                }
+                            });
+                        },
+                        //End GradesStandards
+
+                        //Brand
+                        function (callback) {
+                            BaseColor.find({
+                                _id: {
+                                    $in: colorIds
+                                }
+                            }, {
+                                "_id": 1,
+                                "name": 1
+                            }).sort({
+                                name: 1
+                            }).lean().exec(function (err, data4) {
+                                if (err) {
+                                    console.log(err);
+                                    callback(err, null);
+                                } else if (data3) {
+                                    colorData.push(data4);
+                                    callback(null, data4);
+                                } else {
+                                    callback("Invalid data", null);
+                                }
+                            });
+                        },
+                        //End Brand
+
+                        function (callback) {
+                            Size.find({
+                                _id: {
+                                    $in: sizeArr
+                                }
+                            }, {
+                                "_id": 1,
+                                "name": 1
+                            }).sort({
+                                name: 1
+                            }).lean().exec(function (err, data3) {
+                                if (err) {
+                                    console.log("error :", err);
+                                    callback(null, err);
+                                } else if (data3) {
+                                    sizeData.push(data3);
+                                    callback(null, data3);
+                                } else {
+                                    callback("Invalid data", null);
+                                }
+                            });
+                        },
+                        function (callback) {
+                            Fabric.find({
+                                _id: {
+                                    $in: fabricIds
+                                }
+                            }, {
+                                "_id": 1,
+                                "name": 1
+                            }).sort({
+                                name: 1
+                            }).lean().exec(function (err, data3) {
+                                if (err) {
+                                    console.log("error :", err);
+                                    callback(null, err);
+                                } else if (data3) {
+                                    fabricData.push(data3);
+                                    callback(null, data3);
+                                } else {
+                                    callback("Invalid data", null);
+                                }
+                            });
+                        },
+                        function (callback) {
+                            Type.find({
+                                _id: {
+                                    $in: typeIds
+                                }
+                            }, {
+                                "_id": 1,
+                                "name": 1
+                            }).sort({
+                                name: 1
+                            }).lean().exec(function (err, data3) {
+                                if (err) {
+                                    console.log("error :", err);
+                                    callback(null, err);
+                                } else if (data3) {
+                                    typeData.push(data3);
+                                    callback(null, data3);
+                                } else {
+                                    callback("Invalid data", null);
+                                }
+                            });
+                        },
+                        function (callback) {
+                            Brand.find({
+                                _id: {
+                                    $in: brandIds
+                                }
+                            }, {
+                                "_id": 1,
+                                "name": 1
+                            }).sort({
+                                name: 1
+                            }).lean().exec(function (err, data3) {
+                                if (err) {
+                                    console.log("error :", err);
+                                    callback(null, err);
+                                } else if (data3) {
+                                    brandData.push(data3);
+                                    callback(null, data3);
+                                } else {
+                                    callback("Invalid data", null);
+                                }
+                            });
+                        }
+                    ], function (err, data5) {
+                        console.log("****", data5)
+                        data4.category = categoryData[0];
+                        data4.homeCategory = homeCategoryData[0];
+                        data4.prodCollection = prodCollectionData[0];
+                        data4.color = colorData[0];
+                        data4.size = sizeData[0];
+                        data4.fabric = fabricData[0];
+                        data4.type = typeData[0];
+                        data4.brand = brandData[0];
+                        data4.style = style
+                        data4.price = price
+                        data4.productId = productId
+                        if (err) {
+                            callback(err, null);
+                        }
+                        callback(null, data4);
+                    });
+                }
+
+            });
+    },
+
 };
 module.exports = _.assign(module.exports, exports, model);

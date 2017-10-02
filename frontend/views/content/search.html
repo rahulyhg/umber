@@ -26,10 +26,9 @@
                                 <label for="{{category._id}}"> {{category.name}}
                                </label>
                             </div>-->
-                            <div class="checkbox" ng-repeat="category in categories">
+                            <div class="checkbox" ng-repeat="category in filters.category">
                                 <div class="radio">
-                                    <input type="radio" class="form-control" name="category" id="{{category._id}}" ng-checked="checkRadioCategory(category.slug)"
-                                        value="{{category.name}}" ng-click="filteredProducts(category.slug)">
+                                    <input type="radio" class="form-control" name="category" id="{{category._id}}" value="{{category.name}}" ng-click="applyFilters('category',category)">
                                     <label for="{{category._id}}"> <span ></span>{{category.name}}
                                          
                                        </label>
@@ -55,8 +54,8 @@
                                     <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
                                 </h5>
                             </uib-accordion-heading>
-                            <div class="checkbox" ng-repeat="type in filters.types">
-                                <input type="checkbox" id="{{type._id}}" ng-checked="checkFilterStatus('type',type._id)" ng-click="applyFilters('type', type)">
+                            <div class="checkbox" ng-repeat="type in filters.type">
+                                <input type="checkbox" id="{{type._id}}" ng-click="applyFilters('type', type)">
                                 <label for="{{type._id}}">{{type.name}}
                                 </label>
                             </div>
@@ -73,7 +72,7 @@
                             </uib-accordion-heading>
                             <div class="range-slider">
 
-                                <rzslider rz-slider-model="min" rz-slider-high="max" rz-slider-options="slider_translate.options" ng-mouseup="priceSet(min,max)"></rzslider>
+                                <rzslider rz-slider-model="min" rz-slider-high="max" rz-slider-options="slider_translate.options" ng-mouseup="applyFilters('min',min,'max',max)"></rzslider>
                                 <span class="rupee-count pull-left">Rs{{min}}</span>
                                 <!---&#8377;-->
                                 <span class="rupee-count pull-right">Rs{{max}}</span>
@@ -89,8 +88,8 @@
                                     <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
                                 </h5>
                             </uib-accordion-heading>
-                            <div class="checkbox" ng-repeat="collection in filters.collections">
-                                <input type="checkbox" id="{{collection._id}}" ng-checked="checkFilterStatus('collection',collection._id)" ng-click="applyFilters('collection', collection)">
+                            <div class="checkbox" ng-repeat="collection in filters.prodCollection">
+                                <input type="checkbox" id="{{collection._id}}" ng-checked="checkFilterStatus('collection',collection)" ng-click="applyFilters('collection', collection)">
                                 <label for="{{collection._id}}">{{collection.name}}
                                </label>
                             </div>
@@ -105,10 +104,10 @@
                                     <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
                                 </h5>
                             </uib-accordion-heading>
-                            <div class="checkbox" ng-repeat="size in filters.sizes">
+                            <div class="checkbox" ng-repeat="size in filters.size">
                                 <input type="checkbox" id="{{size._id}}" ng-checked="checkFilterStatus('size',size._id)" ng-click="applyFilters('size', size)">
                                 <label for="{{size._id}}">
-                                     {{size.description}}
+                                     {{size.name}}
                                 </label>
                             </div>
                         </div>
@@ -122,7 +121,7 @@
                                     <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
                                 </h5>
                             </uib-accordion-heading>
-                            <div class="checkbox" ng-repeat="style in filters.styles">
+                            <div class="checkbox" ng-repeat="style in filters.style track by $index">
                                 <input type="checkbox" id="{{style}}" ng-checked="checkFilterStatus('style',style)" ng-click="applyFilters('style', style)">
                                 <label for="{{style}}">
                                      {{style}}
@@ -145,7 +144,7 @@
                                     <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
                                 </h5>
                             </uib-accordion-heading>
-                            <div class="checkbox" ng-repeat="baseColor in filters.colors">
+                            <div class="checkbox" ng-repeat="baseColor in filters.color">
                                 <input type="checkbox" id="{{baseColor._id}}" ng-checked="checkFilterStatus('color',baseColor._id)" ng-click="applyFilters('color', baseColor)">
                                 <label for="{{baseColor._id}}">
                                  {{baseColor.name}}
@@ -162,7 +161,7 @@
                                     <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
                                 </h5>
                             </uib-accordion-heading>
-                            <div class="checkbox" ng-repeat="fabric in filters.fabrics">
+                            <div class="checkbox" ng-repeat="fabric in filters.fabric">
 
                                 <input type="checkbox" id="{{fabric._id}}" ng-checked="checkFilterStatus('fabric',fabric._id)" ng-click="applyFilters('fabric', fabric)">
                                 <label for="{{fabric._id}}">
@@ -247,6 +246,7 @@
                         <p>{{empty}}</p>
                         <!--{{displayMessage}}-->
                         <!--<div infinite-scroll='loadMore()' infinite-scroll-distance='3'>-->
+                        <!--<pre> {{products|json}}</pre>-->
                         <div class="row" ng-repeat="row in products" ng-if="view == 'thumbnailView'">
                             <div class="col-md-4" ng-repeat="product in row" ng-init="parentIndex = $index">
                                 <div class="buy-info custom-checkbox">
@@ -258,18 +258,18 @@
                                                 <a ui-sref="individual-page({id: product.productId})">
                                                     <img ng-src="{{image.image|serverimage}}" class="img-rsponsive img1" title="{{product.productName}}">
                                                 </a>
-                                                <i ng-class="checkWishlist(product.productId)" aria-hidden="true"></i>
+                                                <i ng-class="checkWishlist(product.productId)" aria-hidden="true" ng-click="addRemoveToWishlist(product)"></i>
                                                 <img ng-src="{{buy.img | serverimage}}" class="img-responsive" ng-mouseover="displayCntent();" ng-mouseleave="hideContent();">
                                                 <i class="fa fa-shopping-cart" ng-if="checkInCart(product.productId)"></i>
                                             </li>
                                         </flex-slider>
                                         <div class="buy-para">
                                             <h4><i class="fa fa-inr" aria-hidden="true"></i> {{product.price}}</h4>
-                                            <h5>{{product.productName}} <br>{{product.type.name}}</h5>
+                                            <h5>{{product.productName}} <br>{{product.type}}</h5>
                                             <div class="viewSize">
                                                 <p class="inline-block size-text">Sizes:</p>
                                                 <div class="inline-block buy-para__sizes">
-                                                    <p ng-repeat="size in product.sizes"> {{size.name}}</p>
+                                                    <p ng-repeat="size in product.size"> {{size.name}}</p>
                                                 </div>
                                             </div>
                                             <hr>
@@ -319,11 +319,11 @@
                                         <div class="display-cell align-top item-desc">
                                             <div>
                                                 <h4 class="item-name text-uppercase">{{product.productName}}</h4>
-                                                <p class="item-cost"><i class="fa fa-inr"></i>{{product.price}}</p>
+                                                <p class="item-cost"><i class="fa fa-inr"></i>{{product.price}} </p>{{product}}
                                                 <div class="viewSize">
                                                     <p class="inline-block size-text">Sizes:</p>
                                                     <div class="inline-block buy-para__sizes">
-                                                        <p ng-repeat="size in product.sizes">{{size.name}}</p>
+                                                        <p ng-repeat="size in product.size">{{size.name}}</p>
                                                     </div>
                                                 </div>
                                             </div>

@@ -92,13 +92,15 @@
                                     <div class="get-left">
                                         <h3><i class="fa fa-inr" aria-hidden="true"></i>{{newArrival.price}}</h3>
                                         <h4>{{newArrival.productName}}</h4>
-                                        <div class="abslt-buynow-btn"><buttton class="btn buynow--btn text-uppercase">buy now</buttton></div>
+                                        <div class="abslt-buynow-btn">
+                                            <buttton class="btn buynow--btn text-uppercase">buy</buttton>
+                                        </div>
                                     </div>
                                     <div class="featured__icon-cart" ng-if="checkInCart(newArrival.productId)">
                                         <i class="fa fa-shopping-cart"></i>
                                     </div>
                                     <div class="featured__icon-heart">
-                                        <i ng-class="checkWishlist(new.productId)" aria-hidden="true" class="fa fa-heart-o"></i>
+                                        <i ng-class="checkWishlist(newArrival.productId)" aria-hidden="true" ng-click="addRemoveToWishlist(newArrival)"></i>
                                     </div>
                                 </div>
                             </li>
@@ -130,12 +132,14 @@
                                 <h4 class="text-uppercase">{{new.productName}}</h4>
                             </div>
                             <div class="featured__icon-heart">
-                                <i ng-class="checkWishlist(new.productId)" aria-hidden="true"></i>
+                                <i ng-class="checkWishlist(new.productId)" aria-hidden="true" ng-click="addRemoveToWishlist(new)"></i>
                             </div>
                             <div class="featured__icon-cart" ng-if="checkInCart(new.productId)">
                                 <i class="fa fa-shopping-cart" aria-hidden="true" data-toggle="tooltip" title="Added to cart"></i>
                             </div>
-                            <div class="abslt-buynow-btn"><buttton class="btn buy--btn text-uppercase">buy</buttton></div>
+                            <div class="abslt-buynow-btn">
+                                <buttton class="btn buy--btn text-uppercase">buy</buttton>
+                            </div>
                         </div>
                     </li>
                 </flex-slider>
@@ -214,9 +218,11 @@
                             <div class="sale__cloth-desc">
                                 <h4 class="text-uppercase">{{new.type}}</h4>
                                 <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
-                                 <div class="abslt-buynow-btn"><buttton class="btn buy--btn text-uppercase">buy</buttton></div>
+                                <div class="abslt-buynow-btn">
+                                    <buttton class="btn buy--btn text-uppercase">buy</buttton>
+                                </div>
                             </div>
-                         
+
                         </div>
                     </li>
                 </flex-slider>
