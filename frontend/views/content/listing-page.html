@@ -217,7 +217,7 @@
                                 <img ng-src="{{compare.images[0].image | serverimage}}" class="img-responsive">
                                 <p>{{compare.productName}}</p>
                                 <div class="remove-item">
-                                    <button type="button" class="btn btn-circle" ng-click="removeFromCompare(compare.productId)">X</button>
+                                    <button type="button" class="btn btn-circle" ng-click="removeFromCompare(compare.productId)" title="Remove Item">X</button>
                                 </div>
                             </div>
                         </div>
@@ -303,20 +303,23 @@
                             <div class="listview display-table" ng-repeat="product in row">
                                 <div class="display-row">
                                     <div class="display-cell">
-                                        <div uib-carousel active="active" interval="gridViewSlideInterval">
-                                            <div uib-slide ng-repeat="test in gridViewSlide track by test.id" index="test.id">
-                                                <div class="item-img relate">
-                                                    <img ng-src="{{test.img | serverimage}}" alt="Ordered Item" class="img-responsive">
-                                                    <div class="inline-block wishlist-icon">
-                                                        <i class="fa fa-heart"></i>
+                                        <div class="item-slider">
+                                            <div uib-carousel active="active" interval="gridViewSlideInterval">
+                                                <div uib-slide ng-repeat="test in gridViewSlide" >
+                                                    <div class="item-img relate">
+                                                        <img ng-src="{{test.img}}" alt="Ordered Item" class="img-responsive">
+                                                        <div class="inline-block wishlist-icon">
+                                                            <i class="fa fa-heart"></i>
+                                                        </div>
+                                                        <!--<div class="carousel-caption">
+                                                            <h4>test {{slide.id}}</h4>
+                                                            <p>{{slide.text}}</p>
+                                                        </div>-->
                                                     </div>
-                                                    <!--<div class="carousel-caption">
-                                                        <h4>test {{slide.id}}</h4>
-                                                        <p>{{slide.text}}</p>
-                                                    </div>-->
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                         <div class="display-cell align-top item-desc">
                                             <div>
                                                 <h4 class="item-name text-uppercase">{{product.productName}}</h4>
@@ -345,7 +348,7 @@
                                                 <button type="button" class="btn text-uppercase buy--btn" ng-click="quickviewProduct(product)">quick view</button>
                                             </div>
                                         </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>

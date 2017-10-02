@@ -173,7 +173,12 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
 myApp.filter('serverimage', function () {
     return function (image) {
         if (image && image !== null) {
+           var imgarr= image.split("/")
+            if(imgarr.length>=0){
+            return image;
+            }else{
             return adminurl + "upload/readFile?file=" + image;
+            }
         } else {
             return undefined;
         }

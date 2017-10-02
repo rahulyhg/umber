@@ -1258,7 +1258,13 @@
                             margin-bottom: 15px;
                             border: 1px dashed $darkBrown1;
                             p {
+                                height: 25px;
+                                display: -webkit-box;
                                 font-size: 12px;
+                                -webkit-line-clamp: 2;
+                                -webkit-box-orient: vertical;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
                                 line-height: 1;
                                 @include margin(3px 0 0 0);
                             }
