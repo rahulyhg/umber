@@ -202,13 +202,15 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
         };
 
         $scope.getSubCategories = function (category) {
-            var data = {};
+            $scope.hCategory = {};
             $scope.slug = category.slug;
-            data.slug = category.slug;
-            CategoryService.getCategoryWithParent(data, function (data) {
+            $scope.hCategory.slug = category.slug;
+            console.log("getSubCategories", $scope.hCategory);
+            CategoryService.getCategoryWithParent($scope.hCategory, function (data) {
                 console.log("subcatretrived", data);
                 if (data.data.value) {
-                    $scope.subCategories = data.data.data;
+                    $scope.hCategory.subCategories = data.data.data;
+                    console.log("subcatretrived", $scope.hCategory.subCategories[0].slug);
                 } else {
                     console.log("subcatretrived", data.data.error);
                 }

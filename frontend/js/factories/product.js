@@ -61,7 +61,17 @@ myApp.factory('ProductService', function ($http, $timeout) {
             );
         },
 
-
+        productWithCategory: function (input, callback) {
+            console.log("Get products with category: ", input);
+            $http({
+                url: adminurl + 'Product/productWithCategory',
+                data: input,
+                method: 'POST',
+                withCredentials: false
+            }).then(
+                callback
+            );
+        },
 
         getProductsWithFilters: function (input, callback) {
             $http({

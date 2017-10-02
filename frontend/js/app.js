@@ -53,7 +53,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             controller: 'BuythelookCtrl'
         })
         .state('listing-page', {
-            url: "/listing-page/:id",
+            url: "/listing-page/:id/:cat",
             templateUrl: tempateURL,
             Params: {
                 'cat': null

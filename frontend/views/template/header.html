@@ -127,9 +127,9 @@
                 </div>
                 <div class="product-categories inline-block hidden-xs">
                     <ul class="list-unstyled list-inline text-capitalize">
-                        <li ng-repeat="category in categories" >
+                        <li ng-repeat="category in categories">
                             <a href="" ng-click="getSubCategories(category)">{{category.name}} <div class="underline"></div></a>
-                           
+
                         </li>
                         <!--<li ng-click="view = 'casulShirts'" ng-class="{
                         'active': view =='casulShirts'}"><a href="">casual shirts</a>
@@ -145,7 +145,9 @@
                     <!--<div ng-if="view == 'casulShirts'">-->
                         <div class="sub-categorie">
                             <ul class="list-unstyled list-inline">
-                                <li ng-repeat="subCategory in subCategories" ui-sref="listing-page({id: id, cat:subCategory._id})"><a>{{subCategory.name}}</a></li>
+                                <li ng-repeat="subCategory in hCategory.subCategories">
+                                    <a ui-sref="listing-page({id: hCategory.slug, cat:subCategory._id})">{{subCategory.name}}</a>
+                                </li>
                             </ul>
                         </div>
                 </div>

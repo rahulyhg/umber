@@ -21,9 +21,18 @@
      //      $scope.categories = data.data.data;
 
      //  });
+     console.log("stateParam", $stateParams)
      var parentCat = $stateParams.id;
      var data = {
-         slug: $stateParams.id
+         slug: $stateParams.id,
+         catId: $stateParams.cat
+     }
+
+     if ($stateParams.cat) {
+         ProductService.productWithCategory(data, function (data) {
+             console.log("$$$$$$$in categoryProduct", data.data.data)
+             $scope.products = _.chunk(data.data.data, 3);
+         })
      }
 
      $scope.data1 = {};
@@ -392,10 +401,8 @@
                  "productId": product.productId
              });
              if (result) {
-                 console.log("#######1111111111##if")
                  $scope.removeWishlist(product.productId);
              } else {
-                 console.log("#########else")
 
                  $scope.addToWishlist(product);
              }

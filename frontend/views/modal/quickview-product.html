@@ -63,7 +63,7 @@
                             <div class="viewSize inline-block relate" ng-if="arrayCheck">
                                 <h5>SIZE </h5>
                                 <div class="inline-block buy-para__sizes">
-                                    <p ng-click="selectSize(size)" ng-class="{'active':activeButton=={{size.name}}}" ng-repeat="size in sizes">{{size.name}}</p>
+                                    <p ng-click="selectSize(size)" ng-class="{'active':activeButton=={{size.name}}}" ng-repeat="size in product.size">{{size.name}}</p>
                                     <!--<p>38</p>
                                     <p>40</p>
                                     <p>42</p>
@@ -76,7 +76,7 @@
                             <div class="viewSize inline-block relate" ng-if="!arrayCheck">
                                 <h5>SIZE</h5>
                                 <div class="inline-block buy-para__sizes">
-                                    <p ng-click="selectSize(sizes)" ng-class="{'active':activeButton=={{sizes.name}}}">{{sizes.name}}</p>
+                                    <p ng-click="selectSize(product.size)" ng-class="{'active':activeButton=={{product.size}}}">{{product.size}}</p>
                                     <!--<p>38</p>
                                     <p>40</p>
                                     <p>42</p>
@@ -163,7 +163,7 @@
                                                         <div class="inline-block">
                                                             <ul class="list-unstyled">
                                                                 <li>
-                                                                    {{product.brand.name}}
+                                                                    {{product.brand}}
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -177,7 +177,7 @@
                                                         <div class="inline-block">
                                                             <ul class="list-unstyled">
                                                                 <li>
-                                                                    {{product.prodCollection.name}}
+                                                                    {{product.prodCollection}}
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -203,7 +203,7 @@
                                                         <div class="inline-block">
                                                             <ul class="list-unstyled">
                                                                 <li>
-                                                                    {{product.fabric.name}}
+                                                                    {{product.fabric}}
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -217,7 +217,7 @@
                                                         <div class="inline-block">
                                                             <ul class="list-unstyled">
                                                                 <li>
-                                                                    {{product.color.name}}
+                                                                    {{product.color}}
                                                                 </li>
                                                             </ul>
                                                         </div>
