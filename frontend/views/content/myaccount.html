@@ -165,7 +165,8 @@
                                         <div class="col-md-4">
                                             <div class="form-group country-dropdown" uib-dropdown>
 
-                                                <button class="btn country-dropdown--btn text-capitalize" ng-model="userDetails.data.shippingAddresses[0].country" type="button" uib-dropdown-toggle>{{countryButton}} <span class="caret"></span></button>
+                                                <button class="btn country-dropdown--btn text-capitalize" ng-model="userDetails.data.shippingAddresses[0].country" type="button"
+                                                    uib-dropdown-toggle>{{countryButton}} <span class="caret"></span></button>
 
                                                 <ul class="country-dropdown-menu dropdown-menu text-capitalize" uib-dropdown-menu role="menu">
                                                     <li role="menuitem" ng-repeat="country in selectCounteries" ng-click="changeCountry(country.name)"><a>{{country.name}}</a></li>
@@ -175,22 +176,23 @@
                                         </div>
                                         <div class="col-md-4" ng-if="userDetails.data.shippingAddresses[0].country == 'India'">
                                             <div class="form-group country-dropdown" uib-dropdown>
-                                                <button class="btn country-dropdown--btn text-capitalize" ng-model="userDetails.data.shippingAddresses[0].state" type="button" uib-dropdown-toggle>{{stateButton}} <span class="caret"></span></button>
-                                                <ul class="country-dropdown-menu dropdown-menu text-capitalize"  uib-dropdown-menu role="menu">
+                                                <button class="btn country-dropdown--btn text-capitalize" ng-model="userDetails.data.shippingAddresses[0].state" type="button"
+                                                    uib-dropdown-toggle>{{stateButton}} <span class="caret"></span></button>
+                                                <ul class="country-dropdown-menu dropdown-menu text-capitalize" uib-dropdown-menu role="menu">
                                                     <li role="menuitem" ng-repeat="state in selectedState" ng-click="changeState(state)"><a>{{state}}</a></li>
                                                 </ul>
                                                 <!--<input type="text" placeholder="Country" class="form-control" ng-model="userDetails.data.shippingAddresses[0].country">-->
                                             </div>
                                         </div>
                                         <div class="col-md-4" ng-if="userDetails.data.shippingAddresses[0].country != 'India'">
-                                            <div class="form-group" >
+                                            <div class="form-group">
                                                 <input type="text" placeholder="state" class="form-control" ng-model="userDetails.data.shippingAddresses[0].state">
                                             </div>
                                         </div>
 
                                     </div>
-                                    <p><button class="btn save--btn text-uppercase"  ng-click="edit()">save</button>
-                                        <button class="btn delt--btn text-uppercase" ng-click="edit1(shippingAdd._id)">delete</button>
+                                    <p><button class="btn save--btn text-uppercase" ng-click="edit()">save</button>
+                                        <button class="btn delt--btn text-uppercase" ng-click="edit1(shippingAdd._id)">cancel</button>
                                     </p>
                                 </form>
 

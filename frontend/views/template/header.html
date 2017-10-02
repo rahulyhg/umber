@@ -42,10 +42,14 @@
             <div class="collapse navbar-collapse" id="nav-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#"><i class="fa fa-search"></i></a>
-                        <div class="search-box-area">
-                            <form>
-                                <input type="search" placeholder="search" ng-keypress="search($event,keyword)" ng-model="keyword">
-                            </form>
+                        <div ng-init="focus = false; blur=true; active=false ">
+                            <div class="search-box-area" ng-class="{myFocus: focus, myBlur: blur}">
+                                <form>
+                                    <input type="search" placeholder="search" ng-keypress="search($event,keyword)" ng-model="keyword" ng-focus="focus=true; blur=false; "
+                                        ng-blur="focus=false; blur=true; ">
+
+                                </form>
+                            </div>
                         </div>
                     </li>
                     <!--<li ng-click="openWishlistModal10();"><a href=""><i class="fa fa-heart "></i> Wishlist</a></li>-->
@@ -129,7 +133,6 @@
                     <ul class="list-unstyled list-inline text-capitalize">
                         <li ng-repeat="category in categories">
                             <a href="" ng-click="getSubCategories(category)">{{category.name}} <div class="underline"></div></a>
-
                         </li>
                         <!--<li ng-click="view = 'casulShirts'" ng-class="{
                         'active': view =='casulShirts'}"><a href="">casual shirts</a>

@@ -217,7 +217,7 @@
                                 <img ng-src="{{compare.images[0].image | serverimage}}" class="img-responsive">
                                 <p>{{compare.productName}}</p>
                                 <div class="remove-item">
-                                    <button type="button" class="btn btn-circle" ng-click="removeFromCompare(compare.productId)">X</button>
+                                    <button type="button" class="btn btn-circle" ng-click="removeFromCompare(compare.productId)" title="Remove Item">X</button>
                                 </div>
                             </div>
                         </div>
@@ -302,34 +302,31 @@
                         <div ng-if="view == 'listView'" ng-repeat="row in products">
                             <div class="listview display-table" ng-repeat="product in row">
                                 <div class="display-row">
-                                    <div class="display-cell">
-                                        <div uib-carousel active="active" interval="gridViewSlideInterval">
-                                            <div uib-slide ng-repeat="test in gridViewSlide track by test.id" index="test.id">
-                                                <div class="item-img relate">
-                                                    <img ng-src="{{test.img | serverimage}}" alt="Ordered Item" class="img-responsive">
-                                                    <div class="inline-block wishlist-icon">
-                                                        <i class="fa fa-heart"></i>
+                                    <div class="display-cell listview-item-width">
+                                        <div class="listview-item-slider buy-slider">
+                                            <flex-slider flex-slide="product in listViewSlide track by $index" prev-text="" next-text="" animation="slide">
+                                                <li>
+                                                    <div class="listview-item-img">
+                                                        <img ng-src="{{product.img}}" alt="product Image" class="img-responsive">
                                                     </div>
-                                                    <!--<div class="carousel-caption">
-                                                        <h4>test {{slide.id}}</h4>
-                                                        <p>{{slide.text}}</p>
-                                                    </div>-->
+                                                </li>
+                                            </flex-slider>
+                                        </div>
+                                    </div>
+                                    <div class="display-cell listview-item-width align-top item-desc">
+                                        <div>
+                                            <h4 class="item-name text-uppercase">{{product.productName}}</h4>
+                                            <p class="item-cost"><i class="fa fa-inr"></i>{{product.price}}</p>
+                                            <div class="viewSize">
+                                                <p class="inline-block size-text">Sizes:</p>
+                                                <div class="inline-block buy-para__sizes">
+                                                    <p ng-repeat="size in product.sizes">{{size.name}}</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="display-cell align-top item-desc">
-                                            <div>
-                                                <h4 class="item-name text-uppercase">{{product.productName}}</h4>
-                                                <p class="item-cost"><i class="fa fa-inr"></i>{{product.price}}</p>
-                                                <div class="viewSize">
-                                                    <p class="inline-block size-text">Sizes:</p>
-                                                    <div class="inline-block buy-para__sizes">
-                                                        <p ng-repeat="size in product.sizes">{{size.name}}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="display-cell align-top">
+                                    </div>
+                                    <div class="display-cell listview-item-width align-top ">
+                                        <div>
                                             <div class="custom-checkbox">
                                                 <div class="checkbox">
                                                     <input type="checkbox" id="{{product._id}}">
@@ -337,7 +334,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="display-cell text-right align-middle">
+                                    </div>
+                                    <div class="display-cell listview-item-width text-right align-top">
+                                        <div class="listview-item-action">
                                             <div class="btn-group-vertical" role="group">
                                                 <a ui-sref="individual-page({id: product.productId})">
                                                 <button class="btn btn-default buy--btn text-uppercase">buy</button>
@@ -345,7 +344,7 @@
                                                 <button type="button" class="btn text-uppercase buy--btn" ng-click="quickviewProduct(product)">quick view</button>
                                             </div>
                                         </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>

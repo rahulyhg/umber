@@ -353,6 +353,19 @@
                                 width: 175px;
                                 @include padding(3px 0);
                                 margin-bottom: 10px; //  @extend .btn--brownActive;
+                            } //For listview design
+                            .listview-item-slider {
+                                margin-bottom: 0;
+                            }
+                            .listview-item-width {
+                                width: 25%;
+                            }
+                            .listview-item-img {
+                                width: 100px;
+                                @include margin(0 auto);
+                            }
+                            .listview-item-action {
+                                @include margin(15px null);
                             }
                         } // we have kept this class out because it is used in individual page design. so to use this class, write @extend to extend this class in your own class.
                         .buy-para__sizes {
@@ -922,7 +935,13 @@
                             .compare-product-title {
                                 vertical-align: top;
                                 h5 {
+                                    height: 30px;
                                     margin-bottom: 0;
+                                    display: -webkit-box;
+                                    overflow: hidden;
+                                    -webkit-line-clamp: 2;
+                                    -webkit-box-orient: vertical;
+                                    text-overflow: ellipsis;
                                 }
                             }
                             .close-modal {
@@ -1258,7 +1277,13 @@
                             margin-bottom: 15px;
                             border: 1px dashed $darkBrown1;
                             p {
+                                height: 25px;
+                                display: -webkit-box;
                                 font-size: 12px;
+                                -webkit-line-clamp: 2;
+                                -webkit-box-orient: vertical;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
                                 line-height: 1;
                                 @include margin(3px 0 0 0);
                             }
@@ -1375,20 +1400,20 @@
                                             left: 0;
                                         }
                                     }
-                                    &:before{
+                                    &:before {
                                         @include position(absolute,
-                null null 60px -181px);
+                                        null null 60px -181px);
                                     }
                                     &:after {
-                content: '';
-                border-right: 2px dashed $darkBrown1;
-                @include position(absolute,
-                60px 53px null null);
-                height: 277px;
-            }
-            p.line--height {
-                                            text-align: justify;
-                                        }
+                                        content: '';
+                                        border-right: 2px dashed $darkBrown1;
+                                        @include position(absolute,
+                                        60px 53px null null);
+                                        height: 277px;
+                                    }
+                                    p.line--height {
+                                        text-align: justify;
+                                    }
                                 }
                             }
                         }
@@ -1444,9 +1469,7 @@
                             transform: translate(-50%, -50%);
                             z-index: 9999;
                             opacity: 1;
-                        }
-
-                        // .spinner-overlay {
+                        } // .spinner-overlay {
                         //     background: url("../img/inv.png")no-repeat center;
                         //     position: fixed;
                         //     top: 50%;
