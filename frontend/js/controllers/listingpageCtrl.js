@@ -488,10 +488,8 @@
          $scope.displayMessage = "No Product Found";
 
      // Start of UIB Carousel slider's function for gird view
-     $scope.gridViewSlideInterval = 5000;
-     $scope.active = 0;
-     $scope.currentGridViewSlideIndex = 0;
-     $scope.gridViewSlide = [{
+
+     $scope.listViewSlide = [{
          img: 'frontend/img/individual/product-test.jpg',
          text: 'Cool Shirt',
          id: 1
