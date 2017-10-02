@@ -853,29 +853,44 @@
                                                         border-radius: 1px;
                                                         @include transition(all 300ms linear);
                                                     }
-                                                } // .navbar__search-bar {
-                                                //     width: 45%;
-                                                //     margin-left: 70px;
-                                                //     float: left;
-                                                //     .form-group {
-                                                //         margin: 15px 0;
-                                                //     }
-                                                //     .form-control {
-                                                //         @include form-control-focus($darkBrown1);
-                                                //     }
-                                                // }
+                                                }
                                                 li:hover .search-box-area {
                                                     opacity: 1;
                                                     visibility: visible;
                                                     @include transform(scaleX(1));
                                                 }
-                                                .search-box-area {
-                                                    margin-top: -15px;
+                                                /*Used to change when user has not the focus on input element*/
+                                                .myFocus {
+                                                    opacity: 1;
+                                                    visibility: visible; // @include transform(scaleX(1)!important);
+                                                    @include animation-name(slideToRight);
+                                                    @include animation-fill-mode(forwards);
+                                                    @include transform-origin(right center);
+                                                }
+                                                @include keyframes(slideToRight) {
+                                                    from {
+                                                        @include transform(scaleX(0));
+                                                    }
+                                                    to {
+                                                        @include transform(scaleX(1));
+                                                    }
+                                                }
+                                                /*Used to change when user focus has not  on input element*/
+                                                .myBlur {
                                                     @include position(absolute,
-                                                    50% 100% null null);
+                                                    50% 100% null null!important);
                                                     opacity: 0;
                                                     visibility: hidden;
                                                     @include transform(scaleX(0));
+                                                    @include transform-origin(right center);
+                                                    @include transition(all 0.35s ease 0s);
+                                                }
+                                                .search-box-area {
+                                                    margin-top: -15px;
+                                                    @include position(absolute,
+                                                    50% 100% null null); // opacity: 0;
+                                                    // visibility: hidden;
+                                                    // @include transform(scaleX(0));
                                                     @include transform-origin(right center);
                                                     @include transition(all 0.35s ease 0s);
                                                     input {
@@ -896,6 +911,9 @@
                                                             @include transition-delay(initial);
                                                         }
                                                     }
+                                                }
+                                                .search-box-area input:focus .search-box-area {
+                                                    background-color: red;
                                                 }
                                                 .navbar-right {
                                                     margin-right: 15px;
