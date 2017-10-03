@@ -26,6 +26,9 @@ module.exports = [
   'bower_components/angular-loading-bar/build/loading-bar.js',
   'bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js',
   'bower_components/async/dist/async.min.js',
+  'bower_components/angular-ez-plus/js/angular-ezplus.js',
+  'bower_components/ez-plus/src/jquery.ez-plus.js',
+
   //App.js
   'frontend/js/app.js',
 
