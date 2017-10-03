@@ -304,10 +304,10 @@
                                 <div class="display-row">
                                     <div class="display-cell listview-item-width">
                                         <div class="listview-item-slider buy-slider">
-                                            <flex-slider flex-slide="product in listViewSlide track by $index" prev-text="" next-text="" animation="slide">
+                                            <flex-slider flex-slide="image in product.images track by $index" prev-text="" next-text="" animation="slide">
                                                 <li>
                                                     <div class="listview-item-img">
-                                                        <img ng-src="{{product.img}}" alt="product Image" class="img-responsive">
+                                                        <img ng-src="{{image.image | serverimage}}" alt="product Image" class="img-responsive">
                                                     </div>
                                                 </li>
                                             </flex-slider>
@@ -344,15 +344,15 @@
                                                 <button type="button" class="btn text-uppercase buy--btn" ng-click="quickviewProduct(product)">quick view</button>
                                             </div>
                                         </div>
-                                    
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!--<div infinite-scroll="loadMore1()" infinite-scroll-distance="1" infinite-scroll-disabled="loadingDisable">
+                        <!--<div infinite-scroll="loadMore1()" infinite-scroll-distance="1" infinite-scroll-disabled="loadingDisable">
                     </div>-->
+                    </div>
                 </div>
             </div>
-        </div>
 
-    </div>
+        </div>
