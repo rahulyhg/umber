@@ -65,19 +65,22 @@
              console.log("in global search*222***", data.data.data);
              if (!_.isEmpty(data.data.data)) {
                  $scope.product = _.chunk(data.data.data.products, 3);
+                 console.log("in global search*333***", $scope.product);
                  $scope.products = $scope.product;
                  //  _.each($scope.product, function (n) {
                  //      console.log("in global search**4444**", n);
                  //      $scope.products.push(n);
                  //      console.log("in global search**55555**", $scope.products);
                  //  })
+
                  $scope.filters = data.data.data
                  $scope.price = {
                      max: Math.max.apply(null, data.data.data.price),
                      min: Math.min.apply(null, data.data.data.price)
                  }
-                 $scope.max = $scope.price.max
-                 $scope.min = $scope.price.min
+                 console.log('price', $scope.price)
+                 $scope.max = $scope.price.max;
+                 $scope.min = $scope.price.min;
                  $scope.loadingDisable = false;
                  //  $scope.data1.skip = $scope.data1.skip + 9;
                  $scope.filter.skip = $scope.filter.skip + 9;
@@ -86,9 +89,12 @@
                      $scope.empty = "No Products Found"
 
                  }
+             } else if ($scope.filter.appliedFilters.max && $scope.filter.skip == 0 && _.isEmpty(data.data.data)) {
+                 $scope.products = [];
              } else {
                  //  $scope.empty = "No Products Found"
-
+                 //  $scope.products = [];
+                 console.log('enter');
              }
 
          })
@@ -112,13 +118,15 @@
              if (!_.isArrayLike($scope.appliedFilters[key1])) {
                  $scope.appliedFilters[key1] = [];
              }
-             if (!filter._id) {
+             if (filter._id) {
+                 $scope.appliedFilters[key].push(filter._id);
+             } else if (!filter._id) {
                  $scope.appliedFilters[key].push(filter);
              }
-             $scope.appliedFilters[key].push(filter._id);
              $scope.appliedFilters[key1].push(filter1);
              console.log("$$$$$$$$$$$$$in apply filters", $scope.appliedFilters)
          }
+         $.jStorage.set('appliedFilterss', $scope.appliedFilters);
 
          //  ProductService.searchWithFilters($scope.filter, function (data) {
          //      console.log("in apply filters searchWithFilters****", data.data);
@@ -144,11 +152,14 @@
 
          //  })
          $scope.filter.skip = 0
-         $scope.globalsSearch();
+         $timeout(function () {
+             $scope.globalsSearch();
+         }, 1000);
+         //  $scope.globalsSearch();
      }
 
      $rootScope.clickfun = function (product) {
-         console.log(product)
+         console.log("in clickfun", product)
          $scope.compareproduct = $.jStorage.get('compareproduct') ? $.jStorage.get('compareproduct') : [];
          var result = _.find($scope.compareproduct, {
              productId: product.productId
@@ -214,7 +225,9 @@
          })
      }
      $scope.priceSet = function (min, max) {
-         console.log(min, max)
+         console.log(min, max);
+         $scope.applyFilters('min', min, 'max', max)
+
      }
 
      //  var input = {
@@ -230,11 +243,12 @@
 
      /******checking filters after reload***** */
      $scope.checkFilterStatus = function (key, filter) {
-         var appliedFilters = $.jStorage.get("appliedFilters");
+         var appliedFilters = $.jStorage.get("appliedFilterss");
 
          if (appliedFilters) {
-             var result = _.indexOf(appliedFilters.appliedFilters[key], filter);
-
+             //  console.log("appliedFilters", appliedFilters[key], "filter", filter)
+             var result = _.indexOf(appliedFilters[key], filter);
+             //  console.log("result", result)
              if (result != -1) {
                  return true;
              } else {

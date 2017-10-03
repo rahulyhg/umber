@@ -1495,17 +1495,42 @@ var model = {
             })
         }
         if (!_.isEmpty(data.appliedFilters.max)) {
-
+            if (data.appliedFilters.max[data.appliedFilters.max.length - 1] == null) {
+                console.log("data.appliedFilters.max", data.appliedFilters.max);
+                pipeline.push({
+                    $and: [{
+                        "price": {
+                            $lte: data.appliedFilters.max[data.appliedFilters.max.length - 2]
+                        }
+                    }, {
+                        "price": {
+                            $gte: data.appliedFilters.min[data.appliedFilters.min.length - 1]
+                        }
+                    }]
+                })
+            }
+            if (data.appliedFilters.min[data.appliedFilters.min.length - 1] == null) {
+                console.log("data.appliedFilters.max", data.appliedFilters.min);
+                pipeline.push({
+                    $and: [{
+                        "price": {
+                            $lte: data.appliedFilters.max[data.appliedFilters.max.length - 1]
+                        }
+                    }, {
+                        "price": {
+                            $gte: data.appliedFilters.min[data.appliedFilters.min.length - 2]
+                        }
+                    }]
+                })
+            }
             pipeline.push({
-
-
                 $and: [{
                     "price": {
-                        $lte: data.appliedFilters.max[0]
+                        $lte: data.appliedFilters.max[data.appliedFilters.max.length - 1]
                     }
                 }, {
                     "price": {
-                        $gte: data.appliedFilters.min[0]
+                        $gte: data.appliedFilters.min[data.appliedFilters.min.length - 1]
                     }
                 }]
             })

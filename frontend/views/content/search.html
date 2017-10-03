@@ -28,7 +28,8 @@
                             </div>-->
                             <div class="checkbox" ng-repeat="category in filters.category">
                                 <div class="radio">
-                                    <input type="radio" class="form-control" name="category" id="{{category._id}}" value="{{category.name}}" ng-click="applyFilters('category',category)">
+                                    <input type="radio" class="form-control" name="category" id="{{category._id}}" value="{{category.name}}" ng-checked="checkFilterStatus('collection',collection._id)"
+                                        ng-click="applyFilters('category',category)">
                                     <label for="{{category._id}}"> <span ></span>{{category.name}}
                                          
                                        </label>
@@ -55,7 +56,7 @@
                                 </h5>
                             </uib-accordion-heading>
                             <div class="checkbox" ng-repeat="type in filters.type">
-                                <input type="checkbox" id="{{type._id}}" ng-click="applyFilters('type', type)">
+                                <input type="checkbox" id="{{type._id}}" ng-click="applyFilters('type', type)" ng-checked="checkFilterStatus('type',type._id)">
                                 <label for="{{type._id}}">{{type.name}}
                                 </label>
                             </div>
@@ -72,7 +73,7 @@
                             </uib-accordion-heading>
                             <div class="range-slider">
 
-                                <rzslider rz-slider-model="min" rz-slider-high="max" rz-slider-options="slider_translate.options" ng-mouseup="applyFilters('min',min,'max',max)"></rzslider>
+                                <rzslider rz-slider-model="min" rz-slider-high="max" ng-mouseup="priceSet(min,max)"></rzslider>
                                 <span class="rupee-count pull-left">Rs{{min}}</span>
                                 <!---&#8377;-->
                                 <span class="rupee-count pull-right">Rs{{max}}</span>
@@ -89,7 +90,7 @@
                                 </h5>
                             </uib-accordion-heading>
                             <div class="checkbox" ng-repeat="collection in filters.prodCollection">
-                                <input type="checkbox" id="{{collection._id}}" ng-checked="checkFilterStatus('collection',collection)" ng-click="applyFilters('collection', collection)">
+                                <input type="checkbox" id="{{collection._id}}" ng-checked="checkFilterStatus('collection',collection._id)" ng-click="applyFilters('collection', collection)">
                                 <label for="{{collection._id}}">{{collection.name}}
                                </label>
                             </div>
@@ -213,7 +214,7 @@
                     <div class="row">
                         <div class="col-md-3" ng-repeat="compare in compareproduct track by $index">
                             <div class="compare-img-list relate">
-                                <img ng-src="{{compare.images[0].image}}" class="img-responsive">
+                                <img ng-src="{{compare.images[0].image|serverimage}}" class="img-responsive">
                                 <p>{{compare.productName}}</p>
                                 <div class="remove-item">
                                     <button type="button" class="btn btn-circle" ng-click="removeFromCompare(compare.productId)">X</button>
