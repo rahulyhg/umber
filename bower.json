@@ -64,7 +64,8 @@
     "angular-ui-swiper": "^2.3.6",
     "textAngular": "^1.5.16",
     "angularjs-slider": "^6.1.1",
-    "angular-loading-bar": "^0.9.0"
+    "angular-loading-bar": "^0.9.0",
+    "angular-ez-plus": "^1.2.1"
   },
   "resolutions": {
     "angular": "1.6.4"

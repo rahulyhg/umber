@@ -19,7 +19,7 @@
         "tableRef": "image",
         "placeholder": "Enter Image Link",
         "id": "imgLink",
-        "size": "1920 X 1080",
+        "size": "1600 X 750",
         "option": "single",
         "view": true,
         "validation": ["required", "trim", "unique"],

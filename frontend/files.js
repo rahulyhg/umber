@@ -26,6 +26,8 @@ module.exports = [
   'bower_components/angular-loading-bar/build/loading-bar.js',
   'bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js',
   'bower_components/async/dist/async.min.js',
+  'bower_components/angular-ez-plus/js/angular-ezplus.js',
+  "http://www.elevateweb.co.uk/wp-content/themes/radial/jquery.elevatezoom.min.js" ,
   //App.js
   'frontend/js/app.js',
 

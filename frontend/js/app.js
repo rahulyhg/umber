@@ -56,6 +56,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             url: "/listing-page/:id/:cat",
             templateUrl: tempateURL,
             Params: {
+                'id': null,
                 'cat': null
             },
             controller: 'ListingPageCtrl'
@@ -173,12 +174,12 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
 myApp.filter('serverimage', function () {
     return function (image) {
         if (image && image !== null) {
-           var imgarr= image.split("/")
-        //    console.log("imageserver",imgarr)
-            if(imgarr.length>=2){
-            return image;
-            }else{
-            return adminurl + "upload/readFile?file=" + image;
+            var imgarr = image.split("/")
+            //    console.log("imageserver",imgarr)
+            if (imgarr.length >= 2) {
+                return image;
+            } else {
+                return adminurl + "upload/readFile?file=" + image;
             }
         } else {
             return undefined;

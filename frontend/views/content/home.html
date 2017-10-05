@@ -93,7 +93,7 @@
                                         <h3><i class="fa fa-inr" aria-hidden="true"></i>{{newArrival.price}}</h3>
                                         <h4>{{newArrival.productName}}</h4>
                                         <div class="abslt-buynow-btn">
-                                            <buttton class="btn buynow--btn text-uppercase">buy</buttton>
+                                            <buttton class="btn buynow--btn text-uppercase" ui-sref="individual-page({id: newArrival.productId})">buy</buttton>
                                         </div>
                                     </div>
                                     <div class="featured__icon-cart" ng-if="checkInCart(newArrival.productId)">
@@ -138,13 +138,13 @@
                                 <i class="fa fa-shopping-cart" aria-hidden="true" data-toggle="tooltip" title="Added to cart"></i>
                             </div>
                             <div class="abslt-buynow-btn">
-                                <buttton class="btn buy--btn text-uppercase">buy</buttton>
+                                <buttton class="btn buy--btn text-uppercase" ui-sref="individual-page({id: new.productId})">buy</buttton>
                             </div>
                         </div>
                     </li>
                 </flex-slider>
                 <div class="viewmore-btn text-center">
-                    <button class="btn text-uppercase view--more">view more</button>
+                    <button class="btn text-uppercase view--more" ui-sref="listing-page">view more</button>
                 </div>
             </div>
         </div>

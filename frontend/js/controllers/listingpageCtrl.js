@@ -35,6 +35,13 @@
          })
      }
 
+     if (!$stateParams.cat) {
+         ProductService.getNewArrivals(function (data) {
+             console.log("$$$$$$$in categoryProduct", data.data.data)
+             $scope.products = _.chunk(data.data.data, 3);
+         })
+     }
+
      $scope.data1 = {};
      $scope.data1.keyword = $stateParams.id
      $scope.products = [];

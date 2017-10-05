@@ -46,7 +46,7 @@
                                     Image
                                 </td>
                                 <td ng-repeat="product in products">
-                                    <img src="{{product.images[0].image}}" alt="" class="img-responsive compare-img">
+                                    <img src="{{product.images[0].image|serverimage}}" alt="" class="img-responsive compare-img">
                                 </td>
                             </tr>
                             <tr>
@@ -92,7 +92,7 @@
                         <tbody>
                             <tr>
                                 <td>Collection</td>
-                                <td ng-repeat="product in products">{{product.collection.name}}</td>
+                                <td ng-repeat="product in products">{{product.prodCollection.name}}</td>
                             </tr>
                             <tr>
                                 <td>Style</td>
