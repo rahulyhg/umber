@@ -8,7 +8,14 @@ myApp.factory('UserService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
-
+        verifyRegisterUserWithOtp: function (userData, callback) {
+            $http({
+                url: adminurl + 'User/verifyRegisterUserWithOtp',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
         login: function (userData, callback) {
             $http({
                 url: adminurl + 'User/login',

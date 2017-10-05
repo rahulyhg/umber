@@ -129,7 +129,8 @@ var schema = new Schema({
         enum: ["M", "F"]
     },
     lastAccessed: Date,
-    emailConfirmed: Boolean,
+    otpTime: Date,
+    verifyAcc: Boolean,
     status: {
         type: String,
         enum: ['Enabled', 'Disabled'],
@@ -234,47 +235,396 @@ var model = {
     },
     registration: function (userData, callback) {
         console.log(userData);
+        // User.findOne({
+        //     email: userData.email,
+        //     verifyAcc: false
+        // }).exec(function (err, user) {
+        //     delete user
+        //     console.log("deleted2", user);
+        // })
+
         var user = {};
         user.firstName = userData.firstname;
         user.lastName = userData.lastname;
         user.email = userData.email;
         user.password = md5(userData.password);
         user.mobile = userData.mobile;
+        user.otp = Math.random().toString().substring(2, 6);
+        user.verifyAcc = false;
 
         User.findOne({
             email: user.email
-        }).exec(function (err, data) {
-            if (!_.isEmpty(data)) {
-                callback({
-                    message: "userExists"
-                }, null);
-            } else {
-                User.saveData(user, function (err, data) {
-                    if (err) {
-                        callback(err, null);
-                    } else if (data) {
-                        if (!_.isEmpty(data)) {
-                            var accessToken = uid(16);
-                            data.accessToken.push(accessToken);
-                            User.saveData(data, function () {});
-                            console.log("data: ", data);
-                            callback(null, data);
+        }).exec(function (err, created) {
+            if (!_.isEmpty(created)) {
+                console.log("deleted2", created);
+                if (created.verifyAcc == false) {
+                    created.remove();
+                    var emailData = {};
+                    emailData.otp = user.otp;
+                    emailData.email = user.email;
+                    emailData.subject = "SignUp OTP";
+                    emailData.filename = "otp-email.ejs";
+                    emailData.from = "prajakta.kamble@wohlig.com"
+                    // emailData.name = created.firstName + created.lastName;
+                    emailData.firstname = user.firstName;
+                    emailData.lastName = user.lastName;
+                    // console.log(">>>emailData", emailData);
+                    // callback(null, created);
+                    Config.email(emailData, function (err, response) {
+                        if (err) {
+                            console.log("error in email", err)
+                            User.findOneAndUpdate({
+                                _id: created._id
+                            }, {
+                                $set: {
+                                    verifyAcc: false,
+                                    otp: null,
+                                    otpTime: null
+                                }
+                            }, {
+                                new: true
+                            }).exec(function (err, result) {});
+                            callback("emailError", null);
+                        } else if (response) {
+                            // console.log("in register user mail response", response)
+                            var sendData = {};
+                            // sendData._id = created._id;
+                            sendData.email = user.email;
+                            // sendData.accessToken = created.accessToken;
+                            sendData.mobile = user.mobile;
+                            sendData.firstName = user.firstName;
+                            sendData.lastName = user.lastName;
+                            sendData.lastName = user.lastName;
+                            sendData.password = user.password;
+                            sendData.verifyAcc = user.verifyAcc;
+                            sendData.otp = user.otp;
+                            // callback(null, sendData);
+                            User.saveData(sendData, function (err, data) {
+                                if (err) {
+                                    callback(err, null);
+                                } else if (data) {
+                                    if (!_.isEmpty(data)) {
+                                        var accessToken = uid(16);
+                                        data.accessToken.push(accessToken);
+                                        User.saveData(data, function () {});
+                                        console.log("data: ", data);
+                                        callback(null, data);
+                                    }
+                                } else {
+                                    callback({
+                                        message: {
+                                            data: "Invalid credentials!"
+                                        }
+                                    })
+                                }
+                            });
+                        } else {
+                            callback("errorOccurredRegister", null);
                         }
-                    } else {
-                        callback({
-                            message: {
-                                data: "Invalid credentials!"
+                    });
+                } else {
+                    callback({
+                        message: "userExists"
+                    }, null);
+                }
+            } else {
+                var emailData = {};
+                emailData.otp = user.otp;
+                emailData.email = user.email;
+                emailData.subject = "SignUp OTP";
+                emailData.filename = "otp-email.ejs";
+                emailData.from = "prajakta.kamble@wohlig.com"
+                // emailData.name = created.firstName + created.lastName;
+                emailData.firstname = user.firstName;
+                emailData.lastName = user.lastName;
+                // console.log(">>>emailData", emailData);
+                // callback(null, created);
+                Config.email(emailData, function (err, response) {
+                    if (err) {
+                        console.log("error in email", err)
+                        User.findOneAndUpdate({
+                            _id: created._id
+                        }, {
+                            $set: {
+                                verifyAcc: false,
+                                otp: null,
+                                otpTime: null
                             }
-                        })
+                        }, {
+                            new: true
+                        }).exec(function (err, result) {});
+                        callback("emailError", null);
+                    } else if (response) {
+                        // console.log("in register user mail response", response)
+                        var sendData = {};
+                        // sendData._id = created._id;
+                        sendData.email = user.email;
+                        // sendData.accessToken = created.accessToken;
+                        sendData.mobile = user.mobile;
+                        sendData.firstName = user.firstName;
+                        sendData.lastName = user.lastName;
+                        sendData.lastName = user.lastName;
+                        sendData.password = user.password;
+                        sendData.verifyAcc = user.verifyAcc;
+                        sendData.otp = user.otp;
+                        // callback(null, sendData);
+                        User.saveData(sendData, function (err, data) {
+                            if (err) {
+                                callback(err, null);
+                            } else if (data) {
+                                if (!_.isEmpty(data)) {
+                                    var accessToken = uid(16);
+                                    data.accessToken.push(accessToken);
+                                    User.saveData(data, function () {});
+                                    console.log("data: ", data);
+                                    callback(null, data);
+                                }
+                            } else {
+                                callback({
+                                    message: {
+                                        data: "Invalid credentials!"
+                                    }
+                                })
+                            }
+                        });
+                    } else {
+                        callback("errorOccurredRegister", null);
                     }
                 });
+                // User.saveData(user, function (err, data) {
+                //     if (err) {
+                //         callback(err, null);
+                //     } else if (data) {
+                //         if (!_.isEmpty(data)) {
+                //             var accessToken = uid(16);
+                //             data.accessToken.push(accessToken);
+                //             User.saveData(data, function () {});
+                //             console.log("data: ", data);
+                //             callback(null, data);
+                //         }
+                //     } else {
+                //         callback({
+                //             message: {
+                //                 data: "Invalid credentials!"
+                //             }
+                //         })
+                //     }
+                // });
             }
         });
+    },
+    verifyRegisterUserWithOtp: function (data, callback) {
+        console.log("Verify otp: ", data);
+        async.waterfall([
+            function getUser(cbWaterfall) {
+                User.findOne({
+                    _id: mongoose.Types.ObjectId(data._id)
+                }).exec(cbWaterfall);
+            },
+            function checkOtp(user, cbWaterfall1) {
+                console.log("checkOtp: ", user);
+                // If user already verified
+                if (user.verifyAcc) {
+                    console.log("user.verifyAcc")
+                    User.findOneAndUpdate({
+                        _id: mongoose.Types.ObjectId(user._id)
+                    }, {
+                        $set: {
+                            accessToken: [uid(16)]
+                        }
+                    }, {
+                        new: true
+                    }).exec(cbWaterfall1);
+                } else if (!user.otp) {
+                    cbWaterfall1("noOtpFound", null);
+                } else {
+                    console.log("if !verifyAccount")
+                    // Check if otp is expired
+                    var diff = moment(new Date()).diff(user.otpTime, 'minutes');
+                    if (diff > 10) {
+                        User.findOneAndUpdate({
+                            _id: mongoose.Types.ObjectId(data._id)
+                        }, {
+                            $set: {
+                                verifyAcc: false,
+                                otp: null,
+                                otpTime: null
+                            }
+                        }, {
+                            new: true
+                        }).exec(function (err, removed) {
+                            cbWaterfall1("otpExpired", null);
+                        });
+                    } else {
+                        if (user.otp == data.otp) {
+                            console.log("in comparing");
+                            accessToken = [uid(16)];
+                            User.findOneAndUpdate({
+                                _id: mongoose.Types.ObjectId(data._id)
+                            }, {
+                                $set: {
+                                    verifyAcc: true,
+                                    otp: null,
+                                    otpTime: null,
+                                    accessToken: accessToken
+                                }
+                            }, {
+                                new: true
+                            }).exec(function (err, updatedUser) {
+                                cbWaterfall1(err, updatedUser);
+                            });
+                        } else {
+                            cbWaterfall1("otpNoMatch", null);
+                        }
+                    }
+                }
+            }
+        ], function (err, data) {
+            callback(err, data);
+        });
+    },
+    resendOtp: function (data, callback) {
+
+        User.findOneAndUpdate({
+            _id: mongoose.Types.ObjectId(data._id)
+        }, {
+            $set: {
+                otp: Math.random().toString().substring(2, 6),
+                otpTime: new Date(),
+                verifyAcc: false
+            }
+        }, {
+            new: true
+        }).exec(function (err, user) {
+            var emailData = {};
+            emailData.otp = user.otp;
+            emailData.email = user.email;
+            emailData.subject = "SignUp OTP";
+            // emailData.filename = "otp.ejs";
+            emailData.filename = "otp-email.ejs";
+            emailData.name = user.firstName + user.lastName;
+            Config.email(emailData, function (err, response) {
+                if (err) {
+                    User.findOneAndUpdate({
+                        _id: user._id
+                    }, {
+                        $set: {
+                            verifyAcc: false,
+                            otp: null,
+                            otpTime: null
+                        }
+                    }, {
+                        new: true
+                    }).exec(function (err, result) {});
+                    callback("emailError", null);
+                } else if (response) {
+                    var sendData = {};
+                    sendData._id = user._id;
+                    sendData.email = user.email;
+                    sendData.firstName = user.firstName;
+                    sendData.lastName = user.lastName;
+                    callback(null, sendData);
+                } else {
+                    callback("errorOccurredRegister", null);
+                }
+            });
+        })
+    },
+    registerUser: function (data, callback) {
+        console.log("#####in User", data);
+        if (!data._id) {
+            console.log("m in if");
+
+            // data._id = new mongoose.mongo.ObjectID();
+            data.password = md5(data.password);
+            data.otp = Math.random().toString().substring(2, 6);
+            data.verifyAcc = false;
+            data.otpTime = new Date();
+            console.log("********Data: ", data);
+
+            User.findOneAndUpdate({
+                email: data.email
+            }, data, {
+                new: true,
+                upsert: true
+            }).exec(function (error, created) {
+                if (error, created == undefined) {
+                    console.log("User >>> registerUser >>> User.findOneAndUpdate >>> error", error);
+                    callback(error, null);
+                } else {
+                    var emailData = {};
+                    emailData.otp = created.otp;
+                    emailData.email = created.email;
+                    emailData.subject = "SignUp OTP";
+                    // emailData.filename = "otp.ejs";
+                    emailData.filename = "otp-email.ejs";
+                    emailData.from = "prajakta.kamble@wohlig.com"
+                    // emailData.name = created.firstName + created.lastName;
+                    emailData.firstname = created.firstName;
+                    emailData.lastName = created.lastName;
+                    // console.log(">>>emailData", emailData);
+                    // callback(null, created);
+                    Config.email(emailData, function (err, response) {
+                        if (err) {
+                            console.log("error in email", err)
+                            User.findOneAndUpdate({
+                                _id: created._id
+                            }, {
+                                $set: {
+                                    verifyAcc: false,
+                                    otp: null,
+                                    otpTime: null
+                                }
+                            }, {
+                                new: true
+                            }).exec(function (err, result) {});
+                            callback("emailError", null);
+                        } else if (response) {
+                            var sendData = {};
+                            sendData._id = created._id;
+                            sendData.email = created.email;
+                            sendData.accessToken = created.accessToken;
+                            sendData.firstName = created.firstName;
+                            sendData.lastName = created.lastName;
+                            callback(null, sendData);
+                        } else {
+                            callback("errorOccurredRegister", null);
+                        }
+                    });
+                }
+            })
+        } else {
+            console.log("m in else");
+            var user = this(data);
+            User.findOne({
+                "_id": user._id
+            }).exec(function (err, fdata) {
+                fdata.firstName = data.firstName;
+                fdata.lastName = data.lastName;
+                fdata.mobile = data.mobile;
+                if (data.password) {
+                    fdata.password = md5(data.password);
+                }
+                if (data.photo) {
+                    fdata.photo = data.photo;
+                }
+                User.saveData(fdata, function (err, updated) {
+                    if (err) {
+                        callback(err, null);
+                    } else if (updated) {
+                        callback(null, updated);
+                    } else {
+                        callback(null, {});
+                    }
+                });
+            });
+        }
     },
     login: function (userData, callback) {
         User.findOne({
             email: userData.email,
-            password: md5(userData.password)
+            password: md5(userData.password),
+            verifyAcc: true
         }).exec(function (err, data) {
             if (err) {
                 console.log("err: ", err);
@@ -588,6 +938,61 @@ var model = {
         }, {
             "shippingAddresses.$": 1
         }).exec(callback);
-    }
+    },
+    sendForgotPasswordOtp: function (data, callback) {
+        console.log(" ***** inside sendForgotPasswordOtp of config ***** ", data);
+
+        var userData = {};
+        // check whether user is available or not ?
+        // if --> yes --> generate OTP & send email to user with otp
+        async.waterfall([
+            // Check whether user is present
+            function (callback) {
+                User.findOne({
+                    email: data.email
+                }).exec(callback);
+            },
+            // Change password to random String
+            function (user, callback) {
+                if (_.isEmpty(user)) {
+                    callback(null, "userNotFound");
+                } else {
+                    // Generate random String as a password
+                    var verificationCode = Math.floor(Math.random() * 1000000);
+                    user.forgotPassword = verificationCode;
+                    User.saveData(user, function (err, result) {
+                        if (err) {
+                            callback(err, null);
+                        } else {
+                            User.findOne({
+                                _id: user._id
+                            }).exec(callback);
+                        }
+                    });
+                }
+            },
+            // Send forget password email
+            function (user, callback) {
+
+                userData.userId = user._id;
+
+                var emailData = {};
+                emailData.otp = user.forgotPassword;
+                emailData.email = data.email;
+                emailData.subject = "Forgot Password";
+                emailData.filename = "reset-password.ejs";
+                emailData.from = "prajakta.kamble@wohlig.com"
+                // emailData.name = user.firstName + user.lastName;
+                emailData.firstname = user.firstName;
+                emailData.lastName = user.lastName;
+                Config.emailForResetPassword(emailData, callback);
+                // callback();
+            }
+        ], function (err, result) {
+            console.log(" ***** async.waterfall final response of sendForgotPasswordOtp ***** ", result);
+            callback(err, userData);
+        });
+
+    },
 };
 module.exports = _.assign(module.exports, exports, model);

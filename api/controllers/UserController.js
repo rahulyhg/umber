@@ -112,6 +112,18 @@ var controller = {
         }
     },
 
+    verifyRegisterUserWithOtp: function (req, res) {
+        if (req.body) {
+            User.verifyRegisterUserWithOtp(req.body, res.callback);
+        } else {
+            res.json({
+                message: {
+                    data: "Invalid request!"
+                }
+            });
+        }
+    },
+
     login: function (req, res) {
         if (req.body) {
             User.login(req.body, res.callback);
@@ -201,5 +213,17 @@ var controller = {
             });
         }
     },
+    sendForgotPasswordOtp: function (req, res) {
+        if (req.body) {
+            User.sendForgotPasswordOtp(req.body, res.callback);
+        } else {
+            res.json({
+                message: {
+                    data: "Invalid request!"
+                }
+            });
+        }
+    },
+
 };
 module.exports = _.assign(module.exports, controller);
