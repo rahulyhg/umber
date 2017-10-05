@@ -82,6 +82,17 @@ myApp.factory('ProductService', function ($http, $timeout) {
             }).then(callback);
         },
 
+        productInNewArrival: function (callback) {
+            console.log("Get products with category: ");
+            $http({
+                url: adminurl + 'Product/productInNewArrival',
+                method: 'POST',
+                withCredentials: false
+            }).then(
+                callback
+            );
+        },
+
         getSKUWithParameter: function (input, callback) {
             $http({
                 url: adminurl + 'Product/getSKUWithParameter',

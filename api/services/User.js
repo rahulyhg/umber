@@ -306,6 +306,7 @@ var model = {
                                     if (!_.isEmpty(data)) {
                                         var accessToken = uid(16);
                                         data.accessToken.push(accessToken);
+                                        console.log("data:in  registration ", data);
                                         User.saveData(data, function () {});
                                         console.log("data: ", data);
                                         callback(null, data);
@@ -484,7 +485,8 @@ var model = {
         });
     },
     resendOtp: function (data, callback) {
-
+        console.log("in resend data", data);
+        // user.otp = Math.random().toString().substring(2, 6);
         User.findOneAndUpdate({
             _id: mongoose.Types.ObjectId(data._id)
         }, {
@@ -496,13 +498,16 @@ var model = {
         }, {
             new: true
         }).exec(function (err, user) {
+            console.log("user", user)
             var emailData = {};
             emailData.otp = user.otp;
             emailData.email = user.email;
             emailData.subject = "SignUp OTP";
             // emailData.filename = "otp.ejs";
             emailData.filename = "otp-email.ejs";
-            emailData.name = user.firstName + user.lastName;
+            emailData.from = "prajakta.kamble@wohlig.com"
+            emailData.firstname = user.firstName;
+            emailData.lastName = user.lastName;
             Config.email(emailData, function (err, response) {
                 if (err) {
                     User.findOneAndUpdate({
@@ -519,11 +524,35 @@ var model = {
                     callback("emailError", null);
                 } else if (response) {
                     var sendData = {};
-                    sendData._id = user._id;
-                    sendData.email = user.email;
-                    sendData.firstName = user.firstName;
-                    sendData.lastName = user.lastName;
-                    callback(null, sendData);
+                    // sendData._id = created._id;
+                    // sendData.email = user.email;
+                    // sendData.accessToken = created.accessToken;
+                    // sendData.mobile = user.mobile;
+                    // sendData.firstName = user.firstName;
+                    // sendData.lastName = user.lastName;
+                    // sendData.lastName = user.lastName;
+                    // sendData.password = user.password;
+                    sendData.otp = user.otp;
+                    // callback(null, sendData);
+                    User.saveData(sendData, function (err, data) {
+                        if (err) {
+                            callback(err, null);
+                        } else if (data) {
+                            if (!_.isEmpty(data)) {
+                                var accessToken = uid(16);
+                                data.accessToken.push(accessToken);
+                                User.saveData(data, function () {});
+                                console.log("data: ", data);
+                                callback(null, data);
+                            }
+                        } else {
+                            callback({
+                                message: {
+                                    data: "Invalid credentials!"
+                                }
+                            })
+                        }
+                    });
                 } else {
                     callback("errorOccurredRegister", null);
                 }
@@ -700,6 +729,107 @@ var model = {
                 }, null);
             }
         })
+    },
+    sendForgotPasswordOtp: function (data, callback) {
+        console.log(" ***** inside sendForgotPasswordOtp of config ***** ", data);
+
+        var userData = {};
+        // check whether user is available or not ?
+        // if --> yes --> generate OTP & send email to user with otp
+        async.waterfall([
+            // Check whether user is present
+            function (callback) {
+                User.findOne({
+                    email: data.email
+                }).exec(callback);
+            },
+            // Change password to random String
+            function (user, callback) {
+                if (_.isEmpty(user)) {
+                    callback(null, "userNotFound");
+                } else {
+                    // Generate random String as a password
+                    var verificationCode = Math.floor(Math.random() * 1000000);
+                    user.forgotPassword = verificationCode;
+                    console.log("****444**", user)
+                    User.saveData(user, function (err, result) {
+                        if (err) {
+                            callback(err, null);
+                        } else {
+                            User.findOne({
+                                _id: user._id
+                            }).exec(callback);
+                        }
+                    });
+                }
+            },
+            // Send forget password email
+            function (user, callback) {
+                console.log("in forgot*****", user)
+                userData.userId = user._id;
+
+                var emailData = {};
+                emailData.otp = user.forgotPassword;
+                emailData.email = data.email;
+                emailData.subject = "Forgot Password";
+                emailData.filename = "reset-password.ejs";
+                emailData.from = "prajakta.kamble@wohlig.com"
+                // emailData.name = user.firstName + user.lastName;
+                emailData.firstname = user.firstName;
+                emailData.lastName = user.lastName;
+                Config.emailForResetPassword(emailData, callback);
+                // callback();
+            }
+        ], function (err, result) {
+            console.log(" ***** async.waterfall final response of sendForgotPasswordOtp ***** ", result);
+            callback(err, userData);
+        });
+
+    },
+    confirmForgotPasswordOtp: function (data, callback) {
+        console.log(" **** inside confirmForgotPasswordOtp *** ", data);
+        User.findOne({
+            _id: data._id,
+            forgotPassword: data.verifyOtp
+        }).lean().exec(function (err, data) {
+            if (err) {
+                console.log(" *** inside confirmForgotPasswordOtp err *** ", err);
+                callback(null, err);
+            } else if (!_.isEmpty(data)) {
+                console.log("##############", data)
+                var accessToken = uid(16);
+                data.accessToken.push(accessToken);
+                User.saveData(data, function () {});
+                console.log("data:confirmForgotPassword ", data);
+                callback(null, data);
+            } else {
+                console.log(" *** inside confirmForgotPasswordOtp *** ", data);
+
+                callback(null, false);
+            }
+        });
+    },
+    forgotPasswordSave: function (data, callback) {
+        console.log(" **** forgotPasswordSave *** ", data);
+        User.findOneAndUpdate({
+            _id: data._id
+        }, {
+            $set: {
+                password: md5(data.password)
+            }
+        }, {
+            new: true
+        }).exec(function (err, user) {
+            console.log(" *** inside confirmForgotPasswordOtp  *** ", user);
+            if (err) {
+                console.log(" *** inside confirmForgotPasswordOtp err *** ", err);
+                callback(null, err);
+            } else if (_.isEmpty(user)) {
+                callback(null, false);
+            } else {
+                callback(null, user);
+            }
+        });
     },
 
     isUserLoggedIn: function (accessToken, callback) {
@@ -938,61 +1068,6 @@ var model = {
         }, {
             "shippingAddresses.$": 1
         }).exec(callback);
-    },
-    sendForgotPasswordOtp: function (data, callback) {
-        console.log(" ***** inside sendForgotPasswordOtp of config ***** ", data);
-
-        var userData = {};
-        // check whether user is available or not ?
-        // if --> yes --> generate OTP & send email to user with otp
-        async.waterfall([
-            // Check whether user is present
-            function (callback) {
-                User.findOne({
-                    email: data.email
-                }).exec(callback);
-            },
-            // Change password to random String
-            function (user, callback) {
-                if (_.isEmpty(user)) {
-                    callback(null, "userNotFound");
-                } else {
-                    // Generate random String as a password
-                    var verificationCode = Math.floor(Math.random() * 1000000);
-                    user.forgotPassword = verificationCode;
-                    User.saveData(user, function (err, result) {
-                        if (err) {
-                            callback(err, null);
-                        } else {
-                            User.findOne({
-                                _id: user._id
-                            }).exec(callback);
-                        }
-                    });
-                }
-            },
-            // Send forget password email
-            function (user, callback) {
-
-                userData.userId = user._id;
-
-                var emailData = {};
-                emailData.otp = user.forgotPassword;
-                emailData.email = data.email;
-                emailData.subject = "Forgot Password";
-                emailData.filename = "reset-password.ejs";
-                emailData.from = "prajakta.kamble@wohlig.com"
-                // emailData.name = user.firstName + user.lastName;
-                emailData.firstname = user.firstName;
-                emailData.lastName = user.lastName;
-                Config.emailForResetPassword(emailData, callback);
-                // callback();
-            }
-        ], function (err, result) {
-            console.log(" ***** async.waterfall final response of sendForgotPasswordOtp ***** ", result);
-            callback(err, userData);
-        });
-
-    },
+    }
 };
 module.exports = _.assign(module.exports, exports, model);

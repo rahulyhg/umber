@@ -16,6 +16,14 @@ myApp.factory('UserService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
+        resendOtp: function (userData, callback) {
+            $http({
+                url: adminurl + 'User/resendOtp',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
         login: function (userData, callback) {
             $http({
                 url: adminurl + 'User/login',
@@ -33,7 +41,30 @@ myApp.factory('UserService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
-
+        forgotPasswordOtp: function (userData, callback) {
+            $http({
+                url: adminurl + 'User/sendForgotPasswordOtp',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
+        confirmForgotPasswordOtp: function (userData, callback) {
+            $http({
+                url: adminurl + 'User/confirmForgotPasswordOtp',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
+        forgotPasswordSave: function (userData, callback) {
+            $http({
+                url: adminurl + 'User/forgotPasswordSave',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
         getUserDetails: function (data, callback) {
             $http({
                 url: adminurl + 'User/getDetails',

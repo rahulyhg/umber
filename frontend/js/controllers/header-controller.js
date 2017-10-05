@@ -186,6 +186,7 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
             //  alert('enter');
             $('.side-nav').removeClass('side-nav-menu-in');
             $('.side-nav').addClass('side-nav-menu-out');
+            $('.navbar__sideNav').removeClass('hamburger-cross');
         };
         //End of close side nav
         $scope.closeCategires = function () {
@@ -424,6 +425,7 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
                         $.jStorage.set("userId", $scope.userData._id);
                         $.jStorage.set('accessToken', data.data.data.accessToken[0]);
                         $scope.loggedUser = $scope.userData._id;
+                        $uibModalInstance.dismiss('cancel');
                         $state.reload();
 
                         var emailUser = {};
@@ -455,15 +457,16 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
             }
         }
 
-        // $scope.resendOtp = function () {
-        //     NavigationService.apiCallWithData("User/resendOtp", $scope.formData, function (data) {
-        //         if (data.value) {
-        //             $scope.resendOtpBut = false;
-        //         } else {
-        //             console.log("Error: ", data);
-        //         }
-        //     });
-        // }
+        $scope.resendOtp = function () {
+            console.log(" in resend $scope.formData: ", $scope.userData);
+            UserService.resendOtp($scope.userData, function (data) {
+                if (data.value) {
+                    $scope.resendOtpBut = false;
+                } else {
+                    console.log("Error: ", data);
+                }
+            });
+        }
 
         $scope.forgotPassword = function () {
             $scope.forgotPasswordModal = $uibModal.open({
@@ -474,8 +477,61 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
                 controller: 'loginModalCtrl'
                 // windowClass: 'modal-content-radi0'
             });
+
         }
         $scope.forgotPasswordOtp = function (emailId) {
-            console.log("forgotPasswordOtp", emailId)
+            $scope.userEmail = {};
+            $scope.userEmail.email = emailId;
+            $scope.otpForgot = $uibModal.open({
+                animation: true,
+                templateUrl: 'views/modal/forgotPasswordOtp.html',
+                scope: $scope,
+                // windowClass: 'loginModalSize',
+                controller: 'loginModalCtrl'
+                // windowClass: 'modal-content-radi0'
+            });
+            UserService.forgotPasswordOtp($scope.userEmail, function (data) {
+                console.log("in forgotPassword: ", data)
+                if (data.data.value == true) {
+                    $scope.gtUser = {};
+                    $scope.gtUser._id = data.data.data.userId;
+                    // console.log("in forgotPassword: ", data)
+                } else {
+                    console.log("Error: ", data);
+                }
+            });
+        }
+        $scope.confirmForgotPasswordOtp = function (otp) {
+            $scope.gtUser.verifyOtp = otp;
+            console.log("confirmForgotPasswordOtp: ", $scope.gtUser);
+            UserService.confirmForgotPasswordOtp($scope.gtUser, function (data) {
+                console.log("confirm", data)
+                if (data.data.value = true) {
+                    $scope.otpForgot = $uibModal.open({
+                        animation: true,
+                        templateUrl: 'views/modal/resetForgotPassword.html',
+                        scope: $scope,
+                        // windowClass: 'loginModalSize',
+                        controller: 'loginModalCtrl'
+                        // windowClass: 'modal-content-radi0'
+                    });
+                }
+            })
+        }
+        $scope.savePassword = function (password) {
+            if (password.newPassword == password.confirmPassword) {
+                $scope.gtUser.password = password.newPassword;
+                $scope.gtUser.email = $scope.userEmail.email
+                console.log("confirmForgotPasswordOtp: savePassword", $scope.gtUser);
+                UserService.forgotPasswordSave($scope.gtUser, function (data) {
+                    console.log("data in save password", data.data)
+                    $.jStorage.set("username", data.data.data.firstName);
+                    $.jStorage.set("userId", data.data.data._id);
+                    $.jStorage.set('accessToken', data.data.data.accessToken[0]);
+                    $scope.loggedUser = data.data.data._id;
+                    $uibModalInstance.dismiss('cancel');
+                    $state.reload();
+                })
+            }
         }
     });
