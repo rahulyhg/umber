@@ -65,33 +65,54 @@
                             </form>
                         </div>
                         <div class="col-md-3 col-md-offset-1">
-                            <form class="customized-form custom-checkbox login-form" name="formData">
+                            <form class="customized-form custom-checkbox " name="loginForm" novalidate>
                                 <div class="form-group">
-                                    <input type="text" placeholder="First Name" ng-model="registerData.firstname" class="form-control" required>
+                                    <input type="text" placeholder="First Name" name="firstname" ng-model="registerData.firstname" class="form-control" required
+                                        uib-popover="{{loginForm.firstname.$touched && loginForm.firstname.$invalid}}" popover-title="Please enter your first name"
+                                        popover-placement="bottom" popover-class="login-popover" popover-is-open="loginForm.firstname.$touched && loginForm.firstname.$invalid"
+                                        popover-trigger="'none'">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" placeholder="Last Name" ng-model="registerData.lastname" class="form-control" required>
+                                    <input type="text" placeholder="Last Name" name="lastname" ng-model="registerData.lastname" class="form-control" required
+                                        uib-popover="{{loginForm.lastname.$touched && loginForm.lastname.$invalid}}" popover-title="Please enter your last name"
+                                        popover-placement="bottom" popover-class="login-popover" popover-is-open="loginForm.lastname.$touched && loginForm.lastname.$invalid"
+                                        popover-trigger="'none'">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" placeholder="Email Address" ng-model="registerData.email" class="form-control" required>
+                                    <input type="email" placeholder="Email Address" name="email" ng-model="registerData.email" class="form-control" required
+                                        uib-popover="{{loginForm.email.$touched && loginForm.email.$invalid ||loginForm.email.$error.email && loginForm.email.$error.required }}"
+                                        popover-title="Please enter a valid email address" popover-placement="bottom" popover-class="login-popover"
+                                        popover-is-open="loginForm.email.$touched && loginForm.email.$invalid ||loginForm.email.$error.email && loginForm.email.$error.required"
+                                        popover-trigger="'none'">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" placeholder="Mobile" ng-model="registerData.mobile" class="form-control" required>
+                                    <input type="number" placeholder="Mobile" name="mobile" ng-model="registerData.mobile" class="form-control" required uib-popover="{{loginForm.mobile.$touched && loginForm.mobile.$invalid}}"
+                                        popover-title="Please enter your mobile number" popover-placement="bottom" popover-class="login-popover"
+                                        popover-is-open="loginForm.mobile.$touched && loginForm.mobile.$invalid" popover-trigger="'none'">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" placeholder="Password" ng-model="registerData.password" class="form-control" required>
+                                    <input type="password" placeholder="Password" name="password" ng-model="registerData.password" class="form-control" required
+                                        uib-popover="{{loginForm.password.$touched && loginForm.password.$invalid}}" popover-title="Please enter your password"
+                                        popover-placement="bottom" popover-class="login-popover" popover-is-open="loginForm.password.$touched && loginForm.password.$invalid"
+                                        popover-trigger="'none'">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" placeholder="Confirm Password" ng-model="registerData.confirmpassword" class="form-control" hs-password-verifier="registerData.password"
-                                        required>
-                                    <span ng-show="formData.registerData.confirmpassword.$error.hsPasswordVerifier">Passwords don't match</span>
+                                    <input type="password" placeholder="Confirm Password" name="confirm" ng-model="registerData.confirmpassword" class="form-control"
+                                        hs-password-verifier="registerData.password" required uib-popover="{{loginForm.confirm.$touched && loginForm.confirm.$invalid}}"
+                                        popover-title="Passwords don't match" popover-placement="bottom" popover-class="login-popover"
+                                        popover-is-open="loginForm.confirmpassword.$touched && loginForm.confirmpassword.$invalid || loginForm.loginForm.confirmpassword.$error.hsPswdMatch"
+                                        popover-trigger="'none'">
+                                    <!-- <span ng-show="loginForm.registerData.confirmpassword.$error.hsPasswordVerifier">Passwords don't match</span> -->
                                 </div>
                                 <div class="checkbox forgot__checkout">
-                                    <input type="checkbox" id="a1">
+                                    <input type="checkbox" id="a1" ng-model="registerData.agree" name="agree" required>
                                     <label for="a1">  I agree with the terms and conditions and privacy policy</label>
                                 </div>
                                 <div>
-                                    <button class="btn btn--login btn-block" ng-click="registerUser()">sign in</button>
+                                    <button class="btn btn--login btn-block" ng-disabled="loginForm.firstname.$invalid || 
+                                    loginForm.lastname.$invalid ||
+                                    loginForm.email.$invalid ||loginForm.mobile.$invalid ||loginForm.password.$invalid || 
+                                    loginForm.confirm.$invalid || loginForm.agree.$invalid" ng-click="loginForm.$valid && registerUser()">sign up</button>
                                 </div>
                                 <p class="border-line">or</p>
                                 <div class="social-icons">
