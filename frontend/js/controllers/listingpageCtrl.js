@@ -36,9 +36,17 @@
      }
 
      if (!$stateParams.cat) {
-         ProductService.getNewArrivals(function (data) {
-             console.log("$$$$$$$in categoryProduct", data.data.data)
-             $scope.products = _.chunk(data.data.data, 3);
+         ProductService.getFeatured(function (data) {
+             console.log("$$$$$$$in categoryProduct", data.data.data);
+             $scope.filters = {};
+             $scope.products = _.chunk(data.data.data.featureds, 3);
+             $scope.categories = data.data.data.category;
+             $scope.filters.types = data.data.data.type;
+             $scope.filters.collections = data.data.data.collection;
+             $scope.filters.sizes = data.data.data.size;
+             $scope.filters.styles = data.data.data.style;
+             $scope.filters.colors = data.data.data.color;
+             $scope.filters.fabrics = data.data.data.fabric;
          })
      }
 
@@ -469,11 +477,24 @@
 
      // This function is used to display the modal on quck view button
      $scope.quickviewProduct = function (prod) {
+         console.log("in quick view", prod);
          $scope.product = prod;
-         $scope.sizes = $scope.product.sizes;
-         $scope.activeButton = $scope.sizes[0].name;
-         $scope.selectedSize = $scope.sizes[0];
+
+         if ($scope.product.sizes) {
+             $scope.sizes = $scope.product.sizes
+         } else if (!$scope.product.sizes) {
+             $scope.sizes = $scope.product.size;
+         }
          console.log($scope.sizes);
+         if (angular.isArray($scope.sizes)) {
+             $scope.activeButton = $scope.sizes[0].name;
+             $scope.selectedSize = $scope.sizes[0];
+         } else {
+             $scope.activeButton = $scope.sizes.name;
+             $scope.selectedSize = $scope.sizes;
+         }
+
+
          $scope.arrayCheck = angular.isArray($scope.sizes);
          //  console.log("$scope.arrayCheck", $scope.arrayCheck);
          $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
