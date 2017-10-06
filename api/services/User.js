@@ -264,7 +264,7 @@ var model = {
                     emailData.email = user.email;
                     emailData.subject = "SignUp OTP";
                     emailData.filename = "otp-email.ejs";
-                    emailData.from = "prajakta.kamble@wohlig.com"
+                    emailData.from = "harsh@wohlig.com"
                     // emailData.name = created.firstName + created.lastName;
                     emailData.firstname = user.firstName;
                     emailData.lastName = user.lastName;
@@ -274,7 +274,7 @@ var model = {
                         if (err) {
                             console.log("error in email", err)
                             User.findOneAndUpdate({
-                                _id: created._id
+                                _id: user._id
                             }, {
                                 $set: {
                                     verifyAcc: false,
@@ -334,7 +334,7 @@ var model = {
                 emailData.email = user.email;
                 emailData.subject = "SignUp OTP";
                 emailData.filename = "otp-email.ejs";
-                emailData.from = "prajakta.kamble@wohlig.com"
+                emailData.from = "harsh@wohlig.com"
                 // emailData.name = created.firstName + created.lastName;
                 emailData.firstname = user.firstName;
                 emailData.lastName = user.lastName;
@@ -344,7 +344,7 @@ var model = {
                     if (err) {
                         console.log("error in email", err)
                         User.findOneAndUpdate({
-                            _id: created._id
+                            _id: user._id
                         }, {
                             $set: {
                                 verifyAcc: false,
@@ -505,7 +505,7 @@ var model = {
             emailData.subject = "SignUp OTP";
             // emailData.filename = "otp.ejs";
             emailData.filename = "otp-email.ejs";
-            emailData.from = "prajakta.kamble@wohlig.com"
+            emailData.from = "harsh@wohlig.com"
             emailData.firstname = user.firstName;
             emailData.lastName = user.lastName;
             Config.email(emailData, function (err, response) {
@@ -587,7 +587,7 @@ var model = {
                     emailData.subject = "SignUp OTP";
                     // emailData.filename = "otp.ejs";
                     emailData.filename = "otp-email.ejs";
-                    emailData.from = "prajakta.kamble@wohlig.com"
+                    emailData.from = "harsh@wohlig.com"
                     // emailData.name = created.firstName + created.lastName;
                     emailData.firstname = created.firstName;
                     emailData.lastName = created.lastName;
@@ -749,7 +749,7 @@ var model = {
                     callback(null, "userNotFound");
                 } else {
                     // Generate random String as a password
-                    var verificationCode = Math.floor(Math.random() * 1000000);
+                    var verificationCode = Math.floor(Math.random() * 1000000).toString().substring(2, 6);;
                     user.forgotPassword = verificationCode;
                     console.log("****444**", user)
                     User.saveData(user, function (err, result) {

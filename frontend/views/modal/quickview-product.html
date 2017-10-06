@@ -63,11 +63,10 @@
                             <div class="viewSize inline-block relate" ng-if="arrayCheck">
                                 <h5>SIZE </h5>
                                 <div class="inline-block buy-para__sizes">
-                                    <p ng-click="selectSize(size)" ng-class="{'active':activeButton=={{size.name}}}" ng-repeat="size in product.size">{{size.name}}</p>
-                                    <!--<p>38</p>
-                                    <p>40</p>
-                                    <p>42</p>
-                                    <p>44</p>-->
+                                    <p ng-click="selectSize(size)" ng-class="{'active':activeButton=={{size.name}}}" ng-repeat="size in product.sizes track by $index"
+                                        ng-if="product.sizes">{{size.name}}</p>
+                                    <p ng-click="selectSize(size)" ng-class="{'active':activeButton=={{size.name}}}" ng-repeat="size in product.size track by $index"
+                                        ng-if="!product.sizes">{{size.name}}</p>
                                 </div>
                                 <div>
                                     <a href="" class="linking ">Size Chart</a>
@@ -76,7 +75,7 @@
                             <div class="viewSize inline-block relate" ng-if="!arrayCheck">
                                 <h5>SIZE</h5>
                                 <div class="inline-block buy-para__sizes">
-                                    <p ng-click="selectSize(product.size)" ng-class="{'active':activeButton=={{product.size}}}">{{product.size}}</p>
+                                    <p ng-click="selectSize(product.size)" ng-class="{'active':activeButton=={{product.size.name}}}">{{product.size.name}}</p>
                                     <!--<p>38</p>
                                     <p>40</p>
                                     <p>42</p>
@@ -161,9 +160,14 @@
                                                             <p>Brand</p>
                                                         </div>
                                                         <div class="inline-block">
-                                                            <ul class="list-unstyled">
+                                                            <ul class="list-unstyled" ng-if="!product.brand.name">
                                                                 <li>
                                                                     {{product.brand}}
+                                                                </li>
+                                                            </ul>
+                                                            <ul class="list-unstyled" ng-if="product.brand.name">
+                                                                <li>
+                                                                    {{product.brand.name}}
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -175,9 +179,14 @@
                                                             </div>
                                                         </div>
                                                         <div class="inline-block">
-                                                            <ul class="list-unstyled">
+                                                            <ul class="list-unstyled" ng-if="!product.prodCollection.name">
                                                                 <li>
                                                                     {{product.prodCollection}}
+                                                                </li>
+                                                            </ul>
+                                                            <ul class="list-unstyled" ng-if="product.prodCollection.name">
+                                                                <li>
+                                                                    {{product.prodCollection.name}}
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -201,9 +210,14 @@
                                                             <p>Fabric</p>
                                                         </div>
                                                         <div class="inline-block">
-                                                            <ul class="list-unstyled">
+                                                            <ul class="list-unstyled" ng-if="!product.fabric.name">
                                                                 <li>
                                                                     {{product.fabric}}
+                                                                </li>
+                                                            </ul>
+                                                            <ul class="list-unstyled" ng-if="product.fabric.name">
+                                                                <li>
+                                                                    {{product.fabric.name}}
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -215,9 +229,14 @@
                                                             </div>
                                                         </div>
                                                         <div class="inline-block">
-                                                            <ul class="list-unstyled">
+                                                            <ul class="list-unstyled" ng-if="!product.color.name">
                                                                 <li>
                                                                     {{product.color}}
+                                                                </li>
+                                                            </ul>
+                                                            <ul class="list-unstyled" ng-if="product.color.name">
+                                                                <li>
+                                                                    {{product.color.name}}
                                                                 </li>
                                                             </ul>
                                                         </div>

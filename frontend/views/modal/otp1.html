@@ -1,11 +1,11 @@
 <div class="modal-container">
-    <div class="otp-one login-head">
+    <div class="otp-one login-head text-center" ng-if="forgotPwd">
         <a href="" class="closes" ng-click="$dismiss();">
             <!--<img src="img/home/33.png" class="img-responsive" alt="cross">-->
             <i class="fa fa-2x fa-times-circle-o" aria-hidden="true"></i>
         </a>
         <h1>otp</h1>
-        <p>Enter your email Id below and </br>you’ll receive a 4 Digit Verification Code.</p>
+        <p>Enter your email Id below and <br>you’ll receive a 4 Digit Verification Code.</p>
         <form name="forms-otp1" class="form-otp">
             <div class="form-group">
                 <input type="text" class="form-control" ng-model="emailId" placeholder="Enter your email Id. ">
@@ -13,5 +13,49 @@
             <button class="btn btn-default btn--brown text-uppercase" ng-click="forgotPasswordOtp(emailId)">go</button>
             <!--<button class="btn btn-primary">go</button>-->
         </form>
+    </div>
+
+    <div class="otp-one login-head otp-two text-center" ng-if="otpPwd">
+        <a href="" class="closes" ng-click="$dismiss();">
+            <!--<img src="img/home/33.png" class="img-responsive" alt="cross">-->
+            <i class="fa fa-2x fa-times-circle-o" aria-hidden="true"></i>
+        </a>
+        <h1>otp</h1>
+        <p>Enter your 4 Digit Verification Code</p>
+        <form name="forms-otp1" class="form-otp">
+            <div class="form-groups">
+                <input class="otpInput" type="text" ng-model="userOtp">
+                <!--<span></span>
+                <span></span>
+                <span></span>
+                <span></span>-->
+            </div>
+            <button class="btn btn-default" ng-click="confirmForgotPasswordOtp(userOtp)">Verify OTP</button>
+            <button class="btn btn-default" ng-click="resendOtp()" ng-if="resendOtpBut">Resend OTP</button>
+            <button class="btn btn-default" ng-click="$dismiss()">Cancel</button>
+            <span class="text-center text-danger" ng-if="errorMessage">{{errorMessage}}</span>
+            <!--<a href="#" class="resend">Resend Code</a>-->
+        </form>
+    </div>
+
+    <div class="change-password login-head" ng-if="resetPwd">
+        <a href="" class="closes" ng-click="$dismiss();">
+            <!--<img src="img/home/33.png" class="img-responsive" alt="cross">-->
+            <i class="fa fa-2x fa-times-circle-o" aria-hidden="true"></i>
+        </a>
+        <h1>Reset password</h1>
+        <div class="form">
+            <form name="form" class="forms">
+                <div class="form-group">
+                    <input type="password" class="form-control" ng-model="formData.newPassword" placeholder="New Password">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" ng-model="formData.confirmPassword" placeholder="Confirm Password">
+                </div>
+
+                <button class="btn btn-default btn--brown text-uppercase" ng-click="savePassword(formData)">Save</button>
+            </form>
+        </div>
+
     </div>
 </div>

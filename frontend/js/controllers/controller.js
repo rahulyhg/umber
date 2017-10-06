@@ -194,7 +194,7 @@ myApp
 
         }];
         ProductService.getFeatured(function (data) {
-            $scope.featured = data.data.data;
+            $scope.featured = data.data.data.featureds;
 
             if (_.isEmpty($scope.featured)) {
 

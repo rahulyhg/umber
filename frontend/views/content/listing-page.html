@@ -108,7 +108,7 @@
                             <div class="checkbox" ng-repeat="size in filters.sizes">
                                 <input type="checkbox" id="{{size._id}}" ng-checked="checkFilterStatus('size',size._id)" ng-click="applyFilters('size', size)">
                                 <label for="{{size._id}}">
-                                     {{size.description}}
+                                     {{size.name}}
                                 </label>
                             </div>
                         </div>
@@ -122,7 +122,7 @@
                                     <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
                                 </h5>
                             </uib-accordion-heading>
-                            <div class="checkbox" ng-repeat="style in filters.styles">
+                            <div class="checkbox" ng-repeat="style in filters.styles track by $index">
                                 <input type="checkbox" id="{{style}}" ng-checked="checkFilterStatus('style',style)" ng-click="applyFilters('style', style)">
                                 <label for="{{style}}">
                                      {{style}}
@@ -269,8 +269,11 @@
                                             <h5>{{product.productName}} <br>{{product.type.name}}</h5>
                                             <div class="viewSize">
                                                 <p class="inline-block size-text">Sizes:</p>
-                                                <div class="inline-block buy-para__sizes">
+                                                <div class="inline-block buy-para__sizes" ng-if="product.sizes">
                                                     <p ng-repeat="size in product.sizes"> {{size.name}}</p>
+                                                </div>
+                                                <div class="inline-block buy-para__sizes" ng-if="!product.sizes">
+                                                    <p> {{product.size.name}}</p>
                                                 </div>
                                             </div>
                                             <hr>
@@ -320,7 +323,10 @@
                                             <div class="viewSize">
                                                 <p class="inline-block size-text">Sizes:</p>
                                                 <div class="inline-block buy-para__sizes">
-                                                    <p ng-repeat="size in product.sizes">{{size.name}}</p>
+                                                    <p ng-repeat="size in product.sizes track by $index" ng-if="size.name">
+                                                        {{size}}</p>
+                                                    <p ng-repeat="size in product.sizes track by $index" ng-if="!size.name">
+                                                        {{size}}</p>
                                                 </div>
                                             </div>
                                         </div>

@@ -693,11 +693,12 @@ var model = {
                     Product.findOne({
                             productId: product._id,
                             newArrival: true
-                        }).deepPopulate("homecategory.name category.name prodCollection.name color.name size.name product.fabric.name product.type.name product.brand.name")
+                        }).deepPopulate("homecategory category.name prodCollection.name color.name size.name fabric.name type.name brand.name")
                         .exec(function (err, product) {
-                            if (!_.isEmpty(product))
+                            if (!_.isEmpty(product)) {
                                 newArrivals.push(product);
-                            eachCallback(err, product);
+                                eachCallback(err, product);
+                            }
                         });
                 }, function (err) {
                     callback2(err, newArrivals);
@@ -729,21 +730,49 @@ var model = {
                 });
             },
             function (products, callback2) {
-                var featureds = [];
+                // var featureds = [];
+                var featureds = {
+                    featureds: [],
+                    category: [],
+                    type: [],
+                    price: [],
+                    collection: [],
+                    size: [],
+                    style: [],
+                    color: [],
+                    fabric: [],
+                    brand: []
+                };
                 async.each(products, function (product, eachCallback) {
                     Product.findOne({
-                        productId: product._id,
-                        featured: true
-                    }).exec(function (err, product) {
-                        if (!_.isEmpty(product))
-                            featureds.push(product);
-                        eachCallback(err, product);
-                    });
+                            productId: product._id,
+                            featured: true
+                        }).deepPopulate("homecategory category.name prodCollection.name color.name size.name fabric.name type.name brand.name")
+                        .exec(function (err, product) {
+                            if (!_.isEmpty(product)) {
+                                // featureds.push(product);
+                                featureds.featureds.push(product);
+                                featureds.style.push(product.style);
+                                featureds.price.push(product.price);
+                                featureds.category.push(product.category);
+                                // featureds.homeCategory.push(product);
+                                featureds.collection.push(product.prodCollection);
+                                featureds.color.push(product.color);
+                                featureds.size.push(product.size);
+                                featureds.fabric.push(product.fabric);
+                                featureds.type.push(product.type);
+                                featureds.brand.push(product.brand);
+
+                                eachCallback(err, product);
+                            }
+                        });
                 }, function (err) {
+                    console.log("in new", featureds)
                     callback2(err, featureds);
                 });
             }
         ], function (err, results) {
+            console.log("in result", results)
             callback(err, results);
         });
     },

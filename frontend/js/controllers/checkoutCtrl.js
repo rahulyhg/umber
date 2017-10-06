@@ -1,4 +1,4 @@
-myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService, toastr, $state, myService, BannerService, TemplateService, NavigationService, UserService, CartService, WishlistService, $timeout) {
+myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService, toastr, $state, $uibModal, myService, BannerService, TemplateService, NavigationService, UserService, CartService, WishlistService, $timeout) {
     $scope.template = TemplateService.getHTML("content/checkout.html");
     TemplateService.title = "Checkout"; //This is the Title of the Website
     $scope.navigation = NavigationService.getNavigation();
@@ -9,9 +9,9 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
     $scope.loginData = {};
     $scope.loggedUser = $.jStorage.get("userId");
     $scope.accessToken = $.jStorage.get("accessToken");
-    $scope.user={};
-    $scope.user.billingAddress={};
-    $scope.user.deliveryAddress={};
+    $scope.user = {};
+    $scope.user.billingAddress = {};
+    $scope.user.deliveryAddress = {};
     $scope.user.billingAddress.country = "India";
     $scope.user.deliveryAddress.country = "India";
     if ($scope.loggedUser) {
@@ -42,47 +42,116 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
             if (!_.isEmpty(data.data.data)) {
                 console.log("Login data: ", data);
                 $scope.userData = data.data.data;
+                $scope.otpRegister = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'views/modal/otp2.html',
+                    scope: $scope,
+                    // windowClass: 'loginModalSize',
+                    controller: 'CheckoutCtrl'
+                    // windowClass: 'modal-content-radi0'
+                });
+
                 $.jStorage.set("username", $scope.userData.firstName)
                 if ($.jStorage.get("username")) {
                     $scope.firstname = $.jStorage.get("username");
                 }
-                $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
-                $.jStorage.set("userId", $scope.userData._id);
-                var tokken = $.jStorage.get("accessToken");
-                if (tokken) {
-                    var offlineCart = $.jStorage.get("cart");
-                    if (offlineCart) {
-                        var cart = {};
-                        cart.userId = $.jStorage.get("userId");
-                        cart.accessToken = $.jStorage.get("accessToken");
-                        cart.products = $.jStorage.get("cart").products;
-                        console.log("Offline cart: ", cart);
-                        CartService.saveProduct(cart, function (data) {
-                            if (!data.data.value) {
-                                console.log("Error: in ofline storage ", data.data.error);
-                            } else {
-                                console.log("Success");
-                                $state.reload();
-                            }
-                        });
-                    }
-                    var offlineWishlist = $.jStorage.get("wishlist");
-                    console.log("sendingofflinewishlist::::::", offlineWishlist)
-                    if (offlineWishlist) {
-                        var product = {
-                            accessToken: $.jStorage.get("accessToken"),
-                            userId: $.jStorage.get("userId"),
-                            products: $.jStorage.get("wishlist"),
+                // $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
+                // $.jStorage.set("userId", $scope.userData._id);
+
+            } else if (data.data.error) {
+                toastr.error("User already exists with the given emailId. Please login to proced", "Error");
+            } {
+                // TODO:: show popup to register
+            }
+        });
+    }
+    $scope.checkOtp = function (otp) {
+        if (otp) {
+            $scope.userData.otp = otp;
+            console.log("Registered user: ", $scope.userData);
+            UserService.verifyRegisterUserWithOtp($scope.userData, function (data) {
+                console.log("VerifyOtp: ", data);
+                if (data.data.value === true) {
+                    // $scope.test = $uibModal.open({
+                    //     templateUrl: "views/modal/otpsuccess.html",
+                    //     animation: true,
+                    //     scope: $scope,
+                    //     size: 'small'
+                    // });
+                    $.jStorage.set('user', data.data.data);
+                    $.jStorage.set("userId", $scope.userData._id);
+                    $.jStorage.set('accessToken', data.data.data.accessToken[0]);
+                    var tokken = $.jStorage.get("accessToken");
+                    if (tokken) {
+                        var offlineCart = $.jStorage.get("cart");
+                        if (offlineCart) {
+                            var cart = {};
+                            cart.userId = $.jStorage.get("userId");
+                            cart.accessToken = $.jStorage.get("accessToken");
+                            cart.products = $.jStorage.get("cart").products;
+                            console.log("Offline cart: ", cart);
+                            CartService.saveProduct(cart, function (data) {
+                                if (!data.data.value) {
+                                    console.log("Error: in ofline storage ", data.data.error);
+                                } else {
+                                    console.log("Success");
+                                    $state.reload();
+                                }
+                            });
                         }
-                        WishlistService.saveProduct(product, function (data) {
-                            console.log("sendingwishlisttodb:::::::", data);
-                        })
+                        var offlineWishlist = $.jStorage.get("wishlist");
+                        console.log("sendingofflinewishlist::::::", offlineWishlist)
+                        if (offlineWishlist) {
+                            var product = {
+                                accessToken: $.jStorage.get("accessToken"),
+                                userId: $.jStorage.get("userId"),
+                                products: $.jStorage.get("wishlist"),
+                            }
+                            WishlistService.saveProduct(product, function (data) {
+                                console.log("sendingwishlisttodb:::::::", data);
+                            })
+                        }
+                    }
+                    $scope.loggedUser = $scope.userData._id;
+                    $uibModalInstance.dismiss('cancel');
+                    $state.reload();
+
+                    var emailUser = {};
+                    emailUser.email = $.jStorage.get('user').email;
+                    // NavigationService.apiCallWithData("User/welcomeEmail", emailUser, function (data) {
+                    //     console.log("in User/welcomeEmail", data);
+                    //     if (data.value === true) {
+
+                    //     }
+                    // });
+
+                } else {
+                    if (data.error == 'otpNoMatch') {
+                        $scope.errorMessage = "Invalid OTP. Please provide valid OTP.";
+                    } else if (data.error == 'otpExpired') {
+                        $scope.errorMessage = "OTP Expired. Please click on 'Resend OTP'!";
+                        $scope.resendOtpBut = true;
+                    } else if (data.error == 'noOtpFound') {
+                        $scope.errorMessage = "No OTP found. Please click on 'Resend OTP'!";
+                        $scope.resendOtpBut = true;
+                    } else {
+                        $scope.errorMessage = "Error Occurred. Please click on 'Resend OTP'";
+                        $scope.resendOtpBut = true;
                     }
                 }
-                $state.reload();
+            });
+        } else {
+            $scope.errorMessage = "Please enter OTP";
+        }
+    }
 
+    $scope.resendOtp = function () {
+        console.log(" in resend $scope.formData: ", $scope.userData);
+        UserService.resendOtp($scope.userData, function (data) {
+            if (data.value) {
+                $scope.resendOtpBut = false;
             } else {
-                // TODO:: show popup to register
+                console.log("Error: ", data);
             }
         });
     }
@@ -156,6 +225,7 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                 $state.reload();
             } else {
                 // TODO:: show popup to register
+                $scope.message = "Invalid Credentials"
             }
         });
     }
