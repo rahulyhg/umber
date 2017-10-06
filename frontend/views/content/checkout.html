@@ -25,16 +25,24 @@
                     </div>
                     <div class="login-tab" ng-if="!loggedUser && view=='loginTab'">
                         <div class="col-md-3 col-md-offset-1">
-                            <form class="customized-form login-form">
+                            <form class="customized-form " name="loginForm1" novalidate>
                                 <div class="form-group">
-                                    <input type="text" placeholder="Email" ng-model="loginData.email" class="form-control">
+                                    <input type="email" placeholder="Email" ng-model="loginData.email" class="form-control" name="email" required uib-popover="{{loginForm1.email.$touched && loginForm1.email.$invalid ||loginForm1.email.$error.email && loginForm1.email.$error.required }}"
+                                        popover-title="Please enter a valid email address" popover-placement="bottom" popover-class="login-popover"
+                                        popover-is-open="loginForm1.email.$touched && loginForm1.email.$invalid ||loginForm1.email.$error.email && loginForm1.email.$error.required"
+                                        popover-trigger="'none'">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" placeholder="Password" ng-model="loginData.password" class="form-control">
+                                    <input type="password" placeholder="Password" ng-model="loginData.password" class="form-control" name="password" required
+                                        uib-popover="{{loginForm1.password.$touched && loginForm1.password.$invalid}}" popover-title="Please enter your password"
+                                        popover-placement="bottom" popover-class="login-popover" popover-is-open="loginForm1.password.$touched && loginForm1.password.$invalid"
+                                        popover-trigger="'none'">
                                     <p class="pull-right forgot__checkout"><a href="">Forgot Password?</a></p>
                                 </div>
                                 <div>
-                                    <button class="btn btn--login btn-block" ng-click="login()">log in</button>
+                                    <button class="btn btn--login btn-block" ng-click="login()" ng-disabled="loginForm1.email.$invalid || loginForm1.password.$invalid"
+                                        uib-popover="{{message}}" popover-title="Invalid credential" popover-placement="bottom"
+                                        popover-class="login-popover" popover-is-open="message" popover-trigger="'none'">log in</button>
                                 </div>
                                 <p class="border-line">or</p>
                                 <div class="social-icons">
@@ -97,10 +105,10 @@
                                         popover-trigger="'none'">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" placeholder="Confirm Password" name="confirm" ng-model="registerData.confirmpassword" class="form-control"
-                                        hs-password-verifier="registerData.password" required uib-popover="{{loginForm.confirm.$touched && loginForm.confirm.$invalid}}"
+                                    <input type="password" placeholder="Confirm Password" name="confirmpassword" ng-model="registerData.confirmpassword" class="form-control"
+                                        hs-password-verifier="registerData.password" required uib-popover="{{loginForm.confirmpassword.$touched && loginForm.confirmpassword.$invalid}}"
                                         popover-title="Passwords don't match" popover-placement="bottom" popover-class="login-popover"
-                                        popover-is-open="loginForm.confirmpassword.$touched && loginForm.confirmpassword.$invalid || loginForm.loginForm.confirmpassword.$error.hsPswdMatch"
+                                        popover-is-open="loginForm.confirmpassword.$touched && loginForm.confirmpassword.$invalid || loginForm.registerData.confirmpassword.$error.hsPasswordVerifier"
                                         popover-trigger="'none'">
                                     <!-- <span ng-show="loginForm.registerData.confirmpassword.$error.hsPasswordVerifier">Passwords don't match</span> -->
                                 </div>
@@ -112,7 +120,7 @@
                                     <button class="btn btn--login btn-block" ng-disabled="loginForm.firstname.$invalid || 
                                     loginForm.lastname.$invalid ||
                                     loginForm.email.$invalid ||loginForm.mobile.$invalid ||loginForm.password.$invalid || 
-                                    loginForm.confirm.$invalid || loginForm.agree.$invalid" ng-click="loginForm.$valid && registerUser()">sign up</button>
+                                    loginForm.confirmpassword.$invalid || loginForm.agree.$invalid" ng-click="loginForm.$valid && registerUser()">sign up</button>
                                 </div>
                                 <p class="border-line">or</p>
                                 <div class="social-icons">
