@@ -691,13 +691,14 @@ var model = {
                 var newArrivals = [];
                 async.each(products, function (product, eachCallback) {
                     Product.findOne({
-                        productId: product._id,
-                        newArrival: true
-                    }).exec(function (err, product) {
-                        if (!_.isEmpty(product))
-                            newArrivals.push(product);
-                        eachCallback(err, product);
-                    });
+                            productId: product._id,
+                            newArrival: true
+                        }).deepPopulate("homecategory.name category.name prodCollection.name color.name size.name product.fabric.name product.type.name product.brand.name")
+                        .exec(function (err, product) {
+                            if (!_.isEmpty(product))
+                                newArrivals.push(product);
+                            eachCallback(err, product);
+                        });
                 }, function (err) {
                     callback2(err, newArrivals);
                 });
