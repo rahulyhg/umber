@@ -47,6 +47,15 @@
              $scope.filters.styles = data.data.data.style;
              $scope.filters.colors = data.data.data.color;
              $scope.filters.fabrics = data.data.data.fabric;
+             $scope.filters.price = data.data.data.price;
+             $scope.max = Math.max.apply(null, $scope.filters.price);
+             $scope.min = Math.min.apply(null, $scope.filters.price);
+             //  console.log("$scope.categories", $scope.categories[0].slug)
+             var input = {
+                 "slug": $scope.categories[0].slug,
+                 "page": 1
+             }
+             $.jStorage.set("selectedCategory", input);
          })
      }
 
@@ -98,14 +107,17 @@
      //      console.log($scope.products)
 
      //  }
+     if ($stateParams.id) {
+         CategoryService.getCategoryWithParent(data, function (data) {
+             console.log("cat from parentctrl", data.data.data);
+             $scope.categories = data.data.data;
+             $scope.filteredProducts($scope.categories[0].slug)
+         })
+     }
 
-     CategoryService.getCategoryWithParent(data, function (data) {
-         console.log("cat from parentctrl", data.data.data);
-         $scope.categories = data.data.data;
-         $scope.filteredProducts($scope.categories[0].slug)
-     })
      /******getting products based on category******* */
      $scope.filteredProducts = function (selectedCategory) {
+         console.log("selectedCategory", selectedCategory)
          $.jStorage.deleteKey("appliedFilters");
          if ($.jStorage.get("selectedCategory") && selectedCategory != $.jStorage.get("selectedCategory").slug) {
              $.jStorage.deleteKey("appliedFilters");
@@ -207,9 +219,10 @@
      $scope.gotoComparePage = function () {
          $state.go("compare-products");
      }
+
      var appliedFilters = {};
      /*******retriving products based on filters********* */
-     $scope.applyFilters = function (key, filter) {
+     $scope.applyFilters = function (key, filter, key1, filter1) {
          //  console.log("$.jStorage.get('selectedCategory').slug", $.jStorage.get("selectedCategory").slug);
          appliedFilters = $.jStorage.get('appliedFilters') ? $.jStorage.get('appliedFilters') : {
              appliedFilters: {
@@ -222,21 +235,49 @@
                  fabric: [],
              }
          };
-         console.log(filter, key);
+         console.log(filter, key, filter1, key1);
          var cat = $.jStorage.get("selectedCategory").slug;
          appliedFilters.appliedFilters.slug = [cat];
-
-         var result = _.indexOf(appliedFilters.appliedFilters[key], filter._id);
+         if (filter._id) {
+             var result = _.indexOf(appliedFilters.appliedFilters[key], filter._id);
+         } else {
+             var result = _.indexOf(appliedFilters.appliedFilters[key], filter);
+         }
+         if (filter1) {
+             var result = _.indexOf(appliedFilters.appliedFilters[key], filter);
+         }
          console.log("check result", result)
          if (result != -1) {
-             _.pullAt(appliedFilters.appliedFilters[key], result);
-         } else {
-             if (!_.isArrayLike(appliedFilters.appliedFilters[key])) {
-                 appliedFilters.appliedFilters[key] = [];
+             if (filter1) {
+                 _.pullAt(appliedFilters.appliedFilters[key1], result);
              }
-             appliedFilters.appliedFilters[key].push(filter._id);
+             if (filter) {
+                 _.pullAt(appliedFilters.appliedFilters[key], result);
+             }
+         } else {
+             if (filter1) {
+                 if (!_.isArrayLike(appliedFilters.appliedFilters[key1])) {
+                     appliedFilters.appliedFilters[key1] = [];
+                 }
+                 if (filter._id) {
+                     appliedFilters.appliedFilters[key1].push(filter1._id);
+                 } else {
+                     appliedFilters.appliedFilters[key1].push(filter1);
+                 }
+             }
+             if (filter) {
+                 if (!_.isArrayLike(appliedFilters.appliedFilters[key])) {
+                     appliedFilters.appliedFilters[key] = [];
+                 }
+                 if (filter._id) {
+                     appliedFilters.appliedFilters[key].push(filter._id);
+                 } else {
+                     appliedFilters.appliedFilters[key].push(filter);
+                 }
+             }
          }
          appliedFilters.page = 1;
+         console.log("appliedFilters!!!!!!!!", appliedFilters)
          $.jStorage.set('appliedFilters', appliedFilters)
 
          console.log("Jstoragefor filters::", $.jStorage.get("appliedFilters"))
@@ -246,7 +287,7 @@
                  delete appliedFilters.appliedFilters[key];
              }
          });
-         console.log("apply filters: ", appliedFilters);
+         console.log("apply filters:before ", appliedFilters);
          ProductService.getProductsWithAppliedFilters(appliedFilters, function (data) {
              console.log("filtersretrived:::", data.data.data);
              $scope.products = _.chunk(data.data.data.products, 3);
@@ -278,7 +319,8 @@
          })
      }
      $scope.priceSet = function (min, max) {
-         console.log(min, max)
+         console.log(min, max);
+         $scope.applyFilters('min', min, 'max', max);
      }
 
 
@@ -506,7 +548,6 @@
                  size: sizeObj._id,
                  color: $scope.product.color._id
              }
-
              ProductService.getSKUWithParameter(data, function (data) {
                  console.log("SKU:", data)
                  if (data.data.value) {

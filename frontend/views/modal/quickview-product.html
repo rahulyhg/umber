@@ -63,17 +63,17 @@
                             <div class="viewSize inline-block relate" ng-if="arrayCheck">
                                 <h5>SIZE </h5>
                                 <div class="inline-block buy-para__sizes">
-                                    <p ng-click="selectSize(size)" ng-class="{'active':activeButton=={{size.name}}}" ng-repeat="size in product.sizes track by $index"
-                                        ng-if="product.sizes">{{size.name}}</p>
-                                    <p ng-click="selectSize(size)" ng-class="{'active':activeButton=={{size.name}}}" ng-repeat="size in product.size track by $index"
-                                        ng-if="!product.sizes">{{size.name}}</p>
+                                    <p ng-class="{'active':activeButton=={{size.name}}}" ng-repeat="size in product.sizes track by $index" ng-if="product.sizes"
+                                        ng-click="selectSize(size)">{{size.name}}</p>
+                                    <p ng-class="{'active':activeButton=={{size.name}}}" ng-repeat="size in product.size track by $index" ng-if="!product.sizes"
+                                        ng-click="selectSize(size)">{{size.name}}</p>
                                 </div>
                                 <div>
                                     <a href="" class="linking ">Size Chart</a>
                                 </div>
                             </div>
                             <div class="viewSize inline-block relate" ng-if="!arrayCheck">
-                                <h5>SIZE</h5>
+                                <h5>SIZE2222</h5>
                                 <div class="inline-block buy-para__sizes">
                                     <p ng-click="selectSize(product.size)" ng-class="{'active':activeButton=={{product.size.name}}}">{{product.size.name}}</p>
                                     <!--<p>38</p>

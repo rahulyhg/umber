@@ -83,7 +83,7 @@ schema.plugin(deepPopulate, {
             select: "name"
         },
         'category': {
-            select: "name"
+            select: "name slug"
         },
         'brand': {
             select: "name"
@@ -549,7 +549,7 @@ var model = {
     // Function to retrieve filters on listing page
     // req -> {category: category._id}
     getFiltersWithCategory: function (data, callback) {
-        // console.log("Filters with category data: ", data);
+        console.log("Filters with category data: ", data);
         Category.findOne({
             slug: data.slug
         }).exec(function (err, category) {
@@ -693,7 +693,7 @@ var model = {
                     Product.findOne({
                             productId: product._id,
                             newArrival: true
-                        }).deepPopulate("homecategory category.name prodCollection.name color.name size.name fabric.name type.name brand.name")
+                        }).deepPopulate("homecategory category prodCollection color size fabric type brand")
                         .exec(function (err, product) {
                             if (!_.isEmpty(product)) {
                                 newArrivals.push(product);
@@ -762,17 +762,26 @@ var model = {
                                 featureds.fabric.push(product.fabric);
                                 featureds.type.push(product.type);
                                 featureds.brand.push(product.brand);
+                                // console.log("unique product: ", featureds);
 
                                 eachCallback(err, product);
                             }
                         });
                 }, function (err) {
-                    console.log("in new", featureds)
+                    featureds.style = _.uniq(featureds.style);
+                    featureds.price = _.uniq(featureds.price);
+                    featureds.category = _.uniqBy(featureds.category, 'name');
+                    featureds.collection = _.uniqBy(featureds.collection, 'name');
+                    featureds.color = _.uniqBy(featureds.color, 'name');
+                    featureds.size = _.uniqBy(featureds.size, 'name');
+                    featureds.fabric = _.uniqBy(featureds.fabric, 'name');
+                    featureds.type = _.uniqBy(featureds.type, 'name');
+                    featureds.brand = _.uniqBy(featureds.brand, 'name');
                     callback2(err, featureds);
                 });
             }
         ], function (err, results) {
-            console.log("in result", results)
+            // console.log("in result", results)
             callback(err, results);
         });
     },
@@ -896,7 +905,12 @@ var model = {
                             var filterType = [];
                             var filterCategory = [];
                             var filterCollection = [];
-                            var filterPriceRange = [];
+                            var filterPriceRange = {
+                                min: [],
+                                max: []
+                            }
+                            var filterPriceRangeMin = [];
+                            var filterPriceRangeMax = [];
                             var filterColor = [];
                             var filterSize = [];
                             var filterFabric = [];
@@ -915,14 +929,19 @@ var model = {
                             _.each(filters.appliedFilters.color, function (color) {
                                 filterColor.push(ObjectId(color));
                             });
-                            _.each(filters.appliedFilters.priceRange, function (priceRange) {
-                                filterColor.push(ObjectId(priceRange));
+                            _.each(filters.appliedFilters.min, function (min) {
+                                console.log("priceRange", min)
+                                filterPriceRange.min.push(min);
+                                console.log("filterPriceRange", filterPriceRange)
+                            });
+                            _.each(filters.appliedFilters.max, function (max) {
+                                console.log("priceRange", max)
+                                filterPriceRange.max.push(max);
                             });
                             _.each(filters.appliedFilters.collection, function (collection) {
                                 filterCollection.push(ObjectId(collection));
                             });
                             _.each(filters.appliedFilters.size, function (size) {
-                                console.log("size", size)
                                 filterSize.push(ObjectId(size));
                             });
                             _.each(filters.appliedFilters.fabric, function (fabric) {
@@ -969,6 +988,24 @@ var model = {
                                         "color": {
                                             $in: filterColor
                                         },
+                                    }
+                                })
+                            }
+                            if (!_.isEmpty(filters.appliedFilters.min)) {
+
+                                pipeline.push({
+
+                                    $match: {
+
+                                        $and: [{
+                                            "price": {
+                                                $lte: filterPriceRange.max[filterPriceRange.max.length - 1]
+                                            }
+                                        }, {
+                                            "price": {
+                                                $gte: filterPriceRange.min[filterPriceRange.min.length - 1]
+                                            }
+                                        }]
                                     }
                                 })
                             }

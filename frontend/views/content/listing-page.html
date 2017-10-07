@@ -27,7 +27,7 @@
                                </label>
                             </div>-->
                             <div class="checkbox" ng-repeat="category in categories">
-                                <div class="radio">
+                                <div class="radio" ng-if="category.slug">
                                     <input type="radio" class="form-control" name="category" id="{{category._id}}" ng-checked="checkRadioCategory(category.slug)"
                                         value="{{category.name}}" ng-click="filteredProducts(category.slug)">
                                     <label for="{{category._id}}"> <span ></span>{{category.name}}
@@ -42,7 +42,22 @@
                                      
                                        </label>-->
                                 </div>
-                                </label>
+                                <div class="radio" ng-if="!category.slug">
+                                    <input type="radio" class="form-control" name="category" id="{{category._id}}" ng-checked="checkRadioCategory(category.slug)"
+                                        value="{{category.name}}" ng-click="filteredProducts(category._id)">
+                                    <label for="{{category._id}}"> <span ></span>{{category.name}}
+                                         
+                                       </label>
+                                    <!--<input type="radio" class="form-control" name="radio">
+                                    <label for="radio2"> <span></span> Tshirt
+                                        
+                                       </label>
+                                    <input type="radio" class="form-control" name="radio">
+                                    <label for="radio3">  <span></span>   Trouser
+                                     
+                                       </label>-->
+                                </div>
+                                <!--</label>-->
                             </div>
                         </div>
                     </uib-accordion>
@@ -72,7 +87,6 @@
                                 </h5>
                             </uib-accordion-heading>
                             <div class="range-slider">
-
                                 <rzslider rz-slider-model="min" rz-slider-high="max" rz-slider-options="slider_translate.options" ng-mouseup="priceSet(min,max)"></rzslider>
                                 <span class="rupee-count pull-left">Rs{{min}}</span>
                                 <!---&#8377;-->
