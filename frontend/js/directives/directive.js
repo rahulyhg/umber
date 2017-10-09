@@ -126,4 +126,54 @@ myApp.directive('img', function ($compile, $parse) {
                 });
             }
         };
+    })
+
+
+
+    // elevateZoom
+
+    .directive('elevateZoom', function ($document, $filter) {
+        return {
+            restrict: 'EA',
+            link: function ($scope, element, attr) {
+                $scope.$watch(attr.image, function () {
+                    $scope.changeImage = function () {
+                        console.log($scope[attr.image]);
+                        var $element = $(element);
+                        var image = $scope[attr.image].image;
+                        console.log(image);
+                        // image = image.productdetail.image[0];
+                        var smallimg = attr.smallImage;
+                        var bigimg = attr.bigImage;
+                        // $element.attr('data-zoom-image', image);
+                        // $element.attr('src', image);
+                        var ez = $element.data("elevateZoom");
+                        if (!ez) {
+                            $element.attr('data-zoom-image', $filter('serverimage')(image));
+                            $element.attr('src', $filter('serverimage')(image));
+                            $element.elevateZoom();
+                        } else {
+                            var newImage = $filter('serverimage')(image);
+                            var smallImage = $filter('serverimage')(image);
+                            ez.swaptheimage(smallImage, newImage);
+                        }
+                    }
+                    $scope.$on('changeImage', function (event, data) {
+                        $scope.changeImage();
+                    });
+                    $scope.changeImage();
+                })
+            }
+        }
+    })
+    .directive('zoomContainer', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+                scope.$on('$stateChangeSuccess', function () {
+                    var target = element.children('div.zoomContainer').remove();
+                })
+            }
+        }
+
     });
