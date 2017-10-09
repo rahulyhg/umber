@@ -336,11 +336,12 @@
                                             <p class="item-cost"><i class="fa fa-inr"></i>{{product.price}}</p>
                                             <div class="viewSize">
                                                 <p class="inline-block size-text">Sizes:</p>
-                                                <div class="inline-block buy-para__sizes">
-                                                    <p ng-repeat="size in product.sizes track by $index" ng-if="size.name">
-                                                        {{size}}</p>
-                                                    <p ng-repeat="size in product.sizes track by $index" ng-if="!size.name">
-                                                        {{size}}</p>
+                                                <div class="inline-block buy-para__sizes" ng-if="product.sizes">
+                                                    <p ng-repeat="size in product.sizes"> {{size.name}}</p>
+                                                </div>
+                                                <div class="inline-block buy-para__sizes" ng-if="!product.sizes">
+                                                    <p>
+                                                        {{product.size.name}}</p>
                                                 </div>
                                             </div>
                                         </div>
