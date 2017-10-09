@@ -1079,8 +1079,10 @@
 
                                             .navbar-right>li>a {
                                                 @include navbar-vertical-align(21px);
-                                            }
-
+                                            } // .navbar-fixed-bottom,
+                                            // .navbar-fixed-top {
+                                            //     z-index: 1100; // set it to high because of popover's index
+                                            // }
                                             .dropdown-menu__btn {
                                                 .btn--brown-checkout {
                                                     @extend .btn--brown;
@@ -1116,6 +1118,11 @@
                                                     @include transform(rotate(-45deg));
                                                     @include transform-origin( 10% 10%);
                                                 }
+                                            }
+                                            /*Dont modify the popover's z index(We used uib's popover) */
+
+                                            .popover {
+                                                z-index: 1000;
                                             }
 
                                             .side-nav {
@@ -2147,6 +2154,13 @@
                                                     .form-otp {
                                                         padding: 10px 20%;
                                                     }
+                                                    .fourdgt-otpbox {
+                                                        input {
+                                                            width: 155px;
+                                                            @include margin(0 auto);
+                                                            letter-spacing: 15px;
+                                                        }
+                                                    }
                                                     .form-group {
                                                         input {
                                                             border: none;
@@ -2368,7 +2382,7 @@
                                                     }
                                                     .table-bordered>tbody>tr>td:first-child {
                                                         text-align: right;
-                                                        width: 14%;
+                                                        width: 155px;
                                                         letter-spacing: 1px;
                                                         text-transform: uppercase;
                                                         vertical-align: middle;

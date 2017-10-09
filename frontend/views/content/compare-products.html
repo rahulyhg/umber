@@ -35,7 +35,10 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    Product
+                                    <div style="width: inherit">
+                                        Product
+                                    </div>
+
                                 </td>
                                 <td ng-repeat="product in products">
                                     {{product.productName}}
@@ -43,26 +46,37 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Image
+                                    <div style="width: inherit">
+                                        Image
+                                    </div>
+
                                 </td>
                                 <td ng-repeat="product in products">
                                     <img src="{{product.images[0].image|serverimage}}" alt="" class="img-responsive compare-img">
                                 </td>
                             </tr>
                             <tr>
-                                <td>Price</td>
+                                <td>
+                                    <div style="width: inherit"> Price </div>
+                                </td>
                                 <td ng-repeat="product in products">&#8377; {{product.price}}</td>
                             </tr>
                             <tr>
-                                <td>Product No.</td>
+                                <td>
+                                    <div style="width: inherit"> Product No. </div>
+                                </td>
                                 <td ng-repeat="product in products">{{product.name}}</td>
                             </tr>
                             <tr>
-                                <td>Brand</td>
+                                <td>
+                                    <div style="width: inherit"> Brand </div>
+                                </td>
                                 <td ng-repeat="product in products">{{product.brand.name}}</td>
                             </tr>
                             <tr>
-                                <td>Summary</td>
+                                <td>
+                                    <div style="width: inherit">Summary </div>
+                                </td>
                                 <td ng-repeat="product in products">
                                     <div>
                                         <p>{{product.description}}</p>
@@ -91,19 +105,27 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Collection</td>
+                                <td>
+                                    <div style="width: inherit">Collection </div>
+                                </td>
                                 <td ng-repeat="product in products">{{product.prodCollection.name}}</td>
                             </tr>
                             <tr>
-                                <td>Style</td>
+                                <td>
+                                    <div style="width: inherit">Style</div>
+                                </td>
                                 <td ng-repeat="product in products">{{product.style}}</td>
                             </tr>
                             <tr>
-                                <td>Fabric</td>
+                                <td>
+                                    <div style="width: inherit">Fabric</div>
+                                </td>
                                 <td ng-repeat="product in products">{{product.fabric.name}}</td>
                             </tr>
                             <tr>
-                                <td>Washcare</td>
+                                <td>
+                                    <div style="width: inherit">Washcare</div>
+                                </td>
                                 <td ng-repeat="product in products">
                                     <div>
                                         <p>
@@ -113,7 +135,9 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Basecolor</td>
+                                <td>
+                                    <div style="width: inherit">Basecolor</div>
+                                </td>
                                 <td ng-repeat="product in products">{{product.color.name}}</td>
                             </tr>
                             <!-- <tr>
