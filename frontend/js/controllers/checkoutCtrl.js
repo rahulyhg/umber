@@ -212,7 +212,7 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
             console.log("confirm", data);
             if (data.data.value = true) {
                 if (data.data.data == "No Data Found") {
-                    $scope.errorMessage = "Invalid OTP. Please provide a valid OTP";
+                    $scope.errorOtpMessage = "Invalid OTP.";
                     $scope.resendOtpBut = true;
                 } else {
                     $scope.otpPwd = false;
@@ -238,78 +238,11 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                 // $uibModalInstance.dismiss('cancel');
                 $state.reload();
             })
+        } else {
+            $scope.invalidConfPwd = "Invalid password";
         }
     }
 
-    //Function for forgot password which includes confirm password and save password functionality
-    $scope.forgotPassword = function () {
-        $scope.forgotPwd = true;
-        $scope.otpPwd = false
-        $scope.resetPwd = false;
-        $scope.forgotPasswordModal = $uibModal.open({
-            animation: true,
-            templateUrl: 'views/modal/otp1.html',
-            scope: $scope,
-            // windowClass: 'loginModalSize',
-            controller: 'CheckoutCtrl'
-            // windowClass: 'modal-content-radi0'
-        });
-        // $scope.loginModal.close({
-        //     $value: $scope.loginModal
-        // });
-        // $rootScope.loginModal.close();
-    }
-    $scope.forgotPasswordOtp = function (emailId) {
-        $scope.userEmail = {};
-        $scope.userEmail.email = emailId;
-        $scope.forgotPwd = false;
-        $scope.otpPwd = true;
-        $scope.resetPwd = false;
-        UserService.forgotPasswordOtp($scope.userEmail, function (data) {
-            console.log("in forgotPassword: ", data)
-            if (data.data.value) {
-                $scope.gtUser = {};
-                $scope.gtUser._id = data.data.data.userId;
-                // console.log("in forgotPassword: ", data)
-            } else {
-                console.log("Error: ", data);
-            }
-        });
-    }
-
-    $scope.confirmForgotPasswordOtp = function (otp) {
-
-        $scope.gtUser.verifyOtp = otp;
-        console.log("confirmForgotPasswordOtp: ", $scope.gtUser);
-        UserService.confirmForgotPasswordOtp($scope.gtUser, function (data) {
-            console.log("confirm", data);
-            if (data.data.value) {
-                $scope.otpPwd = false;
-                $scope.resetPwd = true;
-            } else {
-                $scope.errorMessage = "Invalid OTP. Please provide valid OTP. "
-                $scope.resendOtpBut = true;
-
-            }
-        })
-    }
-    $scope.savePassword = function (password) {
-        if (password.newPassword == password.confirmPassword) {
-            $scope.gtUser.password = password.newPassword;
-            $scope.gtUser.email = $scope.userEmail.email
-            console.log("confirmForgotPasswordOtp: savePassword", $scope.gtUser);
-            UserService.forgotPasswordSave($scope.gtUser, function (data) {
-                console.log("data in save password", data.data)
-                $.jStorage.set("username", data.data.data.firstName);
-                $.jStorage.set("userId", data.data.data._id);
-                $.jStorage.set('accessToken', data.data.data.accessToken[0]);
-                $scope.loggedUser = data.data.data._id;
-                $uibModalInstance.dismiss('cancel');
-                $state.reload();
-            })
-        }
-    }
-    // End of forgot password
     // $scope.updateAddress = function () {
     //     angular.element(document.getElementById('ordergenerate')).disabled = true;
     //     var updateAdd = {
