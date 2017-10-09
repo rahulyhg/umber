@@ -440,9 +440,9 @@
          console.log("prod", prod);
          $scope.product = prod;
          $scope.sizes = $scope.product.size;
-         //  console.log("$scope.sizes", $scope.sizes);
-         //  $scope.activeButton = $scope.sizes[0].name;
-         $scope.activeButton = $scope.sizes.name;
+         console.log("$scope.sizes", $scope.sizes);
+         $scope.activeButton = $scope.sizes[0].name;
+         //  $scope.activeButton = $scope.sizes.name;
          $scope.selectedSize = $scope.sizes;
          $scope.arrayCheck = angular.isArray($scope.sizes);
          //  console.log("$scope.arrayCheck", $scope.arrayCheck);
