@@ -248,6 +248,17 @@ var controller = {
             });
         }
     },
+    resendOtpForPwd: function (req, res) {
+        if (req.body) {
+            User.resendOtpForPwd(req.body, res.callback);
+        } else {
+            res.json({
+                message: {
+                    data: "Invalid request!"
+                }
+            });
+        }
+    },
     forgotPasswordSave: function (req, res) {
         if (req.body) {
             User.forgotPasswordSave(req.body, res.callback);
@@ -259,6 +270,16 @@ var controller = {
             });
         }
     },
-
+    dochangepassword: function (req, res) {
+        if (req.body) {
+            User.dochangepassword(req.body, res.callback);
+        } else {
+            res.json({
+                message: {
+                    data: "Invalid request!"
+                }
+            });
+        }
+    },
 };
 module.exports = _.assign(module.exports, controller);

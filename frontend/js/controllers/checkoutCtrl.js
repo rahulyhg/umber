@@ -147,13 +147,97 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
 
     $scope.resendOtp = function () {
         console.log(" in resend $scope.formData: ", $scope.userData);
-        UserService.resendOtp($scope.userData, function (data) {
-            if (data.value) {
-                $scope.resendOtpBut = false;
+        console.log(" in resend $scope.gtUser ", $scope.gtUser);
+        if ($scope.gtUser) {
+            UserService.resendOtpForPwd($scope.gtUser, function (data) {
+                if (data.value) {
+                    $scope.resendOtpBut = false;
+                } else {
+                    console.log("Error: ", data);
+                }
+            });
+        }
+        if ($scope.userData) {
+            UserService.resendOtp($scope.userData, function (data) {
+                if (data.value) {
+                    $scope.resendOtpBut = false;
+                } else {
+                    console.log("Error: ", data);
+                }
+            });
+        }
+    }
+
+    $scope.forgotPassword = function () {
+        console.log("in forgot password1111");
+        $scope.forgotPwd = true;
+        $scope.otpPwd = false
+        $scope.resetPwd = false;
+        $scope.forgotPasswordModal = $uibModal.open({
+            animation: true,
+            templateUrl: 'views/modal/otp1.html',
+            scope: $scope,
+            // windowClass: 'loginModalSize',
+            controller: 'CheckoutCtrl'
+            // windowClass: 'modal-content-radi0'
+        });
+        // $scope.loginModal.close({
+        //     $value: $scope.loginModal
+        // });
+        // $rootScope.loginModal.close();
+    };
+    $scope.forgotPasswordOtp = function (emailId) {
+        $scope.userEmail = {};
+        $scope.userEmail.email = emailId;
+        UserService.forgotPasswordOtp($scope.userEmail, function (data) {
+            console.log("in forgotPassword: 222", data)
+            if (data.data.value) {
+                $scope.forgotPwd = false;
+                $scope.resetPwd = false;
+                $scope.otpPwd = true;
+                $scope.gtUser = {};
+                $scope.gtUser._id = data.data.data._id;
+                // console.log("in forgotPassword: ", data)
             } else {
+                $scope.message = "Please sing up";
                 console.log("Error: ", data);
             }
         });
+    }
+    $scope.confirmForgotPasswordOtp = function (otp) {
+        $scope.gtUser.verifyOtp = otp;
+        console.log("confirmForgotPasswordOtp: ", $scope.gtUser);
+        UserService.confirmForgotPasswordOtp($scope.gtUser, function (data) {
+            console.log("confirm", data);
+            if (data.data.value = true) {
+                if (data.data.data == "No Data Found") {
+                    $scope.errorMessage = "Invalid OTP. Please provide a valid OTP";
+                    $scope.resendOtpBut = true;
+                } else {
+                    $scope.otpPwd = false;
+                    $scope.resetPwd = true;
+                }
+            } else {
+                $scope.errorMessage = "Invalid OTP. Please provide a valid OTP";
+                $scope.resendOtpBut = true;
+            }
+        })
+    }
+    $scope.savePassword = function (password) {
+        if (password.newPassword == password.confirmPassword) {
+            $scope.gtUser.password = password.newPassword;
+            $scope.gtUser.email = $scope.userEmail.email
+            console.log("confirmForgotPasswordOtp: savePassword", $scope.gtUser);
+            UserService.forgotPasswordSave($scope.gtUser, function (data) {
+                console.log("data in save password", data.data)
+                $.jStorage.set("username", data.data.data.firstName);
+                $.jStorage.set("userId", data.data.data._id);
+                $.jStorage.set('accessToken', data.data.data.accessToken[0]);
+                $scope.loggedUser = data.data.data._id;
+                // $uibModalInstance.dismiss('cancel');
+                $state.reload();
+            })
+        }
     }
 
     // $scope.updateAddress = function () {

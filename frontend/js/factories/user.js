@@ -24,6 +24,7 @@ myApp.factory('UserService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
+
         login: function (userData, callback) {
             $http({
                 url: adminurl + 'User/login',
@@ -57,9 +58,25 @@ myApp.factory('UserService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
+        resendOtpForPwd: function (userData, callback) {
+            $http({
+                url: adminurl + 'User/resendOtpForPwd',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
         forgotPasswordSave: function (userData, callback) {
             $http({
                 url: adminurl + 'User/forgotPasswordSave',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
+        changePassword: function (userData, callback) {
+            $http({
+                url: adminurl + 'User/dochangepassword',
                 method: 'POST',
                 data: userData,
                 withCredentials: false

@@ -534,31 +534,32 @@ var model = {
                     // sendData.password = user.password;
                     sendData.otp = user.otp;
                     // callback(null, sendData);
-                    User.saveData(sendData, function (err, data) {
-                        if (err) {
-                            callback(err, null);
-                        } else if (data) {
-                            if (!_.isEmpty(data)) {
-                                var accessToken = uid(16);
-                                data.accessToken.push(accessToken);
-                                User.saveData(data, function () {});
-                                console.log("data: ", data);
-                                callback(null, data);
-                            }
-                        } else {
-                            callback({
-                                message: {
-                                    data: "Invalid credentials!"
-                                }
-                            })
-                        }
-                    });
+                    // User.saveData(sendData, function (err, data) {
+                    //     if (err) {
+                    //         callback(err, null);
+                    //     } else if (data) {
+                    //         if (!_.isEmpty(data)) {
+                    //             var accessToken = uid(16);
+                    //             data.accessToken.push(accessToken);
+                    //             User.saveData(data, function () {});
+                    //             console.log("data: ", data);
+                    //             callback(null, data);
+                    //         }
+                    //     } else {
+                    //         callback({
+                    //             message: {
+                    //                 data: "Invalid credentials!"
+                    //             }
+                    //         })
+                    //     }
+                    // });
                 } else {
                     callback("errorOccurredRegister", null);
                 }
             });
         })
     },
+
     registerUser: function (data, callback) {
         console.log("#####in User", data);
         if (!data._id) {
@@ -740,49 +741,53 @@ var model = {
             // Check whether user is present
             function (callback) {
                 User.findOne({
-                    email: data.email
+                    email: data.email,
+                    verifyAcc: true
                 }).exec(callback);
             },
-            // Change password to random String
-            function (user, callback) {
+            function (user, callback) { // Change password to random String
+                console.log(user);
                 if (_.isEmpty(user)) {
-                    callback(null, "userNotFound");
+                    callback(null, false);
                 } else {
                     // Generate random String as a password
-                    var verificationCode = Math.floor(Math.random() * 1000000).toString().substring(2, 6);;
+                    // var verificationCode = Math.floor(Math.random() * 1000000).toString().substring(2, 6);
+                    var verificationCode = Math.random().toString().substring(2, 6);
                     user.forgotPassword = verificationCode;
-                    console.log("****444**", user)
                     User.saveData(user, function (err, result) {
                         if (err) {
                             callback(err, null);
                         } else {
                             User.findOne({
-                                _id: user._id
+                                _id: user._id,
+                                verifyAcc: true
                             }).exec(callback);
                         }
                     });
                 }
             },
-            // Send forget password email
-            function (user, callback) {
-                console.log("in forgot*****", user)
-                userData.userId = user._id;
-
-                var emailData = {};
-                emailData.otp = user.forgotPassword;
-                emailData.email = data.email;
-                emailData.subject = "Forgot Password";
-                emailData.filename = "reset-password.ejs";
-                emailData.from = "prajakta.kamble@wohlig.com"
-                // emailData.name = user.firstName + user.lastName;
-                emailData.firstname = user.firstName;
-                emailData.lastName = user.lastName;
-                Config.emailForResetPassword(emailData, callback);
-                // callback();
+            function (user, callback) { // Send forget password email
+                if (_.isEmpty(user)) {
+                    callback(null, false);
+                } else {
+                    console.log("in forgot*****", user)
+                    userData.userId = user._id;
+                    var emailData = {};
+                    emailData.otp = user.forgotPassword;
+                    emailData.email = data.email;
+                    emailData.subject = "Forgot Password";
+                    emailData.filename = "reset-password.ejs";
+                    emailData.from = "prajakta.kamble@wohlig.com"
+                    // emailData.name = user.firstName + user.lastName;
+                    emailData.firstname = user.firstName;
+                    emailData.lastName = user.lastName;
+                    Config.emailForResetPassword(emailData, callback);
+                    callback(null, user);
+                }
             }
         ], function (err, result) {
             console.log(" ***** async.waterfall final response of sendForgotPasswordOtp ***** ", result);
-            callback(err, userData);
+            callback(err, result);
         });
 
     },
@@ -803,11 +808,85 @@ var model = {
                 console.log("data:confirmForgotPassword ", data);
                 callback(null, data);
             } else {
-                console.log(" *** inside confirmForgotPasswordOtp *** ", data);
-
+                console.log(" *** inside confirmForgotPasswordOtp *** empty", data);
                 callback(null, false);
             }
         });
+    },
+    resendOtpForPwd: function (data, callback) {
+        console.log("in resend data", data);
+        // user.otp = Math.random().toString().substring(2, 6);
+        User.findOneAndUpdate({
+            _id: mongoose.Types.ObjectId(data._id)
+        }, {
+            $set: {
+                forgotPassword: Math.random().toString().substring(2, 6),
+                otpTime: new Date(),
+                verifyAcc: false
+            }
+        }, {
+            new: true
+        }).exec(function (err, user) {
+            console.log("user", user)
+            var emailData = {};
+            emailData.otp = user.forgotPassword;
+            emailData.email = user.email;
+            emailData.subject = "Forgot OTP";
+            // emailData.filename = "otp.ejs";
+            emailData.filename = "otp-email.ejs";
+            emailData.from = "harsh@wohlig.com"
+            emailData.firstname = user.firstName;
+            emailData.lastName = user.lastName;
+            Config.emailForResetPassword(emailData, function (err, response) {
+                if (err) {
+                    User.findOneAndUpdate({
+                        _id: user._id
+                    }, {
+                        $set: {
+                            verifyAcc: false,
+                            otp: null,
+                            otpTime: null
+                        }
+                    }, {
+                        new: true
+                    }).exec(function (err, result) {});
+                    callback("emailError", null);
+                } else if (response) {
+                    var sendData = {};
+                    // sendData._id = created._id;
+                    // sendData.email = user.email;
+                    // sendData.accessToken = created.accessToken;
+                    // sendData.mobile = user.mobile;
+                    // sendData.firstName = user.firstName;
+                    // sendData.lastName = user.lastName;
+                    // sendData.lastName = user.lastName;
+                    // sendData.password = user.password;
+                    sendData.otp = user.otp;
+                    // callback(null, sendData);
+                    User.saveData(sendData, function (err, data) {
+                        if (err) {
+                            callback(err, null);
+                        } else if (data) {
+                            if (!_.isEmpty(data)) {
+                                var accessToken = uid(16);
+                                data.accessToken.push(accessToken);
+                                User.saveData(data, function () {});
+                                console.log("data: ", data);
+                                callback(null, data);
+                            }
+                        } else {
+                            callback({
+                                message: {
+                                    data: "Invalid credentials!"
+                                }
+                            })
+                        }
+                    });
+                } else {
+                    callback("errorOccurredRegister", null);
+                }
+            });
+        })
     },
     forgotPasswordSave: function (data, callback) {
         console.log(" **** forgotPasswordSave *** ", data);
@@ -831,7 +910,32 @@ var model = {
             }
         });
     },
+    dochangepassword: function (data, callback) {
+        console.log(" ***** inside dochangepassword ***** ", data);
 
+        User.findOneAndUpdate({
+            _id: data.userId,
+            // password: md5(data.current)
+        }, {
+            $set: {
+                password: md5(data.new)
+            }
+        }, {
+            new: true
+        }).exec(function (err, user) {
+            if (err) {
+                console.log("not found", null);
+
+            } else if (user == null) {
+                console.log("user not found");
+                callback("not found", null)
+            } else {
+                user.save(user);
+                callback(null, user)
+            }
+
+        })
+    },
     isUserLoggedIn: function (accessToken, callback) {
         User.findOne({
             accessToken: {

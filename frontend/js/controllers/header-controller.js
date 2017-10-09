@@ -350,7 +350,7 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
             UserService.userRegistration($scope.formData, function (data) {
                 console.log("*****in register user", data.data.data)
                 if (data.data.error) {
-                    $scope.errormsg = "User already exists with the given emailId.<br /> Please login to proced"
+                    $scope.errormsg = "User already exists with the given emailId.Please login to proced"
                 } else if (!_.isEmpty(data.data.data)) {
                     $scope.userData = data.data.data;
                     $scope.otpRegister = $uibModal.open({
@@ -455,13 +455,24 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
 
         $scope.resendOtp = function () {
             console.log(" in resend $scope.formData: ", $scope.userData);
-            UserService.resendOtp($scope.userData, function (data) {
-                if (data.value) {
-                    $scope.resendOtpBut = false;
-                } else {
-                    console.log("Error: ", data);
-                }
-            });
+            if ($scope.gtUser) {
+                UserService.resendOtpForPwd($scope.gtUser, function (data) {
+                    if (data.value) {
+                        $scope.resendOtpBut = false;
+                    } else {
+                        console.log("Error: ", data);
+                    }
+                });
+            }
+            if ($scope.userData) {
+                UserService.resendOtp($scope.userData, function (data) {
+                    if (data.value) {
+                        $scope.resendOtpBut = false;
+                    } else {
+                        console.log("Error: ", data);
+                    }
+                });
+            }
         }
 
         $scope.forgotPassword = function () {
@@ -484,16 +495,17 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
         $scope.forgotPasswordOtp = function (emailId) {
             $scope.userEmail = {};
             $scope.userEmail.email = emailId;
-            $scope.forgotPwd = false;
-            $scope.otpPwd = true;
-            $scope.resetPwd = false;
             UserService.forgotPasswordOtp($scope.userEmail, function (data) {
                 console.log("in forgotPassword: ", data)
-                if (data.data.value == true) {
+                if (data.data.value) {
+                    $scope.forgotPwd = false;
+                    $scope.resetPwd = false;
+                    $scope.otpPwd = true;
                     $scope.gtUser = {};
-                    $scope.gtUser._id = data.data.data.userId;
-                    // console.log("in forgotPassword: ", data)
+                    $scope.gtUser._id = data.data.data._id;
+                    // console.log("in forgotPassword: ", data.data.data)
                 } else {
+                    $scope.message = "Please sing up";
                     console.log("Error: ", data);
                 }
             });
@@ -504,8 +516,16 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
             UserService.confirmForgotPasswordOtp($scope.gtUser, function (data) {
                 console.log("confirm", data);
                 if (data.data.value = true) {
-                    $scope.otpPwd = false;
-                    $scope.resetPwd = true;
+                    if (data.data.data == "No Data Found") {
+                        $scope.errorMessage = "Invalid OTP. Please provide a valid OTP";
+                        $scope.resendOtpBut = true;
+                    } else {
+                        $scope.otpPwd = false;
+                        $scope.resetPwd = true;
+                    }
+                } else {
+                    $scope.errorMessage = "Invalid OTP. Please provide a valid OTP";
+                    $scope.resendOtpBut = true;
                 }
             })
         }

@@ -37,7 +37,7 @@
                                         uib-popover="{{loginForm1.password.$touched && loginForm1.password.$invalid}}" popover-title="Please enter your password"
                                         popover-placement="bottom" popover-class="login-popover" popover-is-open="loginForm1.password.$touched && loginForm1.password.$invalid"
                                         popover-trigger="'none'">
-                                    <p class="pull-right forgot__checkout"><a href="">Forgot Password?</a></p>
+                                    <p class="pull-right forgot__checkout"><a ng-click="forgotPassword()">Forgot Password?</a></p>
                                 </div>
                                 <div>
                                     <button class="btn btn--login btn-block" ng-click="login()" ng-disabled="loginForm1.email.$invalid || loginForm1.password.$invalid"
