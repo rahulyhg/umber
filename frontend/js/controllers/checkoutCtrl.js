@@ -5,7 +5,6 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
     myService.ctrlBanners("checkout", function (data) {
         $scope.banner = data;
     });
-    $scope.errorMessage = "Default msg";
     $scope.registerData = {};
     $scope.loginData = {};
     $scope.loggedUser = $.jStorage.get("userId");

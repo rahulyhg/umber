@@ -539,11 +539,24 @@ var model = {
     // Function to retrieve specific SKU with specified parameters
     // Parameters include color, size
     getSKUWithParameter: function (data, callback) {
+        console.log("data in sku", data)
         Product.findOne({
             productId: data.productId,
             size: mongoose.Types.ObjectId(data.size),
             color: mongoose.Types.ObjectId(data.color)
-        }).deepPopulate('color size').exec(callback);
+        }).deepPopulate('color size').exec(function (err, product) {
+            console.log("in Sku parameter", product);
+            if (err) {
+                callback(err, "error in mongoose productWithCategory");
+            } else {
+                if (_.isEmpty(product)) {
+                    callback(null, false);
+                } else {
+                    callback(null, product);
+                }
+            }
+
+        });
     },
 
     // Function to retrieve filters on listing page

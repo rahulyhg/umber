@@ -463,7 +463,7 @@
                  if (data.data.value) {
                      $scope.product = data.data.data;
                  } else {
-                     $scope.product = {};
+                     //  $scope.product = {};
                      // TODO: show out of stock
                  }
              })

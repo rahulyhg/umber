@@ -145,19 +145,16 @@
                      $scope.min = $scope.filters.priceRange[0].min;
                      $scope.max = $scope.filters.priceRange[0].max;
                      console.log("filters", $scope.filters.priceRange[0].max)
-                     $scope.slider_translate = {
-                         minValue: 0,
-                         maxValue: 100,
-                         options: {
-
-                             floor: $scope.filters.priceRange[0].min,
-                             ceil: $scope.filters.priceRange[0].max,
-                             id: 'translate-slider'
-                             // translate: function (value, id, which) {
-                             //     return '$' + value;
-                             // }
-                         }
-                     };
+                     //  $scope.sliderTranslate = {
+                     //      options: {
+                     //          floor: 45,
+                     //          ceil: $scope.filters.priceRange[0].max,
+                     //          id: 'translate-slider'
+                     //          // translate: function (value, id, which) {
+                     //          //     return '$' + value;
+                     //          // }
+                     //      }
+                     //  };
                  })
 
              } else {
@@ -235,16 +232,29 @@
                  fabric: [],
              }
          };
-         console.log(filter, key, filter1, key1);
+         console.log("###filter", filter, key, filter1, key1);
          var cat = $.jStorage.get("selectedCategory").slug;
          appliedFilters.appliedFilters.slug = [cat];
          if (filter._id) {
              var result = _.indexOf(appliedFilters.appliedFilters[key], filter._id);
          } else {
-             var result = _.indexOf(appliedFilters.appliedFilters[key], filter);
+             //  var result = _.indexOf(appliedFilters.appliedFilters[key], filter);
          }
+         //  if (filter1) {
+         //      var result = _.indexOf(appliedFilters.appliedFilters[key], filter);
+         //  }
          if (filter1) {
-             var result = _.indexOf(appliedFilters.appliedFilters[key], filter);
+             console.log("!!!!!!!!!!!!!!!!!")
+             if (!_.isArrayLike(appliedFilters.appliedFilters[key])) {
+                 appliedFilters.appliedFilters[key] = [];
+                 appliedFilters.appliedFilters[key1] = [];
+             }
+             if (filter._id) {
+                 appliedFilters.appliedFilters[key].push(filter._id);
+             } else {
+                 appliedFilters.appliedFilters[key].push(filter);
+                 appliedFilters.appliedFilters[key1].push(filter1);
+             }
          }
          console.log("check result", result)
          if (result != -1) {
@@ -255,16 +265,16 @@
                  _.pullAt(appliedFilters.appliedFilters[key], result);
              }
          } else {
-             if (filter1) {
-                 if (!_.isArrayLike(appliedFilters.appliedFilters[key1])) {
-                     appliedFilters.appliedFilters[key1] = [];
-                 }
-                 if (filter._id) {
-                     appliedFilters.appliedFilters[key1].push(filter1._id);
-                 } else {
-                     appliedFilters.appliedFilters[key1].push(filter1);
-                 }
-             }
+             //  if (filter1) {
+             //      if (!_.isArrayLike(appliedFilters.appliedFilters[key1])) {
+             //          appliedFilters.appliedFilters[key1] = [];
+             //      }
+             //      if (filter._id) {
+             //          appliedFilters.appliedFilters[key1].push(filter1._id);
+             //      } else {
+             //          appliedFilters.appliedFilters[key1].push(filter1);
+             //      }
+             //  }
              if (filter) {
                  if (!_.isArrayLike(appliedFilters.appliedFilters[key])) {
                      appliedFilters.appliedFilters[key] = [];
@@ -549,11 +559,13 @@
                  color: $scope.product.color._id
              }
              ProductService.getSKUWithParameter(data, function (data) {
-                 console.log("SKU:", data)
+                 console.log("SKU:", data.data);
                  if (data.data.value) {
+                     console.log("after sku if ", $scope.product);
                      $scope.product = data.data.data;
                  } else {
-                     $scope.product = {};
+                     console.log("after sku", $scope.product);
+                     //  $scope.product = {};
                      // TODO: show out of stock
                  }
              })
