@@ -218,7 +218,7 @@
                                         <th>order placed<br><strong>{{order.createdAt | date:'dd/MM/yyyy'}}</strong></th>
                                         <th>order no.<br><strong>{{order.orderNo}}</strong></th>
                                         <th>order-satus<br><strong>{{order.orderStatus}}</strong></th>
-                                        <th>tracking id<br><strong>updating</strong></th>
+                                        <th>tracking id<br><strong>{{order.courierType.courierLink + order.trackingId}}</strong></th>
                                         <th>Grand total<br><strong>&#8377; {{order.totalAmount}}</strong></th>
                                     </tr>
                                 </thead>

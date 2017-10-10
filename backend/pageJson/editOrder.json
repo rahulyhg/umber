@@ -118,6 +118,18 @@
             "dropDownType": "single",
             "dropDown": ["processing", "shipped", "delivered", "returned", "cancelled"]
         }, {
+            "name": "Courier Type",
+            "type": "tags",
+            "tableRef": "courierType",
+            "placeholder": "Select Courier Type",
+            "id": "courierType",
+            "dropDownField": "name",
+            "dropDownType": "single",
+            "searchApi": "searchCall",
+            "url": "Courier/search",
+            "validation": ["", "trim", ""]
+        },
+        {
             "name": "Tracking Id",
             "type": "text",
             "tableRef": "trackingId",

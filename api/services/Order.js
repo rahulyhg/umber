@@ -57,6 +57,10 @@ var schema = new Schema({
         enum: ['cod', 'cc', 'dc', 'netbank'],
         default: 'cod'
     },
+    courierType: {
+        type: Schema.Types.ObjectId,
+        ref: 'Courier'
+    },
     trackingId: String,
     orderStatus: {
         type: String,
@@ -94,7 +98,7 @@ schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('Order', schema);
 
-var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "user  products.product returnedProducts.product", "user", "createdAt", "desc"));
+var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "user  products.product courierType returnedProducts.product", "user", "createdAt", "desc"));
 var model = {
     createOrderFromCart: function (data, callback) {
         console.log("In createorderfromcart");
@@ -185,7 +189,7 @@ var model = {
     getUserOrders: function (data, callback) {
         Order.find({
             user: data.userId
-        }).deepPopulate('products.product products.product.size products.product.color').exec(function (err, orders) {
+        }).deepPopulate('products.product courierType products.product.size products.product.color').exec(function (err, orders) {
             callback(err, orders);
         });
     },
