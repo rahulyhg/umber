@@ -5,6 +5,7 @@
      $scope.navigation = NavigationService.getNavigation();
      $scope.formSubmitted = false;
 
+
      $.jStorage.deleteKey("selectedCategory")
      myService.ctrlBanners("listing-page", function (data) {
          $scope.banner = data;

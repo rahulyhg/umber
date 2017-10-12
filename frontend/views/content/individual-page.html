@@ -22,8 +22,8 @@
                     </ul>
                 </div>
                 <div class="individual-first relate">
-                    <img ng-elevate-zoom ng-src="{{selectedImage.image | serverimage}}" data-zoom-image="{{selectedImage.image | serverimage}}"
-                        class="img-responsive bg">
+                    <img ng-repeat="image in productImages track by $index" ng-elevate-zoom ng-src="{{image.image | serverimage}}" data-zoom-image="{{image.image | serverimage}}"
+                        class="img-responsive bg" ng-if="$index == selectedImageIndex">
                     <div class="individual-first__zoom">
                         <img ng-src="img/individual/zoom.png" alt="zoom" class="img-responsive">
                     </div>

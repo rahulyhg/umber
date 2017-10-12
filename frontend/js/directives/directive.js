@@ -82,7 +82,6 @@ myApp.directive('img', function ($compile, $parse) {
             restrict: 'A',
 
             link: function (scope, element, attrs) {
-                console.log("Linking")
 
                 //Will watch for changes on the attribute
                 attrs.$observe('zoomImage', function () {
