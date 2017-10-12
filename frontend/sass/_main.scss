@@ -1126,7 +1126,7 @@
                                             }
 
                                             .side-nav {
-                                                @include padding(35px 0);
+                                                @include padding(35px 0 0);
                                                 width: 100%;
                                                 min-height: 235px;
                                                 position: fixed; // top: 50px;
@@ -1138,6 +1138,9 @@
                                                     color: $darkBrown1;
                                                     text-decoration: none;
                                                     @include transition(all 0.3s ease 0s);
+                                                }
+                                                .upper-nav {
+                                                    margin-bottom: 55px;
                                                 }
                                                 .links,
                                                 .product-categories {
@@ -1190,10 +1193,24 @@
                                                     display: inline-block;
                                                     position: absolute;
                                                     right: 40px;
-                                                    bottom: 15px;
+                                                    bottom: initial;
                                                     width: 30%;
                                                 }
-                                            } // .mobview-categories-menu-out {
+                                            } //Section promotion
+                                            .promotion-section {
+                                                @include padding(5px);
+                                                background: $darkBrown1;
+                                                .links {
+                                                    border-right: 2px solid white;
+                                                }
+                                                ul {
+                                                    margin-bottom: 0;
+                                                }
+                                                a {
+                                                    color: white;
+                                                }
+                                            } //End of section promotion
+                                            // .mobview-categories-menu-out {
                                             //     @include transform(translateX(1000px));
                                             //     @include transform-origin(right center);
                                             //     @include transition(all 0.3s ease);
