@@ -566,7 +566,7 @@ var model = {
         Category.findOne({
             slug: data.slug
         }).exec(function (err, category) {
-            console.log("Filters with category data:category ", category);
+            // console.log("Filters with category data:category ", category);
             var match = {
                 category: mongoose.Types.ObjectId(category._id)
             };
@@ -1447,7 +1447,6 @@ var model = {
                         if (_.isEmpty(found)) {
                             callback(null, []);
                         } else {
-                            // console.log("found11111111111", found);
                             callback(null, found);
                         }
                     }
@@ -1577,7 +1576,6 @@ var model = {
             })
         }
         if (!_.isEmpty(data.appliedFilters.max)) {
-            console.log("priceRange", data.appliedFilters.max, data.appliedFilters.min)
             pipeline.push({
                 $and: [{
                     "price": {
