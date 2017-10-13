@@ -11,7 +11,13 @@ var schema = new Schema({
     imageSize: String,
     imgLink: String,
     extLink: String,
-    status: String
+    status: String,
+    isView: Boolean,
+    slug: {
+        type: String,
+        required: true,
+        unique: true
+    }
 });
 
 schema.plugin(URLSlugs('name'), {

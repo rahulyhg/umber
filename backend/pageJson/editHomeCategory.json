@@ -55,6 +55,26 @@
             "validation": ["required", "trim", "unique"],
             "url": ""
         }, {
+            "name": "View",
+            "type": "checkbox",
+            "tableRef": "isView",
+            "id": "isView",
+            "url": "",
+            "validation": ["required"]
+        },
+        {
+            "name": "Slug",
+            "type": "text",
+            "tableRef": "slug",
+            "placeholder": "Enter slug",
+            "id": "slug",
+            "validation": [
+                "required",
+                "trim",
+                "unique"
+            ],
+            "url": ""
+        }, {
             "name": "Status",
             "type": "tags",
             "tableRef": "status",
