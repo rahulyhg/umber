@@ -96,9 +96,9 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
         }
     }
 
-
+    $scope.selectedImageIndex = 0;
     $scope.changeImage = function (index) {
-        $scope.selectedImage = $scope.product.images[index];
+        $scope.selectedImageIndex = index;
     };
 
     //To close compare-section modal

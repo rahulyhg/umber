@@ -1888,4 +1888,9 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
             "filename": "zimbabwe"
         }
     ];
+
+    //Function for next button which displays the detail tab if a user is logged in or clicks on the next button for checkout 
+    $scope.proceedToDetailTab = function () {
+        $scope.view = "detailTab";
+    };
 })
