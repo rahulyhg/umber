@@ -34,6 +34,7 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
 
     //to select one checkbox at a time
     $scope.updateSelection = function (position, paymentWay) {
+
         // var result = _.indexOf(paymentWay, id);
 
         // if (result != -1) {
@@ -41,9 +42,9 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
         // } else {
         //     return false;
         // }
-        angular.forEach(paymentWay, function (subscription, index) {
+        angular.forEach(paymentWay, function (payment, index) {
             if (position != index)
-                subscription.checked = false;
+                payment.checked = false;
         });
     }
 
