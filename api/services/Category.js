@@ -10,7 +10,12 @@ var schema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'HomeCategory'
     },
-    status: String
+    status: String,
+    slug: {
+        type: String,
+        required: true,
+        unique: true
+    }
 });
 
 
@@ -65,14 +70,16 @@ var model = {
         })
     },
     getCategoriesWithParent: function (data, callback) {
-        // console.log("Category with parent: ", data);
+        console.log("Category with parent: ", data);
         HomeCategory.findOne({
             slug: data.slug
         }).exec(function (err, category) {
+            console.log("category", category)
             if (!_.isEmpty(category)) {
                 Category.find({
                     category: mongoose.Types.ObjectId(category._id)
                 }).exec(function (err, categories) {
+                    console.log("category", categories)
                     callback(err, categories);
                 });
             } else {

@@ -95,5 +95,39 @@ this.applicableDiscounts = function (productIdsArr, callback) {
 
             }
             callback("success");
+        },
+        this.removeWishlist = function (prod, callback) {
+            var accessToken = $.jStorage.get("accessToken");
+            if (!_.isEmpty(accessToken)) {
+                var wishlist = {
+                    accessToken: accessToken,
+                    userId: $.jStorage.get("userId"),
+                    products: [prod.product.productId]
+                }
+                WishlistService.saveProduct(wishlist, function (data) {
+                    console.log(data);
+                    if (data.data.error) {
+                        console.log("Error: ", data.data.error);
+                    } else {
+                        console.log("Success");
+                        // $state.reload();
+
+                    };
+
+                });
+            } else {
+                console.log("User not logged in");
+                var productId = $.jStorage.get('wishlist') ? $.jStorage.get('wishlist') : [];
+                var result = _.indexOf(productId, prod.product);
+                var index = productId.indexOf(prod.product);
+                console.log("offflinewishlist:::::::result", result);
+                if (result == -1) {
+                    productId.splice(index, 1);
+                    console.log("offflinewishlist:::::::result", productId);
+                    $.jStorage.set('wishlist', productId);
+                }
+
+            }
+            callback("success");
         }
 })

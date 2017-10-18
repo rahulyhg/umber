@@ -320,11 +320,11 @@
                                         <div class="display-cell align-top item-desc">
                                             <div>
                                                 <h4 class="item-name text-uppercase">{{product.productName}}</h4>
-                                                <p class="item-cost"><i class="fa fa-inr"></i>{{product.price}} </p>{{product}}
+                                                <p class="item-cost"><i class="fa fa-inr"></i>{{product.price}} </p>{{product.type}}
                                                 <div class="viewSize">
                                                     <p class="inline-block size-text">Sizes:</p>
                                                     <div class="inline-block buy-para__sizes">
-                                                        <p ng-repeat="size in product.size">{{size.name}}</p>
+                                                        <p ng-repeat="size in product.size track by $index">{{size.name}}</p>
                                                     </div>
                                                 </div>
                                             </div>

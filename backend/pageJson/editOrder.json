@@ -118,6 +118,18 @@
             "dropDownType": "single",
             "dropDown": ["processing", "shipped", "delivered", "returned", "cancelled"]
         }, {
+            "name": "Payment Status",
+            "type": "tags",
+            "tableRef": "paymentStatus",
+            "placeholder": "Enter Payment Status",
+            "id": "paymentStatus",
+            "validation": ["", "trim", ""],
+            "url": "",
+            "dropDownField": "",
+            "dropDownType": "single",
+            "dropDown": ["pending", "payment successfull"]
+        },
+        {
             "name": "Courier Type",
             "type": "tags",
             "tableRef": "courierType",

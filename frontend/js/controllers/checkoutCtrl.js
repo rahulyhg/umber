@@ -14,6 +14,39 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
     $scope.user.deliveryAddress = {};
     $scope.user.billingAddress.country = "India";
     $scope.user.deliveryAddress.country = "India";
+    $scope.paymentWay = [{
+        name: 'Credit Card',
+        checked: false,
+        id: 1
+    }, {
+        name: 'Debit card',
+        checked: false,
+        id: 2
+    }, {
+        name: 'net banking',
+        checked: false,
+        id: 3
+    }, {
+        name: 'Cash on delivery',
+        checked: false,
+        id: 4
+    }]
+
+    //to select one checkbox at a time
+    $scope.updateSelection = function (position, paymentWay) {
+        // var result = _.indexOf(paymentWay, id);
+
+        // if (result != -1) {
+        //     return true;
+        // } else {
+        //     return false;
+        // }
+        angular.forEach(paymentWay, function (subscription, index) {
+            if (position != index)
+                subscription.checked = false;
+        });
+    }
+
     if ($scope.loggedUser) {
         $scope.view = "orderTab";
     } else {
@@ -315,11 +348,24 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
             }
         });
     }
+
+    //to checkPaymentMethod
+    $scope.checkPaymentMethod = function (formData) {
+        alert('dfgdfgdg');
+        console.log("checkPaymentMethod", formData)
+        if (formData.cash) {
+            $scope.generateOrder();
+        } else {
+            alert("paymnetGateway");
+        }
+    }
+
     /************order generation and ADDRESSSS UPDATION IN USERTABLE AS WELL AS ORDER TABLE************* */
     $scope.generateOrder = function () {
 
         var data = {};
         data.userId = $scope.loggedUser;
+
         OrderService.createOrderFromCart(data, function (data) {
             console.log("created order: ", data);
             if (data.data.value) {

@@ -67,6 +67,11 @@ var schema = new Schema({
         enum: ['processing', 'shipped', 'delivered', 'returned', 'cancelled'],
         default: 'processing'
     },
+    paymentStatus: {
+        type: String,
+        enum: ['pending', 'payment successfull'],
+        default: 'pending'
+    },
     returnReason: {
         type: String
     },

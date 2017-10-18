@@ -66,7 +66,7 @@
     <div class="all-categorie">
         <ul class="list-inline list-unstyled">
             <li class="all-categorie__dimension" ng-repeat="category in categories">
-                <div class="padd">
+                <div class="padd" ng-if="category.isView==true">
                     <a ui-sref="listing-page({id: category.slug})"><img ng-src="{{category.imgLink | serverimage}}" alt="" class="img-responsive"></a>
                 </div>
             </li>

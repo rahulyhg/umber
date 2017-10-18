@@ -1434,6 +1434,7 @@ var model = {
 
 
     searchWithFilters1: function (data, callback) {
+        console.log("333333data", data)
         async.waterfall([
             function globalsSearch(callback) {
                 // operation to be performed
@@ -1575,34 +1576,6 @@ var model = {
             })
         }
         if (!_.isEmpty(data.appliedFilters.max)) {
-            if (data.appliedFilters.max[data.appliedFilters.max.length - 1] == null) {
-                console.log("data.appliedFilters.max", data.appliedFilters.max);
-                pipeline.push({
-                    $and: [{
-                        "price": {
-                            $lte: data.appliedFilters.max[data.appliedFilters.max.length - 2]
-                        }
-                    }, {
-                        "price": {
-                            $gte: data.appliedFilters.min[data.appliedFilters.min.length - 1]
-                        }
-                    }]
-                })
-            }
-            if (data.appliedFilters.min[data.appliedFilters.min.length - 1] == null) {
-                console.log("data.appliedFilters.max", data.appliedFilters.min);
-                pipeline.push({
-                    $and: [{
-                        "price": {
-                            $lte: data.appliedFilters.max[data.appliedFilters.max.length - 1]
-                        }
-                    }, {
-                        "price": {
-                            $gte: data.appliedFilters.min[data.appliedFilters.min.length - 2]
-                        }
-                    }]
-                })
-            }
             pipeline.push({
                 $and: [{
                     "price": {
@@ -2300,7 +2273,7 @@ var model = {
 
                     _.map(data3[1], function (key, value) {
                         key.category = key.category.toString();
-                        key.homeCategory = key.homeCategory.toString();
+                        // key.homeCategory = key.homeCategory.toString();
                         key.prodCollection = key.prodCollection.toString();
                         key.color = key.color.toString();
                         _.each(key.size, function (val) {
@@ -2310,9 +2283,13 @@ var model = {
                         if (!_.isEmpty(key.fabric)) {
                             key.fabric = key.fabric.toString();
                         }
+                        if (!_.isEmpty(key.type)) {
+                            key.type = key.type.toString();
+                        }
+                        if (!_.isEmpty(key.brand)) {
+                            key.brand = key.brand.toString();
+                        }
 
-                        key.type = key.type.toString();
-                        key.brand = key.brand.toString();
                     })
 
                     //category = lodash.uniqBy(data3[1].product, 'category');
