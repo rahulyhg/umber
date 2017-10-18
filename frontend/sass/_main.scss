@@ -2389,9 +2389,19 @@
                                                         margin-bottom: 0;
                                                     }
                                                     .compare-img {
-                                                        width: 120px;
-                                                        margin: 0 auto;
+                                                        width: 125px;
                                                         @include padding(10px null 10px null);
+                                                        margin: 0 auto;
+                                                        overflow: hidden;
+                                                        transition: all 0.35s ease 0s; // &:hover {
+                                                        //     .btn-quick-view {
+                                                        //         opacity: 1;
+                                                        //     }
+                                                        // }
+                                                    }
+                                                    .btn-quick-view {
+                                                        @include padding(3px 10px);
+                                                        font-size: 12px; // opacity: 0;
                                                     }
                                                     .table-bordered>tbody>tr>td {
                                                         text-align: center;

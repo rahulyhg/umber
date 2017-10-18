@@ -62,8 +62,8 @@
 
      $scope.data1 = {};
      $scope.data1.keyword = $stateParams.id
-     $scope.products = [];
-     $scope.product = [];
+     //  $scope.products = [];
+     //  $scope.product = [];
      $scope.data1.skip = 0;
      $scope.data1.limit = 9;
      $scope.loadingDisable = false;

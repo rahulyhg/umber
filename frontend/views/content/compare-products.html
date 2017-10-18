@@ -52,7 +52,10 @@
 
                                 </td>
                                 <td ng-repeat="product in products">
-                                    <img src="{{product.images[0].image|serverimage}}" alt="" class="img-responsive compare-img">
+                                    <div class="compare-img relate text-center">
+                                        <img src="{{product.images[0].image|serverimage}}" alt="Compared Product" class="img-responsive ">
+                                        <button class="btn btn--brown btn-quick-view text-uppercase" ng-click="quickviewProduct(product)">quick view</button>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
