@@ -10,24 +10,27 @@
         </div>
         <div class="coupon-code-offer">
             <h4 class="text-capatilize">Discount</h4>
+            <!--{{applicableDiscounts}}-->
             <div class="form-group">
                 <div class="text-left">
-                    <div class="radio-wdth inline-block">
-                        <input class="radio-custom" id="radio1" type="radio" name="select" hidden><label for="radio1" class="radio-inline radio-custom-label">Buy 1 get 1 Free 
+                    <div class="radio-wdth inline-block" ng-repeat="discount in applicableDiscounts track by $index">
+                        <!--<input class="radio-custom" id="radio1" type="radio" name="select" hidden><label for="radio1" class="radio-inline radio-custom-label">-->
+                            <input type="radio" name="discountRadio" ng-model="formData._id" value="{{discount._id}}">
+        {{discount.name}} 
                    </label>
                         <div class="inline-block">
                             <img src="frontend/img/listing/shirt.png" width="15" height="15" alt="Shirt Discount">
                         </div>
                     </div>
-                    <div class="radio-wdth inline-block">
+                    <!--<div class="radio-wdth inline-block">
                         <input class="radio-custom" id="radio2" type="radio" name="select" hidden><label for="radio2" class="radio-inline radio-custom-label">Buy 2 get 20% Off 
                    </label>
                         <div class="inline-block">
                             <img src="frontend/img/listing/lable.png" alt="Offer" width="15" height="15">
                         </div>
-                    </div>
+                    </div>-->
                 </div>
-                <div class="text-left">
+                <!--<div class="text-left">
                     <div class="radio-wdth inline-block">
                         <input class="radio-custom" id="radio3" type="radio" name="select" hidden><label for="radio3" class="radio-inline radio-custom-label">Free Gifts </label>
                         <div class="inline-block">
@@ -40,12 +43,12 @@
                             <img src="frontend/img/listing/percent.png" width="15" height="15">
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>
 </div>
 <div class="modal-footer modal-bottom">
     <button class="btn text-uppercase cancel--btn" type="button" ng-click="$dismiss()">CANCEL</button>
-    <button class="btn text-uppercase apply--btn" type="button" ng-click="">APPLY COUPON</button>
+    <button class="btn text-uppercase apply--btn" type="button" ng-click="radioSubmit(formData);">APPLY COUPON</button>
 </div>

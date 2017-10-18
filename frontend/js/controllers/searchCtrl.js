@@ -30,13 +30,14 @@
      $scope.data1.keyword = $stateParams.id
      $scope.products = [];
      $scope.product = [];
+     $scope.productss = [];
      $scope.data1.skip = 0;
      $scope.data1.limit = 9;
      $scope.data1.appliedFilters = {};
      $scope.loadingDisable = false;
      $scope.fetching = false;
      $scope.categories = [];
-
+     $scope.priceRange = []
      $scope.appliedFilters = {};
      $scope.appliedFilters.category = [];
      $scope.appliedFilters.type = []
@@ -48,7 +49,7 @@
      $scope.appliedFilters.page = 1;
      $scope.filter = {
          keyword: $scope.data1.keyword,
-         limit: 9,
+         limit: 12,
          appliedFilters: $scope.appliedFilters
      }
      $scope.filter.skip = 0
@@ -62,23 +63,25 @@
          //      appliedFilters: $scope.appliedFilters
          //  }
          ProductService.searchWithFilters($scope.filter, function (data) {
-             console.log("in global search*222***", data.data.data);
+             console.log("in global search*222***", data.data.data.products);
              if (!_.isEmpty(data.data.data)) {
-                 $scope.product = _.chunk(data.data.data.products, 3);
+                 _.each(data.data.data.products, function (n) {
+                     $scope.product.push(n);
+                 })
                  console.log("in global search*333***", $scope.product);
-                 $scope.products = $scope.product;
                  //  _.each($scope.product, function (n) {
-                 //      console.log("in global search**4444**", n);
-                 //      $scope.products.push(n);
-                 //      console.log("in global search**55555**", $scope.products);
+                 //      $scope.productss.push(n);
                  //  })
-
-                 $scope.filters = data.data.data
+                 $scope.products = _.chunk($scope.product, 3);
+                 $scope.filters = data.data.data;
+                 $scope.priceRange.push(data.data.data.price);
+                 $scope.priceRange = _.flattenDeep($scope.priceRange)
+                 console.log("PriceRange", $scope.priceRange)
                  $scope.price = {
-                     max: Math.max.apply(null, data.data.data.price),
-                     min: Math.min.apply(null, data.data.data.price)
+                     max: Math.max.apply(null, $scope.priceRange),
+                     min: Math.min.apply(null, $scope.priceRange)
                  }
-                 console.log('price', $scope.price)
+                 console.log('price', $scope.price);
                  $scope.max = $scope.price.max;
                  $scope.min = $scope.price.min;
                  $scope.loadingDisable = false;
@@ -96,6 +99,12 @@
                  //  $scope.products = [];
                  console.log('enter');
              }
+             //  if (!_.isEmpty(data.data.data) && $scope.appliedFilters.max || $scope.appliedFilters.min) {
+             //      console.log("##########not empty###")
+             //      $scope.products = _.chunk(data.data.data.products);
+             //  } else {
+             //      $scope.products = [];
+             //  }
 
          })
      }
@@ -106,6 +115,8 @@
      }
 
      $scope.applyFilters = function (key, filter, key1, filter1) {
+         $scope.product = [];
+         $scope.products = [];
          console.log("in apply filters", key, "value", filter, "key1", key1, "filter1", filter1);
          var result = _.indexOf($scope.appliedFilters[key], filter._id);
          console.log("check result", result)
@@ -152,6 +163,9 @@
 
          //  })
          $scope.filter.skip = 0
+         //  ProductService.searchWithFilters($scope.filter, function (data) {
+
+         //  })
          $timeout(function () {
              $scope.globalsSearch();
          }, 1000);
@@ -363,12 +377,18 @@
      }
      $scope.removeWishlist = function (prodId) {
          var data = {};
-         data.accessToken = $.jStorage.get("accessToken");
-         data.productId = prodId;
-         WishlistService.removeProduct(data, function (data) {
-             console.log(data);
-             $state.reload();
-         })
+         if ($.jStorage.get("accessToken")) {
+             data.accessToken = $.jStorage.get("accessToken");
+             data.productId = prodId;
+             WishlistService.removeProduct(data, function (data) {
+                 console.log(data);
+                 $state.reload();
+             })
+         } else {
+             myService.removeWishlist(data, function (data) {
+                 $state.reload();
+             })
+         }
      }
 
      $scope.addRemoveToWishlist = function (product) {
@@ -379,6 +399,18 @@
              });
              if (result) {
                  $scope.removeWishlist(product.productId);
+             } else {
+                 $scope.addToWishlist(product);
+             }
+         } else {
+             $scope.mycart = $.jStorage.get("cart");
+             $scope.wishlist = $.jStorage.get("wishlist")
+             var result = _.find($scope.wishlist, {
+                 "productId": product.productId
+             });
+             if (result) {
+                 console.log("removeWishLst", result)
+                 $scope.removeWishlist(product);
              } else {
                  $scope.addToWishlist(product);
              }

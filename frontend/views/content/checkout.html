@@ -491,30 +491,21 @@
                                 <div>
                                     <h3 class="marg0 detail-tab__head ">payment method</h3>
                                 </div>
-                                <div class="payment-checkbox custom-checkbox ">
-                                    <form class="font__style ">
-                                        <div class="checkbox checkbox-inline ">
-                                            <input type="checkbox" id="p1 ">
-                                            <label for="p1 " class="chk__label text-uppercase ">Credit Card</label>
+                                <div class="payment-checkbox custom-checkbox">
+                                    <form name="paymentMethod" nonvalidate class="font__style " ng-submit="checkPaymentMethod(payment)">
+                                        <div class="checkbox checkbox-inline " ng-repeat="payment in paymentWay">
+                                            <input type="checkbox" id="{{payment.id}}" ng-model="payment.checked" ng-click="updateSelection($index,paymentWay)" required>
+                                            <label for="{{payment.id}}" class="chk__label text-uppercase ">{{payment.name}}</label>
                                         </div>
-                                        <div class="checkbox checkbox-inline ">
-                                            <input type="checkbox" id="p2 ">
-                                            <label for="p2 " class="chk__label text-uppercase ">  Debit card</label>
-                                        </div>
-                                        <div class="checkbox checkbox-inline ">
-                                            <input type="checkbox" id="p3 ">
-                                            <label for="p3 " class="chk__label text-uppercase ">net banking</label>
-                                        </div>
-                                        <div class="checkbox checkbox-inline ">
-                                            <input type="checkbox" id="p4 ">
-                                            <label for="p4 " class="chk__label text-uppercase ">Cash on delivery</label>
+
+                                        <div class="text-center ">
+                                            <!--<button id="ordergenerate" class="btn btn-default checkout__cont-btn " ng-if="address.$invalid" ng-disabled="true">Continue</button>-->
+                                            <button id="ordergenerate" class="btn btn-default checkout__cont-btn " type="submit" ng-disabled="!(address.$valid &&(paymentWay[0].checked||paymentWay[1].checked||paymentWay[2].checked||paymentWay[3].checked))">Continue</button>
+
                                         </div>
                                     </form>
                                 </div>
-                                <div class="text-center ">
-                                    <button id="ordergenerate" class="btn btn-default checkout__cont-btn " ng-if="!address.$valid" ng-disabled="true">Continue</button>
-                                    <button id="ordergenerate" class="btn btn-default checkout__cont-btn " ng-click="generateOrder()" ng-if="address.$valid">Continue</button>
-                                </div>
+
                             </div>
                         </div>
                     </div>

@@ -94,6 +94,21 @@ myApp.factory('NavigationService', function ($http) {
             classis: "active",
             sref: "#!/page/viewBanner//",
             icon: "document"
+        }, {
+            name: "Discount",
+            classis: "active",
+            sref: "#!/page/viewDiscount//",
+            icon: "document"
+        }, {
+            name: "Discount Type",
+            classis: "active",
+            sref: "#!/page/viewDiscountType//",
+            icon: "document"
+        }, {
+            name: "Coupon",
+            classis: "active",
+            sref: "#!/page/viewCoupon//",
+            icon: "document"
         }
     ];
 

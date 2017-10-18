@@ -40,6 +40,18 @@
         "onView": true,
         "view": true
     }, {
+        "name": "Slug",
+        "type": "text",
+        "tableRef": "slug",
+        "placeholder": "Enter slug",
+        "id": "slug",
+        "validation": [
+            "required",
+            "trim",
+            "unique"
+        ],
+        "url": ""
+    }, {
         "name": "Status",
         "type": "tags",
         "tableRef": "status",
