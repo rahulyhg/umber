@@ -20,16 +20,23 @@
         ],
         "url": ""
     }, {
-        "name": "Variable",
+        "name": "X Value",
         "type": "number",
-        "tableRef": "variable",
-        "placeholder": "Enter discount amount if any",
-        "id": "variable",
+        "tableRef": "xValue",
+        "placeholder": "Enter X discount amount if any",
+        "id": "xValue",
+        "validation": ["trim"]
+    }, {
+        "name": "Y Value",
+        "type": "number",
+        "tableRef": "yValue",
+        "placeholder": "Enter Y discount amount if any",
+        "id": "yValue",
         "validation": ["trim"]
     }, {
         "name": "Product",
         "type": "tags",
-        "tableRef": "product",
+        "tableRef": "products",
         "onView": true,
         "placeholder": "Select Product",
         "id": "productId",
@@ -38,31 +45,6 @@
         "searchApi": "searchCall",
         "url": "Product/getUniqueProducts",
         "validation": ["", "trim", ""]
-    }, {
-        "name": "Coupons",
-        "type": "text",
-        "tableRef": "coupons",
-        "placeholder": "Enter coupon codes",
-        "id": "coupons",
-        "validation": ["trim"]
-    }, {
-        "name": "Gifts",
-        "type": "box",
-        "id": "gifts",
-        "placeholder": "Enter gifts",
-        "fields": [{
-            "name": "Photo",
-            "type": "image",
-            "tableRef": "photo",
-            "id": "photo"
-        }, {
-            "name": "Name",
-            "type": "text",
-            "tableRef": "name",
-            "id": "giftName",
-            "placeholder": "Enter Gift Name",
-            "validation": ["trim"]
-        }]
     }, {
         "name": "Is Discount in amount?",
         "type": "checkbox",

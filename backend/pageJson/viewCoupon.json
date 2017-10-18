@@ -1,23 +1,30 @@
 {
-    "title": "Discounts",
-    "description": "List of Discounts",
+    "title": "Coupons",
+    "description": "List of Coupons",
     "pageType": "view",
     "sendIdWithCreate": true,
     "urlFields": ["_id"],
     "fields": [{
-            "name": "Name",
+            "name": "Code",
             "isSort": "",
             "tableRef": "name"
         },
         {
-            "name": "X Value",
+            "name": "User",
             "isSort": "",
-            "tableRef": "xValue"
+            "tableRef": "user",
+            "field":"name",
+            "type":"userName"
         },
         {
-            "name": "Y Value",
+            "name": "Amount",
             "isSort": "",
-            "tableRef": "yValue"
+            "tableRef": "amount"
+        },
+        {
+            "name": "Status",
+            "isSort": "",
+            "tableRef": "status"
         }
     ],
     "action": [{
@@ -25,7 +32,7 @@
         "icon": "fa-pencil",
         "buttonClass": "btn-primary",
         "type": "page",
-        "action": "editDiscount",
+        "action": "editCoupon",
         "fieldsToSend": {
             "_id": "_id"
         }
@@ -34,9 +41,9 @@
         "icon": "fa-trash",
         "buttonClass": "btn-danger",
         "type": "apiCallConfirm",
-        "title": "Delete Discount",
-        "content": "Are you sure you want to delete Discount?",
-        "api": "Discount/delete",
+        "title": "Delete Coupon",
+        "content": "Are you sure you want to delete Coupon?",
+        "api": "Coupon/delete",
         "fieldsToSend": {
             "name": "_id",
             "value": "_id"
@@ -47,24 +54,24 @@
         "icon": "print",
         "class": "btn-danger",
         "type": "redirect",
-        "action": "Discount/generateExcel",
+        "action": "Coupon/generateExcel",
         "linkType": "admin"
     }, {
         "name": "Upload Excel",
         "icon": "delete",
         "class": "btn-warning",
         "type": "redirect",
-        "action": "excel-upload/Discount",
+        "action": "excel-upload/Coupon",
         "linkType": "internal"
     }, {
         "name": "Create",
         "icon": "plus",
         "class": "btn-success",
         "type": "page",
-        "action": "createDiscount"
+        "action": "createCoupon"
     }],
     "apiCall": {
-        "url": "Discount/search",
+        "url": "Coupon/search",
         "params": "_id"
     }
 }
