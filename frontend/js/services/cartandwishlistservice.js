@@ -9,7 +9,18 @@ myApp.service('myService', function ($http, WishlistService, BannerService, Cart
 
             });
         },
+//avinash functions starts here
+this.applicableDiscounts = function (productIdsArr, callback) {
+            var formData={
+                productIds:productIdsArr
+            }
+            BannerService.applicableDiscounts(formData, function (data) {
+                console.log(data);
+                callback(data.data.data)
 
+            });
+        },
+//avinash functions ends here
         /*************Adding Products To Cart**************** */
         this.addToCart = function (prod, reqQuantity, size, com, callback) {
             console.log("product:", prod, "size:", size, "quanti:", reqQuantity)

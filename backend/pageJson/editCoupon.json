@@ -1,0 +1,103 @@
+{
+    "title": "Edit Coupon",
+    "name": "Coupon",
+    "jsonPage": "viewCoupon",
+    "desciption": "",
+    "pageType": "edit",
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "Coupon Code",
+        "type": "text",
+        "tableRef": "name",
+        "placeholder": "Enter Coupon Code",
+        "id": "name",
+        "validation": [
+            "required",
+            "trim",
+            "unique"
+        ],
+        "url": ""
+    }, {
+        "name": "User",
+        "id": "user",
+        "type": "tags",
+        "tableRef": "user",
+        "placeholder": "User",
+        "dropDownField": "firstName",
+        "dropDownType": "single",
+        "searchApi": "searchCall",
+        "url": "User/search",
+        "view": true,
+        "validation": ["trim"]
+    }, {
+        "name": "Amount",
+        "type": "text",
+        "tableRef": "amount",
+        "placeholder": "Amount",
+        "id": "amount",
+        "validation": ["trim"]
+    }, {
+        "name": "Status",
+        "type": "tags",
+        "tableRef": "status",
+        "placeholder": "Select Status",
+        "id": "status",
+        "validation": ["required", "trim"],
+        "url": "",
+        "dropDownField": "",
+        "dropDownType": "single",
+        "onView": true,
+        "dropDown": ["Used", "unUsed"]
+    }, {
+        "name": "Generated Order Id",
+        "id": "generatedOrderId",
+        "type": "tags",
+        "tableRef": "generatedOrderId",
+        "placeholder": "Order Id",
+        "dropDownField": "orderNo",
+        "dropDownType": "single",
+        "searchApi": "searchCall",
+        "url": "Order/search",
+        "view": true,
+        "validation": ["trim"]
+    }, {
+        "name": "Used Order Id",
+        "id": "usedOrderId",
+        "type": "tags",
+        "tableRef": "usedOrderId",
+        "placeholder": "Order Id",
+        "dropDownField": "orderNo",
+        "dropDownType": "single",
+        "searchApi": "searchCall",
+        "url": "Order/search",
+        "view": true,
+        "validation": ["trim"]
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitCoupon",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewCoupon"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewCoupon"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "Coupon/save",
+        "params": "_id"
+    },
+    "preApi": {
+        "url": "Coupon/getOne",
+        "params": "_id"
+    }
+}

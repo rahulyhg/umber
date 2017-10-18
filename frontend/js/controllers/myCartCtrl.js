@@ -8,11 +8,39 @@
          console.log("$scope.banner", $scope.banner)
 
      });
+
+
      $scope.newA = _.chunk($scope.mycartmodal, 4);
      // console.log("$scope.newA ", $scope.newA);
      var userId = {
          userId: $.jStorage.get("userId")
      };
+
+     //avinash functions start
+$scope.applicableDiscounts = function (data) {
+    // console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+       myService.applicableDiscounts($scope.productArrayForDiscount, function (data) {
+        //    console.log("called api applicableDiscounts");
+           $scope.applicableDiscounts = data;
+           console.log("$scope.applicableDiscounts", $scope.applicableDiscounts)
+
+       });
+}
+
+$scope.radioSubmit = function (data) {
+    console.log("inside radioSubmit",data);
+    // console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    //    myService.applicableDiscounts($scope.productArrayForDiscount, function (data) {
+    //     //    console.log("called api applicableDiscounts");
+    //        $scope.applicableDiscounts = data;
+    //        console.log("$scope.applicableDiscounts", $scope.applicableDiscounts)
+
+    //    });
+}
+
+//avinash functions end
+
+     $scope.productArrayForDiscount=[];
      if (userId.userId != null) {
          CartService.getCart(userId, function (data) {
              console.log("getcart->data: ", data);
@@ -22,6 +50,12 @@
                  toastr.error("add product to cart", "Error:")
                  $state.go("home");
              }
+             _.forEach($scope.mycartTable.products, function (value) {
+             console.log("else-",value.product);
+             $scope.productArrayForDiscount.push(value.product._id);
+
+         });
+         $scope.applicableDiscounts($scope.productArrayForDiscount);
              console.log("mycarttableof if: ", $scope.mycartTable);
              //TODO: Calculate actual grand total
              if ($scope.mycartTable)
@@ -29,12 +63,22 @@
          });
      } else {
          $scope.mycartTable = $.jStorage.get("cart");
+         //_.each for single product
+         _.forEach($scope.mycartTable.products, function (value) {
+             console.log("else-",value.product);
+             $scope.productArrayForDiscount.push(value.product._id);
 
+         });
+         console.log("$scope.productArrayForDiscount=-=-=-=-=-=-",$scope.productArrayForDiscount);
+         $scope.applicableDiscounts($scope.productArrayForDiscount);
          if ($scope.mycartTable) {
              $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
          }
          console.log("else ran:::", $scope.grandTotal);
      }
+
+
+
      // $scope.mycartTable = {};
      $scope.updateQuantity = function (index, count) {
          // if (ProductService.isProductAvailable(count, $scope.mycartTable.products[index])) {
@@ -98,7 +142,12 @@
              animation: true,
              templateUrl: 'views/modal/Coupon.html',
              size: 'md',
-
+             scope: $scope,
+             controller: 'MycartCtrl'
          });
      }
+
+
+
+
  })
