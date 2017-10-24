@@ -272,13 +272,16 @@
                         <tbody>
 
                             <% for(var i=0; i<order.length; i++) {%>
+
                                 <tr>
                                     <td colspan="2" style="padding: 10px;border-top: 1px solid #e5e5e5;
             border-bottom: 1px solid #e5e5e5;
             border-left: 1px solid #e5e5e5;">
                                         <div style="display: table-cell; vertical-align: top;">
                                             <div style="width: 100px; height: 110px;margin: 0 auto; overflow: hidden;">
-                                                <img src="https://storage.googleapis.com/burntumber/1CR0210(1).jpg" alt="Orderd Product" class="img-responsive">
+                                                <img src="<%= order[i].product.images[0].image%>" alt="Orderd Product" class="img-responsive">
+
+
                                             </div>
                                         </div>
                                         <div style="display: table-cell; vertical-align: top;">
@@ -286,8 +289,9 @@
                                                 <h4 style="margin: 5px 0; text-transform: uppercase;">
                                                     <%=order[i].product.productName%>
                                                 </h4>
+
                                                 <span style="display: block;font-size: 12px; text-transform: capitalize;">product code:  <span style="text-transform: uppercase"><%=order[i].product.productId%></span></span>
-                                                <span style="display: block; font-size: 12px;">Size: M</span>
+                                                <span style="display: block; font-size: 12px;">Size: <%= order[i].product.size.name%></span>
                                                 <span style="display: block; font-size: 12px;">Qty: <%= order[i].quantity%></span>
                                             </div>
                                         </div>
@@ -345,7 +349,8 @@
                                         <td colspan="3" style="padding: 10px 15px; background: #F5F5F5;">
                                             <div>
                                                 <ul style="padding-left: 0; margin-top: 0; list-style-type: none;">
-                                                    <li style="margin-left:0">You can check your order status <a href="#" style="color: #341314;">here</a></li>
+                                                    <li style="margin-left:0">You can check your order status <a href="http://umber.tingdom.in/myaccount/orderTab"
+                                                            style="color: #341314;">here</a></li>
                                                     <li style="margin-left:0">For any order related any queries with respect to yor order placed,<br>                                                        contact us: +91 8754410505</li>
                                                 </ul>
                                                 <p>Thank you for shopping with us!</p>

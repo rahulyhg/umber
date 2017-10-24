@@ -364,8 +364,8 @@ var model = {
             } else {
                 Order.findOne({
                     orderNo: data.order.orderNo
-                }).deepPopulate("products.product").lean().exec(function (error, orderss) {
-                    console.log("User >>> ConfirmOrderPlaced >>>^^^^orderDetail", orderss.products[0].product, "++++++++++++++++++++");
+                }).deepPopulate("products.product products.product.size").lean().exec(function (error, orderss) {
+                    // console.log("User >>> ConfirmOrderPlaced >>>^^^^orderDetail", orderss.products[0].product, "++++++++++++++++++++");
                     if (error, orderss == undefined) {
                         console.log("User >>> ConfirmOrderPlaced >>> User.findOneAndUpdate >>> error", error);
                         callback(error, null);
@@ -386,14 +386,14 @@ var model = {
                         emailData.paymentMethod = data.order.paymentMethod;
                         emailData.billingAddress = orderss.billingAddress;
                         emailData.shippingAddress = orderss.shippingAddress;
-                        emailData.shipping = 0;
-                        emailData.discount = 0;
+                        emailData.shipping = orderss.shippingAmount;
+                        emailData.discount = orderss.discountAmount;
                         emailData.tax = 0;
-                        // emailData.totalAmount = orderss.totalAmount;
-                        _.each(emailData.order, function (n) {
-                            total = total + n.price;
-                        })
-                        emailData.totalAmount = total;
+                        emailData.totalAmount = orderss.totalAmount;
+                        // _.each(emailData.order, function (n) {
+                        //     total = total + n.price;
+                        // })
+                        // emailData.totalAmount = total;
                         Config.ConfirmOrderPlacedMail(emailData, function (err, response) {
                             if (err) {
                                 console.log("error in email", err);
@@ -418,7 +418,7 @@ var model = {
     },
     //API to send returned product email
     returnedProductEmail: function (data, callback) {
-        console.log("User >>> returnedProductEmail >>> User.findOneAndUpdate >>> data", data);
+        // console.log("User >>> returnedProductEmail >>> User.findOneAndUpdate >>> data", data);
         User.findOne({
             _id: data._id
         }).exec(function (error, created) {
@@ -428,7 +428,7 @@ var model = {
             } else {
                 Order.findOne({
                     _id: data.orderId
-                }).deepPopulate("returnedProducts.product").lean().exec(function (error, orderss) {
+                }).deepPopulate("returnedProducts.product returnedProducts.product.size").lean().exec(function (error, orderss) {
                     // console.log("User >>> returnedProductEmail >>>^^^^orderDetail", orderss, "++++++++++++++++++++");
                     if (error, orderss == undefined) {
                         console.log("User >>> returnedProductEmail >>> User.findOneAndUpdate >>> error", error);
@@ -459,6 +459,196 @@ var model = {
                         })
                         emailData.totalAmount = total;
                         Config.returnedProductEmail(emailData, function (err, response) {
+                            if (err) {
+                                console.log("error in email", err);
+                                callback("emailError", null);
+                            } else if (response) {
+                                var sendData = {};
+                                sendData._id = created._id;
+                                sendData.email = created.email;
+                                sendData.accessToken = created.accessToken;
+                                sendData.firstName = created.firstName;
+                                sendData.lastName = created.lastName;
+                                callback(null, sendData);
+                            } else {
+                                callback("errorOccurredRegister", null);
+                            }
+                        });
+                    }
+                })
+
+            }
+        })
+    },
+    //API to send cancel product email
+    cancelProductEmail: function (data, callback) {
+        // console.log("User >>> cancelProductEmail >>> User.findOneAndUpdate >>> data", data);
+        User.findOne({
+            _id: data._id
+        }).exec(function (error, created) {
+            if (error, created == undefined) {
+                console.log("User >>> cancelProductEmail >>> User.findOneAndUpdate >>> error", error);
+                callback(error, null);
+            } else {
+                Order.findOne({
+                    _id: data.orderId
+                }).deepPopulate("returnedProducts.product returnedProducts.product.size").lean().exec(function (error, orderss) {
+                    // console.log("User >>> cancelProductEmail >>>^^^^orderDetail", orderss, "++++++++++++++++++++");
+                    if (error, orderss == undefined) {
+                        console.log("User >>> cancelProductEmail >>> User.findOneAndUpdate >>> error", error);
+                        callback(error, null);
+                    } else {
+
+                        var emailData = {};
+                        var total = 0;
+                        emailData.email = created.email;
+                        emailData.subject = "BurntUmber returned product Order";
+                        emailData.filename = "cancelled-product-emailer.ejs";
+                        emailData.from = "harsh@wohlig.com"
+                        emailData.firstname = created.firstName;
+                        emailData.lastName = created.lastName;
+                        emailData.order = orderss.returnedProducts;
+                        emailData.orderNo = orderss.orderNo;
+                        emailData.orderStatus = orderss.orderStatus;
+                        emailData.createdAt = moment(orderss.createdAt).format('ll');
+                        emailData.paymentMethod = orderss.paymentMethod;
+                        emailData.billingAddress = orderss.billingAddress;
+                        emailData.shippingAddress = orderss.shippingAddress;
+                        emailData.shipping = orderss.shippingAmount;
+                        emailData.discount = orderss.discountAmount;
+                        emailData.tax = 0;
+                        // emailData.totalAmount = orderss.totalAmount;
+                        _.each(emailData.order, function (n) {
+                            total = total + n.price;
+                        })
+                        emailData.totalAmount = total;
+                        Config.cancelProductEmail(emailData, function (err, response) {
+                            if (err) {
+                                console.log("error in email", err);
+                                callback("emailError", null);
+                            } else if (response) {
+                                var sendData = {};
+                                sendData._id = created._id;
+                                sendData.email = created.email;
+                                sendData.accessToken = created.accessToken;
+                                sendData.firstName = created.firstName;
+                                sendData.lastName = created.lastName;
+                                callback(null, sendData);
+                            } else {
+                                callback("errorOccurredRegister", null);
+                            }
+                        });
+                    }
+                })
+
+            }
+        })
+    },
+    //API to send delivered product email
+    deliveredProductEmail: function (data, callback) {
+        User.findOne({
+            _id: data._id
+        }).exec(function (error, created) {
+            if (error, created == undefined) {
+                // console.log("User >>> deliveredProductEmail >>> User.findOneAndUpdate >>> error", error);
+                callback(error, null);
+            } else {
+                Order.findOne({
+                    _id: data.orderId
+                }).deepPopulate("products.product products.product.size").lean().exec(function (error, orderss) {
+                    // console.log("User >>> ConfirmOrderPlaced >>>^^^^orderDetail", orderss.products[0].product, "++++++++++++++++++++");
+                    if (error, orderss == undefined) {
+                        console.log("User >>> ConfirmOrderPlaced >>> User.findOneAndUpdate >>> error", error);
+                        callback(error, null);
+                    } else {
+
+                        var emailData = {};
+                        var total = 0;
+                        emailData.email = created.email;
+                        emailData.subject = "BurntUmber product Order Delivered";
+                        emailData.filename = "product-order-delivered.ejs";
+                        emailData.from = "harsh@wohlig.com"
+                        emailData.firstname = created.firstName;
+                        emailData.lastName = created.lastName;
+                        emailData.order = orderss.products;
+                        emailData.orderNo = orderss.orderNo;
+                        emailData.orderStatus = orderss.orderStatus;
+                        emailData.createdAt = moment(orderss.createdAt).format('ll');
+                        emailData.paymentMethod = orderss.paymentMethod;
+                        emailData.billingAddress = orderss.billingAddress;
+                        emailData.shippingAddress = orderss.shippingAddress;
+                        emailData.shipping = orderss.shippingAmount;
+                        emailData.discount = orderss.discountAmount;
+                        emailData.tax = 0;
+                        emailData.totalAmount = orderss.totalAmount;
+                        // _.each(emailData.order, function (n) {
+                        //     total = total + n.price;
+                        // })
+                        // emailData.totalAmount = total;
+                        Config.deliveredProductEmail(emailData, function (err, response) {
+                            if (err) {
+                                console.log("error in email", err);
+                                callback("emailError", null);
+                            } else if (response) {
+                                var sendData = {};
+                                sendData._id = created._id;
+                                sendData.email = created.email;
+                                sendData.accessToken = created.accessToken;
+                                sendData.firstName = created.firstName;
+                                sendData.lastName = created.lastName;
+                                callback(null, sendData);
+                            } else {
+                                callback("errorOccurredRegister", null);
+                            }
+                        });
+                    }
+                })
+
+            }
+        })
+    },
+    //API to send shipped product email
+    shippedProductEmail: function (data, callback) {
+        User.findOne({
+            _id: data._id
+        }).exec(function (error, created) {
+            if (error, created == undefined) {
+                // console.log("User >>> deliveredProductEmail >>> User.findOneAndUpdate >>> error", error);
+                callback(error, null);
+            } else {
+                Order.findOne({
+                    _id: data.orderId
+                }).deepPopulate("products.product products.product.size").lean().exec(function (error, orderss) {
+                    // console.log("User >>> ConfirmOrderPlaced >>>^^^^orderDetail", orderss.products[0].product, "++++++++++++++++++++");
+                    if (error, orderss == undefined) {
+                        console.log("User >>> ConfirmOrderPlaced >>> User.findOneAndUpdate >>> error", error);
+                        callback(error, null);
+                    } else {
+
+                        var emailData = {};
+                        var total = 0;
+                        emailData.email = created.email;
+                        emailData.subject = "BurntUmber product Order";
+                        emailData.filename = "product-order-shipped-emailer.ejs";
+                        emailData.from = "harsh@wohlig.com"
+                        emailData.firstname = created.firstName;
+                        emailData.lastName = created.lastName;
+                        emailData.order = orderss.products;
+                        emailData.orderNo = orderss.orderNo;
+                        emailData.orderStatus = orderss.orderStatus;
+                        emailData.createdAt = moment(orderss.createdAt).format('ll');
+                        emailData.paymentMethod = orderss.paymentMethod;
+                        emailData.billingAddress = orderss.billingAddress;
+                        emailData.shippingAddress = orderss.shippingAddress;
+                        emailData.shipping = orderss.shippingAmount;
+                        emailData.discount = orderss.discountAmount;
+                        emailData.tax = 0;
+                        emailData.totalAmount = orderss.totalAmount;
+                        // _.each(emailData.order, function (n) {
+                        //     total = total + n.price;
+                        // })
+                        // emailData.totalAmount = total;
+                        Config.shippedProductEmail(emailData, function (err, response) {
                             if (err) {
                                 console.log("error in email", err);
                                 callback("emailError", null);
