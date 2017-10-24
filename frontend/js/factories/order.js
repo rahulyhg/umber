@@ -49,6 +49,22 @@ myApp.factory('OrderService', function ($http) {
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
-        }
+        },
+        ConfirmOrderPlacedMail: function (userData, callback) {
+            $http({
+                url: adminurl + 'Order/ConfirmOrderPlacedMail',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
+        returnedProductEmail: function (userData, callback) {
+            $http({
+                url: adminurl + 'Order/returnedProductEmail',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
     }
 });

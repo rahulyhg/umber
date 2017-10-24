@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meata charset="UTF-8">
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Dosis:500');
+            @import url('https://fonts.googleapis.com/css?family=Catamaran:200');
+
+
+            table {
+                width: 600px;
+                margin: 0 auto;
+                font-family: 'Catamaran', sans-serif;
+            }
+
+            tbody>tr>td {
+                font-size: 12pt;
+                padding: 0px 60px;
+            }
+
+            tfoot {
+                color: #f1f1f1;
+                font-size: 11px;
+            }
+
+            .list-inline>li {
+                display: inline-block;
+            }
+
+            .img-responsive {
+                display: block;
+                max-width: 100%;
+                height: auto;
+            }
+
+            .logo {
+                padding: 10px 0px;
+            }
+        </style>
+</head>
+
+<body>
+    <div>
+        <table>
+            <thead>
+                <caption>
+                    <!--<div class="logo">
+                        <img class="img-responsive" src="https://gtem.tingdom.in/frontend/img/logo.png" alt="Logo" style="width: 110px;">
+                    </div>-->
+                </caption>
+
+            </thead>
+            <tbody>
+                <tr>
+                    <!--<td style="padding:0px;">
+                        <img src="https://gtem.tingdom.in/frontend/img/9.jpg" class="img-responsive">
+                    </td>-->
+                </tr>
+                <tr>
+                    <td style="font-family: 'Catamaran', sans-serif;">
+                        <p>Dear <span style="color:#9cdbb9"> <%= firstname%> <%= lastName%>,</span></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style="font-family: 'Catamaran', sans-serif;color: black;text-align:justify;margin:0px 0 50px 0;line-height: 1.2;">
+                            <span><%= otp%></span> is your OTP
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

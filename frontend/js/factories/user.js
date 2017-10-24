@@ -122,6 +122,14 @@ myApp.factory('UserService', function ($http) {
                 data: data,
                 withCredentials: false
             }).then(callback);
+        },
+        welcomeEmail: function (userData, callback) {
+            $http({
+                url: adminurl + 'User/welcomeEmail',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
         }
     }
 });

@@ -491,10 +491,10 @@
                                 <div>
                                     <h3 class="marg0 detail-tab__head ">payment method</h3>
                                 </div>
-                                <div class="payment-checkbox custom-checkbox">
+                                <div class="payment-checkbox custom-checkbox" ng-init="payment">
                                     <form name="paymentMethod" nonvalidate class="font__style " ng-submit="checkPaymentMethod(payment)">
                                         <div class="checkbox checkbox-inline " ng-repeat="payment in paymentWay">
-                                            <input type="checkbox" id="{{payment.id}}" ng-model="payment.checked" ng-click="updateSelection($index,paymentWay)" required>
+                                            <input type="checkbox" id="{{payment.id}}" ng-model="payment.checked" ng-click="updateSelection($index,paymentWay)">
                                             <label for="{{payment.id}}" class="chk__label text-uppercase ">{{payment.name}}</label>
                                         </div>
 
