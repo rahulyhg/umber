@@ -435,7 +435,7 @@ var models = {
             } else if (userdata && userdata.length > 0) {
                 // console.log("userdata ", userdata);
                 if (data.filename && data.filename != "") {
-                    sails.hooks.views.render("reset-password", data, function (err, body) {
+                    sails.hooks.views.render("forgot-pwd-emailer", data, function (err, body) {
                         // console.log("body : ", body);
                         if (err) {
                             console.log(err);
