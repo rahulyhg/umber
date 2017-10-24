@@ -250,6 +250,7 @@ var model = {
         user.password = md5(userData.password);
         user.mobile = userData.mobile;
         user.otp = Math.random().toString().substring(2, 6);
+        user.otpSplit = user.otp.split("");
         user.verifyAcc = false;
 
         User.findOne({
@@ -260,13 +261,13 @@ var model = {
                 if (created.verifyAcc == false) {
                     created.remove();
                     var emailData = {};
-                    emailData.otp = user.otp;
+                    emailData.otp = user.otpSplit;
                     emailData.email = user.email;
                     emailData.subject = "SignUp OTP";
-                    emailData.filename = "otp-email.ejs";
+                    emailData.filename = "user-registration-otp.ejs";
                     emailData.from = "harsh@wohlig.com"
                     // emailData.name = created.firstName + created.lastName;
-                    emailData.firstname = user.firstName;
+                    emailData.firstName = user.firstName;
                     emailData.lastName = user.lastName;
                     // console.log(">>>emailData", emailData);
                     // callback(null, created);
@@ -330,13 +331,13 @@ var model = {
                 }
             } else {
                 var emailData = {};
-                emailData.otp = user.otp;
+                emailData.otp = user.otpSplit;
                 emailData.email = user.email;
                 emailData.subject = "SignUp OTP";
-                emailData.filename = "otp-email.ejs";
+                emailData.filename = "user-registration-otp.ejs";
                 emailData.from = "harsh@wohlig.com"
                 // emailData.name = created.firstName + created.lastName;
-                emailData.firstname = user.firstName;
+                emailData.firstName = user.firstName;
                 emailData.lastName = user.lastName;
                 // console.log(">>>emailData", emailData);
                 // callback(null, created);
@@ -363,7 +364,6 @@ var model = {
                         // sendData.accessToken = created.accessToken;
                         sendData.mobile = user.mobile;
                         sendData.firstName = user.firstName;
-                        sendData.lastName = user.lastName;
                         sendData.lastName = user.lastName;
                         sendData.password = user.password;
                         sendData.verifyAcc = user.verifyAcc;
@@ -500,11 +500,11 @@ var model = {
         }).exec(function (err, user) {
             console.log("user", user)
             var emailData = {};
-            emailData.otp = user.otp;
+            emailData.otp = user.otp.split("");
             emailData.email = user.email;
             emailData.subject = "SignUp OTP";
             // emailData.filename = "otp.ejs";
-            emailData.filename = "otp-email.ejs";
+            emailData.filename = "user-registration-otp.ejs";
             emailData.from = "harsh@wohlig.com"
             emailData.firstname = user.firstName;
             emailData.lastName = user.lastName;
@@ -773,13 +773,13 @@ var model = {
                     console.log("in forgot*****", user)
                     userData.userId = user._id;
                     var emailData = {};
-                    emailData.otp = user.forgotPassword;
+                    emailData.otp = user.forgotPassword.split("");
                     emailData.email = data.email;
                     emailData.subject = "Forgot Password";
                     emailData.filename = "reset-password.ejs";
                     emailData.from = "harsh@wohlig.com"
                     // emailData.name = user.firstName + user.lastName;
-                    emailData.firstname = user.firstName;
+                    emailData.firstName = user.firstName;
                     emailData.lastName = user.lastName;
                     Config.emailForResetPassword(emailData, callback);
                     callback(null, user);
@@ -829,7 +829,7 @@ var model = {
         }).exec(function (err, user) {
             console.log("user", user)
             var emailData = {};
-            emailData.otp = user.forgotPassword;
+            emailData.otp = user.forgotPassword.split("");
             emailData.email = user.email;
             emailData.subject = "Forgot OTP";
             // emailData.filename = "otp.ejs";
@@ -1172,6 +1172,147 @@ var model = {
         }, {
             "shippingAddresses.$": 1
         }).exec(callback);
-    }
+    },
+    // API to send Welcome email
+    // input: users _id
+    welcomeEmail: function (data, callback) {
+        User.findOne({
+            _id: data._id
+        }).exec(function (error, created) {
+            if (error, created == undefined) {
+                console.log("User >>> welcomeEmail >>> User.findOneAndUpdate >>> error", error);
+                callback(error, null);
+            } else {
+                // console.log("User >>> welcomeEmail >>> User.findOneAndUpdate >>> error", created);
+                var emailData = {};
+                emailData.email = created.email;
+                emailData.subject = "Welcome in BurntUmber";
+                emailData.filename = "welcome-emailer.ejs";
+                emailData.from = "harsh@wohlig.com"
+                emailData.firstname = created.firstName;
+                emailData.lastName = created.lastName;
+                Config.emailwelcome(emailData, function (err, response) {
+                    if (err) {
+                        console.log("error in email", err);
+                        callback("emailError", null);
+                    } else if (response) {
+                        var sendData = {};
+                        sendData._id = created._id;
+                        sendData.email = created.email;
+                        sendData.accessToken = created.accessToken;
+                        sendData.firstName = created.firstName;
+                        sendData.lastName = created.lastName;
+                        callback(null, sendData);
+                    } else {
+                        callback("errorOccurredRegister", null);
+                    }
+                });
+            }
+        })
+    },
+    //API to send delivered product email
+    deliveredProductEmail: function (data, callback) {
+        User.findOne({
+            _id: data._id
+        }).exec(function (error, created) {
+            if (error, created == undefined) {
+                // console.log("User >>> deliveredProductEmail >>> User.findOneAndUpdate >>> error", error);
+                callback(error, null);
+            } else {
+                Order.findOne({
+                    _id: data.orderId
+                }).exec(function (error, order) {
+                    if (error, order == undefined) {
+                        // console.log("User >>> deliveredProductEmail >>> User.findOneAndUpdate >>> error", error);
+                        callback(error, null);
+                    } else {
+                        // console.log("User >>> welcomeEmail >>> User.findOneAndUpdate >>> error", created);
+                        var emailData = {};
+                        emailData.email = created.email;
+                        emailData.subject = "Delivered product";
+                        emailData.filename = "welcome.ejs";
+                        emailData.from = "harsh@wohlig.com"
+                        emailData.firstname = created.firstName;
+                        emailData.lastName = created.lastName;
+                        emailData.order = data.order;
+                        emailData.orderNo = data.orderNo;
+                        emailData.orderStatus = order.orderStatus;
+                        emailData.createdAt = moment(order.createdAt).format('ll');
+                        emailData.paymentMethod = order.paymentMethod;
+                        emailData.billingAddress = order.billingAddress;
+                        emailData.shippingAddress = order.shippingAddress
+                        Config.deliveredProductEmail(emailData, function (err, response) {
+                            if (err) {
+                                console.log("error in email", err);
+                                callback("emailError", null);
+                            } else if (response) {
+                                var sendData = {};
+                                sendData._id = created._id;
+                                sendData.email = created.email;
+                                sendData.accessToken = created.accessToken;
+                                sendData.firstName = created.firstName;
+                                sendData.lastName = created.lastName;
+                                callback(null, sendData);
+                            } else {
+                                callback("errorOccurredRegister", null);
+                            }
+                        });
+                    }
+                })
+            }
+        })
+    },
+    //API to send shipped product email
+    shippedProductEmail: function (data, callback) {
+        User.findOne({
+            _id: data._id
+        }).exec(function (error, created) {
+            if (error, created == undefined) {
+                console.log("User >>> shippedProductEmail >>> User.findOneAndUpdate >>> error", error);
+                callback(error, null);
+            } else {
+                Order.findOne({
+                    _id: data.orderId
+                }).exec(function (error, order) {
+                    if (error, order == undefined) {
+                        console.log("User >>> shippedProductEmail >>> User.findOneAndUpdate >>> error", error);
+                        callback(error, null);
+                    } else {
+                        // console.log("User >>> welcomeEmail >>> User.findOneAndUpdate >>> error", created);
+                        var emailData = {};
+                        emailData.email = created.email;
+                        emailData.subject = "shipped product";
+                        emailData.filename = "welcome.ejs";
+                        emailData.from = "harsh@wohlig.com"
+                        emailData.firstname = created.firstName;
+                        emailData.lastName = created.lastName;
+                        emailData.order = data.order;
+                        emailData.orderNo = data.orderNo;
+                        emailData.orderStatus = order.orderStatus;
+                        emailData.createdAt = moment(order.createdAt).format('ll');
+                        emailData.paymentMethod = order.paymentMethod;
+                        emailData.billingAddress = order.billingAddress;
+                        emailData.shippingAddress = order.shippingAddress
+                        Config.shippedProductEmail(emailData, function (err, response) {
+                            if (err) {
+                                console.log("error in email", err);
+                                callback("emailError", null);
+                            } else if (response) {
+                                var sendData = {};
+                                sendData._id = created._id;
+                                sendData.email = created.email;
+                                sendData.accessToken = created.accessToken;
+                                sendData.firstName = created.firstName;
+                                sendData.lastName = created.lastName;
+                                callback(null, sendData);
+                            } else {
+                                callback("errorOccurredRegister", null);
+                            }
+                        });
+                    }
+                })
+            }
+        })
+    },
 };
 module.exports = _.assign(module.exports, exports, model);

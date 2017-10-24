@@ -60,13 +60,25 @@ myApp.controller('OrderDetailCtrl', function ($scope, TemplateService, $translat
         }
 
         $scope.cancelOrder = function () {
-            var data = {};
-            data.products = $.jStorage.get("cancellation");
-            data.user = $.jStorage.get("userId");
-            data.orderId = $scope.order._id;
-            data.accessToken = $.jStorage.get("accessToken");
-            OrderService.cancelOrder(data, function (data) {
+            var data1 = {};
+            data1.products = $.jStorage.get("cancellation");
+            data1.user = $.jStorage.get("userId");
+            data1.orderId = $scope.order._id;
+            data1.accessToken = $.jStorage.get("accessToken");
+            OrderService.cancelOrder(data1, function (data) {
                 console.log(data);
+                if (data.data.value) {
+                    var emailUser = {};
+                    emailUser._id = $.jStorage.get('userId');
+                    emailUser.order = data1.products;
+                    emailUser.orderId = data1.orderId;
+                    OrderService.returnedProductEmail(emailUser, function (data) {
+                        console.log("in User/returnedProductEmail", data);
+                        if (data.value === true) {
+
+                        }
+                    });
+                }
                 OrderService.getDetailsOfOrder(input, function (output) {
                     $scope.order = output.data.data;
                     $.jStorage.deleteKey("cancellation");
@@ -75,7 +87,7 @@ myApp.controller('OrderDetailCtrl', function ($scope, TemplateService, $translat
                 })
                 // $.jStorage.deleteKey("cancellation");
             })
-            console.log("data", data);
+            console.log("data", data1);
 
         }
         console.log($scope.order);

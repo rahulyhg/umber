@@ -370,7 +370,7 @@ var models = {
             } else if (userdata && userdata.length > 0) {
                 // console.log("userdata ", userdata);
                 if (data.filename && data.filename != "") {
-                    sails.hooks.views.render("otp-email", data, function (err, body) {
+                    sails.hooks.views.render("user-registration-otp", data, function (err, body) {
                         // console.log("body : ", body);
                         if (err) {
                             console.log(err);
@@ -425,6 +425,7 @@ var models = {
             }
         });
     },
+    // otp send on forgot Password
     emailForResetPassword: function (data, callback) {
         // console.log(" ***** inside email of config ***** ", data);
         Password.find().exec(function (err, userdata) {
@@ -434,7 +435,7 @@ var models = {
             } else if (userdata && userdata.length > 0) {
                 // console.log("userdata ", userdata);
                 if (data.filename && data.filename != "") {
-                    sails.hooks.views.render("otp-email", data, function (err, body) {
+                    sails.hooks.views.render("reset-password", data, function (err, body) {
                         // console.log("body : ", body);
                         if (err) {
                             console.log(err);
@@ -489,7 +490,206 @@ var models = {
             }
         });
     },
+    //send welcome email
+    emailwelcome: function (data, callback) {
+        // console.log(" ***** inside email of config ***** ", data);
+        Password.find().exec(function (err, userdata) {
+            if (err) {
+                console.log(err);
+                callback(err, null);
+            } else if (userdata && userdata.length > 0) {
+                // console.log("userdata ", userdata);
+                if (data.filename && data.filename != "") {
 
+                    sails.hooks.views.render("welcome-emailer", data, function (err, body) {
+                        // console.log("body : ", body);
+                        if (err) {
+                            console.log(err);
+                            callback(err, null);
+                        } else {
+                            console.log('email else');
+                            if (body && body.value != false) {
+                                var helper = require('sendgrid').mail;
 
+                                from_email = new helper.Email(data.from);
+                                to_email = new helper.Email(data.email);
+                                subject = data.subject;
+                                content = new helper.Content("text/html", body);
+                                mail = new helper.Mail(from_email, subject, to_email, content);
+
+                                console.log("sending mail", mail);
+
+                                var sg = require('sendgrid')(userdata[0].name);
+                                var request = sg.emptyRequest({
+                                    method: 'POST',
+                                    path: '/v3/mail/send',
+                                    body: mail.toJSON()
+                                });
+
+                                sg.API(request, function (error, response) {
+                                    if (error) {
+                                        console.log('Error response received: ', error);
+                                        callback(error, null);
+                                    } else {
+                                        console.log("statuscode: ", response.statusCode)
+                                        console.log("body: ", response.body)
+                                        console.log(response.headers)
+                                        callback(null, response);
+                                    }
+                                })
+                            } else {
+                                callback({
+                                    message: "Error while sending mail."
+                                }, null);
+                            }
+                        }
+                    });
+
+                } else {
+                    callback({
+                        message: "Please provide params"
+                    }, null);
+                }
+            } else {
+                callback({
+                    message: "No api keys found"
+                }, null);
+            }
+        });
+    },
+    //send order Placed email
+    ConfirmOrderPlacedMail: function (data, callback) {
+        console.log(" ***** inside email of config ***** ", data);
+        Password.find().exec(function (err, userdata) {
+            if (err) {
+                console.log(err);
+                callback(err, null);
+            } else if (userdata && userdata.length > 0) {
+                // console.log("userdata ", userdata);
+                if (data.filename && data.filename != "") {
+
+                    sails.hooks.views.render("confirmed-product-order-emailer", data, function (err, body) {
+                        // console.log("body : ", body);
+                        if (err) {
+                            console.log(err);
+                            callback(err, null);
+                        } else {
+                            console.log('email else');
+                            if (body && body.value != false) {
+                                var helper = require('sendgrid').mail;
+
+                                from_email = new helper.Email(data.from);
+                                to_email = new helper.Email(data.email);
+                                subject = data.subject;
+                                content = new helper.Content("text/html", body);
+                                mail = new helper.Mail(from_email, subject, to_email, content);
+
+                                console.log("sending mail", mail);
+
+                                var sg = require('sendgrid')(userdata[0].name);
+                                var request = sg.emptyRequest({
+                                    method: 'POST',
+                                    path: '/v3/mail/send',
+                                    body: mail.toJSON()
+                                });
+
+                                sg.API(request, function (error, response) {
+                                    if (error) {
+                                        console.log('Error response received: ', error);
+                                        callback(error, null);
+                                    } else {
+                                        console.log("statuscode: ", response.statusCode)
+                                        console.log("body: ", response.body)
+                                        console.log(response.headers)
+                                        callback(null, response);
+                                    }
+                                })
+                            } else {
+                                callback({
+                                    message: "Error while sending mail."
+                                }, null);
+                            }
+                        }
+                    });
+
+                } else {
+                    callback({
+                        message: "Please provide params"
+                    }, null);
+                }
+            } else {
+                callback({
+                    message: "No api keys found"
+                }, null);
+            }
+        });
+    },
+    //send returned product email
+    returnedProductEmail: function (data, callback) {
+        // console.log(" ***** inside email of config ***** ", data);
+        Password.find().exec(function (err, userdata) {
+            if (err) {
+                console.log(err);
+                callback(err, null);
+            } else if (userdata && userdata.length > 0) {
+                // console.log("userdata ", userdata);
+                if (data.filename && data.filename != "") {
+
+                    sails.hooks.views.render("returned-product-emailer", data, function (err, body) {
+                        // console.log("body : ", body);
+                        if (err) {
+                            console.log(err);
+                            callback(err, null);
+                        } else {
+                            console.log('email else');
+                            if (body && body.value != false) {
+                                var helper = require('sendgrid').mail;
+
+                                from_email = new helper.Email(data.from);
+                                to_email = new helper.Email(data.email);
+                                subject = data.subject;
+                                content = new helper.Content("text/html", body);
+                                mail = new helper.Mail(from_email, subject, to_email, content);
+
+                                console.log("sending mail", mail);
+
+                                var sg = require('sendgrid')(userdata[0].name);
+                                var request = sg.emptyRequest({
+                                    method: 'POST',
+                                    path: '/v3/mail/send',
+                                    body: mail.toJSON()
+                                });
+
+                                sg.API(request, function (error, response) {
+                                    if (error) {
+                                        console.log('Error response received: ', error);
+                                        callback(error, null);
+                                    } else {
+                                        console.log("statuscode: ", response.statusCode)
+                                        console.log("body: ", response.body)
+                                        console.log(response.headers)
+                                        callback(null, response);
+                                    }
+                                })
+                            } else {
+                                callback({
+                                    message: "Error while sending mail."
+                                }, null);
+                            }
+                        }
+                    });
+
+                } else {
+                    callback({
+                        message: "Please provide params"
+                    }, null);
+                }
+            } else {
+                callback({
+                    message: "No api keys found"
+                }, null);
+            }
+        });
+    },
 };
 module.exports = _.assign(module.exports, models);

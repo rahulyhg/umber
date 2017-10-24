@@ -76,6 +76,28 @@ var controller = {
                 }
             });
         }
-    }
+    },
+    ConfirmOrderPlacedMail: function (req, res) {
+        if (req.body) {
+            Order.ConfirmOrderPlacedMail(req.body, res.callback);
+        } else {
+            res.json({
+                message: {
+                    data: "Invalid request!"
+                }
+            });
+        }
+    },
+    returnedProductEmail: function (req, res) {
+        if (req.body) {
+            Order.returnedProductEmail(req.body, res.callback);
+        } else {
+            res.json({
+                message: {
+                    data: "Invalid request!"
+                }
+            });
+        }
+    },
 };
 module.exports = _.assign(module.exports, controller);

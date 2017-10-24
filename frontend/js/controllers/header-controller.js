@@ -425,13 +425,13 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
                         $state.reload();
 
                         var emailUser = {};
-                        emailUser.email = $.jStorage.get('user').email;
-                        // NavigationService.apiCallWithData("User/welcomeEmail", emailUser, function (data) {
-                        //     console.log("in User/welcomeEmail", data);
-                        //     if (data.value === true) {
+                        emailUser._id = $.jStorage.get('userId');
+                        UserService.welcomeEmail(emailUser, function (data) {
+                            console.log("in User/welcomeEmail", data);
+                            if (data.value === true) {
 
-                        //     }
-                        // });
+                            }
+                        });
 
                     } else {
                         if (data.error == 'otpNoMatch') {

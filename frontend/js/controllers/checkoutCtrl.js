@@ -46,6 +46,7 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
             if (position != index)
                 payment.checked = false;
         });
+        $scope.getPaymentMethod = $scope.paymentWay[position].name;
     }
 
     if ($scope.loggedUser) {
@@ -152,12 +153,12 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
 
                     var emailUser = {};
                     emailUser.email = $.jStorage.get('user').email;
-                    // NavigationService.apiCallWithData("User/welcomeEmail", emailUser, function (data) {
-                    //     console.log("in User/welcomeEmail", data);
-                    //     if (data.value === true) {
+                    UserService.welcomeEmail(emailUser, function (data) {
+                        console.log("in User/welcomeEmail", data);
+                        if (data.value === true) {
 
-                    //     }
-                    // });
+                        }
+                    });
 
                 } else {
                     if (data.error == 'otpNoMatch') {
@@ -351,10 +352,10 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
     }
 
     //to checkPaymentMethod
-    $scope.checkPaymentMethod = function (formData) {
-        alert('dfgdfgdg');
-        console.log("checkPaymentMethod", formData)
-        if (formData.cash) {
+    $scope.checkPaymentMethod = function (payment) {
+        console.log("checkPaymentMethod", payment)
+
+        if ($scope.getPaymentMethod == "Cash on delivery") {
             $scope.generateOrder();
         } else {
             alert("paymnetGateway");
@@ -383,12 +384,22 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                     console.log("oderplaced", data);
                     if (data.data.data) {
                         toastr.success('Thank You your order was placed successfully', 'success');
+                        var emailUser = {};
+                        emailUser._id = $.jStorage.get("userId");
+                        emailUser.order = $scope.orders;
+                        OrderService.ConfirmOrderPlacedMail(emailUser, function (data) {
+                            console.log("in User/ConfirmOrderPlacedMail", data);
+                            if (data.value === true) {
+
+                            }
+                        });
                         $state.reload();
                     } else {
                         toastr.error('Sorry there was some problem in placing your order', 'Error');
                     }
                     angular.element(document.getElementById('ordergenerate')).disabled = false;
                 });
+
             } else {
                 console.log("Error in creating order: ", data.data.error);
             }
