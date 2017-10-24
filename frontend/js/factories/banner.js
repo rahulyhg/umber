@@ -8,11 +8,19 @@ myApp.factory('BannerService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
-        applicableDiscounts: function (productIds, callback) {
+        applicableDiscounts: function (data, callback) {
             $http({
                 url: adminurl + 'Discount/applicableDiscounts',
                 method: 'POST',
-                data: productIds,
+                data: data,
+                withCredentials: false
+            }).then(callback);
+        },
+        getAllProductsByDiscount: function (discountId, callback) {
+            $http({
+                url: adminurl + 'Discount/getOne',
+                method: 'POST',
+                data: discountId,
                 withCredentials: false
             }).then(callback);
         }

@@ -10,11 +10,25 @@ myApp.service('myService', function ($http, WishlistService, BannerService, Cart
             });
         },
 //avinash functions starts here
-this.applicableDiscounts = function (productIdsArr, callback) {
+this.applicableDiscounts = function (productIdsArr,grandTotal, callback) {
             var formData={
-                productIds:productIdsArr
-            }
+                productIds:productIdsArr,
+                grandTotal:grandTotal
+            };
             BannerService.applicableDiscounts(formData, function (data) {
+                console.log(data);
+                callback(data.data.data)
+
+            });
+        },
+
+this.getAllProductsByDiscount = function (discountId, callback) {
+    console.log("cartandwishlistservice inside getAllProductsByDiscount");
+            var formData={
+                _id:discountId
+            }
+            // console.log("formdata$$$",formData);
+            BannerService.getAllProductsByDiscount(formData, function (data) {
                 console.log(data);
                 callback(data.data.data)
 

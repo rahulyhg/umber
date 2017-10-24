@@ -15,13 +15,14 @@
                 <div class="text-left">
                     <div class="radio-wdth inline-block" ng-repeat="discount in applicableDiscounts track by $index">
                         <!--<input class="radio-custom" id="radio1" type="radio" name="select" hidden><label for="radio1" class="radio-inline radio-custom-label">-->
-                            <input type="radio" name="discountRadio" ng-model="formData._id" value="{{discount._id}}">
-        {{discount.name}} 
-                   </label>
+                        <!--{{discount}}-->
+                        <input class="radio-custom" id="radio1" ng-click="radioSubmit(discount);" type="radio" name="select" ng-model="discountValue" ng-value="{{discount}}"><label for="radio3" class="radio-inline radio-custom-label">{{discount.name}} </label> 
+                        </label>
                         <div class="inline-block">
                             <img src="frontend/img/listing/shirt.png" width="15" height="15" alt="Shirt Discount">
                         </div>
                     </div>
+                    <!--<tt>discount = {{discount._id | json}}</tt><br/>-->
                     <!--<div class="radio-wdth inline-block">
                         <input class="radio-custom" id="radio2" type="radio" name="select" hidden><label for="radio2" class="radio-inline radio-custom-label">Buy 2 get 20% Off 
                    </label>
@@ -49,6 +50,7 @@
     </div>
 </div>
 <div class="modal-footer modal-bottom">
-    <button class="btn text-uppercase cancel--btn" type="button" ng-click="$dismiss()">CANCEL</button>
-    <button class="btn text-uppercase apply--btn" type="button" ng-click="radioSubmit(formData);">APPLY COUPON</button>
+    {{discount}}
+    <button class="btn text-uppercase cancel--btn" type="button" ng-click="clearCouponSubmit();$dismiss()">CANCEL</button>
+    <button class="btn text-uppercase apply--btn" type="button" ng-click="applyCouponSubmit();">APPLY COUPON</button>
 </div>
