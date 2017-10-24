@@ -380,6 +380,25 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
                     var messText = "created";
                     if ($scope.json.keyword._id) {
                         messText = "edited";
+                        if (formData.orderStatus == "shipped") {
+                            var order = {};
+                            order._id = formData.user._id;
+                            order.orderId = formData._id;
+                            NavigationService.shippedProductEmail(order, function (data) {
+                                if (data.value) {
+
+                                }
+                            })
+                        } else if (formData.orderStatus == "delivered") {
+                            var order = {};
+                            order._id = formData.user._id;
+                            order.orderId = formData._id;
+                            NavigationService.deliveredProductEmail(order, function (data) {
+                                if (data.value) {
+
+                                }
+                            })
+                        }
                     }
                     toastr.success($scope.json.json.name + " " + formData.name + " " + messText + " successfully.");
                 } else {

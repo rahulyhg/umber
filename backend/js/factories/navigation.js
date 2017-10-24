@@ -214,6 +214,21 @@ myApp.factory('NavigationService', function ($http) {
             });
 
         },
-
+        shippedProductEmail: function (userData, callback) {
+            $http({
+                url: adminurl + 'Order/shippedProductEmail',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
+        deliveredProductEmail: function (userData, callback) {
+            $http({
+                url: adminurl + 'Order/deliveredProductEmail',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
     };
 });

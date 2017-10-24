@@ -209,8 +209,8 @@
                 <td>
                     <h3 class="text-capitalize" style="margin: 5px 0;">hi
                         <%= firstname%>
-                            <%= lastName%> ,</h3>
-                    <p style="margin-top: 0; margin-bottom: 10px;">Your order has been confirmed. Here are your order details</p>
+                            <%= lastName%>,</h3>
+                    <p style="margin-top: 0; margin-bottom: 10px;">This is to confirm that your order has been delivered.Here are your order details.</p>
                     <table class="order-product">
                         <thead class="text-left">
                             <th class="align-top">
@@ -258,7 +258,6 @@
 
                         </thead>
                         <tbody>
-
                             <% for(var i=0; i<order.length; i++) {%>
                                 <tr class="cancelled-product-section">
                                     <td colspan="2">
@@ -272,7 +271,7 @@
                                                 <h4 class="text-uppercase" style="margin: 5px 0;">
                                                     <%=order[i].product.productName%>
                                                 </h4>
-                                                <span class="display-block text-capitalize" style="font-size: 12px;">product code: <span class="text-uppercase"> <%=order[i].product.productId%></span></span>
+                                                <span class="display-block text-capitalize" style="font-size: 12px;">product code: <span class="text-uppercase"><%=order[i].product.productId%></span></span>
                                                 <span class="display-block" style="font-size: 12px;">Size: <%= order[i].product.size.name%></span>
                                                 <span class="display-block" style="font-size: 12px;">Qty: <%= order[i].quantity%></span>
                                             </div>
@@ -280,7 +279,9 @@
                                     </td>
 
                                     <td class="text-right align-top">
-                                        <div style="margin: 10px 0;"><i class="fa fa-inr" aria-hidden="true" style="padding: 0 5px"> <%=order[i].price%></i></div>
+                                        <div style="margin: 10px 0;"><i class="fa fa-inr" aria-hidden="true" style="padding: 0 5px"></i>
+                                            <%=order[i].price%>
+                                        </div>
                                     </td>
                                 </tr>
                                 <%}%>
@@ -331,7 +332,7 @@
                                                             style="color: #341314;">here</a></li>
                                                     <li style="margin-left:0">For any order related any queries with respect to yor order placed,<br>                                                        contact us: +91 8754410505</li>
                                                 </ul>
-                                                <p>Thank you for shopping with us!</p>
+                                                <p>Thank you for shopping with Burnt Umber.We hope you had a good experience!</p>
                                             </div>
                                         </td>
                                     </tr>
@@ -350,10 +351,10 @@
                         <div class="display-cell" style="width: 200px;text-align: right; vertical-align: middle;">
                             <ul class="list-unstyled list-inline" style="margin: 0">
                                 <li style="margin-left:0"> Follow us on</li>
-                                <li style="margin-left:0"><a href="#" style="width: 18px; height: 18px;border: 1px dashed white; background: transparent;color:white; display: block;font-size: 12px; text-align: center;"><img src="http://umber.tingdom.in/img/emailer/facebook.png" alt="Click on Facebook"  width="12" height="12">
-                                <li style="margin-left:0"><a href="#" style="width: 18px; height: 18px;border: 1px dashed white; background: transparent;color:white; display: block;font-size: 12px; text-align: center;"><img src="http://umber.tingdom.in/img/emailer/twitter.png" alt="Click on Twitter" width="12" height="12">
-                                <li style="margin-left:0"><a href="#" style="width: 18px; height: 18px;border: 1px dashed white; background: transparent;color:white; display: block;font-size: 12px; text-align: center;">
-                                    <img src="http://umber.tingdom.in/img/emailer/instagram.png" alt="Click on Instagram"  width="12" height="12"></a></li>
+                                <li style="margin-left:0"><a href="#" style="width: 18px; height: 18px;border: 1px dashed white; background: transparent;color:white; display: block;font-size: 12px;  text-align: center;"><img src="imgs/facebook 18.png" alt="Click on Facebook"  width="12" height="12">
+                                <li style="margin-left:0" ><a href="#" style="width: 18px; height: 18px;border: 1px dashed white; background: transparent;color:white; display: block;font-size: 12px;  text-align: center;"><img src="imgs/twitter 18.png" alt="Click on Twitter" width="12" height="12">
+                                <li style="margin-left:0"><a href="#" style="width: 18px; height: 18px;border: 1px dashed white; background: transparent;color:white; display: block;font-size: 12px;  text-align: center;">
+                                    <img src="imgs/instagram 18.png" alt="Click on Instagram" alt=""  width="12" height="12"></a></li>
                             </ul>
                         </div>
                     </div>

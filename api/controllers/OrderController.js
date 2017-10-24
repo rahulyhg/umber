@@ -99,5 +99,38 @@ var controller = {
             });
         }
     },
+    cancelProductEmail: function (req, res) {
+        if (req.body) {
+            Order.cancelProductEmail(req.body, res.callback);
+        } else {
+            res.json({
+                message: {
+                    data: "Invalid request!"
+                }
+            });
+        }
+    },
+    deliveredProductEmail: function (req, res) {
+        if (req.body) {
+            Order.deliveredProductEmail(req.body, res.callback);
+        } else {
+            res.json({
+                message: {
+                    data: "Invalid request!"
+                }
+            });
+        }
+    },
+    shippedProductEmail: function (req, res) {
+        if (req.body) {
+            Order.shippedProductEmail(req.body, res.callback);
+        } else {
+            res.json({
+                message: {
+                    data: "Invalid request!"
+                }
+            });
+        }
+    },
 };
 module.exports = _.assign(module.exports, controller);
