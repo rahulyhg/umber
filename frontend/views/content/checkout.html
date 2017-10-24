@@ -16,7 +16,7 @@
                             </div>
                             <div>
                                 <button class="btn btn--list" ng-disabled="!loggedUser" ng-click="view='detailTab'" ng-class="{
-                        'btn--brownActive': view=='detailTab' }"> Details</button>
+                        'btn--brownActive': view=='detailTab' }"> Details{{view}}</button>
                             </div>
                             <div>
                                 <button class="btn btn--list">Payment</button>
@@ -191,13 +191,14 @@
                             </table>
                             <div class="pull-right ">
                                 <p class="text-right ">GRAND TOTAL : <span>&#x20b9 {{grandTotal}}</span></p>
-                                <button class="btn btn--list" s ng-disabled="!loggedUser" ng-click="proceedToDetailTab();" ng-class="{
+                                <button class="btn btn--list" ng-disabled="!loggedUser" ng-click="proceedToDetailTab();" ng-class="{
                         'btn--brownActive': view=='detailTab' }"> Next</button>
                             </div>
                         </div>
 
                     </div>
-                    <div class="detail-tab " ng-if="loggedUser&&view=='detailTab'">
+                    <div class="detail-tab " ng-if="loggedUser && view=='detailTab'">
+                        <pre>{{view}}</pre>
                         <div class="col-md-8 col-md-offset-1 ">
                             <div class="details-form ">
                                 <div>
