@@ -24,6 +24,11 @@ var schema = new Schema({
         type: String,
         enum: ['Used', 'unUsed'],
         default: 'unUsed'
+    },
+    isActive: {
+        type: String,
+        enum: ['True', 'False'],
+        default: 'False'
     }
 });
 

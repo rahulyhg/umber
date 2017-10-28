@@ -339,6 +339,7 @@
                                                 display: inline-block;
                                             }
 
+
                                             .text-capitalize {
                                                 text-transform: capitalize;
                                             }
@@ -3277,7 +3278,7 @@
                                             }
 
                                             .coupon-discount {
-                                                width: 355px;
+                                                width: 400px;
                                                 margin: 0 auto;
                                                 h4 {
                                                     font-family: 'vadodara-md';
@@ -3306,7 +3307,8 @@
                                                     margin-bottom: 30px;
                                                 }
                                                 .radio-wdth {
-                                                    width: 175px;
+                                                   width: 200px;
+                                                   margin-bottom: 10px;
                                                     .radio-custom+.radio-custom-label:before {
                                                         content: '';
                                                         background: #fff;

@@ -1,0 +1,98 @@
+{
+    "title": "Edit NormalCoupon",
+    "name": "NormalCoupon",
+    "jsonPage": "viewNormalCoupon",
+    "desciption": "",
+    "pageType": "edit",
+    "urlFields": ["_id"],
+    "fields": [{
+            "name": "Code",
+            "type": "text",
+            "tableRef": "code",
+            "placeholder": "Enter code",
+            "id": "code",
+            "validation": ["required", "trim", "unique"],
+            "url": ""
+        }, {
+            "name": "Coupon Type",
+            "type": "tags",
+            "tableRef": "couponType",
+            "id": "NormalcouponType",
+            "validation": ["", "", ""],
+            "url": "",
+            "dropDownField": "",
+            "dropDownType": "single",
+            "onView": true,
+            "dropDown": ["Percentage", "Amount"]
+        }, {
+            "name": "Start Date",
+            "type": "date",
+            "tableRef": "startDate",
+            "placeholder": "Enter startDate",
+            "id": "startDate",
+            "validation": ["", "", ""],
+            "url": ""
+        }, {
+            "name": "End Date",
+            "type": "date",
+            "tableRef": "endDate",
+            "placeholder": "Enter endDate",
+            "id": "endDate",
+            "validation": ["", "", ""],
+            "url": ""
+        }, {
+            "name": "Percentage",
+            "type": "text",
+            "tableRef": "percentage",
+            "placeholder": "Enter Percentage",
+            "id": "percentage",
+            "validation": ["", "", ""],
+            "url": ""
+        }, {
+            "name": "Amount",
+            "type": "text",
+            "tableRef": "amount",
+            "placeholder": "Enter Amount",
+            "id": "amount",
+            "validation": ["", "", ""],
+            "url": ""
+        },
+        {
+            "name": "Max Amount",
+            "type": "text",
+            "tableRef": "maxAmount",
+            "placeholder": "Enter Max Amount",
+            "id": "maxAmount",
+            "validation": ["", "", ""],
+            "url": ""
+        }
+    ],
+    "action": [{
+        "name": "submit",
+        "action": "submitNormalCoupon",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewNormalCoupon"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewNormalCoupon"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "NormalCoupon/save",
+        "params": "_id"
+    },
+    "preApi": {
+        "url": "NormalCoupon/getOne",
+        "params": "_id"
+    }
+
+}

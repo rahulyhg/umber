@@ -23,6 +23,14 @@ myApp.factory('BannerService', function ($http) {
                 data: discountId,
                 withCredentials: false
             }).then(callback);
+        },
+        addCouponByUserFromCart: function (data, callback) {
+            $http({
+                url: adminurl + 'Coupon/save',
+                method: 'POST',
+                data: data,
+                withCredentials: false
+            }).then(callback);
         }
     }
 })
