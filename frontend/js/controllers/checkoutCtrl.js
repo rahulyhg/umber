@@ -1902,7 +1902,9 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
     ];
 
     //Function for next button which displays the detail tab if a user is logged in or clicks on the next button for checkout 
+    var clickCounter = 0;
     $scope.proceedToDetailTab = function () {
-        $scope.view = "detailTab";
+        $scope.view = 'detailTab';
     };
+
 })

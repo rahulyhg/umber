@@ -66,5 +66,29 @@ myApp.factory('OrderService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
+        cancelProductEmail: function (userData, callback) {
+            $http({
+                url: adminurl + 'Order/cancelProductEmail',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
+        deliveredProductEmail: function (userData, callback) {
+            $http({
+                url: adminurl + 'Order/deliveredProductEmail',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
+        shippedProductEmail: function (userData, callback) {
+            $http({
+                url: adminurl + 'Order/shippedProductEmail',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
     }
 });
