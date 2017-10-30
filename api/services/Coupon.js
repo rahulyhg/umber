@@ -28,8 +28,21 @@ var schema = new Schema({
     isActive: {
         type: String,
         enum: ['True', 'False'],
-        default: 'False'
-    }
+        default: 'True'
+    },
+    startDate: Date,
+    endDate: Date,
+    couponType: {
+        type: String,
+        enum: ['Festival', 'Discount']
+    },
+    valueType: {
+        type: String,
+        enum: ['Percentage', 'Amount']
+    },
+    percentage: Number,
+    cAmount: Number,
+    maxAmount: Number
 });
 
 schema.plugin(deepPopulate, {
@@ -40,8 +53,8 @@ schema.plugin(deepPopulate, {
         'usedOrderId': {
             select: '_id name'
         },
-        'user':{
-            select:'_id firstName'
+        'user': {
+            select: '_id firstName'
         }
     }
 });
@@ -50,5 +63,76 @@ schema.plugin(timestamps);
 module.exports = mongoose.model('Coupon', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "generatedOrderId usedOrderId user", "generatedOrderId usedOrderId user"));
-var model = {};
+var model = {
+    // get coupon information 
+    // input coupon name
+    getCoupon: function (data, callback) {
+        Coupon.findOne({
+            name: data.couponName
+        }).exec(function (err, coupon) {
+            if (err) {
+                callback(err, null);
+            } else {
+                if (_.isEmpty(coupon)) {
+                    callback(null, "Coupon Invalid");
+                } else {
+                    var percentage = {};
+                    var perDiscount = {};
+                    var discount = {};
+                    var discountOnCoupon = {};
+                    var todayDate = new Date();
+                    var one_day = 1000 * 60 * 60 * 24;
+                    if ((todayDate >= coupon.startDate && todayDate <= coupon.endDate) && coupon.isActive) {
+                        if (coupon.couponType == 'Festival') {
+                            if (coupon.valueType == 'Percentage') {
+                                discount.name = coupon.name;
+                                discount.user = coupon.user;
+                                discount.couponType = 'Festival'
+                                discount.generatedOrderId = coupon.generatedOrderId;
+                                discount.usedOrderId = coupon.usedOrderId;
+                                discount.percentage = coupon.percentage;
+                                discount.maxAmount = coupon.maxAmount;
+                                callback(null, discount);
+                            } else {
+                                discount.name = coupon.name;
+                                discount.user = coupon.user;
+                                discount.couponType = 'Festival'
+                                discount.generatedOrderId = coupon.generatedOrderId;
+                                discount.usedOrderId = coupon.usedOrderId;
+                                discount.cAmount = coupon.cAmount;
+                                callback(null, discount);
+                            }
+                        } else {
+                            if (coupon.status == "unUsed") {
+                                if (coupon.valueType == 'Percentage') {
+                                    discount.name = coupon.name;
+                                    discount.user = coupon.user;
+                                    discount.couponType = 'Discount';
+                                    discount.generatedOrderId = coupon.generatedOrderId;
+                                    discount.usedOrderId = coupon.usedOrderId;
+                                    discount.percentage = coupon.percentage;
+                                    discount.maxAmount = coupon.maxAmount;
+                                    callback(null, discount);
+                                } else {
+                                    discount.name = coupon.name;
+                                    discount.user = coupon.user;
+                                    discount.couponType = 'Discount'
+                                    discount.generatedOrderId = coupon.generatedOrderId;
+                                    discount.usedOrderId = coupon.usedOrderId;
+                                    discount.cAmount = coupon.cAmount;
+                                    callback(null, discount);
+                                }
+                            } else {
+                                callback(null, "coupon already Used");
+                            }
+                        }
+                    } else {
+                        callback(null, "coupon has expired");
+                    }
+
+                }
+            }
+        })
+    }
+};
 module.exports = _.assign(module.exports, exports, model);
