@@ -85,9 +85,13 @@
 
      $scope.applyCouponSubmit = function () {
          if (!isEmptyObject($scope.discountSelected)) {
+
              console.log("$scope.discountSelected in applyCouponSubmit", $scope.discountSelected.discountType);
              var discountObject = $scope.discountSelected;
              discountCouponAmount = $scope.discountSelected.xValue;
+             if($scope.discountSelected.maxAmount){
+                 $scope.discountCouponMaxAmount=$scope.discountSelected.maxAmount;
+             }
              if ($scope.discountSelected.discountType == "59f06bc7647252477439a1e4") {
                  $.jStorage.deleteKey("coupon");
 
@@ -99,27 +103,34 @@
 
                  if ($scope.grandTotal >= $scope.discountSelected.yValue) {
                      //if jstorage.user then userid from jstorage 
+                     var timestamp = Date.now();
+                     var couponCode = "BU" + timestamp;
+                     console.log("timestamp", couponCode);
                      if ($.jStorage.get("userId")) {
-
+                         var userId = $.jStorage.get("userId");
                          var couponObj = {
-                             name: "Coupon 1",
-                             user: "59c5008c34054e4586c59a96",
-                             generatedOrderId: "59c4c57603e1027226e4b575",
+                             name: couponCode,
+                             couponType:"Discount",
+                             valueType:"Amount",
+                             user: userId,
+                             generatedOrderId: "",
                              usedOrderId: "",
-                             amount: discountCouponAmount,
+                             amount: $scope.discountCouponMaxAmount,
                              status: "unUsed",
-                             isActive: "False"
+                             isActive: "True"
                          };
                      } else {
 
                          var couponObj = {
-                             name: "Coupon 1",
-                             user: "59c5008c34054e4586c59a96",
-                             generatedOrderId: "59c4c57603e1027226e4b575",
+                             name: couponCode,
+                             couponType:"Discount",
+                             valueType:"Amount",
+                             user: "",
+                             generatedOrderId: "",
                              usedOrderId: "",
-                             amount: discountCouponAmount,
+                             amount: $scope.discountCouponMaxAmount,
                              status: "unUsed",
-                             isActive: "False"
+                             isActive: "True"
                          };
                      }
                      console.log(couponObj, "couponObj");
@@ -138,6 +149,8 @@
                      //  $scope.grandTotal = $scope.grandTotal - $scope.discountSelected.xValue;
                      //  $scope.grandTotalAfterDiscount = $scope.discountSelected.xValue;
                  } else {
+                     $scope.Couponmodal.close();
+                     $scope.discountSelected = {};
                      alert("Your Cart Total Low to Avail This Discount!!! Shop More to Get This Discount...");
                  }
 
