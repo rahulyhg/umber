@@ -105,11 +105,17 @@ var model = {
                 "percent": {
                     $first: '$percent'
                 },
-                "variables": {
-                    $first: '$variables'
+                "xValue": {
+                    $first: '$xValue'
+                },
+                "yValue": {
+                    $first: '$yValue'
                 },
                 "discountType": {
                     $first: '$discountType'
+                },
+                "products": {
+                    $first: '$products'
                 }
             }
         },{

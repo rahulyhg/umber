@@ -6,6 +6,18 @@
     "pageType": "edit",
     "urlFields": ["_id"],
     "fields": [{
+        "name": "Choose Discount Type",
+        "id": "discountType",
+        "type": "tags",
+        "tableRef": "discountType",
+        "placeholder": "Choose Discount Type",
+        "dropDownField": "name",
+        "dropDownType": "single",
+        "searchApi": "searchCall",
+        "url": "DiscountType/search",
+        "view": true,
+        "validation": ["trim"]
+    },{
         "name": "Name",
         "type": "text",
         "tableRef": "name",
@@ -66,18 +78,6 @@
         "type": "number",
         "id": "maxAmount",
         "tableRef": "maxDiscountAmount",
-        "validation": ["trim"]
-    }, {
-        "name": "Choose Discount Type",
-        "id": "discountType",
-        "type": "tags",
-        "tableRef": "discountType",
-        "placeholder": "Choose Discount Type",
-        "dropDownField": "name",
-        "dropDownType": "single",
-        "searchApi": "searchCall",
-        "url": "DiscountType/search",
-        "view": true,
         "validation": ["trim"]
     },{
         "name": "Gifts",

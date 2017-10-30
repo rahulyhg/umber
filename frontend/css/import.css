@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /*
- * jQuery FlexSlider v2.6.3
+ * jQuery FlexSlider v2.6.4
  * http://www.woothemes.com/flexslider/
  *
  * Copyright 2012 WooThemes
@@ -13984,7 +13984,7 @@ p.item-cost {
   width: 750px; }
 
 .coupon-discount {
-  width: 355px;
+  width: 400px;
   margin: 0 auto; }
   .coupon-discount h4 {
     font-family: 'vadodara-md';
@@ -14006,7 +14006,8 @@ p.item-cost {
   .coupon-discount .coupon-code-num {
     margin-bottom: 30px; }
   .coupon-discount .radio-wdth {
-    width: 175px; }
+    width: 200px;
+    margin-bottom: 10px; }
     .coupon-discount .radio-wdth .radio-custom + .radio-custom-label:before {
       content: '';
       background: #fff;
