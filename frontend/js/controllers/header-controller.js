@@ -278,7 +278,7 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
         }
 
     })
-    .controller('loginModalCtrl', function ($rootScope, $scope, $state, $uibModalInstance, UserService, CartService, WishlistService, $uibModal) {
+    .controller('loginModalCtrl', function ($rootScope, $scope, $timeout, $state, $uibModalInstance, UserService, CartService, WishlistService, $uibModal) {
 
         $scope.formData = {};
         $scope.loginData = {};
@@ -353,10 +353,10 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
                     $scope.errormsg = "User already exists with the given emailId.Please login to proced"
                 } else if (!_.isEmpty(data.data.data)) {
                     $scope.userData = data.data.data;
-                    $scope.otpRegister = $uibModal.open({
+                    $rootScope.otpRegister = $uibModal.open({
                         animation: true,
                         templateUrl: 'views/modal/otp2.html',
-                        scope: $scope,
+
                         // windowClass: 'loginModalSize',
                         controller: 'loginModalCtrl'
                         // windowClass: 'modal-content-radi0'
@@ -479,14 +479,26 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
             $scope.forgotPwd = true;
             $scope.otpPwd = false
             $scope.resetPwd = false;
-            $scope.forgotPasswordModal = $uibModal.open({
+            // code to close the modal 
+            // $rootScope.loginModal.close();
+            // $timeout(function () {
+            //     $scope.forgetModal = $uibModal.open({
+            //         animation: true,
+            //         templateUrl: 'views/modal/otp1.html',
+
+            //         // windowClass: 'loginModalSize',
+            //         controller: 'loginModalCtrl'
+            //         // windowClass: 'modal-content-radi0'
+            //     });
+            // }, 500);
+            $scope.forgetModal = $uibModal.open({
                 animation: true,
                 templateUrl: 'views/modal/otp1.html',
-                scope: $scope,
                 // windowClass: 'loginModalSize',
                 controller: 'loginModalCtrl'
                 // windowClass: 'modal-content-radi0'
             });
+
             // $scope.loginModal.close({
             //     $value: $scope.loginModal
             // });

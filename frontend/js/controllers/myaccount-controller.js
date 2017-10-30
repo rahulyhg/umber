@@ -1755,7 +1755,7 @@ myApp.controller('GiftCardCtrl', function ($scope, TemplateService, $translate, 
     TemplateService.title = "Your Gift Card"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
 });
-myApp.controller('StoreLocatorCtrl', function ($scope, TemplateService, $translate, $rootScope, $filter) {
+myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, TemplateService, $translate, $rootScope, $filter) {
     $scope.template = TemplateService.getHTML("content/storelocator.html");
     TemplateService.title = "Stores"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
@@ -1787,8 +1787,98 @@ myApp.controller('StoreLocatorCtrl', function ($scope, TemplateService, $transla
     ];
     $scope.storeLocation = _.chunk($scope.storeLocation, 4);
     $scope.locationButton = 'Location';
-    $scope.location = ['Mumbai', 'Pune', 'Hyderabad', 'Chennai'];
-    $scope.changePlaces = function (name) {
-        $scope.locationButton = name;
+    // $scope.location = ['Mumbai', 'Pune', 'Hyderabad', 'Chennai'];
+    $scope.location = [{
+        'city': 'Mumbai',
+        'lat': 19.0760,
+        'long': 72.8777,
+        'name': 'Location1 Name',
+        'url': 'Location1 URl',
+        'shop': [{
+            'test': 'ccol'
+        }]
+    }, {
+        'city': 'Pune',
+        'lat': 18.5204,
+        'long': 73.8567,
+        'name': 'Location2 Name',
+        'url': 'Location2 URl'
+    }, {
+        'city': 'Hyderabad',
+        'lat': 17.3850,
+        'long': 78.4867,
+        'name': 'Location3 Name',
+        'url': 'Location3 URl'
+    }, {
+        'city': 'Chennai',
+        'lat': 13.0827,
+        'long': 80.2707,
+        'name': 'Location4 Name',
+        'url': 'Location4 URl'
+    }];
+
+    $scope.locationArray = [
+        ['Mumbai', 19.0760, 72.8777, 'Dadar', 'Borivali', 'Location1 URl'],
+        ['Pune', 18.5204, 73.8567, 'sdda', 'asdada', 'Location2 URl'],
+        ['Chennai', 13.0827, 80.2707, 'XYZ', 'ABC', 'Location3 URl']
+    ];
+
+    // var mapLocations = [];
+    var locationObj = {};
+    locationObj['city'] = $scope.location[0].city;
+    locationObj['lat'] = $scope.location[0].lat;
+    locationObj['long'] = $scope.location[0].long;
+    locationObj['name'] = $scope.location[0].name;
+    locationObj['url'] = $scope.location[0].url;
+    // mapLocations.push(locationObj);
+    console.log('scope', locationObj);
+    var geoCoder;
+    var map;
+    // var bounds = new google.maps.LatLngBounds();
+
+    $scope.changePlaces = function (place) {
+        console.log(place);
+        $scope.locationButton = place[0];
+
+        // we are pushing an object into the mapLocations array. So we will get an array of object
+        locationObj['city'] = place.city;
+        locationObj['lat'] = place.lat;
+        locationObj['long'] = place.long;
+        locationObj['name'] = place.name;
+        locationObj['url'] = place.url;
+        // mapLocations.push(locationObj);
+        console.log('locations', locationObj);
     };
+
+    // function init() {
+    //     alert('test');
+    //     map = new google.maps.Map(document.getElementById('mapCanvas'), {
+    //         center: new google.maps.LatLng(19.0760, 72.8777),
+    //         zoom: 13,
+    //         mapTypeId: google.maps.MapTypeId.ROADMAP
+
+    //     });
+    //     geocoder = new google.maps.Geocoder();
+    // }
+    function init() {
+        // alert('loaded');
+        var uluru = {
+            lat: 37.4419,
+            lng: -122.1419
+        };
+        var map = new google.maps.Map(document.getElementById('mapCanvas'), {
+            zoom: 18,
+            center: new google.maps.LatLng(37.4419, -122.1419),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+        });
+    }
+
+    $timeout(function () {
+        init();
+    }, 3000);
+
 });

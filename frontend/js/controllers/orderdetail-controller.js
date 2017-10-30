@@ -59,6 +59,25 @@ myApp.controller('OrderDetailCtrl', function ($scope, TemplateService, $translat
             }
         }
 
+        //Code for return reson dropdown
+        $scope.setReturnResonText = 'Select Cancel Reason';
+        $scope.returnReson = [{
+                'reason': 'I dont like',
+                'id': 1
+            },
+            {
+                'reason': 'I dont like because',
+                'id': 2
+            }, {
+                'reason': 'size is not perfect',
+                'id': 3
+            }
+        ];
+
+        $scope.getReturnReson = function (returnReason) {
+            $scope.setReturnResonText = returnReason.reason;
+        };
+
         $scope.cancelOrder = function () {
             var data1 = {};
             data1.products = $.jStorage.get("cancellation");

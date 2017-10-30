@@ -79,15 +79,14 @@
       </table>
       <div class="row">
         <div class="col-md-5">
-          <form>
+          <form name="productCancel" nonvalidate>
             <div class="form-group">
               <label class="item-code">Reason for cancel :</label>
               <div class=" inline-block order-return-dropdown" uib-dropdown>
-                <button type="button" class="btn text-capitalize item-return--btn" uib-dropdown-toggle ng-click="openDropdown()">Select Cancel Reason  <span class="caret"></button>
+                <button type="button" class="btn text-capitalize item-return--btn" uib-dropdown-toggle ng-click="openDropdown()">{{setReturnResonText}}  <span class="caret"></button>
                 <ul class="return-dropdown-menu dropdown-menu" uib-dropdown-menu role="menu">
-                  <li role="menuitem"><a href="">Test</a></li>
-                  <li role="menuitem"><a href="">Test</a></li>
-                  <li role="menuitem"><a href="">Test</a></li>
+                  <li role="menuitem" ng-repeat="reasons in returnReson" ng-click="getReturnReson(reasons)" value="{{reasons.reason}}"><a href="" value="{{reasons.reason}}">{{reasons.reason}}</a></li>
+
                 </ul>
               </div>
             </div>
