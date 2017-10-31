@@ -113,7 +113,7 @@ var model = {
     createOrderFromCart: function (data, callback) {
         // console.log("In createorderfromcart", data);
         var allData = data;
-        console.log("allData", allData);
+        // console.log("allData", allData);
         if (_.isEmpty(data.userId)) {
             // console.log("No user found for order");
             callback({
@@ -125,7 +125,8 @@ var model = {
                     // console.log("cart: ", cart);
                     var order = {};
                     order.orderNo = Math.ceil(Math.random() * 10000000000000);
-                    order.selectedDiscount = data.selectedDiscount.selectedDiscount._id;
+                    if (data.selectedDiscount.selectedDiscount)
+                        order.selectedDiscount = data.selectedDiscount.selectedDiscount._id;
                     // 59f06bc7647252477439a1e4
                     order.totalAmount = 0;
                     for (var idx = 0; idx < cart.products.length; idx++) {
@@ -161,28 +162,39 @@ var model = {
                                     _id: mongoose.Types.ObjectId(cart._id)
                                 }).exec(function (err, result) {})
                                 Product.subtractQuantity(data1.products, null);
-                                if (allData.couponData && allData.selectedDiscount.selectedDiscount.discountType.toString() == "59f06bc7647252477439a1e4") {
-                                    console.log("have selected right id to check");
-                                    var couponDataToProcess = allData.couponData;
-                                    console.log("couponDataToProcess Before", couponDataToProcess);
-                                    couponDataToProcess.user = allData.userId;
-                                    couponDataToProcess.generatedOrderId = data1._id;
-                                    couponDataToProcess.usedOrderId=null;
-                                    console.log("couponDataToProcess After", couponDataToProcess);
-                                    Coupon.saveData(couponDataToProcess, function (err, couponDataReceived) {
-                                        if (err) {
-                                            console.log("errrrooooooooooorrrrrrrrrrrr",err);
-                                            callback(err, null);
-                                        } else {
-                                            if (!_.isEmpty(couponDataReceived)) {
-                                                order.couponDataReceived=couponDataReceived;
+                                if (allData.selectedDiscount.selectedDiscount) {
+                                    if (allData.couponData && allData.selectedDiscount.selectedDiscount.discountType.toString() == "59f06bc7647252477439a1e4") {
+                                        var couponDataToProcess = allData.couponData;
+                                        couponDataToProcess.user = allData.userId;
+                                        couponDataToProcess.generatedOrderId = data1._id;
+                                        couponDataToProcess.usedOrderId = null;
+                                        Coupon.saveData(couponDataToProcess, function (err, couponDataReceived) {
+                                            if (err) {
+                                                console.log("errrrooooooooooorrrrrrrrrrrr", err);
+                                                callback(err, null);
+                                            } else {
+                                                if (!_.isEmpty(couponDataReceived)) {
+                                                    order.couponDataReceived = couponDataReceived;
+                                                }
+
                                             }
-                                            
+                                            callback(null, order);
+                                        })
+                                    }
+                                } else if (allData.selectedDiscount.coupon) {
+                                    console.log("toSert!!", data1._id);
+                                    Coupon.findOneAndUpdate({
+                                        _id: allData.selectedDiscount.coupon._id
+                                    }, {
+                                        $set: {
+                                            usedOrderId: data1._id,
+                                            status: "Used"
                                         }
-                                          callback(null, order);
-                                    })
+                                    }, {
+                                        new: true
+                                    }).exec()
                                 }
-                              
+                                callback(null, order);
                             });
                         }
                     });

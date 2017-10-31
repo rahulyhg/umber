@@ -1,18 +1,22 @@
 <div class="modal-body text-center">
-    <div class="coupon-discount">
+    <div ng-if="!loggedUser">
+        <p>You are not logged in. Please log in</p>
+    </div>
+    <div class="coupon-discount" ng-if="loggedUser">
         <div class="close-modal" ng-click="$dismiss()"><button class="btn close-modal--btn-circle">X</button></div>
         <div class="coupon-discount-title">
             <h1>Apply Coupon</h1>
         </div>
         <div class="coupon-code-num">
             <h4>Enter coupon code</h4>
-            <input class="form-control" type="text" placeholder="Type coupon code here" value="{{couponCode}}" ng-disabled="visible">
+            <!--<input class="form-control" type="text" placeholder="Type coupon code here" value="{{couponCode}}" ng-disabled="visible">-->
+            <input type="text" ng-model="formData.couponCode" class="form-control" placeholder=" Enter Coupon code" ng-disabled="visible">            {{errMessage}}
         </div>
         <div class="coupon-code-offer">
             <h4 class="text-capatilize">Discount</h4>
             <!--<pre>{{applicableDiscounts}}</pre>-->
             <div class="form-group">
-                <div class="text-left">
+                <div class="text-left" ng-if="!formData.couponCode">
                     <div class="radio-wdth inline-block align-top" ng-repeat="discount in applicableDiscounts track by $index">
                         <!--<input class="radio-custom" id="radio1" type="radio" name="select" hidden><label for="radio1" class="radio-inline radio-custom-label">-->
                         <!--{{discount}}-->
@@ -44,11 +48,13 @@
                 </div>-->
             </div>
         </div>
+        <div class="modal-footer modal-bottom" ng-if="loggedUser">
+            {{discount}}
+            <button class="btn text-uppercase cancel--btn" type="button" ng-click="clearCouponSubmit();$dismiss()">CANCEL</button>
+            <button class="btn text-uppercase apply--btn" type="button" ng-if="formData.couponCode" ng-click="applyCouponSubmit(formData);">APPLY COUPON</button>
+            <button class="btn text-uppercase apply--btn" type="button" ng-if="!formData.couponCode" ng-click="applyCouponSubmit();">APPLY COUPON</button>
+            <!--<button class="btn text-uppercase apply--btn" type="button" ng-click="disabledRadio();">APPLY COUPON</button>-->
+        </div>
     </div>
-</div>
-<div class="modal-footer modal-bottom">
-    {{discount}}
-    <button class="btn text-uppercase cancel--btn" type="button" ng-click="clearCouponSubmit();$dismiss()">CANCEL</button>
-    <button class="btn text-uppercase apply--btn" type="button" ng-click="applyCouponSubmit();">APPLY COUPON</button>
-    <!--<button class="btn text-uppercase apply--btn" type="button" ng-click="disabledRadio();">APPLY COUPON</button>-->
+
 </div>

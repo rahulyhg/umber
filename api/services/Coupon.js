@@ -68,7 +68,7 @@ var model = {
     // input coupon name
     getCoupon: function (data, callback) {
         Coupon.findOne({
-            name: data.couponName
+            name: data.couponCode
         }).exec(function (err, coupon) {
             if (err) {
                 callback(err, null);
@@ -85,18 +85,20 @@ var model = {
                     if ((todayDate >= coupon.startDate && todayDate <= coupon.endDate) && coupon.isActive) {
                         if (coupon.couponType == 'Festival') {
                             if (coupon.valueType == 'Percentage') {
+                                discount._id = coupon._id;
                                 discount.name = coupon.name;
                                 discount.user = coupon.user;
-                                discount.couponType = 'Festival'
+                                discount.usedOrderId = coupon.usedOrderId;
                                 discount.generatedOrderId = coupon.generatedOrderId;
                                 discount.usedOrderId = coupon.usedOrderId;
                                 discount.percentage = coupon.percentage;
                                 discount.maxAmount = coupon.maxAmount;
                                 callback(null, discount);
                             } else {
+                                discount._id = coupon._id;
                                 discount.name = coupon.name;
                                 discount.user = coupon.user;
-                                discount.couponType = 'Festival'
+                                discount.usedOrderId = coupon.usedOrderId;
                                 discount.generatedOrderId = coupon.generatedOrderId;
                                 discount.usedOrderId = coupon.usedOrderId;
                                 discount.cAmount = coupon.cAmount;
@@ -105,21 +107,24 @@ var model = {
                         } else {
                             if (coupon.status == "unUsed") {
                                 if (coupon.valueType == 'Percentage') {
+                                    discount._id = coupon._id;
                                     discount.name = coupon.name;
                                     discount.user = coupon.user;
-                                    discount.couponType = 'Discount';
+                                    discount.usedOrderId = coupon.usedOrderId;
                                     discount.generatedOrderId = coupon.generatedOrderId;
                                     discount.usedOrderId = coupon.usedOrderId;
                                     discount.percentage = coupon.percentage;
                                     discount.maxAmount = coupon.maxAmount;
                                     callback(null, discount);
                                 } else {
+                                    discount._id = coupon._id;
                                     discount.name = coupon.name;
                                     discount.user = coupon.user;
-                                    discount.couponType = 'Discount'
+                                    discount.couponType = coupon.couponType;
                                     discount.generatedOrderId = coupon.generatedOrderId;
                                     discount.usedOrderId = coupon.usedOrderId;
                                     discount.cAmount = coupon.cAmount;
+                                    console.log("discount", discount)
                                     callback(null, discount);
                                 }
                             } else {
