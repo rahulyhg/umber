@@ -367,7 +367,14 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
 
         var data = {};
         data.userId = $scope.loggedUser;
-        data.selectedDiscount = $.jStorage.get("discountValues")
+        data.selectedDiscount = $.jStorage.get("discountValues");
+        var couponD=$.jStorage.get("coupon");
+        console.log("couponD",couponD,"alldata",data);
+        if($.jStorage.get("coupon") && data.selectedDiscount.selectedDiscount.discountType=="59f06bc7647252477439a1e4"){
+            console.log("in if");
+            data.couponData=$.jStorage.get("coupon");
+        }
+        console.log("@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@**@*@*@*@*",data);
         OrderService.createOrderFromCart(data, function (data) {
             console.log("created order: ", data);
             if (data.data.value) {

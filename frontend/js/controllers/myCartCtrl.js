@@ -146,6 +146,17 @@
                      var jStorageData = $.jStorage.get("coupon");
                      console.log("jStorageData", jStorageData);
 
+
+                         $scope.discountValueObject = {
+                             discountAmount: $scope.grandTotalAfterDiscount,
+                             grandTotalAfterDiscount: $scope.grandTotal,
+                             selectedDiscount: $scope.discountSelected,
+                             totalAmountOfOrder: $scope.total
+                         }
+                         console.log("$scope.discountValueObject", $scope.discountValueObject);
+                         $.jStorage.set("discountValues", $scope.discountValueObject);
+
+
                      //  myService.addCouponByUserFromCart(couponObj, function (data) {
                      //  console.log("called api addCouponByUserFromCart", data);
                      //  //send mail to user with coupon code
