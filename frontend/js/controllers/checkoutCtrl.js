@@ -367,7 +367,7 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
 
         var data = {};
         data.userId = $scope.loggedUser;
-
+        data.selectedDiscount = $.jStorage.get("discountValues")
         OrderService.createOrderFromCart(data, function (data) {
             console.log("created order: ", data);
             if (data.data.value) {

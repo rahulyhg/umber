@@ -6,18 +6,18 @@
         </div>
         <div class="coupon-code-num">
             <h4>Enter coupon code</h4>
-            <input class="form-control" type="text" maxlength="4" placeholder="Type coupon code here" value="{{couponCode}}">
+            <input class="form-control" type="text" placeholder="Type coupon code here" value="{{couponCode}}" ng-disabled="visible">
         </div>
         <div class="coupon-code-offer">
             <h4 class="text-capatilize">Discount</h4>
-            <!--{{applicableDiscounts}}-->
+            <!--<pre>{{applicableDiscounts}}</pre>-->
             <div class="form-group">
                 <div class="text-left">
                     <div class="radio-wdth inline-block align-top" ng-repeat="discount in applicableDiscounts track by $index">
                         <!--<input class="radio-custom" id="radio1" type="radio" name="select" hidden><label for="radio1" class="radio-inline radio-custom-label">-->
                         <!--{{discount}}-->
-                        <input hidden class="radio-custom" id="{{discount._id}}" ng-click="radioSubmit(discount);" type="radio" name="select" ng-model="discountValue123" ng-value="{{discount}}"><label for="{{discount._id}}" class="radio-inline radio-custom-label">{{discount.name}} <img src="frontend/img/listing/shirt.png" width="15" height="15" alt="Shirt Discount"> </label> 
-                           
+                        <input hidden class="radio-custom" id="{{discount._id}}" ng-click="radioSubmit(discount);" type="radio" name="select" ng-model="discountValue123"
+                            ng-value="{{discount}}"><label for="{{discount._id}}" class="radio-inline radio-custom-label">{{discount.name}}<img src="frontend/img/listing/shirt.png" width="15" height="15" alt="Shirt Discount"> </label>
                     </div>
                     <!--<tt>discount = {{discount._id | json}}</tt><br/>-->
                     <!--<div class="radio-wdth inline-block">
@@ -50,4 +50,5 @@
     {{discount}}
     <button class="btn text-uppercase cancel--btn" type="button" ng-click="clearCouponSubmit();$dismiss()">CANCEL</button>
     <button class="btn text-uppercase apply--btn" type="button" ng-click="applyCouponSubmit();">APPLY COUPON</button>
+    <!--<button class="btn text-uppercase apply--btn" type="button" ng-click="disabledRadio();">APPLY COUPON</button>-->
 </div>

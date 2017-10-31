@@ -23,9 +23,9 @@
 
      //avinash functions start
      $scope.applicableDiscounts = function (data, grandTotal) {
-         // console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+         //  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", $scope.productArrayForDiscount, "BB", grandTotal);
          myService.applicableDiscounts($scope.productArrayForDiscount, grandTotal, function (data) {
-             //    console.log("called api applicableDiscounts");
+             //  console.log("called api applicableDiscounts");
              $scope.applicableDiscounts = data;
              console.log("$scope.applicableDiscounts", $scope.applicableDiscounts)
 
@@ -34,9 +34,17 @@
      $scope.discountSelected = {};
      $scope.discountValue = "";
      $scope.radioSubmit = function (data) {
-         console.log("inside radioSubmit ************", data);
+         console.log("inside radioSubmit ************", data, $scope.applicableDiscounts);
+         $scope.visible = true;
          $scope.discountSelected = data;
          $scope.discountValue123 = $scope.discountSelected._id;
+         $scope.visibleRadio = true;
+         _.each($scope.applicableDiscounts, function (n) {
+             if (n._id == data._id) {
+                 console.log("@@@@@@@@@@@@@@@@@@@@@@")
+                 $scope.discountValue123 = false;
+             }
+         })
          console.log("$scope.discountValue", $scope.discountValue);
      }
 
@@ -89,8 +97,8 @@
              console.log("$scope.discountSelected in applyCouponSubmit", $scope.discountSelected.discountType);
              var discountObject = $scope.discountSelected;
              discountCouponAmount = $scope.discountSelected.xValue;
-             if($scope.discountSelected.maxAmount){
-                 $scope.discountCouponMaxAmount=$scope.discountSelected.maxAmount;
+             if ($scope.discountSelected.maxAmount) {
+                 $scope.discountCouponMaxAmount = $scope.discountSelected.maxAmount;
              }
              if ($scope.discountSelected.discountType == "59f06bc7647252477439a1e4") {
                  $.jStorage.deleteKey("coupon");
@@ -110,8 +118,8 @@
                          var userId = $.jStorage.get("userId");
                          var couponObj = {
                              name: couponCode,
-                             couponType:"Discount",
-                             valueType:"Amount",
+                             couponType: "Discount",
+                             valueType: "Amount",
                              user: userId,
                              generatedOrderId: "",
                              usedOrderId: "",
@@ -123,8 +131,8 @@
 
                          var couponObj = {
                              name: couponCode,
-                             couponType:"Discount",
-                             valueType:"Amount",
+                             couponType: "Discount",
+                             valueType: "Amount",
                              user: "",
                              generatedOrderId: "",
                              usedOrderId: "",
@@ -668,7 +676,9 @@
          });
      }
 
+     $scope.disabledRadio = function () {
 
+     }
 
 
  })

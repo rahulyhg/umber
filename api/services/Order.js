@@ -52,6 +52,7 @@ var schema = new Schema({
     },
     discountAmount: Number,
     shippingAmount: Number,
+    amountAfterDiscount: Number,
     paymentMethod: {
         type: String,
         enum: ['cod', 'cc', 'dc', 'netbank'],
@@ -66,6 +67,10 @@ var schema = new Schema({
         type: String,
         enum: ['processing', 'shipped', 'delivered', 'returned', 'cancelled'],
         default: 'processing'
+    },
+    selectedDiscount: {
+        type: Schema.Types.ObjectId,
+        ref: 'Discount'
     },
     paymentStatus: {
         type: String,
@@ -106,7 +111,7 @@ module.exports = mongoose.model('Order', schema);
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "user  products.product courierType returnedProducts.product", "user", "createdAt", "desc"));
 var model = {
     createOrderFromCart: function (data, callback) {
-        console.log("In createorderfromcart");
+        // console.log("In createorderfromcart", data);
         if (_.isEmpty(data.userId)) {
             console.log("No user found for order");
             callback({
@@ -118,6 +123,8 @@ var model = {
                     console.log("cart: ", cart);
                     var order = {};
                     order.orderNo = Math.ceil(Math.random() * 10000000000000);
+                    order.selectedDiscount = data.selectedDiscount.selectedDiscount._id;
+                    // 59f06bc7647252477439a1e4
                     order.totalAmount = 0;
                     for (var idx = 0; idx < cart.products.length; idx++) {
                         var product = cart.products[idx];
@@ -135,8 +142,9 @@ var model = {
                     }
                     order.user = mongoose.Types.ObjectId(data.userId);
                     order.shippingAmount = 0;
-                    order.discountAmount = 0;
-                    console.log("order: ", order);
+                    order.discountAmount = data.selectedDiscount.discountAmount;
+                    order.amountAfterDiscount = data.selectedDiscount.grandTotalAfterDiscount
+                    // console.log("order: ", order);
                     Order.saveData(order, function (err, data) {
                         console.log("$$$$$$$$$order: ", order);
                         if (err) {
