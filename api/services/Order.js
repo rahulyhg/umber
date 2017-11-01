@@ -188,13 +188,15 @@ var model = {
                                     }, {
                                         $set: {
                                             usedOrderId: data1._id,
-                                            status: "Used"
+                                            status: "Used",
+                                            isActive:"False"
                                         }
                                     }, {
                                         new: true
-                                    }).exec()
+                                    }).exec();
+                                      callback(null, order);
                                 }
-                                callback(null, order);
+                              
                             });
                         }
                     });

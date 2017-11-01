@@ -133,6 +133,7 @@
                          $.jStorage.set("discountValues", $scope.discountValueObject);
                      }
                  }
+                 $scope.Couponmodal.close();
              })
          } else {
              if (!isEmptyObject($scope.discountSelected)) {
@@ -166,7 +167,7 @@
                                  user: userId,
                                  generatedOrderId: "",
                                  usedOrderId: "",
-                                 amount: $scope.discountCouponMaxAmount,
+                                 cAmount: $scope.discountCouponMaxAmount,
                                  status: "unUsed",
                                  isActive: "True"
                              };
@@ -179,7 +180,7 @@
                                  user: "",
                                  generatedOrderId: "",
                                  usedOrderId: "",
-                                 amount: $scope.discountCouponMaxAmount,
+                                 cAmount: $scope.discountCouponMaxAmount,
                                  status: "unUsed",
                                  isActive: "True"
                              };
