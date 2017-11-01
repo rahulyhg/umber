@@ -68,6 +68,10 @@ var schema = new Schema({
         enum: ['processing', 'shipped', 'delivered', 'returned', 'cancelled'],
         default: 'processing'
     },
+    discountCouponId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Coupon'
+    },
     selectedDiscount: {
         type: Schema.Types.ObjectId,
         ref: 'Discount'
@@ -167,6 +171,7 @@ var model = {
                                         var couponDataToProcess = allData.couponData;
                                         couponDataToProcess.user = allData.userId;
                                         couponDataToProcess.generatedOrderId = data1._id;
+                                        couponDataToProcess.cAmount = allData.selectedDiscount.selectedDiscount.xValue;
                                         couponDataToProcess.usedOrderId = null;
                                         Coupon.saveData(couponDataToProcess, function (err, couponDataReceived) {
                                             if (err) {
@@ -189,14 +194,23 @@ var model = {
                                         $set: {
                                             usedOrderId: data1._id,
                                             status: "Used",
-                                            isActive:"False"
+                                            isActive: "False"
                                         }
                                     }, {
                                         new: true
                                     }).exec();
-                                      callback(null, order);
+                                    Order.findOneAndUpdate({
+                                        _id: data1._id
+                                    }, {
+                                        $set: {
+                                            discountCouponId: allData.selectedDiscount.coupon._id
+                                        }
+                                    }, {
+                                        new: true
+                                    }).exec()
+                                    callback(null, order);
                                 }
-                              
+
                             });
                         }
                     });
