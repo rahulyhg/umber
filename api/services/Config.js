@@ -559,7 +559,7 @@ var models = {
     },
     //send order Placed email
     ConfirmOrderPlacedMail: function (data, callback) {
-        console.log(" ***** inside email of config ***** ", data);
+        // console.log(" ***** inside email of config ***** ", data);
         Password.find().exec(function (err, userdata) {
             if (err) {
                 console.log(err);

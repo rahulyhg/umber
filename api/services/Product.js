@@ -1152,7 +1152,6 @@ var model = {
             }, {
                 new: true
             }).exec(function (err, data) {
-                console.log("^^^^^^^^data^^^^^^^", data);
                 if (data.quantity < 0) {
                     Product.update({
                         _id: product._id

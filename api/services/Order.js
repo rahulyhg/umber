@@ -172,6 +172,8 @@ var model = {
                                         couponDataToProcess.user = allData.userId;
                                         couponDataToProcess.generatedOrderId = data1._id;
                                         couponDataToProcess.cAmount = allData.selectedDiscount.selectedDiscount.xValue;
+                                        couponDataToProcess.startDate = new Date();
+                                        couponDataToProcess.endDate = (new Date(+new Date() + 365 * 24 * 60 * 60 * 1000))
                                         couponDataToProcess.usedOrderId = null;
                                         Coupon.saveData(couponDataToProcess, function (err, couponDataReceived) {
                                             if (err) {
