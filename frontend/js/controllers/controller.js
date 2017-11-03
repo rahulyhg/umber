@@ -17,6 +17,10 @@ myApp
         NavigationService.getEnabledCategories(function (data) {
             $scope.categories = data.data.data;
         });
+        NavigationService.getEnabledHomePageBlock(function (data) {
+            $scope.HomePageBlocks = data.data.data;
+            console.log("$scope.HomePageBlocks",$scope.HomePageBlocks);
+        });
         ProductService.getNewArrivals(function (data) {
             $scope.newArrivals = data.data.data;
         });

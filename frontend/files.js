@@ -1,5 +1,6 @@
 module.exports = [
   //JS & jQuery Libs
+  'https://maps.googleapis.com/maps/api/js?key=AIzaSyAOcyOuay2NEJud84HsBzIgTQ7TcYm83gk',
   'bower_components/jquery/dist/jquery.min.js',
   'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
   'bower_components/flexslider/jquery.flexslider-min.js',
@@ -27,7 +28,7 @@ module.exports = [
   'bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js',
   'bower_components/async/dist/async.min.js',
   'bower_components/angular-ez-plus/js/angular-ezplus.js',
-  "http://www.elevateweb.co.uk/wp-content/themes/radial/jquery.elevatezoom.min.js" ,
+  "http://www.elevateweb.co.uk/wp-content/themes/radial/jquery.elevatezoom.min.js",
   //App.js
   'frontend/js/app.js',
 

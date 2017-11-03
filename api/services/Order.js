@@ -1,9 +1,3 @@
-var crypto = require('crypto');
-var http = require('http'),
-    fs = require('fs'),
-    qs = require('querystring');
-
-var workingKey = "C88303FA3FD1BBF57339FAEAAAD1A993";
 var schema = new Schema({
     orderNo: {
         type: String,
@@ -58,6 +52,7 @@ var schema = new Schema({
     },
     discountAmount: Number,
     shippingAmount: Number,
+    amountAfterDiscount: Number,
     paymentMethod: {
         type: String,
         enum: ['cod', 'cc', 'dc', 'netbank'],
@@ -72,6 +67,14 @@ var schema = new Schema({
         type: String,
         enum: ['processing', 'shipped', 'delivered', 'returned', 'cancelled'],
         default: 'processing'
+    },
+    discountCouponId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Coupon'
+    },
+    selectedDiscount: {
+        type: Schema.Types.ObjectId,
+        ref: 'Discount'
     },
     paymentStatus: {
         type: String,
@@ -111,7 +114,6 @@ module.exports = mongoose.model('Order', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "user  products.product courierType returnedProducts.product", "user", "createdAt", "desc"));
 var model = {
-
     //Function for HDFC
     hdfcPaymentGateway: function (data, callback) {
         // var m = crypto.createHash('md5');
@@ -168,20 +170,27 @@ var model = {
 
         // callback(null, encoded);
     },
+
+
     createOrderFromCart: function (data, callback) {
+        // console.log("In createorderfromcart", data);
         var paymentMethod = data.paymentMethod;
-        console.log("In createorderfromcart");
+        var allData = data;
+        // console.log("allData", allData);
         if (_.isEmpty(data.userId)) {
-            console.log("No user found for order");
+            // console.log("No user found for order");
             callback({
                 message: "noUserFound"
             }, null);
         } else {
             Cart.getCart(data, function (err, cart) {
                 if (!_.isEmpty(cart)) {
-                    console.log("cart: ", cart);
+                    // console.log("cart: ", cart);
                     var order = {};
                     order.orderNo = Math.ceil(Math.random() * 10000000000000);
+                    if (data.selectedDiscount.selectedDiscount)
+                        order.selectedDiscount = data.selectedDiscount.selectedDiscount._id;
+                    // 59f06bc7647252477439a1e4
                     order.totalAmount = 0;
                     for (var idx = 0; idx < cart.products.length; idx++) {
                         var product = cart.products[idx];
@@ -199,27 +208,70 @@ var model = {
                     }
                     order.user = mongoose.Types.ObjectId(data.userId);
                     order.shippingAmount = 0;
-                    order.discountAmount = 0;
-                    console.log("order: ", order);
-                    Order.saveData(order, function (err, data) {
-                        console.log("$$$$$$$$$order: ", order);
+                    order.discountAmount = data.selectedDiscount.discountAmount;
+                    order.amountAfterDiscount = data.selectedDiscount.grandTotalAfterDiscount
+                    // console.log("order: ", order);
+                    Order.saveData(order, function (err, data1) {
+                        // console.log("$$$$$$$$$order: ", order);
                         if (err) {
                             callback(err, null);
-                        } else if (data) {
+                        } else if (data1) {
+                            console.log("in else if avinash", allData);
                             Order.findOne({
-                                _id: mongoose.Types.ObjectId(data._id)
+                                _id: mongoose.Types.ObjectId(data1._id)
                             }).deepPopulate("products.product products.product.size products.product.color").exec(function (err, order) {
-                                console.log("*****DATA:***** ", order);
+                                // console.log("*****DATA:***** ", order);
                                 Cart.remove({
                                     _id: mongoose.Types.ObjectId(cart._id)
                                 }).exec(function (err, result) { })
-                                Product.subtractQuantity(data.products, null);
-                                if (paymentMethod == "Cash on delivery") {
+                                Product.subtractQuantity(data1.products, null);
+                                if (allData.selectedDiscount.selectedDiscount) {
+                                    if (allData.couponData && allData.selectedDiscount.selectedDiscount.discountType.toString() == "59f06bc7647252477439a1e4") {
+                                        var couponDataToProcess = allData.couponData;
+                                        couponDataToProcess.user = allData.userId;
+                                        couponDataToProcess.generatedOrderId = data1._id;
+                                        couponDataToProcess.cAmount = allData.selectedDiscount.selectedDiscount.xValue;
+                                        couponDataToProcess.startDate = new Date();
+                                        couponDataToProcess.endDate = (new Date(+new Date() + 365 * 24 * 60 * 60 * 1000))
+                                        couponDataToProcess.usedOrderId = null;
+                                        Coupon.saveData(couponDataToProcess, function (err, couponDataReceived) {
+                                            if (err) {
+                                                console.log("errrrooooooooooorrrrrrrrrrrr", err);
+                                                callback(err, null);
+                                            } else {
+                                                if (!_.isEmpty(couponDataReceived)) {
+                                                    order.couponDataReceived = couponDataReceived;
+                                                }
+
+                                            }
+                                            callback(null, order);
+                                        })
+                                    }
+                                } else if (allData.selectedDiscount.coupon) {
+                                    console.log("toSert!!", data1._id);
+                                    Coupon.findOneAndUpdate({
+                                        _id: allData.selectedDiscount.coupon._id
+                                    }, {
+                                            $set: {
+                                                usedOrderId: data1._id,
+                                                status: "Used",
+                                                isActive: "False"
+                                            }
+                                        }, {
+                                            new: true
+                                        }).exec();
+                                    Order.findOneAndUpdate({
+                                        _id: data1._id
+                                    }, {
+                                            $set: {
+                                                discountCouponId: allData.selectedDiscount.coupon._id
+                                            }
+                                        }, {
+                                            new: true
+                                        }).exec()
                                     callback(null, order);
-                                } else {
-                                    //payment gateway.
-                                    // Order.hdfcPaymentGateway(order);
                                 }
+
                             });
                         }
                     });
@@ -234,7 +286,7 @@ var model = {
         var keys = _.keys(data.billingAddress);
 
         for (var key of keys) {
-            console.log("155: ", key);
+            // console.log("155: ", key);
             billingAddress[key] = data.billingAddress[key];
         }
 
@@ -243,7 +295,7 @@ var model = {
             shippingAddress[key] = data.shippingAddress[key];
         }
 
-        console.log("@@@@@data@@@@", data)
+        // console.log("@@@@@data@@@@", data)
         Order.findOneAndUpdate({
             _id: mongoose.Types.ObjectId(data._id)
         }, {

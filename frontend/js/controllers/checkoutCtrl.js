@@ -369,6 +369,14 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
         var data = {};
         data.userId = $scope.loggedUser;
         data.paymentMethod = value;
+        data.selectedDiscount = $.jStorage.get("discountValues");
+        var couponD = $.jStorage.get("coupon");
+        // console.log("couponD", couponD, "alldata", data);
+        if (data.selectedDiscount.selectedDiscount) {
+            if ($.jStorage.get("coupon") && data.selectedDiscount.selectedDiscount.discountType == "59f06bc7647252477439a1e4") {
+                data.couponData = $.jStorage.get("coupon");
+            }
+        }
         OrderService.createOrderFromCart(data, function (data) {
             console.log("created order: ", data);
             if (data.data.value) {
@@ -415,7 +423,6 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
     }
 
     CartService.getCart(userData, function (data) {
-
         if (data.data.data)
             $scope.orderTable = data.data.data;
         // if ($scope.orderTable) {
@@ -428,8 +435,17 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
         // } else {
         //     $state.go("mycart");
         // }
-        if ($scope.orderTable && $scope.orderTable.products)
+        if ($scope.orderTable && $scope.orderTable.products) {
             $scope.grandTotal = CartService.getTotal($scope.orderTable.products);
+            if ($.jStorage.get("discountValues")) {
+                // discountAmount: 3394, grandTotalAfterDiscount: 3394, selectedDiscount: Object, totalAmountOfOrder: 6788
+                var discountTypeObjectData = $.jStorage.get("discountValues");
+                $scope.discountAmount = discountTypeObjectData.discountAmount;
+                $scope.grandTotalAfterDiscount = discountTypeObjectData.grandTotalAfterDiscount;
+                $scope.totalAmountOfOrder = discountTypeObjectData.totalAmountOfOrder;
+            }
+        }
+
     });
 
     if (userData.userId) {

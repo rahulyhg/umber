@@ -12,27 +12,19 @@ var schema = new Schema({
     imgLink: String,
     extLink: String,
     status: String,
-    isView: Boolean,
-    slug: {
-        type: String,
-        required: true,
-        unique: true
-    }
+    isView: Boolean
 });
 
-// schema.plugin(URLSlugs('name'), {
-//     update: true
-// });
 schema.plugin(deepPopulate, {});
 schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
-module.exports = mongoose.model('HomeCategory', schema);
+module.exports = mongoose.model('HomePageBlock', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
 var model = {
     //Retrieves all categories in order
     getAllCategories: function (data, callback) {
-        HomeCategory.find({
+        HomePageBlock.find({
 
         }).sort({
             'priority': 1
@@ -49,8 +41,8 @@ var model = {
         });
     },
 
-    getEnabledCategories: function (data, callback) {
-        HomeCategory.find({
+    getEnabledHomePageBlock: function (data, callback) {
+        HomePageBlock.find({
             'status': 'Enabled'
         }).sort({
             'priority': 1
@@ -61,14 +53,14 @@ var model = {
                 callback(null, data);
             } else {
                 callback({
-                    message: "Incorrect Credentials!"
+                    message: "Incorrect Response"
                 }, null);
             }
         });
     },
 
     getCategoryWithId: function (data, callback) {
-        HomeCategory.find({
+        HomePageBlock.find({
             '_id': data
         }).exec(function (err, data) {
             if (err) {
@@ -84,7 +76,7 @@ var model = {
     },
 
     getCategoryByName: function (data, callback) {
-        HomeCategory.findOne({
+        HomePageBlock.findOne({
             name: data.name
         }).exec(function (err, data) {
             if (err) {
@@ -97,29 +89,6 @@ var model = {
                 }, null);
             }
         });
-    },
-    getIdByNameForCategory: function (data, callback) {
-        var Model = this;
-        var Const = this(data);
-        Model.findOne({
-            name: data.name
-        }, function (err, data2) {
-            if (err) {
-                callback(err);
-            } else if (_.isEmpty(data2)) {
-                var slugValue = data.name.replace(/\s/g, "");
-                data.slug = slugValue;
-                Model.saveData(data, function (err, data3) {
-                    if (err) {
-                        callback(err);
-                    } else {
-                        callback(null, data3._id);
-                    }
-                });
-            } else {
-                callback(null, data2._id);
-            }
-        });
-    },
+    }
 };
 module.exports = _.assign(module.exports, exports, model);

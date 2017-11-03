@@ -27,9 +27,9 @@ schema.plugin(deepPopulate, {
         }
     }
 });
-schema.plugin(URLSlugs('name'), {
-    update: true
-});
+// schema.plugin(URLSlugs('name'), {
+//     update: true
+// });
 schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('Category', schema);
@@ -118,6 +118,31 @@ var model = {
         } else {
             callback("Invalid parameters", null);
         }
-    }
+    },
+    getIdByNameForCategory: function (data, callback) {
+        var Model = this;
+        var Const = this(data);
+        console.log("#######################", Model, "@@@@2", Const);
+
+        Category.findOne({
+            name: data.name
+        }, function (err, data2) {
+            if (err) {
+                callback(err);
+            } else if (_.isEmpty(data2)) {
+                var slugValue = data.name.replace(/\s/g, "");
+                data.slug = slugValue;
+                Category.saveData(data, function (err, data3) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null, data3._id);
+                    }
+                });
+            } else {
+                callback(null, data2._id);
+            }
+        });
+    },
 };
 module.exports = _.assign(module.exports, exports, model);

@@ -1,13 +1,13 @@
 module.exports = _.cloneDeep(require("sails-wohlig-controller"));
 var controller = {
-    getCoupon: function (req, res) {
+    getDiscount: function (req, res) {
         if (req.body) {
-            Coupon.getCoupon(req.body, res.callback);
+            NormalCoupon.getDiscount(req.body, res.callback);
         } else {
             res.json({
                 value: false,
                 data: {
-                    message: "Invalid request"
+                    message: "Invalid Request"
                 }
             })
         }

@@ -38,6 +38,15 @@ myApp.factory('NavigationService', function ($http) {
             }).then(callback);
         },
 
+        getEnabledHomePageBlock: function (callback) {
+
+            $http({
+                url: adminurl + 'HomePageBlock/getEnabledHomePageBlock',
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
+
         getBlogs: function (callback) {
             $http({
                 url: adminurl + 'Blog/getBlogs',
@@ -79,6 +88,14 @@ myApp.factory('NavigationService', function ($http) {
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
-        }
+        },
+        getCoupon: function (data, callback) {
+            $http({
+                url: adminurl + 'Coupon/getCoupon',
+                method: 'POST',
+                data: data,
+                withCredentials: false
+            }).then(callback);
+        },
     };
 });

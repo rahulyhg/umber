@@ -9173,7 +9173,7 @@ img.loading {
   height: auto; }
 
 img {
-  opacity: 0;
+  opacity: 1;
   transition: all 300ms ease; }
 
 img.doneLoading {
@@ -13868,8 +13868,11 @@ p.item-cost {
   .row-margin .map-place {
     position: absolute;
     left: -216px;
+    width: 420px;
+    height: 400px;
     top: 41px;
-    z-index: 1; }
+    overflow: hidden;
+    z-index: 10; }
 
 .custom-slider {
   margin: 0;
@@ -13948,12 +13951,20 @@ p.item-cost {
       .custom-slider .flexslider .flex-next:hover {
         opacity: 0.5; }
 
-.store-location-details {
-  padding: 30px 30px 0 0; }
-  .store-location-details .address {
-    margin-bottom: 5px !important; }
-  .store-location-details p {
-    margin-bottom: 5px; }
+.store-location-dtl {
+  padding: 15px; }
+
+.store-location-brands-dtl {
+  width: 200px;
+  height: 85px;
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  background: white;
+  overflow: hidden; }
+  .store-location-brands-dtl img {
+    width: 120px !important;
+    margin: 0 auto; }
 
 .listing-dropdown-menu {
   width: 220px; }
@@ -13984,7 +13995,7 @@ p.item-cost {
   width: 750px; }
 
 .coupon-discount {
-  width: 355px;
+  width: 400px;
   margin: 0 auto; }
   .coupon-discount h4 {
     font-family: 'vadodara-md';
@@ -14006,7 +14017,8 @@ p.item-cost {
   .coupon-discount .coupon-code-num {
     margin-bottom: 30px; }
   .coupon-discount .radio-wdth {
-    width: 175px; }
+    width: 200px;
+    margin-bottom: 10px; }
     .coupon-discount .radio-wdth .radio-custom + .radio-custom-label:before {
       content: '';
       background: #fff;
