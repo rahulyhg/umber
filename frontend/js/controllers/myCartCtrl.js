@@ -392,6 +392,7 @@
                      }
                  } else if ($scope.discountSelected.discountType == "59e44d48f255331e48fc428f") {
                      $.jStorage.deleteKey("coupon");
+                     //gifts section 
                      console.log("cccccccccccccccccccccccccccccccccccccccc");
                      if ($scope.mycartTable) {
                          $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
@@ -409,7 +410,7 @@
                          console.log("$scope.gifts", $scope.gifts);
                          //  $scope.grandTotal = $scope.grandTotal - $scope.discountSelected.xValue;
                          //  $scope.grandTotalAfterDiscount = $scope.discountSelected.xValue;
-                         $scope.Couponmodal.close();
+                        //  $scope.Couponmodal.close();
                      } else {
                          alert("Your Cart Total Low to Avail This Discount!!! Shop More to Get This Discount...");
                      }

@@ -1,0 +1,123 @@
+{
+    "title": "Create HomePageBlock",
+    "name": "HomePageBlock",
+    "jsonPage": "viewCategory",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": [
+        "HomePageBlock"
+    ],
+    "fields": [{
+            "name": "Name",
+            "type": "text",
+            "tableRef": "name",
+            "placeholder": "Enter HomePageBlock Name",
+            "id": "name",
+            "validation": [
+                "required",
+                "trim",
+                "unique"
+            ],
+            "url": ""
+        },
+        {
+            "name": "External Link",
+            "type": "text",
+            "tableRef": "extLink",
+            "placeholder": "Enter External Link",
+            "id": "extLink",
+            "validation": [
+                "required",
+                "trim",
+                ""
+            ],
+            "url": ""
+        }, {
+            "name": "Image size",
+            "type": "text",
+            "tableRef": "imageSize",
+            "placeholder": "Enter Image Size",
+            "id": "imageSize",
+            "validation": ["", "trim", ""],
+            "url": ""
+        },
+        {
+            "name": "Image",
+            "type": "image",
+            "tableRef": "imgLink",
+            "placeholder": "Enter Image Link",
+            "id": "imgLink",
+            "option": "single",
+            "onView": true,
+            "view": true,
+            "validation": [
+                "",
+                "trim",
+                "unique"
+            ],
+            "url": ""
+        },
+        {
+            "name": "Priority",
+            "type": "number",
+            "tableRef": "priority",
+            "placeholder": "Enter HomePageBlock priority",
+            "id": "priority",
+            "validation": [
+                "required",
+                "trim",
+                "unique"
+            ],
+            "url": ""
+        }, {
+            "name": "View",
+            "type": "checkbox",
+            "tableRef": "isView",
+            "id": "isView",
+            "url": "",
+            "validation": ["required"]
+        }, {
+            "name": "Status",
+            "type": "tags",
+            "tableRef": "status",
+            "placeholder": "Select Status",
+            "id": "status",
+            "validation": [
+                "required",
+                "trim"
+            ],
+            "url": "",
+            "dropDownField": "",
+            "dropDownType": "single",
+            "onView": true,
+            "dropDown": [
+                "Enabled",
+                "Disabled"
+            ]
+        }
+    ],
+    "action": [{
+            "name": "submit",
+            "action": "submitHomePageBlock",
+            "stateName": {
+                "page": "page",
+                "json": {
+                    "id": "viewHomePageBlock"
+                }
+            }
+        },
+        {
+            "name": "cancel",
+            "sideMenuRedirect": true,
+            "stateName": {
+                "page": "page",
+                "json": {
+                    "id": "viewHomePageBlock"
+                }
+            }
+        }
+    ],
+    "apiCall": {
+        "url": "HomePageBlock/save"
+    }
+}

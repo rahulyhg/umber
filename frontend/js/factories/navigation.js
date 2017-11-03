@@ -38,6 +38,15 @@ myApp.factory('NavigationService', function ($http) {
             }).then(callback);
         },
 
+        getEnabledHomePageBlock: function (callback) {
+
+            $http({
+                url: adminurl + 'HomePageBlock/getEnabledHomePageBlock',
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
+
         getBlogs: function (callback) {
             $http({
                 url: adminurl + 'Blog/getBlogs',

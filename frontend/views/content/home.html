@@ -65,9 +65,10 @@
 <section>
     <div class="all-categorie">
         <ul class="list-inline list-unstyled">
-            <li class="all-categorie__dimension" ng-repeat="category in categories">
-                <div class="padd" ng-if="category.isView==true">
-                    <a ui-sref="listing-page({id: category.slug})"><img ng-src="{{category.imgLink | serverimage}}" alt="" class="img-responsive"></a>
+            <li class="all-categorie__dimension" ng-repeat="HomePageBlock in HomePageBlocks">
+                <div class="padd" ng-if="HomePageBlock.isView==true">
+                    <a href="{{HomePageBlock.extLink}}" target="_blank"><img ng-src="{{HomePageBlock.imgLink | serverimage}}" alt="" class="img-responsive"></a>
+                    <!--<a ui-sref="listing-page({id: HomePageBlock.slug})"><img ng-src="{{HomePageBlock.imgLink | serverimage}}" alt="" class="img-responsive"></a>-->
                 </div>
             </li>
         </ul>

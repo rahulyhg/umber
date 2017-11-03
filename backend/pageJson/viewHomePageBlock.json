@@ -1,0 +1,51 @@
+{
+    "title": "Home Page Blocks",
+    "description": "List of Home Page Blocks",
+    "pageType": "view",
+    "sendIdWithCreate": true,
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "Name",
+        "isSort": "",
+        "tableRef": "name"
+    }, {
+        "name": "Image",
+        "isSort": "",
+        "type": "image",
+        "tableRef": "imgLink"
+    }, {
+        "name": "External Link",
+        "isSort": "",
+        "type": "text",
+        "tableRef": "extLink"
+    }, {
+        "name": "Status",
+        "isSort": "",
+        "tableRef": "status"
+    }, {
+        "name": "Priority",
+        "isSort": "",
+        "tableRef": "priority"
+    }],
+    "action": [{
+        "name": "edit",
+        "icon": "fa-pencil",
+        "buttonClass": "btn-primary",
+        "type": "page",
+        "action": "editHomePageBlock",
+        "fieldsToSend": {
+            "_id": "_id"
+        }
+    }],
+    "button": [{
+        "name": "Create",
+        "icon": "plus",
+        "class": "btn-success",
+        "type": "page",
+        "action": "createHomePageBlock"
+    }],
+    "apiCall": {
+        "url": "HomePageBlock/search",
+        "params": "_id"
+    }
+}

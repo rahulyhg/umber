@@ -109,6 +109,11 @@ myApp.factory('NavigationService', function ($http) {
             classis: "active",
             sref: "#!/page/viewCoupon//",
             icon: "document"
+        }, {
+            name: "Home Page Blocks",
+            classis: "active",
+            sref: "#!/page/viewHomePageBlock//",
+            icon: "document"
         }
     ];
 
