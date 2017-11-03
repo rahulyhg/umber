@@ -8,6 +8,14 @@ myApp.factory('OrderService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
+        makeHDFCPayment: function (input, callback) {
+            $http({
+                url: adminurl + 'Order/makeHDFCPayment',
+                data: input,
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
         updateOrderAddress: function (input, callback) {
             $http({
                 url: adminurl + 'Order/updateOrderAddress',

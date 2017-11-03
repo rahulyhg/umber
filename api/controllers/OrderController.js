@@ -132,5 +132,8 @@ var controller = {
             });
         }
     },
+    hdfcPaymentGateway: function (req, res) {
+        Order.hdfcPaymentGateway(req.body, res)
+    }
 };
 module.exports = _.assign(module.exports, controller);
