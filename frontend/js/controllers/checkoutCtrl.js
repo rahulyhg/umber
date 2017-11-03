@@ -1,4 +1,4 @@
-myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService, toastr, $state, $uibModal, myService, BannerService, TemplateService, NavigationService, UserService, CartService, WishlistService, $timeout) {
+myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService, toastr, $state, $uibModal, myService, BannerService, TemplateService, $sce, NavigationService, UserService, CartService, WishlistService, $timeout) {
     $scope.template = TemplateService.getHTML("content/checkout.html");
     TemplateService.title = "Checkout"; //This is the Title of the Website
     $scope.navigation = NavigationService.getNavigation();
