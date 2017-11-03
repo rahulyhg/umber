@@ -252,7 +252,7 @@
                         <div class="inline-block ml-10">
                             <img src="img/listing/sale.png" class="img-responsive inline-block"><a>Offer?</a>
                         </div>
-                        <p class="inline-block">Buy 1 Get 1 Free
+                        <p class="inline-block" ng-repeat="discount in applicableDiscounts track by $index">{{discount.name}} <span ng-if="$index!=applicableDiscountsLength-1">,</span>
                         </p>
 
                     </div>

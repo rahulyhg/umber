@@ -132,8 +132,9 @@
                          }
                          $.jStorage.set("discountValues", $scope.discountValueObject);
                      }
-                 }
+
                  $scope.Couponmodal.close();
+                 }
              })
          } else {
              if (!isEmptyObject($scope.discountSelected)) {
