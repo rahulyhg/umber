@@ -9,16 +9,6 @@
         "isSort": "",
         "tableRef": "name"
     }, {
-        "name": "Image",
-        "isSort": "",
-        "type": "image",
-        "tableRef": "imgLink"
-    }, {
-        "name": "External Link",
-        "isSort": "",
-        "type": "text",
-        "tableRef": "extLink"
-    }, {
         "name": "Status",
         "isSort": "",
         "tableRef": "status"
@@ -31,6 +21,18 @@
         "action": "editHomeCategory",
         "fieldsToSend": {
             "_id": "_id"
+        }
+    }, {
+        "name": "delete",
+        "icon": "fa-trash",
+        "buttonClass": "btn-danger",
+        "type": "apiCallConfirm",
+        "title": "Delete Category",
+        "content": "Are you sure you want to delete Category?",
+        "api": "HomeCategory/delete",
+        "fieldsToSend": {
+            "name": "_id",
+            "value": "_id"
         }
     }],
     "button": [{
@@ -47,6 +49,12 @@
         "type": "redirect",
         "action": "excel-upload/HomeCategory",
         "linkType": "internal"
+    }, {
+        "name": "Create",
+        "icon": "plus",
+        "class": "btn-success",
+        "type": "page",
+        "action": "createHomeCategory"
     }],
     "apiCall": {
         "url": "HomeCategory/search",

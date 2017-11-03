@@ -15,38 +15,6 @@
             "url": ""
         },
         {
-            "name": "External Link",
-            "type": "text",
-            "tableRef": "extLink",
-            "placeholder": "Enter External Link",
-            "id": "extLink",
-            "validation": [
-                "required",
-                "trim",
-                ""
-            ],
-            "url": ""
-        }, {
-            "name": "Image size",
-            "type": "readonly",
-            "tableRef": "imageSize",
-            "placeholder": "Enter Image Size",
-            "id": "imageSize",
-            "validation": ["", "trim", ""],
-            "url": ""
-        }, {
-            "name": "Image",
-            "type": "image",
-            "tableRef": "imgLink",
-            "placeholder": "Enter Image Link",
-            "id": "imgLink",
-            "option": "single",
-            "onView": true,
-            "view": true,
-            "validation": ["", "trim", ""],
-            "url": ""
-        },
-        {
             "name": "Priority",
             "type": "number",
             "tableRef": "priority",
