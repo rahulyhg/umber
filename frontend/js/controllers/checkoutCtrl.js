@@ -365,8 +365,19 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
     };
 
     $scope.testFunction = function () {
-        OrderService.hdfcPaymentGateway({}, function (data) {
+        OrderService.hdfcPaymentGateway({ "hii": 1 }, function (data) {
             console.log("########## data ########", data);
+            $scope.paymentData = data.data;
+            $scope.paymentGateway = $uibModal.open({
+                animation: true,
+                templateUrl: 'views/modal/paymentGateway.html',
+                scope: $scope,
+                // windowClass: 'loginModalSize',
+                controller: 'CheckoutCtrl'
+                // windowClass: 'modal-content-radi0'
+            });
+
+
         })
     }
 
