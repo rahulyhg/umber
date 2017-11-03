@@ -133,7 +133,7 @@
                          $.jStorage.set("discountValues", $scope.discountValueObject);
                      }
 
-                 $scope.Couponmodal.close();
+                     $scope.Couponmodal.close();
                  }
              })
          } else {
@@ -147,7 +147,7 @@
                  }
                  if ($scope.discountSelected.discountType == "59f06bc7647252477439a1e4") {
                      $.jStorage.deleteKey("coupon");
-
+                     $.jStorage.deleteKey("gifts");
                      if ($scope.mycartTable) {
                          $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
                          $scope.grandTotalAfterDiscount = 0;
@@ -222,6 +222,7 @@
                      console.log("Buy 1 Get x Off Buy 2 Get 2x Off", $scope.discountSelected);
                      //for Buy 1 Get x Off Buy 2 Get 2x Off
                      $.jStorage.deleteKey("coupon");
+                     $.jStorage.deleteKey("gifts");
                      myService.getAllProductsByDiscount($scope.discountSelected._id, function (data) {
                          console.log("called api getAllProductsByDiscount", data.products);
                          var totalCountProductsInB1GXOff = 0;
@@ -362,6 +363,7 @@
                  } else if ($scope.discountSelected.discountType == "59ede2fcd30c7e2ab3324ece") {
                      //for Discount of Rs X on Y amount shopping
                      $.jStorage.deleteKey("coupon");
+                     $.jStorage.deleteKey("gifts");
                      if ($scope.mycartTable) {
                          $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
                          $scope.grandTotalAfterDiscount = 0;
@@ -392,6 +394,7 @@
                      }
                  } else if ($scope.discountSelected.discountType == "59e44d48f255331e48fc428f") {
                      $.jStorage.deleteKey("coupon");
+                     $.jStorage.deleteKey("gifts");
                      //gifts section 
                      console.log("cccccccccccccccccccccccccccccccccccccccc");
                      if ($scope.mycartTable) {
@@ -408,15 +411,30 @@
                      if ($scope.grandTotal >= $scope.discountSelected.xValue) {
                          $scope.gifts = $scope.discountSelected.gifts;
                          console.log("$scope.gifts", $scope.gifts);
+
+                         //  $.jStorage.set("gifts", $scope.gifts);
                          //  $scope.grandTotal = $scope.grandTotal - $scope.discountSelected.xValue;
                          //  $scope.grandTotalAfterDiscount = $scope.discountSelected.xValue;
-                        //  $scope.Couponmodal.close();
+                         $scope.Couponmodal.close();
+                         $timeout(function () {
+                             $scope.mycart = $uibModal.open({
+                                 animation: true,
+                                 templateUrl: 'views/modal/mycartmodal.html',
+                                 size: 'md',
+                                 scope: $scope
+                             });
+                         }, 500);
+                         $scope.selectGift = function (gift) {
+                             $.jStorage.set("gifts", gift);
+                             $scope.mycart.close();
+                         }
                      } else {
                          alert("Your Cart Total Low to Avail This Discount!!! Shop More to Get This Discount...");
                      }
                  } else if ($scope.discountSelected.discountType == "59f1e3327ddd0f0dcda6fe6f") {
                      //for Buy 1 Get 1 Offer
                      $.jStorage.deleteKey("coupon");
+                     $.jStorage.deleteKey("gifts");
                      myService.getAllProductsByDiscount($scope.discountSelected._id, function (data) {
                          console.log("called api getAllProductsByDiscount", data.products);
                          var totalCountProductsInB1GXOff = 0;
@@ -525,7 +543,7 @@
                  case "59f06bc7647252477439a1e4":
                      alert("59f06bc7647252477439a1e4");
                      $.jStorage.deleteKey("coupon");
-
+                     $.jStorage.deleteKey("gifts");
                      if ($scope.mycartTable) {
                          $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
                          $scope.grandTotalAfterDiscount = 0;
@@ -564,6 +582,7 @@
                  case "59d329e334d0832185b7f577OLD":
                      alert("2");
                      $.jStorage.deleteKey("coupon");
+                     $.jStorage.deleteKey("gifts");
                      myService.getAllProductsByDiscount($scope.discountSelected._id, function (data) {
                          console.log("called api getAllProductsByDiscount", data.products);
                          var totalCountProductsInB1GXOff = 0;

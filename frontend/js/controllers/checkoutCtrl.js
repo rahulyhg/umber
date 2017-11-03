@@ -419,6 +419,10 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
     var userData = {
         userId: $.jStorage.get("userId")
     }
+    /// for gifts
+    if ($.jStorage.get("gifts")) {
+        $scope.gift = $.jStorage.get("gifts");
+    }
 
     CartService.getCart(userData, function (data) {
         if (data.data.data)
@@ -433,17 +437,17 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
         // } else {
         //     $state.go("mycart");
         // }
-        if ($scope.orderTable && $scope.orderTable.products){
+        if ($scope.orderTable && $scope.orderTable.products) {
             $scope.grandTotal = CartService.getTotal($scope.orderTable.products);
-            if($.jStorage.get("discountValues")){
+            if ($.jStorage.get("discountValues")) {
                 // discountAmount: 3394, grandTotalAfterDiscount: 3394, selectedDiscount: Object, totalAmountOfOrder: 6788
-                var discountTypeObjectData=$.jStorage.get("discountValues");
-                $scope.discountAmount=discountTypeObjectData.discountAmount;
-                $scope.grandTotalAfterDiscount=discountTypeObjectData.grandTotalAfterDiscount;
-                $scope.totalAmountOfOrder=discountTypeObjectData.totalAmountOfOrder;
+                var discountTypeObjectData = $.jStorage.get("discountValues");
+                $scope.discountAmount = discountTypeObjectData.discountAmount;
+                $scope.grandTotalAfterDiscount = discountTypeObjectData.grandTotalAfterDiscount;
+                $scope.totalAmountOfOrder = discountTypeObjectData.totalAmountOfOrder;
             }
         }
-            
+
     });
 
     if (userData.userId) {

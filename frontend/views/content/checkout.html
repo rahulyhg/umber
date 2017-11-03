@@ -189,6 +189,33 @@
                                     </tr>
                                 </tfoot>-->
                             </table>
+
+                            <div class="pull-left" ng-if="gift">
+                                <table class="table order-table table-bottom ">
+                                    <caption>Your gift</caption>
+                                    <thead>
+                                        <tr>
+                                            <th>item</th>
+                                            <th>name</th>
+                                            <th>description</th>
+                                            <th>price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="item ">
+                                                    <img ng-src="{{gift.photo|serverimage}}" alt="gift Product" class="img-responsive item__img-checkout ">
+                                                </div>
+                                            </td>
+                                            <td>{{gift.name}}</td>
+                                            <td>{{gift.description}}</td>
+                                            <td>&#x20b9 0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
                             <div class="pull-right ">
                                 <p class="text-right ">ITEM(S) SUBTOTAL : <span>&#x20b9 {{grandTotal}}</span></p>
                                 <p class="text-right " ng-if="discountAmount">MEMBER'S DISCOUNT : <span>&#x20b9 {{discountAmount}}</span></p>
