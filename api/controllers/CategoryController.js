@@ -42,6 +42,17 @@ var controller = {
                 }
             });
         }
-    }
+    },
+    getIdByNameForCategory: function (req, res) {
+        if (req.body)
+            Category.getIdByNameForCategory(req.body, res.callback);
+        else
+            res.json({
+                value: false,
+                message: {
+                    data: "Invalid request!"
+                }
+            });
+    },
 };
 module.exports = _.assign(module.exports, controller);

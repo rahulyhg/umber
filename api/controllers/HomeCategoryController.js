@@ -12,7 +12,18 @@ var controller = {
             })
         }
     },
-
+    getIdByNameForCategory: function (req, res) {
+        if (req.body)
+            HomeCategory.getIdByNameForCategory(req.body, res.callback);
+        else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid request"
+                }
+            })
+        }
+    },
     getCategoryWithId: function (req, res) {
         if (req.body)
             HomeCategory.getCategoryWithId(req.body, res.callback);

@@ -123,6 +123,50 @@ var model = {
                 callback(err, null);
         });
     },
+    getIdByNameForCategory: function (data, callback) {
+        var Model = this;
+        var Const = this(data);
+        Model.findOne({
+            name: data.name
+        }, function (err, data2) {
+            if (err) {
+                callback(err);
+            } else if (_.isEmpty(data2)) {
+                var slugValue = data.name.replace(/\s/g, "");
+                data.slug = slugValue;
+                Model.save(data, function (err, data3) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null, data3._id);
+                    }
+                });
+            } else {
+                callback(null, data2._id);
+            }
+        });
+    },
+    manageForeignKeyForCategory: function (model, data, callback) {
+        model.getIdByNameForCategory(data, function (err, id) {
+            if (id)
+                callback(null, id);
+            else if (err.code == 11000)
+                Product.manageForeignKeyForCategory(model, data, callback);
+            else
+                callback(err, null);
+        });
+    },
+    manageForeignKeyForSubCategory: function (model, data, callback) {
+        Category.getIdByNameForCategory(data, function (err, id) {
+            if (id)
+                callback(null, id);
+            else if (err.code == 11000)
+                Product.manageForeignKeyForSubCategory(model, data, callback);
+            else
+                callback(err, null);
+        });
+    },
+
 
     excelUpload: function (data, callback) {
         var filename = data.file;
@@ -206,12 +250,14 @@ var model = {
                         function UpdateCategory(newProduct, cbWaterfall2) {
                             console.log("newProduct", newProduct);
                             if (product.Category) {
-                                Product.manageForeignKey(HomeCategory, {
+                                // Product.manageForeignKey(HomeCategory, {
+                                Product.manageForeignKeyForCategory(HomeCategory, {
                                     name: product.Category
                                 }, function (err, id) {
+                                    console.log("HomeCategoryId in UpdateCategory", id);
                                     newProduct.homeCategory = id;
                                     if (product.Subcategory) {
-                                        Product.manageForeignKey(Category, {
+                                        Product.manageForeignKeyForSubCategory(Category, {
                                             name: product.Subcategory,
                                             category: newProduct.homeCategory
                                         }, function (err, id) {
