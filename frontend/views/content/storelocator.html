@@ -4,12 +4,7 @@
     </div>
     <div class="row row-margin">
         <div class="col-md-9 col-md-offset-3 col-xs-10">
-            <div class="map-place" id="mapCanvas" style="position: absolute;
-    left: -216px;
-    width: 300px;
-    height: 300px;
-    top: 41px;
-   ">
+            <div class="map-place" id="map">
                 <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.70562794511!2d72.90689501478126!3d19.120565755539104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c7e512dbd727%3A0xeb527108d18e04a1!2sBurnt+Umber+Fashion+Private+Limited!5e0!3m2!1sen!2sin!4v1498902443308"
                     width="400" height="400" frameborder="0" style="border:0" allowfullscreen>
                 </iframe> -->
@@ -22,21 +17,25 @@
         {{locationButton}} <span><img width="15" height="15" src="frontend/img/home/whitearrow.png"></span>
       </button>
                             <ul class="location-dropdown location-dropdown-menu dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                                <li role="menuitem" ng-repeat="place in locationArray" ng-click="changePlaces(place)"><a href="#">{{place[0]}}</a></li>
+                                <li role="menuitem" ng-repeat="place in location" ng-click="changePlaces(place)" value="{{place.city}}"><a href="#">{{place.city}}</a></li>
                             </ul>
                         </div>
                         <div class="inline-block">
-                            <h3 class="tab-title text-uppercase">MUMBAI</h3>
+                            <h3 class="tab-title text-uppercase">{{locationButton}}</h3>
                         </div>
                     </div>
-                    <flex-slider class="slider" flex-slide="slocation in storeLocation track by $index" prev-text="" next-text="" animation="slide">
+                    <flex-slider class="slider" ng-if="showSlider" slide="slocation in storeLocation track by $index" prev-text="" next-text=""
+                        animation="slide" item-width="300" item-margin="20" min-items="2" flexslider>
                         <li>
                             <div class="row">
-                                <div class="col-md-6" ng-repeat="location in slocation track by $index">
-                                    <div class="store-location-details">
-                                        <address class="address"><b>{{location.address}}</b></address>
-                                        <p class="contact-no"><b>{{location.contactNo}}</b></p>
-                                        <p class="email"><b>{{location.email}}</b></p>
+                                <div class="store-location-dtl">
+                                    <div class="store-location-brands-dtl">
+                                        <img ng-src="{{slocation.brand}}" alt="Brand Logo" class="img-responsive">
+                                    </div>
+                                    <div class="store-location-addrs-dtl">
+                                        <address class="address"><b>{{slocation.address}}</b></address>
+                                        <p class="contact-no"><b>{{slocation.contactNo}}</b></p>
+                                        <p class="email"><b>{{slocation.email}}</b></p>
                                     </div>
                                 </div>
                             </div>

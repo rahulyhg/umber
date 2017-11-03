@@ -1759,126 +1759,234 @@ myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, Templat
     $scope.template = TemplateService.getHTML("content/storelocator.html");
     TemplateService.title = "Stores"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
-    $scope.storeLocation = [{
-            address: 'Shop No 2, Morya Mahal,Linking Road,  Bandra West, Mumbai - 400050',
-            contactNo: '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            email: 'info@burntum'
-        },
-        {
-            address: 'Delphi Building, Orchard Ave, Hiranandani Gardens, Powai,Mumbai, Maharashtra 400076',
-            contactNo: '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            email: 'info@burntum'
-        },
-        {
-            address: 'Shop No 2, Morya Mahal, Linking Road,  Bandra West, Mumbai - 400050',
-            contactNo: '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            email: 'info@burntumber.in'
-        },
-        {
-            address: 'Delphi Building, Orchard Ave, Hiranandani Gardens, Powai, Mumbai, Maharashtra 400076',
-            contactNo: '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            email: 'info@burntum'
-        },
-        {
-            address: 'Delphi Building, Orchard Ave, Hiranandani Gardens, Powai,Mumbai, Maharashtra 400076',
-            contactNo: '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            email: 'info@burntum'
-        }
-    ];
-    $scope.storeLocation = _.chunk($scope.storeLocation, 4);
-    $scope.locationButton = 'Location';
-    // $scope.location = ['Mumbai', 'Pune', 'Hyderabad', 'Chennai'];
+    $scope.storeLocation = []; // We need to add city and subCity array of obj
+    $scope.locationButton; // To change the value(City) of button
     $scope.location = [{
         'city': 'Mumbai',
         'lat': 19.0760,
         'long': 72.8777,
-        'name': 'Location1 Name',
-        'url': 'Location1 URl',
-        'shop': [{
-            'test': 'ccol'
+        'subCity': [{
+            'brand': 'frontend/img/brands/tony1.png',
+            'name': 'Location 1 Name',
+            'subCity': 'borivali',
+            'url': 'Location 1 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road, borivali, Mumbai - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntum1'
+        }, {
+            'brand': 'frontend/img/brands/ms-custom.png',
+            'name': 'Location 1 Name',
+            'subCity': 'lowerparel',
+            'url': 'Location 2 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road, lowerparel, Mumbai - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntum2'
+        }, {
+            'brand': 'frontend/img/brands/umber.png',
+            'name': 'Location 1 Name',
+            'subCity': 'mumbai central',
+            'url': 'Location 2 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road,  mumbai central, Mumbai - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntum3'
         }]
+
     }, {
         'city': 'Pune',
         'lat': 18.5204,
         'long': 73.8567,
-        'name': 'Location2 Name',
-        'url': 'Location2 URl'
+        'subCity': [{
+            'brand': 'frontend/img/brands/dockers.png',
+            'name': 'Location 1 Name',
+            'subCity': 'hadapsar',
+            'url': 'Location 1 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road,  hadapsar West, pune - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntumpuna1'
+        }, {
+            'brand': 'frontend/img/brands/ms-custom.png',
+            'name': 'Location 2 Name',
+            'subCity': 'aundh',
+            'url': 'Location 2 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road, aundh, pune - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntumpuna2'
+        }, {
+            'brand': 'frontend/img/brands/ralph.png',
+            'name': 'Location 3 Name',
+            'subCity': 'nanded',
+            'url': 'Location 3 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road, nanded, pune - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntumpuna3'
+        }],
+
+
     }, {
         'city': 'Hyderabad',
         'lat': 17.3850,
         'long': 78.4867,
-        'name': 'Location3 Name',
-        'url': 'Location3 URl'
+        'subCity': [{
+            'brand': 'frontend/img/brands/ms-custom.png',
+            'name': 'Location 1 Name',
+            'subCity': 'banjara hills',
+            'url': 'Location 1 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road, banjara hills, hyderabad - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntumpuna1'
+        }, {
+            'brand': 'frontend/img/brands/dockers.png',
+            'name': 'Location 2 Name',
+            'subCity': 'lb nagar',
+            'url': 'Location 2 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road, lb nagar, hyderabad - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntumpuna2'
+        }, {
+            'brand': 'frontend/img/brands/ralph.png',
+            'name': 'Location 3 Name',
+            'subCity': 'hitec city',
+            'url': 'Location 3 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road, hitec city, hyderabad - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntumpuna3'
+        }],
+
     }, {
         'city': 'Chennai',
         'lat': 13.0827,
         'long': 80.2707,
-        'name': 'Location4 Name',
-        'url': 'Location4 URl'
+        'subCity': [{
+            'brand': 'frontend/img/brands/dockers.png',
+            'name': 'Location 1 Name',
+            'subCity': 'ramapuram',
+            'url': 'Location 1 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road, ramapuram,chennai - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntumpuna1'
+        }, {
+            'brand': 'frontend/img/brands/umber.png',
+            'name': 'Location 2 Name',
+            'subCity': 'tiruvallur',
+            'url': 'Location 2 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road, tiruvallur,chennai - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntumpuna2'
+        }, {
+            'brand': 'frontend/img/brands/tony1.png',
+            'name': 'Location 3 Name',
+            'subCity': 'avadi',
+            'url': 'Location 3 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road, avadi,chennai - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntumpuna3'
+        }],
+
     }];
 
-    $scope.locationArray = [
-        ['Mumbai', 19.0760, 72.8777, 'Dadar', 'Borivali', 'Location1 URl'],
-        ['Pune', 18.5204, 73.8567, 'sdda', 'asdada', 'Location2 URl'],
-        ['Chennai', 13.0827, 80.2707, 'XYZ', 'ABC', 'Location3 URl']
-    ];
-
-    // var mapLocations = [];
-    var locationObj = {};
-    locationObj['city'] = $scope.location[0].city;
-    locationObj['lat'] = $scope.location[0].lat;
-    locationObj['long'] = $scope.location[0].long;
-    locationObj['name'] = $scope.location[0].name;
-    locationObj['url'] = $scope.location[0].url;
-    // mapLocations.push(locationObj);
-    console.log('scope', locationObj);
-    var geoCoder;
+    /* Start of map */
+    $scope.showSlider = true;
     var map;
-    // var bounds = new google.maps.LatLngBounds();
+    // which will hold the value of google map API
+    var geocoder = new google.maps.Geocoder(); // which will hold the value of google map geocoder API
 
-    $scope.changePlaces = function (place) {
-        console.log(place);
-        $scope.locationButton = place[0];
 
-        // we are pushing an object into the mapLocations array. So we will get an array of object
-        locationObj['city'] = place.city;
-        locationObj['lat'] = place.lat;
-        locationObj['long'] = place.long;
-        locationObj['name'] = place.name;
-        locationObj['url'] = place.url;
-        // mapLocations.push(locationObj);
-        console.log('locations', locationObj);
+    //After 800 ms the map initialize function will be called
+    var mapOptions = {
+        center: new google.maps.LatLng(20.5937, 78.9629), // we have set up India lat & long
+        zoom: 10,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
     };
+    $timeout(function () {
+        function myMap() {
+            var mapCanvas = document.getElementById("map");
+            for (i = 0; i < $scope.location.length; i++) {
+                // We need to set the default location or city in dropdown i.e mumbai. So for that we need to iterate $scope.location to get the mumbai city
+                if ($scope.location[i] == $scope.location[0]) {
+                    $scope.locationButton = $scope.location[0].city;
+                    mapOptions.center = new google.maps.LatLng($scope.location[0].lat, $scope.location[0].long);
+                    for (j = 0; j < $scope.location[i].subCity.length; j++) {
+                        geocodeAddress($scope.location[0].subCity[j]);
+                    }
+                }
+            }
 
-    // function init() {
-    //     alert('test');
-    //     map = new google.maps.Map(document.getElementById('mapCanvas'), {
-    //         center: new google.maps.LatLng(19.0760, 72.8777),
-    //         zoom: 13,
-    //         mapTypeId: google.maps.MapTypeId.ROADMAP
+            map = new google.maps.Map(mapCanvas, mapOptions);
 
-    //     });
-    //     geocoder = new google.maps.Geocoder();
-    // }
-    function init() {
-        // alert('loaded');
-        var uluru = {
-            lat: 37.4419,
-            lng: -122.1419
-        };
-        var map = new google.maps.Map(document.getElementById('mapCanvas'), {
-            zoom: 18,
-            center: new google.maps.LatLng(37.4419, -122.1419),
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        myMap();
+
+    }, 500);
+
+    function geocodeAddress(locations) {
+        // console.log("locati", locations);
+        var title = locations.name;
+        var address = locations.subCity;
+        var url = locations.url;
+        $scope.storeLocation.push({
+            'address': locations.address,
+            'contactNo': locations.contactNo,
+            'email': locations.email,
+            'brand': locations.brand
         });
-        var marker = new google.maps.Marker({
-            position: uluru,
-            map: map
+        geocoder.geocode({
+                'address': address
+            },
+
+            function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    var marker = new google.maps.Marker({
+                        // icon: 'http://localhost:8081/frontend/img/map-marker-img.png',
+                        icon: 'http://maps.google.com/mapfiles/ms/icons/red.png',
+                        map: map,
+                        position: results[0].geometry.location,
+                        title: title,
+                        animation: google.maps.Animation.DROP,
+                        address: address,
+                        url: url
+                    })
+                    infoWindow(marker, map, title, address, url);
+                } else {
+                    alert("geocode of " + address + " failed:" + status);
+                }
+            });
+
+    }
+
+    function infoWindow(marker, map, title, address, url) {
+        google.maps.event.addListener(marker, 'click', function () {
+            var html = "<div><h6 style='margin-top: 5px; margin-bottom: 5px;'>" + title + "</h6><p style='margin-bottom: 5px;'>" + address + "<br></div><a href='" + url + "'>View location</a></p></div>";
+            iw = new google.maps.InfoWindow({
+                content: html,
+                maxWidth: 200
+            });
+            iw.open(map, marker);
         });
     }
 
-    $timeout(function () {
-        init();
-    }, 3000);
+    //This is dropdown's function wihich is used for changing the map location after clicking on  a particular city from the dropdown list.
+
+    // For changing addresses after clicking on a particular city
+    $scope.changePlaces = function (place) {
+        $scope.locationButton = place.city; // After clicking on dropdown, the button value changes
+        $scope.showSlider = false;
+        $scope.storeLocation = [];
+
+        map.setCenter(new google.maps.LatLng(place.lat, place.long)); //Set the lat & long of selected dropdown's city
+
+        for (i = 0; i < $scope.location.length; i++) {
+            if ($scope.location[i].city == place.city) {
+                for (j = 0; j < $scope.location[i].subCity.length; j++) {
+                    // alert($scope.location[i].subCity[j].subCity);
+                    geocodeAddress($scope.location[i].subCity[j]);
+                }
+                $timeout(function () {
+                    $scope.showSlider = true;
+                }, 0.5);
+            }
+        }
+
+        // End of map 
+    }; // End of click 
 
 });

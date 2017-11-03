@@ -132,7 +132,7 @@
                                             }
 
                                             img {
-                                                opacity: 0;
+                                                opacity: 1;
                                                 transition: all 300ms ease;
                                             }
 
@@ -338,7 +338,6 @@
                                                 //@include block(true);
                                                 display: inline-block;
                                             }
-
 
                                             .text-capitalize {
                                                 text-transform: capitalize;
@@ -3129,8 +3128,11 @@
                                                 .map-place {
                                                     position: absolute;
                                                     left: -216px;
+                                                    width: 420px;
+                                                    height: 400px;
                                                     top: 41px;
-                                                    z-index: 1;
+                                                    overflow: hidden;
+                                                    z-index: 10;
                                                 }
                                             }
 
@@ -3228,16 +3230,31 @@
                                                 }
                                             }
 
-                                            .store-location-details {
-                                                @include padding(30px 30px 0px 0px);
-                                                .address {
-                                                    margin-bottom: 5px !important;
-                                                }
-                                                p {
-                                                    margin-bottom: 5px;
-                                                }
+                                            .store-location-dtl {
+                                                @include padding(15px);
                                             }
 
+                                            .store-location-brands-dtl {
+                                                @include size(200px,
+                                                85px);
+                                                @include padding(15px);
+                                                margin-top: 15px;
+                                                margin-bottom: 15px;
+                                                background: white;
+                                                overflow: hidden;
+                                                img {
+                                                    width: 120px!important;
+                                                    margin: 0 auto;
+                                                }
+                                            } // .store-location-details {
+                                            //     @include padding(15px 20px);
+                                            //     .address {
+                                            //         margin-bottom: 5px !important;
+                                            //     }
+                                            //     p {
+                                            //         margin-bottom: 5px;
+                                            //     }
+                                            // }
                                             .listing-dropdown-menu {
                                                 width: 220px;
                                                 @extend .dropdown-hidden-anim;
@@ -3307,8 +3324,8 @@
                                                     margin-bottom: 30px;
                                                 }
                                                 .radio-wdth {
-                                                   width: 200px;
-                                                   margin-bottom: 10px;
+                                                    width: 200px;
+                                                    margin-bottom: 10px;
                                                     .radio-custom+.radio-custom-label:before {
                                                         content: '';
                                                         background: #fff;
