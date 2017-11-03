@@ -8,18 +8,20 @@
 <div class="mycart-modal">
     <div class="container-fluid">
         <div class="mycart-modal-container">
-            <div class="row" ng-repeat="mycartmodal1 in newA">
+            <div class="row">
                 <!--<div class="col-md-10 col-md-offset-1">-->
-                <div class="col-md-3" ng-repeat="mycart in mycartmodal1">
 
+                <!--<div class="col-md-3" ng-repeat="mycart in gift">-->
+                <div class="col-md-3" ng-repeat="gift in gifts">
                     <div class="mycart-modal">
                         <div class="modal-img">
-                            <img ng-src="{{mycart.images[0].image}}" alt="" class="img-responsive item__img">
+                            <img ng-src="{{gift.photo|serverimage}}" alt="" class="img-responsive item__img">
                         </div>
-                        <p class="text-left">{{mycart.productName}}</p>
+                        <p class="text-center">{{gift.name}}</p>
+                        <p class="text-center">{{gift.description}}</p>
                         <!--<p class="text-left">{{mycart.title2}}</p>-->
-                        <p><button class="btn add-cart--btn btn-block text-uppercase" ui-sref="individual-page({id: mycart.productId})">add to cart</button></p>
-                        <p><button class="btn add-cart--btn btn-block text-uppercase" ng-click="removeFromWishlist(mycart.productId)">remove</button></p>
+                        <p><button class="btn add-cart--btn btn-block text-uppercase" ng-click="selectGift(gift)">Select gift</button></p>
+                        <!--<p><button class="btn add-cart--btn btn-block text-uppercase"></button></p>-->
                     </div>
                 </div>
                 <!--</div>-->

@@ -439,6 +439,10 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
     var userData = {
         userId: $.jStorage.get("userId")
     }
+    /// for gifts
+    if ($.jStorage.get("gifts")) {
+        $scope.gift = $.jStorage.get("gifts");
+    }
 
     CartService.getCart(userData, function (data) {
         if (data.data.data)

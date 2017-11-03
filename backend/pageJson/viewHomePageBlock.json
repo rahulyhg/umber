@@ -37,13 +37,7 @@
             "_id": "_id"
         }
     }],
-    "button": [{
-        "name": "Create",
-        "icon": "plus",
-        "class": "btn-success",
-        "type": "page",
-        "action": "createHomePageBlock"
-    }],
+    "button": [],
     "apiCall": {
         "url": "HomePageBlock/search",
         "params": "_id"
