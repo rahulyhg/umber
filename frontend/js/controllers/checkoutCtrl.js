@@ -355,12 +355,19 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
     $scope.checkPaymentMethod = function (payment) {
         console.log("checkPaymentMethod", payment)
 
-        $scope.generateOrder($scope.getPaymentMethod);
+        // $scope.generateOrder($scope.getPaymentMethod);
         // if ($scope.getPaymentMethod == "Cash on delivery") {
         //     $scope.generateOrder($scope.getPaymentMethod);
         // } else {
         //     alert("paymnetGateway");
         // }
+        $scope.testFunction();
+    };
+
+    $scope.testFunction = function () {
+        OrderService.hdfcPaymentGateway({}, function (data) {
+            console.log("########## data ########", data);
+        })
     }
 
     /************order generation and ADDRESSSS UPDATION IN USERTABLE AS WELL AS ORDER TABLE************* */

@@ -1,3 +1,9 @@
+var crypto = require('crypto');
+var http = require('http'),
+    fs = require('fs'),
+    qs = require('querystring');
+
+var workingKey = "C8067827DDBC8835097F3BB1C54B51CD";
 var schema = new Schema({
     orderNo: {
         type: String,
@@ -123,7 +129,50 @@ var model = {
         // var cipher = crypto.createCipheriv('aes-128-cbc', key, iv);
         // var encoded = cipher.update(JSON.stringify(data), 'utf8', 'hex');
         // encoded += cipher.final('hex');
+        var data = {
+            "_id": "59e4cfd658946c313e655b30",
+            "createdAt": "2017-10-16T15:27:18.441+0000",
+            "updatedAt": "2017-10-16T15:27:18.568+0000",
+            "orderNo": "2954436897216",
+            "totalAmount": 2098,
+            "user": "59e4c055fde2d42791850689",
+            "shippingAmount": 0,
+            "discountAmount": 0,
+            "returnedProducts": [
 
+            ],
+            "orderStatus": "processing",
+            "paymentMethod": "cod",
+            "products": [
+                {
+                    "product": "59de31a6af88fb51a6d1e124",
+                    "quantity": 1,
+                    "price": 2098,
+                    "comment": null,
+                    "_id": "59e4cfd658946c313e655b31",
+                    "status": "accept"
+                }
+            ],
+            "__v": 0,
+            "shippingAddress": {
+                "pincode": 400022,
+                "state": "Maharashtra",
+                "city": "a",
+                "line3": "a",
+                "line2": "a",
+                "line1": "a",
+                "country": "India"
+            },
+            "billingAddress": {
+                "state": "Maharashtra",
+                "pincode": 400022,
+                "city": "a",
+                "line3": "a",
+                "line2": "a",
+                "line1": "a",
+                "country": "India"
+            }
+        }
         var m = crypto.createHash('md5');
         m.update(workingKey);
         var key = m.digest('buffer');
@@ -133,12 +182,12 @@ var model = {
         encoded += cipher.final('hex');
         // return encoded;
 
-        var accessCode = "AVMY73EJ55AL00YMLA";
+        var accessCode = "AVRL01EK28AF79LRFA";
 
 
 
         var body = '',	//Put in the 32-Bit Key provided by CCAvenue.
-            accessCode = 'AVMY73EJ55AL00YMLA',			//Put in the Access Code provided by CCAvenue.
+            accessCode = 'AVRL01EK28AF79LRFA',			//Put in the Access Code provided by CCAvenue.
             encRequest = '',
             formbody = '';
 
@@ -165,7 +214,7 @@ var model = {
                 callback.write(formbody);
                 callback.end();
             });
-        return;
+        // return;
 
 
         // callback(null, encoded);
