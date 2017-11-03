@@ -1,3 +1,9 @@
+var crypto = require('crypto');
+var http = require('http'),
+    fs = require('fs'),
+    qs = require('querystring');
+
+var workingKey = "C88303FA3FD1BBF57339FAEAAAD1A993";
 var schema = new Schema({
     orderNo: {
         type: String,
@@ -105,7 +111,65 @@ module.exports = mongoose.model('Order', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "user  products.product courierType returnedProducts.product", "user", "createdAt", "desc"));
 var model = {
+
+    //Function for HDFC
+    hdfcPaymentGateway: function (data, callback) {
+        // var m = crypto.createHash('md5');
+        // m.update(workingKey);
+        // var key = m.digest('binary');
+        // var iv = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f';
+        // var cipher = crypto.createCipheriv('aes-128-cbc', key, iv);
+        // var encoded = cipher.update(JSON.stringify(data), 'utf8', 'hex');
+        // encoded += cipher.final('hex');
+
+        var m = crypto.createHash('md5');
+        m.update(workingKey);
+        var key = m.digest('buffer');
+        var iv = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f';
+        var cipher = crypto.createCipheriv('aes-128-cbc', key, iv);
+        var encoded = cipher.update(JSON.stringify(data), 'utf8', 'hex');
+        encoded += cipher.final('hex');
+        // return encoded;
+
+        var accessCode = "AVMY73EJ55AL00YMLA";
+
+
+
+        var body = '',	//Put in the 32-Bit Key provided by CCAvenue.
+            accessCode = 'AVMY73EJ55AL00YMLA',			//Put in the Access Code provided by CCAvenue.
+            encRequest = '',
+            formbody = '';
+
+        // request.on('data', function (data) {
+        //     encRequest = encoded;
+        //     formbody = '<form id="nonseamless" method="post" name="redirect" action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction"/> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><script language="javascript">document.redirect.submit();</script></form>';
+        // });
+
+        // request.on('end', function () {
+        //     response.writeHeader(200, { "Content-Type": "text/html" });
+        //     response.write(formbody);
+        //     response.end();
+        // });
+
+        request("https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction")
+            .on('data', function (data) {
+                console.log("This is the start...", data);
+                encRequest = encoded;
+                formbody = '<form id="nonseamless" method="post" name="redirect" action=" https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"/> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><script language="javascript">document.redirect.submit();</script></form>';
+            })
+            .on('end', function () {
+                console.log("This is the end...");
+                callback.writeHeader(200, { "Content-Type": "text/html" });
+                callback.write(formbody);
+                callback.end();
+            });
+        return;
+
+
+        // callback(null, encoded);
+    },
     createOrderFromCart: function (data, callback) {
+        var paymentMethod = data.paymentMethod;
         console.log("In createorderfromcart");
         if (_.isEmpty(data.userId)) {
             console.log("No user found for order");
@@ -148,9 +212,14 @@ var model = {
                                 console.log("*****DATA:***** ", order);
                                 Cart.remove({
                                     _id: mongoose.Types.ObjectId(cart._id)
-                                }).exec(function (err, result) {})
+                                }).exec(function (err, result) { })
                                 Product.subtractQuantity(data.products, null);
-                                callback(null, order);
+                                if (paymentMethod == "Cash on delivery") {
+                                    callback(null, order);
+                                } else {
+                                    //payment gateway.
+                                    // Order.hdfcPaymentGateway(order);
+                                }
                             });
                         }
                     });
@@ -178,17 +247,17 @@ var model = {
         Order.findOneAndUpdate({
             _id: mongoose.Types.ObjectId(data._id)
         }, {
-            $set: {
-                billingAddress: billingAddress,
-                shippingAddress: shippingAddress
-            }
+                $set: {
+                    billingAddress: billingAddress,
+                    shippingAddress: shippingAddress
+                }
 
-        }, {
-            new: true
-        }, function (err, order) {
-            console.log("Order update address error: ", err);
-            User.saveAddresses(data, callback);
-        });
+            }, {
+                new: true
+            }, function (err, order) {
+                console.log("Order update address error: ", err);
+                User.saveAddresses(data, callback);
+            });
     },
 
     getUserOrders: function (data, callback) {
@@ -231,35 +300,35 @@ var model = {
                                     _id: mongoose.Types.ObjectId(data.orderId),
                                     "products.product": mongoose.Types.ObjectId(product.product)
                                 }, {
-                                    $inc: {
-                                        "products.$.quantity": -product.quantity,
-                                        "products.$.price": -deductPrice,
-                                        'totalAmount': -deductPrice,
-                                    },
-                                    $addToSet: {
-                                        returnedProducts: {
-                                            product: mongoose.Types.ObjectId(product.product),
-                                            quantity: product.quantity,
-                                            price: deductPrice,
-                                            status: product.status,
-                                            comment: product.comment
+                                        $inc: {
+                                            "products.$.quantity": -product.quantity,
+                                            "products.$.price": -deductPrice,
+                                            'totalAmount': -deductPrice,
+                                        },
+                                        $addToSet: {
+                                            returnedProducts: {
+                                                product: mongoose.Types.ObjectId(product.product),
+                                                quantity: product.quantity,
+                                                price: deductPrice,
+                                                status: product.status,
+                                                comment: product.comment
+                                            }
                                         }
-                                    }
-                                }, {
-                                    new: true
-                                }).exec(function (err, updatedProduct) {
-                                    if (!_.isEmpty(updatedProduct)) {
-                                        var cancelProduct = _.remove(updatedProduct.products, function (product) {
-                                            return product.quantity == 0;
-                                        });
-                                        console.log("Cancelled product: ", updatedProduct);
-                                        Order.saveData(updatedProduct, function (err, order) {
-                                            console.log("Saving updated order: ", err, order);
-                                            updatedOrder.push(updatedProduct);
-                                            cbSubWaterfall1(null, order);
-                                        });
-                                    }
-                                });
+                                    }, {
+                                        new: true
+                                    }).exec(function (err, updatedProduct) {
+                                        if (!_.isEmpty(updatedProduct)) {
+                                            var cancelProduct = _.remove(updatedProduct.products, function (product) {
+                                                return product.quantity == 0;
+                                            });
+                                            console.log("Cancelled product: ", updatedProduct);
+                                            Order.saveData(updatedProduct, function (err, order) {
+                                                console.log("Saving updated order: ", err, order);
+                                                updatedOrder.push(updatedProduct);
+                                                cbSubWaterfall1(null, order);
+                                            });
+                                        }
+                                    });
                             }
                         ], function (err, data) {
                             eachCallback(err, data);
@@ -287,55 +356,55 @@ var model = {
         var order = [];
         var index = 0;
         async.waterfall([
-                function checkUser(cbWaterfall) {
-                    User.isUserLoggedIn(data.accessToken, cbWaterfall);
-                },
-                function getOrders(user, cbWaterfall1) {
-                    console.log("found: ", user._id);
-                    console.log("sent: ", data.user);
+            function checkUser(cbWaterfall) {
+                User.isUserLoggedIn(data.accessToken, cbWaterfall);
+            },
+            function getOrders(user, cbWaterfall1) {
+                console.log("found: ", user._id);
+                console.log("sent: ", data.user);
 
-                    // Is user same
-                    if (user._id == data.user) {
-                        console.log("inside")
-                        Order.find({
-                                user: mongoose.Types.ObjectId(data.user)
-                            }).deepPopulate("returnedProducts.product order._id returnedProducts.product.size returnedProducts.product.color")
-                            .exec(function (err, orders) {
-                                console.log("in exec", orders);
-                                if (!_.isEmpty(orders)) {
-                                    _.each(orders, function (value) {
-                                        console.log("in returnedProducts object", value);
-                                        order[index] = {};
-                                        order[index]._id = value._id;
-                                        order[index].createdAt = value.createdAt;
-                                        order[index].orderNo = value.orderNo;
-                                        order[index].orderStatus = value.orderStatus;
-                                        order[index].totalAmount = value.totalAmount;
-                                        order[index].returnCancelProduct = [];
-                                        _.each(value.returnedProducts, function (returnProduct) {
-                                            console.log("status", returnProduct.status);
-                                            if (returnProduct.status == data.status) {
-                                                console.log("match");
-                                                order[index].returnCancelProduct.push(returnProduct);
-                                                console.log("match2", order[index].returnCancelProduct);
-                                            }
-                                        });
-                                        if (_.isEmpty(order[index].returnCancelProduct)) {
-                                            order.splice(index)
-                                        } else {
-                                            index++;
+                // Is user same
+                if (user._id == data.user) {
+                    console.log("inside")
+                    Order.find({
+                        user: mongoose.Types.ObjectId(data.user)
+                    }).deepPopulate("returnedProducts.product order._id returnedProducts.product.size returnedProducts.product.color")
+                        .exec(function (err, orders) {
+                            console.log("in exec", orders);
+                            if (!_.isEmpty(orders)) {
+                                _.each(orders, function (value) {
+                                    console.log("in returnedProducts object", value);
+                                    order[index] = {};
+                                    order[index]._id = value._id;
+                                    order[index].createdAt = value.createdAt;
+                                    order[index].orderNo = value.orderNo;
+                                    order[index].orderStatus = value.orderStatus;
+                                    order[index].totalAmount = value.totalAmount;
+                                    order[index].returnCancelProduct = [];
+                                    _.each(value.returnedProducts, function (returnProduct) {
+                                        console.log("status", returnProduct.status);
+                                        if (returnProduct.status == data.status) {
+                                            console.log("match");
+                                            order[index].returnCancelProduct.push(returnProduct);
+                                            console.log("match2", order[index].returnCancelProduct);
                                         }
                                     });
-                                    cbWaterfall1(null, order);
-                                } else {
-                                    cbWaterfall1(err, null);
-                                }
-                            })
-                    } else {
-                        cbWaterfall1("noUserFound", null);
-                    }
+                                    if (_.isEmpty(order[index].returnCancelProduct)) {
+                                        order.splice(index)
+                                    } else {
+                                        index++;
+                                    }
+                                });
+                                cbWaterfall1(null, order);
+                            } else {
+                                cbWaterfall1(err, null);
+                            }
+                        })
+                } else {
+                    cbWaterfall1("noUserFound", null);
                 }
-            ],
+            }
+        ],
             function (err, data) {
                 callback(err, order);
             });
@@ -344,10 +413,10 @@ var model = {
     getAnOrderDetail: function (data, callback) {
 
         Order.findOne({
-                _id: mongoose.Types.ObjectId(data._id)
-            })
+            _id: mongoose.Types.ObjectId(data._id)
+        })
             .deepPopulate("products.product products.product.size products.product.color " +
-                "returnedProducts.product returnedProducts.product.size returnedProducts.product.color")
+            "returnedProducts.product returnedProducts.product.size returnedProducts.product.color")
             .exec(function (err, order) {
 
                 callback(err, order)
