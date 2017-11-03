@@ -1009,7 +1009,6 @@ var model = {
     // input: data: {billingAddress, shippingAddress}
     saveAddresses: function (data, callback) {
         var updateObj = {};
-        console.log("User->saveAddresses: ", data);
         if (_.isEmpty(data.user)) {
             callback({
                 message: "noUserFound"
@@ -1023,15 +1022,11 @@ var model = {
                     }).lean().exec(cbWaterfall);
                 },
                 function updateAddress(user, cbWaterfall1) {
-                    console.log("in updateAddress:", user.shippingAddresses);
                     if (data.billingAddress) {
                         user.billingAddress = data.billingAddress;
                     }
 
                     if (data.shippingAddress) {
-                        console.log("in shippingAddress:", data.shippingAddress);
-                        console.log("in user shippingAddress:", user.shippingAddresses);
-
                         var idx = _.findIndex(user.shippingAddresses, function (userAddress) {
                             return User.checkShippingAddress(userAddress, data.shippingAddress);
                         });
@@ -1058,14 +1053,14 @@ var model = {
 
     // function to check whether two addresses match
     checkShippingAddress: function (address1, address2) {
-        console.log("!!!!address1", address1);
-        console.log("!!!!address2", address2);
+        // console.log("!!!!address1", address1);
+        // console.log("!!!!address2", address2);
         var keys1 = _.keys(address1);
         var keys2 = _.keys(address2);
         var idIndex = keys1.indexOf('_id');
-        console.log("!!!!keys1", keys1);
-        console.log("!!!!keys2", keys2);
-        console.log("!!!!idIndex", idIndex);
+        // console.log("!!!!keys1", keys1);
+        // console.log("!!!!keys2", keys2);
+        // console.log("!!!!idIndex", idIndex);
 
         if (idIndex > -1) {
             keys1.splice(idIndex, 1);

@@ -190,7 +190,9 @@
                                 </tfoot>-->
                             </table>
                             <div class="pull-right ">
-                                <p class="text-right ">GRAND TOTAL : <span>&#x20b9 {{grandTotal}}</span></p>
+                                <p class="text-right ">ITEM(S) SUBTOTAL : <span>&#x20b9 {{grandTotal}}</span></p>
+                                <p class="text-right " ng-if="discountAmount">MEMBER'S DISCOUNT : <span>&#x20b9 {{discountAmount}}</span></p>
+                                <p class="text-right " ng-if="grandTotalAfterDiscount">GRAND TOTAL : <span>&#x20b9 {{grandTotalAfterDiscount}}</span></p>
                                 <button class="btn btn--list" ng-disabled="!loggedUser" ng-click="proceedToDetailTab();" ng-class="{
                         'btn--brownActive': view=='detailTab' }"> Next</button>
                             </div>

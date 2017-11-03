@@ -20,7 +20,8 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
         productId: $stateParams.id
     };
     ProductService.getProductDetails(data, function (data) {
-
+        var productId = [];
+        var grandTotal = 0;
         if (data.data.value) {
             $scope.product = data.data.data;
             $scope.productImages = _.sortBy($scope.product.images, ['order']);
@@ -29,6 +30,19 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
 
             $scope.selectedSize = $scope.sizes[0];
             $scope.activeButton = $scope.selectedSize.name;
+            productId.push($scope.product._id);
+            console.log(productId, "ProductId");
+            myService.applicableDiscounts(productId, grandTotal, function (data1) {
+                //  console.log("called api applicableDiscounts");
+                $scope.applicableDiscounts = data1;
+                $scope.applicableDiscountsLength=$scope.applicableDiscounts.length;
+                console.log("$scope.applicableDiscounts", $scope.applicableDiscounts);
+                // _.each($scope.applicableDiscounts, function (n) {
+                //     console.log(n);
+                // });
+
+            });
+
         } else {
             console.log(data.data.error);
             $scope.product = {};
