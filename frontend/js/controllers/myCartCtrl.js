@@ -47,6 +47,9 @@
          })
          console.log("$scope.discountValue", $scope.discountValue);
      }
+     $scope.checkbox = function (ind) {
+         $scope.selectedOffer = ind;
+     }
 
      var isEmptyObject = function (obj) {
          for (var prop in obj) {
@@ -411,7 +414,14 @@
                      if ($scope.grandTotal >= $scope.discountSelected.xValue) {
                          $scope.gifts = $scope.discountSelected.gifts;
                          console.log("$scope.gifts", $scope.gifts);
-
+                         $scope.discountValueObject = {
+                             discountAmount: $scope.grandTotalAfterDiscount,
+                             grandTotalAfterDiscount: $scope.grandTotal,
+                             selectedDiscount: $scope.discountSelected,
+                             totalAmountOfOrder: $scope.total
+                         }
+                         console.log("$scope.discountValueObject", $scope.discountValueObject);
+                         $.jStorage.set("discountValues", $scope.discountValueObject);
                          //  $.jStorage.set("gifts", $scope.gifts);
                          //  $scope.grandTotal = $scope.grandTotal - $scope.discountSelected.xValue;
                          //  $scope.grandTotalAfterDiscount = $scope.discountSelected.xValue;
