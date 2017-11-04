@@ -26,8 +26,8 @@
          //  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", $scope.productArrayForDiscount, "BB", grandTotal);
          myService.applicableDiscounts($scope.productArrayForDiscount, grandTotal, function (data) {
              //  console.log("called api applicableDiscounts");
-             $scope.applicableDiscounts = data;
-             console.log("$scope.applicableDiscounts", $scope.applicableDiscounts)
+             $scope.applicableDiscountsAll = data;
+             console.log("$scope.applicableDiscounts", $scope.applicableDiscountsAll)
 
          });
      }
@@ -35,24 +35,21 @@
      $scope.discountValue = "";
      $scope.radioSubmit = function (data) {
 
-         console.log("inside radioSubmit ************", data.checked);
      
          $scope.discountSelected = data;
          $scope.discountValue123 = $scope.discountSelected._id;
          $scope.visibleRadio = true;
-         _.each($scope.applicableDiscounts, function (n) {
-             if (n._id == data._id) {
+        //  _.each($scope.applicableDiscounts, function (n) {
+        //      if (n._id == data._id) {
               
-                 $scope.discountValue123 = false;
-             }
-         })
+        //          $scope.discountValue123 = false;
+        //      }
+        //  })
          console.log("$scope.discountValue", $scope.discountValue);
      }
      $scope.checkbox = function (ind) {
-         $scope.applicableDiscounts
          $scope.selectedOffer = ind;
-         console.log($scope.selectedOffer, $scope.applicableDiscounts);
-         if ($scope.applicableDiscounts[ind].checked) {
+         if ($scope.applicableDiscountsAll[ind].checked) {
              $scope.visible = true;
          } else {
              $scope.visible = false;
