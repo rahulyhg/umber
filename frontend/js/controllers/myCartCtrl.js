@@ -34,32 +34,40 @@
      $scope.discountSelected = {};
      $scope.discountValue = "";
      $scope.radioSubmit = function (data) {
-         console.log("inside radioSubmit ************", data, $scope.applicableDiscounts);
-         $scope.visible = true;
+
+         console.log("inside radioSubmit ************", data.checked);
+     
          $scope.discountSelected = data;
          $scope.discountValue123 = $scope.discountSelected._id;
          $scope.visibleRadio = true;
          _.each($scope.applicableDiscounts, function (n) {
              if (n._id == data._id) {
-                 console.log("@@@@@@@@@@@@@@@@@@@@@@")
+              
                  $scope.discountValue123 = false;
              }
          })
          console.log("$scope.discountValue", $scope.discountValue);
      }
      $scope.checkbox = function (ind) {
+         $scope.applicableDiscounts
          $scope.selectedOffer = ind;
+         console.log($scope.selectedOffer, $scope.applicableDiscounts);
+         if ($scope.applicableDiscounts[ind].checked) {
+             $scope.visible = true;
+         } else {
+             $scope.visible = false;
+         }
      }
 
      var isEmptyObject = function (obj) {
-         for (var prop in obj) {
-             if (obj.hasOwnProperty(prop))
-                 return false;
-         }
+             for (var prop in obj) {
+                 if (obj.hasOwnProperty(prop))
+                     return false;
+             }
 
-         return JSON.stringify(obj) === JSON.stringify({});
-     }
-     //getDiscount function
+             return JSON.stringify(obj) === JSON.stringify({});
+         }
+         //getDiscount function
      $scope.couponCode = "";
      $scope.getDiscount = function (couponCode) {
          // var cartSubTotal =
