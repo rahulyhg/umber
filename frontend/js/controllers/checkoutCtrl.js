@@ -390,14 +390,20 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
         var data = {};
         data.userId = $scope.loggedUser;
         data.paymentMethod = value;
-        data.selectedDiscount = $.jStorage.get("discountValues");
-        var couponD = $.jStorage.get("coupon");
-        // console.log("couponD", couponD, "alldata", data);
-        if (data.selectedDiscount.selectedDiscount) {
-            if ($.jStorage.get("coupon") && data.selectedDiscount.selectedDiscount.discountType == "59f06bc7647252477439a1e4") {
-                data.couponData = $.jStorage.get("coupon");
+        if ($.jStorage.get("discountValues")) {
+            data.selectedDiscount = $.jStorage.get("discountValues");
+
+            if (data.selectedDiscount.selectedDiscount) {
+                if ($.jStorage.get("coupon") && data.selectedDiscount.selectedDiscount.discountType == "59f06bc7647252477439a1e4") {
+                    data.couponData = $.jStorage.get("coupon");
+                }
+            } else {
+
             }
         }
+        var couponD = $.jStorage.get("coupon");
+        // console.log("couponD", couponD, "alldata", data);
+
         if ($.jStorage.get("gifts")) {
             data.gifts = $.jStorage.get("gifts");
         }
