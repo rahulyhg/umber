@@ -256,8 +256,11 @@ var model = {
                     // console.log("cart: ", cart);
                     var order = {};
                     order.orderNo = Math.ceil(Math.random() * 10000000000000);
-                    if (data.selectedDiscount.selectedDiscount)
-                        order.selectedDiscount = data.selectedDiscount.selectedDiscount._id;
+                    if (data.selectedDiscount) {
+                        if (data.selectedDiscount.selectedDiscount) {
+                            order.selectedDiscount = data.selectedDiscount.selectedDiscount._id;
+                        }
+                    }
                     // 59f06bc7647252477439a1e4
                     order.totalAmount = 0;
                     for (var idx = 0; idx < cart.products.length; idx++) {
@@ -276,8 +279,10 @@ var model = {
                     }
                     order.user = mongoose.Types.ObjectId(data.userId);
                     order.shippingAmount = 0;
-                    order.discountAmount = data.selectedDiscount.discountAmount;
-                    order.amountAfterDiscount = data.selectedDiscount.grandTotalAfterDiscount;
+                    if (data.selectedDiscount) {
+                        order.discountAmount = data.selectedDiscount.discountAmount;
+                        order.amountAfterDiscount = data.selectedDiscount.grandTotalAfterDiscount;
+                    }
                     order.paymentMethod = paymentMethod;
                     order.gifts = gifts;
                     console.log("order: ", order);
@@ -295,51 +300,54 @@ var model = {
                                     _id: mongoose.Types.ObjectId(cart._id)
                                 }).exec(function (err, result) {})
                                 Product.subtractQuantity(data1.products, null);
-                                if (allData.selectedDiscount.selectedDiscount) {
-                                    if (allData.couponData && allData.selectedDiscount.selectedDiscount.discountType.toString() == "59f06bc7647252477439a1e4") {
-                                        var couponDataToProcess = allData.couponData;
-                                        couponDataToProcess.user = allData.userId;
-                                        couponDataToProcess.generatedOrderId = data1._id;
-                                        couponDataToProcess.cAmount = allData.selectedDiscount.selectedDiscount.xValue;
-                                        couponDataToProcess.startDate = new Date();
-                                        couponDataToProcess.endDate = (new Date(+new Date() + 365 * 24 * 60 * 60 * 1000))
-                                        couponDataToProcess.usedOrderId = null;
-                                        Coupon.saveData(couponDataToProcess, function (err, couponDataReceived) {
-                                            if (err) {
-                                                console.log("errrrooooooooooorrrrrrrrrrrr", err);
-                                                callback(err, null);
-                                            } else {
-                                                if (!_.isEmpty(couponDataReceived)) {
-                                                    order.couponDataReceived = couponDataReceived;
-                                                }
+                                if (allData.selectedDiscount) {
+                                    if (allData.selectedDiscount.selectedDiscount) {
+                                        if (allData.couponData && allData.selectedDiscount.selectedDiscount.discountType.toString() == "59f06bc7647252477439a1e4") {
+                                            var couponDataToProcess = allData.couponData;
+                                            couponDataToProcess.user = allData.userId;
+                                            couponDataToProcess.generatedOrderId = data1._id;
+                                            couponDataToProcess.cAmount = allData.selectedDiscount.selectedDiscount.xValue;
+                                            couponDataToProcess.startDate = new Date();
+                                            couponDataToProcess.endDate = (new Date(+new Date() + 365 * 24 * 60 * 60 * 1000))
+                                            couponDataToProcess.usedOrderId = null;
+                                            Coupon.saveData(couponDataToProcess, function (err, couponDataReceived) {
+                                                if (err) {
+                                                    console.log("errrrooooooooooorrrrrrrrrrrr", err);
+                                                    callback(err, null);
+                                                } else {
+                                                    if (!_.isEmpty(couponDataReceived)) {
+                                                        order.couponDataReceived = couponDataReceived;
+                                                    }
 
+                                                }
+                                                // callback(null, order);
+                                            })
+                                        }
+
+                                    } else if (allData.selectedDiscount.coupon) {
+                                        console.log("toSert!!", data1._id);
+                                        Coupon.findOneAndUpdate({
+                                            _id: allData.selectedDiscount.coupon._id
+                                        }, {
+                                            $set: {
+                                                usedOrderId: data1._id,
+                                                status: "Used",
+                                                isActive: "False"
                                             }
-                                            // callback(null, order);
-                                        })
+                                        }, {
+                                            new: true
+                                        }).exec();
+                                        Order.findOneAndUpdate({
+                                            _id: data1._id
+                                        }, {
+                                            $set: {
+                                                discountCouponId: allData.selectedDiscount.coupon._id
+                                            }
+                                        }, {
+                                            new: true
+                                        }).exec()
+                                        // callback(null, order);
                                     }
-                                } else if (allData.selectedDiscount.coupon) {
-                                    console.log("toSert!!", data1._id);
-                                    Coupon.findOneAndUpdate({
-                                        _id: allData.selectedDiscount.coupon._id
-                                    }, {
-                                        $set: {
-                                            usedOrderId: data1._id,
-                                            status: "Used",
-                                            isActive: "False"
-                                        }
-                                    }, {
-                                        new: true
-                                    }).exec();
-                                    Order.findOneAndUpdate({
-                                        _id: data1._id
-                                    }, {
-                                        $set: {
-                                            discountCouponId: allData.selectedDiscount.coupon._id
-                                        }
-                                    }, {
-                                        new: true
-                                    }).exec()
-                                    // callback(null, order);
                                 }
                                 callback(null, order);
                             });
