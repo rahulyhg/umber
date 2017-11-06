@@ -17,11 +17,12 @@
             <!--<pre>{{applicableDiscounts}}</pre>-->
             <div class="form-group">
                 <div class="text-left" ng-if="!formData.couponCode">
-                    <div class="radio-wdth inline-block align-top" ng-repeat="discount in applicableDiscounts track by $index">
+                    <div class="radio-wdth inline-block align-top" ng-repeat="discount in applicableDiscountsAll track by $index">
                         <!--<input class="radio-custom" id="radio1" type="radio" name="select" hidden><label for="radio1" class="radio-inline radio-custom-label">-->
                         <!--{{discount}}-->
-                        <input hidden class="radio-custom" id="{{discount._id}}" ng-click="radioSubmit(discount);" type="radio" name="select" ng-model="discountValue123"
-                            ng-value="{{discount}}"><label for="{{discount._id}}" class="radio-inline radio-custom-label">{{discount.name}}<img src="frontend/img/listing/shirt.png" width="15" height="15" alt="Shirt Discount"> </label>
+                        <input hidden class="radio-custom" id="{{discount._id}}" ng-click="radioSubmit(discount);checkbox($index)" type="checkbox"
+                            name="select" ng-model="discount.checked" ng-checked="selectedOffer ==$index" ng-value="{{discount}}">
+                        <label for="{{discount._id}}" class="radio-inline radio-custom-label">{{discount.name}}<img src="frontend/img/listing/shirt.png" width="15" height="15" alt="Shirt Discount">                            </label>
                     </div>
                     <!--<tt>discount = {{discount._id | json}}</tt><br/>-->
                     <!--<div class="radio-wdth inline-block">

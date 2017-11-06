@@ -417,72 +417,73 @@ var model = {
     verifyRegisterUserWithOtp: function (data, callback) {
         console.log("Verify otp: ", data);
         async.waterfall([
-            function getUser(cbWaterfall) {
-                User.findOne({
-                    _id: mongoose.Types.ObjectId(data._id)
-                }).exec(cbWaterfall);
-            },
-            function checkOtp(user, cbWaterfall1) {
-                console.log("checkOtp: ", user);
-                // If user already verified
-                if (user.verifyAcc) {
-                    console.log("user.verifyAcc")
-                    User.findOneAndUpdate({
-                        _id: mongoose.Types.ObjectId(user._id)
-                    }, {
-                        $set: {
-                            accessToken: [uid(16)]
-                        }
-                    }, {
-                        new: true
-                    }).exec(cbWaterfall1);
-                } else if (!user.otp) {
-                    cbWaterfall1("noOtpFound", null);
-                } else {
-                    console.log("if !verifyAccount")
-                    // Check if otp is expired
-                    var diff = moment(new Date()).diff(user.otpTime, 'minutes');
-                    if (diff > 10) {
+                function getUser(cbWaterfall) {
+                    User.findOne({
+                        _id: mongoose.Types.ObjectId(data._id)
+                    }).exec(cbWaterfall);
+                },
+                function checkOtp(user, cbWaterfall1) {
+                    console.log("checkOtp: ", user);
+                    // If user already verified
+                    if (user.verifyAcc) {
+                        console.log("user.verifyAcc")
                         User.findOneAndUpdate({
-                            _id: mongoose.Types.ObjectId(data._id)
+                            _id: mongoose.Types.ObjectId(user._id)
                         }, {
                             $set: {
-                                verifyAcc: false,
-                                otp: null,
-                                otpTime: null
+                                accessToken: [uid(16)]
                             }
                         }, {
                             new: true
-                        }).exec(function (err, removed) {
-                            cbWaterfall1("otpExpired", null);
-                        });
+                        }).exec(cbWaterfall1);
+                    } else if (!user.otp) {
+                        cbWaterfall1("noOtpFound", null);
                     } else {
-                        if (user.otp == data.otp) {
-                            console.log("in comparing");
-                            accessToken = [uid(16)];
+                        console.log("if !verifyAccount")
+                        // Check if otp is expired
+                        var diff = moment(new Date()).diff(user.otpTime, 'minutes');
+                        if (diff > 10) {
                             User.findOneAndUpdate({
                                 _id: mongoose.Types.ObjectId(data._id)
                             }, {
                                 $set: {
-                                    verifyAcc: true,
+                                    verifyAcc: false,
                                     otp: null,
-                                    otpTime: null,
-                                    accessToken: accessToken
+                                    otpTime: null
                                 }
                             }, {
                                 new: true
-                            }).exec(function (err, updatedUser) {
-                                cbWaterfall1(err, updatedUser);
+                            }).exec(function (err, removed) {
+                                cbWaterfall1("otpExpired", null);
                             });
                         } else {
-                            cbWaterfall1("otpNoMatch", null);
+                            if (user.otp == data.otp) {
+                                console.log("in comparing");
+                                accessToken = [uid(16)];
+                                User.findOneAndUpdate({
+                                    _id: mongoose.Types.ObjectId(data._id)
+                                }, {
+                                    $set: {
+                                        verifyAcc: true,
+                                        otp: null,
+                                        otpTime: null,
+                                        accessToken: accessToken
+                                    }
+                                }, {
+                                    new: true
+                                }).exec(function (err, updatedUser) {
+                                    cbWaterfall1(err, updatedUser);
+                                });
+                            } else {
+                                cbWaterfall1("otpNoMatch", null);
+                            }
                         }
                     }
                 }
-            }
-        ], function (err, data) {
-            callback(err, data);
-        });
+            ],
+            function (err, data) {
+                callback(err, data);
+            });
     },
     resendOtp: function (data, callback) {
         console.log("in resend data", data);

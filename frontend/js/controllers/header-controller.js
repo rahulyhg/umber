@@ -352,7 +352,7 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
                 if (data.data.error) {
                     $scope.errormsg = "User already exists with the given emailId.Please login to proced"
                 } else if (!_.isEmpty(data.data.data)) {
-                    $scope.userData = data.data.data;
+                    $rootScope.userData = data.data.data;
                     $rootScope.otpRegister = $uibModal.open({
                         animation: true,
                         templateUrl: 'views/modal/otp2.html',
@@ -411,9 +411,10 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
         }
 
         $scope.checkOtp = function (otp) {
+            // $scope.userData = {};
             if (otp) {
-                $scope.userData.otp = otp;
-                console.log("Registered user: ", $scope.userData);
+                $rootScope.userData.otp = otp;
+                console.log("Registered user: ", $rootScope.userData);
                 UserService.verifyRegisterUserWithOtp($scope.userData, function (data) {
                     console.log("VerifyOtp: ", data);
                     if (data.data.value === true) {
