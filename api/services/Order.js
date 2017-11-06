@@ -208,17 +208,17 @@ var model = {
 
             encRequest = '',
             formbody = '';
-        request("https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction")
-            .on('data', function (data) {
-                console.log("This is the start...", data);
-                encRequest = encoded;
-                formbody = '<form id="nonseamless" method="post" name="redirect" action=" https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><input type="hidden" name="merchant_id" id="merchant_id" value="150530"><script language="javascript">document.redirect.submit();</script></form>';
-            })
-            .on('end', function () {
-                console.log("This is the end...");
-                callback.writeHeader(200, {
-                    "Content-Type": "text/html"
-                });
+        // request("https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction")
+        //     .on('data', function (data) {
+        //         console.log("This is the start...", data);
+        //         encRequest = encoded;
+        //         formbody = '<form id="nonseamless" method="post" name="redirect" action=" https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><input type="hidden" name="merchant_id" id="merchant_id" value="150530"><script language="javascript">document.redirect.submit();</script></form>';
+        //     })
+        //     .on('end', function () {
+        //         console.log("This is the end...");
+        //         callback.writeHeader(200, {
+        //             "Content-Type": "text/html"
+        //         });
 
                 // var m = crypto.createHash('md5');
                 // m.update(workingKey)
@@ -228,14 +228,20 @@ var model = {
                 // var decoded = decipher.update(formbody, 'hex', 'utf8');
                 // decoded += decipher.final('utf8');
                 // return decoded;
-                console.log("formbody", formbody);
-                callback.write(formbody);
-                callback.end();
-            });
+            //     console.log("formbody", formbody);
+            //     callback.write(formbody);
+            //     callback.end();
+            // });
         // return;
 
 
         // callback(null, encoded);
+        request.post({
+            url: 'https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction',
+             body: '<form id="nonseamless" method="post" name="redirect" action=" https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><input type="hidden" name="merchant_id" id="merchant_id" value="150530"><script language="javascript">document.redirect.submit();</script></form>'
+             }, function(error, response, body){
+                console.log(body);
+        });
     },
 
 
