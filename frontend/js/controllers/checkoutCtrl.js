@@ -434,7 +434,9 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
 
                             }
                         });
-                        $state.reload();
+                        $state.go("myaccount", {
+                            'view': 'orderTab'
+                        });
                     } else {
                         toastr.error('Sorry there was some problem in placing your order', 'Error');
                     }
