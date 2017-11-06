@@ -191,9 +191,6 @@
                                                     // margin: 0;
                                                     margin: 5px 0;
                                                 }
-                                                .copyright {
-                                                    margin-left: 25px;
-                                                }
                                                 .share-link__social-icon {
                                                     i {
                                                         padding: 4px 0px;
@@ -209,6 +206,14 @@
                                             } //start of footermenu
                                             .footer-up {
                                                 background-color: $darkBrown1;
+                                                .flex-container {
+                                                    width: 90%;
+                                                    @include margin(0 auto);
+                                                    @include padding(25px 0);
+                                                    @include flex-direction(row);
+                                                    @include align-items(baseline);
+                                                    @include flex-wrap(wrap);
+                                                }
                                                 h5 {
                                                     @include font(normal,
                                                     900,
@@ -234,22 +239,22 @@
                                                 address {
                                                     color: #715a5b;
                                                 }
-                                                .inline-block {
-                                                    vertical-align: top;
-                                                }
-                                                .footer-up__abt-shop {
-                                                    width: 25%;
-                                                    @include padding(25px);
+                                                .flex-item.footer-up__abt-shop {
+                                                    width: 240px;
+                                                    padding-left: 15px;
+                                                    padding-right: 20px;
+                                                    margin-bottom: 15px;
                                                     .underline {
                                                         text-decoration: underline;
                                                     }
                                                 }
-                                                .footer-up__cstmr-serv,
-                                                .footer-up__info,
-                                                .footer-up__my-account,
-                                                .footer-up__contact {
-                                                    width: 11%;
-                                                    @include padding(25px 0);
+                                                .flex-item.footer-up__cstmr-serv,
+                                                .flex-item.footer-up__info,
+                                                .flex-item.footer-up__my-account,
+                                                .flex-item.footer-up__contact {
+                                                    width: 170px;
+                                                    @include padding(0 15px);
+                                                    margin-bottom: 15px;
                                                     .list-unstyled {
                                                         li {
                                                             color: $lightGray1;
@@ -257,17 +262,11 @@
                                                         }
                                                     }
                                                 }
-                                                .footer-up__contact {
-                                                    width: 25%;
-                                                }
                                                 .footer-up__img {
-                                                    @include size(250px,
+                                                    @include size(260px,
                                                     auto);
                                                     @include position( absolute,
-                                                    null -15px 0 null);
-                                                }
-                                                .inline-block+.inline-block {
-                                                    margin-left: 10px;
+                                                    null -35px 0 null);
                                                 }
                                             } //end of footermenu
                                             //bootstrap forms
@@ -373,6 +372,11 @@
 
                                             .width100 {
                                                 width: 100%;
+                                            }
+
+                                            .flex-container {
+                                                @include display(flex);
+                                                height: auto!important;
                                             }
 
                                             .display-table {
