@@ -3,6 +3,8 @@ var http = require('http'),
     fs = require('fs'),
     qs = require('querystring');
 
+
+// var workingKey = "81D48FFD602819EBA40B68CF90C8B6C6"; //local
 var workingKey = "C8067827DDBC8835097F3BB1C54B51CD";
 var schema = new Schema({
     orderNo: {
@@ -130,11 +132,14 @@ var model = {
         // var encoded = cipher.update(JSON.stringify(data), 'utf8', 'hex');
         // encoded += cipher.final('hex');
         var data = {
-            "_id": "59e4cfd658946c313e655b30",
+            "order_id": "59e4cfd658946c313e655b30",
             "createdAt": "2017-10-16T15:27:18.441+0000",
             "updatedAt": "2017-10-16T15:27:18.568+0000",
             "orderNo": "2954436897216",
+            "merchant_id": "150530",
+            "currency": "INR",
             "totalAmount": 2098,
+            "amount": 2098,
             "user": "59e4c055fde2d42791850689",
             "shippingAmount": 0,
             "discountAmount": 0,
@@ -180,33 +185,31 @@ var model = {
         var cipher = crypto.createCipheriv('aes-128-cbc', key, iv);
         var encoded = cipher.update(JSON.stringify(data), 'utf8', 'hex');
         encoded += cipher.final('hex');
+
+        // var m = crypto.createHash('md5');
+        // m.update(workingKey);
+        // var key = m.digest('binary');
+        // var iv = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f';
+        // var cipher = crypto.createCipheriv('aes-128-cbc', key, iv);
+        // var encoded = cipher.update(JSON.stringify(data), 'utf8', 'hex');
+        // encoded += cipher.final('hex');
+        // // return encoded;
         // return encoded;
 
-        var accessCode = "AVRL01EK28AF79LRFA";
+        // var accessCode = "AVHR01EK28AH98RHHA";
 
 
 
         var body = '',	//Put in the 32-Bit Key provided by CCAvenue.
-            accessCode = 'AVRL01EK28AF79LRFA',			//Put in the Access Code provided by CCAvenue.
+            // accessCode = 'AVHR01EK28AH98RHHA',	//local
+            accessCode = "AVRL01EK28AF79LRFA",	//Put in the Access Code provided by CCAvenue.
             encRequest = '',
             formbody = '';
-
-        // request.on('data', function (data) {
-        //     encRequest = encoded;
-        //     formbody = '<form id="nonseamless" method="post" name="redirect" action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction"/> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><script language="javascript">document.redirect.submit();</script></form>';
-        // });
-
-        // request.on('end', function () {
-        //     response.writeHeader(200, { "Content-Type": "text/html" });
-        //     response.write(formbody);
-        //     response.end();
-        // });
-
         request("https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction")
             .on('data', function (data) {
                 console.log("This is the start...", data);
                 encRequest = encoded;
-                formbody = '<form id="nonseamless" method="post" name="redirect" action=" https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"/> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><script language="javascript">document.redirect.submit();</script></form>';
+                formbody = '<form id="nonseamless" method="post" name="redirect" action=" https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><input type="hidden" name="merchant_id" id="merchant_id" value="150530"><script language="javascript">document.redirect.submit();</script></form>';
             })
             .on('end', function () {
                 console.log("This is the end...");
