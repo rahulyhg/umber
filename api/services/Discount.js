@@ -67,6 +67,11 @@ var model = {
             function(convertedArray, callback){
                 console.log("convertedArray waterfall",convertedArray);
                 Discount.aggregate([{
+                    $unwind: {
+                        path: '$products',
+                        preserveNullAndEmptyArrays: true
+                    }
+                },{
                     $lookup: {
                         "from": "products",
                         "localField": "products",
