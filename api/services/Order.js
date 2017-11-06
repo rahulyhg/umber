@@ -144,6 +144,9 @@ var model = {
             "orderNo": "2954436897216",
             "merchant_id": "150530",
             "currency": "INR",
+            "redirect_url": "https://www.google.co.in/",
+            "cancel_url": "https://www.google.co.in/",
+            "language": "EN",
             "totalAmount": 2098,
             "amount": 2098,
             "user": "59e4c055fde2d42791850689",
@@ -220,27 +223,29 @@ var model = {
         //             "Content-Type": "text/html"
         //         });
 
-                // var m = crypto.createHash('md5');
-                // m.update(workingKey)
-                // var key = m.digest('buffer');
-                // var iv = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f';
-                // var decipher = crypto.createDecipheriv('aes-128-cbc', key, iv);
-                // var decoded = decipher.update(formbody, 'hex', 'utf8');
-                // decoded += decipher.final('utf8');
-                // return decoded;
-            //     console.log("formbody", formbody);
-            //     callback.write(formbody);
-            //     callback.end();
-            // });
+        // var m = crypto.createHash('md5');
+        // m.update(workingKey)
+        // var key = m.digest('buffer');
+        // var iv = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f';
+        // var decipher = crypto.createDecipheriv('aes-128-cbc', key, iv);
+        // var decoded = decipher.update(formbody, 'hex', 'utf8');
+        // decoded += decipher.final('utf8');
+        // return decoded;
+        //     console.log("formbody", formbody);
+        //     callback.write(formbody);
+        //     callback.end();
+        // });
         // return;
 
 
         // callback(null, encoded);
         request.post({
             url: 'https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction',
-             body: '<form id="nonseamless" method="post" name="redirect" action=" https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><input type="hidden" name="merchant_id" id="merchant_id" value="150530"><script language="javascript">document.redirect.submit();</script></form>'
-             }, function(error, response, body){
-                console.log(body);
+            body: '<form id="nonseamless" method="post" name="redirect" action=" https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><script language="javascript">document.redirect.submit();</script></form>'
+        }, function (error, response, body) {
+            console.log(error, body);
+            callback.write(body);
+            callback.end();
         });
     },
 
