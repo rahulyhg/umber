@@ -80,6 +80,17 @@
             "validation": ["", "trim", "unique"],
             "url": ""
         }, {
+            "name": "selectedDiscount",
+            "type": "tags",
+            "tableRef": "selectedDiscount",
+            "placeholder": "Select selectedDiscount",
+            "id": "selectedDiscount",
+            "dropDownField": "name",
+            "dropDownType": "single",
+            "searchApi": "searchCall",
+            "url": "Discount/search",
+            "validation": ["", "trim", ""]
+        }, {
             "name": "Discount Amount",
             "type": "number",
             "tableRef": "discountAmount",
@@ -211,6 +222,15 @@
             "tableRef": "comment",
             "placeholder": "Enter comment",
             "id": "comment",
+            "validation": ["", "trim", ""],
+            "url": "",
+            "onView": true
+        }, {
+            "name": "gift Name",
+            "type": "gifts",
+            "tableRef": "gifts",
+            "placeholder": "Enter gifts",
+            "id": "gifts",
             "validation": ["", "trim", ""],
             "url": "",
             "onView": true

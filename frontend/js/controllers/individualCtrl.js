@@ -24,6 +24,7 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
         var grandTotal = 0;
         if (data.data.value) {
             $scope.product = data.data.data;
+            console.log("avinash Product console",$scope.product);
             $scope.productImages = _.sortBy($scope.product.images, ['order']);
             $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
             $scope.sizes = $scope.product.sizes;

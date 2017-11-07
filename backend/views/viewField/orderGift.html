@@ -1,0 +1,4 @@
+<!--{{value.gifts}}-->
+<div ng-if="value.gifts">{{value.gifts.name}}</div>
+<div ng-if="value.gifts"><img ng-src="{{value.gifts.photo|serverimage:50:50:'cover'}}" class="viewImage" alt=""></div>
+<!--<div nh-if="value.testGiven" ng-repeat="row in value.testGiven track by $index"><span ng-if="$index!=0"> / </span><span>{{row.name}}</span></div>-->

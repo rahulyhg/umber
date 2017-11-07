@@ -1,0 +1,7 @@
+<!--{{value}}-->
+<div class="form-group" fields ng-if="formData[type.tableRef]">
+    <span><b>Gifts</b></span>
+    <div><span>-{{formData[type.tableRef].name}}</span></div>
+    <div><span>-{{formData[type.tableRef].description}}</span></div>
+    <div><span><img ng-src="{{formData[type.tableRef].photo|serverimage:100:100:'cover'}}" class="viewImage" alt=""></span></div>
+</div>

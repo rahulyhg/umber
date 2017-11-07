@@ -81,8 +81,9 @@
 
      //  }
      if ($stateParams.id) {
+        //  console.log("avinash",data);
          CategoryService.getCategoryWithParent(data, function (data) {
-             console.log("cat from parentctrl", data.data.data);
+             console.log("cat from parentctrl ***", data.data.data);
              $scope.categories = data.data.data;
              $scope.filteredProducts($scope.categories[0].slug)
          })
@@ -90,9 +91,20 @@
          //  $scope.filteredProducts($scope.categories[0].slug)
      }
 
+     if ($stateParams.id) {
+         console.log("avinash",data);
+         CategoryService.getCategoryBySlug(data, function (data1) {
+             $scope.homeCategoryDetails=data1.data.data;
+             console.log("avinash after response $scope.homeCategoryDetails", $scope.homeCategoryDetails);
+         })
+     } else {
+         //  $scope.filteredProducts($scope.categories[0].slug)
+     }
+
      /******getting products based on category******* */
      $scope.filteredProducts = function (selectedCategory) {
-         console.log("selectedCategory", selectedCategory)
+         console.log("selectedCategory", selectedCategory);
+         $scope.selectedCategoryForBreadcrumb=selectedCategory;
          $.jStorage.deleteKey("appliedFilters");
          if ($.jStorage.get("selectedCategory") && selectedCategory != $.jStorage.get("selectedCategory").slug) {
              $.jStorage.deleteKey("appliedFilters");
