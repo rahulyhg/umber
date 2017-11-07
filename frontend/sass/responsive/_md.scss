@@ -1,3 +1,17 @@
  @media (max-width: $screen-md-max) {
      // Desktop
+     //Start of footer
+     .footer {
+         p {
+             font-size: 11px;
+         }
+     }
+     .footer-up {
+         .flex-container {
+             width: 100%;
+         }
+         .footer-up__img {
+             display: none;
+         }
+     } //End of footer
  }
