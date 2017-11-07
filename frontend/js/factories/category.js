@@ -25,5 +25,14 @@ myApp.factory('CategoryService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
+        getCategoryBySlug: function (data, callback) {
+            console.log("factory getCategoryBySlug",data,adminurl);
+            $http({
+                url: adminurl + 'HomeCategory/getCategoryBySlug',
+                data: data,
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
     };
 });

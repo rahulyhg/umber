@@ -83,6 +83,15 @@ var model = {
         });
     },
 
+    getCategoryBySlug: function (data, callback) {
+        if (data.slug) {
+            HomeCategory.findOne({
+                slug: data.slug
+            }).exec(callback);
+        } else {
+            callback("Invalid parameters", null);
+        }
+    },
     getCategoryByName: function (data, callback) {
         HomeCategory.findOne({
             name: data.name

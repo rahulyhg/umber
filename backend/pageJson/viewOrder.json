@@ -22,10 +22,6 @@
         "isSort": "",
         "tableRef": "orderStatus"
     }, {
-        "name": "Tracking Id",
-        "isSort": "",
-        "tableRef": "trackingId"
-    }, {
         "name": "Discount Amount",
         "isSort": "",
         "tableRef": "discountAmount"
@@ -33,6 +29,12 @@
         "name": "Total Amount",
         "isSort": "",
         "tableRef": "totalAmount"
+    }, {
+        "name": "Gift",
+        "isSort": "",
+        "type": "orderGift",
+        "tableRef": "selectedDiscount",
+        "field": "name"
     }],
     "action": [{
         "name": "edit",

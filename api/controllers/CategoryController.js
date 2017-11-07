@@ -16,6 +16,18 @@ var controller = {
             });
     },
 
+    getCategoryBySlug: function (req, res) {
+        if (req.body)
+            Category.getCategoryBySlug(req.body, res.callback);
+        else
+            res.json({
+                value: false,
+                message: {
+                    data: "Invalid request!"
+                }
+            });
+    },
+
     getCategorySlug: function (req, res) {
         if (req.body)
             Category.getCategorySlug(req.body, res.callback);
