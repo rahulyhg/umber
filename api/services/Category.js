@@ -23,7 +23,7 @@ var schema = new Schema({
 schema.plugin(deepPopulate, {
     populate: {
         category: {
-            select: "name"
+            select: ""
         }
     }
 });
@@ -70,11 +70,11 @@ var model = {
         })
     },
     getCategoriesWithParent: function (data, callback) {
-        console.log("Category with parent: ", data);
+        // console.log("Category with parent: ", data);
         HomeCategory.findOne({
             slug: data.slug
         }).exec(function (err, category) {
-            console.log("category", category)
+            // console.log("category", category)
             if (!_.isEmpty(category)) {
                 Category.find({
                     category: mongoose.Types.ObjectId(category._id)

@@ -83,7 +83,7 @@ schema.plugin(deepPopulate, {
             select: "name"
         },
         'category': {
-            select: "name slug"
+            select: ""
         },
         'brand': {
             select: "name"
@@ -450,7 +450,7 @@ var model = {
                         // description: {
                         //     $exists: true
                         // }
-                    }).deepPopulate("prodCollection brand fabric color type category").lean().exec(cbWaterfall1);
+                    }).deepPopulate("prodCollection brand fabric color type category homeCategory").lean().exec(cbWaterfall1);
                 },
                 function getSizes(product, cbWaterfall2) {
                     if (product) {

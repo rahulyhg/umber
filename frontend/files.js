@@ -7,6 +7,7 @@ module.exports = [
   'bower_components/fancyBox/source/jquery.fancybox.js',
   'bower_components/smart-app-banner/smart-app-banner.js',
   "bower_components/moment/min/moment.min.js",
+  "http://www.elevateweb.co.uk/wp-content/themes/radial/jquery.elevatezoom.min.js",
 
   //Angular Libs
   'bower_components/angular/angular.js',
@@ -28,7 +29,6 @@ module.exports = [
   'bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js',
   'bower_components/async/dist/async.min.js',
   'bower_components/angular-ez-plus/js/angular-ezplus.js',
-  "http://www.elevateweb.co.uk/wp-content/themes/radial/jquery.elevatezoom.min.js",
   //App.js
   'frontend/js/app.js',
 
