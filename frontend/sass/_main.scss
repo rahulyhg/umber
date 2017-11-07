@@ -1023,6 +1023,20 @@
                                                             @extend .border-btm-hidden-anim;
                                                         }
                                                     }
+                                                    .added-cart-amnt {
+                                                        @include size(18px,
+                                                        18px);
+                                                        background: $darkBrown1 none repeat scroll 0 0;
+                                                        border-radius: 100%;
+                                                        color: #ffffff;
+                                                        font-size: 13px;
+                                                        font-weight: 800;
+                                                        line-height: 20px;
+                                                        position: absolute;
+                                                        top: 20px;
+                                                        right: 5px;
+                                                        text-align: center;
+                                                    }
                                                     li:hover {
                                                         a.user-name:after,
                                                         a.mycart:after {
@@ -1222,8 +1236,16 @@
                                             //     max-height: 50px;
                                             //     overflow: auto;
                                             // }
+                                            .mobview-links,
+                                            .mobview-categories {
+                                                position: fixed;
+                                                width: 70.8%;
+                                                min-height: 10px;
+                                            }
+
                                             .mobview-links-menu-in {
-                                                @include transform(translateX(0));
+                                                @include transform(translate(0,
+                                                0));
                                                 @include transform-origin(left center);
                                                 @include transition-property(all);
                                                 @include transition-duration(0.2s);
@@ -1231,7 +1253,8 @@
                                             }
 
                                             .mobview-links-menu-out {
-                                                @include transform(translateX(-1000px));
+                                                @include transform(translate(-1000px,
+                                                0));
                                                 @include transform-origin(center left);
                                                 @include transition-property(all);
                                                 @include transition-duration(0.2s);
@@ -1239,7 +1262,8 @@
                                             }
 
                                             .mobview-categories-menu-in {
-                                                @include transform(translateX(0));
+                                                @include transform(translate(0,
+                                                0));
                                                 @include transform-origin(right center);
                                                 @include transition-property(all);
                                                 @include transition-duration(0.2s);
@@ -1248,27 +1272,86 @@
                                             }
 
                                             .mobview-categories-menu-out {
-                                                @include transform(translateX(1000px));
+                                                @include transform(translate(1000px,
+                                                0));
                                                 @include transform-origin(right center);
                                                 @include transition-property(all);
                                                 @include transition-duration(0.2s);
                                                 @include transition-timing-function(ease);
                                             }
 
+                                            .mobview-search-bar {
+                                                @include size(100%,
+                                                auto); //  border: 1px solid $borderColor;
+                                                position: fixed;
+                                                top: 84px;
+                                                left: 0;
+                                                background: white;
+                                                z-index: 1030;
+                                            }
+
+                                            .search-product {
+                                                label {
+                                                    position: absolute;
+                                                    top: 50%;
+                                                    left: 30px;
+                                                    @include transform(translateY(-50%));
+                                                }
+                                                .fa-search {
+                                                    font-size: 20px;
+                                                }
+                                                .sr-only {
+                                                    position: absolute;
+                                                    width: 1px;
+                                                    height: 1px;
+                                                    padding: 0;
+                                                    margin: -1px;
+                                                    overflow: hidden;
+                                                    clip: rect(0, 0, 0, 0);
+                                                    border: 0;
+                                                }
+                                                input {
+                                                    @include padding(10px 60px);
+                                                    &:focus {
+                                                        border: 1px solid $darkBrown1;
+                                                    }
+                                                }
+                                            }
+
                                             .mobview-side-nav {
-                                                width: 550px;
+                                                width: 600px;
                                                 height: 100%;
                                                 @include padding(15px);
                                                 border: 1px solid $borderColor;
                                                 box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
                                                 position: fixed;
+                                                top: 130px;
+                                                left: 0;
                                                 background-color: $white;
-                                                z-index: 9999;
+                                                overflow: hidden;
+                                                z-index: 1030;
+                                            }
+
+                                            .mobview-links li a {
+                                                color: #341314;
+                                                font-size: 16px;
+                                                display: block;
+                                                padding: 10px 15px;
+                                            }
+
+                                            .mobview-side-nav {
+                                                .fa-shopping-cart,
+                                                .fa-heart,
+                                                .fa-user,
+                                                .fa-address-card-o {
+                                                    margin-right: 10px;
+                                                }
                                             }
 
                                             .mobview-categories {
                                                 .fa-arrow-left {
                                                     padding-left: 15px;
+                                                    color: $darkBrown1;
                                                     @include transition-property(transform);
                                                     @include transition-duration( 0.1s);
                                                     @include transition-timing-function(ease-out);
