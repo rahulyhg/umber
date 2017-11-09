@@ -1123,6 +1123,18 @@
                                                 @include transform-origin(center bottom);
                                             }
 
+                                            .mobview-side-nav-menu-out {
+                                                @include transform(rotate(0deg) scale(1) skew(0deg) translate( -1000px,
+                                                0px));
+                                                @include transform-origin(left center);
+                                                @include transition(all 0.50s ease);
+                                            }
+
+                                            .side-nav-menu-in {
+                                                @include transform(rotate(0deg) scale(1) skew(0deg) translate(0));
+                                                @include transform-origin(left center);
+                                            }
+
                                             .hamburger-cross {
                                                 // this class is used for X button animation to close side nav
                                                 span:first-child {
@@ -1228,18 +1240,10 @@
                                                     color: white;
                                                 }
                                             } //End of section promotion
-                                            // .mobview-categories-menu-out {
-                                            //     @include transform(translateX(1000px));
-                                            //     @include transform-origin(right center);
-                                            //     @include transition(all 0.3s ease);
-                                            //     width: 50%;
-                                            //     max-height: 50px;
-                                            //     overflow: auto;
-                                            // }
                                             .mobview-links,
                                             .mobview-categories {
                                                 position: fixed;
-                                                width: 70.8%;
+                                                width: 95%;
                                                 min-height: 10px;
                                             }
 
@@ -1284,7 +1288,7 @@
                                                 @include size(100%,
                                                 auto); //  border: 1px solid $borderColor;
                                                 position: fixed;
-                                                top: 84px;
+                                                top: 80px;
                                                 left: 0;
                                                 background: white;
                                                 z-index: 1030;
@@ -1318,6 +1322,23 @@
                                                 }
                                             }
 
+                                            .backdrop {
+                                                @include position(fixed,
+                                                0 0 0 0);
+                                                background-color: #000;
+                                                opacity: 0;
+                                                z-index: -1028;
+                                                @include transition(opacity .15s linear);
+                                            }
+
+                                            .backdropEnable {
+                                                @include position(fixed,
+                                                0 0 0 0);
+                                                background-color: #000;
+                                                opacity: .5;
+                                                z-index: 1028;
+                                            }
+
                                             .mobview-side-nav {
                                                 width: 600px;
                                                 height: 100%;
@@ -1325,7 +1346,7 @@
                                                 border: 1px solid $borderColor;
                                                 box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
                                                 position: fixed;
-                                                top: 130px;
+                                                top: 126px;
                                                 left: 0;
                                                 background-color: $white;
                                                 overflow: hidden;
@@ -1359,6 +1380,10 @@
                                                     &:active {
                                                         @include transform(translateX(-4px));
                                                     }
+                                                }
+                                                .fa-minus,
+                                                .fa-plus {
+                                                    color: $darkBrown1;
                                                 }
                                             } //END of navigation menu
                                             //Start of Clothes Categories
@@ -1556,6 +1581,7 @@
                                                             @include margin(10px null 0 null);
                                                         }
                                                         h4 {
+                                                            height: 40px;
                                                             @include margin(0 null null null);
                                                         }
                                                         .fa-shopping-cart {
@@ -1574,15 +1600,6 @@
                                                             border: 1px dashed $darkBrown1;
                                                             background-color: white;
                                                             color: $darkBrown1;
-                                                        }
-                                                    }
-                                                    .get-left {
-                                                        height: 110px;
-                                                        .abslt-buynow-btn {
-                                                            width: 100%;
-                                                            position: absolute;
-                                                            bottom: 0;
-                                                            overflow: hidden;
                                                         }
                                                     }
                                                 }
@@ -1672,7 +1689,6 @@
                                                 }
                                                 .featured__banner-detail {
                                                     .featured__cloth-desc {
-                                                        height: 105px;
                                                         h3 {
                                                             color: $darkBrown1;
                                                             @include margin(10px null 5px null);
@@ -1681,7 +1697,7 @@
                                                             }
                                                         }
                                                         h4 {
-                                                            max-height: 40px;
+                                                            height: 40px;
                                                             color: $darkGray;
                                                             font-family: vadodara-md;
                                                             @include margin(0 null null null);
@@ -1720,12 +1736,6 @@
                                                     } // [class|="featured__icon"] {
                                                     //     opacity: 1;
                                                     // }       
-                                                }
-                                                .abslt-buynow-btn {
-                                                    width: 100%;
-                                                    position: absolute;
-                                                    bottom: 0;
-                                                    overflow: hidden;
                                                 }
                                                 .viewmore-btn {
                                                     @include padding(15px 0);
@@ -1987,19 +1997,10 @@
                                                             }
                                                         }
                                                         h4 {
-                                                            max-height: 40px;
+                                                            height: 40px;
                                                             color: $darkGray;
                                                             @include margin(null null 5px null);
                                                         }
-                                                    }
-                                                    .sale__cloth-desc {
-                                                        height: 105px;
-                                                    }
-                                                    .abslt-buynow-btn {
-                                                        width: 100%;
-                                                        position: absolute;
-                                                        bottom: 0;
-                                                        overflow: hidden;
                                                     }
                                                 }
                                                 .buy--btn {
