@@ -34,7 +34,10 @@
         <flex-slider flex-slide="cloth in clothCat track by $index" prev-text="" next-text="" animation="slide">
             <li>
                 <div class=" cloth-cat__banner-detail relate">
-                    <img ng-src="{{cloth.image | serverimage}}" alt="" class="img-responsive">
+                    <a href="{{cloth.extLink}}" target="_blank">
+                        <img ng-src="{{cloth.image | serverimage}}" alt="" class="img-responsive">
+                    </a>
+                    
                     <!--<div class="get-center text-uppercase">
                         <h1>{{cloth.name}}</h1>
                         <h3>{{cloth.desc}}</h3>
