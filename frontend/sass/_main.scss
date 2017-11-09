@@ -3351,6 +3351,17 @@
                                             .open .listing-dropdown-menu {
                                                 @extend .dropdown-visible-anim;
                                             } //End of store locator.html
+                                            //Start of Blogs.html
+                                            .main-blog-section {
+                                                .flex-container {
+                                                    @include flex-direction(row);
+                                                    @include justify-content(flex-start);
+                                                    @include flex-wrap(wrap);
+                                                }
+                                                .flex-item {
+                                                    width: 33.3333%;
+                                                }
+                                            } //End of blogs.html
                                             // All modals html
                                             /*****NOTE: We can extend this class by using @extend method. Please don't customise the main class(Parent class) .close-modal--btn-circle ****/
 
@@ -3450,7 +3461,12 @@
                                                 @include padding(30px 20px);
                                                 .individual-first {
                                                     min-height: 350px;
+                                                    overflow: hidden;
                                                     background-size: cover!important;
+                                                }
+                                                .product-img {
+                                                    height: 450px;
+                                                    overflow: hidden;
                                                 }
                                                 .individual-first__zoom {
                                                     @include position(absolute,

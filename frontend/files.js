@@ -7,7 +7,7 @@ module.exports = [
   'bower_components/fancyBox/source/jquery.fancybox.js',
   'bower_components/smart-app-banner/smart-app-banner.js',
   "bower_components/moment/min/moment.min.js",
-  "http://www.elevateweb.co.uk/wp-content/themes/radial/jquery.elevatezoom.min.js",
+  // "http://www.elevateweb.co.uk/wp-content/themes/radial/jquery.elevatezoom.min.js",
 
   //Angular Libs
   'bower_components/angular/angular.js',
@@ -71,5 +71,8 @@ module.exports = [
   'frontend/js/controllers/individualCtrl.js',
   'frontend/js/controllers/checkoutCtrl.js',
   'frontend/js/controllers/myCartCtrl.js',
-  'frontend/js/controllers/searchCtrl.js'
+  'frontend/js/controllers/searchCtrl.js',
+
+  //Plugins
+  'frontend/js/elevatezoom.js'
 ];

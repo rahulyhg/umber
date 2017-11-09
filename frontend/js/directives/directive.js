@@ -80,8 +80,8 @@ myApp.directive('img', function ($compile, $parse) {
     .directive('ngElevateZoom', function () {
         return {
             restrict: 'A',
-
             link: function (scope, element, attrs) {
+                console.log('ngzoom');
 
                 //Will watch for changes on the attribute
                 attrs.$observe('zoomImage', function () {

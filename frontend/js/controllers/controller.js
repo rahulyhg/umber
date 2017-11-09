@@ -19,7 +19,7 @@ myApp
         });
         NavigationService.getEnabledHomePageBlock(function (data) {
             $scope.HomePageBlocks = data.data.data;
-            console.log("$scope.HomePageBlocks",$scope.HomePageBlocks);
+            console.log("$scope.HomePageBlocks", $scope.HomePageBlocks);
         });
         ProductService.getNewArrivals(function (data) {
             $scope.newArrivals = data.data.data;
@@ -498,6 +498,11 @@ myApp
     .controller('ContactUsCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.getHTML("content/contactus.html");
         TemplateService.title = "Coming Soon"; //This is the Title of the Website
+        $scope.navigation = NavigationService.getNavigation();
+    })
+    .controller('BlogsCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.getHTML("content/blogs.html");
+        TemplateService.title = "Blogs"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
     })
     //Example API Controller

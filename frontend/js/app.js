@@ -52,6 +52,11 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             templateUrl: tempateURL,
             controller: 'BuythelookCtrl'
         })
+        .state('blogs', {
+            url: "/blogs",
+            templateUrl: tempateURL,
+            controller: 'BlogsCtrl'
+        })
         .state('listing-page', {
             url: "/listing-page/:id/:cat",
             templateUrl: tempateURL,
