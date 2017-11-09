@@ -1,7 +1,134 @@
  @media (max-width: $screen-sm-max) {
      // Tablet
-     // start of  footer 
-
-      //End of footer
-     
+     .section-padd {
+         padding: 15px;
+     }
+     .mg-zero {
+         @include margin(0);
+     }
+     .padd-zero {
+         @include padding(0);
+     }
+     .mg-top-zero {
+         margin-top: 0;
+     }
+     .mg-btm-zero {
+         margin-bottom: 0;
+     } // start of home page 
+     .homepg-title {
+         @include padding(5px 0);
+         margin: 10px 0!important;
+         font-size: 30px;
+         font-family: 'fjalla-reg';
+     }
+     .homepg-slider-product-cost {
+         margin: 10px 0 0;
+         font-size: 20px;
+         font-family: vadodara-md;
+     }
+     .homepg-slider-product-name {
+         height: 35px;
+         margin: 0 0 10px;
+         font-size: 16px;
+         font-family: vadodara-md;
+     }
+     .new-arrival {
+         margin-bottom: 15px;
+         .new-arrival__title .new-arrival--border--line {
+             &:before {
+                 left: 28%;
+             }
+             &:after {
+                 right: 28%;
+             }
+         }
+         .new-arrival__slider {
+             @include padding( 45px 55px 25px);
+             .flexslider-container .flexslider {
+                 .flex-prev {
+                     left: 85% !important;
+                     top: -5%;
+                 }
+                 .flex-next {
+                     top: -5%;
+                 }
+             }
+         }
+     }
+     .featured {
+         margin-bottom: 15px;
+         .featured__title .featured--border--line {
+             &:before {
+                 left: 31%;
+             }
+             &:after {
+                 right: 31%;
+             }
+         }
+         .featured__slider .flexslider {
+             .flex-prev {
+                 left: 90.5% !important;
+             }
+         }
+     }
+     .cloth-buy {
+         margin-bottom: 15px;
+         .cloth-buy__title .cloth-buy--border--line {
+             &:before {
+                 left: 24%;
+             }
+             &:after {
+                 right: 24%;
+             }
+         }
+         .cloth-buy__desc {
+             @include padding(25px);
+             h2 {
+                 font-size: 25px;
+             }
+             p.line--height {
+                 height: 58px;
+                 -webkit-line-clamp: 4;
+             }
+             .buy--now {
+                 width: auto;
+                 font-size: inherit;
+             }
+             &:before {
+                 content: none;
+             }
+             &:after {
+                 content: none;
+             }
+         }
+     }
+     .blog {
+         .blog__title .blog--border--line {
+             &:before {
+                 left: 34%;
+             }
+             &:after {
+                 right: 34%;
+             }
+         }
+     }
+     .sale {
+         .sale__title .sale--border--line {
+             &:before {
+                 left: 35%;
+             }
+             &:after {
+                 right: 35%;
+             }
+         }
+         .sale__slider .sale__banner-detail h4 {
+             font-size: 16px;
+         }
+         .sale__slider .sale__banner-detail h3 {
+             font-size: 20px;
+         }
+         .sale__slider .flexslider-container .flexslider .flex-prev {
+             left: 91% !important;
+         }
+     } //End of home page
  }

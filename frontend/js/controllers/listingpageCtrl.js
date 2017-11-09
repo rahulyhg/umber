@@ -615,6 +615,18 @@
      // This function is used to display the modal on quck view button
      $scope.quickviewProduct = function (prod) {
          console.log("in quick view", prod);
+         var productId=[];
+         var grandTotal=0;
+         productId.push(prod._id);
+            console.log(productId, "ProductId");
+            myService.applicableDiscounts(productId, grandTotal, function (data1) {
+                //  console.log("called api applicableDiscounts");
+                $scope.applicableDiscounts = data1;
+                $scope.applicableDiscountsLength=$scope.applicableDiscounts.length;
+                console.log("$scope.applicableDiscounts", $scope.applicableDiscounts);
+               
+
+            });
          $scope.product = prod;
 
          if ($scope.product.sizes) {

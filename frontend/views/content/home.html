@@ -34,7 +34,10 @@
         <flex-slider flex-slide="cloth in clothCat track by $index" prev-text="" next-text="" animation="slide">
             <li>
                 <div class=" cloth-cat__banner-detail relate">
-                    <img ng-src="{{cloth.image | serverimage}}" alt="" class="img-responsive">
+                    <a href="{{cloth.extLink}}" target="_blank">
+                        <img ng-src="{{cloth.image | serverimage}}" alt="" class="img-responsive">
+                    </a>
+                    
                     <!--<div class="get-center text-uppercase">
                         <h1>{{cloth.name}}</h1>
                         <h3>{{cloth.desc}}</h3>
@@ -78,12 +81,12 @@
 <!--start of new arrivals-->
 <section class="new-arrival">
     <div class="new-arrival__title text-center ">
-        <h1 class="text-uppercase new-arrival--border--line">new arrivals</h1>
+        <h1 class="text-uppercase new-arrival--border--line homepg-title">new arrivals</h1>
     </div>
     <div class="new-arrival__img">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-9 pull-right padd-rt0">
+                <div class="col-md-9 col-sm-9 pull-right padd-rt0">
                     <div class="new-arrival__slider">
                         <flex-slider flex-slide="newArrival in newArrivals track by $index" prev-text="" next-text="" animation="slide" item-width="220"
                             item-margin="20" min-items="3">
@@ -91,8 +94,8 @@
                                 <div class=" new-arrival__banner-detail relate">
                                     <img ng-src="{{newArrival.images[0].image | serverimage}}" alt="" class="img-responsive" ui-sref="individual-page({id: newArrival.productId})">
                                     <div class="get-left">
-                                        <h3><i class="fa fa-inr" aria-hidden="true"></i>{{newArrival.price}}</h3>
-                                        <h4>{{newArrival.productName}}</h4>
+                                        <h3 class="homepg-slider-product-cost"><i class="fa fa-inr" aria-hidden="true"></i>{{newArrival.price}}</h3>
+                                        <h4 class="homepg-slider-product-name">{{newArrival.productName}}</h4>
                                         <div class="abslt-buynow-btn">
                                             <buttton class="btn buynow--btn text-uppercase" ui-sref="individual-page({id: newArrival.productId})">buy</buttton>
                                         </div>
@@ -119,7 +122,7 @@
         <div class="container">
             <div class="row">
                 <div class="featured__title text-center">
-                    <h1 class="text-uppercase featured--border--line">featured</h1>
+                    <h1 class="homepg-title text-uppercase featured--border--line">featured</h1>
                 </div>
             </div>
             <div class="featured__slider">
@@ -129,8 +132,8 @@
                         <div class="featured__banner-detail relate">
                             <img ng-src="{{new.images[0].image | serverimage}}" alt="" class="img-responsive" ui-sref="individual-page({id: new.productId})">
                             <div class="featured__cloth-desc">
-                                <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
-                                <h4 class="text-uppercase">{{new.productName}}</h4>
+                                <h3 class="homepg-slider-product-cost"><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
+                                <h4 class="homepg-slider-product-name text-uppercase">{{new.productName}}</h4>
                             </div>
                             <div class="featured__icon-heart">
                                 <i ng-class="checkWishlist(new.productId)" aria-hidden="true" ng-click="addRemoveToWishlist(new)"></i>
@@ -157,15 +160,15 @@
     <div class="cloth-buy relate">
         <div class="container">
             <div class="row">
-                <div class="col-md-7 paddrt">
+                <div class="col-md-7 paddrt hidden-sm hidden-xs">
                     <img ng-src="{{getthelook.majorImage | serverimage}}" alt="" class="img-responsive">
                 </div>
-                <div class="col-md-5 paddlt">
+                <div class="col-md-5 col-sm-12 paddlt">
                     <div class="cloth-buy__title text-center">
-                        <h1 class="text-uppercase cloth-buy--border--line">buy the look</h1>
+                        <h1 class="homepg-title text-uppercase cloth-buy--border--line">buy the look</h1>
                     </div>
                     <div class="cloth-buy__desc relate">
-                        <h2 class="text-uppercase">{{getthelook.title}}</h2>
+                        <h2 class="mg-top-zero text-uppercase">{{getthelook.title}}</h2>
                         <p class="line--height">{{getthelook.description}}
                         </p>
                         <p>
@@ -183,7 +186,7 @@
     <div class="blog">
         <div class="container">
             <div class="blog__title text-center">
-                <h1 class="text-uppercase blog--border--line">blogs</h1>
+                <h1 class="homepg-title text-uppercase blog--border--line">blogs</h1>
             </div>
             <div class="blog__slider">
                 <flex-slider flex-slide="blog in blogs track by $index" prev-text="" next-text="" animation="slide" item-width="400" min-items="3">
@@ -208,7 +211,7 @@
     <div class="sale relate">
         <div class="container">
             <div class="sale__title text-center">
-                <h1 class="text-uppercase sale--border--line">sale</h1>
+                <h1 class="homepg-title text-uppercase sale--border--line">sale</h1>
             </div>
             <div class="sale__slider">
                 <flex-slider flex-slide="new in sale track by $index" prev-text="" next-text="" animation="slide" item-width="215" item-margin="25"
@@ -234,7 +237,7 @@
                 </div>
             </div>
         </div>
-        <div class="absolute">
+        <div class="absolute hidden-sm hidden-xs">
             <img src="../img/home/Individual_Product Page.png" alt="img" class="img-responsive">
         </div>
     </div>

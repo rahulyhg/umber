@@ -59,7 +59,8 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
                 'id': null,
                 'cat': null
             },
-            controller: 'ListingPageCtrl'
+            controller: 'ListingPageCtrl',
+            cache: false
         })
         .state('search', {
             url: "/search/:id",
@@ -72,7 +73,8 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
         .state('individual-page', {
             url: "/individual-page/:id",
             templateUrl: tempateURL,
-            controller: 'IndividualPageCtrl'
+            controller: 'IndividualPageCtrl',
+            cache: false
         })
         .state('compare-products', {
             url: "/compare-products",

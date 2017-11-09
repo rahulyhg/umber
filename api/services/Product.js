@@ -80,7 +80,7 @@ var schema = new Schema({
 schema.plugin(deepPopulate, {
     populate: {
         'homeCategory': {
-            select: "name"
+            select: ""
         },
         'category': {
             select: ""
