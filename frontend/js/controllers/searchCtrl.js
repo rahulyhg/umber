@@ -25,6 +25,10 @@
      //  var data = {
      //      slug: $stateParams.id
      //  }
+     NavigationService.getAllDiscounts(function (data) {
+         $scope.discounts = data.data.data.results;
+
+     });
 
      $scope.data1 = {};
      $scope.data1.keyword = $stateParams.id
@@ -40,12 +44,13 @@
      $scope.priceRange = []
      $scope.appliedFilters = {};
      $scope.appliedFilters.category = [];
-     $scope.appliedFilters.type = []
-     $scope.appliedFilters.collection = []
-     $scope.appliedFilters.size = []
-     $scope.appliedFilters.style = []
-     $scope.appliedFilters.color = []
-     $scope.appliedFilters.fabric = []
+     $scope.appliedFilters.type = [];
+     $scope.appliedFilters.collection = [];
+     $scope.appliedFilters.size = [];
+     $scope.appliedFilters.style = [];
+     $scope.appliedFilters.color = [];
+     $scope.appliedFilters.fabric = [];
+     $scope.appliedFilters.discount = [];
      $scope.appliedFilters.page = 1;
      $scope.filter = {
          keyword: $scope.data1.keyword,
@@ -91,6 +96,24 @@
 
                      $scope.empty = "No Products Found"
 
+                 }
+                 if (!_.isEmpty($scope.filters.type)) {
+                     $scope.showType = true;
+                 }
+                 if (!_.isEmpty($scope.filters.color)) {
+                     $scope.showcolor = true;
+                 }
+                 if (!_.isEmpty($scope.filters.prodCollection)) {
+                     $scope.showprodCollection = true;
+                 }
+                 if (!_.isEmpty($scope.filters.fabric)) {
+                     $scope.showfabric = true;
+                 }
+                 if (!_.isEmpty($scope.filters.size)) {
+                     $scope.showsize = true;
+                 }
+                 if (!_.isEmpty($scope.filters.style)) {
+                     $scope.showstyle = true;
                  }
              } else if ($scope.filter.appliedFilters.max && $scope.filter.skip == 0 && _.isEmpty(data.data.data)) {
                  $scope.products = [];

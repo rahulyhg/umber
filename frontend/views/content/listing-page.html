@@ -62,7 +62,7 @@
                         </div>
                     </uib-accordion>
                 </div>
-                <div class="sec-second common-Accordian border-div scoll-on custom-checkbox relate">
+                <div class="sec-second common-Accordian border-div scoll-on custom-checkbox relate" ng-if="showType">
                     <uib-accordion close-others="oneAtATime">
                         <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
                             <uib-accordion-heading>
@@ -95,7 +95,7 @@
                         </div>
                     </uib-accordion>
                 </div>
-                <div class="sec-fourth common-Accordian border-div scoll-on custom-checkbox relate">
+                <div class="sec-fourth common-Accordian border-div scoll-on custom-checkbox relate" ng-if="showprodCollection">
                     <uib-accordion close-others="oneAtATime">
                         <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
                             <uib-accordion-heading>
@@ -111,7 +111,7 @@
                         </div>
                     </uib-accordion>
                 </div>
-                <div class="sec-fifth common-Accordian border-div custom-checkbox relate">
+                <div class="sec-fifth common-Accordian border-div custom-checkbox relate" ng-if="showsize">
                     <uib-accordion close-others="oneAtATime">
                         <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
                             <uib-accordion-heading>
@@ -128,7 +128,7 @@
                         </div>
                     </uib-accordion>
                 </div>
-                <div class="sec-six common-Accordian border-div custom-checkbox relate">
+                <div class="sec-six common-Accordian border-div custom-checkbox relate" ng-if="showstyle">
                     <uib-accordion close-others="oneAtATime">
                         <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
                             <uib-accordion-heading>
@@ -151,7 +151,7 @@
                         </div>
                     </uib-accordion>
                 </div>
-                <div class="sec-seven common-Accordian border-div scoll-on custom-checkbox relate">
+                <div class="sec-seven common-Accordian border-div scoll-on custom-checkbox relate" ng-if="showcolor">
                     <uib-accordion close-others="oneAtATime">
                         <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
                             <uib-accordion-heading>
@@ -168,7 +168,7 @@
                         </div>
                     </uib-accordion>
                 </div>
-                <div class="sec-eight common-Accordian border-div custom-checkbox relate">
+                <div class="sec-eight common-Accordian border-div custom-checkbox relate" ng-if="showfabric">
                     <uib-accordion close-others="oneAtATime">
                         <div uib-accordion-group class="hidebordercolor panel-default " is-open="status.open1">
                             <uib-accordion-heading>
@@ -194,28 +194,10 @@
                                     <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
                                 </h5>
                             </uib-accordion-heading>
-                            <div class="checkbox">
+                            <div class="checkbox" ng-repeat="discount in discounts">
 
-                                <input type="checkbox" id="h1">
-                                <label for="h1"> Buy 1 Get 1 Free<img src="img/listing/shirt.png" class="img-responsive">
-                                </label>
-                            </div>
-                            <div class="checkbox">
-
-                                <input type="checkbox" id="h2">
-                                <label for="h2"> Buy 2 Get 20% Off<img src="img/listing/lable.png" class="img-responsive">
-                                </label>
-                            </div>
-                            <div class="checkbox">
-
-                                <input type="checkbox" id="h3">
-                                <label for="h3">Free gift<img src="img/listing/gift.png" class="img-responsive">
-                                </label>
-                            </div>
-                            <div class="checkbox">
-
-                                <input type="checkbox" id="h4">
-                                <label for="h4"> Flat 50% off<img src="img/listing/percent.png" class="img-responsive">
+                                <input type="checkbox" id="{{discount._id}}" ng-checked="checkFilterStatus('discount',discount._id)" ng-click="applyFilters('discount', discount)">
+                                <label for="{{discount._id}}"> {{discount.name}}
                                 </label>
                             </div>
                         </div>

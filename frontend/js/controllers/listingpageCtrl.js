@@ -51,6 +51,24 @@
              $scope.filters.price = data.data.data.price;
              $scope.max = Math.max.apply(null, $scope.filters.price);
              $scope.min = Math.min.apply(null, $scope.filters.price);
+             if (!_.isEmpty($scope.filters.types)) {
+                 $scope.showType = true;
+             }
+             if (!_.isEmpty($scope.filters.collections)) {
+                 $scope.showprodCollection = true;
+             }
+             if (!_.isEmpty($scope.filters.sizes)) {
+                 $scope.showsize = true;
+             }
+             if (!_.isEmpty($scope.filters.styles)) {
+                 $scope.showstyle = true;
+             }
+             if (!_.isEmpty($scope.filters.colors)) {
+                 $scope.showcolor = true;
+             }
+             if (!_.isEmpty($scope.filters.fabrics)) {
+                 $scope.showfabric = true;
+             }
              //  console.log("$scope.categories", $scope.categories[0].slug)
              var input = {
                  "slug": $scope.categories[0].slug,
@@ -71,7 +89,10 @@
          $scope.loadingDisable = true;
      }
 
+     NavigationService.getAllDiscounts(function (data) {
+         $scope.discounts = data.data.data.results;
 
+     });
 
      //  if ($stateParams.id === "search") {
      //      console.log("rootscope", $rootScope.searchedProduct)
@@ -81,7 +102,7 @@
 
      //  }
      if ($stateParams.id) {
-        //  console.log("avinash",data);
+         //  console.log("avinash",data);
          CategoryService.getCategoryWithParent(data, function (data) {
              console.log("cat from parentctrl ***", data.data.data);
              $scope.categories = data.data.data;
@@ -92,9 +113,9 @@
      }
 
      if ($stateParams.id) {
-         console.log("avinash",data);
+         console.log("avinash", data);
          CategoryService.getCategoryBySlug(data, function (data1) {
-             $scope.homeCategoryDetails=data1.data.data;
+             $scope.homeCategoryDetails = data1.data.data;
              console.log("avinash after response $scope.homeCategoryDetails", $scope.homeCategoryDetails);
          })
      } else {
@@ -104,7 +125,7 @@
      /******getting products based on category******* */
      $scope.filteredProducts = function (selectedCategory) {
          console.log("selectedCategory", selectedCategory);
-         $scope.selectedCategoryForBreadcrumb=selectedCategory;
+         $scope.selectedCategoryForBreadcrumb = selectedCategory;
          $.jStorage.deleteKey("appliedFilters");
          if ($.jStorage.get("selectedCategory") && selectedCategory != $.jStorage.get("selectedCategory").slug) {
              $.jStorage.deleteKey("appliedFilters");
@@ -131,7 +152,25 @@
                      $scope.filters = data.data.data;
                      $scope.min = $scope.filters.priceRange[0].min;
                      $scope.max = $scope.filters.priceRange[0].max;
-                     console.log("filters", $scope.filters.priceRange[0].max)
+                     console.log("filters", $scope.filters.priceRange[0].max);
+                     if (!_.isEmpty($scope.filters.types)) {
+                         $scope.showType = true;
+                     }
+                     if (!_.isEmpty($scope.filters.collections)) {
+                         $scope.showprodCollection = true;
+                     }
+                     if (!_.isEmpty($scope.filters.sizes)) {
+                         $scope.showsize = true;
+                     }
+                     if (!_.isEmpty($scope.filters.styles)) {
+                         $scope.showstyle = true;
+                     }
+                     if (!_.isEmpty($scope.filters.colors)) {
+                         $scope.showcolor = true;
+                     }
+                     if (!_.isEmpty($scope.filters.fabrics)) {
+                         $scope.showfabric = true;
+                     }
                      //  $scope.sliderTranslate = {
                      //      options: {
                      //          floor: 45,
@@ -225,15 +264,15 @@
          var cat = $.jStorage.get("selectedCategory").slug;
          appliedFilters.appliedFilters.slug = [cat];
          if (filter._id) {
+             console.log("in checking results");
              var result = _.indexOf(appliedFilters.appliedFilters[key], filter._id);
          } else {
-             //  var result = _.indexOf(appliedFilters.appliedFilters[key], filter);
+             var result = _.indexOf(appliedFilters.appliedFilters[key], filter);
          }
          //  if (filter1) {
          //      var result = _.indexOf(appliedFilters.appliedFilters[key], filter);
          //  }
          if (filter1) {
-             console.log("!!!!!!!!!!!!!!!!!")
              if (!_.isArrayLike(appliedFilters.appliedFilters[key])) {
                  appliedFilters.appliedFilters[key] = [];
                  appliedFilters.appliedFilters[key1] = [];
@@ -245,7 +284,7 @@
                  appliedFilters.appliedFilters[key1].push(filter1);
              }
          }
-         console.log("check result", result)
+         console.log("check result", result);
          if (result != -1) {
              if (filter1) {
                  _.pullAt(appliedFilters.appliedFilters[key1], result);
@@ -270,16 +309,16 @@
                  }
                  if (filter._id) {
                      appliedFilters.appliedFilters[key].push(filter._id);
+                     console.log("in filter########@@@", appliedFilters.appliedFilters, filter._id)
                  } else {
                      appliedFilters.appliedFilters[key].push(filter);
                  }
              }
          }
          appliedFilters.page = 1;
-         console.log("appliedFilters!!!!!!!!", appliedFilters)
+         console.log("appliedFilters!!!!!!!!", appliedFilters);
          $.jStorage.set('appliedFilters', appliedFilters)
-
-         console.log("Jstoragefor filters::", $.jStorage.get("appliedFilters"))
+         console.log("Jstoragefor filters::", $.jStorage.get("appliedFilters"));
          _.forIn(appliedFilters.appliedFilters, function (val, key, obj) {
              if (_.isEmpty(val)) {
                  console.log("key: ", key);
@@ -288,9 +327,30 @@
          });
          console.log("apply filters:before ", appliedFilters);
          ProductService.getProductsWithAppliedFilters(appliedFilters, function (data) {
-             console.log("filtersretrived:::", data.data.data);
+             //  console.log("filtersretrived:::", data.data.data);
              $scope.products = _.chunk(data.data.data.products, 3);
              $scope.filters = data.data.data.filters;
+             //  if (key == "discount") {
+             //      $scope.products = _.chunk(filter.products, 3);
+             //  }
+             if (!_.isEmpty($scope.filters.types)) {
+                 $scope.showType = true;
+             }
+             if (!_.isEmpty($scope.filters.collections)) {
+                 $scope.showprodCollection = true;
+             }
+             if (!_.isEmpty($scope.filters.sizes)) {
+                 $scope.showsize = true;
+             }
+             if (!_.isEmpty($scope.filters.styles)) {
+                 $scope.showstyle = true;
+             }
+             if (!_.isEmpty($scope.filters.colors)) {
+                 $scope.showcolor = true;
+             }
+             if (!_.isEmpty($scope.filters.fabrics)) {
+                 $scope.showfabric = true;
+             }
 
          })
 
@@ -302,7 +362,24 @@
              console.log("filtersretrived:::", data.data.data);
              $scope.products = _.chunk(data.data.data.products, 3);
              $scope.filters = data.data.data.filters;
-
+             if (!_.isEmpty($scope.filters.types)) {
+                 $scope.showType = true;
+             }
+             if (!_.isEmpty($scope.filters.collections)) {
+                 $scope.showprodCollection = true;
+             }
+             if (!_.isEmpty($scope.filters.sizes)) {
+                 $scope.showsize = true;
+             }
+             if (!_.isEmpty($scope.filters.styles)) {
+                 $scope.showstyle = true;
+             }
+             if (!_.isEmpty($scope.filters.colors)) {
+                 $scope.showcolor = true;
+             }
+             if (!_.isEmpty($scope.filters.fabrics)) {
+                 $scope.showfabric = true;
+             }
          })
      }
      $scope.loadMore = function () {
@@ -318,7 +395,6 @@
          })
      }
      $scope.priceSet = function (min, max) {
-         console.log(min, max);
          $scope.applyFilters('min', min, 'max', max);
      }
 
@@ -625,7 +701,7 @@
              scope: $scope,
              size: 'lg',
              windowClass: 'quickview-modal-size'
-         }); 
+         });
          $scope.closeModal = function () {
              quickviewProduct.close();
          }

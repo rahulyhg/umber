@@ -18,4 +18,11 @@ myApp.service('ListingService', function ($http, WishlistService, BannerService,
             callback(data);
         })
     }
+
+    this.getAllDiscounts = function (callback) {
+        DiscountService.getAllDiscounts(function (data) {
+            console.log(data)
+            callback(data);
+        })
+    }
 })
