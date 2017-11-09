@@ -1,5 +1,71 @@
  @media (max-width: $screen-md-max) {
      // Desktop
+     //Start of home.html
+     .new-arrival {
+         .new-arrival__title .new-arrival--border--line {
+             &:before {
+                 left: 29%;
+             }
+             &:after {
+                 right: 29%;
+             }
+         }
+         .new-arrival__slider {
+             .flexslider-container .flexslider {
+                 .flex-prev {
+                     left: 87% !important;
+                 }
+             }
+         }
+     }
+     .featured {
+         .featured__title .featured--border--line {
+             &:before {
+                 left: 32%;
+             }
+             &:after {
+                 right: 32%;
+             }
+         }
+         .featured__slider .flexslider {
+             .flex-prev {
+                 left: 93% !important;
+             }
+         }
+     }
+     .cloth-buy {
+         .cloth-buy__title .cloth-buy--border--line {
+             &:before {
+                 left: 10%;
+             }
+             &:after {
+                 right: 10%;
+             }
+         }
+         .cloth-buy__desc {
+             @include padding(35px 50px);
+             &:before {
+                 bottom: 25px;
+                 left: -257px;
+             }
+             &:after {
+                 height: 280px;
+             }
+         }
+     }
+     .sale {
+         .sale__title .sale--border--line {
+             &:before {
+                 left: 36%;
+             }
+             &:after {
+                 right: 36%;
+             }
+         }
+         .sale__slider .flexslider-container .flexslider .flex-prev {
+             left: 93% !important;
+         }
+     } //End of home.html
      //Start of footer
      .footer {
          p {
