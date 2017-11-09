@@ -97,5 +97,12 @@ myApp.factory('NavigationService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
+        getAllDiscounts: function (callback) {
+            $http({
+                url: adminurl + 'Discount/search',
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
     };
 });
