@@ -241,7 +241,7 @@ var model = {
         // callback(null, encoded);
         request.post({
             url: 'https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction',
-            body: '<form id="nonseamless" method="post" name="redirect" action=" https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><script language="javascript">document.redirect.submit();</script></form>'
+            body: '<form id="nonseamless" method="post" name="redirect" action=" https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"> <input type="hidden" id="enc_request" name="enc_request" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><script language="javascript">document.redirect.submit();</script></form>'
         }, function (error, response, body) {
             console.log(error, body);
             callback.write(body);

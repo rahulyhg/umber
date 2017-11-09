@@ -1,7 +1,46 @@
  @media (max-width: $screen-sm-max) {
      // Tablet
-     // start of  footer 
-
-      //End of footer
-     
+     .section-padd {
+         padding: 15px;
+     } // start of home page 
+     .homepg-title {
+         @include padding(5px 0);
+         margin: 10px 0!important;
+         font-size: 30px;
+         font-family: 'fjalla-reg';
+     }
+     .homepg-slider-product-cost {
+         margin: 10px 0 0;
+         font-size: 20px;
+         font-family: vadodara-md;
+     }
+     .homepg-slider-product-name {
+         height: 35px;
+         margin: 0 0 10px;
+         font-size: 16px;
+         font-family: vadodara-md;
+     }
+     .new-arrival {
+         margin-bottom: 15px;
+         .new-arrival__slider {
+             @include padding( 45px 55px 25px);
+             .flexslider-container .flexslider {
+                 .flex-prev {
+                     left: 89.5% !important;
+                     top: -5%;
+                 }
+                 .flex-next {
+                     top: -5%;
+                 }
+             }
+         }
+     }
+     .featured {
+         margin-bottom: 25px;
+         .featured__slider .flexslider {
+             .flex-prev {
+                 left: 90% !important;
+             }
+         }
+     } //End of home page
  }

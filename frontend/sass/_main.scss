@@ -1023,6 +1023,20 @@
                                                             @extend .border-btm-hidden-anim;
                                                         }
                                                     }
+                                                    .added-cart-amnt {
+                                                        @include size(18px,
+                                                        18px);
+                                                        background: $darkBrown1 none repeat scroll 0 0;
+                                                        border-radius: 100%;
+                                                        color: #ffffff;
+                                                        font-size: 13px;
+                                                        font-weight: 800;
+                                                        line-height: 20px;
+                                                        position: absolute;
+                                                        top: 20px;
+                                                        right: 5px;
+                                                        text-align: center;
+                                                    }
                                                     li:hover {
                                                         a.user-name:after,
                                                         a.mycart:after {
@@ -1107,6 +1121,18 @@
                                             .side-nav-menu-in {
                                                 @include transform(rotate(0deg) scale(1) skew(0deg) translate(0));
                                                 @include transform-origin(center bottom);
+                                            }
+
+                                            .mobview-side-nav-menu-out {
+                                                @include transform(rotate(0deg) scale(1) skew(0deg) translate( -1000px,
+                                                0px));
+                                                @include transform-origin(left center);
+                                                @include transition(all 0.50s ease);
+                                            }
+
+                                            .side-nav-menu-in {
+                                                @include transform(rotate(0deg) scale(1) skew(0deg) translate(0));
+                                                @include transform-origin(left center);
                                             }
 
                                             .hamburger-cross {
@@ -1214,16 +1240,16 @@
                                                     color: white;
                                                 }
                                             } //End of section promotion
-                                            // .mobview-categories-menu-out {
-                                            //     @include transform(translateX(1000px));
-                                            //     @include transform-origin(right center);
-                                            //     @include transition(all 0.3s ease);
-                                            //     width: 50%;
-                                            //     max-height: 50px;
-                                            //     overflow: auto;
-                                            // }
+                                            .mobview-links,
+                                            .mobview-categories {
+                                                position: fixed;
+                                                width: 95%;
+                                                min-height: 10px;
+                                            }
+
                                             .mobview-links-menu-in {
-                                                @include transform(translateX(0));
+                                                @include transform(translate(0,
+                                                0));
                                                 @include transform-origin(left center);
                                                 @include transition-property(all);
                                                 @include transition-duration(0.2s);
@@ -1231,7 +1257,8 @@
                                             }
 
                                             .mobview-links-menu-out {
-                                                @include transform(translateX(-1000px));
+                                                @include transform(translate(-1000px,
+                                                0));
                                                 @include transform-origin(center left);
                                                 @include transition-property(all);
                                                 @include transition-duration(0.2s);
@@ -1239,7 +1266,8 @@
                                             }
 
                                             .mobview-categories-menu-in {
-                                                @include transform(translateX(0));
+                                                @include transform(translate(0,
+                                                0));
                                                 @include transform-origin(right center);
                                                 @include transition-property(all);
                                                 @include transition-duration(0.2s);
@@ -1248,27 +1276,103 @@
                                             }
 
                                             .mobview-categories-menu-out {
-                                                @include transform(translateX(1000px));
+                                                @include transform(translate(1000px,
+                                                0));
                                                 @include transform-origin(right center);
                                                 @include transition-property(all);
                                                 @include transition-duration(0.2s);
                                                 @include transition-timing-function(ease);
                                             }
 
+                                            .mobview-search-bar {
+                                                @include size(100%,
+                                                auto); //  border: 1px solid $borderColor;
+                                                position: fixed;
+                                                top: 80px;
+                                                left: 0;
+                                                background: white;
+                                                z-index: 1030;
+                                            }
+
+                                            .search-product {
+                                                label {
+                                                    position: absolute;
+                                                    top: 50%;
+                                                    left: 30px;
+                                                    @include transform(translateY(-50%));
+                                                }
+                                                .fa-search {
+                                                    font-size: 20px;
+                                                }
+                                                .sr-only {
+                                                    position: absolute;
+                                                    width: 1px;
+                                                    height: 1px;
+                                                    padding: 0;
+                                                    margin: -1px;
+                                                    overflow: hidden;
+                                                    clip: rect(0, 0, 0, 0);
+                                                    border: 0;
+                                                }
+                                                input {
+                                                    @include padding(10px 60px);
+                                                    &:focus {
+                                                        border: 1px solid $darkBrown1;
+                                                    }
+                                                }
+                                            }
+
+                                            .backdrop {
+                                                @include position(fixed,
+                                                0 0 0 0);
+                                                background-color: #000;
+                                                opacity: 0;
+                                                z-index: -1028;
+                                                @include transition(opacity .15s linear);
+                                            }
+
+                                            .backdropEnable {
+                                                @include position(fixed,
+                                                0 0 0 0);
+                                                background-color: #000;
+                                                opacity: .5;
+                                                z-index: 1028;
+                                            }
+
                                             .mobview-side-nav {
-                                                width: 550px;
+                                                width: 600px;
                                                 height: 100%;
                                                 @include padding(15px);
                                                 border: 1px solid $borderColor;
                                                 box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
                                                 position: fixed;
+                                                top: 126px;
+                                                left: 0;
                                                 background-color: $white;
-                                                z-index: 9999;
+                                                overflow: hidden;
+                                                z-index: 1030;
+                                            }
+
+                                            .mobview-links li a {
+                                                color: #341314;
+                                                font-size: 16px;
+                                                display: block;
+                                                padding: 10px 15px;
+                                            }
+
+                                            .mobview-side-nav {
+                                                .fa-shopping-cart,
+                                                .fa-heart,
+                                                .fa-user,
+                                                .fa-address-card-o {
+                                                    margin-right: 10px;
+                                                }
                                             }
 
                                             .mobview-categories {
                                                 .fa-arrow-left {
                                                     padding-left: 15px;
+                                                    color: $darkBrown1;
                                                     @include transition-property(transform);
                                                     @include transition-duration( 0.1s);
                                                     @include transition-timing-function(ease-out);
@@ -1276,6 +1380,10 @@
                                                     &:active {
                                                         @include transform(translateX(-4px));
                                                     }
+                                                }
+                                                .fa-minus,
+                                                .fa-plus {
+                                                    color: $darkBrown1;
                                                 }
                                             } //END of navigation menu
                                             //Start of Clothes Categories
@@ -1473,6 +1581,7 @@
                                                             @include margin(10px null 0 null);
                                                         }
                                                         h4 {
+                                                            height: 40px;
                                                             @include margin(0 null null null);
                                                         }
                                                         .fa-shopping-cart {
@@ -1491,15 +1600,6 @@
                                                             border: 1px dashed $darkBrown1;
                                                             background-color: white;
                                                             color: $darkBrown1;
-                                                        }
-                                                    }
-                                                    .get-left {
-                                                        height: 110px;
-                                                        .abslt-buynow-btn {
-                                                            width: 100%;
-                                                            position: absolute;
-                                                            bottom: 0;
-                                                            overflow: hidden;
                                                         }
                                                     }
                                                 }
@@ -1589,7 +1689,6 @@
                                                 }
                                                 .featured__banner-detail {
                                                     .featured__cloth-desc {
-                                                        height: 105px;
                                                         h3 {
                                                             color: $darkBrown1;
                                                             @include margin(10px null 5px null);
@@ -1598,7 +1697,7 @@
                                                             }
                                                         }
                                                         h4 {
-                                                            max-height: 40px;
+                                                            height: 40px;
                                                             color: $darkGray;
                                                             font-family: vadodara-md;
                                                             @include margin(0 null null null);
@@ -1637,12 +1736,6 @@
                                                     } // [class|="featured__icon"] {
                                                     //     opacity: 1;
                                                     // }       
-                                                }
-                                                .abslt-buynow-btn {
-                                                    width: 100%;
-                                                    position: absolute;
-                                                    bottom: 0;
-                                                    overflow: hidden;
                                                 }
                                                 .viewmore-btn {
                                                     @include padding(15px 0);
@@ -1904,19 +1997,10 @@
                                                             }
                                                         }
                                                         h4 {
-                                                            max-height: 40px;
+                                                            height: 40px;
                                                             color: $darkGray;
                                                             @include margin(null null 5px null);
                                                         }
-                                                    }
-                                                    .sale__cloth-desc {
-                                                        height: 105px;
-                                                    }
-                                                    .abslt-buynow-btn {
-                                                        width: 100%;
-                                                        position: absolute;
-                                                        bottom: 0;
-                                                        overflow: hidden;
                                                     }
                                                 }
                                                 .buy--btn {

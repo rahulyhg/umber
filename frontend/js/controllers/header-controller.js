@@ -166,20 +166,42 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
         $scope.viewLogin = function () {
             $scope.view = !$scope.view;
         }
+        //To change the icon for UIB accordian
+        $scope.accordHeader = false;
+        //To show side navigation backdrop design 
+        $scope.isBackdropActive = false;
         //To open side nav
         $scope.sideNav = false; // For toggle sidenavigation
         $scope.openSideNav = function () {
             if (!$scope.sideNav) {
                 $('.side-nav').toggleClass('side-nav-menu-in');
+                $('.mobview-side-nav').toggleClass('side-nav-menu-in');
                 $('.navbar__sideNav').toggleClass(' hamburger-cross');
                 $scope.sideNav = true;
+                $scope.isBackdropActive = !$scope.isBackdropActive;
             } else {
                 $('.side-nav').toggleClass('side-nav-menu-in');
+                $('.mobview-side-nav').toggleClass('side-nav-menu-in');
                 $('.navbar__sideNav').toggleClass(' hamburger-cross');
                 $scope.sideNav = false;
+                $scope.isBackdropActive = false;
+
             }
 
         };
+
+        //To close side nav when it focuses out
+        $scope.closeSideNav = function () {
+            if ($scope.sideNav) {
+                $('.side-nav').toggleClass('side-nav-menu-in');
+                $('.mobview-side-nav').toggleClass('side-nav-menu-in');
+                $('.navbar__sideNav').toggleClass(' hamburger-cross');
+                $scope.sideNav = false;
+                $scope.isBackdropActive = false;
+
+            }
+        };
+        //End of focus out
         //End of side nav
         //To Close side nav when hovering online
         $scope.slideUpSideNav = function () {
