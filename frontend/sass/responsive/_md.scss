@@ -66,6 +66,13 @@
              left: 93% !important;
          }
      } //End of home.html
+     // Start of about us
+     .cloth-buy .cloth-buy__desc:before{
+          width: 532px;
+     }
+     .about-cloth .cloth-buy .cloth-buy__desc:after{
+         height:315px;
+     }
      //Start of footer
      .footer {
          p {

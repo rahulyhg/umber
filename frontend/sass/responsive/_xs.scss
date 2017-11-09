@@ -4,19 +4,25 @@
          .links {
              width: 100%;
          }
-     } //  .mobview-categories-display {
-     //      display: inline-block;
-     //      width: 50%;
-     //      max-height: 180px;
-     //      overflow: auto;
-     //  }
-     //  .mobview-links {
-     //      display: inline-block;
-     //      width: 40%;
-     //      max-height: auto;
-     //      vertical-align: top;
-     //  }
-     //  .mobview-categories {
-     //      vertical-align: top;
-     //  }
+     }
+     .cloth-buy {
+         .cloth-buy__desc h2 {
+             font-size: 20px;
+         }
+     }
+     //scss for about us page
+     .contact-us .enquiry-form {
+         padding: 35px 35px 35px 35px;
+     }
+     .about-cloth .cloth-buy .cloth-buy__desc h2 {
+         font-size: 20px;
+     }
+     .contact-us .enquiry-form-pdd {
+         max-width: 100%;
+        display: block;
+     }
+     .contact-us .contactus-details {
+         margin-left: 0;
+         max-width: 100%;
+     }
  }

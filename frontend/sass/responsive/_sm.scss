@@ -131,4 +131,27 @@
              left: 91% !important;
          }
      } //End of home page
+     //scss for About us page start
+     .about-cloth .cloth-buy .cloth-buy__desc:after {
+         display: none;
+     }
+     .about-cloth .cloth-buy .cloth-buy__desc {
+         padding: 55px 55px 55px 40px;
+     }
+     .cloth-buy .cloth-buy__desc p.line--height {
+         height: 55px;
+         -webkit-line-clamp: 4;
+     }
+      .listing-img-common {
+         margin-top: 56px;
+     }
+     //scss for contact us
+     .contact-us .contactus-content{
+         max-width:100%;
+     }
+     //scss for Store Locator page
+     .row-margin{
+         margin-bottom: 0;
+         margin-top: 0;
+     }
  }
