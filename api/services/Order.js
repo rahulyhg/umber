@@ -406,7 +406,7 @@ var model = {
     getUserOrders: function (data, callback) {
         Order.find({
             user: data.userId
-        }).deepPopulate('products.product courierType products.product.size products.product.color').exec(function (err, orders) {
+        }).deepPopulate('products.product courierType products.product.size products.product.color').sort( { createdAt: -1 } ).exec(function (err, orders) {
             callback(err, orders);
         });
     },
@@ -447,6 +447,7 @@ var model = {
                                             "products.$.quantity": -product.quantity,
                                             "products.$.price": -deductPrice,
                                             'totalAmount': -deductPrice,
+                                            'orderStatus': 'cancelled'
                                         },
                                         $addToSet: {
                                             returnedProducts: {

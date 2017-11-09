@@ -5,15 +5,15 @@
                 <div class="breadCrumbs-letter">
                     <ul class="list-unstyled list-inline text-uppercase marg0">
                         <li>
-                            <a href="">home</a>
+                            <a ui-sref="home">home</a>
                         </li>
                         <i class="fa fa-angle-right" aria-hidden="true"></i>
                         <li>
-                            <a href="">{{product.homeCategory.name}}</a>
+                            <a ui-sref="listing-page({id:product.homeCategory.slug})">{{product.homeCategory.name}}</a>
                         </li>
                         <i class="fa fa-angle-right" aria-hidden="true"></i>
                         <li>
-                            <a href="">{{product.category.name}}</a>
+                            <a ui-sref="listing-page({id:product.homeCategory.slug,cat:product.category._id})">{{product.category.name}}</a>
                         </li>
                         <i class="fa fa-angle-right" aria-hidden="true"></i>
                         <li>
