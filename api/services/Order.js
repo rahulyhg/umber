@@ -440,7 +440,7 @@ var model = {
                             },
                             function deductQuantity(foundProduct, cbSubWaterfall1) {
                                 var deductPrice = foundProduct.price * product.quantity;
-                                console.log("foundProduct", foundProduct);
+
                                 Order.findOneAndUpdate({
                                     _id: mongoose.Types.ObjectId(data.orderId),
                                     "products.product": mongoose.Types.ObjectId(product.product)
