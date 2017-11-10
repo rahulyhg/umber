@@ -206,7 +206,7 @@
                                             } //start of footermenu
                                             .footer-up {
                                                 background-color: $darkBrown1;
-                                                .flex-container {
+                                                .flex-item-container {
                                                     width: 90%;
                                                     @include margin(0 auto);
                                                     @include padding(25px 0);
@@ -370,13 +370,20 @@
                                                 @include padding(null null null 3px);
                                             }
 
+                                            .section-padd {
+                                                padding: 15px;
+                                            }
+
+                                            .section-tp-bt-padd {
+                                                @include padding(15px 0);
+                                            }
+
                                             .width100 {
                                                 width: 100%;
                                             }
 
-                                            .flex-container {
+                                            .flex-item-container {
                                                 @include display(flex);
-                                                height: auto!important;
                                             }
 
                                             .display-table {
@@ -3353,15 +3360,39 @@
                                             } //End of store locator.html
                                             //Start of Blogs.html
                                             .main-blog-section {
-                                                .flex-container {
+                                                @include padding(25px);
+                                                .flex-item-container {
                                                     @include flex-direction(row);
                                                     @include justify-content(flex-start);
                                                     @include flex-wrap(wrap);
                                                 }
                                                 .flex-item {
-                                                    width: 33.3333%;
+                                                    width: 33.33333333%;
+                                                    margin-bottom: 50px;
                                                 }
                                             } //End of blogs.html
+                                            //Start of inner-blogs.html
+                                            .inner-blog-title {
+                                                @include padding(5px 0);
+                                                @include margin(15px 0);
+                                                color: $darkBrown1;
+                                                font-family: 'vadodara-md';
+                                            }
+
+                                            .inner-blog-section {
+                                                width: 90%;
+                                                @include margin(0 auto);
+                                            }
+
+                                            .inner-blog-change-content {
+                                                .flex-item-container {
+                                                    @include flex-direction(row);
+                                                    @include justify-content(flex-start);
+                                                }
+                                                .flex-item {
+                                                    flex: 1;
+                                                }
+                                            } //End of inner-blogs.html
                                             // All modals html
                                             /*****NOTE: We can extend this class by using @extend method. Please don't customise the main class(Parent class) .close-modal--btn-circle ****/
 
@@ -3391,6 +3422,11 @@
 
                                             .loginModalSize .modal-dialog {
                                                 width: 750px;
+                                            }
+
+                                            .zoomLens,
+                                            .zoomContainer {
+                                                z-index: 1060!important; // adjusted as per modal z-index;
                                             }
 
                                             .coupon-discount {
