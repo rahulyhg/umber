@@ -205,9 +205,9 @@ var model = {
 
         // var accessCode = "AVHR01EK28AH98RHHA";
 
-        var body = '',	//Put in the 32-Bit Key provided by CCAvenue.
+        var body = '', //Put in the 32-Bit Key provided by CCAvenue.
             // accessCode = 'AVHR01EK28AH98RHHA',	//local
-            accessCode = "AVRL01EK28AF79LRFA",	//Put in the Access Code provided by CCAvenue.
+            accessCode = "AVRL01EK28AF79LRFA", //Put in the Access Code provided by CCAvenue.
 
             encRequest = '',
             formbody = '';
@@ -311,7 +311,7 @@ var model = {
                                 // console.log("*****DATA:***** ", order);
                                 Cart.remove({
                                     _id: mongoose.Types.ObjectId(cart._id)
-                                }).exec(function (err, result) { })
+                                }).exec(function (err, result) {})
                                 Product.subtractQuantity(data1.products, null);
                                 if (allData.selectedDiscount) {
                                     if (allData.selectedDiscount.selectedDiscount) {
@@ -342,23 +342,23 @@ var model = {
                                         Coupon.findOneAndUpdate({
                                             _id: allData.selectedDiscount.coupon._id
                                         }, {
-                                                $set: {
-                                                    usedOrderId: data1._id,
-                                                    status: "Used",
-                                                    isActive: "False"
-                                                }
-                                            }, {
-                                                new: true
-                                            }).exec();
+                                            $set: {
+                                                usedOrderId: data1._id,
+                                                status: "Used",
+                                                isActive: "False"
+                                            }
+                                        }, {
+                                            new: true
+                                        }).exec();
                                         Order.findOneAndUpdate({
                                             _id: data1._id
                                         }, {
-                                                $set: {
-                                                    discountCouponId: allData.selectedDiscount.coupon._id
-                                                }
-                                            }, {
-                                                new: true
-                                            }).exec()
+                                            $set: {
+                                                discountCouponId: allData.selectedDiscount.coupon._id
+                                            }
+                                        }, {
+                                            new: true
+                                        }).exec()
                                         // callback(null, order);
                                     }
                                 }
@@ -390,23 +390,25 @@ var model = {
         Order.findOneAndUpdate({
             _id: mongoose.Types.ObjectId(data._id)
         }, {
-                $set: {
-                    billingAddress: billingAddress,
-                    shippingAddress: shippingAddress
-                }
+            $set: {
+                billingAddress: billingAddress,
+                shippingAddress: shippingAddress
+            }
 
-            }, {
-                new: true
-            }, function (err, order) {
-                console.log("Order update address error: ", err);
-                User.saveAddresses(data, callback);
-            });
+        }, {
+            new: true
+        }, function (err, order) {
+            console.log("Order update address error: ", err);
+            User.saveAddresses(data, callback);
+        });
     },
 
     getUserOrders: function (data, callback) {
         Order.find({
             user: data.userId
-        }).deepPopulate('products.product courierType products.product.size products.product.color').sort( { createdAt: -1 } ).exec(function (err, orders) {
+        }).deepPopulate('products.product courierType products.product.size products.product.color').sort({
+            createdAt: -1
+        }).exec(function (err, orders) {
             callback(err, orders);
         });
     },
@@ -438,41 +440,43 @@ var model = {
                             },
                             function deductQuantity(foundProduct, cbSubWaterfall1) {
                                 var deductPrice = foundProduct.price * product.quantity;
-
+                                console.log("foundProduct", foundProduct);
                                 Order.findOneAndUpdate({
                                     _id: mongoose.Types.ObjectId(data.orderId),
                                     "products.product": mongoose.Types.ObjectId(product.product)
                                 }, {
-                                        $inc: {
-                                            "products.$.quantity": -product.quantity,
-                                            "products.$.price": -deductPrice,
-                                            'totalAmount': -deductPrice,
-                                            'orderStatus': 'cancelled'
-                                        },
-                                        $addToSet: {
-                                            returnedProducts: {
-                                                product: mongoose.Types.ObjectId(product.product),
-                                                quantity: product.quantity,
-                                                price: deductPrice,
-                                                status: product.status,
-                                                comment: product.comment
-                                            }
+                                    $inc: {
+                                        "products.$.quantity": -product.quantity,
+                                        "products.$.price": -deductPrice,
+                                        'totalAmount': -deductPrice
+                                    },
+                                    $addToSet: {
+                                        returnedProducts: {
+                                            product: mongoose.Types.ObjectId(product.product),
+                                            quantity: product.quantity,
+                                            price: deductPrice,
+                                            status: product.status,
+                                            comment: product.comment
                                         }
-                                    }, {
-                                        new: true
-                                    }).exec(function (err, updatedProduct) {
-                                        if (!_.isEmpty(updatedProduct)) {
-                                            var cancelProduct = _.remove(updatedProduct.products, function (product) {
-                                                return product.quantity == 0;
-                                            });
-                                            console.log("Cancelled product: ", updatedProduct);
-                                            Order.saveData(updatedProduct, function (err, order) {
-                                                console.log("Saving updated order: ", err, order);
-                                                updatedOrder.push(updatedProduct);
-                                                cbSubWaterfall1(null, order);
-                                            });
-                                        }
-                                    });
+                                    },
+                                    $set: {
+                                        orderStatus: "cancelled"
+                                    }
+                                }, {
+                                    new: true
+                                }).exec(function (err, updatedProduct) {
+                                    if (!_.isEmpty(updatedProduct)) {
+                                        var cancelProduct = _.remove(updatedProduct.products, function (product) {
+                                            return product.quantity == 0;
+                                        });
+                                        console.log("Cancelled product: ", updatedProduct);
+                                        Order.saveData(updatedProduct, function (err, order) {
+                                            console.log("Saving updated order: ", err, order);
+                                            updatedOrder.push(updatedProduct);
+                                            cbSubWaterfall1(null, order);
+                                        });
+                                    }
+                                });
                             }
                         ], function (err, data) {
                             eachCallback(err, data);
@@ -500,55 +504,55 @@ var model = {
         var order = [];
         var index = 0;
         async.waterfall([
-            function checkUser(cbWaterfall) {
-                User.isUserLoggedIn(data.accessToken, cbWaterfall);
-            },
-            function getOrders(user, cbWaterfall1) {
-                console.log("found: ", user._id);
-                console.log("sent: ", data.user);
+                function checkUser(cbWaterfall) {
+                    User.isUserLoggedIn(data.accessToken, cbWaterfall);
+                },
+                function getOrders(user, cbWaterfall1) {
+                    console.log("found: ", user._id);
+                    console.log("sent: ", data.user);
 
-                // Is user same
-                if (user._id == data.user) {
-                    console.log("inside")
-                    Order.find({
-                        user: mongoose.Types.ObjectId(data.user)
-                    }).deepPopulate("returnedProducts.product order._id returnedProducts.product.size returnedProducts.product.color")
-                        .exec(function (err, orders) {
-                            console.log("in exec", orders);
-                            if (!_.isEmpty(orders)) {
-                                _.each(orders, function (value) {
-                                    console.log("in returnedProducts object", value);
-                                    order[index] = {};
-                                    order[index]._id = value._id;
-                                    order[index].createdAt = value.createdAt;
-                                    order[index].orderNo = value.orderNo;
-                                    order[index].orderStatus = value.orderStatus;
-                                    order[index].totalAmount = value.totalAmount;
-                                    order[index].returnCancelProduct = [];
-                                    _.each(value.returnedProducts, function (returnProduct) {
-                                        console.log("status", returnProduct.status);
-                                        if (returnProduct.status == data.status) {
-                                            console.log("match");
-                                            order[index].returnCancelProduct.push(returnProduct);
-                                            console.log("match2", order[index].returnCancelProduct);
+                    // Is user same
+                    if (user._id == data.user) {
+                        console.log("inside")
+                        Order.find({
+                                user: mongoose.Types.ObjectId(data.user)
+                            }).deepPopulate("returnedProducts.product order._id returnedProducts.product.size returnedProducts.product.color")
+                            .exec(function (err, orders) {
+                                console.log("in exec", orders);
+                                if (!_.isEmpty(orders)) {
+                                    _.each(orders, function (value) {
+                                        console.log("in returnedProducts object", value);
+                                        order[index] = {};
+                                        order[index]._id = value._id;
+                                        order[index].createdAt = value.createdAt;
+                                        order[index].orderNo = value.orderNo;
+                                        order[index].orderStatus = value.orderStatus;
+                                        order[index].totalAmount = value.totalAmount;
+                                        order[index].returnCancelProduct = [];
+                                        _.each(value.returnedProducts, function (returnProduct) {
+                                            console.log("status", returnProduct.status);
+                                            if (returnProduct.status == data.status) {
+                                                console.log("match");
+                                                order[index].returnCancelProduct.push(returnProduct);
+                                                console.log("match2", order[index].returnCancelProduct);
+                                            }
+                                        });
+                                        if (_.isEmpty(order[index].returnCancelProduct)) {
+                                            order.splice(index)
+                                        } else {
+                                            index++;
                                         }
                                     });
-                                    if (_.isEmpty(order[index].returnCancelProduct)) {
-                                        order.splice(index)
-                                    } else {
-                                        index++;
-                                    }
-                                });
-                                cbWaterfall1(null, order);
-                            } else {
-                                cbWaterfall1(err, null);
-                            }
-                        })
-                } else {
-                    cbWaterfall1("noUserFound", null);
+                                    cbWaterfall1(null, order);
+                                } else {
+                                    cbWaterfall1(err, null);
+                                }
+                            })
+                    } else {
+                        cbWaterfall1("noUserFound", null);
+                    }
                 }
-            }
-        ],
+            ],
             function (err, data) {
                 callback(err, order);
             });
@@ -557,10 +561,10 @@ var model = {
     getAnOrderDetail: function (data, callback) {
 
         Order.findOne({
-            _id: mongoose.Types.ObjectId(data._id)
-        })
+                _id: mongoose.Types.ObjectId(data._id)
+            })
             .deepPopulate("products.product products.product.size products.product.color " +
-            "returnedProducts.product returnedProducts.product.size returnedProducts.product.color")
+                "returnedProducts.product returnedProducts.product.size returnedProducts.product.color")
             .exec(function (err, order) {
 
                 callback(err, order)
