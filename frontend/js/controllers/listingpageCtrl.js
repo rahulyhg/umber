@@ -615,18 +615,18 @@
      // This function is used to display the modal on quck view button
      $scope.quickviewProduct = function (prod) {
          console.log("in quick view", prod);
-         var productId=[];
-         var grandTotal=0;
+         var productId = [];
+         var grandTotal = 0;
          productId.push(prod._id);
-            console.log(productId, "ProductId");
-            myService.applicableDiscounts(productId, grandTotal, function (data1) {
-                //  console.log("called api applicableDiscounts");
-                $scope.applicableDiscounts = data1;
-                $scope.applicableDiscountsLength=$scope.applicableDiscounts.length;
-                console.log("$scope.applicableDiscounts", $scope.applicableDiscounts);
-               
+         console.log(productId, "ProductId");
+         myService.applicableDiscounts(productId, grandTotal, function (data1) {
+             //  console.log("called api applicableDiscounts");
+             $scope.applicableDiscounts = data1;
+             $scope.applicableDiscountsLength = $scope.applicableDiscounts.length;
+             console.log("$scope.applicableDiscounts", $scope.applicableDiscounts);
 
-            });
+
+         });
          $scope.product = prod;
 
          if ($scope.product.sizes) {
@@ -695,7 +695,7 @@
              $scope.reqQuantity += parseInt(oper);
              console.log($scope.reqQuantity)
          }
-         var quickviewProduct = $uibModal.open({
+         $scope.quickView = $uibModal.open({
              animation: true,
              templateUrl: 'views/modal/quickview-product.html',
              scope: $scope,
@@ -703,7 +703,7 @@
              windowClass: 'quickview-modal-size'
          });
          $scope.closeModal = function () {
-             quickviewProduct.close();
+            $scope.quickView.close();
          }
      };
      //End of  modal on quck view button

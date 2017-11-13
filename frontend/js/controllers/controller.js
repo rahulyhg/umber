@@ -505,6 +505,11 @@ myApp
         TemplateService.title = "Blogs"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
     })
+    .controller('InnerBlogsCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.getHTML("content/inner-blogs.html");
+        TemplateService.title = "Blogs"; //This is the Title of the Website
+        $scope.navigation = NavigationService.getNavigation();
+    })
     //Example API Controller
     .controller('DemoAPICtrl', function ($scope, TemplateService, apiService, NavigationService, $timeout) {
         apiService.getDemo($scope.formData, function (data) {
