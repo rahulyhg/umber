@@ -1014,14 +1014,15 @@ var model = {
                             _.each(filters.appliedFilters.size, function (size) {
                                 filterSize.push(ObjectId(size));
                             });
-                            console.log("filters.appliedFilters.style1111111111111111111", filters.appliedFilters.style)
                             _.each(filters.appliedFilters.style, function (style) {
-                                console.log("filters.appliedFilters.style", filters.appliedFilters.style);
                                 filterStyle.push(style);
                             });
                             _.each(filters.appliedFilters.fabric, function (fabric) {
                                 filterFabric.push(ObjectId(fabric));
                             });
+                            // _.each(filters.appliedFilters.discount, function (discount) {
+                            //     filterDiscount.push(ObjectId(discount));
+                            // });
 
                             // old code is here
 
@@ -1145,36 +1146,45 @@ var model = {
                             }
                             console.log("filters.appliedFilters.discount", filters.appliedFilters.discount);
                             if (filters.appliedFilters.discount) {
-                                _.each(filters.appliedFilters.discount, function (dis) {
+                                async.each(filters.appliedFilters.discount, function (dis, eachCallback) {
                                     Discount.findOne({
                                         _id: dis
                                     }, {
                                         products: 1
                                     }).exec(function (err, discountProducts) {
-                                        console.log("in filters.appliedFilters.discount", discountProducts);
+                                        // console.log("in data.appliedFilters.discount", discountProducts);
                                         if (err) {
+                                            console.log("in discounrt findOne", err);
                                             callback(err, null);
                                         } else {
-                                            _.each(discountProducts.products, function (val) {
-                                                filterDiscount.push(ObjectId(val));
-                                            });
-                                            if (!_.isEmpty(filterDiscount)) {
-                                                pipeline.push({
-                                                    $match: {
-                                                        "_id": {
-                                                            $in: filterDiscount
-                                                        }
-                                                    }
+                                            if (discountProducts.products) {
+                                                console.log("in discounrt findOne if", discountProducts.products);
+                                                _.each(discountProducts.products, function (val) {
+                                                    filterDiscount.push(ObjectId(val));
                                                 });
+
                                             }
-                                            console.log("filterDiscount", filterDiscount);
-                                            callProduct();
-
+                                            eachCallback(null, discountProducts.products);
                                         }
-
                                     });
-                                })
-
+                                }, function (err) {
+                                    if (err) {
+                                        callback(err, null);
+                                    }
+                                    if (!_.isEmpty(filterDiscount)) {
+                                        // console.log("filterDiscount", filterDiscount)
+                                        pipeline.push({
+                                            $match: {
+                                                "_id": {
+                                                    $in: filterDiscount
+                                                }
+                                            }
+                                        });
+                                        console.log("filterDiscount", filterDiscount);
+                                        console.log("pipeline catArr", pipeline);
+                                        callProduct();
+                                    }
+                                });
                             } else {
                                 callProduct();
                             }
