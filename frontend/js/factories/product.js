@@ -146,6 +146,15 @@ myApp.factory('ProductService', function ($http, $timeout) {
 
         isAvailableProduct: function (reqQuantity, product) {
             return reqQuantity < product.quantity;
+        },
+
+        getDiscountProducts: function (callback) {
+            $http({
+                url: adminurl + 'Discount/getDiscountProducts',
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
         }
+
     };
 });

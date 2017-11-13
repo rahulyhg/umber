@@ -13,6 +13,21 @@ var controller = {
                 }
             })
         }
+    },
+
+    getDiscountProducts: function (req, res) {
+        console.log("inside Discount controller getDiscountProducts",req.body);
+        if (req.body) {
+            console.log("InController---------",req.body)
+            Discount.getDiscountProducts(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid Request"
+                }
+            })
+        }
     }
 
 };

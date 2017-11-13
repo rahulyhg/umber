@@ -218,12 +218,13 @@
                     min-items="3">
                     <li class="relate">
                         <div class="sale__banner-detail relate">
-                            <img ng-src="{{new.img}}" alt="" class="img-responsive">
+                            <img ng-src="{{new.images[0].image | serverimage}}" alt="" class="img-responsive">
                             <div class="sale__cloth-desc">
-                                <h4 class="text-uppercase">{{new.type}}</h4>
+                                <h4 class="text-uppercase">{{new.productName}}</h4>
                                 <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
                                 <div class="abslt-buynow-btn">
-                                    <buttton class="btn buy--btn text-uppercase">buy</buttton>
+                                    <!--<buttton class="btn buybtn text-uppercase"  ui-sref="individual-page({id: new._id})">View</buttton>-->
+                                    <buttton class="btn buy--btn text-uppercase" ui-sref="individual-page({id: new.productId})">View</buttton>
                                 </div>
                             </div>
 
