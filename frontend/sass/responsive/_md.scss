@@ -67,12 +67,31 @@
          }
      } //End of home.html
      // Start of about us
-     .cloth-buy .cloth-buy__desc:before{
-          width: 532px;
+     .cloth-buy .cloth-buy__desc:before {
+         width: 532px;
      }
-     .about-cloth .cloth-buy .cloth-buy__desc:after{
-         height:315px;
+     .about-cloth .cloth-buy .cloth-buy__desc:after {
+         height: 315px;
+     } //Start of checkout 
+     .list-checkout {
+         padding-left: 40px;
+     } //End of checkout
+     //Start of compare-products
+     .compare-section {
+         .compare--borderline {
+             &:before {
+                 left: 15%;
+             }
+             &:after {
+                 right: 15%;
+             }
+         } //End of compare products
      }
+     .details-form {
+         .payment-checkbox .checkbox label {
+             margin-right: 4px;
+         }
+     } //End of checkout
      //Start of footer
      .footer {
          p {

@@ -6,25 +6,27 @@
         <div class="container">
             <div class="content-spacing">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-sm-12">
                         <div class="list-checkout">
-                            <button class="btn btn--list" ng-disabled="loggedUser" ng-click="view='loginTab'" ng-class="{
+                            <div class="checkout-tab-btn">
+                                <button class="btn btn--list" ng-disabled="loggedUser" ng-click="view='loginTab'" ng-class="{
                         'btn--brownActive': view=='loginTab' }">Login</button>
-                            <div>
+                            </div>
+                            <div class="checkout-tab-btn">
                                 <button class="btn btn--list" ng-disabled="!loggedUser" ng-click="view='orderTab'" ng-class="{
                         'btn--brownActive': view=='orderTab' }">Order</button>
                             </div>
-                            <div>
+                            <div class="checkout-tab-btn">
                                 <button class="btn btn--list" ng-disabled="!loggedUser" ng-click="view='detailTab'" ng-class="{
                         'btn--brownActive': view=='detailTab' }"> Details</button>
                             </div>
-                            <div>
+                            <div class="checkout-tab-btn">
                                 <button class="btn btn--list">Payment</button>
                             </div>
                         </div>
                     </div>
                     <div class="login-tab" ng-if="!loggedUser && view=='loginTab'">
-                        <div class="col-md-3 col-md-offset-1">
+                        <div class="col-md-3 col-md-offset-1 col-sm-6">
                             <form class="customized-form " name="loginForm1" novalidate>
                                 <div class="form-group">
                                     <input type="email" placeholder="Email" ng-model="loginData.email" class="form-control" name="email" required uib-popover="{{loginForm1.email.$touched && loginForm1.email.$invalid ||loginForm1.email.$error.email && loginForm1.email.$error.required }}"
@@ -72,7 +74,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-md-3 col-md-offset-1">
+                        <div class="col-md-3 col-md-offset-1  col-sm-6">
                             <form class="customized-form custom-checkbox " name="loginForm" novalidate>
                                 <div class="form-group">
                                     <input type="text" placeholder="First Name" name="firstname" ng-model="registerData.firstname" class="form-control" required
@@ -153,7 +155,7 @@
                         </div>
                     </div>
                     <div class="order-tab" ng-if="loggedUser&&view=='orderTab'">
-                        <div class="col-md-9 ">
+                        <div class="col-md-9 col-sm-12">
                             <table class="table order-table table-bottom ">
                                 <thead>
                                     <tr>
@@ -228,7 +230,7 @@
                     </div>
                     <div class="detail-tab " ng-if="loggedUser && view=='detailTab'">
 
-                        <div class="col-md-8 col-md-offset-1 ">
+                        <div class="col-md-8 col-md-offset-1 col-sm-12">
                             <div class="details-form ">
                                 <div>
                                     <h3 class="marg0 detail-tab__head ">your details</h3>
@@ -236,13 +238,13 @@
                                 <div class="row ">
                                     <div class="customized-form ">
                                         <div class="form-group ">
-                                            <div class="col-md-4 ">
+                                            <div class="col-md-4 col-sm-12">
                                                 <input type="text " placeholder="First Name " ng-model="user.firstName
                         " class="form-control ">
                                             </div>
                                         </div>
                                         <div class="form-group ">
-                                            <div class="col-md-4 ">
+                                            <div class="col-md-4 col-sm-12">
                                                 <input type="text " placeholder="Last Name " ng-model="user.lastName
                         " class="form-control ">
                                             </div>
@@ -252,13 +254,13 @@
                                 <div class="row ">
                                     <div class="customized-form ">
                                         <div class="form-group ">
-                                            <div class="col-md-4 ">
+                                            <div class="col-md-4 col-sm-12">
                                                 <input type="text " placeholder="Mobile No " ng-model="user.mobile
                         " class="form-control ">
                                             </div>
                                         </div>
                                         <div class="form-group ">
-                                            <div class="col-md-4 ">
+                                            <div class="col-md-4 col-sm-12">
                                                 <input type="email " placeholder="Email " ng-model="user.email
                         " class="form-control ">
                                             </div>
@@ -269,14 +271,14 @@
                             <div class="details-form ">
                                 <form name="address">
                                     <div class="row ">
-                                        <div class="col-md-6 ">
+                                        <div class="col-md-6 col-sm-6">
                                             <div>
                                                 <h3 class="marg0 detail-tab__head ">billing address</h3>
                                             </div>
                                             <div class="row ">
                                                 <div class="customized-form ">
                                                     <div class="form-group ">
-                                                        <div class="col-md-10 ">
+                                                        <div class="col-md-10 col-sm-12 ">
                                                             <input type="text " placeholder="Line 1* " ng-model="user.billingAddress.line1
                         " class="form-control " ng-required="true">
                                                         </div>
@@ -286,7 +288,7 @@
                                             <div class="row ">
                                                 <div class="customized-form ">
                                                     <div class="form-group ">
-                                                        <div class="col-md-10 ">
+                                                        <div class="col-md-10 col-sm-12">
                                                             <input type="text " placeholder="Line 2 " ng-model="user.billingAddress.line2
                         " class="form-control ">
                                                         </div>
@@ -296,7 +298,7 @@
                                             <div class="row ">
                                                 <div class="customized-form ">
                                                     <div class="form-group ">
-                                                        <div class="col-md-10 ">
+                                                        <div class="col-md-10 col-sm-12">
                                                             <input type="text " placeholder="Line 3 " ng-model="user.billingAddress.line3
                         " class="form-control ">
                                                         </div>
@@ -306,7 +308,7 @@
                                             <div class="row ">
                                                 <div class="customized-form ">
                                                     <div class="form-group ">
-                                                        <div class="col-md-10 ">
+                                                        <div class="col-md-10 col-sm-12">
                                                             <input type="text " placeholder="City* " ng-model="user.billingAddress.city
                         " class="form-control " ng-required="true">
                                                         </div>
@@ -316,7 +318,7 @@
                                             <div class="row ">
                                                 <div class="customized-form ">
                                                     <div class="form-group ">
-                                                        <div class="col-md-10 ">
+                                                        <div class="col-md-10 col-sm-12">
                                                             <input type="text " placeholder="Pincode " ng-model="user.billingAddress.pincode
                         " class="form-control " ng-required="true">
                                                         </div>
@@ -327,7 +329,7 @@
                                             <div class="row ">
                                                 <div class="customized-form ">
                                                     <div class="form-group ">
-                                                        <div class="col-md-10 ">
+                                                        <div class="col-md-10 col-sm-12">
                                                             <div class=" form-control relate country-selection ">
                                                                 <i class="fa fa-angle-down pull-right " aria-hidden="true "></i>
                                                                 <select ng-model="user.billingAddress.country " ng-init="user.billingAddress.country = 'India'" class="checkout-drop relate "> 
@@ -373,7 +375,7 @@
                                             <div class="row ">
                                                 <div class="customized-form ">
                                                     <div class="form-group ">
-                                                        <div class="col-md-10 ">
+                                                        <div class="col-md-10 col-sm-12">
                                                             <input type="text " placeholder="State " ng-model="user.billingAddress.state
                             " class="form-control " ng-required="true" ng-if="user.billingAddress.country != 'India'">
                                                             <div ng-if="user.billingAddress.country == 'India'" class=" form-control relate country-selection ">
@@ -388,7 +390,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 ">
+                                        <div class="col-md-6 col-sm-6">
                                             <div class="custom-checkbox ">
                                                 <h3 class="marg0 detail-tab__head ">shipping address</h3>
                                                 <div class="checkbox ">
@@ -399,7 +401,7 @@
                                             <div class="row ">
                                                 <div class="customized-form ">
                                                     <div class="form-group ">
-                                                        <div class="col-md-10 ">
+                                                        <div class="col-md-10 col-sm-12">
                                                             <input type="text " placeholder="Line 1* " ng-model="user.deliveryAddress.line1
                         " class="form-control " ng-required="true">
                                                         </div>
@@ -409,7 +411,7 @@
                                             <div class="row ">
                                                 <div class="customized-form ">
                                                     <div class="form-group ">
-                                                        <div class="col-md-10 ">
+                                                        <div class="col-md-10 col-sm-12">
                                                             <input type="text " placeholder="Line 2 " ng-model="user.deliveryAddress.line2
                         " class="form-control ">
                                                         </div>
@@ -419,7 +421,7 @@
                                             <div class="row ">
                                                 <div class="customized-form ">
                                                     <div class="form-group ">
-                                                        <div class="col-md-10 ">
+                                                        <div class="col-md-10 col-sm-12">
                                                             <input type="text " placeholder="Line 3 " ng-model="user.deliveryAddress.line3
                         " class="form-control ">
                                                         </div>
@@ -429,7 +431,7 @@
                                             <div class="row ">
                                                 <div class="customized-form ">
                                                     <div class="form-group ">
-                                                        <div class="col-md-10 ">
+                                                        <div class="col-md-10 col-sm-12">
                                                             <input type="text " placeholder="City* " ng-model="user.deliveryAddress.city
                         " class="form-control " ng-required='true'>
                                                         </div>
@@ -439,7 +441,7 @@
                                             <div class="row ">
                                                 <div class="customized-form ">
                                                     <div class="form-group ">
-                                                        <div class="col-md-10 ">
+                                                        <div class="col-md-10 col-sm-12">
                                                             <input type="text " placeholder="Pincode " ng-model="user.deliveryAddress.pincode
                         " class="form-control " ng-required="true">
                                                         </div>
@@ -450,7 +452,7 @@
                                             <div class="row ">
                                                 <div class="customized-form ">
                                                     <div class="form-group ">
-                                                        <div class="col-md-10 ">
+                                                        <div class="col-md-10 col-sm-12">
                                                             <div class=" form-control relate country-selection " uib-dropdown>
                                                                 <i class="fa fa-angle-down pull-right " aria-hidden="true "></i>
                                                                 <select class="checkout-drop relate " ng-init="user.deliveryAddress.country = 'India'" ng-model="user.deliveryAddress.country "> 
@@ -499,7 +501,7 @@
                                             <div class="row ">
                                                 <div class="customized-form ">
                                                     <div class="form-group ">
-                                                        <div class="col-md-10 ">
+                                                        <div class="col-md-10 col-sm-12">
                                                             <input type="text " placeholder="State" ng-if="user.deliveryAddress.country != 'India'" ng-model="user.deliveryAddress.state
                             " class="form-control " ng-required="true">
 
