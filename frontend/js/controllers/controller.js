@@ -24,6 +24,15 @@ myApp
         ProductService.getNewArrivals(function (data) {
             $scope.newArrivals = data.data.data;
         });
+        ProductService.getDiscountProducts(function (data) {
+            $scope.saleProducts = data.data.data;
+            $scope.sale=[];
+            _.each($scope.saleProducts,function(value){
+                console.log("single",value.products[0]);
+                $scope.sale.push(value.products[0]);
+            });
+            console.log("$scope.sale1 after iteration",$scope.sale);
+        });
         /******************todo:for showing cart logo  infinite loop issue******************** */
         var userId = {
             userId: $.jStorage.get("userId"),
@@ -156,7 +165,7 @@ myApp
 
         });
 
-        $scope.sale = [{
+        $scope.saleOld = [{
             img: '../img/home/11.jpg',
             price: '2,899',
             type: 'Linen Full Sleeve ShirtWith Rollup'
