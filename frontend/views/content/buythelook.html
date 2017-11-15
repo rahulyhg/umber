@@ -1,18 +1,21 @@
 <div class="buy-the-look">
     <div class="text-center">
-        <h1 ng-click="otp1();">BUY THE LOOK</h1>
+        <h1>BUY THE LOOK</h1>
     </div>
     <div class="content-spacing">
         <div class="row">
-            <div class="col-md-5">
-                <div class="buy-main-img" ng-click="otp2();">
+            <div class="col-md-5 hidden-sm hidden-xs">
+                <div class="buy-main-img">
                     <img ng-src="{{insideImage | serverimage}}" alt="" class="img-responsive">
                 </div>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-7 col-sm-12 col-xs-12">
                 <div class="sub-row">
-                    <div class="row" ng-repeat="abc in myShirt">
-                        <div class="col-md-4" ng-repeat="xyz in abc" ng-init="parentIndex = $index">
+                    <!-- <div class="row" ng-repeat="abc in myShirt"> -->
+                    <div class="row">
+                        <!-- <div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="xyz in abc" ng-init="parentIndex = $index"> -->
+                        <div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="xyz in myShirt" ng-init="parentIndex = $index">
+
                             <div class="buy-info">
                                 <div class="buy-slider">
                                     <flex-slider flex-slide="buy in xyz.images track by $index" prev-text="" next-text="" animation="slide" min-items="3">
@@ -25,7 +28,7 @@
                                         <h4><i class="fa fa-inr" aria-hidden="true"></i> {{xyz.price}}</h4>
                                         <h5 class="text-uppercase">{{xyz.description}}</h5>
                                         <hr>
-                                        <div class="checkbox inline-block marg0" >
+                                        <div class="checkbox marg0">
                                             <input type="checkbox" id="{{xyz.productId}}" ng-checked="checkStateOnReload(product.productId)" ng-click="clickfun(product)">
                                             <label for=" {{xyz.productId}} ">
                                           Add to compare

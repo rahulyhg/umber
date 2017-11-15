@@ -10,11 +10,11 @@
                 </caption>
                 <thead>
                     <tr class="text-uppercase">
-                        <th>order placed<br><strong>{{order.createdAt | date:'dd/MM/yyyy'}}</strong></th>
-                        <th>order no.<br><strong>{{order.orderNo}}</strong></th>
-                        <th>payment method<br><strong>{{order.paymentMethod}}</strong></th>
-                        <th>tracking id<br><strong class="text-capitalize">{{order.orderStatus}}</strong></th>
-                        <th>Grand total<br><strong>&#8377; {{order.totalAmount}}</strong></th>
+                        <th class="align-top">order placed<br><strong>{{order.createdAt | date:'dd/MM/yyyy'}}</strong></th>
+                        <th class="align-top">order no.<br><strong>{{order.orderNo}}</strong></th>
+                        <th class="align-top">payment method<br><strong>{{order.paymentMethod}}</strong></th>
+                        <th class="align-top">tracking id<br><strong class="text-capitalize">{{order.orderStatus}}</strong></th>
+                        <th class="align-top">Grand total<br><strong>&#8377; {{order.totalAmount}}</strong></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,7 +67,7 @@
             </table>
             <div class="ordertable-footer">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-4">
                         <h4 class="usr-status-title usr-addrs-title">BILLING ADDRESS</h4>
                         <address>
                             <p style="margin:0px">{{order.billingAddress.line1}}</p>
@@ -77,7 +77,7 @@
                             <p style="margin:0px">{{order.billingAddress.state}}, {{order.billingAddress.country}}</p>
                         </address>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-4">
                         <h4 class="usr-status-title usr-addrs-title">SHIPPING ADDRESS</h4>
                         <address>
                             <p style="margin:0px">{{order.shippingAddress.line1}}</p>
@@ -87,7 +87,7 @@
                             <p style="margin:0px">{{order.shippingAddress.state}}, {{order.shippingAddress.country}}</p>
                         </address>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-4">
                         <h4 class="text-center usr-status-title usr-addrs-title">PAYMENT INFORMATION</h4>
                         <p class="text-right order-payment-info">Item(s) Subtotal: <span>&#8377; {{order.totalAmount}}</span><br> Shipping: <span>&#8377; {{order.shippingAmount}}</span><br>                            Disscount:
                             <span>&#8377; {{order.discountAmount}}</span><br> Total: <span>&#8377; {{order.shippingAmount+order.totalAmount-order.discountAmount}}</span><br>                            TAX: <span>&#8377; 00</span><br> Grand Total: <span>&#8377; {{order.totalAmount}}</span>
@@ -102,11 +102,11 @@
                 </caption>
                 <thead>
                     <tr class="text-uppercase">
-                        <th>order placed<br><strong>{{order.createdAt | date:'dd/MM/yyyy'}}</strong></th>
-                        <th>order no.<br><strong>{{order.orderNo}}</strong></th>
-                        <th>payment method<br><strong>{{order.orderStatus}}</strong></th>
-                        <th>tracking id<br><strong class="text-capitalize">Cash on Delivery</strong></th>
-                        <th>Grand total<br><strong>&#8377; {{order.totalAmount}}</strong></th>
+                        <th class="align-top">order placed<br><strong>{{order.createdAt | date:'dd/MM/yyyy'}}</strong></th>
+                        <th class="align-top">order no.<br><strong>{{order.orderNo}}</strong></th>
+                        <th class="align-top">payment method<br><strong>{{order.orderStatus}}</strong></th>
+                        <th class="align-top">tracking id<br><strong class="text-capitalize">Cash on Delivery</strong></th>
+                        <th class="align-top">Grand total<br><strong>&#8377; {{order.totalAmount}}</strong></th>
                     </tr>
                 </thead>
                 <tbody>
