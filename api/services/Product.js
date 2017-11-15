@@ -543,7 +543,7 @@ var model = {
                         productId: '$_id'
                     }
                 });
-                Product.aggregate(pipeline).skip((data.page - 1) * Config.maxRow).limit(Config.maxRow).exec(callback1);
+                Product.aggregate(pipeline).skip(data.skip).limit(data.limit).exec(callback1);
             },
             // Retrieve one document containing all the detail based on product id.
             // for individual page
@@ -566,16 +566,17 @@ var model = {
 
     //getProductWithCategory through nav
     productWithCategory: function (data, callback) {
+        // console.log("productWithCategory^^^^^", data);
         Product.find({
             category: data.catId
-        }).exec(function (err, product) {
+        }).limit(data.limit).skip(data.skip).exec(function (err, product) {
             if (err) {
                 callback(err, "error in mongoose productWithCategory");
             } else {
                 if (_.isEmpty(product)) {
                     callback(null, []);
                 } else {
-
+                    // console.log("productWithCategory^^^^^", product);
                     callback(null, product);
                 }
             }
@@ -957,7 +958,7 @@ var model = {
     // req.body-> {appliedFilters: {key: [val1, val2, ...], key1: [val1, val2, ..], ..}, page: n}
     // Converts this object into queryable object
     getProductsWithFilters: function (filters, callback) {
-        console.log("Filters!!!!!!!!!!!!!11: ", filters);
+        // console.log("Filters!!!!!!!!!!!!!11: ", filters, "################", filters.skip, filters.limit);
         if (!filters.page) {
             filters.page = 1;
         }
@@ -1207,7 +1208,7 @@ var model = {
                                 });
                                 console.log("filter pipeline", pipeline);
                                 Product.aggregate(pipeline).
-                                skip((filters.page - 1) * Config.maxRow).limit(Config.maxRow).exec(function (err, products) {
+                                skip(filters.skip).limit(filters.limit).exec(function (err, products) {
                                     console.log("aggregate product in pipeline", products)
                                     cbWaterfall1(err, products);
                                 });
