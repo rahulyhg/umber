@@ -5,7 +5,7 @@
     <div class="listing-container">
 
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3 col-sm-12 col-xs-12">
                 <div class="border-div">
                     <ul class="list-breadcrumb list-unstyled list-inline">
                         <li class="text-uppercase" ui-sref="home" href="#!/">HOME</li> <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -190,7 +190,7 @@
                 </div>
             </div>
 
-            <div class="col-md-9">
+            <div class="col-md-9 col-sm-12 col-xs-12">
                 <div class="Addtocompare relate" ng-if="showCheck">
                     <div class="row">
                         <div class="col-md-3" ng-repeat="compare in compareproduct track by $index">
@@ -230,7 +230,7 @@
                         <!--<div infinite-scroll='loadMore()' infinite-scroll-distance='3'>-->
                         <!--<pre> {{products|json}}</pre>-->
                         <div class="row" ng-repeat="row in products" ng-if="view == 'thumbnailView'">
-                            <div class="col-md-4" ng-repeat="product in row" ng-init="parentIndex = $index">
+                            <div class="col-md-4 col-sm-4" ng-repeat="product in row" ng-init="parentIndex = $index">
                                 <div class="buy-info custom-checkbox">
                                     <div class="buy-slider slider-individual list-slider">
                                         <flex-slider flex-slide="image in product.images track by $index" prev-text="" next-text="" animation="slide" min-items="3">

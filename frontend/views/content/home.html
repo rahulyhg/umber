@@ -37,7 +37,7 @@
                     <a href="{{cloth.extLink}}" target="_blank">
                         <img ng-src="{{cloth.image | serverimage}}" alt="" class="img-responsive">
                     </a>
-                    
+
                     <!--<div class="get-center text-uppercase">
                         <h1>{{cloth.name}}</h1>
                         <h3>{{cloth.desc}}</h3>
@@ -91,8 +91,16 @@
                         <flex-slider flex-slide="newArrival in newArrivals track by $index" prev-text="" next-text="" animation="slide" item-width="220"
                             item-margin="20" min-items="3">
                             <li>
-                                <div class=" new-arrival__banner-detail relate">
-                                    <img ng-src="{{newArrival.images[0].image | serverimage}}" alt="" class="img-responsive" ui-sref="individual-page({id: newArrival.productId})">
+                                <div class=" new-arrival__banner-detail ">
+                                    <div class="relate">
+                                        <img ng-src="{{newArrival.images[0].image | serverimage}}" alt="" class="img-responsive" ui-sref="individual-page({id: newArrival.productId})">
+                                        <div class="featured__icon-cart" ng-if="checkInCart(newArrival.productId)">
+                                            <i class="fa fa-shopping-cart"></i>
+                                        </div>
+                                        <div class="featured__icon-heart">
+                                            <i ng-class="checkWishlist(newArrival.productId)" aria-hidden="true" ng-click="addRemoveToWishlist(newArrival)"></i>
+                                        </div>
+                                    </div>
                                     <div class="get-left">
                                         <h3 class="homepg-slider-product-cost"><i class="fa fa-inr" aria-hidden="true"></i>{{newArrival.price}}</h3>
                                         <h4 class="homepg-slider-product-name">{{newArrival.productName}}</h4>
@@ -100,12 +108,7 @@
                                             <buttton class="btn buynow--btn text-uppercase" ui-sref="individual-page({id: newArrival.productId})">buy</buttton>
                                         </div>
                                     </div>
-                                    <div class="featured__icon-cart" ng-if="checkInCart(newArrival.productId)">
-                                        <i class="fa fa-shopping-cart"></i>
-                                    </div>
-                                    <div class="featured__icon-heart">
-                                        <i ng-class="checkWishlist(newArrival.productId)" aria-hidden="true" ng-click="addRemoveToWishlist(newArrival)"></i>
-                                    </div>
+
                                 </div>
                             </li>
                         </flex-slider>

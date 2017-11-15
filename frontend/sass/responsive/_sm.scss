@@ -17,7 +17,37 @@
      }
      .mg-btm-zero {
          margin-bottom: 0;
-     } // start of home page 
+     } //Extended Classes
+     .btn--list {
+         width: 170px;
+     } //End of extended classes
+     //classes used in same pages
+     .tab-title {
+         font-size: 20px;
+     }
+     .font17 {
+         // This class is used for p elemment'font size
+         font-size: 17px;
+     }
+     .item-name {
+         font-size: 16px;
+     }
+     .item-code {
+         font-size: 13px;
+     }
+     .item-cost {
+         font-size: 25px;
+         color: $darkBrown1;
+         .fa-inr {
+             font-size: 20px;
+             margin-right: 5px;
+         }
+     }
+     .usrdtl-info {
+         color: $darkGray;
+         font-size: 16px;
+     } //End of used clases
+     // start of home page 
      .homepg-title {
          @include padding(5px 0);
          margin: 10px 0!important;
@@ -54,11 +84,6 @@
                  }
                  .flex-next {
                      top: -5%;
-                 }
-             }
-             .new-arrival__banner-detail {
-                 .fa-shopping-cart {
-                     @include position(absolute, null 0 100px null);
                  }
              }
          }
@@ -164,7 +189,7 @@
                  font-size: 20px;
              }
              .table>thead:first-child>tr:first-child>th {
-                 font-size: 18px;
+                 font-size: 16px;
                  text-indent: 45px;
              }
          }
@@ -179,34 +204,8 @@
      //Start of blogs page
      //End of blogs page
      //Start of My account(myaccount.html)
-     .linking {
-         // For anchor Tag
-         font-size: 14px;
-     }
-     .font17 {
-         // This class is used for p elemment'font size
-         font-size: 17px;
-     }
-     .item-name {
-         font-size: 16px;
-     }
-     .item-code {
-         font-size: 13px;
-         color: $darkGray;
-         font-weight: normal;
-     }
-     .item-cost {
-         font-size: 25px;
-         color: $darkBrown1;
-         .fa-inr {
-             font-size: 20px;
-             margin-right: 5px;
-         }
-     }
-     .usrdtl-info {
-         color: $darkGray;
-         font-size: 16px;
-     } //Start of Cancel, cancel-msg, return page
+     //End of my-account
+     //Start of Cancel, cancel-msg, return page
      .order-status-title {
          // This class is used in return, order, return successful & cancel, cancel successful msg.html
          @include margin(20px 0);
@@ -230,7 +229,8 @@
              font-size: 18px;
              margin-right: 5px;
          }
-     } //Start of return-success.html  cancel-msg.html
+     } //Extended class
+     //Start of return-success.html  cancel-msg.html
      .return-success-msg,
      .cancel-success-msg {
          @include padding(25px);
@@ -251,15 +251,16 @@
                  width: 170px;
              }
          }
-         .list-checkout {
-             padding-bottom: 15px;
-             padding-left: 0;
-         }
-         .checkout-tab-btn {
-             display: inline-block;
-             margin-right: 5px;
-         }
-     } //End of checkout.html
+     } // class used in check out & my-account page for vertical 
+     .checkout-tab-btn {
+         display: inline-block;
+         margin-right: 5px;
+     }
+     .list-checkout {
+         padding-bottom: 15px;
+         padding-left: 0;
+     } //End of check out & my-account page for vertical button
+     //End of checkout.html
      //Start of inner-blogs page
      .inner-blog-section {
          @include padding(25px 0 0);
@@ -298,5 +299,29 @@
      .row-margin {
          margin-bottom: 0;
          margin-top: 0;
+     } //Start of all modals design
+     .modal-container {
+         .login-head {
+             h1 {
+                 font-size: 25px;
+             }
+             p {
+                 font-size: 18px;
+             }
+         }
      }
+     .coupon-discount {
+         .coupon-discount-title {
+             h1 {
+                 font-size: 25px;
+             }
+             margin-bottom: 15px;
+         }
+         .coupon-code-num {
+             margin-bottom: 15px;
+         }
+         .modal-bottom {
+             @include padding(5px 15px);
+         }
+     } //End of all modals design
  }

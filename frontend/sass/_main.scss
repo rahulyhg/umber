@@ -1600,7 +1600,7 @@
                                                             25px);
                                                             @include padding(5px);
                                                             @include position(absolute,
-                                                            null 0% 120px null);
+                                                            null 0 0 null);
                                                             font-size: 16px;
                                                             color: white;
                                                             background-color: $darkBrown1;
@@ -2980,6 +2980,9 @@
                                                     1) 100%);
                                                     border-top: 1px solid $borderColor;
                                                 }
+                                                .display-cell {
+                                                    @include padding(0 5px);
+                                                }
                                             }
 
                                             .order-list--btn {
@@ -3489,7 +3492,8 @@
                                                 }
                                                 .coupon-discount-title {
                                                     h1 {
-                                                        font-family: 'vadodara-md';
+                                                        font-family: 'fjalla-reg';
+                                                        color: $darkBrown1;
                                                     }
                                                 }
                                                 .close-modal {
