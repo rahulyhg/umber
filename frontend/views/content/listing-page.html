@@ -242,8 +242,8 @@
                         </div>
 
                         <!--<div infinite-scroll='loadMore()' infinite-scroll-distance='3'>-->
-                        <div class="row" ng-repeat="row in products" ng-if="view == 'thumbnailView'">
-                            <div class="col-md-4" ng-repeat="product in row" ng-init="parentIndex = $index">
+                        <div class="row" ng-repeat="row in products track by $index" ng-if="view == 'thumbnailView'">
+                            <div class="col-md-4" ng-repeat="product in row track by $index" ng-init="parentIndex = $index">
 
                                 <div class="buy-info custom-checkbox">
                                     <div class="buy-slider slider-individual list-slider">
@@ -352,8 +352,8 @@
                                 </div>
                             </div>
                         </div>
-                        <!--<div infinite-scroll="loadMore1()" infinite-scroll-distance="1" infinite-scroll-disabled="loadingDisable">
-                    </div>-->
+                        <div infinite-scroll="loadMore()" infinite-scroll-distance="1" infinite-scroll-disabled="loadingDisable">
+                        </div>
                     </div>
                 </div>
             </div>
