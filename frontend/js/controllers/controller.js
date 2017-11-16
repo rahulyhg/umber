@@ -26,12 +26,12 @@ myApp
         });
         ProductService.getDiscountProducts(function (data) {
             $scope.saleProducts = data.data.data;
-            $scope.sale=[];
-            _.each($scope.saleProducts,function(value){
-                console.log("single",value.products[0]);
+            $scope.sale = [];
+            _.each($scope.saleProducts, function (value) {
+                console.log("single", value.products[0]);
                 $scope.sale.push(value.products[0]);
             });
-            console.log("$scope.sale1 after iteration",$scope.sale);
+            console.log("$scope.sale1 after iteration", $scope.sale);
         });
         /******************todo:for showing cart logo  infinite loop issue******************** */
         var userId = {
@@ -513,11 +513,47 @@ myApp
         $scope.template = TemplateService.getHTML("content/blogs.html");
         TemplateService.title = "Blogs"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
+        NavigationService.getEnabledBlogs(function (data) {
+            $scope.blogs = data.data.data;
+
+        });
     })
-    .controller('InnerBlogsCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+    .controller('InnerBlogsCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
         $scope.template = TemplateService.getHTML("content/inner-blogs.html");
         TemplateService.title = "Blogs"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
+        var blogData = {}; // To push $stateParams obj
+        var alsoViewBlogData = [];
+        console.log($stateParams);
+        if ($stateParams) {
+            blogData.id = $stateParams.id;
+        }
+        console.log('Blog data', blogData);
+        NavigationService.getEnabledInnerBlogs(blogData, function (data) {
+            $scope.innarBlogs = data.data.data;
+            // console.log('innerblogs', $scope.innarBlogs);
+        });
+        NavigationService.getEnabledBlogs(function (data) {
+            $scope.otherBlogs = data.data.data;
+            $scope.tempData = $scope.otherBlogs;
+            $scope.tempData = _.remove($scope.otherBlogs, function (n) {
+                return blogData.id != n._id;
+            });
+            // _.forEach($scope.otherBlogs,  function (temp, key)  {  
+            //     console.log("blogData.id", blogData.id, " $scope.otherBlogs._id", temp._id, 'key', key);
+            //     console.log("$scope.otherBlogs._id", $scope.otherBlogs[key])
+            //     if (blogData.id == temp._id) {
+
+            //         // alsoViewBlogData.push({});
+            //         // $scope.tempData.splice(key);
+            //         _.slice(array, [start = 0], [end = array.length])
+            //         console.log("temp ", temp, 'matched key', key, 'matched', $scope.otherBlogs[key]);
+            //     }
+            // });
+            $scope.otherBlogs = $scope.tempData;
+            console.log('innerblogs', $scope.otherBlogs);
+        });
+
     })
     //Example API Controller
     .controller('DemoAPICtrl', function ($scope, TemplateService, apiService, NavigationService, $timeout) {

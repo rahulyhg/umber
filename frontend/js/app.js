@@ -58,7 +58,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             controller: 'BlogsCtrl'
         })
         .state('inner-blogs', {
-            url: "/inner-blogs",
+            url: "/inner-blogs/:id",
             templateUrl: tempateURL,
             controller: 'InnerBlogsCtrl'
         })

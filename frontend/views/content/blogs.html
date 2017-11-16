@@ -3,54 +3,19 @@
         <div class="blog main-blog-section">
             <div class="blog__slider">
                 <ul class="list-unstyled flex-item-container">
-                    <li class="flex-item">
+                    <li class="flex-item" ng-repeat="innerBlog in blogs">
+
                         <div class="blog__banner-detail relate">
-                            <img src="img/home/18.jpg" alt="User photo" class="img-responsive">
+                            <img ng-src="{{innerBlog.image |serverimage}}" alt="User photo" class="img-responsive">
                             <div class="blog__desc">
-                                <h3 class="text-uppercase">new</h3>
-                                <p class="typedin-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                                    been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                                    took a galley of type and scrambled it to make a type specimen book. It has survived
-                                    not only five centuries, but also the leap into electronic typesetting, remaining essentially
-                                    unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-                                    Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
-                                    including versions of Lorem Ipsum.</p>
-                                <p class="relate"><a ui-sref="inner-blogs">Read more</a></p>
+                                <h3 class="text-uppercase">{{innerBlog.name}}</h3>
+                                <p class="typedin-desc">{{innerBlog.description}}</p>
+
+                                <p class="relate"><a ui-sref="inner-blogs({id:innerBlog._id})">Read more</a></p>
                             </div>
                         </div>
                     </li>
-                    <li class="flex-item">
-                        <div class="blog__banner-detail relate">
-                            <img src="img/home/18.jpg" alt="User photo" class="img-responsive">
-                            <div class="blog__desc">
-                                <h3 class="text-uppercase">new</h3>
-                                <p class="typedin-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                                    been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                                    took a galley of type and scrambled it to make a type specimen book. It has survived
-                                    not only five centuries, but also the leap into electronic typesetting, remaining essentially
-                                    unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-                                    Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
-                                    including versions of Lorem Ipsum.</p>
-                                <p class="relate"><a href="{{blog.link}}">Read more</a></p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex-item">
-                        <div class="blog__banner-detail relate">
-                            <img src="img/home/18.jpg" alt="User photo" class="img-responsive">
-                            <div class="blog__desc">
-                                <h3 class="text-uppercase">new</h3>
-                                <p class="typedin-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                                    been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                                    took a galley of type and scrambled it to make a type specimen book. It has survived
-                                    not only five centuries, but also the leap into electronic typesetting, remaining essentially
-                                    unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-                                    Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
-                                    including versions of Lorem Ipsum.</p>
-                                <p class="relate"><a href="{{blog.link}}">Read more</a></p>
-                            </div>
-                        </div>
-                    </li>
+
                 </ul>
             </div>
         </div>

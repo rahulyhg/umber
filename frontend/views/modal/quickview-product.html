@@ -2,7 +2,7 @@
     <div class="quick-view-product relate">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-4 padd-rt0">
+                <div class="col-md-4 col-sm-12 col-xs-12 padd-rt0">
                     <!--<div class="breadCrumbs-letter">
                     <ul class="list-unstyled list-inline text-uppercase marg0">
                         <li>
@@ -22,7 +22,7 @@
                         </li>
                     </ul>
                 </div>-->
-                    <div class="individual-first relate">
+                    <div class="individual-first relate visible-lg">
                         <div class="product-img">
                             <img ng-repeat="image in product.images track by $index" ng-src="{{image.image | serverimage}}" alt="Product image" ng-elevate-zoom
                                 data-zoom-image="{{image.image | serverimage}}" class="img-responsive" ng-if="$index == selectedImageIndex">
@@ -31,6 +31,14 @@
                             <img ng-src="img/individual/zoom.png" alt="zoom" class="img-responsive">
                         </div>
                     </div>
+                    <div class="individual-first relate hidden-lg">
+                        <div class="product-img">
+                            <img ng-repeat="image in product.images track by $index" ng-src="{{image.image | serverimage}}" alt="Product image" class="img-responsive"
+                                ng-if="$index == selectedImageIndex">
+                        </div>
+
+                    </div>
+
                     <div class="slider2 relate">
                         <flex-slider flex-slide="image in product.images track by $index" prev-text="" next-text="" animation="slide" item-width="70"
                             item-margin="15" min-items="3">
@@ -42,7 +50,7 @@
                         </flex-slider>
                     </div>
                 </div>
-                <div class="col-md-8 padd-lt3">
+                <div class="col-md-8 col-sm-12 col-xs-12 padd-lt3">
                     <div class="prod-code">
                         <div class="pull-left">
                             <p class="prod-code__left">Product Code: {{product.productId}}</p>

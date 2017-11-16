@@ -48,6 +48,24 @@ var model = {
                 }, null);
             }
         })
+    },
+    // To Get a particular blog
+    //Input : id
+    getEnabledInnerBlogs: function (data, callback) {
+        console.log(data);
+        Blog.findOne({
+            _id: data.id
+        }).exec(function (err, blog) {
+            if (err) {
+                callback(err, null);
+            } else if (blog) {
+                callback(null, blog);
+            } else {
+                callback({
+                    message: "Incorrect credentials"
+                }, null);
+            }
+        })
     }
 };
 module.exports = _.assign(module.exports, exports, model);

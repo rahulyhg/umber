@@ -279,7 +279,20 @@
      .listing-dropdown-menu {
          width: 185px;
      } //End of listing page
-     //scss for About us page start
+     .buy-info {
+         .buy-para {
+             .view--btn {
+                 width: 90px;
+                 font-size: 12px;
+             }
+             .buy-para__button {
+                 .buy--btn {
+                     width: 90px;
+                     font-size: 12px;
+                 }
+             }
+         }
+     } //scss for About us page start
      .about-cloth .cloth-buy .cloth-buy__desc:after {
          display: none;
      }
@@ -322,6 +335,15 @@
          }
          .modal-bottom {
              @include padding(5px 15px);
+         }
+     } // Quick view
+     .quickview-modal-size .modal-dialog {
+         // Used this class in listing-ctrl.js in modal
+         width: 600px;
+     }
+     .quick-view-product {
+         .individual-main {
+             @include padding(15px);
          }
      } //End of all modals design
  }

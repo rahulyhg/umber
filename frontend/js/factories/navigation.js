@@ -63,6 +63,14 @@ myApp.factory('NavigationService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
+        getEnabledInnerBlogs: function (data, callback) {
+            $http({
+                url: adminurl + 'Blog/getEnabledInnerBlogs',
+                method: 'POST',
+                data: data,
+                withCredentials: false
+            }).then(callback);
+        },
 
         getEnabledCollections: function (callback) {
 
@@ -103,6 +111,6 @@ myApp.factory('NavigationService', function ($http) {
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
-        },
+        }
     };
 });
