@@ -25,7 +25,7 @@ module.exports = {
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
 
-  port: 8080,
+  port: 1337,
   realHost: "http://umber.tingdom.in",
   emails: ["chintan@wohlig.com", "jagruti@wohlig.com", "tushar@wohlig.com", "harshad.shirsat@wohlig.com", "prajakta.kamble@wohlig.com", "chirag@wohlig.com", "harsh@wohlig.com", "p.vasu@burntumberfashion.com", "kushbhatia@burntumberfashion.com","avinash.ghare@wohlig.com"]
 
