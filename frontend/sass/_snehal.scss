@@ -22,11 +22,6 @@
                             margin-top: 5px;
                         }
 
-                        .bg-mycart {
-                            min-height: 325px;
-                            background-size: cover!important;
-                        }
-
                         .mycart-container {
                             padding: 21px 20px 160px 20px;
                         }
@@ -165,7 +160,7 @@
                         }
 
                         .buy-main-img {
-                            @include size(null, 760px);
+                            min-height: 760px;
                             img {
                                 @include size(null, 100%);
                             }
@@ -190,7 +185,7 @@
                                 .fa-shopping-cart {
                                     @include size(25px, 25px);
                                     @include padding(5px);
-                                    @include position(absolute, null 5% 5% null);
+                                    @include position(absolute, null 0 20px null);
                                     font-size: 16px;
                                     color: white;
                                     background-color: $darkBrown1;

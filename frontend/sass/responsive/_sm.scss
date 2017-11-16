@@ -1,5 +1,8 @@
  @media (max-width: $screen-sm-max) {
      // Tablet
+     body {
+         padding-top: 130px;
+     }
      .section-padd {
          padding: 15px;
      }
@@ -14,7 +17,37 @@
      }
      .mg-btm-zero {
          margin-bottom: 0;
-     } // start of home page 
+     } //Extended Classes
+     .btn--list {
+         width: 170px;
+     } //End of extended classes
+     //classes used in same pages
+     .tab-title {
+         font-size: 20px;
+     }
+     .font17 {
+         // This class is used for p elemment'font size
+         font-size: 17px;
+     }
+     .item-name {
+         font-size: 16px;
+     }
+     .item-code {
+         font-size: 13px;
+     }
+     .item-cost {
+         font-size: 25px;
+         color: $darkBrown1;
+         .fa-inr {
+             font-size: 20px;
+             margin-right: 5px;
+         }
+     }
+     .usrdtl-info {
+         color: $darkGray;
+         font-size: 16px;
+     } //End of used clases
+     // start of home page 
      .homepg-title {
          @include padding(5px 0);
          margin: 10px 0!important;
@@ -131,6 +164,121 @@
              left: 91% !important;
          }
      } //End of home page
+     //Start of buy the look page
+     .buy-the-look {
+         h1 {
+             font-size: 45px;
+         }
+     } //End of buy the look page
+     //Start of compre-products
+     .compare-section {
+         margin-top: 35px;
+         h1 {
+             font-size: 25px;
+         }
+         .compare--borderline {
+             &:before {
+                 left: 15%;
+             }
+             &:after {
+                 right: 15%;
+             }
+         }
+         .compare-table {
+             .product-align>tbody>tr:nth-child(3)>td+td {
+                 font-size: 20px;
+             }
+             .table>thead:first-child>tr:first-child>th {
+                 font-size: 16px;
+                 text-indent: 45px;
+             }
+         }
+     } //End of compare products
+     //Start of individual page
+     .individual-btn {
+         .btn-add,
+         .btn-wish {
+             font-size: 13px;
+         }
+     } //End of individual page
+     //Start of blogs page
+     //End of blogs page
+     //Start of My account(myaccount.html)
+     //End of my-account
+     //Start of Cancel, cancel-msg, return page
+     .order-status-title {
+         // This class is used in return, order, return successful & cancel, cancel successful msg.html
+         @include margin(20px 0);
+     }
+     .order-details-table {
+         // This class has been extended in order-return-table
+         @include padding(0 15px 35px);
+         .item-desc {
+             width: 55%;
+         }
+     } //End of cancel, 
+     .usr-status-title {
+         font-size: 17px!important;
+         .usr-addrs-title {
+             letter-spacing: 1px;
+         }
+     }
+     .item-cost {
+         font-size: 20px;
+         .fa-inr {
+             font-size: 18px;
+             margin-right: 5px;
+         }
+     } //Extended class
+     //Start of return-success.html  cancel-msg.html
+     .return-success-msg,
+     .cancel-success-msg {
+         @include padding(25px);
+         .return-success-content,
+         s .cancel-success-content {
+             border: 1px solid $borderColor;
+             @include padding(30px);
+         }
+         .return-success-width,
+         .cancel-success-width {
+             width: 100%;
+         }
+     } //End of return-success.html  cancel-msg.html 
+     //Start of checkout.html
+     .checkout {
+         .content-spacing {
+             .btn--list {
+                 width: 170px;
+             }
+         }
+     } // class used in check out & my-account page for vertical 
+     .checkout-tab-btn {
+         display: inline-block;
+         margin-right: 5px;
+     }
+     .list-checkout {
+         padding-bottom: 15px;
+         padding-left: 0;
+     } //End of check out & my-account page for vertical button
+     //End of checkout.html
+     //Start of inner-blogs page
+     .inner-blog-section {
+         @include padding(25px 0 0);
+     } //End of inner-blogs page
+     //Start of listing-page
+     .Addtocompare {
+         margin-top: 15px;
+         margin-left: 0;
+         @include padding(25px 25px 40px);
+     }
+     .listview {
+         .buy--btn {
+             width: 140px;
+         }
+     }
+     .listing-dropdown-menu {
+         width: 185px;
+     } //End of listing page
      //scss for About us page start
      .about-cloth .cloth-buy .cloth-buy__desc:after {
          display: none;
@@ -142,16 +290,38 @@
          height: 55px;
          -webkit-line-clamp: 4;
      }
-      .listing-img-common {
+     .listing-img-common {
          margin-top: 56px;
-     }
-     //scss for contact us
-     .contact-us .contactus-content{
-         max-width:100%;
-     }
-     //scss for Store Locator page
-     .row-margin{
+     } //scss for contact us
+     .contact-us .contactus-content {
+         max-width: 100%;
+     } //scss for Store Locator page
+     .row-margin {
          margin-bottom: 0;
          margin-top: 0;
+     } //Start of all modals design
+     .modal-container {
+         .login-head {
+             h1 {
+                 font-size: 25px;
+             }
+             p {
+                 font-size: 18px;
+             }
+         }
      }
+     .coupon-discount {
+         .coupon-discount-title {
+             h1 {
+                 font-size: 25px;
+             }
+             margin-bottom: 15px;
+         }
+         .coupon-code-num {
+             margin-bottom: 15px;
+         }
+         .modal-bottom {
+             @include padding(5px 15px);
+         }
+     } //End of all modals design
  }

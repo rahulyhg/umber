@@ -230,8 +230,8 @@ myApp
             $scope.insideImage = data.data.data.look.insideImage;
             $scope.myShirt = [];
             $scope.myShirt11 = [];
-            $scope.myShirt = _.chunk($scope.buyshirt, 3);
-
+            // $scope.myShirt = _.chunk($scope.buyshirt, 3);
+            $scope.myShirt = $scope.buyshirt;
             // console.log("myshirt", $scope.myShirt);
             // _.each($scope.myShirt, function (n) {
             //     $scope.myShirt1 = _.chunk(n, 3);

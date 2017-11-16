@@ -21,13 +21,19 @@
                         </li>
                     </ul>
                 </div>
-                <div class="individual-first relate">
+                <div class="individual-first relate visible-lg">
                     <div class="product-img">
                         <img ng-repeat="image in productImages track by $index" ng-elevate-zoom ng-src="{{image.image | serverimage}}" data-zoom-image="{{image.image | serverimage}}"
                             class="img-responsive bg" ng-if="$index == selectedImageIndex">
                     </div>
                     <div class="individual-first__zoom">
                         <img ng-src="img/individual/zoom.png" alt="zoom" class="img-responsive">
+                    </div>
+                </div>
+                <div class="individual-first relate hidden-lg">
+                    <div class="product-img">
+                        <img ng-repeat="image in productImages track by $index" ng-src="{{image.image | serverimage}}" class="img-responsive bg"
+                            ng-if="$index == selectedImageIndex">
                     </div>
                 </div>
                 <div class="slider2 relate">
@@ -143,7 +149,7 @@
                                     </h4>
                                 </uib-accordion-heading>
                                 <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="col-md-5 col-sm-5">
                                         <div class="leftContent">
                                             <ul class="list-unstyled">
                                                 <li>
@@ -215,7 +221,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-7 col-sm-7">
                                         <div class="right-content">
                                             <p class="marg0 weight-600">Washcare</p>
                                             <p class="washcare">{{product.washcare}}

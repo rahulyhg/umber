@@ -350,6 +350,10 @@
                                                 margin: 0;
                                             }
 
+                                            .mb-0 {
+                                                margin-bottom: 0;
+                                            }
+
                                             .relate {
                                                 position: relative;
                                             }
@@ -403,15 +407,15 @@
                                             }
 
                                             .align-middle {
-                                                vertical-align: middle;
+                                                vertical-align: middle!important;
                                             }
 
                                             .align-top {
-                                                vertical-align: top;
+                                                vertical-align: top!important;
                                             }
 
                                             .align-bottom {
-                                                vertical-align: bottom;
+                                                vertical-align: bottom!important;
                                             }
 
                                             .scroll-bar {
@@ -1596,7 +1600,7 @@
                                                             25px);
                                                             @include padding(5px);
                                                             @include position(absolute,
-                                                            null 0% 120px null);
+                                                            null 0 0 null);
                                                             font-size: 16px;
                                                             color: white;
                                                             background-color: $darkBrown1;
@@ -2976,6 +2980,9 @@
                                                     1) 100%);
                                                     border-top: 1px solid $borderColor;
                                                 }
+                                                .display-cell {
+                                                    @include padding(0 5px);
+                                                }
                                             }
 
                                             .order-list--btn {
@@ -3381,17 +3388,64 @@
 
                                             .inner-blog-section {
                                                 width: 90%;
+                                                @include padding(45px 0 0);
                                                 @include margin(0 auto);
                                             }
 
                                             .inner-blog-change-content {
+                                                a {
+                                                    text-decoration: none;
+                                                    color: $darkBrown1;
+                                                }
                                                 .flex-item-container {
+                                                    @include align-items(flex-start);
                                                     @include flex-direction(row);
                                                     @include justify-content(flex-start);
                                                 }
                                                 .flex-item {
                                                     flex: 1;
                                                 }
+                                                .action-btn {
+                                                    @include margin(0 5px);
+                                                }
+                                                .fa-long-arrow-left,
+                                                .fa-long-arrow-right {
+                                                    font-size: 16px;
+                                                    vertical-align: middle;
+                                                }
+                                                .social-box {
+                                                    @include display(flex);
+                                                    @include justify-content(center);
+                                                    font-size: 19px;
+                                                    .flex-item-container {
+                                                        @include align-items(center);
+                                                    }
+                                                    li {
+                                                        @include margin(0 5px);
+                                                        color: $darkBrown1;
+                                                    }
+                                                    li:not(:first-child) {
+                                                        width: 30px;
+                                                        height: 30px;
+                                                    }
+                                                    li:not(:first-child) a {
+                                                        width: 100%;
+                                                        height: 100%;
+                                                        border: 1px dashed $darkBrown1;
+                                                        @include display(flex);
+                                                        @include align-items(center);
+                                                        @include justify-content(center);
+                                                        &:hover {
+                                                            border: 1px dashed white;
+                                                            color: white;
+                                                            background-color: $darkBrown1;
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            .also-view {
+                                                @include padding(45px 0);
                                             } //End of inner-blogs.html
                                             // All modals html
                                             /*****NOTE: We can extend this class by using @extend method. Please don't customise the main class(Parent class) .close-modal--btn-circle ****/
@@ -3438,7 +3492,8 @@
                                                 }
                                                 .coupon-discount-title {
                                                     h1 {
-                                                        font-family: 'vadodara-md';
+                                                        font-family: 'fjalla-reg';
+                                                        color: $darkBrown1;
                                                     }
                                                 }
                                                 .close-modal {

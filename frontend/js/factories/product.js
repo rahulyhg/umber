@@ -50,7 +50,7 @@ myApp.factory('ProductService', function ($http, $timeout) {
             }).then(callback);
         },
         getProductsWithAppliedFilters: function (input, callback) {
-            console.log("Get products with filters: ", input);
+            // console.log("Get products with filters: ", input);
             $http({
                 url: adminurl + 'Product/getProductsWithFilters',
                 data: input,
@@ -62,7 +62,7 @@ myApp.factory('ProductService', function ($http, $timeout) {
         },
 
         productWithCategory: function (input, callback) {
-            console.log("Get products with category: ", input);
+            // console.log("Get products with category: ", input);
             $http({
                 url: adminurl + 'Product/productWithCategory',
                 data: input,
@@ -74,6 +74,7 @@ myApp.factory('ProductService', function ($http, $timeout) {
         },
 
         getProductsWithFilters: function (input, callback) {
+            console.log("getProductsWithCategory", input)
             $http({
                 url: adminurl + 'Product/getProductsWithCategory/',
                 data: input,
@@ -83,7 +84,7 @@ myApp.factory('ProductService', function ($http, $timeout) {
         },
 
         productInNewArrival: function (callback) {
-            console.log("Get products with category: ");
+            // console.log("Get products with category: ");
             $http({
                 url: adminurl + 'Product/productInNewArrival',
                 method: 'POST',
@@ -112,6 +113,7 @@ myApp.factory('ProductService', function ($http, $timeout) {
         },
 
         getProductsWithCategory: function (data, callback) {
+            // console.log("getProductsWithCategory", data)
             $http({
                 url: adminurl + 'Product/getProductsWithCategory',
                 method: 'POST',
