@@ -1,5 +1,5 @@
 apps:
   - script: "app.js"
-    name: "BurntUmber - 1337"
+    name: "BurntUmber - 8080"
     watch: false
     args: "--prod"
