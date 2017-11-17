@@ -24,13 +24,13 @@
         "validation": ["", "trim", ""],
         "view": true,
         "url": ""
-    }, {
+    },{
         "name": "Description",
-        "type": "textarea",
+        "type": "wysiwyg",
         "tableRef": "description",
-        "placeholder": "Enter blog description",
-        "id": "desc",
-        "validation": ["required", "trim"],
+        "placeholder": "Enter Description",
+        "id": "description",
+        "validation": ["required", "trim", ""],
         "url": ""
     }, {
         "name": "Status",
