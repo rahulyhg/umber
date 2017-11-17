@@ -25,13 +25,13 @@ module.exports = {
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
 
-  port: 8080,
-  realHost: "http://umber.wohlig.co.in",
-  emails: ["chintan@wohlig.com", "jagruti@wohlig.com", "tushar@wohlig.com", "harshad.shirsat@wohlig.com", "prajakta.kamble@wohlig.com", "chirag@wohlig.com", "harsh@wohlig.com", "p.vasu@burntumberfashion.com", "kushbhatia@burntumberfashion.com","avinash.ghare@wohlig.com"]
+  // port: 8080,
+  // realHost: "http://umber.wohlig.co.in",
+  // emails: ["chintan@wohlig.com", "jagruti@wohlig.com", "tushar@wohlig.com", "harshad.shirsat@wohlig.com", "prajakta.kamble@wohlig.com", "chirag@wohlig.com", "harsh@wohlig.com", "p.vasu@burntumberfashion.com", "kushbhatia@burntumberfashion.com","avinash.ghare@wohlig.com"]
 
-  // port: 1337,
-  // realHost: "http://104.197.111.0:1337",
-  // emails: ["chintan@wohlig.com", "jagruti@wohlig.com", "tushar@wohlig.com", "harshad.shirsat@wohlig.com", "prajakta.kamble@wohlig.com", "chirag@wohlig.com", "harsh@wohlig.com", "p.vasu@burntumberfashion.com", "kushbhatia@burntumberfashion.com"]
+  port: 1337,
+  realHost: "http://104.197.111.0:1337",
+  emails: ["chintan@wohlig.com", "jagruti@wohlig.com", "tushar@wohlig.com", "harshad.shirsat@wohlig.com", "prajakta.kamble@wohlig.com", "chirag@wohlig.com", "harsh@wohlig.com", "p.vasu@burntumberfashion.com", "kushbhatia@burntumberfashion.com"]
 
   /***************************************************************************
    * Set the log level in production environment to "silent"                 *
