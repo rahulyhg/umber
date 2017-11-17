@@ -116,7 +116,7 @@
                                             } // need to pass true or false like @include block(true);
                                             //end of Mixins CSS finctions
                                             body {
-                                                padding-top: 70px;
+                                                padding-top: 80px;
                                                 font-family: 'vadodara-regular';
                                                 overflow-x: hidden!important;
                                                 -webkit-font-smoothing: antialiased !important;
@@ -380,6 +380,9 @@
 
                                             .section-tp-bt-padd {
                                                 @include padding(15px 0);
+                                                p {
+                                                    margin-bottom: 15px;
+                                                }
                                             }
 
                                             .width100 {
@@ -1878,6 +1881,7 @@
                                                     }
                                                     .blog__banner-detail {
                                                         .blog__desc {
+                                                            overflow: hidden;
                                                             p:last-child {
                                                                 &:after {
                                                                     content: '\02192';
@@ -3381,14 +3385,14 @@
                                             //Start of inner-blogs.html
                                             .inner-blog-title {
                                                 @include padding(5px 0);
-                                                @include margin(15px 0);
+                                                @include margin(10px 0);
                                                 color: $darkBrown1;
                                                 font-family: 'vadodara-md';
                                             }
 
                                             .inner-blog-section {
                                                 width: 90%;
-                                                @include padding(45px 0 0);
+                                                @include padding(25px 0 0);
                                                 @include margin(0 auto);
                                             }
 
@@ -3445,7 +3449,7 @@
                                             }
 
                                             .also-view {
-                                                @include padding(45px 0);
+                                                @include padding(25px 0);
                                             } //End of inner-blogs.html
                                             // All modals html
                                             /*****NOTE: We can extend this class by using @extend method. Please don't customise the main class(Parent class) .close-modal--btn-circle ****/
