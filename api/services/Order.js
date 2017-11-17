@@ -5,7 +5,7 @@ var http = require('http'),
 
 
 // var workingKey = "81D48FFD602819EBA40B68CF90C8B6C6"; //local
-var workingKey = "C8067827DDBC8835097F3BB1C54B51CD";
+var workingKey = "B019F1AD7402B5C7C90FFA59317D2D5A";
 var schema = new Schema({
     orderNo: {
         type: String,
@@ -207,7 +207,7 @@ var model = {
 
         var body = '', //Put in the 32-Bit Key provided by CCAvenue.
             // accessCode = 'AVHR01EK28AH98RHHA',	//local
-            accessCode = "AVRL01EK28AF79LRFA", //Put in the Access Code provided by CCAvenue.
+            accessCode = "AVBG01EK29BB84GBBB", //Put in the Access Code provided by CCAvenue.
 
             encRequest = '',
             formbody = '';
