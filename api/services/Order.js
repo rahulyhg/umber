@@ -252,10 +252,10 @@ var model = {
     hdfcPaymentGateway: function(data, resp){
        var ccav = require('./ccavutil.js');
         var body ={
-            "merchant_d":"150530",
+            "merchant_d":150530,
             "order_id":"123456789",
             "currency":"INR",
-            "amount":"20.00",
+            "amount":20,
             "redirect_url":"http://104.197.111.0:1337/api/order/gatewayResponse",
             "cancel_url":"http://104.197.111.0:1337/api/order/cancelResponse",
             "language":"EN"
