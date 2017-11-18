@@ -251,8 +251,8 @@ var model = {
 
     hdfcPaymentGateway: function(data, resp){
        var ccav = require('./ccavutil.js');
-        var body = {
-            "merchant_id":"150530",
+        var body ={
+            "merchant_d":"150530",
             "order_id":"123456789",
             "currency":"INR",
             "amount":"20.00",
@@ -260,6 +260,7 @@ var model = {
             "cancel_url":"http://104.197.111.0:1337/api/order/cancelResponse",
             "language":"EN"
         };
+        body = new Buffer.from(body.toString());;
        var workingKey = 'C8067827DDBC8835097F3BB1C54B51CD';
        var accessCode = 'AVHR01EK28AH98RHHA';
       var encRequest = ccav.encrypt(body,workingKey);
@@ -267,12 +268,15 @@ var model = {
           "encRequest":encRequest,
           "accessCode":accessCode
       }
-
-      request.post({
+      reqdata = new Buffer.from(body.toString());;
+      var url = {
         url: 'https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction',
          body: reqdata
-         }, function(error, response, body){
-            console.log(body);
+         };
+         console.log(url)
+      request.post(url, function(error, response, body){
+            console.log(error,body);
+            resp.send(body)
     });
     },
     createOrderFromCart: function (data, callback) {
