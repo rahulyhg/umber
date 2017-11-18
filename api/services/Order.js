@@ -251,7 +251,7 @@ var model = {
 
     hdfcPaymentGateway: function(data, resp){
        var ccav = require('./ccavutil.js');
-        var body ="merchant_id =150530&order_id=123456789&currency=INR&amount=20&redirect_url=http://104.197.111.0:1337/api/order/gatewayResponse&cancel_url=http://104.197.111.0:1337/api/order/cancelResponse&language=EN";
+        var body ="merchant_id=150530&order_id=123456789&currency=INR&amount=20&redirect_url=http://104.197.111.0:1337/api/order/gatewayResponse&cancel_url=http://104.197.111.0:1337/api/order/cancelResponse&language=EN";
         
        var workingKey = 'C8067827DDBC8835097F3BB1C54B51CD';
        var accessCode = 'AVHR01EK28AH98RHHA';
