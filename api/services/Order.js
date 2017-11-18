@@ -272,7 +272,7 @@ var model = {
       formbody = '<form id="nonseamless" method="post" name="redirect" action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction"/> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><script language="javascript">document.redirect.submit();</script></form>';
       var url = {
         url: 'https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction',
-         body: formbody
+         body: reqdata
          };
          console.log(url)
       request.post(url, function(error, response, body){
