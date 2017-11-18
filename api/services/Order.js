@@ -252,7 +252,7 @@ var model = {
     hdfcPaymentGateway: function(data, resp){
        var ccav = require('./ccavutil.js');
         var body ={
-            "merchant_d":150530,
+            "merchant_id":150530,
             "order_id":"123456789",
             "currency":"INR",
             "amount":20,
