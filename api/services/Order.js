@@ -129,127 +129,152 @@ module.exports = mongoose.model('Order', schema);
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "user  products.product courierType returnedProducts.product", "user", "createdAt", "desc"));
 var model = {
     //Function for HDFC
-    hdfcPaymentGateway: function (data, callback) {
-        // var m = crypto.createHash('md5');
-        // m.update(workingKey);
-        // var key = m.digest('binary');
-        // var iv = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f';
-        // var cipher = crypto.createCipheriv('aes-128-cbc', key, iv);
-        // var encoded = cipher.update(JSON.stringify(data), 'utf8', 'hex');
-        // encoded += cipher.final('hex');
-        var data = {
-            "order_id": "59e4cfd658946c313e655b30",
-            "createdAt": "2017-10-16T15:27:18.441+0000",
-            "updatedAt": "2017-10-16T15:27:18.568+0000",
-            "orderNo": "2954436897216",
-            "merchant_id": "150530",
-            "currency": "INR",
-            "redirect_url": "https://www.google.co.in/",
-            "cancel_url": "https://www.google.co.in/",
-            "language": "EN",
-            "totalAmount": 2098,
-            "amount": 2098,
-            "user": "59e4c055fde2d42791850689",
-            "shippingAmount": 0,
-            "discountAmount": 0,
-            "returnedProducts": [
+    // hdfcPaymentGateway: function (data, callback) {
+    //     // var m = crypto.createHash('md5');
+    //     // m.update(workingKey);
+    //     // var key = m.digest('binary');
+    //     // var iv = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f';
+    //     // var cipher = crypto.createCipheriv('aes-128-cbc', key, iv);
+    //     // var encoded = cipher.update(JSON.stringify(data), 'utf8', 'hex');
+    //     // encoded += cipher.final('hex');
+    //     var data = {
+    //         "order_id": "59e4cfd658946c313e655b30",
+    //         "createdAt": "2017-10-16T15:27:18.441+0000",
+    //         "updatedAt": "2017-10-16T15:27:18.568+0000",
+    //         "orderNo": "2954436897216",
+    //         "merchant_id": "150530",
+    //         "currency": "INR",
+    //         "redirect_url": "https://www.google.co.in/",
+    //         "cancel_url": "https://www.google.co.in/",
+    //         "language": "EN",
+    //         "totalAmount": 2098,
+    //         "amount": 2098,
+    //         "user": "59e4c055fde2d42791850689",
+    //         "shippingAmount": 0,
+    //         "discountAmount": 0,
+    //         "returnedProducts": [
 
-            ],
-            "orderStatus": "processing",
-            "paymentMethod": "cod",
-            "products": [{
-                "product": "59de31a6af88fb51a6d1e124",
-                "quantity": 1,
-                "price": 2098,
-                "comment": null,
-                "_id": "59e4cfd658946c313e655b31",
-                "status": "accept"
-            }],
-            "__v": 0,
-            "shippingAddress": {
-                "pincode": 400022,
-                "state": "Maharashtra",
-                "city": "a",
-                "line3": "a",
-                "line2": "a",
-                "line1": "a",
-                "country": "India"
-            },
-            "billingAddress": {
-                "state": "Maharashtra",
-                "pincode": 400022,
-                "city": "a",
-                "line3": "a",
-                "line2": "a",
-                "line1": "a",
-                "country": "India"
-            }
-        }
-        var m = crypto.createHash('md5');
-        m.update(workingKey);
-        var key = m.digest('buffer');
-        var iv = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f';
-        var cipher = crypto.createCipheriv('aes-128-cbc', key, iv);
-        var encoded = cipher.update(JSON.stringify(data), 'utf8', 'hex');
-        encoded += cipher.final('hex');
+    //         ],
+    //         "orderStatus": "processing",
+    //         "paymentMethod": "cod",
+    //         "products": [{
+    //             "product": "59de31a6af88fb51a6d1e124",
+    //             "quantity": 1,
+    //             "price": 2098,
+    //             "comment": null,
+    //             "_id": "59e4cfd658946c313e655b31",
+    //             "status": "accept"
+    //         }],
+    //         "__v": 0,
+    //         "shippingAddress": {
+    //             "pincode": 400022,
+    //             "state": "Maharashtra",
+    //             "city": "a",
+    //             "line3": "a",
+    //             "line2": "a",
+    //             "line1": "a",
+    //             "country": "India"
+    //         },
+    //         "billingAddress": {
+    //             "state": "Maharashtra",
+    //             "pincode": 400022,
+    //             "city": "a",
+    //             "line3": "a",
+    //             "line2": "a",
+    //             "line1": "a",
+    //             "country": "India"
+    //         }
+    //     }
+    //     var m = crypto.createHash('md5');
+    //     m.update(workingKey);
+    //     var key = m.digest('buffer');
+    //     var iv = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f';
+    //     var cipher = crypto.createCipheriv('aes-128-cbc', key, iv);
+    //     var encoded = cipher.update(JSON.stringify(data), 'utf8', 'hex');
+    //     encoded += cipher.final('hex');
 
-        // var m = crypto.createHash('md5');
-        // m.update(workingKey);
-        // var key = m.digest('binary');
-        // var iv = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f';
-        // var cipher = crypto.createCipheriv('aes-128-cbc', key, iv);
-        // var encoded = cipher.update(JSON.stringify(data), 'utf8', 'hex');
-        // encoded += cipher.final('hex');
-        // // return encoded;
-        // return encoded;
+    //     // var m = crypto.createHash('md5');
+    //     // m.update(workingKey);
+    //     // var key = m.digest('binary');
+    //     // var iv = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f';
+    //     // var cipher = crypto.createCipheriv('aes-128-cbc', key, iv);
+    //     // var encoded = cipher.update(JSON.stringify(data), 'utf8', 'hex');
+    //     // encoded += cipher.final('hex');
+    //     // // return encoded;
+    //     // return encoded;
 
-        // var accessCode = "AVHR01EK28AH98RHHA";
+    //     // var accessCode = "AVHR01EK28AH98RHHA";
 
-        var body = '', //Put in the 32-Bit Key provided by CCAvenue.
-            // accessCode = 'AVHR01EK28AH98RHHA',	//local
-            accessCode = "AVBG01EK29BB84GBBB", //Put in the Access Code provided by CCAvenue.
+    //     var body = '', //Put in the 32-Bit Key provided by CCAvenue.
+    //         // accessCode = 'AVHR01EK28AH98RHHA',	//local
+    //         accessCode = "AVBG01EK29BB84GBBB", //Put in the Access Code provided by CCAvenue.
 
-            encRequest = '',
-            formbody = '';
-        // request("https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction")
-        //     .on('data', function (data) {
-        //         console.log("This is the start...", data);
-        //         encRequest = encoded;
-        //         formbody = '<form id="nonseamless" method="post" name="redirect" action=" https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><input type="hidden" name="merchant_id" id="merchant_id" value="150530"><script language="javascript">document.redirect.submit();</script></form>';
-        //     })
-        //     .on('end', function () {
-        //         console.log("This is the end...");
-        //         callback.writeHeader(200, {
-        //             "Content-Type": "text/html"
-        //         });
+    //         encRequest = '',
+    //         formbody = '';
+    //     // request("https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction")
+    //     //     .on('data', function (data) {
+    //     //         console.log("This is the start...", data);
+    //     //         encRequest = encoded;
+    //     //         formbody = '<form id="nonseamless" method="post" name="redirect" action=" https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><input type="hidden" name="merchant_id" id="merchant_id" value="150530"><script language="javascript">document.redirect.submit();</script></form>';
+    //     //     })
+    //     //     .on('end', function () {
+    //     //         console.log("This is the end...");
+    //     //         callback.writeHeader(200, {
+    //     //             "Content-Type": "text/html"
+    //     //         });
 
-        // var m = crypto.createHash('md5');
-        // m.update(workingKey)
-        // var key = m.digest('buffer');
-        // var iv = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f';
-        // var decipher = crypto.createDecipheriv('aes-128-cbc', key, iv);
-        // var decoded = decipher.update(formbody, 'hex', 'utf8');
-        // decoded += decipher.final('utf8');
-        // return decoded;
-        //     console.log("formbody", formbody);
-        //     callback.write(formbody);
-        //     callback.end();
-        // });
-        // return;
+    //     // var m = crypto.createHash('md5');
+    //     // m.update(workingKey)
+    //     // var key = m.digest('buffer');
+    //     // var iv = '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f';
+    //     // var decipher = crypto.createDecipheriv('aes-128-cbc', key, iv);
+    //     // var decoded = decipher.update(formbody, 'hex', 'utf8');
+    //     // decoded += decipher.final('utf8');
+    //     // return decoded;
+    //     //     console.log("formbody", formbody);
+    //     //     callback.write(formbody);
+    //     //     callback.end();
+    //     // });
+    //     // return;
 
 
-        // callback(null, encoded);
-        request.post({
-            url: 'https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction',
-            body: '<form id="nonseamless" method="post" name="redirect" action=" https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"> <input type="hidden" id="enc_request" name="enc_request" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><script language="javascript">document.redirect.submit();</script></form>'
-        }, function (error, response, body) {
-            console.log(error, body);
-            callback.write(body);
-            callback.end();
-        });
+    //     // callback(null, encoded);
+    //     request.post({
+    //         url: 'https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction',
+    //         body: '<form id="nonseamless" method="post" name="redirect" action=" https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"> <input type="hidden" id="enc_request" name="enc_request" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><script language="javascript">document.redirect.submit();</script></form>'
+    //     }, function (error, response, body) {
+    //         console.log(error, body);
+    //         callback.write(body);
+    //         callback.end();
+    //     });
+    // },
+
+    hdfcPaymentGateway: function(data, resp){
+       var ccav = require('./ccavutil.js');
+        var body = {
+            "merchant_id":"150530",
+            "order_id":"123456789",
+            "currency":"INR",
+            "amount":"20.00",
+            "redirect_url":"http://104.197.111.0:1337/api/order/gatewayResponse",
+            "cancel_url":"http://104.197.111.0:1337/api/order/cancelResponse",
+            "language":"EN"
+        };
+       var workingKey = 'C8067827DDBC8835097F3BB1C54B51CD';
+       var accessCode = 'AVHR01EK28AH98RHHA';
+      var encRequest = ccav.encrypt(body,workingKey);
+      var reqdata = {
+          "encRequest":encRequest,
+          "accessCode":accessCode
+      }
+
+      request.post({
+        url: 'https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction',
+         body: reqdata
+         }, function(error, response, body){
+            console.log(body);
+    });
     },
-
-
     createOrderFromCart: function (data, callback) {
         // console.log("In createorderfromcart", data);
         if (data.paymentMethod == "Cash on delivery") {
