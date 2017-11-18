@@ -266,7 +266,7 @@ var model = {
       var encRequest = ccav.encrypt(body,workingKey);
       var reqdata = {
           "encRequest":encRequest,
-          "accessCode":accessCode
+          "access_code":accessCode
       }
       reqdata = new Buffer.from(body.toString());;
       var url = {
