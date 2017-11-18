@@ -251,36 +251,25 @@ var model = {
 
     hdfcPaymentGateway: function(data, resp){
        var ccav = require('./ccavutil.js');
-        var body ={
-            "merchant_id":150530,
-            "order_id":"123456789",
-            "currency":"INR",
-            "amount":20,
-            "redirect_url":"http://104.197.111.0:1337/api/order/gatewayResponse",
-            "cancel_url":"http://104.197.111.0:1337/api/order/cancelResponse",
-            "language":"EN"
-        };
-        body = new Buffer.from(body.toString());;
+        var body ="merchant_id =150530"&"order_id=123456789&currency=INR&amount=20&redirect_url=http://104.197.111.0:1337/api/order/gatewayResponse&cancel_url=http://104.197.111.0:1337/api/order/cancelResponse&language=EN";
+        
        var workingKey = 'C8067827DDBC8835097F3BB1C54B51CD';
        var accessCode = 'AVHR01EK28AH98RHHA';
       var encRequest = ccav.encrypt(body,workingKey);
-      var reqdata = {
-          "encRequest":encRequest,
-          "access_code":accessCode
-      }
-    //   reqdata = JSON.stringify(reqdata);
-      formbody = '<form id="nonseamless" method="post" name="redirect" action="https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"/> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><script language="javascript">document.redirect.submit();</script></form>';
-    //   var url = {
-    //     url: 'https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction',
-    //      body: reqdata
-    //      };
-    //      console.log(url)
-    //   request.post(url, function(error, response, body){
-    //         console.log(error,body);
-    //         resp.send(body)
-    // });
-   resp.send(formbody);
+      var reqdata = "encRequest="+encRequest+"&"+"access_code="+accessCode;
+    
+      var url = {
+        url: 'https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction',
+         body: reqdata
+         };
+         console.log(url)
+      request.post(url, function(error, response, body){
+            console.log(error,body);
+            resp.send(body)
+    });
+
     },
+
     createOrderFromCart: function (data, callback) {
         // console.log("In createorderfromcart", data);
         if (data.paymentMethod == "Cash on delivery") {
