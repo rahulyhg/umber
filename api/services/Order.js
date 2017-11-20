@@ -261,7 +261,7 @@ var model = {
     
       var formData = {
         encRequest: encRequest,
-        access_code: access_code
+        access_code: accessCode
     };
     res.view("payment", formData);
 
