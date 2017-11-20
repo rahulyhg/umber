@@ -1,0 +1,17 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+crossorigin="anonymous">
+<form action="https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction" name="payment" method="POST">
+<input type="hidden" value="<%= encRequest %>" name="encRequest" />
+<input type="hidden" value="<%= access_code %>" name="access_code" />
+<button style="display:none;" type="submit" class="submitForm"> SUBMIT </button>
+</form>
+<div class="container">
+<h3 class="text-center" style="padding:20%;">Loading EBS Payment Gateway</h3>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+crossorigin="anonymous"></script>
+<script>
+$(document).ready(function () {
+    $(".submitForm").click();
+});
+</script>
