@@ -263,7 +263,7 @@ var model = {
         encRequest: encRequest,
         access_code: accessCode
     };
-    res.view("payment", formData);
+    resp.view("payment", formData);
 
     //   var url = {
     //     url: 'https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction',
