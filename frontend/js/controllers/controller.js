@@ -549,8 +549,6 @@ myApp
         });
 
 
-
-
     })
     //Example API Controller
     .controller('DemoAPICtrl', function ($scope, TemplateService, apiService, NavigationService, $timeout) {
