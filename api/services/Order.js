@@ -250,6 +250,7 @@ var model = {
     // },
 
     hdfcPaymentGateway: function(data, resp){
+        console.log("in hdfc payment gateway");
        var ccav = require('./ccavutil.js');
         var body ="merchant_id=150530&order_id=123456789&currency=INR&amount=20&redirect_url=http://104.197.111.0:1337/api/order/gatewayResponse&cancel_url=http://104.197.111.0:1337/api/order/cancelResponse&language=EN";
         
@@ -258,15 +259,21 @@ var model = {
       var encRequest = ccav.encrypt(body,workingKey);
       var reqdata = "encRequest="+encRequest+"&"+"access_code="+accessCode;
     
-      var url = {
-        url: 'https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction',
-         body: reqdata
-         };
-         console.log(url)
-      request.post(url, function(error, response, body){
-            console.log(error,body);
-            resp.send(body)
-    });
+      var formData = {
+        encRequest: encRequest,
+        access_code: access_code
+    };
+    res.view("payment", formData);
+
+    //   var url = {
+    //     url: 'https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction',
+    //      body: reqdata
+    //      };
+    //      console.log(url)
+    //   request.post(url, function(error, response, body){
+    //         console.log(error,body);
+    //         resp.send(body)
+    // });
 
     },
 
