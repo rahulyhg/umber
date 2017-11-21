@@ -1287,17 +1287,17 @@
                                                 0));
                                                 @include transform-origin(right center);
                                                 @include transition-property(all);
-                                                @include transition-duration(0.2s);
+                                                @include transition-duration(0.3s);
                                                 @include transition-timing-function(ease);
                                                 @include transition-delay(0.1s);
                                             }
 
                                             .mobview-categories-menu-out {
-                                                @include transform(translate(1000px,
+                                                @include transform(translate(2000px,
                                                 0));
                                                 @include transform-origin(right center);
                                                 @include transition-property(all);
-                                                @include transition-duration(0.2s);
+                                                @include transition-duration(0.3s);
                                                 @include transition-timing-function(ease);
                                             }
 
@@ -1370,13 +1370,22 @@
                                                 z-index: 1030;
                                             }
 
-                                            .mobview-links li a {
+                                            .mobview-links li a,
+                                            {
+                                                @include padding(10px 15px);
                                                 color: #341314;
-                                                font-size: 16px;
                                                 display: block;
-                                                padding: 10px 15px;
+                                                font-size: 16px;
+                                                text-decoration: none;
                                             }
 
+                                            .accordian-mobview-links li a {
+                                                @include padding(5px 0);
+                                                color: #341314;
+                                                display: block;
+                                                font-size: 16px;
+                                                text-decoration: none;
+                                            } //To set font awesome design, we need to mention fa class here
                                             .mobview-side-nav {
                                                 .fa-shopping-cart,
                                                 .fa-heart,

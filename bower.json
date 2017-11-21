@@ -47,7 +47,7 @@
     "fancyBox": "^2.1.5",
     "international-phone-number": "^0.0.16",
     "jquery-slimscroll": "^1.3.8",
-    "font-awesome": "^4.6.3",
+    "font-awesome": "fontawesome#^4.7.0",
     "jStorage": "https://github.com/andris9/jStorage.git#^0.4.12",
     "js-beautify": "https://github.com/beautify-web/js-beautify.git#~1.5.10",
     "moment": "^2.17.1",

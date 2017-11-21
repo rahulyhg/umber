@@ -9,7 +9,28 @@
          .cloth-buy__desc h2 {
              font-size: 20px;
          }
+     } //start of header
+     .mobview-header-navigation {
+         @include align-items(center);
+         @include display(flex);
+         @include flex-direction(row);
+         @include flex-wrap(nowrap);
+         @include justify-content(flex-start);
      }
+     .custom-navbar-header,
+     custom-navbar-nav {
+         flex: 1;
+     }
+     .custom-navbar-nav {
+         @include align-items(center);
+         @include display(flex!important);
+         @include flex-direction(row);
+         @include flex-wrap(nowrap);
+         @include justify-content(flex-end);
+     }
+     .navbar .navbar-right {
+         @include margin(0);
+     } //End of header
      //scss for about us page
      .contact-us .enquiry-form {
          padding: 35px 35px 35px 35px;
@@ -19,7 +40,7 @@
      }
      .contact-us .enquiry-form-pdd {
          max-width: 100%;
-        display: block;
+         display: block;
      }
      .contact-us .contactus-details {
          margin-left: 0;
