@@ -1,26 +1,8 @@
-<!--<header hide-on-scrol>
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-                <a class="navbar-brand" ui-sref="home"><img src="/img/logo.png" alt="logo" width="20"> </a>
-            </div>
-            <div class="collapse navbar-collapse" id="nav-collapse">
-                <div ng-include="template.menu" class="template menu"></div>
-            </div>
-        </div>
-    </nav>
-</header>-->
 <header hide-on-scrol ng-controller="headerCtrl">
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container hidden-sm  hidden-xs ">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false" >
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
                   <span class="sr-only">Toggle navigation</span>
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
@@ -47,7 +29,6 @@
                                 <form>
                                     <input type="search" placeholder="search" ng-keypress="search($event,keyword)" ng-model="keyword" ng-focus="focus=true; blur=false; "
                                         ng-blur="focus=false; blur=true; ">
-
                                 </form>
                             </div>
                         </div>
@@ -55,10 +36,9 @@
 
                     <!--<li ng-click="openWishlistModal10();"><a href=""><i class="fa fa-heart "></i> Wishlist</a></li>-->
 
-                    <li class="hidden-sm hidden-xs" ui-sref="myaccount({view: 'wishlistTab'})"><a href="" class="wish-list"><i class="fa fa-heart hvr-pulse"></i> Wishlist</a></li>
-                    <li class="visible-sm visible-xs" ui-sref="myaccount({view: 'wishlistTab'})"><a href="" class="wish-list"><i class="fa fa-heart hvr-pulse"></i></a>
-                    </li>
-                    <li class="hidden-sm hidden-xs" uib-dropdown ng-mouseenter="slideUpSideNav()">
+                    <li ui-sref="myaccount({view: 'wishlistTab'})"><a href="" class="wish-list"><i class="fa fa-heart hvr-pulse"></i> Wishlist</a></li>
+
+                    <li uib-dropdown ng-mouseenter="slideUpSideNav()">
                         <a href="# " uib-dropdown-toggle ui-sref="mycart " class="mycart">
 
                             <i class="fa fa-shopping-cart "></i> Cart ( <span ng-if="cart.products.length ">{{cart.products.length}}</span>
@@ -98,11 +78,6 @@
                             </div>
                         </ul>
 
-                    </li>
-                    <li class="visible-sm visible-xs">
-                        <a href="# " ui-sref="mycart " class="mobview-mycart">
-                            <i class="fa fa-shopping-cart "></i></a>
-                        <span class="added-cart-amnt"></span>
                     </li>
 
                     <li ng-if="!loggedUser "><button class="btn header--login " ng-click="openLoginModal10(); ">LOGIN</button>
@@ -126,28 +101,28 @@
             </div>-->
         </div>
         <div class="container-fluid visible-sm visible-xs">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed  hidden-xs" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+            <div class="mobview-header-navigation">
+                <div class="navbar-header custom-navbar-header">
+                    <button type="button" class="navbar-toggle collapsed  hidden-xs" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
                   <span class="sr-only">Toggle navigation</span>
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <div>
+                    <div>
+                        <div class="navbar__sideNav inline-block" ng-click="openSideNav();">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </div>
 
-                    <div class="navbar__sideNav inline-block" ng-click="openSideNav();">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </div>
-
-                    <div class="navbar-brand-wrap inline-block">
-                        <a class="navbar-brand" ui-sref="home"><img src="../img/home/logo.png" alt="logo" width="130px" class="img-responsive"> </a>
+                        <div class="navbar-brand-wrap inline-block">
+                            <a class="navbar-brand" ui-sref="home"><img src="../img/home/logo.png" alt="logo" width="130px" class="img-responsive"> </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="collapse navbar-collapse" id="nav-collapse">
-                <ul class="nav navbar-nav navbar-right">
+
+                <ul class="custom-navbar-nav nav navbar-nav navbar-right  visible-xs-">
                     <li class="hidden-sm hidden-xs"><a href="#"><i class="fa fa-search"></i></a>
                         <div ng-init="focus = false; blur=true; active=false ">
                             <div class="search-box-area" ng-class="{myFocus: focus, myBlur: blur}">
@@ -209,12 +184,13 @@
                     <li class="visible-sm visible-xs">
                         <a href="# " ui-sref="mycart " class="mobview-mycart">
                             <i class="fa fa-shopping-cart "></i></a>
-                        <span class="added-cart-amnt"></span>
+                        <span class="added-cart-amnt" ng-if="cart.products.length ">{{cart.products.length}}</span>
+                        <span class="added-cart-amnt" ng-if="!cart.products.length ">0</span>
                     </li>
 
                     <li class="hidden-sm hidden-xs" ng-if="!loggedUser "><button class="btn header--login " ng-click="openLoginModal10(); ">LOGIN</button>
                     </li>
-                    <li ng-if="loggedUser" ng-mouseenter="slideUpSideNav()">
+                    <li class="hidden-sm hidden-xs" ng-if="loggedUser" ng-mouseenter="slideUpSideNav()">
                         <a href="" class="user-name" ui-sref="myaccount" ng-if="userId !='' ">hi, {{firstname}} <i class="fa fa-caret-down"></i></a>
                         <!--<button class=" btn header--logout" ng-click="logout(); " ng-if="userId !='' ">Hi, siddhesh</button>-->
                         <ul class="header-top-right-dropdown list-unstyled">
@@ -228,6 +204,7 @@
                     </li>
                 </ul>
             </div>
+
             <!--<div class="collapse navbar-collapse " id="nav-collapse ">
                 <div ng-include="template.menu " class="template menu "></div>
             </div>-->
@@ -237,7 +214,7 @@
         <form name="productSearchForm" nonvalidate>
             <div class="search-product">
                 <label for="search-input"><i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search Products</span></label>
-                <input type="text" class="form-control input-lg " placeholder="Search Products">
+                <input type="text" class="form-control input-lg " ng-keypress="search($event,keyword)" ng-model="keyword" placeholder="Search Products">
             </div>
         </form>
     </div>
@@ -312,17 +289,19 @@
                     <li><a ui-sref="about">about us</a></li>
                     <li><a ui-sref="contactus">contact us</a></li>
                     <li><a ui-sref="storelocator">store locator</a></li>
-                    <li><a href=""><i class="fa fa-shopping-cart "></i>My Cart</a></li>
-                    <li><a href=""><i class="fa fa-heart"></i>My Wishlist</a></li>
-                    <li ng-if="!loggedUser "><a href="" ng-click="openLoginModal10(); "><i class="fa fa-user" aria-hidden="true"></i>My Account</a>
-                        <ul class="list-unstyled">
-                            <li><a ui-sref="myaccount({view: 'profTab'})">My profile</a> </li>
-                            <li><a ui-sref="myaccount({view: 'addrTab'})"><i class="fa fa-user-circle" aria-hidden="true"></i>manage address</a>                                </li>
+                    <li><a ui-sref="mycart "><i class="fa fa-shopping-cart "></i>My Cart</a></li>
+                    <li><a ui-sref="myaccount({view: 'wishlistTab'})"><i class="fa fa-heart"></i>My Wishlist</a></li>
+                    <li ng-if="!loggedUser"><a ng-click="openLoginModal10(); "><i class="fa fa-user" aria-hidden="true"></i>My Account</a></li>
+                    <li ng-if="loggedUser"><a><i class="fa fa-user" aria-hidden="true"></i>My Account</a>
+
+                        <ul class="list-unstyled" ng-if="loggedUser">
+                            <li><a ui-sref="myaccount({view: 'profTab'})"><i class="fa fa-user-circle-o" aria-hidden="true"></i>My profile</a>                                </li>
+                            <li><a ui-sref="myaccount({view: 'addrTab'})"><i class="fa fa-address-card" aria-hidden="true"></i>manage address</a>                                </li>
                             <li><a ui-sref="myaccount({view: 'orderTab'})">order</a> </li>
-                            <li><a ui-sref="myaccount({view: 'wishlistTab'})">Wishlist</a> </li>
+                            <li><a ui-sref="myaccount({view: 'wishlistTab'})"><i class="fa fa-heart"></i>Wishlist</a> </li>
+                            <li><a ng-click="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i>Log out</a></li>
+
                         </ul>
-
-
                     </li>
 
                 </ul>
@@ -334,24 +313,16 @@
                             <p><a href="" ng-click="slidebackToMobview()"><i class="fa fa-arrow-left"></i></a></p>
 
                         </li>
-                        <li>
-                            <div uib-accordion-group is-open="accordHeader">
+                        <li ng-repeat="category in categories">
+                            <div uib-accordion-group ng-click="getSubCategories(category)" is-open="accordHeader">
                                 <uib-accordion-heading>
-                                    Casual Shirts <i class="pull-right fa" ng-class="{'fa fa-minus': accordHeader, 'fa fa-plus': !accordHeader}"></i>
+                                    {{category.name}} <i class="pull-right fa" ng-class="{'fa fa-minus': accordHeader, 'fa fa-plus': !accordHeader}"></i>
                                 </uib-accordion-heading>
-                                <p>Test1</p>
+                                <ul class="accordian-mobview-links list-unstyled">
+                                    <li ng-repeat="subCategory in hCategory.subCategories"><a ui-sref="listing-page({id: hCategory.slug, cat:subCategory._id})">{{subCategory.name}}</a></li>
+                                </ul>
                             </div>
                         </li>
-                        <!-- <li>
-                            <div uib-accordion-group is-open="accordHeader">
-                                <uib-accordion-heading>
-                                    Trousers <i class="pull-right fa " ng-class="{'fa fa-minus': accordHeader, 'fa fa-plus': !accordHeader}"></i>
-                                </uib-accordion-heading>
-                                <p>Test1</p>
-
-                            </div>
-                        </li> -->
-
                     </ul>
                 </uib-accordion>
             </div>

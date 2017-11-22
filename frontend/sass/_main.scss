@@ -1043,9 +1043,12 @@
                                                         background: $darkBrown1 none repeat scroll 0 0;
                                                         border-radius: 100%;
                                                         color: #ffffff;
+                                                        @include display(flex);
+                                                        @include align-items(center);
+                                                        @include flex-direction(row);
+                                                        @include justify-content(center);
                                                         font-size: 13px;
-                                                        font-weight: 800;
-                                                        line-height: 20px;
+                                                        font-weight: 800; // line-height: 20px;
                                                         position: absolute;
                                                         top: 20px;
                                                         right: 5px;
@@ -1284,17 +1287,17 @@
                                                 0));
                                                 @include transform-origin(right center);
                                                 @include transition-property(all);
-                                                @include transition-duration(0.2s);
+                                                @include transition-duration(0.3s);
                                                 @include transition-timing-function(ease);
                                                 @include transition-delay(0.1s);
                                             }
 
                                             .mobview-categories-menu-out {
-                                                @include transform(translate(1000px,
+                                                @include transform(translate(2000px,
                                                 0));
                                                 @include transform-origin(right center);
                                                 @include transition-property(all);
-                                                @include transition-duration(0.2s);
+                                                @include transition-duration(0.3s);
                                                 @include transition-timing-function(ease);
                                             }
 
@@ -1367,18 +1370,28 @@
                                                 z-index: 1030;
                                             }
 
-                                            .mobview-links li a {
+                                            .mobview-links li a,
+                                            {
+                                                @include padding(10px 15px);
                                                 color: #341314;
-                                                font-size: 16px;
                                                 display: block;
-                                                padding: 10px 15px;
+                                                font-size: 16px;
+                                                text-decoration: none;
                                             }
 
+                                            .accordian-mobview-links li a {
+                                                @include padding(5px 0);
+                                                color: #341314;
+                                                display: block;
+                                                font-size: 16px;
+                                                text-decoration: none;
+                                            } //To set font awesome design, we need to mention fa class here
                                             .mobview-side-nav {
                                                 .fa-shopping-cart,
                                                 .fa-heart,
                                                 .fa-user,
-                                                .fa-address-card-o {
+                                                .fa-address-card-o,
+                                                .fa-sign-out {
                                                     margin-right: 10px;
                                                 }
                                             }
@@ -1913,7 +1926,7 @@
                                                                 overflow: hidden;
                                                                 text-overflow: ellipsis;
                                                             }
-                                                            p:last-child {
+                                                            p.extra-content {
                                                                 &:after {
                                                                     content: '\02192';
                                                                     @include position(absolute,
@@ -3390,6 +3403,20 @@
                                                 font-family: 'vadodara-md';
                                             }
 
+                                            .inner-blog {
+                                                .blog__slider {
+                                                    .flexslider {
+                                                        margin-bottom: 0;
+                                                        &:hover {
+                                                            .flex-direction-nav .flex-prev,
+                                                            .flex-direction-nav .flex-next {
+                                                                opacity: 1;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+
                                             .inner-blog-section {
                                                 width: 90%;
                                                 @include padding(25px 0 0);
@@ -3402,12 +3429,26 @@
                                                     color: $darkBrown1;
                                                 }
                                                 .flex-item-container {
-                                                    @include align-items(flex-start);
+                                                    @include align-items(center);
                                                     @include flex-direction(row);
                                                     @include justify-content(flex-start);
                                                 }
                                                 .flex-item {
                                                     flex: 1;
+                                                }
+                                                .action .flex-prev,
+                                                .action .flex-next {
+                                                    display: block!important;
+                                                }
+                                                .flex-direction-nav a {
+                                                    width: 100px;
+                                                    display: inline-block; // position: relative;
+                                                    &:before {
+                                                        content: ''; // color: $darkBrown1;
+                                                        // display: inline-block;
+                                                        // font-family: FontAwesome;
+                                                        // font-size: 16px;
+                                                    }
                                                 }
                                                 .action-btn {
                                                     @include margin(0 5px);

@@ -5,7 +5,7 @@
             <i class="fa fa-2x fa-times-circle-o" aria-hidden="true"></i>
         </a>
         <h1>otp</h1>
-        <p>Enter your email Id below and <br>you’ll receive a 4 Digit Verification Code.</p>
+        <p>Enter your email Id below and <br>you’ll receive a 4 Digit Verification Code sent to your email id.</p>
         <form name="otpForm" class="form-otp" novalidate ng-submit="forgotPasswordOtp(emailId)">
             <div class="form-group">
                 <input type="email" class="form-control" name="email" ng-model="emailId" placeholder="Enter your email Id. " required uib-popover="{{otpForm.email.$touched && otpForm.email.$invalid ||otpForm.email.$error.email && otpForm.email.$error.required }}"
