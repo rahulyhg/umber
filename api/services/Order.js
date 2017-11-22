@@ -254,8 +254,8 @@ var model = {
        var ccav = require('./ccavutil.js');
         var body ="merchant_id=150530&order_id=123456789&currency=INR&amount=20&redirect_url=http://104.197.111.0:1337/api/order/gatewayResponse&cancel_url=http://104.197.111.0:1337/api/order/cancelResponse&language=EN";
         
-       var workingKey = 'C8067827DDBC8835097F3BB1C54B51CD';
-       var accessCode = 'AVHR01EK28AH98RHHA';
+       var workingKey = '236E7613D01B3B0BDAA4805D6A1162DB';
+       var accessCode = 'AVOH01EK30BS66HOSB';
       var encRequest = ccav.encrypt(body,workingKey);
       var reqdata = "encRequest="+encRequest+"&"+"access_code="+accessCode;
     
@@ -263,6 +263,7 @@ var model = {
         encRequest: encRequest,
         access_code: accessCode
     };
+    console.log(formData);
     resp.view("payment", formData);
 
     //   var url = {
