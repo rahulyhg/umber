@@ -216,12 +216,21 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
             $('.mobview-links').addClass('mobview-links-menu-out');
             $('.mobview-categories').removeClass('mobview-categories-menu-out');
             $('.mobview-categories').addClass('mobview-categories-menu-in');
+
+        };
+        $scope.closePromotions = function () {
+            $('.mobview-links').removeClass('mobview-links-menu-in');
+            $('.mobview-links').addClass('mobview-links-menu-out');
+            $('.mobview-promotions').removeClass('mobview-promotions-menu-out');
+            $('.mobview-promotions').addClass('mobview-promotions-menu-in');
         };
         $scope.slidebackToMobview = function () {
             $('.mobview-links').removeClass('mobview-links-menu-out');
             $('.mobview-links').addClass('mobview-links-menu-in');
             $('.mobview-categories ').removeClass('mobview-categories-menu-in');
             $('.mobview-categories ').addClass('mobview-categories-menu-out');
+            $('.mobview-promotions ').removeClass('mobview-promotions-menu-in');
+            $('.mobview-promotions').addClass('mobview-promotions-menu-out');
         };
 
         $scope.getSubCategories = function (category) {

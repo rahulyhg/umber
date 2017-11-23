@@ -214,7 +214,8 @@
         <form name="productSearchForm" nonvalidate>
             <div class="search-product">
                 <label for="search-input"><i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search Products</span></label>
-                <input type="text" class="form-control input-lg " ng-keypress="search($event,keyword)" ng-model="keyword" placeholder="Search Products">
+                <input type="text" class="form-control input-lg mobview-searchbar-input-lg" ng-keypress="search($event,keyword)" ng-model="keyword"
+                    placeholder="Search Products">
             </div>
         </form>
     </div>
@@ -293,6 +294,7 @@
                     <li><a ui-sref="myaccount({view: 'wishlistTab'})"><i class="fa fa-heart"></i>My Wishlist</a></li>
                     <li ng-if="!loggedUser"><a ng-click="openLoginModal10(); "><i class="fa fa-user" aria-hidden="true"></i>My Account</a></li>
                     <li ng-if="loggedUser"><a><i class="fa fa-user" aria-hidden="true"></i>My Account</a>
+                        <li ng-click="closePromotions();"><a href=""><i class="fa fa-gift" aria-hidden="true"></i>Promotions</a></li>
 
                         <ul class="list-unstyled" ng-if="loggedUser">
                             <li><a ui-sref="myaccount({view: 'profTab'})"><i class="fa fa-user-circle-o" aria-hidden="true"></i>My profile</a>                                </li>
@@ -325,6 +327,17 @@
                         </li>
                     </ul>
                 </uib-accordion>
+            </div>
+            <!--For promotions-->
+            <div class="mobview-promotions mobview-promotions-menu-out">
+                <ul class="list-unstyled mobview-promotions-link">
+                    <li>
+                        <p><a href="" class="padd0" ng-click="slidebackToMobview()"><i class="fa fa-arrow-left"></i></a></p>
+                    </li>
+                    <li ng-repeat="category in categories">
+                        <a ui-sref="listing-page({id: category.slug})">{{category.name}} </a>
+                    </li>
+                </ul>
             </div>
         </nav>
     </div>

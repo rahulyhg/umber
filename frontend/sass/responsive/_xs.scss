@@ -1,5 +1,8 @@
  @media (max-width: $screen-xs-max) {
      // Mobile
+     body {
+         padding-top: 105px;
+     }
      .side-nav {
          .links {
              width: 100%;
@@ -10,6 +13,19 @@
              font-size: 20px;
          }
      } //start of header
+     // Design for side navigation
+     .mobview-searchbar-input-lg {
+         height: 35px;
+     }
+     .mobview-side-nav {
+         width: 275px;
+         top: 105px;
+     }
+     .mobview-links,
+     .mobview-categories,
+     .mobview-promotions {
+         width: 90%;
+     }
      .mobview-header-navigation {
          @include align-items(center);
          @include display(flex);
@@ -28,9 +44,48 @@
          @include flex-wrap(nowrap);
          @include justify-content(flex-end);
      }
-     .navbar .navbar-right {
-         @include margin(0);
+     .navbar {
+         .navbar-right {
+             @include margin(0);
+             .added-cart-amnt {
+                 top: 15px;
+                 right: 0;
+             }
+         }
+     }
+     .navbar {
+         .navbar__sideNav {
+             @include padding(10px 0 10px 10px);
+         }
+         .navbar-brand {
+             @include padding(10px 5px!important);
+             img {
+                 width: 110px;
+             }
+         }
+     }
+     .nav li>a {
+         padding: 10px;
+     }
+     .mobview-search-bar {
+         top: 70px;
+     }
+     .search-product {
+         .fa-search {
+             font-size: 18px;
+         }
      } //End of header
+     //Start of home page
+     .cloth-cat {
+         .flexslider {
+             .flex-prev {
+                 left: 10px!important;
+             }
+             .flex-next {
+                 right: 10px!important;
+             }
+         }
+     } //End of home page
      //scss for about us page
      .contact-us .enquiry-form {
          padding: 35px 35px 35px 35px;

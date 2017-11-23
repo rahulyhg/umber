@@ -359,7 +359,7 @@
                                             }
 
                                             .padd0 {
-                                                padding: 0;
+                                                padding: 0!important;
                                             }
 
                                             .padd-rt0 {
@@ -1180,7 +1180,7 @@
                                                 background-color: $white;
                                                 border: 1px solid $borderColor;
                                                 box-shadow: 3px 3px 10px rgba(128, 128, 128, 0.26);
-                                                z-index: 9999;
+                                                z-index: 1030;
                                                 a {
                                                     color: $darkBrown1;
                                                     text-decoration: none;
@@ -1258,10 +1258,13 @@
                                                 }
                                             } //End of section promotion
                                             .mobview-links,
-                                            .mobview-categories {
-                                                position: fixed;
+                                            .mobview-categories,
+                                            .mobview-promotions {
                                                 width: 95%;
-                                                min-height: 10px;
+                                                height: 100%;
+                                                position: fixed;
+                                                overflow-x: hidden;
+                                                overflow-y: auto;
                                             }
 
                                             .mobview-links-menu-in {
@@ -1282,7 +1285,8 @@
                                                 @include transition-timing-function(ease);
                                             }
 
-                                            .mobview-categories-menu-in {
+                                            .mobview-categories-menu-in,
+                                            .mobview-promotions-menu-in {
                                                 @include transform(translate(0,
                                                 0));
                                                 @include transform-origin(right center);
@@ -1292,7 +1296,8 @@
                                                 @include transition-delay(0.1s);
                                             }
 
-                                            .mobview-categories-menu-out {
+                                            .mobview-categories-menu-out,
+                                            .mobview-promotions-menu-out {
                                                 @include transform(translate(2000px,
                                                 0));
                                                 @include transform-origin(right center);
@@ -1371,7 +1376,7 @@
                                             }
 
                                             .mobview-links li a,
-                                            {
+                                            .mobview-promotions-link li a {
                                                 @include padding(10px 15px);
                                                 color: #341314;
                                                 display: block;
@@ -1391,12 +1396,14 @@
                                                 .fa-heart,
                                                 .fa-user,
                                                 .fa-address-card-o,
-                                                .fa-sign-out {
+                                                .fa-sign-out,
+                                                .fa-gift {
                                                     margin-right: 10px;
                                                 }
                                             }
 
-                                            .mobview-categories {
+                                            .mobview-categories,
+                                            .mobview-promotions {
                                                 .fa-arrow-left {
                                                     padding-left: 15px;
                                                     color: $darkBrown1;
@@ -3525,7 +3532,7 @@
 
                                             .zoomLens,
                                             .zoomContainer {
-                                                z-index: 1060!important; // adjusted as per modal z-index;
+                                                z-index: 1020!important; // adjusted as per modal z-index and navigation;
                                             }
 
                                             .coupon-discount {
