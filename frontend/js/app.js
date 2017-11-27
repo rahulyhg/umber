@@ -150,7 +150,11 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             templateUrl: tempateURL,
             controller: 'CancelCtrl'
         })
-
+        .state('return', {
+            url: "/return/:id",
+            templateUrl: tempateURL,
+            controller: 'ReturnCtrl'
+        })
         .state('gift', {
             url: "/gift-card",
             templateUrl: tempateURL,

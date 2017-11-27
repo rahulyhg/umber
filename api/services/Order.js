@@ -249,32 +249,32 @@ var model = {
     //     });
     // },
 
-    hdfcPaymentGateway: function(data, resp){
+    hdfcPaymentGateway: function (data, resp) {
         console.log("in hdfc payment gateway");
-       var ccav = require('./ccavutil.js');
-        var body ="merchant_id=150530&order_id=123456789&currency=INR&amount=20&redirect_url=http://umber.wohlig.co.in/api/order/gatewayResponse&cancel_url=http://umber.wohlig.co.in/api/order/cancelResponse&language=EN";
-        
-       var workingKey = '236E7613D01B3B0BDAA4805D6A1162DB';
-       var accessCode = 'AVOH01EK30BS66HOSB';
-      var encRequest = ccav.encrypt(body,workingKey);
-      var reqdata = "encRequest="+encRequest+"&"+"access_code="+accessCode;
-    
-      var formData = {
-        encRequest: encRequest,
-        access_code: accessCode
-    };
-    console.log(formData);
-    resp.view("payment", formData);
+        var ccav = require('./ccavutil.js');
+        var body = "merchant_id=150530&order_id=123456789&currency=INR&amount=20&redirect_url=http://umber.wohlig.co.in/api/order/gatewayResponse&cancel_url=http://umber.wohlig.co.in/api/order/cancelResponse&language=EN";
 
-    //   var url = {
-    //     url: 'https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction',
-    //      body: reqdata
-    //      };
-    //      console.log(url)
-    //   request.post(url, function(error, response, body){
-    //         console.log(error,body);
-    //         resp.send(body)
-    // });
+        var workingKey = '236E7613D01B3B0BDAA4805D6A1162DB';
+        var accessCode = 'AVOH01EK30BS66HOSB';
+        var encRequest = ccav.encrypt(body, workingKey);
+        var reqdata = "encRequest=" + encRequest + "&" + "access_code=" + accessCode;
+
+        var formData = {
+            encRequest: encRequest,
+            access_code: accessCode
+        };
+        console.log(formData);
+        resp.view("payment", formData);
+
+        //   var url = {
+        //     url: 'https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction',
+        //      body: reqdata
+        //      };
+        //      console.log(url)
+        //   request.post(url, function(error, response, body){
+        //         console.log(error,body);
+        //         resp.send(body)
+        // });
 
     },
 
@@ -451,6 +451,7 @@ var model = {
     //                        - comment: comment associated with product if any
     //               status - 'returned/cancelled'
     cancelProducts: function (data, callback) {
+        // console.log("data data *************************************", data)
         var updatedOrder = [];
         async.waterfall([
             function checkUser(cbWaterfall) {
@@ -460,6 +461,7 @@ var model = {
 
                 if (user._id == data.user) {
                     async.each(data.products, function (product, eachCallback) {
+                        // console.log("productproductproduct", product);
                         async.waterfall([
                             function findProduct(cbSubWaterfall) {
                                 Product.findOne({
@@ -468,7 +470,11 @@ var model = {
                             },
                             function deductQuantity(foundProduct, cbSubWaterfall1) {
                                 var deductPrice = foundProduct.price * product.quantity;
-
+                                if (data.return) {
+                                    var orderStatus = "returned"
+                                } else {
+                                    var orderStatus = "cancelled"
+                                }
                                 Order.findOneAndUpdate({
                                     _id: mongoose.Types.ObjectId(data.orderId),
                                     "products.product": mongoose.Types.ObjectId(product.product)
@@ -483,13 +489,13 @@ var model = {
                                             product: mongoose.Types.ObjectId(product.product),
                                             quantity: product.quantity,
                                             price: deductPrice,
-                                            status: product.status,
+                                            status: orderStatus,
                                             comment: product.comment
                                         }
                                     },
-                                    $set: {
-                                        orderStatus: "cancelled"
-                                    }
+                                    // $set: {
+                                    //     orderStatus: orderStatus
+                                    // }
                                 }, {
                                     new: true
                                 }).exec(function (err, updatedProduct) {
@@ -497,7 +503,7 @@ var model = {
                                         var cancelProduct = _.remove(updatedProduct.products, function (product) {
                                             return product.quantity == 0;
                                         });
-                                        console.log("Cancelled product: ", updatedProduct);
+                                        // console.log("Cancelled product: ", updatedProduct);
                                         Order.saveData(updatedProduct, function (err, order) {
                                             console.log("Saving updated order: ", err, order);
                                             updatedOrder.push(updatedProduct);
@@ -727,7 +733,7 @@ var model = {
     },
     //API to send cancel product email
     cancelProductEmail: function (data, callback) {
-        // console.log("User >>> cancelProductEmail >>> User.findOneAndUpdate >>> data", data);
+        console.log("User >>> cancelProductEmail >>> User.findOneAndUpdate >>> data", data);
         User.findOne({
             _id: data._id
         }).exec(function (error, created) {
@@ -747,7 +753,7 @@ var model = {
                         var emailData = {};
                         var total = 0;
                         emailData.email = created.email;
-                        emailData.subject = "BurntUmber returned product Order";
+                        emailData.subject = "BurntUmber cancelled product Order";
                         emailData.filename = "cancelled-product-emailer.ejs";
                         emailData.from = "harsh@wohlig.com"
                         emailData.firstname = created.firstName;

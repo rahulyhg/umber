@@ -3,7 +3,7 @@ crossorigin="anonymous">
 <form action="https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction" name="payment" method="POST">
 <input type="hidden" value="<%= encRequest %>" name="encRequest" />
 <input type="hidden" value="<%= access_code %>" name="access_code" />
-<button style="display:none;" type="submit" class="submitForm"> SUBMIT </button>
+<button type="submit" class="submitForm"> SUBMIT </button>
 </form>
 <div class="container">
 <h3 class="text-center" style="padding:20%;">Loading EBS Payment Gateway</h3>
@@ -12,6 +12,6 @@ crossorigin="anonymous">
 crossorigin="anonymous"></script>
 <script>
 $(document).ready(function () {
-    $(".submitForm").click();
+    // $(".submitForm").click();
 });
 </script>
