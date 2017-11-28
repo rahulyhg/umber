@@ -133,7 +133,28 @@ var controller = {
         }
     },
     hdfcPaymentGateway: function (req, res) {
-        Order.hdfcPaymentGateway(req.body, res)
+        // Order.hdfcPaymentGateway(req.body, res)
+        console.log("in hdfc payment gateway");
+        
+        
+                var body = '',
+                workingKey = '236E7613D01B3B0BDAA4805D6A1162DB',	//Put in the 32-Bit key shared by CCAvenues.
+                accessCode = 'AVOH01EK30BS66HOSB',			//Put in the Access Code shared by CCAvenues.
+                encRequest = '',
+                formbody = '';
+                            
+                req.on('data', function (data) {
+                body += data;
+                encRequest = ccav.encrypt(body,workingKey); 
+                formbody = '<form id="nonseamless" method="post" name="redirect" action="https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"/> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><script language="javascript">document.redirect.submit();</script></form>';
+                });
+                            
+                req.on('end', function () {
+                    response.writeHeader(200, {"Content-Type": "text/html"});
+                response.write(formbody);
+                response.end();
+                });
+        
     }
 };
 module.exports = _.assign(module.exports, controller);
