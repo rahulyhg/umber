@@ -252,7 +252,7 @@ var model = {
     hdfcPaymentGateway: function (data, resp) {
         console.log("in hdfc payment gateway");
         var ccav = require('./ccavutil.js');
-        var body = "merchant_id=150530&order_id=123456789&currency=INR&amount=20&redirect_url=http://umber.wohlig.co.in/api/order/gatewayResponse&cancel_url=http://umber.wohlig.co.in/api/order/cancelResponse&language=EN";
+        var body = "tid=1234&merchant_id=150530&order_id=123456789&currency=INR&amount=20&redirect_url=http://umber.wohlig.co.in/api/order/gatewayResponse&cancel_url=http://umber.wohlig.co.in/api/order/cancelResponse&language=EN";
 
         var workingKey = '236E7613D01B3B0BDAA4805D6A1162DB';
         var accessCode = 'AVOH01EK30BS66HOSB';
