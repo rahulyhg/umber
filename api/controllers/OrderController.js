@@ -145,7 +145,7 @@ var controller = {
                 formbody = '';
                             
                 // req.on('data', function (data) {
-                body += req.body;
+                body += req.data;
                 encRequest = ccav.encrypt(body,workingKey); 
                 var formData = {
                     encRequest: encRequest,
