@@ -33,20 +33,21 @@
 
      if ($stateParams.cat) {
          ProductService.productWithCategory(data, function (data) {
-             //  console.log("$$$$$$$in categoryProduct cat", data.data.data)
+             //  console.log("$$$$$$$in categoryProduct cat", data.data.data);
              $scope.products = _.chunk(data.data.data, 3);
          })
      }
 
      if (!$stateParams.cat) {
          ProductService.getFeatured(function (data) {
-             //  console.log("$$$$$$$in categoryProduct", data.data.data);
              $scope.filters = {};
              $scope.products = _.chunk(data.data.data.featureds, 3);
              $scope.categories = data.data.data.category;
              $scope.filters.types = data.data.data.type;
              $scope.filters.collections = data.data.data.collection;
-             $scope.filters.sizes = data.data.data.size;
+             $scope.filters.sizes = _.sortBy(data.data.data.size, [function (o) {
+                 return o.order;
+             }]);
              $scope.filters.styles = data.data.data.style;
              $scope.filters.colors = data.data.data.color;
              $scope.filters.fabrics = data.data.data.fabric;
@@ -80,7 +81,7 @@
              if (!$stateParams.id) {
                  var data = {};
                  data.slug = $scope.categories[0].slug;
-                 $scope.filteredProducts(slug)
+                 $scope.filteredProducts(data.slug)
              }
 
          })
@@ -145,7 +146,16 @@
                      });
                      $scope.products.push(arrray);
                      $scope.products = _.flattenDeep($scope.products);
-                     $scope.products = _.chunk($scope.products, 3);
+                     _.each($scope.products, function (prod) {
+                         prod.sizes = _.sortBy(prod.sizes, [function (o) {
+                             return o.order;
+                         }]);
+                         $scope.isSorted = true;
+                     });
+
+                     if ($scope.isSorted) {
+                         $scope.products = _.chunk($scope.products, 3);
+                     }
 
                      ListingService.retriveFiltersWithCategory(function (data) {
                          //  console.log("product category on basis of category", data.data.data)
@@ -366,7 +376,16 @@
      $scope.getProductsWithAppliedFilters = function (appliedFilters) {
          ProductService.getProductsWithAppliedFilters(appliedFilters, function (data) {
              $scope.products = [];
-             $scope.products = _.chunk(data.data.data.products, 3);
+             _.each(data.data.data.products, function (prod) {
+                 prod.sizes = _.sortBy(prod.sizes, [function (o) {
+                     return o.order;
+                 }]);
+                 $scope.isSorting = true;
+             });
+             if ($scope.isSorting) {
+                 $scope.products = _.chunk(data.data.data.products, 3);
+             }
+
              $scope.filters = data.data.data.filters;
              //  if (key == "discount") {
              //      $scope.products = _.chunk(filter.products, 3);
@@ -397,7 +416,16 @@
      if ($.jStorage.get("appliedFilters")) {
          ProductService.getProductsWithAppliedFilters($.jStorage.get("appliedFilters"), function (data) {
              console.log("filtersretrived:::", data.data.data);
-             $scope.products = _.chunk(data.data.data.products, 3);
+             _.each(data.data.data.products, function (prod) {
+                 prod.sizes = _.sortBy(prod.sizes, [function (o) {
+                     return o.order;
+                 }]);
+                 $scope.isSorting = true;
+             });
+             if ($scope.isSorting) {
+                 $scope.products = _.chunk(data.data.data.products, 3);
+             }
+             //  $scope.products = _.chunk(data.data.data.products, 3);
              $scope.filters = data.data.data.filters;
              if (!_.isEmpty($scope.filters.types)) {
                  $scope.showType = true;
@@ -434,6 +462,9 @@
                      var arrray = [];
                      arrray = _.flattenDeep($scope.products);
                      _.each(data.data.data.products, function (n) {
+                         n.sizes = _.sortBy(n.sizes, [function (o) {
+                             return o.order;
+                         }]);
                          arrray.push(n);
                      });
                      $scope.products = _.chunk(arrray, 3);
@@ -692,9 +723,13 @@
          $scope.product = prod;
 
          if ($scope.product.sizes) {
-             $scope.sizes = $scope.product.sizes
+             $scope.sizes = _.sortBy($scope.product.sizes, [function (o) {
+                 return o.order;
+             }]);
          } else if (!$scope.product.sizes) {
-             $scope.sizes = $scope.product.size;
+             $scope.sizes = _.sortBy($scope.product.size, [function (o) {
+                 return o.order;
+             }]);
          }
          console.log($scope.sizes);
          if (angular.isArray($scope.sizes)) {
