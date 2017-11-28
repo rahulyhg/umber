@@ -566,7 +566,6 @@
          if ($scope.mycart) {
 
              $scope.mycart = $scope.mycart.products;
-             console.log("mycartfor offlinetooltip::::", $scope.mycart)
              $scope.tempcart = [];
              if ($scope.mycart) {
                  for (var i = 0; i < $scope.mycart.length; i++) {
@@ -615,7 +614,6 @@
              data.accessToken = $.jStorage.get("accessToken");
              data.productId = prodId;
              WishlistService.removeProduct(data, function (data) {
-                 console.log(data);
                  $state.reload();
              })
          } else {
@@ -626,8 +624,6 @@
      }
 
      $scope.addRemoveToWishlist = function (product) {
-         console.log("in addremoveToWishList product", product);
-         console.log("(userId.userId", userId.userId);
          if (userId.userId) {
 
              var result = _.find($scope.wishlist, {
@@ -711,12 +707,10 @@
          var productId = [];
          var grandTotal = 0;
          productId.push(prod._id);
-         console.log(productId, "ProductId");
          myService.applicableDiscounts(productId, grandTotal, function (data1) {
              //  console.log("called api applicableDiscounts");
              $scope.applicableDiscounts = data1;
              $scope.applicableDiscountsLength = $scope.applicableDiscounts.length;
-             console.log("$scope.applicableDiscounts", $scope.applicableDiscounts);
 
 
          });

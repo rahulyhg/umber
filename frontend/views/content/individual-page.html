@@ -152,7 +152,7 @@
                                     <div class="col-md-5 col-sm-5">
                                         <div class="leftContent">
                                             <ul class="list-unstyled">
-                                                <li>
+                                                <li ng-if="product.brand">
                                                     <div class="inline-block leftContent__specHead">
                                                         <p>Brand</p>
                                                     </div>
@@ -164,7 +164,7 @@
                                                         </ul>
                                                     </div>
                                                 </li>
-                                                <li>
+                                                <li ng-if="product.prodCollection">
                                                     <div class="inline-block leftContent__specHead">
                                                         <div>
                                                             <p>Collection</p>
@@ -178,7 +178,7 @@
                                                         </ul>
                                                     </div>
                                                 </li>
-                                                <li>
+                                                <li ng-if="product.style">
                                                     <div class="inline-block leftContent__specHead">
                                                         <div>
                                                             <p>Sleeve</p>
@@ -192,7 +192,7 @@
                                                         </ul>
                                                     </div>
                                                 </li>
-                                                <li>
+                                                <li ng-if="product.fabric">
                                                     <div class="inline-block leftContent__specHead">
                                                         <p>Fabric</p>
                                                     </div>
@@ -204,7 +204,7 @@
                                                         </ul>
                                                     </div>
                                                 </li>
-                                                <li>
+                                                <li ng-if="product.color">
                                                     <div class="inline-block leftContent__specHead">
                                                         <div>
                                                             <p>Color</p>
@@ -222,7 +222,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-sm-7">
-                                        <div class="right-content">
+                                        <div class="right-content" ng-if="product.washcare">
                                             <p class="marg0 weight-600">Washcare</p>
                                             <p class="washcare">{{product.washcare}}
                                             </p>
