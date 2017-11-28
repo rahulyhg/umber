@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div class="login-tab" ng-if="!loggedUser && view=='loginTab'">
-                        <div class="col-md-3 col-md-offset-1 col-sm-6">
+                        <div class="col-md-3 col-md-offset-1 col-sm-6 col-xs-12">
                             <form class="customized-form " name="loginForm1" novalidate>
                                 <div class="form-group">
                                     <input type="email" placeholder="Email" ng-model="loginData.email" class="form-control" name="email" required uib-popover="{{loginForm1.email.$touched && loginForm1.email.$invalid ||loginForm1.email.$error.email && loginForm1.email.$error.required }}"
@@ -74,7 +74,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-md-3 col-md-offset-1  col-sm-6">
+                        <div class="col-md-3 col-md-offset-1  col-sm-6 col-xs-12">
                             <form class="customized-form custom-checkbox " name="loginForm" novalidate>
                                 <div class="form-group">
                                     <input type="text" placeholder="First Name" name="firstname" ng-model="registerData.firstname" class="form-control" required
@@ -155,7 +155,7 @@
                         </div>
                     </div>
                     <div class="order-tab" ng-if="loggedUser&&view=='orderTab'">
-                        <div class="col-md-9 col-sm-12">
+                        <div class="col-md-9 col-sm-12 col-xs-12">
                             <table class="table order-table table-bottom ">
                                 <thead>
                                     <tr>

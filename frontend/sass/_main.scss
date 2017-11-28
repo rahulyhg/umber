@@ -380,9 +380,6 @@
 
                                             .section-tp-bt-padd {
                                                 @include padding(15px 0);
-                                                p {
-                                                    margin-bottom: 15px;
-                                                }
                                             }
 
                                             .width100 {
@@ -3450,11 +3447,23 @@
                                                 .flex-direction-nav a {
                                                     width: 100px;
                                                     display: inline-block; // position: relative;
+                                                }
+                                                .flex-direction-nav .flex-prev {
                                                     &:before {
-                                                        content: ''; // color: $darkBrown1;
-                                                        // display: inline-block;
-                                                        // font-family: FontAwesome;
-                                                        // font-size: 16px;
+                                                        font-family: FontAwesome;
+                                                        content: "\f177";
+                                                        color: $darkBrown1;
+                                                        font-size: 16px;
+                                                        vertical-align: middle;
+                                                    }
+                                                }
+                                                .flex-direction-nav .flex-next {
+                                                    &:before {
+                                                        font-family: FontAwesome;
+                                                        content: "\f178";
+                                                        color: $darkBrown1;
+                                                        font-size: 16px;
+                                                        vertical-align: middle;
                                                     }
                                                 }
                                                 .action-btn {

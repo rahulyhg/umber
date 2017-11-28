@@ -23,7 +23,7 @@
                                         <div class=" action relate">
                                             <!-- <a href="#" class=" action"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> <span class="action-btn">Previous</span></a> -->
                                             <ul class="flex-direction-nav">
-                                                <li class="flex-nav-prev"><a class="action flex-prev " href="#"><i class="fa fa-long-arrow-left" aria-hidden="true"></i><span class="action-btn">Previous</span></a></li>
+                                                <li class="flex-nav-prev"><a class="action flex-prev " href="#"><span class="action-btn">Previous</span></a></li>
                                             </ul>
                                         </div>
 
@@ -41,7 +41,7 @@
                                     <div class="flex-item text-right">
                                         <div class="action relate">
                                             <ul class="flex-direction-nav">
-                                                <li class="flex-nav-next"><a class="action flex-next pull-right" href="#"><i class="fa fa-long-arrow-right"></i><span class="action-btn">Next</span></a></li>
+                                                <li class="flex-nav-next"><a class="action flex-next pull-right" href="#"><span class="action-btn">Next</span></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -52,8 +52,8 @@
                 </flex-slider>
                 <div class="also-view">
                     <h3 class="inner-blog-title text-uppercase">Also view</h3>
-                    <div class="flex-item-container">
-                        <div class="flex-item" ng-repeat="blogs in removedBlog">
+                    <flex-slider flex-slide="blogs in removedBlog track by $index" animation="slide" item-width="300" min-items="3" slideshow-speed="2000">
+                        <li>
                             <div class="blog__banner-detail relate">
                                 <img ng-src="{{blogs.image |serverimage}}" alt="User photo" class="img-responsive">
                                 <div class="blog__desc">
@@ -62,10 +62,9 @@
                                     <p class="relate extra-content"><a ui-sref="inner-blogs({id:blogs._id})">Read more</a></p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </li>
+                    </flex-slider>
                 </div>
             </div>
         </div>
-    </div>
 </articale>
