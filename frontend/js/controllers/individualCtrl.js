@@ -24,11 +24,12 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
         var grandTotal = 0;
         if (data.data.value) {
             $scope.product = data.data.data;
-            console.log("avinash Product console",$scope.product);
+            // console.log("avinash Product console", $scope.product);
             $scope.productImages = _.sortBy($scope.product.images, ['order']);
             $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
-            $scope.sizes = $scope.product.sizes;
-
+            $scope.sizes = _.sortBy($scope.product.sizes, [function (o) {
+                return o.order;
+            }]);
             $scope.selectedSize = $scope.sizes[0];
             $scope.activeButton = $scope.selectedSize.name;
             productId.push($scope.product._id);
@@ -36,7 +37,7 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
             myService.applicableDiscounts(productId, grandTotal, function (data1) {
                 //  console.log("called api applicableDiscounts");
                 $scope.applicableDiscounts = data1;
-                $scope.applicableDiscountsLength=$scope.applicableDiscounts.length;
+                $scope.applicableDiscountsLength = $scope.applicableDiscounts.length;
                 console.log("$scope.applicableDiscounts", $scope.applicableDiscounts);
                 // _.each($scope.applicableDiscounts, function (n) {
                 //     console.log(n);

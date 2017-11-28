@@ -569,7 +569,7 @@ var model = {
         // console.log("productWithCategory^^^^^", data);
         Product.find({
             category: data.catId
-        }).limit(data.limit).skip(data.skip).exec(function (err, product) {
+        }).deepPopulate("homeCategory category brand prodCollection fabric type color size").limit(data.limit).skip(data.skip).exec(function (err, product) {
             if (err) {
                 callback(err, "error in mongoose productWithCategory");
             } else {
@@ -649,7 +649,7 @@ var model = {
                                 _id: {
                                     $in: sizes
                                 }
-                            }).sort("name").exec(cbParallel3);
+                            }).sort("order").exec(cbParallel3);
                         });
                     },
                     colors: function (cbParallel4) {

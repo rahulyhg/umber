@@ -77,11 +77,19 @@
                  //  _.each($scope.product, function (n) {
                  //      $scope.productss.push(n);
                  //  })
-                 $scope.products = _.chunk($scope.product, 3);
+                 _.each($scope.product, function (prod) {
+                     prod.size = _.sortBy(prod.size, [function (o) {
+                         return o.order;
+                     }]);
+                     $scope.sortesSize = true;
+                 });
+                 if ($scope.sortesSize) {
+                     $scope.products = _.chunk($scope.product, 3);
+                 }
                  $scope.filters = data.data.data;
                  $scope.priceRange.push(data.data.data.price);
                  $scope.priceRange = _.flattenDeep($scope.priceRange)
-                 console.log("PriceRange", $scope.priceRange)
+                 console.log("PriceRange", $scope.priceRange);
                  $scope.price = {
                      max: Math.max.apply(null, $scope.priceRange),
                      min: Math.min.apply(null, $scope.priceRange)
@@ -158,7 +166,7 @@
                  $scope.appliedFilters[key].push(filter);
              }
              $scope.appliedFilters[key1].push(filter1);
-             console.log("$$$$$$$$$$$$$in apply filters", $scope.appliedFilters)
+             //  console.log("$$$$$$$$$$$$$in apply filters", $scope.appliedFilters)
          }
          $.jStorage.set('appliedFilterss', $scope.appliedFilters);
 
@@ -250,6 +258,7 @@
      /******filters applied automatic if already applied****** */
 
      $scope.loadMore = function () {
+         console.log("loadMore:::", loadMore);
          var appliedFilters = $.jStorage.get("appliedFilters");
          appliedFilters.page++;
          ProductService.getProductsWithAppliedFilters(appliedFilters, function (data) {
@@ -257,6 +266,12 @@
              //  $scope.products.push(_.chunk(data.data.data.products, 3));
              var arrray = _.flattenDeep($scope.products);
              arrray.push(data.data.data.products);
+             _.each(arrray, function (arr) {
+                 arr.size = _.sortBy(arr.size, [function (o) {
+                     return o.order;
+                 }]);
+                 $scope.sortesSize = true;
+             })
              $scope.products = _.chunk(arrray, 3);
              $scope.filters = data.data.data.filters;
          })
@@ -494,8 +509,10 @@
      $scope.quickviewProduct = function (prod) {
          console.log("prod", prod);
          $scope.product = prod;
-         $scope.sizes = $scope.product.size;
-         console.log("$scope.sizes", $scope.sizes);
+         //  $scope.sizes = $scope.product.size;
+         $scope.sizes = _.sortBy($scope.product.size, [function (o) {
+             return o.order;
+         }]);
          $scope.activeButton = $scope.sizes[0].name;
          //  $scope.activeButton = $scope.sizes.name;
          $scope.selectedSize = $scope.sizes;
