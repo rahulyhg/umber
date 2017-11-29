@@ -73,7 +73,7 @@ var schema = new Schema({
     trackingId: String,
     orderStatus: {
         type: String,
-        enum: ['processing', 'shipped', 'delivered', 'returned', 'cancelled'],
+        enum: ['processing', 'shipped', 'delivered', 'returned', 'cancelled', 'pending'],
         default: 'processing'
     },
     discountCouponId: {
@@ -282,6 +282,12 @@ var model = {
         // console.log("In createorderfromcart", data);
         if (data.paymentMethod == "Cash on delivery") {
             var paymentMethod = "cod";
+        } else if (data.paymentMethod == "Credit Card") {
+            var paymentMethod = "cc";
+        } else if (data.paymentMethod == "Debit card") {
+            var paymentMethod = "dc";
+        } else {
+            var paymentMethod = "netbank";
         }
         var gifts = data.gifts;
         var allData = data;
@@ -323,6 +329,9 @@ var model = {
                     if (data.selectedDiscount) {
                         order.discountAmount = data.selectedDiscount.discountAmount;
                         order.amountAfterDiscount = data.selectedDiscount.grandTotalAfterDiscount;
+                    }
+                    if (!paymentMethod == "Cash on delivery"); {
+                        order.orderStatus = "pending";
                     }
                     order.paymentMethod = paymentMethod;
                     order.gifts = gifts;
