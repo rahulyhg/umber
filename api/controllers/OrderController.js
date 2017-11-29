@@ -132,33 +132,22 @@ var controller = {
             });
         }
     },
-    postReq: function (request, response) {
+    postReq: function (req, res) {
         console.log("in post request");
         var http = require('http'),
-        fs = require('fs'),
-        qs = require('querystring');
+            fs = require('fs'),
+            qs = require('querystring');
         var ccav = require('./ccavutil.js');
         var body = '',
             workingKey = '236E7613D01B3B0BDAA4805D6A1162DB', //Put in the 32-Bit key shared by CCAvenues.
             accessCode = 'AVOH01EK30BS66HOSB', //Put in the Access Code shared by CCAvenues.
             encRequest = '',
             formbody = '';
+        body += req.body;
+        encRequest = ccav.encrypt(body, workingKey);
+        formbody = '<form id="nonseamless" method="post" name="redirect" action="https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"/> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><script language="javascript">document.redirect.submit();</script></form>';
 
-        request.on('data', function (data) {
-            console.log(data);
-            body += data;
-            encRequest = ccav.encrypt(body, workingKey);
-            formbody = '<form id="nonseamless" method="post" name="redirect" action="https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"/> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><script language="javascript">document.redirect.submit();</script></form>';
-        });
-
-        request.on('end', function () {
-            response.writeHeader(200, {
-                "Content-Type": "text/html"
-            });
-            response.write(formbody);
-            response.end();
-        });
-        return;
+        res.send(formbody);
     },
     hdfcPaymentGateway: function (req, res) {
         // Order.hdfcPaymentGateway(req.body, res)
@@ -174,7 +163,7 @@ var controller = {
 
         // req.on('data', function (data) {
         body += req.data;
-        encRequest = ccav.encrypt("tid=1511879093778&merchant_id=150530&order_id=123654789&amount=1.00currency=INR&redirect_url=http://wohlig.co.in/umber/PHP_Kit/NON_SEAMLESS_KIT/ccavResponseHandler.php&cancel_url=http://wohlig.co.in/umber/PHP_Kit/NON_SEAMLESS_KIT/ccavResponseHandler.php&language=EN&billing_name=&billing_address=&billing_city=&billing_state=&billing_zip=&billing_country=&billing_tel=&billing_email=&delivery_name=&delivery_address=&delivery_city=&delivery_state=&delivery_zip=&delivery_country=&delivery_tel=&merchant_param1=&merchant_param2=&merchant_param3=&merchant_param4=&merchant_param5=&promo_code=&customer_identifier=&", workingKey);
+        encRequest = ccav.encrypt(body, workingKey);
         var formData = {
             encRequest: encRequest,
             access_code: accessCode
