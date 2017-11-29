@@ -143,7 +143,10 @@ var controller = {
             accessCode = 'AVOH01EK30BS66HOSB', //Put in the Access Code shared by CCAvenues.
             encRequest = '',
             formbody = '';
-        body += req.body;
+
+        _.each(req.body, function (val, key) {
+            body += key + '=' + val + '&';
+        });
         console.log(body);
         encRequest = ccav.encrypt(body, workingKey);
         formbody = '<form id="nonseamless" method="post" name="redirect" action="https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"/> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><script language="javascript">document.redirect.submit();</script></form>';
