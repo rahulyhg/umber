@@ -3,6 +3,7 @@ crossorigin="anonymous">
 <form action="https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction" name="payment" method="POST">
 <input type="hidden" value="<%= encRequest %>" name="encRequest" />
 <input type="hidden" value="<%= access_code %>" name="access_code" />
+<input type="text" name="currency" value="INR" />
 <button type="submit" class="submitForm"> SUBMIT </button>
 </form>
 <div class="container">

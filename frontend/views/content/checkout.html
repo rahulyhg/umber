@@ -39,7 +39,9 @@
                                         uib-popover="{{loginForm1.password.$touched && loginForm1.password.$invalid}}" popover-title="Please enter your password"
                                         popover-placement="bottom" popover-class="login-popover" popover-is-open="loginForm1.password.$touched && loginForm1.password.$invalid"
                                         popover-trigger="'none'">
-                                    <p class="pull-right forgot__checkout"><a ng-click="forgotPassword()">Forgot Password?</a></p>
+                                    <p class="pull-right forgot__checkout">
+                                        <a ng-click="forgotPassword()">Forgot Password?</a>
+                                    </p>
                                 </div>
                                 <div>
                                     <button class="btn btn--login btn-block" ng-click="login()" ng-disabled="loginForm1.email.$invalid || loginForm1.password.$invalid"
@@ -116,7 +118,7 @@
                                 </div>
                                 <div class="checkbox forgot__checkout">
                                     <input type="checkbox" id="a1" ng-model="registerData.agree" name="agree" required>
-                                    <label for="a1">  I agree with the terms and conditions and privacy policy</label>
+                                    <label for="a1"> I agree with the terms and conditions and privacy policy</label>
                                 </div>
                                 <div>
                                     <button class="btn btn--login btn-block" ng-disabled="loginForm.firstname.$invalid || 
@@ -219,9 +221,15 @@
 
                             </div>
                             <div class="pull-right ">
-                                <p class="text-right ">ITEM(S) SUBTOTAL : <span>&#x20b9 {{grandTotal}}</span></p>
-                                <p class="text-right " ng-if="discountAmount">MEMBER'S DISCOUNT : <span>&#x20b9 {{discountAmount}}</span></p>
-                                <p class="text-right " ng-if="grandTotalAfterDiscount">GRAND TOTAL : <span>&#x20b9 {{grandTotalAfterDiscount}}</span></p>
+                                <p class="text-right ">ITEM(S) SUBTOTAL :
+                                    <span>&#x20b9 {{grandTotal}}</span>
+                                </p>
+                                <p class="text-right " ng-if="discountAmount">MEMBER'S DISCOUNT :
+                                    <span>&#x20b9 {{discountAmount}}</span>
+                                </p>
+                                <p class="text-right " ng-if="grandTotalAfterDiscount">GRAND TOTAL :
+                                    <span>&#x20b9 {{grandTotalAfterDiscount}}</span>
+                                </p>
                                 <button class="btn btn--list" ng-disabled="!loggedUser" ng-click="proceedToDetailTab();" ng-class="{
                         'btn--brownActive': view=='detailTab' }"> Next</button>
                             </div>
@@ -332,10 +340,10 @@
                                                         <div class="col-md-10 col-sm-12">
                                                             <div class=" form-control relate country-selection ">
                                                                 <i class="fa fa-angle-down pull-right " aria-hidden="true "></i>
-                                                                <select ng-model="user.billingAddress.country " ng-init="user.billingAddress.country = 'India'" class="checkout-drop relate "> 
-                                                                <option ng-repeat="country in countries">{{country.name}}</option>
-                                                           
-                                                            </select>
+                                                                <select ng-model="user.billingAddress.country " ng-init="user.billingAddress.country = 'India'" class="checkout-drop relate ">
+                                                                    <option ng-repeat="country in countries">{{country.name}}</option>
+
+                                                                </select>
                                                             </div>
                                                             <!--<div class="dropdown country-selection form-control custom-checkbox ">
                                                             <button class="btn checkout-drop dropdown-toggle " type="button
@@ -380,10 +388,10 @@
                             " class="form-control " ng-required="true" ng-if="user.billingAddress.country != 'India'">
                                                             <div ng-if="user.billingAddress.country == 'India'" class=" form-control relate country-selection ">
                                                                 <i class="fa fa-angle-down pull-right " aria-hidden="true "></i>
-                                                                <select ng-model="user.billingAddress.state " ng-init="user.billingAddress.country = 'India'" class="checkout-drop relate "> 
-                                    <option ng-repeat="state in states">{{state}}</option>
-                               
-                                </select>
+                                                                <select ng-model="user.billingAddress.state " ng-init="user.billingAddress.country = 'India'" class="checkout-drop relate ">
+                                                                    <option ng-repeat="state in states">{{state}}</option>
+
+                                                                </select>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -455,9 +463,9 @@
                                                         <div class="col-md-10 col-sm-12">
                                                             <div class=" form-control relate country-selection " uib-dropdown>
                                                                 <i class="fa fa-angle-down pull-right " aria-hidden="true "></i>
-                                                                <select class="checkout-drop relate " ng-init="user.deliveryAddress.country = 'India'" ng-model="user.deliveryAddress.country "> 
-                                                                        <option ng-repeat="country in countries">{{country.name}}</option>
-                                                            </select>
+                                                                <select class="checkout-drop relate " ng-init="user.deliveryAddress.country = 'India'" ng-model="user.deliveryAddress.country ">
+                                                                    <option ng-repeat="country in countries">{{country.name}}</option>
+                                                                </select>
                                                                 <!-- <button class="btn country-dropdown--btn text-capitalize" ng-model="user.deliveryAddress.country " type="button" uib-dropdown-toggle>{{user.deliveryAddress.country = 'India'}} <span class="caret"></span></button>
 
                                                                 <ul class=" dropdown-menu text-capitalize" uib-dropdown-menu role="menu" ng-init="user.deliveryAddress.country = 'India'">
@@ -507,9 +515,9 @@
 
                                                             <div class=" form-control relate country-selection " ng-if="user.deliveryAddress.country=='India'">
                                                                 <i class="fa fa-angle-down pull-right " aria-hidden="true "></i>
-                                                                <select class="checkout-drop relate " ng-init="user.deliveryAddress.country = 'India'" ng-model="user.deliveryAddress.state "> 
-                                            <option ng-repeat="state in states">{{state}}</option>
-                                </select>
+                                                                <select class="checkout-drop relate " ng-init="user.deliveryAddress.country = 'India'" ng-model="user.deliveryAddress.state ">
+                                                                    <option ng-repeat="state in states">{{state}}</option>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -536,6 +544,72 @@
 
                                         </div>
                                     </form>
+                                    <form method="POST" name="customerData" action="http://umber.wohlig.co.in/api/Order/postReq">
+                                        <table width="40%" height="100" border='1' align="center">
+                                            <caption>
+                                                <font size="4" color="blue">
+                                                    <b>Integration Kit</b>
+                                                </font>
+                                            </caption>
+                                        </table>
+                                        <table width="40%" height="100" border='1' align="center">
+                                            <tr>
+                                                <td>Parameter Name:</td>
+                                                <td>Parameter Value:</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">Compulsory information</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Merchant Id</td>
+                                                <td>
+                                                    <input type="text" name="merchant_id" id="merchant_id" value="150530" /> </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Order Id</td>
+                                                <td>
+                                                    <input type="text" name="order_id" value="1" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Currency</td>
+                                                <td>
+                                                    <input type="text" name="currency" value="INR" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Amount</td>
+                                                <td>
+                                                    <input type="text" name="amount" value="1.00" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Redirect URL</td>
+                                                <td>
+                                                    <input type="text" name="redirect_url" value="http://127.0.0.1:3001/ccavResponseHandler" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Cancel URL</td>
+                                                <td>
+                                                    <input type="text" name="cancel_url" value="http://127.0.0.1:3001/ccavResponseHandler" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Language</td>
+                                                <td>
+                                                    <input type="text" name="language" id="language" value="EN" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <INPUT TYPE="submit" value="Checkout">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+
                                 </div>
 
                             </div>

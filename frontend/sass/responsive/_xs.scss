@@ -1,297 +1,473 @@
- @media (max-width: $screen-xs-max) {
-     // Mobile
-     body {
-         padding-top: 105px;
-     }
-     .side-nav {
-         .links {
-             width: 100%;
-         }
-     }
-     .cloth-buy {
-         .cloth-buy__desc h2 {
-             font-size: 20px;
-         }
-     } //Start of global classes
-     .border-line {
-         &:before {
-             width: 20%
-         }
-         &:after {
-             width: 20%
-         }
-     } //End of global classes
-     //start of header
-     // Design for side navigation
-     .mobview-searchbar-input-lg {
-         height: 35px;
-     }
-     .mobview-side-nav {
-         width: 275px;
-         top: 105px;
-     }
-     .mobview-links,
-     .mobview-categories,
-     .mobview-promotions {
-         width: 90%;
-     }
-     .mobview-header-navigation {
-         @include align-items(center);
-         @include display(flex);
-         @include flex-direction(row);
-         @include flex-wrap(nowrap);
-         @include justify-content(flex-start);
-     }
-     .custom-navbar-header,
-     custom-navbar-nav {
-         flex: 1;
-     }
-     .custom-navbar-nav {
-         @include align-items(center);
-         @include display(flex!important);
-         @include flex-direction(row);
-         @include flex-wrap(nowrap);
-         @include justify-content(flex-end);
-     }
-     .navbar {
-         .navbar-right {
-             @include margin(0);
-             .added-cart-amnt {
-                 top: 15px;
-                 right: 0;
+         @media (max-width: $screen-xs-max) {
+             // Mobile
+             body {
+                 padding-top: 105px;
              }
-         }
-     }
-     .navbar {
-         .navbar__sideNav {
-             @include padding(10px 0 10px 10px);
-         }
-         .navbar-brand {
-             @include padding(10px 5px!important);
-             img {
-                 width: 110px;
+             .side-nav {
+                 .links {
+                     width: 100%;
+                 }
              }
-         }
-     }
-     .nav li>a {
-         padding: 10px;
-     }
-     .mobview-search-bar {
-         top: 70px;
-     }
-     .search-product {
-         .fa-search {
-             font-size: 18px;
-         }
-     } //End of header
-     //Start of home page
-     .homepg-title {
-         width: 250px;
-         @include margin(10px auto!important);
-         font-size: 25px;
-     }
-     .homepg-slider-product-cost {
-         font-size: 16px;
-     }
-     .homepg-slider-product-name {
-         font-size: 13px;
-     }
-     .cloth-cat {
-         .flexslider {
-             .flex-prev {
-                 @include size(30px, 30px);
-                 left: 10px!important;
+             .cloth-buy {
+                 .cloth-buy__desc h2 {
+                     font-size: 20px;
+                 }
+             } //Start of global classes
+             .border-line {
                  &:before {
-                     font-size: 35px;
-                     @include position(absolute, -11px null null -2px);
+                     width: 20%
+                 }
+                 &:after {
+                     width: 20%
                  }
              }
-             .flex-next {
-                 @include size(30px, 30px);
-                 right: 10px!important;
-                 &:before {
-                     font-size: 35px;
-                     @include position(absolute, -11px null null -2px);
+             /*Note: You need to extend this class by using @extend method */
+             .plus-minus-btn {
+                 .quantity__input {
+                     text-align: center;
+                     @include size(40px, 33px);
+                     font-size: 16px;
                  }
+             } //End of  plus & minus quantity
+             .section-tp-bt-padd {
+                 @include padding(5px 0);
              }
-         }
-     }
-     .new-arrival {
-         .new-arrival__title .new-arrival--border--line {
-             &:before {
-                 left: 0;
+             .table-responsive>.table {
+                 margin-bottom: 15px;
+             } //End of global classes
+             //start of header
+             // Design for side navigation
+             .mobview-searchbar-input-lg {
+                 height: 35px;
              }
-             &:after {
-                 right: 0;
+             .mobview-side-nav {
+                 width: 275px;
+                 top: 105px;
              }
-         }
-         .new-arrival__slider {
-             @include padding( 45px 15px 25px);
-             .flexslider-container .flexslider {
-                 .flex-prev {
-                     left: 85% !important;
-                     top: -5%;
-                 }
-                 .flex-next {
-                     top: -5%;
-                 }
+             .mobview-links,
+             .mobview-categories,
+             .mobview-promotions {
+                 width: 90%;
              }
-             .new-arrival__banner-detail {
-                 .buynow--btn {
-                     @include padding(3px 15px);
-                 }
+             .mobview-header-navigation {
+                 @include align-items(center);
+                 @include display(flex);
+                 @include flex-direction(row);
+                 @include flex-wrap(nowrap);
+                 @include justify-content(flex-start);
              }
-         }
-         .featured__icon-heart {
-             @include size(30px, 30px);
-             @include padding(3px);
-             font-size: 14px
-         }
-     }
-     .featured {
-         .featured__title .featured--border--line {
-             &:before {
-                 left: 9%;
+             .custom-navbar-header,
+             custom-navbar-nav {
+                 flex: 1;
              }
-             &:after {
-                 right: 9%;
+             .custom-navbar-nav {
+                 @include align-items(center);
+                 @include display(flex!important);
+                 @include flex-direction(row);
+                 @include flex-wrap(nowrap);
+                 @include justify-content(flex-end);
              }
-         }
-         .featured__slider .flexslider {
-             .flex-prev {
-                 left: 90.5% !important;
-             }
-         }
-         .featured__banner-detail {
-             .featured__cloth-desc {
-                 h4 {
-                     height: 50px;
-                 }
-             }
-             .buy--btn {
-                 @include padding(3px 15px);
-             }
-             .featured__icon-heart {
-                 @include size(30px, 30px);
-                 @include padding(3px);
-                 font-size: 14px
-             }
-         }
-         .viewmore-btn {
-             @include padding(5px 0);
-         }
-         .view--more {
-             width: 105px;
-         }
-     }
-     .cloth-buy {
-         .paddrt {
-             @include padding(null 15px null 15px);
-         }
-         .paddlt {
-             @include padding(null 15px null 15px);
-         }
-         .cloth-buy__title .cloth-buy--border--line {
-             &:before {
-                 left: 0;
-             }
-             &:after {
-                 right: 0;
-             }
-         }
-         .cloth-buy__desc {
-             @include padding(15px);
-             h2 {
-                 font-size: 22px;
-             }
-         }
-     }
-     .blog {
-         .blog__title .blog--border--line {
-             &:before {
-                 left: 15%;
-             }
-             &:after {
-                 right: 15%;
-             }
-         }
-         .blog__slider {
-             .blog__banner-detail {
-                 .blog__desc {
-                     height: 115px;
-                     @include padding(3px 5px);
-                     h3 {
-                         font-size: 16px;
+             .navbar {
+                 .navbar-right {
+                     @include margin(0);
+                     .added-cart-amnt {
+                         top: 15px;
+                         right: 0;
                      }
-                     .typedin-desc {
-                         height: 30px;
-                         -webkit-line-clamp: 2;
+                 }
+             }
+             .navbar {
+                 .navbar__sideNav {
+                     @include padding(10px 0 10px 10px);
+                 }
+                 .navbar-brand {
+                     @include padding(10px 5px!important);
+                     img {
+                         width: 110px;
                      }
-                     p.extra-content {
-                         &:after {
-                             font-size: 19px;
-                             @include padding(0 2px);
+                 }
+             }
+             .nav li>a {
+                 padding: 10px;
+             }
+             .mobview-search-bar {
+                 top: 70px;
+             }
+             .search-product {
+                 .fa-search {
+                     font-size: 18px;
+                 }
+             } //End of header
+             //Start of home page
+             .homepg-title {
+                 width: 250px;
+                 @include margin(10px auto!important);
+                 font-size: 25px;
+             }
+             .homepg-slider-product-cost {
+                 font-size: 16px;
+             }
+             .homepg-slider-product-name {
+                 font-size: 13px;
+             }
+             .cloth-cat {
+                 .flexslider {
+                     .flex-prev {
+                         @include size(30px, 30px);
+                         left: 10px!important;
+                         &:before {
+                             font-size: 35px;
+                             @include position(absolute, -11px null null -2px);
                          }
                      }
-                     a {
-                         font-size: 12px;
+                     .flex-next {
+                         @include size(30px, 30px);
+                         right: 10px!important;
+                         &:before {
+                             font-size: 35px;
+                             @include position(absolute, -11px null null -2px);
+                         }
                      }
                  }
              }
-         }
-     }
-     .sale {
-         .sale__title .sale--border--line {
-             &:before {
-                 left: 18%;
+             .new-arrival {
+                 .new-arrival__title .new-arrival--border--line {
+                     &:before {
+                         left: 0;
+                     }
+                     &:after {
+                         right: 0;
+                     }
+                 }
+                 .new-arrival__slider {
+                     @include padding( 45px 15px 25px);
+                     .flexslider-container .flexslider {
+                         .flex-prev {
+                             left: 85% !important;
+                             top: -5%;
+                         }
+                         .flex-next {
+                             top: -5%;
+                         }
+                     }
+                     .new-arrival__banner-detail {
+                         .buynow--btn {
+                             @include padding(3px 15px);
+                         }
+                     }
+                 }
+                 .featured__icon-heart {
+                     @include size(30px, 30px);
+                     @include padding(3px);
+                     font-size: 14px
+                 }
              }
-             &:after {
-                 right: 18%;
+             .featured {
+                 .featured__title .featured--border--line {
+                     &:before {
+                         left: 9%;
+                     }
+                     &:after {
+                         right: 9%;
+                     }
+                 }
+                 .featured__slider .flexslider {
+                     .flex-prev {
+                         left: 90.5% !important;
+                     }
+                 }
+                 .featured__banner-detail {
+                     .featured__cloth-desc {
+                         h4 {
+                             height: 50px;
+                         }
+                     }
+                     .buy--btn {
+                         @include padding(3px 15px);
+                     }
+                     .featured__icon-heart {
+                         @include size(30px, 30px);
+                         @include padding(3px);
+                         font-size: 14px
+                     }
+                 }
+                 .viewmore-btn {
+                     @include padding(5px 0);
+                 }
+                 .view--more {
+                     width: 105px;
+                 }
+             }
+             .cloth-buy {
+                 .paddrt {
+                     @include padding(null 15px null 15px);
+                 }
+                 .paddlt {
+                     @include padding(null 15px null 15px);
+                 }
+                 .cloth-buy__title .cloth-buy--border--line {
+                     &:before {
+                         left: 0;
+                     }
+                     &:after {
+                         right: 0;
+                     }
+                 }
+                 .cloth-buy__desc {
+                     @include padding(15px);
+                     h2 {
+                         font-size: 20px;
+                     }
+                 }
+             }
+             .blog {
+                 .blog__title .blog--border--line {
+                     &:before {
+                         left: 15%;
+                     }
+                     &:after {
+                         right: 15%;
+                     }
+                 }
+                 .blog__slider {
+                     .blog__banner-detail {
+                         .blog__desc {
+                             height: 115px;
+                             @include padding(3px 5px);
+                             h3 {
+                                 margin-top: 15px;
+                                 font-size: 16px;
+                             }
+                             .typedin-desc {
+                                 height: 30px;
+                                 -webkit-line-clamp: 2;
+                             }
+                             p.extra-content {
+                                 &:after {
+                                     font-size: 19px;
+                                     @include padding(0 2px);
+                                 }
+                             }
+                             a {
+                                 font-size: 12px;
+                             }
+                         }
+                     }
+                 }
+             }
+             .sale {
+                 .sale__title .sale--border--line {
+                     &:before {
+                         left: 18%;
+                     }
+                     &:after {
+                         right: 18%;
+                     }
+                 }
+                 .sale__slider .sale__banner-detail h4 {
+                     font-size: 13px;
+                 }
+                 .sale__slider .sale__banner-detail h3 {
+                     font-size: 16px;
+                 }
+                 .sale__slider .flexslider-container .flexslider .flex-prev {
+                     left: 91% !important;
+                 }
+                 .buy--btn {
+                     @include padding(3px 15px);
+                 }
+             } //End of home page
+             //Start of about us page
+             .listing-img-common {
+                 margin-top: 0;
+             }
+             .about-info {
+                 padding-right: 0;
+                 padding-left: 0;
+                 text-align: left;
+                 @include column-count(1);
+             }
+             .about-cloth {
+                 .cloth-buy {
+                     .cloth-buy__desc {
+                         @include padding(15px);
+                         margin-top: 15px;
+                         h2 {
+                             font-size: 20px;
+                             &:before {
+                                 @include size(30px, 25px);
+                                 top: -35px;
+                             }
+                         }
+                     }
+                 }
+             } //End of about page
+             //Start of Blogs page
+             .main-blog-section {
+                 @include padding(25px 0);
+                 .flex-item {
+                     width: 100%;
+                     margin-bottom: 15px;
+                 }
+             } //End of blogs page
+             //Start of inner-blogs page
+             .inner-blog-section {
+                 width: 100%;
+                 @include padding(15px 0 0);
+                 @include margin(0 auto);
+             }
+             .inner-blog-title {
+                 @include padding(5px 0);
+                 @include margin(5px 0);
+                 font-size: 20px;
+             }
+             .inner-blog {
+                 .blog__slider {
+                     .flexslider {
+                         margin-bottom: 0;
+                         &:hover {
+                             .flex-direction-nav .flex-prev,
+                             .flex-direction-nav .flex-next {
+                                 opacity: 1;
+                             }
+                         }
+                     }
+                 }
+             }
+             .inner-blog-change-content {
+                 .flex-direction-nav a {
+                     width: 90px;
+                 }
+                 .flex-direction-nav .flex-prev {
+                     left: 0px!important;
+                 }
+                 .flex-direction-nav .flex-prev {
+                     right: 0!important;
+                 }
+                 .fa-long-arrow-left,
+                 .fa-long-arrow-right {
+                     font-size: 14px;
+                 }
+                 .social-box {
+                     font-size: 14px;
+                     li {
+                         @include margin(0 4px);
+                         color: $darkBrown1;
+                     }
+                     li:not(:first-child) {
+                         width: 22px;
+                         height: 22px;
+                     }
+                 }
+             }
+             .also-view {
+                 @include padding(15px 0);
+             } //End of inner blogs page
+             //Start of brands page
+             .brands-images {
+                 .col-md-3 {
+                     border-right: 1px solid grey!important;
+                     border: 1px solid grey;
+                 }
+             }
+             .brand1 {
+                 @include padding(15px);
+                 figure {
+                     height: 50px;
+                     img {
+                         margin: 0 auto;
+                         max-height: 50px;
+                     }
+                 }
+             } //End of brand page
+             //Start of buy the look page
+             .buy-the-look {
+                 h1 {
+                     font-size: 25px;
+                     margin-top: 15px;
+                     margin-bottom: 15px;
+                 }
+             }
+             .content-spacing {
+                 margin: 15px 0;
+             }
+             .buy-slider {
+                 margin-bottom: 15px;
+             }
+             .buy-info {
+                 h4 {
+                     font-size: 16px;
+                 }
+                 h5 {
+                     font-size: 13px;
+                 }
+             } //End of buy the look page
+             //Start of Cancel, cancel-msg, return page
+             .item-name {
+                 font-size: 14px;
+             }
+             .item-code {
+                 font-size: 11px;
+             }
+             .item-cost {
+                 font-size: 15px;
+                 .fa-inr {
+                     font-size: 15px;
+                 }
+             }
+             .address-delt-btn,
+             .delt--btn,
+             .comnt-submit--btn {
+                 width: auto;
+             }
+             .order-status-title {
+                 // This class is used in return, order, return successful & cancel, cancel successful msg.html
+                 @include margin(10px 0);
+                 font-size: 20px;
+             }
+             /*NOTE:.account-order-table class has been extended in order-detail.html & return-order.html*/
+             .account-order-table {
+                 thead> {
+                     tr>th {
+                         padding-left: 15px;
+                     }
+                 }
+             }
+             .order-details-table {
+                 // This class has been extended in order-return-table
+                 @include padding(0 0 15px);
+                 .item-desc {
+                     width: 55%;
+                 }
+             } //End of cancel,
+             //Start of return-success.html  cancel-msg.html
+             .font17 {
+                 font-size: 14px;
+             }
+             .return-success-msg,
+             .cancel-success-msg {
+                 @include padding(15px 0);
+                 .return-success-content,
+                 .cancel-success-content {
+                     @include padding(15px);
+                 }
+                 p {
+                     margin-bottom: 10px;
+                 }
+                 .backto-prof-btn {
+                     padding-top: 10px;
+                 }
+             } // End of return-success.html
+             //scss for about us page
+             .contact-us .enquiry-form {
+                 padding: 35px 35px 35px 35px;
+             }
+             .contact-us .enquiry-form-pdd {
+                 max-width: 100%;
+                 display: block;
+             }
+             .contact-us .contactus-details {
+                 margin-left: 0;
+                 max-width: 100%;
              }
          }
-         .sale__slider .sale__banner-detail h4 {
-             font-size: 13px;
-         }
-         .sale__slider .sale__banner-detail h3 {
-             font-size: 16px;
-         }
-         .sale__slider .flexslider-container .flexslider .flex-prev {
-             left: 91% !important;
-         }
-         .buy--btn {
-             @include padding(3px 15px);
-         }
-     } //End of home page
-     //Start of about us page
-     .listing-img-common {
-         margin-top: 0;
-     }
-     .about-info {
-         padding-right: 0;
-         padding-left: 0;
-         text-align: left;
-         @include column-count(1);
-     }
-     .about-cloth {
-         .cloth-buy {
-             .cloth-buy__desc {
-                 margin-top: 15px;
-             }
-         }
-     } //End of about page
-     //scss for about us page
-     .contact-us .enquiry-form {
-         padding: 35px 35px 35px 35px;
-     }
-     .about-cloth .cloth-buy .cloth-buy__desc h2 {
-         font-size: 20px;
-     }
-     .contact-us .enquiry-form-pdd {
-         max-width: 100%;
-         display: block;
-     }
-     .contact-us .contactus-details {
-         margin-left: 0;
-         max-width: 100%;
-     }
- }

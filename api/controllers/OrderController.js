@@ -132,8 +132,51 @@ var controller = {
             });
         }
     },
+    postReq: function (req, res) {
+        console.log("in post request");
+        var http = require('http'),
+            fs = require('fs'),
+            qs = require('querystring');
+        var ccav = require('./ccavutil.js');
+        var body = '',
+            workingKey = '236E7613D01B3B0BDAA4805D6A1162DB', //Put in the 32-Bit key shared by CCAvenues.
+            accessCode = 'AVOH01EK30BS66HOSB', //Put in the Access Code shared by CCAvenues.
+            encRequest = '',
+            formbody = '';
+
+        _.each(req.body, function (val, key) {
+            body += key + '=' + val + '&';
+        });
+        console.log(body);
+        encRequest = ccav.encrypt(body, workingKey);
+        formbody = '<form id="nonseamless" method="post" name="redirect" action="https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"/> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><script language="javascript">document.redirect.submit();</script></form>';
+
+        res.send(formbody);
+    },
     hdfcPaymentGateway: function (req, res) {
-        Order.hdfcPaymentGateway(req.body, res)
+        // Order.hdfcPaymentGateway(req.body, res)
+        console.log("in hdfc payment gateway");
+        var ccav = require('./ccavutil.js');
+
+
+        var body = '',
+            workingKey = '236E7613D01B3B0BDAA4805D6A1162DB', //Put in the 32-Bit key shared by CCAvenues.
+            accessCode = 'AVOH01EK30BS66HOSB', //Put in the Access Code shared by CCAvenues.
+            encRequest = '',
+            formbody = '';
+
+        // req.on('data', function (data) {
+        body += req.data;
+        encRequest = ccav.encrypt(body, workingKey);
+        var formData = {
+            encRequest: encRequest,
+            access_code: accessCode
+        };
+        console.log(formData);
+        res.view("payment", formData);
+        // formbody = '<form id="nonseamless" method="post" name="redirect" action="https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"/> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><script language="javascript">document.redirect.submit();</script></form>';
+        // });
+
     }
 };
 module.exports = _.assign(module.exports, controller);
