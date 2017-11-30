@@ -158,7 +158,7 @@
                      }
 
                      ListingService.retriveFiltersWithCategory(function (data) {
-                         //  console.log("product category on basis of category", data.data.data)
+                         //  console.log("product category on basis of category", data.data.data);
                          $scope.filters = data.data.data;
                          $scope.min = $scope.filters.priceRange[0].min;
                          $scope.max = $scope.filters.priceRange[0].max;
@@ -716,7 +716,7 @@
          });
          $scope.product = prod;
 
-         if ($scope.product.sizes) {
+         if (!_.isEmpty($scope.product.sizes)) {
              $scope.sizes = _.sortBy($scope.product.sizes, [function (o) {
                  return o.order;
              }]);
@@ -724,11 +724,17 @@
              $scope.sizes = _.sortBy($scope.product.size, [function (o) {
                  return o.order;
              }]);
+         } else if ($scope.product.size.name) {
+             $scope.sizes = $scope.product.size;
          }
-         console.log($scope.sizes);
+         //  console.log($scope.sizes);
          if (angular.isArray($scope.sizes)) {
-             $scope.activeButton = $scope.sizes[0].name;
-             $scope.selectedSize = $scope.sizes[0];
+             if (!_.isEmpty($scope.sizes)) {
+                 $scope.activeButton = $scope.sizes[0].name;
+                 $scope.selectedSize = $scope.sizes[0];
+             } else {
+
+             }
          } else {
              $scope.activeButton = $scope.sizes.name;
              $scope.selectedSize = $scope.sizes;

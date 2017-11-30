@@ -591,7 +591,7 @@ var model = {
             productId: data.productId,
             size: mongoose.Types.ObjectId(data.size),
             color: mongoose.Types.ObjectId(data.color)
-        }).deepPopulate('color size').exec(function (err, product) {
+        }).deepPopulate('color size brand prodCollection fabric type').exec(function (err, product) {
             console.log("in Sku parameter", product);
             if (err) {
                 callback(err, "error in mongoose productWithCategory");
