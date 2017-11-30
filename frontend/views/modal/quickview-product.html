@@ -74,12 +74,19 @@
                         <div class="second-sec border-div pd-bottom">
                             <div class="viewSize inline-block relate" ng-if="arrayCheck">
                                 <h5>SIZE </h5>
+                                <!--<div class="inline-block buy-para__sizes">-->
+                                <!--<p ng-class="{'active':activeButton==size.name}" ng-repeat="size in product.sizes track by $index" ng-if="product.sizes&&product.size"
+                                        ng-click="selectSize(size)">{{size.name}}</p>-->
+                                <!--<p ng-class="{'active':activeButton==size.name}" ng-repeat="size in product.sizes track by $index" ng-if="product.sizes&&product.size"
+                                        ng-click="selectSize(size)">{{size.name}}111</p>
+                                    {{product.size}}1111 {{product.sizes}}-->
+                                <!--<p ng-class="{'active':activeButton=={{product.size.name}}}" ng-if="!product.sizes && product.size.name" ng-click="selectSize(product.size)">{{product.size.name}}2222</p>-->
+                                <!--<p ng-class="{'active':activeButton==product.size.name}" ng-if="!product.sizes.name&&product.size.name" ng-click="selectSize(product.size)">{{product.size.name}}33333</p>
+                                    <p ng-class="{'active':activeButton==size.name}" ng-repeat="size in product.size track by $index" ng-if="!product.sizes && !product.size.name"
+                                        ng-click="selectSize(size)">{{size.name}}4444</p>
+                                </div>-->
                                 <div class="inline-block buy-para__sizes">
-                                    <p ng-class="{'active':activeButton=={{size.name}}}" ng-repeat="size in product.sizes track by $index" ng-if="product.sizes&&product.size"
-                                        ng-click="selectSize(size)">{{size.name}}</p>
-                                    <p ng-class="{'active':activeButton=={{product.size.name}}}" ng-if="!product.sizes && product.size.name" ng-click="selectSize(product.size)">{{product.size.name}}</p>
-                                    <p ng-class="{'active':activeButton=={{size.name}}}" ng-repeat="size in product.size track by $index" ng-if="!product.sizes && !product.size.name"
-                                        ng-click="selectSize(size)">{{size.name}}</p>
+                                    <p ng-repeat="size in sizes " ng-click="selectSize(size) " ng-class="{'active':activeButton==size.name} ">{{size.name}}</p>
                                 </div>
 
                                 <div>
@@ -89,7 +96,7 @@
                             <div class="viewSize inline-block relate" ng-if="!arrayCheck">
                                 <h5>SIZE</h5>
                                 <div class="inline-block buy-para__sizes">
-                                    <p ng-click="selectSize(product.size)" ng-class="{'active':activeButton=={{product.size.name}}}">{{product.size.name}}</p>
+                                    <p ng-click="selectSize(product.size)" ng-class="{'active':activeButton==product.size.name}">{{product.size.name}}</p>
                                     <!--<p>38</p>
                                     <p>40</p>
                                     <p>42</p>

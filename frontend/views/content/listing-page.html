@@ -267,7 +267,7 @@
                                                 <div class="inline-block buy-para__sizes" ng-if="product.sizes">
                                                     <p ng-repeat="size in product.sizes"> {{size.name}}</p>
                                                 </div>
-                                                <div class="inline-block buy-para__sizes" ng-if="!product.sizes">
+                                                <div class="inline-block buy-para__sizes" ng-if="product.size.name">
                                                     <p> {{product.size.name}}</p>
                                                 </div>
                                             </div>
@@ -320,7 +320,7 @@
                                                 <div class="inline-block buy-para__sizes" ng-if="product.sizes">
                                                     <p ng-repeat="size in product.sizes"> {{size.name}}</p>
                                                 </div>
-                                                <div class="inline-block buy-para__sizes" ng-if="!product.sizes">
+                                                <div class="inline-block buy-para__sizes" ng-if="product.size.name">
                                                     <p>
                                                         {{product.size.name}}</p>
                                                 </div>
