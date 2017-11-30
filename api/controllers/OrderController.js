@@ -136,15 +136,29 @@ var controller = {
         console.log(req.query.orderId);
         Order.findOne({
             _id: mongoose.Types.ObjectId(req.query.orderId)
-        }).exec(function (err, order) {
+        }).populate('user').exec(function (err, order) {
             var toPayment = {
                 "merchant_id": "150530",
-                "order_id": order._id,
+                "order_id": order.orderNo,
                 "currency": "INR",
                 "amount": order.totalAmount,
                 "redirect_url": "http://umber.wohlig.co.in/api/Cart/getCart",
                 "cancel_url": "http://umber.wohlig.co.in/api/Cart/getCart",
-                "language": "EN"
+                "language": "EN",
+                "billing_name": order.user.firstName + " " + order.user.lastName,
+                "billing_address": order.billingAddress.line1 + " " + order.billingAddress.line2 + " " + order.billingAddress.line3,
+                "billing_city": order.billingAddress.city,
+                "billing_state": order.billingAddress.state,
+                "billing_zip": order.billingAddress.pincode,
+                "billing_country": order.billingAddress.country,
+                "billing_tel": order.user.mobile,
+                "billing_email": order.email,
+                "delivery_name": order.firstName + " " + order.lastName,
+                "delivery_address": order.shippingAddress.line1 + " " + order.shippingAddress.line2 + " " + order.shippingAddress.line3,
+                "delivery_city": order.shippingAddress.city,
+                "delivery_zip": order.shippingAddress.pincode,
+                "delivery_country": order.shippingAddress.country,
+                "delivery_tel": order.mobileNo
             }
             console.log(order);
             res.view("payment", toPayment);

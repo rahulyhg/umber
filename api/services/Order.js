@@ -114,7 +114,11 @@ var schema = new Schema({
         },
         comment: String
     }],
-    comment: String
+    comment: String,
+    firstName: String,
+    lastName: String,
+    mobileNo: String,
+    email: String
 });
 
 schema.plugin(deepPopulate, {
@@ -279,7 +283,7 @@ var model = {
     },
 
     createOrderFromCart: function (data, callback) {
-        // console.log("In createorderfromcart", data);
+        console.log("In createorderfromcart", data);
         if (data.paymentMethod == "Cash on delivery") {
             var paymentMethod = "cod";
         } else if (data.paymentMethod == "Credit Card") {
@@ -302,6 +306,10 @@ var model = {
                 if (!_.isEmpty(cart)) {
                     // console.log("cart: ", cart);
                     var order = {};
+                    order.firstName = data.firstName;
+                    order.lastName = data.lastName;
+                    order.mobileNo = data.mobileNo;
+                    order.email = data.email;
                     order.orderNo = Math.ceil(Math.random() * 10000000000000);
                     if (data.selectedDiscount) {
                         if (data.selectedDiscount.selectedDiscount) {
