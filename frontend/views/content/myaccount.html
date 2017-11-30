@@ -45,30 +45,32 @@
                                         <p class="usrdtl-info">Member’s Current Status : <strong class="text-uppercase">gold</strong></p>
                                         <p class="usrdtl-info">Want to change your password? <a ng-click="changePassword()" class="linking">CLICK HERE</a></p>
                                     </div>
-                                    <div class="edit-dtl" ng-if="save">
-                                        <div class="row">
-                                            <form class="customized-form">
-                                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <div class="form-group">
-                                                        <input type="text" placeholder="First Name" class="form-control " ng-model="userDetails.data.firstName">
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-xs-12 edit-dtl" ng-if="save">
+                                            <div class="row">
+                                                <form class="customized-form">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <div class="form-group">
+                                                            <input type="text" placeholder="First Name" class="form-control " ng-model="userDetails.data.firstName">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <div class="form-group">
-                                                        <input type="text" placeholder="Last Name" class="form-control " ng-model="userDetails.data.lastName">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <div class="form-group">
+                                                            <input type="text" placeholder="Last Name" class="form-control " ng-model="userDetails.data.lastName">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-xs-12 ">
-                                                    <div class="form-group">
-                                                        <input type="text" placeholder="Mobile No" class="form-control " ng-model="userDetails.data.mobile">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 ">
+                                                        <div class="form-group">
+                                                            <input type="text" placeholder="Mobile No" class="form-control " ng-model="userDetails.data.mobile">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <div class="form-group">
-                                                        <input type="email" placeholder="Email Address" class="form-control " ng-model="userDetails.data.email">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <div class="form-group">
+                                                            <input type="email" placeholder="Email Address" class="form-control " ng-model="userDetails.data.email">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </form>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -94,110 +96,112 @@
                                             ng-click="edit1(shippingAdd._id)">Delete</button></p>
                                 </div>
                             </div>
-                            <div class="edit-addrs" ng-if="save">
-                                <!--To open Edit Address Tab-->
-                                <h3 class="tab-title text-uppercase">your details</h3>
-                                <form class="customized-form">
-                                    <div class="usr-edit-detail">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="edit-addrs" ng-if="save">
+                                    <!--To open Edit Address Tab-->
+                                    <h3 class="tab-title text-uppercase">your details</h3>
+                                    <form class="customized-form">
+                                        <div class="usr-edit-detail">
+                                            <div class="row">
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="First Name" class="form-control" ng-model="userDetails.data.firstName">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="Last Name" class="form-control" ng-model="userDetails.data.lastName">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="Mobile Number" class="form-control" ng-model="userDetails.data.mobile">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="form-group">
+                                                        <input type="email" placeholder="Email Address" class="form-control" ng-model="userDetails.data.email">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="row">
-                                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                <h3 class="tab-title text-uppercase">shipping address</h3>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12">
                                                 <div class="form-group">
-                                                    <input type="text" placeholder="First Name" class="form-control" ng-model="userDetails.data.firstName">
+                                                    <input type="text" placeholder="Line 1*" class="form-control" ng-model="userDetails.data.shippingAddresses[0].line1">
                                                 </div>
                                             </div>
-                                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                            <div class="col-md-4 col-sm-6 col-xs-12">
                                                 <div class="form-group">
-                                                    <input type="text" placeholder="Last Name" class="form-control" ng-model="userDetails.data.lastName">
+                                                    <input type="text" placeholder="Line 2" class="form-control" ng-model="userDetails.data.shippingAddresses[0].line2">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                            <div class="col-md-4 col-sm-6 col-xs-12">
                                                 <div class="form-group">
-                                                    <input type="text" placeholder="Mobile Number" class="form-control" ng-model="userDetails.data.mobile">
+                                                    <input type="text" placeholder="Line 3" class="form-control" ng-model="userDetails.data.shippingAddresses[0].line3">
                                                 </div>
                                             </div>
-                                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                            <div class="col-md-4 col-sm-6 col-xs-12">
                                                 <div class="form-group">
-                                                    <input type="email" placeholder="Email Address" class="form-control" ng-model="userDetails.data.email">
+                                                    <input type="text" placeholder="Line 4" class="form-control" ng-model="userDetails.data.shippingAddresses[0].line4">
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <h3 class="tab-title text-uppercase">shipping address</h3>
-                                        </div>
-                                        <div class="col-md-4 col-sm-6 col-xs-12">
-                                            <div class="form-group">
-                                                <input type="text" placeholder="Line 1*" class="form-control" ng-model="userDetails.data.shippingAddresses[0].line1">
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                                <div class="form-group">
+                                                    <input type="text" placeholder="City" class="form-control" ng-model="userDetails.data.shippingAddresses[0].city">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                                <div class="form-group">
+                                                    <input type="number" placeholder="Pincode" class="form-control" ng-model="userDetails.data.shippingAddresses[0].pincode">
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4 col-sm-6 col-xs-12">
-                                            <div class="form-group">
-                                                <input type="text" placeholder="Line 2" class="form-control" ng-model="userDetails.data.shippingAddresses[0].line2">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4 col-sm-6 col-xs-12">
-                                            <div class="form-group">
-                                                <input type="text" placeholder="Line 3" class="form-control" ng-model="userDetails.data.shippingAddresses[0].line3">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-6 col-xs-12">
-                                            <div class="form-group">
-                                                <input type="text" placeholder="Line 4" class="form-control" ng-model="userDetails.data.shippingAddresses[0].line4">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4 col-sm-6 col-xs-12">
-                                            <div class="form-group">
-                                                <input type="text" placeholder="City" class="form-control" ng-model="userDetails.data.shippingAddresses[0].city">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-6 col-xs-12">
-                                            <div class="form-group">
-                                                <input type="number" placeholder="Pincode" class="form-control" ng-model="userDetails.data.shippingAddresses[0].pincode">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4 col-sm-6 col-xs-12">
-                                            <div class="form-group country-dropdown" uib-dropdown>
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                                <div class="form-group country-dropdown" uib-dropdown>
 
-                                                <button class="btn country-dropdown--btn text-capitalize" ng-model="userDetails.data.shippingAddresses[0].country" type="button"
-                                                    uib-dropdown-toggle>{{countryButton}} <span class="caret"></span></button>
+                                                    <button class="btn country-dropdown--btn text-capitalize" ng-model="userDetails.data.shippingAddresses[0].country" type="button"
+                                                        uib-dropdown-toggle>{{countryButton}} <span class="caret"></span></button>
 
-                                                <ul class="country-dropdown-menu dropdown-menu text-capitalize" uib-dropdown-menu role="menu">
-                                                    <li role="menuitem" ng-repeat="country in selectCounteries" ng-click="changeCountry(country.name)"><a>{{country.name}}</a></li>
-                                                </ul>
-                                                <!--<input type="text" placeholder="Country" class="form-control" ng-model="userDetails.data.shippingAddresses[0].country">-->
+                                                    <ul class="country-dropdown-menu dropdown-menu text-capitalize" uib-dropdown-menu role="menu">
+                                                        <li role="menuitem" ng-repeat="country in selectCounteries" ng-click="changeCountry(country.name)"><a>{{country.name}}</a></li>
+                                                    </ul>
+                                                    <!--<input type="text" placeholder="Country" class="form-control" ng-model="userDetails.data.shippingAddresses[0].country">-->
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-6 col-xs-12" ng-if="userDetails.data.shippingAddresses[0].country == 'India'">
-                                            <div class="form-group country-dropdown" uib-dropdown>
-                                                <button class="btn country-dropdown--btn text-capitalize" ng-model="userDetails.data.shippingAddresses[0].state" type="button"
-                                                    uib-dropdown-toggle>{{stateButton}} <span class="caret"></span></button>
-                                                <ul class="country-dropdown-menu dropdown-menu text-capitalize" uib-dropdown-menu role="menu">
-                                                    <li role="menuitem" ng-repeat="state in selectedState" ng-click="changeState(state)"><a>{{state}}</a></li>
-                                                </ul>
-                                                <!--<input type="text" placeholder="Country" class="form-control" ng-model="userDetails.data.shippingAddresses[0].country">-->
+                                            <div class="col-md-4 col-sm-6 col-xs-12" ng-if="userDetails.data.shippingAddresses[0].country == 'India'">
+                                                <div class="form-group country-dropdown" uib-dropdown>
+                                                    <button class="btn country-dropdown--btn text-capitalize" ng-model="userDetails.data.shippingAddresses[0].state" type="button"
+                                                        uib-dropdown-toggle>{{stateButton}} <span class="caret"></span></button>
+                                                    <ul class="country-dropdown-menu dropdown-menu text-capitalize" uib-dropdown-menu role="menu">
+                                                        <li role="menuitem" ng-repeat="state in selectedState" ng-click="changeState(state)"><a>{{state}}</a></li>
+                                                    </ul>
+                                                    <!--<input type="text" placeholder="Country" class="form-control" ng-model="userDetails.data.shippingAddresses[0].country">-->
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-6 col-xs-12" ng-if="userDetails.data.shippingAddresses[0].country != 'India'">
-                                            <div class="form-group">
-                                                <input type="text" placeholder="state" class="form-control" ng-model="userDetails.data.shippingAddresses[0].state">
+                                            <div class="col-md-4 col-sm-6 col-xs-12" ng-if="userDetails.data.shippingAddresses[0].country != 'India'">
+                                                <div class="form-group">
+                                                    <input type="text" placeholder="state" class="form-control" ng-model="userDetails.data.shippingAddresses[0].state">
+                                                </div>
                                             </div>
-                                        </div>
 
-                                    </div>
-                                    <p><button class="btn save--btn text-uppercase" ng-click="edit()">save</button>
-                                        <button class="btn delt--btn text-uppercase" ng-click="edit1(shippingAdd._id)">cancel</button>
-                                    </p>
-                                </form>
+                                        </div>
+                                        <p><button class="btn save--btn text-uppercase" ng-click="edit()">save</button>
+                                            <button class="btn delt--btn text-uppercase" ng-click="edit1(shippingAdd._id)">cancel</button>
+                                        </p>
+                                    </form>
 
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -205,7 +209,7 @@
                 <div class="order-tab" ng-if="view == 'orderTab' ">
                     <!--To open an Order Tab-->
                     <div class="col-md-9 col-sm-12 col-xs-12">
-                        <p class="text-uppercase text-center">
+                        <p class="text-uppercase order-list-action text-center">
                             <button class="btn order-list--btn " ng-click="subview='orders'" ng-class="{
                         'btn--brownActive': subview=='orders' }">orders </button>
                             <button class="btn order-list--btn" ng-click="subview='return'; retriveCancelledProducts('returned')" ng-class="{
@@ -213,7 +217,7 @@
                             <button class="btn order-list--btn" ng-click="subview='cancel';retriveCancelledProducts('cancelled')" ng-class="{
                         'btn--brownActive': subview=='cancel' }">cancelled</button>
                         </p>
-                        <div class="account-order-table" ng-if="subview == 'orders'">
+                        <div class="account-order-table table-responsive" ng-if="subview == 'orders'">
                             <table class="table" ng-repeat="order in orders">
                                 <thead>
                                     <tr class="text-uppercase">
@@ -258,7 +262,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="account-order-table" ng-if="subview == 'return'">
+                        <div class="account-order-table table-responsive" ng-if="subview == 'return'">
                             <table class="table" ng-repeat="return in returned">
                                 <thead>
                                     <tr class="text-uppercase">
@@ -334,7 +338,7 @@
                 <div class="wishlist-tab" ng-if="view == 'wishlistTab' ">
                     <div class="col-md-9">
                         <div class="row" ng-repeat="wishlist in wl">
-                            <div class="col-md-3 col-sm-6" ng-repeat="xyz in wishlist" ng-init="parentIndex = $index">
+                            <div class="col-md-3 col-sm-6 col-xs-6" ng-repeat="xyz in wishlist" ng-init="parentIndex = $index">
                                 <div class="buy-info">
                                     <div class="buy-slider">
                                         <flex-slider flex-slide="buy in xyz.images track by $index" prev-text="" next-text="" animation="slide" min-items="3">

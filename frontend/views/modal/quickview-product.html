@@ -23,13 +23,17 @@
                     </ul>
                 </div>-->
                     <div class="individual-first relate visible-lg">
-                        <div class="product-img">
+                        <!-- <div class="product-img">
                             <img ng-repeat="image in product.images track by $index" ng-src="{{image.image | serverimage}}" alt="Product image" ng-elevate-zoom
                                 data-zoom-image="{{image.image | serverimage}}" class="img-responsive" ng-if="$index == selectedImageIndex">
+                        </div> -->
+                        <div class="product-img">
+                            <img ng-repeat="image in product.images track by $index" ng-src="{{image.image | serverimage}}" alt="Product image" class="img-responsive"
+                                ng-if="$index == selectedImageIndex">
                         </div>
-                        <div class="individual-first__zoom">
+                        <!-- <div class="individual-first__zoom">
                             <img ng-src="img/individual/zoom.png" alt="zoom" class="img-responsive">
-                        </div>
+                        </div> -->
                     </div>
                     <div class="individual-first relate hidden-lg">
                         <div class="product-img">

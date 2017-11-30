@@ -310,13 +310,12 @@
                         }
 
                         .listview {
-                            @include margin(15px 0);
-                            .item-img {
-                                img {
-                                    width: 90px;
-                                    margin: 0 auto
-                                }
-                            }
+                            @include margin(15px 0); // .item-img {
+                            //     img {
+                            //         width: 90px;
+                            //         margin: 0 auto
+                            //     }
+                            // }
                             .wishlist-icon {
                                 @include size(30px, 30px);
                                 @include position(absolute, 0 12px null null);
@@ -345,19 +344,25 @@
                             }
                             .buy--btn {
                                 @extend .btn--brown;
-                                width: 175px;
+                                width: 150px;
                                 @include padding(3px 0);
                                 margin-bottom: 10px; //  @extend .btn--brownActive;
                             } //For listview design
+                            .list-view-table tbody>tr>td {
+                                border-top: 1px solid transparent;
+                            }
+                            .item-details {
+                                width: 270px;
+                            }
                             .listview-item-slider {
                                 margin-bottom: 0;
                             }
                             .listview-item-width {
-                                width: 25%;
+                                @include size(130px, 155px);
+                                overflow: hidden;
                             }
-                            .listview-item-img {
-                                width: 100px;
-                                @include margin(0 auto);
+                            .custom-checkbox {
+                                width: 175px;
                             }
                             .listview-item-action {
                                 @include margin(15px null);

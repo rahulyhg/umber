@@ -797,7 +797,8 @@
              templateUrl: 'views/modal/quickview-product.html',
              scope: $scope,
              size: 'lg',
-             windowClass: 'quickview-modal-size'
+             windowClass: 'quickview-modal-size',
+             backdropClass: 'quickview-modal-backdrop'
          });
          $scope.closeModal = function () {
              $scope.quickView.close();

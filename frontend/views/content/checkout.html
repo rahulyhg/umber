@@ -156,41 +156,43 @@
                     </div>
                     <div class="order-tab" ng-if="loggedUser&&view=='orderTab'">
                         <div class="col-md-9 col-sm-12 col-xs-12">
-                            <table class="table order-table table-bottom ">
-                                <thead>
-                                    <tr>
-                                        <th>item</th>
-                                        <th>color</th>
-                                        <th>price</th>
-                                        <th>size</th>
-                                        <th>quantity</th>
-                                        <th>Subtotal</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="product in orderTable.products ">
-                                        <td>
-                                            <div class="item ">
-                                                <img ng-src="{{product.product.images[0].image | serverimage}} " alt="
+                            <div class="table-responsive">
+                                <table class="table order-table table-bottom ">
+                                    <thead>
+                                        <tr>
+                                            <th>item</th>
+                                            <th>color</th>
+                                            <th>price</th>
+                                            <th>size</th>
+                                            <th>quantity</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="product in orderTable.products ">
+                                            <td>
+                                                <div class="item ">
+                                                    <img ng-src="{{product.product.images[0].image | serverimage}} " alt="
                         " class="img-responsive item__img-checkout ">
-                                                <div class="mycart-info ">
-                                                    <p class="item__title1 ">{{product.product.productName}}</p>
+                                                    <div class="mycart-info ">
+                                                        <p class="item__title1 ">{{product.product.productName}}</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td>{{product.product.color.name}}</td>
-                                        <td></td>
-                                        <td>{{product.product.size.name}}</td>
-                                        <td>{{product.quantity}}</td>
-                                        <td>&#x20b9{{product.product.price * product.quantity}}</td>
-                                    </tr>
-                                </tbody>
-                                <!--<tfoot>
+                                            </td>
+                                            <td>{{product.product.color.name}}</td>
+                                            <td></td>
+                                            <td>{{product.product.size.name}}</td>
+                                            <td>{{product.quantity}}</td>
+                                            <td>&#x20b9{{product.product.price * product.quantity}}</td>
+                                        </tr>
+                                    </tbody>
+                                    <!--<tfoot>
                                     <tr>
                                         <td colspan="6 ">Grand Total: <span>170.98</span></td>
                                     </tr>
                                 </tfoot>-->
-                            </table>
+                                </table>
+                            </div>
 
                             <div class="" ng-if="gift">
                                 <table class="table order-table table-bottom ">
@@ -222,7 +224,7 @@
                                 <p class="text-right ">ITEM(S) SUBTOTAL : <span>&#x20b9 {{grandTotal}}</span></p>
                                 <p class="text-right " ng-if="discountAmount">MEMBER'S DISCOUNT : <span>&#x20b9 {{discountAmount}}</span></p>
                                 <p class="text-right " ng-if="grandTotalAfterDiscount">GRAND TOTAL : <span>&#x20b9 {{grandTotalAfterDiscount}}</span></p>
-                                <button class="btn btn--list" ng-disabled="!loggedUser" ng-click="proceedToDetailTab();" ng-class="{
+                                <button class="btn btn--list btn--next" ng-disabled="!loggedUser" ng-click="proceedToDetailTab();" ng-class="{
                         'btn--brownActive': view=='detailTab' }"> Next</button>
                             </div>
                         </div>
@@ -230,10 +232,10 @@
                     </div>
                     <div class="detail-tab " ng-if="loggedUser && view=='detailTab'">
 
-                        <div class="col-md-8 col-md-offset-1 col-sm-12">
+                        <div class="col-md-8 col-md-offset-1 col-sm-12 col-xs-12">
                             <div class="details-form ">
                                 <div>
-                                    <h3 class="marg0 detail-tab__head ">your details</h3>
+                                    <h3 class="marg0 tab-title text-uppercase ">your details</h3>
                                 </div>
                                 <div class="row ">
                                     <div class="customized-form ">
@@ -273,7 +275,7 @@
                                     <div class="row ">
                                         <div class="col-md-6 col-sm-6">
                                             <div>
-                                                <h3 class="marg0 detail-tab__head ">billing address</h3>
+                                                <h3 class="marg0 tab-title text-uppercase">billing address</h3>
                                             </div>
                                             <div class="row ">
                                                 <div class="customized-form ">
@@ -392,7 +394,7 @@
                                         </div>
                                         <div class="col-md-6 col-sm-6">
                                             <div class="custom-checkbox ">
-                                                <h3 class="marg0 detail-tab__head ">shipping address</h3>
+                                                <h3 class="marg0 tab-title text-uppercase">shipping address</h3>
                                                 <div class="checkbox ">
                                                     <input type="checkbox" id="a1 " ng-click="setDeliveryAddress() ">
                                                     <label for="a1 ">Same as BIlling Address</label>
@@ -521,7 +523,7 @@
                             </div>
                             <div class="details-form ">
                                 <div>
-                                    <h3 class="marg0 detail-tab__head ">payment method</h3>
+                                    <h3 class="marg0 tab-title text-uppercase">payment method</h3>
                                 </div>
                                 <div class="payment-checkbox custom-checkbox" ng-init="payment">
                                     <form name="paymentMethod" nonvalidate class="font__style " ng-submit="checkPaymentMethod(payment)">
@@ -552,7 +554,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Merchant Id</td>
-                                                <td><input type="text" name="merchant_id" id="merchant_id" value="150530" /> </td>
+                                                <td><input type="text" name="merchant_id" id="merchant_id" value="150530" />                                                    </td>
                                             </tr>
                                             <tr>
                                                 <td>Order Id</td>
@@ -568,14 +570,14 @@
                                             </tr>
                                             <tr>
                                                 <td>Redirect URL</td>
-                                                <td><input type="text" name="redirect_url"
-                                                    value="http://127.0.0.1:3001/ccavResponseHandler" />
+                                                <td><input type="text" name="redirect_url" value="http://127.0.0.1:3001/ccavResponseHandler"
+                                                    />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Cancel URL</td>
-                                                <td><input type="text" name="cancel_url"
-                                                    value="http://127.0.0.1:3001/ccavResponseHandler" />
+                                                <td><input type="text" name="cancel_url" value="http://127.0.0.1:3001/ccavResponseHandler"
+                                                    />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -584,10 +586,12 @@
                                             </tr>
                                             <tr>
                                                 <td></td>
-                                                <td><INPUT TYPE="submit" value="Checkout"></td>
+                                                <td>
+                                                    <INPUT TYPE="submit" value="Checkout">
+                                                </td>
                                             </tr>
-                                            </table>
-                                            </form>
+                                        </table>
+                                    </form>
 
                                 </div>
 
