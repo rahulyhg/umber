@@ -132,6 +132,10 @@ var controller = {
             });
         }
     },
+    formRedirect: function (req, res) {
+        res.view("payment", req.body);
+
+    },
     postReq: function (req, res) {
         console.log("in post request");
         var http = require('http'),
