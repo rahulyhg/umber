@@ -132,6 +132,18 @@ var controller = {
             });
         }
     },
+    redirectUrl: function (req, res) {
+        if (req.body) {
+            console.log(req.allParams());
+        } else {
+            res.redirect(env.realHost + "/error");
+        }
+    },
+    cancelUrl: function (req, res) {
+        if (req.body) {} else {
+            res.redirect(env.realHost + "/error");
+        }
+    },
     formRedirect: function (req, res) {
         console.log(req.query.orderId);
         Order.findOne({
@@ -142,8 +154,8 @@ var controller = {
                 "order_id": order.orderNo,
                 "currency": "INR",
                 "amount": order.totalAmount,
-                "redirect_url": "http://umber.wohlig.co.in/api/Cart/getCart",
-                "cancel_url": "http://umber.wohlig.co.in/api/Cart/getCart",
+                "redirect_url": "http://umber.wohlig.co.in/api/Order/redirectUrl",
+                "cancel_url": "http://umber.wohlig.co.in/api/Cart/cancelUrl",
                 "language": "EN",
                 "billing_name": order.user.firstName + " " + order.user.lastName,
                 "billing_address": order.billingAddress.line1 + " " + order.billingAddress.line2 + " " + order.billingAddress.line3,
@@ -156,6 +168,7 @@ var controller = {
                 "delivery_name": order.firstName + " " + order.lastName,
                 "delivery_address": order.shippingAddress.line1 + " " + order.shippingAddress.line2 + " " + order.shippingAddress.line3,
                 "delivery_city": order.shippingAddress.city,
+                "delivery_state": order.shippingAddress.state,
                 "delivery_zip": order.shippingAddress.pincode,
                 "delivery_country": order.shippingAddress.country,
                 "delivery_tel": order.mobileNo
