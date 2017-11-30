@@ -455,7 +455,7 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                                 "cancel_url": "http://umber.wohlig.co.in/api/Cart/getCart",
                                 "language": "EN"
                             }
-                            window.location.href = "http://umber.wohlig.co.in/api/Order/postReq";
+                            window.location.href = "http://umber.wohlig.co.in/api/Order/formRedirect";
 
                             OrderService.postReq(toPayment, function (data) {
                                 console.log("########## data ########", data.data);
