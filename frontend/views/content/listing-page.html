@@ -267,7 +267,7 @@
                                                 <div class="inline-block buy-para__sizes" ng-if="product.sizes">
                                                     <p ng-repeat="size in product.sizes"> {{size.name}}</p>
                                                 </div>
-                                                <div class="inline-block buy-para__sizes" ng-if="!product.sizes">
+                                                <div class="inline-block buy-para__sizes" ng-if="product.size.name">
                                                     <p> {{product.size.name}}</p>
                                                 </div>
                                             </div>
@@ -324,12 +324,14 @@
                                                         <div class="inline-block buy-para__sizes" ng-if="product.sizes">
                                                             <p ng-repeat="size in product.sizes"> {{size.name}}</p>
                                                         </div>
-                                                        <div class="inline-block buy-para__sizes" ng-if="!product.sizes">
+                                                        <div class="inline-block buy-para__sizes" ng-if="product.size.name">
                                                             <p>
                                                                 {{product.size.name}}</p>
+
                                                         </div>
                                                     </div>
-                                                </div>
+
+
                                             </td>
                                             <td>
                                                 <div class="custom-checkbox">
@@ -352,12 +354,12 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                                </div>
                             </div>
-                        </div>
-                        <div infinite-scroll="loadMore()" infinite-scroll-distance="1" infinite-scroll-disabled="loadingDisable">
+                            <div infinite-scroll="loadMore()" infinite-scroll-distance="1" infinite-scroll-disabled="loadingDisable">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
+            </div>

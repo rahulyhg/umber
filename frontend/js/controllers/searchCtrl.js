@@ -556,8 +556,9 @@
                  ModalService.addwishlist();
              })
          }
+         $scope.selectedImageIndex = 0;
          $scope.changeImage = function (index) {
-             $scope.selectedImage = $scope.product.images[index];
+             $scope.selectedImageIndex = index;
          };
          $scope.reqQuantity = 1;
          $scope.updateQuantity = function (oper) {

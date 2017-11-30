@@ -73,7 +73,7 @@ var schema = new Schema({
     trackingId: String,
     orderStatus: {
         type: String,
-        enum: ['processing', 'shipped', 'delivered', 'returned', 'cancelled'],
+        enum: ['processing', 'shipped', 'delivered', 'returned', 'cancelled', 'pending'],
         default: 'processing'
     },
     discountCouponId: {
@@ -114,7 +114,11 @@ var schema = new Schema({
         },
         comment: String
     }],
-    comment: String
+    comment: String,
+    firstName: String,
+    lastName: String,
+    mobileNo: String,
+    email: String
 });
 
 schema.plugin(deepPopulate, {
@@ -279,9 +283,15 @@ var model = {
     },
 
     createOrderFromCart: function (data, callback) {
-        // console.log("In createorderfromcart", data);
+        console.log("In createorderfromcart", data);
         if (data.paymentMethod == "Cash on delivery") {
             var paymentMethod = "cod";
+        } else if (data.paymentMethod == "Credit Card") {
+            var paymentMethod = "cc";
+        } else if (data.paymentMethod == "Debit card") {
+            var paymentMethod = "dc";
+        } else {
+            var paymentMethod = "netbank";
         }
         var gifts = data.gifts;
         var allData = data;
@@ -296,6 +306,10 @@ var model = {
                 if (!_.isEmpty(cart)) {
                     // console.log("cart: ", cart);
                     var order = {};
+                    order.firstName = data.firstName;
+                    order.lastName = data.lastName;
+                    order.mobileNo = data.mobileNo;
+                    order.email = data.email;
                     order.orderNo = Math.ceil(Math.random() * 10000000000000);
                     if (data.selectedDiscount) {
                         if (data.selectedDiscount.selectedDiscount) {
@@ -324,9 +338,12 @@ var model = {
                         order.discountAmount = data.selectedDiscount.discountAmount;
                         order.amountAfterDiscount = data.selectedDiscount.grandTotalAfterDiscount;
                     }
+                    if (paymentMethod != "cod") {
+                        order.orderStatus = "pending";
+                    }
                     order.paymentMethod = paymentMethod;
                     order.gifts = gifts;
-                    console.log("order: ", order);
+                    // console.log("order: ", order);
                     Order.saveData(order, function (err, data1) {
                         // console.log("$$$$$$$$$order: ", order);
                         if (err) {
@@ -337,10 +354,12 @@ var model = {
                                 _id: mongoose.Types.ObjectId(data1._id)
                             }).deepPopulate("products.product products.product.size products.product.color").exec(function (err, order) {
                                 // console.log("*****DATA:***** ", order);
-                                Cart.remove({
-                                    _id: mongoose.Types.ObjectId(cart._id)
-                                }).exec(function (err, result) {})
-                                Product.subtractQuantity(data1.products, null);
+                                if (paymentMethod == "cod") {
+                                    Cart.remove({
+                                        _id: mongoose.Types.ObjectId(cart._id)
+                                    }).exec(function (err, result) {})
+                                    Product.subtractQuantity(data1.products, null);
+                                }
                                 if (allData.selectedDiscount) {
                                     if (allData.selectedDiscount.selectedDiscount) {
                                         if (allData.couponData && allData.selectedDiscount.selectedDiscount.discountType.toString() == "59f06bc7647252477439a1e4") {

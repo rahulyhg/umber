@@ -158,7 +158,7 @@
                      }
 
                      ListingService.retriveFiltersWithCategory(function (data) {
-                         //  console.log("product category on basis of category", data.data.data)
+                         //  console.log("product category on basis of category", data.data.data);
                          $scope.filters = data.data.data;
                          $scope.min = $scope.filters.priceRange[0].min;
                          $scope.max = $scope.filters.priceRange[0].max;
@@ -566,7 +566,6 @@
          if ($scope.mycart) {
 
              $scope.mycart = $scope.mycart.products;
-             console.log("mycartfor offlinetooltip::::", $scope.mycart)
              $scope.tempcart = [];
              if ($scope.mycart) {
                  for (var i = 0; i < $scope.mycart.length; i++) {
@@ -615,7 +614,6 @@
              data.accessToken = $.jStorage.get("accessToken");
              data.productId = prodId;
              WishlistService.removeProduct(data, function (data) {
-                 console.log(data);
                  $state.reload();
              })
          } else {
@@ -626,8 +624,6 @@
      }
 
      $scope.addRemoveToWishlist = function (product) {
-         console.log("in addremoveToWishList product", product);
-         console.log("(userId.userId", userId.userId);
          if (userId.userId) {
 
              var result = _.find($scope.wishlist, {
@@ -711,18 +707,16 @@
          var productId = [];
          var grandTotal = 0;
          productId.push(prod._id);
-         console.log(productId, "ProductId");
          myService.applicableDiscounts(productId, grandTotal, function (data1) {
              //  console.log("called api applicableDiscounts");
              $scope.applicableDiscounts = data1;
              $scope.applicableDiscountsLength = $scope.applicableDiscounts.length;
-             console.log("$scope.applicableDiscounts", $scope.applicableDiscounts);
 
 
          });
          $scope.product = prod;
 
-         if ($scope.product.sizes) {
+         if (!_.isEmpty($scope.product.sizes)) {
              $scope.sizes = _.sortBy($scope.product.sizes, [function (o) {
                  return o.order;
              }]);
@@ -730,11 +724,17 @@
              $scope.sizes = _.sortBy($scope.product.size, [function (o) {
                  return o.order;
              }]);
+         } else if ($scope.product.size.name) {
+             $scope.sizes = $scope.product.size;
          }
-         console.log($scope.sizes);
+         //  console.log($scope.sizes);
          if (angular.isArray($scope.sizes)) {
-             $scope.activeButton = $scope.sizes[0].name;
-             $scope.selectedSize = $scope.sizes[0];
+             if (!_.isEmpty($scope.sizes)) {
+                 $scope.activeButton = $scope.sizes[0].name;
+                 $scope.selectedSize = $scope.sizes[0];
+             } else {
+
+             }
          } else {
              $scope.activeButton = $scope.sizes.name;
              $scope.selectedSize = $scope.sizes;
