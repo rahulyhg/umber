@@ -8,9 +8,9 @@ myApp.factory('OrderService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
-        hdfcPaymentGateway: function (input, callback) {
+        postReq: function (input, callback) {
             $http({
-                url: adminurl + 'Order/hdfcPaymentGateway',
+                url: adminurl + 'Order/postReq',
                 data: input,
                 method: 'POST',
                 withCredentials: false
