@@ -353,6 +353,8 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
 
     //to checkPaymentMethod
     $scope.checkPaymentMethod = function (payment) {
+
+        console.log($scope.user.firstName);
         if ($.jStorage.get("gifts")) {
 
         }
@@ -402,6 +404,10 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
     /************order generation and ADDRESSSS UPDATION IN USERTABLE AS WELL AS ORDER TABLE************* */
     $scope.generateOrder = function (value) {
         var data = {};
+        data.firstName = $scope.user.firstName;
+        data.lastName = $scope.user.lastName;
+        data.mobileNo = $scope.user.mobile;
+        data.email = $scope.user.email;
         data.userId = $scope.loggedUser;
         data.paymentMethod = value;
         if ($.jStorage.get("discountValues")) {
@@ -446,6 +452,8 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                         } else {
                             // payment gateway code goes here
                             // you will get all order details in $scope.orders 
+
+                            window.location.href = "http://umber.wohlig.co.in/api/Order/formRedirect?orderId=" + $scope.orders._id;
                         }
                     } else {
                         toastr.error('Sorry there was some problem in placing your order', 'Error');
