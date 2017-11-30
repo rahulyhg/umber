@@ -446,16 +446,8 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                         } else {
                             // payment gateway code goes here
                             // you will get all order details in $scope.orders 
-                            var toPayment = {
-                                "merchant_id": "150530",
-                                "order_id": 1,
-                                "currency": "INR",
-                                "amount": "1.00",
-                                "redirect_url": "http://umber.wohlig.co.in/api/Cart/getCart",
-                                "cancel_url": "http://umber.wohlig.co.in/api/Cart/getCart",
-                                "language": "EN"
-                            }
-                            window.location.href = "http://umber.wohlig.co.in/api/Order/formRedirect";
+
+                            window.location.href = "http://umber.wohlig.co.in/api/Order/formRedirect?orderId=" + $scope.orders._id;
 
                             // OrderService.postReq(toPayment, function (data) {
                             //     console.log("########## data ########", data.data);

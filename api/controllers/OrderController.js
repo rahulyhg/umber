@@ -133,7 +133,22 @@ var controller = {
         }
     },
     formRedirect: function (req, res) {
-        res.view("payment", req.body);
+        console.log(req.query.orderId);
+        Order.findOne({
+            _id: mongoose.Types.ObjectId(req.query.orderId)
+        }).exec(function (err, order) {
+            var toPayment = {
+                "merchant_id": "150530",
+                "order_id": order._id,
+                "currency": "INR",
+                "amount": order.totalAmount,
+                "redirect_url": "http://umber.wohlig.co.in/api/Cart/getCart",
+                "cancel_url": "http://umber.wohlig.co.in/api/Cart/getCart",
+                "language": "EN"
+            }
+            console.log(order);
+            res.view("payment", toPayment);
+        });
 
     },
     postReq: function (req, res) {
