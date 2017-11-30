@@ -330,12 +330,12 @@ var model = {
                         order.discountAmount = data.selectedDiscount.discountAmount;
                         order.amountAfterDiscount = data.selectedDiscount.grandTotalAfterDiscount;
                     }
-                    if (!paymentMethod == "Cash on delivery"); {
+                    if (paymentMethod != "cod") {
                         order.orderStatus = "pending";
                     }
                     order.paymentMethod = paymentMethod;
                     order.gifts = gifts;
-                    console.log("order: ", order);
+                    // console.log("order: ", order);
                     Order.saveData(order, function (err, data1) {
                         // console.log("$$$$$$$$$order: ", order);
                         if (err) {
@@ -346,10 +346,12 @@ var model = {
                                 _id: mongoose.Types.ObjectId(data1._id)
                             }).deepPopulate("products.product products.product.size products.product.color").exec(function (err, order) {
                                 // console.log("*****DATA:***** ", order);
-                                Cart.remove({
-                                    _id: mongoose.Types.ObjectId(cart._id)
-                                }).exec(function (err, result) {})
-                                Product.subtractQuantity(data1.products, null);
+                                if (paymentMethod == "cod") {
+                                    Cart.remove({
+                                        _id: mongoose.Types.ObjectId(cart._id)
+                                    }).exec(function (err, result) {})
+                                    Product.subtractQuantity(data1.products, null);
+                                }
                                 if (allData.selectedDiscount) {
                                     if (allData.selectedDiscount.selectedDiscount) {
                                         if (allData.couponData && allData.selectedDiscount.selectedDiscount.discountType.toString() == "59f06bc7647252477439a1e4") {
