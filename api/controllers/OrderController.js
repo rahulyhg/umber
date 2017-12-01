@@ -155,15 +155,14 @@ var controller = {
             console.log(resJson);
             if (resJson.order_status === "Success" && resJson.order_status === "Aborted") {
                 resJson.shippingStatus = "processing";
-                updateOrder(resJson);
-                clearCart(resJson);
+                updateOrder(resJson, true);
             } else if (resJson.order_status === "Failure") {
                 resJson.shippingStatus = "pending";
-                updateOrder(resJson);
+                updateOrder(resJson, false);
             } else {
                 resJson.shippingStatus = "pending";
                 resJson.order_status = "Illegal";
-                updateOrder(resJson);
+                updateOrder(resJson, false);
             }
 
 
@@ -171,7 +170,7 @@ var controller = {
             res.redirect(env.realHost + "/error");
         }
 
-        function updateOrder(order) {
+        function updateOrder(order, checkFlag) {
             Order.findOneAndUpdate({
                 orderNo: order.order_id
             }, {
@@ -181,12 +180,20 @@ var controller = {
                     trackingId: order.tracking_id,
                     paymentResponse: order
                 }
-            }).exec()
+            }).exec(function (err, found) {
+                if (err) {
+                    //  redirect to sorry page
+                } else {
+                    if (checkFlag) {
+                        //  clear cart code goes here
+                        //  AND redirect to thankyou page after clearing
+                    } else {
+                        //  redirect to sorry page
+                    }
+                }
+            });
         }
 
-        function clearCart(order) {
-            //  delete user card code goes here.
-        }
     },
     cancelUrl: function (req, res) {
         if (req.body) {} else {
