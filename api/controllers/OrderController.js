@@ -156,7 +156,12 @@ var controller = {
             var respString = buf.toString();
             var respObj = respString.split("&");
             console.log(respObj);
-            // console.log(ccavEncResponse);
+            var resJson = {};
+            _.each(respObj, function (n) {
+                var explodeRes = n.split("=");
+                resJson[explodeRes[0]] = explodeRes[1];
+            });
+            console.log(resJson);
 
 
         } else {
