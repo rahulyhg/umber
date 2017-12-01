@@ -153,8 +153,9 @@ var controller = {
             var encryption = ccavPOST.encResp;
             ccavResponse += ccav.decrypt(req.body.encResp, workingKey);
             var buf = Buffer.from(ccavResponse);
-
-            console.log(buf.toString());
+            var respString = buf.toString();
+            var respObj = respString.split("&");
+            console.log(respObj);
             // console.log(ccavEncResponse);
 
 
