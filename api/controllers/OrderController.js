@@ -154,11 +154,14 @@ var controller = {
             });
             console.log(resJson);
             if (resJson.order_status === "Success" && resJson.order_status === "Aborted") {
+                resJson.shippingStatus = "processing";
                 updateOrder(resJson);
                 clearCart(resJson);
             } else if (resJson.order_status === "Failure") {
+                resJson.shippingStatus = "pending";
                 updateOrder(resJson);
             } else {
+                resJson.shippingStatus = "pending";
                 resJson.order_status = "Illegal";
                 updateOrder(resJson);
             }
@@ -174,6 +177,7 @@ var controller = {
             }, {
                 $set: {
                     paymentStatus: order.order_status,
+                    orderStatus: order.shippingStatus,
                     trackingId: order.tracking_id,
                     paymentResponse: order
                 }
