@@ -141,11 +141,11 @@ var controller = {
             var body = '',
                 workingKey = '236E7613D01B3B0BDAA4805D6A1162DB', //Put in the 32-Bit key shared by CCAvenues.
                 accessCode = 'AVOH01EK30BS66HOSB', //Put in the Access Code shared by CCAvenues.
-                encRequest = '',
+                encRequest = '';
 
-                var ccavEncResponse = '',
-                    ccavResponse = '',
-                    ccavPOST = '';
+            var ccavEncResponse = '',
+                ccavResponse = '',
+                ccavPOST = '';
 
             ccavEncResponse += req.body;
             ccavPOST = qs.parse(ccavEncResponse);
