@@ -150,7 +150,7 @@ var controller = {
             ccavEncResponse += req.body;
             ccavPOST = qs.parse(ccavEncResponse);
             var encryption = ccavPOST.encResp;
-            ccavResponse = ccav.decrypt(encryption, workingKey);
+            ccavResponse = ccav.decrypt(req.body, workingKey);
             console.log(req.body);
             console.log(ccavEncResponse);
         } else {
