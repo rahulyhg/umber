@@ -1,7 +1,7 @@
 <div class="container">
     <div class="individual-container relate">
         <div class="row">
-            <div class="col-md-4 padd-rt0">
+            <div class="col-md-4 col-xs-12 padd-rt0">
                 <div class="breadCrumbs-letter">
                     <ul class="list-unstyled list-inline text-uppercase marg0">
                         <li>
@@ -47,7 +47,7 @@
                     </flex-slider>
                 </div>
             </div>
-            <div class="col-md-8 padd-lt3">
+            <div class="col-md-8 col-xs-12 padd-lt3">
                 <div class="prod-code">
                     <div class="pull-left">
                         <p class="prod-code__left">Product Code: {{product.productId}}</p>
@@ -114,7 +114,7 @@
                             </a>
                             <div class="inline-block">
                                 <form>
-                                    <div class="form-group marg0">
+                                    <div class="form-group marg0 plus-minus-btn">
                                         <input type="text" readonly class="form-control quantity__input" ng-model="reqQuantity">
                                     </div>
                                 </form>
@@ -149,7 +149,7 @@
                                     </h4>
                                 </uib-accordion-heading>
                                 <div class="row">
-                                    <div class="col-md-5 col-sm-5">
+                                    <div class="col-md-5 col-sm-5 col-xs-6">
                                         <div class="leftContent">
                                             <ul class="list-unstyled">
                                                 <li ng-if="product.brand">
@@ -221,6 +221,7 @@
                                             </ul>
                                         </div>
                                     </div>
+
                                     <div class="col-md-7 col-sm-7">
                                         <div class="right-content" ng-if="product.washcare">
                                             <p class="marg0 weight-600">Washcare</p>
@@ -313,7 +314,7 @@
     </div>
 </section>
 <section>
-    <div class="compare-product-main" ng-class="{compareProductMenuIn: myVarss == true ,compareProductMenuOut: myVarss != true}">
+    <div class="compare-product-main hidden-xs" ng-class="{compareProductMenuIn: myVarss == true ,compareProductMenuOut: myVarss != true}">
         <div class="close-compare-btn inline-block">
             <a href="" title="Close" ng-click="compareProductModal()"> <i class="fa fa-minus-circle"></i></a>
         </div>

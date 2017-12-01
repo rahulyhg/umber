@@ -208,7 +208,7 @@
             <div class="col-md-9 col-sm-12 col-xs-12">
                 <div class="Addtocompare relate" ng-if="showCheck">
                     <div class="row">
-                        <div class="col-md-3 col-sm-3" ng-repeat="compare in compareproduct track by $index">
+                        <div class="col-md-3 col-sm-3 col-xs-6" ng-repeat="compare in compareproduct track by $index">
                             <div class="compare-img-list relate">
                                 <img ng-src="{{compare.images[0].image | serverimage}}" class="img-responsive">
                                 <p>{{compare.productName}}</p>
@@ -298,63 +298,68 @@
                         </div>
                         <!--</div>-->
                         <div ng-if="view == 'listView'" ng-repeat="row in products">
-                            <div class="listview display-table" ng-repeat="product in row">
-                                <div class="display-row">
-                                    <div class="display-cell listview-item-width">
-                                        <div class="listview-item-slider buy-slider">
-                                            <flex-slider flex-slide="image in product.images track by $index" prev-text="" next-text="" animation="slide">
-                                                <li>
-                                                    <div class="listview-item-img">
-                                                        <img ng-src="{{image.image | serverimage}}" alt="product Image" class="img-responsive">
+                            <div class="listview table-responsive">
+                                <table class="table list-view-table">
+                                    <tbody>
+                                        <tr ng-repeat="product in row">
+                                            <td>
+                                                <div class="listview-item-width">
+                                                    <div class="listview-item-slider buy-slider">
+                                                        <flex-slider flex-slide="image in product.images track by $index" prev-text="" next-text="" animation="slide">
+                                                            <li>
+                                                                <div class="listview-item-img">
+                                                                    <img ng-src="{{image.image | serverimage}}" alt="product Image" class="img-responsive">
+                                                                </div>
+                                                            </li>
+                                                        </flex-slider>
                                                     </div>
-                                                </li>
-                                            </flex-slider>
-                                        </div>
-                                    </div>
-                                    <div class="display-cell listview-item-width align-top item-desc">
-                                        <div>
-                                            <h4 class="item-name text-uppercase">{{product.productName}}</h4>
-                                            <p class="item-cost"><i class="fa fa-inr"></i>{{product.price}}</p>
-                                            <div class="viewSize">
-                                                <p class="inline-block size-text">Sizes:</p>
-                                                <div class="inline-block buy-para__sizes" ng-if="product.sizes">
-                                                    <p ng-repeat="size in product.sizes"> {{size.name}}</p>
                                                 </div>
-                                                <div class="inline-block buy-para__sizes" ng-if="product.size.name">
-                                                    <p>
-                                                        {{product.size.name}}</p>
+                                            </td>
+                                            <td>
+                                                <div class="item-details">
+                                                    <h4 class="item-name text-uppercase">{{product.productName}}</h4>
+                                                    <p class="item-cost"><i class="fa fa-inr"></i>{{product.price}}</p>
+                                                    <div class="viewSize">
+                                                        <p class="inline-block size-text">Sizes:</p>
+                                                        <div class="inline-block buy-para__sizes" ng-if="product.sizes">
+                                                            <p ng-repeat="size in product.sizes"> {{size.name}}</p>
+                                                        </div>
+                                                        <div class="inline-block buy-para__sizes" ng-if="product.size.name">
+                                                            <p>
+                                                                {{product.size.name}}</p>
+
+                                                        </div>
+                                                    </div>
+
+
+                                            </td>
+                                            <td>
+                                                <div class="custom-checkbox">
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" id="{{product._id}}">
+                                                        <label for="{{product._id}}">Add to compare</label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="display-cell listview-item-width align-top ">
-                                        <div>
-                                            <div class="custom-checkbox">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" id="{{product._id}}">
-                                                    <label for="{{product._id}}">Add to compare</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="display-cell listview-item-width text-right align-top">
-                                        <div class="listview-item-action">
-                                            <div class="btn-group-vertical" role="group">
-                                                <a ui-sref="individual-page({id: product.productId})">
+                                            </td>
+                                            <td>
+                                                <div class="listview-item-action">
+                                                    <div class="btn-group-vertical" role="group">
+                                                        <a ui-sref="individual-page({id: product.productId})">
                                                 <button class="btn btn-default buy--btn text-uppercase">buy</button>
                                             </a>
-                                                <button type="button" class="btn text-uppercase buy--btn" ng-click="quickviewProduct(product)">quick view</button>
-                                            </div>
-                                        </div>
-
-                                    </div>
+                                                        <button type="button" class="btn text-uppercase buy--btn" ng-click="quickviewProduct(product)">quick view</button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                                 </div>
                             </div>
-                        </div>
-                        <div infinite-scroll="loadMore()" infinite-scroll-distance="1" infinite-scroll-disabled="loadingDisable">
+                            <div infinite-scroll="loadMore()" infinite-scroll-distance="1" infinite-scroll-disabled="loadingDisable">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
+            </div>

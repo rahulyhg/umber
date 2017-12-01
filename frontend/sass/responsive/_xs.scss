@@ -29,11 +29,20 @@
                      font-size: 16px;
                  }
              } //End of  plus & minus quantity
+             .customized-form {
+                 .form-control {
+                     height: 35px;
+                 }
+             }
              .section-tp-bt-padd {
                  @include padding(5px 0);
              }
              .table-responsive>.table {
                  margin-bottom: 15px;
+             } //Need to override bootstrap's radio-inline & checkbox-inline class
+             .radio-inline+.radio-inline,
+             .checkbox-inline+.checkbox-inline {
+                 margin-left: 0px
              } //End of global classes
              //start of header
              // Design for side navigation
@@ -154,6 +163,10 @@
                          .buynow--btn {
                              @include padding(3px 15px);
                          }
+                         .fa-shopping-cart {
+                             @include size(20px, 20px);
+                             font-size: 13px;
+                         }
                      }
                  }
                  .featured__icon-heart {
@@ -189,6 +202,11 @@
                          @include size(30px, 30px);
                          @include padding(3px);
                          font-size: 14px
+                     }
+                     .featured__icon-cart {
+                         @include size(20px, 20px);
+                         @include padding(2px 5px);
+                         font-size: 13px;
                      }
                  }
                  .viewmore-btn {
@@ -458,16 +476,252 @@
                      padding-top: 10px;
                  }
              } // End of return-success.html
-             //scss for about us page
-             .contact-us .enquiry-form {
-                 padding: 35px 35px 35px 35px;
-             }
-             .contact-us .enquiry-form-pdd {
-                 max-width: 100%;
+             //Start of checkout.html
+             .checkout {
+                 .content-spacing {
+                     .btn--list {
+                         width: 100%;
+                     }
+                     .btn--next {
+                         width: auto;
+                         @include padding(3px 35px);
+                         float: right;
+                     }
+                 }
+             } // class used in check out & my-account page for vertical 
+             //This class has been extended in mycart's table in my cart page
+             .order-table {
+                 th {
+                     font-size: 16px;
+                 }
+                 tbody>tr {
+                     td {
+                         font-size: 14px;
+                     }
+                 }
+             } //End of extended class .order-table
+             .checkout-tab-btn {
                  display: block;
+                 margin-right: 0;
              }
-             .contact-us .contactus-details {
-                 margin-left: 0;
-                 max-width: 100%;
+             .btn--login {
+                 font-size: 14px;
              }
+             .list-checkout {
+                 padding-bottom: 15px;
+                 padding-left: 0;
+             }
+             .social-icons {
+                 // used in login modal and checkout page
+                 text-align: center;
+                 .social-icons__list {
+                     width: 35px;
+                     height: 35px;
+                     border-radius: 50%;
+                     text-align: center;
+                     font-size: 16px;
+                     line-height: 38px;
+                 }
+             } //End of check out & my-account page for vertical button
+             .details-form {
+                 margin-bottom: 15px;
+             }
+             .details-form {
+                 .payment-checkbox {
+                     .font__style {
+                         font-size: 15px;
+                     }
+                 }
+                 .checkout__cont-btn {
+                     width: 100%;
+                     @include margin(15px null);
+                     font-size: 14px;
+                 }
+             } //End of checkout.html
+             //Start of compare products page
+             .compare-section {
+                 margin-top: 15px;
+                 h1 {
+                     width: 290px;
+                     @include margin(15px auto);
+                 }
+                 .compare--borderline {
+                     &:before {
+                         width: 15%;
+                         left: 0;
+                     }
+                     &:after {
+                         width: 15%;
+                         right: 0;
+                     }
+                 }
+                 .compare-table {
+                     padding-left: 0;
+                     padding-right: 0;
+                     .product-dtls {
+                         width: 165px;
+                         text-align: right;
+                     }
+                     .compare-img {
+                         width: 100px;
+                         padding-top: 0;
+                         padding-bottom: 0;
+                     }
+                     .btn-quick-view {
+                         @include padding(3px 10px);
+                         font-size: 10px;
+                     }
+                     .product-align>tbody>tr:nth-child(3)>td+td {
+                         font-size: 16px;
+                     }
+                 }
+             }
+             .compare--btn {
+                 width: 125px;
+                 @include padding(3px 10px);
+                 font-size: 14px;
+             }
+             .pluse-icon {
+                 left: 0.4%;
+             } //End of compare proucts page 
+             //Start of  about us page
+             .contact-us {
+                 .contactus-content {
+                     @include margin(15px auto);
+                 }
+                 .enquiry-form-pdd {
+                     max-width: 100%;
+                     @include padding(15px 0);
+                     display: block;
+                 }
+                 .enquiry-form {
+                     @include padding(20px);
+                 }
+                 .contactus-details {
+                     margin-left: 0;
+                     max-width: 100%;
+                     @include padding(20px);
+                 }
+                 .head-office {
+                     @include padding(15px);
+                 }
+             } //End of about us
+             //Start of gift-card
+             .giftcard {
+                 .giftcard-padd {
+                     @include padding(15px);
+                 }
+                 .addcart--btn {
+                     width: auto;
+                 }
+             } //End of gift card
+             //Start of individual-page
+             .individual-container {
+                 .breadCrumbs-letter {
+                     padding-bottom: 15px;
+                 }
+                 .padd-rt0 {
+                     padding-right: 15px;
+                 }
+                 .padd-lt3 {
+                     padding-left: 15px;
+                 }
+                 .individual-first {
+                     min-height: 200px;
+                 }
+                 .product-img {
+                     @include size(200px, 250px);
+                     @include margin(0 auto);
+                 }
+             }
+             .individual-main {
+                 @include padding(15px 7px);
+             }
+             .first-sec {
+                 h3 {
+                     font-size: 18px;
+                 }
+                 h4 {
+                     font-size: 16px;
+                 }
+             }
+             .fourth-sec {
+                 .leftContent {
+                     .inline-block {
+                         vertical-align: initial;
+                     }
+                     .leftContent__specHead {
+                         width: auto;
+                         margin-right: 5px;
+                     }
+                 }
+             }
+             .individual-btn {
+                 .btn-add {
+                     font-size: 13px;
+                     padding: 5px 6px;
+                 }
+                 .btn-wish {
+                     font-size: 13px;
+                     padding: 5px 6px;
+                     margin-left: 0;
+                 }
+             } //End of individual page
+             //Start of listing page
+             .listing-main {
+                 padding-left: 15px;
+                 margin-top: 20px;
+             }
+             .btn-listing {
+                 width: 175px;
+                 position: relative;
+                 .fa-reg {
+                     height: 29px;
+                     right: 0;
+                 }
+             }
+             .listview {
+                 .buy--btn {
+                     width: 125px;
+                 }
+                 .item-details {
+                     width: 200px;
+                 }
+                 .listview-item-width {
+                     @include size(100px, 125px);
+                 }
+                 .custom-checkbox {
+                     width: 135px;
+                 }
+             } //End of listing page
+             //Start of my account page
+             .usr-account {
+                 address {
+                     margin-bottom: 15px;
+                 }
+                 .order-list-action {
+                     text-align: left;
+                 }
+                 .order-list--btn {
+                     width: 94px;
+                     margin-right: 0px;
+                     font-size: 9px;
+                 }
+             }
+             .checkout-tab-btn {
+                 .btn--list {
+                     width: 100%;
+                 }
+             } //End of my account page
+             //Start of my-cart page
+             .mycart-table {
+                 tbody>tr {
+                     td:last-child {
+                         font-size: 20px;
+                     }
+                 }
+             }
+             mycart-footer p {
+                 font-size: 14px;
+             } //End of my-cart page
          }

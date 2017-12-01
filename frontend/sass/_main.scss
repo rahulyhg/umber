@@ -2778,9 +2778,10 @@
                                             } //Start of My account(myaccount.html)
                                             .tab-title {
                                                 // Used For all Tabs title which uses h3
+                                                margin-top: 0;
                                                 color: $darkBrown1;
                                                 font-family: 'fjalla-reg';
-                                                margin-top: 0;
+                                                font-size: 24px;
                                             }
 
                                             .linking {
@@ -3528,8 +3529,12 @@
                                                 display: inline-block;
                                                 @include position(absolute,
                                                 0 0 null null);
-                                            }
-
+                                            } // .quickview-modal-size {
+                                            //     z-index: 1000!important; // Adjusted for zoom in plugin
+                                            // }
+                                            // .quickview-modal-backdrop {
+                                            //     z-index: 990!important;
+                                            // }
                                             .quickview-modal-size .modal-dialog {
                                                 // Used this class in listing-ctrl.js in modal
                                                 width: 1195px;
