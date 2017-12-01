@@ -390,6 +390,30 @@
                                                 @include display(flex);
                                             }
 
+                                            .justify-content-start {
+                                                @include justify-content(flex-start);
+                                            }
+
+                                            .justify-content-center {
+                                                @include justify-content(center);
+                                            }
+
+                                            .justify-content-end {
+                                                @include justify-content(flex-end);
+                                            }
+
+                                            .align-item-top {
+                                                @include align-items(top);
+                                            }
+
+                                            .align-item-center {
+                                                @include align-items(center);
+                                            }
+
+                                            .align-item-bottom {
+                                                @include align-items(bottom);
+                                            }
+
                                             .display-table {
                                                 display: table;
                                                 width: 100%;
@@ -2972,6 +2996,7 @@
                                                     }
                                                 }
                                                 .item-img {
+                                                    width: 185px;
                                                     vertical-align: top;
                                                     @include padding(10px 15px);
                                                     margin-right: 10px;
@@ -2983,25 +3008,28 @@
                                                 .comment {
                                                     padding-left: 15px;
                                                 }
-                                                hr.table-divider {
-                                                    @include position(absolute,
-                                                    null 12% 10px 12%);
-                                                    @include margin(10px auto);
-                                                    @include linear-gradient(to right,
-                                                    rgba(255,
-                                                    255,
-                                                    255,
-                                                    1) 0%,
-                                                    rgba(255,
-                                                    255,
-                                                    255,
-                                                    0) 49%,
-                                                    rgba(255,
-                                                    255,
-                                                    255,
-                                                    1) 100%);
-                                                    border-top: 1px solid $borderColor;
-                                                }
+                                                .item-desc {
+                                                    width: 65%;
+                                                    white-space: normal;
+                                                } // hr.table-divider {
+                                                //     @include position(absolute,
+                                                //     null 12% 10px 12%);
+                                                //     @include margin(10px auto);
+                                                //     @include linear-gradient(to right,
+                                                //     rgba(255,
+                                                //     255,
+                                                //     255,
+                                                //     1) 0%,
+                                                //     rgba(255,
+                                                //     255,
+                                                //     255,
+                                                //     0) 49%,
+                                                //     rgba(255,
+                                                //     255,
+                                                //     255,
+                                                //     1) 100%);
+                                                //     border-top: 1px solid $borderColor;
+                                                // }
                                                 .display-cell {
                                                     @include padding(0 5px);
                                                 }
@@ -3053,9 +3081,6 @@
                                                 }
                                                 .item-img img {
                                                     width: 105px;
-                                                }
-                                                .item-desc {
-                                                    width: 60%;
                                                 }
                                                 .item-cost {
                                                     margin-top: 20px;
@@ -3638,7 +3663,19 @@
                                                         color: $darkBrown1;
                                                     }
                                                 }
-                                            } //End of all modals html
+                                            } //Start of size-chart modal
+                                            .size-chart-table {
+                                                margin-bottom: 0;
+                                                thead>tr>th {
+                                                    border: 1px solid white;
+                                                    background-color: $lightBrown2;
+                                                    color: white;
+                                                }
+                                                tbody>tr>td {
+                                                    font-size: 16px;
+                                                }
+                                            } //End of size-chart modal
+                                            //End of all modals html
                                             // display message
                                             .displayMessage {
                                                 padding: 20px

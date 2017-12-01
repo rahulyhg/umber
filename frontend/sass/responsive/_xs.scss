@@ -421,6 +421,9 @@
                  }
              } //End of buy the look page
              //Start of Cancel, cancel-msg, return page
+             .linking {
+                 font-size: 12px;
+             }
              .item-name {
                  font-size: 14px;
              }
@@ -450,12 +453,24 @@
                          padding-left: 15px;
                      }
                  }
+                 .item-img {
+                     width: 115px;
+                     @include padding(10px);
+                     margin-right: 5px;
+                 }
+                 .item-desc {
+                     width: 235px;
+                 }
              }
              .order-details-table {
                  // This class has been extended in order-return-table
                  @include padding(0 0 15px);
-                 .item-desc {
-                     width: 55%;
+                 .order-payment-info {
+                     font-size: 14px;
+                 }
+                 address {
+                     padding-right: 0;
+                     font-size: 14px;
                  }
              } //End of cancel,
              //Start of return-success.html  cancel-msg.html
@@ -714,14 +729,50 @@
                  }
              } //End of my account page
              //Start of my-cart page
+             .mycart-container {
+                 @include padding(20px 10px);
+             }
              .mycart-table {
                  tbody>tr {
                      td:last-child {
-                         font-size: 20px;
+                         font-size: 18px;
                      }
                  }
              }
-             mycart-footer p {
+             .mycart-footer .checkout--btn,
+             .mycart-footer .shop--btn {
+                 width: auto;
+                 @include padding(3px 8px);
+                 margin-bottom: 15px;
+             }
+             .mycart-footer span,
+             .mycart-footer p {
                  font-size: 14px;
+             }
+             .mycart-footer {
+                 .inline-block:last-child {
+                     padding-left: 5px;
+                 }
              } //End of my-cart page
+             //Start of order-detail page
+             .usr-status-title {
+                 font-size: 16px!important;
+             } //End of order-detail page 
+             //Start of all modals
+             .modal-container {
+                 @include padding(15px);
+                 .login-head {
+                     h1 {
+                         font-size: 20px;
+                     }
+                     p {
+                         font-size: 14px;
+                     }
+                 }
+                 .form-otp {
+                     width: 255px;
+                     padding: 10px 15px!important;
+                     @include margin(0 auto);
+                 }
+             } //End of all modals
          }

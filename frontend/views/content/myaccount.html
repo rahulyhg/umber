@@ -234,7 +234,7 @@
                                             <div class="item-img display-cell align-top">
                                                 <img ng-src="{{product.product.images[0].image|serverimage}}" alt="Ordered Item" class="img-responsive">
                                             </div>
-                                            <div class="display-cell align-top">
+                                            <div class="item-desc display-cell align-top">
                                                 <h4 class="item-name text-uppercase">{{product.product.productName}}</h4>
                                                 <p class="item-code"><span class="text-capitalize">Product Code:</span><span class="text-uppercase"> {{product.product.name}}</span>
                                                 </p>
@@ -242,7 +242,7 @@
                                             </div>
                                             <div class="comment">
                                                 <p class="item-code">Comment: {{product.comment}}.</p>
-                                                <hr class="table-divider">
+                                                <!-- <hr class="table-divider"> -->
                                             </div>
                                         </td>
                                         <td colspan="3">
@@ -280,11 +280,12 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <h4 class="item-name text-uppercase">{{product.product.productName}}</h4>
-                                            <p class="item-code">Product Code:<span class="text-uppercase"> {{product.product.name}}</span>
-                                            </p>
-                                            <p class="item-cost"><i class="fa fa-inr"></i>{{product.product.price}}</p>
-
+                                            <div class="item-desc">
+                                                <h4 class="item-name text-uppercase">{{product.product.productName}}</h4>
+                                                <p class="item-code">Product Code:<span class="text-uppercase"> {{product.product.name}}</span>
+                                                </p>
+                                                <p class="item-cost"><i class="fa fa-inr"></i>{{product.product.price}}</p>
+                                            </div>
                                         </td>
                                         <td colspan="3">
                                             <div class="pull-right">
@@ -317,10 +318,12 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <h4 class="item-name text-uppercase">{{product.product.productName}}</h4>
-                                            <p class="item-code">Product Code:<span class="text-uppercase"> {{product.product.name}}</span>
-                                            </p>
-                                            <p class="item-cost"><i class="fa fa-inr"></i>{{product.product.price}}</p>
+                                            <div class="item-desc">
+                                                <h4 class="item-name text-uppercase">{{product.product.productName}}</h4>
+                                                <p class="item-code">Product Code:<span class="text-uppercase"> {{product.product.name}}</span>
+                                                </p>
+                                                <p class="item-cost"><i class="fa fa-inr"></i>{{product.product.price}}</p>
+                                            </div>
 
                                         </td>
                                         <td colspan="3">
@@ -350,7 +353,7 @@
                                         <div class="buy-para custom-checkbox">
                                             <h4><i class="fa fa-inr" aria-hidden="true"></i> {{xyz.price}}</h4>
                                             <h5 class="text-uppercase">{{xyz.productName}}</h5>
-                                            <hr>
+
                                             <div class="checkbox inline-block marg0" ng-click="remove();">
                                                 <input type="checkbox" id="{{xyz.productId}}">
                                                 <label for="{{xyz.productId}}">

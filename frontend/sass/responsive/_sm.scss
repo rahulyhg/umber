@@ -213,9 +213,7 @@
      .order-details-table {
          // This class has been extended in order-return-table
          @include padding(0 15px 35px);
-         .item-desc {
-             width: 55%;
-         }
+         
      } //End of cancel, 
      .usr-status-title {
          font-size: 17px!important;

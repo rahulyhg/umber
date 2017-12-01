@@ -182,5 +182,14 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
         $.jStorage.set("compareproduct", removeCompare);
         $state.reload();
     }
+    //To open size chart
+    $scope.openSizeChart = function () {
+        $scope.openSizeChartModal = $uibModal.open({
+            animation: true,
+            templateUrl: 'views/modal/size-chart.html',
+            size: 'md',
+            scope: $scope
+        });
+    };
 
 })

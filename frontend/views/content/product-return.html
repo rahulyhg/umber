@@ -1,80 +1,80 @@
 <div>
     <div class="container">
         <div class="order-return-table">
-            <table class="table">
-                <caption>
-                    <h2 class="order-status-title text-center">Return / exchange
-                    </h2>
-                </caption>
-                <thead>
-                    <tr class="text-uppercase">
-                        <th colspan="2" class="align-top">order placed<br><strong>{{order.createdAt | date:'dd/MM/yyyy'}}</strong></th>
-                        <th class="align-top">order no.<br><strong>{{order.orderNo}}</strong></th>
-                        <th class="align-top">Grand total<br><strong>&#8377; {{order.totalAmount}}</strong></th>
-                    </tr>
-                    <tr>
-                        <th colspan="4"></th>
-                    </tr>
-                    <tr class="text-uppercase">
-                        <th class="align-top">item ordered</th>
-                        <th class="align-top">price</th>
-                        <th class="align-top">quantity</th>
-                        <th class="align-top">return item</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="relate">
-                            <div class="item-img inline-block">
-                                <img src="frontend/img/individual/product-test.jpg" alt="Ordered Item" class="img-responsive">
-                            </div>
-                            <div class="inline-block item-desc">
-                                <h4 class="item-name text-uppercase">marathon plain front trouser
-                                </h4>
-                                <p class="item-code"><span class="text-capitalize">Product Code:</span><span class="text-uppercase"> 0000adafafaa</span>
-                                </p>
-                                <!--<p class="item-code"><span class="text-capitalize">size:</span><span class="text-uppercase">M</span>
+            <h2 class="order-status-title text-center">Return / exchange
+            </h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr class="text-uppercase">
+                            <th colspan="2" class="align-top">order placed<br><strong>{{order.createdAt | date:'dd/MM/yyyy'}}</strong></th>
+                            <th class="align-top">order no.<br><strong>{{order.orderNo}}</strong></th>
+                            <th class="align-top">Grand total<br><strong>&#8377; {{order.totalAmount}}</strong></th>
+                        </tr>
+                        <tr>
+                            <th colspan="4"></th>
+                        </tr>
+                        <tr class="text-uppercase">
+                            <th class="align-top">item ordered</th>
+                            <th class="align-top">price</th>
+                            <th class="align-top">quantity</th>
+                            <th class="align-top">return item</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="relate">
+                                <div class="item-img inline-block">
+                                    <img src="frontend/img/individual/product-test.jpg" alt="Ordered Item" class="img-responsive">
+                                </div>
+                                <div class="inline-block item-desc">
+                                    <h4 class="item-name text-uppercase">marathon plain front trouser
+                                    </h4>
+                                    <p class="item-code"><span class="text-capitalize">Product Code:</span><span class="text-uppercase"> 0000adafafaa</span>
+                                    </p>
+                                    <!--<p class="item-code"><span class="text-capitalize">size:</span><span class="text-uppercase">M</span>
                                 </p>
                                 <p class="item-code"><span class="text-capitalize">color</span><span class="text-uppercase"> black</span>
                                 </p>-->
-                            </div>
-                            <!--<div class="comment">
+                                </div>
+                                <!--<div class="comment">
                                 <p class="item-code">Comment: {{product.comment}}.</p>
                                 <hr class="table-divider">
                             </div>-->
-                        </td>
-                        <td class="text-center relate">
-                            <h4 class="item-name"><i class="fa fa-inr"></i>2300</h4>
-                        </td>
+                            </td>
+                            <td class="text-center relate">
+                                <h4 class="item-name"><i class="fa fa-inr"></i>2300</h4>
+                            </td>
 
-                        <td class="text-center">
-                            <div class="order-return plus-minus-btn">
-                                <!--<a ng-click="updateQuantity($index, -1)">
+                            <td class="text-center">
+                                <div class="order-return plus-minus-btn">
+                                    <!--<a ng-click="updateQuantity($index, -1)">
                                     <i class="fa fa-minus square__bg" aria-hidden="true"></i>
                                 </a>-->
-                                <div class="inline-block">
-                                    <form>
-                                        <div class="form-group marg0">
-                                            <input type="text" readonly class="form-control quantity__input" ng-model="product.quantity">
-                                        </div>
-                                    </form>
-                                </div>
-                                <!--<a ng-click="updateQuantity($index, 1)" ng-if="product.quantity< product.product.quantity">
+                                    <div class="inline-block">
+                                        <form>
+                                            <div class="form-group marg0">
+                                                <input type="text" readonly class="form-control quantity__input" ng-model="product.quantity">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!--<a ng-click="updateQuantity($index, 1)" ng-if="product.quantity< product.product.quantity">
                                     <i class="fa fa-plus square__bg" aria-hidden="true"></i>
                                 </a>-->
-                            </div>
-                        </td>
-                        <td>
-                            <div class=" custom-checkbox">
-                                <div class="inline-block checkbox">
-                                    <input type="checkbox" id="x1">
-                                    <label for="x1"></label>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                            </td>
+                            <td>
+                                <div class=" custom-checkbox">
+                                    <div class="inline-block checkbox">
+                                        <input type="checkbox" id="x1">
+                                        <label for="x1"></label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <div class="row">
                 <div class="col-md-5">
                     <form>

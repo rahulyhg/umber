@@ -76,7 +76,7 @@
                             <div class="inline-block buy-para__sizes ">
                                 <p ng-repeat="size in sizes " ng-click="selectSize(size) " ng-class="{'active':activeButton==size.name} ">{{size.name}}</p>
                                 <div>
-                                    <a href=" " class="linking ">Size Chart</a>
+                                    <a class="linking " ng-click="openSizeChart()">Size Chart</a>
                                 </div>
 
                             </div>
