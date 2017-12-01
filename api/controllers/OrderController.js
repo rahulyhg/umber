@@ -183,12 +183,17 @@ var controller = {
             }).exec(function (err, found) {
                 if (err) {
                     //  redirect to sorry page
+                    res.redirect("http://umber.wohlig.co.in/");
                 } else {
                     if (checkFlag) {
                         //  clear cart code goes here
                         //  AND redirect to thankyou page after clearing
+                        res.redirect("http://umber.wohlig.co.in/");
+
                     } else {
                         //  redirect to sorry page
+                        res.redirect("http://umber.wohlig.co.in/");
+
                     }
                 }
             });
