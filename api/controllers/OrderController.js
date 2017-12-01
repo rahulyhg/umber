@@ -134,38 +134,54 @@ var controller = {
     },
     redirectUrl: function (req, res) {
         if (req.body) {
-            console.log(req.body);
             var http = require('http'),
                 fs = require('fs'),
                 qs = require('querystring');
             var ccav = require('./ccavutil.js');
             var body = '',
                 workingKey = '236E7613D01B3B0BDAA4805D6A1162DB', //Put in the 32-Bit key shared by CCAvenues.
-                accessCode = 'AVOH01EK30BS66HOSB', //Put in the Access Code shared by CCAvenues.
                 encRequest = '';
+            var ccavResponse = '';
 
-            var ccavEncResponse = '',
-                ccavResponse = '',
-                ccavPOST = '';
-
-            ccavEncResponse += req.body;
-            ccavPOST = qs.parse(ccavEncResponse);
-            var encryption = ccavPOST.encResp;
             ccavResponse += ccav.decrypt(req.body.encResp, workingKey);
             var buf = Buffer.from(ccavResponse);
             var respString = buf.toString();
             var respObj = respString.split("&");
-            console.log(respObj);
             var resJson = {};
             _.each(respObj, function (n) {
                 var explodeRes = n.split("=");
                 resJson[explodeRes[0]] = explodeRes[1];
             });
             console.log(resJson);
+            if (resJson.order_status === "Success" && resJson.order_status === "Aborted") {
+                updateOrder(resJson);
+                clearCart(resJson);
+            } else if (resJson.order_status === "Failure") {
+                updateOrder(resJson);
+            } else {
+                resJson.order_status = "Illegal";
+                updateOrder(resJson);
+            }
 
 
         } else {
             res.redirect(env.realHost + "/error");
+        }
+
+        function updateOrder(order) {
+            Order.findOneAndUpdate({
+                orderNo: order.order_id
+            }, {
+                $set: {
+                    paymentStatus: order.order_status,
+                    trackingId: order.tracking_id,
+                    paymentResponse: order
+                }
+            }).exec()
+        }
+
+        function clearCart(order) {
+            //  delete user card code goes here.
         }
     },
     cancelUrl: function (req, res) {

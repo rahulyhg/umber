@@ -127,7 +127,7 @@
             "url": "",
             "dropDownField": "",
             "dropDownType": "single",
-            "dropDown": ["processing", "shipped", "delivered", "returned", "cancelled"]
+            "dropDown": ["processing", "shipped", "delivered", "returned", "cancelled", "pending"]
         }, {
             "name": "Payment Status",
             "type": "tags",
@@ -138,7 +138,7 @@
             "url": "",
             "dropDownField": "",
             "dropDownType": "single",
-            "dropDown": ["pending", "payment successfull"]
+            "dropDown": ["Success", "Aborted", "Failure", "Illegal"]
         },
         {
             "name": "Courier Type",
