@@ -134,6 +134,8 @@ var controller = {
     },
     redirectUrl: function (req, res) {
         if (req.body) {
+            console.log(req.body);
+            console.log(ccavEncResponse);
             var http = require('http'),
                 fs = require('fs'),
                 qs = require('querystring');
@@ -151,8 +153,7 @@ var controller = {
             ccavPOST = qs.parse(ccavEncResponse);
             var encryption = ccavPOST.encResp;
             ccavResponse = ccav.decrypt(req.body, workingKey);
-            console.log(req.body);
-            console.log(ccavEncResponse);
+
         } else {
             res.redirect(env.realHost + "/error");
         }
