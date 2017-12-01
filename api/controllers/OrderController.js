@@ -134,10 +134,71 @@ var controller = {
     },
     redirectUrl: function (req, res) {
         if (req.body) {
-            console.log(req.allParams());
+            var http = require('http'),
+                fs = require('fs'),
+                qs = require('querystring');
+            var ccav = require('./ccavutil.js');
+            var body = '',
+                workingKey = '236E7613D01B3B0BDAA4805D6A1162DB', //Put in the 32-Bit key shared by CCAvenues.
+                encRequest = '';
+            var ccavResponse = '';
+
+            ccavResponse += ccav.decrypt(req.body.encResp, workingKey);
+            var buf = Buffer.from(ccavResponse);
+            var respString = buf.toString();
+            var respObj = respString.split("&");
+            var resJson = {};
+            _.each(respObj, function (n) {
+                var explodeRes = n.split("=");
+                resJson[explodeRes[0]] = explodeRes[1];
+            });
+            console.log(resJson);
+            if (resJson.order_status === "Success" && resJson.order_status === "Aborted") {
+                resJson.shippingStatus = "processing";
+                updateOrder(resJson, true);
+            } else if (resJson.order_status === "Failure") {
+                resJson.shippingStatus = "pending";
+                updateOrder(resJson, false);
+            } else {
+                resJson.shippingStatus = "pending";
+                resJson.order_status = "Illegal";
+                updateOrder(resJson, false);
+            }
+
+
         } else {
             res.redirect(env.realHost + "/error");
         }
+
+        function updateOrder(order, checkFlag) {
+            Order.findOneAndUpdate({
+                orderNo: order.order_id
+            }, {
+                $set: {
+                    paymentStatus: order.order_status,
+                    orderStatus: order.shippingStatus,
+                    trackingId: order.tracking_id,
+                    paymentResponse: order
+                }
+            }).exec(function (err, found) {
+                if (err) {
+                    //  redirect to sorry page
+                    res.redirect("http://umber.wohlig.co.in/");
+                } else {
+                    if (checkFlag) {
+                        //  clear cart code goes here
+                        //  AND redirect to thankyou page after clearing
+                        res.redirect("http://umber.wohlig.co.in/");
+
+                    } else {
+                        //  redirect to sorry page
+                        res.redirect("http://umber.wohlig.co.in/");
+
+                    }
+                }
+            });
+        }
+
     },
     cancelUrl: function (req, res) {
         if (req.body) {} else {

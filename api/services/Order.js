@@ -92,8 +92,7 @@ var schema = new Schema({
     },
     paymentStatus: {
         type: String,
-        enum: ['pending', 'payment successfull'],
-        default: 'pending'
+        enum: ['Success', 'Aborted', 'Failure', 'Illegal']
     },
     returnReason: {
         type: String
@@ -118,7 +117,10 @@ var schema = new Schema({
     firstName: String,
     lastName: String,
     mobileNo: String,
-    email: String
+    email: String,
+    paymentResponse: {
+        type: {}
+    }
 });
 
 schema.plugin(deepPopulate, {
