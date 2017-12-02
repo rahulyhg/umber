@@ -186,21 +186,15 @@ var controller = {
                     res.redirect("http://umber.wohlig.co.in/");
                 } else {
                     if (checkFlag) {
-                        console.log("in successfull payment", found);
                         //  clear cart code goes here
-                        // Cart.remove({
-                        //     user: mongoose.Types.ObjectId(found.user)
-                        // }).exec(function (err, result) {})
-                        // Product.subtractQuantity(found.products, null);
-                        //  AND redirect to thankyou page after clearing
-                        res.redirect("http://umber.wohlig.co.in/");
-
-                    } else {
-                        console.log("for checking@@@@@@@@@@@@@@@", found);
                         Cart.remove({
                             userId: mongoose.Types.ObjectId(found.user)
                         }).exec(function (err, result) {})
                         Product.subtractQuantity(found.products, null);
+                        //  AND redirect to thankyou page after clearing
+                        res.redirect("http://umber.wohlig.co.in/");
+
+                    } else {
                         //  redirect to sorry page
                         res.redirect("http://umber.wohlig.co.in/");
 
