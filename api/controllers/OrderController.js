@@ -186,7 +186,7 @@ var controller = {
                     res.redirect("http://umber.wohlig.co.in/");
                 } else {
                     if (checkFlag) {
-                        console.log("in successfull payment");
+                        console.log("in successfull payment", found);
                         //  clear cart code goes here
                         // Cart.remove({
                         //     user: mongoose.Types.ObjectId(found.user)
@@ -196,7 +196,7 @@ var controller = {
                         res.redirect("http://umber.wohlig.co.in/");
 
                     } else {
-                        console.log("for checking@@@@@@@@@@@@@@@");
+                        console.log("for checking@@@@@@@@@@@@@@@", found);
                         Cart.remove({
                             user: mongoose.Types.ObjectId(found.user)
                         }).exec(function (err, result) {})
