@@ -24,7 +24,7 @@
     <input type="hidden" value="<%= delivery_country %>" name="delivery_country" />
     <input type="hidden" value="<%= delivery_tel %>" name="delivery_tel" />
 
-    <button type="submit" class="submitForm"> SUBMIT </button>
+    <button style="display:none" type="submit" class="submitForm"> SUBMIT </button>
 </form>
 <div class="container">
     <h3 class="text-center" style="padding:20%;">Loading EBS Payment Gateway</h3>
@@ -33,6 +33,6 @@
     crossorigin="anonymous"></script>
 <script>
     $(document).ready(function () {
-        // $(".submitForm").click();
+        $(".submitForm").click();
     });
 </script>
