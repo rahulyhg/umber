@@ -137,12 +137,20 @@ myApp
         }
         $scope.removeWishlist = function (prodId) {
             var data = {};
-            data.accessToken = $.jStorage.get("accessToken");
-            data.productId = prodId;
-            WishlistService.removeProduct(data, function (data) {
-                console.log(data);
-                $state.reload();
-            })
+            if ($.jStorage.get("accessToken")) {
+                data.accessToken = $.jStorage.get("accessToken");
+                data.productId = prodId;
+                WishlistService.removeProduct(data, function (data) {
+                    console.log(data);
+                    $state.reload();
+                })
+            } else {
+                data.productId = prodId;
+                myService.removeWishlist(data, function (data) {
+                    console.log(data);
+                    $state.reload();
+                })
+            }
         }
         $scope.addRemoveToWishlist = function (product) {
             if (userId.userId) {
@@ -151,11 +159,17 @@ myApp
                     "productId": product.productId
                 });
                 if (result) {
-                    console.log("#######1111111111##if")
                     $scope.removeWishlist(product.productId);
                 } else {
-                    console.log("#########else")
-
+                    $scope.addToWishlist(product);
+                }
+            } else {
+                var result = _.find($scope.wishlist, {
+                    "productId": product.productId
+                });
+                if (result) {
+                    $scope.removeWishlist(product.productId);
+                } else {
                     $scope.addToWishlist(product);
                 }
             }
