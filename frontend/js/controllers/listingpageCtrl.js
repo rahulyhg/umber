@@ -33,8 +33,8 @@
 
      if ($stateParams.cat) {
          ProductService.productWithCategory(data, function (data) {
-             //  console.log("$$$$$$$in categoryProduct cat", data.data.data);
-             $scope.products = _.chunk(data.data.data, 3);
+             console.log("$$$$$$$in categoryProduct cat", data.data.data);
+             //  $scope.products = _.chunk(data.data.data, 3);
          })
      }
 
