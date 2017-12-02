@@ -198,7 +198,7 @@ var controller = {
                     } else {
                         console.log("for checking@@@@@@@@@@@@@@@", found);
                         Cart.remove({
-                            user: mongoose.Types.ObjectId(found.user)
+                            userId: mongoose.Types.ObjectId(found.user)
                         }).exec(function (err, result) {})
                         Product.subtractQuantity(found.products, null);
                         //  redirect to sorry page
