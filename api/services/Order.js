@@ -92,7 +92,7 @@ var schema = new Schema({
     },
     paymentStatus: {
         type: String,
-        enum: ['Success', 'Aborted', 'Failure', 'Illegal']
+        enum: ['Success', 'Aborted', 'Failure', 'Illegal', 'pending']
     },
     returnReason: {
         type: String
