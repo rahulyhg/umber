@@ -153,7 +153,7 @@ var controller = {
                 resJson[explodeRes[0]] = explodeRes[1];
             });
             console.log(resJson);
-            if (resJson.order_status === "Success" && resJson.order_status === "Aborted") {
+            if (resJson.order_status === "Success" || resJson.order_status === "Aborted") {
                 resJson.shippingStatus = "processing";
                 updateOrder(resJson, true);
             } else if (resJson.order_status === "Failure") {
