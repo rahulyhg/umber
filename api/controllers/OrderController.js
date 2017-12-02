@@ -139,7 +139,7 @@ var controller = {
                 qs = require('querystring');
             var ccav = require('./ccavutil.js');
             var body = '',
-                workingKey = '236E7613D01B3B0BDAA4805D6A1162DB', //Put in the 32-Bit key shared by CCAvenues.
+                workingKey = 'BBA6242ED4C2826F76DE28CF6B64D90C', //Put in the 32-Bit key shared by CCAvenues.
                 encRequest = '';
             var ccavResponse = '';
 
@@ -250,8 +250,8 @@ var controller = {
             qs = require('querystring');
         var ccav = require('./ccavutil.js');
         var body = '',
-            workingKey = '236E7613D01B3B0BDAA4805D6A1162DB', //Put in the 32-Bit key shared by CCAvenues.
-            accessCode = 'AVOH01EK30BS66HOSB', //Put in the Access Code shared by CCAvenues.
+            workingKey = 'BBA6242ED4C2826F76DE28CF6B64D90C', //Put in the 32-Bit key shared by CCAvenues.
+            accessCode = 'AVNN01EL31AD96NNDA', //Put in the Access Code shared by CCAvenues.
             encRequest = '',
             formbody = '';
 
