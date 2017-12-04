@@ -254,7 +254,7 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
             console.log("In controller.js->confDel");
             var modalInstance = $uibModal.open({
                 animation: $scope.animationsEnabled,
-                templateUrl: '/views/modal/conf-delete.html',
+                templateUrl: 'views/modal/conf-delete.html',
                 size: 'sm',
                 scope: $scope
             });
