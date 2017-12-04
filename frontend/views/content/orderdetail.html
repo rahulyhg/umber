@@ -88,9 +88,9 @@
                             </address>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-7">
-                            <h4 class="text-center usr-status-title usr-addrs-title">PAYMENT INFORMATION</h4>
+                            <h4 class="text-right usr-status-title usr-addrs-title">PAYMENT INFORMATION</h4>
                             <p class="text-right order-payment-info">Item(s) Subtotal: <span>&#8377; {{order.totalAmount}}</span><br> Shipping: <span>&#8377; {{order.shippingAmount}}</span><br>                                Disscount:
-                                <span>&#8377; {{order.discountAmount}}</span><br> Total: <span>&#8377; {{order.shippingAmount+order.totalAmount-order.discountAmount}}</span><br>                                TAX: <span>&#8377; 00</span><br> Grand Total: <span>&#8377; {{order.totalAmount}}</span>
+                                <span>&#8377; {{order.discountAmount}}</span><br> Total: <span>&#8377; {{order.shippingAmount+order.totalAmount-order.discountAmount}}</span><br>                                Tax: <span>&#8377; 00</span><br> Grand Total: <span>&#8377; {{order.totalAmount}}</span>
                             </p>
                         </div>
                     </div>
@@ -99,7 +99,7 @@
                     <h2 class="order-status-title text-center">Returned</h2>
                     <div class="table-responsive">
                         <table class="table return-table">
-                            <thead>
+                            <!-- <thead>
                                 <tr class="text-uppercase">
                                     <th class="align-top">order placed<br><strong>{{order.createdAt | date:'dd/MM/yyyy'}}</strong></th>
                                     <th class="align-top">order no.<br><strong>{{order.orderNo}}</strong></th>
@@ -107,7 +107,7 @@
                                     <th class="align-top">tracking id<br><strong class="text-capitalize">Cash on Delivery</strong></th>
                                     <th class="align-top">Grand total<br><strong>&#8377; {{order.totalAmount}}</strong></th>
                                 </tr>
-                            </thead>
+                            </thead> -->
                             <tbody>
                                 <tr class="relate" ng-repeat="product in order.returnedProducts">
 

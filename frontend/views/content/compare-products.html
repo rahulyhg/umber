@@ -79,8 +79,11 @@
                                 <td ng-repeat="product in products">{{product.brand.name}}</td>
                             </tr>
                             <tr>
-                                <td>
+                                <td class="relate">
                                     <div style="width: inherit">Summary </div>
+                                    <div class="pluse-icon" data-toggle="collapse" data-target="#demo">
+                                        <img src="../img/compare/pluse.png" class="img-responsive">
+                                    </div>
                                 </td>
                                 <td ng-repeat="product in products">
                                     <div>
@@ -91,9 +94,7 @@
 
                         </tbody>
                     </table>
-                    <div class="pluse-icon" data-toggle="collapse" data-target="#demo">
-                        <img src="../img/compare/pluse.png" class="img-responsive">
-                    </div>
+
                 </div>
 
                 <!--<div class="plus-detail">
@@ -156,7 +157,7 @@
                                 <td></td>
                                 <td ng-repeat="product in products">
                                     <div>
-                                        <button class="compare--btn" ui-sref="individual-page({id: product.productId})">buy now</button>
+                                        <button class="compare--btn" ui-sref="individual-page({id: product.productId})">view details</button>
                                     </div>
                                     <div>
                                         <button class="compare--btn" ng-click="removeCompareProduct(product)"><i class="fa fa-trash" aria-hidden="true"></i>remove</button>

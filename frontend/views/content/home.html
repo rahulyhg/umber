@@ -109,7 +109,7 @@
                                     </div>
                                     <div class="get-left">
                                         <h3 class="homepg-slider-product-cost"><i class="fa fa-inr" aria-hidden="true"></i>{{newArrival.price}}</h3>
-                                        <h4 class="homepg-slider-product-name">{{newArrival.productName}}</h4>
+                                        <h4 class="homepg-slider-product-name text-uppercase">{{newArrival.productName}}</h4>
                                         <div class="abslt-buynow-btn">
                                             <buttton class="btn buynow--btn text-uppercase" ui-sref="individual-page({id: newArrival.productId})">buy</buttton>
                                         </div>
@@ -202,11 +202,12 @@
                 <flex-slider flex-slide="blog in blogs track by $index" prev-text="" next-text="" animation="slide" item-width="400" min-items="3">
                     <li class="relate">
                         <article class="blog__banner-detail relate">
-                            <img ng-src="{{blog.image | serverimage}}" alt="" class="img-responsive">
+                            <a ui-sref="inner-blogs({id:blog._id})"> <img ng-src="{{blog.image | serverimage}}" alt="" class="img-responsive"></a>
+
                             <div class="blog__desc">
                                 <h3 class="text-uppercase">{{blog.name}}</h3>
                                 <p class="typedin-desc" ng-bind-html="blog.description"></p>
-                                <p class="relate extra-content"><a href="{{blog.link}}">Read more</a></p>
+                                <p class="relate extra-content"><a ui-sref="inner-blogs({id:blog._id})">Read more</a></p>
                             </div>
                         </article>
                     </li>
