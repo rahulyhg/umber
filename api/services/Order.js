@@ -659,7 +659,11 @@ var model = {
                         emailData.billingAddress = orderss.billingAddress;
                         emailData.shippingAddress = orderss.shippingAddress;
                         emailData.shipping = orderss.shippingAmount;
-                        emailData.discount = orderss.discountAmount;
+                        if (orderss.discountAmount) {
+                            emailData.discount = orderss.discountAmount;
+                        } else {
+                            emailData.discount = 0;
+                        }
                         emailData.tax = 0;
                         emailData.totalAmount = orderss.totalAmount;
                         // _.each(emailData.order, function (n) {
@@ -723,7 +727,11 @@ var model = {
                         emailData.billingAddress = orderss.billingAddress;
                         emailData.shippingAddress = orderss.shippingAddress;
                         emailData.shipping = orderss.shippingAmount;
-                        emailData.discount = orderss.discountAmount;
+                        if (orderss.discountAmount) {
+                            emailData.discount = orderss.discountAmount;
+                        } else {
+                            emailData.discount = 0;
+                        }
                         emailData.tax = 0;
                         // emailData.totalAmount = orderss.totalAmount;
                         _.each(emailData.order, function (n) {
@@ -787,7 +795,11 @@ var model = {
                         emailData.billingAddress = orderss.billingAddress;
                         emailData.shippingAddress = orderss.shippingAddress;
                         emailData.shipping = orderss.shippingAmount;
-                        emailData.discount = orderss.discountAmount;
+                        if (orderss.discountAmount) {
+                            emailData.discount = orderss.discountAmount;
+                        } else {
+                            emailData.discount = 0;
+                        }
                         emailData.tax = 0;
                         // emailData.totalAmount = orderss.totalAmount;
                         _.each(emailData.order, function (n) {
@@ -850,7 +862,11 @@ var model = {
                         emailData.billingAddress = orderss.billingAddress;
                         emailData.shippingAddress = orderss.shippingAddress;
                         emailData.shipping = orderss.shippingAmount;
-                        emailData.discount = orderss.discountAmount;
+                        if (orderss.discountAmount) {
+                            emailData.discount = orderss.discountAmount;
+                        } else {
+                            emailData.discount = 0;
+                        }
                         emailData.tax = 0;
                         emailData.totalAmount = orderss.totalAmount;
                         // _.each(emailData.order, function (n) {
@@ -913,7 +929,11 @@ var model = {
                         emailData.billingAddress = orderss.billingAddress;
                         emailData.shippingAddress = orderss.shippingAddress;
                         emailData.shipping = orderss.shippingAmount;
-                        emailData.discount = orderss.discountAmount;
+                        if (orderss.discountAmount) {
+                            emailData.discount = orderss.discountAmount;
+                        } else {
+                            emailData.discount = 0;
+                        }
                         emailData.tax = 0;
                         emailData.totalAmount = orderss.totalAmount;
                         // _.each(emailData.order, function (n) {

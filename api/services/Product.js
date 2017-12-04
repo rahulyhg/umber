@@ -64,6 +64,7 @@ var schema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'BaseColor'
     },
+    mrp: Number,
     price: Number,
     images: [{
         image: String,
@@ -212,6 +213,9 @@ var model = {
 
                             if (product.price)
                                 newProduct.price = product.price;
+
+                            if (product.mrp)
+                                newProduct.mrp = product.mrp;
 
                             if (product.productCode)
                                 newProduct.productCode = product.productCode;
