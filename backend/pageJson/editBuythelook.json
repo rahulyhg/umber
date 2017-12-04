@@ -27,6 +27,7 @@
     }, {
         "name": "Inside Image",
         "type": "image",
+        "size": "572 x 741px",
         "tableRef": "insideImage",
         "placeholder": "Enter Image Link",
         "id": "imgLink1",

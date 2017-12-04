@@ -94,7 +94,7 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                 // $.jStorage.set("userId", $scope.userData._id);
 
             } else if (data.data.error) {
-                toastr.error("User already exists with the given emailId. Please login to proced", "Error");
+                toastr.error("User already exists with the given emailId. Please login to proceed", "Error");
             } {
                 // TODO:: show popup to register
             }
@@ -258,6 +258,41 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
             }
         })
     }
+
+    //to sve offline cart and wishlist
+    $scope.addOfflineWishlistAndCart = function () {
+        console.log("in addOfflineWishlistAndCart");
+        var cart = {};
+        cart.userId = $.jStorage.get("userId");
+        cart.accessToken = $.jStorage.get("accessToken");
+        var userCart = $.jStorage.get("cart");
+        if (userCart) {
+            cart.products = userCart.products;
+            console.log("Offline cart: ", cart);
+            CartService.saveProduct(cart, function (data) {
+                if (!data.data.value) {
+                    console.log("Error: in ofline storage ", data.data.error);
+                } else {
+                    // $scope.createOrder();
+                    console.log("Success");
+                    $state.reload();
+                }
+            });
+        }
+        var offlineWishlist = $.jStorage.get("wishlist");
+        console.log("sendingofflinewishlist::::::", offlineWishlist)
+        if (offlineWishlist) {
+            var product = {
+                accessToken: $.jStorage.get("accessToken"),
+                userId: $.jStorage.get("userId"),
+                products: $.jStorage.get("wishlist"),
+            }
+            WishlistService.saveProduct(product, function (data) {
+                console.log("sendingwishlisttodb:::::::", data);
+            })
+        }
+    }
+
     $scope.savePassword = function (password) {
         if (password.newPassword == password.confirmPassword) {
             $scope.gtUser.password = password.newPassword;
@@ -270,6 +305,9 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                 $.jStorage.set('accessToken', data.data.data.accessToken[0]);
                 $scope.loggedUser = data.data.data._id;
                 // $uibModalInstance.dismiss('cancel');
+                console.log("GDSGFHFGJGHKGHKJHLJHFXGHS");
+                $scope.addOfflineWishlistAndCart();
+                console.log("GDSGFHFGJGHKGHKJHLJHFXGHS");
                 $state.reload();
             })
         } else {
@@ -319,7 +357,7 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                         if (!data.data.value) {
                             console.log("Error: in ofline storage ", data.data.error);
                         } else {
-                            $scope.createOrder();
+                            // $scope.createOrder();
                             console.log("Success");
                             $state.reload();
                         }
@@ -346,7 +384,7 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                 $state.reload();
             } else {
                 // TODO:: show popup to register
-                $scope.message = "Invalid Credentials"
+                $scope.message = "Invalid user name or password"
             }
         });
     }

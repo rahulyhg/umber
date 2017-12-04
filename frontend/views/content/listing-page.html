@@ -260,8 +260,18 @@
                                             </li>
                                         </flex-slider>
                                         <div class="buy-para">
-                                            <h4><i class="fa fa-inr" aria-hidden="true"></i> {{product.price}}</h4>
-                                            <h5>{{product.productName}} <br>{{product.type.name}}</h5>
+                                            <h4>
+                                                <!--<i class="fa fa-inr" aria-hidden="true"></i>-->
+                                                <!--<div class="inline-block"> -->
+                                                <span style="text-decoration: line-through; color:gray;" ng-show="product.price!=product.mrp">&#x20B9; {{product.mrp}}</span>
+                                                <span class="pull-right" ng-show="product.price!=product.mrp">&#x20B9; {{product.price}}</span>
+                                                <!--</div>-->
+                                                <!--<div class="inline-block">-->
+                                                <span ng-show="product.price==product.mrp">&#x20B9; {{product.mrp}}</span>
+                                                <!--<span ng-show="product.price==product.mrp" class="pull-right">&#x20B9; {{product.price}}</span>-->
+                                                <!--</div>-->
+                                            </h4>
+                                            <h5 class="text-uppercase">{{product.productName}} <br>{{product.type.name}}</h5>
                                             <div class="viewSize">
                                                 <p class="inline-block size-text">Sizes:</p>
                                                 <div class="inline-block buy-para__sizes" ng-if="product.sizes">
@@ -318,7 +328,14 @@
                                             <td>
                                                 <div class="item-details">
                                                     <h4 class="item-name text-uppercase">{{product.productName}}</h4>
-                                                    <p class="item-cost"><i class="fa fa-inr"></i>{{product.price}}</p>
+                                                    <p class="item-cost">
+                                                        <!--<i class="fa fa-inr" style="text-decoration: line-through;" ng-show="product.price!=product.mrp">-->
+                                                        <span style="text-decoration: line-through; color:gray" ng-show="product.price!=product.mrp"> &#8377;{{product.mrp}}</span>
+                                                        <span class="pull-right" ng-show="product.price!=product.mrp">&#x20B9;{{product.price}}</span>
+                                                        </i>
+                                                        <span ng-show="product.price==product.mrp">&#x20B9; {{product.mrp}}</span>
+                                                        <!--<span ng-show="product.price==product.mrp" class="pull-right">&#x20B9; {{product.price}}</span>-->
+                                                    </p>
                                                     <div class="viewSize">
                                                         <p class="inline-block size-text">Sizes:</p>
                                                         <div class="inline-block buy-para__sizes" ng-if="product.sizes">

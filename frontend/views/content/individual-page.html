@@ -62,8 +62,17 @@
 
                     <div class="first-sec clearfix border-div relate ">
                         <h4>{{product.productName}}</h4>
-                        <div class="pull-left ">
-                            <h3><i class="fa fa-inr " aria-hidden="true "></i> {{product.price}}</h3>
+                        <div class="pull-left mrp">
+                            <h3>
+                                <!--<i class="fa fa-inr " aria-hidden="true "></i>-->
+                                <!--<div class="inline-block">-->
+                                <span style="text-decoration: line-through; color: gray;" ng-show="product.price!=product.mrp">&#x20B9; {{product.mrp}}</span>
+                                <span class="pull-right" ng-show="product.price!=product.mrp">&#x20B9; {{product.price}}</span>
+                                <!--</div>-->
+                                <!--<div class="inline-block">-->
+                                <span ng-show="product.price==product.mrp">&#x20B9;{{product.price}}</span>
+                                <!--</div>-->
+                            </h3>
                         </div>
                         <div class="absolute-text " ng-if="!loggedUser ">
                             <a ng-click="openLoginModal() ">Are you a member?</a>

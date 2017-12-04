@@ -17,6 +17,10 @@
         "isSort": "",
         "tableRef": "productName"
     }, {
+        "name": "MRP",
+        "isSort": "",
+        "tableRef": "mrp"
+    }, {
         "name": "Price",
         "isSort": "",
         "tableRef": "price"

@@ -35,16 +35,16 @@
      $scope.discountValue = "";
      $scope.radioSubmit = function (data) {
 
-     
+
          $scope.discountSelected = data;
          $scope.discountValue123 = $scope.discountSelected._id;
          $scope.visibleRadio = true;
-        //  _.each($scope.applicableDiscounts, function (n) {
-        //      if (n._id == data._id) {
-              
-        //          $scope.discountValue123 = false;
-        //      }
-        //  })
+         //  _.each($scope.applicableDiscounts, function (n) {
+         //      if (n._id == data._id) {
+
+         //          $scope.discountValue123 = false;
+         //      }
+         //  })
          console.log("$scope.discountValue", $scope.discountValue);
      }
      $scope.checkbox = function (ind) {
@@ -57,14 +57,14 @@
      }
 
      var isEmptyObject = function (obj) {
-             for (var prop in obj) {
-                 if (obj.hasOwnProperty(prop))
-                     return false;
-             }
-
-             return JSON.stringify(obj) === JSON.stringify({});
+         for (var prop in obj) {
+             if (obj.hasOwnProperty(prop))
+                 return false;
          }
-         //getDiscount function
+
+         return JSON.stringify(obj) === JSON.stringify({});
+     }
+     //getDiscount function
      $scope.couponCode = "";
      $scope.getDiscount = function (couponCode) {
          // var cartSubTotal =
@@ -675,6 +675,7 @@
              //TODO: Calculate actual grand total
              if ($scope.mycartTable) {
                  $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+                 $scope.grandTotal = $scope.total = $scope.grandTotal.toFixed(2);
                  //  $.jStorage.set("grandTotal", $scope.grandTotal);
                  $scope.applicableDiscounts($scope.productArrayForDiscount, $scope.grandTotal);
              }
@@ -691,6 +692,7 @@
          console.log("$scope.productArrayForDiscount=-=-=-=-=-=-", $scope.productArrayForDiscount);
          if ($scope.mycartTable) {
              $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+             $scope.grandTotal = $scope.total = $scope.grandTotal.toFixed(2);
              //  $.jStorage.set("grandTotal", $scope.grandTotal);
              $scope.applicableDiscounts($scope.productArrayForDiscount, $scope.grandTotal);
          }
@@ -709,6 +711,7 @@
          CartService.updateCartQuantity($scope.mycartTable);
          //TODO: Calculate actual grand total
          $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+         $scope.grandTotal = $scope.total = $scope.grandTotal.toFixed(2);
          $scope.applyCouponSubmit();
          //  $scope.grandTotal=$scope.grandTotal-$scope.grandTotalAfterDiscount;
          // }

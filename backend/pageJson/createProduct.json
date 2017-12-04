@@ -274,6 +274,20 @@
             "url": ""
         },
         {
+            "name": "MRP",
+            "type": "text",
+            "tableRef": "mrp",
+            "tableValue": "",
+            "placeholder": "Enter MRP",
+            "id": "mrp",
+            "validation": [
+                "",
+                "trim",
+                ""
+            ],
+            "url": ""
+        },
+        {
             "name": "Price",
             "type": "text",
             "tableRef": "price",

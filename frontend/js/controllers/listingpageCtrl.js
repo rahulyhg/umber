@@ -642,7 +642,7 @@
                  "productId": product.productId
              });
              if (result) {
-                 console.log("removeWishLst", result)
+                 //  console.log("removeWishLst", result)
                  $scope.removeWishlist(product);
              } else {
                  $scope.addToWishlist(product);

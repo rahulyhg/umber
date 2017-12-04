@@ -507,7 +507,7 @@ var model = {
             // emailData.filename = "otp.ejs";
             emailData.filename = "user-registration-otp.ejs";
             emailData.from = "harsh@wohlig.com"
-            emailData.firstname = user.firstName;
+            emailData.firstName = user.firstName;
             emailData.lastName = user.lastName;
             Config.email(emailData, function (err, response) {
                 if (err) {
@@ -534,7 +534,7 @@ var model = {
                     // sendData.lastName = user.lastName;
                     // sendData.password = user.password;
                     sendData.otp = user.otp;
-                    // callback(null, sendData);
+                    callback(null, sendData);
                     // User.saveData(sendData, function (err, data) {
                     //     if (err) {
                     //         callback(err, null);
