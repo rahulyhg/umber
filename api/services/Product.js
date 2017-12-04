@@ -762,6 +762,10 @@ var model = {
                             if (!_.isEmpty(product)) {
                                 newArrivals.push(product);
                                 eachCallback(err, product);
+                            } else {
+                                eachCallback(null, {
+                                    message: "No data found"
+                                });
                             }
                         });
                 }, function (err) {
@@ -844,6 +848,10 @@ var model = {
                                 // console.log("unique product: ", featureds);
 
                                 eachCallback(err, product);
+                            } else {
+                                eachCallback(null, {
+                                    message: "No data found"
+                                });
                             }
                         });
                 }, function (err) {
