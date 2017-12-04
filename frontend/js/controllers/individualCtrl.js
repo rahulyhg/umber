@@ -151,6 +151,7 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
         var result = _.find($scope.compareproduct, {
             productId: product.productId
         });
+        console.log('compare pro', $scope.compareproduct, 'result', result);
         if (result) {
             _.remove($scope.compareproduct, {
                 productId: product.productId

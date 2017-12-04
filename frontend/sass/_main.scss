@@ -1022,6 +1022,9 @@
                                                                     font-size: 25px;
                                                                     color: $darkBrown1;
                                                                 }
+                                                                .product-cost {
+                                                                    font-family: vadodara-md;
+                                                                }
                                                                 .fa-inr:before {
                                                                     @include padding(null 6px null null);
                                                                 }
@@ -1452,9 +1455,10 @@
                                                         @include size(32px,
                                                         32px);
                                                         &:before {
-                                                            content: '\02190';
+                                                            content: "\f053";
                                                             color: $darkBrown1;
                                                             font-size: 38px;
+                                                            font-family: FontAwesome;
                                                             background-color: $white;
                                                             @include position(absolute,
                                                             -14px null null -2px);
@@ -1639,10 +1643,14 @@
                                                             height: 40px;
                                                             @include margin(0 null null null);
                                                         }
+                                                        .fa-inr {
+                                                            padding-right: 6px;
+                                                        }
                                                         .fa-shopping-cart {
                                                             @include size(25px,
                                                             25px);
                                                             @include padding(5px);
+                                                            cursor: pointer;
                                                             @include position(absolute,
                                                             null 0 0 null);
                                                             font-size: 16px;
@@ -1665,6 +1673,7 @@
                                                     height: 35px;
                                                     padding: 6px;
                                                     text-align: center;
+                                                    cursor: pointer;
                                                     color: $darkBrown1;
                                                     @include font(normal,
                                                     null,
@@ -1766,6 +1775,7 @@
                                                         padding: 6px;
                                                         text-align: center;
                                                         color: $darkBrown1;
+                                                        cursor: pointer;
                                                         @include font(normal,
                                                         null,
                                                         18px,
@@ -1779,6 +1789,7 @@
                                                         padding: 6px;
                                                         text-align: center;
                                                         color: $white;
+                                                        cursor: pointer;
                                                         background-color: $darkBrown1;
                                                         @include font(normal,
                                                         null,
@@ -2483,10 +2494,12 @@
                                             }
 
                                             .pluse-icon {
-                                                @include position(absolute,
-                                                null null 5% -0.6%);
                                                 @include size(15px,
                                                 auto);
+                                                position: absolute;
+                                                top: 50%;
+                                                left: 0;
+                                                @include transform(translateY(-50%));
                                                 cursor: pointer;
                                             }
 
@@ -3009,7 +3022,7 @@
                                                     padding-left: 15px;
                                                 }
                                                 .item-desc {
-                                                    width: 65%;
+                                                    width: 330px;
                                                     white-space: normal;
                                                 } // hr.table-divider {
                                                 //     @include position(absolute,

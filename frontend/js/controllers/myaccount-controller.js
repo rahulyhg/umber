@@ -1761,6 +1761,7 @@ myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, Templat
     //  $scope.navigation = NavigationService.getNavigation();
     $scope.storeLocation = []; // We need to add city and subCity array of obj
     $scope.locationButton; // To change the value(City) of button
+    $scope.locationDropdownOpen = false;
     $scope.location = [{
         'city': 'Mumbai',
         'lat': 19.0760,
@@ -1968,6 +1969,7 @@ myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, Templat
 
     // For changing addresses after clicking on a particular city
     $scope.changePlaces = function (place) {
+        $scope.locationDropdownOpen = false;
         $scope.locationButton = place.city; // After clicking on dropdown, the button value changes
         $scope.showSlider = false;
         $scope.storeLocation = [];
