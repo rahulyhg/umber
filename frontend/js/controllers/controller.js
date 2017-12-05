@@ -24,15 +24,15 @@ myApp
         ProductService.getNewArrivals(function (data) {
             $scope.newArrivals = data.data.data;
         });
-        ProductService.getDiscountProducts(function (data) {
-            $scope.saleProducts = data.data.data;
-            $scope.sale = [];
-            _.each($scope.saleProducts, function (value) {
-                console.log("single", value.products[0]);
-                $scope.sale.push(value.products[0]);
-            });
-            console.log("$scope.sale1 after iteration", $scope.sale);
-        });
+        // ProductService.getDiscountProducts(function (data) {
+        //     $scope.saleProducts = data.data.data;
+        //     $scope.sale = [];
+        //     _.each($scope.saleProducts, function (value) {
+        //         console.log("single", value.products[0]);
+        //         $scope.sale.push(value.products[0]);
+        //     });
+        //     console.log("$scope.sale1 after iteration", $scope.sale);
+        // });
         /******************todo:for showing cart logo  infinite loop issue******************** */
         var userId = {
             userId: $.jStorage.get("userId"),
@@ -222,9 +222,8 @@ myApp
         }];
         ProductService.getFeatured(function (data) {
             $scope.featured = data.data.data.featureds;
-
+            $scope.sale = data.data.data.featureds;
             if (_.isEmpty($scope.featured)) {
-
                 $scope.featuredVisible = false;
             }
 
