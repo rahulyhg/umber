@@ -115,6 +115,11 @@
                                                 }
                                             } // need to pass true or false like @include block(true);
                                             //end of Mixins CSS finctions
+                                            html,
+                                            body {
+                                                height: 100%;
+                                            }
+
                                             body {
                                                 padding-top: 80px;
                                                 font-family: 'vadodara-regular';
@@ -558,7 +563,52 @@
                                                     background-color: white;
                                                 }
                                             } //End of  plus & minus quantity
-                                            //Drop Down animation 
+                                            //For navigation of flex slider
+                                            .flexslider:hover .flex-direction-nav .flex-prev:hover,
+                                            .flexslider:hover .flex-direction-nav .flex-next:hover {
+                                                background-color: $darkBrown1;
+                                                &:before {
+                                                    color: white;
+                                                }
+                                            }
+
+                                            .flex-direction-nav a {
+                                                @include size(40px,
+                                                40px);
+                                                border-radius: 50%;
+                                                background-color: white;
+                                                color: $darkBrown1;
+                                                &:before {
+                                                    color: $darkBrown1;
+                                                    font-size: 16px;
+                                                }
+                                            }
+
+                                            .flex-direction-nav .flex-prev {
+                                                text-align: center!important;
+                                                &:before {
+                                                    content: "\f053"!important;
+                                                    font-family: FontAwesome;
+                                                    position: absolute;
+                                                    top: 50%;
+                                                    left: 50%;
+                                                    @include transform(translate(-50%,
+                                                    -50%));
+                                                }
+                                            }
+
+                                            .flex-direction-nav .flex-next {
+                                                text-align: center!important;
+                                                &:before {
+                                                    content: "\f054"!important;
+                                                    font-family: FontAwesome;
+                                                    position: absolute;
+                                                    top: 50%;
+                                                    left: 50%;
+                                                    @include transform(translate(-50%,
+                                                    -50%));
+                                                }
+                                            } //Drop Down animation 
                                             /*NOTE: extend this class in dropdown's by using @extend */
 
                                             .dropdown-hidden-anim {
@@ -1448,42 +1498,40 @@
                                             .cloth-cat {
                                                 .flexslider {
                                                     @include margin(0 0 0 0);
-                                                    border: none;
-                                                    .flex-prev {
-                                                        opacity: 1;
-                                                        left: 39px!important;
-                                                        @include size(32px,
-                                                        32px);
-                                                        &:before {
-                                                            content: "\f053";
-                                                            color: $darkBrown1;
-                                                            font-size: 38px;
-                                                            font-family: FontAwesome;
-                                                            background-color: $white;
-                                                            @include position(absolute,
-                                                            -14px null null -2px);
-                                                        }
-                                                        &:hover {
-                                                            opacity: 0.5;
-                                                        }
-                                                    }
-                                                    .flex-next {
-                                                        right: 39px!important;
-                                                        @include size(32px,
-                                                        32px);
-                                                        opacity: 1;
-                                                        &:before {
-                                                            content: '\02192'!important;
-                                                            color: $white;
-                                                            font-size: 38px;
-                                                            background-color: $darkBrown1;
-                                                            @include position(absolute,
-                                                            -14px null null -4px);
-                                                        }
-                                                        &:hover {
-                                                            opacity: 0.5;
-                                                        }
-                                                    }
+                                                    border: none; // .flex-prev {
+                                                    //     opacity: 1;
+                                                    //     left: 39px!important;
+                                                    //     @include size(32px,
+                                                    //     32px);
+                                                    //     &:before {
+                                                    //         content: "\f053";
+                                                    //         color: $darkBrown1;
+                                                    //         font-size: 38px;
+                                                    //         font-family: FontAwesome;
+                                                    //         background-color: $white;
+                                                    //         @include position(absolute,
+                                                    //         -14px null null -2px);
+                                                    //     }
+                                                    //     &:hover {
+                                                    //         opacity: 0.5;
+                                                    //     }
+                                                    // } // .flex-next {
+                                                    //     right: 39px!important;
+                                                    //     @include size(32px,
+                                                    //     32px);
+                                                    //     opacity: 1;
+                                                    //     &:before {
+                                                    //         content: '\02192'!important;
+                                                    //         color: $white;
+                                                    //         font-size: 38px;
+                                                    //         background-color: $darkBrown1;
+                                                    //         @include position(absolute,
+                                                    //         -14px null null -4px);
+                                                    //     }
+                                                    //     &:hover {
+                                                    //         opacity: 0.5;
+                                                    //     }
+                                                    // }
                                                 }
                                                 .flex-direction-nav a {
                                                     top: 45%;
@@ -1594,36 +1642,34 @@
                                                                 left: 90.5% !important;
                                                                 top: -6%;
                                                                 @include size(32px,
-                                                                32px);
-                                                                &:before {
-                                                                    content: '\02190';
-                                                                    color: #474541;
-                                                                    font-size: 38px;
-                                                                    background-color: $lightGray1;
-                                                                    @include position(absolute,
-                                                                    -14px null null -2px);
-                                                                }
-                                                                &:hover {
-                                                                    opacity: 0.5;
-                                                                }
+                                                                32px); // &:before {
+                                                                //     content: '\02190';
+                                                                //     color: #474541;
+                                                                //     font-size: 38px;
+                                                                //     background-color: $lightGray1;
+                                                                //     @include position(absolute,
+                                                                //     -14px null null -2px);
+                                                                // }
+                                                                // &:hover {
+                                                                //     opacity: 0.5;
+                                                                // }
                                                             }
                                                             .flex-next {
                                                                 top: -6%;
                                                                 right: 0!important;
                                                                 @include size(32px,
                                                                 32px);
-                                                                opacity: 1;
-                                                                &:before {
-                                                                    content: '\02192'!important;
-                                                                    color: #474541;
-                                                                    font-size: 38px;
-                                                                    background-color: $white;
-                                                                    @include position(absolute,
-                                                                    -14px null null -4px);
-                                                                }
-                                                                &:hover {
-                                                                    opacity: 0.5;
-                                                                }
+                                                                opacity: 1; // &:before {
+                                                                //     content: '\02192'!important;
+                                                                //     color: #474541;
+                                                                //     font-size: 38px;
+                                                                //     background-color: $white;
+                                                                //     @include position(absolute,
+                                                                //     -14px null null -4px);
+                                                                // }
+                                                                // &:hover {
+                                                                //     opacity: 0.5;
+                                                                // }
                                                             }
                                                             .flex-control-nav {
                                                                 display: none;
@@ -3482,31 +3528,37 @@
                                                 .action .flex-prev,
                                                 .action .flex-next {
                                                     display: block!important;
-                                                }
-                                                .flex-direction-nav a {
-                                                    width: 100px;
-                                                    display: inline-block; // position: relative;
-                                                }
-                                                .flex-direction-nav .flex-prev {
-                                                    &:before {
-                                                        font-family: FontAwesome;
-                                                        content: "\f177";
-                                                        color: $darkBrown1;
-                                                        font-size: 16px;
-                                                        vertical-align: middle;
-                                                    }
-                                                }
-                                                .flex-direction-nav .flex-next {
-                                                    &:before {
-                                                        font-family: FontAwesome;
-                                                        content: "\f178";
-                                                        color: $darkBrown1;
-                                                        font-size: 16px;
-                                                        vertical-align: middle;
-                                                    }
-                                                }
+                                                } // .flex-direction-nav a {
+                                                //     width: 100px;
+                                                //     display: inline-block; // position: relative;
+                                                // }
+                                                // .flex-direction-nav .flex-prev {
+                                                //     &:before {
+                                                //         font-family: FontAwesome;
+                                                //         content: "\f177";
+                                                //         color: $darkBrown1;
+                                                //         font-size: 16px;
+                                                //         vertical-align: middle;
+                                                //     }
+                                                // }
+                                                // .flex-direction-nav .flex-next {
+                                                //     &:before {
+                                                //         font-family: FontAwesome;
+                                                //         content: "\f178";
+                                                //         color: $darkBrown1;
+                                                //         font-size: 16px;
+                                                //         vertical-align: middle;
+                                                //     }
+                                                // }
                                                 .action-btn {
-                                                    @include margin(0 5px);
+                                                    margin-right: 5px;
+                                                    margin-left: 5px;
+                                                }
+                                                .action-btn.action-btn-prev {
+                                                    margin-left: 55px;
+                                                }
+                                                .action-btn.action-btn-next {
+                                                    margin-right: 55px;
                                                 }
                                                 .fa-long-arrow-left,
                                                 .fa-long-arrow-right {
@@ -3686,6 +3738,9 @@
                                                 }
                                                 tbody>tr>td {
                                                     font-size: 16px;
+                                                }
+                                                tbody>tr>td:first-child {
+                                                    color: black;
                                                 }
                                             } //End of size-chart modal
                                             //End of all modals html
