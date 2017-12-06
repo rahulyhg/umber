@@ -185,7 +185,6 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
                 $('.navbar__sideNav').toggleClass(' hamburger-cross');
                 $scope.sideNav = false;
                 $scope.isBackdropActive = false;
-
             }
 
         };
@@ -198,7 +197,6 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
                 $('.navbar__sideNav').toggleClass(' hamburger-cross');
                 $scope.sideNav = false;
                 $scope.isBackdropActive = false;
-
             }
         };
         //End of focus out
@@ -206,9 +204,12 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
         //To Close side nav when hovering online
         $scope.slideUpSideNav = function () {
             //  alert('enter');
+
             $('.side-nav').removeClass('side-nav-menu-in');
             $('.side-nav').addClass('side-nav-menu-out');
             $('.navbar__sideNav').removeClass('hamburger-cross');
+            $scope.isBackdropActive = false;
+            $scope.sideNav = false;
         };
         //End of close side nav
         $scope.closeCategires = function () {
