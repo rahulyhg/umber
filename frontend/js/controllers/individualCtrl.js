@@ -179,9 +179,9 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
         var result = _.remove(removeCompare, {
             productId: prodId
         });
-
+  $scope.compareproduct = removeCompare;
         $.jStorage.set("compareproduct", removeCompare);
-        $state.reload();
+        // $state.reload();
     }
     //To open size chart
     $scope.openSizeChart = function () {

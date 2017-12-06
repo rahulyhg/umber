@@ -323,6 +323,8 @@
 
                                             .content {
                                                 min-height: 450px;
+                                                @include display(flex);
+                                                @include flex-direction(column);
                                             }
 
                                             .img-full {
@@ -349,6 +351,14 @@
 
                                             .line--height {
                                                 line-height: 1;
+                                            }
+
+                                            .font-rg {
+                                                font-family: 'vadodara-regular';
+                                            }
+
+                                            .font-md {
+                                                font-family: 'vadodara-md';
                                             }
 
                                             .marg0 {
@@ -3405,35 +3415,33 @@
                                                         opacity: 1;
                                                         left: 210px!important;
                                                         @include size(32px,
-                                                        32px);
-                                                        &:before {
-                                                            content: '\02190';
-                                                            color: $darkBrown1;
-                                                            font-size: 38px;
-                                                            background-color: $white;
-                                                            @include position(absolute,
-                                                            -14px null null -2px);
-                                                        }
-                                                        &:hover {
-                                                            opacity: 0.5;
-                                                        }
+                                                        32px); // &:before {
+                                                        //     content: '\02190';
+                                                        //     color: $darkBrown1;
+                                                        //     font-size: 38px;
+                                                        //     background-color: $white;
+                                                        //     @include position(absolute,
+                                                        //     -14px null null -2px);
+                                                        // }
+                                                        // &:hover {
+                                                        //     opacity: 0.5;
+                                                        // }
                                                     }
                                                     .flex-next {
                                                         right: 50px!important;
                                                         @include size(32px,
                                                         32px);
-                                                        opacity: 1;
-                                                        &:before {
-                                                            content: '\02192'!important;
-                                                            color: black;
-                                                            font-size: 38px;
-                                                            background-color: white;
-                                                            @include position(absolute,
-                                                            -14px null null -4px);
-                                                        }
-                                                        &:hover {
-                                                            opacity: 0.5;
-                                                        }
+                                                        opacity: 1; // &:before {
+                                                        //     content: '\02192'!important;
+                                                        //     color: black;
+                                                        //     font-size: 38px;
+                                                        //     background-color: white;
+                                                        //     @include position(absolute,
+                                                        //     -14px null null -4px);
+                                                        // }
+                                                        // &:hover {
+                                                        //     opacity: 0.5;
+                                                        // }
                                                     }
                                                 }
                                             }
@@ -3599,6 +3607,62 @@
                                             .also-view {
                                                 @include padding(25px 0);
                                             } //End of inner-blogs.html
+                                            //Use h2 for msg-title + .font-md for weight bold
+                                            .msg-title {
+                                                margin-top: 10px;
+                                                margin-bottom: 10px;
+                                                color: $darkBrown1;
+                                                font-size: 50px;
+                                            }
+
+                                            .msg-title-focus-text {
+                                                width: 400px;
+                                                @include margin(0 auto);
+                                                display: block;
+                                                font-size: 40px;
+                                                position: relative;
+                                            }
+
+                                            .msg-title-focus-text.border-line {
+                                                &:before {
+                                                    width: 15%;
+                                                }
+                                                &:after {
+                                                    width: 15%;
+                                                }
+                                            }
+
+                                            .thankyou-msg {
+                                                .msg-title-focus-text {
+                                                    width: 255px;
+                                                }
+                                            }
+
+                                            .error-msg,
+                                            .thankyou-msg {
+                                                @include flex-direction(column);
+                                                @include flex-grow(1);
+                                                @include justify-content(center);
+                                                .msg-action-section {
+                                                    min-height: 120px;
+                                                    @include flex-direction(column);
+                                                    @include justify-content(flex-end);
+                                                }
+                                                .msg--btn {
+                                                    @extend .btn--brown;
+                                                    @include padding(6px 25px);
+                                                }
+                                                .brand-img {
+                                                    width: 210px;
+                                                    position: absolute;
+                                                    top: 0;
+                                                    right: 0;
+                                                }
+                                                .msg-order-status {
+                                                    font-size: 18px;
+                                                }
+                                            } //Start of errormsg & thankyou-msg page
+                                            //End of errormsg & thankyou-msg page
                                             // All modals html
                                             /*****NOTE: We can extend this class by using @extend method. Please don't customise the main class(Parent class) .close-modal--btn-circle ****/
 

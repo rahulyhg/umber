@@ -150,6 +150,16 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             templateUrl: tempateURL,
             controller: 'CancelCtrl'
         })
+        .state('error-msg', {
+            url: "/error-msg",
+            templateUrl: tempateURL,
+            controller: 'ErrorMsgCtrl'
+        })
+        .state('thankyou-msg', {
+            url: "/thankyou-msg",
+            templateUrl: tempateURL,
+            controller: 'ThankYouMsgCtrl'
+        })
         .state('return', {
             url: "/return/:id",
             templateUrl: tempateURL,

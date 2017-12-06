@@ -562,6 +562,17 @@ myApp
         });
 
     })
+    .controller('ErrorMsgCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.getHTML("content/error-msg.html");
+        TemplateService.title = "Error"; //This is the Title of the Website
+        $scope.navigation = NavigationService.getNavigation();
+    })
+    .controller('ThankYouMsgCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.getHTML("content/thankyou-msg.html");
+        TemplateService.title = "Thank You"; //This is the Title of the Website
+        $scope.navigation = NavigationService.getNavigation();
+    })
+
     //Example API Controller
     .controller('DemoAPICtrl', function ($scope, TemplateService, apiService, NavigationService, $timeout) {
         apiService.getDemo($scope.formData, function (data) {
