@@ -192,7 +192,7 @@
                          //          // }
                          //      }
                          //  };
-                     })
+                     });
 
                  } else {
                      toastr.error('There was some error', 'Error');
@@ -261,12 +261,11 @@
      $scope.removeFromCompare = function (prodId) {
 
          var removeCompare = $.jStorage.get("compareproduct");
-         var result = _.remove(removeCompare, {
+         $scope.result = _.remove(removeCompare, {
              productId: prodId
          });
-
+         $scope.compareproduct = removeCompare;
          $.jStorage.set("compareproduct", removeCompare);
-         $state.reload();
      }
 
      /**********logic for checkbox on reload************ */

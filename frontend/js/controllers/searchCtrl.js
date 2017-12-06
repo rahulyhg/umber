@@ -60,7 +60,7 @@
      $scope.filter.skip = 0
 
      $scope.globalsSearch = function () {
-         console.log("in global search****11111", $scope.filter)
+         //  console.log("in global search****11111", $scope.filter)
          //  $scope.filter = {
          //      keyword: $scope.data1.keyword,
          //      skip: 0,
@@ -68,12 +68,10 @@
          //      appliedFilters: $scope.appliedFilters
          //  }
          ProductService.searchWithFilters($scope.filter, function (data) {
-             console.log("in global search*222***", data.data.data.products);
              if (!_.isEmpty(data.data.data)) {
                  _.each(data.data.data.products, function (n) {
                      $scope.product.push(n);
                  })
-                 console.log("in global search*333***", $scope.product);
                  //  _.each($scope.product, function (n) {
                  //      $scope.productss.push(n);
                  //  })
@@ -89,22 +87,19 @@
                  $scope.filters = data.data.data;
                  $scope.priceRange.push(data.data.data.price);
                  $scope.priceRange = _.flattenDeep($scope.priceRange)
-                 console.log("PriceRange", $scope.priceRange);
                  $scope.price = {
                      max: Math.max.apply(null, $scope.priceRange),
                      min: Math.min.apply(null, $scope.priceRange)
                  }
-                 console.log('price', $scope.price);
                  $scope.max = $scope.price.max;
                  $scope.min = $scope.price.min;
                  $scope.loadingDisable = false;
                  //  $scope.data1.skip = $scope.data1.skip + 9;
                  $scope.filter.skip = $scope.filter.skip + 9;
                  if ($scope.product.length <= 0) {
-
                      $scope.empty = "No Products Found"
-
                  }
+                 console.log("in gloabl search lhjfkladfj;mghkd", $scope.product);
                  if (!_.isEmpty($scope.filters.type)) {
                      $scope.showType = true;
                  }
@@ -231,12 +226,11 @@
      $scope.removeFromCompare = function (prodId) {
 
          var removeCompare = $.jStorage.get("compareproduct");
-         var result = _.remove(removeCompare, {
+         $scope.result = _.remove(removeCompare, {
              productId: prodId
          });
-
+         $scope.compareproduct = removeCompare;
          $.jStorage.set("compareproduct", removeCompare);
-         $state.reload();
      }
 
      /**********logic for checkbox on reload************ */
