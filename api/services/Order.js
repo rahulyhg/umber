@@ -681,6 +681,17 @@ var model = {
                                 sendData.accessToken = created.accessToken;
                                 sendData.firstName = created.firstName;
                                 sendData.lastName = created.lastName;
+                                emailData.email = "siddhesh@wohlig.com";
+                                Config.ConfirmOrderPlacedMail(emailData, function (err, response) {
+                                    if (err) {
+                                        console.log("error in email", err);
+                                        callback("emailError", null);
+                                    } else if (response) {
+                                        // callback(null, sendData);
+                                    } else {
+                                        callback("errorOccurredRegister", null);
+                                    }
+                                });
                                 callback(null, sendData);
                             } else {
                                 callback("errorOccurredRegister", null);

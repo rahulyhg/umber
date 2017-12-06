@@ -595,7 +595,7 @@ var model = {
             productId: data.productId,
             size: mongoose.Types.ObjectId(data.size),
             color: mongoose.Types.ObjectId(data.color)
-        }).deepPopulate('color size brand prodCollection fabric type').exec(function (err, product) {
+        }).deepPopulate('color size brand prodCollection fabric type category homeCategory').exec(function (err, product) {
             console.log("in Sku parameter", product);
             if (err) {
                 callback(err, "error in mongoose productWithCategory");
@@ -2251,10 +2251,6 @@ var model = {
                         // console.log("data filter",objthickness);
 
                         Product.aggregate(_.compact(_.concat(lookupArr, [{
-                                '$skip': data.skip
-                            }, {
-                                '$limit': data.limit
-                            }, {
                                 $group: {
                                     _id: "$productId",
                                     style: {
@@ -2300,6 +2296,10 @@ var model = {
                                         $first: "$images"
                                     }
                                 }
+                            }, {
+                                '$skip': data.skip
+                            }, {
+                                '$limit': data.limit
                             }])),
                             function (err, data1) {
                                 if (err) {
