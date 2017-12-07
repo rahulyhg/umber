@@ -1755,7 +1755,7 @@ myApp.controller('GiftCardCtrl', function ($scope, TemplateService, $translate, 
     TemplateService.title = "Your Gift Card"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
 });
-myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, TemplateService, $translate, $rootScope, $filter) {
+myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, toastr, TemplateService, $translate, $rootScope, $filter) {
     $scope.template = TemplateService.getHTML("content/storelocator.html");
     TemplateService.title = "Stores"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
@@ -1892,7 +1892,7 @@ myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, Templat
     var geocoder = new google.maps.Geocoder(); // which will hold the value of google map geocoder API
 
 
-    //After 800 ms the map initialize function will be called
+    //After 500 ms the map initialize function will be called
     var mapOptions = {
         center: new google.maps.LatLng(20.5937, 78.9629), // we have set up India lat & long
         zoom: 10,
@@ -1937,8 +1937,8 @@ myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, Templat
             function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     var marker = new google.maps.Marker({
-                        // icon: 'http://localhost:8081/frontend/img/map-marker-img.png',
-                        icon: 'http://maps.google.com/mapfiles/ms/icons/red.png',
+                        icon: 'http://umber.wohlig.co.in/img/map-marker-img.png',
+                        //icon: 'http://maps.google.com/mapfiles/ms/icons/red.png',
                         map: map,
                         position: results[0].geometry.location,
                         title: title,
@@ -1948,7 +1948,8 @@ myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, Templat
                     })
                     infoWindow(marker, map, title, address, url);
                 } else {
-                    alert("geocode of " + address + " failed:" + status);
+                    toastr.warning('Geocode of' + address + 'failed:' + status);
+                    //alert("geocode of " + address + " failed:" + status);
                 }
             });
 
