@@ -183,7 +183,7 @@ var controller = {
             }).exec(function (err, found) {
                 if (err) {
                     //  redirect to sorry page
-                    res.redirect("http://umber.wohlig.co.in/");
+                    res.redirect("http://umber.wohlig.co.in/error-msg/" + order.order_id);
                 } else {
                     if (checkFlag) {
                         //  clear cart code goes here
@@ -192,11 +192,11 @@ var controller = {
                         }).exec(function (err, result) {})
                         Product.subtractQuantity(found.products, null);
                         //  AND redirect to thankyou page after clearing
-                        res.redirect("http://umber.wohlig.co.in/");
+                        res.redirect("http://umber.wohlig.co.in/thankyou-msg/" + order.order_id);
 
                     } else {
                         //  redirect to sorry page
-                        res.redirect("http://umber.wohlig.co.in/");
+                        res.redirect("http://umber.wohlig.co.in/error-msg/" + order.order_id);
 
                     }
                 }
