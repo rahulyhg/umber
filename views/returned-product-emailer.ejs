@@ -217,61 +217,62 @@
                     <p style="margin-top: 0; margin-bottom: 10px;">This is to confirm that your order has been returned. Here are your order details</p>
                     <table>
                         <thead style="text-align:left;">
-                            <th style="    width: 200px;
+                            <tr>
+                                <th style="    width: 200px;
             background-color: #ededed;
               padding: 8px;
     line-height: 1.42857143;
             font-weight: normal;vertical-align:top;">
-                                <h4 style=" margin: 5px 0 ; color:#341314; text-transform:uppercase;">billing address</h4>
-                                <address style="line-height: 1.3;
+                                    <h4 style=" margin: 5px 0 ; color:#341314; text-transform:uppercase;">billing address</h4>
+                                    <address style="line-height: 1.3;
             font-style: normal;
             font-weight: normal;
             font-size: 12px;">
-                                    <%= billingAddress.line1%>,
-                                        <%= billingAddress.line2%>,
-                                            <%= billingAddress.line3%>,
-                                                <%= billingAddress.city%>
-                                                    <%= billingAddress.pincode%>
-                                                        <%= billingAddress.state%>
-                                                            <%= billingAddress.country%>
-                                </address>
-                            </th>
-                            <th style="    width: 200px;
+                                        <%= billingAddress.line1%>,
+                                            <%= billingAddress.line2%>,
+                                                <%= billingAddress.line3%>,
+                                                    <%= billingAddress.city%>
+                                                        <%= billingAddress.pincode%>
+                                                            <%= billingAddress.state%>
+                                                                <%= billingAddress.country%>
+                                    </address>
+                                </th>
+                                <th style="    width: 200px;
             background-color: #ededed;
                padding: 8px;
     line-height: 1.42857143;
             font-weight: normal;vertical-align:top;">
-                                <h4 style=" margin: 5px 0 ; color:#341314; text-transform:uppercase;">shipping address</h4>
-                                <address style="line-height: 1.3;
+                                    <h4 style=" margin: 5px 0 ; color:#341314; text-transform:uppercase;">shipping address</h4>
+                                    <address style="line-height: 1.3;
             font-style: normal;
             font-weight: normal;
             font-size: 12px;">
-                                    <%= shippingAddress.line1%>,
-                                        <%= shippingAddress.line2%>,
-                                            <%= shippingAddress.line3%>,
-                                                <%= shippingAddress.city%>
-                                                    <%= shippingAddress.pincode%>
-                                                        <%= shippingAddress.state%>
-                                                            <%= shippingAddress.country%>
-                                </address>
-                            </th>
-                            <th style="    width: 200px;
+                                        <%= shippingAddress.line1%>,
+                                            <%= shippingAddress.line2%>,
+                                                <%= shippingAddress.line3%>,
+                                                    <%= shippingAddress.city%>
+                                                        <%= shippingAddress.pincode%>
+                                                            <%= shippingAddress.state%>
+                                                                <%= shippingAddress.country%>
+                                    </address>
+                                </th>
+                                <th style="    width: 200px;
             background-color: #ededed;
                padding: 8px;
     line-height: 1.42857143;
             font-weight: normal;vertical-align:top;">
-                                <div style="line-height: 1">
-                                    <div>
-                                        <h4 style=" margin: 5px 0 ; color:#341314; text-transform:uppercase;">payment method</h4>
-                                        <span style="font-size: 12px;"><%= paymentMethod%></span>
+                                    <div style="line-height: 1">
+                                        <div>
+                                            <h4 style=" margin: 5px 0 ; color:#341314; text-transform:uppercase;">payment method</h4>
+                                            <span style="font-size: 12px;"><%= paymentMethod%></span>
+                                        </div>
+                                        <div>
+                                            <h4 style=" margin: 5px 0 ; color:#341314; text-transform:uppercase;">order status</h4>
+                                            <span style="font-size: 12px;"><%= orderStatus%></span>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h4 style=" margin: 5px 0 ; color:#341314; text-transform:uppercase;">order status</h4>
-                                        <span style="font-size: 12px;"><%= orderStatus%></span>
-                                    </div>
-                                </div>
-                            </th>
-
+                                </th>
+                            </tr>
                         </thead>
                         <tbody>
                             <tr>
@@ -357,11 +358,11 @@
                 <td style="padding: 8px;
     line-height: 1.42857143;
     vertical-align: top; background: #341314;">
-                    <div class="display-table" style="color:white; font-size: 11px;">
-                        <div class="display-cell" style=" width: 400px;vertical-align: middle;">
+                    <div style="color:white; display:table; font-size: 11px;">
+                        <div style=" width: 400px; display:table-cell; vertical-align: middle;">
                             Burntumber Fashion Pvt Ltd© Copyright 2015
                         </div>
-                        <div class="display-cell" style="width: 200px;text-align: right; vertical-align: middle;">
+                        <div style="width: 200px; display:table-cell; text-align: right; vertical-align: middle;">
                             <ul class="list-unstyled list-inline" style="margin: 0">
                                 <li style="margin-left: 0"> Follow us on</li>
                                 <li style="margin-left: 0"><a href="" style="width: 18px; height: 18px;border: 1px dashed white; background: transparent;color:white; display: block;font-size: 12px;text-align: center;"><img src="http://umber.wohlig.co.in/img/emailer/facebook.png" alt="Click on Facebook"  width="12" height="12" style="vertical-align:middle;">
