@@ -151,12 +151,12 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             controller: 'CancelCtrl'
         })
         .state('error-msg', {
-            url: "/error-msg",
+            url: "/error-msg/:id",
             templateUrl: tempateURL,
             controller: 'ErrorMsgCtrl'
         })
         .state('thankyou-msg', {
-            url: "/thankyou-msg",
+            url: "/thankyou-msg/:id",
             templateUrl: tempateURL,
             controller: 'ThankYouMsgCtrl'
         })
