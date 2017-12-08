@@ -47,6 +47,8 @@ var schema = new Schema({
         },
         quantity: Number,
         price: Number,
+        style: String,
+        color: String,
         status: {
             type: String,
             enum: ['accept', 'returned', 'cancelled'],
@@ -70,6 +72,7 @@ var schema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Courier'
     },
+    courierAmount: Number,
     trackingId: String,
     orderStatus: {
         type: String,
@@ -105,6 +108,8 @@ var schema = new Schema({
         },
         quantity: Number,
         price: Number,
+        style: String,
+        color: String,
         status: {
             type: String,
             enum: ['returned', 'cancelled'],
@@ -326,6 +331,8 @@ var model = {
                             product: mongoose.Types.ObjectId(product.product._id),
                             quantity: product.quantity,
                             price: product.quantity * product.product.price,
+                            color: product.product.color.name,
+                            style: product.product.style,
                             comment: product.comment
                         };
                         if (!order.products) {

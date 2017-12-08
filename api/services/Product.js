@@ -2266,10 +2266,13 @@ var model = {
                                         $first: "$description"
                                     },
                                     category: {
-                                        $first: "$category.name"
+                                        $first: "$category"
                                     },
                                     price: {
                                         $first: "$price"
+                                    },
+                                    mrp: {
+                                        $first: "$mrp"
                                     },
                                     homeCategory: {
                                         $first: "$homeCategory.name"
@@ -2339,6 +2342,9 @@ var model = {
                                     },
                                     price: {
                                         $first: "$price"
+                                    },
+                                    mrp: {
+                                        $first: "$mrp"
                                     },
                                     homeCategory: {
                                         $first: "$homeCategory._id"
@@ -2713,9 +2719,9 @@ var model = {
                                 data4.fabric = fabricData[0];
                                 data4.type = typeData[0];
                                 data4.brand = brandData[0];
-                                data4.style = style
-                                data4.price = price
-                                data4.productId = productId
+                                data4.style = style;
+                                data4.price = price;
+                                data4.productId = productId;
                                 callback(null, data4);
                             }
                         });
