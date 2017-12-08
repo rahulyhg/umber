@@ -115,7 +115,7 @@
                                         </div>
                                     </div>
                                     <div class="get-left">
-                                        <h3 class="homepg-slider-product-cost"><i class="fa fa-inr" aria-hidden="true"></i>{{newArrival.price}}</h3>
+                                        <h3 class="homepg-slider-product-cost"><i class="fa fa-inr" aria-hidden="true"></i>{{newArrival.price |number:0}}</h3>
                                         <h4 class="homepg-slider-product-name text-uppercase">{{newArrival.productName}}</h4>
                                         <div class="abslt-buynow-btn">
                                             <buttton class="btn buynow--btn text-uppercase" ui-sref="individual-page({id: newArrival.productId})">buy</buttton>
@@ -149,7 +149,7 @@
                         <div class="featured__banner-detail relate">
                             <img ng-src="{{new.images[0].image | serverimage}}" alt="" class="img-responsive" ui-sref="individual-page({id: new.productId})">
                             <div class="featured__cloth-desc">
-                                <h3 class="homepg-slider-product-cost"><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
+                                <h3 class="homepg-slider-product-cost"><i class="fa fa-inr" aria-hidden="true"></i>{{new.price |number:0}}</h3>
                                 <h4 class="homepg-slider-product-name text-uppercase">{{new.productName}}</h4>
                             </div>
                             <div class="featured__icon-heart">
@@ -239,7 +239,7 @@
                             <img ng-src="{{new.images[0].image | serverimage}}" alt="" class="img-responsive">
                             <div class="sale__cloth-desc">
                                 <h4 class="text-uppercase">{{new.productName}}</h4>
-                                <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
+                                <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price |number:0}}</h3>
                                 <div class="abslt-buynow-btn">
                                     <!--<buttton class="btn buybtn text-uppercase"  ui-sref="individual-page({id: new._id})">View</buttton>-->
                                     <buttton class="btn buy--btn text-uppercase" ui-sref="individual-page({id: new.productId})">View</buttton>

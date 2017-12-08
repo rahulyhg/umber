@@ -9,7 +9,7 @@
                         <tr class="text-uppercase">
                             <th colspan="2">order placed<br><strong>{{order.createdAt | date:'dd/MM/yyyy'}}</strong></th>
                             <th>order no.<br><strong>{{order.orderNo}}</strong></th>
-                            <th>Grand total<br><strong>&#8377; {{order.totalAmount}}</strong></th>
+                            <th>Grand total<br><strong>&#8377; {{order.totalAmount |number:0}}</strong></th>
                         </tr>
                         <tr>
                             <th colspan="4"></th>
@@ -43,7 +43,7 @@
                             </div>-->
                             </td>
                             <td class="text-center relate">
-                                <h4 class="item-name"><i class="fa fa-inr"></i>{{product.product.price * product.quantity}}</h4>
+                                <h4 class="item-name"><i class="fa fa-inr"></i>{{product.product.price * product.quantity |number:0}}</h4>
                             </td>
 
                             <td class="text-center">

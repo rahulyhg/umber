@@ -15,7 +15,10 @@ var schema = new Schema({
         type: String,
         required: true,
         unique: true
-    }
+    },
+    sizeChartImage: {
+        image: String
+    },
 });
 
 

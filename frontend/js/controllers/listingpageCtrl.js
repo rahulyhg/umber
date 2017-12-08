@@ -804,6 +804,17 @@
          }
      };
      //End of  modal on quck view button
+
+     //To open size chart on quick
+     $scope.openSizeChart = function () {
+         $scope.openSizeChartModal = $uibModal.open({
+             animation: true,
+             templateUrl: 'views/modal/size-chart.html',
+             size: 'md',
+             scope: $scope
+         });
+     };
+
      if (_.isEmpty($scope.products))
          $scope.displayMessage = "No Product Found";
 

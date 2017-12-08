@@ -45,7 +45,7 @@
                             </a>
                             </div>
                         </td>
-                        <td>&#x20b9 &nbsp;{{product.product.price * product.quantity}}</td>
+                        <td>&#x20b9 &nbsp;{{product.product.price * product.quantity |number:0}}</td>
                     </tr>
                     <tr>
                         <td colspan="6" class="td-border">
@@ -69,10 +69,10 @@
                         <p>GRAND TOTAL:</p>
                     </div>
                     <div class="inline-block">
-                        <p>&#x20b9 {{total}}</p>
+                        <p>&#x20b9 {{total |number:0}}</p>
                         <p> 0</p>
                         <p> 0</p>
-                        <p>&#x20b9 {{grandTotal}}</p>
+                        <p>&#x20b9 {{grandTotal |number:0}}</p>
                     </div>
                 </div>
                 <div class="clearfix"></div>

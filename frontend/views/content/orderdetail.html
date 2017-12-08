@@ -13,7 +13,7 @@
                             <th class="align-top">order no.<br><strong>{{order.orderNo}}</strong></th>
                             <th class="align-top">payment method<br><strong>{{order.paymentMethod}}</strong></th>
                             <th class="align-top">tracking id<br><strong class="text-capitalize">{{order.orderStatus}}</strong></th>
-                            <th class="align-top">Grand total<br><strong>&#8377; {{order.totalAmount}}</strong></th>
+                            <th class="align-top">Grand total<br><strong>&#8377; {{order.totalAmount |number:0}}</strong></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,7 +34,7 @@
                                     </p>
                                     <p class="item-code"><span class="text-capitalize">color</span><span class="text-uppercase"> {{product.product.color.name}}</span>
                                     </p>
-                                    <p class="item-cost"><i class="fa fa-inr"></i>{{product.product.price}}</p>
+                                    <p class="item-cost"><i class="fa fa-inr"></i>{{product.product.price |number:0}}</p>
                                 </div>
                                 <div class="comment">
                                     <p class="item-code">Comment: {{product.comment}}.</p>
@@ -59,7 +59,7 @@
                                 </div>
                             </td>
                             <td>
-                                <p class="item-cost grand-total"><i class="fa fa-inr"></i>{{product.product.price * product.quantity}}</p>
+                                <p class="item-cost grand-total"><i class="fa fa-inr"></i>{{product.product.price * product.quantity |number:0}}</p>
                             </td>
                         </tr>
                     </tbody>
@@ -89,8 +89,8 @@
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-7">
                             <h4 class="text-right usr-status-title usr-addrs-title">PAYMENT INFORMATION</h4>
-                            <p class="text-right order-payment-info">Item(s) Subtotal: <span>&#8377; {{order.totalAmount}}</span><br> Shipping: <span>&#8377; {{order.shippingAmount}}</span><br>                                Disscount:
-                                <span>&#8377; {{order.discountAmount}}</span><br> Total: <span>&#8377; {{order.shippingAmount+order.totalAmount-order.discountAmount}}</span><br>                                Tax: <span>&#8377; 00</span><br> Grand Total: <span>&#8377; {{order.totalAmount}}</span>
+                            <p class="text-right order-payment-info">Item(s) Subtotal: <span>&#8377; {{order.totalAmount |number:0}}</span><br> Shipping: <span>&#8377; {{order.shippingAmount}}</span><br>                                Disscount:
+                                <span>&#8377; {{order.discountAmount}}</span><br> Total: <span>&#8377; {{order.shippingAmount+order.totalAmount-order.discountAmount |number:0}}</span><br>                                Tax: <span>&#8377; 00</span><br> Grand Total: <span>&#8377; {{order.totalAmount|number:0}}</span>
                             </p>
                         </div>
                     </div>
@@ -150,7 +150,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="item-cost grand-total"><i class="fa fa-inr"></i>{{product.product.price}}</p>
+                                        <p class="item-cost grand-total"><i class="fa fa-inr"></i>{{product.product.price |number:0}}</p>
                                     </td>
                                 </tr>
                             </tbody>

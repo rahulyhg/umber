@@ -99,7 +99,6 @@
                  if ($scope.product.length <= 0) {
                      $scope.empty = "No Products Found"
                  }
-                 console.log("in gloabl search lhjfkladfj;mghkd", $scope.product);
                  if (!_.isEmpty($scope.filters.type)) {
                      $scope.showType = true;
                  }
@@ -559,7 +558,7 @@
              $scope.reqQuantity += parseInt(oper);
              console.log($scope.reqQuantity)
          }
-         var quickviewProduct = $uibModal.open({
+         $scope.quickviewProduct = $uibModal.open({
              animation: true,
              templateUrl: 'views/modal/quickview-product.html',
              scope: $scope,
@@ -567,10 +566,20 @@
              windowClass: 'quickview-modal-size'
          });
          $scope.closeModal = function () {
-             quickviewProduct.close();
+             $scope.quickviewProduct.close();
          }
      };
      //End of  modal on quck view button
+     //To open size chart on quick
+     $scope.openSizeChart = function () {
+         $scope.openSizeChartModal = $uibModal.open({
+             animation: true,
+             templateUrl: 'views/modal/size-chart.html',
+             size: 'md',
+             scope: $scope
+         });
+     };
+
      if (_.isEmpty($scope.products))
          $scope.displayMessage = "No Product Found";
 

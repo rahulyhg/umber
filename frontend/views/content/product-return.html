@@ -9,7 +9,7 @@
                         <tr class="text-uppercase">
                             <th colspan="2" class="align-top">order placed<br><strong>{{order.createdAt | date:'dd/MM/yyyy'}}</strong></th>
                             <th class="align-top">order no.<br><strong>{{order.orderNo}}</strong></th>
-                            <th class="align-top">Grand total<br><strong>&#8377; {{order.totalAmount}}</strong></th>
+                            <th class="align-top">Grand total<br><strong>&#8377; {{order.totalAmount |number:0}}</strong></th>
                         </tr>
                         <tr>
                             <th colspan="4"></th>
