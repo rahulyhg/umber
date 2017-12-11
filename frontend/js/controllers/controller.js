@@ -562,7 +562,7 @@ myApp
         });
 
     })
-    .controller('ErrorMsgCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+    .controller('ErrorMsgCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
         $scope.template = TemplateService.getHTML("content/error-msg.html");
         TemplateService.title = "Error"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -571,7 +571,7 @@ myApp
             $scope.orderId = $stateParams.id;
         }
     })
-    .controller('ThankYouMsgCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+    .controller('ThankYouMsgCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
         $scope.template = TemplateService.getHTML("content/thankyou-msg.html");
         TemplateService.title = "Thank You"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
