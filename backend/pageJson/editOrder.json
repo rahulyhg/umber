@@ -153,6 +153,15 @@
             "validation": ["", "trim", ""]
         },
         {
+            "name": "Courier Amount",
+            "type": "number",
+            "tableRef": "courierAmount",
+            "placeholder": "Enter Courier Amount",
+            "id": "courierAmount",
+            "validation": ["", "trim", ""],
+            "url": ""
+        },
+        {
             "name": "Tracking Id",
             "type": "text",
             "tableRef": "trackingId",

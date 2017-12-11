@@ -11,6 +11,8 @@ var schema = new Schema({
             ref: 'Product'
         },
         quantity: Number,
+        style: String,
+        color: String,
         comment: {
             type: String
         }
@@ -37,9 +39,11 @@ var model = {
         cart.products.push({
             product: mongoose.Types.ObjectId(product._id),
             quantity: product.reqQuantity,
+            style: product.style,
+            color: product.color.name,
             comment: product.comment
         });
-        console.log("#########product in cart#####", cart.products);
+        // console.log("#########product in cart#####", cart.products);
         cart.userId = userId;
 
         async.waterfall([
@@ -93,6 +97,8 @@ var model = {
                                     foundCart.products.push({
                                         product: mongoose.Types.ObjectId(product._id),
                                         quantity: product.reqQuantity,
+                                        style: product.style,
+                                        color: product.color.name,
                                         comment: product.comment
                                     });
                                     foundCart.userId = userId;

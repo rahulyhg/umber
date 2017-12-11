@@ -32,6 +32,8 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
             }]);
             $scope.selectedSize = $scope.sizes[0];
             $scope.activeButton = $scope.selectedSize.name;
+            $scope.productStyle = $scope.product.style;
+            $scope.productColor = $scope.product.color.name;
             productId.push($scope.product._id);
             console.log(productId, "ProductId");
             myService.applicableDiscounts(productId, grandTotal, function (data1) {
@@ -84,7 +86,7 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
     }
     $scope.addToCart = function (pc) {
         console.log("product", $scope.product)
-        myService.addToCart($scope.product, $scope.reqQuantity, $scope.selectedSize, $scope.productComment.name, function (data) {
+        myService.addToCart($scope.product, $scope.reqQuantity, $scope.selectedSize, $scope.productComment.name, $scope.productStyle, $scope.productColor, function (data) {
             ModalService.addcart();
 
         })
@@ -179,7 +181,7 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
         var result = _.remove(removeCompare, {
             productId: prodId
         });
-  $scope.compareproduct = removeCompare;
+        $scope.compareproduct = removeCompare;
         $.jStorage.set("compareproduct", removeCompare);
         // $state.reload();
     }

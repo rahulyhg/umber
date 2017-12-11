@@ -595,7 +595,7 @@ var model = {
             productId: data.productId,
             size: mongoose.Types.ObjectId(data.size),
             color: mongoose.Types.ObjectId(data.color)
-        }).deepPopulate('color size brand prodCollection fabric type').exec(function (err, product) {
+        }).deepPopulate('color size brand prodCollection fabric type category homeCategory').exec(function (err, product) {
             console.log("in Sku parameter", product);
             if (err) {
                 callback(err, "error in mongoose productWithCategory");
@@ -2251,10 +2251,6 @@ var model = {
                         // console.log("data filter",objthickness);
 
                         Product.aggregate(_.compact(_.concat(lookupArr, [{
-                                '$skip': data.skip
-                            }, {
-                                '$limit': data.limit
-                            }, {
                                 $group: {
                                     _id: "$productId",
                                     style: {
@@ -2270,10 +2266,13 @@ var model = {
                                         $first: "$description"
                                     },
                                     category: {
-                                        $first: "$category.name"
+                                        $first: "$category"
                                     },
                                     price: {
                                         $first: "$price"
+                                    },
+                                    mrp: {
+                                        $first: "$mrp"
                                     },
                                     homeCategory: {
                                         $first: "$homeCategory.name"
@@ -2300,6 +2299,10 @@ var model = {
                                         $first: "$images"
                                     }
                                 }
+                            }, {
+                                '$skip': data.skip
+                            }, {
+                                '$limit': data.limit
                             }])),
                             function (err, data1) {
                                 if (err) {
@@ -2339,6 +2342,9 @@ var model = {
                                     },
                                     price: {
                                         $first: "$price"
+                                    },
+                                    mrp: {
+                                        $first: "$mrp"
                                     },
                                     homeCategory: {
                                         $first: "$homeCategory._id"
@@ -2713,9 +2719,9 @@ var model = {
                                 data4.fabric = fabricData[0];
                                 data4.type = typeData[0];
                                 data4.brand = brandData[0];
-                                data4.style = style
-                                data4.price = price
-                                data4.productId = productId
+                                data4.style = style;
+                                data4.price = price;
+                                data4.productId = productId;
                                 callback(null, data4);
                             }
                         });

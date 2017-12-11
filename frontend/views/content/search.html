@@ -108,7 +108,7 @@
                             <div class="checkbox" ng-repeat="size in filters.size">
                                 <input type="checkbox" id="{{size._id}}" ng-checked="checkFilterStatus('size',size._id)" ng-click="applyFilters('size', size)">
                                 <label for="{{size._id}}">
-                                     {{size.name}}
+                                     {{size.description}}
                                 </label>
                             </div>
                         </div>
@@ -246,7 +246,17 @@
                                             </li>
                                         </flex-slider>
                                         <div class="buy-para">
-                                            <h4><i class="fa fa-inr" aria-hidden="true"></i> {{product.price}}</h4>
+                                            <h4>
+                                                <!--<i class="fa fa-inr" aria-hidden="true"></i>-->
+                                                <!--<div class="inline-block"> -->
+                                                <span style="text-decoration: line-through; color:gray;" ng-show="product.price!=product.mrp">&#x20B9; {{product.mrp}}</span>
+                                                <span class="pull-right" ng-show="product.price!=product.mrp">&#x20B9; {{product.price |number:0}}</span>
+                                                <!--</div>-->
+                                                <!--<div class="inline-block">-->
+                                                <span ng-show="product.price==product.mrp">&#x20B9; {{product.mrp}}</span>
+                                                <!--<span ng-show="product.price==product.mrp" class="pull-right">&#x20B9; {{product.price}}</span>-->
+                                                <!--</div>-->
+                                            </h4>
                                             <h5>{{product.productName}} <br>{{product.type}}</h5>
                                             <div class="viewSize">
                                                 <p class="inline-block size-text">Sizes:</p>
@@ -301,7 +311,13 @@
                                         <div class="display-cell align-top item-desc">
                                             <div>
                                                 <h4 class="item-name text-uppercase">{{product.productName}}</h4>
-                                                <p class="item-cost"><i class="fa fa-inr"></i>{{product.price}} </p>{{product.type}}
+                                                <p class="item-cost">
+                                                    <!--<i class="fa fa-inr" style="text-decoration: line-through;" ng-show="product.price!=product.mrp">-->
+                                                    <span style="text-decoration: line-through; color:gray" ng-show="product.price!=product.mrp"> &#8377;{{product.mrp}}</span>
+                                                    <span class="pull-right" ng-show="product.price!=product.mrp">&#x20B9;{{product.price |number:0}}</span>
+                                                    <!--</i>-->
+                                                    <span ng-show="product.price==product.mrp">&#x20B9; {{product.mrp}}</span>
+                                                    <!--<span ng-show="product.price==product.mrp" class="pull-right">&#x20B9; {{product.price}}</span>--></p>{{product.type}}
                                                 <div class="viewSize">
                                                     <p class="inline-block size-text">Sizes:</p>
                                                     <div class="inline-block buy-para__sizes">

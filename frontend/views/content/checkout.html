@@ -185,7 +185,7 @@
                                             <td></td>
                                             <td>{{product.product.size.name}}</td>
                                             <td>{{product.quantity}}</td>
-                                            <td>&#x20b9{{product.product.price * product.quantity}}</td>
+                                            <td>&#x20b9{{product.product.price * product.quantity |number:0}}</td>
                                         </tr>
                                     </tbody>
                                     <!--<tfoot>
@@ -224,13 +224,13 @@
                             </div>
                             <div class="pull-right ">
                                 <p class="text-right ">ITEM(S) SUBTOTAL :
-                                    <span>&#x20b9 {{grandTotal}}</span>
+                                    <span>&#x20b9 {{grandTotal |number:0}}</span>
                                 </p>
                                 <p class="text-right " ng-if="discountAmount">MEMBER'S DISCOUNT :
-                                    <span>&#x20b9 {{discountAmount}}</span>
+                                    <span>&#x20b9 {{discountAmount |number:0}}</span>
                                 </p>
                                 <p class="text-right " ng-if="grandTotalAfterDiscount">GRAND TOTAL :
-                                    <span>&#x20b9 {{grandTotalAfterDiscount}}</span>
+                                    <span>&#x20b9 {{grandTotalAfterDiscount |number:0}}</span>
                                 </p>
                                 <button class="btn btn--list" ng-disabled="!loggedUser" ng-click="proceedToDetailTab();" ng-class="{
                         'btn--brownActive': view=='detailTab' }"> Next</button>

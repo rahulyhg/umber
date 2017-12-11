@@ -230,6 +230,7 @@
                                                     color: #cdc5c5!important;
                                                     @extend .btn--brown;
                                                     font-size: inherit;
+                                                    text-align: right;
                                                 }
                                                 a[href] {
                                                     color: #715a5b;
@@ -244,7 +245,8 @@
                                                 address {
                                                     color: #715a5b;
                                                 }
-                                                .flex-item.footer-up__abt-shop {
+                                                .flex-item.footer-up__abt-shop,
+                                                .flex-item.footer-up__contact {
                                                     width: 240px;
                                                     padding-left: 15px;
                                                     padding-right: 20px;
@@ -255,15 +257,26 @@
                                                 }
                                                 .flex-item.footer-up__cstmr-serv,
                                                 .flex-item.footer-up__info,
-                                                .flex-item.footer-up__my-account,
-                                                .flex-item.footer-up__contact {
+                                                .flex-item.footer-up__my-account {
                                                     width: 170px;
                                                     @include padding(0 15px);
                                                     margin-bottom: 15px;
                                                     .list-unstyled {
                                                         li {
-                                                            color: $lightGray1;
+                                                            //   color: $lightGray1;
                                                             @include padding(4px 0);
+                                                        }
+                                                    }
+                                                }
+                                                .flex-item.footer-up__contact {
+                                                    @include padding(0 15px);
+                                                    margin-bottom: 15px;
+                                                    .address {
+                                                        margin-bottom: 10px;
+                                                    }
+                                                    address .address-list {
+                                                        li {
+                                                            padding: 0;
                                                         }
                                                     }
                                                 }

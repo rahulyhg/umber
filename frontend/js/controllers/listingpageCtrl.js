@@ -192,7 +192,7 @@
                          //          // }
                          //      }
                          //  };
-                     })
+                     });
 
                  } else {
                      toastr.error('There was some error', 'Error');
@@ -261,12 +261,11 @@
      $scope.removeFromCompare = function (prodId) {
 
          var removeCompare = $.jStorage.get("compareproduct");
-         var result = _.remove(removeCompare, {
+         $scope.result = _.remove(removeCompare, {
              productId: prodId
          });
-
+         $scope.compareproduct = removeCompare;
          $.jStorage.set("compareproduct", removeCompare);
-         $state.reload();
      }
 
      /**********logic for checkbox on reload************ */
@@ -805,6 +804,17 @@
          }
      };
      //End of  modal on quck view button
+
+     //To open size chart on quick
+     $scope.openSizeChart = function () {
+         $scope.openSizeChartModal = $uibModal.open({
+             animation: true,
+             templateUrl: 'views/modal/size-chart.html',
+             size: 'md',
+             scope: $scope
+         });
+     };
+
      if (_.isEmpty($scope.products))
          $scope.displayMessage = "No Product Found";
 

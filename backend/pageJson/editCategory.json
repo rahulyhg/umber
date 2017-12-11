@@ -52,6 +52,17 @@
         ],
         "url": ""
     }, {
+        "name": "Size Chart Image",
+        "type": "image",
+        "tableRef": "sizeChartImage",
+        "placeholder": "Enter Size Chart Image",
+        "id": "sizeChartImage",
+        "option": "single",
+        "validation": ["", "trim", ""],
+        "onView": true,
+        "view": true,
+        "url": ""
+    }, {
         "name": "Status",
         "type": "tags",
         "tableRef": "status",

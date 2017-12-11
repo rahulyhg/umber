@@ -165,13 +165,13 @@
 </head>
 
 <body>
-    <table style="width: 600px; margin: 0 auto;">
+    <table style="width: 600px; margin: 0 auto; border:1px solid #341314">
         <tbody>
             <tr>
-                <td>
+                <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;">
                     <div class="clearfix" style="position: relative;">
                         <div style="float:left; width: 140px; overflow: hidden;">
-                            <img src="http://umber.tingdom.in/img/home/logo.png" alt="Logo" class="img-responsive">
+                            <img src="http://umber.wohlig.co.in/img/home/logo.png" alt="Logo" class="img-responsive">
                         </div>
                         <div style=" width: 75%; color:#341314; float:right; text-align:right;">
                             <div style="padding: 18px 0 0; border-bottom: 2px solid #341314; margin-bottom: 2px">
@@ -186,86 +186,78 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;">
                     <h3 style="text-transform:capitalize; margin: 5px 0;">hi
                         <%= firstname%>
                             <%= lastName%>,</h3>
                     <p style="margin-top: 0; margin-bottom: 10px;">This is to confirm that your order has been cancelled. Here are your order details</p>
                     <table>
                         <thead style="text-align:left;">
-                            <th style="    width: 200px;
+                            <tr>
+                                <th style="    width: 200px;
             background-color: #ededed;
-            padding-top: 10px;
-            padding-right: 15px;
-            padding-bottom: 10px;
-             padding-left: 15px;
+           padding: 8px;line-height:1.42857143;
             font-weight: normal;vertical-align:top;">
-                                <h4 style=" margin: 5px 0 ; color:#341314; text-transform:uppercase;">billing address</h4>
-                                <address style="line-height: 1.3;
+                                    <h4 style=" margin: 5px 0 ; color:#341314; text-transform:uppercase;">billing address</h4>
+                                    <address style="line-height: 1.3;
             font-style: normal;
             font-weight: normal;
             font-size: 12px;">
-                                    <%= billingAddress.line1%>,
-                                        <%= billingAddress.line2%>,
-                                            <%= billingAddress.line3%>,
-                                                <%= billingAddress.city%>
-                                                    <%= billingAddress.pincode%>
-                                                        <%= billingAddress.state%>
-                                                            <%= billingAddress.country%>
-                                </address>
-                            </th>
-                            <th style="    width: 200px;
+                                        <%= billingAddress.line1%>,
+                                            <%= billingAddress.line2%>,
+                                                <%= billingAddress.line3%>,
+                                                    <%= billingAddress.city%>
+                                                        <%= billingAddress.pincode%>
+                                                            <%= billingAddress.state%>
+                                                                <%= billingAddress.country%>
+                                    </address>
+                                </th>
+                                <th style="    width: 200px;
             background-color: #ededed;
-            padding-top: 10px;
-            padding-right: 15px;
-            padding-bottom: 10px;
-            padding-left: 15px;
+            padding: 8px;line-height:1.42857143;
             font-weight: normal; vertical-align: top;">
-                                <h4 style=" margin: 5px 0 ;color:#341314; text-transform: uppercase;">shipping address</h4>
-                                <address style="line-height: 1.3;
+                                    <h4 style=" margin: 5px 0 ;color:#341314; text-transform: uppercase;">shipping address</h4>
+                                    <address style="line-height: 1.3;
             font-style: normal;
             font-weight: normal;
             font-size: 12px;">
-                                    <%= shippingAddress.line1%>,
-                                        <%= shippingAddress.line2%>,
-                                            <%= shippingAddress.line3%>,
-                                                <%= shippingAddress.city%>
-                                                    <%= shippingAddress.pincode%>
-                                                        <%= shippingAddress.state%>
-                                                            <%= shippingAddress.country%>
-                                </address>
-                            </th>
-                            <th style="    width: 200px;
+                                        <%= shippingAddress.line1%>,
+                                            <%= shippingAddress.line2%>,
+                                                <%= shippingAddress.line3%>,
+                                                    <%= shippingAddress.city%>
+                                                        <%= shippingAddress.pincode%>
+                                                            <%= shippingAddress.state%>
+                                                                <%= shippingAddress.country%>
+                                    </address>
+                                </th>
+                                <th style="    width: 200px;
             background-color: #ededed;
-            padding-top: 10px;
-            padding-right: 15px;
-            padding-bottom: 10px;
-             padding-left: 15px;
+           padding: 8px;line-height:1.42857143;
             font-weight: normal;vertical-align:top;">
-                                <div style="line-height: 1">
-                                    <div>
-                                        <h4 style=" margin: 5px 0 ; color:#341314;  text-transform: uppercase;">payment method</h4>
-                                        <span style="font-size: 12px;"><%= paymentMethod%></span>
+                                    <div style="line-height: 1">
+                                        <div>
+                                            <h4 style=" margin: 5px 0 ; color:#341314;  text-transform: uppercase;">payment method</h4>
+                                            <span style="font-size: 12px;"><%= paymentMethod%></span>
+                                        </div>
+                                        <div>
+                                            <h4 style="  margin: 5px 0;color:#341314;  text-transform: uppercase;">order status</h4>
+                                            <span style="font-size: 12px;"><%= orderStatus%></span>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h4 style="  margin: 5px 0;color:#341314;  text-transform: uppercase;">order status</h4>
-                                        <span style="font-size: 12px;"><%= orderStatus%></span>
-                                    </div>
-                                </div>
-                            </th>
-
+                                </th>
+                            </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td colspan="3">
+                                <td colspan="3" style="padding: 8px;line-height: 1.42857143;vertical-align: top;">
                                     <h2 style="text-align: center; text-transform: uppercase; margin: 5px 0;">cancelled</h2>
                                 </td>
                             </tr>
                             <% for(var i=0; i<order.length; i++) {%>
                                 <tr>
-                                    <td colspan="2" style="padding: 10px;border-top: 1px solid #e5e5e5;
+                                    <td colspan="2" style="padding: 8px;border-top: 1px solid #e5e5e5;
             border-bottom: 1px solid #e5e5e5;
-            border-left: 1px solid #e5e5e5;">
+            border-left: 1px solid #e5e5e5;line-height: 1.42857143;vertical-align: top;">
                                         <div style="display: table-cell; vertical-align: top;">
                                             <div style="width: 100px; height: 110px;margin: 0 auto; overflow: hidden;">
                                                 <img src="<%= order[i].product.images[0].image%>" alt="Orderd Product" class="img-responsive">
@@ -279,13 +271,15 @@
                                                 <span style="display: block;font-size: 12px; text-transform: capitalize;">product code: <span style="text-transform: uppercase"><%=order[i].product.productId%></span></span>
                                                 <span style="display: block; font-size: 12px;">Size: <%= order[i].product.size.name%></span>
                                                 <span style="display: block;font-size: 12px;">Qty: <%= order[i].quantity%></span>
+                                                <span style="display: block; font-size: 12px;">Style: <%= order[i].product.style%></span>
+                                                <span style="display: block; font-size: 12px;">Color: <%= order[i].color%></span>
                                             </div>
                                         </div>
                                     </td>
 
-                                    <td style=" padding: 10px; border-top: 1px solid #e5e5e5;
+                                    <td style="padding: 8px; border-top: 1px solid #e5e5e5;
             border-right: 1px solid #e5e5e5;
-            border-bottom: 1px solid #e5e5e5; text-align: right; vertical-align:top">
+            border-bottom: 1px solid #e5e5e5;line-height: 1.42857143; text-align: right; vertical-align:top">
                                         <div style="margin: 10px 0; color:#341314; font-weight:bold;"> &#8377;
                                             <%=order[i].price%>
                                         </div>
@@ -293,7 +287,7 @@
                                 </tr>
                                 <%}%>
                                     <tr>
-                                        <td colspan="3" style="padding: 10px 15px;">
+                                        <td colspan="3" style=" padding: 8px;line-height:1.42857143;vertical-align: top;">
                                             <div>
                                                 <p><b>Your selected items have been successfully cancelled.<br> Your order information
                                             has been updated. If you have paid using net banking or credit/debit card, your
@@ -303,10 +297,10 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3" style="padding: 10px 15px; background: #F5F5F5;">
+                                        <td colspan="3" style="padding: 8px;line-height:1.42857143;vertical-align: top; background: #F5F5F5;">
                                             <div>
                                                 <ul style=" padding-left: 0; margin-top: 0;list-style-type: none;">
-                                                    <li style="margin-left:0">You can check your order status <a href="http://umber.tingdom.in/myaccount/orderTab"
+                                                    <li style="margin-left:0">You can check your order status <a href="http://umber.wohlig.co.in/myaccount/orderTab"
                                                             style="color: #341314;">here</a></li>
                                                     <li style="margin-left:0">For more information please refer our <a href="#" style="color: #341314;">cancellation policy</a></li>
                                                     <li style="margin-left:0">For any order related to queries with respect to your order placed, contact-us:
@@ -324,18 +318,18 @@
         </tbody>
         <tfoot>
             <tr>
-                <td style=" padding: 7px 15px; background: #341314;">
-                    <div class="display-table" style="color:white; font-size: 11px;">
-                        <div class="display-cell" style=" width: 400px;vertical-align: middle;">
+                <td style=" padding: 8px;line-height:1.42857143;vertical-align: top; background: #341314;">
+                    <div style="display:table; color:white; font-size: 11px;">
+                        <div style="width: 400px;display:table-cell; vertical-align: middle;">
                             Burntumber Fashion Pvt Ltd© Copyright 2015
                         </div>
-                        <div class="display-cell" style="width: 200px;text-align: right; vertical-align: middle;">
+                        <div style="width: 200px;text-align: right; display:table-cell;vertical-align: middle;">
                             <ul class="list-unstyled list-inline" style="margin: 0">
                                 <li style="margin-left:0"> Follow us on</li>
-                                <li style="margin-left:0"><a href="#" style="width: 18px; height: 18px;border: 1px dashed white; background: transparent;color:white; display: block;font-size: 12px; text-align: center;"><img src="http://umber.tingdom.in/img/emailer/facebook.png" alt="Click on Facebook"  width="12" height="12" style="vertical-align:middle;">
-                                <li style="margin-left:0"><a href="#" style="width: 18px; height: 18px;border: 1px dashed white; background: transparent;color:white; display: block;font-size: 12px; text-align: center;"><img src="http://umber.tingdom.in/img/emailer/twitter.png" alt="Click on Twitter" width="12" height="12" style="vertical-align:middle;">
+                                <li style="margin-left:0"><a href="#" style="width: 18px; height: 18px;border: 1px dashed white; background: transparent;color:white; display: block;font-size: 12px; text-align: center;"><img src="http://umber.wohlig.co.in/img/emailer/facebook.png" alt="Click on Facebook"  width="12" height="12" style="vertical-align:middle;">
+                                <li style="margin-left:0"><a href="#" style="width: 18px; height: 18px;border: 1px dashed white; background: transparent;color:white; display: block;font-size: 12px; text-align: center;"><img src="http://umber.wohlig.co.in/img/emailer/twitter.png" alt="Click on Twitter" width="12" height="12" style="vertical-align:middle;">
                                 <li style="margin-left:0"><a href="#" style="width: 18px; height: 18px;border: 1px dashed white; background: transparent;color:white; display: block;font-size: 12px; text-align: center;">
-                                    <img src="http://umber.tingdom.in/img/emailer/instagram.png" alt="Click on Instagram"  width="12" height="12" style="vertical-align:middle;"></a></li>
+                                    <img src="http://umber.wohlig.co.in/img/emailer/instagram.png" alt="Click on Instagram"  width="12" height="12" style="vertical-align:middle;"></a></li>
                             </ul>
                         </div>
                     </div>

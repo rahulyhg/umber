@@ -9,11 +9,11 @@ myApp.service('myService', function ($http, WishlistService, BannerService, Cart
 
             });
         },
-//avinash functions starts here
-this.applicableDiscounts = function (productIdsArr,grandTotal, callback) {
-            var formData={
-                productIds:productIdsArr,
-                grandTotal:grandTotal
+        //avinash functions starts here
+        this.applicableDiscounts = function (productIdsArr, grandTotal, callback) {
+            var formData = {
+                productIds: productIdsArr,
+                grandTotal: grandTotal
             };
             BannerService.applicableDiscounts(formData, function (data) {
                 console.log(data);
@@ -22,10 +22,10 @@ this.applicableDiscounts = function (productIdsArr,grandTotal, callback) {
             });
         },
 
-this.getAllProductsByDiscount = function (discountId, callback) {
-    console.log("cartandwishlistservice inside getAllProductsByDiscount");
-            var formData={
-                _id:discountId
+        this.getAllProductsByDiscount = function (discountId, callback) {
+            console.log("cartandwishlistservice inside getAllProductsByDiscount");
+            var formData = {
+                _id: discountId
             }
             // console.log("formdata$$$",formData);
             BannerService.getAllProductsByDiscount(formData, function (data) {
@@ -34,13 +34,15 @@ this.getAllProductsByDiscount = function (discountId, callback) {
 
             });
         },
-//avinash functions ends here
+        //avinash functions ends here
         /*************Adding Products To Cart**************** */
-        this.addToCart = function (prod, reqQuantity, size, com, callback) {
-            console.log("product:", prod, "size:", size, "quanti:", reqQuantity)
+        this.addToCart = function (prod, reqQuantity, size, com, productStyle, productColor, callback) {
+            console.log("product:", prod, "size:", size, "quanti:", reqQuantity, "productColor", productColor)
             prod.selectedSize = size._id;
             prod.reqQuantity = reqQuantity;
             prod.comment = com;
+            prod.productStyle = productStyle;
+            prod.productColor = productColor;
             var accessToken = $.jStorage.get("accessToken");
             if (!_.isEmpty(accessToken)) {
                 console.log("inside if in addtcart service")

@@ -47,6 +47,8 @@ var schema = new Schema({
         },
         quantity: Number,
         price: Number,
+        style: String,
+        color: String,
         status: {
             type: String,
             enum: ['accept', 'returned', 'cancelled'],
@@ -70,6 +72,7 @@ var schema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Courier'
     },
+    courierAmount: Number,
     trackingId: String,
     orderStatus: {
         type: String,
@@ -105,6 +108,8 @@ var schema = new Schema({
         },
         quantity: Number,
         price: Number,
+        style: String,
+        color: String,
         status: {
             type: String,
             enum: ['returned', 'cancelled'],
@@ -326,6 +331,8 @@ var model = {
                             product: mongoose.Types.ObjectId(product.product._id),
                             quantity: product.quantity,
                             price: product.quantity * product.product.price,
+                            color: product.product.color.name,
+                            style: product.product.style,
                             comment: product.comment
                         };
                         if (!order.products) {
@@ -681,6 +688,17 @@ var model = {
                                 sendData.accessToken = created.accessToken;
                                 sendData.firstName = created.firstName;
                                 sendData.lastName = created.lastName;
+                                emailData.email = "siddhesh@wohlig.com";
+                                Config.ConfirmOrderPlacedMail(emailData, function (err, response) {
+                                    if (err) {
+                                        console.log("error in email", err);
+                                        callback("emailError", null);
+                                    } else if (response) {
+                                        // callback(null, sendData);
+                                    } else {
+                                        callback("errorOccurredRegister", null);
+                                    }
+                                });
                                 callback(null, sendData);
                             } else {
                                 callback("errorOccurredRegister", null);

@@ -18,6 +18,9 @@
                             <th>PRICE</th>
                             <th>SIZE</th>
                             <th>QUANTITY</th>
+                            <th>MRP</th>
+                            <th>DISCOUNT PRICE</th>
+                            <th>GST</th>
                             <th>SUBTOTAL</th>
                         </tr>
                     </thead>
@@ -34,7 +37,7 @@
                                 </div>
                             </td>
                             <td>{{product.product.color.name}}</td>
-                            <td>{{product.product.price}} </td>
+                            <td>&#x20b9 &nbsp;{{product.product.price|number:0}} </td>
                             <td>{{product.product.size.name}}</td>
                             <td>
                                 <div class="plus-minus-btn">
@@ -53,11 +56,16 @@
                             </a>
                                 </div>
                             </td>
-                            <td>&#x20b9 &nbsp;{{product.product.price * product.quantity}}</td>
+                            <td>
+                                &#x20b9 &nbsp;{{product.product.mrp}}
+                            </td>
+                            <td>&#x20b9 &nbsp;{{product.product.price|number:0}}</td>
+                            <td></td>
+                            <td>&#x20b9 &nbsp;{{product.product.price * product.quantity|number:0}}</td>
 
                         </tr>
                         <tr>
-                            <td colspan="6" class="td-border">
+                            <td colspan="8" class="td-border">
                                 <div class="pull-right">
                                     <button class=" btn text-uppercase wishlist--btn" ng-click="addToWishlist(product)"> <i class="fa fa-heart" aria-hidden="true"></i>ADD TO WISHLIST</button>
                                     <button class="btn text-uppercase remove--btn" ng-click="removeProductFromCart(mycartTable._id, product.product._id)"><i class="fa fa-trash" aria-hidden="true"></i>REMOVE</button>
@@ -83,12 +91,12 @@
                         <p>GRAND TOTAL:</p>
                     </div>
                     <div class="inline-block">
-                        <p>&#x20b9 {{total}}</p>
+                        <p>&#x20b9 {{total|number:0}}</p>
                         <p>&#x20b9 0</p>
-                        <p>&#x20b9 {{grandTotalAfterDiscount}}</p>
-                        <p>&#x20b9 {{grandTotal}}</p>
+                        <p>&#x20b9 {{grandTotalAfterDiscount|number:0}}</p>
+                        <p>&#x20b9 {{grandTotal|number:0}}</p>
                         <p>&#x20b9 0</p>
-                        <p>&#x20b9 {{grandTotal}}</p>
+                        <p>&#x20b9 {{grandTotal|number:0}}</p>
                     </div>
                 </div>
                 <div class="clearfix"></div>

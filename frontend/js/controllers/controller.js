@@ -566,11 +566,17 @@ myApp
         $scope.template = TemplateService.getHTML("content/error-msg.html");
         TemplateService.title = "Error"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
+        if ($stateParams.id) {
+            $scope.orderId = $stateParams.id;
+        }
     })
     .controller('ThankYouMsgCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.getHTML("content/thankyou-msg.html");
         TemplateService.title = "Thank You"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
+        if ($stateParams.id) {
+            $scope.orderId = $stateParams.id;
+        }
     })
 
     //Example API Controller

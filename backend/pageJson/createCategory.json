@@ -6,65 +6,78 @@
     "pageType": "create",
     "urlFields": ["Category"],
     "fields": [{
-        "name": "Name",
-        "type": "text",
-        "tableRef": "name",
-        "placeholder": "Enter Category Name",
-        "id": "name",
-        "validation": ["required", "trim", "unique"],
-        "onView": true,
-        "view": true,
-        "url": ""
-    }, {
-        "name": "Image",
-        "type": "image",
-        "tableRef": "imgLink",
-        "placeholder": "Enter Image Link",
-        "id": "imgLink",
-        "option": "single",
-        "validation": ["", "trim", "unique"],
-        "onView": true,
-        "view": true,
-        "url": ""
-    }, {
-        "name": "ParentCategory",
-        "type": "tags",
-        "tableRef": "category",
-        "placeholder": "Select Parent Category",
-        "id": "parCategory",
-        "searchApi": "searchCall",
-        "fieldType": "",
-        "url": "HomeCategory/search",
-        "dropDownField": "name",
-        "dropDownType": "single",
-        "onView": true,
-        "view": true
-    }, {
-        "name": "Slug",
-        "type": "text",
-        "tableRef": "slug",
-        "placeholder": "Enter slug",
-        "id": "slug",
-        "validation": [
-            "required",
-            "trim",
-            "unique"
-        ],
-        "url": ""
-    }, {
-        "name": "Status",
-        "type": "tags",
-        "tableRef": "status",
-        "placeholder": "Select Status",
-        "id": "status",
-        "validation": ["required", "trim"],
-        "url": "",
-        "dropDownField": "",
-        "dropDownType": "single",
-        "onView": true,
-        "view": true,
-        "dropDown": ["Enabled", "Disabled"]
-    }],
+            "name": "Name",
+            "type": "text",
+            "tableRef": "name",
+            "placeholder": "Enter Category Name",
+            "id": "name",
+            "validation": ["required", "trim", "unique"],
+            "onView": true,
+            "view": true,
+            "url": ""
+        }, {
+            "name": "Image",
+            "type": "image",
+            "tableRef": "imgLink",
+            "placeholder": "Enter Image Link",
+            "id": "imgLink",
+            "option": "single",
+            "validation": ["", "trim", "unique"],
+            "onView": true,
+            "view": true,
+            "url": ""
+        }, {
+            "name": "ParentCategory",
+            "type": "tags",
+            "tableRef": "category",
+            "placeholder": "Select Parent Category",
+            "id": "parCategory",
+            "searchApi": "searchCall",
+            "fieldType": "",
+            "url": "HomeCategory/search",
+            "dropDownField": "name",
+            "dropDownType": "single",
+            "onView": true,
+            "view": true
+        }, {
+            "name": "Slug",
+            "type": "text",
+            "tableRef": "slug",
+            "placeholder": "Enter slug",
+            "id": "slug",
+            "validation": [
+                "required",
+                "trim",
+                "unique"
+            ],
+            "url": ""
+        },
+        {
+            "name": "Size Chart Image",
+            "type": "image",
+            "tableRef": "sizeChartImage",
+            "placeholder": "Enter Size Chart Image",
+            "id": "sizeChartImage",
+            "option": "single",
+            "validation": ["", "trim", ""],
+            "onView": true,
+            "view": true,
+            "url": ""
+        }, {
+            "name": "Status",
+            "type": "tags",
+            "tableRef": "status",
+            "placeholder": "Select Status",
+            "id": "status",
+            "validation": ["required", "trim"],
+            "url": "",
+            "dropDownField": "",
+            "dropDownType": "single",
+            "onView": true,
+            "view": true,
+            "dropDown": ["Enabled", "Disabled"]
+        }
+    ],
     "action": [{
         "name": "submit",
         "action": "submitCategory",

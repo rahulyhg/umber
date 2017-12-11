@@ -59,7 +59,6 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="individual-main">
-
                     <div class="first-sec clearfix border-div relate ">
                         <h4>{{product.productName}}</h4>
                         <div class="pull-left mrp">
@@ -67,10 +66,10 @@
                                 <!--<i class="fa fa-inr " aria-hidden="true "></i>-->
                                 <!--<div class="inline-block">-->
                                 <span style="text-decoration: line-through; color: gray;" ng-show="product.price!=product.mrp">&#x20B9; {{product.mrp}}</span>
-                                <span class="pull-right" ng-show="product.price!=product.mrp">&#x20B9; {{product.price}}</span>
+                                <span class="pull-right" ng-show="product.price!=product.mrp">&#x20B9; {{product.price|number:0}}</span>
                                 <!--</div>-->
                                 <!--<div class="inline-block">-->
-                                <span ng-show="product.price==product.mrp">&#x20B9;{{product.price}}</span>
+                                <span ng-show="product.price==product.mrp">&#x20B9;{{product.price |number:0}}</span>
                                 <!--</div>-->
                             </h3>
                         </div>
@@ -85,7 +84,8 @@
                             <div class="inline-block buy-para__sizes ">
                                 <p ng-repeat="size in sizes " ng-click="selectSize(size) " ng-class="{'active':activeButton==size.name} ">{{size.name}}</p>
                                 <div>
-                                    <a class="linking " ng-click="openSizeChart()">Size Chart</a>
+                                    <a class="linking" ng-click="openSizeChart()">Size Chart</a>
+                                    <!--{{product.category.image}}-->
                                 </div>
 
                             </div>
@@ -305,7 +305,7 @@
                             <div class="customer-choice__banner-detail relate">
                                 <img ng-src="{{new.img | serverimage}}" alt="" class="img-responsive">
                                 <div class="customer-choiced__cloth-desc">
-                                    <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price}}</h3>
+                                    <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price |number:0}}</h3>
                                     <h4>{{new.type}}</h4>
                                 </div>
                                 <!--<div class="customer-choice__icon-heart">
