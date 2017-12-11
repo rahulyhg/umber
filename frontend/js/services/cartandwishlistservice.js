@@ -1,4 +1,4 @@
-myApp.service('myService', function ($http, WishlistService, BannerService, CartService) {
+myApp.service('myService', function ($http, WishlistService, BannerService, CartService, $uibModal, $timeout) {
     this.ctrlBanners = function (pagename, callback) {
             var banner = {
                 pageName: pagename
@@ -51,13 +51,21 @@ myApp.service('myService', function ($http, WishlistService, BannerService, Cart
                 console.log("productbeforesending:", prod)
 
                 CartService.saveProduct(prod, function (data) {
-
                     if (data.data.error) {
                         console.log("Error: ", data.data.error);
 
                     } else {
-                        console.log("Success");
+                        var addcartmodal = $uibModal.open({
+                            animation: true,
+                            templateUrl: 'views/modal/cartadd.html',
+                            size: 'md',
 
+                        });
+                        $timeout(function () {
+                            addcartmodal.close();
+                            // $state.reload();
+                        }, 2000)
+                        console.log("Success");
 
                     }
                 });
@@ -77,9 +85,9 @@ myApp.service('myService', function ($http, WishlistService, BannerService, Cart
                 cart.products[len - 1].quantity = reqQuantity;
                 $.jStorage.set('cart', cart);
                 console.log("added to offlinecart", $.jStorage.set('cart', cart))
-
+                callback("sucess");
             }
-            callback("sucess");
+
         },
 
         /*******Add Product To Wishlist******** */
