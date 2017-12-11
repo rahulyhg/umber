@@ -1,6 +1,5 @@
 module.exports = [
   //JS & jQuery Libs
-  'https://maps.googleapis.com/maps/api/js?key=AIzaSyAOcyOuay2NEJud84HsBzIgTQ7TcYm83gk',
   'bower_components/jquery/dist/jquery.min.js',
   'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
   'bower_components/flexslider/jquery.flexslider-min.js',

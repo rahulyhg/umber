@@ -2077,11 +2077,61 @@ arguments[c],d;for(d in a)a.hasOwnProperty(d)&&(b[d]=a[d])}return b}},{}]},{},[1
 !function(a,b){"object"==typeof exports&&"undefined"!=typeof module?module.exports=b():"function"==typeof define&&define.amd?define(b):a.moment=b()}(this,function(){"use strict";function a(){return sd.apply(null,arguments)}function b(a){sd=a}function c(a){return a instanceof Array||"[object Array]"===Object.prototype.toString.call(a)}function d(a){return null!=a&&"[object Object]"===Object.prototype.toString.call(a)}function e(a){var b;for(b in a)return!1;return!0}function f(a){return void 0===a}function g(a){return"number"==typeof a||"[object Number]"===Object.prototype.toString.call(a)}function h(a){return a instanceof Date||"[object Date]"===Object.prototype.toString.call(a)}function i(a,b){var c,d=[];for(c=0;c<a.length;++c)d.push(b(a[c],c));return d}function j(a,b){return Object.prototype.hasOwnProperty.call(a,b)}function k(a,b){for(var c in b)j(b,c)&&(a[c]=b[c]);return j(b,"toString")&&(a.toString=b.toString),j(b,"valueOf")&&(a.valueOf=b.valueOf),a}function l(a,b,c,d){return sb(a,b,c,d,!0).utc()}function m(){return{empty:!1,unusedTokens:[],unusedInput:[],overflow:-2,charsLeftOver:0,nullInput:!1,invalidMonth:null,invalidFormat:!1,userInvalidated:!1,iso:!1,parsedDateParts:[],meridiem:null,rfc2822:!1,weekdayMismatch:!1}}function n(a){return null==a._pf&&(a._pf=m()),a._pf}function o(a){if(null==a._isValid){var b=n(a),c=ud.call(b.parsedDateParts,function(a){return null!=a}),d=!isNaN(a._d.getTime())&&b.overflow<0&&!b.empty&&!b.invalidMonth&&!b.invalidWeekday&&!b.nullInput&&!b.invalidFormat&&!b.userInvalidated&&(!b.meridiem||b.meridiem&&c);if(a._strict&&(d=d&&0===b.charsLeftOver&&0===b.unusedTokens.length&&void 0===b.bigHour),null!=Object.isFrozen&&Object.isFrozen(a))return d;a._isValid=d}return a._isValid}function p(a){var b=l(NaN);return null!=a?k(n(b),a):n(b).userInvalidated=!0,b}function q(a,b){var c,d,e;if(f(b._isAMomentObject)||(a._isAMomentObject=b._isAMomentObject),f(b._i)||(a._i=b._i),f(b._f)||(a._f=b._f),f(b._l)||(a._l=b._l),f(b._strict)||(a._strict=b._strict),f(b._tzm)||(a._tzm=b._tzm),f(b._isUTC)||(a._isUTC=b._isUTC),f(b._offset)||(a._offset=b._offset),f(b._pf)||(a._pf=n(b)),f(b._locale)||(a._locale=b._locale),vd.length>0)for(c=0;c<vd.length;c++)d=vd[c],e=b[d],f(e)||(a[d]=e);return a}function r(b){q(this,b),this._d=new Date(null!=b._d?b._d.getTime():NaN),this.isValid()||(this._d=new Date(NaN)),wd===!1&&(wd=!0,a.updateOffset(this),wd=!1)}function s(a){return a instanceof r||null!=a&&null!=a._isAMomentObject}function t(a){return a<0?Math.ceil(a)||0:Math.floor(a)}function u(a){var b=+a,c=0;return 0!==b&&isFinite(b)&&(c=t(b)),c}function v(a,b,c){var d,e=Math.min(a.length,b.length),f=Math.abs(a.length-b.length),g=0;for(d=0;d<e;d++)(c&&a[d]!==b[d]||!c&&u(a[d])!==u(b[d]))&&g++;return g+f}function w(b){a.suppressDeprecationWarnings===!1&&"undefined"!=typeof console&&console.warn&&console.warn("Deprecation warning: "+b)}function x(b,c){var d=!0;return k(function(){if(null!=a.deprecationHandler&&a.deprecationHandler(null,b),d){for(var e,f=[],g=0;g<arguments.length;g++){if(e="","object"==typeof arguments[g]){e+="\n["+g+"] ";for(var h in arguments[0])e+=h+": "+arguments[0][h]+", ";e=e.slice(0,-2)}else e=arguments[g];f.push(e)}w(b+"\nArguments: "+Array.prototype.slice.call(f).join("")+"\n"+(new Error).stack),d=!1}return c.apply(this,arguments)},c)}function y(b,c){null!=a.deprecationHandler&&a.deprecationHandler(b,c),xd[b]||(w(c),xd[b]=!0)}function z(a){return a instanceof Function||"[object Function]"===Object.prototype.toString.call(a)}function A(a){var b,c;for(c in a)b=a[c],z(b)?this[c]=b:this["_"+c]=b;this._config=a,this._dayOfMonthOrdinalParseLenient=new RegExp((this._dayOfMonthOrdinalParse.source||this._ordinalParse.source)+"|"+/\d{1,2}/.source)}function B(a,b){var c,e=k({},a);for(c in b)j(b,c)&&(d(a[c])&&d(b[c])?(e[c]={},k(e[c],a[c]),k(e[c],b[c])):null!=b[c]?e[c]=b[c]:delete e[c]);for(c in a)j(a,c)&&!j(b,c)&&d(a[c])&&(e[c]=k({},e[c]));return e}function C(a){null!=a&&this.set(a)}function D(a,b,c){var d=this._calendar[a]||this._calendar.sameElse;return z(d)?d.call(b,c):d}function E(a){var b=this._longDateFormat[a],c=this._longDateFormat[a.toUpperCase()];return b||!c?b:(this._longDateFormat[a]=c.replace(/MMMM|MM|DD|dddd/g,function(a){return a.slice(1)}),this._longDateFormat[a])}function F(){return this._invalidDate}function G(a){return this._ordinal.replace("%d",a)}function H(a,b,c,d){var e=this._relativeTime[c];return z(e)?e(a,b,c,d):e.replace(/%d/i,a)}function I(a,b){var c=this._relativeTime[a>0?"future":"past"];return z(c)?c(b):c.replace(/%s/i,b)}function J(a,b){var c=a.toLowerCase();Hd[c]=Hd[c+"s"]=Hd[b]=a}function K(a){return"string"==typeof a?Hd[a]||Hd[a.toLowerCase()]:void 0}function L(a){var b,c,d={};for(c in a)j(a,c)&&(b=K(c),b&&(d[b]=a[c]));return d}function M(a,b){Id[a]=b}function N(a){var b=[];for(var c in a)b.push({unit:c,priority:Id[c]});return b.sort(function(a,b){return a.priority-b.priority}),b}function O(b,c){return function(d){return null!=d?(Q(this,b,d),a.updateOffset(this,c),this):P(this,b)}}function P(a,b){return a.isValid()?a._d["get"+(a._isUTC?"UTC":"")+b]():NaN}function Q(a,b,c){a.isValid()&&a._d["set"+(a._isUTC?"UTC":"")+b](c)}function R(a){return a=K(a),z(this[a])?this[a]():this}function S(a,b){if("object"==typeof a){a=L(a);for(var c=N(a),d=0;d<c.length;d++)this[c[d].unit](a[c[d].unit])}else if(a=K(a),z(this[a]))return this[a](b);return this}function T(a,b,c){var d=""+Math.abs(a),e=b-d.length,f=a>=0;return(f?c?"+":"":"-")+Math.pow(10,Math.max(0,e)).toString().substr(1)+d}function U(a,b,c,d){var e=d;"string"==typeof d&&(e=function(){return this[d]()}),a&&(Md[a]=e),b&&(Md[b[0]]=function(){return T(e.apply(this,arguments),b[1],b[2])}),c&&(Md[c]=function(){return this.localeData().ordinal(e.apply(this,arguments),a)})}function V(a){return a.match(/\[[\s\S]/)?a.replace(/^\[|\]$/g,""):a.replace(/\\/g,"")}function W(a){var b,c,d=a.match(Jd);for(b=0,c=d.length;b<c;b++)Md[d[b]]?d[b]=Md[d[b]]:d[b]=V(d[b]);return function(b){var e,f="";for(e=0;e<c;e++)f+=z(d[e])?d[e].call(b,a):d[e];return f}}function X(a,b){return a.isValid()?(b=Y(b,a.localeData()),Ld[b]=Ld[b]||W(b),Ld[b](a)):a.localeData().invalidDate()}function Y(a,b){function c(a){return b.longDateFormat(a)||a}var d=5;for(Kd.lastIndex=0;d>=0&&Kd.test(a);)a=a.replace(Kd,c),Kd.lastIndex=0,d-=1;return a}function Z(a,b,c){ce[a]=z(b)?b:function(a,d){return a&&c?c:b}}function $(a,b){return j(ce,a)?ce[a](b._strict,b._locale):new RegExp(_(a))}function _(a){return aa(a.replace("\\","").replace(/\\(\[)|\\(\])|\[([^\]\[]*)\]|\\(.)/g,function(a,b,c,d,e){return b||c||d||e}))}function aa(a){return a.replace(/[-\/\\^$*+?.()|[\]{}]/g,"\\$&")}function ba(a,b){var c,d=b;for("string"==typeof a&&(a=[a]),g(b)&&(d=function(a,c){c[b]=u(a)}),c=0;c<a.length;c++)de[a[c]]=d}function ca(a,b){ba(a,function(a,c,d,e){d._w=d._w||{},b(a,d._w,d,e)})}function da(a,b,c){null!=b&&j(de,a)&&de[a](b,c._a,c,a)}function ea(a,b){return new Date(Date.UTC(a,b+1,0)).getUTCDate()}function fa(a,b){return a?c(this._months)?this._months[a.month()]:this._months[(this._months.isFormat||oe).test(b)?"format":"standalone"][a.month()]:c(this._months)?this._months:this._months.standalone}function ga(a,b){return a?c(this._monthsShort)?this._monthsShort[a.month()]:this._monthsShort[oe.test(b)?"format":"standalone"][a.month()]:c(this._monthsShort)?this._monthsShort:this._monthsShort.standalone}function ha(a,b,c){var d,e,f,g=a.toLocaleLowerCase();if(!this._monthsParse)for(this._monthsParse=[],this._longMonthsParse=[],this._shortMonthsParse=[],d=0;d<12;++d)f=l([2e3,d]),this._shortMonthsParse[d]=this.monthsShort(f,"").toLocaleLowerCase(),this._longMonthsParse[d]=this.months(f,"").toLocaleLowerCase();return c?"MMM"===b?(e=ne.call(this._shortMonthsParse,g),e!==-1?e:null):(e=ne.call(this._longMonthsParse,g),e!==-1?e:null):"MMM"===b?(e=ne.call(this._shortMonthsParse,g),e!==-1?e:(e=ne.call(this._longMonthsParse,g),e!==-1?e:null)):(e=ne.call(this._longMonthsParse,g),e!==-1?e:(e=ne.call(this._shortMonthsParse,g),e!==-1?e:null))}function ia(a,b,c){var d,e,f;if(this._monthsParseExact)return ha.call(this,a,b,c);for(this._monthsParse||(this._monthsParse=[],this._longMonthsParse=[],this._shortMonthsParse=[]),d=0;d<12;d++){if(e=l([2e3,d]),c&&!this._longMonthsParse[d]&&(this._longMonthsParse[d]=new RegExp("^"+this.months(e,"").replace(".","")+"$","i"),this._shortMonthsParse[d]=new RegExp("^"+this.monthsShort(e,"").replace(".","")+"$","i")),c||this._monthsParse[d]||(f="^"+this.months(e,"")+"|^"+this.monthsShort(e,""),this._monthsParse[d]=new RegExp(f.replace(".",""),"i")),c&&"MMMM"===b&&this._longMonthsParse[d].test(a))return d;if(c&&"MMM"===b&&this._shortMonthsParse[d].test(a))return d;if(!c&&this._monthsParse[d].test(a))return d}}function ja(a,b){var c;if(!a.isValid())return a;if("string"==typeof b)if(/^\d+$/.test(b))b=u(b);else if(b=a.localeData().monthsParse(b),!g(b))return a;return c=Math.min(a.date(),ea(a.year(),b)),a._d["set"+(a._isUTC?"UTC":"")+"Month"](b,c),a}function ka(b){return null!=b?(ja(this,b),a.updateOffset(this,!0),this):P(this,"Month")}function la(){return ea(this.year(),this.month())}function ma(a){return this._monthsParseExact?(j(this,"_monthsRegex")||oa.call(this),a?this._monthsShortStrictRegex:this._monthsShortRegex):(j(this,"_monthsShortRegex")||(this._monthsShortRegex=re),this._monthsShortStrictRegex&&a?this._monthsShortStrictRegex:this._monthsShortRegex)}function na(a){return this._monthsParseExact?(j(this,"_monthsRegex")||oa.call(this),a?this._monthsStrictRegex:this._monthsRegex):(j(this,"_monthsRegex")||(this._monthsRegex=se),this._monthsStrictRegex&&a?this._monthsStrictRegex:this._monthsRegex)}function oa(){function a(a,b){return b.length-a.length}var b,c,d=[],e=[],f=[];for(b=0;b<12;b++)c=l([2e3,b]),d.push(this.monthsShort(c,"")),e.push(this.months(c,"")),f.push(this.months(c,"")),f.push(this.monthsShort(c,""));for(d.sort(a),e.sort(a),f.sort(a),b=0;b<12;b++)d[b]=aa(d[b]),e[b]=aa(e[b]);for(b=0;b<24;b++)f[b]=aa(f[b]);this._monthsRegex=new RegExp("^("+f.join("|")+")","i"),this._monthsShortRegex=this._monthsRegex,this._monthsStrictRegex=new RegExp("^("+e.join("|")+")","i"),this._monthsShortStrictRegex=new RegExp("^("+d.join("|")+")","i")}function pa(a){return qa(a)?366:365}function qa(a){return a%4===0&&a%100!==0||a%400===0}function ra(){return qa(this.year())}function sa(a,b,c,d,e,f,g){var h=new Date(a,b,c,d,e,f,g);return a<100&&a>=0&&isFinite(h.getFullYear())&&h.setFullYear(a),h}function ta(a){var b=new Date(Date.UTC.apply(null,arguments));return a<100&&a>=0&&isFinite(b.getUTCFullYear())&&b.setUTCFullYear(a),b}function ua(a,b,c){var d=7+b-c,e=(7+ta(a,0,d).getUTCDay()-b)%7;return-e+d-1}function va(a,b,c,d,e){var f,g,h=(7+c-d)%7,i=ua(a,d,e),j=1+7*(b-1)+h+i;return j<=0?(f=a-1,g=pa(f)+j):j>pa(a)?(f=a+1,g=j-pa(a)):(f=a,g=j),{year:f,dayOfYear:g}}function wa(a,b,c){var d,e,f=ua(a.year(),b,c),g=Math.floor((a.dayOfYear()-f-1)/7)+1;return g<1?(e=a.year()-1,d=g+xa(e,b,c)):g>xa(a.year(),b,c)?(d=g-xa(a.year(),b,c),e=a.year()+1):(e=a.year(),d=g),{week:d,year:e}}function xa(a,b,c){var d=ua(a,b,c),e=ua(a+1,b,c);return(pa(a)-d+e)/7}function ya(a){return wa(a,this._week.dow,this._week.doy).week}function za(){return this._week.dow}function Aa(){return this._week.doy}function Ba(a){var b=this.localeData().week(this);return null==a?b:this.add(7*(a-b),"d")}function Ca(a){var b=wa(this,1,4).week;return null==a?b:this.add(7*(a-b),"d")}function Da(a,b){return"string"!=typeof a?a:isNaN(a)?(a=b.weekdaysParse(a),"number"==typeof a?a:null):parseInt(a,10)}function Ea(a,b){return"string"==typeof a?b.weekdaysParse(a)%7||7:isNaN(a)?null:a}function Fa(a,b){return a?c(this._weekdays)?this._weekdays[a.day()]:this._weekdays[this._weekdays.isFormat.test(b)?"format":"standalone"][a.day()]:c(this._weekdays)?this._weekdays:this._weekdays.standalone}function Ga(a){return a?this._weekdaysShort[a.day()]:this._weekdaysShort}function Ha(a){return a?this._weekdaysMin[a.day()]:this._weekdaysMin}function Ia(a,b,c){var d,e,f,g=a.toLocaleLowerCase();if(!this._weekdaysParse)for(this._weekdaysParse=[],this._shortWeekdaysParse=[],this._minWeekdaysParse=[],d=0;d<7;++d)f=l([2e3,1]).day(d),this._minWeekdaysParse[d]=this.weekdaysMin(f,"").toLocaleLowerCase(),this._shortWeekdaysParse[d]=this.weekdaysShort(f,"").toLocaleLowerCase(),this._weekdaysParse[d]=this.weekdays(f,"").toLocaleLowerCase();return c?"dddd"===b?(e=ne.call(this._weekdaysParse,g),e!==-1?e:null):"ddd"===b?(e=ne.call(this._shortWeekdaysParse,g),e!==-1?e:null):(e=ne.call(this._minWeekdaysParse,g),e!==-1?e:null):"dddd"===b?(e=ne.call(this._weekdaysParse,g),e!==-1?e:(e=ne.call(this._shortWeekdaysParse,g),e!==-1?e:(e=ne.call(this._minWeekdaysParse,g),e!==-1?e:null))):"ddd"===b?(e=ne.call(this._shortWeekdaysParse,g),e!==-1?e:(e=ne.call(this._weekdaysParse,g),e!==-1?e:(e=ne.call(this._minWeekdaysParse,g),e!==-1?e:null))):(e=ne.call(this._minWeekdaysParse,g),e!==-1?e:(e=ne.call(this._weekdaysParse,g),e!==-1?e:(e=ne.call(this._shortWeekdaysParse,g),e!==-1?e:null)))}function Ja(a,b,c){var d,e,f;if(this._weekdaysParseExact)return Ia.call(this,a,b,c);for(this._weekdaysParse||(this._weekdaysParse=[],this._minWeekdaysParse=[],this._shortWeekdaysParse=[],this._fullWeekdaysParse=[]),d=0;d<7;d++){if(e=l([2e3,1]).day(d),c&&!this._fullWeekdaysParse[d]&&(this._fullWeekdaysParse[d]=new RegExp("^"+this.weekdays(e,"").replace(".",".?")+"$","i"),this._shortWeekdaysParse[d]=new RegExp("^"+this.weekdaysShort(e,"").replace(".",".?")+"$","i"),this._minWeekdaysParse[d]=new RegExp("^"+this.weekdaysMin(e,"").replace(".",".?")+"$","i")),this._weekdaysParse[d]||(f="^"+this.weekdays(e,"")+"|^"+this.weekdaysShort(e,"")+"|^"+this.weekdaysMin(e,""),this._weekdaysParse[d]=new RegExp(f.replace(".",""),"i")),c&&"dddd"===b&&this._fullWeekdaysParse[d].test(a))return d;if(c&&"ddd"===b&&this._shortWeekdaysParse[d].test(a))return d;if(c&&"dd"===b&&this._minWeekdaysParse[d].test(a))return d;if(!c&&this._weekdaysParse[d].test(a))return d}}function Ka(a){if(!this.isValid())return null!=a?this:NaN;var b=this._isUTC?this._d.getUTCDay():this._d.getDay();return null!=a?(a=Da(a,this.localeData()),this.add(a-b,"d")):b}function La(a){if(!this.isValid())return null!=a?this:NaN;var b=(this.day()+7-this.localeData()._week.dow)%7;return null==a?b:this.add(a-b,"d")}function Ma(a){if(!this.isValid())return null!=a?this:NaN;if(null!=a){var b=Ea(a,this.localeData());return this.day(this.day()%7?b:b-7)}return this.day()||7}function Na(a){return this._weekdaysParseExact?(j(this,"_weekdaysRegex")||Qa.call(this),a?this._weekdaysStrictRegex:this._weekdaysRegex):(j(this,"_weekdaysRegex")||(this._weekdaysRegex=ye),this._weekdaysStrictRegex&&a?this._weekdaysStrictRegex:this._weekdaysRegex)}function Oa(a){return this._weekdaysParseExact?(j(this,"_weekdaysRegex")||Qa.call(this),a?this._weekdaysShortStrictRegex:this._weekdaysShortRegex):(j(this,"_weekdaysShortRegex")||(this._weekdaysShortRegex=ze),this._weekdaysShortStrictRegex&&a?this._weekdaysShortStrictRegex:this._weekdaysShortRegex)}function Pa(a){return this._weekdaysParseExact?(j(this,"_weekdaysRegex")||Qa.call(this),a?this._weekdaysMinStrictRegex:this._weekdaysMinRegex):(j(this,"_weekdaysMinRegex")||(this._weekdaysMinRegex=Ae),this._weekdaysMinStrictRegex&&a?this._weekdaysMinStrictRegex:this._weekdaysMinRegex)}function Qa(){function a(a,b){return b.length-a.length}var b,c,d,e,f,g=[],h=[],i=[],j=[];for(b=0;b<7;b++)c=l([2e3,1]).day(b),d=this.weekdaysMin(c,""),e=this.weekdaysShort(c,""),f=this.weekdays(c,""),g.push(d),h.push(e),i.push(f),j.push(d),j.push(e),j.push(f);for(g.sort(a),h.sort(a),i.sort(a),j.sort(a),b=0;b<7;b++)h[b]=aa(h[b]),i[b]=aa(i[b]),j[b]=aa(j[b]);this._weekdaysRegex=new RegExp("^("+j.join("|")+")","i"),this._weekdaysShortRegex=this._weekdaysRegex,this._weekdaysMinRegex=this._weekdaysRegex,this._weekdaysStrictRegex=new RegExp("^("+i.join("|")+")","i"),this._weekdaysShortStrictRegex=new RegExp("^("+h.join("|")+")","i"),this._weekdaysMinStrictRegex=new RegExp("^("+g.join("|")+")","i")}function Ra(){return this.hours()%12||12}function Sa(){return this.hours()||24}function Ta(a,b){U(a,0,0,function(){return this.localeData().meridiem(this.hours(),this.minutes(),b)})}function Ua(a,b){return b._meridiemParse}function Va(a){return"p"===(a+"").toLowerCase().charAt(0)}function Wa(a,b,c){return a>11?c?"pm":"PM":c?"am":"AM"}function Xa(a){return a?a.toLowerCase().replace("_","-"):a}function Ya(a){for(var b,c,d,e,f=0;f<a.length;){for(e=Xa(a[f]).split("-"),b=e.length,c=Xa(a[f+1]),c=c?c.split("-"):null;b>0;){if(d=Za(e.slice(0,b).join("-")))return d;if(c&&c.length>=b&&v(e,c,!0)>=b-1)break;b--}f++}return null}function Za(a){var b=null;if(!Fe[a]&&"undefined"!=typeof module&&module&&module.exports)try{b=Be._abbr,require("./locale/"+a),$a(b)}catch(a){}return Fe[a]}function $a(a,b){var c;return a&&(c=f(b)?bb(a):_a(a,b),c&&(Be=c)),Be._abbr}function _a(a,b){if(null!==b){var c=Ee;if(b.abbr=a,null!=Fe[a])y("defineLocaleOverride","use moment.updateLocale(localeName, config) to change an existing locale. moment.defineLocale(localeName, config) should only be used for creating a new locale See http://momentjs.com/guides/#/warnings/define-locale/ for more info."),c=Fe[a]._config;else if(null!=b.parentLocale){if(null==Fe[b.parentLocale])return Ge[b.parentLocale]||(Ge[b.parentLocale]=[]),Ge[b.parentLocale].push({name:a,config:b}),null;c=Fe[b.parentLocale]._config}return Fe[a]=new C(B(c,b)),Ge[a]&&Ge[a].forEach(function(a){_a(a.name,a.config)}),$a(a),Fe[a]}return delete Fe[a],null}function ab(a,b){if(null!=b){var c,d=Ee;null!=Fe[a]&&(d=Fe[a]._config),b=B(d,b),c=new C(b),c.parentLocale=Fe[a],Fe[a]=c,$a(a)}else null!=Fe[a]&&(null!=Fe[a].parentLocale?Fe[a]=Fe[a].parentLocale:null!=Fe[a]&&delete Fe[a]);return Fe[a]}function bb(a){var b;if(a&&a._locale&&a._locale._abbr&&(a=a._locale._abbr),!a)return Be;if(!c(a)){if(b=Za(a))return b;a=[a]}return Ya(a)}function cb(){return Ad(Fe)}function db(a){var b,c=a._a;return c&&n(a).overflow===-2&&(b=c[fe]<0||c[fe]>11?fe:c[ge]<1||c[ge]>ea(c[ee],c[fe])?ge:c[he]<0||c[he]>24||24===c[he]&&(0!==c[ie]||0!==c[je]||0!==c[ke])?he:c[ie]<0||c[ie]>59?ie:c[je]<0||c[je]>59?je:c[ke]<0||c[ke]>999?ke:-1,n(a)._overflowDayOfYear&&(b<ee||b>ge)&&(b=ge),n(a)._overflowWeeks&&b===-1&&(b=le),n(a)._overflowWeekday&&b===-1&&(b=me),n(a).overflow=b),a}function eb(a){var b,c,d,e,f,g,h=a._i,i=He.exec(h)||Ie.exec(h);if(i){for(n(a).iso=!0,b=0,c=Ke.length;b<c;b++)if(Ke[b][1].exec(i[1])){e=Ke[b][0],d=Ke[b][2]!==!1;break}if(null==e)return void(a._isValid=!1);if(i[3]){for(b=0,c=Le.length;b<c;b++)if(Le[b][1].exec(i[3])){f=(i[2]||" ")+Le[b][0];break}if(null==f)return void(a._isValid=!1)}if(!d&&null!=f)return void(a._isValid=!1);if(i[4]){if(!Je.exec(i[4]))return void(a._isValid=!1);g="Z"}a._f=e+(f||"")+(g||""),lb(a)}else a._isValid=!1}function fb(a){var b,c,d,e,f,g,h,i,j={" GMT":" +0000"," EDT":" -0400"," EST":" -0500"," CDT":" -0500"," CST":" -0600"," MDT":" -0600"," MST":" -0700"," PDT":" -0700"," PST":" -0800"},k="YXWVUTSRQPONZABCDEFGHIKLM";if(b=a._i.replace(/\([^\)]*\)|[\n\t]/g," ").replace(/(\s\s+)/g," ").replace(/^\s|\s$/g,""),c=Ne.exec(b)){if(d=c[1]?"ddd"+(5===c[1].length?", ":" "):"",e="D MMM "+(c[2].length>10?"YYYY ":"YY "),f="HH:mm"+(c[4]?":ss":""),c[1]){var l=new Date(c[2]),m=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][l.getDay()];if(c[1].substr(0,3)!==m)return n(a).weekdayMismatch=!0,void(a._isValid=!1)}switch(c[5].length){case 2:0===i?h=" +0000":(i=k.indexOf(c[5][1].toUpperCase())-12,h=(i<0?" -":" +")+(""+i).replace(/^-?/,"0").match(/..$/)[0]+"00");break;case 4:h=j[c[5]];break;default:h=j[" GMT"]}c[5]=h,a._i=c.splice(1).join(""),g=" ZZ",a._f=d+e+f+g,lb(a),n(a).rfc2822=!0}else a._isValid=!1}function gb(b){var c=Me.exec(b._i);return null!==c?void(b._d=new Date(+c[1])):(eb(b),void(b._isValid===!1&&(delete b._isValid,fb(b),b._isValid===!1&&(delete b._isValid,a.createFromInputFallback(b)))))}function hb(a,b,c){return null!=a?a:null!=b?b:c}function ib(b){var c=new Date(a.now());return b._useUTC?[c.getUTCFullYear(),c.getUTCMonth(),c.getUTCDate()]:[c.getFullYear(),c.getMonth(),c.getDate()]}function jb(a){var b,c,d,e,f=[];if(!a._d){for(d=ib(a),a._w&&null==a._a[ge]&&null==a._a[fe]&&kb(a),null!=a._dayOfYear&&(e=hb(a._a[ee],d[ee]),(a._dayOfYear>pa(e)||0===a._dayOfYear)&&(n(a)._overflowDayOfYear=!0),c=ta(e,0,a._dayOfYear),a._a[fe]=c.getUTCMonth(),a._a[ge]=c.getUTCDate()),b=0;b<3&&null==a._a[b];++b)a._a[b]=f[b]=d[b];for(;b<7;b++)a._a[b]=f[b]=null==a._a[b]?2===b?1:0:a._a[b];24===a._a[he]&&0===a._a[ie]&&0===a._a[je]&&0===a._a[ke]&&(a._nextDay=!0,a._a[he]=0),a._d=(a._useUTC?ta:sa).apply(null,f),null!=a._tzm&&a._d.setUTCMinutes(a._d.getUTCMinutes()-a._tzm),a._nextDay&&(a._a[he]=24)}}function kb(a){var b,c,d,e,f,g,h,i;if(b=a._w,null!=b.GG||null!=b.W||null!=b.E)f=1,g=4,c=hb(b.GG,a._a[ee],wa(tb(),1,4).year),d=hb(b.W,1),e=hb(b.E,1),(e<1||e>7)&&(i=!0);else{f=a._locale._week.dow,g=a._locale._week.doy;var j=wa(tb(),f,g);c=hb(b.gg,a._a[ee],j.year),d=hb(b.w,j.week),null!=b.d?(e=b.d,(e<0||e>6)&&(i=!0)):null!=b.e?(e=b.e+f,(b.e<0||b.e>6)&&(i=!0)):e=f}d<1||d>xa(c,f,g)?n(a)._overflowWeeks=!0:null!=i?n(a)._overflowWeekday=!0:(h=va(c,d,e,f,g),a._a[ee]=h.year,a._dayOfYear=h.dayOfYear)}function lb(b){if(b._f===a.ISO_8601)return void eb(b);if(b._f===a.RFC_2822)return void fb(b);b._a=[],n(b).empty=!0;var c,d,e,f,g,h=""+b._i,i=h.length,j=0;for(e=Y(b._f,b._locale).match(Jd)||[],c=0;c<e.length;c++)f=e[c],d=(h.match($(f,b))||[])[0],d&&(g=h.substr(0,h.indexOf(d)),g.length>0&&n(b).unusedInput.push(g),h=h.slice(h.indexOf(d)+d.length),j+=d.length),Md[f]?(d?n(b).empty=!1:n(b).unusedTokens.push(f),da(f,d,b)):b._strict&&!d&&n(b).unusedTokens.push(f);n(b).charsLeftOver=i-j,h.length>0&&n(b).unusedInput.push(h),b._a[he]<=12&&n(b).bigHour===!0&&b._a[he]>0&&(n(b).bigHour=void 0),n(b).parsedDateParts=b._a.slice(0),n(b).meridiem=b._meridiem,b._a[he]=mb(b._locale,b._a[he],b._meridiem),jb(b),db(b)}function mb(a,b,c){var d;return null==c?b:null!=a.meridiemHour?a.meridiemHour(b,c):null!=a.isPM?(d=a.isPM(c),d&&b<12&&(b+=12),d||12!==b||(b=0),b):b}function nb(a){var b,c,d,e,f;if(0===a._f.length)return n(a).invalidFormat=!0,void(a._d=new Date(NaN));for(e=0;e<a._f.length;e++)f=0,b=q({},a),null!=a._useUTC&&(b._useUTC=a._useUTC),b._f=a._f[e],lb(b),o(b)&&(f+=n(b).charsLeftOver,f+=10*n(b).unusedTokens.length,n(b).score=f,(null==d||f<d)&&(d=f,c=b));k(a,c||b)}function ob(a){if(!a._d){var b=L(a._i);a._a=i([b.year,b.month,b.day||b.date,b.hour,b.minute,b.second,b.millisecond],function(a){return a&&parseInt(a,10)}),jb(a)}}function pb(a){var b=new r(db(qb(a)));return b._nextDay&&(b.add(1,"d"),b._nextDay=void 0),b}function qb(a){var b=a._i,d=a._f;return a._locale=a._locale||bb(a._l),null===b||void 0===d&&""===b?p({nullInput:!0}):("string"==typeof b&&(a._i=b=a._locale.preparse(b)),s(b)?new r(db(b)):(h(b)?a._d=b:c(d)?nb(a):d?lb(a):rb(a),o(a)||(a._d=null),a))}function rb(b){var e=b._i;f(e)?b._d=new Date(a.now()):h(e)?b._d=new Date(e.valueOf()):"string"==typeof e?gb(b):c(e)?(b._a=i(e.slice(0),function(a){return parseInt(a,10)}),jb(b)):d(e)?ob(b):g(e)?b._d=new Date(e):a.createFromInputFallback(b)}function sb(a,b,f,g,h){var i={};return f!==!0&&f!==!1||(g=f,f=void 0),(d(a)&&e(a)||c(a)&&0===a.length)&&(a=void 0),i._isAMomentObject=!0,i._useUTC=i._isUTC=h,i._l=f,i._i=a,i._f=b,i._strict=g,pb(i)}function tb(a,b,c,d){return sb(a,b,c,d,!1)}function ub(a,b){var d,e;if(1===b.length&&c(b[0])&&(b=b[0]),!b.length)return tb();for(d=b[0],e=1;e<b.length;++e)b[e].isValid()&&!b[e][a](d)||(d=b[e]);return d}function vb(){var a=[].slice.call(arguments,0);return ub("isBefore",a)}function wb(){var a=[].slice.call(arguments,0);return ub("isAfter",a)}function xb(a){for(var b in a)if(Re.indexOf(b)===-1||null!=a[b]&&isNaN(a[b]))return!1;for(var c=!1,d=0;d<Re.length;++d)if(a[Re[d]]){if(c)return!1;parseFloat(a[Re[d]])!==u(a[Re[d]])&&(c=!0)}return!0}function yb(){return this._isValid}function zb(){return Sb(NaN)}function Ab(a){var b=L(a),c=b.year||0,d=b.quarter||0,e=b.month||0,f=b.week||0,g=b.day||0,h=b.hour||0,i=b.minute||0,j=b.second||0,k=b.millisecond||0;this._isValid=xb(b),this._milliseconds=+k+1e3*j+6e4*i+1e3*h*60*60,this._days=+g+7*f,this._months=+e+3*d+12*c,this._data={},this._locale=bb(),this._bubble()}function Bb(a){return a instanceof Ab}function Cb(a){return a<0?Math.round(-1*a)*-1:Math.round(a)}function Db(a,b){U(a,0,0,function(){var a=this.utcOffset(),c="+";return a<0&&(a=-a,c="-"),c+T(~~(a/60),2)+b+T(~~a%60,2)})}function Eb(a,b){var c=(b||"").match(a);if(null===c)return null;var d=c[c.length-1]||[],e=(d+"").match(Se)||["-",0,0],f=+(60*e[1])+u(e[2]);return 0===f?0:"+"===e[0]?f:-f}function Fb(b,c){var d,e;return c._isUTC?(d=c.clone(),e=(s(b)||h(b)?b.valueOf():tb(b).valueOf())-d.valueOf(),d._d.setTime(d._d.valueOf()+e),a.updateOffset(d,!1),d):tb(b).local()}function Gb(a){return 15*-Math.round(a._d.getTimezoneOffset()/15)}function Hb(b,c,d){var e,f=this._offset||0;if(!this.isValid())return null!=b?this:NaN;if(null!=b){if("string"==typeof b){if(b=Eb(_d,b),null===b)return this}else Math.abs(b)<16&&!d&&(b=60*b);return!this._isUTC&&c&&(e=Gb(this)),this._offset=b,this._isUTC=!0,null!=e&&this.add(e,"m"),f!==b&&(!c||this._changeInProgress?Xb(this,Sb(b-f,"m"),1,!1):this._changeInProgress||(this._changeInProgress=!0,a.updateOffset(this,!0),this._changeInProgress=null)),this}return this._isUTC?f:Gb(this)}function Ib(a,b){return null!=a?("string"!=typeof a&&(a=-a),this.utcOffset(a,b),this):-this.utcOffset()}function Jb(a){return this.utcOffset(0,a)}function Kb(a){return this._isUTC&&(this.utcOffset(0,a),this._isUTC=!1,a&&this.subtract(Gb(this),"m")),this}function Lb(){if(null!=this._tzm)this.utcOffset(this._tzm,!1,!0);else if("string"==typeof this._i){var a=Eb($d,this._i);null!=a?this.utcOffset(a):this.utcOffset(0,!0)}return this}function Mb(a){return!!this.isValid()&&(a=a?tb(a).utcOffset():0,(this.utcOffset()-a)%60===0)}function Nb(){return this.utcOffset()>this.clone().month(0).utcOffset()||this.utcOffset()>this.clone().month(5).utcOffset()}function Ob(){if(!f(this._isDSTShifted))return this._isDSTShifted;var a={};if(q(a,this),a=qb(a),a._a){var b=a._isUTC?l(a._a):tb(a._a);this._isDSTShifted=this.isValid()&&v(a._a,b.toArray())>0}else this._isDSTShifted=!1;return this._isDSTShifted}function Pb(){return!!this.isValid()&&!this._isUTC}function Qb(){return!!this.isValid()&&this._isUTC}function Rb(){return!!this.isValid()&&(this._isUTC&&0===this._offset)}function Sb(a,b){var c,d,e,f=a,h=null;return Bb(a)?f={ms:a._milliseconds,d:a._days,M:a._months}:g(a)?(f={},b?f[b]=a:f.milliseconds=a):(h=Te.exec(a))?(c="-"===h[1]?-1:1,f={y:0,d:u(h[ge])*c,h:u(h[he])*c,m:u(h[ie])*c,s:u(h[je])*c,ms:u(Cb(1e3*h[ke]))*c}):(h=Ue.exec(a))?(c="-"===h[1]?-1:1,f={y:Tb(h[2],c),M:Tb(h[3],c),w:Tb(h[4],c),d:Tb(h[5],c),h:Tb(h[6],c),m:Tb(h[7],c),s:Tb(h[8],c)}):null==f?f={}:"object"==typeof f&&("from"in f||"to"in f)&&(e=Vb(tb(f.from),tb(f.to)),f={},f.ms=e.milliseconds,f.M=e.months),d=new Ab(f),Bb(a)&&j(a,"_locale")&&(d._locale=a._locale),d}function Tb(a,b){var c=a&&parseFloat(a.replace(",","."));return(isNaN(c)?0:c)*b}function Ub(a,b){var c={milliseconds:0,months:0};return c.months=b.month()-a.month()+12*(b.year()-a.year()),a.clone().add(c.months,"M").isAfter(b)&&--c.months,c.milliseconds=+b-+a.clone().add(c.months,"M"),c}function Vb(a,b){var c;return a.isValid()&&b.isValid()?(b=Fb(b,a),a.isBefore(b)?c=Ub(a,b):(c=Ub(b,a),c.milliseconds=-c.milliseconds,c.months=-c.months),c):{milliseconds:0,months:0}}function Wb(a,b){return function(c,d){var e,f;return null===d||isNaN(+d)||(y(b,"moment()."+b+"(period, number) is deprecated. Please use moment()."+b+"(number, period). See http://momentjs.com/guides/#/warnings/add-inverted-param/ for more info."),f=c,c=d,d=f),c="string"==typeof c?+c:c,e=Sb(c,d),Xb(this,e,a),this}}function Xb(b,c,d,e){var f=c._milliseconds,g=Cb(c._days),h=Cb(c._months);b.isValid()&&(e=null==e||e,f&&b._d.setTime(b._d.valueOf()+f*d),g&&Q(b,"Date",P(b,"Date")+g*d),h&&ja(b,P(b,"Month")+h*d),e&&a.updateOffset(b,g||h))}function Yb(a,b){var c=a.diff(b,"days",!0);return c<-6?"sameElse":c<-1?"lastWeek":c<0?"lastDay":c<1?"sameDay":c<2?"nextDay":c<7?"nextWeek":"sameElse"}function Zb(b,c){var d=b||tb(),e=Fb(d,this).startOf("day"),f=a.calendarFormat(this,e)||"sameElse",g=c&&(z(c[f])?c[f].call(this,d):c[f]);return this.format(g||this.localeData().calendar(f,this,tb(d)))}function $b(){return new r(this)}function _b(a,b){var c=s(a)?a:tb(a);return!(!this.isValid()||!c.isValid())&&(b=K(f(b)?"millisecond":b),"millisecond"===b?this.valueOf()>c.valueOf():c.valueOf()<this.clone().startOf(b).valueOf())}function ac(a,b){var c=s(a)?a:tb(a);return!(!this.isValid()||!c.isValid())&&(b=K(f(b)?"millisecond":b),"millisecond"===b?this.valueOf()<c.valueOf():this.clone().endOf(b).valueOf()<c.valueOf())}function bc(a,b,c,d){return d=d||"()",("("===d[0]?this.isAfter(a,c):!this.isBefore(a,c))&&(")"===d[1]?this.isBefore(b,c):!this.isAfter(b,c))}function cc(a,b){var c,d=s(a)?a:tb(a);return!(!this.isValid()||!d.isValid())&&(b=K(b||"millisecond"),"millisecond"===b?this.valueOf()===d.valueOf():(c=d.valueOf(),this.clone().startOf(b).valueOf()<=c&&c<=this.clone().endOf(b).valueOf()))}function dc(a,b){return this.isSame(a,b)||this.isAfter(a,b)}function ec(a,b){return this.isSame(a,b)||this.isBefore(a,b)}function fc(a,b,c){var d,e,f,g;return this.isValid()?(d=Fb(a,this),d.isValid()?(e=6e4*(d.utcOffset()-this.utcOffset()),b=K(b),"year"===b||"month"===b||"quarter"===b?(g=gc(this,d),"quarter"===b?g/=3:"year"===b&&(g/=12)):(f=this-d,g="second"===b?f/1e3:"minute"===b?f/6e4:"hour"===b?f/36e5:"day"===b?(f-e)/864e5:"week"===b?(f-e)/6048e5:f),c?g:t(g)):NaN):NaN}function gc(a,b){var c,d,e=12*(b.year()-a.year())+(b.month()-a.month()),f=a.clone().add(e,"months");return b-f<0?(c=a.clone().add(e-1,"months"),d=(b-f)/(f-c)):(c=a.clone().add(e+1,"months"),d=(b-f)/(c-f)),-(e+d)||0}function hc(){return this.clone().locale("en").format("ddd MMM DD YYYY HH:mm:ss [GMT]ZZ")}function ic(){if(!this.isValid())return null;var a=this.clone().utc();return a.year()<0||a.year()>9999?X(a,"YYYYYY-MM-DD[T]HH:mm:ss.SSS[Z]"):z(Date.prototype.toISOString)?this.toDate().toISOString():X(a,"YYYY-MM-DD[T]HH:mm:ss.SSS[Z]")}function jc(){if(!this.isValid())return"moment.invalid(/* "+this._i+" */)";var a="moment",b="";this.isLocal()||(a=0===this.utcOffset()?"moment.utc":"moment.parseZone",b="Z");var c="["+a+'("]',d=0<=this.year()&&this.year()<=9999?"YYYY":"YYYYYY",e="-MM-DD[T]HH:mm:ss.SSS",f=b+'[")]';return this.format(c+d+e+f)}function kc(b){b||(b=this.isUtc()?a.defaultFormatUtc:a.defaultFormat);var c=X(this,b);return this.localeData().postformat(c)}function lc(a,b){return this.isValid()&&(s(a)&&a.isValid()||tb(a).isValid())?Sb({to:this,from:a}).locale(this.locale()).humanize(!b):this.localeData().invalidDate()}function mc(a){return this.from(tb(),a)}function nc(a,b){return this.isValid()&&(s(a)&&a.isValid()||tb(a).isValid())?Sb({from:this,to:a}).locale(this.locale()).humanize(!b):this.localeData().invalidDate()}function oc(a){return this.to(tb(),a)}function pc(a){var b;return void 0===a?this._locale._abbr:(b=bb(a),null!=b&&(this._locale=b),this)}function qc(){return this._locale}function rc(a){switch(a=K(a)){case"year":this.month(0);case"quarter":case"month":this.date(1);case"week":case"isoWeek":case"day":case"date":this.hours(0);case"hour":this.minutes(0);case"minute":this.seconds(0);case"second":this.milliseconds(0)}return"week"===a&&this.weekday(0),"isoWeek"===a&&this.isoWeekday(1),"quarter"===a&&this.month(3*Math.floor(this.month()/3)),this}function sc(a){return a=K(a),void 0===a||"millisecond"===a?this:("date"===a&&(a="day"),this.startOf(a).add(1,"isoWeek"===a?"week":a).subtract(1,"ms"))}function tc(){return this._d.valueOf()-6e4*(this._offset||0)}function uc(){return Math.floor(this.valueOf()/1e3)}function vc(){return new Date(this.valueOf())}function wc(){var a=this;return[a.year(),a.month(),a.date(),a.hour(),a.minute(),a.second(),a.millisecond()]}function xc(){var a=this;return{years:a.year(),months:a.month(),date:a.date(),hours:a.hours(),minutes:a.minutes(),seconds:a.seconds(),milliseconds:a.milliseconds()}}function yc(){return this.isValid()?this.toISOString():null}function zc(){return o(this)}function Ac(){
 return k({},n(this))}function Bc(){return n(this).overflow}function Cc(){return{input:this._i,format:this._f,locale:this._locale,isUTC:this._isUTC,strict:this._strict}}function Dc(a,b){U(0,[a,a.length],0,b)}function Ec(a){return Ic.call(this,a,this.week(),this.weekday(),this.localeData()._week.dow,this.localeData()._week.doy)}function Fc(a){return Ic.call(this,a,this.isoWeek(),this.isoWeekday(),1,4)}function Gc(){return xa(this.year(),1,4)}function Hc(){var a=this.localeData()._week;return xa(this.year(),a.dow,a.doy)}function Ic(a,b,c,d,e){var f;return null==a?wa(this,d,e).year:(f=xa(a,d,e),b>f&&(b=f),Jc.call(this,a,b,c,d,e))}function Jc(a,b,c,d,e){var f=va(a,b,c,d,e),g=ta(f.year,0,f.dayOfYear);return this.year(g.getUTCFullYear()),this.month(g.getUTCMonth()),this.date(g.getUTCDate()),this}function Kc(a){return null==a?Math.ceil((this.month()+1)/3):this.month(3*(a-1)+this.month()%3)}function Lc(a){var b=Math.round((this.clone().startOf("day")-this.clone().startOf("year"))/864e5)+1;return null==a?b:this.add(a-b,"d")}function Mc(a,b){b[ke]=u(1e3*("0."+a))}function Nc(){return this._isUTC?"UTC":""}function Oc(){return this._isUTC?"Coordinated Universal Time":""}function Pc(a){return tb(1e3*a)}function Qc(){return tb.apply(null,arguments).parseZone()}function Rc(a){return a}function Sc(a,b,c,d){var e=bb(),f=l().set(d,b);return e[c](f,a)}function Tc(a,b,c){if(g(a)&&(b=a,a=void 0),a=a||"",null!=b)return Sc(a,b,c,"month");var d,e=[];for(d=0;d<12;d++)e[d]=Sc(a,d,c,"month");return e}function Uc(a,b,c,d){"boolean"==typeof a?(g(b)&&(c=b,b=void 0),b=b||""):(b=a,c=b,a=!1,g(b)&&(c=b,b=void 0),b=b||"");var e=bb(),f=a?e._week.dow:0;if(null!=c)return Sc(b,(c+f)%7,d,"day");var h,i=[];for(h=0;h<7;h++)i[h]=Sc(b,(h+f)%7,d,"day");return i}function Vc(a,b){return Tc(a,b,"months")}function Wc(a,b){return Tc(a,b,"monthsShort")}function Xc(a,b,c){return Uc(a,b,c,"weekdays")}function Yc(a,b,c){return Uc(a,b,c,"weekdaysShort")}function Zc(a,b,c){return Uc(a,b,c,"weekdaysMin")}function $c(){var a=this._data;return this._milliseconds=df(this._milliseconds),this._days=df(this._days),this._months=df(this._months),a.milliseconds=df(a.milliseconds),a.seconds=df(a.seconds),a.minutes=df(a.minutes),a.hours=df(a.hours),a.months=df(a.months),a.years=df(a.years),this}function _c(a,b,c,d){var e=Sb(b,c);return a._milliseconds+=d*e._milliseconds,a._days+=d*e._days,a._months+=d*e._months,a._bubble()}function ad(a,b){return _c(this,a,b,1)}function bd(a,b){return _c(this,a,b,-1)}function cd(a){return a<0?Math.floor(a):Math.ceil(a)}function dd(){var a,b,c,d,e,f=this._milliseconds,g=this._days,h=this._months,i=this._data;return f>=0&&g>=0&&h>=0||f<=0&&g<=0&&h<=0||(f+=864e5*cd(fd(h)+g),g=0,h=0),i.milliseconds=f%1e3,a=t(f/1e3),i.seconds=a%60,b=t(a/60),i.minutes=b%60,c=t(b/60),i.hours=c%24,g+=t(c/24),e=t(ed(g)),h+=e,g-=cd(fd(e)),d=t(h/12),h%=12,i.days=g,i.months=h,i.years=d,this}function ed(a){return 4800*a/146097}function fd(a){return 146097*a/4800}function gd(a){if(!this.isValid())return NaN;var b,c,d=this._milliseconds;if(a=K(a),"month"===a||"year"===a)return b=this._days+d/864e5,c=this._months+ed(b),"month"===a?c:c/12;switch(b=this._days+Math.round(fd(this._months)),a){case"week":return b/7+d/6048e5;case"day":return b+d/864e5;case"hour":return 24*b+d/36e5;case"minute":return 1440*b+d/6e4;case"second":return 86400*b+d/1e3;case"millisecond":return Math.floor(864e5*b)+d;default:throw new Error("Unknown unit "+a)}}function hd(){return this.isValid()?this._milliseconds+864e5*this._days+this._months%12*2592e6+31536e6*u(this._months/12):NaN}function id(a){return function(){return this.as(a)}}function jd(a){return a=K(a),this.isValid()?this[a+"s"]():NaN}function kd(a){return function(){return this.isValid()?this._data[a]:NaN}}function ld(){return t(this.days()/7)}function md(a,b,c,d,e){return e.relativeTime(b||1,!!c,a,d)}function nd(a,b,c){var d=Sb(a).abs(),e=uf(d.as("s")),f=uf(d.as("m")),g=uf(d.as("h")),h=uf(d.as("d")),i=uf(d.as("M")),j=uf(d.as("y")),k=e<=vf.ss&&["s",e]||e<vf.s&&["ss",e]||f<=1&&["m"]||f<vf.m&&["mm",f]||g<=1&&["h"]||g<vf.h&&["hh",g]||h<=1&&["d"]||h<vf.d&&["dd",h]||i<=1&&["M"]||i<vf.M&&["MM",i]||j<=1&&["y"]||["yy",j];return k[2]=b,k[3]=+a>0,k[4]=c,md.apply(null,k)}function od(a){return void 0===a?uf:"function"==typeof a&&(uf=a,!0)}function pd(a,b){return void 0!==vf[a]&&(void 0===b?vf[a]:(vf[a]=b,"s"===a&&(vf.ss=b-1),!0))}function qd(a){if(!this.isValid())return this.localeData().invalidDate();var b=this.localeData(),c=nd(this,!a,b);return a&&(c=b.pastFuture(+this,c)),b.postformat(c)}function rd(){if(!this.isValid())return this.localeData().invalidDate();var a,b,c,d=wf(this._milliseconds)/1e3,e=wf(this._days),f=wf(this._months);a=t(d/60),b=t(a/60),d%=60,a%=60,c=t(f/12),f%=12;var g=c,h=f,i=e,j=b,k=a,l=d,m=this.asSeconds();return m?(m<0?"-":"")+"P"+(g?g+"Y":"")+(h?h+"M":"")+(i?i+"D":"")+(j||k||l?"T":"")+(j?j+"H":"")+(k?k+"M":"")+(l?l+"S":""):"P0D"}var sd,td;td=Array.prototype.some?Array.prototype.some:function(a){for(var b=Object(this),c=b.length>>>0,d=0;d<c;d++)if(d in b&&a.call(this,b[d],d,b))return!0;return!1};var ud=td,vd=a.momentProperties=[],wd=!1,xd={};a.suppressDeprecationWarnings=!1,a.deprecationHandler=null;var yd;yd=Object.keys?Object.keys:function(a){var b,c=[];for(b in a)j(a,b)&&c.push(b);return c};var zd,Ad=yd,Bd={sameDay:"[Today at] LT",nextDay:"[Tomorrow at] LT",nextWeek:"dddd [at] LT",lastDay:"[Yesterday at] LT",lastWeek:"[Last] dddd [at] LT",sameElse:"L"},Cd={LTS:"h:mm:ss A",LT:"h:mm A",L:"MM/DD/YYYY",LL:"MMMM D, YYYY",LLL:"MMMM D, YYYY h:mm A",LLLL:"dddd, MMMM D, YYYY h:mm A"},Dd="Invalid date",Ed="%d",Fd=/\d{1,2}/,Gd={future:"in %s",past:"%s ago",s:"a few seconds",ss:"%d seconds",m:"a minute",mm:"%d minutes",h:"an hour",hh:"%d hours",d:"a day",dd:"%d days",M:"a month",MM:"%d months",y:"a year",yy:"%d years"},Hd={},Id={},Jd=/(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g,Kd=/(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g,Ld={},Md={},Nd=/\d/,Od=/\d\d/,Pd=/\d{3}/,Qd=/\d{4}/,Rd=/[+-]?\d{6}/,Sd=/\d\d?/,Td=/\d\d\d\d?/,Ud=/\d\d\d\d\d\d?/,Vd=/\d{1,3}/,Wd=/\d{1,4}/,Xd=/[+-]?\d{1,6}/,Yd=/\d+/,Zd=/[+-]?\d+/,$d=/Z|[+-]\d\d:?\d\d/gi,_d=/Z|[+-]\d\d(?::?\d\d)?/gi,ae=/[+-]?\d+(\.\d{1,3})?/,be=/[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i,ce={},de={},ee=0,fe=1,ge=2,he=3,ie=4,je=5,ke=6,le=7,me=8;zd=Array.prototype.indexOf?Array.prototype.indexOf:function(a){var b;for(b=0;b<this.length;++b)if(this[b]===a)return b;return-1};var ne=zd;U("M",["MM",2],"Mo",function(){return this.month()+1}),U("MMM",0,0,function(a){return this.localeData().monthsShort(this,a)}),U("MMMM",0,0,function(a){return this.localeData().months(this,a)}),J("month","M"),M("month",8),Z("M",Sd),Z("MM",Sd,Od),Z("MMM",function(a,b){return b.monthsShortRegex(a)}),Z("MMMM",function(a,b){return b.monthsRegex(a)}),ba(["M","MM"],function(a,b){b[fe]=u(a)-1}),ba(["MMM","MMMM"],function(a,b,c,d){var e=c._locale.monthsParse(a,d,c._strict);null!=e?b[fe]=e:n(c).invalidMonth=a});var oe=/D[oD]?(\[[^\[\]]*\]|\s)+MMMM?/,pe="January_February_March_April_May_June_July_August_September_October_November_December".split("_"),qe="Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec".split("_"),re=be,se=be;U("Y",0,0,function(){var a=this.year();return a<=9999?""+a:"+"+a}),U(0,["YY",2],0,function(){return this.year()%100}),U(0,["YYYY",4],0,"year"),U(0,["YYYYY",5],0,"year"),U(0,["YYYYYY",6,!0],0,"year"),J("year","y"),M("year",1),Z("Y",Zd),Z("YY",Sd,Od),Z("YYYY",Wd,Qd),Z("YYYYY",Xd,Rd),Z("YYYYYY",Xd,Rd),ba(["YYYYY","YYYYYY"],ee),ba("YYYY",function(b,c){c[ee]=2===b.length?a.parseTwoDigitYear(b):u(b)}),ba("YY",function(b,c){c[ee]=a.parseTwoDigitYear(b)}),ba("Y",function(a,b){b[ee]=parseInt(a,10)}),a.parseTwoDigitYear=function(a){return u(a)+(u(a)>68?1900:2e3)};var te=O("FullYear",!0);U("w",["ww",2],"wo","week"),U("W",["WW",2],"Wo","isoWeek"),J("week","w"),J("isoWeek","W"),M("week",5),M("isoWeek",5),Z("w",Sd),Z("ww",Sd,Od),Z("W",Sd),Z("WW",Sd,Od),ca(["w","ww","W","WW"],function(a,b,c,d){b[d.substr(0,1)]=u(a)});var ue={dow:0,doy:6};U("d",0,"do","day"),U("dd",0,0,function(a){return this.localeData().weekdaysMin(this,a)}),U("ddd",0,0,function(a){return this.localeData().weekdaysShort(this,a)}),U("dddd",0,0,function(a){return this.localeData().weekdays(this,a)}),U("e",0,0,"weekday"),U("E",0,0,"isoWeekday"),J("day","d"),J("weekday","e"),J("isoWeekday","E"),M("day",11),M("weekday",11),M("isoWeekday",11),Z("d",Sd),Z("e",Sd),Z("E",Sd),Z("dd",function(a,b){return b.weekdaysMinRegex(a)}),Z("ddd",function(a,b){return b.weekdaysShortRegex(a)}),Z("dddd",function(a,b){return b.weekdaysRegex(a)}),ca(["dd","ddd","dddd"],function(a,b,c,d){var e=c._locale.weekdaysParse(a,d,c._strict);null!=e?b.d=e:n(c).invalidWeekday=a}),ca(["d","e","E"],function(a,b,c,d){b[d]=u(a)});var ve="Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"),we="Sun_Mon_Tue_Wed_Thu_Fri_Sat".split("_"),xe="Su_Mo_Tu_We_Th_Fr_Sa".split("_"),ye=be,ze=be,Ae=be;U("H",["HH",2],0,"hour"),U("h",["hh",2],0,Ra),U("k",["kk",2],0,Sa),U("hmm",0,0,function(){return""+Ra.apply(this)+T(this.minutes(),2)}),U("hmmss",0,0,function(){return""+Ra.apply(this)+T(this.minutes(),2)+T(this.seconds(),2)}),U("Hmm",0,0,function(){return""+this.hours()+T(this.minutes(),2)}),U("Hmmss",0,0,function(){return""+this.hours()+T(this.minutes(),2)+T(this.seconds(),2)}),Ta("a",!0),Ta("A",!1),J("hour","h"),M("hour",13),Z("a",Ua),Z("A",Ua),Z("H",Sd),Z("h",Sd),Z("k",Sd),Z("HH",Sd,Od),Z("hh",Sd,Od),Z("kk",Sd,Od),Z("hmm",Td),Z("hmmss",Ud),Z("Hmm",Td),Z("Hmmss",Ud),ba(["H","HH"],he),ba(["k","kk"],function(a,b,c){var d=u(a);b[he]=24===d?0:d}),ba(["a","A"],function(a,b,c){c._isPm=c._locale.isPM(a),c._meridiem=a}),ba(["h","hh"],function(a,b,c){b[he]=u(a),n(c).bigHour=!0}),ba("hmm",function(a,b,c){var d=a.length-2;b[he]=u(a.substr(0,d)),b[ie]=u(a.substr(d)),n(c).bigHour=!0}),ba("hmmss",function(a,b,c){var d=a.length-4,e=a.length-2;b[he]=u(a.substr(0,d)),b[ie]=u(a.substr(d,2)),b[je]=u(a.substr(e)),n(c).bigHour=!0}),ba("Hmm",function(a,b,c){var d=a.length-2;b[he]=u(a.substr(0,d)),b[ie]=u(a.substr(d))}),ba("Hmmss",function(a,b,c){var d=a.length-4,e=a.length-2;b[he]=u(a.substr(0,d)),b[ie]=u(a.substr(d,2)),b[je]=u(a.substr(e))});var Be,Ce=/[ap]\.?m?\.?/i,De=O("Hours",!0),Ee={calendar:Bd,longDateFormat:Cd,invalidDate:Dd,ordinal:Ed,dayOfMonthOrdinalParse:Fd,relativeTime:Gd,months:pe,monthsShort:qe,week:ue,weekdays:ve,weekdaysMin:xe,weekdaysShort:we,meridiemParse:Ce},Fe={},Ge={},He=/^\s*((?:[+-]\d{6}|\d{4})-(?:\d\d-\d\d|W\d\d-\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?::\d\d(?::\d\d(?:[.,]\d+)?)?)?)([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?$/,Ie=/^\s*((?:[+-]\d{6}|\d{4})(?:\d\d\d\d|W\d\d\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?:\d\d(?:\d\d(?:[.,]\d+)?)?)?)([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?$/,Je=/Z|[+-]\d\d(?::?\d\d)?/,Ke=[["YYYYYY-MM-DD",/[+-]\d{6}-\d\d-\d\d/],["YYYY-MM-DD",/\d{4}-\d\d-\d\d/],["GGGG-[W]WW-E",/\d{4}-W\d\d-\d/],["GGGG-[W]WW",/\d{4}-W\d\d/,!1],["YYYY-DDD",/\d{4}-\d{3}/],["YYYY-MM",/\d{4}-\d\d/,!1],["YYYYYYMMDD",/[+-]\d{10}/],["YYYYMMDD",/\d{8}/],["GGGG[W]WWE",/\d{4}W\d{3}/],["GGGG[W]WW",/\d{4}W\d{2}/,!1],["YYYYDDD",/\d{7}/]],Le=[["HH:mm:ss.SSSS",/\d\d:\d\d:\d\d\.\d+/],["HH:mm:ss,SSSS",/\d\d:\d\d:\d\d,\d+/],["HH:mm:ss",/\d\d:\d\d:\d\d/],["HH:mm",/\d\d:\d\d/],["HHmmss.SSSS",/\d\d\d\d\d\d\.\d+/],["HHmmss,SSSS",/\d\d\d\d\d\d,\d+/],["HHmmss",/\d\d\d\d\d\d/],["HHmm",/\d\d\d\d/],["HH",/\d\d/]],Me=/^\/?Date\((\-?\d+)/i,Ne=/^((?:Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s)?(\d?\d\s(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(?:\d\d)?\d\d\s)(\d\d:\d\d)(\:\d\d)?(\s(?:UT|GMT|[ECMP][SD]T|[A-IK-Za-ik-z]|[+-]\d{4}))$/;a.createFromInputFallback=x("value provided is not in a recognized RFC2822 or ISO format. moment construction falls back to js Date(), which is not reliable across all browsers and versions. Non RFC2822/ISO date formats are discouraged and will be removed in an upcoming major release. Please refer to http://momentjs.com/guides/#/warnings/js-date/ for more info.",function(a){a._d=new Date(a._i+(a._useUTC?" UTC":""))}),a.ISO_8601=function(){},a.RFC_2822=function(){};var Oe=x("moment().min is deprecated, use moment.max instead. http://momentjs.com/guides/#/warnings/min-max/",function(){var a=tb.apply(null,arguments);return this.isValid()&&a.isValid()?a<this?this:a:p()}),Pe=x("moment().max is deprecated, use moment.min instead. http://momentjs.com/guides/#/warnings/min-max/",function(){var a=tb.apply(null,arguments);return this.isValid()&&a.isValid()?a>this?this:a:p()}),Qe=function(){return Date.now?Date.now():+new Date},Re=["year","quarter","month","week","day","hour","minute","second","millisecond"];Db("Z",":"),Db("ZZ",""),Z("Z",_d),Z("ZZ",_d),ba(["Z","ZZ"],function(a,b,c){c._useUTC=!0,c._tzm=Eb(_d,a)});var Se=/([\+\-]|\d\d)/gi;a.updateOffset=function(){};var Te=/^(\-)?(?:(\d*)[. ])?(\d+)\:(\d+)(?:\:(\d+)(\.\d*)?)?$/,Ue=/^(-)?P(?:(-?[0-9,.]*)Y)?(?:(-?[0-9,.]*)M)?(?:(-?[0-9,.]*)W)?(?:(-?[0-9,.]*)D)?(?:T(?:(-?[0-9,.]*)H)?(?:(-?[0-9,.]*)M)?(?:(-?[0-9,.]*)S)?)?$/;Sb.fn=Ab.prototype,Sb.invalid=zb;var Ve=Wb(1,"add"),We=Wb(-1,"subtract");a.defaultFormat="YYYY-MM-DDTHH:mm:ssZ",a.defaultFormatUtc="YYYY-MM-DDTHH:mm:ss[Z]";var Xe=x("moment().lang() is deprecated. Instead, use moment().localeData() to get the language configuration. Use moment().locale() to change languages.",function(a){return void 0===a?this.localeData():this.locale(a)});U(0,["gg",2],0,function(){return this.weekYear()%100}),U(0,["GG",2],0,function(){return this.isoWeekYear()%100}),Dc("gggg","weekYear"),Dc("ggggg","weekYear"),Dc("GGGG","isoWeekYear"),Dc("GGGGG","isoWeekYear"),J("weekYear","gg"),J("isoWeekYear","GG"),M("weekYear",1),M("isoWeekYear",1),Z("G",Zd),Z("g",Zd),Z("GG",Sd,Od),Z("gg",Sd,Od),Z("GGGG",Wd,Qd),Z("gggg",Wd,Qd),Z("GGGGG",Xd,Rd),Z("ggggg",Xd,Rd),ca(["gggg","ggggg","GGGG","GGGGG"],function(a,b,c,d){b[d.substr(0,2)]=u(a)}),ca(["gg","GG"],function(b,c,d,e){c[e]=a.parseTwoDigitYear(b)}),U("Q",0,"Qo","quarter"),J("quarter","Q"),M("quarter",7),Z("Q",Nd),ba("Q",function(a,b){b[fe]=3*(u(a)-1)}),U("D",["DD",2],"Do","date"),J("date","D"),M("date",9),Z("D",Sd),Z("DD",Sd,Od),Z("Do",function(a,b){return a?b._dayOfMonthOrdinalParse||b._ordinalParse:b._dayOfMonthOrdinalParseLenient}),ba(["D","DD"],ge),ba("Do",function(a,b){b[ge]=u(a.match(Sd)[0],10)});var Ye=O("Date",!0);U("DDD",["DDDD",3],"DDDo","dayOfYear"),J("dayOfYear","DDD"),M("dayOfYear",4),Z("DDD",Vd),Z("DDDD",Pd),ba(["DDD","DDDD"],function(a,b,c){c._dayOfYear=u(a)}),U("m",["mm",2],0,"minute"),J("minute","m"),M("minute",14),Z("m",Sd),Z("mm",Sd,Od),ba(["m","mm"],ie);var Ze=O("Minutes",!1);U("s",["ss",2],0,"second"),J("second","s"),M("second",15),Z("s",Sd),Z("ss",Sd,Od),ba(["s","ss"],je);var $e=O("Seconds",!1);U("S",0,0,function(){return~~(this.millisecond()/100)}),U(0,["SS",2],0,function(){return~~(this.millisecond()/10)}),U(0,["SSS",3],0,"millisecond"),U(0,["SSSS",4],0,function(){return 10*this.millisecond()}),U(0,["SSSSS",5],0,function(){return 100*this.millisecond()}),U(0,["SSSSSS",6],0,function(){return 1e3*this.millisecond()}),U(0,["SSSSSSS",7],0,function(){return 1e4*this.millisecond()}),U(0,["SSSSSSSS",8],0,function(){return 1e5*this.millisecond()}),U(0,["SSSSSSSSS",9],0,function(){return 1e6*this.millisecond()}),J("millisecond","ms"),M("millisecond",16),Z("S",Vd,Nd),Z("SS",Vd,Od),Z("SSS",Vd,Pd);var _e;for(_e="SSSS";_e.length<=9;_e+="S")Z(_e,Yd);for(_e="S";_e.length<=9;_e+="S")ba(_e,Mc);var af=O("Milliseconds",!1);U("z",0,0,"zoneAbbr"),U("zz",0,0,"zoneName");var bf=r.prototype;bf.add=Ve,bf.calendar=Zb,bf.clone=$b,bf.diff=fc,bf.endOf=sc,bf.format=kc,bf.from=lc,bf.fromNow=mc,bf.to=nc,bf.toNow=oc,bf.get=R,bf.invalidAt=Bc,bf.isAfter=_b,bf.isBefore=ac,bf.isBetween=bc,bf.isSame=cc,bf.isSameOrAfter=dc,bf.isSameOrBefore=ec,bf.isValid=zc,bf.lang=Xe,bf.locale=pc,bf.localeData=qc,bf.max=Pe,bf.min=Oe,bf.parsingFlags=Ac,bf.set=S,bf.startOf=rc,bf.subtract=We,bf.toArray=wc,bf.toObject=xc,bf.toDate=vc,bf.toISOString=ic,bf.inspect=jc,bf.toJSON=yc,bf.toString=hc,bf.unix=uc,bf.valueOf=tc,bf.creationData=Cc,bf.year=te,bf.isLeapYear=ra,bf.weekYear=Ec,bf.isoWeekYear=Fc,bf.quarter=bf.quarters=Kc,bf.month=ka,bf.daysInMonth=la,bf.week=bf.weeks=Ba,bf.isoWeek=bf.isoWeeks=Ca,bf.weeksInYear=Hc,bf.isoWeeksInYear=Gc,bf.date=Ye,bf.day=bf.days=Ka,bf.weekday=La,bf.isoWeekday=Ma,bf.dayOfYear=Lc,bf.hour=bf.hours=De,bf.minute=bf.minutes=Ze,bf.second=bf.seconds=$e,bf.millisecond=bf.milliseconds=af,bf.utcOffset=Hb,bf.utc=Jb,bf.local=Kb,bf.parseZone=Lb,bf.hasAlignedHourOffset=Mb,bf.isDST=Nb,bf.isLocal=Pb,bf.isUtcOffset=Qb,bf.isUtc=Rb,bf.isUTC=Rb,bf.zoneAbbr=Nc,bf.zoneName=Oc,bf.dates=x("dates accessor is deprecated. Use date instead.",Ye),bf.months=x("months accessor is deprecated. Use month instead",ka),bf.years=x("years accessor is deprecated. Use year instead",te),bf.zone=x("moment().zone is deprecated, use moment().utcOffset instead. http://momentjs.com/guides/#/warnings/zone/",Ib),bf.isDSTShifted=x("isDSTShifted is deprecated. See http://momentjs.com/guides/#/warnings/dst-shifted/ for more information",Ob);var cf=C.prototype;cf.calendar=D,cf.longDateFormat=E,cf.invalidDate=F,cf.ordinal=G,cf.preparse=Rc,cf.postformat=Rc,cf.relativeTime=H,cf.pastFuture=I,cf.set=A,cf.months=fa,cf.monthsShort=ga,cf.monthsParse=ia,cf.monthsRegex=na,cf.monthsShortRegex=ma,cf.week=ya,cf.firstDayOfYear=Aa,cf.firstDayOfWeek=za,cf.weekdays=Fa,cf.weekdaysMin=Ha,cf.weekdaysShort=Ga,cf.weekdaysParse=Ja,cf.weekdaysRegex=Na,cf.weekdaysShortRegex=Oa,cf.weekdaysMinRegex=Pa,cf.isPM=Va,cf.meridiem=Wa,$a("en",{dayOfMonthOrdinalParse:/\d{1,2}(th|st|nd|rd)/,ordinal:function(a){var b=a%10,c=1===u(a%100/10)?"th":1===b?"st":2===b?"nd":3===b?"rd":"th";return a+c}}),a.lang=x("moment.lang is deprecated. Use moment.locale instead.",$a),a.langData=x("moment.langData is deprecated. Use moment.localeData instead.",bb);var df=Math.abs,ef=id("ms"),ff=id("s"),gf=id("m"),hf=id("h"),jf=id("d"),kf=id("w"),lf=id("M"),mf=id("y"),nf=kd("milliseconds"),of=kd("seconds"),pf=kd("minutes"),qf=kd("hours"),rf=kd("days"),sf=kd("months"),tf=kd("years"),uf=Math.round,vf={ss:44,s:45,m:45,h:22,d:26,M:11},wf=Math.abs,xf=Ab.prototype;return xf.isValid=yb,xf.abs=$c,xf.add=ad,xf.subtract=bd,xf.as=gd,xf.asMilliseconds=ef,xf.asSeconds=ff,xf.asMinutes=gf,xf.asHours=hf,xf.asDays=jf,xf.asWeeks=kf,xf.asMonths=lf,xf.asYears=mf,xf.valueOf=hd,xf._bubble=dd,xf.get=jd,xf.milliseconds=nf,xf.seconds=of,xf.minutes=pf,xf.hours=qf,xf.days=rf,xf.weeks=ld,xf.months=sf,xf.years=tf,xf.humanize=qd,xf.toISOString=rd,xf.toString=rd,xf.toJSON=rd,xf.locale=pc,xf.localeData=qc,xf.toIsoString=x("toIsoString() is deprecated. Please use toISOString() instead (notice the capitals)",rd),xf.lang=Xe,U("X",0,0,"unix"),U("x",0,0,"valueOf"),Z("x",Zd),Z("X",ae),ba("X",function(a,b,c){c._d=new Date(1e3*parseFloat(a,10))}),ba("x",function(a,b,c){c._d=new Date(u(a))}),a.version="2.18.1",b(tb),a.fn=bf,a.min=vb,a.max=wb,a.now=Qe,a.utc=l,a.unix=Pc,a.months=Vc,a.isDate=h,a.locale=$a,a.invalid=p,a.duration=Sb,a.isMoment=s,a.weekdays=Xc,a.parseZone=Qc,a.localeData=bb,a.isDuration=Bb,a.monthsShort=Wc,a.weekdaysMin=Zc,a.defineLocale=_a,a.updateLocale=ab,a.locales=cb,a.weekdaysShort=Yc,a.normalizeUnits=K,a.relativeTimeRounding=od,a.relativeTimeThreshold=pd,a.calendarFormat=Yb,a.prototype=bf,a});
 /**
- * @license AngularJS v1.6.4
+ * @license AngularJS v1.6.5
  * (c) 2010-2017 Google, Inc. http://angularjs.org
  * License: MIT
  */
 (function(window) {'use strict';
+
+/* exported
+  minErrConfig,
+  errorHandlingConfig,
+  isValidObjectMaxDepth
+*/
+
+var minErrConfig = {
+  objectMaxDepth: 5
+};
+
+/**
+ * @ngdoc function
+ * @name angular.errorHandlingConfig
+ * @module ng
+ * @kind function
+ *
+ * @description
+ * Configure several aspects of error handling in AngularJS if used as a setter or return the
+ * current configuration if used as a getter. The following options are supported:
+ *
+ * - **objectMaxDepth**: The maximum depth to which objects are traversed when stringified for error messages.
+ *
+ * Omitted or undefined options will leave the corresponding configuration values unchanged.
+ *
+ * @param {Object=} config - The configuration object. May only contain the options that need to be
+ *     updated. Supported keys:
+ *
+ * * `objectMaxDepth`  **{Number}** - The max depth for stringifying objects. Setting to a
+ *   non-positive or non-numeric value, removes the max depth limit.
+ *   Default: 5
+ */
+function errorHandlingConfig(config) {
+  if (isObject(config)) {
+    if (isDefined(config.objectMaxDepth)) {
+      minErrConfig.objectMaxDepth = isValidObjectMaxDepth(config.objectMaxDepth) ? config.objectMaxDepth : NaN;
+    }
+  } else {
+    return minErrConfig;
+  }
+}
+
+/**
+ * @private
+ * @param {Number} maxDepth
+ * @return {boolean}
+ */
+function isValidObjectMaxDepth(maxDepth) {
+  return isNumber(maxDepth) && maxDepth > 0;
+}
 
 /**
  * @description
@@ -2134,7 +2184,7 @@ function minErr(module, ErrorConstructor) {
       return match;
     });
 
-    message += '\nhttp://errors.angularjs.org/1.6.4/' +
+    message += '\nhttp://errors.angularjs.org/1.6.5/' +
       (module ? module + '/' : '') + code;
 
     for (i = 0, paramPrefix = '?'; i < templateArgs.length; i++, paramPrefix = '&') {
@@ -2190,6 +2240,7 @@ function minErr(module, ErrorConstructor) {
   isNumber,
   isNumberNaN,
   isDate,
+  isError,
   isArray,
   isFunction,
   isRegExp,
@@ -2273,50 +2324,6 @@ var VALIDITY_STATE_PROPERTY = 'validity';
 
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-var minErrConfig = {
-  objectMaxDepth: 5
-};
-
- /**
- * @ngdoc function
- * @name angular.errorHandlingConfig
- * @module ng
- * @kind function
- *
- * @description
- * Configure several aspects of error handling in AngularJS if used as a setter or return the
- * current configuration if used as a getter. The following options are supported:
- *
- * - **objectMaxDepth**: The maximum depth to which objects are traversed when stringified for error messages.
- *
- * Omitted or undefined options will leave the corresponding configuration values unchanged.
- *
- * @param {Object=} config - The configuration object. May only contain the options that need to be
- *     updated. Supported keys:
- *
- * * `objectMaxDepth`  **{Number}** - The max depth for stringifying objects. Setting to a
- *   non-positive or non-numeric value, removes the max depth limit.
- *   Default: 5
- */
-function errorHandlingConfig(config) {
-  if (isObject(config)) {
-    if (isDefined(config.objectMaxDepth)) {
-      minErrConfig.objectMaxDepth = isValidObjectMaxDepth(config.objectMaxDepth) ? config.objectMaxDepth : NaN;
-    }
-  } else {
-    return minErrConfig;
-  }
-}
-
-/**
- * @private
- * @param {Number} maxDepth
- * @return {boolean}
- */
-function isValidObjectMaxDepth(maxDepth) {
-  return isNumber(maxDepth) && maxDepth > 0;
-}
 
 /**
  * @ngdoc function
@@ -2625,6 +2632,20 @@ function extend(dst) {
 * Unlike {@link angular.extend extend()}, `merge()` recursively descends into object properties of source
 * objects, performing a deep copy.
 *
+* @deprecated
+* sinceVersion="1.6.5"
+* This function is deprecated, but will not be removed in the 1.x lifecycle.
+* There are edge cases (see {@link angular.merge#known-issues known issues}) that are not
+* supported by this function. We suggest
+* using [lodash's merge()](https://lodash.com/docs/4.17.4#merge) instead.
+*
+* @knownIssue
+* This is a list of (known) object types that are not handled correctly by this function:
+* - [`Blob`](https://developer.mozilla.org/docs/Web/API/Blob)
+* - [`MediaStream`](https://developer.mozilla.org/docs/Web/API/MediaStream)
+* - [`CanvasGradient`](https://developer.mozilla.org/docs/Web/API/CanvasGradient)
+* - AngularJS {@link $rootScope.Scope scopes};
+*
 * @param {Object} dst Destination object.
 * @param {...Object} src Source object(s).
 * @returns {Object} Reference to `dst`.
@@ -2833,6 +2854,24 @@ function isDate(value) {
  * @returns {boolean} True if `value` is an `Array`.
  */
 var isArray = Array.isArray;
+
+/**
+ * @description
+ * Determines if a reference is an `Error`.
+ * Loosely based on https://www.npmjs.com/package/iserror
+ *
+ * @param {*} value Reference to check.
+ * @returns {boolean} True if `value` is an `Error`.
+ */
+function isError(value) {
+  var tag = toString.call(value);
+  switch (tag) {
+    case '[object Error]': return true;
+    case '[object Exception]': return true;
+    case '[object DOMException]': return true;
+    default: return value instanceof Error;
+  }
+}
 
 /**
  * @ngdoc function
@@ -3514,7 +3553,7 @@ function fromJson(json) {
 
 var ALL_COLONS = /:/g;
 function timezoneToOffset(timezone, fallback) {
-  // Support: IE 9-11 only, Edge 13-14+
+  // Support: IE 9-11 only, Edge 13-15+
   // IE/Edge do not "understand" colon (`:`) in timezone
   timezone = timezone.replace(ALL_COLONS, '');
   var requestedTimezoneOffset = Date.parse('Jan 01, 1970 00:00:00 ' + timezone) / 60000;
@@ -3541,12 +3580,7 @@ function convertTimezoneToLocal(date, timezone, reverse) {
  * @returns {string} Returns the string representation of the element.
  */
 function startingTag(element) {
-  element = jqLite(element).clone();
-  try {
-    // turns out IE does not let you set .html() on elements which
-    // are not allowed to have children. So we just ignore it.
-    element.empty();
-  } catch (e) { /* empty */ }
+  element = jqLite(element).clone().empty();
   var elemHtml = jqLite('<div>').append(element).html();
   try {
     return element[0].nodeType === NODE_TYPE_TEXT ? lowercase(elemHtml) :
@@ -3684,6 +3718,7 @@ function allowAutoBootstrap(document) {
   var script = document.currentScript;
 
   if (!script) {
+    // Support: IE 9-11 only
     // IE does not have `document.currentScript`
     return true;
   }
@@ -4675,7 +4710,7 @@ function shallowCopy(src, dst) {
   return dst || src;
 }
 
-/* global toDebugString: true */
+/* exported toDebugString */
 
 function serializeObject(obj, maxDepth) {
   var seen = [];
@@ -4684,7 +4719,9 @@ function serializeObject(obj, maxDepth) {
   // and a very deep object can cause a performance issue, so we copy the object
   // based on this specific depth and then stringify it.
   if (isValidObjectMaxDepth(maxDepth)) {
-    obj = copy(obj, null, maxDepth);
+    // This file is also included in `angular-loader`, so `copy()` might not always be available in
+    // the closure. Therefore, it is lazily retrieved as `angular.copy()` when needed.
+    obj = angular.copy(obj, null, maxDepth);
   }
   return JSON.stringify(obj, function(key, val) {
     val = toJsonReplacer(key, val);
@@ -4825,11 +4862,11 @@ function toDebugString(obj, maxDepth) {
 var version = {
   // These placeholder strings will be replaced by grunt's `build` task.
   // They need to be double- or single-quoted.
-  full: '1.6.4',
+  full: '1.6.5',
   major: 1,
   minor: 6,
-  dot: 4,
-  codeName: 'phenomenal-footnote'
+  dot: 5,
+  codeName: 'toffee-salinization'
 };
 
 
@@ -4975,7 +5012,7 @@ function publishExternalAPI(angular) {
       });
     }
   ])
-  .info({ angularVersion: '1.6.4' });
+  .info({ angularVersion: '1.6.5' });
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -7564,6 +7601,7 @@ var $$CoreAnimateQueueProvider = /** @this */ function() {
 var $AnimateProvider = ['$provide', /** @this */ function($provide) {
   var provider = this;
   var classNameFilter = null;
+  var customFilter = null;
 
   this.$$registeredAnimations = Object.create(null);
 
@@ -7618,6 +7656,51 @@ var $AnimateProvider = ['$provide', /** @this */ function($provide) {
 
   /**
    * @ngdoc method
+   * @name $animateProvider#customFilter
+   *
+   * @description
+   * Sets and/or returns the custom filter function that is used to "filter" animations, i.e.
+   * determine if an animation is allowed or not. When no filter is specified (the default), no
+   * animation will be blocked. Setting the `customFilter` value will only allow animations for
+   * which the filter function's return value is truthy.
+   *
+   * This allows to easily create arbitrarily complex rules for filtering animations, such as
+   * allowing specific events only, or enabling animations on specific subtrees of the DOM, etc.
+   * Filtering animations can also boost performance for low-powered devices, as well as
+   * applications containing a lot of structural operations.
+   *
+   * <div class="alert alert-success">
+   *   **Best Practice:**
+   *   Keep the filtering function as lean as possible, because it will be called for each DOM
+   *   action (e.g. insertion, removal, class change) performed by "animation-aware" directives.
+   *   See {@link guide/animations#which-directives-support-animations- here} for a list of built-in
+   *   directives that support animations.
+   *   Performing computationally expensive or time-consuming operations on each call of the
+   *   filtering function can make your animations sluggish.
+   * </div>
+   *
+   * **Note:** If present, `customFilter` will be checked before
+   * {@link $animateProvider#classNameFilter classNameFilter}.
+   *
+   * @param {Function=} filterFn - The filter function which will be used to filter all animations.
+   *   If a falsy value is returned, no animation will be performed. The function will be called
+   *   with the following arguments:
+   *   - **node** `{DOMElement}` - The DOM element to be animated.
+   *   - **event** `{String}` - The name of the animation event (e.g. `enter`, `leave`, `addClass`
+   *     etc).
+   *   - **options** `{Object}` - A collection of options/styles used for the animation.
+   * @return {Function} The current filter function or `null` if there is none set.
+   */
+  this.customFilter = function(filterFn) {
+    if (arguments.length === 1) {
+      customFilter = isFunction(filterFn) ? filterFn : null;
+    }
+
+    return customFilter;
+  };
+
+  /**
+   * @ngdoc method
    * @name $animateProvider#classNameFilter
    *
    * @description
@@ -7627,6 +7710,11 @@ var $AnimateProvider = ['$provide', /** @this */ function($provide) {
    * When setting the `classNameFilter` value, animations will only be performed on elements
    * that successfully match the filter expression. This in turn can boost performance
    * for low-powered devices as well as applications containing a lot of structural operations.
+   *
+   * **Note:** If present, `classNameFilter` will be checked after
+   * {@link $animateProvider#customFilter customFilter}. If `customFilter` is present and returns
+   * false, `classNameFilter` will not be checked.
+   *
    * @param {RegExp=} expression The className expression which will be checked against all animations
    * @return {RegExp} The current CSS className expression value. If null then there is no expression value
    */
@@ -10216,7 +10304,8 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
    * @ngdoc method
    * @name $compileProvider#component
    * @module ng
-   * @param {string} name Name of the component in camelCase (i.e. `myComp` which will match `<my-comp>`)
+   * @param {string|Object} name Name of the component in camelCase (i.e. `myComp` which will match `<my-comp>`),
+   *    or an object map of components where the keys are the names and the values are the component definition objects.
    * @param {Object} options Component definition object (a simplified
    *    {@link ng.$compile#directive-definition-object directive definition object}),
    *    with the following properties (all optional):
@@ -10299,6 +10388,11 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
    * See also {@link ng.$compileProvider#directive $compileProvider.directive()}.
    */
   this.component = function registerComponent(name, options) {
+    if (!isString(name)) {
+      forEach(name, reverseParams(bind(this, registerComponent)));
+      return this;
+    }
+
     var controller = options.controller || function() {};
 
     function factory($injector) {
@@ -12234,7 +12328,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
           }
           linkQueue = null;
         }).catch(function(error) {
-          if (error instanceof Error) {
+          if (isError(error)) {
             $exceptionHandler(error);
           }
         });
@@ -13377,12 +13471,6 @@ function $HttpProvider() {
    * {@link ng.$cacheFactory `$cacheFactory`} to enable or disable caching of HTTP responses
    * by default. See {@link $http#caching $http Caching} for more information.
    *
-   * - **`defaults.xsrfCookieName`** - {string} - Name of cookie containing the XSRF token.
-   * Defaults value is `'XSRF-TOKEN'`.
-   *
-   * - **`defaults.xsrfHeaderName`** - {string} - Name of HTTP header to populate with the
-   * XSRF token. Defaults value is `'X-XSRF-TOKEN'`.
-   *
    * - **`defaults.headers`** - {Object} - Default headers for all $http requests.
    * Refer to {@link ng.$http#setting-http-headers $http} for documentation on
    * setting default headers.
@@ -13391,15 +13479,38 @@ function $HttpProvider() {
    *     - **`defaults.headers.put`**
    *     - **`defaults.headers.patch`**
    *
+   * - **`defaults.jsonpCallbackParam`** - `{string}` - the name of the query parameter that passes the name of the
+   * callback in a JSONP request. The value of this parameter will be replaced with the expression generated by the
+   * {@link $jsonpCallbacks} service. Defaults to `'callback'`.
    *
    * - **`defaults.paramSerializer`** - `{string|function(Object<string,string>):string}` - A function
    *  used to the prepare string representation of request parameters (specified as an object).
    *  If specified as string, it is interpreted as a function registered with the {@link auto.$injector $injector}.
    *  Defaults to {@link ng.$httpParamSerializer $httpParamSerializer}.
    *
-   * - **`defaults.jsonpCallbackParam`** - `{string}` - the name of the query parameter that passes the name of the
-   * callback in a JSONP request. The value of this parameter will be replaced with the expression generated by the
-   * {@link $jsonpCallbacks} service. Defaults to `'callback'`.
+   * - **`defaults.transformRequest`** -
+   * `{Array<function(data, headersGetter)>|function(data, headersGetter)}` -
+   * An array of functions (or a single function) which are applied to the request data.
+   * By default, this is an array with one request transformation function:
+   *
+   *   - If the `data` property of the request configuration object contains an object, serialize it
+   *     into JSON format.
+   *
+   * - **`defaults.transformResponse`** -
+   * `{Array<function(data, headersGetter, status)>|function(data, headersGetter, status)}` -
+   * An array of functions (or a single function) which are applied to the response data. By default,
+   * this is an array which applies one response transformation function that does two things:
+   *
+   *  - If XSRF prefix is detected, strip it
+   *    (see {@link ng.$http#security-considerations Security Considerations in the $http docs}).
+   *  - If the `Content-Type` is `application/json` or the response looks like JSON,
+   *    deserialize it using a JSON parser.
+   *
+   * - **`defaults.xsrfCookieName`** - {string} - Name of cookie containing the XSRF token.
+   * Defaults value is `'XSRF-TOKEN'`.
+   *
+   * - **`defaults.xsrfHeaderName`** - {string} - Name of HTTP header to populate with the
+   * XSRF token. Defaults value is `'X-XSRF-TOKEN'`.
    *
    **/
   var defaults = this.defaults = {
@@ -13663,15 +13774,18 @@ function $HttpProvider() {
      *
      * Angular provides the following default transformations:
      *
-     * Request transformations (`$httpProvider.defaults.transformRequest` and `$http.defaults.transformRequest`):
+     * Request transformations (`$httpProvider.defaults.transformRequest` and `$http.defaults.transformRequest`) is
+     * an array with one function that does the following:
      *
      * - If the `data` property of the request configuration object contains an object, serialize it
      *   into JSON format.
      *
-     * Response transformations (`$httpProvider.defaults.transformResponse` and `$http.defaults.transformResponse`):
+     * Response transformations (`$httpProvider.defaults.transformResponse` and `$http.defaults.transformResponse`) is
+     * an array with one function that does the following:
      *
      *  - If XSRF prefix is detected, strip it (see Security Considerations section below).
-     *  - If JSON response is detected, deserialize it using a JSON parser.
+     *  - If the `Content-Type` is `application/json` or the response looks like JSON,
+   *      deserialize it using a JSON parser.
      *
      *
      * ### Overriding the Default Transformations Per Request
@@ -15308,7 +15422,7 @@ function $IntervalProvider() {
     interval.cancel = function(promise) {
       if (promise && promise.$$intervalId in intervals) {
         // Interval cancels should not report as unhandled promise.
-        intervals[promise.$$intervalId].promise.catch(noop);
+        markQExceptionHandled(intervals[promise.$$intervalId].promise);
         intervals[promise.$$intervalId].reject('canceled');
         $window.clearInterval(promise.$$intervalId);
         delete intervals[promise.$$intervalId];
@@ -16450,6 +16564,14 @@ function $LocationProvider() {
  *
  * The main purpose of this service is to simplify debugging and troubleshooting.
  *
+ * To reveal the location of the calls to `$log` in the JavaScript console,
+ * you can "blackbox" the AngularJS source in your browser:
+ *
+ * [Mozilla description of blackboxing](https://developer.mozilla.org/en-US/docs/Tools/Debugger/How_to/Black_box_a_source).
+ * [Chrome description of blackboxing](https://developer.chrome.com/devtools/docs/blackboxing).
+ *
+ * Note: Not all browsers support blackboxing.
+ *
  * The default is to log `debug` messages. You can use
  * {@link ng.$logProvider ng.$logProvider#debugEnabled} to change this.
  *
@@ -16571,7 +16693,7 @@ function $LogProvider() {
     };
 
     function formatError(arg) {
-      if (arg instanceof Error) {
+      if (isError(arg)) {
         if (arg.stack && formatStackTrace) {
           arg = (arg.message && arg.stack.indexOf(arg.message) === -1)
               ? 'Error: ' + arg.message + '\n' + arg.stack
@@ -16585,29 +16707,17 @@ function $LogProvider() {
 
     function consoleLog(type) {
       var console = $window.console || {},
-          logFn = console[type] || console.log || noop,
-          hasApply = false;
+          logFn = console[type] || console.log || noop;
 
-      // Note: reading logFn.apply throws an error in IE11 in IE8 document mode.
-      // The reason behind this is that console.log has type "object" in IE8...
-      try {
-        hasApply = !!logFn.apply;
-      } catch (e) { /* empty */ }
-
-      if (hasApply) {
-        return function() {
-          var args = [];
-          forEach(arguments, function(arg) {
-            args.push(formatError(arg));
-          });
-          return logFn.apply(console, args);
-        };
-      }
-
-      // we are IE which either doesn't have window.console => this is noop and we do nothing,
-      // or we are IE where console.log doesn't have apply so we log at least first 2 args
-      return function(arg1, arg2) {
-        logFn(arg1, arg2 == null ? '' : arg2);
+      return function() {
+        var args = [];
+        forEach(arguments, function(arg) {
+          args.push(formatError(arg));
+        });
+        // Support: IE 9 only
+        // console methods don't inherit from Function.prototype in IE 9 so we can't
+        // call `logFn.apply(console, args)` directly.
+        return Function.prototype.apply.call(logFn, console, args);
       };
     }
   }];
@@ -17235,15 +17345,47 @@ function isStateless($filter, filterName) {
   return !fn.$stateful;
 }
 
-function findConstantAndWatchExpressions(ast, $filter) {
+var PURITY_ABSOLUTE = 1;
+var PURITY_RELATIVE = 2;
+
+// Detect nodes which could depend on non-shallow state of objects
+function isPure(node, parentIsPure) {
+  switch (node.type) {
+    // Computed members might invoke a stateful toString()
+    case AST.MemberExpression:
+      if (node.computed) {
+        return false;
+      }
+      break;
+
+    // Unary always convert to primative
+    case AST.UnaryExpression:
+      return PURITY_ABSOLUTE;
+
+    // The binary + operator can invoke a stateful toString().
+    case AST.BinaryExpression:
+      return node.operator !== '+' ? PURITY_ABSOLUTE : false;
+
+    // Functions / filters probably read state from within objects
+    case AST.CallExpression:
+      return false;
+  }
+
+  return (undefined === parentIsPure) ? PURITY_RELATIVE : parentIsPure;
+}
+
+function findConstantAndWatchExpressions(ast, $filter, parentIsPure) {
   var allConstants;
   var argsToWatch;
   var isStatelessFilter;
+
+  var astIsPure = ast.isPure = isPure(ast, parentIsPure);
+
   switch (ast.type) {
   case AST.Program:
     allConstants = true;
     forEach(ast.body, function(expr) {
-      findConstantAndWatchExpressions(expr.expression, $filter);
+      findConstantAndWatchExpressions(expr.expression, $filter, astIsPure);
       allConstants = allConstants && expr.expression.constant;
     });
     ast.constant = allConstants;
@@ -17253,26 +17395,26 @@ function findConstantAndWatchExpressions(ast, $filter) {
     ast.toWatch = [];
     break;
   case AST.UnaryExpression:
-    findConstantAndWatchExpressions(ast.argument, $filter);
+    findConstantAndWatchExpressions(ast.argument, $filter, astIsPure);
     ast.constant = ast.argument.constant;
     ast.toWatch = ast.argument.toWatch;
     break;
   case AST.BinaryExpression:
-    findConstantAndWatchExpressions(ast.left, $filter);
-    findConstantAndWatchExpressions(ast.right, $filter);
+    findConstantAndWatchExpressions(ast.left, $filter, astIsPure);
+    findConstantAndWatchExpressions(ast.right, $filter, astIsPure);
     ast.constant = ast.left.constant && ast.right.constant;
     ast.toWatch = ast.left.toWatch.concat(ast.right.toWatch);
     break;
   case AST.LogicalExpression:
-    findConstantAndWatchExpressions(ast.left, $filter);
-    findConstantAndWatchExpressions(ast.right, $filter);
+    findConstantAndWatchExpressions(ast.left, $filter, astIsPure);
+    findConstantAndWatchExpressions(ast.right, $filter, astIsPure);
     ast.constant = ast.left.constant && ast.right.constant;
     ast.toWatch = ast.constant ? [] : [ast];
     break;
   case AST.ConditionalExpression:
-    findConstantAndWatchExpressions(ast.test, $filter);
-    findConstantAndWatchExpressions(ast.alternate, $filter);
-    findConstantAndWatchExpressions(ast.consequent, $filter);
+    findConstantAndWatchExpressions(ast.test, $filter, astIsPure);
+    findConstantAndWatchExpressions(ast.alternate, $filter, astIsPure);
+    findConstantAndWatchExpressions(ast.consequent, $filter, astIsPure);
     ast.constant = ast.test.constant && ast.alternate.constant && ast.consequent.constant;
     ast.toWatch = ast.constant ? [] : [ast];
     break;
@@ -17281,9 +17423,9 @@ function findConstantAndWatchExpressions(ast, $filter) {
     ast.toWatch = [ast];
     break;
   case AST.MemberExpression:
-    findConstantAndWatchExpressions(ast.object, $filter);
+    findConstantAndWatchExpressions(ast.object, $filter, astIsPure);
     if (ast.computed) {
-      findConstantAndWatchExpressions(ast.property, $filter);
+      findConstantAndWatchExpressions(ast.property, $filter, astIsPure);
     }
     ast.constant = ast.object.constant && (!ast.computed || ast.property.constant);
     ast.toWatch = [ast];
@@ -17293,7 +17435,7 @@ function findConstantAndWatchExpressions(ast, $filter) {
     allConstants = isStatelessFilter;
     argsToWatch = [];
     forEach(ast.arguments, function(expr) {
-      findConstantAndWatchExpressions(expr, $filter);
+      findConstantAndWatchExpressions(expr, $filter, astIsPure);
       allConstants = allConstants && expr.constant;
       if (!expr.constant) {
         argsToWatch.push.apply(argsToWatch, expr.toWatch);
@@ -17303,8 +17445,8 @@ function findConstantAndWatchExpressions(ast, $filter) {
     ast.toWatch = isStatelessFilter ? argsToWatch : [ast];
     break;
   case AST.AssignmentExpression:
-    findConstantAndWatchExpressions(ast.left, $filter);
-    findConstantAndWatchExpressions(ast.right, $filter);
+    findConstantAndWatchExpressions(ast.left, $filter, astIsPure);
+    findConstantAndWatchExpressions(ast.right, $filter, astIsPure);
     ast.constant = ast.left.constant && ast.right.constant;
     ast.toWatch = [ast];
     break;
@@ -17312,7 +17454,7 @@ function findConstantAndWatchExpressions(ast, $filter) {
     allConstants = true;
     argsToWatch = [];
     forEach(ast.elements, function(expr) {
-      findConstantAndWatchExpressions(expr, $filter);
+      findConstantAndWatchExpressions(expr, $filter, astIsPure);
       allConstants = allConstants && expr.constant;
       if (!expr.constant) {
         argsToWatch.push.apply(argsToWatch, expr.toWatch);
@@ -17325,13 +17467,13 @@ function findConstantAndWatchExpressions(ast, $filter) {
     allConstants = true;
     argsToWatch = [];
     forEach(ast.properties, function(property) {
-      findConstantAndWatchExpressions(property.value, $filter);
+      findConstantAndWatchExpressions(property.value, $filter, astIsPure);
       allConstants = allConstants && property.value.constant && !property.computed;
       if (!property.value.constant) {
         argsToWatch.push.apply(argsToWatch, property.value.toWatch);
       }
       if (property.computed) {
-        findConstantAndWatchExpressions(property.key, $filter);
+        findConstantAndWatchExpressions(property.key, $filter, astIsPure);
         if (!property.key.constant) {
           argsToWatch.push.apply(argsToWatch, property.key.toWatch);
         }
@@ -17416,7 +17558,7 @@ ASTCompiler.prototype = {
       var intoId = self.nextId();
       self.recurse(watch, intoId);
       self.return_(intoId);
-      self.state.inputs.push(fnKey);
+      self.state.inputs.push({name: fnKey, isPure: watch.isPure});
       watch.watchId = key;
     });
     this.state.computing = 'fn';
@@ -17452,13 +17594,16 @@ ASTCompiler.prototype = {
 
   watchFns: function() {
     var result = [];
-    var fns = this.state.inputs;
+    var inputs = this.state.inputs;
     var self = this;
-    forEach(fns, function(name) {
-      result.push('var ' + name + '=' + self.generateFunction(name, 's'));
+    forEach(inputs, function(input) {
+      result.push('var ' + input.name + '=' + self.generateFunction(input.name, 's'));
+      if (input.isPure) {
+        result.push(input.name, '.isPure=' + JSON.stringify(input.isPure) + ';');
+      }
     });
-    if (fns.length) {
-      result.push('fn.inputs=[' + fns.join(',') + '];');
+    if (inputs.length) {
+      result.push('fn.inputs=[' + inputs.map(function(i) { return i.name; }).join(',') + '];');
     }
     return result.join('');
   },
@@ -17864,6 +18009,7 @@ ASTInterpreter.prototype = {
       inputs = [];
       forEach(toWatch, function(watch, key) {
         var input = self.recurse(watch);
+        input.isPure = watch.isPure;
         watch.input = input;
         inputs.push(input);
         watch.watchId = key;
@@ -18378,8 +18524,8 @@ function $ParseProvider() {
             if (parsedExpression.constant) {
               parsedExpression.$$watchDelegate = constantWatchDelegate;
             } else if (oneTime) {
-              parsedExpression.oneTime = true;
-              parsedExpression.$$watchDelegate = oneTimeWatchDelegate;
+              parsedExpression.$$watchDelegate = parsedExpression.literal ?
+                  oneTimeLiteralWatchDelegate : oneTimeWatchDelegate;
             } else if (parsedExpression.inputs) {
               parsedExpression.$$watchDelegate = inputsWatchDelegate;
             }
@@ -18430,7 +18576,7 @@ function $ParseProvider() {
         inputExpressions = inputExpressions[0];
         return scope.$watch(function expressionInputWatch(scope) {
           var newInputValue = inputExpressions(scope);
-          if (!expressionInputDirtyCheck(newInputValue, oldInputValueOf, parsedExpression.literal)) {
+          if (!expressionInputDirtyCheck(newInputValue, oldInputValueOf, inputExpressions.isPure)) {
             lastResult = parsedExpression(scope, undefined, undefined, [newInputValue]);
             oldInputValueOf = newInputValue && getValueOf(newInputValue);
           }
@@ -18450,7 +18596,7 @@ function $ParseProvider() {
 
         for (var i = 0, ii = inputExpressions.length; i < ii; i++) {
           var newInputValue = inputExpressions[i](scope);
-          if (changed || (changed = !expressionInputDirtyCheck(newInputValue, oldInputValueOfValues[i], parsedExpression.literal))) {
+          if (changed || (changed = !expressionInputDirtyCheck(newInputValue, oldInputValueOfValues[i], inputExpressions[i].isPure))) {
             oldInputValues[i] = newInputValue;
             oldInputValueOfValues[i] = newInputValue && getValueOf(newInputValue);
           }
@@ -18465,7 +18611,6 @@ function $ParseProvider() {
     }
 
     function oneTimeWatchDelegate(scope, listener, objectEquality, parsedExpression, prettyPrintExpression) {
-      var isDone = parsedExpression.literal ? isAllDefined : isDefined;
       var unwatch, lastValue;
       if (parsedExpression.inputs) {
         unwatch = inputsWatchDelegate(scope, oneTimeListener, objectEquality, parsedExpression, prettyPrintExpression);
@@ -18482,9 +18627,9 @@ function $ParseProvider() {
         if (isFunction(listener)) {
           listener(value, old, scope);
         }
-        if (isDone(value)) {
+        if (isDefined(value)) {
           scope.$$postDigest(function() {
-            if (isDone(lastValue)) {
+            if (isDefined(lastValue)) {
               unwatch();
             }
           });
@@ -18492,12 +18637,31 @@ function $ParseProvider() {
       }
     }
 
-    function isAllDefined(value) {
-      var allDefined = true;
-      forEach(value, function(val) {
-        if (!isDefined(val)) allDefined = false;
-      });
-      return allDefined;
+    function oneTimeLiteralWatchDelegate(scope, listener, objectEquality, parsedExpression) {
+      var unwatch, lastValue;
+      unwatch = scope.$watch(function oneTimeWatch(scope) {
+        return parsedExpression(scope);
+      }, function oneTimeListener(value, old, scope) {
+        lastValue = value;
+        if (isFunction(listener)) {
+          listener(value, old, scope);
+        }
+        if (isAllDefined(value)) {
+          scope.$$postDigest(function() {
+            if (isAllDefined(lastValue)) unwatch();
+          });
+        }
+      }, objectEquality);
+
+      return unwatch;
+
+      function isAllDefined(value) {
+        var allDefined = true;
+        forEach(value, function(val) {
+          if (!isDefined(val)) allDefined = false;
+        });
+        return allDefined;
+      }
     }
 
     function constantWatchDelegate(scope, listener, objectEquality, parsedExpression) {
@@ -18513,37 +18677,41 @@ function $ParseProvider() {
       var watchDelegate = parsedExpression.$$watchDelegate;
       var useInputs = false;
 
-      var isDone = parsedExpression.literal ? isAllDefined : isDefined;
+      var regularWatch =
+          watchDelegate !== oneTimeLiteralWatchDelegate &&
+          watchDelegate !== oneTimeWatchDelegate;
 
-      function regularInterceptedExpression(scope, locals, assign, inputs) {
+      var fn = regularWatch ? function regularInterceptedExpression(scope, locals, assign, inputs) {
         var value = useInputs && inputs ? inputs[0] : parsedExpression(scope, locals, assign, inputs);
         return interceptorFn(value, scope, locals);
-      }
-
-      function oneTimeInterceptedExpression(scope, locals, assign, inputs) {
-        var value = useInputs && inputs ? inputs[0] : parsedExpression(scope, locals, assign, inputs);
+      } : function oneTimeInterceptedExpression(scope, locals, assign, inputs) {
+        var value = parsedExpression(scope, locals, assign, inputs);
         var result = interceptorFn(value, scope, locals);
         // we only return the interceptor's result if the
         // initial value is defined (for bind-once)
-        return isDone(value) ? result : value;
-      }
+        return isDefined(value) ? result : value;
+      };
 
-      var fn = parsedExpression.oneTime ? oneTimeInterceptedExpression : regularInterceptedExpression;
-
-      // Propogate the literal/oneTime attributes
-      fn.literal = parsedExpression.literal;
-      fn.oneTime = parsedExpression.oneTime;
-
-      // Propagate or create inputs / $$watchDelegates
+      // Propagate $$watchDelegates other then inputsWatchDelegate
       useInputs = !parsedExpression.inputs;
       if (watchDelegate && watchDelegate !== inputsWatchDelegate) {
         fn.$$watchDelegate = watchDelegate;
         fn.inputs = parsedExpression.inputs;
       } else if (!interceptorFn.$stateful) {
-        // If there is an interceptor, but no watchDelegate then treat the interceptor like
-        // we treat filters - it is assumed to be a pure function unless flagged with $stateful
+        // Treat interceptor like filters - assume non-stateful by default and use the inputsWatchDelegate
         fn.$$watchDelegate = inputsWatchDelegate;
         fn.inputs = parsedExpression.inputs ? parsedExpression.inputs : [parsedExpression];
+      }
+
+      if (fn.inputs) {
+        fn.inputs = fn.inputs.map(function(e) {
+              // Remove the isPure flag of inputs when it is not absolute because they are now wrapped in a
+              // potentially non-pure interceptor function.
+              if (e.isPure === PURITY_RELATIVE) {
+                return function depurifier(s) { return e(s); };
+              }
+              return e;
+            });
       }
 
       return fn;
@@ -18831,7 +18999,7 @@ function $$QProvider() {
  * @param {function(function)} nextTick Function for executing functions in the next turn.
  * @param {function(...*)} exceptionHandler Function into which unexpected exceptions are passed for
  *     debugging purposes.
- @ param {=boolean} errorOnUnhandledRejections Whether an error should be generated on unhandled
+ * @param {boolean=} errorOnUnhandledRejections Whether an error should be generated on unhandled
  *     promises rejections.
  * @returns {object} Promise manager.
  */
@@ -18902,7 +19070,7 @@ function qFactory(nextTick, exceptionHandler, errorOnUnhandledRejections) {
     state.pending = undefined;
     try {
       for (var i = 0, ii = pending.length; i < ii; ++i) {
-        state.pur = true;
+        markQStateExceptionHandled(state);
         promise = pending[i][0];
         fn = pending[i][state.status];
         try {
@@ -18929,10 +19097,10 @@ function qFactory(nextTick, exceptionHandler, errorOnUnhandledRejections) {
     // eslint-disable-next-line no-unmodified-loop-condition
     while (!queueSize && checkQueue.length) {
       var toCheck = checkQueue.shift();
-      if (!toCheck.pur) {
-        toCheck.pur = true;
+      if (!isStateExceptionHandled(toCheck)) {
+        markQStateExceptionHandled(toCheck);
         var errorMessage = 'Possibly unhandled rejection: ' + toDebugString(toCheck.value);
-        if (toCheck.value instanceof Error) {
+        if (isError(toCheck.value)) {
           exceptionHandler(toCheck.value, errorMessage);
         } else {
           exceptionHandler(errorMessage);
@@ -18942,7 +19110,7 @@ function qFactory(nextTick, exceptionHandler, errorOnUnhandledRejections) {
   }
 
   function scheduleProcessQueue(state) {
-    if (errorOnUnhandledRejections && !state.pending && state.status === 2 && !state.pur) {
+    if (errorOnUnhandledRejections && !state.pending && state.status === 2 && !isStateExceptionHandled(state)) {
       if (queueSize === 0 && checkQueue.length === 0) {
         nextTick(processChecks);
       }
@@ -19221,6 +19389,16 @@ function qFactory(nextTick, exceptionHandler, errorOnUnhandledRejections) {
   $Q.race = race;
 
   return $Q;
+}
+
+function isStateExceptionHandled(state) {
+  return !!state.pur;
+}
+function markQStateExceptionHandled(state) {
+  state.pur = true;
+}
+function markQExceptionHandled(q) {
+  markQStateExceptionHandled(q.$$state);
 }
 
 /** @this */
@@ -19703,6 +19881,12 @@ function $RootScopeProvider() {
        *   values are examined for changes on every call to `$digest`.
        * - The `listener` is called whenever any expression in the `watchExpressions` array changes.
        *
+       * `$watchGroup` is more performant than watching each expression individually, and should be
+       * used when the listener does not need to know which expression has changed.
+       * If the listener needs to know which expression has changed,
+       * {@link ng.$rootScope.Scope#$watch $watch()} or
+       * {@link ng.$rootScope.Scope#$watchCollection $watchCollection()} should be used.
+       *
        * @param {Array.<string|Function(scope)>} watchExpressions Array of expressions that will be individually
        * watched using {@link ng.$rootScope.Scope#$watch $watch()}
        *
@@ -19711,7 +19895,34 @@ function $RootScopeProvider() {
        *    The `newValues` array contains the current values of the `watchExpressions`, with the indexes matching
        *    those of `watchExpression`
        *    and the `oldValues` array contains the previous values of the `watchExpressions`, with the indexes matching
-       *    those of `watchExpression`
+       *    those of `watchExpression`.
+       *
+       *    Note that `newValues` and `oldValues` reflect the differences in each **individual**
+       *    expression, and not the difference of the values between each call of the listener.
+       *    That means the difference between `newValues` and `oldValues` cannot be used to determine
+       *    which expression has changed / remained stable:
+       *
+       *    ```js
+       *
+       *    $scope.$watchGroup(['v1', 'v2'], function(newValues, oldValues) {
+       *      console.log(newValues, oldValues);
+       *    });
+       *
+       *    // newValues, oldValues initially
+       *    // [undefined, undefined], [undefined, undefined]
+       *
+       *    $scope.v1 = 'a';
+       *    $scope.v2 = 'a';
+       *
+       *    // ['a', 'a'], [undefined, undefined]
+       *
+       *    $scope.v2 = 'b'
+       *
+       *    // v1 hasn't changed since it became `'a'`, therefore its oldValue is still `undefined`
+       *    // ['a', 'b'], [undefined, 'a']
+       *
+       *    ```
+       *
        *    The `scope` refers to the current scope.
        * @returns {function()} Returns a de-registration function for all listeners.
        */
@@ -22286,7 +22497,7 @@ function $TimeoutProvider() {
     timeout.cancel = function(promise) {
       if (promise && promise.$$timeoutId in deferreds) {
         // Timeout cancels should not report an unhandled promise.
-        deferreds[promise.$$timeoutId].promise.catch(noop);
+        markQExceptionHandled(deferreds[promise.$$timeoutId].promise);
         deferreds[promise.$$timeoutId].reject('canceled');
         delete deferreds[promise.$$timeoutId];
         return $browser.defer.cancel(promise.$$timeoutId);
@@ -22721,7 +22932,7 @@ function $FilterProvider($provide) {
  *
  * @param {function(actual, expected)|true|false} [comparator] Comparator which is used in
  *     determining if values retrieved using `expression` (when it is not a function) should be
- *     considered a match based on the the expected value (from the filter expression) and actual
+ *     considered a match based on the expected value (from the filter expression) and actual
  *     value (from the object in the array).
  *
  *   Can be one of:
@@ -23640,6 +23851,9 @@ function jsonFilter() {
  * @kind function
  * @description
  * Converts string to lowercase.
+ *
+ * See the {@link ng.uppercase uppercase filter documentation} for a functionally identical example.
+ *
  * @see angular.lowercase
  */
 var lowercaseFilter = valueFn(lowercase);
@@ -23651,7 +23865,23 @@ var lowercaseFilter = valueFn(lowercase);
  * @kind function
  * @description
  * Converts string to uppercase.
- * @see angular.uppercase
+ * @example
+   <example module="uppercaseFilterExample" name="filter-uppercase">
+     <file name="index.html">
+       <script>
+         angular.module('uppercaseFilterExample', [])
+           .controller('ExampleController', ['$scope', function($scope) {
+             $scope.title = 'This is a title';
+           }]);
+       </script>
+       <div ng-controller="ExampleController">
+         <!-- This title should be formatted normally -->
+         <h1>{{title}}</h1>
+         <!-- This title should be capitalized -->
+         <h1>{{title | uppercase}}</h1>
+       </div>
+     </file>
+   </example>
  */
 var uppercaseFilter = valueFn(uppercase);
 
@@ -23839,6 +24069,9 @@ function sliceFn(input, begin, end) {
  * specified predicates can distinguish between two items, `orderBy` will automatically introduce a
  * dummy predicate that returns the item's index as `value`.
  * (If you are using a custom comparator, make sure it can handle this predicate as well.)
+ *
+ * If a custom comparator still can't distinguish between two items, then they will be sorted based
+ * on their index using the built-in comparator.
  *
  * Finally, in an attempt to simplify things, if a predicate returns an object as the extracted
  * value for an item, `orderBy` will try to convert that object to a primitive value, before passing
@@ -24386,7 +24619,7 @@ function orderByFilter($parse) {
         }
       }
 
-      return compare(v1.tieBreaker, v2.tieBreaker) * descending;
+      return (compare(v1.tieBreaker, v2.tieBreaker) || defaultCompare(v1.tieBreaker, v2.tieBreaker)) * descending;
     }
   };
 
@@ -24989,17 +25222,23 @@ function nullFormRenameControl(control, name) {
  * @property {boolean} $dirty True if user has already interacted with the form.
  * @property {boolean} $valid True if all of the containing forms and controls are valid.
  * @property {boolean} $invalid True if at least one containing control or form is invalid.
- * @property {boolean} $pending True if at least one containing control or form is pending.
  * @property {boolean} $submitted True if user has submitted the form even if its invalid.
  *
- * @property {Object} $error Is an object hash, containing references to controls or
- *  forms with failing validators, where:
+ * @property {Object} $pending An object hash, containing references to controls or forms with
+ *  pending validators, where:
+ *
+ *  - keys are validations tokens (error names).
+ *  - values are arrays of controls or forms that have a pending validator for the given error name.
+ *
+ * See {@link form.FormController#$error $error} for a list of built-in validation tokens.
+ *
+ * @property {Object} $error An object hash, containing references to controls or forms with failing
+ *  validators, where:
  *
  *  - keys are validation tokens (error names),
- *  - values are arrays of controls or forms that have a failing validator for given error name.
+ *  - values are arrays of controls or forms that have a failing validator for the given error name.
  *
  *  Built-in validation tokens:
- *
  *  - `email`
  *  - `max`
  *  - `maxlength`
@@ -25245,9 +25484,24 @@ FormController.prototype = {
  * @name form.FormController#$setValidity
  *
  * @description
- * Sets the validity of a form control.
+ * Change the validity state of the form, and notify the parent form (if any).
  *
- * This method will also propagate to parent forms.
+ * Application developers will rarely need to call this method directly. It is used internally, by
+ * {@link ngModel.NgModelController#$setValidity NgModelController.$setValidity()}, to propagate a
+ * control's validity state to the parent `FormController`.
+ *
+ * @param {string} validationErrorKey Name of the validator. The `validationErrorKey` will be
+ *        assigned to either `$error[validationErrorKey]` or `$pending[validationErrorKey]` (for
+ *        unfulfilled `$asyncValidators`), so that it is available for data-binding. The
+ *        `validationErrorKey` should be in camelCase and will get converted into dash-case for
+ *        class name. Example: `myError` will result in `ng-valid-my-error` and
+ *        `ng-invalid-my-error` classes and can be bound to as `{{ someForm.$error.myError }}`.
+ * @param {boolean} isValid Whether the current state is valid (true), invalid (false), pending
+ *        (undefined),  or skipped (null). Pending is used for unfulfilled `$asyncValidators`.
+ *        Skipped is used by AngularJS when validators do not run because of parse errors and when
+ *        `$asyncValidators` do not run because any of the `$validators` failed.
+ * @param {NgModelController | FormController} controller - The controller whose validity state is
+ *        triggering the change.
  */
 addSetValidityMethod({
   clazz: FormController,
@@ -28092,6 +28346,13 @@ function classDirective(name, selector) {
     return {
       restrict: 'AC',
       link: function(scope, element, attr) {
+        var expression = attr[name].trim();
+        var isOneTime = (expression.charAt(0) === ':') && (expression.charAt(1) === ':');
+
+        var watchInterceptor = isOneTime ? toFlatValue : toClassString;
+        var watchExpression = $parse(expression, watchInterceptor);
+        var watchAction = isOneTime ? ngClassOneTimeWatchAction : ngClassWatchAction;
+
         var classCounts = element.data('$classCounts');
         var oldModulo = true;
         var oldClassString;
@@ -28114,7 +28375,7 @@ function classDirective(name, selector) {
           scope.$watch(indexWatchExpression, ngClassIndexWatchAction);
         }
 
-        scope.$watch($parse(attr[name], toClassString), ngClassWatchAction);
+        scope.$watch(watchExpression, watchAction, isOneTime);
 
         function addClasses(classString) {
           classString = digestClassCounts(split(classString), 1);
@@ -28156,9 +28417,9 @@ function classDirective(name, selector) {
         }
 
         function ngClassIndexWatchAction(newModulo) {
-          // This watch-action should run before the `ngClassWatchAction()`, thus it
+          // This watch-action should run before the `ngClass[OneTime]WatchAction()`, thus it
           // adds/removes `oldClassString`. If the `ngClass` expression has changed as well, the
-          // `ngClassWatchAction()` will update the classes.
+          // `ngClass[OneTime]WatchAction()` will update the classes.
           if (newModulo === selector) {
             addClasses(oldClassString);
           } else {
@@ -28168,13 +28429,15 @@ function classDirective(name, selector) {
           oldModulo = newModulo;
         }
 
-        function ngClassWatchAction(newClassString) {
-          // When using a one-time binding the newClassString will return
-          // the pre-interceptor value until the one-time is complete
-          if (!isString(newClassString)) {
-            newClassString = toClassString(newClassString);
-          }
+        function ngClassOneTimeWatchAction(newClassValue) {
+          var newClassString = toClassString(newClassValue);
 
+          if (newClassString !== oldClassString) {
+            ngClassWatchAction(newClassString);
+          }
+        }
+
+        function ngClassWatchAction(newClassString) {
           if (oldModulo === selector) {
             updateClasses(oldClassString, newClassString);
           }
@@ -28220,6 +28483,34 @@ function classDirective(name, selector) {
     }
 
     return classString;
+  }
+
+  function toFlatValue(classValue) {
+    var flatValue = classValue;
+
+    if (isArray(classValue)) {
+      flatValue = classValue.map(toFlatValue);
+    } else if (isObject(classValue)) {
+      var hasUndefined = false;
+
+      flatValue = Object.keys(classValue).filter(function(key) {
+        var value = classValue[key];
+
+        if (!hasUndefined && isUndefined(value)) {
+          hasUndefined = true;
+        }
+
+        return value;
+      });
+
+      if (hasUndefined) {
+        // Prevent the `oneTimeLiteralWatchInterceptor` from unregistering
+        // the watcher, by including at least one `undefined` value.
+        flatValue.push(undefined);
+      }
+    }
+
+    return flatValue;
   }
 }
 
@@ -31061,7 +31352,7 @@ function setupModelWatcher(ctrl) {
  *        (for unfulfilled `$asyncValidators`), so that it is available for data-binding.
  *        The `validationErrorKey` should be in camelCase and will get converted into dash-case
  *        for class name. Example: `myError` will result in `ng-valid-my-error` and `ng-invalid-my-error`
- *        class and can be bound to as  `{{someForm.someControl.$error.myError}}` .
+ *        classes and can be bound to as `{{ someForm.someControl.$error.myError }}`.
  * @param {boolean} isValid Whether the current state is valid (true), invalid (false), pending (undefined),
  *                          or skipped (null). Pending is used for unfulfilled `$asyncValidators`.
  *                          Skipped is used by Angular when validators do not run because of parse errors and
@@ -32136,7 +32427,8 @@ var ngOptionsDirective = ['$compile', '$document', '$parse', function($compile, 
   }
 
 
-  // we can't just jqLite('<option>') since jqLite is not smart enough
+  // Support: IE 9 only
+  // We can't just jqLite('<option>') since jqLite is not smart enough
   // to create it in <select> and IE barfs otherwise.
   var optionTemplate = window.document.createElement('option'),
       optGroupTemplate = window.document.createElement('optgroup');
@@ -32156,6 +32448,9 @@ var ngOptionsDirective = ['$compile', '$document', '$parse', function($compile, 
           break;
         }
       }
+
+      // The empty option will be compiled and rendered before we first generate the options
+      selectElement.empty();
 
       var providedEmptyOption = !!selectCtrl.emptyOption;
 
@@ -32178,12 +32473,15 @@ var ngOptionsDirective = ['$compile', '$document', '$parse', function($compile, 
       if (!multiple) {
 
         selectCtrl.writeValue = function writeNgOptionsValue(value) {
-          var selectedOption = options.selectValueMap[selectElement.val()];
+          // The options might not be defined yet when ngModel tries to render
+          if (!options) return;
+
+          var selectedOption = selectElement[0].options[selectElement[0].selectedIndex];
           var option = options.getOptionFromViewValue(value);
 
           // Make sure to remove the selected attribute from the previously selected option
           // Otherwise, screen readers might get confused
-          if (selectedOption) selectedOption.element.removeAttribute('selected');
+          if (selectedOption) selectedOption.removeAttribute('selected');
 
           if (option) {
             // Don't update the option when it is already selected.
@@ -32193,7 +32491,6 @@ var ngOptionsDirective = ['$compile', '$document', '$parse', function($compile, 
 
             if (selectElement[0].value !== option.selectValue) {
               selectCtrl.removeUnknownOption();
-              selectCtrl.unselectEmptyOption();
 
               selectElement[0].value = option.selectValue;
               option.element.selected = true;
@@ -32201,14 +32498,7 @@ var ngOptionsDirective = ['$compile', '$document', '$parse', function($compile, 
 
             option.element.setAttribute('selected', 'selected');
           } else {
-
-            if (providedEmptyOption) {
-              selectCtrl.selectEmptyOption();
-            } else if (selectCtrl.unknownOption.parent().length) {
-              selectCtrl.updateUnknownOption(value);
-            } else {
-              selectCtrl.renderUnknownOption(value);
-            }
+            selectCtrl.selectUnknownOrEmptyOption(value);
           }
         };
 
@@ -32237,9 +32527,11 @@ var ngOptionsDirective = ['$compile', '$document', '$parse', function($compile, 
       } else {
 
         selectCtrl.writeValue = function writeNgOptionsMultiple(values) {
+          // The options might not be defined yet when ngModel tries to render
+          if (!options) return;
+
           // Only set `<option>.selected` if necessary, in order to prevent some browsers from
           // scrolling to `<option>` elements that are outside the `<select>` element's viewport.
-
           var selectedOptions = values && values.map(getAndUpdateSelectedOption) || [];
 
           options.items.forEach(function(option) {
@@ -32281,12 +32573,10 @@ var ngOptionsDirective = ['$compile', '$document', '$parse', function($compile, 
 
       if (providedEmptyOption) {
 
-        // we need to remove it before calling selectElement.empty() because otherwise IE will
-        // remove the label from the element. wtf?
-        selectCtrl.emptyOption.remove();
-
         // compile the element since there might be bindings in it
         $compile(selectCtrl.emptyOption)(scope);
+
+        selectElement.prepend(selectCtrl.emptyOption);
 
         if (selectCtrl.emptyOption[0].nodeType === NODE_TYPE_COMMENT) {
           // This means the empty option has currently no actual DOM node, probably because
@@ -32305,8 +32595,12 @@ var ngOptionsDirective = ['$compile', '$document', '$parse', function($compile, 
               ngModelCtrl.$render();
 
               optionEl.on('$destroy', function() {
+                var needsRerender = selectCtrl.$isEmptyOptionSelected();
+
                 selectCtrl.hasEmptyOption = false;
                 selectCtrl.emptyOption = undefined;
+
+                if (needsRerender) ngModelCtrl.$render();
               });
             }
           };
@@ -32318,12 +32612,6 @@ var ngOptionsDirective = ['$compile', '$document', '$parse', function($compile, 
         }
 
       }
-
-      selectElement.empty();
-
-      // We need to do this here to ensure that the options object is defined
-      // when we first hit it in writeNgOptionsValue
-      updateOptions();
 
       // We will re-render the option elements if the option values or labels change
       scope.$watchCollection(ngOptions.getWatchables, updateOptions);
@@ -32348,7 +32636,8 @@ var ngOptionsDirective = ['$compile', '$document', '$parse', function($compile, 
       function updateOptionElement(option, element) {
         option.element = element;
         element.disabled = option.disabled;
-        // NOTE: The label must be set before the value, otherwise IE10/11/EDGE create unresponsive
+        // Support: IE 11 only, Edge 12-13 only
+        // NOTE: The label must be set before the value, otherwise IE 11 & Edge create unresponsive
         // selects in certain circumstances when multiple selects are next to each other and display
         // the option list in listbox style, i.e. the select is [multiple], or specifies a [size].
         // See https://github.com/angular/angular.js/issues/11314 for more info.
@@ -32383,11 +32672,6 @@ var ngOptionsDirective = ['$compile', '$document', '$parse', function($compile, 
         options = ngOptions.getOptions();
 
         var groupElementMap = {};
-
-        // Ensure that the empty option is always there if it was explicitly provided
-        if (providedEmptyOption) {
-          selectElement.prepend(selectCtrl.emptyOption);
-        }
 
         options.items.forEach(function addOption(option) {
           var groupElement;
@@ -32433,7 +32717,6 @@ var ngOptionsDirective = ['$compile', '$document', '$parse', function($compile, 
             ngModelCtrl.$render();
           }
         }
-
       }
   }
 
@@ -33121,7 +33404,7 @@ var ngRepeatDirective = ['$parse', '$animate', '$compile', function($parse, $ani
         // Store a list of elements from previous run. This is a hash where key is the item from the
         // iterator, and the value is objects with following properties.
         //   - scope: bound scope
-        //   - element: previous element.
+        //   - clone: previous element.
         //   - index: position
         //
         // We are using no-proto object so that we don't need to guard against inherited props via
@@ -34224,7 +34507,7 @@ var scriptDirective = ['$templateCache', function($templateCache) {
 var noopNgModelController = { $setViewValue: noop, $render: noop };
 
 function setOptionSelectedStatus(optionEl, value) {
-  optionEl.prop('selected', value); // needed for IE
+  optionEl.prop('selected', value);
   /**
    * When unselecting an option, setting the property to null / false should be enough
    * However, screenreaders might react to the selected attribute instead, see
@@ -34238,10 +34521,120 @@ function setOptionSelectedStatus(optionEl, value) {
 /**
  * @ngdoc type
  * @name  select.SelectController
+ *
  * @description
- * The controller for the `<select>` directive. This provides support for reading
- * and writing the selected value(s) of the control and also coordinates dynamically
- * added `<option>` elements, perhaps by an `ngRepeat` directive.
+ * The controller for the {@link ng.select select} directive. The controller exposes
+ * a few utility methods that can be used to augment the behavior of a regular or an
+ * {@link ng.ngOptions ngOptions} select element.
+ *
+ * @example
+ * ### Set a custom error when the unknown option is selected
+ *
+ * This example sets a custom error "unknownValue" on the ngModelController
+ * when the select element's unknown option is selected, i.e. when the model is set to a value
+ * that is not matched by any option.
+ *
+ * <example name="select-unknown-value-error" module="staticSelect">
+ * <file name="index.html">
+ * <div ng-controller="ExampleController">
+ *   <form name="myForm">
+ *     <label for="testSelect"> Single select: </label><br>
+ *     <select name="testSelect" ng-model="selected" unknown-value-error>
+ *       <option value="option-1">Option 1</option>
+ *       <option value="option-2">Option 2</option>
+ *     </select><br>
+ *     <span ng-if="myForm.testSelect.$error.unknownValue">Error: The current model doesn't match any option</span>
+ *
+ *     <button ng-click="forceUnknownOption()">Force unknown option</button><br>
+ *   </form>
+ * </div>
+ * </file>
+ * <file name="app.js">
+ *  angular.module('staticSelect', [])
+ *    .controller('ExampleController', ['$scope', function($scope) {
+ *      $scope.selected = null;
+ *
+ *      $scope.forceUnknownOption = function() {
+ *        $scope.selected = 'nonsense';
+ *      };
+ *   }])
+ *   .directive('unknownValueError', function() {
+ *     return {
+ *       require: ['ngModel', 'select'],
+ *       link: function(scope, element, attrs, ctrls) {
+ *         var ngModelCtrl = ctrls[0];
+ *         var selectCtrl = ctrls[1];
+ *
+ *         ngModelCtrl.$validators.unknownValue = function(modelValue, viewValue) {
+ *           if (selectCtrl.$isUnknownOptionSelected()) {
+ *             return false;
+ *           }
+ *
+ *           return true;
+ *         };
+ *       }
+ *
+ *     };
+ *   });
+ * </file>
+ *</example>
+ *
+ *
+ * @example
+ * ### Set the "required" error when the unknown option is selected.
+ *
+ * By default, the "required" error on the ngModelController is only set on a required select
+ * when the empty option is selected. This example adds a custom directive that also sets the
+ * error when the unknown option is selected.
+ *
+ * <example name="select-unknown-value-required" module="staticSelect">
+ * <file name="index.html">
+ * <div ng-controller="ExampleController">
+ *   <form name="myForm">
+ *     <label for="testSelect"> Select: </label><br>
+ *     <select name="testSelect" ng-model="selected" unknown-value-required>
+ *       <option value="option-1">Option 1</option>
+ *       <option value="option-2">Option 2</option>
+ *     </select><br>
+ *     <span ng-if="myForm.testSelect.$error.required">Error: Please select a value</span><br>
+ *
+ *     <button ng-click="forceUnknownOption()">Force unknown option</button><br>
+ *   </form>
+ * </div>
+ * </file>
+ * <file name="app.js">
+ *  angular.module('staticSelect', [])
+ *    .controller('ExampleController', ['$scope', function($scope) {
+ *      $scope.selected = null;
+ *
+ *      $scope.forceUnknownOption = function() {
+ *        $scope.selected = 'nonsense';
+ *      };
+ *   }])
+ *   .directive('unknownValueRequired', function() {
+ *     return {
+ *       priority: 1, // This directive must run after the required directive has added its validator
+ *       require: ['ngModel', 'select'],
+ *       link: function(scope, element, attrs, ctrls) {
+ *         var ngModelCtrl = ctrls[0];
+ *         var selectCtrl = ctrls[1];
+ *
+ *         var originalRequiredValidator = ngModelCtrl.$validators.required;
+ *
+ *         ngModelCtrl.$validators.required = function() {
+ *           if (attrs.required && selectCtrl.$isUnknownOptionSelected()) {
+ *             return false;
+ *           }
+ *
+ *           return originalRequiredValidator.apply(this, arguments);
+ *         };
+ *       }
+ *     };
+ *   });
+ * </file>
+ *</example>
+ *
+ *
  */
 var SelectController =
         ['$element', '$scope', /** @this */ function($element, $scope) {
@@ -34259,15 +34652,18 @@ var SelectController =
   // does not match any of the options. When it is rendered the value of the unknown
   // option is '? XXX ?' where XXX is the hashKey of the value that is not known.
   //
+  // Support: IE 9 only
   // We can't just jqLite('<option>') since jqLite is not smart enough
   // to create it in <select> and IE barfs otherwise.
   self.unknownOption = jqLite(window.document.createElement('option'));
 
-  // The empty option is an option with the value '' that te application developer can
-  // provide inside the select. When the model changes to a value that doesn't match an option,
-  // it is selected - so if an empty option is provided, no unknown option is generated.
-  // However, the empty option is not removed when the model matches an option. It is always selectable
-  // and indicates that a "null" selection has been made.
+  // The empty option is an option with the value '' that the application developer can
+  // provide inside the select. It is always selectable and indicates that a "null" selection has
+  // been made by the user.
+  // If the select has an empty option, and the model of the select is set to "undefined" or "null",
+  // the empty option is selected.
+  // If the model is set to a different unmatched value, the unknown option is rendered and
+  // selected, i.e both are present, because a "null" selection and an unknown value are different.
   self.hasEmptyOption = false;
   self.emptyOption = undefined;
 
@@ -34303,7 +34699,7 @@ var SelectController =
 
   self.unselectEmptyOption = function() {
     if (self.hasEmptyOption) {
-      self.emptyOption.removeAttr('selected');
+      setOptionSelectedStatus(self.emptyOption, false);
     }
   };
 
@@ -34345,14 +34741,7 @@ var SelectController =
       var selectedOption = $element[0].options[$element[0].selectedIndex];
       setOptionSelectedStatus(jqLite(selectedOption), true);
     } else {
-      if (value == null && self.emptyOption) {
-        self.removeUnknownOption();
-        self.selectEmptyOption();
-      } else if (self.unknownOption.parent().length) {
-        self.updateUnknownOption(value);
-      } else {
-        self.renderUnknownOption(value);
-      }
+      self.selectUnknownOrEmptyOption(value);
     }
   };
 
@@ -34395,6 +34784,59 @@ var SelectController =
     return !!optionsMap.get(value);
   };
 
+  /**
+   * @ngdoc method
+   * @name select.SelectController#$hasEmptyOption
+   *
+   * @description
+   *
+   * Returns `true` if the select element currently has an empty option
+   * element, i.e. an option that signifies that the select is empty / the selection is null.
+   *
+   */
+  self.$hasEmptyOption = function() {
+    return self.hasEmptyOption;
+  };
+
+  /**
+   * @ngdoc method
+   * @name select.SelectController#$isUnknownOptionSelected
+   *
+   * @description
+   *
+   * Returns `true` if the select element's unknown option is selected. The unknown option is added
+   * and automatically selected whenever the select model doesn't match any option.
+   *
+   */
+  self.$isUnknownOptionSelected = function() {
+    // Presence of the unknown option means it is selected
+    return $element[0].options[0] === self.unknownOption[0];
+  };
+
+  /**
+   * @ngdoc method
+   * @name select.SelectController#$isEmptyOptionSelected
+   *
+   * @description
+   *
+   * Returns `true` if the select element has an empty option and this empty option is currently
+   * selected. Returns `false` if the select element has no empty option or it is not selected.
+   *
+   */
+  self.$isEmptyOptionSelected = function() {
+    return self.hasEmptyOption && $element[0].options[$element[0].selectedIndex] === self.emptyOption[0];
+  };
+
+  self.selectUnknownOrEmptyOption = function(value) {
+    if (value == null && self.emptyOption) {
+      self.removeUnknownOption();
+      self.selectEmptyOption();
+    } else if (self.unknownOption.parent().length) {
+      self.updateUnknownOption(value);
+    } else {
+      self.renderUnknownOption(value);
+    }
+  };
 
   var renderScheduled = false;
   function scheduleRender() {
@@ -34543,6 +34985,9 @@ var SelectController =
  * the content of the `value` attribute or the textContent of the `<option>`, if the value attribute is missing.
  * Value and textContent can be interpolated.
  *
+ * The {@link select.SelectController select controller} exposes utility functions that can be used
+ * to manipulate the select's behavior.
+ *
  * ## Matching model and option values
  *
  * In general, the match between the model and an option is evaluated by strictly comparing the model
@@ -34594,6 +35039,19 @@ var SelectController =
  * set on the model on selection. See {@link ngOptions `ngOptions`}.
  * @param {string=} ngAttrSize sets the size of the select element dynamically. Uses the
  * {@link guide/interpolation#-ngattr-for-binding-to-arbitrary-attributes ngAttr} directive.
+ *
+ *
+ * @knownIssue
+ *
+ * In Firefox, the select model is only updated when the select element is blurred. For example,
+ * when switching between options with the keyboard, the select model is only set to the
+ * currently selected option when the select is blurred, e.g via tab key or clicking the mouse
+ * outside the select.
+ *
+ * This is due to an ambiguity in the select element specification. See the
+ * [issue on the Firefox bug tracker](https://bugzilla.mozilla.org/show_bug.cgi?id=126379)
+ * for more information, and this
+ * [Github comment for a workaround](https://github.com/angular/angular.js/issues/9134#issuecomment-130800488)
  *
  * @example
  * ### Simple `select` elements with static options
@@ -34839,10 +35297,11 @@ var selectDirective = function() {
                                                includes(value, selectCtrl.selectValueMap[option.value]));
             var currentlySelected = option.selected;
 
-            // IE and Edge, adding options to the selection via shift+click/UP/DOWN,
+            // Support: IE 9-11 only, Edge 12-15+
+            // In IE and Edge adding options to the selection via shift+click/UP/DOWN
             // will de-select already selected options if "selected" on those options was set
             // more than once (i.e. when the options were already selected)
-            // So we only modify the selected property if neccessary.
+            // So we only modify the selected property if necessary.
             // Note: this behavior cannot be replicated via unit tests because it only shows in the
             // actual user interface.
             if (shouldBeSelected !== currentlySelected) {
@@ -35449,7 +35908,7 @@ $provide.value("$locale", {
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
 /**
- * @license AngularJS v1.6.4
+ * @license AngularJS v1.6.5
  * (c) 2010-2017 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -35768,27 +36227,78 @@ function $SanitizeProvider() {
     return obj;
   }
 
-  var inertBodyElement;
-  (function(window) {
-    var doc;
-    if (window.document && window.document.implementation) {
-      doc = window.document.implementation.createHTMLDocument('inert');
+  /**
+   * Create an inert document that contains the dirty HTML that needs sanitizing
+   * Depending upon browser support we use one of three strategies for doing this.
+   * Support: Safari 10.x -> XHR strategy
+   * Support: Firefox -> DomParser strategy
+   */
+  var getInertBodyElement /* function(html: string): HTMLBodyElement */ = (function(window, document) {
+    var inertDocument;
+    if (document && document.implementation) {
+      inertDocument = document.implementation.createHTMLDocument('inert');
     } else {
       throw $sanitizeMinErr('noinert', 'Can\'t create an inert html document');
     }
-    var docElement = doc.documentElement || doc.getDocumentElement();
-    var bodyElements = docElement.getElementsByTagName('body');
+    var inertBodyElement = (inertDocument.documentElement || inertDocument.getDocumentElement()).querySelector('body');
 
-    // usually there should be only one body element in the document, but IE doesn't have any, so we need to create one
-    if (bodyElements.length === 1) {
-      inertBodyElement = bodyElements[0];
+    // Check for the Safari 10.1 bug - which allows JS to run inside the SVG G element
+    inertBodyElement.innerHTML = '<svg><g onload="this.parentNode.remove()"></g></svg>';
+    if (!inertBodyElement.querySelector('svg')) {
+      return getInertBodyElement_XHR;
     } else {
-      var html = doc.createElement('html');
-      inertBodyElement = doc.createElement('body');
-      html.appendChild(inertBodyElement);
-      doc.appendChild(html);
+      // Check for the Firefox bug - which prevents the inner img JS from being sanitized
+      inertBodyElement.innerHTML = '<svg><p><style><img src="</style><img src=x onerror=alert(1)//">';
+      if (inertBodyElement.querySelector('svg img')) {
+        return getInertBodyElement_DOMParser;
+      } else {
+        return getInertBodyElement_InertDocument;
+      }
     }
-  })(window);
+
+    function getInertBodyElement_XHR(html) {
+      // We add this dummy element to ensure that the rest of the content is parsed as expected
+      // e.g. leading whitespace is maintained and tags like `<meta>` do not get hoisted to the `<head>` tag.
+      html = '<remove></remove>' + html;
+      try {
+        html = encodeURI(html);
+      } catch (e) {
+        return undefined;
+      }
+      var xhr = new window.XMLHttpRequest();
+      xhr.responseType = 'document';
+      xhr.open('GET', 'data:text/html;charset=utf-8,' + html, false);
+      xhr.send(null);
+      var body = xhr.response.body;
+      body.firstChild.remove();
+      return body;
+    }
+
+    function getInertBodyElement_DOMParser(html) {
+      // We add this dummy element to ensure that the rest of the content is parsed as expected
+      // e.g. leading whitespace is maintained and tags like `<meta>` do not get hoisted to the `<head>` tag.
+      html = '<remove></remove>' + html;
+      try {
+        var body = new window.DOMParser().parseFromString(html, 'text/html').body;
+        body.firstChild.remove();
+        return body;
+      } catch (e) {
+        return undefined;
+      }
+    }
+
+    function getInertBodyElement_InertDocument(html) {
+      inertBodyElement.innerHTML = html;
+
+      // Support: IE 9-11 only
+      // strip custom-namespaced attributes on IE<=11
+      if (document.documentMode) {
+        stripCustomNsAttrs(inertBodyElement);
+      }
+
+      return inertBodyElement;
+    }
+  })(window, window.document);
 
   /**
    * @example
@@ -35808,7 +36318,9 @@ function $SanitizeProvider() {
     } else if (typeof html !== 'string') {
       html = '' + html;
     }
-    inertBodyElement.innerHTML = html;
+
+    var inertBodyElement = getInertBodyElement(html);
+    if (!inertBodyElement) return '';
 
     //mXSS protection
     var mXSSAttempts = 5;
@@ -35818,12 +36330,9 @@ function $SanitizeProvider() {
       }
       mXSSAttempts--;
 
-      // strip custom-namespaced attributes on IE<=11
-      if (window.document.documentMode) {
-        stripCustomNsAttrs(inertBodyElement);
-      }
-      html = inertBodyElement.innerHTML; //trigger mXSS
-      inertBodyElement.innerHTML = html;
+      // trigger mXSS if it is going to happen by reading and writing the innerHTML
+      html = inertBodyElement.innerHTML;
+      inertBodyElement = getInertBodyElement(html);
     } while (html !== inertBodyElement.innerHTML);
 
     var node = inertBodyElement.firstChild;
@@ -36004,7 +36513,7 @@ function sanitizeText(chars) {
 // define ngSanitize module and register $sanitize service
 angular.module('ngSanitize', [])
   .provider('$sanitize', $SanitizeProvider)
-  .info({ angularVersion: '1.6.4' });
+  .info({ angularVersion: '1.6.5' });
 
 /**
  * @ngdoc filter
@@ -36206,61 +36715,61 @@ angular.module('ngSanitize').filter('linky', ['$sanitize', function($sanitize) {
 })(window, window.angular);
 
 /*
- AngularJS v1.6.4
+ AngularJS v1.6.5
  (c) 2010-2017 Google, Inc. http://angularjs.org
  License: MIT
 */
-(function(R,y){'use strict';function Ea(a,b,c){if(!a)throw Oa("areq",b||"?",c||"required");return a}function Fa(a,b){if(!a&&!b)return"";if(!a)return b;if(!b)return a;W(a)&&(a=a.join(" "));W(b)&&(b=b.join(" "));return a+" "+b}function Pa(a){var b={};a&&(a.to||a.from)&&(b.to=a.to,b.from=a.from);return b}function X(a,b,c){var d="";a=W(a)?a:a&&F(a)&&a.length?a.split(/\s+/):[];s(a,function(a,e){a&&0<a.length&&(d+=0<e?" ":"",d+=c?b+a:a+b)});return d}function Ga(a){if(a instanceof E)switch(a.length){case 0:return a;
-case 1:if(1===a[0].nodeType)return a;break;default:return E(ua(a))}if(1===a.nodeType)return E(a)}function ua(a){if(!a[0])return a;for(var b=0;b<a.length;b++){var c=a[b];if(1===c.nodeType)return c}}function Qa(a,b,c){s(b,function(b){a.addClass(b,c)})}function Ra(a,b,c){s(b,function(b){a.removeClass(b,c)})}function Y(a){return function(b,c){c.addClass&&(Qa(a,b,c.addClass),c.addClass=null);c.removeClass&&(Ra(a,b,c.removeClass),c.removeClass=null)}}function na(a){a=a||{};if(!a.$$prepared){var b=a.domOperation||
-P;a.domOperation=function(){a.$$domOperationFired=!0;b();b=P};a.$$prepared=!0}return a}function ha(a,b){Ha(a,b);Ia(a,b)}function Ha(a,b){b.from&&(a.css(b.from),b.from=null)}function Ia(a,b){b.to&&(a.css(b.to),b.to=null)}function U(a,b,c){var d=b.options||{};c=c.options||{};var f=(d.addClass||"")+" "+(c.addClass||""),e=(d.removeClass||"")+" "+(c.removeClass||"");a=Sa(a.attr("class"),f,e);c.preparationClasses&&(d.preparationClasses=Z(c.preparationClasses,d.preparationClasses),delete c.preparationClasses);
-f=d.domOperation!==P?d.domOperation:null;va(d,c);f&&(d.domOperation=f);d.addClass=a.addClass?a.addClass:null;d.removeClass=a.removeClass?a.removeClass:null;b.addClass=d.addClass;b.removeClass=d.removeClass;return d}function Sa(a,b,c){function d(a){F(a)&&(a=a.split(" "));var b={};s(a,function(a){a.length&&(b[a]=!0)});return b}var f={};a=d(a);b=d(b);s(b,function(a,b){f[b]=1});c=d(c);s(c,function(a,b){f[b]=1===f[b]?null:-1});var e={addClass:"",removeClass:""};s(f,function(b,c){var d,f;1===b?(d="addClass",
-f=!a[c]||a[c+"-remove"]):-1===b&&(d="removeClass",f=a[c]||a[c+"-add"]);f&&(e[d].length&&(e[d]+=" "),e[d]+=c)});return e}function Q(a){return a instanceof E?a[0]:a}function Ta(a,b,c){var d="";b&&(d=X(b,"ng-",!0));c.addClass&&(d=Z(d,X(c.addClass,"-add")));c.removeClass&&(d=Z(d,X(c.removeClass,"-remove")));d.length&&(c.preparationClasses=d,a.addClass(d))}function oa(a,b){var c=b?"-"+b+"s":"";ka(a,[la,c]);return[la,c]}function wa(a,b){var c=b?"paused":"",d=$+"PlayState";ka(a,[d,c]);return[d,c]}function ka(a,
-b){a.style[b[0]]=b[1]}function Z(a,b){return a?b?a+" "+b:a:b}function Ja(a,b,c){var d=Object.create(null),f=a.getComputedStyle(b)||{};s(c,function(a,b){var c=f[a];if(c){var G=c.charAt(0);if("-"===G||"+"===G||0<=G)c=Ua(c);0===c&&(c=null);d[b]=c}});return d}function Ua(a){var b=0;a=a.split(/\s*,\s*/);s(a,function(a){"s"===a.charAt(a.length-1)&&(a=a.substring(0,a.length-1));a=parseFloat(a)||0;b=b?Math.max(a,b):a});return b}function xa(a){return 0===a||null!=a}function Ka(a,b){var c=S,d=a+"s";b?c+="Duration":
-d+=" linear all";return[c,d]}function La(){var a=Object.create(null);return{flush:function(){a=Object.create(null)},count:function(b){return(b=a[b])?b.total:0},get:function(b){return(b=a[b])&&b.value},put:function(b,c){a[b]?a[b].total++:a[b]={total:1,value:c}}}}function Ma(a,b,c){s(c,function(c){a[c]=ya(a[c])?a[c]:b.style.getPropertyValue(c)})}var S,za,$,Aa;void 0===R.ontransitionend&&void 0!==R.onwebkittransitionend?(S="WebkitTransition",za="webkitTransitionEnd transitionend"):(S="transition",za=
-"transitionend");void 0===R.onanimationend&&void 0!==R.onwebkitanimationend?($="WebkitAnimation",Aa="webkitAnimationEnd animationend"):($="animation",Aa="animationend");var pa=$+"Delay",Ba=$+"Duration",la=S+"Delay",Na=S+"Duration",Oa=y.$$minErr("ng"),Va={transitionDuration:Na,transitionDelay:la,transitionProperty:S+"Property",animationDuration:Ba,animationDelay:pa,animationIterationCount:$+"IterationCount"},Wa={transitionDuration:Na,transitionDelay:la,animationDuration:Ba,animationDelay:pa},Ca,va,
-s,W,ya,da,Da,aa,F,N,E,P;y.module("ngAnimate",[],function(){P=y.noop;Ca=y.copy;va=y.extend;E=y.element;s=y.forEach;W=y.isArray;F=y.isString;aa=y.isObject;N=y.isUndefined;ya=y.isDefined;Da=y.isFunction;da=y.isElement}).info({angularVersion:"1.6.4"}).directive("ngAnimateSwap",["$animate","$rootScope",function(a,b){return{restrict:"A",transclude:"element",terminal:!0,priority:600,link:function(b,d,f,e,p){var K,G;b.$watchCollection(f.ngAnimateSwap||f["for"],function(f){K&&a.leave(K);G&&(G.$destroy(),G=
-null);if(f||0===f)G=b.$new(),p(G,function(b){K=b;a.enter(b,null,d)})})}}}]).directive("ngAnimateChildren",["$interpolate",function(a){return{link:function(b,c,d){function f(a){c.data("$$ngAnimateChildren","on"===a||"true"===a)}var e=d.ngAnimateChildren;F(e)&&0===e.length?c.data("$$ngAnimateChildren",!0):(f(a(e)(b)),d.$observe("ngAnimateChildren",f))}}}]).factory("$$rAFScheduler",["$$rAF",function(a){function b(a){d=d.concat(a);c()}function c(){if(d.length){for(var b=d.shift(),p=0;p<b.length;p++)b[p]();
-f||a(function(){f||c()})}}var d,f;d=b.queue=[];b.waitUntilQuiet=function(b){f&&f();f=a(function(){f=null;b();c()})};return b}]).provider("$$animateQueue",["$animateProvider",function(a){function b(a){if(!a)return null;a=a.split(" ");var b=Object.create(null);s(a,function(a){b[a]=!0});return b}function c(a,c){if(a&&c){var d=b(c);return a.split(" ").some(function(a){return d[a]})}}function d(a,b,c){return e[a].some(function(a){return a(b,c)})}function f(a,b){var c=0<(a.addClass||"").length,d=0<(a.removeClass||
-"").length;return b?c&&d:c||d}var e=this.rules={skip:[],cancel:[],join:[]};e.join.push(function(a,b){return!a.structural&&f(a)});e.skip.push(function(a,b){return!a.structural&&!f(a)});e.skip.push(function(a,b){return"leave"===b.event&&a.structural});e.skip.push(function(a,b){return b.structural&&2===b.state&&!a.structural});e.cancel.push(function(a,b){return b.structural&&a.structural});e.cancel.push(function(a,b){return 2===b.state&&a.structural});e.cancel.push(function(a,b){if(b.structural)return!1;
-var d=a.addClass,f=a.removeClass,e=b.addClass,qa=b.removeClass;return N(d)&&N(f)||N(e)&&N(qa)?!1:c(d,qa)||c(f,e)});this.$get=["$$rAF","$rootScope","$rootElement","$document","$$Map","$$animation","$$AnimateRunner","$templateRequest","$$jqLite","$$forceReflow","$$isDocumentHidden",function(b,c,e,n,z,qa,J,u,H,k,O){function L(){var a=!1;return function(b){a?b():c.$$postDigest(function(){a=!0;b()})}}function A(a,b,c){var g=[],d=h[c];d&&s(d,function(d){w.call(d.node,b)?g.push(d.callback):"leave"===c&&
-w.call(d.node,a)&&g.push(d.callback)});return g}function B(a,b,c){var g=ua(b);return a.filter(function(a){return!(a.node===g&&(!c||a.callback===c))})}function q(a,h,v){function q(a,c,g,d){G(function(){var a=A(ta,k,c);a.length?b(function(){s(a,function(a){a(e,g,d)});"close"!==g||k.parentNode||ra.off(k)}):"close"!==g||k.parentNode||ra.off(k)});a.progress(c,g,d)}function B(a){var b=e,c=m;c.preparationClasses&&(b.removeClass(c.preparationClasses),c.preparationClasses=null);c.activeClasses&&(b.removeClass(c.activeClasses),
-c.activeClasses=null);D(e,m);ha(e,m);m.domOperation();t.complete(!a)}var m=Ca(v),e=Ga(a),k=Q(e),ta=k&&k.parentNode,m=na(m),t=new J,G=L();W(m.addClass)&&(m.addClass=m.addClass.join(" "));m.addClass&&!F(m.addClass)&&(m.addClass=null);W(m.removeClass)&&(m.removeClass=m.removeClass.join(" "));m.removeClass&&!F(m.removeClass)&&(m.removeClass=null);m.from&&!aa(m.from)&&(m.from=null);m.to&&!aa(m.to)&&(m.to=null);if(!k)return B(),t;v=[k.getAttribute("class"),m.addClass,m.removeClass].join(" ");if(!Xa(v))return B(),
-t;var n=0<=["enter","move","leave"].indexOf(h),w=O(),u=!g||w||ga.get(k);v=!u&&x.get(k)||{};var H=!!v.state;u||H&&1===v.state||(u=!M(k,ta,h));if(u)return w&&q(t,h,"start"),B(),w&&q(t,h,"close"),t;n&&sa(k);w={structural:n,element:e,event:h,addClass:m.addClass,removeClass:m.removeClass,close:B,options:m,runner:t};if(H){if(d("skip",w,v)){if(2===v.state)return B(),t;U(e,v,w);return v.runner}if(d("cancel",w,v))if(2===v.state)v.runner.end();else if(v.structural)v.close();else return U(e,v,w),v.runner;else if(d("join",
-w,v))if(2===v.state)U(e,w,{});else return Ta(e,n?h:null,m),h=w.event=v.event,m=U(e,v,w),v.runner}else U(e,w,{});(H=w.structural)||(H="animate"===w.event&&0<Object.keys(w.options.to||{}).length||f(w));if(!H)return B(),l(k),t;var z=(v.counter||0)+1;w.counter=z;I(k,1,w);c.$$postDigest(function(){e=Ga(a);var b=x.get(k),c=!b,b=b||{},g=0<(e.parent()||[]).length&&("animate"===b.event||b.structural||f(b));if(c||b.counter!==z||!g){c&&(D(e,m),ha(e,m));if(c||n&&b.event!==h)m.domOperation(),t.end();g||l(k)}else h=
-!b.structural&&f(b,!0)?"setClass":b.event,I(k,2),b=qa(e,h,b.options),t.setHost(b),q(t,h,"start",{}),b.done(function(a){B(!a);(a=x.get(k))&&a.counter===z&&l(k);q(t,h,"close",{})})});return t}function sa(a){a=a.querySelectorAll("[data-ng-animate]");s(a,function(a){var b=parseInt(a.getAttribute("data-ng-animate"),10),c=x.get(a);if(c)switch(b){case 2:c.runner.end();case 1:x.delete(a)}})}function l(a){a.removeAttribute("data-ng-animate");x.delete(a)}function M(a,b,c){c=n[0].body;var g=Q(e),d=a===c||"HTML"===
-a.nodeName,h=a===g,f=!1,k=ga.get(a),A;for((a=E.data(a,"$ngAnimatePin"))&&(b=Q(a));b;){h||(h=b===g);if(1!==b.nodeType)break;a=x.get(b)||{};if(!f){var q=ga.get(b);if(!0===q&&!1!==k){k=!0;break}else!1===q&&(k=!1);f=a.structural}if(N(A)||!0===A)a=E.data(b,"$$ngAnimateChildren"),ya(a)&&(A=a);if(f&&!1===A)break;d||(d=b===c);if(d&&h)break;if(!h&&(a=E.data(b,"$ngAnimatePin"))){b=Q(a);continue}b=b.parentNode}return(!f||A)&&!0!==k&&h&&d}function I(a,b,c){c=c||{};c.state=b;a.setAttribute("data-ng-animate",b);
-c=(b=x.get(a))?va(b,c):c;x.set(a,c)}var x=new z,ga=new z,g=null,ta=c.$watch(function(){return 0===u.totalPendingRequests},function(a){a&&(ta(),c.$$postDigest(function(){c.$$postDigest(function(){null===g&&(g=!0)})}))}),h=Object.create(null),t=a.classNameFilter(),Xa=t?function(a){return t.test(a)}:function(){return!0},D=Y(H),w=R.Node.prototype.contains||function(a){return this===a||!!(this.compareDocumentPosition(a)&16)},ra={on:function(a,b,c){var g=ua(b);h[a]=h[a]||[];h[a].push({node:g,callback:c});
-E(b).on("$destroy",function(){x.get(g)||ra.off(a,b,c)})},off:function(a,b,c){if(1!==arguments.length||F(arguments[0])){var g=h[a];g&&(h[a]=1===arguments.length?null:B(g,b,c))}else for(g in b=arguments[0],h)h[g]=B(h[g],b)},pin:function(a,b){Ea(da(a),"element","not an element");Ea(da(b),"parentElement","not an element");a.data("$ngAnimatePin",b)},push:function(a,b,c,g){c=c||{};c.domOperation=g;return q(a,b,c)},enabled:function(a,b){var c=arguments.length;if(0===c)b=!!g;else if(da(a)){var d=Q(a);1===
-c?b=!ga.get(d):ga.set(d,!b)}else b=g=!!a;return b}};return ra}]}]).provider("$$animation",["$animateProvider",function(a){var b=this.drivers=[];this.$get=["$$jqLite","$rootScope","$injector","$$AnimateRunner","$$Map","$$rAFScheduler",function(a,d,f,e,p,K){function G(a){function b(a){if(a.processed)return a;a.processed=!0;var d=a.domNode,e=d.parentNode;f.set(d,a);for(var q;e;){if(q=f.get(e)){q.processed||(q=b(q));break}e=e.parentNode}(q||c).children.push(a);return a}var c={children:[]},d,f=new p;for(d=
-0;d<a.length;d++){var e=a[d];f.set(e.domNode,a[d]={domNode:e.domNode,fn:e.fn,children:[]})}for(d=0;d<a.length;d++)b(a[d]);return function(a){var b=[],c=[],d;for(d=0;d<a.children.length;d++)c.push(a.children[d]);a=c.length;var f=0,e=[];for(d=0;d<c.length;d++){var k=c[d];0>=a&&(a=f,f=0,b.push(e),e=[]);e.push(k.fn);k.children.forEach(function(a){f++;c.push(a)});a--}e.length&&b.push(e);return b}(c)}var n=[],z=Y(a);return function(p,J,u){function H(a){a=a.hasAttribute("ng-animate-ref")?[a]:a.querySelectorAll("[ng-animate-ref]");
-var b=[];s(a,function(a){var c=a.getAttribute("ng-animate-ref");c&&c.length&&b.push(a)});return b}function k(a){var b=[],c={};s(a,function(a,d){var h=Q(a.element),f=0<=["enter","move"].indexOf(a.event),h=a.structural?H(h):[];if(h.length){var e=f?"to":"from";s(h,function(a){var b=a.getAttribute("ng-animate-ref");c[b]=c[b]||{};c[b][e]={animationID:d,element:E(a)}})}else b.push(a)});var d={},f={};s(c,function(c,e){var k=c.from,A=c.to;if(k&&A){var q=a[k.animationID],x=a[A.animationID],l=k.animationID.toString();
-if(!f[l]){var B=f[l]={structural:!0,beforeStart:function(){q.beforeStart();x.beforeStart()},close:function(){q.close();x.close()},classes:O(q.classes,x.classes),from:q,to:x,anchors:[]};B.classes.length?b.push(B):(b.push(q),b.push(x))}f[l].anchors.push({out:k.element,"in":A.element})}else k=k?k.animationID:A.animationID,A=k.toString(),d[A]||(d[A]=!0,b.push(a[k]))});return b}function O(a,b){a=a.split(" ");b=b.split(" ");for(var c=[],d=0;d<a.length;d++){var f=a[d];if("ng-"!==f.substring(0,3))for(var e=
-0;e<b.length;e++)if(f===b[e]){c.push(f);break}}return c.join(" ")}function L(a){for(var c=b.length-1;0<=c;c--){var d=f.get(b[c])(a);if(d)return d}}function A(a,b){function c(a){(a=a.data("$$animationRunner"))&&a.setHost(b)}a.from&&a.to?(c(a.from.element),c(a.to.element)):c(a.element)}function B(){var a=p.data("$$animationRunner");!a||"leave"===J&&u.$$domOperationFired||a.end()}function q(b){p.off("$destroy",B);p.removeData("$$animationRunner");z(p,u);ha(p,u);u.domOperation();I&&a.removeClass(p,I);
-p.removeClass("ng-animate");l.complete(!b)}u=na(u);var sa=0<=["enter","move","leave"].indexOf(J),l=new e({end:function(){q()},cancel:function(){q(!0)}});if(!b.length)return q(),l;p.data("$$animationRunner",l);var M=Fa(p.attr("class"),Fa(u.addClass,u.removeClass)),I=u.tempClasses;I&&(M+=" "+I,u.tempClasses=null);var x;sa&&(x="ng-"+J+"-prepare",a.addClass(p,x));n.push({element:p,classes:M,event:J,structural:sa,options:u,beforeStart:function(){p.addClass("ng-animate");I&&a.addClass(p,I);x&&(a.removeClass(p,
-x),x=null)},close:q});p.on("$destroy",B);if(1<n.length)return l;d.$$postDigest(function(){var a=[];s(n,function(b){b.element.data("$$animationRunner")?a.push(b):b.close()});n.length=0;var b=k(a),c=[];s(b,function(a){c.push({domNode:Q(a.from?a.from.element:a.element),fn:function(){a.beforeStart();var b,c=a.close;if((a.anchors?a.from.element||a.to.element:a.element).data("$$animationRunner")){var d=L(a);d&&(b=d.start)}b?(b=b(),b.done(function(a){c(!a)}),A(a,b)):c()}})});K(G(c))});return l}}]}]).provider("$animateCss",
-["$animateProvider",function(a){var b=La(),c=La();this.$get=["$window","$$jqLite","$$AnimateRunner","$timeout","$$forceReflow","$sniffer","$$rAFScheduler","$$animateQueue",function(a,f,e,p,K,G,n,z){function y(a,b){var c=a.parentNode;return(c.$$ngAnimateParentKey||(c.$$ngAnimateParentKey=++O))+"-"+a.getAttribute("class")+"-"+b}function J(e,k,q,p){var l;0<b.count(q)&&(l=c.get(q),l||(k=X(k,"-stagger"),f.addClass(e,k),l=Ja(a,e,p),l.animationDuration=Math.max(l.animationDuration,0),l.transitionDuration=
-Math.max(l.transitionDuration,0),f.removeClass(e,k),c.put(q,l)));return l||{}}function u(a){L.push(a);n.waitUntilQuiet(function(){b.flush();c.flush();for(var a=K(),d=0;d<L.length;d++)L[d](a);L.length=0})}function H(c,f,e){f=b.get(e);f||(f=Ja(a,c,Va),"infinite"===f.animationIterationCount&&(f.animationIterationCount=1));b.put(e,f);c=f;e=c.animationDelay;f=c.transitionDelay;c.maxDelay=e&&f?Math.max(e,f):e||f;c.maxDuration=Math.max(c.animationDuration*c.animationIterationCount,c.transitionDuration);
-return c}var k=Y(f),O=0,L=[];return function(a,c){function d(){l()}function n(){l(!0)}function l(b){if(!(w||E&&O)){w=!0;O=!1;g.$$skipPreparationClasses||f.removeClass(a,fa);f.removeClass(a,da);wa(h,!1);oa(h,!1);s(t,function(a){h.style[a[0]]=""});k(a,g);ha(a,g);Object.keys(L).length&&s(L,function(a,b){a?h.style.setProperty(b,a):h.style.removeProperty(b)});if(g.onDone)g.onDone();ea&&ea.length&&a.off(ea.join(" "),x);var c=a.data("$$animateCss");c&&(p.cancel(c[0].timer),a.removeData("$$animateCss"));
-F&&F.complete(!b)}}function M(a){r.blockTransition&&oa(h,a);r.blockKeyframeAnimation&&wa(h,!!a)}function I(){F=new e({end:d,cancel:n});u(P);l();return{$$willAnimate:!1,start:function(){return F},end:d}}function x(a){a.stopPropagation();var b=a.originalEvent||a;a=b.$manualTimeStamp||Date.now();b=parseFloat(b.elapsedTime.toFixed(3));Math.max(a-Y,0)>=R&&b>=m&&(E=!0,l())}function ga(){function b(){if(!w){M(!1);s(t,function(a){h.style[a[0]]=a[1]});k(a,g);f.addClass(a,da);if(r.recalculateTimingStyles){ma=
-h.getAttribute("class")+" "+fa;ja=y(h,ma);C=H(h,ma,ja);ba=C.maxDelay;N=Math.max(ba,0);m=C.maxDuration;if(0===m){l();return}r.hasTransitions=0<C.transitionDuration;r.hasAnimations=0<C.animationDuration}r.applyAnimationDelay&&(ba="boolean"!==typeof g.delay&&xa(g.delay)?parseFloat(g.delay):ba,N=Math.max(ba,0),C.animationDelay=ba,ca=[pa,ba+"s"],t.push(ca),h.style[ca[0]]=ca[1]);R=1E3*N;U=1E3*m;if(g.easing){var d,e=g.easing;r.hasTransitions&&(d=S+"TimingFunction",t.push([d,e]),h.style[d]=e);r.hasAnimations&&
-(d=$+"TimingFunction",t.push([d,e]),h.style[d]=e)}C.transitionDuration&&ea.push(za);C.animationDuration&&ea.push(Aa);Y=Date.now();var n=R+1.5*U;d=Y+n;var e=a.data("$$animateCss")||[],q=!0;if(e.length){var I=e[0];(q=d>I.expectedEndTime)?p.cancel(I.timer):e.push(l)}q&&(n=p(c,n,!1),e[0]={timer:n,expectedEndTime:d},e.push(l),a.data("$$animateCss",e));if(ea.length)a.on(ea.join(" "),x);g.to&&(g.cleanupStyles&&Ma(L,h,Object.keys(g.to)),Ia(a,g))}}function c(){var b=a.data("$$animateCss");if(b){for(var d=
-1;d<b.length;d++)b[d]();a.removeData("$$animateCss")}}if(!w)if(h.parentNode){var d=function(a){if(E)O&&a&&(O=!1,l());else if(O=!a,C.animationDuration)if(a=wa(h,O),O)t.push(a);else{var b=t,c=b.indexOf(a);0<=a&&b.splice(c,1)}},e=0<aa&&(C.transitionDuration&&0===V.transitionDuration||C.animationDuration&&0===V.animationDuration)&&Math.max(V.animationDelay,V.transitionDelay);e?p(b,Math.floor(e*aa*1E3),!1):b();v.resume=function(){d(!0)};v.pause=function(){d(!1)}}else l()}var g=c||{};g.$$prepared||(g=na(Ca(g)));
-var L={},h=Q(a);if(!h||!h.parentNode||!z.enabled())return I();var t=[],K=a.attr("class"),D=Pa(g),w,O,E,F,v,N,R,m,U,Y,ea=[];if(0===g.duration||!G.animations&&!G.transitions)return I();var ia=g.event&&W(g.event)?g.event.join(" "):g.event,Z="",T="";ia&&g.structural?Z=X(ia,"ng-",!0):ia&&(Z=ia);g.addClass&&(T+=X(g.addClass,"-add"));g.removeClass&&(T.length&&(T+=" "),T+=X(g.removeClass,"-remove"));g.applyClassesEarly&&T.length&&k(a,g);var fa=[Z,T].join(" ").trim(),ma=K+" "+fa,da=X(fa,"-active"),K=D.to&&
-0<Object.keys(D.to).length;if(!(0<(g.keyframeStyle||"").length||K||fa))return I();var ja,V;0<g.stagger?(D=parseFloat(g.stagger),V={transitionDelay:D,animationDelay:D,transitionDuration:0,animationDuration:0}):(ja=y(h,ma),V=J(h,fa,ja,Wa));g.$$skipPreparationClasses||f.addClass(a,fa);g.transitionStyle&&(D=[S,g.transitionStyle],ka(h,D),t.push(D));0<=g.duration&&(D=0<h.style[S].length,D=Ka(g.duration,D),ka(h,D),t.push(D));g.keyframeStyle&&(D=[$,g.keyframeStyle],ka(h,D),t.push(D));var aa=V?0<=g.staggerIndex?
-g.staggerIndex:b.count(ja):0;(ia=0===aa)&&!g.skipBlocking&&oa(h,9999);var C=H(h,ma,ja),ba=C.maxDelay;N=Math.max(ba,0);m=C.maxDuration;var r={};r.hasTransitions=0<C.transitionDuration;r.hasAnimations=0<C.animationDuration;r.hasTransitionAll=r.hasTransitions&&"all"===C.transitionProperty;r.applyTransitionDuration=K&&(r.hasTransitions&&!r.hasTransitionAll||r.hasAnimations&&!r.hasTransitions);r.applyAnimationDuration=g.duration&&r.hasAnimations;r.applyTransitionDelay=xa(g.delay)&&(r.applyTransitionDuration||
-r.hasTransitions);r.applyAnimationDelay=xa(g.delay)&&r.hasAnimations;r.recalculateTimingStyles=0<T.length;if(r.applyTransitionDuration||r.applyAnimationDuration)m=g.duration?parseFloat(g.duration):m,r.applyTransitionDuration&&(r.hasTransitions=!0,C.transitionDuration=m,D=0<h.style[S+"Property"].length,t.push(Ka(m,D))),r.applyAnimationDuration&&(r.hasAnimations=!0,C.animationDuration=m,t.push([Ba,m+"s"]));if(0===m&&!r.recalculateTimingStyles)return I();if(null!=g.delay){var ca;"boolean"!==typeof g.delay&&
-(ca=parseFloat(g.delay),N=Math.max(ca,0));r.applyTransitionDelay&&t.push([la,ca+"s"]);r.applyAnimationDelay&&t.push([pa,ca+"s"])}null==g.duration&&0<C.transitionDuration&&(r.recalculateTimingStyles=r.recalculateTimingStyles||ia);R=1E3*N;U=1E3*m;g.skipBlocking||(r.blockTransition=0<C.transitionDuration,r.blockKeyframeAnimation=0<C.animationDuration&&0<V.animationDelay&&0===V.animationDuration);g.from&&(g.cleanupStyles&&Ma(L,h,Object.keys(g.from)),Ha(a,g));r.blockTransition||r.blockKeyframeAnimation?
-M(m):g.skipBlocking||oa(h,!1);return{$$willAnimate:!0,end:d,start:function(){if(!w)return v={end:d,cancel:n,resume:null,pause:null},F=new e(v),u(ga),F}}}}]}]).provider("$$animateCssDriver",["$$animationProvider",function(a){a.drivers.push("$$animateCssDriver");this.$get=["$animateCss","$rootScope","$$AnimateRunner","$rootElement","$sniffer","$$jqLite","$document",function(a,c,d,f,e,p,K){function G(a){return a.replace(/\bng-\S+\b/g,"")}function n(a,b){F(a)&&(a=a.split(" "));F(b)&&(b=b.split(" "));
-return a.filter(function(a){return-1===b.indexOf(a)}).join(" ")}function z(c,e,f){function p(a){var b={},c=Q(a).getBoundingClientRect();s(["width","height","top","left"],function(a){var d=c[a];switch(a){case "top":d+=u.scrollTop;break;case "left":d+=u.scrollLeft}b[a]=Math.floor(d)+"px"});return b}function K(){var c=G(f.attr("class")||""),d=n(c,l),c=n(l,c),d=a(z,{to:p(f),addClass:"ng-anchor-in "+d,removeClass:"ng-anchor-out "+c,delay:!0});return d.$$willAnimate?d:null}function q(){z.remove();e.removeClass("ng-animate-shim");
-f.removeClass("ng-animate-shim")}var z=E(Q(e).cloneNode(!0)),l=G(z.attr("class")||"");e.addClass("ng-animate-shim");f.addClass("ng-animate-shim");z.addClass("ng-anchor");H.append(z);var M;c=function(){var c=a(z,{addClass:"ng-anchor-out",delay:!0,from:p(e)});return c.$$willAnimate?c:null}();if(!c&&(M=K(),!M))return q();var I=c||M;return{start:function(){function a(){c&&c.end()}var b,c=I.start();c.done(function(){c=null;if(!M&&(M=K()))return c=M.start(),c.done(function(){c=null;q();b.complete()}),c;
-q();b.complete()});return b=new d({end:a,cancel:a})}}}function y(a,b,c,e){var f=J(a,P),p=J(b,P),n=[];s(e,function(a){(a=z(c,a.out,a["in"]))&&n.push(a)});if(f||p||0!==n.length)return{start:function(){function a(){s(b,function(a){a.end()})}var b=[];f&&b.push(f.start());p&&b.push(p.start());s(n,function(a){b.push(a.start())});var c=new d({end:a,cancel:a});d.all(b,function(a){c.complete(a)});return c}}}function J(c){var d=c.element,e=c.options||{};c.structural&&(e.event=c.event,e.structural=!0,e.applyClassesEarly=
-!0,"leave"===c.event&&(e.onDone=e.domOperation));e.preparationClasses&&(e.event=Z(e.event,e.preparationClasses));c=a(d,e);return c.$$willAnimate?c:null}if(!e.animations&&!e.transitions)return P;var u=K[0].body;c=Q(f);var H=E(c.parentNode&&11===c.parentNode.nodeType||u.contains(c)?c:u);return function(a){return a.from&&a.to?y(a.from,a.to,a.classes,a.anchors):J(a)}}]}]).provider("$$animateJs",["$animateProvider",function(a){this.$get=["$injector","$$AnimateRunner","$$jqLite",function(b,c,d){function f(c){c=
-W(c)?c:c.split(" ");for(var d=[],e={},f=0;f<c.length;f++){var s=c[f],y=a.$$registeredAnimations[s];y&&!e[s]&&(d.push(b.get(y)),e[s]=!0)}return d}var e=Y(d);return function(a,b,d,n){function z(){n.domOperation();e(a,n)}function y(a,b,d,e,f){switch(d){case "animate":b=[b,e.from,e.to,f];break;case "setClass":b=[b,k,F,f];break;case "addClass":b=[b,k,f];break;case "removeClass":b=[b,F,f];break;default:b=[b,f]}b.push(e);if(a=a.apply(a,b))if(Da(a.start)&&(a=a.start()),a instanceof c)a.done(f);else if(Da(a))return a;
-return P}function J(a,b,d,e,f){var k=[];s(e,function(e){var l=e[f];l&&k.push(function(){var e,f,g=!1,h=function(a){g||(g=!0,(f||P)(a),e.complete(!a))};e=new c({end:function(){h()},cancel:function(){h(!0)}});f=y(l,a,b,d,function(a){h(!1===a)});return e})});return k}function u(a,b,d,e,f){var k=J(a,b,d,e,f);if(0===k.length){var h,l;"beforeSetClass"===f?(h=J(a,"removeClass",d,e,"beforeRemoveClass"),l=J(a,"addClass",d,e,"beforeAddClass")):"setClass"===f&&(h=J(a,"removeClass",d,e,"removeClass"),l=J(a,"addClass",
-d,e,"addClass"));h&&(k=k.concat(h));l&&(k=k.concat(l))}if(0!==k.length)return function(a){var b=[];k.length&&s(k,function(a){b.push(a())});b.length?c.all(b,a):a();return function(a){s(b,function(b){a?b.cancel():b.end()})}}}var H=!1;3===arguments.length&&aa(d)&&(n=d,d=null);n=na(n);d||(d=a.attr("class")||"",n.addClass&&(d+=" "+n.addClass),n.removeClass&&(d+=" "+n.removeClass));var k=n.addClass,F=n.removeClass,L=f(d),A,B;if(L.length){var q,E;"leave"===b?(E="leave",q="afterLeave"):(E="before"+b.charAt(0).toUpperCase()+
-b.substr(1),q=b);"enter"!==b&&"move"!==b&&(A=u(a,b,n,L,E));B=u(a,b,n,L,q)}if(A||B){var l;return{$$willAnimate:!0,end:function(){l?l.end():(H=!0,z(),ha(a,n),l=new c,l.complete(!0));return l},start:function(){function b(c){H=!0;z();ha(a,n);l.complete(c)}if(l)return l;l=new c;var d,e=[];A&&e.push(function(a){d=A(a)});e.length?e.push(function(a){z();a(!0)}):z();B&&e.push(function(a){d=B(a)});l.setHost({end:function(){H||((d||P)(void 0),b(void 0))},cancel:function(){H||((d||P)(!0),b(!0))}});c.chain(e,
-b);return l}}}}}]}]).provider("$$animateJsDriver",["$$animationProvider",function(a){a.drivers.push("$$animateJsDriver");this.$get=["$$animateJs","$$AnimateRunner",function(a,c){function d(c){return a(c.element,c.event,c.classes,c.options)}return function(a){if(a.from&&a.to){var b=d(a.from),p=d(a.to);if(b||p)return{start:function(){function a(){return function(){s(d,function(a){a.end()})}}var d=[];b&&d.push(b.start());p&&d.push(p.start());c.all(d,function(a){f.complete(a)});var f=new c({end:a(),cancel:a()});
-return f}}}else return d(a)}}]}])})(window,window.angular);
+(function(S,q){'use strict';function Ea(a,b,c){if(!a)throw Pa("areq",b||"?",c||"required");return a}function Fa(a,b){if(!a&&!b)return"";if(!a)return b;if(!b)return a;V(a)&&(a=a.join(" "));V(b)&&(b=b.join(" "));return a+" "+b}function Qa(a){var b={};a&&(a.to||a.from)&&(b.to=a.to,b.from=a.from);return b}function W(a,b,c){var d="";a=V(a)?a:a&&C(a)&&a.length?a.split(/\s+/):[];t(a,function(a,f){a&&0<a.length&&(d+=0<f?" ":"",d+=c?b+a:a+b)});return d}function Ga(a){if(a instanceof A)switch(a.length){case 0:return a;
+case 1:if(1===a[0].nodeType)return a;break;default:return A(ua(a))}if(1===a.nodeType)return A(a)}function ua(a){if(!a[0])return a;for(var b=0;b<a.length;b++){var c=a[b];if(1===c.nodeType)return c}}function Ra(a,b,c){t(b,function(b){a.addClass(b,c)})}function Sa(a,b,c){t(b,function(b){a.removeClass(b,c)})}function X(a){return function(b,c){c.addClass&&(Ra(a,b,c.addClass),c.addClass=null);c.removeClass&&(Sa(a,b,c.removeClass),c.removeClass=null)}}function oa(a){a=a||{};if(!a.$$prepared){var b=a.domOperation||
+O;a.domOperation=function(){a.$$domOperationFired=!0;b();b=O};a.$$prepared=!0}return a}function ha(a,b){Ha(a,b);Ia(a,b)}function Ha(a,b){b.from&&(a.css(b.from),b.from=null)}function Ia(a,b){b.to&&(a.css(b.to),b.to=null)}function T(a,b,c){var d=b.options||{};c=c.options||{};var e=(d.addClass||"")+" "+(c.addClass||""),f=(d.removeClass||"")+" "+(c.removeClass||"");a=Ta(a.attr("class"),e,f);c.preparationClasses&&(d.preparationClasses=ca(c.preparationClasses,d.preparationClasses),delete c.preparationClasses);
+e=d.domOperation!==O?d.domOperation:null;va(d,c);e&&(d.domOperation=e);d.addClass=a.addClass?a.addClass:null;d.removeClass=a.removeClass?a.removeClass:null;b.addClass=d.addClass;b.removeClass=d.removeClass;return d}function Ta(a,b,c){function d(a){C(a)&&(a=a.split(" "));var b={};t(a,function(a){a.length&&(b[a]=!0)});return b}var e={};a=d(a);b=d(b);t(b,function(a,b){e[b]=1});c=d(c);t(c,function(a,b){e[b]=1===e[b]?null:-1});var f={addClass:"",removeClass:""};t(e,function(b,c){var d,e;1===b?(d="addClass",
+e=!a[c]||a[c+"-remove"]):-1===b&&(d="removeClass",e=a[c]||a[c+"-add"]);e&&(f[d].length&&(f[d]+=" "),f[d]+=c)});return f}function J(a){return a instanceof A?a[0]:a}function Ua(a,b,c){var d="";b&&(d=W(b,"ng-",!0));c.addClass&&(d=ca(d,W(c.addClass,"-add")));c.removeClass&&(d=ca(d,W(c.removeClass,"-remove")));d.length&&(c.preparationClasses=d,a.addClass(d))}function pa(a,b){var c=b?"-"+b+"s":"";ka(a,[la,c]);return[la,c]}function wa(a,b){var c=b?"paused":"",d=Y+"PlayState";ka(a,[d,c]);return[d,c]}function ka(a,
+b){a.style[b[0]]=b[1]}function ca(a,b){return a?b?a+" "+b:a:b}function Ja(a,b,c){var d=Object.create(null),e=a.getComputedStyle(b)||{};t(c,function(a,b){var c=e[a];if(c){var l=c.charAt(0);if("-"===l||"+"===l||0<=l)c=Va(c);0===c&&(c=null);d[b]=c}});return d}function Va(a){var b=0;a=a.split(/\s*,\s*/);t(a,function(a){"s"===a.charAt(a.length-1)&&(a=a.substring(0,a.length-1));a=parseFloat(a)||0;b=b?Math.max(a,b):a});return b}function xa(a){return 0===a||null!=a}function Ka(a,b){var c=Q,d=a+"s";b?c+="Duration":
+d+=" linear all";return[c,d]}function La(){var a=Object.create(null);return{flush:function(){a=Object.create(null)},count:function(b){return(b=a[b])?b.total:0},get:function(b){return(b=a[b])&&b.value},put:function(b,c){a[b]?a[b].total++:a[b]={total:1,value:c}}}}function Ma(a,b,c){t(c,function(c){a[c]=ya(a[c])?a[c]:b.style.getPropertyValue(c)})}var Q,za,Y,Aa;void 0===S.ontransitionend&&void 0!==S.onwebkittransitionend?(Q="WebkitTransition",za="webkitTransitionEnd transitionend"):(Q="transition",za=
+"transitionend");void 0===S.onanimationend&&void 0!==S.onwebkitanimationend?(Y="WebkitAnimation",Aa="webkitAnimationEnd animationend"):(Y="animation",Aa="animationend");var qa=Y+"Delay",Ba=Y+"Duration",la=Q+"Delay",Na=Q+"Duration",Pa=q.$$minErr("ng"),Wa={transitionDuration:Na,transitionDelay:la,transitionProperty:Q+"Property",animationDuration:Ba,animationDelay:qa,animationIterationCount:Y+"IterationCount"},Xa={transitionDuration:Na,transitionDelay:la,animationDuration:Ba,animationDelay:qa},Ca,va,
+t,V,ya,Z,Da,ra,C,P,A,O;q.module("ngAnimate",[],function(){O=q.noop;Ca=q.copy;va=q.extend;A=q.element;t=q.forEach;V=q.isArray;C=q.isString;ra=q.isObject;P=q.isUndefined;ya=q.isDefined;Da=q.isFunction;Z=q.isElement}).info({angularVersion:"1.6.5"}).directive("ngAnimateSwap",["$animate","$rootScope",function(a,b){return{restrict:"A",transclude:"element",terminal:!0,priority:600,link:function(b,d,e,f,n){var G,l;b.$watchCollection(e.ngAnimateSwap||e["for"],function(e){G&&a.leave(G);l&&(l.$destroy(),l=null);
+if(e||0===e)l=b.$new(),n(l,function(b){G=b;a.enter(b,null,d)})})}}}]).directive("ngAnimateChildren",["$interpolate",function(a){return{link:function(b,c,d){function e(a){c.data("$$ngAnimateChildren","on"===a||"true"===a)}var f=d.ngAnimateChildren;C(f)&&0===f.length?c.data("$$ngAnimateChildren",!0):(e(a(f)(b)),d.$observe("ngAnimateChildren",e))}}}]).factory("$$rAFScheduler",["$$rAF",function(a){function b(a){d=d.concat(a);c()}function c(){if(d.length){for(var b=d.shift(),n=0;n<b.length;n++)b[n]();
+e||a(function(){e||c()})}}var d,e;d=b.queue=[];b.waitUntilQuiet=function(b){e&&e();e=a(function(){e=null;b();c()})};return b}]).provider("$$animateQueue",["$animateProvider",function(a){function b(a){if(!a)return null;a=a.split(" ");var b=Object.create(null);t(a,function(a){b[a]=!0});return b}function c(a,c){if(a&&c){var d=b(c);return a.split(" ").some(function(a){return d[a]})}}function d(a,b,c){return f[a].some(function(a){return a(b,c)})}function e(a,b){var c=0<(a.addClass||"").length,d=0<(a.removeClass||
+"").length;return b?c&&d:c||d}var f=this.rules={skip:[],cancel:[],join:[]};f.join.push(function(a,b){return!a.structural&&e(a)});f.skip.push(function(a,b){return!a.structural&&!e(a)});f.skip.push(function(a,b){return"leave"===b.event&&a.structural});f.skip.push(function(a,b){return b.structural&&2===b.state&&!a.structural});f.cancel.push(function(a,b){return b.structural&&a.structural});f.cancel.push(function(a,b){return 2===b.state&&a.structural});f.cancel.push(function(a,b){if(b.structural)return!1;
+var d=a.addClass,e=a.removeClass,f=b.addClass,sa=b.removeClass;return P(d)&&P(e)||P(f)&&P(sa)?!1:c(d,sa)||c(e,f)});this.$get=["$$rAF","$rootScope","$rootElement","$document","$$Map","$$animation","$$AnimateRunner","$templateRequest","$$jqLite","$$forceReflow","$$isDocumentHidden",function(b,c,f,s,y,sa,da,v,E,g,M){function x(){var a=!1;return function(b){a?b():c.$$postDigest(function(){a=!0;b()})}}function H(a,b,c){var h=[],d=k[c];d&&t(d,function(d){u.call(d.node,b)?h.push(d.callback):"leave"===c&&
+u.call(d.node,a)&&h.push(d.callback)});return h}function I(a,b,c){var h=ua(b);return a.filter(function(a){return!(a.node===h&&(!c||a.callback===c))})}function K(a,k,w){function K(a,c,h,k){s(function(){var a=H(na,p,c);a.length?b(function(){t(a,function(a){a(f,h,k)});"close"!==h||p.parentNode||ba.off(p)}):"close"!==h||p.parentNode||ba.off(p)});a.progress(c,h,k)}function I(a){var b=f,c=g;c.preparationClasses&&(b.removeClass(c.preparationClasses),c.preparationClasses=null);c.activeClasses&&(b.removeClass(c.activeClasses),
+c.activeClasses=null);Oa(f,g);ha(f,g);g.domOperation();l.complete(!a)}var g=Ca(w),f=Ga(a),p=J(f),na=p&&p.parentNode,g=oa(g),l=new da,s=x();V(g.addClass)&&(g.addClass=g.addClass.join(" "));g.addClass&&!C(g.addClass)&&(g.addClass=null);V(g.removeClass)&&(g.removeClass=g.removeClass.join(" "));g.removeClass&&!C(g.removeClass)&&(g.removeClass=null);g.from&&!ra(g.from)&&(g.from=null);g.to&&!ra(g.to)&&(g.to=null);if(!(h&&p&&Ya(p,k,w)&&D(p,g)))return I(),l;var v=0<=["enter","move","leave"].indexOf(k),u=
+M(),y=u||ga.get(p);w=!y&&z.get(p)||{};var E=!!w.state;y||E&&1===w.state||(y=!L(p,na,k));if(y)return u&&K(l,k,"start"),I(),u&&K(l,k,"close"),l;v&&ta(p);u={structural:v,element:f,event:k,addClass:g.addClass,removeClass:g.removeClass,close:I,options:g,runner:l};if(E){if(d("skip",u,w)){if(2===w.state)return I(),l;T(f,w,u);return w.runner}if(d("cancel",u,w))if(2===w.state)w.runner.end();else if(w.structural)w.close();else return T(f,w,u),w.runner;else if(d("join",u,w))if(2===w.state)T(f,u,{});else return Ua(f,
+v?k:null,g),k=u.event=w.event,g=T(f,w,u),w.runner}else T(f,u,{});(E=u.structural)||(E="animate"===u.event&&0<Object.keys(u.options.to||{}).length||e(u));if(!E)return I(),m(p),l;var q=(w.counter||0)+1;u.counter=q;F(p,1,u);c.$$postDigest(function(){f=Ga(a);var b=z.get(p),c=!b,b=b||{},h=0<(f.parent()||[]).length&&("animate"===b.event||b.structural||e(b));if(c||b.counter!==q||!h){c&&(Oa(f,g),ha(f,g));if(c||v&&b.event!==k)g.domOperation(),l.end();h||m(p)}else k=!b.structural&&e(b,!0)?"setClass":b.event,
+F(p,2),b=sa(f,k,b.options),l.setHost(b),K(l,k,"start",{}),b.done(function(a){I(!a);(a=z.get(p))&&a.counter===q&&m(p);K(l,k,"close",{})})});return l}function ta(a){a=a.querySelectorAll("[data-ng-animate]");t(a,function(a){var b=parseInt(a.getAttribute("data-ng-animate"),10),c=z.get(a);if(c)switch(b){case 2:c.runner.end();case 1:z.delete(a)}})}function m(a){a.removeAttribute("data-ng-animate");z.delete(a)}function L(a,b,c){c=s[0].body;var h=J(f),k=a===c||"HTML"===a.nodeName,d=a===h,g=!1,e=ga.get(a),
+p;for((a=A.data(a,"$ngAnimatePin"))&&(b=J(a));b;){d||(d=b===h);if(1!==b.nodeType)break;a=z.get(b)||{};if(!g){var H=ga.get(b);if(!0===H&&!1!==e){e=!0;break}else!1===H&&(e=!1);g=a.structural}if(P(p)||!0===p)a=A.data(b,"$$ngAnimateChildren"),ya(a)&&(p=a);if(g&&!1===p)break;k||(k=b===c);if(k&&d)break;if(!d&&(a=A.data(b,"$ngAnimatePin"))){b=J(a);continue}b=b.parentNode}return(!g||p)&&!0!==e&&d&&k}function F(a,b,c){c=c||{};c.state=b;a.setAttribute("data-ng-animate",b);c=(b=z.get(a))?va(b,c):c;z.set(a,c)}
+var z=new y,ga=new y,h=null,p=c.$watch(function(){return 0===v.totalPendingRequests},function(a){a&&(p(),c.$$postDigest(function(){c.$$postDigest(function(){null===h&&(h=!0)})}))}),k=Object.create(null);y=a.customFilter();var na=a.classNameFilter();g=function(){return!0};var Ya=y||g,D=na?function(a,b){var c=[a.getAttribute("class"),b.addClass,b.removeClass].join(" ");return na.test(c)}:g,Oa=X(E),u=S.Node.prototype.contains||function(a){return this===a||!!(this.compareDocumentPosition(a)&16)},ba={on:function(a,
+b,c){var h=ua(b);k[a]=k[a]||[];k[a].push({node:h,callback:c});A(b).on("$destroy",function(){z.get(h)||ba.off(a,b,c)})},off:function(a,b,c){if(1!==arguments.length||C(arguments[0])){var h=k[a];h&&(k[a]=1===arguments.length?null:I(h,b,c))}else for(h in b=arguments[0],k)k[h]=I(k[h],b)},pin:function(a,b){Ea(Z(a),"element","not an element");Ea(Z(b),"parentElement","not an element");a.data("$ngAnimatePin",b)},push:function(a,b,c,h){c=c||{};c.domOperation=h;return K(a,b,c)},enabled:function(a,b){var c=arguments.length;
+if(0===c)b=!!h;else if(Z(a)){var k=J(a);1===c?b=!ga.get(k):ga.set(k,!b)}else b=h=!!a;return b}};return ba}]}]).provider("$$animation",["$animateProvider",function(a){var b=this.drivers=[];this.$get=["$$jqLite","$rootScope","$injector","$$AnimateRunner","$$Map","$$rAFScheduler",function(a,d,e,f,n,G){function l(a){function b(a){if(a.processed)return a;a.processed=!0;var d=a.domNode,e=d.parentNode;g.set(d,a);for(var f;e;){if(f=g.get(e)){f.processed||(f=b(f));break}e=e.parentNode}(f||c).children.push(a);
+return a}var c={children:[]},d,g=new n;for(d=0;d<a.length;d++){var e=a[d];g.set(e.domNode,a[d]={domNode:e.domNode,fn:e.fn,children:[]})}for(d=0;d<a.length;d++)b(a[d]);return function(a){var b=[],c=[],d;for(d=0;d<a.children.length;d++)c.push(a.children[d]);a=c.length;var g=0,e=[];for(d=0;d<c.length;d++){var f=c[d];0>=a&&(a=g,g=0,b.push(e),e=[]);e.push(f.fn);f.children.forEach(function(a){g++;c.push(a)});a--}e.length&&b.push(e);return b}(c)}var s=[],y=X(a);return function(n,q,v){function E(a){a=a.hasAttribute("ng-animate-ref")?
+[a]:a.querySelectorAll("[ng-animate-ref]");var b=[];t(a,function(a){var c=a.getAttribute("ng-animate-ref");c&&c.length&&b.push(a)});return b}function g(a){var b=[],c={};t(a,function(a,d){var k=J(a.element),g=0<=["enter","move"].indexOf(a.event),k=a.structural?E(k):[];if(k.length){var e=g?"to":"from";t(k,function(a){var b=a.getAttribute("ng-animate-ref");c[b]=c[b]||{};c[b][e]={animationID:d,element:A(a)}})}else b.push(a)});var d={},g={};t(c,function(c,e){var f=c.from,p=c.to;if(f&&p){var H=a[f.animationID],
+z=a[p.animationID],m=f.animationID.toString();if(!g[m]){var l=g[m]={structural:!0,beforeStart:function(){H.beforeStart();z.beforeStart()},close:function(){H.close();z.close()},classes:M(H.classes,z.classes),from:H,to:z,anchors:[]};l.classes.length?b.push(l):(b.push(H),b.push(z))}g[m].anchors.push({out:f.element,"in":p.element})}else f=f?f.animationID:p.animationID,p=f.toString(),d[p]||(d[p]=!0,b.push(a[f]))});return b}function M(a,b){a=a.split(" ");b=b.split(" ");for(var c=[],d=0;d<a.length;d++){var g=
+a[d];if("ng-"!==g.substring(0,3))for(var e=0;e<b.length;e++)if(g===b[e]){c.push(g);break}}return c.join(" ")}function x(a){for(var c=b.length-1;0<=c;c--){var d=e.get(b[c])(a);if(d)return d}}function H(a,b){function c(a){(a=a.data("$$animationRunner"))&&a.setHost(b)}a.from&&a.to?(c(a.from.element),c(a.to.element)):c(a.element)}function I(){var a=n.data("$$animationRunner");!a||"leave"===q&&v.$$domOperationFired||a.end()}function K(b){n.off("$destroy",I);n.removeData("$$animationRunner");y(n,v);ha(n,
+v);v.domOperation();F&&a.removeClass(n,F);n.removeClass("ng-animate");m.complete(!b)}v=oa(v);var ta=0<=["enter","move","leave"].indexOf(q),m=new f({end:function(){K()},cancel:function(){K(!0)}});if(!b.length)return K(),m;n.data("$$animationRunner",m);var L=Fa(n.attr("class"),Fa(v.addClass,v.removeClass)),F=v.tempClasses;F&&(L+=" "+F,v.tempClasses=null);var z;ta&&(z="ng-"+q+"-prepare",a.addClass(n,z));s.push({element:n,classes:L,event:q,structural:ta,options:v,beforeStart:function(){n.addClass("ng-animate");
+F&&a.addClass(n,F);z&&(a.removeClass(n,z),z=null)},close:K});n.on("$destroy",I);if(1<s.length)return m;d.$$postDigest(function(){var a=[];t(s,function(b){b.element.data("$$animationRunner")?a.push(b):b.close()});s.length=0;var b=g(a),c=[];t(b,function(a){c.push({domNode:J(a.from?a.from.element:a.element),fn:function(){a.beforeStart();var b,c=a.close;if((a.anchors?a.from.element||a.to.element:a.element).data("$$animationRunner")){var d=x(a);d&&(b=d.start)}b?(b=b(),b.done(function(a){c(!a)}),H(a,b)):
+c()}})});G(l(c))});return m}}]}]).provider("$animateCss",["$animateProvider",function(a){var b=La(),c=La();this.$get=["$window","$$jqLite","$$AnimateRunner","$timeout","$$forceReflow","$sniffer","$$rAFScheduler","$$animateQueue",function(a,e,f,n,G,l,s,y){function q(a,b){var c=a.parentNode;return(c.$$ngAnimateParentKey||(c.$$ngAnimateParentKey=++M))+"-"+a.getAttribute("class")+"-"+b}function da(g,f,l,n){var m;0<b.count(l)&&(m=c.get(l),m||(f=W(f,"-stagger"),e.addClass(g,f),m=Ja(a,g,n),m.animationDuration=
+Math.max(m.animationDuration,0),m.transitionDuration=Math.max(m.transitionDuration,0),e.removeClass(g,f),c.put(l,m)));return m||{}}function v(a){x.push(a);s.waitUntilQuiet(function(){b.flush();c.flush();for(var a=G(),d=0;d<x.length;d++)x[d](a);x.length=0})}function E(c,g,e){g=b.get(e);g||(g=Ja(a,c,Wa),"infinite"===g.animationIterationCount&&(g.animationIterationCount=1));b.put(e,g);c=g;e=c.animationDelay;g=c.transitionDelay;c.maxDelay=e&&g?Math.max(e,g):e||g;c.maxDuration=Math.max(c.animationDuration*
+c.animationIterationCount,c.transitionDuration);return c}var g=X(e),M=0,x=[];return function(a,c){function d(){m()}function s(){m(!0)}function m(b){if(!(M||ba&&u)){M=!0;u=!1;h.$$skipPreparationClasses||e.removeClass(a,fa);e.removeClass(a,ca);wa(k,!1);pa(k,!1);t(x,function(a){k.style[a[0]]=""});g(a,h);ha(a,h);Object.keys(p).length&&t(p,function(a,b){a?k.style.setProperty(b,a):k.style.removeProperty(b)});if(h.onDone)h.onDone();ea&&ea.length&&a.off(ea.join(" "),z);var c=a.data("$$animateCss");c&&(n.cancel(c[0].timer),
+a.removeData("$$animateCss"));A&&A.complete(!b)}}function L(a){r.blockTransition&&pa(k,a);r.blockKeyframeAnimation&&wa(k,!!a)}function F(){A=new f({end:d,cancel:s});v(O);m();return{$$willAnimate:!1,start:function(){return A},end:d}}function z(a){a.stopPropagation();var b=a.originalEvent||a;a=b.$manualTimeStamp||Date.now();b=parseFloat(b.elapsedTime.toFixed(3));Math.max(a-T,0)>=P&&b>=N&&(ba=!0,m())}function ga(){function b(){if(!M){L(!1);t(x,function(a){k.style[a[0]]=a[1]});g(a,h);e.addClass(a,ca);
+if(r.recalculateTimingStyles){ma=k.getAttribute("class")+" "+fa;ja=q(k,ma);B=E(k,ma,ja);$=B.maxDelay;w=Math.max($,0);N=B.maxDuration;if(0===N){m();return}r.hasTransitions=0<B.transitionDuration;r.hasAnimations=0<B.animationDuration}r.applyAnimationDelay&&($="boolean"!==typeof h.delay&&xa(h.delay)?parseFloat(h.delay):$,w=Math.max($,0),B.animationDelay=$,aa=[qa,$+"s"],x.push(aa),k.style[aa[0]]=aa[1]);P=1E3*w;S=1E3*N;if(h.easing){var d,f=h.easing;r.hasTransitions&&(d=Q+"TimingFunction",x.push([d,f]),
+k.style[d]=f);r.hasAnimations&&(d=Y+"TimingFunction",x.push([d,f]),k.style[d]=f)}B.transitionDuration&&ea.push(za);B.animationDuration&&ea.push(Aa);T=Date.now();var l=P+1.5*S;d=T+l;var f=a.data("$$animateCss")||[],F=!0;if(f.length){var s=f[0];(F=d>s.expectedEndTime)?n.cancel(s.timer):f.push(m)}F&&(l=n(c,l,!1),f[0]={timer:l,expectedEndTime:d},f.push(m),a.data("$$animateCss",f));if(ea.length)a.on(ea.join(" "),z);h.to&&(h.cleanupStyles&&Ma(p,k,Object.keys(h.to)),Ia(a,h))}}function c(){var b=a.data("$$animateCss");
+if(b){for(var d=1;d<b.length;d++)b[d]();a.removeData("$$animateCss")}}if(!M)if(k.parentNode){var d=function(a){if(ba)u&&a&&(u=!1,m());else if(u=!a,B.animationDuration)if(a=wa(k,u),u)x.push(a);else{var b=x,c=b.indexOf(a);0<=a&&b.splice(c,1)}},f=0<Z&&(B.transitionDuration&&0===U.transitionDuration||B.animationDuration&&0===U.animationDuration)&&Math.max(U.animationDelay,U.transitionDelay);f?n(b,Math.floor(f*Z*1E3),!1):b();C.resume=function(){d(!0)};C.pause=function(){d(!1)}}else m()}var h=c||{};h.$$prepared||
+(h=oa(Ca(h)));var p={},k=J(a);if(!k||!k.parentNode||!y.enabled())return F();var x=[],G=a.attr("class"),D=Qa(h),M,u,ba,A,C,w,P,N,S,T,ea=[];if(0===h.duration||!l.animations&&!l.transitions)return F();var ia=h.event&&V(h.event)?h.event.join(" "):h.event,X="",R="";ia&&h.structural?X=W(ia,"ng-",!0):ia&&(X=ia);h.addClass&&(R+=W(h.addClass,"-add"));h.removeClass&&(R.length&&(R+=" "),R+=W(h.removeClass,"-remove"));h.applyClassesEarly&&R.length&&g(a,h);var fa=[X,R].join(" ").trim(),ma=G+" "+fa,ca=W(fa,"-active"),
+G=D.to&&0<Object.keys(D.to).length;if(!(0<(h.keyframeStyle||"").length||G||fa))return F();var ja,U;0<h.stagger?(D=parseFloat(h.stagger),U={transitionDelay:D,animationDelay:D,transitionDuration:0,animationDuration:0}):(ja=q(k,ma),U=da(k,fa,ja,Xa));h.$$skipPreparationClasses||e.addClass(a,fa);h.transitionStyle&&(D=[Q,h.transitionStyle],ka(k,D),x.push(D));0<=h.duration&&(D=0<k.style[Q].length,D=Ka(h.duration,D),ka(k,D),x.push(D));h.keyframeStyle&&(D=[Y,h.keyframeStyle],ka(k,D),x.push(D));var Z=U?0<=
+h.staggerIndex?h.staggerIndex:b.count(ja):0;(ia=0===Z)&&!h.skipBlocking&&pa(k,9999);var B=E(k,ma,ja),$=B.maxDelay;w=Math.max($,0);N=B.maxDuration;var r={};r.hasTransitions=0<B.transitionDuration;r.hasAnimations=0<B.animationDuration;r.hasTransitionAll=r.hasTransitions&&"all"===B.transitionProperty;r.applyTransitionDuration=G&&(r.hasTransitions&&!r.hasTransitionAll||r.hasAnimations&&!r.hasTransitions);r.applyAnimationDuration=h.duration&&r.hasAnimations;r.applyTransitionDelay=xa(h.delay)&&(r.applyTransitionDuration||
+r.hasTransitions);r.applyAnimationDelay=xa(h.delay)&&r.hasAnimations;r.recalculateTimingStyles=0<R.length;if(r.applyTransitionDuration||r.applyAnimationDuration)N=h.duration?parseFloat(h.duration):N,r.applyTransitionDuration&&(r.hasTransitions=!0,B.transitionDuration=N,D=0<k.style[Q+"Property"].length,x.push(Ka(N,D))),r.applyAnimationDuration&&(r.hasAnimations=!0,B.animationDuration=N,x.push([Ba,N+"s"]));if(0===N&&!r.recalculateTimingStyles)return F();if(null!=h.delay){var aa;"boolean"!==typeof h.delay&&
+(aa=parseFloat(h.delay),w=Math.max(aa,0));r.applyTransitionDelay&&x.push([la,aa+"s"]);r.applyAnimationDelay&&x.push([qa,aa+"s"])}null==h.duration&&0<B.transitionDuration&&(r.recalculateTimingStyles=r.recalculateTimingStyles||ia);P=1E3*w;S=1E3*N;h.skipBlocking||(r.blockTransition=0<B.transitionDuration,r.blockKeyframeAnimation=0<B.animationDuration&&0<U.animationDelay&&0===U.animationDuration);h.from&&(h.cleanupStyles&&Ma(p,k,Object.keys(h.from)),Ha(a,h));r.blockTransition||r.blockKeyframeAnimation?
+L(N):h.skipBlocking||pa(k,!1);return{$$willAnimate:!0,end:d,start:function(){if(!M)return C={end:d,cancel:s,resume:null,pause:null},A=new f(C),v(ga),A}}}}]}]).provider("$$animateCssDriver",["$$animationProvider",function(a){a.drivers.push("$$animateCssDriver");this.$get=["$animateCss","$rootScope","$$AnimateRunner","$rootElement","$sniffer","$$jqLite","$document",function(a,c,d,e,f,n,G){function l(a){return a.replace(/\bng-\S+\b/g,"")}function s(a,b){C(a)&&(a=a.split(" "));C(b)&&(b=b.split(" "));
+return a.filter(function(a){return-1===b.indexOf(a)}).join(" ")}function y(c,f,e){function n(a){var b={},c=J(a).getBoundingClientRect();t(["width","height","top","left"],function(a){var d=c[a];switch(a){case "top":d+=v.scrollTop;break;case "left":d+=v.scrollLeft}b[a]=Math.floor(d)+"px"});return b}function G(){var c=l(e.attr("class")||""),d=s(c,m),c=s(m,c),d=a(y,{to:n(e),addClass:"ng-anchor-in "+d,removeClass:"ng-anchor-out "+c,delay:!0});return d.$$willAnimate?d:null}function q(){y.remove();f.removeClass("ng-animate-shim");
+e.removeClass("ng-animate-shim")}var y=A(J(f).cloneNode(!0)),m=l(y.attr("class")||"");f.addClass("ng-animate-shim");e.addClass("ng-animate-shim");y.addClass("ng-anchor");E.append(y);var L;c=function(){var c=a(y,{addClass:"ng-anchor-out",delay:!0,from:n(f)});return c.$$willAnimate?c:null}();if(!c&&(L=G(),!L))return q();var F=c||L;return{start:function(){function a(){c&&c.end()}var b,c=F.start();c.done(function(){c=null;if(!L&&(L=G()))return c=L.start(),c.done(function(){c=null;q();b.complete()}),c;
+q();b.complete()});return b=new d({end:a,cancel:a})}}}function q(a,b,c,f){var e=da(a,O),l=da(b,O),n=[];t(f,function(a){(a=y(c,a.out,a["in"]))&&n.push(a)});if(e||l||0!==n.length)return{start:function(){function a(){t(b,function(a){a.end()})}var b=[];e&&b.push(e.start());l&&b.push(l.start());t(n,function(a){b.push(a.start())});var c=new d({end:a,cancel:a});d.all(b,function(a){c.complete(a)});return c}}}function da(c){var d=c.element,e=c.options||{};c.structural&&(e.event=c.event,e.structural=!0,e.applyClassesEarly=
+!0,"leave"===c.event&&(e.onDone=e.domOperation));e.preparationClasses&&(e.event=ca(e.event,e.preparationClasses));c=a(d,e);return c.$$willAnimate?c:null}if(!f.animations&&!f.transitions)return O;var v=G[0].body;c=J(e);var E=A(c.parentNode&&11===c.parentNode.nodeType||v.contains(c)?c:v);return function(a){return a.from&&a.to?q(a.from,a.to,a.classes,a.anchors):da(a)}}]}]).provider("$$animateJs",["$animateProvider",function(a){this.$get=["$injector","$$AnimateRunner","$$jqLite",function(b,c,d){function e(c){c=
+V(c)?c:c.split(" ");for(var d=[],e={},f=0;f<c.length;f++){var y=c[f],q=a.$$registeredAnimations[y];q&&!e[y]&&(d.push(b.get(q)),e[y]=!0)}return d}var f=X(d);return function(a,b,d,s){function q(){s.domOperation();f(a,s)}function A(a,b,d,e,f){switch(d){case "animate":b=[b,e.from,e.to,f];break;case "setClass":b=[b,g,M,f];break;case "addClass":b=[b,g,f];break;case "removeClass":b=[b,M,f];break;default:b=[b,f]}b.push(e);if(a=a.apply(a,b))if(Da(a.start)&&(a=a.start()),a instanceof c)a.done(f);else if(Da(a))return a;
+return O}function C(a,b,d,e,f){var g=[];t(e,function(e){var l=e[f];l&&g.push(function(){var e,f,h=!1,g=function(a){h||(h=!0,(f||O)(a),e.complete(!a))};e=new c({end:function(){g()},cancel:function(){g(!0)}});f=A(l,a,b,d,function(a){g(!1===a)});return e})});return g}function v(a,b,d,e,f){var g=C(a,b,d,e,f);if(0===g.length){var k,l;"beforeSetClass"===f?(k=C(a,"removeClass",d,e,"beforeRemoveClass"),l=C(a,"addClass",d,e,"beforeAddClass")):"setClass"===f&&(k=C(a,"removeClass",d,e,"removeClass"),l=C(a,"addClass",
+d,e,"addClass"));k&&(g=g.concat(k));l&&(g=g.concat(l))}if(0!==g.length)return function(a){var b=[];g.length&&t(g,function(a){b.push(a())});b.length?c.all(b,a):a();return function(a){t(b,function(b){a?b.cancel():b.end()})}}}var E=!1;3===arguments.length&&ra(d)&&(s=d,d=null);s=oa(s);d||(d=a.attr("class")||"",s.addClass&&(d+=" "+s.addClass),s.removeClass&&(d+=" "+s.removeClass));var g=s.addClass,M=s.removeClass,x=e(d),H,I;if(x.length){var K,J;"leave"===b?(J="leave",K="afterLeave"):(J="before"+b.charAt(0).toUpperCase()+
+b.substr(1),K=b);"enter"!==b&&"move"!==b&&(H=v(a,b,s,x,J));I=v(a,b,s,x,K)}if(H||I){var m;return{$$willAnimate:!0,end:function(){m?m.end():(E=!0,q(),ha(a,s),m=new c,m.complete(!0));return m},start:function(){function b(c){E=!0;q();ha(a,s);m.complete(c)}if(m)return m;m=new c;var d,e=[];H&&e.push(function(a){d=H(a)});e.length?e.push(function(a){q();a(!0)}):q();I&&e.push(function(a){d=I(a)});m.setHost({end:function(){E||((d||O)(void 0),b(void 0))},cancel:function(){E||((d||O)(!0),b(!0))}});c.chain(e,
+b);return m}}}}}]}]).provider("$$animateJsDriver",["$$animationProvider",function(a){a.drivers.push("$$animateJsDriver");this.$get=["$$animateJs","$$AnimateRunner",function(a,c){function d(c){return a(c.element,c.event,c.classes,c.options)}return function(a){if(a.from&&a.to){var b=d(a.from),n=d(a.to);if(b||n)return{start:function(){function a(){return function(){t(d,function(a){a.end()})}}var d=[];b&&d.push(b.start());n&&d.push(n.start());c.all(d,function(a){e.complete(a)});var e=new c({end:a(),cancel:a()});
+return e}}}else return d(a)}}]}])})(window,window.angular);
 //# sourceMappingURL=angular-animate.min.js.map
 
 /*
@@ -36480,7 +36989,7 @@ d.parentNode.scrollTop=d.offsetTop;break;default:c&&P.$apply(function(){angular.
 }).call(this);
 
 /*!
- * angular-translate - v2.15.1 - 2017-03-04
+ * angular-translate - v2.15.2 - 2017-06-22
  * 
  * Copyright (c) 2017 The angular-translate team, Pascal Precht; Licensed MIT
  */
@@ -36490,7 +36999,7 @@ d.parentNode.scrollTop=d.offsetTop;break;default:c&&P.$apply(function(){angular.
     define([], function () {
       return (factory());
     });
-  } else if (typeof exports === 'object') {
+  } else if (typeof module === 'object' && module.exports) {
     // Node. Does not work with strict CommonJS, but
     // only CommonJS-like environments that support module.exports,
     // like Node.
@@ -36854,6 +37363,8 @@ function $translateSanitizationProvider () {
       return result;
     } else if (angular.isNumber(value)) {
       return value;
+    } else if (value === true || value === false) {
+      return value;
     } else if (!angular.isUndefined(value) && value !== null) {
       return iteratee(value);
     } else {
@@ -36929,7 +37440,7 @@ function $translate($STORAGE_KEY, $windowProvider, $translateSanitizationProvide
       }
     };
 
-  var version = '2.15.1';
+  var version = '2.15.2';
 
   // tries to determine the browsers language
   var getFirstBrowserLanguage = function () {
@@ -38016,8 +38527,7 @@ function $translate($STORAGE_KEY, $windowProvider, $translateSanitizationProvide
         };
         promiseResolved.displayName = 'promiseResolved';
 
-        promiseToWaitFor['finally'](promiseResolved)
-          .catch(angular.noop); // we don't care about errors here, already handled
+        promiseToWaitFor['finally'](promiseResolved)['catch'](angular.noop); // we don't care about errors here, already handled
       }
       return deferred.promise;
     };
@@ -38772,7 +39282,7 @@ function $translate($STORAGE_KEY, $windowProvider, $translateSanitizationProvide
         });
         langPromises[key]['finally'](function () {
           clearNextLangAndPromise(key);
-        }).catch(angular.noop); // we don't care about errors (clearing)
+        })['catch'](angular.noop); // we don't care about errors (clearing)
       } else if (langPromises[key]) {
         // we are already loading this asynchronously
         // resolve our new deferred when the old langPromise is resolved
@@ -38942,7 +39452,7 @@ function $translate($STORAGE_KEY, $windowProvider, $translateSanitizationProvide
         },
         //handle rejection to appease the $q validation
         angular.noop
-      ).finally(
+      )['finally'](
         function () {
           $rootScope.$emit('$translateRefreshEnd', {language : langKey});
         }
@@ -61953,9 +62463,9 @@ function Dom7Service () {
   })();
 	return Dom7;
 }
-/*! angularjs-slider - v6.1.1 -  (c) Rafal Zajac <rzajac@gmail.com>, Valentin Hervieu <valentin@hervieu.me>, Jussi Saarivirta <jusasi@gmail.com>, Angelin Sirbu <angelin.sirbu@gmail.com> -  https://github.com/angular-slider/angularjs-slider -  2017-03-29 */
-!function(a,b){"use strict";if("function"==typeof define&&define.amd)define(["angular"],b);else if("object"==typeof module&&module.exports){var c=angular||require("angular");c&&c.module||"undefined"==typeof angular||(c=angular),module.exports=b(c)}else b(a.angular)}(this,function(a){"use strict";var b=a.module("rzModule",[]).factory("RzSliderOptions",function(){var b={floor:0,ceil:null,step:1,precision:0,minRange:null,maxRange:null,pushRange:!1,minLimit:null,maxLimit:null,id:null,translate:null,getLegend:null,stepsArray:null,bindIndexForStepsArray:!1,draggableRange:!1,draggableRangeOnly:!1,showSelectionBar:!1,showSelectionBarEnd:!1,showSelectionBarFromValue:null,hidePointerLabels:!1,hideLimitLabels:!1,autoHideLimitLabels:!0,readOnly:!1,disabled:!1,interval:350,showTicks:!1,showTicksValues:!1,ticksArray:null,ticksTooltip:null,ticksValuesTooltip:null,vertical:!1,getSelectionBarColor:null,getTickColor:null,getPointerColor:null,keyboardSupport:!0,scale:1,enforceStep:!0,enforceRange:!1,noSwitching:!1,onlyBindHandles:!1,onStart:null,onChange:null,onEnd:null,rightToLeft:!1,boundPointerLabels:!0,mergeRangeLabelsIfSame:!1,customTemplateScope:null,logScale:!1,customValueToPosition:null,customPositionToValue:null,selectionBarGradient:null,ariaLabel:null,ariaLabelledBy:null,ariaLabelHigh:null,ariaLabelledByHigh:null},c={},d={};return d.options=function(b){a.extend(c,b)},d.getOptions=function(d){return a.extend({},b,c,d)},d}).factory("rzThrottle",["$timeout",function(a){return function(b,c,d){var e,f,g,h=Date.now||function(){return(new Date).getTime()},i=null,j=0;d=d||{};var k=function(){j=h(),i=null,g=b.apply(e,f),e=f=null};return function(){var l=h(),m=c-(l-j);return e=this,f=arguments,0>=m?(a.cancel(i),i=null,j=l,g=b.apply(e,f),e=f=null):i||d.trailing===!1||(i=a(k,m)),g}}}]).factory("RzSlider",["$timeout","$document","$window","$compile","RzSliderOptions","rzThrottle",function(b,c,d,e,f,g){var h=function(a,b){this.scope=a,this.lowValue=0,this.highValue=0,this.sliderElem=b,this.range=void 0!==this.scope.rzSliderModel&&void 0!==this.scope.rzSliderHigh,this.dragging={active:!1,value:0,difference:0,position:0,lowLimit:0,highLimit:0},this.positionProperty="left",this.dimensionProperty="width",this.handleHalfDim=0,this.maxPos=0,this.precision=0,this.step=1,this.tracking="",this.minValue=0,this.maxValue=0,this.valueRange=0,this.intermediateTicks=!1,this.initHasRun=!1,this.firstKeyDown=!1,this.internalChange=!1,this.cmbLabelShown=!1,this.currentFocusElement=null,this.fullBar=null,this.selBar=null,this.minH=null,this.maxH=null,this.flrLab=null,this.ceilLab=null,this.minLab=null,this.maxLab=null,this.cmbLab=null,this.ticks=null,this.init()};return h.prototype={init:function(){var b,c,e=this,f=function(){e.calcViewDimensions()};this.applyOptions(),this.syncLowValue(),this.range&&this.syncHighValue(),this.initElemHandles(),this.manageElementsStyle(),this.setDisabledState(),this.calcViewDimensions(),this.setMinAndMax(),this.addAccessibility(),this.updateCeilLab(),this.updateFloorLab(),this.initHandles(),this.manageEventsBindings(),this.scope.$on("reCalcViewDimensions",f),a.element(d).on("resize",f),this.initHasRun=!0,b=g(function(){e.onLowHandleChange()},e.options.interval),c=g(function(){e.onHighHandleChange()},e.options.interval),this.scope.$on("rzSliderForceRender",function(){e.resetLabelsValue(),b(),e.range&&c(),e.resetSlider()}),this.scope.$watch("rzSliderOptions()",function(a,b){a!==b&&(e.applyOptions(),e.syncLowValue(),e.range&&e.syncHighValue(),e.resetSlider())},!0),this.scope.$watch("rzSliderModel",function(a,c){e.internalChange||a!==c&&b()}),this.scope.$watch("rzSliderHigh",function(a,b){e.internalChange||a!==b&&(null!=a&&c(),(e.range&&null==a||!e.range&&null!=a)&&(e.applyOptions(),e.resetSlider()))}),this.scope.$on("$destroy",function(){e.unbindEvents(),a.element(d).off("resize",f),e.currentFocusElement=null})},findStepIndex:function(b){for(var c=0,d=0;d<this.options.stepsArray.length;d++){var e=this.options.stepsArray[d];if(e===b){c=d;break}if(a.isDate(e)){if(e.getTime()===b.getTime()){c=d;break}}else if(a.isObject(e)&&(a.isDate(e.value)&&e.value.getTime()===b.getTime()||e.value===b)){c=d;break}}return c},syncLowValue:function(){this.options.stepsArray?this.options.bindIndexForStepsArray?this.lowValue=this.scope.rzSliderModel:this.lowValue=this.findStepIndex(this.scope.rzSliderModel):this.lowValue=this.scope.rzSliderModel},syncHighValue:function(){this.options.stepsArray?this.options.bindIndexForStepsArray?this.highValue=this.scope.rzSliderHigh:this.highValue=this.findStepIndex(this.scope.rzSliderHigh):this.highValue=this.scope.rzSliderHigh},getStepValue:function(b){var c=this.options.stepsArray[b];return a.isDate(c)?c:a.isObject(c)?c.value:c},applyLowValue:function(){this.options.stepsArray?this.options.bindIndexForStepsArray?this.scope.rzSliderModel=this.lowValue:this.scope.rzSliderModel=this.getStepValue(this.lowValue):this.scope.rzSliderModel=this.lowValue},applyHighValue:function(){this.options.stepsArray?this.options.bindIndexForStepsArray?this.scope.rzSliderHigh=this.highValue:this.scope.rzSliderHigh=this.getStepValue(this.highValue):this.scope.rzSliderHigh=this.highValue},onLowHandleChange:function(){this.syncLowValue(),this.range&&this.syncHighValue(),this.setMinAndMax(),this.updateLowHandle(this.valueToPosition(this.lowValue)),this.updateSelectionBar(),this.updateTicksScale(),this.updateAriaAttributes(),this.range&&this.updateCmbLabel()},onHighHandleChange:function(){this.syncLowValue(),this.syncHighValue(),this.setMinAndMax(),this.updateHighHandle(this.valueToPosition(this.highValue)),this.updateSelectionBar(),this.updateTicksScale(),this.updateCmbLabel(),this.updateAriaAttributes()},applyOptions:function(){var b;b=this.scope.rzSliderOptions?this.scope.rzSliderOptions():{},this.options=f.getOptions(b),this.options.step<=0&&(this.options.step=1),this.range=void 0!==this.scope.rzSliderModel&&void 0!==this.scope.rzSliderHigh,this.options.draggableRange=this.range&&this.options.draggableRange,this.options.draggableRangeOnly=this.range&&this.options.draggableRangeOnly,this.options.draggableRangeOnly&&(this.options.draggableRange=!0),this.options.showTicks=this.options.showTicks||this.options.showTicksValues||!!this.options.ticksArray,this.scope.showTicks=this.options.showTicks,(a.isNumber(this.options.showTicks)||this.options.ticksArray)&&(this.intermediateTicks=!0),this.options.showSelectionBar=this.options.showSelectionBar||this.options.showSelectionBarEnd||null!==this.options.showSelectionBarFromValue,this.options.stepsArray?this.parseStepsArray():(this.options.translate?this.customTrFn=this.options.translate:this.customTrFn=function(a){return String(a)},this.getLegend=this.options.getLegend),this.options.vertical&&(this.positionProperty="bottom",this.dimensionProperty="height"),this.options.customTemplateScope&&(this.scope.custom=this.options.customTemplateScope)},parseStepsArray:function(){this.options.floor=0,this.options.ceil=this.options.stepsArray.length-1,this.options.step=1,this.options.translate?this.customTrFn=this.options.translate:this.customTrFn=function(a){return this.options.bindIndexForStepsArray?this.getStepValue(a):a},this.getLegend=function(b){var c=this.options.stepsArray[b];return a.isObject(c)?c.legend:null}},resetSlider:function(){this.manageElementsStyle(),this.addAccessibility(),this.setMinAndMax(),this.updateCeilLab(),this.updateFloorLab(),this.unbindEvents(),this.manageEventsBindings(),this.setDisabledState(),this.calcViewDimensions(),this.refocusPointerIfNeeded()},refocusPointerIfNeeded:function(){this.currentFocusElement&&(this.onPointerFocus(this.currentFocusElement.pointer,this.currentFocusElement.ref),this.focusElement(this.currentFocusElement.pointer))},initElemHandles:function(){a.forEach(this.sliderElem.children(),function(b,c){var d=a.element(b);switch(c){case 0:this.fullBar=d;break;case 1:this.selBar=d;break;case 2:this.minH=d;break;case 3:this.maxH=d;break;case 4:this.flrLab=d;break;case 5:this.ceilLab=d;break;case 6:this.minLab=d;break;case 7:this.maxLab=d;break;case 8:this.cmbLab=d;break;case 9:this.ticks=d}},this),this.selBar.rzsp=0,this.minH.rzsp=0,this.maxH.rzsp=0,this.flrLab.rzsp=0,this.ceilLab.rzsp=0,this.minLab.rzsp=0,this.maxLab.rzsp=0,this.cmbLab.rzsp=0},manageElementsStyle:function(){this.range?this.maxH.css("display",""):this.maxH.css("display","none"),this.alwaysHide(this.flrLab,this.options.showTicksValues||this.options.hideLimitLabels),this.alwaysHide(this.ceilLab,this.options.showTicksValues||this.options.hideLimitLabels);var a=this.options.showTicksValues&&!this.intermediateTicks;this.alwaysHide(this.minLab,a||this.options.hidePointerLabels),this.alwaysHide(this.maxLab,a||!this.range||this.options.hidePointerLabels),this.alwaysHide(this.cmbLab,a||!this.range||this.options.hidePointerLabels),this.alwaysHide(this.selBar,!this.range&&!this.options.showSelectionBar),this.options.vertical&&this.sliderElem.addClass("rz-vertical"),this.options.draggableRange?this.selBar.addClass("rz-draggable"):this.selBar.removeClass("rz-draggable"),this.intermediateTicks&&this.options.showTicksValues&&this.ticks.addClass("rz-ticks-values-under")},alwaysHide:function(a,b){a.rzAlwaysHide=b,b?this.hideEl(a):this.showEl(a)},manageEventsBindings:function(){this.options.disabled||this.options.readOnly?this.unbindEvents():this.bindEvents()},setDisabledState:function(){this.options.disabled?this.sliderElem.attr("disabled","disabled"):this.sliderElem.attr("disabled",null)},resetLabelsValue:function(){this.minLab.rzsv=void 0,this.maxLab.rzsv=void 0},initHandles:function(){this.updateLowHandle(this.valueToPosition(this.lowValue)),this.range&&this.updateHighHandle(this.valueToPosition(this.highValue)),this.updateSelectionBar(),this.range&&this.updateCmbLabel(),this.updateTicksScale()},translateFn:function(a,b,c,d){d=void 0===d?!0:d;var e="",f=!1,g=b.hasClass("no-label-injection");d?(this.options.stepsArray&&!this.options.bindIndexForStepsArray&&(a=this.getStepValue(a)),e=String(this.customTrFn(a,this.options.id,c))):e=String(a),(void 0===b.rzsv||b.rzsv.length!==e.length||b.rzsv.length>0&&0===b.rzsd)&&(f=!0,b.rzsv=e),g||b.html(e),this.scope[c+"Label"]=e,f&&this.getDimension(b)},setMinAndMax:function(){if(this.step=+this.options.step,this.precision=+this.options.precision,this.minValue=this.options.floor,this.options.logScale&&0===this.minValue)throw Error("Can't use floor=0 with logarithmic scale");this.options.enforceStep&&(this.lowValue=this.roundStep(this.lowValue),this.range&&(this.highValue=this.roundStep(this.highValue))),null!=this.options.ceil?this.maxValue=this.options.ceil:this.maxValue=this.options.ceil=this.range?this.highValue:this.lowValue,this.options.enforceRange&&(this.lowValue=this.sanitizeValue(this.lowValue),this.range&&(this.highValue=this.sanitizeValue(this.highValue))),this.applyLowValue(),this.range&&this.applyHighValue(),this.valueRange=this.maxValue-this.minValue},addAccessibility:function(){this.minH.attr("role","slider"),this.updateAriaAttributes(),!this.options.keyboardSupport||this.options.readOnly||this.options.disabled?this.minH.attr("tabindex",""):this.minH.attr("tabindex","0"),this.options.vertical&&this.minH.attr("aria-orientation","vertical"),this.options.ariaLabel?this.minH.attr("aria-label",this.options.ariaLabel):this.options.ariaLabelledBy&&this.minH.attr("aria-labelledby",this.options.ariaLabelledBy),this.range&&(this.maxH.attr("role","slider"),!this.options.keyboardSupport||this.options.readOnly||this.options.disabled?this.maxH.attr("tabindex",""):this.maxH.attr("tabindex","0"),this.options.vertical&&this.maxH.attr("aria-orientation","vertical"),this.options.ariaLabelHigh?this.maxH.attr("aria-label",this.options.ariaLabelHigh):this.options.ariaLabelledByHigh&&this.maxH.attr("aria-labelledby",this.options.ariaLabelledByHigh))},updateAriaAttributes:function(){this.minH.attr({"aria-valuenow":this.scope.rzSliderModel,"aria-valuetext":this.customTrFn(this.scope.rzSliderModel,this.options.id,"model"),"aria-valuemin":this.minValue,"aria-valuemax":this.maxValue}),this.range&&this.maxH.attr({"aria-valuenow":this.scope.rzSliderHigh,"aria-valuetext":this.customTrFn(this.scope.rzSliderHigh,this.options.id,"high"),"aria-valuemin":this.minValue,"aria-valuemax":this.maxValue})},calcViewDimensions:function(){var a=this.getDimension(this.minH);if(this.handleHalfDim=a/2,this.barDimension=this.getDimension(this.fullBar),this.maxPos=this.barDimension-a,this.getDimension(this.sliderElem),this.sliderElem.rzsp=this.sliderElem[0].getBoundingClientRect()[this.positionProperty],this.initHasRun){this.updateFloorLab(),this.updateCeilLab(),this.initHandles();var c=this;b(function(){c.updateTicksScale()})}},updateTicksScale:function(){if(this.options.showTicks){var a=this.options.ticksArray||this.getTicksArray(),b=this.options.vertical?"translateY":"translateX",c=this;this.options.rightToLeft&&a.reverse(),this.scope.ticks=a.map(function(a){var d=c.valueToPosition(a);c.options.vertical&&(d=c.maxPos-d);var e=b+"("+Math.round(d)+"px)",f={selected:c.isTickSelected(a),style:{"-webkit-transform":e,"-moz-transform":e,"-o-transform":e,"-ms-transform":e,transform:e}};if(f.selected&&c.options.getSelectionBarColor&&(f.style["background-color"]=c.getSelectionBarColor()),!f.selected&&c.options.getTickColor&&(f.style["background-color"]=c.getTickColor(a)),c.options.ticksTooltip&&(f.tooltip=c.options.ticksTooltip(a),f.tooltipPlacement=c.options.vertical?"right":"top"),c.options.showTicksValues&&(f.value=c.getDisplayValue(a,"tick-value"),c.options.ticksValuesTooltip&&(f.valueTooltip=c.options.ticksValuesTooltip(a),f.valueTooltipPlacement=c.options.vertical?"right":"top")),c.getLegend){var g=c.getLegend(a,c.options.id);g&&(f.legend=g)}return f})}},getTicksArray:function(){var a=this.step,b=[];this.intermediateTicks&&(a=this.options.showTicks);for(var c=this.minValue;c<=this.maxValue;c+=a)b.push(c);return b},isTickSelected:function(a){if(!this.range)if(null!==this.options.showSelectionBarFromValue){var b=this.options.showSelectionBarFromValue;if(this.lowValue>b&&a>=b&&a<=this.lowValue)return!0;if(this.lowValue<b&&b>=a&&a>=this.lowValue)return!0}else if(this.options.showSelectionBarEnd){if(a>=this.lowValue)return!0}else if(this.options.showSelectionBar&&a<=this.lowValue)return!0;return this.range&&a>=this.lowValue&&a<=this.highValue?!0:!1},updateFloorLab:function(){this.translateFn(this.minValue,this.flrLab,"floor"),this.getDimension(this.flrLab);var a=this.options.rightToLeft?this.barDimension-this.flrLab.rzsd:0;this.setPosition(this.flrLab,a)},updateCeilLab:function(){this.translateFn(this.maxValue,this.ceilLab,"ceil"),this.getDimension(this.ceilLab);var a=this.options.rightToLeft?0:this.barDimension-this.ceilLab.rzsd;this.setPosition(this.ceilLab,a)},updateHandles:function(a,b){"lowValue"===a?this.updateLowHandle(b):this.updateHighHandle(b),this.updateSelectionBar(),this.updateTicksScale(),this.range&&this.updateCmbLabel()},getHandleLabelPos:function(a,b){var c=this[a].rzsd,d=b-c/2+this.handleHalfDim,e=this.barDimension-c;return this.options.boundPointerLabels?this.options.rightToLeft&&"minLab"===a||!this.options.rightToLeft&&"maxLab"===a?Math.min(d,e):Math.min(Math.max(d,0),e):d},updateLowHandle:function(a){if(this.setPosition(this.minH,a),this.translateFn(this.lowValue,this.minLab,"model"),this.setPosition(this.minLab,this.getHandleLabelPos("minLab",a)),this.options.getPointerColor){var b=this.getPointerColor("min");this.scope.minPointerStyle={backgroundColor:b}}this.options.autoHideLimitLabels&&this.shFloorCeil()},updateHighHandle:function(a){if(this.setPosition(this.maxH,a),this.translateFn(this.highValue,this.maxLab,"high"),this.setPosition(this.maxLab,this.getHandleLabelPos("maxLab",a)),this.options.getPointerColor){var b=this.getPointerColor("max");this.scope.maxPointerStyle={backgroundColor:b}}this.options.autoHideLimitLabels&&this.shFloorCeil()},shFloorCeil:function(){if(!this.options.hidePointerLabels){var a=!1,b=!1,c=this.isLabelBelowFloorLab(this.minLab),d=this.isLabelAboveCeilLab(this.minLab),e=this.isLabelAboveCeilLab(this.maxLab),f=this.isLabelBelowFloorLab(this.cmbLab),g=this.isLabelAboveCeilLab(this.cmbLab);if(c?(a=!0,this.hideEl(this.flrLab)):(a=!1,this.showEl(this.flrLab)),d?(b=!0,this.hideEl(this.ceilLab)):(b=!1,this.showEl(this.ceilLab)),this.range){var h=this.cmbLabelShown?g:e,i=this.cmbLabelShown?f:c;h?this.hideEl(this.ceilLab):b||this.showEl(this.ceilLab),i?this.hideEl(this.flrLab):a||this.showEl(this.flrLab)}}},isLabelBelowFloorLab:function(a){var b=this.options.rightToLeft,c=a.rzsp,d=a.rzsd,e=this.flrLab.rzsp,f=this.flrLab.rzsd;return b?c+d>=e-2:e+f+2>=c},isLabelAboveCeilLab:function(a){var b=this.options.rightToLeft,c=a.rzsp,d=a.rzsd,e=this.ceilLab.rzsp,f=this.ceilLab.rzsd;return b?e+f+2>=c:c+d>=e-2},updateSelectionBar:function(){var a=0,b=0,c=this.options.rightToLeft?!this.options.showSelectionBarEnd:this.options.showSelectionBarEnd,d=this.options.rightToLeft?this.maxH.rzsp+this.handleHalfDim:this.minH.rzsp+this.handleHalfDim;if(this.range)b=Math.abs(this.maxH.rzsp-this.minH.rzsp),a=d;else if(null!==this.options.showSelectionBarFromValue){var e=this.options.showSelectionBarFromValue,f=this.valueToPosition(e),g=this.options.rightToLeft?this.lowValue<=e:this.lowValue>e;g?(b=this.minH.rzsp-f,a=f+this.handleHalfDim):(b=f-this.minH.rzsp,a=this.minH.rzsp+this.handleHalfDim)}else c?(b=Math.abs(this.maxPos-this.minH.rzsp)+this.handleHalfDim,a=this.minH.rzsp+this.handleHalfDim):(b=Math.abs(this.maxH.rzsp-this.minH.rzsp)+this.handleHalfDim,a=0);if(this.setDimension(this.selBar,b),this.setPosition(this.selBar,a),this.options.getSelectionBarColor){var h=this.getSelectionBarColor();this.scope.barStyle={backgroundColor:h}}else if(this.options.selectionBarGradient){var i=null!==this.options.showSelectionBarFromValue?this.valueToPosition(this.options.showSelectionBarFromValue):0,j=i-a>0^c,k=this.options.vertical?j?"bottom":"top":j?"left":"right";this.scope.barStyle={backgroundImage:"linear-gradient(to "+k+", "+this.options.selectionBarGradient.from+" 0%,"+this.options.selectionBarGradient.to+" 100%)"},this.options.vertical?(this.scope.barStyle.backgroundPosition="center "+(i+b+a+(j?-this.handleHalfDim:0))+"px",this.scope.barStyle.backgroundSize="100% "+(this.barDimension-this.handleHalfDim)+"px"):(this.scope.barStyle.backgroundPosition=i-a+(j?this.handleHalfDim:0)+"px center",this.scope.barStyle.backgroundSize=this.barDimension-this.handleHalfDim+"px 100%")}},getSelectionBarColor:function(){return this.range?this.options.getSelectionBarColor(this.scope.rzSliderModel,this.scope.rzSliderHigh):this.options.getSelectionBarColor(this.scope.rzSliderModel)},getPointerColor:function(a){return"max"===a?this.options.getPointerColor(this.scope.rzSliderHigh,a):this.options.getPointerColor(this.scope.rzSliderModel,a)},getTickColor:function(a){return this.options.getTickColor(a)},updateCmbLabel:function(){var a=null;if(a=this.options.rightToLeft?this.minLab.rzsp-this.minLab.rzsd-10<=this.maxLab.rzsp:this.minLab.rzsp+this.minLab.rzsd+10>=this.maxLab.rzsp){var b=this.getDisplayValue(this.lowValue,"model"),c=this.getDisplayValue(this.highValue,"high"),d="";d=this.options.mergeRangeLabelsIfSame&&b===c?b:this.options.rightToLeft?c+" - "+b:b+" - "+c,this.translateFn(d,this.cmbLab,"cmb",!1);var e=this.options.boundPointerLabels?Math.min(Math.max(this.selBar.rzsp+this.selBar.rzsd/2-this.cmbLab.rzsd/2,0),this.barDimension-this.cmbLab.rzsd):this.selBar.rzsp+this.selBar.rzsd/2-this.cmbLab.rzsd/2;this.setPosition(this.cmbLab,e),this.cmbLabelShown=!0,this.hideEl(this.minLab),this.hideEl(this.maxLab),this.showEl(this.cmbLab)}else this.cmbLabelShown=!1,this.updateHighHandle(this.valueToPosition(this.highValue)),this.updateLowHandle(this.valueToPosition(this.lowValue)),this.showEl(this.maxLab),this.showEl(this.minLab),this.hideEl(this.cmbLab);this.options.autoHideLimitLabels&&this.shFloorCeil()},getDisplayValue:function(a,b){return this.options.stepsArray&&!this.options.bindIndexForStepsArray&&(a=this.getStepValue(a)),this.customTrFn(a,this.options.id,b)},roundStep:function(a,b){var c=b?b:this.step,d=parseFloat((a-this.minValue)/c).toPrecision(12);d=Math.round(+d)*c;var e=(this.minValue+d).toFixed(this.precision);return+e},hideEl:function(a){return a.css({visibility:"hidden"})},showEl:function(a){return a.rzAlwaysHide?a:a.css({visibility:"visible"})},setPosition:function(a,b){a.rzsp=b;var c={};return c[this.positionProperty]=Math.round(b)+"px",a.css(c),b},getDimension:function(a){var b=a[0].getBoundingClientRect();return this.options.vertical?a.rzsd=(b.bottom-b.top)*this.options.scale:a.rzsd=(b.right-b.left)*this.options.scale,a.rzsd},setDimension:function(a,b){a.rzsd=b;var c={};return c[this.dimensionProperty]=Math.round(b)+"px",a.css(c),b},sanitizeValue:function(a){return Math.min(Math.max(a,this.minValue),this.maxValue)},valueToPosition:function(a){var b=this.linearValueToPosition;this.options.customValueToPosition?b=this.options.customValueToPosition:this.options.logScale&&(b=this.logValueToPosition),a=this.sanitizeValue(a);var c=b(a,this.minValue,this.maxValue)||0;return this.options.rightToLeft&&(c=1-c),c*this.maxPos},linearValueToPosition:function(a,b,c){var d=c-b;return(a-b)/d},logValueToPosition:function(a,b,c){a=Math.log(a),b=Math.log(b),c=Math.log(c);var d=c-b;return(a-b)/d},positionToValue:function(a){var b=a/this.maxPos;this.options.rightToLeft&&(b=1-b);var c=this.linearPositionToValue;return this.options.customPositionToValue?c=this.options.customPositionToValue:this.options.logScale&&(c=this.logPositionToValue),c(b,this.minValue,this.maxValue)||0},linearPositionToValue:function(a,b,c){return a*(c-b)+b},logPositionToValue:function(a,b,c){b=Math.log(b),c=Math.log(c);var d=a*(c-b)+b;return Math.exp(d)},getEventXY:function(a){var b=this.options.vertical?"clientY":"clientX";return void 0!==a[b]?a[b]:void 0===a.originalEvent?a.touches[0][b]:a.originalEvent.touches[0][b]},getEventPosition:function(a){var b=this.sliderElem.rzsp,c=0;return c=this.options.vertical?-this.getEventXY(a)+b:this.getEventXY(a)-b,c*this.options.scale-this.handleHalfDim},getEventNames:function(a){var b={moveEvent:"",endEvent:""};return a.touches||void 0!==a.originalEvent&&a.originalEvent.touches?(b.moveEvent="touchmove",b.endEvent="touchend"):(b.moveEvent="mousemove",b.endEvent="mouseup"),b},getNearestHandle:function(a){if(!this.range)return this.minH;var b=this.getEventPosition(a),c=Math.abs(b-this.minH.rzsp),d=Math.abs(b-this.maxH.rzsp);return d>c?this.minH:c>d?this.maxH:this.options.rightToLeft?b>this.minH.rzsp?this.minH:this.maxH:b<this.minH.rzsp?this.minH:this.maxH},focusElement:function(a){var b=0;a[b].focus()},bindEvents:function(){var b,c,d;this.options.draggableRange?(b="rzSliderDrag",c=this.onDragStart,d=this.onDragMove):(b="lowValue",c=this.onStart,d=this.onMove),this.options.onlyBindHandles||(this.selBar.on("mousedown",a.bind(this,c,null,b)),this.selBar.on("mousedown",a.bind(this,d,this.selBar))),this.options.draggableRangeOnly?(this.minH.on("mousedown",a.bind(this,c,null,b)),this.maxH.on("mousedown",a.bind(this,c,null,b))):(this.minH.on("mousedown",a.bind(this,this.onStart,this.minH,"lowValue")),this.range&&this.maxH.on("mousedown",a.bind(this,this.onStart,this.maxH,"highValue")),this.options.onlyBindHandles||(this.fullBar.on("mousedown",a.bind(this,this.onStart,null,null)),this.fullBar.on("mousedown",a.bind(this,this.onMove,this.fullBar)),this.ticks.on("mousedown",a.bind(this,this.onStart,null,null)),this.ticks.on("mousedown",a.bind(this,this.onTickClick,this.ticks)))),this.options.onlyBindHandles||(this.selBar.on("touchstart",a.bind(this,c,null,b)),this.selBar.on("touchstart",a.bind(this,d,this.selBar))),this.options.draggableRangeOnly?(this.minH.on("touchstart",a.bind(this,c,null,b)),this.maxH.on("touchstart",a.bind(this,c,null,b))):(this.minH.on("touchstart",a.bind(this,this.onStart,this.minH,"lowValue")),this.range&&this.maxH.on("touchstart",a.bind(this,this.onStart,this.maxH,"highValue")),this.options.onlyBindHandles||(this.fullBar.on("touchstart",a.bind(this,this.onStart,null,null)),this.fullBar.on("touchstart",a.bind(this,this.onMove,this.fullBar)),this.ticks.on("touchstart",a.bind(this,this.onStart,null,null)),this.ticks.on("touchstart",a.bind(this,this.onTickClick,this.ticks)))),this.options.keyboardSupport&&(this.minH.on("focus",a.bind(this,this.onPointerFocus,this.minH,"lowValue")),this.range&&this.maxH.on("focus",a.bind(this,this.onPointerFocus,this.maxH,"highValue")))},unbindEvents:function(){this.minH.off(),this.maxH.off(),this.fullBar.off(),this.selBar.off(),this.ticks.off()},onStart:function(b,d,e){var f,g,h=this.getEventNames(e);e.stopPropagation(),e.preventDefault(),this.calcViewDimensions(),b?this.tracking=d:(b=this.getNearestHandle(e),this.tracking=b===this.minH?"lowValue":"highValue"),b.addClass("rz-active"),this.options.keyboardSupport&&this.focusElement(b),f=a.bind(this,this.dragging.active?this.onDragMove:this.onMove,b),g=a.bind(this,this.onEnd,f),c.on(h.moveEvent,f),c.one(h.endEvent,g),this.callOnStart()},onMove:function(b,c,d){var e,f=this.getEventPosition(c),g=this.options.rightToLeft?this.minValue:this.maxValue,h=this.options.rightToLeft?this.maxValue:this.minValue;0>=f?e=h:f>=this.maxPos?e=g:(e=this.positionToValue(f),e=d&&a.isNumber(this.options.showTicks)?this.roundStep(e,this.options.showTicks):this.roundStep(e)),this.positionTrackingHandle(e)},onEnd:function(a,b){var d=this.getEventNames(b).moveEvent;this.options.keyboardSupport||(this.minH.removeClass("rz-active"),this.maxH.removeClass("rz-active"),this.tracking=""),this.dragging.active=!1,c.off(d,a),this.callOnEnd()},onTickClick:function(a,b){this.onMove(a,b,!0)},onPointerFocus:function(b,c){this.tracking=c,b.one("blur",a.bind(this,this.onPointerBlur,b)),b.on("keydown",a.bind(this,this.onKeyboardEvent)),b.on("keyup",a.bind(this,this.onKeyUp)),this.firstKeyDown=!0,b.addClass("rz-active"),this.currentFocusElement={pointer:b,ref:c}},onKeyUp:function(){this.firstKeyDown=!0,this.callOnEnd()},onPointerBlur:function(a){a.off("keydown"),a.off("keyup"),this.tracking="",a.removeClass("rz-active"),this.currentFocusElement=null},getKeyActions:function(a){var b=a+this.step,c=a-this.step,d=a+this.valueRange/10,e=a-this.valueRange/10,f={UP:b,DOWN:c,LEFT:c,RIGHT:b,PAGEUP:d,PAGEDOWN:e,HOME:this.minValue,END:this.maxValue};return this.options.rightToLeft&&(f.LEFT=b,f.RIGHT=c,this.options.vertical&&(f.UP=c,f.DOWN=b)),f},onKeyboardEvent:function(a){var c=this[this.tracking],d=a.keyCode||a.which,e={38:"UP",40:"DOWN",37:"LEFT",39:"RIGHT",33:"PAGEUP",34:"PAGEDOWN",36:"HOME",35:"END"},f=this.getKeyActions(c),g=e[d],h=f[g];if(null!=h&&""!==this.tracking){a.preventDefault(),this.firstKeyDown&&(this.firstKeyDown=!1,this.callOnStart());var i=this;b(function(){var a=i.roundStep(i.sanitizeValue(h));if(i.options.draggableRangeOnly){var b,c,d=i.highValue-i.lowValue;"lowValue"===i.tracking?(b=a,c=a+d,c>i.maxValue&&(c=i.maxValue,b=c-d)):(c=a,b=a-d,b<i.minValue&&(b=i.minValue,c=b+d)),i.positionTrackingBar(b,c)}else i.positionTrackingHandle(a)})}},onDragStart:function(a,b,c){var d=this.getEventPosition(c);this.dragging={active:!0,value:this.positionToValue(d),difference:this.highValue-this.lowValue,lowLimit:this.options.rightToLeft?this.minH.rzsp-d:d-this.minH.rzsp,highLimit:this.options.rightToLeft?d-this.maxH.rzsp:this.maxH.rzsp-d},this.onStart(a,b,c)},getValue:function(a,b,c,d){var e=this.options.rightToLeft,f=null;return f="min"===a?c?d?e?this.minValue:this.maxValue-this.dragging.difference:e?this.maxValue-this.dragging.difference:this.minValue:e?this.positionToValue(b+this.dragging.lowLimit):this.positionToValue(b-this.dragging.lowLimit):c?d?e?this.minValue+this.dragging.difference:this.maxValue:e?this.maxValue:this.minValue+this.dragging.difference:e?this.positionToValue(b+this.dragging.lowLimit)+this.dragging.difference:this.positionToValue(b-this.dragging.lowLimit)+this.dragging.difference,this.roundStep(f)},onDragMove:function(a,b){var c,d,e,f,g,h,i,j,k=this.getEventPosition(b);if(this.options.rightToLeft?(e=this.dragging.lowLimit,f=this.dragging.highLimit,i=this.maxH,j=this.minH):(e=this.dragging.highLimit,f=this.dragging.lowLimit,i=this.minH,j=this.maxH),g=f>=k,h=k>=this.maxPos-e,g){if(0===i.rzsp)return;c=this.getValue("min",k,!0,!1),d=this.getValue("max",k,!0,!1)}else if(h){if(j.rzsp===this.maxPos)return;d=this.getValue("max",k,!0,!0),c=this.getValue("min",k,!0,!0)}else c=this.getValue("min",k,!1),d=this.getValue("max",k,!1);this.positionTrackingBar(c,d)},positionTrackingBar:function(a,b){null!=this.options.minLimit&&a<this.options.minLimit&&(a=this.options.minLimit,b=a+this.dragging.difference),null!=this.options.maxLimit&&b>this.options.maxLimit&&(b=this.options.maxLimit,a=b-this.dragging.difference),this.lowValue=a,this.highValue=b,this.applyLowValue(),this.range&&this.applyHighValue(),this.applyModel(!0),this.updateHandles("lowValue",this.valueToPosition(a)),this.updateHandles("highValue",this.valueToPosition(b))},positionTrackingHandle:function(a){var b=!1;a=this.applyMinMaxLimit(a),this.range&&(this.options.pushRange?(a=this.applyPushRange(a),b=!0):(this.options.noSwitching&&("lowValue"===this.tracking&&a>this.highValue?a=this.applyMinMaxRange(this.highValue):"highValue"===this.tracking&&a<this.lowValue&&(a=this.applyMinMaxRange(this.lowValue))),a=this.applyMinMaxRange(a),"lowValue"===this.tracking&&a>this.highValue?(this.lowValue=this.highValue,this.applyLowValue(),this.applyModel(),this.updateHandles(this.tracking,this.maxH.rzsp),this.updateAriaAttributes(),this.tracking="highValue",this.minH.removeClass("rz-active"),this.maxH.addClass("rz-active"),this.options.keyboardSupport&&this.focusElement(this.maxH),b=!0):"highValue"===this.tracking&&a<this.lowValue&&(this.highValue=this.lowValue,this.applyHighValue(),this.applyModel(),this.updateHandles(this.tracking,this.minH.rzsp),this.updateAriaAttributes(),this.tracking="lowValue",this.maxH.removeClass("rz-active"),this.minH.addClass("rz-active"),this.options.keyboardSupport&&this.focusElement(this.minH),b=!0))),this[this.tracking]!==a&&(this[this.tracking]=a,"lowValue"===this.tracking?this.applyLowValue():this.applyHighValue(),this.applyModel(),this.updateHandles(this.tracking,this.valueToPosition(a)),this.updateAriaAttributes(),b=!0),b&&this.applyModel(!0)},applyMinMaxLimit:function(a){return null!=this.options.minLimit&&a<this.options.minLimit?this.options.minLimit:null!=this.options.maxLimit&&a>this.options.maxLimit?this.options.maxLimit:a},applyMinMaxRange:function(a){var b="lowValue"===this.tracking?this.highValue:this.lowValue,c=Math.abs(a-b);return null!=this.options.minRange&&c<this.options.minRange?"lowValue"===this.tracking?this.highValue-this.options.minRange:this.lowValue+this.options.minRange:null!=this.options.maxRange&&c>this.options.maxRange?"lowValue"===this.tracking?this.highValue-this.options.maxRange:this.lowValue+this.options.maxRange:a},applyPushRange:function(a){var b="lowValue"===this.tracking?this.highValue-a:a-this.lowValue,c=null!==this.options.minRange?this.options.minRange:this.options.step,d=this.options.maxRange;return c>b?("lowValue"===this.tracking?(this.highValue=Math.min(a+c,this.maxValue),a=this.highValue-c,this.applyHighValue(),this.updateHandles("highValue",this.valueToPosition(this.highValue))):(this.lowValue=Math.max(a-c,this.minValue),a=this.lowValue+c,this.applyLowValue(),this.updateHandles("lowValue",this.valueToPosition(this.lowValue))),this.updateAriaAttributes()):null!==d&&b>d&&("lowValue"===this.tracking?(this.highValue=a+d,this.applyHighValue(),this.updateHandles("highValue",this.valueToPosition(this.highValue))):(this.lowValue=a-d,this.applyLowValue(),this.updateHandles("lowValue",this.valueToPosition(this.lowValue))),this.updateAriaAttributes()),a},applyModel:function(a){this.internalChange=!0,this.scope.$apply(),a&&this.callOnChange(),this.internalChange=!1},callOnStart:function(){if(this.options.onStart){var a=this,b="lowValue"===this.tracking?"min":"max";this.scope.$evalAsync(function(){a.options.onStart(a.options.id,a.scope.rzSliderModel,a.scope.rzSliderHigh,b);
-})}},callOnChange:function(){if(this.options.onChange){var a=this,b="lowValue"===this.tracking?"min":"max";this.scope.$evalAsync(function(){a.options.onChange(a.options.id,a.scope.rzSliderModel,a.scope.rzSliderHigh,b)})}},callOnEnd:function(){if(this.options.onEnd){var a=this,b="lowValue"===this.tracking?"min":"max";this.scope.$evalAsync(function(){a.options.onEnd(a.options.id,a.scope.rzSliderModel,a.scope.rzSliderHigh,b)})}this.scope.$emit("slideEnded")}},h}]).directive("rzslider",["RzSlider",function(a){return{restrict:"AE",replace:!0,scope:{rzSliderModel:"=?",rzSliderHigh:"=?",rzSliderOptions:"&?",rzSliderTplUrl:"@"},templateUrl:function(a,b){return b.rzSliderTplUrl||"rzSliderTpl.html"},link:function(b,c){b.slider=new a(b,c)}}}]);return b.run(["$templateCache",function(a){a.put("rzSliderTpl.html",'<div class=rzslider><span class=rz-bar-wrapper><span class=rz-bar></span></span> <span class=rz-bar-wrapper><span class="rz-bar rz-selection" ng-style=barStyle></span></span> <span class="rz-pointer rz-pointer-min" ng-style=minPointerStyle></span> <span class="rz-pointer rz-pointer-max" ng-style=maxPointerStyle></span> <span class="rz-bubble rz-limit rz-floor"></span> <span class="rz-bubble rz-limit rz-ceil"></span> <span class=rz-bubble></span> <span class=rz-bubble></span> <span class=rz-bubble></span><ul ng-show=showTicks class=rz-ticks><li ng-repeat="t in ticks track by $index" class=rz-tick ng-class="{\'rz-selected\': t.selected}" ng-style=t.style ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement={{t.tooltipPlacement}} ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}"><span ng-if="t.value != null" class=rz-tick-value ng-attr-uib-tooltip="{{ t.valueTooltip }}" ng-attr-tooltip-placement={{t.valueTooltipPlacement}}>{{ t.value }}</span> <span ng-if="t.legend != null" class=rz-tick-legend>{{ t.legend }}</span></li></ul></div>')}]),b.name});
+/*! angularjs-slider - v6.2.3 -  (c) Rafal Zajac <rzajac@gmail.com>, Valentin Hervieu <valentin@hervieu.me>, Jussi Saarivirta <jusasi@gmail.com>, Angelin Sirbu <angelin.sirbu@gmail.com> -  https://github.com/angular-slider/angularjs-slider -  2017-07-08 */
+!function(a,b){"use strict";if("function"==typeof define&&define.amd)define(["angular"],b);else if("object"==typeof module&&module.exports){var c=angular||require("angular");c&&c.module||"undefined"==typeof angular||(c=angular),module.exports=b(c)}else b(a.angular)}(this,function(a){"use strict";var b=a.module("rzModule",[]).factory("RzSliderOptions",function(){var b={floor:0,ceil:null,step:1,precision:0,minRange:null,maxRange:null,pushRange:!1,minLimit:null,maxLimit:null,id:null,translate:null,getLegend:null,stepsArray:null,bindIndexForStepsArray:!1,draggableRange:!1,draggableRangeOnly:!1,showSelectionBar:!1,showSelectionBarEnd:!1,showSelectionBarFromValue:null,hidePointerLabels:!1,hideLimitLabels:!1,autoHideLimitLabels:!0,readOnly:!1,disabled:!1,interval:350,showTicks:!1,showTicksValues:!1,ticksArray:null,ticksTooltip:null,ticksValuesTooltip:null,vertical:!1,getSelectionBarColor:null,getTickColor:null,getPointerColor:null,keyboardSupport:!0,scale:1,enforceStep:!0,enforceRange:!1,noSwitching:!1,onlyBindHandles:!1,onStart:null,onChange:null,onEnd:null,rightToLeft:!1,boundPointerLabels:!0,mergeRangeLabelsIfSame:!1,customTemplateScope:null,logScale:!1,customValueToPosition:null,customPositionToValue:null,selectionBarGradient:null,ariaLabel:null,ariaLabelledBy:null,ariaLabelHigh:null,ariaLabelledByHigh:null},c={},d={};return d.options=function(b){a.extend(c,b)},d.getOptions=function(d){return a.extend({},b,c,d)},d}).factory("rzThrottle",["$timeout",function(a){return function(b,c,d){var e,f,g,h=Date.now||function(){return(new Date).getTime()},i=null,j=0;d=d||{};var k=function(){j=h(),i=null,g=b.apply(e,f),e=f=null};return function(){var l=h(),m=c-(l-j);return e=this,f=arguments,0>=m?(a.cancel(i),i=null,j=l,g=b.apply(e,f),e=f=null):i||d.trailing===!1||(i=a(k,m)),g}}}]).factory("RzSlider",["$timeout","$document","$window","$compile","RzSliderOptions","rzThrottle",function(b,c,d,e,f,g){var h=function(a,b){this.scope=a,this.lowValue=0,this.highValue=0,this.sliderElem=b,this.range=void 0!==this.scope.rzSliderModel&&void 0!==this.scope.rzSliderHigh,this.dragging={active:!1,value:0,difference:0,position:0,lowLimit:0,highLimit:0},this.positionProperty="left",this.dimensionProperty="width",this.handleHalfDim=0,this.maxPos=0,this.precision=0,this.step=1,this.tracking="",this.minValue=0,this.maxValue=0,this.valueRange=0,this.intermediateTicks=!1,this.initHasRun=!1,this.firstKeyDown=!1,this.internalChange=!1,this.cmbLabelShown=!1,this.currentFocusElement=null,this.fullBar=null,this.selBar=null,this.minH=null,this.maxH=null,this.flrLab=null,this.ceilLab=null,this.minLab=null,this.maxLab=null,this.cmbLab=null,this.ticks=null,this.init()};return h.prototype={init:function(){var b,c,e=this,f=function(){e.calcViewDimensions()};this.applyOptions(),this.syncLowValue(),this.range&&this.syncHighValue(),this.initElemHandles(),this.manageElementsStyle(),this.setDisabledState(),this.calcViewDimensions(),this.setMinAndMax(),this.addAccessibility(),this.updateCeilLab(),this.updateFloorLab(),this.initHandles(),this.manageEventsBindings(),this.scope.$on("reCalcViewDimensions",f),a.element(d).on("resize",f),this.initHasRun=!0,b=g(function(){e.onLowHandleChange()},e.options.interval),c=g(function(){e.onHighHandleChange()},e.options.interval),this.scope.$on("rzSliderForceRender",function(){e.resetLabelsValue(),b(),e.range&&c(),e.resetSlider()}),this.scope.$watch("rzSliderOptions()",function(a,b){a!==b&&(e.applyOptions(),e.syncLowValue(),e.range&&e.syncHighValue(),e.resetSlider())},!0),this.scope.$watch("rzSliderModel",function(a,c){e.internalChange||a!==c&&b()}),this.scope.$watch("rzSliderHigh",function(a,b){e.internalChange||a!==b&&(null!=a&&c(),(e.range&&null==a||!e.range&&null!=a)&&(e.applyOptions(),e.resetSlider()))}),this.scope.$on("$destroy",function(){e.unbindEvents(),a.element(d).off("resize",f),e.currentFocusElement=null})},findStepIndex:function(b){for(var c=0,d=0;d<this.options.stepsArray.length;d++){var e=this.options.stepsArray[d];if(e===b){c=d;break}if(a.isDate(e)){if(e.getTime()===b.getTime()){c=d;break}}else if(a.isObject(e)&&(a.isDate(e.value)&&e.value.getTime()===b.getTime()||e.value===b)){c=d;break}}return c},syncLowValue:function(){this.options.stepsArray?this.options.bindIndexForStepsArray?this.lowValue=this.scope.rzSliderModel:this.lowValue=this.findStepIndex(this.scope.rzSliderModel):this.lowValue=this.scope.rzSliderModel},syncHighValue:function(){this.options.stepsArray?this.options.bindIndexForStepsArray?this.highValue=this.scope.rzSliderHigh:this.highValue=this.findStepIndex(this.scope.rzSliderHigh):this.highValue=this.scope.rzSliderHigh},getStepValue:function(b){var c=this.options.stepsArray[b];return a.isDate(c)?c:a.isObject(c)?c.value:c},applyLowValue:function(){this.options.stepsArray?this.options.bindIndexForStepsArray?this.scope.rzSliderModel=this.lowValue:this.scope.rzSliderModel=this.getStepValue(this.lowValue):this.scope.rzSliderModel=this.lowValue},applyHighValue:function(){this.options.stepsArray?this.options.bindIndexForStepsArray?this.scope.rzSliderHigh=this.highValue:this.scope.rzSliderHigh=this.getStepValue(this.highValue):this.scope.rzSliderHigh=this.highValue},onLowHandleChange:function(){this.syncLowValue(),this.range&&this.syncHighValue(),this.setMinAndMax(),this.updateLowHandle(this.valueToPosition(this.lowValue)),this.updateSelectionBar(),this.updateTicksScale(),this.updateAriaAttributes(),this.range&&this.updateCmbLabel()},onHighHandleChange:function(){this.syncLowValue(),this.syncHighValue(),this.setMinAndMax(),this.updateHighHandle(this.valueToPosition(this.highValue)),this.updateSelectionBar(),this.updateTicksScale(),this.updateCmbLabel(),this.updateAriaAttributes()},applyOptions:function(){var b;b=this.scope.rzSliderOptions?this.scope.rzSliderOptions():{},this.options=f.getOptions(b),this.options.step<=0&&(this.options.step=1),this.range=void 0!==this.scope.rzSliderModel&&void 0!==this.scope.rzSliderHigh,this.options.draggableRange=this.range&&this.options.draggableRange,this.options.draggableRangeOnly=this.range&&this.options.draggableRangeOnly,this.options.draggableRangeOnly&&(this.options.draggableRange=!0),this.options.showTicks=this.options.showTicks||this.options.showTicksValues||!!this.options.ticksArray,this.scope.showTicks=this.options.showTicks,(a.isNumber(this.options.showTicks)||this.options.ticksArray)&&(this.intermediateTicks=!0),this.options.showSelectionBar=this.options.showSelectionBar||this.options.showSelectionBarEnd||null!==this.options.showSelectionBarFromValue,this.options.stepsArray?this.parseStepsArray():(this.options.translate?this.customTrFn=this.options.translate:this.customTrFn=function(a){return String(a)},this.getLegend=this.options.getLegend),this.options.vertical&&(this.positionProperty="bottom",this.dimensionProperty="height"),this.options.customTemplateScope&&(this.scope.custom=this.options.customTemplateScope)},parseStepsArray:function(){this.options.floor=0,this.options.ceil=this.options.stepsArray.length-1,this.options.step=1,this.options.translate?this.customTrFn=this.options.translate:this.customTrFn=function(a){return this.options.bindIndexForStepsArray?this.getStepValue(a):a},this.getLegend=function(b){var c=this.options.stepsArray[b];return a.isObject(c)?c.legend:null}},resetSlider:function(){this.manageElementsStyle(),this.addAccessibility(),this.setMinAndMax(),this.updateCeilLab(),this.updateFloorLab(),this.unbindEvents(),this.manageEventsBindings(),this.setDisabledState(),this.calcViewDimensions(),this.refocusPointerIfNeeded()},refocusPointerIfNeeded:function(){this.currentFocusElement&&(this.onPointerFocus(this.currentFocusElement.pointer,this.currentFocusElement.ref),this.focusElement(this.currentFocusElement.pointer))},initElemHandles:function(){a.forEach(this.sliderElem.children(),function(b,c){var d=a.element(b);switch(c){case 0:this.fullBar=d;break;case 1:this.selBar=d;break;case 2:this.minH=d;break;case 3:this.maxH=d;break;case 4:this.flrLab=d;break;case 5:this.ceilLab=d;break;case 6:this.minLab=d;break;case 7:this.maxLab=d;break;case 8:this.cmbLab=d;break;case 9:this.ticks=d}},this),this.selBar.rzsp=0,this.minH.rzsp=0,this.maxH.rzsp=0,this.flrLab.rzsp=0,this.ceilLab.rzsp=0,this.minLab.rzsp=0,this.maxLab.rzsp=0,this.cmbLab.rzsp=0},manageElementsStyle:function(){this.range?this.maxH.css("display",""):this.maxH.css("display","none"),this.alwaysHide(this.flrLab,this.options.showTicksValues||this.options.hideLimitLabels),this.alwaysHide(this.ceilLab,this.options.showTicksValues||this.options.hideLimitLabels);var a=this.options.showTicksValues&&!this.intermediateTicks;this.alwaysHide(this.minLab,a||this.options.hidePointerLabels),this.alwaysHide(this.maxLab,a||!this.range||this.options.hidePointerLabels),this.alwaysHide(this.cmbLab,a||!this.range||this.options.hidePointerLabels),this.alwaysHide(this.selBar,!this.range&&!this.options.showSelectionBar),this.options.vertical&&this.sliderElem.addClass("rz-vertical"),this.options.draggableRange?this.selBar.addClass("rz-draggable"):this.selBar.removeClass("rz-draggable"),this.intermediateTicks&&this.options.showTicksValues&&this.ticks.addClass("rz-ticks-values-under")},alwaysHide:function(a,b){a.rzAlwaysHide=b,b?this.hideEl(a):this.showEl(a)},manageEventsBindings:function(){this.options.disabled||this.options.readOnly?this.unbindEvents():this.bindEvents()},setDisabledState:function(){this.options.disabled?this.sliderElem.attr("disabled","disabled"):this.sliderElem.attr("disabled",null)},resetLabelsValue:function(){this.minLab.rzsv=void 0,this.maxLab.rzsv=void 0},initHandles:function(){this.updateLowHandle(this.valueToPosition(this.lowValue)),this.range&&this.updateHighHandle(this.valueToPosition(this.highValue)),this.updateSelectionBar(),this.range&&this.updateCmbLabel(),this.updateTicksScale()},translateFn:function(a,b,c,d){d=void 0===d?!0:d;var e="",f=!1,g=b.hasClass("no-label-injection");d?(this.options.stepsArray&&!this.options.bindIndexForStepsArray&&(a=this.getStepValue(a)),e=String(this.customTrFn(a,this.options.id,c))):e=String(a),(void 0===b.rzsv||b.rzsv.length!==e.length||b.rzsv.length>0&&0===b.rzsd)&&(f=!0,b.rzsv=e),g||b.html(e),this.scope[c+"Label"]=e,f&&this.getDimension(b)},setMinAndMax:function(){if(this.step=+this.options.step,this.precision=+this.options.precision,this.minValue=this.options.floor,this.options.logScale&&0===this.minValue)throw Error("Can't use floor=0 with logarithmic scale");this.options.enforceStep&&(this.lowValue=this.roundStep(this.lowValue),this.range&&(this.highValue=this.roundStep(this.highValue))),null!=this.options.ceil?this.maxValue=this.options.ceil:this.maxValue=this.options.ceil=this.range?this.highValue:this.lowValue,this.options.enforceRange&&(this.lowValue=this.sanitizeValue(this.lowValue),this.range&&(this.highValue=this.sanitizeValue(this.highValue))),this.applyLowValue(),this.range&&this.applyHighValue(),this.valueRange=this.maxValue-this.minValue},addAccessibility:function(){this.minH.attr("role","slider"),this.updateAriaAttributes(),!this.options.keyboardSupport||this.options.readOnly||this.options.disabled?this.minH.attr("tabindex",""):this.minH.attr("tabindex","0"),this.options.vertical&&this.minH.attr("aria-orientation","vertical"),this.options.ariaLabel?this.minH.attr("aria-label",this.options.ariaLabel):this.options.ariaLabelledBy&&this.minH.attr("aria-labelledby",this.options.ariaLabelledBy),this.range&&(this.maxH.attr("role","slider"),!this.options.keyboardSupport||this.options.readOnly||this.options.disabled?this.maxH.attr("tabindex",""):this.maxH.attr("tabindex","0"),this.options.vertical&&this.maxH.attr("aria-orientation","vertical"),this.options.ariaLabelHigh?this.maxH.attr("aria-label",this.options.ariaLabelHigh):this.options.ariaLabelledByHigh&&this.maxH.attr("aria-labelledby",this.options.ariaLabelledByHigh))},updateAriaAttributes:function(){this.minH.attr({"aria-valuenow":this.scope.rzSliderModel,"aria-valuetext":this.customTrFn(this.scope.rzSliderModel,this.options.id,"model"),"aria-valuemin":this.minValue,"aria-valuemax":this.maxValue}),this.range&&this.maxH.attr({"aria-valuenow":this.scope.rzSliderHigh,"aria-valuetext":this.customTrFn(this.scope.rzSliderHigh,this.options.id,"high"),"aria-valuemin":this.minValue,"aria-valuemax":this.maxValue})},calcViewDimensions:function(){var a=this.getDimension(this.minH);if(this.handleHalfDim=a/2,this.barDimension=this.getDimension(this.fullBar),this.maxPos=this.barDimension-a,this.getDimension(this.sliderElem),this.sliderElem.rzsp=this.sliderElem[0].getBoundingClientRect()[this.positionProperty],this.initHasRun){this.updateFloorLab(),this.updateCeilLab(),this.initHandles();var c=this;b(function(){c.updateTicksScale()})}},updateTicksScale:function(){if(this.options.showTicks){var a=this.options.ticksArray||this.getTicksArray(),b=this.options.vertical?"translateY":"translateX",c=this;this.options.rightToLeft&&a.reverse(),this.scope.ticks=a.map(function(a){var d=c.valueToPosition(a);c.options.vertical&&(d=c.maxPos-d);var e=b+"("+Math.round(d)+"px)",f={selected:c.isTickSelected(a),style:{"-webkit-transform":e,"-moz-transform":e,"-o-transform":e,"-ms-transform":e,transform:e}};if(f.selected&&c.options.getSelectionBarColor&&(f.style["background-color"]=c.getSelectionBarColor()),!f.selected&&c.options.getTickColor&&(f.style["background-color"]=c.getTickColor(a)),c.options.ticksTooltip&&(f.tooltip=c.options.ticksTooltip(a),f.tooltipPlacement=c.options.vertical?"right":"top"),c.options.showTicksValues&&(f.value=c.getDisplayValue(a,"tick-value"),c.options.ticksValuesTooltip&&(f.valueTooltip=c.options.ticksValuesTooltip(a),f.valueTooltipPlacement=c.options.vertical?"right":"top")),c.getLegend){var g=c.getLegend(a,c.options.id);g&&(f.legend=g)}return f})}},getTicksArray:function(){var a=this.step,b=[];this.intermediateTicks&&(a=this.options.showTicks);for(var c=this.minValue;c<=this.maxValue;c+=a)b.push(c);return b},isTickSelected:function(a){if(!this.range)if(null!==this.options.showSelectionBarFromValue){var b=this.options.showSelectionBarFromValue;if(this.lowValue>b&&a>=b&&a<=this.lowValue)return!0;if(this.lowValue<b&&b>=a&&a>=this.lowValue)return!0}else if(this.options.showSelectionBarEnd){if(a>=this.lowValue)return!0}else if(this.options.showSelectionBar&&a<=this.lowValue)return!0;return this.range&&a>=this.lowValue&&a<=this.highValue?!0:!1},updateFloorLab:function(){this.translateFn(this.minValue,this.flrLab,"floor"),this.getDimension(this.flrLab);var a=this.options.rightToLeft?this.barDimension-this.flrLab.rzsd:0;this.setPosition(this.flrLab,a)},updateCeilLab:function(){this.translateFn(this.maxValue,this.ceilLab,"ceil"),this.getDimension(this.ceilLab);var a=this.options.rightToLeft?0:this.barDimension-this.ceilLab.rzsd;this.setPosition(this.ceilLab,a)},updateHandles:function(a,b){"lowValue"===a?this.updateLowHandle(b):this.updateHighHandle(b),this.updateSelectionBar(),this.updateTicksScale(),this.range&&this.updateCmbLabel()},getHandleLabelPos:function(a,b){var c=this[a].rzsd,d=b-c/2+this.handleHalfDim,e=this.barDimension-c;return this.options.boundPointerLabels?this.options.rightToLeft&&"minLab"===a||!this.options.rightToLeft&&"maxLab"===a?Math.min(d,e):Math.min(Math.max(d,0),e):d},updateLowHandle:function(a){if(this.setPosition(this.minH,a),this.translateFn(this.lowValue,this.minLab,"model"),this.setPosition(this.minLab,this.getHandleLabelPos("minLab",a)),this.options.getPointerColor){var b=this.getPointerColor("min");this.scope.minPointerStyle={backgroundColor:b}}this.options.autoHideLimitLabels&&this.shFloorCeil()},updateHighHandle:function(a){if(this.setPosition(this.maxH,a),this.translateFn(this.highValue,this.maxLab,"high"),this.setPosition(this.maxLab,this.getHandleLabelPos("maxLab",a)),this.options.getPointerColor){var b=this.getPointerColor("max");this.scope.maxPointerStyle={backgroundColor:b}}this.options.autoHideLimitLabels&&this.shFloorCeil()},shFloorCeil:function(){if(!this.options.hidePointerLabels){var a=!1,b=!1,c=this.isLabelBelowFloorLab(this.minLab),d=this.isLabelAboveCeilLab(this.minLab),e=this.isLabelAboveCeilLab(this.maxLab),f=this.isLabelBelowFloorLab(this.cmbLab),g=this.isLabelAboveCeilLab(this.cmbLab);if(c?(a=!0,this.hideEl(this.flrLab)):(a=!1,this.showEl(this.flrLab)),d?(b=!0,this.hideEl(this.ceilLab)):(b=!1,this.showEl(this.ceilLab)),this.range){var h=this.cmbLabelShown?g:e,i=this.cmbLabelShown?f:c;h?this.hideEl(this.ceilLab):b||this.showEl(this.ceilLab),i?this.hideEl(this.flrLab):a||this.showEl(this.flrLab)}}},isLabelBelowFloorLab:function(a){var b=this.options.rightToLeft,c=a.rzsp,d=a.rzsd,e=this.flrLab.rzsp,f=this.flrLab.rzsd;return b?c+d>=e-2:e+f+2>=c},isLabelAboveCeilLab:function(a){var b=this.options.rightToLeft,c=a.rzsp,d=a.rzsd,e=this.ceilLab.rzsp,f=this.ceilLab.rzsd;return b?e+f+2>=c:c+d>=e-2},updateSelectionBar:function(){var a=0,b=0,c=this.options.rightToLeft?!this.options.showSelectionBarEnd:this.options.showSelectionBarEnd,d=this.options.rightToLeft?this.maxH.rzsp+this.handleHalfDim:this.minH.rzsp+this.handleHalfDim;if(this.range)b=Math.abs(this.maxH.rzsp-this.minH.rzsp),a=d;else if(null!==this.options.showSelectionBarFromValue){var e=this.options.showSelectionBarFromValue,f=this.valueToPosition(e),g=this.options.rightToLeft?this.lowValue<=e:this.lowValue>e;g?(b=this.minH.rzsp-f,a=f+this.handleHalfDim):(b=f-this.minH.rzsp,a=this.minH.rzsp+this.handleHalfDim)}else c?(b=Math.abs(this.maxPos-this.minH.rzsp)+this.handleHalfDim,a=this.minH.rzsp+this.handleHalfDim):(b=this.minH.rzsp+this.handleHalfDim,a=0);if(this.setDimension(this.selBar,b),this.setPosition(this.selBar,a),this.options.getSelectionBarColor){var h=this.getSelectionBarColor();this.scope.barStyle={backgroundColor:h}}else if(this.options.selectionBarGradient){var i=null!==this.options.showSelectionBarFromValue?this.valueToPosition(this.options.showSelectionBarFromValue):0,j=i-a>0^c,k=this.options.vertical?j?"bottom":"top":j?"left":"right";this.scope.barStyle={backgroundImage:"linear-gradient(to "+k+", "+this.options.selectionBarGradient.from+" 0%,"+this.options.selectionBarGradient.to+" 100%)"},this.options.vertical?(this.scope.barStyle.backgroundPosition="center "+(i+b+a+(j?-this.handleHalfDim:0))+"px",this.scope.barStyle.backgroundSize="100% "+(this.barDimension-this.handleHalfDim)+"px"):(this.scope.barStyle.backgroundPosition=i-a+(j?this.handleHalfDim:0)+"px center",this.scope.barStyle.backgroundSize=this.barDimension-this.handleHalfDim+"px 100%")}},getSelectionBarColor:function(){return this.range?this.options.getSelectionBarColor(this.scope.rzSliderModel,this.scope.rzSliderHigh):this.options.getSelectionBarColor(this.scope.rzSliderModel)},getPointerColor:function(a){return"max"===a?this.options.getPointerColor(this.scope.rzSliderHigh,a):this.options.getPointerColor(this.scope.rzSliderModel,a)},getTickColor:function(a){return this.options.getTickColor(a)},updateCmbLabel:function(){var a=null;if(a=this.options.rightToLeft?this.minLab.rzsp-this.minLab.rzsd-10<=this.maxLab.rzsp:this.minLab.rzsp+this.minLab.rzsd+10>=this.maxLab.rzsp){var b=this.getDisplayValue(this.lowValue,"model"),c=this.getDisplayValue(this.highValue,"high"),d="";d=this.options.mergeRangeLabelsIfSame&&b===c?b:this.options.rightToLeft?c+" - "+b:b+" - "+c,this.translateFn(d,this.cmbLab,"cmb",!1);var e=this.options.boundPointerLabels?Math.min(Math.max(this.selBar.rzsp+this.selBar.rzsd/2-this.cmbLab.rzsd/2,0),this.barDimension-this.cmbLab.rzsd):this.selBar.rzsp+this.selBar.rzsd/2-this.cmbLab.rzsd/2;this.setPosition(this.cmbLab,e),this.cmbLabelShown=!0,this.hideEl(this.minLab),this.hideEl(this.maxLab),this.showEl(this.cmbLab)}else this.cmbLabelShown=!1,this.updateHighHandle(this.valueToPosition(this.highValue)),this.updateLowHandle(this.valueToPosition(this.lowValue)),this.showEl(this.maxLab),this.showEl(this.minLab),this.hideEl(this.cmbLab);this.options.autoHideLimitLabels&&this.shFloorCeil()},getDisplayValue:function(a,b){return this.options.stepsArray&&!this.options.bindIndexForStepsArray&&(a=this.getStepValue(a)),this.customTrFn(a,this.options.id,b)},roundStep:function(a,b){var c=b?b:this.step,d=parseFloat((a-this.minValue)/c).toPrecision(12);d=Math.round(+d)*c;var e=(this.minValue+d).toFixed(this.precision);return+e},hideEl:function(a){return a.css({visibility:"hidden"})},showEl:function(a){return a.rzAlwaysHide?a:a.css({visibility:"visible"})},setPosition:function(a,b){a.rzsp=b;var c={};return c[this.positionProperty]=Math.round(b)+"px",a.css(c),b},getDimension:function(a){var b=a[0].getBoundingClientRect();return this.options.vertical?a.rzsd=(b.bottom-b.top)*this.options.scale:a.rzsd=(b.right-b.left)*this.options.scale,a.rzsd},setDimension:function(a,b){a.rzsd=b;var c={};return c[this.dimensionProperty]=Math.round(b)+"px",a.css(c),b},sanitizeValue:function(a){return Math.min(Math.max(a,this.minValue),this.maxValue)},valueToPosition:function(a){var b=this.linearValueToPosition;this.options.customValueToPosition?b=this.options.customValueToPosition:this.options.logScale&&(b=this.logValueToPosition),a=this.sanitizeValue(a);var c=b(a,this.minValue,this.maxValue)||0;return this.options.rightToLeft&&(c=1-c),c*this.maxPos},linearValueToPosition:function(a,b,c){var d=c-b;return(a-b)/d},logValueToPosition:function(a,b,c){a=Math.log(a),b=Math.log(b),c=Math.log(c);var d=c-b;return(a-b)/d},positionToValue:function(a){var b=a/this.maxPos;this.options.rightToLeft&&(b=1-b);var c=this.linearPositionToValue;return this.options.customPositionToValue?c=this.options.customPositionToValue:this.options.logScale&&(c=this.logPositionToValue),c(b,this.minValue,this.maxValue)||0},linearPositionToValue:function(a,b,c){return a*(c-b)+b},logPositionToValue:function(a,b,c){b=Math.log(b),c=Math.log(c);var d=a*(c-b)+b;return Math.exp(d)},getEventAttr:function(a,b){return void 0===a.originalEvent?a[b]:a.originalEvent[b]},getEventXY:function(a,b){var c=this.options.vertical?"clientY":"clientX";if(void 0!==a[c])return a[c];var d=this.getEventAttr(a,"touches");if(void 0!==b)for(var e=0;e<d.length;e++)if(d[e].identifier===b)return d[e][c];return d[0][c]},getEventPosition:function(a,b){var c=this.sliderElem.rzsp,d=0;return d=this.options.vertical?-this.getEventXY(a,b)+c:this.getEventXY(a,b)-c,d*this.options.scale-this.handleHalfDim},getEventNames:function(a){var b={moveEvent:"",endEvent:""};return this.getEventAttr(a,"touches")?(b.moveEvent="touchmove",b.endEvent="touchend"):(b.moveEvent="mousemove",b.endEvent="mouseup"),b},getNearestHandle:function(a){if(!this.range)return this.minH;var b=this.getEventPosition(a),c=Math.abs(b-this.minH.rzsp),d=Math.abs(b-this.maxH.rzsp);return d>c?this.minH:c>d?this.maxH:this.options.rightToLeft?b>this.minH.rzsp?this.minH:this.maxH:b<this.minH.rzsp?this.minH:this.maxH},focusElement:function(a){var b=0;a[b].focus()},bindEvents:function(){var b,c,d;this.options.draggableRange?(b="rzSliderDrag",c=this.onDragStart,d=this.onDragMove):(b="lowValue",c=this.onStart,d=this.onMove),this.options.onlyBindHandles||(this.selBar.on("mousedown",a.bind(this,c,null,b)),this.selBar.on("mousedown",a.bind(this,d,this.selBar))),this.options.draggableRangeOnly?(this.minH.on("mousedown",a.bind(this,c,null,b)),this.maxH.on("mousedown",a.bind(this,c,null,b))):(this.minH.on("mousedown",a.bind(this,this.onStart,this.minH,"lowValue")),this.range&&this.maxH.on("mousedown",a.bind(this,this.onStart,this.maxH,"highValue")),this.options.onlyBindHandles||(this.fullBar.on("mousedown",a.bind(this,this.onStart,null,null)),this.fullBar.on("mousedown",a.bind(this,this.onMove,this.fullBar)),this.ticks.on("mousedown",a.bind(this,this.onStart,null,null)),this.ticks.on("mousedown",a.bind(this,this.onTickClick,this.ticks)))),this.options.onlyBindHandles||(this.selBar.on("touchstart",a.bind(this,c,null,b)),this.selBar.on("touchstart",a.bind(this,d,this.selBar))),this.options.draggableRangeOnly?(this.minH.on("touchstart",a.bind(this,c,null,b)),this.maxH.on("touchstart",a.bind(this,c,null,b))):(this.minH.on("touchstart",a.bind(this,this.onStart,this.minH,"lowValue")),this.range&&this.maxH.on("touchstart",a.bind(this,this.onStart,this.maxH,"highValue")),this.options.onlyBindHandles||(this.fullBar.on("touchstart",a.bind(this,this.onStart,null,null)),this.fullBar.on("touchstart",a.bind(this,this.onMove,this.fullBar)),this.ticks.on("touchstart",a.bind(this,this.onStart,null,null)),this.ticks.on("touchstart",a.bind(this,this.onTickClick,this.ticks)))),this.options.keyboardSupport&&(this.minH.on("focus",a.bind(this,this.onPointerFocus,this.minH,"lowValue")),this.range&&this.maxH.on("focus",a.bind(this,this.onPointerFocus,this.maxH,"highValue")))},unbindEvents:function(){this.minH.off(),this.maxH.off(),this.fullBar.off(),this.selBar.off(),this.ticks.off()},onStart:function(b,d,e){var f,g,h=this.getEventNames(e);e.stopPropagation(),e.preventDefault(),this.calcViewDimensions(),b?this.tracking=d:(b=this.getNearestHandle(e),this.tracking=b===this.minH?"lowValue":"highValue"),b.addClass("rz-active"),this.options.keyboardSupport&&this.focusElement(b),f=a.bind(this,this.dragging.active?this.onDragMove:this.onMove,b),g=a.bind(this,this.onEnd,f),c.on(h.moveEvent,f),c.on(h.endEvent,g),this.endHandlerToBeRemovedOnEnd=g,this.callOnStart();var i=this.getEventAttr(e,"changedTouches");i&&(this.touchId||(this.isDragging=!0,this.touchId=i[0].identifier))},onMove:function(b,c,d){var e,f=this.getEventAttr(c,"changedTouches");if(f)for(var g=0;g<f.length;g++)if(f[g].identifier===this.touchId){e=f[g];break}if(!f||e){var h,i=this.getEventPosition(c,e?e.identifier:void 0),j=this.options.rightToLeft?this.minValue:this.maxValue,k=this.options.rightToLeft?this.maxValue:this.minValue;0>=i?h=k:i>=this.maxPos?h=j:(h=this.positionToValue(i),h=d&&a.isNumber(this.options.showTicks)?this.roundStep(h,this.options.showTicks):this.roundStep(h)),this.positionTrackingHandle(h)}},onEnd:function(a,b){var d=this.getEventAttr(b,"changedTouches");if(!d||d[0].identifier===this.touchId){this.isDragging=!1,this.touchId=null,this.options.keyboardSupport||(this.minH.removeClass("rz-active"),this.maxH.removeClass("rz-active"),this.tracking=""),this.dragging.active=!1;var e=this.getEventNames(b);c.off(e.moveEvent,a),c.off(e.endEvent,this.endHandlerToBeRemovedOnEnd),this.endHandlerToBeRemovedOnEnd=null,this.callOnEnd()}},onTickClick:function(a,b){this.onMove(a,b,!0)},onPointerFocus:function(b,c){this.tracking=c,b.one("blur",a.bind(this,this.onPointerBlur,b)),b.on("keydown",a.bind(this,this.onKeyboardEvent)),b.on("keyup",a.bind(this,this.onKeyUp)),this.firstKeyDown=!0,b.addClass("rz-active"),this.currentFocusElement={pointer:b,ref:c}},onKeyUp:function(){this.firstKeyDown=!0,this.callOnEnd()},onPointerBlur:function(a){a.off("keydown"),a.off("keyup"),a.removeClass("rz-active"),this.isDragging||(this.tracking="",this.currentFocusElement=null)},getKeyActions:function(a){var b=a+this.step,c=a-this.step,d=a+this.valueRange/10,e=a-this.valueRange/10,f={UP:b,DOWN:c,LEFT:c,RIGHT:b,PAGEUP:d,PAGEDOWN:e,HOME:this.minValue,END:this.maxValue};return this.options.rightToLeft&&(f.LEFT=b,f.RIGHT=c,this.options.vertical&&(f.UP=c,f.DOWN=b)),f},onKeyboardEvent:function(a){var c=this[this.tracking],d=a.keyCode||a.which,e={38:"UP",40:"DOWN",37:"LEFT",39:"RIGHT",33:"PAGEUP",34:"PAGEDOWN",36:"HOME",35:"END"},f=this.getKeyActions(c),g=e[d],h=f[g];if(null!=h&&""!==this.tracking){a.preventDefault(),this.firstKeyDown&&(this.firstKeyDown=!1,this.callOnStart());var i=this;b(function(){var a=i.roundStep(i.sanitizeValue(h));if(i.options.draggableRangeOnly){var b,c,d=i.highValue-i.lowValue;"lowValue"===i.tracking?(b=a,c=a+d,c>i.maxValue&&(c=i.maxValue,b=c-d)):(c=a,b=a-d,b<i.minValue&&(b=i.minValue,c=b+d)),i.positionTrackingBar(b,c)}else i.positionTrackingHandle(a)})}},onDragStart:function(a,b,c){var d=this.getEventPosition(c);this.dragging={active:!0,value:this.positionToValue(d),difference:this.highValue-this.lowValue,lowLimit:this.options.rightToLeft?this.minH.rzsp-d:d-this.minH.rzsp,highLimit:this.options.rightToLeft?d-this.maxH.rzsp:this.maxH.rzsp-d},this.onStart(a,b,c)},getValue:function(a,b,c,d){var e=this.options.rightToLeft,f=null;return f="min"===a?c?d?e?this.minValue:this.maxValue-this.dragging.difference:e?this.maxValue-this.dragging.difference:this.minValue:e?this.positionToValue(b+this.dragging.lowLimit):this.positionToValue(b-this.dragging.lowLimit):c?d?e?this.minValue+this.dragging.difference:this.maxValue:e?this.maxValue:this.minValue+this.dragging.difference:e?this.positionToValue(b+this.dragging.lowLimit)+this.dragging.difference:this.positionToValue(b-this.dragging.lowLimit)+this.dragging.difference,this.roundStep(f)},onDragMove:function(a,b){var c,d,e,f,g,h,i,j,k=this.getEventPosition(b);if(this.options.rightToLeft?(e=this.dragging.lowLimit,f=this.dragging.highLimit,i=this.maxH,j=this.minH):(e=this.dragging.highLimit,f=this.dragging.lowLimit,i=this.minH,j=this.maxH),g=f>=k,h=k>=this.maxPos-e,g){if(0===i.rzsp)return;c=this.getValue("min",k,!0,!1),d=this.getValue("max",k,!0,!1)}else if(h){if(j.rzsp===this.maxPos)return;d=this.getValue("max",k,!0,!0),c=this.getValue("min",k,!0,!0)}else c=this.getValue("min",k,!1),d=this.getValue("max",k,!1);this.positionTrackingBar(c,d)},positionTrackingBar:function(a,b){null!=this.options.minLimit&&a<this.options.minLimit&&(a=this.options.minLimit,b=a+this.dragging.difference),null!=this.options.maxLimit&&b>this.options.maxLimit&&(b=this.options.maxLimit,a=b-this.dragging.difference),this.lowValue=a,this.highValue=b,this.applyLowValue(),this.range&&this.applyHighValue(),this.applyModel(!0),this.updateHandles("lowValue",this.valueToPosition(a)),this.updateHandles("highValue",this.valueToPosition(b))},positionTrackingHandle:function(a){var b=!1;a=this.applyMinMaxLimit(a),this.range&&(this.options.pushRange?(a=this.applyPushRange(a),b=!0):(this.options.noSwitching&&("lowValue"===this.tracking&&a>this.highValue?a=this.applyMinMaxRange(this.highValue):"highValue"===this.tracking&&a<this.lowValue&&(a=this.applyMinMaxRange(this.lowValue))),a=this.applyMinMaxRange(a),"lowValue"===this.tracking&&a>this.highValue?(this.lowValue=this.highValue,this.applyLowValue(),this.applyModel(),this.updateHandles(this.tracking,this.maxH.rzsp),this.updateAriaAttributes(),this.tracking="highValue",this.minH.removeClass("rz-active"),this.maxH.addClass("rz-active"),this.options.keyboardSupport&&this.focusElement(this.maxH),b=!0):"highValue"===this.tracking&&a<this.lowValue&&(this.highValue=this.lowValue,this.applyHighValue(),this.applyModel(),this.updateHandles(this.tracking,this.minH.rzsp),this.updateAriaAttributes(),this.tracking="lowValue",this.maxH.removeClass("rz-active"),this.minH.addClass("rz-active"),this.options.keyboardSupport&&this.focusElement(this.minH),b=!0))),this[this.tracking]!==a&&(this[this.tracking]=a,"lowValue"===this.tracking?this.applyLowValue():this.applyHighValue(),this.applyModel(),this.updateHandles(this.tracking,this.valueToPosition(a)),this.updateAriaAttributes(),b=!0),b&&this.applyModel(!0)},applyMinMaxLimit:function(a){return null!=this.options.minLimit&&a<this.options.minLimit?this.options.minLimit:null!=this.options.maxLimit&&a>this.options.maxLimit?this.options.maxLimit:a},applyMinMaxRange:function(a){var b="lowValue"===this.tracking?this.highValue:this.lowValue,c=Math.abs(a-b);return null!=this.options.minRange&&c<this.options.minRange?"lowValue"===this.tracking?this.highValue-this.options.minRange:this.lowValue+this.options.minRange:null!=this.options.maxRange&&c>this.options.maxRange?"lowValue"===this.tracking?this.highValue-this.options.maxRange:this.lowValue+this.options.maxRange:a},applyPushRange:function(a){var b="lowValue"===this.tracking?this.highValue-a:a-this.lowValue,c=null!==this.options.minRange?this.options.minRange:this.options.step,d=this.options.maxRange;return c>b?("lowValue"===this.tracking?(this.highValue=Math.min(a+c,this.maxValue),a=this.highValue-c,this.applyHighValue(),this.updateHandles("highValue",this.valueToPosition(this.highValue))):(this.lowValue=Math.max(a-c,this.minValue),a=this.lowValue+c,this.applyLowValue(),this.updateHandles("lowValue",this.valueToPosition(this.lowValue))),
+this.updateAriaAttributes()):null!==d&&b>d&&("lowValue"===this.tracking?(this.highValue=a+d,this.applyHighValue(),this.updateHandles("highValue",this.valueToPosition(this.highValue))):(this.lowValue=a-d,this.applyLowValue(),this.updateHandles("lowValue",this.valueToPosition(this.lowValue))),this.updateAriaAttributes()),a},applyModel:function(a){this.internalChange=!0,this.scope.$apply(),a&&this.callOnChange(),this.internalChange=!1},callOnStart:function(){if(this.options.onStart){var a=this,b="lowValue"===this.tracking?"min":"max";this.scope.$evalAsync(function(){a.options.onStart(a.options.id,a.scope.rzSliderModel,a.scope.rzSliderHigh,b)})}},callOnChange:function(){if(this.options.onChange){var a=this,b="lowValue"===this.tracking?"min":"max";this.scope.$evalAsync(function(){a.options.onChange(a.options.id,a.scope.rzSliderModel,a.scope.rzSliderHigh,b)})}},callOnEnd:function(){if(this.options.onEnd){var a=this,b="lowValue"===this.tracking?"min":"max";this.scope.$evalAsync(function(){a.options.onEnd(a.options.id,a.scope.rzSliderModel,a.scope.rzSliderHigh,b)})}this.scope.$emit("slideEnded")}},h}]).directive("rzslider",["RzSlider",function(a){return{restrict:"AE",replace:!0,scope:{rzSliderModel:"=?",rzSliderHigh:"=?",rzSliderOptions:"&?",rzSliderTplUrl:"@"},templateUrl:function(a,b){return b.rzSliderTplUrl||"rzSliderTpl.html"},link:function(b,c){b.slider=new a(b,c)}}}]);return b.run(["$templateCache",function(a){a.put("rzSliderTpl.html",'<div class=rzslider><span class=rz-bar-wrapper><span class=rz-bar></span></span> <span class=rz-bar-wrapper><span class="rz-bar rz-selection" ng-style=barStyle></span></span> <span class="rz-pointer rz-pointer-min" ng-style=minPointerStyle></span> <span class="rz-pointer rz-pointer-max" ng-style=maxPointerStyle></span> <span class="rz-bubble rz-limit rz-floor"></span> <span class="rz-bubble rz-limit rz-ceil"></span> <span class=rz-bubble></span> <span class=rz-bubble></span> <span class=rz-bubble></span><ul ng-show=showTicks class=rz-ticks><li ng-repeat="t in ticks track by $index" class=rz-tick ng-class="{\'rz-selected\': t.selected}" ng-style=t.style ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement={{t.tooltipPlacement}} ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}"><span ng-if="t.value != null" class=rz-tick-value ng-attr-uib-tooltip="{{ t.valueTooltip }}" ng-attr-tooltip-placement={{t.valueTooltipPlacement}}>{{ t.value }}</span> <span ng-if="t.legend != null" class=rz-tick-legend>{{ t.legend }}</span></li></ul></div>')}]),b.name});
 (function() {
   'use strict';
 
@@ -62809,6 +63319,236 @@ angular.module('cfp.loadingBar', [])
 
 /* ng-infinite-scroll - v1.3.0 - 2016-11-04 */
 !function(a,b){if("function"==typeof define&&define.amd)define(["module","exports","angular"],b);else if("undefined"!=typeof exports)b(module,exports,require("angular"));else{var c={exports:{}};b(c,c.exports,a.angular),a.infiniteScroll=c.exports}}(this,function(a,b,c){"use strict";function d(a){return a&&a.__esModule?a:{default:a}}Object.defineProperty(b,"__esModule",{value:!0});var e=d(c),f="infinite-scroll";e.default.module(f,[]).value("THROTTLE_MILLISECONDS",null).directive("infiniteScroll",["$rootScope","$window","$interval","THROTTLE_MILLISECONDS",function(a,b,c,d){return{scope:{infiniteScroll:"&",infiniteScrollContainer:"=",infiniteScrollDistance:"=",infiniteScrollDisabled:"=",infiniteScrollUseDocumentBottom:"=",infiniteScrollListenForEvent:"@"},link:function(f,g,h){function i(a){var b=a[0]||a;return isNaN(b.offsetHeight)?b.document.documentElement.clientHeight:b.offsetHeight}function j(a){var b=a[0]||a;return isNaN(window.pageYOffset)?b.document.documentElement.scrollTop:b.ownerDocument.defaultView.pageYOffset}function k(a){if(a[0].getBoundingClientRect&&!a.css("none"))return a[0].getBoundingClientRect().top+j(a)}function l(){var b=void 0,d=void 0;if(y===u)b=i(y)+j(y[0].document.documentElement),d=k(g)+i(g);else{b=i(y);var e=0;void 0!==k(y)&&(e=k(y)),d=k(g)-e+i(g)}A&&(d=i((g[0].ownerDocument||g[0].document).documentElement));var h=d-b,l=h<=i(y)*v+1;l?(x=!0,w&&(f.$$phase||a.$$phase?f.infiniteScroll():f.$apply(f.infiniteScroll))):(C&&c.cancel(C),x=!1)}function m(a,b){function d(){return g=(new Date).getTime(),c.cancel(f),f=null,a.call()}function e(){var e=(new Date).getTime(),h=b-(e-g);h<=0?(c.cancel(f),f=null,g=e,a.call()):f||(f=c(d,h,1))}var f=null,g=0;return e}function n(){y.unbind("scroll",D),null!=B&&(B(),B=null),C&&c.cancel(C)}function o(a){v=parseFloat(a)||0}function p(a){w=!a,w&&x&&(x=!1,D())}function q(a){A=a}function r(a){null!=y&&y.unbind("scroll",D),y=a,null!=a&&y.bind("scroll",D)}function s(a){if(null!=a&&0!==a.length){var b=void 0;if(b=a.nodeType&&1===a.nodeType?e.default.element(a):"function"==typeof a.append?e.default.element(a[a.length-1]):"string"==typeof a?e.default.element(document.querySelector(a)):a,null==b)throw new Error("invalid infinite-scroll-container attribute.");r(b)}}function t(){return z&&D(),c.cancel(C)}var u=e.default.element(b),v=null,w=null,x=null,y=null,z=!0,A=!1,B=null,C=!1,D=null!=d?m(l,d):l;return f.$on("$destroy",n),f.$watch("infiniteScrollDistance",o),o(f.infiniteScrollDistance),f.$watch("infiniteScrollDisabled",p),p(f.infiniteScrollDisabled),f.$watch("infiniteScrollUseDocumentBottom",q),q(f.infiniteScrollUseDocumentBottom),r(u),f.infiniteScrollListenForEvent&&(B=a.$on(f.infiniteScrollListenForEvent,D)),f.$watch("infiniteScrollContainer",s),s(f.infiniteScrollContainer||[]),null!=h.infiniteScrollParent&&r(e.default.element(g.parent())),null!=h.infiniteScrollImmediateCheck&&(z=f.$eval(h.infiniteScrollImmediateCheck)),C=c(t)}}}]),b.default=f,a.exports=b.default});
+!function(n,t){"object"==typeof exports&&"undefined"!=typeof module?t(exports):"function"==typeof define&&define.amd?define(["exports"],t):t(n.async=n.async||{})}(this,function(n){"use strict";function t(n,t){t|=0;for(var e=Math.max(n.length-t,0),r=Array(e),u=0;u<e;u++)r[u]=n[t+u];return r}function e(n){var t=typeof n;return null!=n&&("object"==t||"function"==t)}function r(n){setTimeout(n,0)}function u(n){return function(e){var r=t(arguments,1);n(function(){e.apply(null,r)})}}function o(n){return it(function(t,r){var u;try{u=n.apply(this,t)}catch(n){return r(n)}e(u)&&"function"==typeof u.then?u.then(function(n){i(r,null,n)},function(n){i(r,n.message?n:new Error(n))}):r(null,u)})}function i(n,t,e){try{n(t,e)}catch(n){at(c,n)}}function c(n){throw n}function f(n){return lt&&"AsyncFunction"===n[Symbol.toStringTag]}function a(n){return f(n)?o(n):n}function l(n){return function(e){var r=t(arguments,1),u=it(function(t,r){var u=this;return n(e,function(n,e){a(n).apply(u,t.concat(e))},r)});return r.length?u.apply(this,r):u}}function s(n){var t=dt.call(n,gt),e=n[gt];try{n[gt]=void 0;var r=!0}catch(n){}var u=mt.call(n);return r&&(t?n[gt]=e:delete n[gt]),u}function p(n){return jt.call(n)}function h(n){return null==n?void 0===n?kt:St:(n=Object(n),Lt&&Lt in n?s(n):p(n))}function y(n){if(!e(n))return!1;var t=h(n);return t==wt||t==xt||t==Ot||t==Et}function v(n){return"number"==typeof n&&n>-1&&n%1==0&&n<=At}function d(n){return null!=n&&v(n.length)&&!y(n)}function m(){}function g(n){return function(){if(null!==n){var t=n;n=null,t.apply(this,arguments)}}}function b(n,t){for(var e=-1,r=Array(n);++e<n;)r[e]=t(e);return r}function j(n){return null!=n&&"object"==typeof n}function S(n){return j(n)&&h(n)==It}function k(){return!1}function L(n,t){return t=null==t?Wt:t,!!t&&("number"==typeof n||Nt.test(n))&&n>-1&&n%1==0&&n<t}function O(n){return j(n)&&v(n.length)&&!!de[h(n)]}function w(n){return function(t){return n(t)}}function x(n,t){var e=Pt(n),r=!e&&zt(n),u=!e&&!r&&$t(n),o=!e&&!r&&!u&&Le(n),i=e||r||u||o,c=i?b(n.length,String):[],f=c.length;for(var a in n)!t&&!we.call(n,a)||i&&("length"==a||u&&("offset"==a||"parent"==a)||o&&("buffer"==a||"byteLength"==a||"byteOffset"==a)||L(a,f))||c.push(a);return c}function E(n){var t=n&&n.constructor,e="function"==typeof t&&t.prototype||xe;return n===e}function A(n,t){return function(e){return n(t(e))}}function T(n){if(!E(n))return Ee(n);var t=[];for(var e in Object(n))Te.call(n,e)&&"constructor"!=e&&t.push(e);return t}function B(n){return d(n)?x(n):T(n)}function F(n){var t=-1,e=n.length;return function(){return++t<e?{value:n[t],key:t}:null}}function I(n){var t=-1;return function(){var e=n.next();return e.done?null:(t++,{value:e.value,key:t})}}function _(n){var t=B(n),e=-1,r=t.length;return function(){var u=t[++e];return e<r?{value:n[u],key:u}:null}}function M(n){if(d(n))return F(n);var t=Ft(n);return t?I(t):_(n)}function U(n){return function(){if(null===n)throw new Error("Callback was already called.");var t=n;n=null,t.apply(this,arguments)}}function z(n){return function(t,e,r){function u(n,t){if(f-=1,n)c=!0,r(n);else{if(t===Tt||c&&f<=0)return c=!0,r(null);o()}}function o(){for(;f<n&&!c;){var t=i();if(null===t)return c=!0,void(f<=0&&r(null));f+=1,e(t.value,t.key,U(u))}}if(r=g(r||m),n<=0||!t)return r(null);var i=M(t),c=!1,f=0;o()}}function P(n,t,e,r){z(t)(n,a(e),r)}function V(n,t){return function(e,r,u){return n(e,t,r,u)}}function q(n,t,e){function r(n,t){n?e(n):++o!==i&&t!==Tt||e(null)}e=g(e||m);var u=0,o=0,i=n.length;for(0===i&&e(null);u<i;u++)t(n[u],u,U(r))}function D(n){return function(t,e,r){return n(Fe,t,a(e),r)}}function R(n,t,e,r){r=r||m,t=t||[];var u=[],o=0,i=a(e);n(t,function(n,t,e){var r=o++;i(n,function(n,t){u[r]=t,e(n)})},function(n){r(n,u)})}function C(n){return function(t,e,r,u){return n(z(e),t,a(r),u)}}function $(n,t){for(var e=-1,r=null==n?0:n.length;++e<r&&t(n[e],e,n)!==!1;);return n}function W(n){return function(t,e,r){for(var u=-1,o=Object(t),i=r(t),c=i.length;c--;){var f=i[n?c:++u];if(e(o[f],f,o)===!1)break}return t}}function N(n,t){return n&&Ve(n,t,B)}function Q(n,t,e,r){for(var u=n.length,o=e+(r?1:-1);r?o--:++o<u;)if(t(n[o],o,n))return o;return-1}function G(n){return n!==n}function H(n,t,e){for(var r=e-1,u=n.length;++r<u;)if(n[r]===t)return r;return-1}function J(n,t,e){return t===t?H(n,t,e):Q(n,G,e)}function K(n,t){for(var e=-1,r=null==n?0:n.length,u=Array(r);++e<r;)u[e]=t(n[e],e,n);return u}function X(n){return"symbol"==typeof n||j(n)&&h(n)==De}function Y(n){if("string"==typeof n)return n;if(Pt(n))return K(n,Y)+"";if(X(n))return $e?$e.call(n):"";var t=n+"";return"0"==t&&1/n==-Re?"-0":t}function Z(n,t,e){var r=-1,u=n.length;t<0&&(t=-t>u?0:u+t),e=e>u?u:e,e<0&&(e+=u),u=t>e?0:e-t>>>0,t>>>=0;for(var o=Array(u);++r<u;)o[r]=n[r+t];return o}function nn(n,t,e){var r=n.length;return e=void 0===e?r:e,!t&&e>=r?n:Z(n,t,e)}function tn(n,t){for(var e=n.length;e--&&J(t,n[e],0)>-1;);return e}function en(n,t){for(var e=-1,r=n.length;++e<r&&J(t,n[e],0)>-1;);return e}function rn(n){return n.split("")}function un(n){return Je.test(n)}function on(n){return n.match(hr)||[]}function cn(n){return un(n)?on(n):rn(n)}function fn(n){return null==n?"":Y(n)}function an(n,t,e){if(n=fn(n),n&&(e||void 0===t))return n.replace(yr,"");if(!n||!(t=Y(t)))return n;var r=cn(n),u=cn(t),o=en(r,u),i=tn(r,u)+1;return nn(r,o,i).join("")}function ln(n){return n=n.toString().replace(gr,""),n=n.match(vr)[2].replace(" ",""),n=n?n.split(dr):[],n=n.map(function(n){return an(n.replace(mr,""))})}function sn(n,t){var e={};N(n,function(n,t){function r(t,e){var r=K(u,function(n){return t[n]});r.push(e),a(n).apply(null,r)}var u,o=f(n),i=!o&&1===n.length||o&&0===n.length;if(Pt(n))u=n.slice(0,-1),n=n[n.length-1],e[t]=u.concat(u.length>0?r:n);else if(i)e[t]=n;else{if(u=ln(n),0===n.length&&!o&&0===u.length)throw new Error("autoInject task functions require explicit parameters.");o||u.pop(),e[t]=u.concat(r)}}),qe(e,t)}function pn(){this.head=this.tail=null,this.length=0}function hn(n,t){n.length=1,n.head=n.tail=t}function yn(n,t,e){function r(n,t,e){if(null!=e&&"function"!=typeof e)throw new Error("task callback must be a function");if(l.started=!0,Pt(n)||(n=[n]),0===n.length&&l.idle())return at(function(){l.drain()});for(var r=0,u=n.length;r<u;r++){var o={data:n[r],callback:e||m};t?l._tasks.unshift(o):l._tasks.push(o)}at(l.process)}function u(n){return function(t){i-=1;for(var e=0,r=n.length;e<r;e++){var u=n[e],o=J(c,u,0);o>=0&&c.splice(o,1),u.callback.apply(u,arguments),null!=t&&l.error(t,u.data)}i<=l.concurrency-l.buffer&&l.unsaturated(),l.idle()&&l.drain(),l.process()}}if(null==t)t=1;else if(0===t)throw new Error("Concurrency must not be zero");var o=a(n),i=0,c=[],f=!1,l={_tasks:new pn,concurrency:t,payload:e,saturated:m,unsaturated:m,buffer:t/4,empty:m,drain:m,error:m,started:!1,paused:!1,push:function(n,t){r(n,!1,t)},kill:function(){l.drain=m,l._tasks.empty()},unshift:function(n,t){r(n,!0,t)},remove:function(n){l._tasks.remove(n)},process:function(){if(!f){for(f=!0;!l.paused&&i<l.concurrency&&l._tasks.length;){var n=[],t=[],e=l._tasks.length;l.payload&&(e=Math.min(e,l.payload));for(var r=0;r<e;r++){var a=l._tasks.shift();n.push(a),c.push(a),t.push(a.data)}i+=1,0===l._tasks.length&&l.empty(),i===l.concurrency&&l.saturated();var s=U(u(n));o(t,s)}f=!1}},length:function(){return l._tasks.length},running:function(){return i},workersList:function(){return c},idle:function(){return l._tasks.length+i===0},pause:function(){l.paused=!0},resume:function(){l.paused!==!1&&(l.paused=!1,at(l.process))}};return l}function vn(n,t){return yn(n,1,t)}function dn(n,t,e,r){r=g(r||m);var u=a(e);jr(n,function(n,e,r){u(t,n,function(n,e){t=e,r(n)})},function(n){r(n,t)})}function mn(){var n=K(arguments,a);return function(){var e=t(arguments),r=this,u=e[e.length-1];"function"==typeof u?e.pop():u=m,dn(n,e,function(n,e,u){e.apply(r,n.concat(function(n){var e=t(arguments,1);u(n,e)}))},function(n,t){u.apply(r,[n].concat(t))})}}function gn(n){return n}function bn(n,t){return function(e,r,u,o){o=o||m;var i,c=!1;e(r,function(e,r,o){u(e,function(r,u){r?o(r):n(u)&&!i?(c=!0,i=t(!0,e),o(null,Tt)):o()})},function(n){n?o(n):o(null,c?i:t(!1))})}}function jn(n,t){return t}function Sn(n){return function(e){var r=t(arguments,1);r.push(function(e){var r=t(arguments,1);"object"==typeof console&&(e?console.error&&console.error(e):console[n]&&$(r,function(t){console[n](t)}))}),a(e).apply(null,r)}}function kn(n,e,r){function u(n){if(n)return r(n);var e=t(arguments,1);e.push(o),c.apply(this,e)}function o(n,t){return n?r(n):t?void i(u):r(null)}r=U(r||m);var i=a(n),c=a(e);o(null,!0)}function Ln(n,e,r){r=U(r||m);var u=a(n),o=function(n){if(n)return r(n);var i=t(arguments,1);return e.apply(this,i)?u(o):void r.apply(null,[null].concat(i))};u(o)}function On(n,t,e){Ln(n,function(){return!t.apply(this,arguments)},e)}function wn(n,t,e){function r(n){return n?e(n):void i(u)}function u(n,t){return n?e(n):t?void o(r):e(null)}e=U(e||m);var o=a(t),i=a(n);i(u)}function xn(n){return function(t,e,r){return n(t,r)}}function En(n,t,e){Fe(n,xn(a(t)),e)}function An(n,t,e,r){z(t)(n,xn(a(e)),r)}function Tn(n){return f(n)?n:it(function(t,e){var r=!0;t.push(function(){var n=arguments;r?at(function(){e.apply(null,n)}):e.apply(null,n)}),n.apply(this,t),r=!1})}function Bn(n){return!n}function Fn(n){return function(t){return null==t?void 0:t[n]}}function In(n,t,e,r){var u=new Array(t.length);n(t,function(n,t,r){e(n,function(n,e){u[t]=!!e,r(n)})},function(n){if(n)return r(n);for(var e=[],o=0;o<t.length;o++)u[o]&&e.push(t[o]);r(null,e)})}function _n(n,t,e,r){var u=[];n(t,function(n,t,r){e(n,function(e,o){e?r(e):(o&&u.push({index:t,value:n}),r())})},function(n){n?r(n):r(null,K(u.sort(function(n,t){return n.index-t.index}),Fn("value")))})}function Mn(n,t,e,r){var u=d(t)?In:_n;u(n,t,a(e),r||m)}function Un(n,t){function e(n){return n?r(n):void u(e)}var r=U(t||m),u=a(Tn(n));e()}function zn(n,t,e,r){r=g(r||m);var u={},o=a(e);P(n,t,function(n,t,e){o(n,t,function(n,r){return n?e(n):(u[t]=r,void e())})},function(n){r(n,u)})}function Pn(n,t){return t in n}function Vn(n,e){var r=Object.create(null),u=Object.create(null);e=e||gn;var o=a(n),i=it(function(n,i){var c=e.apply(null,n);Pn(r,c)?at(function(){i.apply(null,r[c])}):Pn(u,c)?u[c].push(i):(u[c]=[i],o.apply(null,n.concat(function(){var n=t(arguments);r[c]=n;var e=u[c];delete u[c];for(var o=0,i=e.length;o<i;o++)e[o].apply(null,n)})))});return i.memo=r,i.unmemoized=n,i}function qn(n,e,r){r=r||m;var u=d(e)?[]:{};n(e,function(n,e,r){a(n)(function(n,o){arguments.length>2&&(o=t(arguments,1)),u[e]=o,r(n)})},function(n){r(n,u)})}function Dn(n,t){qn(Fe,n,t)}function Rn(n,t,e){qn(z(t),n,e)}function Cn(n,t){if(t=g(t||m),!Pt(n))return t(new TypeError("First argument to race must be an array of functions"));if(!n.length)return t();for(var e=0,r=n.length;e<r;e++)a(n[e])(t)}function $n(n,e,r,u){var o=t(n).reverse();dn(o,e,r,u)}function Wn(n){var e=a(n);return it(function(n,r){return n.push(function(n,e){if(n)r(null,{error:n});else{var u;u=arguments.length<=2?e:t(arguments,1),r(null,{value:u})}}),e.apply(this,n)})}function Nn(n,t,e,r){Mn(n,t,function(n,t){e(n,function(n,e){t(n,!e)})},r)}function Qn(n){var t;return Pt(n)?t=K(n,Wn):(t={},N(n,function(n,e){t[e]=Wn.call(this,n)})),t}function Gn(n){return function(){return n}}function Hn(n,t,e){function r(n,t){if("object"==typeof t)n.times=+t.times||o,n.intervalFunc="function"==typeof t.interval?t.interval:Gn(+t.interval||i),n.errorFilter=t.errorFilter;else{if("number"!=typeof t&&"string"!=typeof t)throw new Error("Invalid arguments for async.retry");n.times=+t||o}}function u(){f(function(n){n&&l++<c.times&&("function"!=typeof c.errorFilter||c.errorFilter(n))?setTimeout(u,c.intervalFunc(l)):e.apply(null,arguments)})}var o=5,i=0,c={times:o,intervalFunc:Gn(i)};if(arguments.length<3&&"function"==typeof n?(e=t||m,t=n):(r(c,n),e=e||m),"function"!=typeof t)throw new Error("Invalid arguments for async.retry");var f=a(t),l=1;u()}function Jn(n,t){qn(jr,n,t)}function Kn(n,t,e){function r(n,t){var e=n.criteria,r=t.criteria;return e<r?-1:e>r?1:0}var u=a(t);Ie(n,function(n,t){u(n,function(e,r){return e?t(e):void t(null,{value:n,criteria:r})})},function(n,t){return n?e(n):void e(null,K(t.sort(r),Fn("value")))})}function Xn(n,t,e){var r=a(n);return it(function(u,o){function i(){var t=n.name||"anonymous",r=new Error('Callback function "'+t+'" timed out.');r.code="ETIMEDOUT",e&&(r.info=e),f=!0,o(r)}var c,f=!1;u.push(function(){f||(o.apply(null,arguments),clearTimeout(c))}),c=setTimeout(i,t),r.apply(null,u)})}function Yn(n,t,e,r){for(var u=-1,o=tu(nu((t-n)/(e||1)),0),i=Array(o);o--;)i[r?o:++u]=n,n+=e;return i}function Zn(n,t,e,r){var u=a(e);Me(Yn(0,n,1),t,u,r)}function nt(n,t,e,r){arguments.length<=3&&(r=e,e=t,t=Pt(n)?[]:{}),r=g(r||m);var u=a(e);Fe(n,function(n,e,r){u(t,n,e,r)},function(n){r(n,t)})}function tt(n,e){var r,u=null;e=e||m,Fr(n,function(n,e){a(n)(function(n,o){r=arguments.length>2?t(arguments,1):o,u=n,e(!n)})},function(){e(u,r)})}function et(n){return function(){return(n.unmemoized||n).apply(null,arguments)}}function rt(n,e,r){r=U(r||m);var u=a(e);if(!n())return r(null);var o=function(e){if(e)return r(e);if(n())return u(o);var i=t(arguments,1);r.apply(null,[null].concat(i))};u(o)}function ut(n,t,e){rt(function(){return!n.apply(this,arguments)},t,e)}var ot,it=function(n){return function(){var e=t(arguments),r=e.pop();n.call(this,e,r)}},ct="function"==typeof setImmediate&&setImmediate,ft="object"==typeof process&&"function"==typeof process.nextTick;ot=ct?setImmediate:ft?process.nextTick:r;var at=u(ot),lt="function"==typeof Symbol,st="object"==typeof global&&global&&global.Object===Object&&global,pt="object"==typeof self&&self&&self.Object===Object&&self,ht=st||pt||Function("return this")(),yt=ht.Symbol,vt=Object.prototype,dt=vt.hasOwnProperty,mt=vt.toString,gt=yt?yt.toStringTag:void 0,bt=Object.prototype,jt=bt.toString,St="[object Null]",kt="[object Undefined]",Lt=yt?yt.toStringTag:void 0,Ot="[object AsyncFunction]",wt="[object Function]",xt="[object GeneratorFunction]",Et="[object Proxy]",At=9007199254740991,Tt={},Bt="function"==typeof Symbol&&Symbol.iterator,Ft=function(n){return Bt&&n[Bt]&&n[Bt]()},It="[object Arguments]",_t=Object.prototype,Mt=_t.hasOwnProperty,Ut=_t.propertyIsEnumerable,zt=S(function(){return arguments}())?S:function(n){return j(n)&&Mt.call(n,"callee")&&!Ut.call(n,"callee")},Pt=Array.isArray,Vt="object"==typeof n&&n&&!n.nodeType&&n,qt=Vt&&"object"==typeof module&&module&&!module.nodeType&&module,Dt=qt&&qt.exports===Vt,Rt=Dt?ht.Buffer:void 0,Ct=Rt?Rt.isBuffer:void 0,$t=Ct||k,Wt=9007199254740991,Nt=/^(?:0|[1-9]\d*)$/,Qt="[object Arguments]",Gt="[object Array]",Ht="[object Boolean]",Jt="[object Date]",Kt="[object Error]",Xt="[object Function]",Yt="[object Map]",Zt="[object Number]",ne="[object Object]",te="[object RegExp]",ee="[object Set]",re="[object String]",ue="[object WeakMap]",oe="[object ArrayBuffer]",ie="[object DataView]",ce="[object Float32Array]",fe="[object Float64Array]",ae="[object Int8Array]",le="[object Int16Array]",se="[object Int32Array]",pe="[object Uint8Array]",he="[object Uint8ClampedArray]",ye="[object Uint16Array]",ve="[object Uint32Array]",de={};de[ce]=de[fe]=de[ae]=de[le]=de[se]=de[pe]=de[he]=de[ye]=de[ve]=!0,de[Qt]=de[Gt]=de[oe]=de[Ht]=de[ie]=de[Jt]=de[Kt]=de[Xt]=de[Yt]=de[Zt]=de[ne]=de[te]=de[ee]=de[re]=de[ue]=!1;var me="object"==typeof n&&n&&!n.nodeType&&n,ge=me&&"object"==typeof module&&module&&!module.nodeType&&module,be=ge&&ge.exports===me,je=be&&st.process,Se=function(){try{return je&&je.binding("util")}catch(n){}}(),ke=Se&&Se.isTypedArray,Le=ke?w(ke):O,Oe=Object.prototype,we=Oe.hasOwnProperty,xe=Object.prototype,Ee=A(Object.keys,Object),Ae=Object.prototype,Te=Ae.hasOwnProperty,Be=V(P,1/0),Fe=function(n,t,e){var r=d(n)?q:Be;r(n,a(t),e)},Ie=D(R),_e=l(Ie),Me=C(R),Ue=V(Me,1),ze=l(Ue),Pe=function(n){var e=t(arguments,1);return function(){var r=t(arguments);return n.apply(null,e.concat(r))}},Ve=W(),qe=function(n,e,r){function u(n,t){j.push(function(){f(n,t)})}function o(){if(0===j.length&&0===v)return r(null,y);for(;j.length&&v<e;){var n=j.shift();n()}}function i(n,t){var e=b[n];e||(e=b[n]=[]),e.push(t)}function c(n){var t=b[n]||[];$(t,function(n){n()}),o()}function f(n,e){if(!d){var u=U(function(e,u){if(v--,arguments.length>2&&(u=t(arguments,1)),e){var o={};N(y,function(n,t){o[t]=n}),o[n]=u,d=!0,b=Object.create(null),r(e,o)}else y[n]=u,c(n)});v++;var o=a(e[e.length-1]);e.length>1?o(y,u):o(u)}}function l(){for(var n,t=0;S.length;)n=S.pop(),t++,$(s(n),function(n){0===--k[n]&&S.push(n)});if(t!==h)throw new Error("async.auto cannot execute tasks due to a recursive dependency")}function s(t){var e=[];return N(n,function(n,r){Pt(n)&&J(n,t,0)>=0&&e.push(r)}),e}"function"==typeof e&&(r=e,e=null),r=g(r||m);var p=B(n),h=p.length;if(!h)return r(null);e||(e=h);var y={},v=0,d=!1,b=Object.create(null),j=[],S=[],k={};N(n,function(t,e){if(!Pt(t))return u(e,[t]),void S.push(e);var r=t.slice(0,t.length-1),o=r.length;return 0===o?(u(e,t),void S.push(e)):(k[e]=o,void $(r,function(c){if(!n[c])throw new Error("async.auto task `"+e+"` has a non-existent dependency `"+c+"` in "+r.join(", "));i(c,function(){o--,0===o&&u(e,t)})}))}),l(),o()},De="[object Symbol]",Re=1/0,Ce=yt?yt.prototype:void 0,$e=Ce?Ce.toString:void 0,We="\\ud800-\\udfff",Ne="\\u0300-\\u036f\\ufe20-\\ufe23",Qe="\\u20d0-\\u20f0",Ge="\\ufe0e\\ufe0f",He="\\u200d",Je=RegExp("["+He+We+Ne+Qe+Ge+"]"),Ke="\\ud800-\\udfff",Xe="\\u0300-\\u036f\\ufe20-\\ufe23",Ye="\\u20d0-\\u20f0",Ze="\\ufe0e\\ufe0f",nr="["+Ke+"]",tr="["+Xe+Ye+"]",er="\\ud83c[\\udffb-\\udfff]",rr="(?:"+tr+"|"+er+")",ur="[^"+Ke+"]",or="(?:\\ud83c[\\udde6-\\uddff]){2}",ir="[\\ud800-\\udbff][\\udc00-\\udfff]",cr="\\u200d",fr=rr+"?",ar="["+Ze+"]?",lr="(?:"+cr+"(?:"+[ur,or,ir].join("|")+")"+ar+fr+")*",sr=ar+fr+lr,pr="(?:"+[ur+tr+"?",tr,or,ir,nr].join("|")+")",hr=RegExp(er+"(?="+er+")|"+pr+sr,"g"),yr=/^\s+|\s+$/g,vr=/^(?:async\s+)?(function)?\s*[^\(]*\(\s*([^\)]*)\)/m,dr=/,/,mr=/(=.+)?(\s*)$/,gr=/((\/\/.*$)|(\/\*[\s\S]*?\*\/))/gm;pn.prototype.removeLink=function(n){return n.prev?n.prev.next=n.next:this.head=n.next,n.next?n.next.prev=n.prev:this.tail=n.prev,n.prev=n.next=null,this.length-=1,n},pn.prototype.empty=function(){for(;this.head;)this.shift();return this},pn.prototype.insertAfter=function(n,t){t.prev=n,t.next=n.next,n.next?n.next.prev=t:this.tail=t,n.next=t,this.length+=1},pn.prototype.insertBefore=function(n,t){t.prev=n.prev,t.next=n,n.prev?n.prev.next=t:this.head=t,n.prev=t,this.length+=1},pn.prototype.unshift=function(n){this.head?this.insertBefore(this.head,n):hn(this,n)},pn.prototype.push=function(n){this.tail?this.insertAfter(this.tail,n):hn(this,n)},pn.prototype.shift=function(){return this.head&&this.removeLink(this.head)},pn.prototype.pop=function(){return this.tail&&this.removeLink(this.tail)},pn.prototype.toArray=function(){for(var n=Array(this.length),t=this.head,e=0;e<this.length;e++)n[e]=t.data,t=t.next;return n},pn.prototype.remove=function(n){for(var t=this.head;t;){var e=t.next;n(t)&&this.removeLink(t),t=e}return this};var br,jr=V(P,1),Sr=function(){return mn.apply(null,t(arguments).reverse())},kr=Array.prototype.concat,Lr=function(n,e,r,u){u=u||m;var o=a(r);Me(n,e,function(n,e){o(n,function(n){return n?e(n):e(null,t(arguments,1))})},function(n,t){for(var e=[],r=0;r<t.length;r++)t[r]&&(e=kr.apply(e,t[r]));return u(n,e)})},Or=V(Lr,1/0),wr=V(Lr,1),xr=function(){var n=t(arguments),e=[null].concat(n);return function(){var n=arguments[arguments.length-1];return n.apply(this,e)}},Er=D(bn(gn,jn)),Ar=C(bn(gn,jn)),Tr=V(Ar,1),Br=Sn("dir"),Fr=V(An,1),Ir=D(bn(Bn,Bn)),_r=C(bn(Bn,Bn)),Mr=V(_r,1),Ur=D(Mn),zr=C(Mn),Pr=V(zr,1),Vr=function(n,t,e,r){r=r||m;var u=a(e);Me(n,t,function(n,t){u(n,function(e,r){return e?t(e):t(null,{key:r,val:n})})},function(n,t){for(var e={},u=Object.prototype.hasOwnProperty,o=0;o<t.length;o++)if(t[o]){var i=t[o].key,c=t[o].val;u.call(e,i)?e[i].push(c):e[i]=[c]}return r(n,e)})},qr=V(Vr,1/0),Dr=V(Vr,1),Rr=Sn("log"),Cr=V(zn,1/0),$r=V(zn,1);br=ft?process.nextTick:ct?setImmediate:r;var Wr=u(br),Nr=function(n,t){var e=a(n);return yn(function(n,t){e(n[0],t)},t,1)},Qr=function(n,t){var e=Nr(n,t);return e.push=function(n,t,r){if(null==r&&(r=m),"function"!=typeof r)throw new Error("task callback must be a function");if(e.started=!0,Pt(n)||(n=[n]),0===n.length)return at(function(){e.drain()});t=t||0;for(var u=e._tasks.head;u&&t>=u.priority;)u=u.next;for(var o=0,i=n.length;o<i;o++){var c={data:n[o],priority:t,callback:r};u?e._tasks.insertBefore(u,c):e._tasks.push(c)}at(e.process)},delete e.unshift,e},Gr=D(Nn),Hr=C(Nn),Jr=V(Hr,1),Kr=function(n,t){t||(t=n,n=null);var e=a(t);return it(function(t,r){function u(n){e.apply(null,t.concat(n))}n?Hn(n,u,r):Hn(u,r)})},Xr=D(bn(Boolean,gn)),Yr=C(bn(Boolean,gn)),Zr=V(Yr,1),nu=Math.ceil,tu=Math.max,eu=V(Zn,1/0),ru=V(Zn,1),uu=function(n,e){function r(t){var e=a(n[o++]);t.push(U(u)),e.apply(null,t)}function u(u){return u||o===n.length?e.apply(null,arguments):void r(t(arguments,1))}if(e=g(e||m),!Pt(n))return e(new Error("First argument to waterfall must be an array of functions"));if(!n.length)return e();var o=0;r([])},ou={applyEach:_e,applyEachSeries:ze,apply:Pe,asyncify:o,auto:qe,autoInject:sn,cargo:vn,compose:Sr,concat:Or,concatLimit:Lr,concatSeries:wr,constant:xr,detect:Er,detectLimit:Ar,detectSeries:Tr,dir:Br,doDuring:kn,doUntil:On,doWhilst:Ln,during:wn,each:En,eachLimit:An,eachOf:Fe,eachOfLimit:P,eachOfSeries:jr,eachSeries:Fr,ensureAsync:Tn,every:Ir,everyLimit:_r,everySeries:Mr,filter:Ur,filterLimit:zr,filterSeries:Pr,forever:Un,groupBy:qr,groupByLimit:Vr,groupBySeries:Dr,log:Rr,map:Ie,mapLimit:Me,mapSeries:Ue,mapValues:Cr,mapValuesLimit:zn,mapValuesSeries:$r,memoize:Vn,nextTick:Wr,parallel:Dn,parallelLimit:Rn,priorityQueue:Qr,queue:Nr,race:Cn,reduce:dn,reduceRight:$n,reflect:Wn,reflectAll:Qn,reject:Gr,rejectLimit:Hr,rejectSeries:Jr,retry:Hn,retryable:Kr,seq:mn,series:Jn,setImmediate:at,some:Xr,someLimit:Yr,someSeries:Zr,sortBy:Kn,timeout:Xn,times:eu,timesLimit:Zn,timesSeries:ru,transform:nt,tryEach:tt,unmemoize:et,until:ut,waterfall:uu,whilst:rt,all:Ir,any:Xr,forEach:En,forEachSeries:Fr,forEachLimit:An,forEachOf:Fe,forEachOfSeries:jr,forEachOfLimit:P,inject:dn,foldl:dn,foldr:$n,select:Ur,selectLimit:zr,selectSeries:Pr,wrapSync:o};n.default=ou,n.applyEach=_e,n.applyEachSeries=ze,n.apply=Pe,n.asyncify=o,n.auto=qe,n.autoInject=sn,n.cargo=vn,n.compose=Sr,n.concat=Or,n.concatLimit=Lr,n.concatSeries=wr,n.constant=xr,n.detect=Er,n.detectLimit=Ar,n.detectSeries=Tr,n.dir=Br,n.doDuring=kn,n.doUntil=On,n.doWhilst=Ln,n.during=wn,n.each=En,n.eachLimit=An,n.eachOf=Fe,n.eachOfLimit=P,n.eachOfSeries=jr,n.eachSeries=Fr,n.ensureAsync=Tn,n.every=Ir,n.everyLimit=_r,n.everySeries=Mr,n.filter=Ur,n.filterLimit=zr,n.filterSeries=Pr,n.forever=Un,n.groupBy=qr,n.groupByLimit=Vr,n.groupBySeries=Dr,n.log=Rr,n.map=Ie,n.mapLimit=Me,n.mapSeries=Ue,n.mapValues=Cr,n.mapValuesLimit=zn,n.mapValuesSeries=$r,n.memoize=Vn,n.nextTick=Wr,n.parallel=Dn,n.parallelLimit=Rn,n.priorityQueue=Qr,n.queue=Nr,n.race=Cn,n.reduce=dn,n.reduceRight=$n,n.reflect=Wn,n.reflectAll=Qn,n.reject=Gr,n.rejectLimit=Hr,n.rejectSeries=Jr,n.retry=Hn,n.retryable=Kr,n.seq=mn,n.series=Jn,n.setImmediate=at,n.some=Xr,n.someLimit=Yr,n.someSeries=Zr,n.sortBy=Kn,n.timeout=Xn,n.times=eu,n.timesLimit=Zn,n.timesSeries=ru,n.transform=nt,n.tryEach=tt,n.unmemoize=et,n.until=ut,n.waterfall=uu,n.whilst=rt,n.all=Ir,n.allLimit=_r,n.allSeries=Mr,n.any=Xr,n.anyLimit=Yr,n.anySeries=Zr,n.find=Er,n.findLimit=Ar,n.findSeries=Tr,n.forEach=En,n.forEachSeries=Fr,n.forEachLimit=An,n.forEachOf=Fe,n.forEachOfSeries=jr,n.forEachOfLimit=P,n.inject=dn,n.foldl=dn,n.foldr=$n,n.select=Ur,n.selectLimit=zr,n.selectSeries=Pr,n.wrapSync=o,Object.defineProperty(n,"__esModule",{value:!0})});
+//# sourceMappingURL=async.min.map
+(function () {
+    'use strict';
+
+    angular.module('ezplus', [])
+        .directive('ezPlus', ezPlus);
+
+    ezPlus.$inject = ['$document'];
+    function ezPlus($document) {
+        var service = {
+            restrict: 'A',
+            scope: {
+                ezpModel: '=',
+                ezpOptions: '=',
+                onComplete: '=ezpOnComplete',
+                onDestroy: '=ezpOnDestroy',
+                onImageClick: '=ezpOnImageClick',
+                onImageSwap: '=ezpOnImageSwap',
+                onImageSwapComplete: '=ezpOnImageSwapComplete',
+                onShow: '=ezpOnShow',
+                onZoomedImageLoaded: '=ezpOnZoomedImageLoaded'
+            },
+            link: link
+        };
+        return service;
+
+        ////////////////////////////
+
+        link.$inject = ['$scope', '$element', '$attributes'];
+        function link($scope, $element, $attributes) {
+            var bootstrapped = false;
+            var lastPlugin = null;
+            var zoomIds = {};
+            var options = {
+                onComplete: function () {
+                    if ($scope.onComplete && $scope.onComplete()) {
+                        $scope.onComplete()();
+                    }
+                },
+                onDestroy: function () {
+                    if ($scope.onDestroy && $scope.onDestroy()) {
+                        $scope.onDestroy()();
+                    }
+                },
+                onImageClick: function () {
+                    if ($scope.onImageClick && $scope.onImageClick()) {
+                        $scope.onImageClick()();
+                    }
+                },
+
+                onImageSwap: function () {
+                    if ($scope.onImageSwap && $scope.onImageSwap()) {
+                        $scope.onImageSwap()();
+                    }
+                },
+                onImageSwapComplete: function () {
+                    if ($scope.onImageSwapComplete && $scope.onImageSwapComplete()) {
+                        $scope.onImageSwapComplete()();
+                    }
+                },
+                onShow: function () {
+                    if ($scope.onShow && $scope.onShow()) {
+                        $scope.onShow()();
+                    }
+                },
+                onZoomedImageLoaded: function () {
+                    if ($scope.onZoomedImageLoaded && $scope.onZoomedImageLoaded()) {
+                        $scope.onZoomedImageLoaded()();
+                    }
+                }
+            };
+
+            //generic way that sets all (non-function) parameters of elevate zoom plus.
+            if ($scope.ezpOptions) {
+                angular.extend(options, $scope.ezpOptions);
+            }
+            if (options.appendto) {
+                options.zoomContainerAppendTo = options.appendto;
+            }
+
+            var loader;
+            if (options.loader) {
+                loader = options.loader;
+            }
+
+            $scope.$on('ezp-hidesAll', function (e, msg) {
+                hideZoom();
+            });
+            $scope.$on('ezp-showAll', function (e, msg) {
+                showZoom();
+            });
+            $scope.$on('ezp-disableZoom', function (e, msg) {
+                var plugin = getZoomPlugin();
+                if (plugin) {
+                    plugin.changeState('disable');
+                }
+            });
+            $scope.$on('ezp-enableZoom', function (e, msg) {
+                var plugin = getZoomPlugin();
+                if (plugin) {
+                    plugin.changeState('enable');
+                }
+            });
+            //updates options dynamically by deeply watching the options object
+            $scope.$watch('ezpOptions', function (newValue, oldValue) {
+                if (!bootstrapped) {
+                    bootstrapped = true;
+                } else {
+                    var plugin = getZoomPlugin();
+                    plugin.destroy();
+                    angular.extend(options, $scope.ezpOptions);
+                    if (plugin) {
+                        preparePlugin($element, options);
+                    }
+                }
+            }, true);
+            $scope.$watch('ezpModel', function (newValue, oldValue) {
+                var image = newValue;
+                var thumbUrl = (image && image.thumb) || '';
+                var smallUrl = (image && image.small) || '';
+                var largeUrl = (image && image.large) || '';
+
+                var initialUrl = null;
+                var plugin = getZoomPlugin();
+                if (plugin && plugin.options.enabled) {
+                    if (image) {
+                        hideZoom();
+                        if (loader) {
+                            plugin.swaptheimage(loader, loader);
+                        }
+
+                        initialUrl = getInitialUrl(options, smallUrl);
+                        $element.data($scope.ezpOptions.attrImageZoomSrc || 'zoom-image', $scope.ezpModel.large || '');
+                        plugin.swaptheimage(initialUrl, largeUrl);
+                        showZoom();
+                    } else {
+                        plugin.closeAll();
+                    }
+                } else {
+                    if (image) {
+
+                        initialUrl = getInitialUrl(options);
+                        if (initialUrl) {
+                            $element.attr('src', initialUrl);
+                        }
+
+                        $element.data($scope.ezpOptions.attrImageZoomSrc || 'zoom-image', $scope.ezpModel.large || '');
+
+                        preparePlugin($element, options);
+                    }
+                }
+
+                function getInitialUrl(options, defaultUrl) {
+                    var initialUrl = defaultUrl;
+                    if (options.initial === 'thumb') {
+                        initialUrl = thumbUrl;
+                    } else if (options.initial === 'small') {
+                        initialUrl = smallUrl;
+                    } else if (options.initial === 'large') {
+                        initialUrl = largeUrl;
+                    }
+                    return initialUrl;
+                }
+            });
+
+            $scope.$on('$destroy', destroyPlugin);
+
+            function destroyPlugin() {
+                var plugin = getZoomPlugin();
+                if (plugin) {
+                    plugin.destroy();
+                }
+
+                //in case the $destroy is called after the actual plugin element was removed, otherwise zoom containers
+                //will be visible.
+                for (var zoomId in zoomIds) {
+                    if (zoomIds.hasOwnProperty(zoomId)) {
+                        var zoomContainer = findZoomContainer(zoomId);
+                        zoomContainer.remove();
+                    }
+                }
+                zoomIds = {};
+            }
+
+            function findZoomContainer(uuid) {
+                return angular.element($document).find('[uuid=' + uuid + ']');
+            }
+
+            function preparePlugin(element, options) {
+                var plugin = angular.element(element).ezPlus(options);
+                lastPlugin = plugin && plugin.length > 0 ? getZoomPlugin(plugin[0]) : null;
+                if (lastPlugin) {
+                    zoomIds[lastPlugin.options.zoomId] = true;
+                }
+                return lastPlugin;
+            }
+
+            function getZoomPlugin(element) {
+                var plugin = angular.element(element ? element : $element).data('ezPlus');
+                return plugin;
+            }
+
+            function hideZoom() {
+                var action = 'hide';
+                var plugin = getZoomPlugin();
+                if (plugin) {
+                    plugin.showHideZoomContainer(action);
+                    /*plugin.showHideWindow(action);
+                     plugin.showHideTint(action);
+                     plugin.showHideLens(action);*/
+                }
+            }
+
+            function showZoom() {
+                var action = 'show';
+                var plugin = getZoomPlugin();
+                if (plugin) {
+                    /*plugin.showHideLens(action);
+                     plugin.showHideTint(action);
+                     plugin.showHideWindow(action);*/
+                    plugin.showHideZoomContainer(action);
+                }
+            }
+        }
+    }
+
+})
+();
+
 // Link all the JS Docs here
 var myApp = angular.module('myApp', [
     'ui.bootstrap',
@@ -62833,7 +63573,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
     var tempateURL = "views/template/template.html"; //Default Template URL
     cfpLoadingBarProvider.includeSpinner = true;
     cfpLoadingBarProvider.includeBar = true;
-    cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
+    // cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
     cfpLoadingBarProvider.spinnerTemplate = '<div class="spinner-overlay"><img class="spinner" src="img/default.gif" /></div>';
     // for http request with session
     $httpProvider.defaults.withCredentials = true;
@@ -62863,13 +63603,25 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             templateUrl: tempateURL,
             controller: 'BuythelookCtrl'
         })
+        .state('blogs', {
+            url: "/blogs",
+            templateUrl: tempateURL,
+            controller: 'BlogsCtrl'
+        })
+        .state('inner-blogs', {
+            url: "/inner-blogs/:id",
+            templateUrl: tempateURL,
+            controller: 'InnerBlogsCtrl'
+        })
         .state('listing-page', {
-            url: "/listing-page/:id",
+            url: "/listing-page/:id/:cat",
             templateUrl: tempateURL,
             Params: {
+                'id': null,
                 'cat': null
             },
-            controller: 'ListingPageCtrl'
+            controller: 'ListingPageCtrl',
+            cache: false
         })
         .state('search', {
             url: "/search/:id",
@@ -62882,7 +63634,8 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
         .state('individual-page', {
             url: "/individual-page/:id",
             templateUrl: tempateURL,
-            controller: 'IndividualPageCtrl'
+            controller: 'IndividualPageCtrl',
+            cache: false
         })
         .state('compare-products', {
             url: "/compare-products",
@@ -62948,7 +63701,21 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
             templateUrl: tempateURL,
             controller: 'CancelCtrl'
         })
-
+        .state('error-msg', {
+            url: "/error-msg/:id",
+            templateUrl: tempateURL,
+            controller: 'ErrorMsgCtrl'
+        })
+        .state('thankyou-msg', {
+            url: "/thankyou-msg/:id",
+            templateUrl: tempateURL,
+            controller: 'ThankYouMsgCtrl'
+        })
+        .state('return', {
+            url: "/return/:id",
+            templateUrl: tempateURL,
+            controller: 'ReturnCtrl'
+        })
         .state('gift', {
             url: "/gift-card",
             templateUrl: tempateURL,
@@ -62984,7 +63751,13 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
 myApp.filter('serverimage', function () {
     return function (image) {
         if (image && image !== null) {
-            return adminurl + "upload/readFile?file=" + image;
+            var imgarr = image.split("/")
+            //    console.log("imageserver",imgarr)
+            if (imgarr.length >= 2) {
+                return image;
+            } else {
+                return adminurl + "upload/readFile?file=" + image;
+            }
         } else {
             return undefined;
         }
@@ -63084,6 +63857,30 @@ myApp.directive('img', function ($compile, $parse) {
         };
     })
 
+    .directive('ngElevateZoom', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+
+                //Will watch for changes on the attribute
+                attrs.$observe('zoomImage', function () {
+                    linkElevateZoom();
+                })
+
+
+                function linkElevateZoom() {
+                    //Check if its not empty
+                    if (!attrs.zoomImage) return;
+                    element.attr('data-zoom-image', attrs.zoomImage);
+                    $(element).elevateZoom();
+                }
+
+                linkElevateZoom();
+
+            }
+
+        };
+    })
 
     .directive('replace', function () {
         return {
@@ -63110,7 +63907,54 @@ myApp.directive('img', function ($compile, $parse) {
     })
 
 
-;
+
+    // elevateZoom
+
+    .directive('elevateZoom', function ($document, $filter) {
+        return {
+            restrict: 'EA',
+            link: function ($scope, element, attr) {
+                $scope.$watch(attr.image, function () {
+                    $scope.changeImage = function () {
+                        console.log($scope[attr.image]);
+                        var $element = $(element);
+                        var image = $scope[attr.image].image;
+                        console.log(image);
+                        // image = image.productdetail.image[0];
+                        var smallimg = attr.smallImage;
+                        var bigimg = attr.bigImage;
+                        // $element.attr('data-zoom-image', image);
+                        // $element.attr('src', image);
+                        var ez = $element.data("elevateZoom");
+                        if (!ez) {
+                            $element.attr('data-zoom-image', $filter('serverimage')(image));
+                            $element.attr('src', $filter('serverimage')(image));
+                            $element.elevateZoom();
+                        } else {
+                            var newImage = $filter('serverimage')(image);
+                            var smallImage = $filter('serverimage')(image);
+                            ez.swaptheimage(smallImage, newImage);
+                        }
+                    }
+                    $scope.$on('changeImage', function (event, data) {
+                        $scope.changeImage();
+                    });
+                    $scope.changeImage();
+                })
+            }
+        }
+    })
+    .directive('zoomContainer', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+                scope.$on('$stateChangeSuccess', function () {
+                    var target = element.children('div.zoomContainer').remove();
+                })
+            }
+        }
+
+    });
 myApp.directive('hsPasswordVerifier', function ($compile, $parse) {
     return {
         require: 'ngModel',
@@ -63170,7 +64014,7 @@ myApp.service('TemplateService', function () {
     this.init();
 
 });
-myApp.service('myService', function ($http, WishlistService, BannerService, CartService) {
+myApp.service('myService', function ($http, WishlistService, BannerService, CartService, $uibModal, $timeout) {
     this.ctrlBanners = function (pagename, callback) {
             var banner = {
                 pageName: pagename
@@ -63181,13 +64025,40 @@ myApp.service('myService', function ($http, WishlistService, BannerService, Cart
 
             });
         },
+        //avinash functions starts here
+        this.applicableDiscounts = function (productIdsArr, grandTotal, callback) {
+            var formData = {
+                productIds: productIdsArr,
+                grandTotal: grandTotal
+            };
+            BannerService.applicableDiscounts(formData, function (data) {
+                console.log(data);
+                callback(data.data.data)
 
+            });
+        },
+
+        this.getAllProductsByDiscount = function (discountId, callback) {
+            console.log("cartandwishlistservice inside getAllProductsByDiscount");
+            var formData = {
+                _id: discountId
+            }
+            // console.log("formdata$$$",formData);
+            BannerService.getAllProductsByDiscount(formData, function (data) {
+                console.log(data);
+                callback(data.data.data)
+
+            });
+        },
+        //avinash functions ends here
         /*************Adding Products To Cart**************** */
-        this.addToCart = function (prod, reqQuantity, size, com, callback) {
-            console.log("product:", prod, "size:", size, "quanti:", reqQuantity)
+        this.addToCart = function (prod, reqQuantity, size, com, productStyle, productColor, callback) {
+            console.log("product:", prod, "size:", size, "quanti:", reqQuantity, "productColor", productColor)
             prod.selectedSize = size._id;
             prod.reqQuantity = reqQuantity;
             prod.comment = com;
+            prod.productStyle = productStyle;
+            prod.productColor = productColor;
             var accessToken = $.jStorage.get("accessToken");
             if (!_.isEmpty(accessToken)) {
                 console.log("inside if in addtcart service")
@@ -63196,13 +64067,21 @@ myApp.service('myService', function ($http, WishlistService, BannerService, Cart
                 console.log("productbeforesending:", prod)
 
                 CartService.saveProduct(prod, function (data) {
-
                     if (data.data.error) {
                         console.log("Error: ", data.data.error);
 
                     } else {
-                        console.log("Success");
+                        var addcartmodal = $uibModal.open({
+                            animation: true,
+                            templateUrl: 'views/modal/cartadd.html',
+                            size: 'md',
 
+                        });
+                        $timeout(function () {
+                            addcartmodal.close();
+                            // $state.reload();
+                        }, 2000)
+                        console.log("Success");
 
                     }
                 });
@@ -63222,9 +64101,9 @@ myApp.service('myService', function ($http, WishlistService, BannerService, Cart
                 cart.products[len - 1].quantity = reqQuantity;
                 $.jStorage.set('cart', cart);
                 console.log("added to offlinecart", $.jStorage.set('cart', cart))
-
+                callback("sucess");
             }
-            callback("sucess");
+
         },
 
         /*******Add Product To Wishlist******** */
@@ -63253,6 +64132,40 @@ myApp.service('myService', function ($http, WishlistService, BannerService, Cart
                 productId.push(prod.product);
                 $.jStorage.set('wishlist', productId);
                 console.log("offflinewishlist:::::::")
+
+            }
+            callback("success");
+        },
+        this.removeWishlist = function (prod, callback) {
+            var accessToken = $.jStorage.get("accessToken");
+            if (!_.isEmpty(accessToken)) {
+                var wishlist = {
+                    accessToken: accessToken,
+                    userId: $.jStorage.get("userId"),
+                    products: [prod.product.productId]
+                }
+                WishlistService.saveProduct(wishlist, function (data) {
+                    console.log(data);
+                    if (data.data.error) {
+                        console.log("Error: ", data.data.error);
+                    } else {
+                        console.log("Success");
+                        // $state.reload();
+
+                    };
+
+                });
+            } else {
+                console.log("User not logged in");
+                var productId = $.jStorage.get('wishlist') ? $.jStorage.get('wishlist') : [];
+                var result = _.indexOf(productId, prod.product);
+                var index = productId.indexOf(prod.product);
+                console.log("offflinewishlist:::::::result", result);
+                if (result == -1) {
+                    productId.splice(index, 1);
+                    console.log("offflinewishlist:::::::result", productId);
+                    $.jStorage.set('wishlist', productId);
+                }
 
             }
             callback("success");
@@ -63305,6 +64218,13 @@ myApp.service('ListingService', function ($http, WishlistService, BannerService,
             callback(data);
         })
     }
+
+    this.getAllDiscounts = function (callback) {
+        DiscountService.getAllDiscounts(function (data) {
+            console.log(data)
+            callback(data);
+        })
+    }
 })
 myApp.factory('NavigationService', function ($http) {
     var navigation = [{
@@ -63346,6 +64266,15 @@ myApp.factory('NavigationService', function ($http) {
             }).then(callback);
         },
 
+        getEnabledHomePageBlock: function (callback) {
+
+            $http({
+                url: adminurl + 'HomePageBlock/getEnabledHomePageBlock',
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
+
         getBlogs: function (callback) {
             $http({
                 url: adminurl + 'Blog/getBlogs',
@@ -63359,6 +64288,14 @@ myApp.factory('NavigationService', function ($http) {
             $http({
                 url: adminurl + 'Blog/getEnabledBlogs',
                 method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
+        getEnabledInnerBlogs: function (data, callback) {
+            $http({
+                url: adminurl + 'Blog/getEnabledInnerBlogs',
+                method: 'POST',
+                data: data,
                 withCredentials: false
             }).then(callback);
         },
@@ -63384,6 +64321,21 @@ myApp.factory('NavigationService', function ($http) {
         getListingCategories: function (callback) {
             $http({
                 url: adminurl + 'Category/getEnabledCategories',
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
+        getCoupon: function (data, callback) {
+            $http({
+                url: adminurl + 'Coupon/getCoupon',
+                method: 'POST',
+                data: data,
+                withCredentials: false
+            }).then(callback);
+        },
+        getAllDiscounts: function (callback) {
+            $http({
+                url: adminurl + 'Discount/search',
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
@@ -63477,6 +64429,22 @@ myApp.factory('UserService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
+        verifyRegisterUserWithOtp: function (userData, callback) {
+            $http({
+                url: adminurl + 'User/verifyRegisterUserWithOtp',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
+        resendOtp: function (userData, callback) {
+            $http({
+                url: adminurl + 'User/resendOtp',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
 
         login: function (userData, callback) {
             $http({
@@ -63495,7 +64463,46 @@ myApp.factory('UserService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
-
+        forgotPasswordOtp: function (userData, callback) {
+            $http({
+                url: adminurl + 'User/sendForgotPasswordOtp',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
+        confirmForgotPasswordOtp: function (userData, callback) {
+            $http({
+                url: adminurl + 'User/confirmForgotPasswordOtp',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
+        resendOtpForPwd: function (userData, callback) {
+            $http({
+                url: adminurl + 'User/resendOtpForPwd',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
+        forgotPasswordSave: function (userData, callback) {
+            $http({
+                url: adminurl + 'User/forgotPasswordSave',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
+        changePassword: function (userData, callback) {
+            $http({
+                url: adminurl + 'User/dochangepassword',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
         getUserDetails: function (data, callback) {
             $http({
                 url: adminurl + 'User/getDetails',
@@ -63534,6 +64541,14 @@ myApp.factory('UserService', function ($http) {
                 url: adminurl + 'User/updateUser',
                 method: 'POST',
                 data: data,
+                withCredentials: false
+            }).then(callback);
+        },
+        welcomeEmail: function (userData, callback) {
+            $http({
+                url: adminurl + 'User/welcomeEmail',
+                method: 'POST',
+                data: userData,
                 withCredentials: false
             }).then(callback);
         }
@@ -63582,9 +64597,16 @@ myApp.factory('ProductService', function ($http, $timeout) {
                 withCredentials: false
             }).then(callback);
         },
-
+        searchWithFilters: function (input, callback) {
+            $http({
+                url: adminurl + 'Product/searchWithFilters',
+                data: input,
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
         getProductsWithAppliedFilters: function (input, callback) {
-            console.log("Get products with filters: ", input);
+            // console.log("Get products with filters: ", input);
             $http({
                 url: adminurl + 'Product/getProductsWithFilters',
                 data: input,
@@ -63595,15 +64617,37 @@ myApp.factory('ProductService', function ($http, $timeout) {
             );
         },
 
-
+        productWithCategory: function (input, callback) {
+            // console.log("Get products with category: ", input);
+            $http({
+                url: adminurl + 'Product/productWithCategory',
+                data: input,
+                method: 'POST',
+                withCredentials: false
+            }).then(
+                callback
+            );
+        },
 
         getProductsWithFilters: function (input, callback) {
+            console.log("getProductsWithCategory", input)
             $http({
                 url: adminurl + 'Product/getProductsWithCategory/',
                 data: input,
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
+        },
+
+        productInNewArrival: function (callback) {
+            // console.log("Get products with category: ");
+            $http({
+                url: adminurl + 'Product/productInNewArrival',
+                method: 'POST',
+                withCredentials: false
+            }).then(
+                callback
+            );
         },
 
         getSKUWithParameter: function (input, callback) {
@@ -63625,6 +64669,7 @@ myApp.factory('ProductService', function ($http, $timeout) {
         },
 
         getProductsWithCategory: function (data, callback) {
+            // console.log("getProductsWithCategory", data)
             $http({
                 url: adminurl + 'Product/getProductsWithCategory',
                 method: 'POST',
@@ -63659,7 +64704,16 @@ myApp.factory('ProductService', function ($http, $timeout) {
 
         isAvailableProduct: function (reqQuantity, product) {
             return reqQuantity < product.quantity;
+        },
+
+        getDiscountProducts: function (callback) {
+            $http({
+                url: adminurl + 'Discount/getDiscountProducts',
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
         }
+
     };
 });
 myApp.factory('CategoryService', function ($http) {
@@ -63679,7 +64733,25 @@ myApp.factory('CategoryService', function ($http) {
                 data: input,
                 withCredentials: false
             }).then(callback);
-        }
+        },
+        getCategorySlug: function (data, callback) {
+
+            $http({
+                url: adminurl + 'Category/getCategorySlug',
+                data: data,
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
+        getCategoryBySlug: function (data, callback) {
+            console.log("factory getCategoryBySlug",data,adminurl);
+            $http({
+                url: adminurl + 'HomeCategory/getCategoryBySlug',
+                data: data,
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
     };
 });
 myApp.factory('BannerService', function ($http) {
@@ -63689,6 +64761,30 @@ myApp.factory('BannerService', function ($http) {
                 url: adminurl + 'Banner/getBanner',
                 method: 'POST',
                 data: pageName,
+                withCredentials: false
+            }).then(callback);
+        },
+        applicableDiscounts: function (data, callback) {
+            $http({
+                url: adminurl + 'Discount/applicableDiscounts',
+                method: 'POST',
+                data: data,
+                withCredentials: false
+            }).then(callback);
+        },
+        getAllProductsByDiscount: function (discountId, callback) {
+            $http({
+                url: adminurl + 'Discount/getOne',
+                method: 'POST',
+                data: discountId,
+                withCredentials: false
+            }).then(callback);
+        },
+        addCouponByUserFromCart: function (data, callback) {
+            $http({
+                url: adminurl + 'Coupon/save',
+                method: 'POST',
+                data: data,
                 withCredentials: false
             }).then(callback);
         }
@@ -63746,6 +64842,14 @@ myApp.factory('OrderService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
+        postReq: function (input, callback) {
+            $http({
+                url: adminurl + 'Order/postReq',
+                data: input,
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
+        },
         updateOrderAddress: function (input, callback) {
             $http({
                 url: adminurl + 'Order/updateOrderAddress',
@@ -63787,18 +64891,58 @@ myApp.factory('OrderService', function ($http) {
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
-        }
+        },
+        ConfirmOrderPlacedMail: function (userData, callback) {
+            $http({
+                url: adminurl + 'Order/ConfirmOrderPlacedMail',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
+        returnedProductEmail: function (userData, callback) {
+            $http({
+                url: adminurl + 'Order/returnedProductEmail',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
+        cancelProductEmail: function (userData, callback) {
+            $http({
+                url: adminurl + 'Order/cancelProductEmail',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
+        deliveredProductEmail: function (userData, callback) {
+            $http({
+                url: adminurl + 'Order/deliveredProductEmail',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
+        shippedProductEmail: function (userData, callback) {
+            $http({
+                url: adminurl + 'Order/shippedProductEmail',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
     }
 });
 myApp
-    .controller('HomeCtrl', function ($scope, TemplateService, CartService, WishlistService, NavigationService, ProductService, $timeout, $location) {
+    .controller('HomeCtrl', function ($scope, TemplateService, CartService, $state, myService, ModalService, WishlistService, NavigationService, ProductService, $timeout, $location) {
         $scope.template = TemplateService.getHTML("content/home.html");
         TemplateService.title = "Home"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
         $scope.toggled = function (open) {
             alert('xd');
         };
-        $scope.featuredVisible=true;
+        $scope.featuredVisible = true;
         ProductService.getthelook(function (data) {
             $scope.getthelook = data.data.data;
         })
@@ -63809,9 +64953,22 @@ myApp
         NavigationService.getEnabledCategories(function (data) {
             $scope.categories = data.data.data;
         });
+        NavigationService.getEnabledHomePageBlock(function (data) {
+            $scope.HomePageBlocks = data.data.data;
+            console.log("$scope.HomePageBlocks", $scope.HomePageBlocks);
+        });
         ProductService.getNewArrivals(function (data) {
             $scope.newArrivals = data.data.data;
         });
+        // ProductService.getDiscountProducts(function (data) {
+        //     $scope.saleProducts = data.data.data;
+        //     $scope.sale = [];
+        //     _.each($scope.saleProducts, function (value) {
+        //         console.log("single", value.products[0]);
+        //         $scope.sale.push(value.products[0]);
+        //     });
+        //     console.log("$scope.sale1 after iteration", $scope.sale);
+        // });
         /******************todo:for showing cart logo  infinite loop issue******************** */
         var userId = {
             userId: $.jStorage.get("userId"),
@@ -63829,13 +64986,13 @@ myApp
                         })
                     }
                 }
-              
+
 
             })
             WishlistService.getWishlist(userId, function (result) {
-                
+
                 $scope.wishlist = result.data.data;
-            
+
             });
         } else {
             $scope.mycart = []
@@ -63853,7 +65010,7 @@ myApp
                 }
             }
 
-            
+
         }
         $scope.checkInCart = function (productId) {
             if (userId.userId) {
@@ -63906,12 +65063,59 @@ myApp
             }
         }
 
+        $scope.addToWishlist = function (prod) {
+            var data = {
+                "product": prod,
+            }
+            myService.addToWishlist(data, function (data) {
+                ModalService.addwishlist();
+            })
+        }
+        $scope.removeWishlist = function (prodId) {
+            var data = {};
+            if ($.jStorage.get("accessToken")) {
+                data.accessToken = $.jStorage.get("accessToken");
+                data.productId = prodId;
+                WishlistService.removeProduct(data, function (data) {
+                    console.log(data);
+                    $state.reload();
+                })
+            } else {
+                data.productId = prodId;
+                myService.removeWishlist(data, function (data) {
+                    console.log(data);
+                    $state.reload();
+                })
+            }
+        }
+        $scope.addRemoveToWishlist = function (product) {
+            if (userId.userId) {
+
+                var result = _.find($scope.wishlist, {
+                    "productId": product.productId
+                });
+                if (result) {
+                    $scope.removeWishlist(product.productId);
+                } else {
+                    $scope.addToWishlist(product);
+                }
+            } else {
+                var result = _.find($scope.wishlist, {
+                    "productId": product.productId
+                });
+                if (result) {
+                    $scope.removeWishlist(product.productId);
+                } else {
+                    $scope.addToWishlist(product);
+                }
+            }
+        }
         NavigationService.getEnabledBlogs(function (data) {
             $scope.blogs = data.data.data;
 
         });
 
-        $scope.sale = [{
+        $scope.saleOld = [{
             img: '../img/home/11.jpg',
             price: '2,899',
             type: 'Linen Full Sleeve ShirtWith Rollup'
@@ -63953,13 +65157,12 @@ myApp
 
         }];
         ProductService.getFeatured(function (data) {
-            $scope.featured = data.data.data;
-           
-            if(_.isEmpty($scope.featured)){
-                
+            $scope.featured = data.data.data.featureds;
+            $scope.sale = data.data.data.featureds;
+            if (_.isEmpty($scope.featured)) {
                 $scope.featuredVisible = false;
             }
-            
+
         });
     })
     .controller('BuythelookCtrl', function ($scope, $rootScope, $stateParams, ProductService, TemplateService, NavigationService, $timeout, $uibModal, myService, ModalService) {
@@ -63967,7 +65170,7 @@ myApp
         TemplateService.title = "Buythelook"; //This is the Title of the Website
         //$scope.navigation = NavigationService.getEnabledCtNavigation();
         $scope.currentId = $stateParams.id;
-        
+
         var input = {
             _id: $scope.currentId
         }
@@ -63976,8 +65179,8 @@ myApp
             $scope.insideImage = data.data.data.look.insideImage;
             $scope.myShirt = [];
             $scope.myShirt11 = [];
-            $scope.myShirt = _.chunk($scope.buyshirt, 3);
-            
+            // $scope.myShirt = _.chunk($scope.buyshirt, 3);
+            $scope.myShirt = $scope.buyshirt;
             // console.log("myshirt", $scope.myShirt);
             // _.each($scope.myShirt, function (n) {
             //     $scope.myShirt1 = _.chunk(n, 3);
@@ -63987,7 +65190,7 @@ myApp
         })
 
         $rootScope.clickfun = function (product) {
-            
+
             $scope.compareproduct = $.jStorage.get('compareproduct') ? $.jStorage.get('compareproduct') : [];
             var result = _.find($scope.compareproduct, {
                 productId: product.productId
@@ -64000,9 +65203,9 @@ myApp
             } else {
                 $scope.compareproduct.push(product);
                 $.jStorage.set('compareproduct', $scope.compareproduct);
-               
+
             }
-            
+
             if (_.isEmpty($.jStorage.get('compareproduct'))) {
                 $scope.showCheck = false
 
@@ -64058,7 +65261,7 @@ myApp
         //     });
         // };
         $scope.addWishlist = function (prod) {
-           
+
             var data = {
                 "product": prod,
             }
@@ -64092,13 +65295,13 @@ myApp
             $scope.form = false;
         };
     })
-    .controller('compareProductsCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+    .controller('compareProductsCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
         $scope.template = TemplateService.getHTML("content/compare-products.html");
         TemplateService.title = "Compare Products"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
 
         $scope.products = $.jStorage.get('compareproduct');
-        
+
 
         $scope.removeCompareProduct = function (product) {
             _.remove($scope.products, {
@@ -64106,6 +65309,87 @@ myApp
             });
             $.jStorage.set('compareproduct', $scope.products);
         }
+
+        // This function is used to display the modal on quck view button
+        $scope.quickviewProduct = function (prod) {
+            console.log("in quick view", prod);
+            $scope.product = prod;
+
+            if ($scope.product.sizes) {
+                $scope.sizes = $scope.product.sizes
+            } else if (!$scope.product.sizes) {
+                $scope.sizes = $scope.product.size;
+            }
+            console.log($scope.sizes);
+            if (angular.isArray($scope.sizes)) {
+                $scope.activeButton = $scope.sizes[0].name;
+                $scope.selectedSize = $scope.sizes[0];
+            } else {
+                $scope.activeButton = $scope.sizes.name;
+                $scope.selectedSize = $scope.sizes;
+            }
+
+
+            $scope.arrayCheck = angular.isArray($scope.sizes);
+            //  console.log("$scope.arrayCheck", $scope.arrayCheck);
+            $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
+            $scope.selectSize = function (sizeObj) {
+                $scope.activeButton = sizeObj.name;
+                $scope.selectedSize = sizeObj;
+                var data = {
+                    productId: $scope.product.productId,
+                    size: sizeObj._id,
+                    color: $scope.product.color._id
+                }
+                ProductService.getSKUWithParameter(data, function (data) {
+                    console.log("SKU:", data.data);
+                    if (data.data.value) {
+                        console.log("after sku if ", $scope.product);
+                        $scope.product = data.data.data;
+                    } else {
+                        console.log("after sku", $scope.product);
+                        //  $scope.product = {};
+                        // TODO: show out of stock
+                    }
+                })
+            }
+            $scope.addToCart = function () {
+                var comment = "";
+                myService.addToCart($scope.product, $scope.reqQuantity, $scope.selectedSize, comment, function (data) {
+                    ModalService.addcart();
+                    $scope.reload();
+                })
+            }
+            $scope.addToWishlist = function () {
+                var data = {
+                    "product": $scope.product
+                }
+                myService.addToWishlist(data, function (data) {
+
+                    ModalService.addwishlist();
+                })
+            }
+            $scope.selectedImageIndex = 0;
+            $scope.changeImage = function (index) {
+                $scope.selectedImageIndex = index;
+            };
+            $scope.reqQuantity = 1;
+            $scope.updateQuantity = function (oper) {
+                $scope.reqQuantity += parseInt(oper);
+                console.log($scope.reqQuantity)
+            }
+            var quickviewProduct = $uibModal.open({
+                animation: true,
+                templateUrl: 'views/modal/quickview-product.html',
+                scope: $scope,
+                size: 'lg',
+                windowClass: 'quickview-modal-size'
+            });
+            $scope.closeModal = function () {
+                quickviewProduct.close();
+            }
+        };
+        //End of  modal on quck view button
     })
     .controller('BrandsCtrl', function ($scope, myService, TemplateService, ProductService, BannerService, NavigationService, $timeout) {
         $scope.template = TemplateService.getHTML("content/brands.html");
@@ -64137,7 +65421,7 @@ myApp
         $scope.navigation = NavigationService.getNavigation();
         $scope.formSubmitted = false;
         $scope.submitForm = function (data) {
-            
+
             $scope.formSubmitted = true;
         };
     })
@@ -64174,13 +65458,79 @@ myApp
         TemplateService.title = "Coming Soon"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
     })
+    .controller('BlogsCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+        $scope.template = TemplateService.getHTML("content/blogs.html");
+        TemplateService.title = "Blogs"; //This is the Title of the Website
+        $scope.navigation = NavigationService.getNavigation();
+        NavigationService.getEnabledBlogs(function (data) {
+            $scope.blogs = data.data.data;
+
+        });
+    })
+    .controller('InnerBlogsCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
+        $scope.template = TemplateService.getHTML("content/inner-blogs.html");
+        TemplateService.title = "Blogs"; //This is the Title of the Website
+        $scope.navigation = NavigationService.getNavigation();
+        var blogData = {}; // To push $stateParams obj
+        $scope.sliderBlogsData = []; // To push individual blogs plus removed one 
+        // console.log($stateParams);
+        if ($stateParams) {
+            blogData.id = $stateParams.id;
+            // console.log(blogData.id);
+        }
+        //  console.log('Blog data', blogData);
+        NavigationService.getEnabledInnerBlogs(blogData, function (data) {
+            $scope.innarBlogs = data.data.data;
+            $scope.sliderBlogsData.push($scope.innarBlogs);
+            //  console.log('innerblogs', $scope.innarBlogs);
+            //This service used for view also blogs section.
+            NavigationService.getEnabledBlogs(function (data) {
+                $scope.otherBlogs = data.data.data; // used to get all array of objects from blogs
+                // In $scope.removedBlog we will get the objects except the reoved one
+                $scope.removedBlog = _.remove($scope.otherBlogs, function (n) {
+                    return blogData.id != n._id;
+                });
+                $scope.sliderBlogsData.push($scope.removedBlog);
+                $scope.sliderBlogsData = _.flattenDeep($scope.sliderBlogsData);
+                //console.log('after removing', $scope.removedBlog);
+                // console.log('sliderBlogsData', $scope.sliderBlogsData);
+            });
+        });
+
+    })
+    .controller('ErrorMsgCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
+        $scope.template = TemplateService.getHTML("content/error-msg.html");
+        TemplateService.title = "Error"; //This is the Title of the Website
+        $scope.navigation = NavigationService.getNavigation();
+        if ($stateParams.id) {
+            $scope.orderId = $stateParams.id;
+        }
+    })
+    .controller('ThankYouMsgCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
+        $scope.template = TemplateService.getHTML("content/thankyou-msg.html");
+        TemplateService.title = "Thank You"; //This is the Title of the Website
+        $scope.navigation = NavigationService.getNavigation();
+        if ($stateParams.id) {
+            $scope.orderId = $stateParams.id;
+        }
+        var emailUser = {};
+        emailUser._id = $.jStorage.get("userId");
+        emailUser.order = $.jStorage.get("userOrders");
+        OrderService.ConfirmOrderPlacedMail(emailUser, function (data) {
+            console.log("in User/ConfirmOrderPlacedMail", data);
+            if (data.value === true) {
+
+            }
+        });
+    })
+
     //Example API Controller
     .controller('DemoAPICtrl', function ($scope, TemplateService, apiService, NavigationService, $timeout) {
         apiService.getDemo($scope.formData, function (data) {
-          
+
         });
     });
-myApp.controller('headerCtrl', function ($scope, NavigationService, $state, WishlistService,
+myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, $state, WishlistService,
         TemplateService, CartService, UserService, $uibModal, CategoryService, ProductService) {
         $scope.template = TemplateService;
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
@@ -64195,7 +65545,7 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
 
         $scope.openLoginModal10 = function () {
 
-            $scope.loginModal = $uibModal.open({
+            $rootScope.loginModal = $uibModal.open({
                 animation: true,
                 templateUrl: 'views/modal/login.html',
                 scope: $scope,
@@ -64348,26 +65698,50 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
         $scope.viewLogin = function () {
             $scope.view = !$scope.view;
         }
+        //To change the icon for UIB accordian
+        $scope.accordHeader = false;
+        //To show side navigation backdrop design 
+        $scope.isBackdropActive = false;
         //To open side nav
         $scope.sideNav = false; // For toggle sidenavigation
         $scope.openSideNav = function () {
             if (!$scope.sideNav) {
                 $('.side-nav').toggleClass('side-nav-menu-in');
+                $('.mobview-side-nav').toggleClass('side-nav-menu-in');
                 $('.navbar__sideNav').toggleClass(' hamburger-cross');
                 $scope.sideNav = true;
+                $scope.isBackdropActive = !$scope.isBackdropActive;
             } else {
                 $('.side-nav').toggleClass('side-nav-menu-in');
+                $('.mobview-side-nav').toggleClass('side-nav-menu-in');
                 $('.navbar__sideNav').toggleClass(' hamburger-cross');
                 $scope.sideNav = false;
+                $scope.isBackdropActive = false;
             }
 
         };
+
+        //To close side nav when it focuses out
+        $scope.closeSideNav = function () {
+            if ($scope.sideNav) {
+                $('.side-nav').toggleClass('side-nav-menu-in');
+                $('.mobview-side-nav').toggleClass('side-nav-menu-in');
+                $('.navbar__sideNav').toggleClass(' hamburger-cross');
+                $scope.sideNav = false;
+                $scope.isBackdropActive = false;
+            }
+        };
+        //End of focus out
         //End of side nav
         //To Close side nav when hovering online
         $scope.slideUpSideNav = function () {
             //  alert('enter');
+
             $('.side-nav').removeClass('side-nav-menu-in');
             $('.side-nav').addClass('side-nav-menu-out');
+            $('.navbar__sideNav').removeClass('hamburger-cross');
+            $scope.isBackdropActive = false;
+            $scope.sideNav = false;
         };
         //End of close side nav
         $scope.closeCategires = function () {
@@ -64375,22 +65749,33 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
             $('.mobview-links').addClass('mobview-links-menu-out');
             $('.mobview-categories').removeClass('mobview-categories-menu-out');
             $('.mobview-categories').addClass('mobview-categories-menu-in');
+
+        };
+        $scope.closePromotions = function () {
+            $('.mobview-links').removeClass('mobview-links-menu-in');
+            $('.mobview-links').addClass('mobview-links-menu-out');
+            $('.mobview-promotions').removeClass('mobview-promotions-menu-out');
+            $('.mobview-promotions').addClass('mobview-promotions-menu-in');
         };
         $scope.slidebackToMobview = function () {
             $('.mobview-links').removeClass('mobview-links-menu-out');
             $('.mobview-links').addClass('mobview-links-menu-in');
             $('.mobview-categories ').removeClass('mobview-categories-menu-in');
             $('.mobview-categories ').addClass('mobview-categories-menu-out');
+            $('.mobview-promotions ').removeClass('mobview-promotions-menu-in');
+            $('.mobview-promotions').addClass('mobview-promotions-menu-out');
         };
 
         $scope.getSubCategories = function (category) {
-            var data = {};
+            $scope.hCategory = {};
             $scope.slug = category.slug;
-            data.slug = category.slug;
-            CategoryService.getCategoryWithParent(data, function (data) {
+            $scope.hCategory.slug = category.slug;
+            console.log("getSubCategories", $scope.hCategory);
+            CategoryService.getCategoryWithParent($scope.hCategory, function (data) {
                 console.log("subcatretrived", data);
                 if (data.data.value) {
-                    $scope.subCategories = data.data.data;
+                    $scope.hCategory.subCategories = data.data.data;
+                    console.log("subcatretrived", $scope.hCategory.subCategories[0].slug);
                 } else {
                     console.log("subcatretrived", data.data.error);
                 }
@@ -64457,7 +65842,7 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
         }
 
     })
-    .controller('loginModalCtrl', function ($scope, $state, $uibModalInstance, UserService, CartService, WishlistService) {
+    .controller('loginModalCtrl', function ($rootScope, $scope, $timeout, $state, $uibModalInstance, UserService, CartService, WishlistService, $uibModal) {
 
         $scope.formData = {};
         $scope.loginData = {};
@@ -64526,20 +65911,29 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
         }
 
         $scope.registerUser = function () {
-
             UserService.userRegistration($scope.formData, function (data) {
-
+                console.log("*****in register user", data.data.data)
                 if (data.data.error) {
-                    $scope.errormsg = "User already exists with the given emailId.<br /> Please login to proced"
-                }
-                $scope.userData = data.data.data;
-                $.jStorage.set("username", $scope.userData.firstName);
-                if ($.jStorage.get("username")) {
-                    $scope.firstname = $.jStorage.get("username");
+                    $scope.errormsg = "User already exists with the given emailId.Please login to proced"
+                } else if (!_.isEmpty(data.data.data)) {
+                    $rootScope.userData = data.data.data;
+                    $rootScope.otpRegister = $uibModal.open({
+                        animation: true,
+                        templateUrl: 'views/modal/otp2.html',
+
+                        // windowClass: 'loginModalSize',
+                        controller: 'loginModalCtrl'
+                        // windowClass: 'modal-content-radi0'
+                    });
+                    $.jStorage.set("username", $scope.userData.firstName);
+                    if ($.jStorage.get("username")) {
+                        $scope.firstname = $.jStorage.get("username");
+                    }
+
+                    $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
+                    // $.jStorage.set("userId", $scope.userData._id);
                 }
 
-                $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
-                $.jStorage.set("userId", $scope.userData._id);
                 var tokken = $.jStorage.get("accessToken");
                 if (tokken) {
                     var offlineCart = $.jStorage.get("cart");
@@ -64572,12 +65966,161 @@ myApp.controller('headerCtrl', function ($scope, NavigationService, $state, Wish
                     }
                 }
 
-                $scope.loggedUser = $scope.userData._id;
-                $scope.accessToken = $scope.userData.accessToken[$scope.userData.accessToken.length - 1];
+                // $scope.loggedUser = $scope.userData._id;
+                // $scope.accessToken = $scope.userData.accessToken[$scope.userData.accessToken.length - 1];
 
-                $uibModalInstance.close();
-                $state.reload();
+                // $uibModalInstance.close();
+                // $state.reload();
             });
+        }
+
+        $scope.checkOtp = function (otp) {
+            // $scope.userData = {};
+            if (otp) {
+                $rootScope.userData.otp = otp;
+                console.log("Registered user: ", $rootScope.userData);
+                UserService.verifyRegisterUserWithOtp($scope.userData, function (data) {
+                    console.log("VerifyOtp: ", data);
+                    if (data.data.value === true) {
+                        $.jStorage.set('user', data.data.data);
+                        $.jStorage.set("userId", $scope.userData._id);
+                        $.jStorage.set('accessToken', data.data.data.accessToken[0]);
+                        $scope.loggedUser = $scope.userData._id;
+                        $uibModalInstance.dismiss('cancel');
+                        $state.reload();
+
+                        var emailUser = {};
+                        emailUser._id = $.jStorage.get('userId');
+                        UserService.welcomeEmail(emailUser, function (data) {
+                            console.log("in User/welcomeEmail", data);
+                            if (data.value === true) {
+
+                            }
+                        });
+
+                    } else {
+                        if (data.error == 'otpNoMatch') {
+                            $scope.errorMessage = "Invalid OTP. Please provide valid OTP.";
+                        } else if (data.error == 'otpExpired') {
+                            $scope.errorMessage = "OTP Expired. Please click on 'Resend OTP'!";
+                            $scope.resendOtpBut = true;
+                        } else if (data.error == 'noOtpFound') {
+                            $scope.errorMessage = "No OTP found. Please click on 'Resend OTP'!";
+                            $scope.resendOtpBut = true;
+                        } else {
+                            $scope.errorMessage = "Error Occurred. Please click on 'Resend OTP'";
+                            $scope.resendOtpBut = true;
+                        }
+                    }
+                });
+            } else {
+                $scope.errorMessage = "Please enter OTP";
+            }
+        }
+
+        $scope.resendOtp = function () {
+            console.log(" in resend $scope.formData: ", $scope.userData);
+            if ($scope.gtUser) {
+                UserService.resendOtpForPwd($scope.gtUser, function (data) {
+                    if (data.value) {
+                        $scope.resendOtpBut = false;
+                    } else {
+                        console.log("Error: ", data);
+                    }
+                });
+            }
+            if ($scope.userData) {
+                UserService.resendOtp($scope.userData, function (data) {
+                    if (data.value) {
+                        $scope.resendOtpBut = false;
+                    } else {
+                        console.log("Error: ", data);
+                    }
+                });
+            }
+        }
+
+        $scope.forgotPassword = function () {
+            $scope.forgotPwd = true;
+            $scope.otpPwd = false
+            $scope.resetPwd = false;
+            // code to close the modal 
+            // $rootScope.loginModal.close();
+            // $timeout(function () {
+            //     $scope.forgetModal = $uibModal.open({
+            //         animation: true,
+            //         templateUrl: 'views/modal/otp1.html',
+
+            //         // windowClass: 'loginModalSize',
+            //         controller: 'loginModalCtrl'
+            //         // windowClass: 'modal-content-radi0'
+            //     });
+            // }, 500);
+            $scope.forgetModal = $uibModal.open({
+                animation: true,
+                templateUrl: 'views/modal/otp1.html',
+                // windowClass: 'loginModalSize',
+                controller: 'loginModalCtrl'
+                // windowClass: 'modal-content-radi0'
+            });
+
+            // $scope.loginModal.close({
+            //     $value: $scope.loginModal
+            // });
+            // $rootScope.loginModal.close();
+        }
+        $scope.forgotPasswordOtp = function (emailId) {
+            $scope.userEmail = {};
+            $scope.userEmail.email = emailId;
+            UserService.forgotPasswordOtp($scope.userEmail, function (data) {
+                console.log("in forgotPassword: ", data)
+                if (data.data.value) {
+                    $scope.forgotPwd = false;
+                    $scope.resetPwd = false;
+                    $scope.otpPwd = true;
+                    $scope.gtUser = {};
+                    $scope.gtUser._id = data.data.data._id;
+                    // console.log("in forgotPassword: ", data.data.data)
+                } else {
+                    $scope.message = "Please sing up";
+                    console.log("Error: ", data);
+                }
+            });
+        }
+        $scope.confirmForgotPasswordOtp = function (otp) {
+            $scope.gtUser.verifyOtp = otp;
+            console.log("confirmForgotPasswordOtp: ", $scope.gtUser);
+            UserService.confirmForgotPasswordOtp($scope.gtUser, function (data) {
+                console.log("confirm", data);
+                if (data.data.value = true) {
+                    if (data.data.data == "No Data Found") {
+                        $scope.errorMessage = "Invalid OTP. Please provide a valid OTP";
+                        $scope.resendOtpBut = true;
+                    } else {
+                        $scope.otpPwd = false;
+                        $scope.resetPwd = true;
+                    }
+                } else {
+                    $scope.errorMessage = "Invalid OTP. Please provide a valid OTP";
+                    $scope.resendOtpBut = true;
+                }
+            })
+        }
+        $scope.savePassword = function (password) {
+            if (password.newPassword == password.confirmPassword) {
+                $scope.gtUser.password = password.newPassword;
+                $scope.gtUser.email = $scope.userEmail.email
+                console.log("confirmForgotPasswordOtp: savePassword", $scope.gtUser);
+                UserService.forgotPasswordSave($scope.gtUser, function (data) {
+                    console.log("data in save password", data.data)
+                    $.jStorage.set("username", data.data.data.firstName);
+                    $.jStorage.set("userId", data.data.data._id);
+                    $.jStorage.set('accessToken', data.data.data.accessToken[0]);
+                    $scope.loggedUser = data.data.data._id;
+                    $uibModalInstance.dismiss('cancel');
+                    $state.reload();
+                })
+            }
         }
     });
 myApp.controller('languageCtrl', function ($scope, TemplateService, $translate, $rootScope) {
@@ -64659,14 +66202,145 @@ myApp.controller('OrderDetailCtrl', function ($scope, TemplateService, $translat
             }
         }
 
+        //Code for return reson dropdown
+        $scope.setReturnResonText = 'Select Cancel Reason';
+        $scope.returnReson = [{
+                'reason': 'I dont like',
+                'id': 1
+            },
+            {
+                'reason': 'I dont like because',
+                'id': 2
+            }, {
+                'reason': 'size is not perfect',
+                'id': 3
+            }
+        ];
+
+        $scope.getReturnReson = function (returnReason) {
+            $scope.setReturnResonText = returnReason.reason;
+        };
+
         $scope.cancelOrder = function () {
-            var data = {};
-            data.products = $.jStorage.get("cancellation");
-            data.user = $.jStorage.get("userId");
-            data.orderId = $scope.order._id;
-            data.accessToken = $.jStorage.get("accessToken");
-            OrderService.cancelOrder(data, function (data) {
+            var data1 = {};
+            data1.products = $.jStorage.get("cancellation");
+            data1.user = $.jStorage.get("userId");
+            data1.orderId = $scope.order._id;
+            data1.accessToken = $.jStorage.get("accessToken");
+            OrderService.cancelOrder(data1, function (data) {
                 console.log(data);
+                if (data.data.value) {
+                    var emailUser = {};
+                    emailUser._id = $.jStorage.get('userId');
+                    emailUser.order = data1.products;
+                    emailUser.orderId = data1.orderId;
+                    OrderService.cancelProductEmail(emailUser, function (data) {
+                        console.log("in User/cancelProductEmail", data);
+                        if (data.value === true) {
+
+                        }
+                    });
+                }
+                OrderService.getDetailsOfOrder(input, function (output) {
+                    $scope.order = output.data.data;
+                    $.jStorage.deleteKey("cancellation");
+                    console.log(output);
+                    $state.go("cancel-msg")
+                })
+                // $.jStorage.deleteKey("cancellation");
+            })
+            console.log("data", data1);
+
+        }
+        console.log($scope.order);
+
+    })
+    .controller('ReturnCtrl', function ($scope, TemplateService, NavigationService, $timeout, OrderService, $stateParams, $state) {
+        $scope.template = TemplateService.getHTML("content/return.html");
+        TemplateService.title = "Return-Cancellation"; //This is the Title of the Website
+        $scope.navigation = NavigationService.getNavigation();
+        // $scope.order = $.jStorage.get("orderDetails");
+        $.jStorage.deleteKey("cancellation");
+        var input = {
+            _id: $stateParams.id
+        }
+        OrderService.getDetailsOfOrder(input, function (output) {
+            $scope.order = output.data.data;
+            console.log(output);
+        })
+
+        $scope.selectedProduct = function (product) {
+            var products = $.jStorage.get('cancellation') ? $.jStorage.get('cancellation') : [];
+            var result = _.find(products, {
+                product: product.product._id
+            })
+            if (result) {
+                _.remove(products, {
+                    product: product.product._id
+                })
+            } else {
+
+                products.push({
+                    product: product.product._id,
+                    quantity: product.quantity
+                });
+            }
+            // console.log("products", products);
+            $.jStorage.set("cancellation", products);
+        }
+
+        $scope.check = function (prodid) {
+            var products = $.jStorage.get('cancellation') ? $.jStorage.get('cancellation') : [];
+            var result = _.find(products, {
+                product: prodid
+            })
+            if (result) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        //Code for return reson dropdown
+        $scope.setReturnResonText = 'Select Cancel Reason';
+        $scope.returnReson = [{
+                'reason': 'I dont like',
+                'id': 1
+            },
+            {
+                'reason': 'I dont like because',
+                'id': 2
+            }, {
+                'reason': 'size is not perfect',
+                'id': 3
+            }
+        ];
+
+        $scope.getReturnReson = function (returnReason) {
+            $scope.setReturnResonText = returnReason.reason;
+        };
+
+        $scope.cancelOrder = function () {
+            var data1 = {};
+            data1.products = $.jStorage.get("cancellation");
+            data1.user = $.jStorage.get("userId");
+            data1.orderId = $scope.order._id;
+            data1.return = true;
+            data1.accessToken = $.jStorage.get("accessToken");
+            OrderService.cancelOrder(data1, function (data) {
+                console.log(data);
+                if (data.data.value) {
+                    var emailUser = {};
+                    emailUser._id = $.jStorage.get('userId');
+                    emailUser.order = data1.products;
+                    emailUser.orderId = data1.orderId;
+                    OrderService.returnedProductEmail(emailUser, function (data) {
+                        console.log("in User/returnedProductEmail", data);
+                        if (data.value === true) {
+
+                        }
+                    });
+                }
                 OrderService.getDetailsOfOrder(input, function (output) {
                     $scope.order = output.data.data;
                     $.jStorage.deleteKey("cancellation");
@@ -64675,13 +66349,13 @@ myApp.controller('OrderDetailCtrl', function ($scope, TemplateService, $translat
                 })
                 // $.jStorage.deleteKey("cancellation");
             })
-            console.log("data", data);
+            console.log("data", data1);
 
         }
         console.log($scope.order);
 
     });
-myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService, WishlistService, TemplateService, $translate, $rootScope, UserService, $stateParams, $filter) {
+myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService, WishlistService, TemplateService, $uibModal, $translate, $rootScope, UserService, $stateParams, $filter) {
     $scope.template = TemplateService.getHTML("content/myaccount.html");
     TemplateService.title = "My Account"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
@@ -64793,7 +66467,7 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
         };
 
         UserService.deleteShippingAddress($scope.data, function (data) {
-            console.log("deletion",data);
+            console.log("deletion", data);
             $state.reload();
         })
 
@@ -64925,1444 +66599,1444 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
     $scope.visible = true;
     $scope.hidden = false;
     $scope.selectCounteries = [{
-        "name": "Afghanistan",
-        "code": "AF",
-        "continent": "Asia",
-        "filename": "afghanistan"
-    },
-    {
-        "name": "Åland Islands",
-        "continent": "Europe",
-        "code": "AX"
-    },
-    {
-        "name": "Albania",
-        "code": "AL",
-        "continent": "Europe",
-        "filename": "albania"
-    },
-    {
-        "name": "Algeria",
-        "code": "DZ",
-        "continent": "Africa",
-        "filename": "algeria"
-    },
-    {
-        "name": "American Samoa",
-        "code": "AS",
-        "continent": "Oceania"
-    },
-    {
-        "name": "Andorra",
-        "code": "AD",
-        "continent": "Europe",
-        "filename": "andorra"
-    },
-    {
-        "name": "Angola",
-        "code": "AO",
-        "continent": "Africa",
-        "filename": "angola"
-    },
-    {
-        "name": "Anguilla",
-        "code": "AI",
-        "continent": "North America"
-    },
-    {
-        "name": "Antarctica",
-        "continent": "Antarctica",
-        "code": "AQ"
-    },
-    {
-        "name": "Antigua and Barbuda",
-        "code": "AG",
-        "continent": "North America",
-        "filename": "antigua-and-barbuda"
-    },
-    {
-        "name": "Argentina",
-        "code": "AR",
-        "continent": "South America",
-        "filename": "argentina"
-    },
-    {
-        "name": "Armenia",
-        "code": "AM",
-        "continent": "Europe",
-        "filename": "armenia"
-    },
-    {
-        "name": "Aruba",
-        "code": "AW",
-        "continent": "Europe"
-    },
-    {
-        "name": "Australia",
-        "code": "AU",
-        "continent": "Oceania",
-        "filename": "australia"
-    },
-    {
-        "name": "Austria",
-        "code": "AT",
-        "continent": "Europe",
-        "filename": "austria"
-    },
-    {
-        "name": "Azerbaijan",
-        "code": "AZ",
-        "continent": "Europe",
-        "filename": "azerbaijan"
-    },
-    {
-        "name": "Bahamas",
-        "code": "BS",
-        "continent": "North America",
-        "filename": "bahamas"
-    },
-    {
-        "name": "Bahrain",
-        "code": "BH",
-        "continent": "Asia",
-        "filename": "bahrain"
-    },
-    {
-        "name": "Bangladesh",
-        "code": "BD",
-        "continent": "Asia",
-        "filename": "bangladesh"
-    },
-    {
-        "name": "Barbados",
-        "code": "BB",
-        "continent": "North America",
-        "filename": "barbados"
-    },
-    {
-        "name": "Belarus",
-        "code": "BY",
-        "continent": "Europe",
-        "filename": "belarus"
-    },
-    {
-        "name": "Belgium",
-        "code": "BE",
-        "continent": "Europe",
-        "filename": "belgium"
-    },
-    {
-        "name": "Belize",
-        "code": "BZ",
-        "continent": "North America",
-        "filename": "belize"
-    },
-    {
-        "name": "Benin",
-        "code": "BJ",
-        "continent": "Africa",
-        "filename": "benin"
-    },
-    {
-        "name": "Bermuda",
-        "code": "BM",
-        "continent": "North America"
-    },
-    {
-        "name": "Bhutan",
-        "code": "BT",
-        "continent": "Asia",
-        "filename": "bhutan"
-    },
-    {
-        "name": "Bolivia",
-        "code": "BO",
-        "continent": "South America",
-        "filename": "bolivia"
-    },
-    {
-        "name": "Bosnia and Herzegovina",
-        "code": "BA",
-        "continent": "Europe",
-        "filename": "bosnia-and-herzegovina"
-    },
-    {
-        "name": "Botswana",
-        "code": "BW",
-        "continent": "Africa",
-        "filename": "botswana"
-    },
-    {
-        "name": "Bouvet Island",
-        "continent": "Antarctica",
-        "code": "BV"
-    },
-    {
-        "name": "Brazil",
-        "code": "BR",
-        "continent": "South America",
-        "filename": "brazil"
-    },
-    {
-        "name": "British Indian Ocean Territory",
-        "continent": "Africa",
-        "code": "IO"
-    },
-    {
-        "name": "Brunei Darussalam",
-        "code": "BN",
-        "continent": "Asia",
-        "filename": "brunei-darussalam"
-    },
-    {
-        "name": "Bulgaria",
-        "code": "BG",
-        "continent": "Europe",
-        "filename": "bulgaria"
-    },
-    {
-        "name": "Burkina Faso",
-        "code": "BF",
-        "continent": "Africa",
-        "filename": "burkina-faso"
-    },
-    {
-        "name": "Burundi",
-        "code": "BI",
-        "continent": "Africa",
-        "filename": "burundi"
-    },
-    {
-        "name": "Cambodia",
-        "code": "KH",
-        "continent": "Asia",
-        "filename": "cambodia"
-    },
-    {
-        "name": "Cameroon",
-        "code": "CM",
-        "continent": "Africa",
-        "filename": "cameroon"
-    },
-    {
-        "name": "Canada",
-        "code": "CA",
-        "continent": "North America",
-        "filename": "canada"
-    },
-    {
-        "name": "Cape Verde",
-        "code": "CV",
-        "continent": "Africa",
-        "filename": "cape-verde"
-    },
-    {
-        "name": "Cayman Islands",
-        "code": "KY",
-        "continent": "North America"
-    },
-    {
-        "name": "Central African Republic",
-        "code": "CF",
-        "continent": "Africa",
-        "filename": "central-african-republic"
-    },
-    {
-        "name": "Chad",
-        "code": "TD",
-        "continent": "Africa",
-        "filename": "chad"
-    },
-    {
-        "name": "Chile",
-        "code": "CL",
-        "continent": "South America",
-        "filename": "chile"
-    },
-    {
-        "name": "China",
-        "code": "CN",
-        "continent": "Asia",
-        "filename": "china"
-    },
-    {
-        "name": "Christmas Island",
-        "code": "CX",
-        "continent": "Oceania"
-    },
-    {
-        "name": "Cocos (Keeling) Islands",
-        "code": "CC",
-        "continent": "Oceania"
-    },
-    {
-        "name": "Colombia",
-        "code": "CO",
-        "continent": "South America",
-        "filename": "colombia"
-    },
-    {
-        "name": "Comoros",
-        "code": "KM",
-        "continent": "Africa",
-        "filename": "comoros"
-    },
-    {
-        "name": "Congo",
-        "code": "CG",
-        "continent": "Africa",
-        "filename": "congo"
-    },
-    {
-        "name": "Congo, The Democratic Republic of the",
-        "code": "CD",
-        "continent": "Africa",
-        "filename": "congo-the-democratic-republic-of-the"
-    },
-    {
-        "name": "Cook Islands",
-        "continent": "Oceania",
-        "code": "CK"
-    },
-    {
-        "name": "Costa Rica",
-        "code": "CR",
-        "continent": "North America",
-        "filename": "costa-rica"
-    },
-    {
-        "name": "Côte d'Ivoire, Republic of",
-        "code": "CI",
-        "continent": "Africa",
-        "filename": "cote-d-ivoire-republic-of"
-    },
-    {
-        "name": "Croatia",
-        "code": "HR",
-        "continent": "Europe",
-        "filename": "croatia"
-    },
-    {
-        "name": "Cuba",
-        "code": "CU",
-        "continent": "North America",
-        "filename": "cuba"
-    },
-    {
-        "name": "Curaçao",
-        "code": "CW",
-        "continent": "Europe"
-    },
-    {
-        "name": "Cyprus",
-        "code": "CY",
-        "continent": "Europe",
-        "filename": "cyprus"
-    },
-    {
-        "name": "Czech Republic",
-        "code": "CZ",
-        "continent": "Europe",
-        "filename": "czech-republic"
-    },
-    {
-        "name": "Denmark",
-        "code": "DK",
-        "continent": "Europe",
-        "filename": "denmark"
-    },
-    {
-        "name": "Djibouti",
-        "code": "DJ",
-        "continent": "Africa",
-        "filename": "djibouti"
-    },
-    {
-        "name": "Dominica",
-        "code": "DM",
-        "continent": "North America",
-        "filename": "dominica"
-    },
-    {
-        "name": "Dominican Republic",
-        "code": "DO",
-        "continent": "North America",
-        "filename": "dominican-republic"
-    },
-    {
-        "name": "Ecuador",
-        "code": "EC",
-        "continent": "South America",
-        "filename": "ecuador"
-    },
-    {
-        "name": "Egypt",
-        "code": "EG",
-        "continent": "Africa",
-        "filename": "egypt"
-    },
-    {
-        "name": "El Salvador",
-        "code": "SV",
-        "continent": "North America",
-        "filename": "el-salvador"
-    },
-    {
-        "name": "Equatorial Guinea",
-        "code": "GQ",
-        "continent": "Africa",
-        "filename": "equatorial-guinea"
-    },
-    {
-        "name": "Eritrea",
-        "code": "ER",
-        "continent": "Africa",
-        "filename": "eritrea"
-    },
-    {
-        "name": "Estonia",
-        "code": "EE",
-        "continent": "Europe",
-        "filename": "estonia"
-    },
-    {
-        "name": "Ethiopia",
-        "code": "ET",
-        "continent": "Africa",
-        "filename": "ethiopia"
-    },
-    {
-        "name": "Falkland Islands (Malvinas)",
-        "code": "FK",
-        "continent": "South America"
-    },
-    {
-        "name": "Faroe Islands",
-        "continent": "Europe",
-        "code": "FO"
-    },
-    {
-        "name": "Fiji",
-        "code": "FJ",
-        "continent": "Oceania",
-        "filename": "fiji"
-    },
-    {
-        "name": "Finland",
-        "code": "FI",
-        "continent": "Europe",
-        "filename": "finland"
-    },
-    {
-        "name": "France",
-        "code": "FR",
-        "continent": "Europe",
-        "filename": "france"
-    },
-    {
-        "name": "French Guiana",
-        "code": "GF",
-        "continent": "South America"
-    },
-    {
-        "name": "French Polynesia",
-        "code": "PF",
-        "continent": "Oceania"
-    },
-    {
-        "name": "French Southern Territories",
-        "continent": "Antarctica",
-        "code": "TF"
-    },
-    {
-        "name": "Gabon",
-        "code": "GA",
-        "continent": "Africa",
-        "filename": "gabon"
-    },
-    {
-        "name": "Gambia",
-        "code": "GM",
-        "continent": "Africa",
-        "filename": "gambia"
-    },
-    {
-        "name": "Georgia",
-        "code": "GE",
-        "continent": "Europe",
-        "filename": "georgia"
-    },
-    {
-        "name": "Germany",
-        "code": "DE",
-        "continent": "Europe",
-        "filename": "germany"
-    },
-    {
-        "name": "Ghana",
-        "code": "GH",
-        "continent": "Africa",
-        "filename": "ghana"
-    },
-    {
-        "name": "Gibraltar",
-        "continent": "Europe",
-        "code": "GI"
-    },
-    {
-        "name": "Greece",
-        "code": "GR",
-        "continent": "Europe",
-        "filename": "greece"
-    },
-    {
-        "name": "Greenland",
-        "code": "GL",
-        "continent": "North America",
-        "filename": "greenland"
-    },
-    {
-        "name": "Grenada",
-        "code": "GD",
-        "continent": "North America",
-        "filename": "grenada"
-    },
-    {
-        "name": "Guadeloupe",
-        "code": "GP",
-        "continent": "North America"
-    },
-    {
-        "name": "Guam",
-        "code": "GU",
-        "continent": "Oceania"
-    },
-    {
-        "name": "Guatemala",
-        "code": "GT",
-        "continent": "North America",
-        "filename": "guatemala"
-    },
-    {
-        "name": "Guernsey",
-        "continent": "Europe",
-        "code": "GG"
-    },
-    {
-        "name": "Guinea",
-        "code": "GN",
-        "continent": "Africa",
-        "filename": "guinea"
-    },
-    {
-        "name": "Guinea-Bissau",
-        "code": "GW",
-        "continent": "Africa",
-        "filename": "guinea-bissau"
-    },
-    {
-        "name": "Guyana",
-        "code": "GY",
-        "continent": "South America",
-        "filename": "guyana"
-    },
-    {
-        "name": "Haiti",
-        "code": "HT",
-        "continent": "North America",
-        "filename": "haiti"
-    },
-    {
-        "name": "Heard Island and Mcdonald Islands",
-        "continent": "Oceania",
-        "code": "HM"
-    },
-    {
-        "name": "Holy See (Vatican City State)",
-        "code": "VA",
-        "continent": "Europe"
-    },
-    {
-        "name": "Honduras",
-        "code": "HN",
-        "continent": "North America",
-        "filename": "honduras"
-    },
-    {
-        "name": "Hong Kong",
-        "code": "HK",
-        "continent": "Asia",
-        "filename": "hong-kong"
-    },
-    {
-        "name": "Hungary",
-        "code": "HU",
-        "continent": "Europe",
-        "filename": "hungary"
-    },
-    {
-        "name": "Iceland",
-        "code": "IS",
-        "continent": "Europe",
-        "filename": "iceland"
-    },
-    {
-        "name": "India",
-        "code": "IN",
-        "continent": "Asia",
-        "filename": "india"
-    },
-    {
-        "name": "Indonesia",
-        "code": "ID",
-        "continent": "Asia",
-        "filename": "indonesia"
-    },
-    {
-        "name": "Iran, Islamic Republic Of",
-        "code": "IR",
-        "continent": "Asia",
-        "filename": "iran-islamic-republic-of"
-    },
-    {
-        "name": "Iraq",
-        "code": "IQ",
-        "continent": "Asia",
-        "filename": "iraq"
-    },
-    {
-        "name": "Ireland",
-        "code": "IE",
-        "continent": "Europe",
-        "filename": "ireland"
-    },
-    {
-        "name": "Isle of Man",
-        "continent": "Europe",
-        "code": "IM"
-    },
-    {
-        "name": "Israel",
-        "code": "IL",
-        "continent": "Asia",
-        "filename": "israel"
-    },
-    {
-        "name": "Italy",
-        "code": "IT",
-        "continent": "Europe",
-        "filename": "italy"
-    },
-    {
-        "name": "Jamaica",
-        "code": "JM",
-        "continent": "North America",
-        "filename": "jamaica"
-    },
-    {
-        "name": "Japan",
-        "code": "JP",
-        "continent": "Asia",
-        "filename": "japan"
-    },
-    {
-        "name": "Jersey",
-        "continent": "Europe",
-        "code": "JE"
-    },
-    {
-        "name": "Jordan",
-        "code": "JO",
-        "continent": "Asia",
-        "filename": "jordan"
-    },
-    {
-        "name": "Kazakhstan",
-        "code": "KZ",
-        "continent": "Europe",
-        "filename": "kazakhstan"
-    },
-    {
-        "name": "Kenya",
-        "code": "KE",
-        "continent": "Africa",
-        "filename": "kenya"
-    },
-    {
-        "name": "Kiribati",
-        "code": "KI",
-        "continent": "Oceania",
-        "filename": "kiribati"
-    },
-    {
-        "name": "Korea, Democratic People's Republic of",
-        "code": "KP",
-        "continent": "Asia",
-        "filename": "korea-democratic-people-s-republic-of"
-    },
-    {
-        "name": "Korea, Republic of",
-        "code": "KR",
-        "continent": "Asia",
-        "filename": "korea-republic-of"
-    },
-    {
-        "name": "Kuwait",
-        "code": "KW",
-        "continent": "Asia",
-        "filename": "kuwait"
-    },
-    {
-        "name": "Kyrgyzstan",
-        "code": "KG",
-        "continent": "Asia",
-        "filename": "kyrgyzstan"
-    },
-    {
-        "name": "Lao People's Democratic Republic",
-        "code": "LA",
-        "continent": "Asia",
-        "filename": "lao-people-s-democratic-republic"
-    },
-    {
-        "name": "Latvia",
-        "code": "LV",
-        "continent": "Europe",
-        "filename": "latvia"
-    },
-    {
-        "name": "Lebanon",
-        "code": "LB",
-        "continent": "Asia",
-        "filename": "lebanon"
-    },
-    {
-        "name": "Lesotho",
-        "code": "LS",
-        "continent": "Africa",
-        "filename": "lesotho"
-    },
-    {
-        "name": "Liberia",
-        "code": "LR",
-        "continent": "Africa",
-        "filename": "liberia"
-    },
-    {
-        "name": "Libyan Arab Jamahiriya",
-        "code": "LY",
-        "continent": "Africa",
-        "filename": "libyan-arab-jamahiriya"
-    },
-    {
-        "name": "Liechtenstein",
-        "code": "LI",
-        "continent": "Europe",
-        "filename": "liechtenstein"
-    },
-    {
-        "name": "Lithuania",
-        "code": "LT",
-        "continent": "Europe",
-        "filename": "lithuania"
-    },
-    {
-        "name": "Luxembourg",
-        "code": "LU",
-        "continent": "Europe",
-        "filename": "luxembourg"
-    },
-    {
-        "name": "Macao",
-        "code": "MO",
-        "continent": "Asia"
-    },
-    {
-        "name": "Macedonia, The Former Yugoslav Republic of",
-        "code": "MK",
-        "continent": "Europe",
-        "filename": "macedonia-the-former-yugoslav-republic-of"
-    },
-    {
-        "name": "Madagascar",
-        "code": "MG",
-        "continent": "Africa",
-        "filename": "madagascar"
-    },
-    {
-        "name": "Malawi",
-        "code": "MW",
-        "continent": "Africa",
-        "filename": "malawi"
-    },
-    {
-        "name": "Malaysia",
-        "code": "MY",
-        "continent": "Asia",
-        "filename": "malaysia"
-    },
-    {
-        "name": "Maldives",
-        "code": "MV",
-        "continent": "Asia",
-        "filename": "maldives"
-    },
-    {
-        "name": "Mali",
-        "code": "ML",
-        "continent": "Africa",
-        "filename": "mali"
-    },
-    {
-        "name": "Malta",
-        "code": "MT",
-        "continent": "Europe",
-        "filename": "malta"
-    },
-    {
-        "name": "Marshall Islands",
-        "code": "MH",
-        "continent": "Oceania",
-        "filename": "marshall-islands"
-    },
-    {
-        "name": "Martinique",
-        "code": "MQ",
-        "continent": "North America"
-    },
-    {
-        "name": "Mauritania",
-        "code": "MR",
-        "continent": "Africa",
-        "filename": "mauritania"
-    },
-    {
-        "name": "Mauritius",
-        "code": "MU",
-        "continent": "Africa",
-        "filename": "mauritius"
-    },
-    {
-        "name": "Mayotte",
-        "code": "YT",
-        "continent": "Africa"
-    },
-    {
-        "name": "Mexico",
-        "code": "MX",
-        "continent": "North America",
-        "filename": "mexico"
-    },
-    {
-        "name": "Micronesia, Federated States of",
-        "code": "FM",
-        "continent": "Oceania",
-        "filename": "micronesia-federated-states-of"
-    },
-    {
-        "name": "Moldova, Republic of",
-        "code": "MD",
-        "continent": "Europe",
-        "filename": "moldova-republic-of"
-    },
-    {
-        "name": "Monaco",
-        "code": "MC",
-        "continent": "Europe",
-        "filename": "monaco"
-    },
-    {
-        "name": "Mongolia",
-        "code": "MN",
-        "continent": "Asia",
-        "filename": "mongolia"
-    },
-    {
-        "name": "Montenegro",
-        "code": "ME",
-        "continent": "Europe",
-        "filename": "montenegro"
-    },
-    {
-        "name": "Montserrat",
-        "code": "MS",
-        "continent": "North America"
-    },
-    {
-        "name": "Morocco",
-        "code": "MA",
-        "continent": "Africa",
-        "filename": "morocco"
-    },
-    {
-        "name": "Mozambique",
-        "code": "MZ",
-        "continent": "Africa",
-        "filename": "mozambique"
-    },
-    {
-        "name": "Myanmar",
-        "code": "MM",
-        "continent": "Asia",
-        "filename": "myanmar"
-    },
-    {
-        "name": "Namibia",
-        "code": "NA",
-        "continent": "Africa",
-        "filename": "namibia"
-    },
-    {
-        "name": "Nauru",
-        "code": "NR",
-        "continent": "Oceania",
-        "filename": "nauru"
-    },
-    {
-        "name": "Nepal",
-        "code": "NP",
-        "continent": "Asia",
-        "filename": "nepal"
-    },
-    {
-        "name": "Netherlands",
-        "code": "NL",
-        "continent": "Europe",
-        "filename": "netherlands"
-    },
-    {
-        "name": "Netherlands Antilles",
-        "code": "AN",
-        "continent": "Europe"
-    },
-    {
-        "name": "New Caledonia",
-        "code": "NC",
-        "continent": "Oceania"
-    },
-    {
-        "name": "New Zealand",
-        "code": "NZ",
-        "continent": "Oceania",
-        "filename": "new-zealand"
-    },
-    {
-        "name": "Nicaragua",
-        "code": "NI",
-        "continent": "North America",
-        "filename": "nicaragua"
-    },
-    {
-        "name": "Niger",
-        "code": "NE",
-        "continent": "Africa",
-        "filename": "niger"
-    },
-    {
-        "name": "Nigeria",
-        "code": "NG",
-        "continent": "Africa",
-        "filename": "nigeria"
-    },
-    {
-        "name": "Niue",
-        "continent": "Oceania",
-        "code": "NU"
-    },
-    {
-        "name": "Norfolk Island",
-        "code": "NF",
-        "continent": "Oceania"
-    },
-    {
-        "name": "Northern Mariana Islands",
-        "continent": "Oceania",
-        "code": "MP"
-    },
-    {
-        "name": "Norway",
-        "code": "NO",
-        "continent": "Europe",
-        "filename": "norway"
-    },
-    {
-        "name": "Oman",
-        "code": "OM",
-        "continent": "Asia",
-        "filename": "oman"
-    },
-    {
-        "name": "Pakistan",
-        "code": "PK",
-        "continent": "Asia",
-        "filename": "pakistan"
-    },
-    {
-        "name": "Palau",
-        "code": "PW",
-        "continent": "Oceania",
-        "filename": "palau"
-    },
-    {
-        "name": "Palestinian Territory, Occupied",
-        "code": "PS",
-        "continent": "Asia",
-        "filename": "palestinian-territory-occupied"
-    },
-    {
-        "name": "Panama",
-        "code": "PA",
-        "continent": "North America",
-        "filename": "panama"
-    },
-    {
-        "name": "Papua New Guinea",
-        "code": "PG",
-        "continent": "Oceania",
-        "filename": "papua-new-guinea"
-    },
-    {
-        "name": "Paraguay",
-        "code": "PY",
-        "continent": "South America",
-        "filename": "paraguay"
-    },
-    {
-        "name": "Peru",
-        "code": "PE",
-        "continent": "South America",
-        "filename": "peru"
-    },
-    {
-        "name": "Philippines",
-        "code": "PH",
-        "continent": "Asia",
-        "filename": "philippines"
-    },
-    {
-        "name": "Pitcairn",
-        "continent": "Oceania",
-        "code": "PN"
-    },
-    {
-        "name": "Poland",
-        "code": "PL",
-        "continent": "Europe",
-        "filename": "poland"
-    },
-    {
-        "name": "Portugal",
-        "code": "PT",
-        "continent": "Europe",
-        "filename": "portugal"
-    },
-    {
-        "name": "Puerto Rico",
-        "code": "PR",
-        "continent": "North America"
-    },
-    {
-        "name": "Qatar",
-        "code": "QA",
-        "continent": "Asia",
-        "filename": "qatar"
-    },
-    {
-        "name": "Réunion",
-        "code": "RE",
-        "continent": "Africa"
-    },
-    {
-        "name": "Romania",
-        "code": "RO",
-        "continent": "Europe",
-        "filename": "romania"
-    },
-    {
-        "name": "Russian Federation",
-        "code": "RU",
-        "continent": "Europe",
-        "filename": "russian-federation"
-    },
-    {
-        "name": "Rwanda",
-        "code": "RW",
-        "continent": "Africa",
-        "filename": "rwanda"
-    },
-    {
-        "name": "Saint Helena, Ascension and Tristan da Cunha",
-        "code": "SH",
-        "continent": "Africa",
-        "filename": "saint-helena-ascension-and-tristan-da-cunha"
-    },
-    {
-        "name": "Saint Kitts and Nevis",
-        "code": "KN",
-        "continent": "North America",
-        "filename": "saint-kitts-and-nevis"
-    },
-    {
-        "name": "Saint Lucia",
-        "code": "LC",
-        "continent": "North America",
-        "filename": "saint-lucia"
-    },
-    {
-        "name": "Saint Pierre and Miquelon",
-        "code": "PM",
-        "continent": "North America"
-    },
-    {
-        "name": "Saint Vincent and the Grenadines",
-        "code": "VC",
-        "continent": "North America",
-        "filename": "saint-vincent-and-the-grenadines"
-    },
-    {
-        "name": "Samoa",
-        "code": "WS",
-        "continent": "Oceania",
-        "filename": "samoa"
-    },
-    {
-        "name": "San Marino",
-        "code": "SM",
-        "continent": "Europe",
-        "filename": "san-marino"
-    },
-    {
-        "name": "São Tomé and Príncipe",
-        "code": "ST",
-        "continent": "Africa",
-        "filename": "sao-tome-and-principe"
-    },
-    {
-        "name": "Saudi Arabia",
-        "code": "SA",
-        "continent": "Asia",
-        "filename": "saudi-arabia"
-    },
-    {
-        "name": "Senegal",
-        "code": "SN",
-        "continent": "Africa",
-        "filename": "senegal"
-    },
-    {
-        "name": "Serbia",
-        "code": "RS",
-        "continent": "Europe",
-        "filename": "serbia"
-    },
-    {
-        "name": "Seychelles",
-        "code": "SC",
-        "continent": "Africa",
-        "filename": "seychelles"
-    },
-    {
-        "name": "Sierra Leone",
-        "code": "SL",
-        "continent": "Africa",
-        "filename": "sierra-leone"
-    },
-    {
-        "name": "Singapore",
-        "code": "SG",
-        "continent": "Asia",
-        "filename": "singapore"
-    },
-    {
-        "name": "Sint Maarten",
-        "code": "SX",
-        "continent": "Europe"
-    },
-    {
-        "name": "Slovakia",
-        "code": "SK",
-        "continent": "Europe",
-        "filename": "slovakia"
-    },
-    {
-        "name": "Slovenia",
-        "code": "SI",
-        "continent": "Europe",
-        "filename": "slovenia"
-    },
-    {
-        "name": "Solomon Islands",
-        "code": "SB",
-        "continent": "Oceania",
-        "filename": "solomon-islands"
-    },
-    {
-        "name": "Somalia",
-        "code": "SO",
-        "continent": "Africa",
-        "filename": "somalia"
-    },
-    {
-        "name": "South Africa",
-        "code": "ZA",
-        "continent": "Africa",
-        "filename": "south-africa"
-    },
-    {
-        "name": "South Georgia and the South Sandwich Islands",
-        "code": "GS",
-        "continent": "South America"
-    },
-    {
-        "name": "South Sudan",
-        "code": "SS",
-        "continent": "Africa",
-        "filename": "south-sudan"
-    },
-    {
-        "name": "Spain",
-        "code": "ES",
-        "continent": "Europe",
-        "filename": "spain"
-    },
-    {
-        "name": "Sri Lanka",
-        "code": "LK",
-        "continent": "Asia",
-        "filename": "sri-lanka"
-    },
-    {
-        "name": "Sudan",
-        "code": "SD",
-        "continent": "Africa",
-        "filename": "sudan"
-    },
-    {
-        "name": "Suriname",
-        "code": "SR",
-        "continent": "South America",
-        "filename": "suriname"
-    },
-    {
-        "name": "Svalbard and Jan Mayen",
-        "continent": "Europe",
-        "code": "SJ"
-    },
-    {
-        "name": "Swaziland",
-        "code": "SZ",
-        "continent": "Africa",
-        "filename": "swaziland"
-    },
-    {
-        "name": "Sweden",
-        "code": "SE",
-        "continent": "Europe",
-        "filename": "sweden"
-    },
-    {
-        "name": "Switzerland",
-        "code": "CH",
-        "continent": "Europe",
-        "filename": "switzerland"
-    },
-    {
-        "name": "Syrian Arab Republic",
-        "code": "SY",
-        "continent": "Asia",
-        "filename": "syrian-arab-republic"
-    },
-    {
-        "name": "Taiwan, Province of China",
-        "code": "TW",
-        "continent": "Asia",
-        "filename": "taiwan-province-of-china"
-    },
-    {
-        "name": "Tajikistan",
-        "code": "TJ",
-        "continent": "Asia",
-        "filename": "tajikistan"
-    },
-    {
-        "name": "Tanzania, United Republic of",
-        "code": "TZ",
-        "continent": "Africa",
-        "filename": "tanzania-united-republic-of"
-    },
-    {
-        "name": "Thailand",
-        "code": "TH",
-        "continent": "Asia",
-        "filename": "thailand"
-    },
-    {
-        "name": "Timor-Leste",
-        "code": "TL",
-        "continent": "Oceania",
-        "filename": "timor-leste"
-    },
-    {
-        "name": "Togo",
-        "code": "TG",
-        "continent": "Africa",
-        "filename": "togo"
-    },
-    {
-        "name": "Tokelau",
-        "continent": "Oceania",
-        "code": "TK"
-    },
-    {
-        "name": "Tonga",
-        "code": "TO",
-        "continent": "Oceania",
-        "filename": "tonga"
-    },
-    {
-        "name": "Trinidad and Tobago",
-        "code": "TT",
-        "continent": "North America",
-        "filename": "trinidad-and-tobago"
-    },
-    {
-        "name": "Tunisia",
-        "code": "TN",
-        "continent": "Africa",
-        "filename": "tunisia"
-    },
-    {
-        "name": "Turkey",
-        "code": "TR",
-        "continent": "Europe",
-        "filename": "turkey"
-    },
-    {
-        "name": "Turkmenistan",
-        "code": "TM",
-        "continent": "Asia",
-        "filename": "turkmenistan"
-    },
-    {
-        "name": "Turks and Caicos Islands",
-        "code": "TC",
-        "continent": "North America"
-    },
-    {
-        "name": "Tuvalu",
-        "code": "TV",
-        "continent": "Oceania",
-        "filename": "tuvalu"
-    },
-    {
-        "name": "Uganda",
-        "code": "UG",
-        "continent": "Africa",
-        "filename": "uganda"
-    },
-    {
-        "name": "Ukraine",
-        "code": "UA",
-        "continent": "Europe",
-        "filename": "ukraine"
-    },
-    {
-        "name": "United Arab Emirates",
-        "code": "AE",
-        "continent": "Asia",
-        "filename": "united-arab-emirates"
-    },
-    {
-        "name": "United Kingdom",
-        "code": "GB",
-        "continent": "Europe",
-        "filename": "united-kingdom"
-    },
-    {
-        "name": "United States",
-        "code": "US",
-        "continent": "North America",
-        "filename": "united-states"
-    },
-    {
-        "name": "United States Minor Outlying Islands",
-        "code": "UM",
-        "continent": "North America",
-        "filename": "united-states-minor-outlying-islands"
-    },
-    {
-        "name": "Uruguay",
-        "code": "UY",
-        "continent": "South America",
-        "filename": "uruguay"
-    },
-    {
-        "name": "Uzbekistan",
-        "code": "UZ",
-        "continent": "Asia",
-        "filename": "uzbekistan"
-    },
-    {
-        "name": "Vanuatu",
-        "code": "VU",
-        "continent": "Oceania",
-        "filename": "vanuatu"
-    },
-    {
-        "name": "Venezuela",
-        "code": "VE",
-        "continent": "South America",
-        "filename": "venezuela"
-    },
-    {
-        "name": "Viet Nam",
-        "code": "VN",
-        "continent": "Asia",
-        "filename": "viet-nam"
-    },
-    {
-        "name": "Virgin Islands, British",
-        "code": "VG",
-        "continent": "North America"
-    },
-    {
-        "name": "Virgin Islands, U.S.",
-        "code": "VI",
-        "continent": "North America"
-    },
-    {
-        "name": "Wallis and Futuna",
-        "continent": "Oceania",
-        "code": "WF"
-    },
-    {
-        "name": "Western Sahara",
-        "continent": "Africa",
-        "code": "EH"
-    },
-    {
-        "name": "Yemen",
-        "code": "YE",
-        "continent": "Asia",
-        "filename": "yemen"
-    },
-    {
-        "name": "Zambia",
-        "code": "ZM",
-        "continent": "Africa",
-        "filename": "zambia"
-    },
-    {
-        "name": "Zimbabwe",
-        "code": "ZW",
-        "continent": "Africa",
-        "filename": "zimbabwe"
-    }
-];
+            "name": "Afghanistan",
+            "code": "AF",
+            "continent": "Asia",
+            "filename": "afghanistan"
+        },
+        {
+            "name": "Åland Islands",
+            "continent": "Europe",
+            "code": "AX"
+        },
+        {
+            "name": "Albania",
+            "code": "AL",
+            "continent": "Europe",
+            "filename": "albania"
+        },
+        {
+            "name": "Algeria",
+            "code": "DZ",
+            "continent": "Africa",
+            "filename": "algeria"
+        },
+        {
+            "name": "American Samoa",
+            "code": "AS",
+            "continent": "Oceania"
+        },
+        {
+            "name": "Andorra",
+            "code": "AD",
+            "continent": "Europe",
+            "filename": "andorra"
+        },
+        {
+            "name": "Angola",
+            "code": "AO",
+            "continent": "Africa",
+            "filename": "angola"
+        },
+        {
+            "name": "Anguilla",
+            "code": "AI",
+            "continent": "North America"
+        },
+        {
+            "name": "Antarctica",
+            "continent": "Antarctica",
+            "code": "AQ"
+        },
+        {
+            "name": "Antigua and Barbuda",
+            "code": "AG",
+            "continent": "North America",
+            "filename": "antigua-and-barbuda"
+        },
+        {
+            "name": "Argentina",
+            "code": "AR",
+            "continent": "South America",
+            "filename": "argentina"
+        },
+        {
+            "name": "Armenia",
+            "code": "AM",
+            "continent": "Europe",
+            "filename": "armenia"
+        },
+        {
+            "name": "Aruba",
+            "code": "AW",
+            "continent": "Europe"
+        },
+        {
+            "name": "Australia",
+            "code": "AU",
+            "continent": "Oceania",
+            "filename": "australia"
+        },
+        {
+            "name": "Austria",
+            "code": "AT",
+            "continent": "Europe",
+            "filename": "austria"
+        },
+        {
+            "name": "Azerbaijan",
+            "code": "AZ",
+            "continent": "Europe",
+            "filename": "azerbaijan"
+        },
+        {
+            "name": "Bahamas",
+            "code": "BS",
+            "continent": "North America",
+            "filename": "bahamas"
+        },
+        {
+            "name": "Bahrain",
+            "code": "BH",
+            "continent": "Asia",
+            "filename": "bahrain"
+        },
+        {
+            "name": "Bangladesh",
+            "code": "BD",
+            "continent": "Asia",
+            "filename": "bangladesh"
+        },
+        {
+            "name": "Barbados",
+            "code": "BB",
+            "continent": "North America",
+            "filename": "barbados"
+        },
+        {
+            "name": "Belarus",
+            "code": "BY",
+            "continent": "Europe",
+            "filename": "belarus"
+        },
+        {
+            "name": "Belgium",
+            "code": "BE",
+            "continent": "Europe",
+            "filename": "belgium"
+        },
+        {
+            "name": "Belize",
+            "code": "BZ",
+            "continent": "North America",
+            "filename": "belize"
+        },
+        {
+            "name": "Benin",
+            "code": "BJ",
+            "continent": "Africa",
+            "filename": "benin"
+        },
+        {
+            "name": "Bermuda",
+            "code": "BM",
+            "continent": "North America"
+        },
+        {
+            "name": "Bhutan",
+            "code": "BT",
+            "continent": "Asia",
+            "filename": "bhutan"
+        },
+        {
+            "name": "Bolivia",
+            "code": "BO",
+            "continent": "South America",
+            "filename": "bolivia"
+        },
+        {
+            "name": "Bosnia and Herzegovina",
+            "code": "BA",
+            "continent": "Europe",
+            "filename": "bosnia-and-herzegovina"
+        },
+        {
+            "name": "Botswana",
+            "code": "BW",
+            "continent": "Africa",
+            "filename": "botswana"
+        },
+        {
+            "name": "Bouvet Island",
+            "continent": "Antarctica",
+            "code": "BV"
+        },
+        {
+            "name": "Brazil",
+            "code": "BR",
+            "continent": "South America",
+            "filename": "brazil"
+        },
+        {
+            "name": "British Indian Ocean Territory",
+            "continent": "Africa",
+            "code": "IO"
+        },
+        {
+            "name": "Brunei Darussalam",
+            "code": "BN",
+            "continent": "Asia",
+            "filename": "brunei-darussalam"
+        },
+        {
+            "name": "Bulgaria",
+            "code": "BG",
+            "continent": "Europe",
+            "filename": "bulgaria"
+        },
+        {
+            "name": "Burkina Faso",
+            "code": "BF",
+            "continent": "Africa",
+            "filename": "burkina-faso"
+        },
+        {
+            "name": "Burundi",
+            "code": "BI",
+            "continent": "Africa",
+            "filename": "burundi"
+        },
+        {
+            "name": "Cambodia",
+            "code": "KH",
+            "continent": "Asia",
+            "filename": "cambodia"
+        },
+        {
+            "name": "Cameroon",
+            "code": "CM",
+            "continent": "Africa",
+            "filename": "cameroon"
+        },
+        {
+            "name": "Canada",
+            "code": "CA",
+            "continent": "North America",
+            "filename": "canada"
+        },
+        {
+            "name": "Cape Verde",
+            "code": "CV",
+            "continent": "Africa",
+            "filename": "cape-verde"
+        },
+        {
+            "name": "Cayman Islands",
+            "code": "KY",
+            "continent": "North America"
+        },
+        {
+            "name": "Central African Republic",
+            "code": "CF",
+            "continent": "Africa",
+            "filename": "central-african-republic"
+        },
+        {
+            "name": "Chad",
+            "code": "TD",
+            "continent": "Africa",
+            "filename": "chad"
+        },
+        {
+            "name": "Chile",
+            "code": "CL",
+            "continent": "South America",
+            "filename": "chile"
+        },
+        {
+            "name": "China",
+            "code": "CN",
+            "continent": "Asia",
+            "filename": "china"
+        },
+        {
+            "name": "Christmas Island",
+            "code": "CX",
+            "continent": "Oceania"
+        },
+        {
+            "name": "Cocos (Keeling) Islands",
+            "code": "CC",
+            "continent": "Oceania"
+        },
+        {
+            "name": "Colombia",
+            "code": "CO",
+            "continent": "South America",
+            "filename": "colombia"
+        },
+        {
+            "name": "Comoros",
+            "code": "KM",
+            "continent": "Africa",
+            "filename": "comoros"
+        },
+        {
+            "name": "Congo",
+            "code": "CG",
+            "continent": "Africa",
+            "filename": "congo"
+        },
+        {
+            "name": "Congo, The Democratic Republic of the",
+            "code": "CD",
+            "continent": "Africa",
+            "filename": "congo-the-democratic-republic-of-the"
+        },
+        {
+            "name": "Cook Islands",
+            "continent": "Oceania",
+            "code": "CK"
+        },
+        {
+            "name": "Costa Rica",
+            "code": "CR",
+            "continent": "North America",
+            "filename": "costa-rica"
+        },
+        {
+            "name": "Côte d'Ivoire, Republic of",
+            "code": "CI",
+            "continent": "Africa",
+            "filename": "cote-d-ivoire-republic-of"
+        },
+        {
+            "name": "Croatia",
+            "code": "HR",
+            "continent": "Europe",
+            "filename": "croatia"
+        },
+        {
+            "name": "Cuba",
+            "code": "CU",
+            "continent": "North America",
+            "filename": "cuba"
+        },
+        {
+            "name": "Curaçao",
+            "code": "CW",
+            "continent": "Europe"
+        },
+        {
+            "name": "Cyprus",
+            "code": "CY",
+            "continent": "Europe",
+            "filename": "cyprus"
+        },
+        {
+            "name": "Czech Republic",
+            "code": "CZ",
+            "continent": "Europe",
+            "filename": "czech-republic"
+        },
+        {
+            "name": "Denmark",
+            "code": "DK",
+            "continent": "Europe",
+            "filename": "denmark"
+        },
+        {
+            "name": "Djibouti",
+            "code": "DJ",
+            "continent": "Africa",
+            "filename": "djibouti"
+        },
+        {
+            "name": "Dominica",
+            "code": "DM",
+            "continent": "North America",
+            "filename": "dominica"
+        },
+        {
+            "name": "Dominican Republic",
+            "code": "DO",
+            "continent": "North America",
+            "filename": "dominican-republic"
+        },
+        {
+            "name": "Ecuador",
+            "code": "EC",
+            "continent": "South America",
+            "filename": "ecuador"
+        },
+        {
+            "name": "Egypt",
+            "code": "EG",
+            "continent": "Africa",
+            "filename": "egypt"
+        },
+        {
+            "name": "El Salvador",
+            "code": "SV",
+            "continent": "North America",
+            "filename": "el-salvador"
+        },
+        {
+            "name": "Equatorial Guinea",
+            "code": "GQ",
+            "continent": "Africa",
+            "filename": "equatorial-guinea"
+        },
+        {
+            "name": "Eritrea",
+            "code": "ER",
+            "continent": "Africa",
+            "filename": "eritrea"
+        },
+        {
+            "name": "Estonia",
+            "code": "EE",
+            "continent": "Europe",
+            "filename": "estonia"
+        },
+        {
+            "name": "Ethiopia",
+            "code": "ET",
+            "continent": "Africa",
+            "filename": "ethiopia"
+        },
+        {
+            "name": "Falkland Islands (Malvinas)",
+            "code": "FK",
+            "continent": "South America"
+        },
+        {
+            "name": "Faroe Islands",
+            "continent": "Europe",
+            "code": "FO"
+        },
+        {
+            "name": "Fiji",
+            "code": "FJ",
+            "continent": "Oceania",
+            "filename": "fiji"
+        },
+        {
+            "name": "Finland",
+            "code": "FI",
+            "continent": "Europe",
+            "filename": "finland"
+        },
+        {
+            "name": "France",
+            "code": "FR",
+            "continent": "Europe",
+            "filename": "france"
+        },
+        {
+            "name": "French Guiana",
+            "code": "GF",
+            "continent": "South America"
+        },
+        {
+            "name": "French Polynesia",
+            "code": "PF",
+            "continent": "Oceania"
+        },
+        {
+            "name": "French Southern Territories",
+            "continent": "Antarctica",
+            "code": "TF"
+        },
+        {
+            "name": "Gabon",
+            "code": "GA",
+            "continent": "Africa",
+            "filename": "gabon"
+        },
+        {
+            "name": "Gambia",
+            "code": "GM",
+            "continent": "Africa",
+            "filename": "gambia"
+        },
+        {
+            "name": "Georgia",
+            "code": "GE",
+            "continent": "Europe",
+            "filename": "georgia"
+        },
+        {
+            "name": "Germany",
+            "code": "DE",
+            "continent": "Europe",
+            "filename": "germany"
+        },
+        {
+            "name": "Ghana",
+            "code": "GH",
+            "continent": "Africa",
+            "filename": "ghana"
+        },
+        {
+            "name": "Gibraltar",
+            "continent": "Europe",
+            "code": "GI"
+        },
+        {
+            "name": "Greece",
+            "code": "GR",
+            "continent": "Europe",
+            "filename": "greece"
+        },
+        {
+            "name": "Greenland",
+            "code": "GL",
+            "continent": "North America",
+            "filename": "greenland"
+        },
+        {
+            "name": "Grenada",
+            "code": "GD",
+            "continent": "North America",
+            "filename": "grenada"
+        },
+        {
+            "name": "Guadeloupe",
+            "code": "GP",
+            "continent": "North America"
+        },
+        {
+            "name": "Guam",
+            "code": "GU",
+            "continent": "Oceania"
+        },
+        {
+            "name": "Guatemala",
+            "code": "GT",
+            "continent": "North America",
+            "filename": "guatemala"
+        },
+        {
+            "name": "Guernsey",
+            "continent": "Europe",
+            "code": "GG"
+        },
+        {
+            "name": "Guinea",
+            "code": "GN",
+            "continent": "Africa",
+            "filename": "guinea"
+        },
+        {
+            "name": "Guinea-Bissau",
+            "code": "GW",
+            "continent": "Africa",
+            "filename": "guinea-bissau"
+        },
+        {
+            "name": "Guyana",
+            "code": "GY",
+            "continent": "South America",
+            "filename": "guyana"
+        },
+        {
+            "name": "Haiti",
+            "code": "HT",
+            "continent": "North America",
+            "filename": "haiti"
+        },
+        {
+            "name": "Heard Island and Mcdonald Islands",
+            "continent": "Oceania",
+            "code": "HM"
+        },
+        {
+            "name": "Holy See (Vatican City State)",
+            "code": "VA",
+            "continent": "Europe"
+        },
+        {
+            "name": "Honduras",
+            "code": "HN",
+            "continent": "North America",
+            "filename": "honduras"
+        },
+        {
+            "name": "Hong Kong",
+            "code": "HK",
+            "continent": "Asia",
+            "filename": "hong-kong"
+        },
+        {
+            "name": "Hungary",
+            "code": "HU",
+            "continent": "Europe",
+            "filename": "hungary"
+        },
+        {
+            "name": "Iceland",
+            "code": "IS",
+            "continent": "Europe",
+            "filename": "iceland"
+        },
+        {
+            "name": "India",
+            "code": "IN",
+            "continent": "Asia",
+            "filename": "india"
+        },
+        {
+            "name": "Indonesia",
+            "code": "ID",
+            "continent": "Asia",
+            "filename": "indonesia"
+        },
+        {
+            "name": "Iran, Islamic Republic Of",
+            "code": "IR",
+            "continent": "Asia",
+            "filename": "iran-islamic-republic-of"
+        },
+        {
+            "name": "Iraq",
+            "code": "IQ",
+            "continent": "Asia",
+            "filename": "iraq"
+        },
+        {
+            "name": "Ireland",
+            "code": "IE",
+            "continent": "Europe",
+            "filename": "ireland"
+        },
+        {
+            "name": "Isle of Man",
+            "continent": "Europe",
+            "code": "IM"
+        },
+        {
+            "name": "Israel",
+            "code": "IL",
+            "continent": "Asia",
+            "filename": "israel"
+        },
+        {
+            "name": "Italy",
+            "code": "IT",
+            "continent": "Europe",
+            "filename": "italy"
+        },
+        {
+            "name": "Jamaica",
+            "code": "JM",
+            "continent": "North America",
+            "filename": "jamaica"
+        },
+        {
+            "name": "Japan",
+            "code": "JP",
+            "continent": "Asia",
+            "filename": "japan"
+        },
+        {
+            "name": "Jersey",
+            "continent": "Europe",
+            "code": "JE"
+        },
+        {
+            "name": "Jordan",
+            "code": "JO",
+            "continent": "Asia",
+            "filename": "jordan"
+        },
+        {
+            "name": "Kazakhstan",
+            "code": "KZ",
+            "continent": "Europe",
+            "filename": "kazakhstan"
+        },
+        {
+            "name": "Kenya",
+            "code": "KE",
+            "continent": "Africa",
+            "filename": "kenya"
+        },
+        {
+            "name": "Kiribati",
+            "code": "KI",
+            "continent": "Oceania",
+            "filename": "kiribati"
+        },
+        {
+            "name": "Korea, Democratic People's Republic of",
+            "code": "KP",
+            "continent": "Asia",
+            "filename": "korea-democratic-people-s-republic-of"
+        },
+        {
+            "name": "Korea, Republic of",
+            "code": "KR",
+            "continent": "Asia",
+            "filename": "korea-republic-of"
+        },
+        {
+            "name": "Kuwait",
+            "code": "KW",
+            "continent": "Asia",
+            "filename": "kuwait"
+        },
+        {
+            "name": "Kyrgyzstan",
+            "code": "KG",
+            "continent": "Asia",
+            "filename": "kyrgyzstan"
+        },
+        {
+            "name": "Lao People's Democratic Republic",
+            "code": "LA",
+            "continent": "Asia",
+            "filename": "lao-people-s-democratic-republic"
+        },
+        {
+            "name": "Latvia",
+            "code": "LV",
+            "continent": "Europe",
+            "filename": "latvia"
+        },
+        {
+            "name": "Lebanon",
+            "code": "LB",
+            "continent": "Asia",
+            "filename": "lebanon"
+        },
+        {
+            "name": "Lesotho",
+            "code": "LS",
+            "continent": "Africa",
+            "filename": "lesotho"
+        },
+        {
+            "name": "Liberia",
+            "code": "LR",
+            "continent": "Africa",
+            "filename": "liberia"
+        },
+        {
+            "name": "Libyan Arab Jamahiriya",
+            "code": "LY",
+            "continent": "Africa",
+            "filename": "libyan-arab-jamahiriya"
+        },
+        {
+            "name": "Liechtenstein",
+            "code": "LI",
+            "continent": "Europe",
+            "filename": "liechtenstein"
+        },
+        {
+            "name": "Lithuania",
+            "code": "LT",
+            "continent": "Europe",
+            "filename": "lithuania"
+        },
+        {
+            "name": "Luxembourg",
+            "code": "LU",
+            "continent": "Europe",
+            "filename": "luxembourg"
+        },
+        {
+            "name": "Macao",
+            "code": "MO",
+            "continent": "Asia"
+        },
+        {
+            "name": "Macedonia, The Former Yugoslav Republic of",
+            "code": "MK",
+            "continent": "Europe",
+            "filename": "macedonia-the-former-yugoslav-republic-of"
+        },
+        {
+            "name": "Madagascar",
+            "code": "MG",
+            "continent": "Africa",
+            "filename": "madagascar"
+        },
+        {
+            "name": "Malawi",
+            "code": "MW",
+            "continent": "Africa",
+            "filename": "malawi"
+        },
+        {
+            "name": "Malaysia",
+            "code": "MY",
+            "continent": "Asia",
+            "filename": "malaysia"
+        },
+        {
+            "name": "Maldives",
+            "code": "MV",
+            "continent": "Asia",
+            "filename": "maldives"
+        },
+        {
+            "name": "Mali",
+            "code": "ML",
+            "continent": "Africa",
+            "filename": "mali"
+        },
+        {
+            "name": "Malta",
+            "code": "MT",
+            "continent": "Europe",
+            "filename": "malta"
+        },
+        {
+            "name": "Marshall Islands",
+            "code": "MH",
+            "continent": "Oceania",
+            "filename": "marshall-islands"
+        },
+        {
+            "name": "Martinique",
+            "code": "MQ",
+            "continent": "North America"
+        },
+        {
+            "name": "Mauritania",
+            "code": "MR",
+            "continent": "Africa",
+            "filename": "mauritania"
+        },
+        {
+            "name": "Mauritius",
+            "code": "MU",
+            "continent": "Africa",
+            "filename": "mauritius"
+        },
+        {
+            "name": "Mayotte",
+            "code": "YT",
+            "continent": "Africa"
+        },
+        {
+            "name": "Mexico",
+            "code": "MX",
+            "continent": "North America",
+            "filename": "mexico"
+        },
+        {
+            "name": "Micronesia, Federated States of",
+            "code": "FM",
+            "continent": "Oceania",
+            "filename": "micronesia-federated-states-of"
+        },
+        {
+            "name": "Moldova, Republic of",
+            "code": "MD",
+            "continent": "Europe",
+            "filename": "moldova-republic-of"
+        },
+        {
+            "name": "Monaco",
+            "code": "MC",
+            "continent": "Europe",
+            "filename": "monaco"
+        },
+        {
+            "name": "Mongolia",
+            "code": "MN",
+            "continent": "Asia",
+            "filename": "mongolia"
+        },
+        {
+            "name": "Montenegro",
+            "code": "ME",
+            "continent": "Europe",
+            "filename": "montenegro"
+        },
+        {
+            "name": "Montserrat",
+            "code": "MS",
+            "continent": "North America"
+        },
+        {
+            "name": "Morocco",
+            "code": "MA",
+            "continent": "Africa",
+            "filename": "morocco"
+        },
+        {
+            "name": "Mozambique",
+            "code": "MZ",
+            "continent": "Africa",
+            "filename": "mozambique"
+        },
+        {
+            "name": "Myanmar",
+            "code": "MM",
+            "continent": "Asia",
+            "filename": "myanmar"
+        },
+        {
+            "name": "Namibia",
+            "code": "NA",
+            "continent": "Africa",
+            "filename": "namibia"
+        },
+        {
+            "name": "Nauru",
+            "code": "NR",
+            "continent": "Oceania",
+            "filename": "nauru"
+        },
+        {
+            "name": "Nepal",
+            "code": "NP",
+            "continent": "Asia",
+            "filename": "nepal"
+        },
+        {
+            "name": "Netherlands",
+            "code": "NL",
+            "continent": "Europe",
+            "filename": "netherlands"
+        },
+        {
+            "name": "Netherlands Antilles",
+            "code": "AN",
+            "continent": "Europe"
+        },
+        {
+            "name": "New Caledonia",
+            "code": "NC",
+            "continent": "Oceania"
+        },
+        {
+            "name": "New Zealand",
+            "code": "NZ",
+            "continent": "Oceania",
+            "filename": "new-zealand"
+        },
+        {
+            "name": "Nicaragua",
+            "code": "NI",
+            "continent": "North America",
+            "filename": "nicaragua"
+        },
+        {
+            "name": "Niger",
+            "code": "NE",
+            "continent": "Africa",
+            "filename": "niger"
+        },
+        {
+            "name": "Nigeria",
+            "code": "NG",
+            "continent": "Africa",
+            "filename": "nigeria"
+        },
+        {
+            "name": "Niue",
+            "continent": "Oceania",
+            "code": "NU"
+        },
+        {
+            "name": "Norfolk Island",
+            "code": "NF",
+            "continent": "Oceania"
+        },
+        {
+            "name": "Northern Mariana Islands",
+            "continent": "Oceania",
+            "code": "MP"
+        },
+        {
+            "name": "Norway",
+            "code": "NO",
+            "continent": "Europe",
+            "filename": "norway"
+        },
+        {
+            "name": "Oman",
+            "code": "OM",
+            "continent": "Asia",
+            "filename": "oman"
+        },
+        {
+            "name": "Pakistan",
+            "code": "PK",
+            "continent": "Asia",
+            "filename": "pakistan"
+        },
+        {
+            "name": "Palau",
+            "code": "PW",
+            "continent": "Oceania",
+            "filename": "palau"
+        },
+        {
+            "name": "Palestinian Territory, Occupied",
+            "code": "PS",
+            "continent": "Asia",
+            "filename": "palestinian-territory-occupied"
+        },
+        {
+            "name": "Panama",
+            "code": "PA",
+            "continent": "North America",
+            "filename": "panama"
+        },
+        {
+            "name": "Papua New Guinea",
+            "code": "PG",
+            "continent": "Oceania",
+            "filename": "papua-new-guinea"
+        },
+        {
+            "name": "Paraguay",
+            "code": "PY",
+            "continent": "South America",
+            "filename": "paraguay"
+        },
+        {
+            "name": "Peru",
+            "code": "PE",
+            "continent": "South America",
+            "filename": "peru"
+        },
+        {
+            "name": "Philippines",
+            "code": "PH",
+            "continent": "Asia",
+            "filename": "philippines"
+        },
+        {
+            "name": "Pitcairn",
+            "continent": "Oceania",
+            "code": "PN"
+        },
+        {
+            "name": "Poland",
+            "code": "PL",
+            "continent": "Europe",
+            "filename": "poland"
+        },
+        {
+            "name": "Portugal",
+            "code": "PT",
+            "continent": "Europe",
+            "filename": "portugal"
+        },
+        {
+            "name": "Puerto Rico",
+            "code": "PR",
+            "continent": "North America"
+        },
+        {
+            "name": "Qatar",
+            "code": "QA",
+            "continent": "Asia",
+            "filename": "qatar"
+        },
+        {
+            "name": "Réunion",
+            "code": "RE",
+            "continent": "Africa"
+        },
+        {
+            "name": "Romania",
+            "code": "RO",
+            "continent": "Europe",
+            "filename": "romania"
+        },
+        {
+            "name": "Russian Federation",
+            "code": "RU",
+            "continent": "Europe",
+            "filename": "russian-federation"
+        },
+        {
+            "name": "Rwanda",
+            "code": "RW",
+            "continent": "Africa",
+            "filename": "rwanda"
+        },
+        {
+            "name": "Saint Helena, Ascension and Tristan da Cunha",
+            "code": "SH",
+            "continent": "Africa",
+            "filename": "saint-helena-ascension-and-tristan-da-cunha"
+        },
+        {
+            "name": "Saint Kitts and Nevis",
+            "code": "KN",
+            "continent": "North America",
+            "filename": "saint-kitts-and-nevis"
+        },
+        {
+            "name": "Saint Lucia",
+            "code": "LC",
+            "continent": "North America",
+            "filename": "saint-lucia"
+        },
+        {
+            "name": "Saint Pierre and Miquelon",
+            "code": "PM",
+            "continent": "North America"
+        },
+        {
+            "name": "Saint Vincent and the Grenadines",
+            "code": "VC",
+            "continent": "North America",
+            "filename": "saint-vincent-and-the-grenadines"
+        },
+        {
+            "name": "Samoa",
+            "code": "WS",
+            "continent": "Oceania",
+            "filename": "samoa"
+        },
+        {
+            "name": "San Marino",
+            "code": "SM",
+            "continent": "Europe",
+            "filename": "san-marino"
+        },
+        {
+            "name": "São Tomé and Príncipe",
+            "code": "ST",
+            "continent": "Africa",
+            "filename": "sao-tome-and-principe"
+        },
+        {
+            "name": "Saudi Arabia",
+            "code": "SA",
+            "continent": "Asia",
+            "filename": "saudi-arabia"
+        },
+        {
+            "name": "Senegal",
+            "code": "SN",
+            "continent": "Africa",
+            "filename": "senegal"
+        },
+        {
+            "name": "Serbia",
+            "code": "RS",
+            "continent": "Europe",
+            "filename": "serbia"
+        },
+        {
+            "name": "Seychelles",
+            "code": "SC",
+            "continent": "Africa",
+            "filename": "seychelles"
+        },
+        {
+            "name": "Sierra Leone",
+            "code": "SL",
+            "continent": "Africa",
+            "filename": "sierra-leone"
+        },
+        {
+            "name": "Singapore",
+            "code": "SG",
+            "continent": "Asia",
+            "filename": "singapore"
+        },
+        {
+            "name": "Sint Maarten",
+            "code": "SX",
+            "continent": "Europe"
+        },
+        {
+            "name": "Slovakia",
+            "code": "SK",
+            "continent": "Europe",
+            "filename": "slovakia"
+        },
+        {
+            "name": "Slovenia",
+            "code": "SI",
+            "continent": "Europe",
+            "filename": "slovenia"
+        },
+        {
+            "name": "Solomon Islands",
+            "code": "SB",
+            "continent": "Oceania",
+            "filename": "solomon-islands"
+        },
+        {
+            "name": "Somalia",
+            "code": "SO",
+            "continent": "Africa",
+            "filename": "somalia"
+        },
+        {
+            "name": "South Africa",
+            "code": "ZA",
+            "continent": "Africa",
+            "filename": "south-africa"
+        },
+        {
+            "name": "South Georgia and the South Sandwich Islands",
+            "code": "GS",
+            "continent": "South America"
+        },
+        {
+            "name": "South Sudan",
+            "code": "SS",
+            "continent": "Africa",
+            "filename": "south-sudan"
+        },
+        {
+            "name": "Spain",
+            "code": "ES",
+            "continent": "Europe",
+            "filename": "spain"
+        },
+        {
+            "name": "Sri Lanka",
+            "code": "LK",
+            "continent": "Asia",
+            "filename": "sri-lanka"
+        },
+        {
+            "name": "Sudan",
+            "code": "SD",
+            "continent": "Africa",
+            "filename": "sudan"
+        },
+        {
+            "name": "Suriname",
+            "code": "SR",
+            "continent": "South America",
+            "filename": "suriname"
+        },
+        {
+            "name": "Svalbard and Jan Mayen",
+            "continent": "Europe",
+            "code": "SJ"
+        },
+        {
+            "name": "Swaziland",
+            "code": "SZ",
+            "continent": "Africa",
+            "filename": "swaziland"
+        },
+        {
+            "name": "Sweden",
+            "code": "SE",
+            "continent": "Europe",
+            "filename": "sweden"
+        },
+        {
+            "name": "Switzerland",
+            "code": "CH",
+            "continent": "Europe",
+            "filename": "switzerland"
+        },
+        {
+            "name": "Syrian Arab Republic",
+            "code": "SY",
+            "continent": "Asia",
+            "filename": "syrian-arab-republic"
+        },
+        {
+            "name": "Taiwan, Province of China",
+            "code": "TW",
+            "continent": "Asia",
+            "filename": "taiwan-province-of-china"
+        },
+        {
+            "name": "Tajikistan",
+            "code": "TJ",
+            "continent": "Asia",
+            "filename": "tajikistan"
+        },
+        {
+            "name": "Tanzania, United Republic of",
+            "code": "TZ",
+            "continent": "Africa",
+            "filename": "tanzania-united-republic-of"
+        },
+        {
+            "name": "Thailand",
+            "code": "TH",
+            "continent": "Asia",
+            "filename": "thailand"
+        },
+        {
+            "name": "Timor-Leste",
+            "code": "TL",
+            "continent": "Oceania",
+            "filename": "timor-leste"
+        },
+        {
+            "name": "Togo",
+            "code": "TG",
+            "continent": "Africa",
+            "filename": "togo"
+        },
+        {
+            "name": "Tokelau",
+            "continent": "Oceania",
+            "code": "TK"
+        },
+        {
+            "name": "Tonga",
+            "code": "TO",
+            "continent": "Oceania",
+            "filename": "tonga"
+        },
+        {
+            "name": "Trinidad and Tobago",
+            "code": "TT",
+            "continent": "North America",
+            "filename": "trinidad-and-tobago"
+        },
+        {
+            "name": "Tunisia",
+            "code": "TN",
+            "continent": "Africa",
+            "filename": "tunisia"
+        },
+        {
+            "name": "Turkey",
+            "code": "TR",
+            "continent": "Europe",
+            "filename": "turkey"
+        },
+        {
+            "name": "Turkmenistan",
+            "code": "TM",
+            "continent": "Asia",
+            "filename": "turkmenistan"
+        },
+        {
+            "name": "Turks and Caicos Islands",
+            "code": "TC",
+            "continent": "North America"
+        },
+        {
+            "name": "Tuvalu",
+            "code": "TV",
+            "continent": "Oceania",
+            "filename": "tuvalu"
+        },
+        {
+            "name": "Uganda",
+            "code": "UG",
+            "continent": "Africa",
+            "filename": "uganda"
+        },
+        {
+            "name": "Ukraine",
+            "code": "UA",
+            "continent": "Europe",
+            "filename": "ukraine"
+        },
+        {
+            "name": "United Arab Emirates",
+            "code": "AE",
+            "continent": "Asia",
+            "filename": "united-arab-emirates"
+        },
+        {
+            "name": "United Kingdom",
+            "code": "GB",
+            "continent": "Europe",
+            "filename": "united-kingdom"
+        },
+        {
+            "name": "United States",
+            "code": "US",
+            "continent": "North America",
+            "filename": "united-states"
+        },
+        {
+            "name": "United States Minor Outlying Islands",
+            "code": "UM",
+            "continent": "North America",
+            "filename": "united-states-minor-outlying-islands"
+        },
+        {
+            "name": "Uruguay",
+            "code": "UY",
+            "continent": "South America",
+            "filename": "uruguay"
+        },
+        {
+            "name": "Uzbekistan",
+            "code": "UZ",
+            "continent": "Asia",
+            "filename": "uzbekistan"
+        },
+        {
+            "name": "Vanuatu",
+            "code": "VU",
+            "continent": "Oceania",
+            "filename": "vanuatu"
+        },
+        {
+            "name": "Venezuela",
+            "code": "VE",
+            "continent": "South America",
+            "filename": "venezuela"
+        },
+        {
+            "name": "Viet Nam",
+            "code": "VN",
+            "continent": "Asia",
+            "filename": "viet-nam"
+        },
+        {
+            "name": "Virgin Islands, British",
+            "code": "VG",
+            "continent": "North America"
+        },
+        {
+            "name": "Virgin Islands, U.S.",
+            "code": "VI",
+            "continent": "North America"
+        },
+        {
+            "name": "Wallis and Futuna",
+            "continent": "Oceania",
+            "code": "WF"
+        },
+        {
+            "name": "Western Sahara",
+            "continent": "Africa",
+            "code": "EH"
+        },
+        {
+            "name": "Yemen",
+            "code": "YE",
+            "continent": "Asia",
+            "filename": "yemen"
+        },
+        {
+            "name": "Zambia",
+            "code": "ZM",
+            "continent": "Africa",
+            "filename": "zambia"
+        },
+        {
+            "name": "Zimbabwe",
+            "code": "ZW",
+            "continent": "Africa",
+            "filename": "zimbabwe"
+        }
+    ];
     $scope.changeCountry = function (name) {
         $scope.countryButton = name;
         $scope.userDetails.data.shippingAddresses[0].country = name;
-       
+
         // $scope.countryButton = name;
         // var countryButton = angular.element(document.getElementsByClassName('state-dropdown--btn'));
         // console.log(countryButton);
@@ -66371,7 +68045,7 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
 
     //For Manage address's dropdown to select state
     $scope.stateButton = 'State';
-    
+
     $scope.changeState = function (name) {
         $scope.stateButton = name;
         $scope.userDetails.data.shippingAddresses[0].state = name;
@@ -66389,6 +68063,33 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
             console.log(data);
             $state.reload();
         })
+    }
+    $scope.changePassword = function () {
+        $scope.changePasswordModal = $uibModal.open({
+            animation: true,
+            templateUrl: 'views/modal/resetForgotPassword.html',
+            scope: $scope,
+            // windowClass: 'loginModalSize',
+            controller: 'MyAccountCtrl'
+            // windowClass: 'modal-content-radi0'
+        });
+    }
+    $scope.savePassword = function (formData) {
+        $scope.userData = {};
+        if ($.jStorage.get("userId")) {
+            $scope.userData.userId = $.jStorage.get("userId");
+            if (formData.newPassword == formData.confirmPassword) {
+                $scope.userData.new = formData.newPassword;
+                UserService.changePassword($scope.userData, function (data) {
+                    if (data.data.value) {
+                        toastr.success("You have Successfully changed the Password", 'Success');
+                        $state.reload();
+                    }
+                });
+            } else {
+                $scope.errorCnfMsg = "new password and confirm password must be same!!!"
+            }
+        }
     }
 
 });
@@ -66411,42 +68112,243 @@ myApp.controller('GiftCardCtrl', function ($scope, TemplateService, $translate, 
     TemplateService.title = "Your Gift Card"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
 });
-myApp.controller('StoreLocatorCtrl', function ($scope, TemplateService, $translate, $rootScope, $filter) {
+myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, toastr, TemplateService, $translate, $rootScope, $filter) {
     $scope.template = TemplateService.getHTML("content/storelocator.html");
     TemplateService.title = "Stores"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
-    $scope.storeLocation = [{
-            address: 'Shop No 2, Morya Mahal,Linking Road,  Bandra West, Mumbai - 400050',
-            contactNo: '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            email: 'info@burntum'
-        },
-        {
-            address: 'Delphi Building, Orchard Ave, Hiranandani Gardens, Powai,Mumbai, Maharashtra 400076',
-            contactNo: '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            email: 'info@burntum'
-        },
-        {
-            address: 'Shop No 2, Morya Mahal, Linking Road,  Bandra West, Mumbai - 400050',
-            contactNo: '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            email: 'info@burntumber.in'
-        },
-        {
-            address: 'Delphi Building, Orchard Ave, Hiranandani Gardens, Powai, Mumbai, Maharashtra 400076',
-            contactNo: '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            email: 'info@burntum'
-        },
-        {
-            address: 'Delphi Building, Orchard Ave, Hiranandani Gardens, Powai,Mumbai, Maharashtra 400076',
-            contactNo: '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            email: 'info@burntum'
-        }
-    ];
-    $scope.storeLocation = _.chunk($scope.storeLocation, 4);
-    $scope.locationButton = 'Location';
-    $scope.location = ['Mumbai', 'Pune', 'Hyderabad', 'Chennai'];
-    $scope.changePlaces = function (name) {
-        $scope.locationButton = name;
+    $scope.storeLocation = []; // We need to add city and subCity array of obj
+    $scope.locationButton; // To change the value(City) of button
+    $scope.locationDropdownOpen = false;
+    $scope.location = [{
+        'city': 'Mumbai',
+        'lat': 19.0760,
+        'long': 72.8777,
+        'subCity': [{
+            'brand': 'frontend/img/brands/tony1.png',
+            'name': 'Location 1 Name',
+            'subCity': 'borivali',
+            'url': 'Location 1 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road, borivali, Mumbai - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntum1'
+        }, {
+            'brand': 'frontend/img/brands/ms-custom.png',
+            'name': 'Location 1 Name',
+            'subCity': 'lowerparel',
+            'url': 'Location 2 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road, lowerparel, Mumbai - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntum2'
+        }, {
+            'brand': 'frontend/img/brands/umber.png',
+            'name': 'Location 1 Name',
+            'subCity': 'mumbai central',
+            'url': 'Location 2 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road,  mumbai central, Mumbai - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntum3'
+        }]
+
+    }, {
+        'city': 'Pune',
+        'lat': 18.5204,
+        'long': 73.8567,
+        'subCity': [{
+            'brand': 'frontend/img/brands/dockers.png',
+            'name': 'Location 1 Name',
+            'subCity': 'hadapsar',
+            'url': 'Location 1 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road,  hadapsar West, pune - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntumpuna1'
+        }, {
+            'brand': 'frontend/img/brands/ms-custom.png',
+            'name': 'Location 2 Name',
+            'subCity': 'aundh',
+            'url': 'Location 2 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road, aundh, pune - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntumpuna2'
+        }, {
+            'brand': 'frontend/img/brands/ralph.png',
+            'name': 'Location 3 Name',
+            'subCity': 'nanded',
+            'url': 'Location 3 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road, nanded, pune - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntumpuna3'
+        }],
+
+
+    }, {
+        'city': 'Hyderabad',
+        'lat': 17.3850,
+        'long': 78.4867,
+        'subCity': [{
+            'brand': 'frontend/img/brands/ms-custom.png',
+            'name': 'Location 1 Name',
+            'subCity': 'banjara hills',
+            'url': 'Location 1 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road, banjara hills, hyderabad - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntumpuna1'
+        }, {
+            'brand': 'frontend/img/brands/dockers.png',
+            'name': 'Location 2 Name',
+            'subCity': 'lb nagar',
+            'url': 'Location 2 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road, lb nagar, hyderabad - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntumpuna2'
+        }, {
+            'brand': 'frontend/img/brands/ralph.png',
+            'name': 'Location 3 Name',
+            'subCity': 'hitec city',
+            'url': 'Location 3 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road, hitec city, hyderabad - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntumpuna3'
+        }],
+
+    }, {
+        'city': 'Chennai',
+        'lat': 13.0827,
+        'long': 80.2707,
+        'subCity': [{
+            'brand': 'frontend/img/brands/dockers.png',
+            'name': 'Location 1 Name',
+            'subCity': 'ramapuram',
+            'url': 'Location 1 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road, ramapuram,chennai - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntumpuna1'
+        }, {
+            'brand': 'frontend/img/brands/umber.png',
+            'name': 'Location 2 Name',
+            'subCity': 'tiruvallur',
+            'url': 'Location 2 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road, tiruvallur,chennai - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntumpuna2'
+        }, {
+            'brand': 'frontend/img/brands/tony1.png',
+            'name': 'Location 3 Name',
+            'subCity': 'avadi',
+            'url': 'Location 3 URL',
+            'address': 'Shop No 2, Morya Mahal,Linking Road, avadi,chennai - 400050',
+            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+            'email': 'info@burntumpuna3'
+        }],
+
+    }];
+
+    /* Start of map */
+    $scope.showSlider = true;
+    var map;
+    // which will hold the value of google map API
+    var geocoder = new google.maps.Geocoder(); // which will hold the value of google map geocoder API
+
+
+    //After 500 ms the map initialize function will be called
+    var mapOptions = {
+        center: new google.maps.LatLng(20.5937, 78.9629), // we have set up India lat & long
+        zoom: 10,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
     };
+    $timeout(function () {
+        function myMap() {
+            var mapCanvas = document.getElementById("map");
+            for (i = 0; i < $scope.location.length; i++) {
+                // We need to set the default location or city in dropdown i.e mumbai. So for that we need to iterate $scope.location to get the mumbai city
+                if ($scope.location[i] == $scope.location[0]) {
+                    $scope.locationButton = $scope.location[0].city;
+                    mapOptions.center = new google.maps.LatLng($scope.location[0].lat, $scope.location[0].long);
+                    for (j = 0; j < $scope.location[i].subCity.length; j++) {
+                        geocodeAddress($scope.location[0].subCity[j]);
+                    }
+                }
+            }
+
+            map = new google.maps.Map(mapCanvas, mapOptions);
+
+        }
+        myMap();
+
+    }, 500);
+
+    function geocodeAddress(locations) {
+        // console.log("locati", locations);
+        var title = locations.name;
+        var address = locations.subCity;
+        var url = locations.url;
+        $scope.storeLocation.push({
+            'address': locations.address,
+            'contactNo': locations.contactNo,
+            'email': locations.email,
+            'brand': locations.brand
+        });
+        geocoder.geocode({
+                'address': address
+            },
+
+            function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    var marker = new google.maps.Marker({
+                        icon: 'http://umber.wohlig.co.in/img/map-marker-img.png',
+                        //icon: 'http://maps.google.com/mapfiles/ms/icons/red.png',
+                        map: map,
+                        position: results[0].geometry.location,
+                        title: title,
+                        animation: google.maps.Animation.DROP,
+                        address: address,
+                        url: url
+                    })
+                    infoWindow(marker, map, title, address, url);
+                } else {
+                    toastr.warning('Geocode of' + address + 'failed:' + status);
+                    //alert("geocode of " + address + " failed:" + status);
+                }
+            });
+
+    }
+
+    function infoWindow(marker, map, title, address, url) {
+        google.maps.event.addListener(marker, 'click', function () {
+            var html = "<div><h6 style='margin-top: 5px; margin-bottom: 5px;'>" + title + "</h6><p style='margin-bottom: 5px;'>" + address + "<br></div><a href='" + url + "'>View location</a></p></div>";
+            iw = new google.maps.InfoWindow({
+                content: html,
+                maxWidth: 200
+            });
+            iw.open(map, marker);
+        });
+    }
+
+    //This is dropdown's function wihich is used for changing the map location after clicking on  a particular city from the dropdown list.
+
+    // For changing addresses after clicking on a particular city
+    $scope.changePlaces = function (place) {
+        $scope.locationDropdownOpen = false;
+        $scope.locationButton = place.city; // After clicking on dropdown, the button value changes
+        $scope.showSlider = false;
+        $scope.storeLocation = [];
+
+        map.setCenter(new google.maps.LatLng(place.lat, place.long)); //Set the lat & long of selected dropdown's city
+
+        for (i = 0; i < $scope.location.length; i++) {
+            if ($scope.location[i].city == place.city) {
+                for (j = 0; j < $scope.location[i].subCity.length; j++) {
+                    // alert($scope.location[i].subCity[j].subCity);
+                    geocodeAddress($scope.location[i].subCity[j]);
+                }
+                $timeout(function () {
+                    $scope.showSlider = true;
+                }, 0.5);
+            }
+        }
+
+        // End of map 
+    }; // End of click 
+
 });
  myApp.controller('ListingPageCtrl', function ($scope, toastr, CartService, $rootScope, $stateParams, $state, $filter, WishlistService, TemplateService, NavigationService,
      SizeService, BannerService, CategoryService, myService, ProductService, $timeout, $uibModal, ModalService, ListingService) {
@@ -66454,6 +68356,7 @@ myApp.controller('StoreLocatorCtrl', function ($scope, TemplateService, $transla
      TemplateService.title = "Form"; //This is the Title of the Website
      $scope.navigation = NavigationService.getNavigation();
      $scope.formSubmitted = false;
+
 
      $.jStorage.deleteKey("selectedCategory")
      myService.ctrlBanners("listing-page", function (data) {
@@ -66471,51 +68374,79 @@ myApp.controller('StoreLocatorCtrl', function ($scope, TemplateService, $transla
      //      $scope.categories = data.data.data;
 
      //  });
+     console.log("stateParam", $stateParams)
      var parentCat = $stateParams.id;
      var data = {
-         slug: $stateParams.id
+         slug: $stateParams.id,
+         catId: $stateParams.cat,
+         skip: 0,
+         limit: 12
      }
 
-     $scope.data1 = {};
-     $scope.data1.keyword = $stateParams.id
-     $scope.products = [];
-     $scope.product = [];
-     $scope.data1.skip = 0;
-     $scope.data1.limit = 9;
-     $scope.loadingDisable = false;
-     $scope.fetching = false;
-
-     $scope.globalsSearch = function () {
-         console.log("in global search****")
-         ProductService.globalSearch($scope.data1, function (data) {
-             console.log("########################### data.data.data", data.data.data)
-             if (!_.isEmpty(data.data.data)) {
-                 //  alert("hiiii")
-                 $scope.product = _.chunk(data.data.data, 3);
-                 _.each($scope.product, function (n) {
-                     $scope.products.push(n);
-                 })
-                 $scope.loadingDisable = false;
-                 $scope.data1.skip = $scope.data1.skip + 9;
-             }
-             //  else if ($scope.products.length > 0 && data.data.data.length == 0) {
-             //      $scope.fetching = false;
-             //  } else {
-             //      $scope.fetching = false;
-             //      $scope.displayMessage = "No Product Found";
-             //  }
+     if ($stateParams.cat) {
+         ProductService.productWithCategory(data, function (data) {
+             console.log("$$$$$$$in categoryProduct cat", data.data.data);
+             //  $scope.products = _.chunk(data.data.data, 3);
          })
      }
 
+     if (!$stateParams.cat) {
+         ProductService.getFeatured(function (data) {
+             $scope.filters = {};
+             $scope.products = _.chunk(data.data.data.featureds, 3);
+             $scope.categories = data.data.data.category;
+             $scope.filters.types = data.data.data.type;
+             $scope.filters.collections = data.data.data.collection;
+             $scope.filters.sizes = _.sortBy(data.data.data.size, [function (o) {
+                 return o.order;
+             }]);
+             $scope.filters.styles = data.data.data.style;
+             $scope.filters.colors = data.data.data.color;
+             $scope.filters.fabrics = data.data.data.fabric;
+             $scope.filters.price = data.data.data.price;
+             $scope.max = Math.max.apply(null, $scope.filters.price);
+             $scope.min = Math.min.apply(null, $scope.filters.price);
+             if (!_.isEmpty($scope.filters.types)) {
+                 $scope.showType = true;
+             }
+             if (!_.isEmpty($scope.filters.collections)) {
+                 $scope.showprodCollection = true;
+             }
+             if (!_.isEmpty($scope.filters.sizes)) {
+                 $scope.showsize = true;
+             }
+             if (!_.isEmpty($scope.filters.styles)) {
+                 $scope.showstyle = true;
+             }
+             if (!_.isEmpty($scope.filters.colors)) {
+                 $scope.showcolor = true;
+             }
+             if (!_.isEmpty($scope.filters.fabrics)) {
+                 $scope.showfabric = true;
+             }
+             //  console.log("$scope.categories", $scope.categories[0].slug)
+             var input = {
+                 "slug": $scope.categories[0].slug,
+                 "page": 1
+             }
+             $.jStorage.set("selectedCategory", input);
+             if (!$stateParams.id) {
+                 var data = {};
+                 data.slug = $scope.categories[0].slug;
+                 $scope.filteredProducts(data.slug)
+             }
 
-
+         })
+     }
      $scope.loadMore1 = function () {
-         console.log("$scope.data1.skip", $scope.data1.skip)
          $scope.globalsSearch();
          $scope.loadingDisable = true;
      }
 
+     NavigationService.getAllDiscounts(function (data) {
+         $scope.discounts = data.data.data.results;
 
+     });
 
      //  if ($stateParams.id === "search") {
      //      console.log("rootscope", $rootScope.searchedProduct)
@@ -66524,62 +68455,134 @@ myApp.controller('StoreLocatorCtrl', function ($scope, TemplateService, $transla
      //      console.log($scope.products)
 
      //  }
+     if ($stateParams.id) {
+         //  console.log("avinash",data);
+         CategoryService.getCategoryWithParent(data, function (data) {
+             console.log("cat from parentctrl ***", data.data.data);
+             $scope.categories = data.data.data;
+             $scope.filteredProducts($scope.categories[0].slug)
+         })
+     } else {
+         //  $scope.filteredProducts($scope.categories[0].slug)
+     }
 
-     CategoryService.getCategoryWithParent(data, function (data) {
-         console.log("cat from parentctrl", data)
-         $scope.categories = data.data.data;
-         $scope.filteredProducts($scope.categories[0].slug)
-     })
-     /******getting products based on category******* */
-     $scope.filteredProducts = function (selectedCategory) {
-         $.jStorage.deleteKey("appliedFilters");
-         if ($.jStorage.get("selectedCategory") && selectedCategory != $.jStorage.get("selectedCategory").slug) {
-             $.jStorage.deleteKey("appliedFilters");
+     if ($stateParams.id) {
+         console.log("avinash", data);
+         CategoryService.getCategoryBySlug(data, function (data1) {
+             $scope.homeCategoryDetails = data1.data.data;
+             console.log("avinash after response $scope.homeCategoryDetails", $scope.homeCategoryDetails);
+         })
+     } else {
+         //  $scope.filteredProducts($scope.categories[0].slug)
+     }
+
+     /***************retriving filters based on categories and respective filters**************** */
+     $scope.product = [];
+     $scope.retriveProductsWithCategory = function () {
+         if (data.skip == 0) {
+             $scope.products = [];
          }
-         var input = {
-             "slug": selectedCategory,
-             "page": 1
-         }
-         $.jStorage.set("selectedCategory", input);
-         /***************retriving filters based on categories and respective filters**************** */
          ListingService.retriveProductsWithCategory(function (data) {
 
              if (data.data.data.length == 0) {
                  $scope.displayMessage = "No Product Found";
-                 $scope.products = ""
+                 //  $scope.products = ""
+                 $scope.loadingDisable = true;
+             } else if (data.data.value) {
+                 if (!_.isEmpty(data.data.data)) {
+                     $scope.displayMessage = "";
+                     //  console.log("productretruved based on category", data.data.data);
+                     var arrray = [];
+                     _.each(data.data.data, function (n) {
+                         arrray.push(n);
+                     });
+                     $scope.products.push(arrray);
+                     $scope.products = _.flattenDeep($scope.products);
+                     _.each($scope.products, function (prod) {
+                         prod.sizes = _.sortBy(prod.sizes, [function (o) {
+                             return o.order;
+                         }]);
+                         $scope.isSorted = true;
+                     });
 
-             } else if (!_.isEmpty(data.data.data)) {
-                 $scope.displayMessage = "";
-                 $scope.products = _.chunk(data.data.data, 3);
-                 console.log("productretruved based on category", data)
+                     if ($scope.isSorted) {
+                         $scope.products = _.chunk($scope.products, 3);
+                     }
 
-                 ListingService.retriveFiltersWithCategory(function (data) {
-                     console.log("product category on basis of category", data.data.data)
-                     $scope.filters = data.data.data;
-                     $scope.min = $scope.filters.priceRange[0].min;
-                     $scope.max = $scope.filters.priceRange[0].max;
-                     console.log("filters", $scope.filters.priceRange[0].max)
-                     $scope.slider_translate = {
-                         minValue: 0,
-                         maxValue: 100,
-                         options: {
-
-                             floor: $scope.filters.priceRange[0].min,
-                             ceil: $scope.filters.priceRange[0].max,
-                             id: 'translate-slider'
-                             // translate: function (value, id, which) {
-                             //     return '$' + value;
-                             // }
+                     ListingService.retriveFiltersWithCategory(function (data) {
+                         //  console.log("product category on basis of category", data.data.data);
+                         $scope.filters = data.data.data;
+                         $scope.min = $scope.filters.priceRange[0].min;
+                         $scope.max = $scope.filters.priceRange[0].max;
+                         //  console.log("filters", $scope.filters.priceRange[0].max);
+                         $scope.loadingDisable = false;
+                         if (!_.isEmpty($scope.filters.types)) {
+                             $scope.showType = true;
                          }
-                     };
-                 })
+                         if (!_.isEmpty($scope.filters.collections)) {
+                             $scope.showprodCollection = true;
+                         }
+                         if (!_.isEmpty($scope.filters.sizes)) {
+                             $scope.showsize = true;
+                         }
+                         if (!_.isEmpty($scope.filters.styles)) {
+                             $scope.showstyle = true;
+                         }
+                         if (!_.isEmpty($scope.filters.colors)) {
+                             $scope.showcolor = true;
+                         }
+                         if (!_.isEmpty($scope.filters.fabrics)) {
+                             $scope.showfabric = true;
+                         }
+                         //  $scope.sliderTranslate = {
+                         //      options: {
+                         //          floor: 45,
+                         //          ceil: $scope.filters.priceRange[0].max,
+                         //          id: 'translate-slider'
+                         //          // translate: function (value, id, which) {
+                         //          //     return '$' + value;
+                         //          // }
+                         //      }
+                         //  };
+                     });
 
+                 } else {
+                     toastr.error('There was some error', 'Error');
+                 }
+                 //  $scope.loadingDisable = false;
              } else {
-                 toastr.error('There was some error', 'Error');
+
              }
-         })
+
+         });
+         data.skip = data.skip + 12;
      }
+
+
+     /******getting products based on category******* */
+
+     $scope.filteredProducts = function (selectedCategory) {
+         //  console.log("selectedCategory", selectedCategory);
+         $scope.selectedCategoryForBreadcrumb = selectedCategory;
+         $.jStorage.deleteKey("appliedFilters");
+
+         if ($.jStorage.get("selectedCategory") && selectedCategory != $.jStorage.get("selectedCategory").slug) {
+             $.jStorage.deleteKey("appliedFilters");
+         }
+         $scope.input = {
+             "slug": selectedCategory,
+             "page": 1,
+             "skip": 0,
+             "limit": 12
+         }
+         $.jStorage.set("selectedCategory", $scope.input);
+         /***************retriving filters based on categories and respective filters**************** */
+         $scope.retriveProductsWithCategory();
+         $scope.loadingDisable = true;
+     }
+     //  console.log("$.jStorage.get('selectedCategory')", $.jStorage.get('selectedCategory'))
      if ($.jStorage.get('selectedCategory')) {
+         //  console.log("$.jStorage.get('selectedCategory')", $.jStorage.get('selectedCategory'))
          $scope.filteredProducts($.jStorage.get('selectedCategory').slug)
      }
      $rootScope.clickfun = function (product) {
@@ -66610,12 +68613,11 @@ myApp.controller('StoreLocatorCtrl', function ($scope, TemplateService, $transla
      $scope.removeFromCompare = function (prodId) {
 
          var removeCompare = $.jStorage.get("compareproduct");
-         var result = _.remove(removeCompare, {
+         $scope.result = _.remove(removeCompare, {
              productId: prodId
          });
-
+         $scope.compareproduct = removeCompare;
          $.jStorage.set("compareproduct", removeCompare);
-         $state.reload();
      }
 
      /**********logic for checkbox on reload************ */
@@ -66633,10 +68635,11 @@ myApp.controller('StoreLocatorCtrl', function ($scope, TemplateService, $transla
      $scope.gotoComparePage = function () {
          $state.go("compare-products");
      }
+
      var appliedFilters = {};
      /*******retriving products based on filters********* */
-     $scope.applyFilters = function (key, filter) {
-
+     $scope.applyFilters = function (key, filter, key1, filter1) {
+         //  console.log("$.jStorage.get('selectedCategory').slug", $.jStorage.get("selectedCategory").slug);
          appliedFilters = $.jStorage.get('appliedFilters') ? $.jStorage.get('appliedFilters') : {
              appliedFilters: {
                  slug: [],
@@ -66648,63 +68651,195 @@ myApp.controller('StoreLocatorCtrl', function ($scope, TemplateService, $transla
                  fabric: [],
              }
          };
-         console.log(filter, key);
+         console.log("###filter", filter, key, filter1, key1);
          var cat = $.jStorage.get("selectedCategory").slug;
          appliedFilters.appliedFilters.slug = [cat];
-
-         var result = _.indexOf(appliedFilters.appliedFilters[key], filter._id);
-         console.log("check result", result)
-         if (result != -1) {
-             _.pullAt(appliedFilters.appliedFilters[key], result);
+         if (filter._id) {
+             console.log("in checking results");
+             var result = _.indexOf(appliedFilters.appliedFilters[key], filter._id);
          } else {
+             var result = _.indexOf(appliedFilters.appliedFilters[key], filter);
+         }
+         //  if (filter1) {
+         //      var result = _.indexOf(appliedFilters.appliedFilters[key], filter);
+         //  }
+         if (filter1) {
              if (!_.isArrayLike(appliedFilters.appliedFilters[key])) {
                  appliedFilters.appliedFilters[key] = [];
+                 appliedFilters.appliedFilters[key1] = [];
              }
-             appliedFilters.appliedFilters[key].push(filter._id);
+             if (filter._id) {
+                 appliedFilters.appliedFilters[key].push(filter._id);
+             } else {
+                 appliedFilters.appliedFilters[key].push(filter);
+                 appliedFilters.appliedFilters[key1].push(filter1);
+             }
+         }
+         //  console.log("check result", result);
+         if (result != -1) {
+             if (filter1) {
+                 _.pullAt(appliedFilters.appliedFilters[key1], result);
+             }
+             if (filter) {
+                 _.pullAt(appliedFilters.appliedFilters[key], result);
+             }
+         } else {
+             //  if (filter1) {
+             //      if (!_.isArrayLike(appliedFilters.appliedFilters[key1])) {
+             //          appliedFilters.appliedFilters[key1] = [];
+             //      }
+             //      if (filter._id) {
+             //          appliedFilters.appliedFilters[key1].push(filter1._id);
+             //      } else {
+             //          appliedFilters.appliedFilters[key1].push(filter1);
+             //      }
+             //  }
+             if (filter) {
+                 if (!_.isArrayLike(appliedFilters.appliedFilters[key])) {
+                     appliedFilters.appliedFilters[key] = [];
+                 }
+                 if (filter._id) {
+                     appliedFilters.appliedFilters[key].push(filter._id);
+                     //  console.log("in filter########@@@", appliedFilters.appliedFilters, filter._id)
+                 } else {
+                     appliedFilters.appliedFilters[key].push(filter);
+                 }
+             }
          }
          appliedFilters.page = 1;
+         appliedFilters.skip = 0;
+         appliedFilters.limit = 12;
+         console.log("appliedFilters!!!!!!!!", appliedFilters);
          $.jStorage.set('appliedFilters', appliedFilters)
-
-         console.log("Jstoragefor filters::", $.jStorage.get("appliedFilters"))
+         console.log("Jstoragefor filters::", $.jStorage.get("appliedFilters"));
          _.forIn(appliedFilters.appliedFilters, function (val, key, obj) {
              if (_.isEmpty(val)) {
                  console.log("key: ", key);
                  delete appliedFilters.appliedFilters[key];
              }
          });
-         console.log("apply filters: ", appliedFilters);
-         ProductService.getProductsWithAppliedFilters(appliedFilters, function (data) {
-             console.log("filtersretrived:::", data.data.data);
-             $scope.products = _.chunk(data.data.data.products, 3);
-             $scope.filters = data.data.data.filters;
-
-         })
+         console.log("apply filters:before ", appliedFilters);
+         $scope.getProductsWithAppliedFilters(appliedFilters);
 
          //api call
+     }
+
+     $scope.getProductsWithAppliedFilters = function (appliedFilters) {
+         ProductService.getProductsWithAppliedFilters(appliedFilters, function (data) {
+             $scope.products = [];
+             _.each(data.data.data.products, function (prod) {
+                 prod.sizes = _.sortBy(prod.sizes, [function (o) {
+                     return o.order;
+                 }]);
+                 $scope.isSorting = true;
+             });
+             if ($scope.isSorting) {
+                 $scope.products = _.chunk(data.data.data.products, 3);
+             }
+
+             $scope.filters = data.data.data.filters;
+             //  if (key == "discount") {
+             //      $scope.products = _.chunk(filter.products, 3);
+             //  }
+             $scope.loadingDisable = false;
+             if (!_.isEmpty($scope.filters.types)) {
+                 $scope.showType = true;
+             }
+             if (!_.isEmpty($scope.filters.collections)) {
+                 $scope.showprodCollection = true;
+             }
+             if (!_.isEmpty($scope.filters.sizes)) {
+                 $scope.showsize = true;
+             }
+             if (!_.isEmpty($scope.filters.styles)) {
+                 $scope.showstyle = true;
+             }
+             if (!_.isEmpty($scope.filters.colors)) {
+                 $scope.showcolor = true;
+             }
+             if (!_.isEmpty($scope.filters.fabrics)) {
+                 $scope.showfabric = true;
+             }
+
+         })
      }
      /******filters applied automatic if already applied****** */
      if ($.jStorage.get("appliedFilters")) {
          ProductService.getProductsWithAppliedFilters($.jStorage.get("appliedFilters"), function (data) {
              console.log("filtersretrived:::", data.data.data);
-             $scope.products = _.chunk(data.data.data.products, 3);
+             _.each(data.data.data.products, function (prod) {
+                 prod.sizes = _.sortBy(prod.sizes, [function (o) {
+                     return o.order;
+                 }]);
+                 $scope.isSorting = true;
+             });
+             if ($scope.isSorting) {
+                 $scope.products = _.chunk(data.data.data.products, 3);
+             }
+             //  $scope.products = _.chunk(data.data.data.products, 3);
              $scope.filters = data.data.data.filters;
-
+             if (!_.isEmpty($scope.filters.types)) {
+                 $scope.showType = true;
+             }
+             if (!_.isEmpty($scope.filters.collections)) {
+                 $scope.showprodCollection = true;
+             }
+             if (!_.isEmpty($scope.filters.sizes)) {
+                 $scope.showsize = true;
+             }
+             if (!_.isEmpty($scope.filters.styles)) {
+                 $scope.showstyle = true;
+             }
+             if (!_.isEmpty($scope.filters.colors)) {
+                 $scope.showcolor = true;
+             }
+             if (!_.isEmpty($scope.filters.fabrics)) {
+                 $scope.showfabric = true;
+             }
          })
      }
      $scope.loadMore = function () {
-         var appliedFilters = $.jStorage.get("appliedFilters");
-         appliedFilters.page++;
-         ProductService.getProductsWithAppliedFilters(appliedFilters, function (data) {
-             console.log("filtersretrived:::", data.data.data);
-             //  $scope.products.push(_.chunk(data.data.data.products, 3));
-             var arrray = _.flattenDeep($scope.products);
-             arrray.push(data.data.data.products);
-             $scope.products = _.chunk(arrray, 3);
-             $scope.filters = data.data.data.filters;
-         })
+         if ($.jStorage.get("appliedFilters")) {
+             var appliedFilters = $.jStorage.get("appliedFilters");
+             appliedFilters.page++;
+             //  appliedFilters.skip = appliedFilters.skip + 12;
+             ProductService.getProductsWithAppliedFilters(appliedFilters, function (data) {
+                 //  console.log("filtersretrived:::", data.data.data);
+                 //  $scope.products.push(data.data.data.products);
+                 if (data.data.data.products.length == 0) {
+                     $scope.loadingDisable = true;
+                 }
+                 if (data.data.data.products.length > 0) {
+                     var arrray = [];
+                     arrray = _.flattenDeep($scope.products);
+                     _.each(data.data.data.products, function (n) {
+                         n.sizes = _.sortBy(n.sizes, [function (o) {
+                             return o.order;
+                         }]);
+                         arrray.push(n);
+                     });
+                     $scope.products = _.chunk(arrray, 3);
+                     $scope.filters = data.data.data.filters;
+                     $scope.loadingDisable = false;
+                     appliedFilters.skip = appliedFilters.skip + 12;
+                 }
+             });
+             $scope.loadingDisable = true;
+
+         } else {
+             $scope.retriveProductsWithCategory();
+             if ($.jStorage.get("selectedCategory")) {
+                 var selectCat = $.jStorage.get("selectedCategory");
+                 selectCat.skip = selectCat.skip + 12;
+                 $.jStorage.set("selectedCategory", selectCat);
+                 //  $scope.input.skip = $scope.input.skip + 12;
+
+             }
+             $scope.loadingDisable = true;
+         }
      }
      $scope.priceSet = function (min, max) {
-         console.log(min, max)
+         $scope.applyFilters('min', min, 'max', max);
      }
 
 
@@ -66782,7 +68917,6 @@ myApp.controller('StoreLocatorCtrl', function ($scope, TemplateService, $transla
          if ($scope.mycart) {
 
              $scope.mycart = $scope.mycart.products;
-             console.log("mycartfor offlinetooltip::::", $scope.mycart)
              $scope.tempcart = [];
              if ($scope.mycart) {
                  for (var i = 0; i < $scope.mycart.length; i++) {
@@ -66814,6 +68948,55 @@ myApp.controller('StoreLocatorCtrl', function ($scope, TemplateService, $transla
                  return "fa fa-heart";
              } else {
                  return "fa fa-heart-o";
+             }
+         }
+     }
+     $scope.addToWishlist = function (prod) {
+         var data = {
+             "product": prod,
+         }
+         myService.addToWishlist(data, function (data) {
+             ModalService.addwishlist();
+         })
+     }
+     $scope.removeWishlist = function (prodId) {
+         var data = {};
+         if ($.jStorage.get("accessToken")) {
+             data.accessToken = $.jStorage.get("accessToken");
+             data.productId = prodId;
+             WishlistService.removeProduct(data, function (data) {
+                 $state.reload();
+             })
+         } else {
+             myService.removeWishlist(data, function (data) {
+                 $state.reload();
+             })
+         }
+     }
+
+     $scope.addRemoveToWishlist = function (product) {
+         if (userId.userId) {
+
+             var result = _.find($scope.wishlist, {
+                 "productId": product.productId
+             });
+             if (result) {
+                 $scope.removeWishlist(product.productId);
+             } else {
+
+                 $scope.addToWishlist(product);
+             }
+         } else {
+             $scope.mycart = $.jStorage.get("cart");
+             $scope.wishlist = $.jStorage.get("wishlist")
+             var result = _.find($scope.wishlist, {
+                 "productId": product.productId
+             });
+             if (result) {
+                 //  console.log("removeWishLst", result)
+                 $scope.removeWishlist(product);
+             } else {
+                 $scope.addToWishlist(product);
              }
          }
      }
@@ -66871,11 +69054,44 @@ myApp.controller('StoreLocatorCtrl', function ($scope, TemplateService, $transla
 
      // This function is used to display the modal on quck view button
      $scope.quickviewProduct = function (prod) {
+         console.log("in quick view", prod);
+         var productId = [];
+         var grandTotal = 0;
+         productId.push(prod._id);
+         myService.applicableDiscounts(productId, grandTotal, function (data1) {
+             //  console.log("called api applicableDiscounts");
+             $scope.applicableDiscounts = data1;
+             $scope.applicableDiscountsLength = $scope.applicableDiscounts.length;
+
+
+         });
          $scope.product = prod;
-         $scope.sizes = $scope.product.sizes;
-         $scope.activeButton = $scope.sizes[0].name;
-         $scope.selectedSize = $scope.sizes[0];
-         console.log($scope.sizes);
+
+         if (!_.isEmpty($scope.product.sizes)) {
+             $scope.sizes = _.sortBy($scope.product.sizes, [function (o) {
+                 return o.order;
+             }]);
+         } else if (!$scope.product.sizes) {
+             $scope.sizes = _.sortBy($scope.product.size, [function (o) {
+                 return o.order;
+             }]);
+         } else if ($scope.product.size.name) {
+             $scope.sizes = $scope.product.size;
+         }
+         //  console.log($scope.sizes);
+         if (angular.isArray($scope.sizes)) {
+             if (!_.isEmpty($scope.sizes)) {
+                 $scope.activeButton = $scope.sizes[0].name;
+                 $scope.selectedSize = $scope.sizes[0];
+             } else {
+
+             }
+         } else {
+             $scope.activeButton = $scope.sizes.name;
+             $scope.selectedSize = $scope.sizes;
+         }
+
+
          $scope.arrayCheck = angular.isArray($scope.sizes);
          //  console.log("$scope.arrayCheck", $scope.arrayCheck);
          $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
@@ -66887,13 +69103,14 @@ myApp.controller('StoreLocatorCtrl', function ($scope, TemplateService, $transla
                  size: sizeObj._id,
                  color: $scope.product.color._id
              }
-
              ProductService.getSKUWithParameter(data, function (data) {
-                 console.log("SKU:", data)
+                 console.log("SKU:", data.data);
                  if (data.data.value) {
+                     console.log("after sku if ", $scope.product);
                      $scope.product = data.data.data;
                  } else {
-                     $scope.product = {};
+                     console.log("after sku", $scope.product);
+                     //  $scope.product = {};
                      // TODO: show out of stock
                  }
              })
@@ -66914,34 +69131,48 @@ myApp.controller('StoreLocatorCtrl', function ($scope, TemplateService, $transla
                  ModalService.addwishlist();
              })
          }
+         //  $scope.changeImage = function (index) {
+         //      $scope.selectedImage = $scope.product.images[index];
+         //  };
+         $scope.selectedImageIndex = 0;
          $scope.changeImage = function (index) {
-             $scope.selectedImage = $scope.product.images[index];
+             $scope.selectedImageIndex = index;
          };
          $scope.reqQuantity = 1;
          $scope.updateQuantity = function (oper) {
              $scope.reqQuantity += parseInt(oper);
              console.log($scope.reqQuantity)
          }
-         var quickviewProduct = $uibModal.open({
+         $scope.quickView = $uibModal.open({
              animation: true,
              templateUrl: 'views/modal/quickview-product.html',
              scope: $scope,
              size: 'lg',
-             windowClass: 'quickview-modal-size'
+             windowClass: 'quickview-modal-size',
+             backdropClass: 'quickview-modal-backdrop'
          });
          $scope.closeModal = function () {
-             quickviewProduct.close();
+             $scope.quickView.close();
          }
      };
      //End of  modal on quck view button
+
+     //To open size chart on quick
+     $scope.openSizeChart = function () {
+         $scope.openSizeChartModal = $uibModal.open({
+             animation: true,
+             templateUrl: 'views/modal/size-chart.html',
+             size: 'md',
+             scope: $scope
+         });
+     };
+
      if (_.isEmpty($scope.products))
          $scope.displayMessage = "No Product Found";
 
      // Start of UIB Carousel slider's function for gird view
-     $scope.gridViewSlideInterval = 5000;
-     $scope.active = 0;
-     $scope.currentGridViewSlideIndex = 0;
-     $scope.gridViewSlide = [{
+
+     $scope.listViewSlide = [{
          img: 'frontend/img/individual/product-test.jpg',
          text: 'Cool Shirt',
          id: 1
@@ -66981,15 +69212,33 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
         productId: $stateParams.id
     };
     ProductService.getProductDetails(data, function (data) {
-
+        var productId = [];
+        var grandTotal = 0;
         if (data.data.value) {
             $scope.product = data.data.data;
+            // console.log("avinash Product console", $scope.product);
             $scope.productImages = _.sortBy($scope.product.images, ['order']);
             $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
-            $scope.sizes = $scope.product.sizes;
-
+            $scope.sizes = _.sortBy($scope.product.sizes, [function (o) {
+                return o.order;
+            }]);
             $scope.selectedSize = $scope.sizes[0];
             $scope.activeButton = $scope.selectedSize.name;
+            $scope.productStyle = $scope.product.style;
+            $scope.productColor = $scope.product.color.name;
+            productId.push($scope.product._id);
+            console.log(productId, "ProductId");
+            myService.applicableDiscounts(productId, grandTotal, function (data1) {
+                //  console.log("called api applicableDiscounts");
+                $scope.applicableDiscounts = data1;
+                $scope.applicableDiscountsLength = $scope.applicableDiscounts.length;
+                console.log("$scope.applicableDiscounts", $scope.applicableDiscounts);
+                // _.each($scope.applicableDiscounts, function (n) {
+                //     console.log(n);
+                // });
+
+            });
+
         } else {
             console.log(data.data.error);
             $scope.product = {};
@@ -67029,7 +69278,7 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
     }
     $scope.addToCart = function (pc) {
         console.log("product", $scope.product)
-        myService.addToCart($scope.product, $scope.reqQuantity, $scope.selectedSize, $scope.productComment.name, function (data) {
+        myService.addToCart($scope.product, $scope.reqQuantity, $scope.selectedSize, $scope.productComment.name, $scope.productStyle, $scope.productColor, function (data) {
             ModalService.addcart();
 
         })
@@ -67057,9 +69306,9 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
         }
     }
 
-
+    $scope.selectedImageIndex = 0;
     $scope.changeImage = function (index) {
-        $scope.selectedImage = $scope.product.images[index];
+        $scope.selectedImageIndex = index;
     };
 
     //To close compare-section modal
@@ -67096,6 +69345,7 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
         var result = _.find($scope.compareproduct, {
             productId: product.productId
         });
+        console.log('compare pro', $scope.compareproduct, 'result', result);
         if (result) {
             _.remove($scope.compareproduct, {
                 productId: product.productId
@@ -67123,13 +69373,22 @@ myApp.controller('IndividualPageCtrl', function ($scope, $rootScope, $http, $sta
         var result = _.remove(removeCompare, {
             productId: prodId
         });
-
+        $scope.compareproduct = removeCompare;
         $.jStorage.set("compareproduct", removeCompare);
-        $state.reload();
+        // $state.reload();
     }
+    //To open size chart
+    $scope.openSizeChart = function () {
+        $scope.openSizeChartModal = $uibModal.open({
+            animation: true,
+            templateUrl: 'views/modal/size-chart.html',
+            size: 'md',
+            scope: $scope
+        });
+    };
 
 })
-myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService, toastr, $state, myService, BannerService, TemplateService, NavigationService, UserService, CartService, WishlistService, $timeout) {
+myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService, toastr, $state, $uibModal, myService, BannerService, TemplateService, $sce, NavigationService, UserService, CartService, WishlistService, $timeout) {
     $scope.template = TemplateService.getHTML("content/checkout.html");
     TemplateService.title = "Checkout"; //This is the Title of the Website
     $scope.navigation = NavigationService.getNavigation();
@@ -67140,11 +69399,46 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
     $scope.loginData = {};
     $scope.loggedUser = $.jStorage.get("userId");
     $scope.accessToken = $.jStorage.get("accessToken");
-    $scope.user={};
-    $scope.user.billingAddress={};
-    $scope.user.deliveryAddress={};
+    $scope.user = {};
+    $scope.user.billingAddress = {};
+    $scope.user.deliveryAddress = {};
     $scope.user.billingAddress.country = "India";
     $scope.user.deliveryAddress.country = "India";
+    $scope.paymentWay = [{
+        name: 'Credit Card',
+        checked: false,
+        id: 1
+    }, {
+        name: 'Debit card',
+        checked: false,
+        id: 2
+    }, {
+        name: 'net banking',
+        checked: false,
+        id: 3
+    }, {
+        name: 'Cash on delivery',
+        checked: false,
+        id: 4
+    }]
+
+    //to select one checkbox at a time
+    $scope.updateSelection = function (position, paymentWay) {
+
+        // var result = _.indexOf(paymentWay, id);
+
+        // if (result != -1) {
+        //     return true;
+        // } else {
+        //     return false;
+        // }
+        angular.forEach(paymentWay, function (payment, index) {
+            if (position != index)
+                payment.checked = false;
+        });
+        $scope.getPaymentMethod = $scope.paymentWay[position].name;
+    }
+
     if ($scope.loggedUser) {
         $scope.view = "orderTab";
     } else {
@@ -67173,49 +69467,242 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
             if (!_.isEmpty(data.data.data)) {
                 console.log("Login data: ", data);
                 $scope.userData = data.data.data;
+                $scope.otpRegister = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'views/modal/otp2.html',
+                    scope: $scope,
+                    // windowClass: 'loginModalSize',
+                    controller: 'CheckoutCtrl'
+                    // windowClass: 'modal-content-radi0'
+                });
+
                 $.jStorage.set("username", $scope.userData.firstName)
                 if ($.jStorage.get("username")) {
                     $scope.firstname = $.jStorage.get("username");
                 }
-                $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
-                $.jStorage.set("userId", $scope.userData._id);
-                var tokken = $.jStorage.get("accessToken");
-                if (tokken) {
-                    var offlineCart = $.jStorage.get("cart");
-                    if (offlineCart) {
-                        var cart = {};
-                        cart.userId = $.jStorage.get("userId");
-                        cart.accessToken = $.jStorage.get("accessToken");
-                        cart.products = $.jStorage.get("cart").products;
-                        console.log("Offline cart: ", cart);
-                        CartService.saveProduct(cart, function (data) {
-                            if (!data.data.value) {
-                                console.log("Error: in ofline storage ", data.data.error);
-                            } else {
-                                console.log("Success");
-                                $state.reload();
-                            }
-                        });
-                    }
-                    var offlineWishlist = $.jStorage.get("wishlist");
-                    console.log("sendingofflinewishlist::::::", offlineWishlist)
-                    if (offlineWishlist) {
-                        var product = {
-                            accessToken: $.jStorage.get("accessToken"),
-                            userId: $.jStorage.get("userId"),
-                            products: $.jStorage.get("wishlist"),
-                        }
-                        WishlistService.saveProduct(product, function (data) {
-                            console.log("sendingwishlisttodb:::::::", data);
-                        })
-                    }
-                }
-                $state.reload();
+                // $.jStorage.set("accessToken", $scope.userData.accessToken[$scope.userData.accessToken.length - 1]);
+                // $.jStorage.set("userId", $scope.userData._id);
 
-            } else {
+            } else if (data.data.error) {
+                toastr.error("User already exists with the given emailId. Please login to proceed", "Error");
+            } {
                 // TODO:: show popup to register
             }
         });
+    }
+    $scope.checkOtp = function (otp) {
+        if (otp) {
+            $scope.userData.otp = otp;
+            console.log("Registered user: ", $scope.userData);
+            UserService.verifyRegisterUserWithOtp($scope.userData, function (data) {
+                console.log("VerifyOtp: ", data);
+                if (data.data.value === true) {
+                    // $scope.test = $uibModal.open({
+                    //     templateUrl: "views/modal/otpsuccess.html",
+                    //     animation: true,
+                    //     scope: $scope,
+                    //     size: 'small'
+                    // });
+                    $.jStorage.set('user', data.data.data);
+                    $.jStorage.set("userId", $scope.userData._id);
+                    $.jStorage.set('accessToken', data.data.data.accessToken[0]);
+                    var tokken = $.jStorage.get("accessToken");
+                    if (tokken) {
+                        var offlineCart = $.jStorage.get("cart");
+                        if (offlineCart) {
+                            var cart = {};
+                            cart.userId = $.jStorage.get("userId");
+                            cart.accessToken = $.jStorage.get("accessToken");
+                            cart.products = $.jStorage.get("cart").products;
+                            console.log("Offline cart: ", cart);
+                            CartService.saveProduct(cart, function (data) {
+                                if (!data.data.value) {
+                                    console.log("Error: in ofline storage ", data.data.error);
+                                } else {
+                                    console.log("Success");
+                                    $state.reload();
+                                }
+                            });
+                        }
+                        var offlineWishlist = $.jStorage.get("wishlist");
+                        console.log("sendingofflinewishlist::::::", offlineWishlist)
+                        if (offlineWishlist) {
+                            var product = {
+                                accessToken: $.jStorage.get("accessToken"),
+                                userId: $.jStorage.get("userId"),
+                                products: $.jStorage.get("wishlist"),
+                            }
+                            WishlistService.saveProduct(product, function (data) {
+                                console.log("sendingwishlisttodb:::::::", data);
+                            })
+                        }
+                    }
+                    $scope.loggedUser = $scope.userData._id;
+                    $uibModalInstance.dismiss('cancel');
+                    $state.reload();
+
+                    var emailUser = {};
+                    emailUser.email = $.jStorage.get('user').email;
+                    UserService.welcomeEmail(emailUser, function (data) {
+                        console.log("in User/welcomeEmail", data);
+                        if (data.value === true) {
+
+                        }
+                    });
+
+                } else {
+                    if (data.error == 'otpNoMatch') {
+                        $scope.errorMessage = "Invalid OTP. Please provide valid OTP.";
+                    } else if (data.error == 'otpExpired') {
+                        $scope.errorMessage = "OTP Expired. Please click on 'Resend OTP'!";
+                        $scope.resendOtpBut = true;
+                    } else if (data.error == 'noOtpFound') {
+                        $scope.errorMessage = "No OTP found. Please click on 'Resend OTP'!";
+                        $scope.resendOtpBut = true;
+                    } else {
+                        $scope.errorMessage = "Error Occurred. Please click on 'Resend OTP'";
+                        $scope.resendOtpBut = true;
+                    }
+                }
+            });
+        } else {
+            $scope.errorMessage = "Please enter OTP";
+        }
+    }
+
+    $scope.resendOtp = function () {
+        console.log(" in resend $scope.formData: ", $scope.userData);
+        console.log(" in resend $scope.gtUser ", $scope.gtUser);
+        if ($scope.gtUser) {
+            UserService.resendOtpForPwd($scope.gtUser, function (data) {
+                if (data.value) {
+                    $scope.resendOtpBut = false;
+                } else {
+                    console.log("Error: ", data);
+                }
+            });
+        }
+        if ($scope.userData) {
+            UserService.resendOtp($scope.userData, function (data) {
+                if (data.value) {
+                    $scope.resendOtpBut = false;
+                } else {
+                    console.log("Error: ", data);
+                }
+            });
+        }
+    }
+
+    $scope.forgotPassword = function () {
+        console.log("in forgot password1111");
+        $scope.forgotPwd = true;
+        $scope.otpPwd = false
+        $scope.resetPwd = false;
+        $scope.forgotPasswordModal = $uibModal.open({
+            animation: true,
+            templateUrl: 'views/modal/otp1.html',
+            scope: $scope,
+            // windowClass: 'loginModalSize',
+            controller: 'CheckoutCtrl'
+            // windowClass: 'modal-content-radi0'
+        });
+        // $scope.loginModal.close({
+        //     $value: $scope.loginModal
+        // });
+        // $rootScope.loginModal.close();
+    };
+    $scope.forgotPasswordOtp = function (emailId) {
+        $scope.userEmail = {};
+        $scope.userEmail.email = emailId;
+        UserService.forgotPasswordOtp($scope.userEmail, function (data) {
+            console.log("in forgotPassword: 222", data)
+            if (data.data.value) {
+                $scope.forgotPwd = false;
+                $scope.resetPwd = false;
+                $scope.otpPwd = true;
+                $scope.gtUser = {};
+                $scope.gtUser._id = data.data.data._id;
+                // console.log("in forgotPassword: ", data)
+            } else {
+                $scope.message = "Please sing up";
+                console.log("Error: ", data);
+            }
+        });
+    }
+    $scope.confirmForgotPasswordOtp = function (otp) {
+        $scope.gtUser.verifyOtp = otp;
+        console.log("confirmForgotPasswordOtp: ", $scope.gtUser);
+        UserService.confirmForgotPasswordOtp($scope.gtUser, function (data) {
+            console.log("confirm", data);
+            if (data.data.value = true) {
+                if (data.data.data == "No Data Found") {
+                    $scope.errorOtpMessage = "Invalid OTP.";
+                    $scope.resendOtpBut = true;
+                } else {
+                    $scope.otpPwd = false;
+                    $scope.resetPwd = true;
+                }
+            } else {
+                $scope.errorMessage = "Invalid OTP. Please provide a valid OTP";
+                $scope.resendOtpBut = true;
+            }
+        })
+    }
+
+    //to sve offline cart and wishlist
+    $scope.addOfflineWishlistAndCart = function () {
+        console.log("in addOfflineWishlistAndCart");
+        var cart = {};
+        cart.userId = $.jStorage.get("userId");
+        cart.accessToken = $.jStorage.get("accessToken");
+        var userCart = $.jStorage.get("cart");
+        if (userCart) {
+            cart.products = userCart.products;
+            console.log("Offline cart: ", cart);
+            CartService.saveProduct(cart, function (data) {
+                if (!data.data.value) {
+                    console.log("Error: in ofline storage ", data.data.error);
+                } else {
+                    // $scope.createOrder();
+                    console.log("Success");
+                    $state.reload();
+                }
+            });
+        }
+        var offlineWishlist = $.jStorage.get("wishlist");
+        console.log("sendingofflinewishlist::::::", offlineWishlist)
+        if (offlineWishlist) {
+            var product = {
+                accessToken: $.jStorage.get("accessToken"),
+                userId: $.jStorage.get("userId"),
+                products: $.jStorage.get("wishlist"),
+            }
+            WishlistService.saveProduct(product, function (data) {
+                console.log("sendingwishlisttodb:::::::", data);
+            })
+        }
+    }
+
+    $scope.savePassword = function (password) {
+        if (password.newPassword == password.confirmPassword) {
+            $scope.gtUser.password = password.newPassword;
+            $scope.gtUser.email = $scope.userEmail.email
+            console.log("confirmForgotPasswordOtp: savePassword", $scope.gtUser);
+            UserService.forgotPasswordSave($scope.gtUser, function (data) {
+                console.log("data in save password", data.data)
+                $.jStorage.set("username", data.data.data.firstName);
+                $.jStorage.set("userId", data.data.data._id);
+                $.jStorage.set('accessToken', data.data.data.accessToken[0]);
+                $scope.loggedUser = data.data.data._id;
+                // $uibModalInstance.dismiss('cancel');
+                console.log("GDSGFHFGJGHKGHKJHLJHFXGHS");
+                $scope.addOfflineWishlistAndCart();
+                console.log("GDSGFHFGJGHKGHKJHLJHFXGHS");
+                $state.reload();
+            })
+        } else {
+            $scope.invalidConfPwd = "Invalid password";
+        }
     }
 
     // $scope.updateAddress = function () {
@@ -67260,7 +69747,7 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                         if (!data.data.value) {
                             console.log("Error: in ofline storage ", data.data.error);
                         } else {
-                            $scope.createOrder();
+                            // $scope.createOrder();
                             console.log("Success");
                             $state.reload();
                         }
@@ -67287,20 +69774,94 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                 $state.reload();
             } else {
                 // TODO:: show popup to register
+                $scope.message = "Invalid user name or password"
             }
         });
     }
-    /************order generation and ADDRESSSS UPDATION IN USERTABLE AS WELL AS ORDER TABLE************* */
-    $scope.generateOrder = function () {
 
+    //to checkPaymentMethod
+    $scope.checkPaymentMethod = function (payment) {
+
+        console.log($scope.user.firstName);
+        if ($.jStorage.get("gifts")) {
+
+        }
+        // $scope.generateOrder($scope.getPaymentMethod);
+        if ($scope.getPaymentMethod == "Cash on delivery") {
+            $scope.generateOrder($scope.getPaymentMethod);
+        } else {
+            $scope.generateOrder($scope.getPaymentMethod);
+        }
+    };
+
+    $scope.testFunction = function () {
+        OrderService.hdfcPaymentGateway({
+            "hii": 1
+        }, function (data) {
+            console.log("########## data ########", data.data);
+            $scope.paymentData = $sce.trustAsHtml('<form id="nonseamless" method="post"name="redirect" action="https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction" /><input type="hidden" id="encRequest" name="encRequest" value="f51027781089b57f78dfccf60bd3551d731e88ce4a4f0c3f67b49a6c889bb032869ba385f1c4ee2f3965dbc1535b6e62fc6ecbc9166d87ee31eaa64e85feac210c1c9524ced5da9f9aecab05a70cc117ee0d6bc6562c222ad3b62d7358e901b919cbd28276a4c4a92437a599d72ac41d1d4fdc4a13f87be21904a2c28de5f1b0a52678d4c89ab588bb7307906b49f5f74240f908726eceb121239ec07009934327ef645e106aebd97bbe1172712272d6c1b49d853116e81eb2e3dd4684a3807e474eea337957fc0f1a46342e5fda8c1e75cb25da3e81a21f56e11bab09096cb7dae26602c078b41ff7142478f5e181ee0d4c8512a58adf31c3a7a4a9df3c4e670bf8d57b572d7c826041a7039e7a380e159efc330d96ae12f46439d49edc1438fef36d4dbbd404cf865bac54df188bf65c23f7f2ef9d4b687ec24a8a0d7ea8fe96e54709ad395a391ebd755438ff64c490750ab7b0783e28e13de3ee6bbf0cd2c94378b5264244b5946558cb1e3414dcf576f794faa0869787781cf4707109af66f0f09c5ffc88672baa85b622d84fcdd2e6f11cc76937d1a305a362fbc30c46ff1afeec55ea9a0861f8f9c322e928548b320e17ffcd5d8f1aed77b92e8ece2403182e80e4ce8ab2fb9bab22a4ed82cf7120e59a3a8a332a84ac2775af0238170ffc146589eabc28c348fab382a55be5ad66460e29cc0458ac38c9aec4d21ac473d60792c21019aa023aabf4baa96f0d071f4a20251d87caabc252076db14f0767c90b5062543efc3b06961442feb569a4016b034cf3c8f8ba85e2da8f0f39756673f67b60be23600217cd77efce137ab2607f33f4fcf412186956c700c85be540269bfc5f5cfc95559e079b5163541ee4adfdbbd8ce8be918b858bb4fda34318a849355ae3c6ce6f136fedfdfe0dc2c3f410c8e8cfde4dea374828297dd1c71796f7df09a67b660b63c6ef2ea0e55624d712eb6f57011c5bbc0b5bd76662b943911c69d33b61645599038dde96d17d3"><input type="hidden" name="access_code" id="access_code" value="AVRL01EK28AF79LRFA"><script language="javascript">document.redirect.submit();</script></form>');
+            $scope.paymentGateway = $uibModal.open({
+                animation: true,
+                templateUrl: 'views/modal/paymentGateway.html',
+                scope: $scope
+                // windowClass: 'loginModalSize',
+                // controller: 'CheckoutCtrl'
+                // windowClass: 'modal-content-radi0'
+            });
+
+
+        })
+    }
+
+    //for send ordermail
+    $scope.orderConfirmMail = function (emailUser) {
+        OrderService.ConfirmOrderPlacedMail(emailUser, function (data) {
+            console.log("in User/ConfirmOrderPlacedMail", data);
+            if (data.value === true) {
+
+            }
+        });
+    }
+    // redirect to myAccount OrderTab
+    $scope.redirectToOrderTab = function () {
+        $state.go("myaccount", {
+            'view': 'orderTab'
+        });
+    }
+
+    /************order generation and ADDRESSSS UPDATION IN USERTABLE AS WELL AS ORDER TABLE************* */
+    $scope.generateOrder = function (value) {
         var data = {};
+        data.firstName = $scope.user.firstName;
+        data.lastName = $scope.user.lastName;
+        data.mobileNo = $scope.user.mobile;
+        data.email = $scope.user.email;
         data.userId = $scope.loggedUser;
+        data.paymentMethod = value;
+        if ($.jStorage.get("discountValues")) {
+            data.selectedDiscount = $.jStorage.get("discountValues");
+            if (data.selectedDiscount.selectedDiscount) {
+                if ($.jStorage.get("coupon") && data.selectedDiscount.selectedDiscount.discountType == "59f06bc7647252477439a1e4") {
+                    data.couponData = $.jStorage.get("coupon");
+                }
+            } else {
+
+            }
+        }
+        var couponD = $.jStorage.get("coupon");
+        // console.log("couponD", couponD, "alldata", data);
+        if ($.jStorage.get("gifts")) {
+            data.gifts = $.jStorage.get("gifts");
+        }
         OrderService.createOrderFromCart(data, function (data) {
             console.log("created order: ", data);
             if (data.data.value) {
                 $scope.orders = data.data.data;
+                $.jStorage.set("userOrders", $scope.orders);
                 $scope.grandTotal = CartService.getTotal($scope.orders.products);
                 console.log("Orders: ", $scope.orders);
+                $.jStorage.deleteKey("gifts");
+                $.jStorage.deleteKey("discountValues");
                 var updateAdd = {
                     _id: $scope.orders._id,
                     user: $.jStorage.get("userId"),
@@ -67310,28 +69871,40 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                 OrderService.updateOrderAddress(updateAdd, function (data) {
                     console.log("oderplaced", data);
                     if (data.data.data) {
-                        toastr.success('Thank You your order was placed successfully', 'success');
-                        $state.reload();
+                        var emailUser = {};
+                        emailUser._id = $.jStorage.get("userId");
+                        emailUser.order = $scope.orders;
+                        if (value == "Cash on delivery") {
+                            toastr.success('Thank You your order was placed successfully', 'success');
+                            $scope.orderConfirmMail(emailUser);
+                            $scope.redirectToOrderTab();
+                        } else {
+                            // payment gateway code goes here
+                            // you will get all order details in $scope.orders 
+
+                            window.location.href = "http://umber.wohlig.co.in/api/Order/formRedirect?orderId=" + $scope.orders._id;
+                        }
                     } else {
                         toastr.error('Sorry there was some problem in placing your order', 'Error');
                     }
                     angular.element(document.getElementById('ordergenerate')).disabled = false;
                 });
+
             } else {
                 console.log("Error in creating order: ", data.data.error);
             }
         });
-
-
-
     }
 
     var userData = {
         userId: $.jStorage.get("userId")
     }
+    /// for gifts
+    if ($.jStorage.get("gifts")) {
+        $scope.gift = $.jStorage.get("gifts");
+    }
 
     CartService.getCart(userData, function (data) {
-
         if (data.data.data)
             $scope.orderTable = data.data.data;
         // if ($scope.orderTable) {
@@ -67344,8 +69917,17 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
         // } else {
         //     $state.go("mycart");
         // }
-        if ($scope.orderTable && $scope.orderTable.products)
+        if ($scope.orderTable && $scope.orderTable.products) {
             $scope.grandTotal = CartService.getTotal($scope.orderTable.products);
+            if ($.jStorage.get("discountValues")) {
+                // discountAmount: 3394, grandTotalAfterDiscount: 3394, selectedDiscount: Object, totalAmountOfOrder: 6788
+                var discountTypeObjectData = $.jStorage.get("discountValues");
+                $scope.discountAmount = discountTypeObjectData.discountAmount;
+                $scope.grandTotalAfterDiscount = discountTypeObjectData.grandTotalAfterDiscount;
+                $scope.totalAmountOfOrder = discountTypeObjectData.totalAmountOfOrder;
+            }
+        }
+
     });
 
     if (userData.userId) {
@@ -68817,6 +71399,13 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
             "filename": "zimbabwe"
         }
     ];
+
+    //Function for next button which displays the detail tab if a user is logged in or clicks on the next button for checkout 
+    var clickCounter = 0;
+    $scope.proceedToDetailTab = function () {
+        $scope.view = 'detailTab';
+    };
+
 })
  myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state, toastr, TemplateService, NavigationService, BannerService, CartService, $timeout, $uibModal, WishlistService) {
      $scope.template = TemplateService.getHTML("content/mycart.html");
@@ -68828,11 +71417,654 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
          console.log("$scope.banner", $scope.banner)
 
      });
+
+     $scope.grandTotalAfterDiscount = 0;
+
+     //  $scope.discountValue={
+     //      id:"demo"
+     //  };
+
      $scope.newA = _.chunk($scope.mycartmodal, 4);
      // console.log("$scope.newA ", $scope.newA);
      var userId = {
          userId: $.jStorage.get("userId")
      };
+
+     //avinash functions start
+     $scope.applicableDiscounts = function (data, grandTotal) {
+         //  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", $scope.productArrayForDiscount, "BB", grandTotal);
+         myService.applicableDiscounts($scope.productArrayForDiscount, grandTotal, function (data) {
+             //  console.log("called api applicableDiscounts");
+             $scope.applicableDiscountsAll = data;
+             console.log("$scope.applicableDiscounts", $scope.applicableDiscountsAll)
+
+         });
+     }
+     $scope.discountSelected = {};
+     $scope.discountValue = "";
+     $scope.radioSubmit = function (data) {
+
+
+         $scope.discountSelected = data;
+         $scope.discountValue123 = $scope.discountSelected._id;
+         $scope.visibleRadio = true;
+         //  _.each($scope.applicableDiscounts, function (n) {
+         //      if (n._id == data._id) {
+
+         //          $scope.discountValue123 = false;
+         //      }
+         //  })
+         console.log("$scope.discountValue", $scope.discountValue);
+     }
+     $scope.checkbox = function (ind) {
+         $scope.selectedOffer = ind;
+         if ($scope.applicableDiscountsAll[ind].checked) {
+             $scope.visible = true;
+         } else {
+             $scope.visible = false;
+         }
+     }
+
+     var isEmptyObject = function (obj) {
+         for (var prop in obj) {
+             if (obj.hasOwnProperty(prop))
+                 return false;
+         }
+
+         return JSON.stringify(obj) === JSON.stringify({});
+     }
+     //getDiscount function
+     $scope.couponCode = "";
+     $scope.getDiscount = function (couponCode) {
+         // var cartSubTotal =
+         $scope.couponCode = couponCode;
+         if (couponCode) {
+             $scope.discount = {};
+             $scope.discount = couponCode;
+             $scope.discount.subTotal = $scope.cartSubTotal;
+             $scope.butActive = true;
+             NavigationService.apiCallWithData("NormalCoupon/getDiscount", $scope.discount, function (data) {
+                 $scope.perDiscount = {};
+                 if (data.value) {
+                     if (data.data == "coupon has expired") {
+                         $scope.perDiscount = 000;
+                         $scope.errMessage = "Coupon Code has Expired!!!!";
+                     } else {
+                         $scope.subTotal = data.data.discount;
+                         $scope.perDiscount = data.data.perDiscount;
+                         $.jStorage.set('subTotal', $scope.subTotal);
+                         $scope.errMessage = "";
+                     }
+                 } else {
+                     $scope.errMessage = "Please Enter valid Coupon Code";
+                     $scope.butActive = true;
+                     $scope.perDiscount = 000;
+                 }
+             })
+         } else {
+             console.log("in else of NormalCoupon");
+         }
+
+     }
+
+
+     $scope.applyCouponSubmit = function (couponName) {
+         //  console.log("applyCouponSubmit", couponName)
+         if (couponName) {
+             NavigationService.getCoupon(couponName, function (couponData) {
+                 console.log("applyCouponSubmit getCoupon", couponData)
+                 if (couponData.data.data == "Coupon Invalid") {
+                     console.log("in invalid");
+                     $scope.errMessage = "Coupon Invalid!!!!";
+                 } else if (couponData.data.data == "coupon already Used") {
+                     console.log("alredy used");
+                     $scope.errMessage = "coupon already Used!!!!";
+                 } else if (couponData.data.data == "coupon has expired") {
+                     console.log("expired");
+                     $scope.errMessage = "coupon has expired!!!!";
+                 } else {
+                     $scope.validCoupon = couponData.data.data;
+                     if ($scope.mycartTable) {
+                         console.log("$scope.mycartTable", $scope.mycartTable);
+                         $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+                         $scope.grandTotalAfterDiscount = 0;
+                         if ($scope.validCoupon.cAmount) {
+                             $scope.grandTotalAfterDiscount = $scope.validCoupon.cAmount;
+                             $scope.grandTotal = $scope.total - $scope.grandTotalAfterDiscount;
+                         } else {
+                             //  console.log("Percentage@@@@@@", $scope.total);
+                             var disPercentage = $scope.validCoupon.percentage / 100;
+                             $scope.grandTotalAfterDiscount = $scope.total * ($scope.validCoupon.percentage) / 100;
+                             if ($scope.grandTotalAfterDiscount > $scope.validCoupon.maxAmount) {
+                                 $scope.grandTotalAfterDiscount = $scope.validCoupon.maxAmount;
+                             }
+                             $scope.grandTotal = $scope.total - $scope.grandTotalAfterDiscount;
+                         }
+                         $scope.discountValueObject = {
+                             discountAmount: $scope.grandTotalAfterDiscount,
+                             grandTotalAfterDiscount: $scope.grandTotal,
+                             selectedDiscount: null,
+                             totalAmountOfOrder: $scope.total,
+                             coupon: $scope.validCoupon
+                         }
+                         $.jStorage.set("discountValues", $scope.discountValueObject);
+                     }
+
+                     $scope.Couponmodal.close();
+                 }
+             })
+         } else {
+             if (!isEmptyObject($scope.discountSelected)) {
+
+                 console.log("$scope.discountSelected in applyCouponSubmit", $scope.discountSelected.discountType);
+                 var discountObject = $scope.discountSelected;
+                 discountCouponAmount = $scope.discountSelected.xValue;
+                 if ($scope.discountSelected.maxAmount) {
+                     $scope.discountCouponMaxAmount = $scope.discountSelected.maxAmount;
+                 }
+                 if ($scope.discountSelected.discountType == "59f06bc7647252477439a1e4") {
+                     $.jStorage.deleteKey("coupon");
+                     $.jStorage.deleteKey("gifts");
+                     if ($scope.mycartTable) {
+                         $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+                         $scope.grandTotalAfterDiscount = 0;
+                         //  $.jStorage.set("grandTotal", $scope.grandTotal);
+                     }
+
+                     if ($scope.grandTotal >= $scope.discountSelected.yValue) {
+                         //if jstorage.user then userid from jstorage 
+                         var timestamp = Date.now();
+                         var couponCode = "BU" + timestamp;
+                         console.log("timestamp", couponCode);
+                         if ($.jStorage.get("userId")) {
+                             var userId = $.jStorage.get("userId");
+                             var couponObj = {
+                                 name: couponCode,
+                                 couponType: "Discount",
+                                 valueType: "Amount",
+                                 user: userId,
+                                 generatedOrderId: "",
+                                 usedOrderId: "",
+                                 cAmount: $scope.discountCouponMaxAmount,
+                                 status: "unUsed",
+                                 isActive: "True"
+                             };
+                         } else {
+
+                             var couponObj = {
+                                 name: couponCode,
+                                 couponType: "Discount",
+                                 valueType: "Amount",
+                                 user: "",
+                                 generatedOrderId: "",
+                                 usedOrderId: "",
+                                 cAmount: $scope.discountCouponMaxAmount,
+                                 status: "unUsed",
+                                 isActive: "True"
+                             };
+                         }
+                         console.log(couponObj, "couponObj");
+                         $.jStorage.set("coupon", couponObj);
+                         var jStorageData = $.jStorage.get("coupon");
+                         console.log("jStorageData", jStorageData);
+
+
+                         $scope.discountValueObject = {
+                             discountAmount: $scope.grandTotalAfterDiscount,
+                             grandTotalAfterDiscount: $scope.grandTotal,
+                             selectedDiscount: $scope.discountSelected,
+                             totalAmountOfOrder: $scope.total
+                         }
+                         console.log("$scope.discountValueObject", $scope.discountValueObject);
+                         $.jStorage.set("discountValues", $scope.discountValueObject);
+
+
+                         //  myService.addCouponByUserFromCart(couponObj, function (data) {
+                         //  console.log("called api addCouponByUserFromCart", data);
+                         //  //send mail to user with coupon code
+                         // //  var totalCountProductsInB1GXOff = 0;
+
+                         //  $scope.Couponmodal.close();
+                         // });
+                         $scope.Couponmodal.close();
+                         //  $scope.grandTotal = $scope.grandTotal - $scope.discountSelected.xValue;
+                         //  $scope.grandTotalAfterDiscount = $scope.discountSelected.xValue;
+                     } else {
+                         $scope.Couponmodal.close();
+                         $scope.discountSelected = {};
+                         alert("Your Cart Total Low to Avail This Discount!!! Shop More to Get This Discount...");
+                     }
+
+                 } else if ($scope.discountSelected.discountType == "59d329e334d0832185b7f577") {
+                     console.log("Buy 1 Get x Off Buy 2 Get 2x Off", $scope.discountSelected);
+                     //for Buy 1 Get x Off Buy 2 Get 2x Off
+                     $.jStorage.deleteKey("coupon");
+                     $.jStorage.deleteKey("gifts");
+                     myService.getAllProductsByDiscount($scope.discountSelected._id, function (data) {
+                         console.log("called api getAllProductsByDiscount", data.products);
+                         var totalCountProductsInB1GXOff = 0;
+                         var totalAmountOfCountProductsInB1GXOff = 0;
+                         var discountProducts = data.products;
+                         var priceOfTwo = 0;
+                         var firstTwoProductsAmountSum;
+                         var iterationNumber = 0;
+                         var totalPriceAdded = 0;
+                         var sortedArray = discountProducts.sort(function (a, b) {
+                             console.log("a", a, "b", b);
+                             return a.price > b.price ? -1 : a.price < b.price ? 1 : 0
+                         })
+                         console.log("sortedArray", sortedArray);
+
+                         _.each(sortedArray, function (product) {
+                             _.each($scope.mycartTable.products, function (cartProduct) {
+                                 if (product._id == cartProduct.product._id) {
+                                     iterationNumber = iterationNumber + 1;
+                                     totalCountProductsInB1GXOff = totalCountProductsInB1GXOff + cartProduct.quantity;
+                                     console.log("totalCountProductsInB1GXOff", totalCountProductsInB1GXOff);
+                                     var productPriceBeforeQuantityMultiplication = cartProduct.product.price;
+                                     //  totalAmountOfCountProductsInB1GXOff = totalAmountOfCountProductsInB1GXOff + (cartProduct.quantity * cartProduct.product.price);
+                                     var firstTwoProductsAmountSum = productPriceBeforeQuantityMultiplication;
+
+                                     if (iterationNumber == 1) {
+                                         if (cartProduct.quantity > 0 && cartProduct.quantity <= 2) {
+                                             totalAmountOfCountProductsInB1GXOff = totalAmountOfCountProductsInB1GXOff + (cartProduct.quantity * cartProduct.product.price);
+                                             totalPriceAdded = cartProduct.quantity;
+                                             priceOfTwo = totalAmountOfCountProductsInB1GXOff;
+                                         } else if (cartProduct.quantity > 2) {
+                                             priceOfTwo = totalAmountOfCountProductsInB1GXOff + (2 * cartProduct.product.price);
+                                             totalPriceAdded = 2;
+                                             totalAmountOfCountProductsInB1GXOff = totalAmountOfCountProductsInB1GXOff + (cartProduct.quantity * cartProduct.product.price);
+                                         }
+                                     } else if (iterationNumber == 2 && totalPriceAdded < 2) {
+                                         if (cartProduct.quantity > 0 && cartProduct.quantity <= 1) {
+                                             totalAmountOfCountProductsInB1GXOff = totalAmountOfCountProductsInB1GXOff + (cartProduct.quantity * cartProduct.product.price);
+                                             totalPriceAdded = cartProduct.quantity;
+                                             priceOfTwo = totalAmountOfCountProductsInB1GXOff;
+                                         } else if (cartProduct.quantity > 1) {
+                                             priceOfTwo = totalAmountOfCountProductsInB1GXOff + (1 * cartProduct.product.price);
+                                             totalAmountOfCountProductsInB1GXOff = totalAmountOfCountProductsInB1GXOff + (cartProduct.quantity * cartProduct.product.price);
+                                             totalPriceAdded = 2;
+                                         }
+                                     } else {
+                                         totalAmountOfCountProductsInB1GXOff = totalAmountOfCountProductsInB1GXOff + (cartProduct.quantity * cartProduct.product.price);
+                                     }
+
+
+                                     //  if(cartProduct.quantity>=2 && totalCountProductsInB1GXOff>0){
+                                     //     var firstTwoProductsAmountSum=cartProduct.product.price*(2-(totalCountProductsInB1GXOff-cartProduct.quantity));
+                                     //     console.log("firstTwoProductsAmountSum",firstTwoProductsAmountSum);
+                                     //  }
+
+                                     //  if(totalCountProductsInB1GXOff<=2){
+                                     //      priceOfTwo=firstTwoProductsAmountSum;
+                                     //         console.log("priceOfTwo if after change",priceOfTwo);
+                                     //      console.log("totalAmountOfCountProductsInB1GXOff in if after calculations",totalAmountOfCountProductsInB1GXOff);
+                                     //  }else{
+
+
+                                     //     //     console.log("priceOfTwo else",priceOfTwo);
+                                     //     //  totalAmountOfCountProductsInB1GXOff = totalAmountOfCountProductsInB1GXOff + (cartProduct.quantity * cartProduct.product.price);
+                                     //     // //  totalAmountOfCountProductsInB1GXOff=priceOfTwo;
+                                     //     //  console.log("totalAmountOfCountProductsInB1GXOff in else",totalAmountOfCountProductsInB1GXOff);
+                                     //  }
+
+
+                                 }
+                             });
+                         });
+                         console.log("totalAmountOfCountProductsInB1GXOff", totalAmountOfCountProductsInB1GXOff);
+                         console.log("priceOfTwo", priceOfTwo);
+                         if (totalCountProductsInB1GXOff == 1) {
+                             console.log("$scope.grandTotal Before 1 nnn", $scope.grandTotal);
+                             var percentage = $scope.discountSelected.xValue;
+                             console.log("percentage", percentage);
+                             //  =totalAmountOfCountProductsInB1GXOff;
+                             if ($scope.mycartTable) {
+                                 $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+                                 //  $.jStorage.set("grandTotal", $scope.grandTotal);
+                             }
+
+                             //  var totalDiscount = ($scope.discountSelected.xValue/totalAmountOfCountProductsInB1GXOff)*100;
+                             $scope.grandTotalAfterDiscount = (priceOfTwo * percentage) / 100;
+                             console.log("$scope.grandTotalAfterDiscount nnn", $scope.grandTotalAfterDiscount);
+                             $scope.grandTotal = $scope.grandTotal - $scope.grandTotalAfterDiscount;
+                             console.log("$scope.grandTotal after 1 nnn", $scope.grandTotal);
+
+
+                             $scope.discountValueObject = {
+                                 discountAmount: $scope.grandTotalAfterDiscount,
+                                 grandTotalAfterDiscount: $scope.grandTotal,
+                                 selectedDiscount: $scope.discountSelected,
+                                 totalAmountOfOrder: $scope.total
+                             }
+                             console.log("$scope.discountValueObject", $scope.discountValueObject);
+                             $.jStorage.set("discountValues", $scope.discountValueObject);
+
+
+                             $scope.Couponmodal.close();
+
+                         } else if (totalCountProductsInB1GXOff >= 2) {
+                             var percentage = $scope.discountSelected.yValue;
+                             console.log("$scope.grandTotal before 2 nnn", $scope.grandTotal);
+                             if ($scope.mycartTable) {
+                                 $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+                                 //  $.jStorage.set("grandTotal", $scope.grandTotal);
+                             }
+                             $scope.grandTotalAfterDiscount = (priceOfTwo * percentage) / 100;
+                             $scope.grandTotal = $scope.grandTotal - $scope.grandTotalAfterDiscount;
+                             console.log("$scope.grandTotal after 2 nnn", $scope.grandTotal);
+
+                             $scope.discountValueObject = {
+                                 discountAmount: $scope.grandTotalAfterDiscount,
+                                 grandTotalAfterDiscount: $scope.grandTotal,
+                                 selectedDiscount: $scope.discountSelected,
+                                 totalAmountOfOrder: $scope.total
+                             }
+                             console.log("$scope.discountValueObject", $scope.discountValueObject);
+                             $.jStorage.set("discountValues", $scope.discountValueObject);
+
+
+                             $scope.Couponmodal.close();
+                         } else {
+                             $scope.grandTotal = 0;
+                             $scope.grandTotalAfterDiscount = 0;
+                             $scope.Couponmodal.close();
+
+                         }
+                         // $scope.$apply();
+
+                         //    $scope.applicableDiscounts = data;
+                         //    console.log("$scope.applicableDiscounts", $scope.applicableDiscounts)
+
+                     });
+                 } else if ($scope.discountSelected.discountType == "59ede2fcd30c7e2ab3324ece") {
+                     //for Discount of Rs X on Y amount shopping
+                     $.jStorage.deleteKey("coupon");
+                     $.jStorage.deleteKey("gifts");
+                     if ($scope.mycartTable) {
+                         $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+                         $scope.grandTotalAfterDiscount = 0;
+                         //  $.jStorage.set("grandTotal", $scope.grandTotal);
+                     }
+                     if ($scope.grandTotal >= $scope.discountSelected.yValue) {
+                         //  $scope.grandTotal = $scope.grandTotal - $scope.diif ($scope.mycartTable) {
+                         $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+                         $scope.grandTotalAfterDiscount = 0;
+                         //  $.jStorage.set("grandTotal", $scope.grandTotal);
+                     }
+                     if ($scope.grandTotal >= $scope.discountSelected.yValue) {
+                         $scope.grandTotal = $scope.grandTotal - $scope.discountSelected.xValue;
+                         $scope.grandTotalAfterDiscount = $scope.discountSelected.xValue;
+
+                         $scope.discountValueObject = {
+                             discountAmount: $scope.grandTotalAfterDiscount,
+                             grandTotalAfterDiscount: $scope.grandTotal,
+                             selectedDiscount: $scope.discountSelected,
+                             totalAmountOfOrder: $scope.total
+                         }
+                         console.log("$scope.discountValueObject", $scope.discountValueObject);
+                         $.jStorage.set("discountValues", $scope.discountValueObject);
+
+                         $scope.Couponmodal.close();
+                     } else {
+                         alert("Your Cart Total Low to Avail This Discount!!! Shop More to Get This Discount...");
+                     }
+                 } else if ($scope.discountSelected.discountType == "59e44d48f255331e48fc428f") {
+                     $.jStorage.deleteKey("coupon");
+                     $.jStorage.deleteKey("gifts");
+                     //gifts section 
+                     console.log("cccccccccccccccccccccccccccccccccccccccc");
+                     if ($scope.mycartTable) {
+                         $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+                         $scope.grandTotalAfterDiscount = 0;
+                         //  $.jStorage.set("grandTotal", $scope.grandTotal);
+                     }
+                     //  if ($scope.grandTotal >= $scope.discountSelected.xValue) {
+                     //      //  $scope.grandTotal = $scope.grandTotal - $scope.diif ($scope.mycartTable) {
+                     //      $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+                     //      $scope.grandTotalAfterDiscount = 0;
+                     //      //  $.jStorage.set("grandTotal", $scope.grandTotal);
+                     //  }
+                     if ($scope.grandTotal >= $scope.discountSelected.xValue) {
+                         $scope.gifts = $scope.discountSelected.gifts;
+                         console.log("$scope.gifts", $scope.gifts);
+                         $scope.discountValueObject = {
+                             discountAmount: $scope.grandTotalAfterDiscount,
+                             grandTotalAfterDiscount: $scope.grandTotal,
+                             selectedDiscount: $scope.discountSelected,
+                             totalAmountOfOrder: $scope.total
+                         }
+                         console.log("$scope.discountValueObject", $scope.discountValueObject);
+                         $.jStorage.set("discountValues", $scope.discountValueObject);
+                         //  $.jStorage.set("gifts", $scope.gifts);
+                         //  $scope.grandTotal = $scope.grandTotal - $scope.discountSelected.xValue;
+                         //  $scope.grandTotalAfterDiscount = $scope.discountSelected.xValue;
+                         $scope.Couponmodal.close();
+                         $timeout(function () {
+                             $scope.mycart = $uibModal.open({
+                                 animation: true,
+                                 templateUrl: 'views/modal/mycartmodal.html',
+                                 size: 'md',
+                                 scope: $scope
+                             });
+                         }, 500);
+                         $scope.selectGift = function (gift) {
+                             $.jStorage.set("gifts", gift);
+                             $scope.mycart.close();
+                         }
+                     } else {
+                         alert("Your Cart Total Low to Avail This Discount!!! Shop More to Get This Discount...");
+                     }
+                 } else if ($scope.discountSelected.discountType == "59f1e3327ddd0f0dcda6fe6f") {
+                     //for Buy 1 Get 1 Offer
+                     $.jStorage.deleteKey("coupon");
+                     $.jStorage.deleteKey("gifts");
+                     myService.getAllProductsByDiscount($scope.discountSelected._id, function (data) {
+                         console.log("called api getAllProductsByDiscount", data.products);
+                         var totalCountProductsInB1GXOff = 0;
+                         var totalAmountOfCountProductsInB1GXOff = 0;
+                         var discountProducts = data.products;
+                         var priceOfTwo = 0;
+                         var firstTwoProductsAmountSum;
+                         var iterationNumber = 0;
+                         var totalPriceAdded = 0;
+                         console.log("avinash");
+                         var sortedArray = discountProducts.sort(function (a, b) {
+                             console.log("a", a, "b", b);
+                             return a.price > b.price ? -1 : a.price < b.price ? 1 : 0
+                         });
+                         console.log("sortedArray", sortedArray);
+                         console.log("$scope.mycartTable.products", $scope.mycartTable.products);
+                         var productsInBOGOOffer = [];
+                         var seperateProductsInBOGOOffer = [];
+                         var totalDiscountBOGO = 0;
+                         _.each(sortedArray, function (product) {
+                             _.each($scope.mycartTable.products, function (cartProduct) {
+                                 if (product._id == cartProduct.product._id) {
+                                     for (i = 0; i < cartProduct.quantity; i++) {
+                                         seperateProductsInBOGOOffer.push(cartProduct);
+                                     }
+                                     console.log("seperateProductsInBOGOOffer", seperateProductsInBOGOOffer);
+
+
+                                 }
+                             });
+                         });
+                         var allDiscountedProcuctsTotalQty = 0;
+                         _.each(seperateProductsInBOGOOffer, function (last1) {
+                             allDiscountedProcuctsTotalQty += last1.product.price;
+                         });
+                         console.log("allDiscountedProcuctsTotalQty", allDiscountedProcuctsTotalQty);
+                         var seperateProductsInBOGOOfferLength = seperateProductsInBOGOOffer.length;
+                         var processingArray = seperateProductsInBOGOOffer;
+                         var sumOfPricesToBeDiscard = Math.floor(seperateProductsInBOGOOfferLength / 2);
+                         //  console.log("seperateProductsInBOGOOffer%%%",seperateProductsInBOGOOffer);
+                         console.log("sumOfPricesToBeDiscard", sumOfPricesToBeDiscard);
+                         var totalDiscount = 0;
+                         var iteration = 0;
+
+                         var finalArray = seperateProductsInBOGOOffer.slice(0, -sumOfPricesToBeDiscard);
+                         //  _.takeRight(processingArray, sumOfPricesToBeDiscard);
+                         console.log("finalArray processingArray", finalArray);
+                         if (finalArray) {
+                             console.log("in if");
+                             _.each(finalArray, function (last) {
+                                 console.log("last", last.product.price);
+                                 totalDiscount = totalDiscount + last.product.price;
+                             });
+                             console.log("totalDiscount in if last", totalDiscount);
+                         } else {
+                             console.log("In else");
+                         }
+                         console.log("after if else", allDiscountedProcuctsTotalQty - totalDiscount);
+                         if (sumOfPricesToBeDiscard < 1) {
+                             tC = 0;
+                         } else {
+                             var tC = allDiscountedProcuctsTotalQty - totalDiscount;
+                         }
+                         console.log("tC", tC);
+                         if ($scope.mycartTable) {
+                             $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+                             //  $.jStorage.set("grandTotal", $scope.grandTotal);
+                         }
+                         console.log("$scope.grandTotal", $scope.grandTotal)
+                         $scope.grandTotalAfterDiscount = tC;
+                         console.log("$scope.grandTotalAfterDiscount", $scope.grandTotalAfterDiscount)
+                         $scope.grandTotal = $scope.grandTotal - $scope.grandTotalAfterDiscount;
+                         console.log("$scope.grandTotal last", $scope.grandTotal);
+
+                         $scope.discountValueObject = {
+                             discountAmount: $scope.grandTotalAfterDiscount,
+                             grandTotalAfterDiscount: $scope.grandTotal,
+                             selectedDiscount: $scope.discountSelected,
+                             totalAmountOfOrder: $scope.total
+                         }
+                         console.log("$scope.discountValueObject", $scope.discountValueObject);
+                         $.jStorage.set("discountValues", $scope.discountValueObject);
+
+                         $scope.Couponmodal.close();
+
+                     });
+                 }
+
+
+             } else {
+                 $scope.notSelectedDiscount = true;
+                 console.log("in else  ");
+             }
+         }
+     }
+
+
+
+     //new in switch Case 
+     $scope.applyCouponSubmitSwitchCase = function () {
+         if (!isEmptyObject($scope.discountSelected)) {
+             console.log("$scope.discountSelected in applyCouponSubmit", $scope.discountSelected.discountType);
+             var discountObject = $scope.discountSelected;
+             discountCouponAmount = $scope.discountSelected.xValue;
+             switch ($scope.discountSelected.discountType) {
+                 case "59f06bc7647252477439a1e4":
+                     alert("59f06bc7647252477439a1e4");
+                     $.jStorage.deleteKey("coupon");
+                     $.jStorage.deleteKey("gifts");
+                     if ($scope.mycartTable) {
+                         $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+                         $scope.grandTotalAfterDiscount = 0;
+                         //  $.jStorage.set("grandTotal", $scope.grandTotal);
+                     }
+                     if ($scope.grandTotal >= $scope.discountSelected.yValue) {
+                         var couponObj = {
+                             name: "Coupon 1",
+                             user: "59c5008c34054e4586c59a96",
+                             generatedOrderId: "59c4c57603e1027226e4b575",
+                             usedOrderId: "",
+                             amount: discountCouponAmount,
+                             status: "unUsed",
+                             isActive: "False"
+                         };
+                         console.log(couponObj, "couponObj");
+                         $.jStorage.set("coupon", couponObj);
+                         var jStorageData = $.jStorage.get("coupon");
+                         console.log("jStorageData", jStorageData);
+
+                         //  myService.addCouponByUserFromCart(couponObj, function (data) {
+                         //  console.log("called api addCouponByUserFromCart", data);
+                         //  //send mail to user with coupon code
+                         // //  var totalCountProductsInB1GXOff = 0;
+
+                         //  $scope.Couponmodal.close();
+                         // });
+                         $scope.Couponmodal.close();
+                         //  $scope.grandTotal = $scope.grandTotal - $scope.discountSelected.xValue;
+                         //  $scope.grandTotalAfterDiscount = $scope.discountSelected.xValue;
+                     } else {
+                         alert("Your Cart Total Low to Avail This Discount!!! Shop More to Get This Discount...");
+                     }
+                     break;
+
+                 case "59d329e334d0832185b7f577OLD":
+                     alert("2");
+                     $.jStorage.deleteKey("coupon");
+                     $.jStorage.deleteKey("gifts");
+                     myService.getAllProductsByDiscount($scope.discountSelected._id, function (data) {
+                         console.log("called api getAllProductsByDiscount", data.products);
+                         var totalCountProductsInB1GXOff = 0;
+                         _.each(data.products, function (product) {
+                             _.each($scope.mycartTable.products, function (cartProduct) {
+                                 if (product._id == cartProduct.product._id) {
+                                     totalCountProductsInB1GXOff = totalCountProductsInB1GXOff + cartProduct.quantity;
+                                 }
+                             });
+                         });
+                         if (totalCountProductsInB1GXOff > 1) {
+                             console.log("$scope.grandTotal Before 1", $scope.grandTotal);
+
+                             if ($scope.mycartTable) {
+                                 $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+                                 //  $.jStorage.set("grandTotal", $scope.grandTotal);
+                             }
+
+                             $scope.grandTotal = $scope.grandTotal - $scope.discountSelected.maxDiscountAmount;
+                             $scope.grandTotalAfterDiscount = $scope.discountSelected.maxDiscountAmount;
+                             //  $scope.$watch('grandTotal', function (newValue, oldValue) {
+                             //      $scope.$digest();
+                             //  });
+                             //  $scope.dgetCategoryWithIdiscount="400";
+                             console.log("$scope.grandTotal after 1", $scope.grandTotal);
+                             $scope.Couponmodal.close();
+
+                         } else if (totalCountProductsInB1GXOff == 1) {
+                             console.log("$scope.grandTotal before 2", $scope.grandTotal);
+                             if ($scope.mycartTable) {
+                                 $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+                                 //  $.jStorage.set("grandTotal", $scope.grandTotal);
+                             }
+                             $scope.grandTotal = $scope.grandTotal - $scope.discountSelected.xValue;
+                             $scope.grandTotalAfterDiscount = $scope.discountSelected.xValue;
+                             console.log("$scope.grandTotal after 2", $scope.grandTotal);
+
+                             $scope.Couponmodal.close();
+                         } else {
+                             $scope.grandTotal = 0;
+                             $scope.grandTotalAfterDiscount = 0;
+                             $scope.Couponmodal.close();
+
+                         }
+                     });
+                     break;
+                 case "default":
+                     alert("avinasg");
+             }
+         } else {
+             console.log("in else");
+         }
+     }
+
+
+     //avinash functions end
+
+     $scope.productArrayForDiscount = [];
      if (userId.userId != null) {
          CartService.getCart(userId, function (data) {
              console.log("getcart->data: ", data);
@@ -68842,19 +72074,42 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                  toastr.error("add product to cart", "Error:")
                  $state.go("home");
              }
+             _.forEach($scope.mycartTable.products, function (value) {
+                 console.log("else-", value.product);
+                 $scope.productArrayForDiscount.push(value.product._id);
+
+             });
+             //  $scope.applicableDiscounts($scope.productArrayForDiscount);
              console.log("mycarttableof if: ", $scope.mycartTable);
              //TODO: Calculate actual grand total
-             if ($scope.mycartTable)
+             if ($scope.mycartTable) {
                  $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+                 $scope.grandTotal = $scope.total = $scope.grandTotal.toFixed(2);
+                 //  $.jStorage.set("grandTotal", $scope.grandTotal);
+                 $scope.applicableDiscounts($scope.productArrayForDiscount, $scope.grandTotal);
+             }
+
          });
      } else {
          $scope.mycartTable = $.jStorage.get("cart");
+         //_.each for single product
+         _.forEach($scope.mycartTable.products, function (value) {
+             console.log("else-", value.product);
+             $scope.productArrayForDiscount.push(value.product._id);
 
+         });
+         console.log("$scope.productArrayForDiscount=-=-=-=-=-=-", $scope.productArrayForDiscount);
          if ($scope.mycartTable) {
              $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+             $scope.grandTotal = $scope.total = $scope.grandTotal.toFixed(2);
+             //  $.jStorage.set("grandTotal", $scope.grandTotal);
+             $scope.applicableDiscounts($scope.productArrayForDiscount, $scope.grandTotal);
          }
          console.log("else ran:::", $scope.grandTotal);
      }
+
+
+
      // $scope.mycartTable = {};
      $scope.updateQuantity = function (index, count) {
          // if (ProductService.isProductAvailable(count, $scope.mycartTable.products[index])) {
@@ -68865,6 +72120,9 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
          CartService.updateCartQuantity($scope.mycartTable);
          //TODO: Calculate actual grand total
          $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+         $scope.grandTotal = $scope.total = $scope.grandTotal.toFixed(2);
+         $scope.applyCouponSubmit();
+         //  $scope.grandTotal=$scope.grandTotal-$scope.grandTotalAfterDiscount;
          // }
      }
      console.log("oflinecartinmycartcontroller::::::", $.jStorage.get("cart"))
@@ -68914,13 +72172,23 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
      }
 
      $scope.openCoupon = function () {
-         var Couponmodal = $uibModal.open({
+         $scope.Couponmodal = $uibModal.open({
              animation: true,
              templateUrl: 'views/modal/Coupon.html',
              size: 'md',
-
+             scope: $scope
          });
+         if ($.jStorage.get("userId")) {
+             $scope.loggedUser = true;
+         } else {
+             $scope.loggedUser = false;
+         }
      }
+
+     $scope.disabledRadio = function () {
+
+     }
+
  })
  myApp.controller('searchCtrl', function ($scope, toastr, CartService, $rootScope, $stateParams, $state, $filter, WishlistService, TemplateService, NavigationService,
      SizeService, BannerService, CategoryService, myService, ProductService, $timeout, $uibModal, ModalService, ListingService) {
@@ -68949,107 +72217,180 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
      //  var data = {
      //      slug: $stateParams.id
      //  }
+     NavigationService.getAllDiscounts(function (data) {
+         $scope.discounts = data.data.data.results;
+
+     });
 
      $scope.data1 = {};
      $scope.data1.keyword = $stateParams.id
      $scope.products = [];
      $scope.product = [];
+     $scope.productss = [];
      $scope.data1.skip = 0;
      $scope.data1.limit = 9;
+     $scope.data1.appliedFilters = {};
      $scope.loadingDisable = false;
      $scope.fetching = false;
+     $scope.categories = [];
+     $scope.priceRange = []
+     $scope.appliedFilters = {};
+     $scope.appliedFilters.category = [];
+     $scope.appliedFilters.type = [];
+     $scope.appliedFilters.collection = [];
+     $scope.appliedFilters.size = [];
+     $scope.appliedFilters.style = [];
+     $scope.appliedFilters.color = [];
+     $scope.appliedFilters.fabric = [];
+     $scope.appliedFilters.discount = [];
+     $scope.appliedFilters.page = 1;
+     $scope.filter = {
+         keyword: $scope.data1.keyword,
+         limit: 12,
+         appliedFilters: $scope.appliedFilters
+     }
+     $scope.filter.skip = 0
 
      $scope.globalsSearch = function () {
-         //  console.log("in global search****")
-         ProductService.globalSearch($scope.data1, function (data) {
+         //  console.log("in global search****11111", $scope.filter)
+         //  $scope.filter = {
+         //      keyword: $scope.data1.keyword,
+         //      skip: 0,
+         //      limit: 9,
+         //      appliedFilters: $scope.appliedFilters
+         //  }
+         ProductService.searchWithFilters($scope.filter, function (data) {
              if (!_.isEmpty(data.data.data)) {
-                 $scope.product = _.chunk(data.data.data, 3);
-                 _.each($scope.product, function (n) {
-                     $scope.products.push(n);
+                 _.each(data.data.data.products, function (n) {
+                     $scope.product.push(n);
                  })
+                 //  _.each($scope.product, function (n) {
+                 //      $scope.productss.push(n);
+                 //  })
+                 _.each($scope.product, function (prod) {
+                     prod.size = _.sortBy(prod.size, [function (o) {
+                         return o.order;
+                     }]);
+                     $scope.sortesSize = true;
+                 });
+                 if ($scope.sortesSize) {
+                     $scope.products = _.chunk($scope.product, 3);
+                 }
+                 $scope.filters = data.data.data;
+                 $scope.priceRange.push(data.data.data.price);
+                 $scope.priceRange = _.flattenDeep($scope.priceRange)
+                 $scope.price = {
+                     max: Math.max.apply(null, $scope.priceRange),
+                     min: Math.min.apply(null, $scope.priceRange)
+                 }
+                 $scope.max = $scope.price.max;
+                 $scope.min = $scope.price.min;
                  $scope.loadingDisable = false;
-                 $scope.data1.skip = $scope.data1.skip + 9;
+                 //  $scope.data1.skip = $scope.data1.skip + 9;
+                 $scope.filter.skip = $scope.filter.skip + 9;
+                 if ($scope.product.length <= 0) {
+                     $scope.empty = "No Products Found"
+                 }
+                 if (!_.isEmpty($scope.filters.type)) {
+                     $scope.showType = true;
+                 }
+                 if (!_.isEmpty($scope.filters.color)) {
+                     $scope.showcolor = true;
+                 }
+                 if (!_.isEmpty($scope.filters.prodCollection)) {
+                     $scope.showprodCollection = true;
+                 }
+                 if (!_.isEmpty($scope.filters.fabric)) {
+                     $scope.showfabric = true;
+                 }
+                 if (!_.isEmpty($scope.filters.size)) {
+                     $scope.showsize = true;
+                 }
+                 if (!_.isEmpty($scope.filters.style)) {
+                     $scope.showstyle = true;
+                 }
+             } else if ($scope.filter.appliedFilters.max && $scope.filter.skip == 0 && _.isEmpty(data.data.data)) {
+                 $scope.products = [];
              } else {
-                 $scope.displayMessage = "no products found"
+                 //  $scope.empty = "No Products Found"
+                 //  $scope.products = [];
+                 console.log('enter');
              }
-             $scope.searchFilters();
+             //  if (!_.isEmpty(data.data.data) && $scope.appliedFilters.max || $scope.appliedFilters.min) {
+             //      console.log("##########not empty###")
+             //      $scope.products = _.chunk(data.data.data.products);
+             //  } else {
+             //      $scope.products = [];
+             //  }
+
          })
      }
-
-
 
      $scope.loadMore1 = function () {
          $scope.globalsSearch();
          $scope.loadingDisable = true;
      }
-     $scope.searchFilters = function () {
-         var data = {};
-         $scope.pro = _.flattenDeep($scope.products)
-         _.each($scope.pro, function (n) {
-             data.slug = n.homeCategory.slug;
 
-             CategoryService.getCategoryWithParent(data, function (data) {
-                 $scope.categories = data.data.data;
-                 $scope.filteredProducts($scope.categories[0].slug)
-             })
-         })
-
-     }
-
-     /******getting products based on category******* */
-     $scope.filteredProducts = function (selectedCategory) {
-         $.jStorage.deleteKey("appliedFilters");
-         if ($.jStorage.get("selectedCategory") && selectedCategory != $.jStorage.get("selectedCategory").slug) {
-             $.jStorage.deleteKey("appliedFilters");
-         }
-         var input = {
-             "slug": selectedCategory,
-             "page": 1
-         }
-         $.jStorage.set("selectedCategory", input);
-         /***************retriving filters based on categories and respective filters**************** */
-         ListingService.retriveProductsWithCategory(function (data) {
-
-             if (data.data.data.length == 0) {
-                 $scope.displayMessage = "No Product Found";
-                 //  $scope.products = ""
-
-             } else if (!_.isEmpty(data.data.data)) {
-                 $scope.displayMessage = "";
-                 $scope.productss = _.chunk(data.data.data, 3);
-                 //  console.log("productretruved based on category", data);
-
-                 ListingService.retriveFiltersWithCategory(function (data) {
-                     //  console.log("product category on basis of category", data.data.data)
-                     $scope.filters = data.data.data;
-                     $scope.min = $scope.filters.priceRange[0].min;
-                     $scope.max = $scope.filters.priceRange[0].max;
-                     //  console.log("filters", $scope.filters.priceRange[0].max)
-                     $scope.slider_translate = {
-                         minValue: 0,
-                         maxValue: 100,
-                         options: {
-
-                             floor: $scope.filters.priceRange[0].min,
-                             ceil: $scope.filters.priceRange[0].max,
-                             id: 'translate-slider'
-                             // translate: function (value, id, which) {
-                             //     return '$' + value;
-                             // }
-                         }
-                     };
-                 })
-
-             } else {
-                 toastr.error('There was some error', 'Error');
+     $scope.applyFilters = function (key, filter, key1, filter1) {
+         $scope.product = [];
+         $scope.products = [];
+         console.log("in apply filters", key, "value", filter, "key1", key1, "filter1", filter1);
+         var result = _.indexOf($scope.appliedFilters[key], filter._id);
+         console.log("check result", result)
+         if (result != -1) {
+             _.pullAt($scope.appliedFilters[key], result);
+         } else {
+             if (!_.isArrayLike($scope.appliedFilters[key])) {
+                 $scope.appliedFilters[key] = [];
              }
-         })
+             if (!_.isArrayLike($scope.appliedFilters[key1])) {
+                 $scope.appliedFilters[key1] = [];
+             }
+             if (filter._id) {
+                 $scope.appliedFilters[key].push(filter._id);
+             } else if (!filter._id) {
+                 $scope.appliedFilters[key].push(filter);
+             }
+             $scope.appliedFilters[key1].push(filter1);
+             //  console.log("$$$$$$$$$$$$$in apply filters", $scope.appliedFilters)
+         }
+         $.jStorage.set('appliedFilterss', $scope.appliedFilters);
+
+         //  ProductService.searchWithFilters($scope.filter, function (data) {
+         //      console.log("in apply filters searchWithFilters****", data.data);
+         //      if (!_.isEmpty(data.data.data)) {
+         //          $scope.product = _.chunk(data.data.data.products, 3);
+         //          console.log("in global search****", $scope.product);
+         //          _.each($scope.product, function (n) {
+         //              $scope.products.push(n);
+         //          })
+         //          //  $scope.filters = data.data.data
+         //          //  $scope.loadingDisable = false;
+         //          //  $scope.filter.skip = $scope.filter.skip + 9;
+         //          //  filter.skip = $scope.data1.skip
+         //          if ($scope.product.length <= 0) {
+
+         //              $scope.empty = "No Products Found"
+
+         //          }
+         //      } else {
+         //          //  $scope.empty = "No Products Found"
+
+         //      }
+
+         //  })
+         $scope.filter.skip = 0
+         //  ProductService.searchWithFilters($scope.filter, function (data) {
+
+         //  })
+         $timeout(function () {
+             $scope.globalsSearch();
+         }, 1000);
+         //  $scope.globalsSearch();
      }
-     if ($.jStorage.get('selectedCategory')) {
-         $scope.filteredProducts($.jStorage.get('selectedCategory').slug)
-     }
+
      $rootScope.clickfun = function (product) {
-         console.log(product)
+         console.log("in clickfun", product)
          $scope.compareproduct = $.jStorage.get('compareproduct') ? $.jStorage.get('compareproduct') : [];
          var result = _.find($scope.compareproduct, {
              productId: product.productId
@@ -69076,12 +72417,11 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
      $scope.removeFromCompare = function (prodId) {
 
          var removeCompare = $.jStorage.get("compareproduct");
-         var result = _.remove(removeCompare, {
+         $scope.result = _.remove(removeCompare, {
              productId: prodId
          });
-
+         $scope.compareproduct = removeCompare;
          $.jStorage.set("compareproduct", removeCompare);
-         $state.reload();
      }
 
      /**********logic for checkbox on reload************ */
@@ -69099,65 +72439,11 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
      $scope.gotoComparePage = function () {
          $state.go("compare-products");
      }
-     var appliedFilters = {};
-     /*******retriving products based on filters********* */
-     $scope.applyFilters = function (key, filter) {
 
-         appliedFilters = $.jStorage.get('appliedFilters') ? $.jStorage.get('appliedFilters') : {
-             appliedFilters: {
-                 slug: [],
-                 type: [],
-                 style: [],
-                 color: [],
-                 collection: [],
-                 size: [],
-                 fabric: [],
-             }
-         };
-         console.log(filter, key);
-         var cat = $.jStorage.get("selectedCategory").slug;
-         appliedFilters.appliedFilters.slug = [cat];
-
-         var result = _.indexOf(appliedFilters.appliedFilters[key], filter._id);
-         console.log("check result", result)
-         if (result != -1) {
-             _.pullAt(appliedFilters.appliedFilters[key], result);
-         } else {
-             if (!_.isArrayLike(appliedFilters.appliedFilters[key])) {
-                 appliedFilters.appliedFilters[key] = [];
-             }
-             appliedFilters.appliedFilters[key].push(filter._id);
-         }
-         appliedFilters.page = 1;
-         $.jStorage.set('appliedFilters', appliedFilters)
-
-         console.log("Jstoragefor filters::", $.jStorage.get("appliedFilters"))
-         _.forIn(appliedFilters.appliedFilters, function (val, key, obj) {
-             if (_.isEmpty(val)) {
-                 console.log("key: ", key);
-                 delete appliedFilters.appliedFilters[key];
-             }
-         });
-         console.log("apply filters: ", appliedFilters);
-         ProductService.getProductsWithAppliedFilters(appliedFilters, function (data) {
-             //  console.log("filtersretrived:::", data.data.data);
-             $scope.products = _.chunk(data.data.data.products, 3);
-             $scope.filters = data.data.data.filters;
-
-         })
-
-         //api call
-     }
      /******filters applied automatic if already applied****** */
-     if ($.jStorage.get("appliedFilters")) {
-         ProductService.getProductsWithAppliedFilters($.jStorage.get("appliedFilters"), function (data) {
-             //  console.log("filtersretrived:::", data.data.data);
-             $scope.products = _.chunk(data.data.data.products, 3);
-             $scope.filters = data.data.data.filters;
 
-         })
-     }
      $scope.loadMore = function () {
+         console.log("loadMore:::", loadMore);
          var appliedFilters = $.jStorage.get("appliedFilters");
          appliedFilters.page++;
          ProductService.getProductsWithAppliedFilters(appliedFilters, function (data) {
@@ -69165,22 +72451,41 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
              //  $scope.products.push(_.chunk(data.data.data.products, 3));
              var arrray = _.flattenDeep($scope.products);
              arrray.push(data.data.data.products);
+             _.each(arrray, function (arr) {
+                 arr.size = _.sortBy(arr.size, [function (o) {
+                     return o.order;
+                 }]);
+                 $scope.sortesSize = true;
+             })
              $scope.products = _.chunk(arrray, 3);
              $scope.filters = data.data.data.filters;
          })
      }
      $scope.priceSet = function (min, max) {
-         console.log(min, max)
+         console.log(min, max);
+         $scope.applyFilters('min', min, 'max', max)
+
      }
 
+     //  var input = {
+     //      "slug": $scope.categories[0].slug,
+     //      "page": 1
+     //  }
+     //  console.log("input", input);
+     //  $.jStorage.set("selectedCategory", input);
+
+
+     //  console.log("$.jStorage.set('selectedCategory', input)", $.jStorage.get('selectedCategory'));
+     //  $scope.searchFilters();
 
      /******checking filters after reload***** */
      $scope.checkFilterStatus = function (key, filter) {
-         var appliedFilters = $.jStorage.get("appliedFilters");
+         var appliedFilters = $.jStorage.get("appliedFilterss");
 
          if (appliedFilters) {
-             var result = _.indexOf(appliedFilters.appliedFilters[key], filter);
-
+             //  console.log("appliedFilters", appliedFilters[key], "filter", filter)
+             var result = _.indexOf(appliedFilters[key], filter);
+             //  console.log("result", result)
              if (result != -1) {
                  return true;
              } else {
@@ -69190,6 +72495,7 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
      }
      /********check selected category******** */
      $scope.checkRadioCategory = function (catid) {
+         //  console.log("catid", catid)
          if ($.jStorage.get("selectedCategory"))
              var selectedId = $.jStorage.get("selectedCategory").slug;
 
@@ -69283,7 +72589,56 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
              }
          }
      }
+     $scope.addToWishlist = function (prod) {
+         console.log("addToWishlist", prod);
+         var data = {
+             "product": prod,
+         }
+         myService.addToWishlist(data, function (data) {
+             ModalService.addwishlist();
+         })
+     }
+     $scope.removeWishlist = function (prodId) {
+         var data = {};
+         if ($.jStorage.get("accessToken")) {
+             data.accessToken = $.jStorage.get("accessToken");
+             data.productId = prodId;
+             WishlistService.removeProduct(data, function (data) {
+                 console.log(data);
+                 $state.reload();
+             })
+         } else {
+             myService.removeWishlist(data, function (data) {
+                 $state.reload();
+             })
+         }
+     }
 
+     $scope.addRemoveToWishlist = function (product) {
+         if (userId.userId) {
+
+             var result = _.find($scope.wishlist, {
+                 "productId": product.productId
+             });
+             if (result) {
+                 $scope.removeWishlist(product.productId);
+             } else {
+                 $scope.addToWishlist(product);
+             }
+         } else {
+             $scope.mycart = $.jStorage.get("cart");
+             $scope.wishlist = $.jStorage.get("wishlist")
+             var result = _.find($scope.wishlist, {
+                 "productId": product.productId
+             });
+             if (result) {
+                 console.log("removeWishLst", result)
+                 $scope.removeWishlist(product);
+             } else {
+                 $scope.addToWishlist(product);
+             }
+         }
+     }
      $scope.checkInCart = function (productId) {
 
          if (userId.userId) {
@@ -69337,18 +72692,21 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
 
      // This function is used to display the modal on quck view button
      $scope.quickviewProduct = function (prod) {
-         //  console.log("prod", prod);
+         console.log("prod", prod);
          $scope.product = prod;
-         $scope.sizes = $scope.product.size;
-         //  console.log("$scope.sizes", $scope.sizes);
-         //  $scope.activeButton = $scope.sizes[0].name;
-         $scope.activeButton = $scope.sizes.name;
+         //  $scope.sizes = $scope.product.size;
+         $scope.sizes = _.sortBy($scope.product.size, [function (o) {
+             return o.order;
+         }]);
+         $scope.activeButton = $scope.sizes[0].name;
+         //  $scope.activeButton = $scope.sizes.name;
          $scope.selectedSize = $scope.sizes;
          $scope.arrayCheck = angular.isArray($scope.sizes);
          //  console.log("$scope.arrayCheck", $scope.arrayCheck);
          //  console.log("$scope.selectedSize", $scope.selectedSize);
          $scope.selectedImage = _.sortBy($scope.product.images, ['order'])[0];
          $scope.selectSize = function (sizeObj) {
+             console.log("$scope.selectedSize", sizeObj);
              $scope.activeButton = sizeObj.name;
              $scope.selectedSize = sizeObj;
              var data = {
@@ -69362,7 +72720,7 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                  if (data.data.value) {
                      $scope.product = data.data.data;
                  } else {
-                     $scope.product = {};
+                     //  $scope.product = {};
                      // TODO: show out of stock
                  }
              })
@@ -69383,15 +72741,16 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                  ModalService.addwishlist();
              })
          }
+         $scope.selectedImageIndex = 0;
          $scope.changeImage = function (index) {
-             $scope.selectedImage = $scope.product.images[index];
+             $scope.selectedImageIndex = index;
          };
          $scope.reqQuantity = 1;
          $scope.updateQuantity = function (oper) {
              $scope.reqQuantity += parseInt(oper);
              console.log($scope.reqQuantity)
          }
-         var quickviewProduct = $uibModal.open({
+         $scope.quickviewProduct = $uibModal.open({
              animation: true,
              templateUrl: 'views/modal/quickview-product.html',
              scope: $scope,
@@ -69399,10 +72758,20 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
              windowClass: 'quickview-modal-size'
          });
          $scope.closeModal = function () {
-             quickviewProduct.close();
+             $scope.quickviewProduct.close();
          }
      };
      //End of  modal on quck view button
+     //To open size chart on quick
+     $scope.openSizeChart = function () {
+         $scope.openSizeChartModal = $uibModal.open({
+             animation: true,
+             templateUrl: 'views/modal/size-chart.html',
+             size: 'md',
+             scope: $scope
+         });
+     };
+
      if (_.isEmpty($scope.products))
          $scope.displayMessage = "No Product Found";
 
@@ -69419,6 +72788,7 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
          text: 'Nice Shirt',
          id: 2
      }];
+
      //   $scope.addgridViewSlide = function () {
      //       slides.push({
 
@@ -69428,3 +72798,617 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
      //End of UIB Carousel slider's function for gird view
 
  })
+"function" !== typeof Object.create && (Object.create = function (d) {
+    function h() {}
+    h.prototype = d;
+    return new h
+});
+(function (d, h, l, m) {
+    var k = {
+        init: function (b, a) {
+            var c = this;
+            c.elem = a;
+            c.$elem = d(a);
+            c.imageSrc = c.$elem.data("zoom-image") ? c.$elem.data("zoom-image") : c.$elem.attr("src");
+            c.options = d.extend({}, d.fn.elevateZoom.options, b);
+            c.options.tint && (c.options.lensColour = "none", c.options.lensOpacity = "1");
+            "inner" == c.options.zoomType && (c.options.showLens = !1);
+            c.$elem.parent().removeAttr("title").removeAttr("alt");
+            c.zoomImage = c.imageSrc;
+            c.refresh(1);
+            d("#" + c.options.gallery + " a").click(function (a) {
+                c.options.galleryActiveClass &&
+                    (d("#" + c.options.gallery + " a").removeClass(c.options.galleryActiveClass), d(this).addClass(c.options.galleryActiveClass));
+                a.preventDefault();
+                d(this).data("zoom-image") ? c.zoomImagePre = d(this).data("zoom-image") : c.zoomImagePre = d(this).data("image");
+                c.swaptheimage(d(this).data("image"), c.zoomImagePre);
+                return !1
+            })
+        },
+        refresh: function (b) {
+            var a = this;
+            setTimeout(function () {
+                a.fetch(a.imageSrc)
+            }, b || a.options.refresh)
+        },
+        fetch: function (b) {
+            var a = this,
+                c = new Image;
+            c.onload = function () {
+                a.largeWidth = c.width;
+                a.largeHeight =
+                    c.height;
+                a.startZoom();
+                a.currentImage = a.imageSrc;
+                a.options.onZoomedImageLoaded(a.$elem)
+            };
+            c.src = b
+        },
+        startZoom: function () {
+            var b = this;
+            b.nzWidth = b.$elem.width();
+            b.nzHeight = b.$elem.height();
+            b.isWindowActive = !1;
+            b.isLensActive = !1;
+            b.isTintActive = !1;
+            b.overWindow = !1;
+            b.options.imageCrossfade && (b.zoomWrap = b.$elem.wrap('<div style="height:' + b.nzHeight + "px;width:" + b.nzWidth + 'px;" class="zoomWrapper" />'), b.$elem.css("position", "absolute"));
+            b.zoomLock = 1;
+            b.scrollingLock = !1;
+            b.changeBgSize = !1;
+            b.currentZoomLevel = b.options.zoomLevel;
+            b.nzOffset = b.$elem.offset();
+            b.widthRatio = b.largeWidth / b.currentZoomLevel / b.nzWidth;
+            b.heightRatio = b.largeHeight / b.currentZoomLevel / b.nzHeight;
+            "window" == b.options.zoomType && (b.zoomWindowStyle = "overflow: hidden;background-position: 0px 0px;text-align:center;background-color: " + String(b.options.zoomWindowBgColour) + ";width: " + String(b.options.zoomWindowWidth) + "px;height: " + String(b.options.zoomWindowHeight) + "px;float: left;background-size: " + b.largeWidth / b.currentZoomLevel + "px " + b.largeHeight / b.currentZoomLevel +
+                "px;display: none;z-index:100;border: " + String(b.options.borderSize) + "px solid " + b.options.borderColour + ";background-repeat: no-repeat;position: absolute;");
+            if ("inner" == b.options.zoomType) {
+                var a = b.$elem.css("border-left-width");
+                b.zoomWindowStyle = "overflow: hidden;margin-left: " + String(a) + ";margin-top: " + String(a) + ";background-position: 0px 0px;width: " + String(b.nzWidth) + "px;height: " + String(b.nzHeight) + "px;float: left;display: none;cursor:" + b.options.cursor + ";px solid " + b.options.borderColour + ";background-repeat: no-repeat;position: absolute;"
+            }
+            "window" ==
+            b.options.zoomType && (lensHeight = b.nzHeight < b.options.zoomWindowWidth / b.widthRatio ? b.nzHeight : String(b.options.zoomWindowHeight / b.heightRatio), lensWidth = b.largeWidth < b.options.zoomWindowWidth ? b.nzWidth : b.options.zoomWindowWidth / b.widthRatio, b.lensStyle = "background-position: 0px 0px;width: " + String(b.options.zoomWindowWidth / b.widthRatio) + "px;height: " + String(b.options.zoomWindowHeight / b.heightRatio) + "px;float: right;display: none;overflow: hidden;z-index: 999;-webkit-transform: translateZ(0);opacity:" +
+                b.options.lensOpacity + ";filter: alpha(opacity = " + 100 * b.options.lensOpacity + "); zoom:1;width:" + lensWidth + "px;height:" + lensHeight + "px;background-color:" + b.options.lensColour + ";cursor:" + b.options.cursor + ";border: " + b.options.lensBorderSize + "px solid " + b.options.lensBorderColour + ";background-repeat: no-repeat;position: absolute;");
+            b.tintStyle = "display: block;position: absolute;background-color: " + b.options.tintColour + ";filter:alpha(opacity=0);opacity: 0;width: " + b.nzWidth + "px;height: " + b.nzHeight + "px;";
+            b.lensRound = "";
+            "lens" == b.options.zoomType && (b.lensStyle = "background-position: 0px 0px;float: left;display: none;border: " + String(b.options.borderSize) + "px solid " + b.options.borderColour + ";width:" + String(b.options.lensSize) + "px;height:" + String(b.options.lensSize) + "px;background-repeat: no-repeat;position: absolute;");
+            "round" == b.options.lensShape && (b.lensRound = "border-top-left-radius: " + String(b.options.lensSize / 2 + b.options.borderSize) + "px;border-top-right-radius: " + String(b.options.lensSize / 2 + b.options.borderSize) +
+                "px;border-bottom-left-radius: " + String(b.options.lensSize / 2 + b.options.borderSize) + "px;border-bottom-right-radius: " + String(b.options.lensSize / 2 + b.options.borderSize) + "px;");
+            b.zoomContainer = d('<div class="zoomContainer" style="-webkit-transform: translateZ(0);position:absolute;left:' + b.nzOffset.left + "px;top:" + b.nzOffset.top + "px;height:" + b.nzHeight + "px;width:" + b.nzWidth + 'px;"></div>');
+            d("body").append(b.zoomContainer);
+            b.options.containLensZoom && "lens" == b.options.zoomType && b.zoomContainer.css("overflow",
+                "hidden");
+            "inner" != b.options.zoomType && (b.zoomLens = d("<div class='zoomLens' style='" + b.lensStyle + b.lensRound + "'>&nbsp;</div>").appendTo(b.zoomContainer).click(function () {
+                b.$elem.trigger("click")
+            }), b.options.tint && (b.tintContainer = d("<div/>").addClass("tintContainer"), b.zoomTint = d("<div class='zoomTint' style='" + b.tintStyle + "'></div>"), b.zoomLens.wrap(b.tintContainer), b.zoomTintcss = b.zoomLens.after(b.zoomTint), b.zoomTintImage = d('<img style="position: absolute; left: 0px; top: 0px; max-width: none; width: ' +
+                b.nzWidth + "px; height: " + b.nzHeight + 'px;" src="' + b.imageSrc + '">').appendTo(b.zoomLens).click(function () {
+                b.$elem.trigger("click")
+            })));
+            isNaN(b.options.zoomWindowPosition) ? b.zoomWindow = d("<div style='z-index:999;left:" + b.windowOffsetLeft + "px;top:" + b.windowOffsetTop + "px;" + b.zoomWindowStyle + "' class='zoomWindow'>&nbsp;</div>").appendTo("body").click(function () {
+                b.$elem.trigger("click")
+            }) : b.zoomWindow = d("<div style='z-index:999;left:" + b.windowOffsetLeft + "px;top:" + b.windowOffsetTop + "px;" + b.zoomWindowStyle +
+                "' class='zoomWindow'>&nbsp;</div>").appendTo(b.zoomContainer).click(function () {
+                b.$elem.trigger("click")
+            });
+            b.zoomWindowContainer = d("<div/>").addClass("zoomWindowContainer").css("width", b.options.zoomWindowWidth);
+            b.zoomWindow.wrap(b.zoomWindowContainer);
+            "lens" == b.options.zoomType && b.zoomLens.css({
+                backgroundImage: "url('" + b.imageSrc + "')"
+            });
+            "window" == b.options.zoomType && b.zoomWindow.css({
+                backgroundImage: "url('" + b.imageSrc + "')"
+            });
+            "inner" == b.options.zoomType && b.zoomWindow.css({
+                backgroundImage: "url('" + b.imageSrc +
+                    "')"
+            });
+            b.$elem.bind("touchmove", function (a) {
+                a.preventDefault();
+                b.setPosition(a.originalEvent.touches[0] || a.originalEvent.changedTouches[0])
+            });
+            b.zoomContainer.bind("touchmove", function (a) {
+                "inner" == b.options.zoomType && b.showHideWindow("show");
+                a.preventDefault();
+                b.setPosition(a.originalEvent.touches[0] || a.originalEvent.changedTouches[0])
+            });
+            b.zoomContainer.bind("touchend", function (a) {
+                b.showHideWindow("hide");
+                b.options.showLens && b.showHideLens("hide");
+                b.options.tint && "inner" != b.options.zoomType && b.showHideTint("hide")
+            });
+            b.$elem.bind("touchend", function (a) {
+                b.showHideWindow("hide");
+                b.options.showLens && b.showHideLens("hide");
+                b.options.tint && "inner" != b.options.zoomType && b.showHideTint("hide")
+            });
+            b.options.showLens && (b.zoomLens.bind("touchmove", function (a) {
+                a.preventDefault();
+                b.setPosition(a.originalEvent.touches[0] || a.originalEvent.changedTouches[0])
+            }), b.zoomLens.bind("touchend", function (a) {
+                b.showHideWindow("hide");
+                b.options.showLens && b.showHideLens("hide");
+                b.options.tint && "inner" != b.options.zoomType && b.showHideTint("hide")
+            }));
+            b.$elem.bind("mousemove", function (a) {
+                !1 == b.overWindow && b.setElements("show");
+                if (b.lastX !== a.clientX || b.lastY !== a.clientY) b.setPosition(a), b.currentLoc = a;
+                b.lastX = a.clientX;
+                b.lastY = a.clientY
+            });
+            b.zoomContainer.bind("mousemove", function (a) {
+                !1 == b.overWindow && b.setElements("show");
+                if (b.lastX !== a.clientX || b.lastY !== a.clientY) b.setPosition(a), b.currentLoc = a;
+                b.lastX = a.clientX;
+                b.lastY = a.clientY
+            });
+            "inner" != b.options.zoomType && b.zoomLens.bind("mousemove", function (a) {
+                if (b.lastX !== a.clientX || b.lastY !== a.clientY) b.setPosition(a),
+                    b.currentLoc = a;
+                b.lastX = a.clientX;
+                b.lastY = a.clientY
+            });
+            b.options.tint && "inner" != b.options.zoomType && b.zoomTint.bind("mousemove", function (a) {
+                if (b.lastX !== a.clientX || b.lastY !== a.clientY) b.setPosition(a), b.currentLoc = a;
+                b.lastX = a.clientX;
+                b.lastY = a.clientY
+            });
+            "inner" == b.options.zoomType && b.zoomWindow.bind("mousemove", function (a) {
+                if (b.lastX !== a.clientX || b.lastY !== a.clientY) b.setPosition(a), b.currentLoc = a;
+                b.lastX = a.clientX;
+                b.lastY = a.clientY
+            });
+            b.zoomContainer.add(b.$elem).mouseenter(function () {
+                !1 == b.overWindow &&
+                    b.setElements("show")
+            }).mouseleave(function () {
+                b.scrollLock || b.setElements("hide")
+            });
+            "inner" != b.options.zoomType && b.zoomWindow.mouseenter(function () {
+                b.overWindow = !0;
+                b.setElements("hide")
+            }).mouseleave(function () {
+                b.overWindow = !1
+            });
+            b.minZoomLevel = b.options.minZoomLevel ? b.options.minZoomLevel : 2 * b.options.scrollZoomIncrement;
+            b.options.scrollZoom && b.zoomContainer.add(b.$elem).bind("mousewheel DOMMouseScroll MozMousePixelScroll", function (a) {
+                b.scrollLock = !0;
+                clearTimeout(d.data(this, "timer"));
+                d.data(this, "timer",
+                    setTimeout(function () {
+                        b.scrollLock = !1
+                    }, 250));
+                var e = a.originalEvent.wheelDelta || -1 * a.originalEvent.detail;
+                a.stopImmediatePropagation();
+                a.stopPropagation();
+                a.preventDefault();
+                0 < e / 120 ? b.currentZoomLevel >= b.minZoomLevel && b.changeZoomLevel(b.currentZoomLevel - b.options.scrollZoomIncrement) : b.options.maxZoomLevel ? b.currentZoomLevel <= b.options.maxZoomLevel && b.changeZoomLevel(parseFloat(b.currentZoomLevel) + b.options.scrollZoomIncrement) : b.changeZoomLevel(parseFloat(b.currentZoomLevel) + b.options.scrollZoomIncrement);
+                return !1
+            })
+        },
+        setElements: function (b) {
+            if (!this.options.zoomEnabled) return !1;
+            "show" == b && this.isWindowSet && ("inner" == this.options.zoomType && this.showHideWindow("show"), "window" == this.options.zoomType && this.showHideWindow("show"), this.options.showLens && this.showHideLens("show"), this.options.tint && "inner" != this.options.zoomType && this.showHideTint("show"));
+            "hide" == b && ("window" == this.options.zoomType && this.showHideWindow("hide"), this.options.tint || this.showHideWindow("hide"), this.options.showLens && this.showHideLens("hide"),
+                this.options.tint && this.showHideTint("hide"))
+        },
+        setPosition: function (b) {
+            if (!this.options.zoomEnabled) return !1;
+            this.nzHeight = this.$elem.height();
+            this.nzWidth = this.$elem.width();
+            this.nzOffset = this.$elem.offset();
+            this.options.tint && "inner" != this.options.zoomType && (this.zoomTint.css({
+                top: 0
+            }), this.zoomTint.css({
+                left: 0
+            }));
+            this.options.responsive && !this.options.scrollZoom && this.options.showLens && (lensHeight = this.nzHeight < this.options.zoomWindowWidth / this.widthRatio ? this.nzHeight : String(this.options.zoomWindowHeight /
+                this.heightRatio), lensWidth = this.largeWidth < this.options.zoomWindowWidth ? this.nzWidth : this.options.zoomWindowWidth / this.widthRatio, this.widthRatio = this.largeWidth / this.nzWidth, this.heightRatio = this.largeHeight / this.nzHeight, "lens" != this.options.zoomType && (lensHeight = this.nzHeight < this.options.zoomWindowWidth / this.widthRatio ? this.nzHeight : String(this.options.zoomWindowHeight / this.heightRatio), lensWidth = this.options.zoomWindowWidth < this.options.zoomWindowWidth ? this.nzWidth : this.options.zoomWindowWidth /
+                this.widthRatio, this.zoomLens.css("width", lensWidth), this.zoomLens.css("height", lensHeight), this.options.tint && (this.zoomTintImage.css("width", this.nzWidth), this.zoomTintImage.css("height", this.nzHeight))), "lens" == this.options.zoomType && this.zoomLens.css({
+                width: String(this.options.lensSize) + "px",
+                height: String(this.options.lensSize) + "px"
+            }));
+            this.zoomContainer.css({
+                top: this.nzOffset.top
+            });
+            this.zoomContainer.css({
+                left: this.nzOffset.left
+            });
+            this.mouseLeft = parseInt(b.pageX - this.nzOffset.left);
+            this.mouseTop =
+                parseInt(b.pageY - this.nzOffset.top);
+            "window" == this.options.zoomType && (this.Etoppos = this.mouseTop < this.zoomLens.height() / 2, this.Eboppos = this.mouseTop > this.nzHeight - this.zoomLens.height() / 2 - 2 * this.options.lensBorderSize, this.Eloppos = this.mouseLeft < 0 + this.zoomLens.width() / 2, this.Eroppos = this.mouseLeft > this.nzWidth - this.zoomLens.width() / 2 - 2 * this.options.lensBorderSize);
+            "inner" == this.options.zoomType && (this.Etoppos = this.mouseTop < this.nzHeight / 2 / this.heightRatio, this.Eboppos = this.mouseTop > this.nzHeight -
+                this.nzHeight / 2 / this.heightRatio, this.Eloppos = this.mouseLeft < 0 + this.nzWidth / 2 / this.widthRatio, this.Eroppos = this.mouseLeft > this.nzWidth - this.nzWidth / 2 / this.widthRatio - 2 * this.options.lensBorderSize);
+            0 >= this.mouseLeft || 0 > this.mouseTop || this.mouseLeft > this.nzWidth || this.mouseTop > this.nzHeight ? this.setElements("hide") : (this.options.showLens && (this.lensLeftPos = String(this.mouseLeft - this.zoomLens.width() / 2), this.lensTopPos = String(this.mouseTop - this.zoomLens.height() / 2)), this.Etoppos && (this.lensTopPos = 0),
+                this.Eloppos && (this.tintpos = this.lensLeftPos = this.windowLeftPos = 0), "window" == this.options.zoomType && (this.Eboppos && (this.lensTopPos = Math.max(this.nzHeight - this.zoomLens.height() - 2 * this.options.lensBorderSize, 0)), this.Eroppos && (this.lensLeftPos = this.nzWidth - this.zoomLens.width() - 2 * this.options.lensBorderSize)), "inner" == this.options.zoomType && (this.Eboppos && (this.lensTopPos = Math.max(this.nzHeight - 2 * this.options.lensBorderSize, 0)), this.Eroppos && (this.lensLeftPos = this.nzWidth - this.nzWidth - 2 * this.options.lensBorderSize)),
+                "lens" == this.options.zoomType && (this.windowLeftPos = String(-1 * ((b.pageX - this.nzOffset.left) * this.widthRatio - this.zoomLens.width() / 2)), this.windowTopPos = String(-1 * ((b.pageY - this.nzOffset.top) * this.heightRatio - this.zoomLens.height() / 2)), this.zoomLens.css({
+                    backgroundPosition: this.windowLeftPos + "px " + this.windowTopPos + "px"
+                }), this.changeBgSize && (this.nzHeight > this.nzWidth ? ("lens" == this.options.zoomType && this.zoomLens.css({
+                    "background-size": this.largeWidth / this.newvalueheight + "px " + this.largeHeight / this.newvalueheight +
+                        "px"
+                }), this.zoomWindow.css({
+                    "background-size": this.largeWidth / this.newvalueheight + "px " + this.largeHeight / this.newvalueheight + "px"
+                })) : ("lens" == this.options.zoomType && this.zoomLens.css({
+                    "background-size": this.largeWidth / this.newvaluewidth + "px " + this.largeHeight / this.newvaluewidth + "px"
+                }), this.zoomWindow.css({
+                    "background-size": this.largeWidth / this.newvaluewidth + "px " + this.largeHeight / this.newvaluewidth + "px"
+                })), this.changeBgSize = !1), this.setWindowPostition(b)), this.options.tint && "inner" != this.options.zoomType &&
+                this.setTintPosition(b), "window" == this.options.zoomType && this.setWindowPostition(b), "inner" == this.options.zoomType && this.setWindowPostition(b), this.options.showLens && (this.fullwidth && "lens" != this.options.zoomType && (this.lensLeftPos = 0), this.zoomLens.css({
+                    left: this.lensLeftPos + "px",
+                    top: this.lensTopPos + "px"
+                })))
+        },
+        showHideWindow: function (b) {
+            "show" != b || this.isWindowActive || (this.options.zoomWindowFadeIn ? this.zoomWindow.stop(!0, !0, !1).fadeIn(this.options.zoomWindowFadeIn) : this.zoomWindow.show(), this.isWindowActive = !0);
+            "hide" == b && this.isWindowActive && (this.options.zoomWindowFadeOut ? this.zoomWindow.stop(!0, !0).fadeOut(this.options.zoomWindowFadeOut) : this.zoomWindow.hide(), this.isWindowActive = !1)
+        },
+        showHideLens: function (b) {
+            "show" != b || this.isLensActive || (this.options.lensFadeIn ? this.zoomLens.stop(!0, !0, !1).fadeIn(this.options.lensFadeIn) : this.zoomLens.show(), this.isLensActive = !0);
+            "hide" == b && this.isLensActive && (this.options.lensFadeOut ? this.zoomLens.stop(!0, !0).fadeOut(this.options.lensFadeOut) : this.zoomLens.hide(),
+                this.isLensActive = !1)
+        },
+        showHideTint: function (b) {
+            "show" != b || this.isTintActive || (this.options.zoomTintFadeIn ? this.zoomTint.css({
+                opacity: this.options.tintOpacity
+            }).animate().stop(!0, !0).fadeIn("slow") : (this.zoomTint.css({
+                opacity: this.options.tintOpacity
+            }).animate(), this.zoomTint.show()), this.isTintActive = !0);
+            "hide" == b && this.isTintActive && (this.options.zoomTintFadeOut ? this.zoomTint.stop(!0, !0).fadeOut(this.options.zoomTintFadeOut) : this.zoomTint.hide(), this.isTintActive = !1)
+        },
+        setLensPostition: function (b) {},
+        setWindowPostition: function (b) {
+            var a = this;
+            if (isNaN(a.options.zoomWindowPosition)) a.externalContainer = d("#" + a.options.zoomWindowPosition), a.externalContainerWidth = a.externalContainer.width(), a.externalContainerHeight = a.externalContainer.height(), a.externalContainerOffset = a.externalContainer.offset(), a.windowOffsetTop = a.externalContainerOffset.top, a.windowOffsetLeft = a.externalContainerOffset.left;
+            else switch (a.options.zoomWindowPosition) {
+                case 1:
+                    a.windowOffsetTop = a.options.zoomWindowOffety;
+                    a.windowOffsetLeft = +a.nzWidth;
+                    break;
+                case 2:
+                    a.options.zoomWindowHeight > a.nzHeight && (a.windowOffsetTop = -1 * (a.options.zoomWindowHeight / 2 - a.nzHeight / 2), a.windowOffsetLeft = a.nzWidth);
+                    break;
+                case 3:
+                    a.windowOffsetTop = a.nzHeight - a.zoomWindow.height() - 2 * a.options.borderSize;
+                    a.windowOffsetLeft = a.nzWidth;
+                    break;
+                case 4:
+                    a.windowOffsetTop = a.nzHeight;
+                    a.windowOffsetLeft = a.nzWidth;
+                    break;
+                case 5:
+                    a.windowOffsetTop = a.nzHeight;
+                    a.windowOffsetLeft = a.nzWidth - a.zoomWindow.width() - 2 * a.options.borderSize;
+                    break;
+                case 6:
+                    a.options.zoomWindowHeight >
+                        a.nzHeight && (a.windowOffsetTop = a.nzHeight, a.windowOffsetLeft = -1 * (a.options.zoomWindowWidth / 2 - a.nzWidth / 2 + 2 * a.options.borderSize));
+                    break;
+                case 7:
+                    a.windowOffsetTop = a.nzHeight;
+                    a.windowOffsetLeft = 0;
+                    break;
+                case 8:
+                    a.windowOffsetTop = a.nzHeight;
+                    a.windowOffsetLeft = -1 * (a.zoomWindow.width() + 2 * a.options.borderSize);
+                    break;
+                case 9:
+                    a.windowOffsetTop = a.nzHeight - a.zoomWindow.height() - 2 * a.options.borderSize;
+                    a.windowOffsetLeft = -1 * (a.zoomWindow.width() + 2 * a.options.borderSize);
+                    break;
+                case 10:
+                    a.options.zoomWindowHeight > a.nzHeight &&
+                        (a.windowOffsetTop = -1 * (a.options.zoomWindowHeight / 2 - a.nzHeight / 2), a.windowOffsetLeft = -1 * (a.zoomWindow.width() + 2 * a.options.borderSize));
+                    break;
+                case 11:
+                    a.windowOffsetTop = a.options.zoomWindowOffety;
+                    a.windowOffsetLeft = -1 * (a.zoomWindow.width() + 2 * a.options.borderSize);
+                    break;
+                case 12:
+                    a.windowOffsetTop = -1 * (a.zoomWindow.height() + 2 * a.options.borderSize);
+                    a.windowOffsetLeft = -1 * (a.zoomWindow.width() + 2 * a.options.borderSize);
+                    break;
+                case 13:
+                    a.windowOffsetTop = -1 * (a.zoomWindow.height() + 2 * a.options.borderSize);
+                    a.windowOffsetLeft =
+                        0;
+                    break;
+                case 14:
+                    a.options.zoomWindowHeight > a.nzHeight && (a.windowOffsetTop = -1 * (a.zoomWindow.height() + 2 * a.options.borderSize), a.windowOffsetLeft = -1 * (a.options.zoomWindowWidth / 2 - a.nzWidth / 2 + 2 * a.options.borderSize));
+                    break;
+                case 15:
+                    a.windowOffsetTop = -1 * (a.zoomWindow.height() + 2 * a.options.borderSize);
+                    a.windowOffsetLeft = a.nzWidth - a.zoomWindow.width() - 2 * a.options.borderSize;
+                    break;
+                case 16:
+                    a.windowOffsetTop = -1 * (a.zoomWindow.height() + 2 * a.options.borderSize);
+                    a.windowOffsetLeft = a.nzWidth;
+                    break;
+                default:
+                    a.windowOffsetTop =
+                        a.options.zoomWindowOffety, a.windowOffsetLeft = a.nzWidth
+            }
+            a.isWindowSet = !0;
+            a.windowOffsetTop += a.options.zoomWindowOffety;
+            a.windowOffsetLeft += a.options.zoomWindowOffetx;
+            a.zoomWindow.css({
+                top: a.windowOffsetTop
+            });
+            a.zoomWindow.css({
+                left: a.windowOffsetLeft
+            });
+            "inner" == a.options.zoomType && (a.zoomWindow.css({
+                top: 0
+            }), a.zoomWindow.css({
+                left: 0
+            }));
+            a.windowLeftPos = String(-1 * ((b.pageX - a.nzOffset.left) * a.widthRatio - a.zoomWindow.width() / 2));
+            a.windowTopPos = String(-1 * ((b.pageY - a.nzOffset.top) * a.heightRatio - a.zoomWindow.height() /
+                2));
+            a.Etoppos && (a.windowTopPos = 0);
+            a.Eloppos && (a.windowLeftPos = 0);
+            a.Eboppos && (a.windowTopPos = -1 * (a.largeHeight / a.currentZoomLevel - a.zoomWindow.height()));
+            a.Eroppos && (a.windowLeftPos = -1 * (a.largeWidth / a.currentZoomLevel - a.zoomWindow.width()));
+            a.fullheight && (a.windowTopPos = 0);
+            a.fullwidth && (a.windowLeftPos = 0);
+            if ("window" == a.options.zoomType || "inner" == a.options.zoomType) 1 == a.zoomLock && (1 >= a.widthRatio && (a.windowLeftPos = 0), 1 >= a.heightRatio && (a.windowTopPos = 0)), a.largeHeight < a.options.zoomWindowHeight && (a.windowTopPos =
+                0), a.largeWidth < a.options.zoomWindowWidth && (a.windowLeftPos = 0), a.options.easing ? (a.xp || (a.xp = 0), a.yp || (a.yp = 0), a.loop || (a.loop = setInterval(function () {
+                a.xp += (a.windowLeftPos - a.xp) / a.options.easingAmount;
+                a.yp += (a.windowTopPos - a.yp) / a.options.easingAmount;
+                a.scrollingLock ? (clearInterval(a.loop), a.xp = a.windowLeftPos, a.yp = a.windowTopPos, a.xp = -1 * ((b.pageX - a.nzOffset.left) * a.widthRatio - a.zoomWindow.width() / 2), a.yp = -1 * ((b.pageY - a.nzOffset.top) * a.heightRatio - a.zoomWindow.height() / 2), a.changeBgSize && (a.nzHeight >
+                    a.nzWidth ? ("lens" == a.options.zoomType && a.zoomLens.css({
+                        "background-size": a.largeWidth / a.newvalueheight + "px " + a.largeHeight / a.newvalueheight + "px"
+                    }), a.zoomWindow.css({
+                        "background-size": a.largeWidth / a.newvalueheight + "px " + a.largeHeight / a.newvalueheight + "px"
+                    })) : ("lens" != a.options.zoomType && a.zoomLens.css({
+                        "background-size": a.largeWidth / a.newvaluewidth + "px " + a.largeHeight / a.newvalueheight + "px"
+                    }), a.zoomWindow.css({
+                        "background-size": a.largeWidth / a.newvaluewidth + "px " + a.largeHeight / a.newvaluewidth + "px"
+                    })),
+                    a.changeBgSize = !1), a.zoomWindow.css({
+                    backgroundPosition: a.windowLeftPos + "px " + a.windowTopPos + "px"
+                }), a.scrollingLock = !1, a.loop = !1) : (a.changeBgSize && (a.nzHeight > a.nzWidth ? ("lens" == a.options.zoomType && a.zoomLens.css({
+                    "background-size": a.largeWidth / a.newvalueheight + "px " + a.largeHeight / a.newvalueheight + "px"
+                }), a.zoomWindow.css({
+                    "background-size": a.largeWidth / a.newvalueheight + "px " + a.largeHeight / a.newvalueheight + "px"
+                })) : ("lens" != a.options.zoomType && a.zoomLens.css({
+                    "background-size": a.largeWidth / a.newvaluewidth +
+                        "px " + a.largeHeight / a.newvaluewidth + "px"
+                }), a.zoomWindow.css({
+                    "background-size": a.largeWidth / a.newvaluewidth + "px " + a.largeHeight / a.newvaluewidth + "px"
+                })), a.changeBgSize = !1), a.zoomWindow.css({
+                    backgroundPosition: a.xp + "px " + a.yp + "px"
+                }))
+            }, 16))) : (a.changeBgSize && (a.nzHeight > a.nzWidth ? ("lens" == a.options.zoomType && a.zoomLens.css({
+                "background-size": a.largeWidth / a.newvalueheight + "px " + a.largeHeight / a.newvalueheight + "px"
+            }), a.zoomWindow.css({
+                "background-size": a.largeWidth / a.newvalueheight + "px " + a.largeHeight /
+                    a.newvalueheight + "px"
+            })) : ("lens" == a.options.zoomType && a.zoomLens.css({
+                "background-size": a.largeWidth / a.newvaluewidth + "px " + a.largeHeight / a.newvaluewidth + "px"
+            }), a.largeHeight / a.newvaluewidth < a.options.zoomWindowHeight ? a.zoomWindow.css({
+                "background-size": a.largeWidth / a.newvaluewidth + "px " + a.largeHeight / a.newvaluewidth + "px"
+            }) : a.zoomWindow.css({
+                "background-size": a.largeWidth / a.newvalueheight + "px " + a.largeHeight / a.newvalueheight + "px"
+            })), a.changeBgSize = !1), a.zoomWindow.css({
+                backgroundPosition: a.windowLeftPos +
+                    "px " + a.windowTopPos + "px"
+            }))
+        },
+        setTintPosition: function (b) {
+            this.nzOffset = this.$elem.offset();
+            this.tintpos = String(-1 * (b.pageX - this.nzOffset.left - this.zoomLens.width() / 2));
+            this.tintposy = String(-1 * (b.pageY - this.nzOffset.top - this.zoomLens.height() / 2));
+            this.Etoppos && (this.tintposy = 0);
+            this.Eloppos && (this.tintpos = 0);
+            this.Eboppos && (this.tintposy = -1 * (this.nzHeight - this.zoomLens.height() - 2 * this.options.lensBorderSize));
+            this.Eroppos && (this.tintpos = -1 * (this.nzWidth - this.zoomLens.width() - 2 * this.options.lensBorderSize));
+            this.options.tint && (this.fullheight && (this.tintposy = 0), this.fullwidth && (this.tintpos = 0), this.zoomTintImage.css({
+                left: this.tintpos + "px"
+            }), this.zoomTintImage.css({
+                top: this.tintposy + "px"
+            }))
+        },
+        swaptheimage: function (b, a) {
+            var c = this,
+                e = new Image;
+            c.options.loadingIcon && (c.spinner = d("<div style=\"background: url('" + c.options.loadingIcon + "') no-repeat center;height:" + c.nzHeight + "px;width:" + c.nzWidth + 'px;z-index: 2000;position: absolute; background-position: center center;"></div>'), c.$elem.after(c.spinner));
+            c.options.onImageSwap(c.$elem);
+            e.onload = function () {
+                c.largeWidth = e.width;
+                c.largeHeight = e.height;
+                c.zoomImage = a;
+                c.zoomWindow.css({
+                    "background-size": c.largeWidth + "px " + c.largeHeight + "px"
+                });
+                c.zoomWindow.css({
+                    "background-size": c.largeWidth + "px " + c.largeHeight + "px"
+                });
+                c.swapAction(b, a)
+            };
+            e.src = a
+        },
+        swapAction: function (b, a) {
+            var c = this,
+                e = new Image;
+            e.onload = function () {
+                c.nzHeight = e.height;
+                c.nzWidth = e.width;
+                c.options.onImageSwapComplete(c.$elem);
+                c.doneCallback()
+            };
+            e.src = b;
+            c.currentZoomLevel = c.options.zoomLevel;
+            c.options.maxZoomLevel = !1;
+            "lens" == c.options.zoomType && c.zoomLens.css({
+                backgroundImage: "url('" + a + "')"
+            });
+            "window" == c.options.zoomType && c.zoomWindow.css({
+                backgroundImage: "url('" + a + "')"
+            });
+            "inner" == c.options.zoomType && c.zoomWindow.css({
+                backgroundImage: "url('" + a + "')"
+            });
+            c.currentImage = a;
+            if (c.options.imageCrossfade) {
+                var f = c.$elem,
+                    g = f.clone();
+                c.$elem.attr("src", b);
+                c.$elem.after(g);
+                g.stop(!0).fadeOut(c.options.imageCrossfade, function () {
+                    d(this).remove()
+                });
+                c.$elem.width("auto").removeAttr("width");
+                c.$elem.height("auto").removeAttr("height");
+                f.fadeIn(c.options.imageCrossfade);
+                c.options.tint && "inner" != c.options.zoomType && (f = c.zoomTintImage, g = f.clone(), c.zoomTintImage.attr("src", a), c.zoomTintImage.after(g), g.stop(!0).fadeOut(c.options.imageCrossfade, function () {
+                    d(this).remove()
+                }), f.fadeIn(c.options.imageCrossfade), c.zoomTint.css({
+                    height: c.$elem.height()
+                }), c.zoomTint.css({
+                    width: c.$elem.width()
+                }));
+                c.zoomContainer.css("height", c.$elem.height());
+                c.zoomContainer.css("width", c.$elem.width());
+                "inner" != c.options.zoomType || c.options.constrainType ||
+                    (c.zoomWrap.parent().css("height", c.$elem.height()), c.zoomWrap.parent().css("width", c.$elem.width()), c.zoomWindow.css("height", c.$elem.height()), c.zoomWindow.css("width", c.$elem.width()))
+            } else c.$elem.attr("src", b), c.options.tint && (c.zoomTintImage.attr("src", a), c.zoomTintImage.attr("height", c.$elem.height()), c.zoomTintImage.css({
+                height: c.$elem.height()
+            }), c.zoomTint.css({
+                height: c.$elem.height()
+            })), c.zoomContainer.css("height", c.$elem.height()), c.zoomContainer.css("width", c.$elem.width());
+            c.options.imageCrossfade &&
+                (c.zoomWrap.css("height", c.$elem.height()), c.zoomWrap.css("width", c.$elem.width()));
+            c.options.constrainType && ("height" == c.options.constrainType && (c.zoomContainer.css("height", c.options.constrainSize), c.zoomContainer.css("width", "auto"), c.options.imageCrossfade ? (c.zoomWrap.css("height", c.options.constrainSize), c.zoomWrap.css("width", "auto"), c.constwidth = c.zoomWrap.width()) : (c.$elem.css("height", c.options.constrainSize), c.$elem.css("width", "auto"), c.constwidth = c.$elem.width()), "inner" == c.options.zoomType &&
+                    (c.zoomWrap.parent().css("height", c.options.constrainSize), c.zoomWrap.parent().css("width", c.constwidth), c.zoomWindow.css("height", c.options.constrainSize), c.zoomWindow.css("width", c.constwidth)), c.options.tint && (c.tintContainer.css("height", c.options.constrainSize), c.tintContainer.css("width", c.constwidth), c.zoomTint.css("height", c.options.constrainSize), c.zoomTint.css("width", c.constwidth), c.zoomTintImage.css("height", c.options.constrainSize), c.zoomTintImage.css("width", c.constwidth))), "width" ==
+                c.options.constrainType && (c.zoomContainer.css("height", "auto"), c.zoomContainer.css("width", c.options.constrainSize), c.options.imageCrossfade ? (c.zoomWrap.css("height", "auto"), c.zoomWrap.css("width", c.options.constrainSize), c.constheight = c.zoomWrap.height()) : (c.$elem.css("height", "auto"), c.$elem.css("width", c.options.constrainSize), c.constheight = c.$elem.height()), "inner" == c.options.zoomType && (c.zoomWrap.parent().css("height", c.constheight), c.zoomWrap.parent().css("width", c.options.constrainSize), c.zoomWindow.css("height",
+                    c.constheight), c.zoomWindow.css("width", c.options.constrainSize)), c.options.tint && (c.tintContainer.css("height", c.constheight), c.tintContainer.css("width", c.options.constrainSize), c.zoomTint.css("height", c.constheight), c.zoomTint.css("width", c.options.constrainSize), c.zoomTintImage.css("height", c.constheight), c.zoomTintImage.css("width", c.options.constrainSize))))
+        },
+        doneCallback: function () {
+            this.options.loadingIcon && this.spinner.hide();
+            this.nzOffset = this.$elem.offset();
+            this.nzWidth = this.$elem.width();
+            this.nzHeight = this.$elem.height();
+            this.currentZoomLevel = this.options.zoomLevel;
+            this.widthRatio = this.largeWidth / this.nzWidth;
+            this.heightRatio = this.largeHeight / this.nzHeight;
+            "window" == this.options.zoomType && (lensHeight = this.nzHeight < this.options.zoomWindowWidth / this.widthRatio ? this.nzHeight : String(this.options.zoomWindowHeight / this.heightRatio), lensWidth = this.options.zoomWindowWidth < this.options.zoomWindowWidth ? this.nzWidth : this.options.zoomWindowWidth / this.widthRatio, this.zoomLens && (this.zoomLens.css("width",
+                lensWidth), this.zoomLens.css("height", lensHeight)))
+        },
+        getCurrentImage: function () {
+            return this.zoomImage
+        },
+        getGalleryList: function () {
+            var b = this;
+            b.gallerylist = [];
+            b.options.gallery ? d("#" + b.options.gallery + " a").each(function () {
+                    var a = "";
+                    d(this).data("zoom-image") ? a = d(this).data("zoom-image") : d(this).data("image") && (a = d(this).data("image"));
+                    a == b.zoomImage ? b.gallerylist.unshift({
+                        href: "" + a + "",
+                        title: d(this).find("img").attr("title")
+                    }) : b.gallerylist.push({
+                        href: "" + a + "",
+                        title: d(this).find("img").attr("title")
+                    })
+                }) :
+                b.gallerylist.push({
+                    href: "" + b.zoomImage + "",
+                    title: d(this).find("img").attr("title")
+                });
+            return b.gallerylist
+        },
+        changeZoomLevel: function (b) {
+            this.scrollingLock = !0;
+            this.newvalue = parseFloat(b).toFixed(2);
+            newvalue = parseFloat(b).toFixed(2);
+            maxheightnewvalue = this.largeHeight / (this.options.zoomWindowHeight / this.nzHeight * this.nzHeight);
+            maxwidthtnewvalue = this.largeWidth / (this.options.zoomWindowWidth / this.nzWidth * this.nzWidth);
+            "inner" != this.options.zoomType && (maxheightnewvalue <= newvalue ? (this.heightRatio = this.largeHeight /
+                maxheightnewvalue / this.nzHeight, this.newvalueheight = maxheightnewvalue, this.fullheight = !0) : (this.heightRatio = this.largeHeight / newvalue / this.nzHeight, this.newvalueheight = newvalue, this.fullheight = !1), maxwidthtnewvalue <= newvalue ? (this.widthRatio = this.largeWidth / maxwidthtnewvalue / this.nzWidth, this.newvaluewidth = maxwidthtnewvalue, this.fullwidth = !0) : (this.widthRatio = this.largeWidth / newvalue / this.nzWidth, this.newvaluewidth = newvalue, this.fullwidth = !1), "lens" == this.options.zoomType && (maxheightnewvalue <= newvalue ?
+                (this.fullwidth = !0, this.newvaluewidth = maxheightnewvalue) : (this.widthRatio = this.largeWidth / newvalue / this.nzWidth, this.newvaluewidth = newvalue, this.fullwidth = !1)));
+            "inner" == this.options.zoomType && (maxheightnewvalue = parseFloat(this.largeHeight / this.nzHeight).toFixed(2), maxwidthtnewvalue = parseFloat(this.largeWidth / this.nzWidth).toFixed(2), newvalue > maxheightnewvalue && (newvalue = maxheightnewvalue), newvalue > maxwidthtnewvalue && (newvalue = maxwidthtnewvalue), maxheightnewvalue <= newvalue ? (this.heightRatio = this.largeHeight /
+                newvalue / this.nzHeight, this.newvalueheight = newvalue > maxheightnewvalue ? maxheightnewvalue : newvalue, this.fullheight = !0) : (this.heightRatio = this.largeHeight / newvalue / this.nzHeight, this.newvalueheight = newvalue > maxheightnewvalue ? maxheightnewvalue : newvalue, this.fullheight = !1), maxwidthtnewvalue <= newvalue ? (this.widthRatio = this.largeWidth / newvalue / this.nzWidth, this.newvaluewidth = newvalue > maxwidthtnewvalue ? maxwidthtnewvalue : newvalue, this.fullwidth = !0) : (this.widthRatio = this.largeWidth / newvalue / this.nzWidth, this.newvaluewidth =
+                newvalue, this.fullwidth = !1));
+            scrcontinue = !1;
+            "inner" == this.options.zoomType && (this.nzWidth > this.nzHeight && (this.newvaluewidth <= maxwidthtnewvalue ? scrcontinue = !0 : (scrcontinue = !1, this.fullwidth = this.fullheight = !0)), this.nzHeight > this.nzWidth && (this.newvaluewidth <= maxwidthtnewvalue ? scrcontinue = !0 : (scrcontinue = !1, this.fullwidth = this.fullheight = !0)));
+            "inner" != this.options.zoomType && (scrcontinue = !0);
+            scrcontinue && (this.zoomLock = 0, this.changeZoom = !0, this.options.zoomWindowHeight / this.heightRatio <= this.nzHeight &&
+                (this.currentZoomLevel = this.newvalueheight, "lens" != this.options.zoomType && "inner" != this.options.zoomType && (this.changeBgSize = !0, this.zoomLens.css({
+                    height: String(this.options.zoomWindowHeight / this.heightRatio) + "px"
+                })), "lens" == this.options.zoomType || "inner" == this.options.zoomType) && (this.changeBgSize = !0), this.options.zoomWindowWidth / this.widthRatio <= this.nzWidth && ("inner" != this.options.zoomType && this.newvaluewidth > this.newvalueheight && (this.currentZoomLevel = this.newvaluewidth), "lens" != this.options.zoomType &&
+                    "inner" != this.options.zoomType && (this.changeBgSize = !0, this.zoomLens.css({
+                        width: String(this.options.zoomWindowWidth / this.widthRatio) + "px"
+                    })), "lens" == this.options.zoomType || "inner" == this.options.zoomType) && (this.changeBgSize = !0), "inner" == this.options.zoomType && (this.changeBgSize = !0, this.nzWidth > this.nzHeight && (this.currentZoomLevel = this.newvaluewidth), this.nzHeight > this.nzWidth && (this.currentZoomLevel = this.newvaluewidth)));
+            this.setPosition(this.currentLoc)
+        },
+        closeAll: function () {
+            self.zoomWindow && self.zoomWindow.hide();
+            self.zoomLens && self.zoomLens.hide();
+            self.zoomTint && self.zoomTint.hide()
+        },
+        changeState: function (b) {
+            "enable" == b && (this.options.zoomEnabled = !0);
+            "disable" == b && (this.options.zoomEnabled = !1)
+        }
+    };
+    d.fn.elevateZoom = function (b) {
+        return this.each(function () {
+            var a = Object.create(k);
+            a.init(b, this);
+            d.data(this, "elevateZoom", a)
+        })
+    };
+    d.fn.elevateZoom.options = {
+        zoomActivation: "hover",
+        zoomEnabled: !0,
+        preloading: 1,
+        zoomLevel: 1,
+        scrollZoom: !1,
+        scrollZoomIncrement: 0.1,
+        minZoomLevel: !1,
+        maxZoomLevel: !1,
+        easing: !1,
+        easingAmount: 12,
+        lensSize: 200,
+        zoomWindowWidth: 400,
+        zoomWindowHeight: 400,
+        zoomWindowOffetx: 0,
+        zoomWindowOffety: 0,
+        zoomWindowPosition: 1,
+        zoomWindowBgColour: "#fff",
+        lensFadeIn: !1,
+        lensFadeOut: !1,
+        debug: !1,
+        zoomWindowFadeIn: !1,
+        zoomWindowFadeOut: !1,
+        zoomWindowAlwaysShow: !1,
+        zoomTintFadeIn: !1,
+        zoomTintFadeOut: !1,
+        borderSize: 4,
+        showLens: !0,
+        borderColour: "#888",
+        lensBorderSize: 1,
+        lensBorderColour: "#000",
+        lensShape: "square",
+        zoomType: "window",
+        containLensZoom: !1,
+        lensColour: "white",
+        lensOpacity: 0.4,
+        lenszoom: !1,
+        tint: !1,
+        tintColour: "#333",
+        tintOpacity: 0.4,
+        gallery: !1,
+        galleryActiveClass: "zoomGalleryActive",
+        imageCrossfade: !1,
+        constrainType: !1,
+        constrainSize: !1,
+        loadingIcon: !1,
+        cursor: "default",
+        responsive: !0,
+        onComplete: d.noop,
+        onZoomedImageLoaded: function () {},
+        onImageSwap: d.noop,
+        onImageSwapComplete: d.noop
+    }
+})(jQuery, window, document);
