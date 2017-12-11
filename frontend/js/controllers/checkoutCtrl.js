@@ -467,6 +467,7 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
             console.log("created order: ", data);
             if (data.data.value) {
                 $scope.orders = data.data.data;
+                $.jStorage.set("userOrders", $scope.orders);
                 $scope.grandTotal = CartService.getTotal($scope.orders.products);
                 console.log("Orders: ", $scope.orders);
                 $.jStorage.deleteKey("gifts");

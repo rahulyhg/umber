@@ -231,7 +231,7 @@
                                     <tr class="text-uppercase">
                                         <th class="align-top">order placed<br><strong>{{order.createdAt | date:'dd/MM/yyyy'}}</strong></th>
                                         <th class="align-top">order no.<br><strong>{{order.orderNo}}</strong></th>
-                                        <th class="align-top">order-satus<br><strong>{{order.orderStatus}}</strong></th>
+                                        <th class="align-top">order-status<br><strong>{{order.orderStatus}}</strong></th>
                                         <th class="align-top">tracking id<br><strong>{{order.courierType.courierLink + order.trackingId}}</strong></th>
                                         <th class="align-top">Grand total<br><strong>&#8377; {{order.totalAmount |number:0}}</strong></th>
                                     </tr>
@@ -351,7 +351,7 @@
                             <tr class="text-uppercase">
                                 <th>order placed<br><strong>{{return.createdAt | date:'dd/MM/yyyy'}}</strong></th>
                                 <th>order no.<br><strong>{{return.orderNo}}</strong></th>
-                                <th>order-satus<br><strong>returned</strong></th>
+                                <th>order-status<br><strong>returned</strong></th>
                                 <th>Grand total<br><strong>&#8377; {{return.totalAmount|number:0}}</strong></th>
                             </tr>
                         </thead>
@@ -388,7 +388,7 @@
                             <tr class="text-uppercase">
                                 <th>order placed<br><strong>{{return.createdAt | date:'dd/MM/yyyy'}}</strong></th>
                                 <th>order no.<br><strong>{{return.orderNo}}</strong></th>
-                                <th>order-satus<br><strong>cancelled</strong></th>
+                                <th>order-status<br><strong>cancelled</strong></th>
                                 <th>Grand total<br><strong>&#8377; {{return.totalAmount|number:0}}</strong></th>
                             </tr>
                         </thead>
