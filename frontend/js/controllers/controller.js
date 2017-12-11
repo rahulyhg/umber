@@ -566,6 +566,7 @@ myApp
         $scope.template = TemplateService.getHTML("content/error-msg.html");
         TemplateService.title = "Error"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
+        console.log("$stateParams in errorMSGCTRK", $stateParams);
         if ($stateParams.id) {
             $scope.orderId = $stateParams.id;
         }
@@ -574,6 +575,7 @@ myApp
         $scope.template = TemplateService.getHTML("content/thankyou-msg.html");
         TemplateService.title = "Thank You"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
+        console.log("$stateParams in thankyou", $stateParams);
         if ($stateParams.id) {
             $scope.orderId = $stateParams.id;
         }

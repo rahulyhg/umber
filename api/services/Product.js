@@ -2618,7 +2618,8 @@ var model = {
                                     }
                                 }, {
                                     "_id": 1,
-                                    "name": 1
+                                    "name": 1,
+                                    "description": 1,
                                 }).sort({
                                     name: 1
                                 }).lean().exec(function (err, data3) {
