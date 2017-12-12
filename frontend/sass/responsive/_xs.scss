@@ -43,6 +43,12 @@
              .radio-inline+.radio-inline,
              .checkbox-inline+.checkbox-inline {
                  margin-left: 0px
+             }
+             .flex-direction-nav a {
+                 @include size(30px, 30px);
+                 &:before {
+                     font-size: 12px;
+                 }
              } //End of global classes
              //start of header
              // Design for side navigation
@@ -119,26 +125,6 @@
              .homepg-slider-product-name {
                  font-size: 13px;
              }
-             .cloth-cat {
-                 .flexslider {
-                     .flex-prev {
-                         @include size(30px, 30px);
-                         left: 10px!important;
-                         &:before {
-                             font-size: 35px;
-                             @include position(absolute, -11px null null -2px);
-                         }
-                     }
-                     .flex-next {
-                         @include size(30px, 30px);
-                         right: 10px!important;
-                         &:before {
-                             font-size: 35px;
-                             @include position(absolute, -11px null null -2px);
-                         }
-                     }
-                 }
-             }
              .new-arrival {
                  .new-arrival__title .new-arrival--border--line {
                      &:before {
@@ -150,16 +136,11 @@
                  }
                  .new-arrival__slider {
                      @include padding( 45px 15px 25px);
-                     .flexslider-container .flexslider {
-                         .flex-prev {
-                             left: 85% !important;
-                             top: -5%;
-                         }
-                         .flex-next {
-                             top: -5%;
-                         }
-                     }
                      .new-arrival__banner-detail {
+                         h4 {
+                             height: 30px;
+                             -webkit-line-clamp: 2;
+                         }
                          .buynow--btn {
                              @include padding(3px 15px);
                          }
@@ -174,6 +155,30 @@
                      @include padding(3px);
                      font-size: 14px
                  }
+             } //flex navigation for new arrival and sale section
+             .new-arrival,
+             .sale,
+             .featured {
+                 // For custom flex nav
+                 .flex-prev {
+                     @include size(28px, 28px);
+                     left: 165px !important;
+                 }
+                 .flex-next {
+                     @include size(28px, 28px);
+                 }
+             }
+             .featured {
+                 .flex-direction-nav {
+                     top: -20px;
+                 }
+                 .flex-direction-nav a {
+                     background-color: $darkBrown1;
+                     color: white;
+                     &:before {
+                         color: white;
+                     }
+                 }
              }
              .featured {
                  .featured__title .featured--border--line {
@@ -184,15 +189,11 @@
                          right: 9%;
                      }
                  }
-                 .featured__slider .flexslider {
-                     .flex-prev {
-                         left: 90.5% !important;
-                     }
-                 }
                  .featured__banner-detail {
                      .featured__cloth-desc {
                          h4 {
-                             height: 50px;
+                             height: 30px;
+                             -webkit-line-clamp: 2;
                          }
                      }
                      .buy--btn {
@@ -283,13 +284,12 @@
                      }
                  }
                  .sale__slider .sale__banner-detail h4 {
+                     height: 30px;
+                     -webkit-line-clamp: 2;
                      font-size: 13px;
                  }
                  .sale__slider .sale__banner-detail h3 {
                      font-size: 16px;
-                 }
-                 .sale__slider .flexslider-container .flexslider .flex-prev {
-                     left: 91% !important;
                  }
                  .buy--btn {
                      @include padding(3px 15px);
@@ -710,6 +710,10 @@
                  }
              } //End of listing page
              //Start of my account page
+             .tab-title {
+                 // Used For all Tabs title which uses h3
+                 font-size: 20px;
+             }
              .usr-account {
                  address {
                      margin-bottom: 15px;
@@ -720,7 +724,6 @@
                  .order-list--btn {
                      width: 94px;
                      margin-right: 0px;
-                     font-size: 9px;
                  }
              }
              .checkout-tab-btn {
@@ -758,7 +761,38 @@
              .usr-status-title {
                  font-size: 16px!important;
              } //End of order-detail page 
+             //Start of errormsg & thankyou-msg page
+             //Use h2 for msg-title + .font-md for weight bold
+             .msg-title {
+                 font-size: 25px;
+             }
+             .msg-title-focus-text {
+                 width: 155px;
+                 font-size: 15px;
+             }
+             .thankyou-msg {
+                 .msg-title-focus-text {
+                     width: 255px;
+                 }
+             }
+             .error-msg,
+             .thankyou-msg {
+                 .msg-action-section {
+                     min-height: 100px;
+                 }
+                 .msg--btn {
+                     @include padding(3px 15px);
+                 }
+                 .msg-order-status {
+                     font-size: 16px;
+                 }
+             } //End of errormsg & thankyou-msg page   
              //Start of all modals
+             .btn--mob-modal {
+                 // use this class for all modals button
+                 font-size: 12px;
+                 @include padding(3px 10px);
+             }
              .modal-container {
                  @include padding(15px);
                  .login-head {

@@ -1,347 +1,360 @@
- @media (max-width: $screen-sm-max) {
-     // Tablet
-     body {
-         padding-top: 126px;
-     }
-     .section-padd {
-         padding: 15px;
-     }
-     .mg-zero {
-         @include margin(0);
-     }
-     .padd-zero {
-         @include padding(0);
-     }
-     .mg-top-zero {
-         margin-top: 0;
-     }
-     .mg-btm-zero {
-         margin-bottom: 0;
-     } //Extended Classes
-     .btn--list {
-         width: 170px;
-     } //End of extended classes
-     //classes used in same pages
-     .tab-title {
-         font-size: 20px;
-     }
-     .font17 {
-         // This class is used for p elemment'font size
-         font-size: 17px;
-     }
-     .item-name {
-         font-size: 16px;
-     }
-     .item-code {
-         font-size: 13px;
-     }
-     .item-cost {
-         font-size: 25px;
-         color: $darkBrown1;
-         .fa-inr {
+     @media (max-width: $screen-sm-max) {
+         // Tablet
+         body {
+             padding-top: 126px;
+         }
+         .section-padd {
+             padding: 15px;
+         }
+         .mg-zero {
+             @include margin(0);
+         }
+         .padd-zero {
+             @include padding(0);
+         }
+         .mg-top-zero {
+             margin-top: 0;
+         }
+         .mg-btm-zero {
+             margin-bottom: 0;
+         } //Extended Classes
+         .btn--list {
+             width: 170px;
+         } //End of extended classes
+         //classes used in same pages
+         .tab-title {
              font-size: 20px;
-             margin-right: 5px;
          }
-     }
-     .usrdtl-info {
-         color: $darkGray;
-         font-size: 16px;
-     } //End of used clases
-     // start of home page 
-     .homepg-title {
-         @include padding(5px 0);
-         margin: 10px 0!important;
-         font-size: 30px;
-         font-family: 'fjalla-reg';
-     }
-     .homepg-slider-product-cost {
-         margin: 10px 0 0;
-         font-size: 20px;
-         font-family: vadodara-md;
-     }
-     .homepg-slider-product-name {
-         height: 35px;
-         margin: 0 0 10px;
-         font-size: 16px;
-         font-family: vadodara-md;
-     }
-     .new-arrival {
-         margin-bottom: 15px;
-         .new-arrival__title .new-arrival--border--line {
-             &:before {
-                 left: 28%;
-             }
-             &:after {
-                 right: 28%;
-             }
+         .font17 {
+             // This class is used for p elemment'font size
+             font-size: 17px;
          }
-         .new-arrival__slider {
-             @include padding( 45px 55px 25px);
-             .flexslider-container .flexslider {
-                 .flex-prev {
-                     left: 85% !important;
-                     top: -5%;
-                 }
-                 .flex-next {
-                     top: -5%;
-                 }
-             }
-         }
-     }
-     .featured {
-         margin-bottom: 15px;
-         .featured__title .featured--border--line {
-             &:before {
-                 left: 31%;
-             }
-             &:after {
-                 right: 31%;
-             }
-         }
-         .featured__slider .flexslider {
-             .flex-prev {
-                 left: 90.5% !important;
-             }
-         }
-     }
-     .cloth-buy {
-         margin-bottom: 15px;
-         .cloth-buy__title .cloth-buy--border--line {
-             &:before {
-                 left: 24%;
-             }
-             &:after {
-                 right: 24%;
-             }
-         }
-         .cloth-buy__desc {
-             @include padding(25px);
-             h2 {
-                 font-size: 25px;
-             }
-             p.line--height {
-                 height: 58px;
-                 -webkit-line-clamp: 4;
-             }
-             .buy--now {
-                 width: auto;
-                 font-size: inherit;
-             }
-             &:before {
-                 content: none;
-             }
-             &:after {
-                 content: none;
-             }
-         }
-     }
-     .blog {
-         .blog__title .blog--border--line {
-             &:before {
-                 left: 34%;
-             }
-             &:after {
-                 right: 34%;
-             }
-         }
-     }
-     .sale {
-         .sale__title .sale--border--line {
-             &:before {
-                 left: 35%;
-             }
-             &:after {
-                 right: 35%;
-             }
-         }
-         .sale__slider .sale__banner-detail h4 {
+         .item-name {
              font-size: 16px;
          }
-         .sale__slider .sale__banner-detail h3 {
-             font-size: 20px;
-         }
-         .sale__slider .flexslider-container .flexslider .flex-prev {
-             left: 91% !important;
-         }
-     } //End of home page
-     //Start of buy the look page
-     .buy-the-look {
-         h1 {
-             font-size: 45px;
-         }
-     } //End of buy the look page
-     //Start of compre-products
-     .compare-section {
-         margin-top: 35px;
-         h1 {
-             font-size: 25px;
-         }
-         .compare--borderline {
-             &:before {
-                 left: 15%;
-             }
-             &:after {
-                 right: 15%;
-             }
-         }
-         .compare-table {
-             .product-align>tbody>tr:nth-child(3)>td+td {
-                 font-size: 20px;
-             }
-             .table>thead:first-child>tr:first-child>th {
-                 font-size: 16px;
-                 text-indent: 45px;
-             }
-         }
-     } //End of compare products
-     //Start of individual page
-     .individual-btn {
-         .btn-add,
-         .btn-wish {
+         .item-code {
              font-size: 13px;
          }
-     } //End of individual page
-     //Start of blogs page
-     //End of blogs page
-     //Start of My account(myaccount.html)
-     //End of my-account
-     //Start of Cancel, cancel-msg, return page
-     .order-status-title {
-         // This class is used in return, order, return successful & cancel, cancel successful msg.html
-         @include margin(20px 0);
-     }
-     .order-details-table {
-         // This class has been extended in order-return-table
-         @include padding(0 15px 35px);
-         
-     } //End of cancel, 
-     .usr-status-title {
-         font-size: 17px!important;
-         .usr-addrs-title {
-             letter-spacing: 1px;
+         .item-cost {
+             font-size: 25px;
+             color: $darkBrown1;
+             .fa-inr {
+                 font-size: 20px;
+                 margin-right: 5px;
+             }
          }
-     }
-     .item-cost {
-         font-size: 20px;
-         .fa-inr {
-             font-size: 18px;
+         .usrdtl-info {
+             color: $darkGray;
+             font-size: 16px;
+         } //End of used clases
+         // start of home page 
+         .homepg-title {
+             @include padding(5px 0);
+             margin: 10px 0!important;
+             font-size: 30px;
+             font-family: 'fjalla-reg';
+         }
+         .homepg-slider-product-cost {
+             margin: 10px 0 0;
+             font-size: 20px;
+             font-family: vadodara-md;
+         }
+         .homepg-slider-product-name {
+             height: 35px;
+             margin: 0 0 10px;
+             font-size: 16px;
+             font-family: vadodara-md;
+         }
+         .new-arrival {
+             margin-bottom: 15px;
+             .new-arrival__title .new-arrival--border--line {
+                 &:before {
+                     left: 28%;
+                 }
+                 &:after {
+                     right: 28%;
+                 }
+             }
+             .new-arrival__slider {
+                 @include padding( 45px 55px 25px);
+             }
+         }
+         .new-arrival,
+         .sale,
+         .featured {
+             // For custom flex nav
+             .flex-direction-nav {
+                 top: -30px;
+             }
+         }
+         .featured {
+             margin-bottom: 15px;
+             .featured__title .featured--border--line {
+                 &:before {
+                     left: 31%;
+                 }
+                 &:after {
+                     right: 31%;
+                 }
+             }
+         }
+         .cloth-buy {
+             margin-bottom: 15px;
+             .cloth-buy__title .cloth-buy--border--line {
+                 &:before {
+                     left: 24%;
+                 }
+                 &:after {
+                     right: 24%;
+                 }
+             }
+             .cloth-buy__desc {
+                 @include padding(25px);
+                 h2 {
+                     font-size: 25px;
+                 }
+                 p.line--height {
+                     height: 58px;
+                     -webkit-line-clamp: 4;
+                 }
+                 .buy--now {
+                     width: auto;
+                     font-size: inherit;
+                 }
+                 &:before {
+                     content: none;
+                 }
+                 &:after {
+                     content: none;
+                 }
+             }
+         }
+         .blog {
+             .blog__title .blog--border--line {
+                 &:before {
+                     left: 34%;
+                 }
+                 &:after {
+                     right: 34%;
+                 }
+             }
+         }
+         .sale {
+             .sale__title .sale--border--line {
+                 &:before {
+                     left: 35%;
+                 }
+                 &:after {
+                     right: 35%;
+                 }
+             }
+             .sale__slider .sale__banner-detail h4 {
+                 font-size: 16px;
+             }
+             .sale__slider .sale__banner-detail h3 {
+                 font-size: 20px;
+             }
+         } //End of home page
+         //Start of buy the look page
+         .buy-the-look {
+             h1 {
+                 font-size: 45px;
+             }
+         } //End of buy the look page
+         //Start of compre-products
+         .compare-section {
+             margin-top: 35px;
+             h1 {
+                 font-size: 25px;
+             }
+             .compare--borderline {
+                 &:before {
+                     left: 15%;
+                 }
+                 &:after {
+                     right: 15%;
+                 }
+             }
+             .compare-table {
+                 .product-align>tbody>tr:nth-child(3)>td+td {
+                     font-size: 20px;
+                 }
+                 .table>thead:first-child>tr:first-child>th {
+                     font-size: 16px;
+                     text-indent: 45px;
+                 }
+             }
+         } //End of compare products
+         //Start of individual page
+         .individual-btn {
+             .btn-add,
+             .btn-wish {
+                 font-size: 13px;
+             }
+         } //End of individual page
+         //Start of blogs page
+         //End of blogs page
+         //Start of My account(myaccount.html)
+         //End of my-account
+         //Start of Cancel, cancel-msg, return page
+         .order-status-title {
+             // This class is used in return, order, return successful & cancel, cancel successful msg.html
+             @include margin(20px 0);
+         }
+         .order-details-table {
+             // This class has been extended in order-return-table
+             @include padding(0 15px 35px);
+         } //End of cancel, 
+         .usr-status-title {
+             font-size: 17px!important;
+             .usr-addrs-title {
+                 letter-spacing: 1px;
+             }
+         }
+         .item-cost {
+             font-size: 20px;
+             .fa-inr {
+                 font-size: 18px;
+                 margin-right: 5px;
+             }
+         } //Extended class
+         //Start of return-success.html  cancel-msg.html
+         .return-success-msg,
+         .cancel-success-msg {
+             @include padding(25px);
+             .return-success-content,
+             s .cancel-success-content {
+                 border: 1px solid $borderColor;
+                 @include padding(30px);
+             }
+             .return-success-width,
+             .cancel-success-width {
+                 width: 100%;
+             }
+         } //End of return-success.html  cancel-msg.html 
+         //Start of checkout.html
+         .checkout {
+             .content-spacing {
+                 .btn--list {
+                     width: 170px;
+                 }
+             }
+         } // class used in check out & my-account page for vertical 
+         .checkout-tab-btn {
+             display: inline-block;
              margin-right: 5px;
          }
-     } //Extended class
-     //Start of return-success.html  cancel-msg.html
-     .return-success-msg,
-     .cancel-success-msg {
-         @include padding(25px);
-         .return-success-content,
-         s .cancel-success-content {
-             border: 1px solid $borderColor;
-             @include padding(30px);
+         .list-checkout {
+             padding-bottom: 15px;
+             padding-left: 0;
+         } //End of check out & my-account page for vertical button
+         //End of checkout.html
+         //Start of inner-blogs page
+         .inner-blog-section {
+             @include padding(25px 0 0);
+         } //End of inner-blogs page
+         //Start of listing-page
+         .Addtocompare {
+             margin-top: 15px;
+             margin-left: 0;
+             @include padding(25px 25px 40px);
          }
-         .return-success-width,
-         .cancel-success-width {
-             width: 100%;
-         }
-     } //End of return-success.html  cancel-msg.html 
-     //Start of checkout.html
-     .checkout {
-         .content-spacing {
-             .btn--list {
-                 width: 170px;
+         .listview {
+             .buy--btn {
+                 width: 140px;
              }
          }
-     } // class used in check out & my-account page for vertical 
-     .checkout-tab-btn {
-         display: inline-block;
-         margin-right: 5px;
-     }
-     .list-checkout {
-         padding-bottom: 15px;
-         padding-left: 0;
-     } //End of check out & my-account page for vertical button
-     //End of checkout.html
-     //Start of inner-blogs page
-     .inner-blog-section {
-         @include padding(25px 0 0);
-     } //End of inner-blogs page
-     //Start of listing-page
-     .Addtocompare {
-         margin-top: 15px;
-         margin-left: 0;
-         @include padding(25px 25px 40px);
-     }
-     .listview {
-         .buy--btn {
-             width: 140px;
-         }
-     }
-     .listing-dropdown-menu {
-         width: 185px;
-     } //End of listing page
-     .buy-info {
-         .buy-para {
-             .view--btn {
-                 width: 90px;
-                 font-size: 12px;
-             }
-             .buy-para__button {
-                 .buy--btn {
+         .listing-dropdown-menu {
+             width: 185px;
+         } //End of listing page
+         .buy-info {
+             .buy-para {
+                 .view--btn {
                      width: 90px;
                      font-size: 12px;
                  }
+                 .buy-para__button {
+                     .buy--btn {
+                         width: 90px;
+                         font-size: 12px;
+                     }
+                 }
+             }
+         } //scss for About us page start
+         .about-cloth .cloth-buy .cloth-buy__desc:after {
+             display: none;
+         }
+         .about-cloth .cloth-buy .cloth-buy__desc {
+             padding: 55px 55px 55px 40px;
+         }
+         .cloth-buy .cloth-buy__desc p.line--height {
+             height: 55px;
+             -webkit-line-clamp: 4;
+         }
+         .listing-img-common {
+             margin-top: 56px;
+         } //scss for contact us
+         .contact-us .contactus-content {
+             max-width: 100%;
+         } //scss for Store Locator page
+         .row-margin {
+             margin-bottom: 0;
+             margin-top: 0;
+         } //Start of errormsg & thankyou-msg page
+         //Use h2 for msg-title + .font-md for weight bold
+         .msg-title {
+             font-size: 35px;
+         }
+         .msg-title-focus-text {
+             width: 255px;
+             font-size: 25px;
+         }
+         .thankyou-msg {
+             .msg-title-focus-text {
+                 width: 255px;
              }
          }
-     } //scss for About us page start
-     .about-cloth .cloth-buy .cloth-buy__desc:after {
-         display: none;
-     }
-     .about-cloth .cloth-buy .cloth-buy__desc {
-         padding: 55px 55px 55px 40px;
-     }
-     .cloth-buy .cloth-buy__desc p.line--height {
-         height: 55px;
-         -webkit-line-clamp: 4;
-     }
-     .listing-img-common {
-         margin-top: 56px;
-     } //scss for contact us
-     .contact-us .contactus-content {
-         max-width: 100%;
-     } //scss for Store Locator page
-     .row-margin {
-         margin-bottom: 0;
-         margin-top: 0;
-     } //Start of all modals design
-     .modal-container {
-         .login-head {
-             h1 {
-                 font-size: 25px;
+         .error-msg,
+         .thankyou-msg {
+             .msg-action-section {
+                 min-height: 100px;
              }
-             p {
-                 font-size: 18px;
+             .brand-img {
+                 width: 165px;
+             }
+         } //End of errormsg & thankyou-msg page   
+         //Start of all modals design
+         .modal-container {
+             .login-head {
+                 h1 {
+                     font-size: 25px;
+                 }
+                 p {
+                     font-size: 18px;
+                 }
              }
          }
-     }
-     .coupon-discount {
-         .coupon-discount-title {
-             h1 {
-                 font-size: 25px;
+         .coupon-discount {
+             .coupon-discount-title {
+                 h1 {
+                     font-size: 25px;
+                 }
+                 margin-bottom: 15px;
              }
-             margin-bottom: 15px;
+             .coupon-code-num {
+                 margin-bottom: 15px;
+             }
+             .modal-bottom {
+                 @include padding(5px 15px);
+             }
+         } // Quick view
+         .quickview-modal-size .modal-dialog {
+             // Used this class in listing-ctrl.js in modal
+             width: 600px;
          }
-         .coupon-code-num {
-             margin-bottom: 15px;
-         }
-         .modal-bottom {
-             @include padding(5px 15px);
-         }
-     } // Quick view
-     .quickview-modal-size .modal-dialog {
-         // Used this class in listing-ctrl.js in modal
-         width: 600px;
+         .quick-view-product {
+             .individual-main {
+                 @include padding(15px);
+             }
+         } //End of all modals design
      }
-     .quick-view-product {
-         .individual-main {
-             @include padding(15px);
-         }
-     } //End of all modals design
- }

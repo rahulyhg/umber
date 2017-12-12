@@ -13,9 +13,9 @@
                     popover-is-open="otpForm.email.$touched && otpForm.email.$invalid ||otpForm.email.$error.email && otpForm.email.$error.required"
                     popover-trigger="'none'">
             </div>
-            <button class="btn btn-default btn--brown text-uppercase" type="submit" ng-disabled="otpForm.email.$invalid" uib-popover="{{message}}"
-                popover-title="Please sign up first" popover-placement="bottom" popover-class="login-popover" popover-is-open="{{message}}"
-                popover-trigger="'click'">go</button>
+            <button class="btn btn-default btn--brown btn--mob-modal text-uppercase" type="submit" ng-disabled="otpForm.email.$invalid"
+                uib-popover="{{message}}" popover-title="Please sign up first" popover-placement="bottom" popover-class="login-popover"
+                popover-is-open="{{message}}" popover-trigger="'click'">go</button>
             <!-- <span>{{message}}</span> -->
         </form>
     </div>
@@ -36,9 +36,10 @@
                 <span></span>-->
             </div>
             <p>
-                <button class="btn btn--brown" ng-click="confirmForgotPasswordOtp(userOtp)" uib-popover="{{errorOtpMessage}}" popover-title="{{errorOtpMessage}}"
-                    popover-placement="bottom" popover-class="login-popover" popover-is-open="{{errorOtpMessage}}" popover-trigger="'click'">Verify OTP</button>
-                <button class="btn btn--brown" ng-click="$dismiss()">Cancel</button>
+                <button class="btn btn--brown btn--mob-modal" ng-click="confirmForgotPasswordOtp(userOtp)" uib-popover="{{errorOtpMessage}}"
+                    popover-title="{{errorOtpMessage}}" popover-placement="bottom" popover-class="login-popover" popover-is-open="{{errorOtpMessage}}"
+                    popover-trigger="'click'">Verify OTP</button>
+                <button class="btn btn--brown btn--mob-modal" ng-click="$dismiss()">Cancel</button>
             </p>
             <!-- <span class="text-center text-danger" ng-if="resendOtpBut">{{errorMessage}}</span> -->
             <a ng-click="resendOtp()" class="resend">Resend Code</a>
@@ -66,7 +67,7 @@
                         popover-trigger="'none'">
                 </div>
 
-                <button class="btn btn-default btn--brown text-uppercase" type="submit" ng-disabled="resetForm.newPassword.$invalid || resetForm.confirmPassword.$invalid"
+                <button class="btn btn-default btn--brown btn--mob-modal text-uppercase" type="submit" ng-disabled="resetForm.newPassword.$invalid || resetForm.confirmPassword.$invalid"
                     uib-popover="{{invalidConfPwd}}" popover-title="{{invalidConfPwd}}" popover-placement="bottom" popover-class="login-popover"
                     popover-is-open="message" popover-trigger="'click'">Save</button>
             </form>
