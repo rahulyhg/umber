@@ -1755,10 +1755,16 @@ myApp.controller('GiftCardCtrl', function ($scope, TemplateService, $translate, 
     TemplateService.title = "Your Gift Card"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
 });
-myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, toastr, TemplateService, $translate, $rootScope, $filter) {
+myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, toastr, TemplateService, myService, $translate, $rootScope, $filter) {
     $scope.template = TemplateService.getHTML("content/storelocator.html");
     TemplateService.title = "Stores"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
+    myService.ctrlBanners("mycart", function (data) {
+        console.log("called api");
+        $scope.banner = data;
+        console.log("$scope.banner", $scope.banner)
+
+    });
     $scope.storeLocation = []; // We need to add city and subCity array of obj
     $scope.locationButton; // To change the value(City) of button
     $scope.locationDropdownOpen = false;
@@ -1767,7 +1773,7 @@ myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, toastr,
         'lat': 19.0760,
         'long': 72.8777,
         'subCity': [{
-            'brand': 'frontend/img/brands/tony1.png',
+            'brand': 'img/brands/tony1.png',
             'name': 'Location 1 Name',
             'subCity': 'borivali',
             'url': 'Location 1 URL',
@@ -1775,7 +1781,7 @@ myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, toastr,
             'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
             'email': 'info@burntum1'
         }, {
-            'brand': 'frontend/img/brands/ms-custom.png',
+            'brand': 'img/brands/ms-custom.png',
             'name': 'Location 1 Name',
             'subCity': 'lowerparel',
             'url': 'Location 2 URL',
@@ -1783,7 +1789,7 @@ myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, toastr,
             'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
             'email': 'info@burntum2'
         }, {
-            'brand': 'frontend/img/brands/umber.png',
+            'brand': 'img/brands/umber.png',
             'name': 'Location 1 Name',
             'subCity': 'mumbai central',
             'url': 'Location 2 URL',
@@ -1797,7 +1803,7 @@ myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, toastr,
         'lat': 18.5204,
         'long': 73.8567,
         'subCity': [{
-            'brand': 'frontend/img/brands/dockers.png',
+            'brand': 'img/brands/dockers.png',
             'name': 'Location 1 Name',
             'subCity': 'hadapsar',
             'url': 'Location 1 URL',
@@ -1805,7 +1811,7 @@ myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, toastr,
             'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
             'email': 'info@burntumpuna1'
         }, {
-            'brand': 'frontend/img/brands/ms-custom.png',
+            'brand': 'img/brands/ms-custom.png',
             'name': 'Location 2 Name',
             'subCity': 'aundh',
             'url': 'Location 2 URL',
@@ -1813,7 +1819,7 @@ myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, toastr,
             'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
             'email': 'info@burntumpuna2'
         }, {
-            'brand': 'frontend/img/brands/ralph.png',
+            'brand': 'img/brands/ralph.png',
             'name': 'Location 3 Name',
             'subCity': 'nanded',
             'url': 'Location 3 URL',
@@ -1828,7 +1834,7 @@ myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, toastr,
         'lat': 17.3850,
         'long': 78.4867,
         'subCity': [{
-            'brand': 'frontend/img/brands/ms-custom.png',
+            'brand': 'img/brands/ms-custom.png',
             'name': 'Location 1 Name',
             'subCity': 'banjara hills',
             'url': 'Location 1 URL',
@@ -1836,7 +1842,7 @@ myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, toastr,
             'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
             'email': 'info@burntumpuna1'
         }, {
-            'brand': 'frontend/img/brands/dockers.png',
+            'brand': 'img/brands/dockers.png',
             'name': 'Location 2 Name',
             'subCity': 'lb nagar',
             'url': 'Location 2 URL',
@@ -1844,7 +1850,7 @@ myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, toastr,
             'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
             'email': 'info@burntumpuna2'
         }, {
-            'brand': 'frontend/img/brands/ralph.png',
+            'brand': 'img/brands/ralph.png',
             'name': 'Location 3 Name',
             'subCity': 'hitec city',
             'url': 'Location 3 URL',
@@ -1858,7 +1864,7 @@ myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, toastr,
         'lat': 13.0827,
         'long': 80.2707,
         'subCity': [{
-            'brand': 'frontend/img/brands/dockers.png',
+            'brand': 'img/brands/dockers.png',
             'name': 'Location 1 Name',
             'subCity': 'ramapuram',
             'url': 'Location 1 URL',
@@ -1866,7 +1872,7 @@ myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, toastr,
             'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
             'email': 'info@burntumpuna1'
         }, {
-            'brand': 'frontend/img/brands/umber.png',
+            'brand': 'img/brands/umber.png',
             'name': 'Location 2 Name',
             'subCity': 'tiruvallur',
             'url': 'Location 2 URL',
@@ -1874,7 +1880,7 @@ myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, toastr,
             'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
             'email': 'info@burntumpuna2'
         }, {
-            'brand': 'frontend/img/brands/tony1.png',
+            'brand': 'img/brands/tony1.png',
             'name': 'Location 3 Name',
             'subCity': 'avadi',
             'url': 'Location 3 URL',

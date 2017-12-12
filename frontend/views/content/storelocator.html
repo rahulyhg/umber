@@ -1,6 +1,6 @@
 <div>
     <div class="bg-img listing-img-common">
-        <img src="frontend/img/cart/mycart-bg.jpg" alt="Background Image" class="img-responsive">
+        <img src="img/store-locator/banner.jpg" alt="Background Image" class="img-responsive">
     </div>
     <div class="row row-margin hidden-sm hidden-xs">
         <div class="col-md-9 col-md-offset-3">
@@ -14,7 +14,7 @@
                     <div class="location-title text-center">
                         <div class="btn-group" uib-dropdown is-open="locationDropdownOpen">
                             <button id="single-button" type="button" class="btn location--btn" uib-dropdown-toggle ng-disabled="disabled">
-        {{locationButton}} <span><img width="15" height="15" src="frontend/img/home/whitearrow.png"></span>
+        {{locationButton}} <span><img width="15" height="15" src="img/home/whitearrow.png"></span>
       </button>
                             <ul class="location-dropdown location-dropdown-menu dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
                                 <li role="menuitem" ng-repeat="place in location" ng-click="changePlaces(place)" value="{{place.city}}"><a href="#">{{place.city}}</a></li>
