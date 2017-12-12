@@ -114,6 +114,11 @@ myApp.factory('NavigationService', function ($http) {
             classis: "active",
             sref: "#!/page/viewHomePageBlock//",
             icon: "document"
+        }, {
+            name: "Store Locator",
+            classis: "active",
+            sref: "#!/page/viewStoreLocator//",
+            icon: "document"
         }
     ];
 

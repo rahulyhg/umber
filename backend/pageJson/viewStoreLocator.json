@@ -1,0 +1,54 @@
+{
+    "title": "StoreLocator",
+    "description": "List of StoreLocator",
+    "pageType": "view",
+    "sendIdWithCreate": true,
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "City Name",
+        "isSort": "",
+        "tableRef": "name"
+    }, {
+        "name": "Lattitude",
+        "isSort": "",
+        "tableRef": "lat",
+        "field": "lat"
+    }, {
+        "name": "Longitude",
+        "isSort": "",
+        "tableRef": "long"
+    }],
+    "action": [{
+        "name": "edit",
+        "icon": "fa-pencil",
+        "buttonClass": "btn-primary",
+        "type": "page",
+        "action": "editStoreLocator",
+        "fieldsToSend": {
+            "_id": "_id"
+        }
+    }, {
+        "name": "delete",
+        "icon": "fa-trash",
+        "buttonClass": "btn-danger",
+        "type": "apiCallConfirm",
+        "title": "Delete StoreLocator",
+        "content": "Are you sure you want to delete StoreLocator?",
+        "api": "StoreLocator/delete",
+        "fieldsToSend": {
+            "name": "_id",
+            "value": "_id"
+        }
+    }],
+    "button": [{
+        "name": "Create",
+        "icon": "plus",
+        "class": "btn-success",
+        "type": "page",
+        "action": "createStoreLocator"
+    }],
+    "apiCall": {
+        "url": "StoreLocator/search",
+        "params": "_id"
+    }
+}

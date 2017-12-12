@@ -1,0 +1,131 @@
+{
+    "title": "Edit StoreLocator",
+    "name": "StoreLocator",
+    "jsonPage": "viewStoreLocator",
+    "desciption": "",
+    "pageType": "edit",
+    "urlFields": ["_id"],
+    "fields": [{
+            "name": "City name",
+            "type": "text",
+            "tableRef": "name",
+            "placeholder": "Enter City name",
+            "id": "name",
+            "validation": ["", "trim", ""],
+            "url": ""
+        }, {
+            "name": "lattitude",
+            "type": "number",
+            "tableRef": "lat",
+            "placeholder": "Enter Lattitude",
+            "id": "lat",
+            "url": "",
+            "validation": ["", "trim", ""]
+        }, {
+            "name": "longitude",
+            "type": "number",
+            "tableRef": "long",
+            "placeholder": "Enter Longitude",
+            "id": "long",
+            "url": "",
+            "validation": ["", "trim", ""]
+        },
+        {
+            "name": "subcity",
+            "type": "box",
+            "tableRef": "subcity",
+            "validation": ["required", "trim", ""],
+            "fields": [{
+                "name": "brand",
+                "type": "image",
+                "tableRef": "brand",
+                "placeholder": "Enter brand",
+                "id": "brand",
+                "validation": ["", "trim", ""],
+                "url": "",
+                "onView": true
+            }, {
+                "name": "name",
+                "type": "text",
+                "tableRef": "name",
+                "placeholder": "Enter name",
+                "id": "name",
+                "validation": ["", "trim", ""],
+                "url": "",
+                "onView": true
+            }, {
+                "name": "subCity",
+                "type": "text",
+                "tableRef": "subCity",
+                "placeholder": "Enter subCity",
+                "id": "subCity",
+                "validation": ["", "trim", ""],
+                "url": "",
+                "onView": true
+            }, {
+                "name": "url",
+                "type": "text",
+                "tableRef": "url",
+                "placeholder": "Enter url",
+                "id": "status",
+                "validation": ["", "trim", ""],
+                "url": "",
+                "onView": true
+            }, {
+                "name": "address",
+                "type": "text",
+                "tableRef": "address",
+                "placeholder": "Enter address",
+                "id": "address",
+                "validation": ["", "trim", ""],
+                "url": "",
+                "onView": true
+            }, {
+                "name": "contactNo",
+                "type": "text",
+                "tableRef": "contactNo",
+                "placeholder": "Enter contactNo",
+                "id": "contactNo",
+                "validation": ["", "trim", ""],
+                "url": "",
+                "onView": true
+            }, {
+                "name": "email",
+                "type": "text",
+                "tableRef": "email",
+                "placeholder": "Enter email",
+                "id": "email",
+                "validation": ["", "trim", ""],
+                "url": "",
+                "onView": true
+            }]
+        }
+    ],
+    "action": [{
+        "name": "submit",
+        "action": "submitStoreLocator",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewStoreLocator"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewStoreLocator"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "StoreLocator/save",
+        "params": "_id"
+    },
+    "preApi": {
+        "url": "StoreLocator/getOne",
+        "params": "_id"
+    }
+}
