@@ -570,7 +570,7 @@ myApp
             $scope.orderId = $stateParams.id;
         }
     })
-    .controller('ThankYouMsgCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
+    .controller('ThankYouMsgCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, OrderService) {
         $scope.template = TemplateService.getHTML("content/thankyou-msg.html");
         TemplateService.title = "Thank You"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
