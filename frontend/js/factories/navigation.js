@@ -111,6 +111,14 @@ myApp.factory('NavigationService', function ($http) {
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
+        },
+        getAllLocation: function (callback) {
+            console.log("klhfknsdjfjhsfkdnghfdklgnhdklf")
+            $http({
+                url: adminurl + 'StoreLocator/search',
+                method: 'POST',
+                withCredentials: false
+            }).then(callback);
         }
     };
 });
