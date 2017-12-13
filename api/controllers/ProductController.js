@@ -192,6 +192,21 @@ var controller = {
                 }
             });
         }
+    },
+    /**
+     * for get all products by SKU and set he productId in discount 
+     */
+    getProductAccordingSku: function (req, res) {
+        if (req.body) {
+            Product.getProductAccordingSku(req.body.skuOfProducts, req.body._id, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid request"
+                }
+            });
+        }
     }
 };
 module.exports = _.assign(module.exports, controller);

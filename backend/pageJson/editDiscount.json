@@ -17,7 +17,7 @@
         "url": "DiscountType/search",
         "view": true,
         "validation": ["trim"]
-    },{
+    }, {
         "name": "Name",
         "type": "text",
         "tableRef": "name",
@@ -53,7 +53,15 @@
         "dropDownField": "productName",
         "dropDownType": "multiple",
         "searchApi": "searchCall",
-        "url": "Product/getUniqueProducts",
+        "url": "",
+        "validation": ["", "trim", ""]
+    }, {
+        "name": "SKU of Product",
+        "type": "text",
+        "tableRef": "skuOfProducts",
+        "placeholder": "Enter skuOfProducts",
+        "id": "skuOfProducts",
+        "url": "",
         "validation": ["", "trim", ""]
     }, {
         "name": "Is Discount in amount?",
@@ -79,7 +87,7 @@
         "id": "maxAmount",
         "tableRef": "maxDiscountAmount",
         "validation": ["trim"]
-    },{
+    }, {
         "name": "Gifts",
         "type": "box",
         "id": "gifts",
