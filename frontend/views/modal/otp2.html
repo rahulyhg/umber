@@ -17,11 +17,11 @@
                 <span></span>-->
             </div>
             <p>
-                <button class="btn  btn--brown text-uppercase" ng-click="checkOtp(userOtp)" ng-disabled="formOtp2.userOtp.$invalid" uib-popover="{{errorMessage}}"
-                    popover-title="{{errorMessage}}" popover-placement="bottom" popover-class="login-popover" popover-is-open="{{errorMessage}}"
-                    popover-trigger="'click'">Verify OTP</button>
+                <button class="btn  btn--brown btn--mob-modal text-uppercase " ng-click="checkOtp(userOtp)" ng-disabled="formOtp2.userOtp.$invalid"
+                    uib-popover="{{errorMessage}}" popover-title="{{errorMessage}}" popover-placement="bottom" popover-class="login-popover"
+                    popover-is-open="{{errorMessage}}" popover-trigger="'click'">Verify OTP</button>
                 <!--<button class="btn  btn--brown text-uppercase" ng-click="resendOtp()" ng-if="resendOtpBut">Resend OTP</button>-->
-                <button class="btn  btn--brown text-uppercase" ng-click="$dismiss()">Cancel</button>
+                <button class="btn  btn--brown btn--mob-modal text-uppercase" ng-click="$dismiss()">Cancel</button>
             </p>
 
             <a href="" class="resend" ng-click="resendOtp()">Resend Code</a>
