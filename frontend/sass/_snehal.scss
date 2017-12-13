@@ -467,7 +467,8 @@
                         }
 
                         .absolute-text {
-                            @include position(absolute, null 8.3% 10% null);
+                            //  @include position(absolute, null 8.3% 10% null);
+                            float: right;
                             a {
                                 color: #948484;
                                 text-decoration: underline;
