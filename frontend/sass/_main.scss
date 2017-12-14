@@ -3295,35 +3295,46 @@
                                                 column-count: 2;
                                             } //start of About.html
                                             //Start of Store locator.html
+                                            .store-locator {
+                                                .flex-item-container {
+                                                    position: relative;
+                                                    @include align-items(center);
+                                                    @include flex-direction(row);
+                                                    @include flex-wrap(wrap);
+                                                }
+                                            }
+
                                             .row-margin {
                                                 margin-bottom: 50px;
                                                 margin-top: 50px;
+                                            }
+
+                                            .map-section {
+                                                @include size(500px,
+                                                360px);
+                                                @include margin(15px 15px 15px 95px);
+                                                position: relative;
+                                                overflow: hidden;
+                                                z-index: 1;
                                                 .map-place {
-                                                    position: absolute;
-                                                    left: -216px;
-                                                    width: 420px;
-                                                    height: 400px;
-                                                    top: 41px;
-                                                    overflow: hidden;
-                                                    z-index: 10;
+                                                    height: inherit;
                                                 }
                                             }
 
                                             .custom-slider {
                                                 margin: 0;
+                                                margin-left: -230px;
                                                 background: #341314;
                                                 border: 0;
                                                 border-radius: 0;
                                                 padding: 20px;
+                                                -webkit-flex: 1;
+                                                /* Safari 6.1+ */
+                                                -ms-flex: 1;
+                                                /* IE 10 */
+                                                flex: 1;
                                                 .border {
                                                     border: 1px dashed #fff;
-                                                    .location-title {
-                                                        position: absolute;
-                                                        top: 66px;
-                                                        left: 334px;
-                                                        z-index: 2;
-                                                        display: flex;
-                                                    }
                                                     .location--btn {
                                                         @extend .btn--brown;
                                                         border: 0px;
@@ -3348,9 +3359,18 @@
                                                     }
                                                     .tab-title {
                                                         color: white;
-                                                        padding-left: 55px;
-                                                        margin-top: 10px;
                                                     }
+                                                }
+                                                .location-title {
+                                                    min-height: 65px;
+                                                    @include display(flex);
+                                                    @include flex-direction(row);
+                                                    @include flex-wrap(wrap);
+                                                    @include align-items(flex-end);
+                                                }
+                                                .location-name {
+                                                    margin-left: 20px;
+                                                    margin-right: 20px;
                                                 }
                                                 .flex-control-paging li a {
                                                     display: none;
@@ -3359,44 +3379,21 @@
                                                     margin: 0;
                                                     background: #341314;
                                                     border: 0px dashed #fff;
-                                                    padding-top: 90px;
-                                                    padding-bottom: 30px;
-                                                    padding-left: 300px;
-                                                    padding-right: 140px;
+                                                    padding-top: 15px;
+                                                    padding-bottom: 15px;
                                                     border-radius: 0px !important;
                                                     color: white;
-                                                    height: 440px;
                                                     .flex-prev {
                                                         opacity: 1;
-                                                        left: 210px!important;
-                                                        @include size(32px,
-                                                        32px); // &:before {
-                                                        //     content: '\02190';
-                                                        //     color: $darkBrown1;
-                                                        //     font-size: 38px;
-                                                        //     background-color: $white;
-                                                        //     @include position(absolute,
-                                                        //     -14px null null -2px);
-                                                        // }
-                                                        // &:hover {
-                                                        //     opacity: 0.5;
-                                                        // }
-                                                    }
-                                                    .flex-next {
-                                                        right: 50px!important;
+                                                        left: -55px!important;
                                                         @include size(32px,
                                                         32px);
-                                                        opacity: 1; // &:before {
-                                                        //     content: '\02192'!important;
-                                                        //     color: black;
-                                                        //     font-size: 38px;
-                                                        //     background-color: white;
-                                                        //     @include position(absolute,
-                                                        //     -14px null null -4px);
-                                                        // }
-                                                        // &:hover {
-                                                        //     opacity: 0.5;
-                                                        // }
+                                                    }
+                                                    .flex-next {
+                                                        right: -10px!important;
+                                                        @include size(32px,
+                                                        32px);
+                                                        opacity: 1;
                                                     }
                                                 }
                                             }

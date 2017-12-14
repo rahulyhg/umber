@@ -297,9 +297,36 @@
          .contact-us .contactus-content {
              max-width: 100%;
          } //scss for Store Locator page
+         //Start of Store locator.html
+         .store-locator {
+             .flex-item-container {
+                 position: relative;
+                 @include align-items(initial);
+                 @include flex-direction(column);
+             }
+         }
          .row-margin {
-             margin-bottom: 0;
-             margin-top: 0;
+             margin-bottom: 15px;
+             margin-top: 15px;
+         }
+         .map-section {
+             width: 100%;
+             @include margin(15px 15px 15px 0);
+         }
+         .custom-slider {
+             @include margin(0 15px);
+             .location-title {
+                 padding-left: 15px;
+                 padding-right: 15px;
+             }
+             .flexslider {
+                 .flex-prev {
+                     left: -15px!important;
+                 }
+                 .flex-next {
+                     right: -15px!important;
+                 }
+             }
          } //Start of errormsg & thankyou-msg page
          //Use h2 for msg-title + .font-md for weight bold
          .msg-title {

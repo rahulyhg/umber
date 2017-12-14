@@ -51,9 +51,9 @@
         </div>
         <div class="modal-footer modal-bottom" ng-if="loggedUser">
             {{discount}}
-            <button class="btn text-uppercase cancel--btn" type="button" ng-click="clearCouponSubmit();$dismiss()">CANCEL</button>
-            <button class="btn text-uppercase apply--btn" type="button" ng-if="formData.couponCode" ng-click="applyCouponSubmit(formData);">APPLY COUPON</button>
-            <button class="btn text-uppercase apply--btn" type="button" ng-if="!formData.couponCode" ng-click="applyCouponSubmit();">APPLY COUPON</button>
+            <button class="btn text-uppercase cancel--btn btn--mob-modal" type="button" ng-click="clearCouponSubmit();$dismiss()">CANCEL</button>
+            <button class="btn text-uppercase apply--btn btn--mob-modal" type="button" ng-if="formData.couponCode" ng-click="applyCouponSubmit(formData);">APPLY COUPON</button>
+            <button class="btn text-uppercase apply--btn btn--mob-modal" type="button" ng-if="!formData.couponCode" ng-click="applyCouponSubmit();">APPLY COUPON</button>
             <!--<button class="btn text-uppercase apply--btn" type="button" ng-click="disabledRadio();">APPLY COUPON</button>-->
         </div>
     </div>
