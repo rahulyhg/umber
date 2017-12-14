@@ -51,7 +51,7 @@ var controller = {
             });
         }
     },
-
+    
     getCancelledOrdersForUser: function (req, res) {
         if (req.body) {
             Order.getCancelledOrdersForUser(req.body, res.callback);
@@ -288,6 +288,19 @@ var controller = {
         // formbody = '<form id="nonseamless" method="post" name="redirect" action="https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"/> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><script language="javascript">document.redirect.submit();</script></form>';
         // });
 
-    }
+    },
+    generateInvoice: function (req, res) {
+        console.log("Order controller");
+        if (req.body) {
+            Order.generateInvoice(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid request!"
+                }
+            });
+        }
+    },
 };
 module.exports = _.assign(module.exports, controller);
