@@ -156,10 +156,7 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
 
         } else {
             //TODO: Implement without login
-
             $scope.cart = $.jStorage.get("cart");
-
-
         }
 
         $scope.view = false;
@@ -258,6 +255,19 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
 
 
         });
+        //
+        $scope.redirectCheckOut = function (cart) {
+            console.log("cart", cart);
+            _.each(cart, function (pro) {
+                if (pro.product.quantity == 0) {
+                    $scope.cartDisable = true;
+                    $scope.cartErr = "Product is Out of Stock";
+                    return false
+                } else {
+                    $state.go("checkout");
+                }
+            });
+        }
 
     })
     .controller('wishlistModalCtrl', function ($scope, $state, $uibModalInstance, UserService, CartService, WishlistService) {

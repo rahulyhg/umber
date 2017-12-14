@@ -59,9 +59,11 @@
                             <td>
                                 &#x20b9 &nbsp;{{product.product.mrp}}
                             </td>
-                            <td>&#x20b9 &nbsp;{{product.product.price|number:0}}</td>
+                            <td ng-if="discountApplicable">&#x20b9 &nbsp;{{product.product.discountPriceOfProduct|number:0}}</td>
+                            <td ng-if="!discountApplicable">&#x20b9 &nbsp;0</td>
                             <td></td>
-                            <td>&#x20b9 &nbsp;{{product.product.price * product.quantity|number:0}}</td>
+                            <td ng-if="discountApplicable">&#x20b9 &nbsp;{{product.product.priceWithDiscount|number:0}}</td>
+                            <td ng-if="!discountApplicable">&#x20b9 &nbsp;{{product.product.price * product.quantity|number:0}}</td>
 
                         </tr>
                         <tr>
@@ -94,9 +96,9 @@
                         <p>&#x20b9 {{total|number:0}}</p>
                         <p>&#x20b9 0</p>
                         <p>&#x20b9 {{grandTotalAfterDiscount|number:0}}</p>
-                        <p>&#x20b9 {{grandTotal|number:0}}</p>
+                        <p>&#x20b9 {{total-grandTotalAfterDiscount|number:0}}</p>
                         <p>&#x20b9 0</p>
-                        <p>&#x20b9 {{grandTotal|number:0}}</p>
+                        <p>&#x20b9 {{total-grandTotalAfterDiscount|number:0}}</p>
                     </div>
                 </div>
                 <div class="clearfix"></div>

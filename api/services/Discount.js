@@ -201,10 +201,6 @@ var model = {
         });
 
 
-    },
-
-    getAllDiscounts: function (callback) {
-
     }
 };
 module.exports = _.assign(module.exports, exports, model);
