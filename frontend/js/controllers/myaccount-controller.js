@@ -1755,141 +1755,145 @@ myApp.controller('GiftCardCtrl', function ($scope, TemplateService, $translate, 
     TemplateService.title = "Your Gift Card"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
 });
-myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, toastr, TemplateService, myService, $translate, $rootScope, $filter) {
+myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, toastr, TemplateService, myService, NavigationService, $translate, $rootScope, $filter) {
     $scope.template = TemplateService.getHTML("content/storelocator.html");
     TemplateService.title = "Stores"; //This is the Title of the Website
-    //  $scope.navigation = NavigationService.getNavigation();
+    $scope.navigation = NavigationService.getNavigation();
     myService.ctrlBanners("mycart", function (data) {
         console.log("called api");
         $scope.banner = data;
         console.log("$scope.banner", $scope.banner)
 
     });
+    NavigationService.getAllLocation(function (data) {
+        $scope.location = data.data.data.results;
+    });
     $scope.storeLocation = []; // We need to add city and subCity array of obj
     $scope.locationButton; // To change the value(City) of button
     $scope.locationDropdownOpen = false;
-    $scope.location = [{
-        'city': 'Mumbai',
-        'lat': 19.0760,
-        'long': 72.8777,
-        'subCity': [{
-            'brand': 'img/brands/tony1.png',
-            'name': 'Location 1 Name',
-            'subCity': 'borivali',
-            'url': 'Location 1 URL',
-            'address': 'Shop No 2, Morya Mahal,Linking Road, borivali, Mumbai - 400050',
-            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            'email': 'info@burntum1'
-        }, {
-            'brand': 'img/brands/ms-custom.png',
-            'name': 'Location 1 Name',
-            'subCity': 'lowerparel',
-            'url': 'Location 2 URL',
-            'address': 'Shop No 2, Morya Mahal,Linking Road, lowerparel, Mumbai - 400050',
-            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            'email': 'info@burntum2'
-        }, {
-            'brand': 'img/brands/umber.png',
-            'name': 'Location 1 Name',
-            'subCity': 'mumbai central',
-            'url': 'Location 2 URL',
-            'address': 'Shop No 2, Morya Mahal,Linking Road,  mumbai central, Mumbai - 400050',
-            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            'email': 'info@burntum3'
-        }]
+    // $scope.location = [{
+    //     'city': 'Mumbai',
+    //     'lat': 19.0760,
+    //     'long': 72.8777,
+    //     'subCity': [{
+    //         'brand': 'img/brands/tony1.png',
+    //         'name': 'Location 1 Name',
+    //         'subCity': 'borivali',
+    //         'url': 'Location 1 URL',
+    //         'address': 'Shop No 2, Morya Mahal,Linking Road, borivali, Mumbai - 400050',
+    //         'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+    //         'email': 'info@burntum1'
+    //     }, {
+    //         'brand': 'img/brands/ms-custom.png',
+    //         'name': 'Location 1 Name',
+    //         'subCity': 'lowerparel',
+    //         'url': 'Location 2 URL',
+    //         'address': 'Shop No 2, Morya Mahal,Linking Road, lowerparel, Mumbai - 400050',
+    //         'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+    //         'email': 'info@burntum2'
+    //     }, {
+    //         'brand': 'img/brands/umber.png',
+    //         'name': 'Location 1 Name',
+    //         'subCity': 'mumbai central',
+    //         'url': 'Location 2 URL',
+    //         'address': 'Shop No 2, Morya Mahal,Linking Road,  mumbai central, Mumbai - 400050',
+    //         'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+    //         'email': 'info@burntum3'
+    //     }]
 
-    }, {
-        'city': 'Pune',
-        'lat': 18.5204,
-        'long': 73.8567,
-        'subCity': [{
-            'brand': 'img/brands/dockers.png',
-            'name': 'Location 1 Name',
-            'subCity': 'hadapsar',
-            'url': 'Location 1 URL',
-            'address': 'Shop No 2, Morya Mahal,Linking Road,  hadapsar West, pune - 400050',
-            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            'email': 'info@burntumpuna1'
-        }, {
-            'brand': 'img/brands/ms-custom.png',
-            'name': 'Location 2 Name',
-            'subCity': 'aundh',
-            'url': 'Location 2 URL',
-            'address': 'Shop No 2, Morya Mahal,Linking Road, aundh, pune - 400050',
-            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            'email': 'info@burntumpuna2'
-        }, {
-            'brand': 'img/brands/ralph.png',
-            'name': 'Location 3 Name',
-            'subCity': 'nanded',
-            'url': 'Location 3 URL',
-            'address': 'Shop No 2, Morya Mahal,Linking Road, nanded, pune - 400050',
-            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            'email': 'info@burntumpuna3'
-        }],
+    // }, {
+    //     'city': 'Pune',
+    //     'lat': 18.5204,
+    //     'long': 73.8567,
+    //     'subCity': [{
+    //         'brand': 'img/brands/dockers.png',
+    //         'name': 'Location 1 Name',
+    //         'subCity': 'hadapsar',
+    //         'url': 'Location 1 URL',
+    //         'address': 'Shop No 2, Morya Mahal,Linking Road,  hadapsar West, pune - 400050',
+    //         'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+    //         'email': 'info@burntumpuna1'
+    //     }, {
+    //         'brand': 'img/brands/ms-custom.png',
+    //         'name': 'Location 2 Name',
+    //         'subCity': 'aundh',
+    //         'url': 'Location 2 URL',
+    //         'address': 'Shop No 2, Morya Mahal,Linking Road, aundh, pune - 400050',
+    //         'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+    //         'email': 'info@burntumpuna2'
+    //     }, {
+    //         'brand': 'img/brands/ralph.png',
+    //         'name': 'Location 3 Name',
+
+    //         'subCity': 'nanded',
+    //         'url': 'Location 3 URL',
+    //         'address': 'Shop No 2, Morya Mahal,Linking Road, nanded, pune - 400050',
+    //         'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+    //         'email': 'info@burntumpuna3'
+    //     }],
 
 
-    }, {
-        'city': 'Hyderabad',
-        'lat': 17.3850,
-        'long': 78.4867,
-        'subCity': [{
-            'brand': 'img/brands/ms-custom.png',
-            'name': 'Location 1 Name',
-            'subCity': 'banjara hills',
-            'url': 'Location 1 URL',
-            'address': 'Shop No 2, Morya Mahal,Linking Road, banjara hills, hyderabad - 400050',
-            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            'email': 'info@burntumpuna1'
-        }, {
-            'brand': 'img/brands/dockers.png',
-            'name': 'Location 2 Name',
-            'subCity': 'lb nagar',
-            'url': 'Location 2 URL',
-            'address': 'Shop No 2, Morya Mahal,Linking Road, lb nagar, hyderabad - 400050',
-            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            'email': 'info@burntumpuna2'
-        }, {
-            'brand': 'img/brands/ralph.png',
-            'name': 'Location 3 Name',
-            'subCity': 'hitec city',
-            'url': 'Location 3 URL',
-            'address': 'Shop No 2, Morya Mahal,Linking Road, hitec city, hyderabad - 400050',
-            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            'email': 'info@burntumpuna3'
-        }],
+    // }, {
+    //     'city': 'Hyderabad',
+    //     'lat': 17.3850,
+    //     'long': 78.4867,
+    //     'subCity': [{
+    //         'brand': 'img/brands/ms-custom.png',
+    //         'name': 'Location 1 Name',
+    //         'subCity': 'banjara hills',
+    //         'url': 'Location 1 URL',
+    //         'address': 'Shop No 2, Morya Mahal,Linking Road, banjara hills, hyderabad - 400050',
+    //         'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+    //         'email': 'info@burntumpuna1'
+    //     }, {
+    //         'brand': 'img/brands/dockers.png',
+    //         'name': 'Location 2 Name',
+    //         'subCity': 'lb nagar',
+    //         'url': 'Location 2 URL',
+    //         'address': 'Shop No 2, Morya Mahal,Linking Road, lb nagar, hyderabad - 400050',
+    //         'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+    //         'email': 'info@burntumpuna2'
+    //     }, {
+    //         'brand': 'img/brands/ralph.png',
+    //         'name': 'Location 3 Name',
+    //         'subCity': 'hitec city',
+    //         'url': 'Location 3 URL',
+    //         'address': 'Shop No 2, Morya Mahal,Linking Road, hitec city, hyderabad - 400050',
+    //         'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+    //         'email': 'info@burntumpuna3'
+    //     }],
 
-    }, {
-        'city': 'Chennai',
-        'lat': 13.0827,
-        'long': 80.2707,
-        'subCity': [{
-            'brand': 'img/brands/dockers.png',
-            'name': 'Location 1 Name',
-            'subCity': 'ramapuram',
-            'url': 'Location 1 URL',
-            'address': 'Shop No 2, Morya Mahal,Linking Road, ramapuram,chennai - 400050',
-            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            'email': 'info@burntumpuna1'
-        }, {
-            'brand': 'img/brands/umber.png',
-            'name': 'Location 2 Name',
-            'subCity': 'tiruvallur',
-            'url': 'Location 2 URL',
-            'address': 'Shop No 2, Morya Mahal,Linking Road, tiruvallur,chennai - 400050',
-            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            'email': 'info@burntumpuna2'
-        }, {
-            'brand': 'img/brands/tony1.png',
-            'name': 'Location 3 Name',
-            'subCity': 'avadi',
-            'url': 'Location 3 URL',
-            'address': 'Shop No 2, Morya Mahal,Linking Road, avadi,chennai - 400050',
-            'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
-            'email': 'info@burntumpuna3'
-        }],
+    // }, {
+    //     'city': 'Chennai',
+    //     'lat': 13.0827,
+    //     'long': 80.2707,
+    //     'subCity': [{
+    //         'brand': 'img/brands/dockers.png',
+    //         'name': 'Location 1 Name',
+    //         'subCity': 'ramapuram',
+    //         'url': 'Location 1 URL',
+    //         'address': 'Shop No 2, Morya Mahal,Linking Road, ramapuram,chennai - 400050',
+    //         'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+    //         'email': 'info@burntumpuna1'
+    //     }, {
+    //         'brand': 'img/brands/umber.png',
+    //         'name': 'Location 2 Name',
+    //         'subCity': 'tiruvallur',
+    //         'url': 'Location 2 URL',
+    //         'address': 'Shop No 2, Morya Mahal,Linking Road, tiruvallur,chennai - 400050',
+    //         'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+    //         'email': 'info@burntumpuna2'
+    //     }, {
+    //         'brand': 'img/brands/tony1.png',
+    //         'name': 'Location 3 Name',
+    //         'subCity': 'avadi',
+    //         'url': 'Location 3 URL',
+    //         'address': 'Shop No 2, Morya Mahal,Linking Road, avadi,chennai - 400050',
+    //         'contactNo': '+(91)-22-26559556 +(91)-9769422251, 9821593786',
+    //         'email': 'info@burntumpuna3'
+    //     }],
 
-    }];
+    // }];
 
     /* Start of map */
     $scope.showSlider = true;
