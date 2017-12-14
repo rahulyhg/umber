@@ -8,14 +8,14 @@
     "fields": [{
             "name": "City name",
             "type": "text",
-            "tableRef": "name",
+            "tableRef": "city",
             "placeholder": "Enter City name",
-            "id": "name",
+            "id": "city",
             "validation": ["", "trim", ""],
             "url": ""
         }, {
             "name": "lattitude",
-            "type": "number",
+            "type": "text",
             "tableRef": "lat",
             "placeholder": "Enter Lattitude",
             "id": "lat",
@@ -23,7 +23,7 @@
             "validation": ["", "trim", ""]
         }, {
             "name": "longitude",
-            "type": "number",
+            "type": "text",
             "tableRef": "long",
             "placeholder": "Enter Longitude",
             "id": "long",
@@ -31,9 +31,9 @@
             "validation": ["", "trim", ""]
         },
         {
-            "name": "subcity",
+            "name": "subCity",
             "type": "box",
-            "tableRef": "subcity",
+            "tableRef": "subCity",
             "validation": ["required", "trim", ""],
             "fields": [{
                 "name": "brand",

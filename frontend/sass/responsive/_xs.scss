@@ -49,6 +49,9 @@
                  &:before {
                      font-size: 12px;
                  }
+             } // for padding
+             .padd-rt0 {
+                 padding-right: 15px;
              } //End of global classes
              //start of header
              // Design for side navigation
@@ -631,7 +634,15 @@
                  }
              } //End of gift card
              //Start of individual-page
+             .slider2 {
+                 @include padding(10px 25px);
+                 margin: 0;
+                 .flexslider {
+                     margin-bottom: 0;
+                 }
+             }
              .individual-container {
+                 padding-top: 15px;
                  .breadCrumbs-letter {
                      padding-bottom: 15px;
                  }
@@ -652,12 +663,41 @@
              .individual-main {
                  @include padding(15px 7px);
              }
+             .absolute-text {
+                 float: left;
+             }
+             .prod-code {
+                 .prod-code__left,
+                 .prod-code__right {
+                     margin-left: 0;
+                 }
+                 .prod-code__right {
+                     width: 200px;
+                     margin-right: 0;
+                     float: left!important;
+                 }
+             }
              .first-sec {
                  h3 {
                      font-size: 18px;
                  }
                  h4 {
                      font-size: 16px;
+                 }
+             }
+             .second-sec {
+                 .viewSize {
+                     display: block;
+                     max-width: 100%;
+                     &:after {
+                         content: none;
+                     }
+                 }
+                 .quantity {
+                     @include padding(0);
+                 }
+                 h5 {
+                     text-align: left;
                  }
              }
              .fourth-sec {
@@ -683,8 +723,15 @@
                  }
              } //End of individual page
              //Start of listing page
+             .listing-container {
+                 @include padding(null 0 15px 0);
+                 margin-bottom: 15px;
+             }
+             .list-breadcrumb {
+                 margin-top: 15px;
+             }
              .listing-main {
-                 padding-left: 15px;
+                 padding-left: 0;
                  margin-top: 20px;
              }
              .btn-listing {
@@ -701,6 +748,7 @@
                  }
                  .item-details {
                      width: 200px;
+                     white-space: normal;
                  }
                  .listview-item-width {
                      @include size(100px, 125px);
@@ -789,9 +837,13 @@
              } //End of errormsg & thankyou-msg page   
              //Start of all modals
              .btn--mob-modal {
-                 // use this class for all modals button
+                 // use this class for all modal's button
                  font-size: 12px;
                  @include padding(3px 10px);
+             } //Sizes which are used for modals
+             .quickview-modal-size .modal-dialog {
+                 // Used this class in listing-ctrl.js in modal
+                 width: auto;
              }
              .modal-container {
                  @include padding(15px);
@@ -808,5 +860,25 @@
                      padding: 10px 15px!important;
                      @include margin(0 auto);
                  }
-             } //End of all modals
+             } //Start of quick view page
+             .quick-view-product {
+                 @include padding(0);
+                 .individual-first {
+                     min-height: 200px;
+                 }
+                 .product-img {
+                     height: 200px;
+                 }
+                 .fourth-sec {
+                     .right-content p {
+                         padding-left: 0;
+                     }
+                     .right-content {
+                         &:before {
+                             content: none;
+                         }
+                     }
+                 }
+             } //End of quick view page
+             //End of all modals: ;
          }

@@ -1,11 +1,11 @@
 var schema = new Schema({
-    name: {
+    city: {
         type: String,
         required: true
     },
-    lat: Number,
-    long: Number,
-    subcity: [{
+    lat: String,
+    long: String,
+    subCity: [{
         brand: {
             type: String
         },

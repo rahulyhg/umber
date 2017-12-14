@@ -7,7 +7,7 @@
     "fields": [{
         "name": "City Name",
         "isSort": "",
-        "tableRef": "name"
+        "tableRef": "city"
     }, {
         "name": "Lattitude",
         "isSort": "",

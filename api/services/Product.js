@@ -1313,6 +1313,39 @@ var model = {
             });
         })
     },
+    // get product based on sku
+    /**
+     * this function provides product based on SKU and
+     * update the product according SKU in discount
+     * @param {skuOfProducts} input skuOfProducts
+     * @param {discoutId} input discoutId
+     * @param {callback} callback function with err and response
+     */
+    getProductAccordingSku: function (skuOfProducts, discoutId, callback) {
+        if (skuOfProducts) {
+            var array = _.map(skuOfProducts.split(','), function (n) {
+                return _.trim(n);
+            });
+            Product.find({
+                "name": {
+                    $in: array
+                }
+            }).exec(function (err, products) {
+                if (err || _.isEmpty(products)) {
+                    callback(err, null);
+                } else {
+                    Discount.findOneAndUpdate({
+                        _id: discoutId
+                    }, {
+                        $set: {
+                            "products": _.map(products, "_id"),
+                            skuOfProducts: _.join(array, ", ")
+                        }
+                    }).exec(callback);
+                }
+            });
+        }
+    },
     //for global search
     getAggregatePipeLine: function (data) {
         // console.log("**** in  getAggregatePipeLine***", data)
