@@ -288,6 +288,20 @@ var controller = {
         // formbody = '<form id="nonseamless" method="post" name="redirect" action="https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"/> <input type="hidden" id="encRequest" name="encRequest" value="' + encRequest + '"><input type="hidden" name="access_code" id="access_code" value="' + accessCode + '"><script language="javascript">document.redirect.submit();</script></form>';
         // });
 
-    }
+    },
+    generateInvoice: function (req, res) {
+        console.log("Order controller");
+
+        if (req.body) {
+            async.waterfall([
+                function (callback) {
+                    Order.generateInvoice(req.body, callback);
+                },
+                Order.sendInvoice,
+            ]);
+        } else {
+            res.callback("In correct Data");
+        }
+    },
 };
 module.exports = _.assign(module.exports, controller);

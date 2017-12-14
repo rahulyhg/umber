@@ -335,7 +335,6 @@
              .inner-blog-section {
                  width: 100%;
                  @include padding(15px 0 0);
-                 @include margin(0 auto);
              }
              .inner-blog-title {
                  @include padding(5px 0);
@@ -345,25 +344,30 @@
              .inner-blog {
                  .blog__slider {
                      .flexslider {
-                         margin-bottom: 0;
-                         &:hover {
-                             .flex-direction-nav .flex-prev,
-                             .flex-direction-nav .flex-next {
-                                 opacity: 1;
-                             }
-                         }
+                         margin-bottom: 0; //  &:hover {
+                         //      .flex-direction-nav .flex-prev,
+                         //      .flex-direction-nav .flex-next {
+                         //          opacity: 1;
+                         //      }
+                         //  }
                      }
                  }
              }
              .inner-blog-change-content {
-                 .flex-direction-nav a {
-                     width: 90px;
+                 .flex-item-container {
+                     @include justify-content(center);
                  }
                  .flex-direction-nav .flex-prev {
                      left: 0px!important;
                  }
-                 .flex-direction-nav .flex-prev {
+                 .flex-direction-nav .flex-next {
                      right: 0!important;
+                 }
+                 .action-btn.action-btn-prev {
+                     margin-left: 30px;
+                 }
+                 .action-btn.action-btn-next {
+                     margin-right: 30px;
                  }
                  .fa-long-arrow-left,
                  .fa-long-arrow-right {
@@ -809,6 +813,30 @@
              .usr-status-title {
                  font-size: 16px!important;
              } //End of order-detail page 
+             //Start of storelocator
+             .custom-slider {
+                 @include padding(15px);
+                 .location-name {
+                     @include margin(15px 10px);
+                 }
+                 .flexslider {
+                     padding-top: 0;
+                     padding-bottom: 0;
+                     .flex-prev {
+                         left: -30px !important;
+                     }
+                     .flex-next {
+                         right: -30px !important;
+                     }
+                 }
+             }
+             .store-location-brands-dtl {
+                 width: auto;
+                 height: auto;
+             }
+             .store-location-dtl {
+                 @include padding(0 15px);
+             } //End of store locator
              //Start of errormsg & thankyou-msg page
              //Use h2 for msg-title + .font-md for weight bold
              .msg-title {
@@ -860,7 +888,23 @@
                      padding: 10px 15px!important;
                      @include margin(0 auto);
                  }
-             } //Start of quick view page
+             } //Start of coupon code
+             .coupon-discount {
+                 width: 85%;
+                 h4 {
+                     font-size: 14px;
+                 }
+                 .coupon-discount-title {
+                     h1 {
+                         font-size: 20px;
+                     }
+                 }
+                 .modal-bottom {
+                     @include padding(5px 15px);
+                     text-align: center;
+                 }
+             } //End of coupon code
+             //Start of quick view page
              .quick-view-product {
                  @include padding(0);
                  .individual-first {

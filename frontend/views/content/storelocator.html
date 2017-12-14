@@ -1,93 +1,55 @@
-<div>
+<div class="store-locator">
     <div class="bg-img listing-img-common">
         <img src="img/store-locator/banner.jpg" alt="Background Image" class="img-responsive">
     </div>
-    <div class="row row-margin hidden-sm hidden-xs">
-        <div class="col-md-9 col-md-offset-3">
+    <div class="flex-item-container row-margin">
+        <div class="map-section">
             <div class="map-place" id="map">
                 <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.70562794511!2d72.90689501478126!3d19.120565755539104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c7e512dbd727%3A0xeb527108d18e04a1!2sBurnt+Umber+Fashion+Private+Limited!5e0!3m2!1sen!2sin!4v1498902443308"
                     width="400" height="400" frameborder="0" style="border:0" allowfullscreen>
                 </iframe> -->
             </div>
-            <div class="custom-slider">
-                <div class="border">
-                    <div class="location-title text-center">
-                        <div class="btn-group" uib-dropdown is-open="locationDropdownOpen">
-                            <button id="single-button" type="button" class="btn location--btn" uib-dropdown-toggle ng-disabled="disabled">
+        </div>
+        <div class="custom-slider">
+            <div class="border">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-4 col-sm-12 col-xs-12">
+                        <div class="location-title text-center">
+                            <div class="btn-group" uib-dropdown is-open="locationDropdownOpen">
+                                <button id="single-button" type="button" class="btn location--btn" uib-dropdown-toggle ng-disabled="disabled">
         {{locationButton}} <span><img width="15" height="15" src="img/home/whitearrow.png"></span>
       </button>
-                            <ul class="location-dropdown location-dropdown-menu dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                                <li role="menuitem" ng-repeat="place in location" ng-click="changePlaces(place)" value="{{place.city}}"><a href="#">{{place.city}}</a></li>
-                            </ul>
-                        </div>
-                        <div class="inline-block">
-                            <h3 class="tab-title text-uppercase">{{locationButton}}</h3>
-                        </div>
-                    </div>
-                    <flex-slider class="slider" ng-if="showSlider" slide="slocation in storeLocation track by $index" prev-text="" next-text=""
-                        animation="slide" item-width="300" item-margin="20" min-items="2" flexslider>
-                        <li>
-                            <div class="row">
-                                <div class="store-location-dtl">
-                                    <div class="store-location-brands-dtl">
-                                        <img ng-src="{{slocation.brand | serverimage}}" alt="Brand Logo" class="img-responsive">
-                                    </div>
-                                    <div class="store-location-addrs-dtl">
-                                        <address class="address"><b>{{slocation.address}}</b></address>
-                                        <p class="contact-no"><b>{{slocation.contactNo}}</b></p>
-                                        <p class="email"><b>{{slocation.email}}</b></p>
-                                    </div>
-                                </div>
+                                <ul class="location-dropdown location-dropdown-menu dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                                    <li role="menuitem" ng-repeat="place in location" ng-click="changePlaces(place)" value="{{place.city}}"><a href="#">{{place.city}}</a></li>
+                                </ul>
                             </div>
-                        </li>
-                    </flex-slider>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row row-margin visible-sm visible-xs">
-        <div class="col-sm-12">
-            <div class="map-place" id="map"></div>
-            <div class="col-sm-12">
+                            <div class="location-name">
+                                <h3 class="tab-title text-uppercase marg0">{{locationButton}}</h3>
+                            </div>
+                        </div>
 
-                <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.70562794511!2d72.90689501478126!3d19.120565755539104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c7e512dbd727%3A0xeb527108d18e04a1!2sBurnt+Umber+Fashion+Private+Limited!5e0!3m2!1sen!2sin!4v1498902443308"
-                    width="400" height="400" frameborder="0" style="border:0" allowfullscreen>
-                </iframe> -->
-            </div>
-            <div class="custom-slider">
-                <div class="border">
-                    <div class="location-title text-center">
-                        <div class="btn-group" uib-dropdown is-open="status.isopen">
-                            <button id="single-button" type="button" class="btn location--btn" uib-dropdown-toggle ng-disabled="disabled">
-        {{locationButton}} <span><img width="15" height="15" src="frontend/img/home/whitearrow.png"></span>
-      </button>
-                            <ul class="location-dropdown location-dropdown-menu dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                                <li role="menuitem" ng-repeat="place in location" ng-click="changePlaces(place)" value="{{place.city}}"><a href="#">{{place.city}}</a></li>
-                            </ul>
-                        </div>
-                        <div class="inline-block">
-                            <h3 class="tab-title text-uppercase">{{locationButton}}</h3>
-                        </div>
-                    </div>
-                    <flex-slider class="slider" ng-if="showSlider" slide="slocation in storeLocation track by $index" prev-text="" next-text=""
-                        animation="slide" item-width="300" item-margin="20" min-items="2" flexslider>
-                        <li>
-                            <div class="row">
-                                <div class="store-location-dtl">
-                                    <div class="store-location-brands-dtl">
-                                        <img ng-src="{{slocation.brand}}" alt="Brand Logo" class="img-responsive">
-                                    </div>
-                                    <div class="store-location-addrs-dtl">
-                                        <address class="address"><b>{{slocation.address}}</b></address>
-                                        <p class="contact-no"><b>{{slocation.contactNo}}</b></p>
-                                        <p class="email"><b>{{slocation.email}}</b></p>
+                        <flex-slider class="section-padd " ng-if="showSlider" slide="slocation in storeLocation track by $index" prev-text="" next-text=""
+                            animation="slide" item-width="300" item-margin="20" min-items="2" flexslider>
+                            <li>
+                                <div class="row">
+                                    <div class="store-location-dtl">
+                                        <div class="store-location-brands-dtl">
+                                            <img ng-src="{{slocation.brand}}" alt="Brand Logo" class="img-responsive">
+                                        </div>
+                                        <div class="store-location-addrs-dtl">
+                                            <address class="address"><b>{{slocation.address}}</b></address>
+                                            <p class="contact-no"><b>{{slocation.contactNo}}</b></p>
+                                            <p class="email"><b>{{slocation.email}}</b></p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                    </flex-slider>
+                            </li>
+                        </flex-slider>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
+
 </div>
