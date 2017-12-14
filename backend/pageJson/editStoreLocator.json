@@ -33,7 +33,7 @@
         {
             "name": "subCity",
             "type": "box",
-            "tableRef": "subcity",
+            "tableRef": "subCity",
             "validation": ["required", "trim", ""],
             "fields": [{
                 "name": "brand",
