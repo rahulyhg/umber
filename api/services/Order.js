@@ -54,7 +54,8 @@ var schema = new Schema({
             enum: ['accept', 'returned', 'cancelled'],
             default: 'accept'
         },
-        comment: String
+        comment: String,
+        taxPercent: String
     }],
     totalAmount: {
         type: Number,
@@ -844,7 +845,7 @@ var model = {
                 })
 
             }
-        })
+        });
     },
     //API to send delivered product email
     deliveredProductEmail: function (data, callback) {
@@ -908,10 +909,10 @@ var model = {
                             }
                         });
                     }
-                })
+                });
 
             }
-        })
+        });
     },
     //API to send shipped product email
     shippedProductEmail: function (data, callback) {
@@ -980,68 +981,69 @@ var model = {
             }
         })
     },
-     
-    Invoice:function Invoice(actualPrice,discountPrice,discountPercent,priceAfterDiscount,taxAmt,taxPercent,finalAmt)
-    {
-        this.actualPrice=actualPrice;
-        this.discountPrice=discountPrice;
-        this.discountPercent=discountPercent;
-        this.priceAfterDiscount=priceAfterDiscount;
-        this.taxAmt=taxAmt;
-        this.taxPercent=taxPercent;
-        this.finalAmt=finalAmt;
+
+    Invoice: function Invoice(actualPrice, discountPrice, discountPercent, priceAfterDiscount, taxAmt, taxPercent, finalAmt) {
+        this.actualPrice = actualPrice;
+        this.discountPrice = discountPrice;
+        this.discountPercent = discountPercent;
+        this.priceAfterDiscount = priceAfterDiscount;
+        this.taxAmt = taxAmt;
+        this.taxPercent = taxPercent;
+        this.finalAmt = finalAmt;
     },
 
-    generateInvoice: function (data,callback) {
-        var taxPercent=0;
-        var taxAmt=0;
-        var finalAmt=0;
-        var actualPrice=0;
-        var discountPercent=0;
-        var taxLimiterWithDiscount=1000;
-        var taxLimiterWithoutDiscount=1049;
-        var priceAfterDiscount=0;
-        invoiceInfo=[];
+    generateInvoice: function (data, callback) {
+        var taxPercent = 0;
+        var taxAmt = 0;
+        var finalAmt = 0;
+        var actualPrice = 0;
+        var discountPercent = 0;
+        var taxLimiterWithDiscount = 1000;
+        var taxLimiterWithoutDiscount = 1000;
+        var priceAfterDiscount = 0;
+        invoiceInfo = [];
         Order.findOne({
             _id: data._id
         }).exec(function (err, order) {
-            console.log(order);
-           var discountPrice=order.discountAmount;
-            async.each(order.products,function(data,async_callback){
-                actualPrice=data.price;
-                discountPercent=(discountPrice*100)/actualPrice;
-                if(order.discountAmount > 0){
-                    priceAfterDiscount =  actualPrice - discountPrice;
-                    if(priceAfterDiscount <= taxLimiterWithDiscount){
-                        taxPercent = 5;
-                    }
-                    else {
-                        taxPercent = 12;
-                    }
-                    taxAmt=((taxPercent/100)*discountedAmt)
-                    finalAmt = discountedAmt + taxAmt;
-                }
-                else{
-                    finalAmt=data.price;
-                    priceAfterDiscount=finalAmt;
-                    if(finalAmt > taxLimiterWithoutDiscount){
-                        taxPercent=12;
-                        taxAmt=0.12*finalAmt;
-                        actualPrice=finalAmt-taxAmt;
-                    }
-                    else {
-                        taxPercent=5;
-                        taxAmt=0.05*finalAmt;
-                        actualPrice=finalAmt-taxAmt;
-                    }
-                }
-                invoiceInfo.push(new model.Invoice(Math.ceil(actualPrice),Math.ceil(discountPrice),discountPercent,priceAfterDiscount,Math.ceil(taxAmt),taxPercent,finalAmt));
-                async_callback();
-            },function(err) {
-                console.log("Invoice Info:\n",invoiceInfo);
+            var discountPrice = order.discountAmount;
+            _.each(order.products, function (product, async_callback) {
+                // actualPrice = data.price;
+                // discountPercent = (discountPrice * 100) / actualPrice;
+                // if (order.discountAmount > 0) {
+                //     priceAfterDiscount = actualPrice - discountPrice;
+                //     if (priceAfterDiscount <= taxLimiterWithDiscount) {
+                //         taxPercent = 5;
+                //     } else {
+                //         taxPercent = 12;
+                //     }
+                //     taxAmt = ((taxPercent / 100) * discountedAmt);
+                //     finalAmt = discountedAmt + taxAmt;
+                // } else {
+                //     finalAmt = data.price;
+                //     priceAfterDiscount = finalAmt;
+                //     if (finalAmt > taxLimiterWithoutDiscount) {
+                //         taxPercent = 12;
+                //         taxAmt = 0.12 * finalAmt;
+                //         actualPrice = finalAmt - taxAmt;
+                //     } else {
+                //         taxPercent = 5;
+                //         taxAmt = 0.05 * finalAmt;
+                //         actualPrice = finalAmt - taxAmt;
+                //     }
+                // }
+                product.taxPercent = 5;
             });
-            
-    });
-}
+            order.save(function (err, data) {
+                callback(err, order);
+            });
+        });
+    },
+    sendInvoice: function (data, callback) {
+        sails.renderView('email/welcome', {
+            order: order
+        }, function (err, bodyOfEmail) {
+            // Config.sendEmail(order.user.id, );  Send email here
+        });
+    }
 };
 module.exports = _.assign(module.exports, exports, model);

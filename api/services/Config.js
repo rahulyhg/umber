@@ -536,7 +536,7 @@ var models = {
                                         console.log(response.headers)
                                         callback(null, response);
                                     }
-                                })
+                                });
                             } else {
                                 callback({
                                     message: "Error while sending mail."
@@ -732,9 +732,9 @@ var models = {
                                         console.log('Error response received: ', error);
                                         callback(error, null);
                                     } else {
-                                        console.log("statuscode: ", response.statusCode)
+                                        console.log("statuscode: ", response.statusCode);
                                         console.log("body: ", response.body)
-                                        console.log(response.headers)
+                                        console.log(response.headers);
                                         callback(null, response);
                                     }
                                 })
@@ -892,5 +892,35 @@ var models = {
             }
         });
     },
+    sendEmail: function (fromemail, toemail, subject, body, callback) {
+        var helper = require('sendgrid').mail;
+
+        from_email = new helper.Email(data.from);
+        to_email = new helper.Email(data.email);
+        subject = data.subject;
+        content = new helper.Content("text/html", body);
+        mail = new helper.Mail(from_email, subject, to_email, content);
+
+        console.log("sending mail", mail);
+
+        var sg = require('sendgrid')(userdata[0].name);
+        var request = sg.emptyRequest({
+            method: 'POST',
+            path: '/v3/mail/send',
+            body: mail.toJSON()
+        });
+
+        sg.API(request, function (error, response) {
+            if (error) {
+                console.log('Error response received: ', error);
+                callback(error, null);
+            } else {
+                console.log("statuscode: ", response.statusCode)
+                console.log("body: ", response.body)
+                console.log(response.headers)
+                callback(null, response);
+            }
+        });
+    }
 };
 module.exports = _.assign(module.exports, models);

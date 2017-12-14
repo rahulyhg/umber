@@ -51,7 +51,7 @@ var controller = {
             });
         }
     },
-    
+
     getCancelledOrdersForUser: function (req, res) {
         if (req.body) {
             Order.getCancelledOrdersForUser(req.body, res.callback);
@@ -291,15 +291,16 @@ var controller = {
     },
     generateInvoice: function (req, res) {
         console.log("Order controller");
+
         if (req.body) {
-            Order.generateInvoice(req.body, res.callback);
+            async.waterfall([
+                function (callback) {
+                    Order.generateInvoice(req.body, callback);
+                },
+                Order.sendInvoice,
+            ]);
         } else {
-            res.json({
-                value: false,
-                data: {
-                    message: "Invalid request!"
-                }
-            });
+            res.callback("In correct Data");
         }
     },
 };
