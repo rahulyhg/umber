@@ -1039,7 +1039,7 @@ var model = {
         });
     },
     sendInvoice: function (data, callback) {
-        sails.renderView('email/welcome', {
+        sails.renderView('email/invoice', {
             order: order
         }, function (err, bodyOfEmail) {
             // Config.sendEmail(order.user.id, );  Send email here
