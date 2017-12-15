@@ -35,8 +35,17 @@ myApp.service('myService', function ($http, WishlistService, BannerService, Cart
             });
         },
         //avinash functions ends here
-        /*************Adding Products To Cart**************** */
-        this.addToCart = function (prod, reqQuantity, size, com, productStyle, productColor, callback) {
+        this.discountOfProduct = function (data, callback) {
+            $http({
+                url: adminurl + 'Discount/discountsParticularProduct',
+                method: 'POST',
+                data: data,
+                withCredentials: false
+            }).then(callback);
+        }
+
+    /*************Adding Products To Cart**************** */
+    this.addToCart = function (prod, reqQuantity, size, com, productStyle, productColor, callback) {
             console.log("product:", prod, "size:", size, "quanti:", reqQuantity, "productColor", productColor)
             prod.selectedSize = size._id;
             prod.reqQuantity = reqQuantity;

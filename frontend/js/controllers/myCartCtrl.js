@@ -99,9 +99,9 @@
      }
 
 
-     $scope.applyCouponSubmit = function (couponName) {
+     $scope.applyCouponSubmit = function (couponName, productId) {
          //  console.log("applyCouponSubmit", couponName)
-         if (couponName) {
+         if (!productId && couponName) {
              NavigationService.getCoupon(couponName, function (couponData) {
                  console.log("applyCouponSubmit getCoupon", couponData)
                  if (couponData.data.data == "Coupon Invalid") {
@@ -146,7 +146,7 @@
              })
          } else {
              if (!isEmptyObject($scope.discountSelected)) {
-                 $scope.discountApplicable = true;
+                 //  $scope.discountApplicable = true;
                  console.log("$scope.discountSelected in applyCouponSubmit", $scope.discountSelected.discountType);
                  var discountObject = $scope.discountSelected;
                  discountCouponAmount = $scope.discountSelected.xValue;
@@ -245,67 +245,68 @@
                          $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
                          $scope.grandTotalAfterDiscount = 0;
                          var sortedArray = discountProducts.sort(function (a, b) {
-                             console.log("a", a, "b", b);
                              return a.price > b.price ? -1 : a.price < b.price ? 1 : 0
-                         })
-                         console.log("sortedArray", sortedArray);
-                         _.each(sortedArray, function (product) {
-                             _.each($scope.mycartTable.products, function (cartProduct) {
-                                 if (product._id == cartProduct.product._id) {
-                                     console.log("cartProduct.product._id", cartProduct);
-                                     switch (cartProduct.quantity) {
-                                         case 1:
-                                             cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = (cartProduct.product.price * cartProduct.quantity) * 0.1;
-                                             cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = cartProduct.product.price - $scope.discountPriceOfProduct;
-                                             $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
-                                             $scope.Couponmodal.close();
-                                             break;
-                                         case 2:
-                                             cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = (cartProduct.product.price * cartProduct.quantity) * 0.2;
-                                             cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
-                                             $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
-                                             $scope.Couponmodal.close();
-                                             break;
-                                         case 3:
-                                             cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = (cartProduct.product.price * cartProduct.quantity) * 0.3;
-                                             cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
-                                             $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
-                                             $scope.Couponmodal.close();
-                                             break;
-                                         case 4:
-                                             cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = (cartProduct.product.price * cartProduct.quantity) * 0.4;
-                                             cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
-                                             $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
-                                             $scope.Couponmodal.close();
-                                             break;
-                                         case 5:
-                                             cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = (cartProduct.product.price * cartProduct.quantity) * 0.5;
-                                             cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
-                                             $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
-                                             $scope.Couponmodal.close();
-                                             break;
-                                         case 6:
-                                             cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = (cartProduct.product.price * cartProduct.quantity) * 0.6;
-                                             cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
-                                             $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
-                                             $scope.Couponmodal.close();
-                                             break;
-                                         case 7:
-                                             cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = (cartProduct.product.price * cartProduct.quantity) * 0.7;
-                                             cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
-                                             $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
-                                             $scope.Couponmodal.close();
-                                             break;
-                                         default:
-                                             cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = 0;
-                                             cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
-                                             $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
-                                             $scope.Couponmodal.close();
-                                             break;
-                                     }
-                                 }
-                             });
                          });
+                         //  _.each(sortedArray, function (product) {
+                         console.log("$scope.mycartTable.products", $scope.mycartTable.products)
+                         _.each($scope.mycartTable.products, function (cartProduct) {
+                             if (productId == cartProduct.product._id) {
+                                 cartProduct.product.discountApplicable = true;
+                                 switch (cartProduct.quantity) {
+                                     case 1:
+                                         cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = (cartProduct.product.price * cartProduct.quantity) * 0.1;
+                                         cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = cartProduct.product.price - $scope.discountPriceOfProduct;
+                                         $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
+                                         $scope.Couponmodal.close();
+                                         break;
+                                     case 2:
+                                         cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = (cartProduct.product.price * cartProduct.quantity) * 0.2;
+                                         cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
+                                         $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
+                                         $scope.Couponmodal.close();
+                                         break;
+                                     case 3:
+                                         cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = (cartProduct.product.price * cartProduct.quantity) * 0.3;
+                                         cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
+                                         $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
+                                         $scope.Couponmodal.close();
+                                         break;
+                                     case 4:
+                                         cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = (cartProduct.product.price * cartProduct.quantity) * 0.4;
+                                         cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
+                                         $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
+                                         $scope.Couponmodal.close();
+                                         break;
+                                     case 5:
+                                         cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = (cartProduct.product.price * cartProduct.quantity) * 0.5;
+                                         cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
+                                         $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
+                                         $scope.Couponmodal.close();
+                                         break;
+                                     case 6:
+                                         cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = (cartProduct.product.price * cartProduct.quantity) * 0.6;
+                                         cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
+                                         $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
+                                         $scope.Couponmodal.close();
+                                         break;
+                                     case 7:
+                                         cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = (cartProduct.product.price * cartProduct.quantity) * 0.7;
+                                         cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
+                                         $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
+                                         $scope.Couponmodal.close();
+                                         break;
+                                     default:
+                                         cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = 0;
+                                         cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
+                                         $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
+                                         $scope.Couponmodal.close();
+                                         break;
+                                 }
+                             } else {
+                                 cartProduct.product.discountApplicable = false;
+                             }
+                         });
+                         //  });
                          $scope.discountValueObject = {
                              discountAmount: $scope.grandTotalAfterDiscount,
                              grandTotalAfterDiscount: $scope.total - $scope.grandTotalAfterDiscount,
@@ -660,7 +661,7 @@
          //TODO: Calculate actual grand total
          $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
          $scope.grandTotal = $scope.total = $scope.grandTotal.toFixed(2);
-         $scope.applyCouponSubmit();
+         $scope.applyCouponSubmit(null, $scope.mycartTable.products[index].product._id);
          //  $scope.grandTotal=$scope.grandTotal-$scope.grandTotalAfterDiscount;
          // }
      }
@@ -710,7 +711,16 @@
 
      }
 
-     $scope.openCoupon = function () {
+     $scope.openCoupon = function (product) {
+         _.each($scope.mycartTable.products, function (cartProduct) {
+
+         });
+
+         myService.discountOfProduct(product, function (data) {
+             $scope.applicableDiscountsOfProduct = data.data.data;
+             $scope.applicableDiscountsOfProduct.productId = product._id;
+         });
+
          $scope.Couponmodal = $uibModal.open({
              animation: true,
              templateUrl: 'views/modal/Coupon.html',

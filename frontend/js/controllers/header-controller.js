@@ -152,11 +152,21 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
         if (userId.userId != null) {
             CartService.getCart(userId, function (data) {
                 $scope.cart = data.data.data;
+                _.each($scope.cart.products, function (product) {
+                    if (product.product.quantity == 0) {
+                        $scope.cartDisable = true;
+                    }
+                });
             });
 
         } else {
             //TODO: Implement without login
             $scope.cart = $.jStorage.get("cart");
+            _.each($scope.cart.products, function (product) {
+                if (product.product.quantity == 0) {
+                    $scope.cartDisable = true;
+                }
+            })
         }
 
         $scope.view = false;
@@ -263,8 +273,6 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
                     $scope.cartDisable = true;
                     $scope.cartErr = "Product is Out of Stock";
                     return false
-                } else {
-                    $state.go("checkout");
                 }
             });
         }

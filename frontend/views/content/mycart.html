@@ -26,12 +26,12 @@
                     </thead>
                     <tbody ng-repeat="product in mycartTable.products track by $index">
                         <tr ng-class="checkStockStatus(product)">
-
                             <td rowspan="2">
                                 <div class="item relate">
                                     <img ng-src="{{product.product.images[0].image | serverimage}}" alt="" class="img-responsive item__img">
                                     <div class="mycart-info">
                                         <p class="item__title1">{{product.product.productName}}</p>
+                                        <a class="linking" style="color: #341314" ng-click="openCoupon(product.product)">Check Offer</a>
                                     </div>
                                     <div class="outofstock" ng-if="product.quantity>product.product.quantity">OUT OF STOCK</div>
                                 </div>
@@ -59,11 +59,11 @@
                             <td>
                                 &#x20b9 &nbsp;{{product.product.mrp}}
                             </td>
-                            <td ng-if="discountApplicable">&#x20b9 &nbsp;{{product.product.discountPriceOfProduct|number:0}}</td>
-                            <td ng-if="!discountApplicable">&#x20b9 &nbsp;0</td>
+                            <td ng-if="product.product.discountApplicable">&#x20b9 &nbsp;{{product.product.discountPriceOfProduct|number:0}}</td>
+                            <td ng-if="!product.product.discountApplicable">&#x20b9 &nbsp;0</td>
                             <td></td>
-                            <td ng-if="discountApplicable">&#x20b9 &nbsp;{{product.product.priceWithDiscount|number:0}}</td>
-                            <td ng-if="!discountApplicable">&#x20b9 &nbsp;{{product.product.price * product.quantity|number:0}}</td>
+                            <td ng-if="product.product.discountApplicable">&#x20b9 &nbsp;{{product.product.priceWithDiscount|number:0}}</td>
+                            <td ng-if="!product.product.discountApplicable">&#x20b9 &nbsp;{{product.product.price * product.quantity|number:0}}</td>
 
                         </tr>
                         <tr>
@@ -81,7 +81,7 @@
 
             <div class="mycart-footer">
                 <div class="pull-left">
-                    <a class="linking" style="color: #341314" ng-click="openCoupon()">Check Offer</a>
+                    <!--<a class="linking" style="color: #341314" ng-click="openCoupon()">Check Offer</a>-->
                 </div>
                 <div class="pull-right">
                     <div class="text-right inline-block">

@@ -74,7 +74,7 @@
 
                             </li>
                             <div class="dropdown-menu__btn text-center ">
-                                <button class="btn btn--brown-checkout" ng-disabled="!cart.products.length" ng-click="redirectCheckOut(cart.products)">CHECKOUT</button>
+                                <a ui-sref="checkout"> <button class="btn btn--brown-checkout" ng-disabled="!cart.products.length || cartDisable ">CHECKOUT</button></a>
                                 <p ng-if="cartDisable">{{cartErr}}</p>
                             </div>
                         </ul>
