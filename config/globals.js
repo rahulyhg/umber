@@ -91,7 +91,7 @@ global["request"] = require('request');
 global["fs"] = require('fs');
 global["json2xls"] = require('json2xls');
 global["xlsx"] = require('node-xlsx').default;
-// global["pdf"] = require('html-pdf');
+
 
 // passport Globals
 global["passport"] = require('passport');

@@ -1,3 +1,5 @@
+// import { disconnect } from 'cluster';
+
 var crypto = require('crypto');
 var http = require('http'),
     fs = require('fs'),
@@ -46,7 +48,6 @@ var schema = new Schema({
             required: true
         },
         quantity: Number,
-        price: Number,
         style: String,
         color: String,
         status: {
@@ -55,7 +56,13 @@ var schema = new Schema({
             default: 'accept'
         },
         comment: String,
-        taxPercent: String
+        price: Number,
+        discountAmount:Number,
+        discountPercent:Number,
+        priceAfterDiscount:Number,
+        taxAmt:Number,
+        taxPercent:Number,
+        finalAmt:Number
     }],
     totalAmount: {
         type: Number,
@@ -982,15 +989,6 @@ var model = {
         })
     },
 
-    Invoice: function Invoice(actualPrice, discountPrice, discountPercent, priceAfterDiscount, taxAmt, taxPercent, finalAmt) {
-        this.actualPrice = actualPrice;
-        this.discountPrice = discountPrice;
-        this.discountPercent = discountPercent;
-        this.priceAfterDiscount = priceAfterDiscount;
-        this.taxAmt = taxAmt;
-        this.taxPercent = taxPercent;
-        this.finalAmt = finalAmt;
-    },
 
     generateInvoice: function (data, callback) {
         var taxPercent = 0;
@@ -998,52 +996,92 @@ var model = {
         var finalAmt = 0;
         var actualPrice = 0;
         var discountPercent = 0;
+        var discountPrice =0;
         var taxLimiterWithDiscount = 1000;
         var taxLimiterWithoutDiscount = 1000;
         var priceAfterDiscount = 0;
         invoiceInfo = [];
         Order.findOne({
             _id: data._id
-        }).exec(function (err, order) {
-            var discountPrice = order.discountAmount;
-            _.each(order.products, function (product, async_callback) {
-                // actualPrice = data.price;
-                // discountPercent = (discountPrice * 100) / actualPrice;
-                // if (order.discountAmount > 0) {
-                //     priceAfterDiscount = actualPrice - discountPrice;
-                //     if (priceAfterDiscount <= taxLimiterWithDiscount) {
-                //         taxPercent = 5;
-                //     } else {
-                //         taxPercent = 12;
-                //     }
-                //     taxAmt = ((taxPercent / 100) * discountedAmt);
-                //     finalAmt = discountedAmt + taxAmt;
-                // } else {
-                //     finalAmt = data.price;
-                //     priceAfterDiscount = finalAmt;
-                //     if (finalAmt > taxLimiterWithoutDiscount) {
-                //         taxPercent = 12;
-                //         taxAmt = 0.12 * finalAmt;
-                //         actualPrice = finalAmt - taxAmt;
-                //     } else {
-                //         taxPercent = 5;
-                //         taxAmt = 0.05 * finalAmt;
-                //         actualPrice = finalAmt - taxAmt;
-                //     }
-                // }
-                product.taxPercent = 5;
-            });
-            order.save(function (err, data) {
-                callback(err, order);
-            });
+        }).lean().exec(function (err, order) {
+            _.each(order.products, function (product,index) {
+                product.discountPercent=10;
+                product.discountAmount=0;
+                actualPrice = product.price;
+                discountPrice = product.discountAmount;
+                discountPercent = product.discountPercent;
+                if (discountPrice > 0 || product.discountPercent>0) {
+                    if(discountPrice > 0)
+                    {
+                        discountPercent = (discountPrice * 100) / actualPrice;
+                    }
+                   else if(discountPercent > 0)
+                   {
+                       discountPrice =(discountPercent/100)*actualPrice;
+                   }
+                    priceAfterDiscount = actualPrice - discountPrice;
+                    if (priceAfterDiscount <= taxLimiterWithDiscount) {
+                        taxPercent = 5;
+                    } else {
+                        taxPercent = 12;
+                    }
+                    taxAmt = ((taxPercent / 100) * priceAfterDiscount);
+                    finalAmt = priceAfterDiscount + taxAmt;
+                } else {
+                    finalAmt = actualPrice = priceAfterDiscount = product.price;
+                    if (finalAmt > taxLimiterWithoutDiscount) {
+                        taxPercent = 12;
+                        taxAmt = 0.12 * finalAmt;
+                    } else {
+                        taxPercent = 5;
+                        taxAmt = 0.05 * finalAmt;
+                    }
+                }
+                product.price = _.ceil(actualPrice);
+                product.discountAmount = _.ceil(discountPrice);
+                product.discountPercent = discountPercent;
+                product.priceAfterDiscount = _.ceil(priceAfterDiscount);
+                product.taxAmt = _.ceil(taxAmt);
+                product.taxPercent = taxPercent;
+                product.finalAmt = _.ceil(finalAmt); 
+            });  
+            Order.saveData(order,function(err,data)
+            {
+                if(err)
+                {
+                    console.log(err);
+                }
+                else
+                {
+                    callback(null,order);
+                }
+            })
         });
     },
-    sendInvoice: function (data, callback) {
-        sails.renderView('email/invoice', {
-            order: order
-        }, function (err, bodyOfEmail) {
-            // Config.sendEmail(order.user.id, );  Send email here
-        });
+    sendEmail: function (order,prevCallback) {
+        async.parallel([
+            function(callback) {
+                Config.generatePdf("invoice",order,callback);
+            },
+            function(callback) {
+                var emailData = {};
+                emailData.email = "supriya.kadam@wohlig.com";
+                emailData.subject = "Invoice PDF";
+                emailData.body = "Invoice";
+                emailData.from = "supriya.kadam478@hotmail.com"
+                emailData.filename="foo.pdf"
+                Config.sendEmailAttachment(emailData, callback);
+            }
+        ],function(err, results) {
+            if(err){
+                console.log("Error",err);
+                prevCallback(err,null);
+            }
+            else{
+                console.log("Results");
+                prevCallback(null,results);
+            }
+        })
     }
 };
 module.exports = _.assign(module.exports, exports, model);

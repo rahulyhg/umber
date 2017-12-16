@@ -156,7 +156,7 @@ var models = {
         res.set({
             'Cache-Control': 'public, max-age=31557600',
             'Expires': new Date(Date.now() + 345600000).toUTCString(),
-            'Content-Type': 'image/jpeg'
+            // 'Content-Type': 'image/jpeg'
         });
         var readstream = gfs.createReadStream({
             filename: filename
@@ -892,6 +892,62 @@ var models = {
             }
         });
     },
+
+    sendEmailAttachment(data,callback)
+    {
+        Password.find().exec(function (err, userdata) {
+            if (err) {
+                callback(err, null);
+            } else if (userdata && userdata.length > 0) 
+            {  
+                            if (data.body) {
+                                var helper = require('sendgrid').mail;
+                                from_email = new helper.Email(data.from);
+                                to_email = new helper.Email(data.email);
+                                subject = data.subject;
+                                content = new helper.Content("text/html", data.body);
+                                mail = new helper.Mail(from_email, subject, to_email, content);
+                        
+                                if (data.filename) {
+                                    var attachment = new helper.Attachment();
+                                    var file = fs.readFileSync( data.filename);
+                                    var base64File = new Buffer(file).toString('base64');
+                                    attachment.setContent(base64File);
+                                    var pdfgen = data.filename.split(".");
+                                    data.filename = pdfgen[0] + ".pdf";
+                                    attachment.setFilename(data.filename);
+                                    attachment.setDisposition('attachment');
+                                    mail.addAttachment(attachment);
+                                }
+                                var sg = require('sendgrid')(userdata[0].name);
+                                var request = sg.emptyRequest({
+                                    method: 'POST',
+                                    path: '/v3/mail/send',
+                                    body: mail.toJSON()
+                                });
+
+                                sg.API(request, function (error, response) {
+                                    if (error) {
+                                        console.log('Error response received: ', error);
+                                        callback(error, null);
+                                    } else {
+                                        // console.log("statuscode: ", response.statusCode)
+                                        // console.log("body: ", response.body)
+                                        // console.log(response.headers)
+                                        callback(null, response);
+                                    }
+                                })
+                            } else {
+                                callback({
+                                    message: "Error while sending mail."
+                                }, null);
+                            }
+                        
+                    }
+        });
+
+    },
+
     sendEmail: function (fromemail, toemail, subject, body, callback) {
         var helper = require('sendgrid').mail;
 
@@ -921,6 +977,70 @@ var models = {
                 callback(null, response);
             }
         });
+    },
+    generatePdf: function (page, obj, callback, res, custom, notValid) {
+        obj = _.assign(obj, env);
+        sails.hooks.views.render(page, obj, function (err, html) {
+            if (err) {
+                callback(err);
+            } else {
+                var id = mongoose.Types.ObjectId();
+                var newFilename = id + ".pdf";
+                var writestream = gfs.createWriteStream({
+                    filename: newFilename
+                });
+                writestream.on('finish', function () {
+                    if (res) {
+                        // res.set('Content-Disposition', "filename=" + filename);
+                        // res.send(newFilename)
+                    } else {
+                        console.log("#333333",newFilename);
+                        callback(null, {
+                            name: newFilename,
+                            url: global["env"].realHost + "/api/downloadWithName/" + newFilename
+                        });
+                    }
+                });
+
+                var config = {
+                    // Export options 
+                    "directory": "/tmp",
+                    "format": "A4", // allowed units: A3, A4, A5, Legal, Letter, Tabloid 
+                    "orientation": "portrait", // portrait or landscape 
+                    // File options 
+                    "type": "pdf", // allowed file types: png, jpeg, pdf 
+                    "timeout": 30000, // Timeout that will cancel phantomjs, in milliseconds 
+                    "footer": {
+                        "height": "0.5cm",
+                    },
+                };
+                
+                    // Page options 
+                    config.border = {
+                        "top": "2cm", // default is 0, units: mm, cm, in, px 
+                        "right": "1cm",
+                        "bottom": "1cm",
+                        "left": "2.5cm"
+                    };
+                
+                 console.log('html : ', html);
+                var pdf = require('html-pdf');
+                pdf.create(html, config).toStream(function (err, stream) {
+                    // console.log(err);
+                    // console.log("Chinatn");
+                    if (err) {
+                        callback(err);
+                    } else {
+                        console.log("In Config To generate PDF");
+                        stream.pipe(writestream);
+                        stream.pipe(fs.createWriteStream('foo.pdf'));
+                    }
+
+                });
+            }
+
+        });
     }
+
 };
 module.exports = _.assign(module.exports, models);

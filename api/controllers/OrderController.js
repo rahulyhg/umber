@@ -290,14 +290,18 @@ var controller = {
 
     },
     generateInvoice: function (req, res) {
-        console.log("Order controller");
-
         if (req.body) {
             async.waterfall([
                 function (callback) {
-                    Order.generateInvoice(req.body, callback);
+                    Order.generateInvoice(req.body,callback);
                 },
-                Order.sendInvoice,
+                function (data,callback) {
+
+                    Order.sendEmail(data, callback);
+                },
+                function (data,callback) {
+                    console.log("Email sent");
+                }
             ]);
         } else {
             res.callback("In correct Data");
