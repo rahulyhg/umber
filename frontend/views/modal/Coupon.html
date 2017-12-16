@@ -17,7 +17,7 @@
             <!--<pre>{{applicableDiscounts}}</pre>-->
             <div class="form-group">
                 <div class="text-left" ng-if="!formData.couponCode">
-                    <div class="radio-wdth inline-block align-top" ng-repeat="discount in applicableDiscountsOfProduct track by $index">
+                    <div class="radio-wdth inline-block align-top" ng-repeat="discount in applicableDiscountsAll track by $index">
                         <!--<input class="radio-custom" id="radio1" type="radio" name="select" hidden><label for="radio1" class="radio-inline radio-custom-label">-->
                         <!--{{discount}}-->
                         <input hidden class="radio-custom" id="{{discount._id}}" ng-click="radioSubmit(discount);checkbox($index)" type="checkbox"

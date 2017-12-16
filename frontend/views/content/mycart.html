@@ -31,7 +31,7 @@
                                     <img ng-src="{{product.product.images[0].image | serverimage}}" alt="" class="img-responsive item__img">
                                     <div class="mycart-info">
                                         <p class="item__title1">{{product.product.productName}}</p>
-                                        <a class="linking" style="color: #341314" ng-click="openCoupon(product.product)">Check Offer</a>
+                                        <!--<a class="linking" style="color: #341314" ng-click="openCoupon(product.product)">Check Offer</a>-->
                                     </div>
                                     <div class="outofstock" ng-if="product.quantity>product.product.quantity">OUT OF STOCK</div>
                                 </div>
@@ -81,7 +81,7 @@
 
             <div class="mycart-footer">
                 <div class="pull-left">
-                    <!--<a class="linking" style="color: #341314" ng-click="openCoupon()">Check Offer</a>-->
+                    <a class="linking" style="color: #341314" ng-click="openCoupon()">Check Offer</a>
                 </div>
                 <div class="pull-right">
                     <div class="text-right inline-block">
