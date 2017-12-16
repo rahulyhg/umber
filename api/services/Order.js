@@ -1059,17 +1059,17 @@ var model = {
         });
     },
     sendEmail: function (order,prevCallback) {
-        async.parallel([
+        async.waterfall([
             function(callback) {
                 Config.generatePdf("invoice",order,callback);
             },
-            function(callback) {
+            function(data,callback) {
                 var emailData = {};
                 emailData.email = "supriya.kadam@wohlig.com";
                 emailData.subject = "Invoice PDF";
                 emailData.body = "Invoice";
-                emailData.from = "supriya.kadam478@hotmail.com"
-                emailData.filename="foo.pdf"
+                emailData.from = "supriya.kadam478@hotmail.com";
+                emailData.filename="foo.pdf";
                 Config.sendEmailAttachment(emailData, callback);
             }
         ],function(err, results) {
