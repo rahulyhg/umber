@@ -99,9 +99,9 @@
      }
 
 
-     $scope.applyCouponSubmit = function (couponName) {
+     $scope.applyCouponSubmit = function (couponName, productId) {
          //  console.log("applyCouponSubmit", couponName)
-         if (couponName) {
+         if (!productId && couponName) {
              NavigationService.getCoupon(couponName, function (couponData) {
                  console.log("applyCouponSubmit getCoupon", couponData)
                  if (couponData.data.data == "Coupon Invalid") {
@@ -146,7 +146,7 @@
              })
          } else {
              if (!isEmptyObject($scope.discountSelected)) {
-
+                 //  $scope.discountApplicable = true;
                  console.log("$scope.discountSelected in applyCouponSubmit", $scope.discountSelected.discountType);
                  var discountObject = $scope.discountSelected;
                  discountCouponAmount = $scope.discountSelected.xValue;
@@ -240,132 +240,81 @@
                          var firstTwoProductsAmountSum;
                          var iterationNumber = 0;
                          var totalPriceAdded = 0;
+                         $scope.discountPriceOfProduct = 0;
+                         $scope.priceWithDiscount = 0;
+                         $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
+                         $scope.grandTotalAfterDiscount = 0;
                          var sortedArray = discountProducts.sort(function (a, b) {
-                             console.log("a", a, "b", b);
                              return a.price > b.price ? -1 : a.price < b.price ? 1 : 0
-                         })
-                         console.log("sortedArray", sortedArray);
-
-                         _.each(sortedArray, function (product) {
-                             _.each($scope.mycartTable.products, function (cartProduct) {
-                                 if (product._id == cartProduct.product._id) {
-                                     iterationNumber = iterationNumber + 1;
-                                     totalCountProductsInB1GXOff = totalCountProductsInB1GXOff + cartProduct.quantity;
-                                     console.log("totalCountProductsInB1GXOff", totalCountProductsInB1GXOff);
-                                     var productPriceBeforeQuantityMultiplication = cartProduct.product.price;
-                                     //  totalAmountOfCountProductsInB1GXOff = totalAmountOfCountProductsInB1GXOff + (cartProduct.quantity * cartProduct.product.price);
-                                     var firstTwoProductsAmountSum = productPriceBeforeQuantityMultiplication;
-
-                                     if (iterationNumber == 1) {
-                                         if (cartProduct.quantity > 0 && cartProduct.quantity <= 2) {
-                                             totalAmountOfCountProductsInB1GXOff = totalAmountOfCountProductsInB1GXOff + (cartProduct.quantity * cartProduct.product.price);
-                                             totalPriceAdded = cartProduct.quantity;
-                                             priceOfTwo = totalAmountOfCountProductsInB1GXOff;
-                                         } else if (cartProduct.quantity > 2) {
-                                             priceOfTwo = totalAmountOfCountProductsInB1GXOff + (2 * cartProduct.product.price);
-                                             totalPriceAdded = 2;
-                                             totalAmountOfCountProductsInB1GXOff = totalAmountOfCountProductsInB1GXOff + (cartProduct.quantity * cartProduct.product.price);
-                                         }
-                                     } else if (iterationNumber == 2 && totalPriceAdded < 2) {
-                                         if (cartProduct.quantity > 0 && cartProduct.quantity <= 1) {
-                                             totalAmountOfCountProductsInB1GXOff = totalAmountOfCountProductsInB1GXOff + (cartProduct.quantity * cartProduct.product.price);
-                                             totalPriceAdded = cartProduct.quantity;
-                                             priceOfTwo = totalAmountOfCountProductsInB1GXOff;
-                                         } else if (cartProduct.quantity > 1) {
-                                             priceOfTwo = totalAmountOfCountProductsInB1GXOff + (1 * cartProduct.product.price);
-                                             totalAmountOfCountProductsInB1GXOff = totalAmountOfCountProductsInB1GXOff + (cartProduct.quantity * cartProduct.product.price);
-                                             totalPriceAdded = 2;
-                                         }
-                                     } else {
-                                         totalAmountOfCountProductsInB1GXOff = totalAmountOfCountProductsInB1GXOff + (cartProduct.quantity * cartProduct.product.price);
-                                     }
-
-
-                                     //  if(cartProduct.quantity>=2 && totalCountProductsInB1GXOff>0){
-                                     //     var firstTwoProductsAmountSum=cartProduct.product.price*(2-(totalCountProductsInB1GXOff-cartProduct.quantity));
-                                     //     console.log("firstTwoProductsAmountSum",firstTwoProductsAmountSum);
-                                     //  }
-
-                                     //  if(totalCountProductsInB1GXOff<=2){
-                                     //      priceOfTwo=firstTwoProductsAmountSum;
-                                     //         console.log("priceOfTwo if after change",priceOfTwo);
-                                     //      console.log("totalAmountOfCountProductsInB1GXOff in if after calculations",totalAmountOfCountProductsInB1GXOff);
-                                     //  }else{
-
-
-                                     //     //     console.log("priceOfTwo else",priceOfTwo);
-                                     //     //  totalAmountOfCountProductsInB1GXOff = totalAmountOfCountProductsInB1GXOff + (cartProduct.quantity * cartProduct.product.price);
-                                     //     // //  totalAmountOfCountProductsInB1GXOff=priceOfTwo;
-                                     //     //  console.log("totalAmountOfCountProductsInB1GXOff in else",totalAmountOfCountProductsInB1GXOff);
-                                     //  }
-
-
-                                 }
-                             });
                          });
-                         console.log("totalAmountOfCountProductsInB1GXOff", totalAmountOfCountProductsInB1GXOff);
-                         console.log("priceOfTwo", priceOfTwo);
-                         if (totalCountProductsInB1GXOff == 1) {
-                             console.log("$scope.grandTotal Before 1 nnn", $scope.grandTotal);
-                             var percentage = $scope.discountSelected.xValue;
-                             console.log("percentage", percentage);
-                             //  =totalAmountOfCountProductsInB1GXOff;
-                             if ($scope.mycartTable) {
-                                 $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
-                                 //  $.jStorage.set("grandTotal", $scope.grandTotal);
+                         //  _.each(sortedArray, function (product) {
+                         console.log("$scope.mycartTable.products", $scope.mycartTable.products)
+                         _.each($scope.mycartTable.products, function (cartProduct) {
+                             if (productId == cartProduct.product._id) {
+                                 cartProduct.product.discountApplicable = true;
+                                 switch (cartProduct.quantity) {
+                                     case 1:
+                                         cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = (cartProduct.product.price * cartProduct.quantity) * 0.1;
+                                         cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = cartProduct.product.price - $scope.discountPriceOfProduct;
+                                         $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
+                                         $scope.Couponmodal.close();
+                                         break;
+                                     case 2:
+                                         cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = (cartProduct.product.price * cartProduct.quantity) * 0.2;
+                                         cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
+                                         $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
+                                         $scope.Couponmodal.close();
+                                         break;
+                                     case 3:
+                                         cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = (cartProduct.product.price * cartProduct.quantity) * 0.3;
+                                         cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
+                                         $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
+                                         $scope.Couponmodal.close();
+                                         break;
+                                     case 4:
+                                         cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = (cartProduct.product.price * cartProduct.quantity) * 0.4;
+                                         cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
+                                         $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
+                                         $scope.Couponmodal.close();
+                                         break;
+                                     case 5:
+                                         cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = (cartProduct.product.price * cartProduct.quantity) * 0.5;
+                                         cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
+                                         $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
+                                         $scope.Couponmodal.close();
+                                         break;
+                                     case 6:
+                                         cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = (cartProduct.product.price * cartProduct.quantity) * 0.6;
+                                         cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
+                                         $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
+                                         $scope.Couponmodal.close();
+                                         break;
+                                     case 7:
+                                         cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = (cartProduct.product.price * cartProduct.quantity) * 0.7;
+                                         cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
+                                         $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
+                                         $scope.Couponmodal.close();
+                                         break;
+                                     default:
+                                         cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = 0;
+                                         cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
+                                         $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
+                                         $scope.Couponmodal.close();
+                                         break;
+                                 }
+                             } else {
+                                 cartProduct.product.discountApplicable = false;
                              }
-
-                             //  var totalDiscount = ($scope.discountSelected.xValue/totalAmountOfCountProductsInB1GXOff)*100;
-                             $scope.grandTotalAfterDiscount = (priceOfTwo * percentage) / 100;
-                             console.log("$scope.grandTotalAfterDiscount nnn", $scope.grandTotalAfterDiscount);
-                             $scope.grandTotal = $scope.grandTotal - $scope.grandTotalAfterDiscount;
-                             console.log("$scope.grandTotal after 1 nnn", $scope.grandTotal);
-
-
-                             $scope.discountValueObject = {
-                                 discountAmount: $scope.grandTotalAfterDiscount,
-                                 grandTotalAfterDiscount: $scope.grandTotal,
-                                 selectedDiscount: $scope.discountSelected,
-                                 totalAmountOfOrder: $scope.total
-                             }
-                             console.log("$scope.discountValueObject", $scope.discountValueObject);
-                             $.jStorage.set("discountValues", $scope.discountValueObject);
-
-
-                             $scope.Couponmodal.close();
-
-                         } else if (totalCountProductsInB1GXOff >= 2) {
-                             var percentage = $scope.discountSelected.yValue;
-                             console.log("$scope.grandTotal before 2 nnn", $scope.grandTotal);
-                             if ($scope.mycartTable) {
-                                 $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
-                                 //  $.jStorage.set("grandTotal", $scope.grandTotal);
-                             }
-                             $scope.grandTotalAfterDiscount = (priceOfTwo * percentage) / 100;
-                             $scope.grandTotal = $scope.grandTotal - $scope.grandTotalAfterDiscount;
-                             console.log("$scope.grandTotal after 2 nnn", $scope.grandTotal);
-
-                             $scope.discountValueObject = {
-                                 discountAmount: $scope.grandTotalAfterDiscount,
-                                 grandTotalAfterDiscount: $scope.grandTotal,
-                                 selectedDiscount: $scope.discountSelected,
-                                 totalAmountOfOrder: $scope.total
-                             }
-                             console.log("$scope.discountValueObject", $scope.discountValueObject);
-                             $.jStorage.set("discountValues", $scope.discountValueObject);
-
-
-                             $scope.Couponmodal.close();
-                         } else {
-                             $scope.grandTotal = 0;
-                             $scope.grandTotalAfterDiscount = 0;
-                             $scope.Couponmodal.close();
-
+                         });
+                         //  });
+                         $scope.discountValueObject = {
+                             discountAmount: $scope.grandTotalAfterDiscount,
+                             grandTotalAfterDiscount: $scope.total - $scope.grandTotalAfterDiscount,
+                             selectedDiscount: $scope.discountSelected,
+                             totalAmountOfOrder: $scope.total
                          }
-                         // $scope.$apply();
-
-                         //    $scope.applicableDiscounts = data;
-                         //    console.log("$scope.applicableDiscounts", $scope.applicableDiscounts)
+                         console.log("$scope.discountValueObject", $scope.discountValueObject);
+                         $.jStorage.set("discountValues", $scope.discountValueObject);
 
                      });
                  } else if ($scope.discountSelected.discountType == "59ede2fcd30c7e2ab3324ece") {
@@ -712,7 +661,7 @@
          //TODO: Calculate actual grand total
          $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
          $scope.grandTotal = $scope.total = $scope.grandTotal.toFixed(2);
-         $scope.applyCouponSubmit();
+         $scope.applyCouponSubmit(null, $scope.mycartTable.products[index].product._id);
          //  $scope.grandTotal=$scope.grandTotal-$scope.grandTotalAfterDiscount;
          // }
      }
@@ -762,7 +711,16 @@
 
      }
 
-     $scope.openCoupon = function () {
+     $scope.openCoupon = function (product) {
+         _.each($scope.mycartTable.products, function (cartProduct) {
+
+         });
+
+         myService.discountOfProduct(product, function (data) {
+             $scope.applicableDiscountsOfProduct = data.data.data;
+             $scope.applicableDiscountsOfProduct.productId = product._id;
+         });
+
          $scope.Couponmodal = $uibModal.open({
              animation: true,
              templateUrl: 'views/modal/Coupon.html',

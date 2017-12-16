@@ -17,7 +17,7 @@
             <!--<pre>{{applicableDiscounts}}</pre>-->
             <div class="form-group">
                 <div class="text-left" ng-if="!formData.couponCode">
-                    <div class="radio-wdth inline-block align-top" ng-repeat="discount in applicableDiscountsAll track by $index">
+                    <div class="radio-wdth inline-block align-top" ng-repeat="discount in applicableDiscountsOfProduct track by $index">
                         <!--<input class="radio-custom" id="radio1" type="radio" name="select" hidden><label for="radio1" class="radio-inline radio-custom-label">-->
                         <!--{{discount}}-->
                         <input hidden class="radio-custom" id="{{discount._id}}" ng-click="radioSubmit(discount);checkbox($index)" type="checkbox"
@@ -51,9 +51,9 @@
         </div>
         <div class="modal-footer modal-bottom" ng-if="loggedUser">
             {{discount}}
-            <button class="btn text-uppercase cancel--btn" type="button" ng-click="clearCouponSubmit();$dismiss()">CANCEL</button>
-            <button class="btn text-uppercase apply--btn" type="button" ng-if="formData.couponCode" ng-click="applyCouponSubmit(formData);">APPLY COUPON</button>
-            <button class="btn text-uppercase apply--btn" type="button" ng-if="!formData.couponCode" ng-click="applyCouponSubmit();">APPLY COUPON</button>
+            <button class="btn text-uppercase cancel--btn btn--mob-modal" type="button" ng-click="clearCouponSubmit();$dismiss()">CANCEL</button>
+            <button class="btn text-uppercase apply--btn btn--mob-modal" type="button" ng-if="formData.couponCode" ng-click="applyCouponSubmit(formData);">APPLY COUPON</button>
+            <button class="btn text-uppercase apply--btn btn--mob-modal" type="button" ng-if="!formData.couponCode" ng-click="applyCouponSubmit(formData,applicableDiscountsOfProduct.productId);">APPLY COUPON</button>
             <!--<button class="btn text-uppercase apply--btn" type="button" ng-click="disabledRadio();">APPLY COUPON</button>-->
         </div>
     </div>

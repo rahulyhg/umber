@@ -74,7 +74,8 @@
 
                             </li>
                             <div class="dropdown-menu__btn text-center ">
-                                <a ui-sref="checkout "><button class="btn btn--brown-checkout" ng-disabled="!cart.products.length">CHECKOUT</button></a>
+                                <a ui-sref="checkout"> <button class="btn btn--brown-checkout" ng-disabled="!cart.products.length || cartDisable ">CHECKOUT</button></a>
+                                <p ng-if="cartDisable">{{cartErr}}</p>
                             </div>
                         </ul>
 
@@ -147,6 +148,7 @@
                             <span ng-if="!cart.products.length ">0</span> )</a>
                         <ul class="cart-dropdown-menu dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown ">
                             <li ng-repeat="product in cart.products ">
+
                                 <div class="dropdown-menu__dropdown-cart ">
                                     <div class="inline-block img ">
                                         <img ng-src="{{product.product.images[0].image | serverimage}} " alt="shirt_img
@@ -173,7 +175,6 @@
                                         </p>
                                     </div>
                                 </div>
-
                             </li>
                             <div class="dropdown-menu__btn text-center ">
                                 <a ui-sref="checkout "><button class="btn btn--brown-checkout" ng-disabled="!cart.products.length">CHECKOUT</button></a>
