@@ -1,3 +1,5 @@
+//import { prependListener } from 'cluster';
+
 // import { disconnect } from 'cluster';
 
 var crypto = require('crypto');
@@ -57,9 +59,10 @@ var schema = new Schema({
         },
         comment: String,
         price: Number,
+        unitPrice:Number,
         discountAmount:Number,
         discountPercent:Number,
-        priceAfterDiscount:Number,
+        priceAfterTax:Number,
         taxAmt:Number,
         taxPercent:Number,
         finalAmt:Number
@@ -68,6 +71,7 @@ var schema = new Schema({
         type: Number,
         required: true
     },
+    grandTotal:Number,
     discountAmount: Number,
     shippingAmount: Number,
     amountAfterDiscount: Number,
@@ -994,57 +998,62 @@ var model = {
         var taxPercent = 0;
         var taxAmt = 0;
         var finalAmt = 0;
-        var actualPrice = 0;
+        var unitPrice = 0;
+        var price =0;
         var discountPercent = 0;
         var discountPrice =0;
         var taxLimiterWithDiscount = 1000;
         var taxLimiterWithoutDiscount = 1000;
-        var priceAfterDiscount = 0;
+        var priceAfterTax = 0;
+        var priceBeforeTax= 0;
+        var grandTotal=0;
+        var quantity =0;
         invoiceInfo = [];
         Order.findOne({
             _id: data._id
         }).lean().exec(function (err, order) {
             _.each(order.products, function (product,index) {
-                product.discountPercent=10;
-                product.discountAmount=0;
-                actualPrice = product.price;
+                quantity = product.quantity;
+                product.discountPercent=0;
+                product.discountAmount=10;
+                price = product.price;
                 discountPrice = product.discountAmount;
                 discountPercent = product.discountPercent;
-                if (discountPrice > 0 || product.discountPercent>0) {
-                    if(discountPrice > 0)
-                    {
-                        discountPercent = (discountPrice * 100) / actualPrice;
-                    }
-                   else if(discountPercent > 0)
-                   {
-                       discountPrice =(discountPercent/100)*actualPrice;
-                   }
-                    priceAfterDiscount = actualPrice - discountPrice;
-                    if (priceAfterDiscount <= taxLimiterWithDiscount) {
-                        taxPercent = 5;
-                    } else {
-                        taxPercent = 12;
-                    }
-                    taxAmt = ((taxPercent / 100) * priceAfterDiscount);
-                    finalAmt = priceAfterDiscount + taxAmt;
+                if (price <= taxLimiterWithDiscount) {
+                    taxPercent = 5;
                 } else {
-                    finalAmt = actualPrice = priceAfterDiscount = product.price;
+                    taxPercent = 12;
+                }
+                taxAmt = ((taxPercent / 100) * price);
+                if (discountPrice > 0 || product.discountPercent>0) {
+                    priceAfterTax = price + taxAmt;
+                    if(discountPrice > 0){
+                        discountPercent = (discountPrice * 100) / priceAfterTax;
+                    }
+                   else if(discountPercent > 0){
+                       discountPrice =(discountPercent/100)*priceAfterTax;
+                   }
+                    finalAmt = priceAfterTax - discountPrice;
+                   
+                } else {
+                    finalAmt = priceAfterTax = price;
                     if (finalAmt > taxLimiterWithoutDiscount) {
-                        taxPercent = 12;
-                        taxAmt = 0.12 * finalAmt;
+                        price = 0.88 * finalAmt;
                     } else {
-                        taxPercent = 5;
-                        taxAmt = 0.05 * finalAmt;
+                        price = 0.95 * finalAmt;
                     }
                 }
-                product.price = _.ceil(actualPrice);
+                product.price = _.ceil(price);
+                product.unitPrice = _.ceil(price/quantity);
                 product.discountAmount = _.ceil(discountPrice);
                 product.discountPercent = discountPercent;
-                product.priceAfterDiscount = _.ceil(priceAfterDiscount);
+                product.priceAfterTax = _.ceil(priceAfterTax);
                 product.taxAmt = _.ceil(taxAmt);
                 product.taxPercent = taxPercent;
-                product.finalAmt = _.ceil(finalAmt); 
+                product.finalAmt = _.ceil(finalAmt);
+                grandTotal = grandTotal + product.finalAmt; 
             });  
+            order.grandTotal = grandTotal;
             Order.saveData(order,function(err,data)
             {
                 if(err)
@@ -1061,7 +1070,7 @@ var model = {
     sendEmail: function (order,prevCallback) {
         async.waterfall([
             function(callback) {
-                Config.generatePdf("invoice",order,callback);
+                Config.generatePdf("invoice-actual.1",order,callback);
             },
             function(data,callback) {
                 var emailData = {};
@@ -1070,7 +1079,7 @@ var model = {
                 emailData.body = "Invoice";
                 emailData.from = "supriya.kadam478@hotmail.com";
                 emailData.filename="foo.pdf";
-                Config.sendEmailAttachment(emailData, callback);
+                //Config.sendEmailAttachment(emailData, callback);
             }
         ],function(err, results) {
             if(err){

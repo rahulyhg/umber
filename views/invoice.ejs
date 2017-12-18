@@ -5,25 +5,29 @@
         <thead></thead>
         <tbody>
             <tr>
-
+                   
                 <td>
 
                         <% _.each(products,function(product) { %>
-                           <h3>Actual price</h3> <%= product.price %>
-                           <h3>Discount amount</h3> <%= product.discountAmount %>
-                           <h3>Discount percentage</h3> <%= product.discountPercent %>
-                           <h3>Price after discount</h3> <%= product.priceAfterDiscount %>
-                           <h3>Tax amount</h3> <%= product.taxAmt %> 
-                           <h3>Tax percentage</h3> <%= product.taxPercent %>
-                           <h3>Final amount</h3> <%= product.finalAmt %>
+                            <h3> Unit Price</h3> <%= product.unitPrice %>
+                            <h3>Quantity</h3> <%= product.quantity %>
+                            <h3> Price</h3> <%= product.price %>
+                            <h3>Tax amount</h3> <%= product.taxAmt %> 
+                            <h3>Tax percentage</h3> <%= product.taxPercent %>
+                            <h3>Price after tax</h3> <%= product.priceAfterTax %>
+                            <h3>Discount amount</h3> <%= product.discountAmount %>
+                            <h3>Discount percentage</h3> <%= product.discountPercent %>
+                            <h3>Final amount</h3> <%= product.finalAmt %>
                            <h3>----------------------------------------------------------------</h3>
                         <% }); %>    
 
-                       
+                        <h3>GrandTotal</h3> <%= grandTotal %>
                         
                 </td>       
-                     
+               
             </tr>
+
+            
         </tbody>
     </table>
 </body>
