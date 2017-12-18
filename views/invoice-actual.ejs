@@ -6,8 +6,8 @@
 </head>
 
 <body>
-    <div style="width:618px;padding:20px; border: 1px solid #eee;-moz-box-shadow:0 0 10px rgba(0, 0, 0, .15)!important;-webkit-box-shadow:0 0 10px rgba(0, 0, 0, .15)!important;box-shadow: 0 0 10px rgba(0, 0, 0, .15)!important; margin:auto;   font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;">
-        <table cellpadding="0" cellspacing="0" style="width: 618px;min-height: 100%; margin: auto; border-collapse:collapse; border-spacing:0;color: #555; font-size:14px;">
+    <div style="padding:10px; border: 1px solid #eee;-moz-box-shadow:0 0 10px rgba(0, 0, 0, .15)!important;-webkit-box-shadow:0 0 10px rgba(0, 0, 0, .15)!important;box-shadow: 0 0 10px rgba(0, 0, 0, .15)!important; margin:auto;   font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;">
+        <table cellpadding="0" cellspacing="0" style="min-height: 100%; margin: auto; border-collapse:collapse; border-spacing:0;color: #555; font-size:14px;">
             <caption align="center" style="padding-top: 8px;padding-bottom: 8px; font-size:20px; text-align: center"> <strong>Tax invoice</strong></caption>
             <tbody>
                 <tr>
@@ -75,12 +75,13 @@
                             <thead>
                                 <tr>
                                     <th align="left" style="padding: 8px;border-bottom: 1px solid #ddd;background: #eee;line-height: 1.42857143;vertical-align: top;text-align:left">Item & Description</th>
-                                    <th align="center" style="padding: 8px;border-bottom: 1px solid #ddd;background: #eee;line-height: 1.42857143;vertical-align: top;text-align:center">Quantity</th>
                                     <th align="center" style="padding: 8px;border-bottom: 1px solid #ddd;background: #eee;line-height: 1.42857143;vertical-align: top;text-align:center">Unit Price</th>
-                                    <th align="center" style="padding: 8px;border-bottom: 1px solid #ddd;background: #eee;line-height: 1.42857143;vertical-align: top;text-align:center">Subtotal</th>
+                                    <th align="center" style="padding: 8px;border-bottom: 1px solid #ddd;background: #eee;line-height: 1.42857143;vertical-align: top;text-align:center">Quantity</th>
+                                    <th align="center" style="padding: 8px;border-bottom: 1px solid #ddd;background: #eee;line-height: 1.42857143;vertical-align: top;text-align:center">Price</th>
                                 </tr>
                             </thead>
                             <tbody>
+                             <% _.each(products,function(product) { %>
                                 <tr>
                                     <td align="top" style="width:270px;padding: 8px;line-height: 1.42857143;vertical-align: top;">
                                         <div style="  color: #333; text-transform:uppercase;">
@@ -90,23 +91,11 @@
                                             Product Code:&nbsp;<span>G000-gmshhs0198-amten-02</span>
                                         </div>
                                     </td>
-                                    <td align="top" style="padding: 8px;line-height: 1.42857143; text-align:center;vertical-align: top;"> &#8377;&nbsp;2899</td>
-                                    <td align="top" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;">05</td>
-                                    <td align="top" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;">&#8377;&nbsp;2899</td>
+                                    <td align="top" style="padding: 8px;line-height: 1.42857143; text-align:center;vertical-align: top;"> &#8377;&nbsp;<%= product.unitPrice %></td>
+                                    <td align="top" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;"><%= product.quantity %></td>
+                                    <td align="top" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;">&#8377;&nbsp;<%= product.actualPrice %></td>
                                 </tr>
-                                <tr>
-                                    <td align="top" style="width:270px;padding: 8px;line-height: 1.42857143;vertical-align: top;">
-                                        <div style="  color: #333;text-transform:uppercase;">
-                                            MENS FULL SLEEVE SHIRT
-                                        </div>
-                                        <div style="    font-size: 12px;">
-                                            Product Code:&nbsp;<span>G000-gmshhs0198-amten-02</span>
-                                        </div>
-                                    </td>
-                                    <td align="top" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;"> &#8377; &nbsp;2899</td>
-                                    <td align="top" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;">05</td>
-                                    <td align="top" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;">&#8377;&nbsp;2899</td>
-                                </tr>
+                                <% }); %>  
                                 <tr>
                                     <td align="top" rowspan="6" style="padding: 8px;line-height: 1.42857143;vertical-align: top;">
                                         <div>Order Notes</div>
@@ -117,29 +106,26 @@
                                             typesetting, remaining essentially unchanged. </p>
                                     </td>
                                     <td align="top" style="padding: 8px;line-height: 1.42857143;text-align:left; text-indent:12px;vertical-align: top;">Subtotal</td>
-                                    <td align="top" colspan="2" style="padding: 8px;line-height: 1.42857143; text-align:center;vertical-align: top;"><span>&#8377;</span><span style="min-width:85px;float:right;">2899</span></td>
+                                    <td align="top" colspan="2" style="padding: 8px;line-height: 1.42857143; text-align:center;vertical-align: top;"><span>&#8377;</span><span style="min-width:85px;float:right;"><%= subTotal %></span></td>
                                 </tr>
                                 <tr>
 
-                                    <td align="top" colspan="2" style="padding: 8px;line-height: 1.42857143;text-align:left;text-indent:12px;vertical-align: top;">Shipping and Handling</td>
-                                    <td align="top" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;">Free Shipping</td>
+                                    <td align="top"  style="padding: 8px;line-height: 1.42857143;text-align:left;vertical-align: top;">Shipping and Handling</td>
+                                    <td align="top" colspan="2" style="padding: 8px;line-height: 1.42857143;text-align:right;vertical-align: top;">Free Shipping</td>
 
                                 </tr>
                                 <tr>
-                                    <td align="top" style="padding: 8px;line-height: 1.42857143; text-align:left;text-indent:12px;vertical-align: top;">Discount</td>
-                                    <td align="top" colspan="2" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;"><span>&#8377;</span><span style="min-width:85px;float:right;">(0.0)</span></td>
+                                    <td align="top" style="padding: 8px;line-height: 1.42857143; text-align:left;vertical-align: top;">Discount</td>
+                                    <td align="top" colspan="2" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;"><span>&#8377;</span><span style="min-width:85px;float:right;"><%= totalDiscount %></span></td>
                                 </tr>
                                 <tr>
-                                    <td align="top" style="padding: 8px;line-height: 1.42857143;text-align:left;text-indent:12px;vertical-align: top;">Total</td>
-                                    <td align="top" colspan="2" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;"><span>&#8377;</span><span style="min-width:85px;float:right;">2,8999</span></td>
+                                    <td align="top" style="padding: 8px;line-height: 1.42857143;text-align:left;vertical-align: top;">Total taxes</td>
+                                    <td align="top" colspan="2" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;"><span>&#8377;</span><span style="min-width:85px;float:right;"><%= totalTax %></span></td>
                                 </tr>
+                              
                                 <tr>
-                                    <td align="top" style="padding: 8px;line-height: 1.42857143;text-align:left;text-indent:12px;vertical-align: top;">Taxes</td>
-                                    <td align="top" colspan="2" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;"><span>&#8377;</span><span style="min-width:85px;float:right;">2,8999</span></td>
-                                </tr>
-                                <tr>
-                                    <td align="top" style="padding: 8px;line-height: 1.42857143;text-align:left;text-indent:12px;vertical-align: top;"><strong>Grand Total</strong></td>
-                                    <td align="top" colspan="2" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;"><strong><span>&#8377;</span><span  style="min-width:85px;float:right;">2,8999</span></strong></td>
+                                    <td align="top" colspan="1" style="padding: 8px;line-height: 1.42857143;text-align:left;vertical-align: top;"><strong>Grand Total</strong></td>
+                                    <td align="top" colspan="3" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;"><strong><span>&#8377;</span><span  style="min-width:85px;float:right;"><%= grandTotal %></span></strong></td>
                                 </tr>
                                 <tr>
                                     <td align="top" style="padding: 8px;line-height: 1.42857143;vertical-align: top;"></td>

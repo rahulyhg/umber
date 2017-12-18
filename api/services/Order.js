@@ -59,6 +59,7 @@ var schema = new Schema({
         },
         comment: String,
         price: Number,
+        actualPrice:Number,
         unitPrice:Number,
         discountAmount:Number,
         discountPercent:Number,
@@ -71,9 +72,11 @@ var schema = new Schema({
         type: Number,
         required: true
     },
-    grandTotal:Number,
+    subTotal:Number,
     discountAmount: Number,
+    taxAmt :Number,
     shippingAmount: Number,
+    grandTotal:Number,
     amountAfterDiscount: Number,
     paymentMethod: {
         type: String,
@@ -998,25 +1001,29 @@ var model = {
         var taxPercent = 0;
         var taxAmt = 0;
         var finalAmt = 0;
-        var unitPrice = 0;
-        var price =0;
+        var price =0; //price given (with tax included in case of non-discounted items and without tax in case of discounted items )
+        var unitPrice = 0; //Price of each product (without any tax or discount)
+        var actualPrice= 0; // unitPrice * quantity
         var discountPercent = 0;
         var discountPrice =0;
         var taxLimiterWithDiscount = 1000;
         var taxLimiterWithoutDiscount = 1000;
         var priceAfterTax = 0;
-        var priceBeforeTax= 0;
+        var subTotal=0;
+        var totalTax=0;
+        var totalDiscount=0;
         var grandTotal=0;
         var quantity =0;
-        invoiceInfo = [];
+        
         Order.findOne({
             _id: data._id
         }).lean().exec(function (err, order) {
             _.each(order.products, function (product,index) {
                 quantity = product.quantity;
-                product.discountPercent=0;
-                product.discountAmount=10;
-                price = product.price;
+                product.discountPercent=10;
+                product.discountAmount=0;
+                price = _.ceil(product.price);
+                
                 discountPrice = product.discountAmount;
                 discountPercent = product.discountPercent;
                 if (price <= taxLimiterWithDiscount) {
@@ -1024,35 +1031,42 @@ var model = {
                 } else {
                     taxPercent = 12;
                 }
-                taxAmt = ((taxPercent / 100) * price);
+                taxAmt = _.ceil((taxPercent / 100) * price);
                 if (discountPrice > 0 || product.discountPercent>0) {
+                    actualPrice = price;
                     priceAfterTax = price + taxAmt;
                     if(discountPrice > 0){
-                        discountPercent = (discountPrice * 100) / priceAfterTax;
+                        discountPercent = ((discountPrice) * 100) / priceAfterTax;
                     }
                    else if(discountPercent > 0){
-                       discountPrice =(discountPercent/100)*priceAfterTax;
+                       discountPrice =_.floor((discountPercent/100)*priceAfterTax);
                    }
                     finalAmt = priceAfterTax - discountPrice;
                    
                 } else {
                     finalAmt = priceAfterTax = price;
                     if (finalAmt > taxLimiterWithoutDiscount) {
-                        price = 0.88 * finalAmt;
+                        actualPrice = _.floor(0.88 * (finalAmt));
                     } else {
-                        price = 0.95 * finalAmt;
+                        actualPrice = _.floor(0.95 * (finalAmt));
                     }
                 }
-                product.price = _.ceil(price);
-                product.unitPrice = _.ceil(price/quantity);
-                product.discountAmount = _.ceil(discountPrice);
-                product.discountPercent = discountPercent;
-                product.priceAfterTax = _.ceil(priceAfterTax);
+                product.actualPrice = _.ceil(actualPrice);
+                product.unitPrice = _.ceil(actualPrice/quantity);
                 product.taxAmt = _.ceil(taxAmt);
                 product.taxPercent = taxPercent;
+                product.priceAfterTax = _.ceil(priceAfterTax);
+                product.discountAmount = _.ceil(discountPrice);
+                product.discountPercent = discountPercent;
                 product.finalAmt = _.ceil(finalAmt);
-                grandTotal = grandTotal + product.finalAmt; 
+                totalTax =totalTax + _.ceil(taxAmt);
+                totalDiscount =totalDiscount +_.ceil(discountPrice);
+                subTotal = subTotal + _.ceil(actualPrice);
+                grandTotal = grandTotal + _.ceil(finalAmt); 
             });  
+            order.totalDiscount = _.ceil(totalDiscount);
+            order.totalTax =_.ceil(totalTax);
+            order.subTotal =_.ceil(subTotal);
             order.grandTotal = grandTotal;
             Order.saveData(order,function(err,data)
             {
