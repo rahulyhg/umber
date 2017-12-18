@@ -296,7 +296,6 @@ var controller = {
                     Order.generateInvoice(req.body,callback);
                 },
                 function (data,callback) {
-
                     Order.sendEmail(data, callback);
                 },
                 function (data,callback) {
