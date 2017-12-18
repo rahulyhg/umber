@@ -1356,8 +1356,9 @@
                                             .mobview-links,
                                             .mobview-categories,
                                             .mobview-promotions {
-                                                width: 95%;
-                                                height: 100%;
+                                                @include size(95%,
+                                                80%);
+                                                margin: auto;
                                                 position: fixed;
                                                 overflow-x: hidden;
                                                 overflow-y: auto;
@@ -1493,8 +1494,17 @@
                                                 .fa-user,
                                                 .fa-address-card-o,
                                                 .fa-sign-out,
-                                                .fa-gift {
+                                                .fa-gift,
+                                                .fa-rss,
+                                                .fa-street-view,
+                                                .fa-mobile,
+                                                .fa-home,
+                                                .fa-shirtsinbulk,
+                                                .fa-building,
+                                                .fa-user-circle-o,
+                                                .fa-address-card {
                                                     margin-right: 10px;
+                                                    color: $darkBrown1;
                                                 }
                                             }
 
@@ -2249,6 +2259,37 @@
                                                 }
                                             } //END of check out
                                             //Homepage login css
+                                            .login-tab {
+                                                @include padding(15px 0);
+                                                .nav-pills {
+                                                    @include display(flex);
+                                                    @include justify-content(center);
+                                                }
+                                                .nav-pills>li>a {
+                                                    @include padding(5px 15px);
+                                                    color: $darkBrown1;
+                                                    font-size: 12px;
+                                                    transition: none;
+                                                }
+                                                .nav-pills>li.active>a {
+                                                    @extend .btn--brown;
+                                                    &:hover {
+                                                        background-color: $darkBrown1;
+                                                        color: white;
+                                                    }
+                                                    &:focus {
+                                                        background-color: $darkBrown1;
+                                                        color: white;
+                                                    }
+                                                }
+                                            }
+
+                                            .customized-navPill-tab {
+                                                //   @extend .btn--mob-modal;
+                                                // @extend .btn--brown;
+                                                // font-size: 12px;
+                                            }
+
                                             .modal__customized-form {
                                                 @extend .customized-form;
                                                 .form-control {

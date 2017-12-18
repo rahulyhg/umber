@@ -129,6 +129,9 @@
                  font-size: 13px;
              }
              .new-arrival {
+                 .new-arrival__img {
+                     background-image: none;
+                 }
                  .new-arrival__title .new-arrival--border--line {
                      &:before {
                          left: 0;
@@ -866,14 +869,23 @@
              //Start of all modals
              .btn--mob-modal {
                  // use this class for all modal's button
-                 font-size: 12px;
                  @include padding(3px 10px);
+                 font-size: 12px;
              } //Sizes which are used for modals
              .quickview-modal-size .modal-dialog {
                  // Used this class in listing-ctrl.js in modal
                  width: auto;
              }
              .modal-container {
+                 .minHeight {
+                     min-height: 260px;
+                 }
+                 .login-head-top {
+                     margin-top: 15px;
+                 }
+                 .login-footer {
+                     margin-top: 15px;
+                 }
                  @include padding(15px);
                  .login-head {
                      h1 {
@@ -904,6 +916,10 @@
                      text-align: center;
                  }
              } //End of coupon code
+             //Start of login page
+             .loginModalSize .modal-dialog {
+                 width: auto;
+             } // End of login page
              //Start of quick view page
              .quick-view-product {
                  @include padding(0);

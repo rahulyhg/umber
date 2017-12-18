@@ -1017,10 +1017,10 @@ var models = {
                 
                     // Page options 
                     config.border = {
-                        "top": "2cm", // default is 0, units: mm, cm, in, px 
-                        "right": "1cm",
+                        "top": "1cm", // default is 0, units: mm, cm, in, px 
+                        "right": "0.5cm",
                         "bottom": "1cm",
-                        "left": "2.5cm"
+                        "left": "0.5cm"
                     };
                 
                  console.log('html : ', html);

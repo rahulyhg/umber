@@ -81,14 +81,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                             <% _.each(products,function(product) { %>
+                             <% _.each(order.products,function(product) { %>
                                 <tr>
                                     <td align="top" style="width:270px;padding: 8px;line-height: 1.42857143;vertical-align: top;">
                                         <div style="  color: #333; text-transform:uppercase;">
-                                                <%= product.product.description %></td>
+                                            MENS FULL SLE EVE SHIRT
                                         </div>
-                                        <div style="font-size: 12px;">
-                                            Product Code:&nbsp;<span><%= product.product.productCode %></td></span>
+                                        <div style="    font-size: 12px;">
+                                            Product Code:&nbsp;<span>G000-gmshhs0198-amten-02</span>
                                         </div>
                                     </td>
                                     <td align="top" style="padding: 8px;line-height: 1.42857143; text-align:center;vertical-align: top;"> &#8377;&nbsp;<%= product.unitPrice %></td>
@@ -106,7 +106,7 @@
                                             typesetting, remaining essentially unchanged. </p>
                                     </td>
                                     <td align="top" style="padding: 8px;line-height: 1.42857143;text-align:left; text-indent:12px;vertical-align: top;">Subtotal</td>
-                                    <td align="top" colspan="2" style="padding: 8px;line-height: 1.42857143; text-align:center;vertical-align: top;"><span>&#8377;</span><span style="min-width:85px;float:right;"><%= subTotal %></span></td>
+                                    <td align="top" colspan="2" style="padding: 8px;line-height: 1.42857143; text-align:center;vertical-align: top;"><span>&#8377;</span><span style="min-width:85px;float:right;"><%= order.subTotal %></span></td>
                                 </tr>
                                 <tr>
 
@@ -116,16 +116,16 @@
                                 </tr>
                                 <tr>
                                     <td align="top" style="padding: 8px;line-height: 1.42857143; text-align:left;vertical-align: top;">Discount</td>
-                                    <td align="top" colspan="2" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;"><span>&#8377;</span><span style="min-width:85px;float:right;"><%= totalDiscount %></span></td>
+                                    <td align="top" colspan="2" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;"><span>&#8377;</span><span style="min-width:85px;float:right;"><%= order.totalDiscount %></span></td>
                                 </tr>
                                 <tr>
                                     <td align="top" style="padding: 8px;line-height: 1.42857143;text-align:left;vertical-align: top;">Total taxes</td>
-                                    <td align="top" colspan="2" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;"><span>&#8377;</span><span style="min-width:85px;float:right;"><%= totalTax %></span></td>
+                                    <td align="top" colspan="2" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;"><span>&#8377;</span><span style="min-width:85px;float:right;"><%= order.totalTax %></span></td>
                                 </tr>
                               
                                 <tr>
                                     <td align="top" colspan="1" style="padding: 8px;line-height: 1.42857143;text-align:left;vertical-align: top;"><strong>Grand Total</strong></td>
-                                    <td align="top" colspan="3" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;"><strong><span>&#8377;</span><span  style="min-width:85px;float:right;"><%= grandTotal %></span></strong></td>
+                                    <td align="top" colspan="3" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;"><strong><span>&#8377;</span><span  style="min-width:85px;float:right;"><%= order.grandTotal %></span></strong></td>
                                 </tr>
                                 <tr>
                                     <td align="top" style="padding: 8px;line-height: 1.42857143;vertical-align: top;"></td>

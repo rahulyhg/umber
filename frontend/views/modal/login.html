@@ -1,7 +1,7 @@
-<div class="relate">
+<div class="relate hidden-xs">
     <div ng-if="!view">
         <div class="row marg0">
-            <div class="col-md-6 col-sm-6 col-xs-6 padd0">
+            <div class="col-md-6 col-sm-6 col-xs-12 padd0">
                 <div class="modal-container">
                     <div class="minHeight">
                         <div class="text-center login-head login-head-top">
@@ -33,10 +33,11 @@
                     </div>
                     <div class="login-footer">
                         <a ng-click="forgotPassword();">Forgot Password?</a>
+                        <a class="visible-xs" ng-click="viewLogin();">Sign Up</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-6 col-xs-6 padd0">
+            <div class="col-md-6 col-sm-6 col-xs-12 padd0">
                 <!--<img src="img/home/login.jpg" alt="" class="img-responsive width100">-->
                 <div class="modal-container-right sign-up">
                     <div class="minHeight">
@@ -82,7 +83,7 @@
     </div>
     <div ng-if="view">
         <div class="row marg0">
-            <div class="col-md-6 col-sm-6 col-xs-6 padd0">
+            <div class="col-md-6 col-sm-6 col-xs-12 padd0">
                 <div class="modal-container">
                     <div class="minHeight">
                         <div class="text-center login-head">
@@ -140,7 +141,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-6 col-xs-6 padd0">
+            <div class="col-md-6 col-sm-6 col-xs-12 padd0">
                 <!--<img src="img/home/login.jpg" alt="" class="img-responsive width100">-->
                 <div class="modal-container-right sign-up">
                     <div class="minHeight">
@@ -184,10 +185,183 @@
             </div>
         </div>
     </div>
-    <div class="orCircle">
+    <div class="orCircle ">
         <p class="marg0">or</p>
     </div>
     <div class="cross-absolute" ng-click="$dismiss();">
         <img src="../img/home/33.png" class="img-responsive">
     </div>
+</div>
+
+<div class="visible-xs login-tab">
+    <uib-tabset active="navActiveTab" type="pills">
+        <uib-tab index="0" heading="Log in" classes="customized-navPill-tab" select="changeToLoginTab()">
+            <!-- <uib-tab-heading>
+                LOG IN
+            </uib-tab-heading> -->
+            <div ng-if="!view">
+                <div class="row marg0">
+                    <div class="col-md-6 col-sm-6 col-xs-12 padd0">
+                        <div class="modal-container">
+                            <div class="minHeight">
+                                <div class="text-center login-head login-head-top">
+                                    <h1 class="brown--color">Log in</h1>
+                                    <p class="gray--color">to your account</p>
+                                </div>
+                                <div>
+                                    <form class="modal__customized-form" name="loginform">
+                                        <div class="form-group">
+                                            <input type="email" placeholder="Email Address" name="email" ng-model="loginData.email" class="form-control" required uib-popover="{{loginform.email.$touched && loginform.email.$invalid ||loginform.email.$error.email && loginform.email.$error.required }}"
+                                                popover-title="Please enter a valid email address" popover-placement="bottom"
+                                                popover-class="login-popover" popover-is-open="loginform.email.$touched && loginform.email.$invalid ||loginform.email.$error.email && loginform.email.$error.required"
+                                                popover-trigger="'none'">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" placeholder="Password" name="password" ng-model="loginData.password" class="form-control" required
+                                                uib-popover="{{loginform.password.$touched && loginform.password.$invalid}}"
+                                                popover-title="Please enter your password" popover-placement="bottom" popover-class="login-popover"
+                                                popover-is-open="loginform.password.$touched && loginform.password.$invalid"
+                                                popover-trigger="'none'">
+                                        </div>
+                                        <p class="marginTop">
+                                            <button type="button" class="btn btn-login btn-block btn--mob-modal" ng-disabled="loginform.email.$invalid || loginform.password.$invalid"
+                                                ng-click="login()" uib-popover="{{message}}" popover-title="Invalid credential"
+                                                popover-placement="bottom" popover-class="login-popover" popover-is-open="message"
+                                                popover-trigger="'none'">log in</button>
+                                        </p>
+                                        <div class="social-icons ">
+                                            <ul class="list-unstyled list-inline">
+                                                <li>
+                                                    <div class="social-icons__list fb">
+                                                        <a href="">
+                                            <i class="fa fa-facebook" aria-hidden="true"></i>
+                                        </a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="social-icons__list tw">
+                                                        <a href="">
+                                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                                        </a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="social-icons__list gp">
+                                                        <a href="">
+                                            <i class="fa fa-google-plus" aria-hidden="true"></i>
+                                        </a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="login-footer">
+                                <a ng-click="forgotPassword();">Forgot Password?</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </uib-tab>
+        <uib-tab index="1" heading="Sign Up" classes="customized-navPill-tab" select="changeToSignUpTab()">
+            <!-- <uib-tab-heading>
+                SIGN UP
+            </uib-tab-heading> -->
+            <div ng-if="view">
+                <div class="row marg0">
+                    <div class="col-md-6 col-sm-6 col-xs-12 padd0">
+                        <div class="modal-container">
+                            <div class="minHeight">
+
+                                <div class="text-center login-head">
+                                    <h1>sign up</h1>
+                                    <p>to your account</p>
+                                </div>
+                                <div>
+                                    <form class="modal__customized-form" name="registerForm" novalidate>
+                                        <div class="form-group">
+                                            <input type="text" placeholder="First Name" name="firstname" ng-model="formData.firstname" class="form-control" required
+                                                uib-popover="{{registerForm.firstname.$touched && registerForm.firstname.$invalid}}"
+                                                popover-title="Please enter your first name" popover-placement="bottom" popover-class="login-popover"
+                                                popover-is-open="registerForm.firstname.$touched && registerForm.firstname.$invalid"
+                                                popover-trigger="'none'">
+
+                                            <!--<p ng-show="registerForm.firstname.$touched && registerForm.firstname.$invalid">Test</p>-->
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Last Name" name="lastname" ng-model="formData.lastname" class="form-control" required uib-popover="{{registerForm.lastname.$touched && registerForm.lastname.$invalid}}"
+                                                popover-title="Please enter your last name" popover-placement="bottom" popover-class="login-popover"
+                                                popover-is-open="registerForm.lastname.$touched && registerForm.lastname.$invalid"
+                                                popover-trigger="'none'">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" placeholder="Email Address" name="email" ng-model="formData.email" class="form-control" required uib-popover="{{registerForm.email.$touched && registerForm.email.$invalid ||registerForm.email.$error.email && registerForm.email.$error.required }}"
+                                                popover-title="Please enter a valid email address" popover-placement="bottom"
+                                                popover-class="login-popover" popover-is-open="registerForm.email.$touched && registerForm.email.$invalid ||registerForm.email.$error.email && registerForm.email.$error.required"
+                                                popover-trigger="'none'">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="number" placeholder="Mobile No" name="mobile" ng-model="formData.mobile" class="form-control" required uib-popover="{{registerForm.mobile.$touched && registerForm.mobile.$invalid}}"
+                                                popover-title="Please enter your mobile number" popover-placement="bottom" popover-class="login-popover"
+                                                popover-is-open="registerForm.mobile.$touched && registerForm.mobile.$invalid"
+                                                popover-trigger="'none'">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" placeholder="Password" name="password" ng-model="formData.password" class="form-control" required
+                                                uib-popover="{{registerForm.password.$touched && registerForm.password.$invalid}}"
+                                                popover-title="Please enter your password" popover-placement="bottom" popover-class="login-popover"
+                                                popover-is-open="registerForm.password.$touched && registerForm.password.$invalid"
+                                                popover-trigger="'none'">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" placeholder="Confirm Password" name="confirm" ng-model="formData.confirm" class="form-control" hs-password-verifier="formData.password"
+                                                required uib-popover="{{registerForm.confirm.$touched && registerForm.confirm.$invalid}}"
+                                                popover-title="Please enter your password" popover-placement="bottom" popover-class="login-popover"
+                                                popover-is-open="registerForm.confirm.$touched && registerForm.confirm.$invalid || registerForm.formData.confirm.$error.hsPswdMatch"
+                                                popover-trigger="'none'">
+                                            <!--<span ng-show='registerForm.formData.confirm.$error.hsPswdMatch'>Passwords don't match</span>-->
+                                        </div>
+                                        <p class="marginTop">
+                                            <button type="button" class="btn btn-login btn-block btn--mob-modal" ng-disabled="registerForm.firstname.$invalid || registerForm.lastname.$invalid || registerForm.email.$invalid || registerForm.mobile.$invalid || registerForm.password.$invalid || registerForm.confirm.$invalid"
+                                                ng-click="registerForm.$valid && registerUser()">Sign Up</button>
+                                        </p>
+                                        <strong style="color:red" ng-bind-html="errormsg"></strong>
+                                        <div class="social-icons ">
+                                            <ul class="list-unstyled list-inline">
+                                                <li>
+                                                    <div class="social-icons__list fb">
+                                                        <a href="">
+                                            <i class="fa fa-facebook" aria-hidden="true"></i>
+                                        </a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="social-icons__list tw">
+                                                        <a href="">
+                                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                                        </a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="social-icons__list gp">
+                                                        <a href="">
+                                            <i class="fa fa-google-plus" aria-hidden="true"></i>
+                                        </a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </uib-tab>
+    </uib-tabset>
 </div>
