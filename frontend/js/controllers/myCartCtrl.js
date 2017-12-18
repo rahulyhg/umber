@@ -246,9 +246,11 @@
                          var sortedArray = discountProducts.sort(function (a, b) {
                              return a.price > b.price ? -1 : a.price < b.price ? 1 : 0
                          });
-                         _.each(sortedArray, function (product) {
-                             _.each($scope.mycartTable.products, function (cartProduct) {
+                         _.each($scope.mycartTable.products, function (cartProduct) {
+                             cartProduct.product.discountApplicable = false;
+                             _.each(sortedArray, function (product) {
                                  if (product._id == cartProduct.product._id) {
+                                     cartProduct.product.discountApplicable = true;
                                      if ($scope.discountSelected._id == "59ed87aa0a9eb11654a1eb87") {
                                          $scope.discountPriceOfProduct = cartProduct.product.price * 0.2;
                                      } else {
@@ -260,6 +262,7 @@
                                              cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct;
                                              cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = cartProduct.product.price - $scope.discountPriceOfProduct;
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
+                                             //  console.log("HIEEEEEEEEEEEEEEEEEEE33333", cartProduct.product.discountApplicable);
                                              $scope.Couponmodal.close();
                                              break;
                                          case 2:
@@ -428,15 +431,15 @@
                          var productsInBOGOOffer = [];
                          var seperateProductsInBOGOOffer = [];
                          var totalDiscountBOGO = 0;
-                         _.each(sortedArray, function (product) {
-                             _.each($scope.mycartTable.products, function (cartProduct) {
+                         _.each($scope.mycartTable.products, function (cartProduct) {
+                             cartProduct.product.discountApplicable = false;
+                             _.each(sortedArray, function (product) {
                                  if (product._id == cartProduct.product._id) {
+                                     cartProduct.product.discountApplicable = true;
                                      for (i = 0; i < cartProduct.quantity; i++) {
                                          seperateProductsInBOGOOffer.push(cartProduct);
                                      }
                                      console.log("seperateProductsInBOGOOffer", seperateProductsInBOGOOffer);
-
-
                                  }
                              });
                          });
@@ -455,6 +458,19 @@
 
                          var finalArray = seperateProductsInBOGOOffer.slice(0, -sumOfPricesToBeDiscard);
                          //  _.takeRight(processingArray, sumOfPricesToBeDiscard);
+                         _.each(seperateProductsInBOGOOffer, function (val1) {
+                             _.each(finalArray, function (val) {
+                                 if (val1.product._id == val.product._id) {
+                                     val.product.discountApplicable = true;
+                                     val.product.discountPriceOfProduct = 0;
+                                     val.product.priceWithDiscount = val.product.price;
+                                 } else {
+                                     val1.product.discountApplicable = true;
+                                     val1.product.discountPriceOfProduct = 0;
+                                     val1.product.priceWithDiscount = 0;
+                                 }
+                             });
+                         });
                          console.log("finalArray processingArray", finalArray);
                          if (finalArray) {
                              console.log("in if");
