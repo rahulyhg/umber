@@ -161,12 +161,14 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
 
         } else {
             //TODO: Implement without login
-            $scope.cart = $.jStorage.get("cart");
-            _.each($scope.cart.products, function (product) {
-                if (product.product.quantity == 0) {
-                    $scope.cartDisable = true;
-                }
-            })
+            if ($.jStorage.get("cart")) {
+                $scope.cart = $.jStorage.get("cart");
+                _.each($scope.cart.products, function (product) {
+                    if (product.product.quantity == 0) {
+                        $scope.cartDisable = true;
+                    }
+                })
+            }
         }
 
         $scope.view = false;
