@@ -9159,6 +9159,10 @@ button.close {
   src: url("../fonts/FjallaOne-Regular.otf"); }
 
 /* Bootstrap Variables Goes Here */
+html,
+body {
+  min-height: 100%; }
+
 body {
   padding-top: 80px;
   font-family: 'vadodara-regular';
@@ -9263,7 +9267,8 @@ footer {
     color: #ffffff; }
   .footer-up .contact--btn {
     color: #cdc5c5 !important;
-    font-size: inherit; }
+    font-size: inherit;
+    text-align: right; }
   .footer-up a[href] {
     color: #715a5b; }
   .footer-up p {
@@ -9273,26 +9278,32 @@ footer {
     font-size: 12px; }
   .footer-up address {
     color: #715a5b; }
-  .footer-up .flex-item.footer-up__abt-shop {
+  .footer-up .flex-item.footer-up__abt-shop,
+  .footer-up .flex-item.footer-up__contact {
     width: 240px;
     padding-left: 15px;
     padding-right: 20px;
     margin-bottom: 15px; }
-    .footer-up .flex-item.footer-up__abt-shop .underline {
+    .footer-up .flex-item.footer-up__abt-shop .underline,
+    .footer-up .flex-item.footer-up__contact .underline {
       text-decoration: underline; }
   .footer-up .flex-item.footer-up__cstmr-serv,
   .footer-up .flex-item.footer-up__info,
-  .footer-up .flex-item.footer-up__my-account,
-  .footer-up .flex-item.footer-up__contact {
+  .footer-up .flex-item.footer-up__my-account {
     width: 170px;
     padding: 0 15px;
     margin-bottom: 15px; }
     .footer-up .flex-item.footer-up__cstmr-serv .list-unstyled li,
     .footer-up .flex-item.footer-up__info .list-unstyled li,
-    .footer-up .flex-item.footer-up__my-account .list-unstyled li,
-    .footer-up .flex-item.footer-up__contact .list-unstyled li {
-      color: #ededed;
+    .footer-up .flex-item.footer-up__my-account .list-unstyled li {
       padding: 4px 0; }
+  .footer-up .flex-item.footer-up__contact {
+    padding: 0 15px;
+    margin-bottom: 15px; }
+    .footer-up .flex-item.footer-up__contact .address {
+      margin-bottom: 10px; }
+    .footer-up .flex-item.footer-up__contact address .address-list li {
+      padding: 0; }
   .footer-up .footer-up__img {
     width: 260px;
     height: auto;
@@ -9362,6 +9373,12 @@ header {
 .line--height {
   line-height: 1; }
 
+.font-rg {
+  font-family: 'vadodara-regular'; }
+
+.font-md {
+  font-family: 'vadodara-md'; }
+
 .marg0 {
   margin: 0; }
 
@@ -9399,6 +9416,60 @@ header {
   display: -moz-flex;
   display: -ms-flexbox;
   display: flex; }
+
+.justify-content-start {
+  -webkit-box-pack: start;
+  box-pack: start;
+  -moz-justify-content: flex-start;
+  -ms-justify-content: flex-start;
+  -o-justify-content: flex-start;
+  justify-content: flex-start;
+  -ms-flex-pack: start; }
+
+.justify-content-center {
+  -webkit-box-pack: center;
+  box-pack: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+  -ms-flex-pack: center; }
+
+.justify-content-end {
+  -webkit-box-pack: end;
+  box-pack: end;
+  -moz-justify-content: flex-end;
+  -ms-justify-content: flex-end;
+  -o-justify-content: flex-end;
+  justify-content: flex-end;
+  -ms-flex-pack: end; }
+
+.align-item-top {
+  -webkit-box-align: top;
+  box-align: top;
+  -moz-align-items: top;
+  -ms-align-items: top;
+  -o-align-items: top;
+  align-items: top;
+  -ms-flex-align: top; }
+
+.align-item-center {
+  -webkit-box-align: center;
+  box-align: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  -ms-flex-align: center; }
+
+.align-item-bottom {
+  -webkit-box-align: bottom;
+  box-align: bottom;
+  -moz-align-items: bottom;
+  -ms-align-items: bottom;
+  -o-align-items: bottom;
+  align-items: bottom;
+  -ms-flex-align: bottom; }
 
 .display-table {
   display: table;
@@ -9447,7 +9518,8 @@ header {
 .delt--btn,
 .invoice--btn,
 .comnt-submit--btn, .return-success-msg .backto-prof--btn,
-.cancel-success-msg .backto-prof--btn, .contact-us .send--btn, .giftcard .addcart--btn, .custom-slider .border .location--btn, .modal-bottom .cancel--btn,
+.cancel-success-msg .backto-prof--btn, .contact-us .send--btn, .giftcard .addcart--btn, .custom-slider .border .location--btn, .error-msg .msg--btn,
+.thankyou-msg .msg--btn, .modal-bottom .cancel--btn,
 .modal-bottom .apply--btn, .mycart-table .wishlist--btn, .mycart-table .remove--btn, .mycart-footer .shop--btn, .mycart-footer .checkout--btn, .mycart-modal .add-cart--btn, .buy-info .buy-para .view--btn, .buy-info .buy-para .buy-para__button .buy--btn, .listview .buy--btn, .product-compare--btn, .btn--compare {
   color: #ffffff;
   background-color: #341314;
@@ -9461,14 +9533,16 @@ header {
   .delt--btn:focus,
   .invoice--btn:focus,
   .comnt-submit--btn:focus, .return-success-msg .backto-prof--btn:focus,
-  .cancel-success-msg .backto-prof--btn:focus, .contact-us .send--btn:focus, .giftcard .addcart--btn:focus, .custom-slider .border .location--btn:focus, .modal-bottom .cancel--btn:focus,
+  .cancel-success-msg .backto-prof--btn:focus, .contact-us .send--btn:focus, .giftcard .addcart--btn:focus, .custom-slider .border .location--btn:focus, .error-msg .msg--btn:focus,
+  .thankyou-msg .msg--btn:focus, .modal-bottom .cancel--btn:focus,
   .modal-bottom .apply--btn:focus, .mycart-table .wishlist--btn:focus, .mycart-table .remove--btn:focus, .mycart-footer .shop--btn:focus, .mycart-footer .checkout--btn:focus, .mycart-modal .add-cart--btn:focus, .buy-info .buy-para .view--btn:focus, .buy-info .buy-para .buy-para__button .buy--btn:focus, .listview .buy--btn:focus, .product-compare--btn:focus, .btn--compare:focus, .btn--brown.focus, .footer-up .focus.contact--btn, .focus.btn--login, .navbar .navbar-right .focus.header--login, .navbar .navbar-right .cart-dropdown-menu .dropdown-menu__dropdown-cart .inline-block.desc .focus.remove--btn, .dropdown-menu__btn .focus.btn--brown-checkout, .cloth-cat .get-center .focus.shop--now, .new-arrival .new-arrival__slider .new-arrival__banner-detail .focus.buynow--btn, .featured .focus.buy--btn, .featured .focus.view--more, .cloth-buy .cloth-buy__desc .focus.buy--now, .sale .focus.buy--btn, .sale .focus.view--more, .checkout .focus.next--btn, .focus.btn-login, .details-form .focus.checkout__cont-btn, .focus.compare--btn, .focus.address-edit-btn,
   .focus.address-delt-btn,
   .focus.save--btn,
   .focus.delt--btn,
   .focus.invoice--btn,
   .focus.comnt-submit--btn, .return-success-msg .focus.backto-prof--btn,
-  .cancel-success-msg .focus.backto-prof--btn, .contact-us .focus.send--btn, .giftcard .focus.addcart--btn, .custom-slider .border .focus.location--btn, .modal-bottom .focus.cancel--btn,
+  .cancel-success-msg .focus.backto-prof--btn, .contact-us .focus.send--btn, .giftcard .focus.addcart--btn, .custom-slider .border .focus.location--btn, .error-msg .focus.msg--btn,
+  .thankyou-msg .focus.msg--btn, .modal-bottom .focus.cancel--btn,
   .modal-bottom .focus.apply--btn, .mycart-table .focus.wishlist--btn, .mycart-table .focus.remove--btn, .mycart-footer .focus.shop--btn, .mycart-footer .focus.checkout--btn, .mycart-modal .focus.add-cart--btn, .buy-info .buy-para .focus.view--btn, .buy-info .buy-para .buy-para__button .focus.buy--btn, .listview .focus.buy--btn, .focus.product-compare--btn, .focus.btn--compare {
     color: #ffffff;
     background-color: #0f0506;
@@ -9479,7 +9553,8 @@ header {
   .delt--btn:hover,
   .invoice--btn:hover,
   .comnt-submit--btn:hover, .return-success-msg .backto-prof--btn:hover,
-  .cancel-success-msg .backto-prof--btn:hover, .contact-us .send--btn:hover, .giftcard .addcart--btn:hover, .custom-slider .border .location--btn:hover, .modal-bottom .cancel--btn:hover,
+  .cancel-success-msg .backto-prof--btn:hover, .contact-us .send--btn:hover, .giftcard .addcart--btn:hover, .custom-slider .border .location--btn:hover, .error-msg .msg--btn:hover,
+  .thankyou-msg .msg--btn:hover, .modal-bottom .cancel--btn:hover,
   .modal-bottom .apply--btn:hover, .mycart-table .wishlist--btn:hover, .mycart-table .remove--btn:hover, .mycart-footer .shop--btn:hover, .mycart-footer .checkout--btn:hover, .mycart-modal .add-cart--btn:hover, .buy-info .buy-para .view--btn:hover, .buy-info .buy-para .buy-para__button .buy--btn:hover, .listview .buy--btn:hover, .product-compare--btn:hover, .btn--compare:hover {
     color: #ffffff;
     background-color: #0f0506;
@@ -9490,14 +9565,16 @@ header {
   .delt--btn:active,
   .invoice--btn:active,
   .comnt-submit--btn:active, .return-success-msg .backto-prof--btn:active,
-  .cancel-success-msg .backto-prof--btn:active, .contact-us .send--btn:active, .giftcard .addcart--btn:active, .custom-slider .border .location--btn:active, .modal-bottom .cancel--btn:active,
+  .cancel-success-msg .backto-prof--btn:active, .contact-us .send--btn:active, .giftcard .addcart--btn:active, .custom-slider .border .location--btn:active, .error-msg .msg--btn:active,
+  .thankyou-msg .msg--btn:active, .modal-bottom .cancel--btn:active,
   .modal-bottom .apply--btn:active, .mycart-table .wishlist--btn:active, .mycart-table .remove--btn:active, .mycart-footer .shop--btn:active, .mycart-footer .checkout--btn:active, .mycart-modal .add-cart--btn:active, .buy-info .buy-para .view--btn:active, .buy-info .buy-para .buy-para__button .buy--btn:active, .listview .buy--btn:active, .product-compare--btn:active, .btn--compare:active, .btn--brown.active, .footer-up .active.contact--btn, .active.btn--login, .navbar .navbar-right .active.header--login, .navbar .navbar-right .cart-dropdown-menu .dropdown-menu__dropdown-cart .inline-block.desc .active.remove--btn, .dropdown-menu__btn .active.btn--brown-checkout, .cloth-cat .get-center .active.shop--now, .new-arrival .new-arrival__slider .new-arrival__banner-detail .active.buynow--btn, .featured .active.buy--btn, .featured .active.view--more, .cloth-buy .cloth-buy__desc .active.buy--now, .sale .active.buy--btn, .sale .active.view--more, .checkout .active.next--btn, .active.btn-login, .details-form .active.checkout__cont-btn, .active.compare--btn, .active.address-edit-btn,
   .active.address-delt-btn,
   .active.save--btn,
   .active.delt--btn,
   .active.invoice--btn,
   .active.comnt-submit--btn, .return-success-msg .active.backto-prof--btn,
-  .cancel-success-msg .active.backto-prof--btn, .contact-us .active.send--btn, .giftcard .active.addcart--btn, .custom-slider .border .active.location--btn, .modal-bottom .active.cancel--btn,
+  .cancel-success-msg .active.backto-prof--btn, .contact-us .active.send--btn, .giftcard .active.addcart--btn, .custom-slider .border .active.location--btn, .error-msg .active.msg--btn,
+  .thankyou-msg .active.msg--btn, .modal-bottom .active.cancel--btn,
   .modal-bottom .active.apply--btn, .mycart-table .active.wishlist--btn, .mycart-table .active.remove--btn, .mycart-footer .active.shop--btn, .mycart-footer .active.checkout--btn, .mycart-modal .active.add-cart--btn, .buy-info .buy-para .active.view--btn, .buy-info .buy-para .buy-para__button .active.buy--btn, .listview .active.buy--btn, .active.product-compare--btn, .active.btn--compare,
   .open > .btn--brown.dropdown-toggle, .footer-up
   .open > .dropdown-toggle.contact--btn,
@@ -9532,7 +9609,10 @@ header {
   .open > .dropdown-toggle.backto-prof--btn, .contact-us
   .open > .dropdown-toggle.send--btn, .giftcard
   .open > .dropdown-toggle.addcart--btn, .custom-slider .border
-  .open > .dropdown-toggle.location--btn, .modal-bottom
+  .open > .dropdown-toggle.location--btn, .error-msg
+  .open > .dropdown-toggle.msg--btn,
+  .thankyou-msg
+  .open > .dropdown-toggle.msg--btn, .modal-bottom
   .open > .dropdown-toggle.cancel--btn,
   .modal-bottom
   .open > .dropdown-toggle.apply--btn, .mycart-table
@@ -9555,42 +9635,48 @@ header {
     .delt--btn:active:hover,
     .invoice--btn:active:hover,
     .comnt-submit--btn:active:hover, .return-success-msg .backto-prof--btn:active:hover,
-    .cancel-success-msg .backto-prof--btn:active:hover, .contact-us .send--btn:active:hover, .giftcard .addcart--btn:active:hover, .custom-slider .border .location--btn:active:hover, .modal-bottom .cancel--btn:active:hover,
+    .cancel-success-msg .backto-prof--btn:active:hover, .contact-us .send--btn:active:hover, .giftcard .addcart--btn:active:hover, .custom-slider .border .location--btn:active:hover, .error-msg .msg--btn:active:hover,
+    .thankyou-msg .msg--btn:active:hover, .modal-bottom .cancel--btn:active:hover,
     .modal-bottom .apply--btn:active:hover, .mycart-table .wishlist--btn:active:hover, .mycart-table .remove--btn:active:hover, .mycart-footer .shop--btn:active:hover, .mycart-footer .checkout--btn:active:hover, .mycart-modal .add-cart--btn:active:hover, .buy-info .buy-para .view--btn:active:hover, .buy-info .buy-para .buy-para__button .buy--btn:active:hover, .listview .buy--btn:active:hover, .product-compare--btn:active:hover, .btn--compare:active:hover, .btn--brown:active:focus, .footer-up .contact--btn:active:focus, .btn--login:active:focus, .navbar .navbar-right .header--login:active:focus, .navbar .navbar-right .cart-dropdown-menu .dropdown-menu__dropdown-cart .inline-block.desc .remove--btn:active:focus, .dropdown-menu__btn .btn--brown-checkout:active:focus, .cloth-cat .get-center .shop--now:active:focus, .new-arrival .new-arrival__slider .new-arrival__banner-detail .buynow--btn:active:focus, .featured .buy--btn:active:focus, .featured .view--more:active:focus, .cloth-buy .cloth-buy__desc .buy--now:active:focus, .sale .buy--btn:active:focus, .sale .view--more:active:focus, .checkout .next--btn:active:focus, .btn-login:active:focus, .details-form .checkout__cont-btn:active:focus, .compare--btn:active:focus, .address-edit-btn:active:focus,
     .address-delt-btn:active:focus,
     .save--btn:active:focus,
     .delt--btn:active:focus,
     .invoice--btn:active:focus,
     .comnt-submit--btn:active:focus, .return-success-msg .backto-prof--btn:active:focus,
-    .cancel-success-msg .backto-prof--btn:active:focus, .contact-us .send--btn:active:focus, .giftcard .addcart--btn:active:focus, .custom-slider .border .location--btn:active:focus, .modal-bottom .cancel--btn:active:focus,
+    .cancel-success-msg .backto-prof--btn:active:focus, .contact-us .send--btn:active:focus, .giftcard .addcart--btn:active:focus, .custom-slider .border .location--btn:active:focus, .error-msg .msg--btn:active:focus,
+    .thankyou-msg .msg--btn:active:focus, .modal-bottom .cancel--btn:active:focus,
     .modal-bottom .apply--btn:active:focus, .mycart-table .wishlist--btn:active:focus, .mycart-table .remove--btn:active:focus, .mycart-footer .shop--btn:active:focus, .mycart-footer .checkout--btn:active:focus, .mycart-modal .add-cart--btn:active:focus, .buy-info .buy-para .view--btn:active:focus, .buy-info .buy-para .buy-para__button .buy--btn:active:focus, .listview .buy--btn:active:focus, .product-compare--btn:active:focus, .btn--compare:active:focus, .btn--brown:active.focus, .footer-up .contact--btn:active.focus, .btn--login:active.focus, .navbar .navbar-right .header--login:active.focus, .navbar .navbar-right .cart-dropdown-menu .dropdown-menu__dropdown-cart .inline-block.desc .remove--btn:active.focus, .dropdown-menu__btn .btn--brown-checkout:active.focus, .cloth-cat .get-center .shop--now:active.focus, .new-arrival .new-arrival__slider .new-arrival__banner-detail .buynow--btn:active.focus, .featured .buy--btn:active.focus, .featured .view--more:active.focus, .cloth-buy .cloth-buy__desc .buy--now:active.focus, .sale .buy--btn:active.focus, .sale .view--more:active.focus, .checkout .next--btn:active.focus, .btn-login:active.focus, .details-form .checkout__cont-btn:active.focus, .compare--btn:active.focus, .address-edit-btn:active.focus,
     .address-delt-btn:active.focus,
     .save--btn:active.focus,
     .delt--btn:active.focus,
     .invoice--btn:active.focus,
     .comnt-submit--btn:active.focus, .return-success-msg .backto-prof--btn:active.focus,
-    .cancel-success-msg .backto-prof--btn:active.focus, .contact-us .send--btn:active.focus, .giftcard .addcart--btn:active.focus, .custom-slider .border .location--btn:active.focus, .modal-bottom .cancel--btn:active.focus,
+    .cancel-success-msg .backto-prof--btn:active.focus, .contact-us .send--btn:active.focus, .giftcard .addcart--btn:active.focus, .custom-slider .border .location--btn:active.focus, .error-msg .msg--btn:active.focus,
+    .thankyou-msg .msg--btn:active.focus, .modal-bottom .cancel--btn:active.focus,
     .modal-bottom .apply--btn:active.focus, .mycart-table .wishlist--btn:active.focus, .mycart-table .remove--btn:active.focus, .mycart-footer .shop--btn:active.focus, .mycart-footer .checkout--btn:active.focus, .mycart-modal .add-cart--btn:active.focus, .buy-info .buy-para .view--btn:active.focus, .buy-info .buy-para .buy-para__button .buy--btn:active.focus, .listview .buy--btn:active.focus, .product-compare--btn:active.focus, .btn--compare:active.focus, .btn--brown.active:hover, .footer-up .active.contact--btn:hover, .active.btn--login:hover, .navbar .navbar-right .active.header--login:hover, .navbar .navbar-right .cart-dropdown-menu .dropdown-menu__dropdown-cart .inline-block.desc .active.remove--btn:hover, .dropdown-menu__btn .active.btn--brown-checkout:hover, .cloth-cat .get-center .active.shop--now:hover, .new-arrival .new-arrival__slider .new-arrival__banner-detail .active.buynow--btn:hover, .featured .active.buy--btn:hover, .featured .active.view--more:hover, .cloth-buy .cloth-buy__desc .active.buy--now:hover, .sale .active.buy--btn:hover, .sale .active.view--more:hover, .checkout .active.next--btn:hover, .active.btn-login:hover, .details-form .active.checkout__cont-btn:hover, .active.compare--btn:hover, .active.address-edit-btn:hover,
     .active.address-delt-btn:hover,
     .active.save--btn:hover,
     .active.delt--btn:hover,
     .active.invoice--btn:hover,
     .active.comnt-submit--btn:hover, .return-success-msg .active.backto-prof--btn:hover,
-    .cancel-success-msg .active.backto-prof--btn:hover, .contact-us .active.send--btn:hover, .giftcard .active.addcart--btn:hover, .custom-slider .border .active.location--btn:hover, .modal-bottom .active.cancel--btn:hover,
+    .cancel-success-msg .active.backto-prof--btn:hover, .contact-us .active.send--btn:hover, .giftcard .active.addcart--btn:hover, .custom-slider .border .active.location--btn:hover, .error-msg .active.msg--btn:hover,
+    .thankyou-msg .active.msg--btn:hover, .modal-bottom .active.cancel--btn:hover,
     .modal-bottom .active.apply--btn:hover, .mycart-table .active.wishlist--btn:hover, .mycart-table .active.remove--btn:hover, .mycart-footer .active.shop--btn:hover, .mycart-footer .active.checkout--btn:hover, .mycart-modal .active.add-cart--btn:hover, .buy-info .buy-para .active.view--btn:hover, .buy-info .buy-para .buy-para__button .active.buy--btn:hover, .listview .active.buy--btn:hover, .active.product-compare--btn:hover, .active.btn--compare:hover, .btn--brown.active:focus, .footer-up .active.contact--btn:focus, .active.btn--login:focus, .navbar .navbar-right .active.header--login:focus, .navbar .navbar-right .cart-dropdown-menu .dropdown-menu__dropdown-cart .inline-block.desc .active.remove--btn:focus, .dropdown-menu__btn .active.btn--brown-checkout:focus, .cloth-cat .get-center .active.shop--now:focus, .new-arrival .new-arrival__slider .new-arrival__banner-detail .active.buynow--btn:focus, .featured .active.buy--btn:focus, .featured .active.view--more:focus, .cloth-buy .cloth-buy__desc .active.buy--now:focus, .sale .active.buy--btn:focus, .sale .active.view--more:focus, .checkout .active.next--btn:focus, .active.btn-login:focus, .details-form .active.checkout__cont-btn:focus, .active.compare--btn:focus, .active.address-edit-btn:focus,
     .active.address-delt-btn:focus,
     .active.save--btn:focus,
     .active.delt--btn:focus,
     .active.invoice--btn:focus,
     .active.comnt-submit--btn:focus, .return-success-msg .active.backto-prof--btn:focus,
-    .cancel-success-msg .active.backto-prof--btn:focus, .contact-us .active.send--btn:focus, .giftcard .active.addcart--btn:focus, .custom-slider .border .active.location--btn:focus, .modal-bottom .active.cancel--btn:focus,
+    .cancel-success-msg .active.backto-prof--btn:focus, .contact-us .active.send--btn:focus, .giftcard .active.addcart--btn:focus, .custom-slider .border .active.location--btn:focus, .error-msg .active.msg--btn:focus,
+    .thankyou-msg .active.msg--btn:focus, .modal-bottom .active.cancel--btn:focus,
     .modal-bottom .active.apply--btn:focus, .mycart-table .active.wishlist--btn:focus, .mycart-table .active.remove--btn:focus, .mycart-footer .active.shop--btn:focus, .mycart-footer .active.checkout--btn:focus, .mycart-modal .active.add-cart--btn:focus, .buy-info .buy-para .active.view--btn:focus, .buy-info .buy-para .buy-para__button .active.buy--btn:focus, .listview .active.buy--btn:focus, .active.product-compare--btn:focus, .active.btn--compare:focus, .btn--brown.active.focus, .footer-up .active.focus.contact--btn, .active.focus.btn--login, .navbar .navbar-right .active.focus.header--login, .navbar .navbar-right .cart-dropdown-menu .dropdown-menu__dropdown-cart .inline-block.desc .active.focus.remove--btn, .dropdown-menu__btn .active.focus.btn--brown-checkout, .cloth-cat .get-center .active.focus.shop--now, .new-arrival .new-arrival__slider .new-arrival__banner-detail .active.focus.buynow--btn, .featured .active.focus.buy--btn, .featured .active.focus.view--more, .cloth-buy .cloth-buy__desc .active.focus.buy--now, .sale .active.focus.buy--btn, .sale .active.focus.view--more, .checkout .active.focus.next--btn, .active.focus.btn-login, .details-form .active.focus.checkout__cont-btn, .active.focus.compare--btn, .active.focus.address-edit-btn,
     .active.focus.address-delt-btn,
     .active.focus.save--btn,
     .active.focus.delt--btn,
     .active.focus.invoice--btn,
     .active.focus.comnt-submit--btn, .return-success-msg .active.focus.backto-prof--btn,
-    .cancel-success-msg .active.focus.backto-prof--btn, .contact-us .active.focus.send--btn, .giftcard .active.focus.addcart--btn, .custom-slider .border .active.focus.location--btn, .modal-bottom .active.focus.cancel--btn,
+    .cancel-success-msg .active.focus.backto-prof--btn, .contact-us .active.focus.send--btn, .giftcard .active.focus.addcart--btn, .custom-slider .border .active.focus.location--btn, .error-msg .active.focus.msg--btn,
+    .thankyou-msg .active.focus.msg--btn, .modal-bottom .active.focus.cancel--btn,
     .modal-bottom .active.focus.apply--btn, .mycart-table .active.focus.wishlist--btn, .mycart-table .active.focus.remove--btn, .mycart-footer .active.focus.shop--btn, .mycart-footer .active.focus.checkout--btn, .mycart-modal .active.focus.add-cart--btn, .buy-info .buy-para .active.focus.view--btn, .buy-info .buy-para .buy-para__button .active.focus.buy--btn, .listview .active.focus.buy--btn, .active.focus.product-compare--btn, .active.focus.btn--compare,
     .open > .btn--brown.dropdown-toggle:hover, .footer-up
     .open > .dropdown-toggle.contact--btn:hover,
@@ -9625,7 +9711,10 @@ header {
     .open > .dropdown-toggle.backto-prof--btn:hover, .contact-us
     .open > .dropdown-toggle.send--btn:hover, .giftcard
     .open > .dropdown-toggle.addcart--btn:hover, .custom-slider .border
-    .open > .dropdown-toggle.location--btn:hover, .modal-bottom
+    .open > .dropdown-toggle.location--btn:hover, .error-msg
+    .open > .dropdown-toggle.msg--btn:hover,
+    .thankyou-msg
+    .open > .dropdown-toggle.msg--btn:hover, .modal-bottom
     .open > .dropdown-toggle.cancel--btn:hover,
     .modal-bottom
     .open > .dropdown-toggle.apply--btn:hover, .mycart-table
@@ -9672,7 +9761,10 @@ header {
     .open > .dropdown-toggle.backto-prof--btn:focus, .contact-us
     .open > .dropdown-toggle.send--btn:focus, .giftcard
     .open > .dropdown-toggle.addcart--btn:focus, .custom-slider .border
-    .open > .dropdown-toggle.location--btn:focus, .modal-bottom
+    .open > .dropdown-toggle.location--btn:focus, .error-msg
+    .open > .dropdown-toggle.msg--btn:focus,
+    .thankyou-msg
+    .open > .dropdown-toggle.msg--btn:focus, .modal-bottom
     .open > .dropdown-toggle.cancel--btn:focus,
     .modal-bottom
     .open > .dropdown-toggle.apply--btn:focus, .mycart-table
@@ -9719,7 +9811,10 @@ header {
     .open > .dropdown-toggle.focus.backto-prof--btn, .contact-us
     .open > .dropdown-toggle.focus.send--btn, .giftcard
     .open > .dropdown-toggle.focus.addcart--btn, .custom-slider .border
-    .open > .dropdown-toggle.focus.location--btn, .modal-bottom
+    .open > .dropdown-toggle.focus.location--btn, .error-msg
+    .open > .dropdown-toggle.focus.msg--btn,
+    .thankyou-msg
+    .open > .dropdown-toggle.focus.msg--btn, .modal-bottom
     .open > .dropdown-toggle.focus.cancel--btn,
     .modal-bottom
     .open > .dropdown-toggle.focus.apply--btn, .mycart-table
@@ -9742,14 +9837,16 @@ header {
   .delt--btn:active,
   .invoice--btn:active,
   .comnt-submit--btn:active, .return-success-msg .backto-prof--btn:active,
-  .cancel-success-msg .backto-prof--btn:active, .contact-us .send--btn:active, .giftcard .addcart--btn:active, .custom-slider .border .location--btn:active, .modal-bottom .cancel--btn:active,
+  .cancel-success-msg .backto-prof--btn:active, .contact-us .send--btn:active, .giftcard .addcart--btn:active, .custom-slider .border .location--btn:active, .error-msg .msg--btn:active,
+  .thankyou-msg .msg--btn:active, .modal-bottom .cancel--btn:active,
   .modal-bottom .apply--btn:active, .mycart-table .wishlist--btn:active, .mycart-table .remove--btn:active, .mycart-footer .shop--btn:active, .mycart-footer .checkout--btn:active, .mycart-modal .add-cart--btn:active, .buy-info .buy-para .view--btn:active, .buy-info .buy-para .buy-para__button .buy--btn:active, .listview .buy--btn:active, .product-compare--btn:active, .btn--compare:active, .btn--brown.active, .footer-up .active.contact--btn, .active.btn--login, .navbar .navbar-right .active.header--login, .navbar .navbar-right .cart-dropdown-menu .dropdown-menu__dropdown-cart .inline-block.desc .active.remove--btn, .dropdown-menu__btn .active.btn--brown-checkout, .cloth-cat .get-center .active.shop--now, .new-arrival .new-arrival__slider .new-arrival__banner-detail .active.buynow--btn, .featured .active.buy--btn, .featured .active.view--more, .cloth-buy .cloth-buy__desc .active.buy--now, .sale .active.buy--btn, .sale .active.view--more, .checkout .active.next--btn, .active.btn-login, .details-form .active.checkout__cont-btn, .active.compare--btn, .active.address-edit-btn,
   .active.address-delt-btn,
   .active.save--btn,
   .active.delt--btn,
   .active.invoice--btn,
   .active.comnt-submit--btn, .return-success-msg .active.backto-prof--btn,
-  .cancel-success-msg .active.backto-prof--btn, .contact-us .active.send--btn, .giftcard .active.addcart--btn, .custom-slider .border .active.location--btn, .modal-bottom .active.cancel--btn,
+  .cancel-success-msg .active.backto-prof--btn, .contact-us .active.send--btn, .giftcard .active.addcart--btn, .custom-slider .border .active.location--btn, .error-msg .active.msg--btn,
+  .thankyou-msg .active.msg--btn, .modal-bottom .active.cancel--btn,
   .modal-bottom .active.apply--btn, .mycart-table .active.wishlist--btn, .mycart-table .active.remove--btn, .mycart-footer .active.shop--btn, .mycart-footer .active.checkout--btn, .mycart-modal .active.add-cart--btn, .buy-info .buy-para .active.view--btn, .buy-info .buy-para .buy-para__button .active.buy--btn, .listview .active.buy--btn, .active.product-compare--btn, .active.btn--compare,
   .open > .btn--brown.dropdown-toggle, .footer-up
   .open > .dropdown-toggle.contact--btn,
@@ -9784,7 +9881,10 @@ header {
   .open > .dropdown-toggle.backto-prof--btn, .contact-us
   .open > .dropdown-toggle.send--btn, .giftcard
   .open > .dropdown-toggle.addcart--btn, .custom-slider .border
-  .open > .dropdown-toggle.location--btn, .modal-bottom
+  .open > .dropdown-toggle.location--btn, .error-msg
+  .open > .dropdown-toggle.msg--btn,
+  .thankyou-msg
+  .open > .dropdown-toggle.msg--btn, .modal-bottom
   .open > .dropdown-toggle.cancel--btn,
   .modal-bottom
   .open > .dropdown-toggle.apply--btn, .mycart-table
@@ -9805,42 +9905,48 @@ header {
   .disabled.delt--btn:hover,
   .disabled.invoice--btn:hover,
   .disabled.comnt-submit--btn:hover, .return-success-msg .disabled.backto-prof--btn:hover,
-  .cancel-success-msg .disabled.backto-prof--btn:hover, .contact-us .disabled.send--btn:hover, .giftcard .disabled.addcart--btn:hover, .custom-slider .border .disabled.location--btn:hover, .modal-bottom .disabled.cancel--btn:hover,
+  .cancel-success-msg .disabled.backto-prof--btn:hover, .contact-us .disabled.send--btn:hover, .giftcard .disabled.addcart--btn:hover, .custom-slider .border .disabled.location--btn:hover, .error-msg .disabled.msg--btn:hover,
+  .thankyou-msg .disabled.msg--btn:hover, .modal-bottom .disabled.cancel--btn:hover,
   .modal-bottom .disabled.apply--btn:hover, .mycart-table .disabled.wishlist--btn:hover, .mycart-table .disabled.remove--btn:hover, .mycart-footer .disabled.shop--btn:hover, .mycart-footer .disabled.checkout--btn:hover, .mycart-modal .disabled.add-cart--btn:hover, .buy-info .buy-para .disabled.view--btn:hover, .buy-info .buy-para .buy-para__button .disabled.buy--btn:hover, .listview .disabled.buy--btn:hover, .disabled.product-compare--btn:hover, .disabled.btn--compare:hover, .btn--brown.disabled:focus, .footer-up .disabled.contact--btn:focus, .disabled.btn--login:focus, .navbar .navbar-right .disabled.header--login:focus, .navbar .navbar-right .cart-dropdown-menu .dropdown-menu__dropdown-cart .inline-block.desc .disabled.remove--btn:focus, .dropdown-menu__btn .disabled.btn--brown-checkout:focus, .cloth-cat .get-center .disabled.shop--now:focus, .new-arrival .new-arrival__slider .new-arrival__banner-detail .disabled.buynow--btn:focus, .featured .disabled.buy--btn:focus, .featured .disabled.view--more:focus, .cloth-buy .cloth-buy__desc .disabled.buy--now:focus, .sale .disabled.buy--btn:focus, .sale .disabled.view--more:focus, .checkout .disabled.next--btn:focus, .disabled.btn-login:focus, .details-form .disabled.checkout__cont-btn:focus, .disabled.compare--btn:focus, .disabled.address-edit-btn:focus,
   .disabled.address-delt-btn:focus,
   .disabled.save--btn:focus,
   .disabled.delt--btn:focus,
   .disabled.invoice--btn:focus,
   .disabled.comnt-submit--btn:focus, .return-success-msg .disabled.backto-prof--btn:focus,
-  .cancel-success-msg .disabled.backto-prof--btn:focus, .contact-us .disabled.send--btn:focus, .giftcard .disabled.addcart--btn:focus, .custom-slider .border .disabled.location--btn:focus, .modal-bottom .disabled.cancel--btn:focus,
+  .cancel-success-msg .disabled.backto-prof--btn:focus, .contact-us .disabled.send--btn:focus, .giftcard .disabled.addcart--btn:focus, .custom-slider .border .disabled.location--btn:focus, .error-msg .disabled.msg--btn:focus,
+  .thankyou-msg .disabled.msg--btn:focus, .modal-bottom .disabled.cancel--btn:focus,
   .modal-bottom .disabled.apply--btn:focus, .mycart-table .disabled.wishlist--btn:focus, .mycart-table .disabled.remove--btn:focus, .mycart-footer .disabled.shop--btn:focus, .mycart-footer .disabled.checkout--btn:focus, .mycart-modal .disabled.add-cart--btn:focus, .buy-info .buy-para .disabled.view--btn:focus, .buy-info .buy-para .buy-para__button .disabled.buy--btn:focus, .listview .disabled.buy--btn:focus, .disabled.product-compare--btn:focus, .disabled.btn--compare:focus, .btn--brown.disabled.focus, .footer-up .disabled.focus.contact--btn, .disabled.focus.btn--login, .navbar .navbar-right .disabled.focus.header--login, .navbar .navbar-right .cart-dropdown-menu .dropdown-menu__dropdown-cart .inline-block.desc .disabled.focus.remove--btn, .dropdown-menu__btn .disabled.focus.btn--brown-checkout, .cloth-cat .get-center .disabled.focus.shop--now, .new-arrival .new-arrival__slider .new-arrival__banner-detail .disabled.focus.buynow--btn, .featured .disabled.focus.buy--btn, .featured .disabled.focus.view--more, .cloth-buy .cloth-buy__desc .disabled.focus.buy--now, .sale .disabled.focus.buy--btn, .sale .disabled.focus.view--more, .checkout .disabled.focus.next--btn, .disabled.focus.btn-login, .details-form .disabled.focus.checkout__cont-btn, .disabled.focus.compare--btn, .disabled.focus.address-edit-btn,
   .disabled.focus.address-delt-btn,
   .disabled.focus.save--btn,
   .disabled.focus.delt--btn,
   .disabled.focus.invoice--btn,
   .disabled.focus.comnt-submit--btn, .return-success-msg .disabled.focus.backto-prof--btn,
-  .cancel-success-msg .disabled.focus.backto-prof--btn, .contact-us .disabled.focus.send--btn, .giftcard .disabled.focus.addcart--btn, .custom-slider .border .disabled.focus.location--btn, .modal-bottom .disabled.focus.cancel--btn,
+  .cancel-success-msg .disabled.focus.backto-prof--btn, .contact-us .disabled.focus.send--btn, .giftcard .disabled.focus.addcart--btn, .custom-slider .border .disabled.focus.location--btn, .error-msg .disabled.focus.msg--btn,
+  .thankyou-msg .disabled.focus.msg--btn, .modal-bottom .disabled.focus.cancel--btn,
   .modal-bottom .disabled.focus.apply--btn, .mycart-table .disabled.focus.wishlist--btn, .mycart-table .disabled.focus.remove--btn, .mycart-footer .disabled.focus.shop--btn, .mycart-footer .disabled.focus.checkout--btn, .mycart-modal .disabled.focus.add-cart--btn, .buy-info .buy-para .disabled.focus.view--btn, .buy-info .buy-para .buy-para__button .disabled.focus.buy--btn, .listview .disabled.focus.buy--btn, .disabled.focus.product-compare--btn, .disabled.focus.btn--compare, .btn--brown[disabled]:hover, .footer-up [disabled].contact--btn:hover, [disabled].btn--login:hover, .navbar .navbar-right [disabled].header--login:hover, .navbar .navbar-right .cart-dropdown-menu .dropdown-menu__dropdown-cart .inline-block.desc [disabled].remove--btn:hover, .dropdown-menu__btn [disabled].btn--brown-checkout:hover, .cloth-cat .get-center [disabled].shop--now:hover, .new-arrival .new-arrival__slider .new-arrival__banner-detail [disabled].buynow--btn:hover, .featured [disabled].buy--btn:hover, .featured [disabled].view--more:hover, .cloth-buy .cloth-buy__desc [disabled].buy--now:hover, .sale [disabled].buy--btn:hover, .sale [disabled].view--more:hover, .checkout [disabled].next--btn:hover, [disabled].btn-login:hover, .details-form [disabled].checkout__cont-btn:hover, [disabled].compare--btn:hover, [disabled].address-edit-btn:hover,
   [disabled].address-delt-btn:hover,
   [disabled].save--btn:hover,
   [disabled].delt--btn:hover,
   [disabled].invoice--btn:hover,
   [disabled].comnt-submit--btn:hover, .return-success-msg [disabled].backto-prof--btn:hover,
-  .cancel-success-msg [disabled].backto-prof--btn:hover, .contact-us [disabled].send--btn:hover, .giftcard [disabled].addcart--btn:hover, .custom-slider .border [disabled].location--btn:hover, .modal-bottom [disabled].cancel--btn:hover,
+  .cancel-success-msg [disabled].backto-prof--btn:hover, .contact-us [disabled].send--btn:hover, .giftcard [disabled].addcart--btn:hover, .custom-slider .border [disabled].location--btn:hover, .error-msg [disabled].msg--btn:hover,
+  .thankyou-msg [disabled].msg--btn:hover, .modal-bottom [disabled].cancel--btn:hover,
   .modal-bottom [disabled].apply--btn:hover, .mycart-table [disabled].wishlist--btn:hover, .mycart-table [disabled].remove--btn:hover, .mycart-footer [disabled].shop--btn:hover, .mycart-footer [disabled].checkout--btn:hover, .mycart-modal [disabled].add-cart--btn:hover, .buy-info .buy-para [disabled].view--btn:hover, .buy-info .buy-para .buy-para__button [disabled].buy--btn:hover, .listview [disabled].buy--btn:hover, [disabled].product-compare--btn:hover, [disabled].btn--compare:hover, .btn--brown[disabled]:focus, .footer-up [disabled].contact--btn:focus, [disabled].btn--login:focus, .navbar .navbar-right [disabled].header--login:focus, .navbar .navbar-right .cart-dropdown-menu .dropdown-menu__dropdown-cart .inline-block.desc [disabled].remove--btn:focus, .dropdown-menu__btn [disabled].btn--brown-checkout:focus, .cloth-cat .get-center [disabled].shop--now:focus, .new-arrival .new-arrival__slider .new-arrival__banner-detail [disabled].buynow--btn:focus, .featured [disabled].buy--btn:focus, .featured [disabled].view--more:focus, .cloth-buy .cloth-buy__desc [disabled].buy--now:focus, .sale [disabled].buy--btn:focus, .sale [disabled].view--more:focus, .checkout [disabled].next--btn:focus, [disabled].btn-login:focus, .details-form [disabled].checkout__cont-btn:focus, [disabled].compare--btn:focus, [disabled].address-edit-btn:focus,
   [disabled].address-delt-btn:focus,
   [disabled].save--btn:focus,
   [disabled].delt--btn:focus,
   [disabled].invoice--btn:focus,
   [disabled].comnt-submit--btn:focus, .return-success-msg [disabled].backto-prof--btn:focus,
-  .cancel-success-msg [disabled].backto-prof--btn:focus, .contact-us [disabled].send--btn:focus, .giftcard [disabled].addcart--btn:focus, .custom-slider .border [disabled].location--btn:focus, .modal-bottom [disabled].cancel--btn:focus,
+  .cancel-success-msg [disabled].backto-prof--btn:focus, .contact-us [disabled].send--btn:focus, .giftcard [disabled].addcart--btn:focus, .custom-slider .border [disabled].location--btn:focus, .error-msg [disabled].msg--btn:focus,
+  .thankyou-msg [disabled].msg--btn:focus, .modal-bottom [disabled].cancel--btn:focus,
   .modal-bottom [disabled].apply--btn:focus, .mycart-table [disabled].wishlist--btn:focus, .mycart-table [disabled].remove--btn:focus, .mycart-footer [disabled].shop--btn:focus, .mycart-footer [disabled].checkout--btn:focus, .mycart-modal [disabled].add-cart--btn:focus, .buy-info .buy-para [disabled].view--btn:focus, .buy-info .buy-para .buy-para__button [disabled].buy--btn:focus, .listview [disabled].buy--btn:focus, [disabled].product-compare--btn:focus, [disabled].btn--compare:focus, .btn--brown[disabled].focus, .footer-up [disabled].focus.contact--btn, [disabled].focus.btn--login, .navbar .navbar-right [disabled].focus.header--login, .navbar .navbar-right .cart-dropdown-menu .dropdown-menu__dropdown-cart .inline-block.desc [disabled].focus.remove--btn, .dropdown-menu__btn [disabled].focus.btn--brown-checkout, .cloth-cat .get-center [disabled].focus.shop--now, .new-arrival .new-arrival__slider .new-arrival__banner-detail [disabled].focus.buynow--btn, .featured [disabled].focus.buy--btn, .featured [disabled].focus.view--more, .cloth-buy .cloth-buy__desc [disabled].focus.buy--now, .sale [disabled].focus.buy--btn, .sale [disabled].focus.view--more, .checkout [disabled].focus.next--btn, [disabled].focus.btn-login, .details-form [disabled].focus.checkout__cont-btn, [disabled].focus.compare--btn, [disabled].focus.address-edit-btn,
   [disabled].focus.address-delt-btn,
   [disabled].focus.save--btn,
   [disabled].focus.delt--btn,
   [disabled].focus.invoice--btn,
   [disabled].focus.comnt-submit--btn, .return-success-msg [disabled].focus.backto-prof--btn,
-  .cancel-success-msg [disabled].focus.backto-prof--btn, .contact-us [disabled].focus.send--btn, .giftcard [disabled].focus.addcart--btn, .custom-slider .border [disabled].focus.location--btn, .modal-bottom [disabled].focus.cancel--btn,
+  .cancel-success-msg [disabled].focus.backto-prof--btn, .contact-us [disabled].focus.send--btn, .giftcard [disabled].focus.addcart--btn, .custom-slider .border [disabled].focus.location--btn, .error-msg [disabled].focus.msg--btn,
+  .thankyou-msg [disabled].focus.msg--btn, .modal-bottom [disabled].focus.cancel--btn,
   .modal-bottom [disabled].focus.apply--btn, .mycart-table [disabled].focus.wishlist--btn, .mycart-table [disabled].focus.remove--btn, .mycart-footer [disabled].focus.shop--btn, .mycart-footer [disabled].focus.checkout--btn, .mycart-modal [disabled].focus.add-cart--btn, .buy-info .buy-para [disabled].focus.view--btn, .buy-info .buy-para .buy-para__button [disabled].focus.buy--btn, .listview [disabled].focus.buy--btn, [disabled].focus.product-compare--btn, [disabled].focus.btn--compare,
   fieldset[disabled] .btn--brown:hover,
   fieldset[disabled] .footer-up .contact--btn:hover, .footer-up
@@ -9895,6 +10001,12 @@ header {
   fieldset[disabled] .addcart--btn:hover,
   fieldset[disabled] .custom-slider .border .location--btn:hover, .custom-slider .border
   fieldset[disabled] .location--btn:hover,
+  fieldset[disabled] .error-msg .msg--btn:hover, .error-msg
+  fieldset[disabled] .msg--btn:hover,
+  fieldset[disabled]
+  .thankyou-msg .msg--btn:hover,
+  .thankyou-msg
+  fieldset[disabled] .msg--btn:hover,
   fieldset[disabled] .modal-bottom .cancel--btn:hover, .modal-bottom
   fieldset[disabled] .cancel--btn:hover,
   fieldset[disabled]
@@ -9972,6 +10084,12 @@ header {
   fieldset[disabled] .addcart--btn:focus,
   fieldset[disabled] .custom-slider .border .location--btn:focus, .custom-slider .border
   fieldset[disabled] .location--btn:focus,
+  fieldset[disabled] .error-msg .msg--btn:focus, .error-msg
+  fieldset[disabled] .msg--btn:focus,
+  fieldset[disabled]
+  .thankyou-msg .msg--btn:focus,
+  .thankyou-msg
+  fieldset[disabled] .msg--btn:focus,
   fieldset[disabled] .modal-bottom .cancel--btn:focus, .modal-bottom
   fieldset[disabled] .cancel--btn:focus,
   fieldset[disabled]
@@ -10049,6 +10167,12 @@ header {
   fieldset[disabled] .focus.addcart--btn,
   fieldset[disabled] .custom-slider .border .focus.location--btn, .custom-slider .border
   fieldset[disabled] .focus.location--btn,
+  fieldset[disabled] .error-msg .focus.msg--btn, .error-msg
+  fieldset[disabled] .focus.msg--btn,
+  fieldset[disabled]
+  .thankyou-msg .focus.msg--btn,
+  .thankyou-msg
+  fieldset[disabled] .focus.msg--btn,
   fieldset[disabled] .modal-bottom .focus.cancel--btn, .modal-bottom
   fieldset[disabled] .focus.cancel--btn,
   fieldset[disabled]
@@ -10081,7 +10205,8 @@ header {
   .delt--btn .badge,
   .invoice--btn .badge,
   .comnt-submit--btn .badge, .return-success-msg .backto-prof--btn .badge,
-  .cancel-success-msg .backto-prof--btn .badge, .contact-us .send--btn .badge, .giftcard .addcart--btn .badge, .custom-slider .border .location--btn .badge, .modal-bottom .cancel--btn .badge,
+  .cancel-success-msg .backto-prof--btn .badge, .contact-us .send--btn .badge, .giftcard .addcart--btn .badge, .custom-slider .border .location--btn .badge, .error-msg .msg--btn .badge,
+  .thankyou-msg .msg--btn .badge, .modal-bottom .cancel--btn .badge,
   .modal-bottom .apply--btn .badge, .mycart-table .wishlist--btn .badge, .mycart-table .remove--btn .badge, .mycart-footer .shop--btn .badge, .mycart-footer .checkout--btn .badge, .mycart-modal .add-cart--btn .badge, .buy-info .buy-para .view--btn .badge, .buy-info .buy-para .buy-para__button .buy--btn .badge, .listview .buy--btn .badge, .product-compare--btn .badge, .btn--compare .badge {
     color: #341314;
     background-color: #ffffff; }
@@ -10091,21 +10216,24 @@ header {
   .delt--btn:hover,
   .invoice--btn:hover,
   .comnt-submit--btn:hover, .return-success-msg .backto-prof--btn:hover,
-  .cancel-success-msg .backto-prof--btn:hover, .contact-us .send--btn:hover, .giftcard .addcart--btn:hover, .custom-slider .border .location--btn:hover, .modal-bottom .cancel--btn:hover,
+  .cancel-success-msg .backto-prof--btn:hover, .contact-us .send--btn:hover, .giftcard .addcart--btn:hover, .custom-slider .border .location--btn:hover, .error-msg .msg--btn:hover,
+  .thankyou-msg .msg--btn:hover, .modal-bottom .cancel--btn:hover,
   .modal-bottom .apply--btn:hover, .mycart-table .wishlist--btn:hover, .mycart-table .remove--btn:hover, .mycart-footer .shop--btn:hover, .mycart-footer .checkout--btn:hover, .mycart-modal .add-cart--btn:hover, .buy-info .buy-para .view--btn:hover, .buy-info .buy-para .buy-para__button .buy--btn:hover, .listview .buy--btn:hover, .product-compare--btn:hover, .btn--compare:hover, .btn--brown:active, .footer-up .contact--btn:active, .btn--login:active, .navbar .navbar-right .header--login:active, .navbar .navbar-right .cart-dropdown-menu .dropdown-menu__dropdown-cart .inline-block.desc .remove--btn:active, .dropdown-menu__btn .btn--brown-checkout:active, .cloth-cat .get-center .shop--now:active, .new-arrival .new-arrival__slider .new-arrival__banner-detail .buynow--btn:active, .featured .buy--btn:active, .featured .view--more:active, .cloth-buy .cloth-buy__desc .buy--now:active, .sale .buy--btn:active, .sale .view--more:active, .checkout .next--btn:active, .btn-login:active, .details-form .checkout__cont-btn:active, .compare--btn:active, .address-edit-btn:active,
   .address-delt-btn:active,
   .save--btn:active,
   .delt--btn:active,
   .invoice--btn:active,
   .comnt-submit--btn:active, .return-success-msg .backto-prof--btn:active,
-  .cancel-success-msg .backto-prof--btn:active, .contact-us .send--btn:active, .giftcard .addcart--btn:active, .custom-slider .border .location--btn:active, .modal-bottom .cancel--btn:active,
+  .cancel-success-msg .backto-prof--btn:active, .contact-us .send--btn:active, .giftcard .addcart--btn:active, .custom-slider .border .location--btn:active, .error-msg .msg--btn:active,
+  .thankyou-msg .msg--btn:active, .modal-bottom .cancel--btn:active,
   .modal-bottom .apply--btn:active, .mycart-table .wishlist--btn:active, .mycart-table .remove--btn:active, .mycart-footer .shop--btn:active, .mycart-footer .checkout--btn:active, .mycart-modal .add-cart--btn:active, .buy-info .buy-para .view--btn:active, .buy-info .buy-para .buy-para__button .buy--btn:active, .listview .buy--btn:active, .product-compare--btn:active, .btn--compare:active, .btn--brown:focus, .footer-up .contact--btn:focus, .btn--login:focus, .navbar .navbar-right .header--login:focus, .navbar .navbar-right .cart-dropdown-menu .dropdown-menu__dropdown-cart .inline-block.desc .remove--btn:focus, .dropdown-menu__btn .btn--brown-checkout:focus, .cloth-cat .get-center .shop--now:focus, .new-arrival .new-arrival__slider .new-arrival__banner-detail .buynow--btn:focus, .featured .buy--btn:focus, .featured .view--more:focus, .cloth-buy .cloth-buy__desc .buy--now:focus, .sale .buy--btn:focus, .sale .view--more:focus, .checkout .next--btn:focus, .btn-login:focus, .details-form .checkout__cont-btn:focus, .compare--btn:focus, .address-edit-btn:focus,
   .address-delt-btn:focus,
   .save--btn:focus,
   .delt--btn:focus,
   .invoice--btn:focus,
   .comnt-submit--btn:focus, .return-success-msg .backto-prof--btn:focus,
-  .cancel-success-msg .backto-prof--btn:focus, .contact-us .send--btn:focus, .giftcard .addcart--btn:focus, .custom-slider .border .location--btn:focus, .modal-bottom .cancel--btn:focus,
+  .cancel-success-msg .backto-prof--btn:focus, .contact-us .send--btn:focus, .giftcard .addcart--btn:focus, .custom-slider .border .location--btn:focus, .error-msg .msg--btn:focus,
+  .thankyou-msg .msg--btn:focus, .modal-bottom .cancel--btn:focus,
   .modal-bottom .apply--btn:focus, .mycart-table .wishlist--btn:focus, .mycart-table .remove--btn:focus, .mycart-footer .shop--btn:focus, .mycart-footer .checkout--btn:focus, .mycart-modal .add-cart--btn:focus, .buy-info .buy-para .view--btn:focus, .buy-info .buy-para .buy-para__button .buy--btn:focus, .listview .buy--btn:focus, .product-compare--btn:focus, .btn--compare:focus {
     color: #ffffff;
     background-color: #341314; }
@@ -10175,6 +10303,45 @@ a {
 .plus-minus-btn .square__bg, .second-sec .square__bg,
 .plus-minus-btn .quantity__input, .second-sec .quantity__input {
   background-color: white; }
+
+.flexslider:hover .flex-direction-nav .flex-prev:hover,
+.flexslider:hover .flex-direction-nav .flex-next:hover {
+  background-color: #341314; }
+  .flexslider:hover .flex-direction-nav .flex-prev:hover:before,
+  .flexslider:hover .flex-direction-nav .flex-next:hover:before {
+    color: white; }
+
+.flex-direction-nav a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  color: #341314; }
+  .flex-direction-nav a:before {
+    color: #341314;
+    font-size: 16px; }
+
+.flex-direction-nav .flex-prev {
+  text-align: center !important; }
+  .flex-direction-nav .flex-prev:before {
+    content: "" !important;
+    font-family: FontAwesome;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+
+.flex-direction-nav .flex-next {
+  text-align: center !important; }
+  .flex-direction-nav .flex-next:before {
+    content: "" !important;
+    font-family: FontAwesome;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
 
 /*NOTE: extend this class in dropdown's by using @extend */
 .dropdown-hidden-anim, .navbar .navbar-right .cart-dropdown-menu, .state-dropdown-menu,
@@ -10338,7 +10505,11 @@ input[type=number]::-webkit-outer-spin-button {
 .cancel-success-msg .backto-prof--btn,
 .cancel-success-msg .customized-form .backto-prof--btn, .modal__customized-form
 .cancel-success-msg .backto-prof--btn,
-.cancel-success-msg .modal__customized-form .backto-prof--btn, .customized-form .contact-us .send--btn, .contact-us .customized-form .send--btn, .modal__customized-form .contact-us .send--btn, .contact-us .modal__customized-form .send--btn, .customized-form .giftcard .addcart--btn, .giftcard .customized-form .addcart--btn, .modal__customized-form .giftcard .addcart--btn, .giftcard .modal__customized-form .addcart--btn, .customized-form .custom-slider .border .location--btn, .custom-slider .border .customized-form .location--btn, .modal__customized-form .custom-slider .border .location--btn, .custom-slider .border .modal__customized-form .location--btn, .customized-form .modal-bottom .cancel--btn, .modal-bottom .customized-form .cancel--btn, .modal__customized-form .modal-bottom .cancel--btn, .modal-bottom .modal__customized-form .cancel--btn, .customized-form
+.cancel-success-msg .modal__customized-form .backto-prof--btn, .customized-form .contact-us .send--btn, .contact-us .customized-form .send--btn, .modal__customized-form .contact-us .send--btn, .contact-us .modal__customized-form .send--btn, .customized-form .giftcard .addcart--btn, .giftcard .customized-form .addcart--btn, .modal__customized-form .giftcard .addcart--btn, .giftcard .modal__customized-form .addcart--btn, .customized-form .custom-slider .border .location--btn, .custom-slider .border .customized-form .location--btn, .modal__customized-form .custom-slider .border .location--btn, .custom-slider .border .modal__customized-form .location--btn, .customized-form .error-msg .msg--btn, .error-msg .customized-form .msg--btn, .modal__customized-form .error-msg .msg--btn, .error-msg .modal__customized-form .msg--btn, .customized-form
+.thankyou-msg .msg--btn,
+.thankyou-msg .customized-form .msg--btn, .modal__customized-form
+.thankyou-msg .msg--btn,
+.thankyou-msg .modal__customized-form .msg--btn, .customized-form .modal-bottom .cancel--btn, .modal-bottom .customized-form .cancel--btn, .modal__customized-form .modal-bottom .cancel--btn, .modal-bottom .modal__customized-form .cancel--btn, .customized-form
 .modal-bottom .apply--btn,
 .modal-bottom .customized-form .apply--btn, .modal__customized-form
 .modal-bottom .apply--btn,
@@ -10360,7 +10531,11 @@ input[type=number]::-webkit-outer-spin-button {
   .cancel-success-msg .backto-prof--btn:focus,
   .cancel-success-msg .customized-form .backto-prof--btn:focus, .modal__customized-form
   .cancel-success-msg .backto-prof--btn:focus,
-  .cancel-success-msg .modal__customized-form .backto-prof--btn:focus, .customized-form .contact-us .send--btn:focus, .contact-us .customized-form .send--btn:focus, .modal__customized-form .contact-us .send--btn:focus, .contact-us .modal__customized-form .send--btn:focus, .customized-form .giftcard .addcart--btn:focus, .giftcard .customized-form .addcart--btn:focus, .modal__customized-form .giftcard .addcart--btn:focus, .giftcard .modal__customized-form .addcart--btn:focus, .customized-form .custom-slider .border .location--btn:focus, .custom-slider .border .customized-form .location--btn:focus, .modal__customized-form .custom-slider .border .location--btn:focus, .custom-slider .border .modal__customized-form .location--btn:focus, .customized-form .modal-bottom .cancel--btn:focus, .modal-bottom .customized-form .cancel--btn:focus, .modal__customized-form .modal-bottom .cancel--btn:focus, .modal-bottom .modal__customized-form .cancel--btn:focus, .customized-form
+  .cancel-success-msg .modal__customized-form .backto-prof--btn:focus, .customized-form .contact-us .send--btn:focus, .contact-us .customized-form .send--btn:focus, .modal__customized-form .contact-us .send--btn:focus, .contact-us .modal__customized-form .send--btn:focus, .customized-form .giftcard .addcart--btn:focus, .giftcard .customized-form .addcart--btn:focus, .modal__customized-form .giftcard .addcart--btn:focus, .giftcard .modal__customized-form .addcart--btn:focus, .customized-form .custom-slider .border .location--btn:focus, .custom-slider .border .customized-form .location--btn:focus, .modal__customized-form .custom-slider .border .location--btn:focus, .custom-slider .border .modal__customized-form .location--btn:focus, .customized-form .error-msg .msg--btn:focus, .error-msg .customized-form .msg--btn:focus, .modal__customized-form .error-msg .msg--btn:focus, .error-msg .modal__customized-form .msg--btn:focus, .customized-form
+  .thankyou-msg .msg--btn:focus,
+  .thankyou-msg .customized-form .msg--btn:focus, .modal__customized-form
+  .thankyou-msg .msg--btn:focus,
+  .thankyou-msg .modal__customized-form .msg--btn:focus, .customized-form .modal-bottom .cancel--btn:focus, .modal-bottom .customized-form .cancel--btn:focus, .modal__customized-form .modal-bottom .cancel--btn:focus, .modal-bottom .modal__customized-form .cancel--btn:focus, .customized-form
   .modal-bottom .apply--btn:focus,
   .modal-bottom .customized-form .apply--btn:focus, .modal__customized-form
   .modal-bottom .apply--btn:focus,
@@ -10378,7 +10553,11 @@ input[type=number]::-webkit-outer-spin-button {
   .cancel-success-msg .focus.backto-prof--btn,
   .cancel-success-msg .customized-form .focus.backto-prof--btn, .modal__customized-form
   .cancel-success-msg .focus.backto-prof--btn,
-  .cancel-success-msg .modal__customized-form .focus.backto-prof--btn, .customized-form .contact-us .focus.send--btn, .contact-us .customized-form .focus.send--btn, .modal__customized-form .contact-us .focus.send--btn, .contact-us .modal__customized-form .focus.send--btn, .customized-form .giftcard .focus.addcart--btn, .giftcard .customized-form .focus.addcart--btn, .modal__customized-form .giftcard .focus.addcart--btn, .giftcard .modal__customized-form .focus.addcart--btn, .customized-form .custom-slider .border .focus.location--btn, .custom-slider .border .customized-form .focus.location--btn, .modal__customized-form .custom-slider .border .focus.location--btn, .custom-slider .border .modal__customized-form .focus.location--btn, .customized-form .modal-bottom .focus.cancel--btn, .modal-bottom .customized-form .focus.cancel--btn, .modal__customized-form .modal-bottom .focus.cancel--btn, .modal-bottom .modal__customized-form .focus.cancel--btn, .customized-form
+  .cancel-success-msg .modal__customized-form .focus.backto-prof--btn, .customized-form .contact-us .focus.send--btn, .contact-us .customized-form .focus.send--btn, .modal__customized-form .contact-us .focus.send--btn, .contact-us .modal__customized-form .focus.send--btn, .customized-form .giftcard .focus.addcart--btn, .giftcard .customized-form .focus.addcart--btn, .modal__customized-form .giftcard .focus.addcart--btn, .giftcard .modal__customized-form .focus.addcart--btn, .customized-form .custom-slider .border .focus.location--btn, .custom-slider .border .customized-form .focus.location--btn, .modal__customized-form .custom-slider .border .focus.location--btn, .custom-slider .border .modal__customized-form .focus.location--btn, .customized-form .error-msg .focus.msg--btn, .error-msg .customized-form .focus.msg--btn, .modal__customized-form .error-msg .focus.msg--btn, .error-msg .modal__customized-form .focus.msg--btn, .customized-form
+  .thankyou-msg .focus.msg--btn,
+  .thankyou-msg .customized-form .focus.msg--btn, .modal__customized-form
+  .thankyou-msg .focus.msg--btn,
+  .thankyou-msg .modal__customized-form .focus.msg--btn, .customized-form .modal-bottom .focus.cancel--btn, .modal-bottom .customized-form .focus.cancel--btn, .modal__customized-form .modal-bottom .focus.cancel--btn, .modal-bottom .modal__customized-form .focus.cancel--btn, .customized-form
   .modal-bottom .focus.apply--btn,
   .modal-bottom .customized-form .focus.apply--btn, .modal__customized-form
   .modal-bottom .focus.apply--btn,
@@ -10400,7 +10579,11 @@ input[type=number]::-webkit-outer-spin-button {
   .cancel-success-msg .backto-prof--btn:hover,
   .cancel-success-msg .customized-form .backto-prof--btn:hover, .modal__customized-form
   .cancel-success-msg .backto-prof--btn:hover,
-  .cancel-success-msg .modal__customized-form .backto-prof--btn:hover, .customized-form .contact-us .send--btn:hover, .contact-us .customized-form .send--btn:hover, .modal__customized-form .contact-us .send--btn:hover, .contact-us .modal__customized-form .send--btn:hover, .customized-form .giftcard .addcart--btn:hover, .giftcard .customized-form .addcart--btn:hover, .modal__customized-form .giftcard .addcart--btn:hover, .giftcard .modal__customized-form .addcart--btn:hover, .customized-form .custom-slider .border .location--btn:hover, .custom-slider .border .customized-form .location--btn:hover, .modal__customized-form .custom-slider .border .location--btn:hover, .custom-slider .border .modal__customized-form .location--btn:hover, .customized-form .modal-bottom .cancel--btn:hover, .modal-bottom .customized-form .cancel--btn:hover, .modal__customized-form .modal-bottom .cancel--btn:hover, .modal-bottom .modal__customized-form .cancel--btn:hover, .customized-form
+  .cancel-success-msg .modal__customized-form .backto-prof--btn:hover, .customized-form .contact-us .send--btn:hover, .contact-us .customized-form .send--btn:hover, .modal__customized-form .contact-us .send--btn:hover, .contact-us .modal__customized-form .send--btn:hover, .customized-form .giftcard .addcart--btn:hover, .giftcard .customized-form .addcart--btn:hover, .modal__customized-form .giftcard .addcart--btn:hover, .giftcard .modal__customized-form .addcart--btn:hover, .customized-form .custom-slider .border .location--btn:hover, .custom-slider .border .customized-form .location--btn:hover, .modal__customized-form .custom-slider .border .location--btn:hover, .custom-slider .border .modal__customized-form .location--btn:hover, .customized-form .error-msg .msg--btn:hover, .error-msg .customized-form .msg--btn:hover, .modal__customized-form .error-msg .msg--btn:hover, .error-msg .modal__customized-form .msg--btn:hover, .customized-form
+  .thankyou-msg .msg--btn:hover,
+  .thankyou-msg .customized-form .msg--btn:hover, .modal__customized-form
+  .thankyou-msg .msg--btn:hover,
+  .thankyou-msg .modal__customized-form .msg--btn:hover, .customized-form .modal-bottom .cancel--btn:hover, .modal-bottom .customized-form .cancel--btn:hover, .modal__customized-form .modal-bottom .cancel--btn:hover, .modal-bottom .modal__customized-form .cancel--btn:hover, .customized-form
   .modal-bottom .apply--btn:hover,
   .modal-bottom .customized-form .apply--btn:hover, .modal__customized-form
   .modal-bottom .apply--btn:hover,
@@ -10422,7 +10605,11 @@ input[type=number]::-webkit-outer-spin-button {
   .cancel-success-msg .backto-prof--btn:active,
   .cancel-success-msg .customized-form .backto-prof--btn:active, .modal__customized-form
   .cancel-success-msg .backto-prof--btn:active,
-  .cancel-success-msg .modal__customized-form .backto-prof--btn:active, .customized-form .contact-us .send--btn:active, .contact-us .customized-form .send--btn:active, .modal__customized-form .contact-us .send--btn:active, .contact-us .modal__customized-form .send--btn:active, .customized-form .giftcard .addcart--btn:active, .giftcard .customized-form .addcart--btn:active, .modal__customized-form .giftcard .addcart--btn:active, .giftcard .modal__customized-form .addcart--btn:active, .customized-form .custom-slider .border .location--btn:active, .custom-slider .border .customized-form .location--btn:active, .modal__customized-form .custom-slider .border .location--btn:active, .custom-slider .border .modal__customized-form .location--btn:active, .customized-form .modal-bottom .cancel--btn:active, .modal-bottom .customized-form .cancel--btn:active, .modal__customized-form .modal-bottom .cancel--btn:active, .modal-bottom .modal__customized-form .cancel--btn:active, .customized-form
+  .cancel-success-msg .modal__customized-form .backto-prof--btn:active, .customized-form .contact-us .send--btn:active, .contact-us .customized-form .send--btn:active, .modal__customized-form .contact-us .send--btn:active, .contact-us .modal__customized-form .send--btn:active, .customized-form .giftcard .addcart--btn:active, .giftcard .customized-form .addcart--btn:active, .modal__customized-form .giftcard .addcart--btn:active, .giftcard .modal__customized-form .addcart--btn:active, .customized-form .custom-slider .border .location--btn:active, .custom-slider .border .customized-form .location--btn:active, .modal__customized-form .custom-slider .border .location--btn:active, .custom-slider .border .modal__customized-form .location--btn:active, .customized-form .error-msg .msg--btn:active, .error-msg .customized-form .msg--btn:active, .modal__customized-form .error-msg .msg--btn:active, .error-msg .modal__customized-form .msg--btn:active, .customized-form
+  .thankyou-msg .msg--btn:active,
+  .thankyou-msg .customized-form .msg--btn:active, .modal__customized-form
+  .thankyou-msg .msg--btn:active,
+  .thankyou-msg .modal__customized-form .msg--btn:active, .customized-form .modal-bottom .cancel--btn:active, .modal-bottom .customized-form .cancel--btn:active, .modal__customized-form .modal-bottom .cancel--btn:active, .modal-bottom .modal__customized-form .cancel--btn:active, .customized-form
   .modal-bottom .apply--btn:active,
   .modal-bottom .customized-form .apply--btn:active, .modal__customized-form
   .modal-bottom .apply--btn:active,
@@ -10440,7 +10627,11 @@ input[type=number]::-webkit-outer-spin-button {
   .cancel-success-msg .active.backto-prof--btn,
   .cancel-success-msg .customized-form .active.backto-prof--btn, .modal__customized-form
   .cancel-success-msg .active.backto-prof--btn,
-  .cancel-success-msg .modal__customized-form .active.backto-prof--btn, .customized-form .contact-us .active.send--btn, .contact-us .customized-form .active.send--btn, .modal__customized-form .contact-us .active.send--btn, .contact-us .modal__customized-form .active.send--btn, .customized-form .giftcard .active.addcart--btn, .giftcard .customized-form .active.addcart--btn, .modal__customized-form .giftcard .active.addcart--btn, .giftcard .modal__customized-form .active.addcart--btn, .customized-form .custom-slider .border .active.location--btn, .custom-slider .border .customized-form .active.location--btn, .modal__customized-form .custom-slider .border .active.location--btn, .custom-slider .border .modal__customized-form .active.location--btn, .customized-form .modal-bottom .active.cancel--btn, .modal-bottom .customized-form .active.cancel--btn, .modal__customized-form .modal-bottom .active.cancel--btn, .modal-bottom .modal__customized-form .active.cancel--btn, .customized-form
+  .cancel-success-msg .modal__customized-form .active.backto-prof--btn, .customized-form .contact-us .active.send--btn, .contact-us .customized-form .active.send--btn, .modal__customized-form .contact-us .active.send--btn, .contact-us .modal__customized-form .active.send--btn, .customized-form .giftcard .active.addcart--btn, .giftcard .customized-form .active.addcart--btn, .modal__customized-form .giftcard .active.addcart--btn, .giftcard .modal__customized-form .active.addcart--btn, .customized-form .custom-slider .border .active.location--btn, .custom-slider .border .customized-form .active.location--btn, .modal__customized-form .custom-slider .border .active.location--btn, .custom-slider .border .modal__customized-form .active.location--btn, .customized-form .error-msg .active.msg--btn, .error-msg .customized-form .active.msg--btn, .modal__customized-form .error-msg .active.msg--btn, .error-msg .modal__customized-form .active.msg--btn, .customized-form
+  .thankyou-msg .active.msg--btn,
+  .thankyou-msg .customized-form .active.msg--btn, .modal__customized-form
+  .thankyou-msg .active.msg--btn,
+  .thankyou-msg .modal__customized-form .active.msg--btn, .customized-form .modal-bottom .active.cancel--btn, .modal-bottom .customized-form .active.cancel--btn, .modal__customized-form .modal-bottom .active.cancel--btn, .modal-bottom .modal__customized-form .active.cancel--btn, .customized-form
   .modal-bottom .active.apply--btn,
   .modal-bottom .customized-form .active.apply--btn, .modal__customized-form
   .modal-bottom .active.apply--btn,
@@ -10551,6 +10742,18 @@ input[type=number]::-webkit-outer-spin-button {
   .open > .customized-form .dropdown-toggle.location--btn,
   .open > .modal__customized-form .custom-slider .border .dropdown-toggle.location--btn, .custom-slider .border
   .open > .modal__customized-form .dropdown-toggle.location--btn,
+  .open > .customized-form .error-msg .dropdown-toggle.msg--btn, .error-msg
+  .open > .customized-form .dropdown-toggle.msg--btn,
+  .open > .modal__customized-form .error-msg .dropdown-toggle.msg--btn, .error-msg
+  .open > .modal__customized-form .dropdown-toggle.msg--btn,
+  .open > .customized-form
+  .thankyou-msg .dropdown-toggle.msg--btn,
+  .thankyou-msg
+  .open > .customized-form .dropdown-toggle.msg--btn,
+  .open > .modal__customized-form
+  .thankyou-msg .dropdown-toggle.msg--btn,
+  .thankyou-msg
+  .open > .modal__customized-form .dropdown-toggle.msg--btn,
   .open > .customized-form .modal-bottom .dropdown-toggle.cancel--btn, .modal-bottom
   .open > .customized-form .dropdown-toggle.cancel--btn,
   .open > .modal__customized-form .modal-bottom .dropdown-toggle.cancel--btn, .modal-bottom
@@ -10616,7 +10819,11 @@ input[type=number]::-webkit-outer-spin-button {
     .cancel-success-msg .backto-prof--btn:active:hover,
     .cancel-success-msg .customized-form .backto-prof--btn:active:hover, .modal__customized-form
     .cancel-success-msg .backto-prof--btn:active:hover,
-    .cancel-success-msg .modal__customized-form .backto-prof--btn:active:hover, .customized-form .contact-us .send--btn:active:hover, .contact-us .customized-form .send--btn:active:hover, .modal__customized-form .contact-us .send--btn:active:hover, .contact-us .modal__customized-form .send--btn:active:hover, .customized-form .giftcard .addcart--btn:active:hover, .giftcard .customized-form .addcart--btn:active:hover, .modal__customized-form .giftcard .addcart--btn:active:hover, .giftcard .modal__customized-form .addcart--btn:active:hover, .customized-form .custom-slider .border .location--btn:active:hover, .custom-slider .border .customized-form .location--btn:active:hover, .modal__customized-form .custom-slider .border .location--btn:active:hover, .custom-slider .border .modal__customized-form .location--btn:active:hover, .customized-form .modal-bottom .cancel--btn:active:hover, .modal-bottom .customized-form .cancel--btn:active:hover, .modal__customized-form .modal-bottom .cancel--btn:active:hover, .modal-bottom .modal__customized-form .cancel--btn:active:hover, .customized-form
+    .cancel-success-msg .modal__customized-form .backto-prof--btn:active:hover, .customized-form .contact-us .send--btn:active:hover, .contact-us .customized-form .send--btn:active:hover, .modal__customized-form .contact-us .send--btn:active:hover, .contact-us .modal__customized-form .send--btn:active:hover, .customized-form .giftcard .addcart--btn:active:hover, .giftcard .customized-form .addcart--btn:active:hover, .modal__customized-form .giftcard .addcart--btn:active:hover, .giftcard .modal__customized-form .addcart--btn:active:hover, .customized-form .custom-slider .border .location--btn:active:hover, .custom-slider .border .customized-form .location--btn:active:hover, .modal__customized-form .custom-slider .border .location--btn:active:hover, .custom-slider .border .modal__customized-form .location--btn:active:hover, .customized-form .error-msg .msg--btn:active:hover, .error-msg .customized-form .msg--btn:active:hover, .modal__customized-form .error-msg .msg--btn:active:hover, .error-msg .modal__customized-form .msg--btn:active:hover, .customized-form
+    .thankyou-msg .msg--btn:active:hover,
+    .thankyou-msg .customized-form .msg--btn:active:hover, .modal__customized-form
+    .thankyou-msg .msg--btn:active:hover,
+    .thankyou-msg .modal__customized-form .msg--btn:active:hover, .customized-form .modal-bottom .cancel--btn:active:hover, .modal-bottom .customized-form .cancel--btn:active:hover, .modal__customized-form .modal-bottom .cancel--btn:active:hover, .modal-bottom .modal__customized-form .cancel--btn:active:hover, .customized-form
     .modal-bottom .apply--btn:active:hover,
     .modal-bottom .customized-form .apply--btn:active:hover, .modal__customized-form
     .modal-bottom .apply--btn:active:hover,
@@ -10634,7 +10841,11 @@ input[type=number]::-webkit-outer-spin-button {
     .cancel-success-msg .backto-prof--btn:active:focus,
     .cancel-success-msg .customized-form .backto-prof--btn:active:focus, .modal__customized-form
     .cancel-success-msg .backto-prof--btn:active:focus,
-    .cancel-success-msg .modal__customized-form .backto-prof--btn:active:focus, .customized-form .contact-us .send--btn:active:focus, .contact-us .customized-form .send--btn:active:focus, .modal__customized-form .contact-us .send--btn:active:focus, .contact-us .modal__customized-form .send--btn:active:focus, .customized-form .giftcard .addcart--btn:active:focus, .giftcard .customized-form .addcart--btn:active:focus, .modal__customized-form .giftcard .addcart--btn:active:focus, .giftcard .modal__customized-form .addcart--btn:active:focus, .customized-form .custom-slider .border .location--btn:active:focus, .custom-slider .border .customized-form .location--btn:active:focus, .modal__customized-form .custom-slider .border .location--btn:active:focus, .custom-slider .border .modal__customized-form .location--btn:active:focus, .customized-form .modal-bottom .cancel--btn:active:focus, .modal-bottom .customized-form .cancel--btn:active:focus, .modal__customized-form .modal-bottom .cancel--btn:active:focus, .modal-bottom .modal__customized-form .cancel--btn:active:focus, .customized-form
+    .cancel-success-msg .modal__customized-form .backto-prof--btn:active:focus, .customized-form .contact-us .send--btn:active:focus, .contact-us .customized-form .send--btn:active:focus, .modal__customized-form .contact-us .send--btn:active:focus, .contact-us .modal__customized-form .send--btn:active:focus, .customized-form .giftcard .addcart--btn:active:focus, .giftcard .customized-form .addcart--btn:active:focus, .modal__customized-form .giftcard .addcart--btn:active:focus, .giftcard .modal__customized-form .addcart--btn:active:focus, .customized-form .custom-slider .border .location--btn:active:focus, .custom-slider .border .customized-form .location--btn:active:focus, .modal__customized-form .custom-slider .border .location--btn:active:focus, .custom-slider .border .modal__customized-form .location--btn:active:focus, .customized-form .error-msg .msg--btn:active:focus, .error-msg .customized-form .msg--btn:active:focus, .modal__customized-form .error-msg .msg--btn:active:focus, .error-msg .modal__customized-form .msg--btn:active:focus, .customized-form
+    .thankyou-msg .msg--btn:active:focus,
+    .thankyou-msg .customized-form .msg--btn:active:focus, .modal__customized-form
+    .thankyou-msg .msg--btn:active:focus,
+    .thankyou-msg .modal__customized-form .msg--btn:active:focus, .customized-form .modal-bottom .cancel--btn:active:focus, .modal-bottom .customized-form .cancel--btn:active:focus, .modal__customized-form .modal-bottom .cancel--btn:active:focus, .modal-bottom .modal__customized-form .cancel--btn:active:focus, .customized-form
     .modal-bottom .apply--btn:active:focus,
     .modal-bottom .customized-form .apply--btn:active:focus, .modal__customized-form
     .modal-bottom .apply--btn:active:focus,
@@ -10652,7 +10863,11 @@ input[type=number]::-webkit-outer-spin-button {
     .cancel-success-msg .backto-prof--btn:active.focus,
     .cancel-success-msg .customized-form .backto-prof--btn:active.focus, .modal__customized-form
     .cancel-success-msg .backto-prof--btn:active.focus,
-    .cancel-success-msg .modal__customized-form .backto-prof--btn:active.focus, .customized-form .contact-us .send--btn:active.focus, .contact-us .customized-form .send--btn:active.focus, .modal__customized-form .contact-us .send--btn:active.focus, .contact-us .modal__customized-form .send--btn:active.focus, .customized-form .giftcard .addcart--btn:active.focus, .giftcard .customized-form .addcart--btn:active.focus, .modal__customized-form .giftcard .addcart--btn:active.focus, .giftcard .modal__customized-form .addcart--btn:active.focus, .customized-form .custom-slider .border .location--btn:active.focus, .custom-slider .border .customized-form .location--btn:active.focus, .modal__customized-form .custom-slider .border .location--btn:active.focus, .custom-slider .border .modal__customized-form .location--btn:active.focus, .customized-form .modal-bottom .cancel--btn:active.focus, .modal-bottom .customized-form .cancel--btn:active.focus, .modal__customized-form .modal-bottom .cancel--btn:active.focus, .modal-bottom .modal__customized-form .cancel--btn:active.focus, .customized-form
+    .cancel-success-msg .modal__customized-form .backto-prof--btn:active.focus, .customized-form .contact-us .send--btn:active.focus, .contact-us .customized-form .send--btn:active.focus, .modal__customized-form .contact-us .send--btn:active.focus, .contact-us .modal__customized-form .send--btn:active.focus, .customized-form .giftcard .addcart--btn:active.focus, .giftcard .customized-form .addcart--btn:active.focus, .modal__customized-form .giftcard .addcart--btn:active.focus, .giftcard .modal__customized-form .addcart--btn:active.focus, .customized-form .custom-slider .border .location--btn:active.focus, .custom-slider .border .customized-form .location--btn:active.focus, .modal__customized-form .custom-slider .border .location--btn:active.focus, .custom-slider .border .modal__customized-form .location--btn:active.focus, .customized-form .error-msg .msg--btn:active.focus, .error-msg .customized-form .msg--btn:active.focus, .modal__customized-form .error-msg .msg--btn:active.focus, .error-msg .modal__customized-form .msg--btn:active.focus, .customized-form
+    .thankyou-msg .msg--btn:active.focus,
+    .thankyou-msg .customized-form .msg--btn:active.focus, .modal__customized-form
+    .thankyou-msg .msg--btn:active.focus,
+    .thankyou-msg .modal__customized-form .msg--btn:active.focus, .customized-form .modal-bottom .cancel--btn:active.focus, .modal-bottom .customized-form .cancel--btn:active.focus, .modal__customized-form .modal-bottom .cancel--btn:active.focus, .modal-bottom .modal__customized-form .cancel--btn:active.focus, .customized-form
     .modal-bottom .apply--btn:active.focus,
     .modal-bottom .customized-form .apply--btn:active.focus, .modal__customized-form
     .modal-bottom .apply--btn:active.focus,
@@ -10670,7 +10885,11 @@ input[type=number]::-webkit-outer-spin-button {
     .cancel-success-msg .active.backto-prof--btn:hover,
     .cancel-success-msg .customized-form .active.backto-prof--btn:hover, .modal__customized-form
     .cancel-success-msg .active.backto-prof--btn:hover,
-    .cancel-success-msg .modal__customized-form .active.backto-prof--btn:hover, .customized-form .contact-us .active.send--btn:hover, .contact-us .customized-form .active.send--btn:hover, .modal__customized-form .contact-us .active.send--btn:hover, .contact-us .modal__customized-form .active.send--btn:hover, .customized-form .giftcard .active.addcart--btn:hover, .giftcard .customized-form .active.addcart--btn:hover, .modal__customized-form .giftcard .active.addcart--btn:hover, .giftcard .modal__customized-form .active.addcart--btn:hover, .customized-form .custom-slider .border .active.location--btn:hover, .custom-slider .border .customized-form .active.location--btn:hover, .modal__customized-form .custom-slider .border .active.location--btn:hover, .custom-slider .border .modal__customized-form .active.location--btn:hover, .customized-form .modal-bottom .active.cancel--btn:hover, .modal-bottom .customized-form .active.cancel--btn:hover, .modal__customized-form .modal-bottom .active.cancel--btn:hover, .modal-bottom .modal__customized-form .active.cancel--btn:hover, .customized-form
+    .cancel-success-msg .modal__customized-form .active.backto-prof--btn:hover, .customized-form .contact-us .active.send--btn:hover, .contact-us .customized-form .active.send--btn:hover, .modal__customized-form .contact-us .active.send--btn:hover, .contact-us .modal__customized-form .active.send--btn:hover, .customized-form .giftcard .active.addcart--btn:hover, .giftcard .customized-form .active.addcart--btn:hover, .modal__customized-form .giftcard .active.addcart--btn:hover, .giftcard .modal__customized-form .active.addcart--btn:hover, .customized-form .custom-slider .border .active.location--btn:hover, .custom-slider .border .customized-form .active.location--btn:hover, .modal__customized-form .custom-slider .border .active.location--btn:hover, .custom-slider .border .modal__customized-form .active.location--btn:hover, .customized-form .error-msg .active.msg--btn:hover, .error-msg .customized-form .active.msg--btn:hover, .modal__customized-form .error-msg .active.msg--btn:hover, .error-msg .modal__customized-form .active.msg--btn:hover, .customized-form
+    .thankyou-msg .active.msg--btn:hover,
+    .thankyou-msg .customized-form .active.msg--btn:hover, .modal__customized-form
+    .thankyou-msg .active.msg--btn:hover,
+    .thankyou-msg .modal__customized-form .active.msg--btn:hover, .customized-form .modal-bottom .active.cancel--btn:hover, .modal-bottom .customized-form .active.cancel--btn:hover, .modal__customized-form .modal-bottom .active.cancel--btn:hover, .modal-bottom .modal__customized-form .active.cancel--btn:hover, .customized-form
     .modal-bottom .active.apply--btn:hover,
     .modal-bottom .customized-form .active.apply--btn:hover, .modal__customized-form
     .modal-bottom .active.apply--btn:hover,
@@ -10688,7 +10907,11 @@ input[type=number]::-webkit-outer-spin-button {
     .cancel-success-msg .active.backto-prof--btn:focus,
     .cancel-success-msg .customized-form .active.backto-prof--btn:focus, .modal__customized-form
     .cancel-success-msg .active.backto-prof--btn:focus,
-    .cancel-success-msg .modal__customized-form .active.backto-prof--btn:focus, .customized-form .contact-us .active.send--btn:focus, .contact-us .customized-form .active.send--btn:focus, .modal__customized-form .contact-us .active.send--btn:focus, .contact-us .modal__customized-form .active.send--btn:focus, .customized-form .giftcard .active.addcart--btn:focus, .giftcard .customized-form .active.addcart--btn:focus, .modal__customized-form .giftcard .active.addcart--btn:focus, .giftcard .modal__customized-form .active.addcart--btn:focus, .customized-form .custom-slider .border .active.location--btn:focus, .custom-slider .border .customized-form .active.location--btn:focus, .modal__customized-form .custom-slider .border .active.location--btn:focus, .custom-slider .border .modal__customized-form .active.location--btn:focus, .customized-form .modal-bottom .active.cancel--btn:focus, .modal-bottom .customized-form .active.cancel--btn:focus, .modal__customized-form .modal-bottom .active.cancel--btn:focus, .modal-bottom .modal__customized-form .active.cancel--btn:focus, .customized-form
+    .cancel-success-msg .modal__customized-form .active.backto-prof--btn:focus, .customized-form .contact-us .active.send--btn:focus, .contact-us .customized-form .active.send--btn:focus, .modal__customized-form .contact-us .active.send--btn:focus, .contact-us .modal__customized-form .active.send--btn:focus, .customized-form .giftcard .active.addcart--btn:focus, .giftcard .customized-form .active.addcart--btn:focus, .modal__customized-form .giftcard .active.addcart--btn:focus, .giftcard .modal__customized-form .active.addcart--btn:focus, .customized-form .custom-slider .border .active.location--btn:focus, .custom-slider .border .customized-form .active.location--btn:focus, .modal__customized-form .custom-slider .border .active.location--btn:focus, .custom-slider .border .modal__customized-form .active.location--btn:focus, .customized-form .error-msg .active.msg--btn:focus, .error-msg .customized-form .active.msg--btn:focus, .modal__customized-form .error-msg .active.msg--btn:focus, .error-msg .modal__customized-form .active.msg--btn:focus, .customized-form
+    .thankyou-msg .active.msg--btn:focus,
+    .thankyou-msg .customized-form .active.msg--btn:focus, .modal__customized-form
+    .thankyou-msg .active.msg--btn:focus,
+    .thankyou-msg .modal__customized-form .active.msg--btn:focus, .customized-form .modal-bottom .active.cancel--btn:focus, .modal-bottom .customized-form .active.cancel--btn:focus, .modal__customized-form .modal-bottom .active.cancel--btn:focus, .modal-bottom .modal__customized-form .active.cancel--btn:focus, .customized-form
     .modal-bottom .active.apply--btn:focus,
     .modal-bottom .customized-form .active.apply--btn:focus, .modal__customized-form
     .modal-bottom .active.apply--btn:focus,
@@ -10706,7 +10929,11 @@ input[type=number]::-webkit-outer-spin-button {
     .cancel-success-msg .active.focus.backto-prof--btn,
     .cancel-success-msg .customized-form .active.focus.backto-prof--btn, .modal__customized-form
     .cancel-success-msg .active.focus.backto-prof--btn,
-    .cancel-success-msg .modal__customized-form .active.focus.backto-prof--btn, .customized-form .contact-us .active.focus.send--btn, .contact-us .customized-form .active.focus.send--btn, .modal__customized-form .contact-us .active.focus.send--btn, .contact-us .modal__customized-form .active.focus.send--btn, .customized-form .giftcard .active.focus.addcart--btn, .giftcard .customized-form .active.focus.addcart--btn, .modal__customized-form .giftcard .active.focus.addcart--btn, .giftcard .modal__customized-form .active.focus.addcart--btn, .customized-form .custom-slider .border .active.focus.location--btn, .custom-slider .border .customized-form .active.focus.location--btn, .modal__customized-form .custom-slider .border .active.focus.location--btn, .custom-slider .border .modal__customized-form .active.focus.location--btn, .customized-form .modal-bottom .active.focus.cancel--btn, .modal-bottom .customized-form .active.focus.cancel--btn, .modal__customized-form .modal-bottom .active.focus.cancel--btn, .modal-bottom .modal__customized-form .active.focus.cancel--btn, .customized-form
+    .cancel-success-msg .modal__customized-form .active.focus.backto-prof--btn, .customized-form .contact-us .active.focus.send--btn, .contact-us .customized-form .active.focus.send--btn, .modal__customized-form .contact-us .active.focus.send--btn, .contact-us .modal__customized-form .active.focus.send--btn, .customized-form .giftcard .active.focus.addcart--btn, .giftcard .customized-form .active.focus.addcart--btn, .modal__customized-form .giftcard .active.focus.addcart--btn, .giftcard .modal__customized-form .active.focus.addcart--btn, .customized-form .custom-slider .border .active.focus.location--btn, .custom-slider .border .customized-form .active.focus.location--btn, .modal__customized-form .custom-slider .border .active.focus.location--btn, .custom-slider .border .modal__customized-form .active.focus.location--btn, .customized-form .error-msg .active.focus.msg--btn, .error-msg .customized-form .active.focus.msg--btn, .modal__customized-form .error-msg .active.focus.msg--btn, .error-msg .modal__customized-form .active.focus.msg--btn, .customized-form
+    .thankyou-msg .active.focus.msg--btn,
+    .thankyou-msg .customized-form .active.focus.msg--btn, .modal__customized-form
+    .thankyou-msg .active.focus.msg--btn,
+    .thankyou-msg .modal__customized-form .active.focus.msg--btn, .customized-form .modal-bottom .active.focus.cancel--btn, .modal-bottom .customized-form .active.focus.cancel--btn, .modal__customized-form .modal-bottom .active.focus.cancel--btn, .modal-bottom .modal__customized-form .active.focus.cancel--btn, .customized-form
     .modal-bottom .active.focus.apply--btn,
     .modal-bottom .customized-form .active.focus.apply--btn, .modal__customized-form
     .modal-bottom .active.focus.apply--btn,
@@ -10817,6 +11044,18 @@ input[type=number]::-webkit-outer-spin-button {
     .open > .customized-form .dropdown-toggle.location--btn:hover,
     .open > .modal__customized-form .custom-slider .border .dropdown-toggle.location--btn:hover, .custom-slider .border
     .open > .modal__customized-form .dropdown-toggle.location--btn:hover,
+    .open > .customized-form .error-msg .dropdown-toggle.msg--btn:hover, .error-msg
+    .open > .customized-form .dropdown-toggle.msg--btn:hover,
+    .open > .modal__customized-form .error-msg .dropdown-toggle.msg--btn:hover, .error-msg
+    .open > .modal__customized-form .dropdown-toggle.msg--btn:hover,
+    .open > .customized-form
+    .thankyou-msg .dropdown-toggle.msg--btn:hover,
+    .thankyou-msg
+    .open > .customized-form .dropdown-toggle.msg--btn:hover,
+    .open > .modal__customized-form
+    .thankyou-msg .dropdown-toggle.msg--btn:hover,
+    .thankyou-msg
+    .open > .modal__customized-form .dropdown-toggle.msg--btn:hover,
     .open > .customized-form .modal-bottom .dropdown-toggle.cancel--btn:hover, .modal-bottom
     .open > .customized-form .dropdown-toggle.cancel--btn:hover,
     .open > .modal__customized-form .modal-bottom .dropdown-toggle.cancel--btn:hover, .modal-bottom
@@ -10971,6 +11210,18 @@ input[type=number]::-webkit-outer-spin-button {
     .open > .customized-form .dropdown-toggle.location--btn:focus,
     .open > .modal__customized-form .custom-slider .border .dropdown-toggle.location--btn:focus, .custom-slider .border
     .open > .modal__customized-form .dropdown-toggle.location--btn:focus,
+    .open > .customized-form .error-msg .dropdown-toggle.msg--btn:focus, .error-msg
+    .open > .customized-form .dropdown-toggle.msg--btn:focus,
+    .open > .modal__customized-form .error-msg .dropdown-toggle.msg--btn:focus, .error-msg
+    .open > .modal__customized-form .dropdown-toggle.msg--btn:focus,
+    .open > .customized-form
+    .thankyou-msg .dropdown-toggle.msg--btn:focus,
+    .thankyou-msg
+    .open > .customized-form .dropdown-toggle.msg--btn:focus,
+    .open > .modal__customized-form
+    .thankyou-msg .dropdown-toggle.msg--btn:focus,
+    .thankyou-msg
+    .open > .modal__customized-form .dropdown-toggle.msg--btn:focus,
     .open > .customized-form .modal-bottom .dropdown-toggle.cancel--btn:focus, .modal-bottom
     .open > .customized-form .dropdown-toggle.cancel--btn:focus,
     .open > .modal__customized-form .modal-bottom .dropdown-toggle.cancel--btn:focus, .modal-bottom
@@ -11125,6 +11376,18 @@ input[type=number]::-webkit-outer-spin-button {
     .open > .customized-form .dropdown-toggle.focus.location--btn,
     .open > .modal__customized-form .custom-slider .border .dropdown-toggle.focus.location--btn, .custom-slider .border
     .open > .modal__customized-form .dropdown-toggle.focus.location--btn,
+    .open > .customized-form .error-msg .dropdown-toggle.focus.msg--btn, .error-msg
+    .open > .customized-form .dropdown-toggle.focus.msg--btn,
+    .open > .modal__customized-form .error-msg .dropdown-toggle.focus.msg--btn, .error-msg
+    .open > .modal__customized-form .dropdown-toggle.focus.msg--btn,
+    .open > .customized-form
+    .thankyou-msg .dropdown-toggle.focus.msg--btn,
+    .thankyou-msg
+    .open > .customized-form .dropdown-toggle.focus.msg--btn,
+    .open > .modal__customized-form
+    .thankyou-msg .dropdown-toggle.focus.msg--btn,
+    .thankyou-msg
+    .open > .modal__customized-form .dropdown-toggle.focus.msg--btn,
     .open > .customized-form .modal-bottom .dropdown-toggle.focus.cancel--btn, .modal-bottom
     .open > .customized-form .dropdown-toggle.focus.cancel--btn,
     .open > .modal__customized-form .modal-bottom .dropdown-toggle.focus.cancel--btn, .modal-bottom
@@ -11190,7 +11453,11 @@ input[type=number]::-webkit-outer-spin-button {
   .cancel-success-msg .backto-prof--btn:active,
   .cancel-success-msg .customized-form .backto-prof--btn:active, .modal__customized-form
   .cancel-success-msg .backto-prof--btn:active,
-  .cancel-success-msg .modal__customized-form .backto-prof--btn:active, .customized-form .contact-us .send--btn:active, .contact-us .customized-form .send--btn:active, .modal__customized-form .contact-us .send--btn:active, .contact-us .modal__customized-form .send--btn:active, .customized-form .giftcard .addcart--btn:active, .giftcard .customized-form .addcart--btn:active, .modal__customized-form .giftcard .addcart--btn:active, .giftcard .modal__customized-form .addcart--btn:active, .customized-form .custom-slider .border .location--btn:active, .custom-slider .border .customized-form .location--btn:active, .modal__customized-form .custom-slider .border .location--btn:active, .custom-slider .border .modal__customized-form .location--btn:active, .customized-form .modal-bottom .cancel--btn:active, .modal-bottom .customized-form .cancel--btn:active, .modal__customized-form .modal-bottom .cancel--btn:active, .modal-bottom .modal__customized-form .cancel--btn:active, .customized-form
+  .cancel-success-msg .modal__customized-form .backto-prof--btn:active, .customized-form .contact-us .send--btn:active, .contact-us .customized-form .send--btn:active, .modal__customized-form .contact-us .send--btn:active, .contact-us .modal__customized-form .send--btn:active, .customized-form .giftcard .addcart--btn:active, .giftcard .customized-form .addcart--btn:active, .modal__customized-form .giftcard .addcart--btn:active, .giftcard .modal__customized-form .addcart--btn:active, .customized-form .custom-slider .border .location--btn:active, .custom-slider .border .customized-form .location--btn:active, .modal__customized-form .custom-slider .border .location--btn:active, .custom-slider .border .modal__customized-form .location--btn:active, .customized-form .error-msg .msg--btn:active, .error-msg .customized-form .msg--btn:active, .modal__customized-form .error-msg .msg--btn:active, .error-msg .modal__customized-form .msg--btn:active, .customized-form
+  .thankyou-msg .msg--btn:active,
+  .thankyou-msg .customized-form .msg--btn:active, .modal__customized-form
+  .thankyou-msg .msg--btn:active,
+  .thankyou-msg .modal__customized-form .msg--btn:active, .customized-form .modal-bottom .cancel--btn:active, .modal-bottom .customized-form .cancel--btn:active, .modal__customized-form .modal-bottom .cancel--btn:active, .modal-bottom .modal__customized-form .cancel--btn:active, .customized-form
   .modal-bottom .apply--btn:active,
   .modal-bottom .customized-form .apply--btn:active, .modal__customized-form
   .modal-bottom .apply--btn:active,
@@ -11208,7 +11475,11 @@ input[type=number]::-webkit-outer-spin-button {
   .cancel-success-msg .active.backto-prof--btn,
   .cancel-success-msg .customized-form .active.backto-prof--btn, .modal__customized-form
   .cancel-success-msg .active.backto-prof--btn,
-  .cancel-success-msg .modal__customized-form .active.backto-prof--btn, .customized-form .contact-us .active.send--btn, .contact-us .customized-form .active.send--btn, .modal__customized-form .contact-us .active.send--btn, .contact-us .modal__customized-form .active.send--btn, .customized-form .giftcard .active.addcart--btn, .giftcard .customized-form .active.addcart--btn, .modal__customized-form .giftcard .active.addcart--btn, .giftcard .modal__customized-form .active.addcart--btn, .customized-form .custom-slider .border .active.location--btn, .custom-slider .border .customized-form .active.location--btn, .modal__customized-form .custom-slider .border .active.location--btn, .custom-slider .border .modal__customized-form .active.location--btn, .customized-form .modal-bottom .active.cancel--btn, .modal-bottom .customized-form .active.cancel--btn, .modal__customized-form .modal-bottom .active.cancel--btn, .modal-bottom .modal__customized-form .active.cancel--btn, .customized-form
+  .cancel-success-msg .modal__customized-form .active.backto-prof--btn, .customized-form .contact-us .active.send--btn, .contact-us .customized-form .active.send--btn, .modal__customized-form .contact-us .active.send--btn, .contact-us .modal__customized-form .active.send--btn, .customized-form .giftcard .active.addcart--btn, .giftcard .customized-form .active.addcart--btn, .modal__customized-form .giftcard .active.addcart--btn, .giftcard .modal__customized-form .active.addcart--btn, .customized-form .custom-slider .border .active.location--btn, .custom-slider .border .customized-form .active.location--btn, .modal__customized-form .custom-slider .border .active.location--btn, .custom-slider .border .modal__customized-form .active.location--btn, .customized-form .error-msg .active.msg--btn, .error-msg .customized-form .active.msg--btn, .modal__customized-form .error-msg .active.msg--btn, .error-msg .modal__customized-form .active.msg--btn, .customized-form
+  .thankyou-msg .active.msg--btn,
+  .thankyou-msg .customized-form .active.msg--btn, .modal__customized-form
+  .thankyou-msg .active.msg--btn,
+  .thankyou-msg .modal__customized-form .active.msg--btn, .customized-form .modal-bottom .active.cancel--btn, .modal-bottom .customized-form .active.cancel--btn, .modal__customized-form .modal-bottom .active.cancel--btn, .modal-bottom .modal__customized-form .active.cancel--btn, .customized-form
   .modal-bottom .active.apply--btn,
   .modal-bottom .customized-form .active.apply--btn, .modal__customized-form
   .modal-bottom .active.apply--btn,
@@ -11319,6 +11590,18 @@ input[type=number]::-webkit-outer-spin-button {
   .open > .customized-form .dropdown-toggle.location--btn,
   .open > .modal__customized-form .custom-slider .border .dropdown-toggle.location--btn, .custom-slider .border
   .open > .modal__customized-form .dropdown-toggle.location--btn,
+  .open > .customized-form .error-msg .dropdown-toggle.msg--btn, .error-msg
+  .open > .customized-form .dropdown-toggle.msg--btn,
+  .open > .modal__customized-form .error-msg .dropdown-toggle.msg--btn, .error-msg
+  .open > .modal__customized-form .dropdown-toggle.msg--btn,
+  .open > .customized-form
+  .thankyou-msg .dropdown-toggle.msg--btn,
+  .thankyou-msg
+  .open > .customized-form .dropdown-toggle.msg--btn,
+  .open > .modal__customized-form
+  .thankyou-msg .dropdown-toggle.msg--btn,
+  .thankyou-msg
+  .open > .modal__customized-form .dropdown-toggle.msg--btn,
   .open > .customized-form .modal-bottom .dropdown-toggle.cancel--btn, .modal-bottom
   .open > .customized-form .dropdown-toggle.cancel--btn,
   .open > .modal__customized-form .modal-bottom .dropdown-toggle.cancel--btn, .modal-bottom
@@ -11382,7 +11665,11 @@ input[type=number]::-webkit-outer-spin-button {
   .cancel-success-msg .disabled.backto-prof--btn:hover,
   .cancel-success-msg .customized-form .disabled.backto-prof--btn:hover, .modal__customized-form
   .cancel-success-msg .disabled.backto-prof--btn:hover,
-  .cancel-success-msg .modal__customized-form .disabled.backto-prof--btn:hover, .customized-form .contact-us .disabled.send--btn:hover, .contact-us .customized-form .disabled.send--btn:hover, .modal__customized-form .contact-us .disabled.send--btn:hover, .contact-us .modal__customized-form .disabled.send--btn:hover, .customized-form .giftcard .disabled.addcart--btn:hover, .giftcard .customized-form .disabled.addcart--btn:hover, .modal__customized-form .giftcard .disabled.addcart--btn:hover, .giftcard .modal__customized-form .disabled.addcart--btn:hover, .customized-form .custom-slider .border .disabled.location--btn:hover, .custom-slider .border .customized-form .disabled.location--btn:hover, .modal__customized-form .custom-slider .border .disabled.location--btn:hover, .custom-slider .border .modal__customized-form .disabled.location--btn:hover, .customized-form .modal-bottom .disabled.cancel--btn:hover, .modal-bottom .customized-form .disabled.cancel--btn:hover, .modal__customized-form .modal-bottom .disabled.cancel--btn:hover, .modal-bottom .modal__customized-form .disabled.cancel--btn:hover, .customized-form
+  .cancel-success-msg .modal__customized-form .disabled.backto-prof--btn:hover, .customized-form .contact-us .disabled.send--btn:hover, .contact-us .customized-form .disabled.send--btn:hover, .modal__customized-form .contact-us .disabled.send--btn:hover, .contact-us .modal__customized-form .disabled.send--btn:hover, .customized-form .giftcard .disabled.addcart--btn:hover, .giftcard .customized-form .disabled.addcart--btn:hover, .modal__customized-form .giftcard .disabled.addcart--btn:hover, .giftcard .modal__customized-form .disabled.addcart--btn:hover, .customized-form .custom-slider .border .disabled.location--btn:hover, .custom-slider .border .customized-form .disabled.location--btn:hover, .modal__customized-form .custom-slider .border .disabled.location--btn:hover, .custom-slider .border .modal__customized-form .disabled.location--btn:hover, .customized-form .error-msg .disabled.msg--btn:hover, .error-msg .customized-form .disabled.msg--btn:hover, .modal__customized-form .error-msg .disabled.msg--btn:hover, .error-msg .modal__customized-form .disabled.msg--btn:hover, .customized-form
+  .thankyou-msg .disabled.msg--btn:hover,
+  .thankyou-msg .customized-form .disabled.msg--btn:hover, .modal__customized-form
+  .thankyou-msg .disabled.msg--btn:hover,
+  .thankyou-msg .modal__customized-form .disabled.msg--btn:hover, .customized-form .modal-bottom .disabled.cancel--btn:hover, .modal-bottom .customized-form .disabled.cancel--btn:hover, .modal__customized-form .modal-bottom .disabled.cancel--btn:hover, .modal-bottom .modal__customized-form .disabled.cancel--btn:hover, .customized-form
   .modal-bottom .disabled.apply--btn:hover,
   .modal-bottom .customized-form .disabled.apply--btn:hover, .modal__customized-form
   .modal-bottom .disabled.apply--btn:hover,
@@ -11400,7 +11687,11 @@ input[type=number]::-webkit-outer-spin-button {
   .cancel-success-msg .disabled.backto-prof--btn:focus,
   .cancel-success-msg .customized-form .disabled.backto-prof--btn:focus, .modal__customized-form
   .cancel-success-msg .disabled.backto-prof--btn:focus,
-  .cancel-success-msg .modal__customized-form .disabled.backto-prof--btn:focus, .customized-form .contact-us .disabled.send--btn:focus, .contact-us .customized-form .disabled.send--btn:focus, .modal__customized-form .contact-us .disabled.send--btn:focus, .contact-us .modal__customized-form .disabled.send--btn:focus, .customized-form .giftcard .disabled.addcart--btn:focus, .giftcard .customized-form .disabled.addcart--btn:focus, .modal__customized-form .giftcard .disabled.addcart--btn:focus, .giftcard .modal__customized-form .disabled.addcart--btn:focus, .customized-form .custom-slider .border .disabled.location--btn:focus, .custom-slider .border .customized-form .disabled.location--btn:focus, .modal__customized-form .custom-slider .border .disabled.location--btn:focus, .custom-slider .border .modal__customized-form .disabled.location--btn:focus, .customized-form .modal-bottom .disabled.cancel--btn:focus, .modal-bottom .customized-form .disabled.cancel--btn:focus, .modal__customized-form .modal-bottom .disabled.cancel--btn:focus, .modal-bottom .modal__customized-form .disabled.cancel--btn:focus, .customized-form
+  .cancel-success-msg .modal__customized-form .disabled.backto-prof--btn:focus, .customized-form .contact-us .disabled.send--btn:focus, .contact-us .customized-form .disabled.send--btn:focus, .modal__customized-form .contact-us .disabled.send--btn:focus, .contact-us .modal__customized-form .disabled.send--btn:focus, .customized-form .giftcard .disabled.addcart--btn:focus, .giftcard .customized-form .disabled.addcart--btn:focus, .modal__customized-form .giftcard .disabled.addcart--btn:focus, .giftcard .modal__customized-form .disabled.addcart--btn:focus, .customized-form .custom-slider .border .disabled.location--btn:focus, .custom-slider .border .customized-form .disabled.location--btn:focus, .modal__customized-form .custom-slider .border .disabled.location--btn:focus, .custom-slider .border .modal__customized-form .disabled.location--btn:focus, .customized-form .error-msg .disabled.msg--btn:focus, .error-msg .customized-form .disabled.msg--btn:focus, .modal__customized-form .error-msg .disabled.msg--btn:focus, .error-msg .modal__customized-form .disabled.msg--btn:focus, .customized-form
+  .thankyou-msg .disabled.msg--btn:focus,
+  .thankyou-msg .customized-form .disabled.msg--btn:focus, .modal__customized-form
+  .thankyou-msg .disabled.msg--btn:focus,
+  .thankyou-msg .modal__customized-form .disabled.msg--btn:focus, .customized-form .modal-bottom .disabled.cancel--btn:focus, .modal-bottom .customized-form .disabled.cancel--btn:focus, .modal__customized-form .modal-bottom .disabled.cancel--btn:focus, .modal-bottom .modal__customized-form .disabled.cancel--btn:focus, .customized-form
   .modal-bottom .disabled.apply--btn:focus,
   .modal-bottom .customized-form .disabled.apply--btn:focus, .modal__customized-form
   .modal-bottom .disabled.apply--btn:focus,
@@ -11418,7 +11709,11 @@ input[type=number]::-webkit-outer-spin-button {
   .cancel-success-msg .disabled.focus.backto-prof--btn,
   .cancel-success-msg .customized-form .disabled.focus.backto-prof--btn, .modal__customized-form
   .cancel-success-msg .disabled.focus.backto-prof--btn,
-  .cancel-success-msg .modal__customized-form .disabled.focus.backto-prof--btn, .customized-form .contact-us .disabled.focus.send--btn, .contact-us .customized-form .disabled.focus.send--btn, .modal__customized-form .contact-us .disabled.focus.send--btn, .contact-us .modal__customized-form .disabled.focus.send--btn, .customized-form .giftcard .disabled.focus.addcart--btn, .giftcard .customized-form .disabled.focus.addcart--btn, .modal__customized-form .giftcard .disabled.focus.addcart--btn, .giftcard .modal__customized-form .disabled.focus.addcart--btn, .customized-form .custom-slider .border .disabled.focus.location--btn, .custom-slider .border .customized-form .disabled.focus.location--btn, .modal__customized-form .custom-slider .border .disabled.focus.location--btn, .custom-slider .border .modal__customized-form .disabled.focus.location--btn, .customized-form .modal-bottom .disabled.focus.cancel--btn, .modal-bottom .customized-form .disabled.focus.cancel--btn, .modal__customized-form .modal-bottom .disabled.focus.cancel--btn, .modal-bottom .modal__customized-form .disabled.focus.cancel--btn, .customized-form
+  .cancel-success-msg .modal__customized-form .disabled.focus.backto-prof--btn, .customized-form .contact-us .disabled.focus.send--btn, .contact-us .customized-form .disabled.focus.send--btn, .modal__customized-form .contact-us .disabled.focus.send--btn, .contact-us .modal__customized-form .disabled.focus.send--btn, .customized-form .giftcard .disabled.focus.addcart--btn, .giftcard .customized-form .disabled.focus.addcart--btn, .modal__customized-form .giftcard .disabled.focus.addcart--btn, .giftcard .modal__customized-form .disabled.focus.addcart--btn, .customized-form .custom-slider .border .disabled.focus.location--btn, .custom-slider .border .customized-form .disabled.focus.location--btn, .modal__customized-form .custom-slider .border .disabled.focus.location--btn, .custom-slider .border .modal__customized-form .disabled.focus.location--btn, .customized-form .error-msg .disabled.focus.msg--btn, .error-msg .customized-form .disabled.focus.msg--btn, .modal__customized-form .error-msg .disabled.focus.msg--btn, .error-msg .modal__customized-form .disabled.focus.msg--btn, .customized-form
+  .thankyou-msg .disabled.focus.msg--btn,
+  .thankyou-msg .customized-form .disabled.focus.msg--btn, .modal__customized-form
+  .thankyou-msg .disabled.focus.msg--btn,
+  .thankyou-msg .modal__customized-form .disabled.focus.msg--btn, .customized-form .modal-bottom .disabled.focus.cancel--btn, .modal-bottom .customized-form .disabled.focus.cancel--btn, .modal__customized-form .modal-bottom .disabled.focus.cancel--btn, .modal-bottom .modal__customized-form .disabled.focus.cancel--btn, .customized-form
   .modal-bottom .disabled.focus.apply--btn,
   .modal-bottom .customized-form .disabled.focus.apply--btn, .modal__customized-form
   .modal-bottom .disabled.focus.apply--btn,
@@ -11436,7 +11731,11 @@ input[type=number]::-webkit-outer-spin-button {
   .cancel-success-msg [disabled].backto-prof--btn:hover,
   .cancel-success-msg .customized-form [disabled].backto-prof--btn:hover, .modal__customized-form
   .cancel-success-msg [disabled].backto-prof--btn:hover,
-  .cancel-success-msg .modal__customized-form [disabled].backto-prof--btn:hover, .customized-form .contact-us [disabled].send--btn:hover, .contact-us .customized-form [disabled].send--btn:hover, .modal__customized-form .contact-us [disabled].send--btn:hover, .contact-us .modal__customized-form [disabled].send--btn:hover, .customized-form .giftcard [disabled].addcart--btn:hover, .giftcard .customized-form [disabled].addcart--btn:hover, .modal__customized-form .giftcard [disabled].addcart--btn:hover, .giftcard .modal__customized-form [disabled].addcart--btn:hover, .customized-form .custom-slider .border [disabled].location--btn:hover, .custom-slider .border .customized-form [disabled].location--btn:hover, .modal__customized-form .custom-slider .border [disabled].location--btn:hover, .custom-slider .border .modal__customized-form [disabled].location--btn:hover, .customized-form .modal-bottom [disabled].cancel--btn:hover, .modal-bottom .customized-form [disabled].cancel--btn:hover, .modal__customized-form .modal-bottom [disabled].cancel--btn:hover, .modal-bottom .modal__customized-form [disabled].cancel--btn:hover, .customized-form
+  .cancel-success-msg .modal__customized-form [disabled].backto-prof--btn:hover, .customized-form .contact-us [disabled].send--btn:hover, .contact-us .customized-form [disabled].send--btn:hover, .modal__customized-form .contact-us [disabled].send--btn:hover, .contact-us .modal__customized-form [disabled].send--btn:hover, .customized-form .giftcard [disabled].addcart--btn:hover, .giftcard .customized-form [disabled].addcart--btn:hover, .modal__customized-form .giftcard [disabled].addcart--btn:hover, .giftcard .modal__customized-form [disabled].addcart--btn:hover, .customized-form .custom-slider .border [disabled].location--btn:hover, .custom-slider .border .customized-form [disabled].location--btn:hover, .modal__customized-form .custom-slider .border [disabled].location--btn:hover, .custom-slider .border .modal__customized-form [disabled].location--btn:hover, .customized-form .error-msg [disabled].msg--btn:hover, .error-msg .customized-form [disabled].msg--btn:hover, .modal__customized-form .error-msg [disabled].msg--btn:hover, .error-msg .modal__customized-form [disabled].msg--btn:hover, .customized-form
+  .thankyou-msg [disabled].msg--btn:hover,
+  .thankyou-msg .customized-form [disabled].msg--btn:hover, .modal__customized-form
+  .thankyou-msg [disabled].msg--btn:hover,
+  .thankyou-msg .modal__customized-form [disabled].msg--btn:hover, .customized-form .modal-bottom [disabled].cancel--btn:hover, .modal-bottom .customized-form [disabled].cancel--btn:hover, .modal__customized-form .modal-bottom [disabled].cancel--btn:hover, .modal-bottom .modal__customized-form [disabled].cancel--btn:hover, .customized-form
   .modal-bottom [disabled].apply--btn:hover,
   .modal-bottom .customized-form [disabled].apply--btn:hover, .modal__customized-form
   .modal-bottom [disabled].apply--btn:hover,
@@ -11454,7 +11753,11 @@ input[type=number]::-webkit-outer-spin-button {
   .cancel-success-msg [disabled].backto-prof--btn:focus,
   .cancel-success-msg .customized-form [disabled].backto-prof--btn:focus, .modal__customized-form
   .cancel-success-msg [disabled].backto-prof--btn:focus,
-  .cancel-success-msg .modal__customized-form [disabled].backto-prof--btn:focus, .customized-form .contact-us [disabled].send--btn:focus, .contact-us .customized-form [disabled].send--btn:focus, .modal__customized-form .contact-us [disabled].send--btn:focus, .contact-us .modal__customized-form [disabled].send--btn:focus, .customized-form .giftcard [disabled].addcart--btn:focus, .giftcard .customized-form [disabled].addcart--btn:focus, .modal__customized-form .giftcard [disabled].addcart--btn:focus, .giftcard .modal__customized-form [disabled].addcart--btn:focus, .customized-form .custom-slider .border [disabled].location--btn:focus, .custom-slider .border .customized-form [disabled].location--btn:focus, .modal__customized-form .custom-slider .border [disabled].location--btn:focus, .custom-slider .border .modal__customized-form [disabled].location--btn:focus, .customized-form .modal-bottom [disabled].cancel--btn:focus, .modal-bottom .customized-form [disabled].cancel--btn:focus, .modal__customized-form .modal-bottom [disabled].cancel--btn:focus, .modal-bottom .modal__customized-form [disabled].cancel--btn:focus, .customized-form
+  .cancel-success-msg .modal__customized-form [disabled].backto-prof--btn:focus, .customized-form .contact-us [disabled].send--btn:focus, .contact-us .customized-form [disabled].send--btn:focus, .modal__customized-form .contact-us [disabled].send--btn:focus, .contact-us .modal__customized-form [disabled].send--btn:focus, .customized-form .giftcard [disabled].addcart--btn:focus, .giftcard .customized-form [disabled].addcart--btn:focus, .modal__customized-form .giftcard [disabled].addcart--btn:focus, .giftcard .modal__customized-form [disabled].addcart--btn:focus, .customized-form .custom-slider .border [disabled].location--btn:focus, .custom-slider .border .customized-form [disabled].location--btn:focus, .modal__customized-form .custom-slider .border [disabled].location--btn:focus, .custom-slider .border .modal__customized-form [disabled].location--btn:focus, .customized-form .error-msg [disabled].msg--btn:focus, .error-msg .customized-form [disabled].msg--btn:focus, .modal__customized-form .error-msg [disabled].msg--btn:focus, .error-msg .modal__customized-form [disabled].msg--btn:focus, .customized-form
+  .thankyou-msg [disabled].msg--btn:focus,
+  .thankyou-msg .customized-form [disabled].msg--btn:focus, .modal__customized-form
+  .thankyou-msg [disabled].msg--btn:focus,
+  .thankyou-msg .modal__customized-form [disabled].msg--btn:focus, .customized-form .modal-bottom [disabled].cancel--btn:focus, .modal-bottom .customized-form [disabled].cancel--btn:focus, .modal__customized-form .modal-bottom [disabled].cancel--btn:focus, .modal-bottom .modal__customized-form [disabled].cancel--btn:focus, .customized-form
   .modal-bottom [disabled].apply--btn:focus,
   .modal-bottom .customized-form [disabled].apply--btn:focus, .modal__customized-form
   .modal-bottom [disabled].apply--btn:focus,
@@ -11472,7 +11775,11 @@ input[type=number]::-webkit-outer-spin-button {
   .cancel-success-msg [disabled].focus.backto-prof--btn,
   .cancel-success-msg .customized-form [disabled].focus.backto-prof--btn, .modal__customized-form
   .cancel-success-msg [disabled].focus.backto-prof--btn,
-  .cancel-success-msg .modal__customized-form [disabled].focus.backto-prof--btn, .customized-form .contact-us [disabled].focus.send--btn, .contact-us .customized-form [disabled].focus.send--btn, .modal__customized-form .contact-us [disabled].focus.send--btn, .contact-us .modal__customized-form [disabled].focus.send--btn, .customized-form .giftcard [disabled].focus.addcart--btn, .giftcard .customized-form [disabled].focus.addcart--btn, .modal__customized-form .giftcard [disabled].focus.addcart--btn, .giftcard .modal__customized-form [disabled].focus.addcart--btn, .customized-form .custom-slider .border [disabled].focus.location--btn, .custom-slider .border .customized-form [disabled].focus.location--btn, .modal__customized-form .custom-slider .border [disabled].focus.location--btn, .custom-slider .border .modal__customized-form [disabled].focus.location--btn, .customized-form .modal-bottom [disabled].focus.cancel--btn, .modal-bottom .customized-form [disabled].focus.cancel--btn, .modal__customized-form .modal-bottom [disabled].focus.cancel--btn, .modal-bottom .modal__customized-form [disabled].focus.cancel--btn, .customized-form
+  .cancel-success-msg .modal__customized-form [disabled].focus.backto-prof--btn, .customized-form .contact-us [disabled].focus.send--btn, .contact-us .customized-form [disabled].focus.send--btn, .modal__customized-form .contact-us [disabled].focus.send--btn, .contact-us .modal__customized-form [disabled].focus.send--btn, .customized-form .giftcard [disabled].focus.addcart--btn, .giftcard .customized-form [disabled].focus.addcart--btn, .modal__customized-form .giftcard [disabled].focus.addcart--btn, .giftcard .modal__customized-form [disabled].focus.addcart--btn, .customized-form .custom-slider .border [disabled].focus.location--btn, .custom-slider .border .customized-form [disabled].focus.location--btn, .modal__customized-form .custom-slider .border [disabled].focus.location--btn, .custom-slider .border .modal__customized-form [disabled].focus.location--btn, .customized-form .error-msg [disabled].focus.msg--btn, .error-msg .customized-form [disabled].focus.msg--btn, .modal__customized-form .error-msg [disabled].focus.msg--btn, .error-msg .modal__customized-form [disabled].focus.msg--btn, .customized-form
+  .thankyou-msg [disabled].focus.msg--btn,
+  .thankyou-msg .customized-form [disabled].focus.msg--btn, .modal__customized-form
+  .thankyou-msg [disabled].focus.msg--btn,
+  .thankyou-msg .modal__customized-form [disabled].focus.msg--btn, .customized-form .modal-bottom [disabled].focus.cancel--btn, .modal-bottom .customized-form [disabled].focus.cancel--btn, .modal__customized-form .modal-bottom [disabled].focus.cancel--btn, .modal-bottom .modal__customized-form [disabled].focus.cancel--btn, .customized-form
   .modal-bottom [disabled].focus.apply--btn,
   .modal-bottom .customized-form [disabled].focus.apply--btn, .modal__customized-form
   .modal-bottom [disabled].focus.apply--btn,
@@ -11583,6 +11890,18 @@ input[type=number]::-webkit-outer-spin-button {
   fieldset[disabled] .customized-form .location--btn:hover,
   fieldset[disabled] .modal__customized-form .custom-slider .border .location--btn:hover, .custom-slider .border
   fieldset[disabled] .modal__customized-form .location--btn:hover,
+  fieldset[disabled] .customized-form .error-msg .msg--btn:hover, .error-msg
+  fieldset[disabled] .customized-form .msg--btn:hover,
+  fieldset[disabled] .modal__customized-form .error-msg .msg--btn:hover, .error-msg
+  fieldset[disabled] .modal__customized-form .msg--btn:hover,
+  fieldset[disabled] .customized-form
+  .thankyou-msg .msg--btn:hover,
+  .thankyou-msg
+  fieldset[disabled] .customized-form .msg--btn:hover,
+  fieldset[disabled] .modal__customized-form
+  .thankyou-msg .msg--btn:hover,
+  .thankyou-msg
+  fieldset[disabled] .modal__customized-form .msg--btn:hover,
   fieldset[disabled] .customized-form .modal-bottom .cancel--btn:hover, .modal-bottom
   fieldset[disabled] .customized-form .cancel--btn:hover,
   fieldset[disabled] .modal__customized-form .modal-bottom .cancel--btn:hover, .modal-bottom
@@ -11737,6 +12056,18 @@ input[type=number]::-webkit-outer-spin-button {
   fieldset[disabled] .customized-form .location--btn:focus,
   fieldset[disabled] .modal__customized-form .custom-slider .border .location--btn:focus, .custom-slider .border
   fieldset[disabled] .modal__customized-form .location--btn:focus,
+  fieldset[disabled] .customized-form .error-msg .msg--btn:focus, .error-msg
+  fieldset[disabled] .customized-form .msg--btn:focus,
+  fieldset[disabled] .modal__customized-form .error-msg .msg--btn:focus, .error-msg
+  fieldset[disabled] .modal__customized-form .msg--btn:focus,
+  fieldset[disabled] .customized-form
+  .thankyou-msg .msg--btn:focus,
+  .thankyou-msg
+  fieldset[disabled] .customized-form .msg--btn:focus,
+  fieldset[disabled] .modal__customized-form
+  .thankyou-msg .msg--btn:focus,
+  .thankyou-msg
+  fieldset[disabled] .modal__customized-form .msg--btn:focus,
   fieldset[disabled] .customized-form .modal-bottom .cancel--btn:focus, .modal-bottom
   fieldset[disabled] .customized-form .cancel--btn:focus,
   fieldset[disabled] .modal__customized-form .modal-bottom .cancel--btn:focus, .modal-bottom
@@ -11891,6 +12222,18 @@ input[type=number]::-webkit-outer-spin-button {
   fieldset[disabled] .customized-form .focus.location--btn,
   fieldset[disabled] .modal__customized-form .custom-slider .border .focus.location--btn, .custom-slider .border
   fieldset[disabled] .modal__customized-form .focus.location--btn,
+  fieldset[disabled] .customized-form .error-msg .focus.msg--btn, .error-msg
+  fieldset[disabled] .customized-form .focus.msg--btn,
+  fieldset[disabled] .modal__customized-form .error-msg .focus.msg--btn, .error-msg
+  fieldset[disabled] .modal__customized-form .focus.msg--btn,
+  fieldset[disabled] .customized-form
+  .thankyou-msg .focus.msg--btn,
+  .thankyou-msg
+  fieldset[disabled] .customized-form .focus.msg--btn,
+  fieldset[disabled] .modal__customized-form
+  .thankyou-msg .focus.msg--btn,
+  .thankyou-msg
+  fieldset[disabled] .modal__customized-form .focus.msg--btn,
   fieldset[disabled] .customized-form .modal-bottom .focus.cancel--btn, .modal-bottom
   fieldset[disabled] .customized-form .focus.cancel--btn,
   fieldset[disabled] .modal__customized-form .modal-bottom .focus.cancel--btn, .modal-bottom
@@ -11955,7 +12298,11 @@ input[type=number]::-webkit-outer-spin-button {
   .cancel-success-msg .backto-prof--btn .badge,
   .cancel-success-msg .customized-form .backto-prof--btn .badge, .modal__customized-form
   .cancel-success-msg .backto-prof--btn .badge,
-  .cancel-success-msg .modal__customized-form .backto-prof--btn .badge, .customized-form .contact-us .send--btn .badge, .contact-us .customized-form .send--btn .badge, .modal__customized-form .contact-us .send--btn .badge, .contact-us .modal__customized-form .send--btn .badge, .customized-form .giftcard .addcart--btn .badge, .giftcard .customized-form .addcart--btn .badge, .modal__customized-form .giftcard .addcart--btn .badge, .giftcard .modal__customized-form .addcart--btn .badge, .customized-form .custom-slider .border .location--btn .badge, .custom-slider .border .customized-form .location--btn .badge, .modal__customized-form .custom-slider .border .location--btn .badge, .custom-slider .border .modal__customized-form .location--btn .badge, .customized-form .modal-bottom .cancel--btn .badge, .modal-bottom .customized-form .cancel--btn .badge, .modal__customized-form .modal-bottom .cancel--btn .badge, .modal-bottom .modal__customized-form .cancel--btn .badge, .customized-form
+  .cancel-success-msg .modal__customized-form .backto-prof--btn .badge, .customized-form .contact-us .send--btn .badge, .contact-us .customized-form .send--btn .badge, .modal__customized-form .contact-us .send--btn .badge, .contact-us .modal__customized-form .send--btn .badge, .customized-form .giftcard .addcart--btn .badge, .giftcard .customized-form .addcart--btn .badge, .modal__customized-form .giftcard .addcart--btn .badge, .giftcard .modal__customized-form .addcart--btn .badge, .customized-form .custom-slider .border .location--btn .badge, .custom-slider .border .customized-form .location--btn .badge, .modal__customized-form .custom-slider .border .location--btn .badge, .custom-slider .border .modal__customized-form .location--btn .badge, .customized-form .error-msg .msg--btn .badge, .error-msg .customized-form .msg--btn .badge, .modal__customized-form .error-msg .msg--btn .badge, .error-msg .modal__customized-form .msg--btn .badge, .customized-form
+  .thankyou-msg .msg--btn .badge,
+  .thankyou-msg .customized-form .msg--btn .badge, .modal__customized-form
+  .thankyou-msg .msg--btn .badge,
+  .thankyou-msg .modal__customized-form .msg--btn .badge, .customized-form .modal-bottom .cancel--btn .badge, .modal-bottom .customized-form .cancel--btn .badge, .modal__customized-form .modal-bottom .cancel--btn .badge, .modal-bottom .modal__customized-form .cancel--btn .badge, .customized-form
   .modal-bottom .apply--btn .badge,
   .modal-bottom .customized-form .apply--btn .badge, .modal__customized-form
   .modal-bottom .apply--btn .badge,
@@ -11976,7 +12323,11 @@ input[type=number]::-webkit-outer-spin-button {
   .cancel-success-msg .backto-prof--btn:hover,
   .cancel-success-msg .customized-form .backto-prof--btn:hover, .modal__customized-form
   .cancel-success-msg .backto-prof--btn:hover,
-  .cancel-success-msg .modal__customized-form .backto-prof--btn:hover, .customized-form .contact-us .send--btn:hover, .contact-us .customized-form .send--btn:hover, .modal__customized-form .contact-us .send--btn:hover, .contact-us .modal__customized-form .send--btn:hover, .customized-form .giftcard .addcart--btn:hover, .giftcard .customized-form .addcart--btn:hover, .modal__customized-form .giftcard .addcart--btn:hover, .giftcard .modal__customized-form .addcart--btn:hover, .customized-form .custom-slider .border .location--btn:hover, .custom-slider .border .customized-form .location--btn:hover, .modal__customized-form .custom-slider .border .location--btn:hover, .custom-slider .border .modal__customized-form .location--btn:hover, .customized-form .modal-bottom .cancel--btn:hover, .modal-bottom .customized-form .cancel--btn:hover, .modal__customized-form .modal-bottom .cancel--btn:hover, .modal-bottom .modal__customized-form .cancel--btn:hover, .customized-form
+  .cancel-success-msg .modal__customized-form .backto-prof--btn:hover, .customized-form .contact-us .send--btn:hover, .contact-us .customized-form .send--btn:hover, .modal__customized-form .contact-us .send--btn:hover, .contact-us .modal__customized-form .send--btn:hover, .customized-form .giftcard .addcart--btn:hover, .giftcard .customized-form .addcart--btn:hover, .modal__customized-form .giftcard .addcart--btn:hover, .giftcard .modal__customized-form .addcart--btn:hover, .customized-form .custom-slider .border .location--btn:hover, .custom-slider .border .customized-form .location--btn:hover, .modal__customized-form .custom-slider .border .location--btn:hover, .custom-slider .border .modal__customized-form .location--btn:hover, .customized-form .error-msg .msg--btn:hover, .error-msg .customized-form .msg--btn:hover, .modal__customized-form .error-msg .msg--btn:hover, .error-msg .modal__customized-form .msg--btn:hover, .customized-form
+  .thankyou-msg .msg--btn:hover,
+  .thankyou-msg .customized-form .msg--btn:hover, .modal__customized-form
+  .thankyou-msg .msg--btn:hover,
+  .thankyou-msg .modal__customized-form .msg--btn:hover, .customized-form .modal-bottom .cancel--btn:hover, .modal-bottom .customized-form .cancel--btn:hover, .modal__customized-form .modal-bottom .cancel--btn:hover, .modal-bottom .modal__customized-form .cancel--btn:hover, .customized-form
   .modal-bottom .apply--btn:hover,
   .modal-bottom .customized-form .apply--btn:hover, .modal__customized-form
   .modal-bottom .apply--btn:hover,
@@ -11997,7 +12348,11 @@ input[type=number]::-webkit-outer-spin-button {
   .cancel-success-msg .backto-prof--btn:focus,
   .cancel-success-msg .customized-form .backto-prof--btn:focus, .modal__customized-form
   .cancel-success-msg .backto-prof--btn:focus,
-  .cancel-success-msg .modal__customized-form .backto-prof--btn:focus, .customized-form .contact-us .send--btn:focus, .contact-us .customized-form .send--btn:focus, .modal__customized-form .contact-us .send--btn:focus, .contact-us .modal__customized-form .send--btn:focus, .customized-form .giftcard .addcart--btn:focus, .giftcard .customized-form .addcart--btn:focus, .modal__customized-form .giftcard .addcart--btn:focus, .giftcard .modal__customized-form .addcart--btn:focus, .customized-form .custom-slider .border .location--btn:focus, .custom-slider .border .customized-form .location--btn:focus, .modal__customized-form .custom-slider .border .location--btn:focus, .custom-slider .border .modal__customized-form .location--btn:focus, .customized-form .modal-bottom .cancel--btn:focus, .modal-bottom .customized-form .cancel--btn:focus, .modal__customized-form .modal-bottom .cancel--btn:focus, .modal-bottom .modal__customized-form .cancel--btn:focus, .customized-form
+  .cancel-success-msg .modal__customized-form .backto-prof--btn:focus, .customized-form .contact-us .send--btn:focus, .contact-us .customized-form .send--btn:focus, .modal__customized-form .contact-us .send--btn:focus, .contact-us .modal__customized-form .send--btn:focus, .customized-form .giftcard .addcart--btn:focus, .giftcard .customized-form .addcart--btn:focus, .modal__customized-form .giftcard .addcart--btn:focus, .giftcard .modal__customized-form .addcart--btn:focus, .customized-form .custom-slider .border .location--btn:focus, .custom-slider .border .customized-form .location--btn:focus, .modal__customized-form .custom-slider .border .location--btn:focus, .custom-slider .border .modal__customized-form .location--btn:focus, .customized-form .error-msg .msg--btn:focus, .error-msg .customized-form .msg--btn:focus, .modal__customized-form .error-msg .msg--btn:focus, .error-msg .modal__customized-form .msg--btn:focus, .customized-form
+  .thankyou-msg .msg--btn:focus,
+  .thankyou-msg .customized-form .msg--btn:focus, .modal__customized-form
+  .thankyou-msg .msg--btn:focus,
+  .thankyou-msg .modal__customized-form .msg--btn:focus, .customized-form .modal-bottom .cancel--btn:focus, .modal-bottom .customized-form .cancel--btn:focus, .modal__customized-form .modal-bottom .cancel--btn:focus, .modal-bottom .modal__customized-form .cancel--btn:focus, .customized-form
   .modal-bottom .apply--btn:focus,
   .modal-bottom .customized-form .apply--btn:focus, .modal__customized-form
   .modal-bottom .apply--btn:focus,
@@ -12258,6 +12613,8 @@ input[type=number]::-webkit-outer-spin-button {
           .navbar .navbar-right .cart-dropdown-menu .dropdown-menu__dropdown-cart .inline-block.desc i.fa-inr {
             font-size: 25px;
             color: #341314; }
+          .navbar .navbar-right .cart-dropdown-menu .dropdown-menu__dropdown-cart .inline-block.desc .product-cost {
+            font-family: vadodara-md; }
           .navbar .navbar-right .cart-dropdown-menu .dropdown-menu__dropdown-cart .inline-block.desc .fa-inr:before {
             padding-right: 6px; }
           .navbar .navbar-right .cart-dropdown-menu .dropdown-menu__dropdown-cart .inline-block.desc .inline-block__size {
@@ -12642,36 +12999,6 @@ input[type=number]::-webkit-outer-spin-button {
 .cloth-cat .flexslider {
   margin: 0;
   border: none; }
-  .cloth-cat .flexslider .flex-prev {
-    opacity: 1;
-    left: 39px !important;
-    width: 32px;
-    height: 32px; }
-    .cloth-cat .flexslider .flex-prev:before {
-      content: '\02190';
-      color: #341314;
-      font-size: 38px;
-      background-color: #ffffff;
-      position: absolute;
-      top: -14px;
-      left: -2px; }
-    .cloth-cat .flexslider .flex-prev:hover {
-      opacity: 0.5; }
-  .cloth-cat .flexslider .flex-next {
-    right: 39px !important;
-    width: 32px;
-    height: 32px;
-    opacity: 1; }
-    .cloth-cat .flexslider .flex-next:before {
-      content: "→" !important;
-      color: #ffffff;
-      font-size: 38px;
-      background-color: #341314;
-      position: absolute;
-      top: -14px;
-      left: -4px; }
-    .cloth-cat .flexslider .flex-next:hover {
-      opacity: 0.5; }
 
 .cloth-cat .flex-direction-nav a {
   top: 45%; }
@@ -12755,38 +13082,6 @@ input[type=number]::-webkit-outer-spin-button {
       background: transparent;
       border: none;
       margin-bottom: 0; }
-      .new-arrival .new-arrival__slider .flexslider-container .flexslider .flex-prev {
-        opacity: 1;
-        left: 90.5% !important;
-        top: -6%;
-        width: 32px;
-        height: 32px; }
-        .new-arrival .new-arrival__slider .flexslider-container .flexslider .flex-prev:before {
-          content: '\02190';
-          color: #474541;
-          font-size: 38px;
-          background-color: #ededed;
-          position: absolute;
-          top: -14px;
-          left: -2px; }
-        .new-arrival .new-arrival__slider .flexslider-container .flexslider .flex-prev:hover {
-          opacity: 0.5; }
-      .new-arrival .new-arrival__slider .flexslider-container .flexslider .flex-next {
-        top: -6%;
-        right: 0 !important;
-        width: 32px;
-        height: 32px;
-        opacity: 1; }
-        .new-arrival .new-arrival__slider .flexslider-container .flexslider .flex-next:before {
-          content: "→" !important;
-          color: #474541;
-          font-size: 38px;
-          background-color: #ffffff;
-          position: absolute;
-          top: -14px;
-          left: -4px; }
-        .new-arrival .new-arrival__slider .flexslider-container .flexslider .flex-next:hover {
-          opacity: 0.5; }
       .new-arrival .new-arrival__slider .flexslider-container .flexslider .flex-control-nav {
         display: none; }
     .new-arrival .new-arrival__slider .new-arrival__banner-detail h3,
@@ -12798,11 +13093,19 @@ input[type=number]::-webkit-outer-spin-button {
       margin-bottom: 0; }
     .new-arrival .new-arrival__slider .new-arrival__banner-detail h4 {
       height: 40px;
-      margin-top: 0; }
+      margin-top: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis; }
+    .new-arrival .new-arrival__slider .new-arrival__banner-detail .fa-inr {
+      padding-right: 6px; }
     .new-arrival .new-arrival__slider .new-arrival__banner-detail .fa-shopping-cart {
       width: 25px;
       height: 25px;
       padding: 5px;
+      cursor: pointer;
       position: absolute;
       right: 0;
       bottom: 0;
@@ -12822,10 +13125,42 @@ input[type=number]::-webkit-outer-spin-button {
     height: 35px;
     padding: 6px;
     text-align: center;
+    cursor: pointer;
     color: #341314;
     font-style: normal;
     font-size: 18px;
     font-family: FontAwesome; }
+
+.new-arrival .flex-direction-nav,
+.sale .flex-direction-nav,
+.featured .flex-direction-nav {
+  width: 225px;
+  height: 25px;
+  position: absolute;
+  top: -35px;
+  right: 0; }
+
+.new-arrival .flex-prev,
+.sale .flex-prev,
+.featured .flex-prev {
+  width: 32px;
+  height: 32px;
+  left: 155px !important;
+  opacity: 1; }
+
+.new-arrival .flex-next,
+.sale .flex-next,
+.featured .flex-next {
+  width: 32px;
+  height: 32px;
+  right: 0 !important;
+  opacity: 1; }
+
+.featured .flex-direction-nav a {
+  background-color: #341314;
+  color: white; }
+  .featured .flex-direction-nav a:before {
+    color: white; }
 
 .featured {
   margin-bottom: 40px; }
@@ -12847,38 +13182,6 @@ input[type=number]::-webkit-outer-spin-button {
     position: relative; }
     .featured .featured__slider .flexslider {
       margin: 0 0 20px; }
-      .featured .featured__slider .flexslider .flex-prev {
-        opacity: 1;
-        left: 94% !important;
-        top: -5%;
-        width: 32px;
-        height: 32px; }
-        .featured .featured__slider .flexslider .flex-prev:before {
-          content: '\02190';
-          color: #ffffff;
-          font-size: 38px;
-          background-color: #b38889;
-          position: absolute;
-          top: -14px;
-          left: -2px; }
-        .featured .featured__slider .flexslider .flex-prev:hover {
-          opacity: 0.5; }
-      .featured .featured__slider .flexslider .flex-next {
-        opacity: 1;
-        top: -5%;
-        right: 0 !important;
-        width: 32px;
-        height: 32px; }
-        .featured .featured__slider .flexslider .flex-next:before {
-          content: "→" !important;
-          color: #ffffff;
-          font-size: 38px;
-          background-color: #681214;
-          position: absolute;
-          top: -14px;
-          left: -4px; }
-        .featured .featured__slider .flexslider .flex-next:hover {
-          opacity: 0.5; }
       .featured .featured__slider .flexslider .flex-control-nav {
         display: none; }
   .featured .featured__banner-detail .featured__cloth-desc h3 {
@@ -12891,7 +13194,12 @@ input[type=number]::-webkit-outer-spin-button {
     height: 40px;
     color: #252525;
     font-family: vadodara-md;
-    margin-top: 0; }
+    margin-top: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; }
   .featured .featured__banner-detail .featured__icon-heart {
     position: absolute;
     top: 0;
@@ -12901,6 +13209,7 @@ input[type=number]::-webkit-outer-spin-button {
     padding: 6px;
     text-align: center;
     color: #341314;
+    cursor: pointer;
     font-style: normal;
     font-size: 18px;
     font-family: FontAwesome; }
@@ -12913,6 +13222,7 @@ input[type=number]::-webkit-outer-spin-button {
     padding: 6px;
     text-align: center;
     color: #ffffff;
+    cursor: pointer;
     background-color: #341314;
     font-style: normal;
     font-size: 18px;
@@ -13073,38 +13383,6 @@ input[type=number]::-webkit-outer-spin-button {
     background: transparent;
     border: none;
     margin: 0 0 35px; }
-    .sale .sale__slider .flexslider-container .flexslider .flex-prev {
-      opacity: 1;
-      left: 94% !important;
-      top: -5%;
-      width: 32px;
-      height: 32px; }
-      .sale .sale__slider .flexslider-container .flexslider .flex-prev:before {
-        content: '\02190';
-        color: #ffffff;
-        font-size: 38px;
-        background-color: #b38889;
-        position: absolute;
-        top: -14px;
-        left: -2px; }
-      .sale .sale__slider .flexslider-container .flexslider .flex-prev:hover {
-        opacity: 0.5; }
-    .sale .sale__slider .flexslider-container .flexslider .flex-next {
-      opacity: 1;
-      top: -5%;
-      right: 0 !important;
-      width: 32px;
-      height: 32px; }
-      .sale .sale__slider .flexslider-container .flexslider .flex-next:before {
-        content: "→" !important;
-        color: #ffffff;
-        font-size: 38px;
-        background-color: #681214;
-        position: absolute;
-        top: -14px;
-        left: -4px; }
-      .sale .sale__slider .flexslider-container .flexslider .flex-next:hover {
-        opacity: 0.5; }
     .sale .sale__slider .flexslider-container .flexslider .flex-control-nav {
       display: none; }
   .sale .sale__slider .sale__banner-detail h3 {
@@ -13115,7 +13393,12 @@ input[type=number]::-webkit-outer-spin-button {
   .sale .sale__slider .sale__banner-detail h4 {
     height: 40px;
     color: #252525;
-    margin-bottom: 5px; }
+    margin-bottom: 5px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; }
   .sale .buy--btn {
     padding: 3px 35px; }
   .sale .view--more {
@@ -13423,11 +13706,13 @@ input[type=number]::-webkit-outer-spin-button {
   color: #ababab; }
 
 .pluse-icon {
-  position: absolute;
-  bottom: 5%;
-  left: -0.6%;
   width: 15px;
   height: auto;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
   cursor: pointer; }
 
 .compare--btn {
@@ -13824,6 +14109,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .account-order-table .item-img, .order-details-table .item-img, .order-return-table .item-img,
 .order-cancel-table .item-img {
+  width: 185px;
   vertical-align: top;
   padding: 10px 15px;
   margin-right: 10px; }
@@ -13836,16 +14122,10 @@ input[type=number]::-webkit-outer-spin-button {
 .order-cancel-table .comment {
   padding-left: 15px; }
 
-.account-order-table hr.table-divider, .order-details-table hr.table-divider, .order-return-table hr.table-divider,
-.order-cancel-table hr.table-divider {
-  position: absolute;
-  right: 12%;
-  bottom: 10px;
-  left: 12%;
-  margin: 10px auto;
-  background-color: white;
-  background-image: linear-gradient(to right,white 0%, rgba(255, 255, 255, 0) 49%, white 100%);
-  border-top: 1px solid #e7dada; }
+.account-order-table .item-desc, .order-details-table .item-desc, .order-return-table .item-desc,
+.order-cancel-table .item-desc {
+  width: 330px;
+  white-space: normal; }
 
 .account-order-table .display-cell, .order-details-table .display-cell, .order-return-table .display-cell,
 .order-cancel-table .display-cell {
@@ -13884,9 +14164,6 @@ p.item-cost {
   .order-details-table .item-img img, .order-return-table .item-img img,
   .order-cancel-table .item-img img {
     width: 105px; }
-  .order-details-table .item-desc, .order-return-table .item-desc,
-  .order-cancel-table .item-desc {
-    width: 60%; }
   .order-details-table .item-cost, .order-return-table .item-cost,
   .order-cancel-table .item-cost {
     margin-top: 20px; }
@@ -14037,34 +14314,56 @@ p.item-cost {
   -webkit-column-count: 2;
   column-count: 2; }
 
+.store-locator .flex-item-container {
+  position: relative;
+  -webkit-box-align: center;
+  box-align: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  -ms-flex-align: center;
+  -webkit-box-orient: horizontal;
+  box-orient: horizontal;
+  -webkit-box-direction: normal;
+  box-direction: normal;
+  -moz-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-direction: row;
+  -webkit-box-lines: multiple;
+  -moz-box-lines: multiple;
+  box-lines: multiple;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; }
+
 .row-margin {
   margin-bottom: 50px;
   margin-top: 50px; }
-  .row-margin .map-place {
-    position: absolute;
-    left: -216px;
-    width: 420px;
-    height: 400px;
-    top: 41px;
-    overflow: hidden;
-    z-index: 10; }
+
+.map-section {
+  width: 500px;
+  height: 360px;
+  margin: 15px 15px 15px 95px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1; }
+  .map-section .map-place {
+    height: inherit; }
 
 .custom-slider {
   margin: 0;
+  margin-left: -230px;
   background: #341314;
   border: 0;
   border-radius: 0;
-  padding: 20px; }
+  padding: 20px;
+  /* Safari 6.1+ */
+  -ms-flex: 1;
+  /* IE 10 */
+  -webkit-box-flex: 1;
+          flex: 1; }
   .custom-slider .border {
     border: 1px dashed #fff; }
-    .custom-slider .border .location-title {
-      position: absolute;
-      top: 66px;
-      left: 334px;
-      z-index: 2;
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex; }
     .custom-slider .border .location--btn {
       border: 0px;
       border-bottom: solid 1px white;
@@ -14079,52 +14378,57 @@ p.item-cost {
     .custom-slider .border .location-dropdown {
       min-width: 200px; }
     .custom-slider .border .tab-title {
-      color: white;
-      padding-left: 55px;
-      margin-top: 10px; }
+      color: white; }
+  .custom-slider .location-title {
+    min-height: 65px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    box-orient: horizontal;
+    -webkit-box-direction: normal;
+    box-direction: normal;
+    -moz-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-direction: row;
+    -webkit-box-lines: multiple;
+    -moz-box-lines: multiple;
+    box-lines: multiple;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-align: end;
+    box-align: end;
+    -moz-align-items: flex-end;
+    -ms-align-items: flex-end;
+    -o-align-items: flex-end;
+    align-items: flex-end;
+    -ms-flex-align: end; }
+  .custom-slider .location-name {
+    margin-left: 20px;
+    margin-right: 20px; }
   .custom-slider .flex-control-paging li a {
     display: none; }
   .custom-slider .flexslider {
     margin: 0;
     background: #341314;
     border: 0px dashed #fff;
-    padding-top: 90px;
-    padding-bottom: 30px;
-    padding-left: 300px;
-    padding-right: 140px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     border-radius: 0px !important;
-    color: white;
-    height: 440px; }
+    color: white; }
     .custom-slider .flexslider .flex-prev {
       opacity: 1;
-      left: 210px !important;
+      left: -55px !important;
       width: 32px;
       height: 32px; }
-      .custom-slider .flexslider .flex-prev:before {
-        content: '\02190';
-        color: #341314;
-        font-size: 38px;
-        background-color: #ffffff;
-        position: absolute;
-        top: -14px;
-        left: -2px; }
-      .custom-slider .flexslider .flex-prev:hover {
-        opacity: 0.5; }
     .custom-slider .flexslider .flex-next {
-      right: 50px !important;
+      right: -10px !important;
       width: 32px;
       height: 32px;
       opacity: 1; }
-      .custom-slider .flexslider .flex-next:before {
-        content: "→" !important;
-        color: black;
-        font-size: 38px;
-        background-color: white;
-        position: absolute;
-        top: -14px;
-        left: -4px; }
-      .custom-slider .flexslider .flex-next:hover {
-        opacity: 0.5; }
 
 .store-location-dtl {
   padding: 15px; }
@@ -14223,26 +14527,15 @@ p.item-cost {
 .inner-blog-change-content .action .flex-next {
   display: block !important; }
 
-.inner-blog-change-content .flex-direction-nav a {
-  width: 100px;
-  display: inline-block; }
-
-.inner-blog-change-content .flex-direction-nav .flex-prev:before {
-  font-family: FontAwesome;
-  content: "\f177";
-  color: #341314;
-  font-size: 16px;
-  vertical-align: middle; }
-
-.inner-blog-change-content .flex-direction-nav .flex-next:before {
-  font-family: FontAwesome;
-  content: "\f178";
-  color: #341314;
-  font-size: 16px;
-  vertical-align: middle; }
-
 .inner-blog-change-content .action-btn {
-  margin: 0 5px; }
+  margin-right: 5px;
+  margin-left: 5px; }
+
+.inner-blog-change-content .action-btn.action-btn-prev {
+  margin-left: 55px; }
+
+.inner-blog-change-content .action-btn.action-btn-next {
+  margin-right: 55px; }
 
 .inner-blog-change-content .fa-long-arrow-left,
 .inner-blog-change-content .fa-long-arrow-right {
@@ -14309,6 +14602,75 @@ p.item-cost {
 
 .also-view {
   padding: 25px 0; }
+
+.msg-title {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #341314;
+  font-size: 50px; }
+
+.msg-title-focus-text {
+  width: 400px;
+  margin: 0 auto;
+  display: block;
+  font-size: 40px;
+  position: relative; }
+
+.msg-title-focus-text.border-line:before, .new-arrival .new-arrival__title .msg-title-focus-text.new-arrival--border--line:before, .featured .featured__title .msg-title-focus-text.featured--border--line:before, .cloth-buy .cloth-buy__title .msg-title-focus-text.cloth-buy--border--line:before, .blog .blog__title .msg-title-focus-text.blog--border--line:before, .sale .sale__title .msg-title-focus-text.sale--border--line:before, .compare-section .msg-title-focus-text.compare--borderline:before, .customer-choice .msg-title-focus-text.customer-choice__title:before, .msg-title-focus-text.individual--border--line:before {
+  width: 15%; }
+
+.msg-title-focus-text.border-line:after, .new-arrival .new-arrival__title .msg-title-focus-text.new-arrival--border--line:after, .featured .featured__title .msg-title-focus-text.featured--border--line:after, .cloth-buy .cloth-buy__title .msg-title-focus-text.cloth-buy--border--line:after, .blog .blog__title .msg-title-focus-text.blog--border--line:after, .sale .sale__title .msg-title-focus-text.sale--border--line:after, .compare-section .msg-title-focus-text.compare--borderline:after, .customer-choice .msg-title-focus-text.customer-choice__title:after, .msg-title-focus-text.individual--border--line:after {
+  width: 15%; }
+
+.thankyou-msg .msg-title-focus-text {
+  width: 255px; }
+
+.error-msg,
+.thankyou-msg {
+  min-height: inherit;
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-box-direction: normal;
+  box-direction: normal;
+  -moz-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-direction: column;
+  -webkit-box-pack: center;
+  box-pack: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+  -ms-flex-pack: center; }
+  .error-msg .msg-action-section,
+  .thankyou-msg .msg-action-section {
+    min-height: 120px;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    -webkit-box-direction: normal;
+    box-direction: normal;
+    -moz-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-direction: column;
+    -webkit-box-pack: end;
+    box-pack: end;
+    -moz-justify-content: flex-end;
+    -ms-justify-content: flex-end;
+    -o-justify-content: flex-end;
+    justify-content: flex-end;
+    -ms-flex-pack: end; }
+  .error-msg .msg--btn,
+  .thankyou-msg .msg--btn {
+    padding: 6px 25px; }
+  .error-msg .brand-img,
+  .thankyou-msg .brand-img {
+    width: 210px;
+    position: absolute;
+    top: 0;
+    right: 0; }
+  .error-msg .msg-order-status,
+  .thankyou-msg .msg-order-status {
+    font-size: 18px; }
 
 /*****NOTE: We can extend this class by using @extend method. Please don't customise the main class(Parent class) .close-modal--btn-circle ****/
 .close-modal--btn-circle, .quick-view-product .qv-close-modal button {
@@ -14406,6 +14768,17 @@ p.item-cost {
   .quick-view-product .qv-close-modal button {
     border: 1px solid #341314;
     color: #341314; }
+
+.size-chart-table {
+  margin-bottom: 0; }
+  .size-chart-table thead > tr > th {
+    border: 1px solid white;
+    background-color: #681214;
+    color: white; }
+  .size-chart-table tbody > tr > td {
+    font-size: 16px; }
+  .size-chart-table tbody > tr > td:first-child {
+    color: black; }
 
 .displayMessage {
   padding: 20px; }
@@ -14561,6 +14934,7 @@ img.loading {
     position: relative; }
     .buy-slider li .fa-heart-o,
     .buy-slider li .fa-heart {
+      color: #341314;
       position: absolute;
       right: 15px;
       top: 13px;
@@ -14620,7 +14994,9 @@ img.loading {
 .invoice--btn, .buy-info
 .comnt-submit--btn, .buy-info .return-success-msg .backto-prof--btn, .return-success-msg .buy-info .backto-prof--btn, .buy-info
 .cancel-success-msg .backto-prof--btn,
-.cancel-success-msg .buy-info .backto-prof--btn, .buy-info .contact-us .send--btn, .contact-us .buy-info .send--btn, .buy-info .giftcard .addcart--btn, .giftcard .buy-info .addcart--btn, .buy-info .custom-slider .border .location--btn, .custom-slider .border .buy-info .location--btn, .buy-info .modal-bottom .cancel--btn, .modal-bottom .buy-info .cancel--btn, .buy-info
+.cancel-success-msg .buy-info .backto-prof--btn, .buy-info .contact-us .send--btn, .contact-us .buy-info .send--btn, .buy-info .giftcard .addcart--btn, .giftcard .buy-info .addcart--btn, .buy-info .custom-slider .border .location--btn, .custom-slider .border .buy-info .location--btn, .buy-info .error-msg .msg--btn, .error-msg .buy-info .msg--btn, .buy-info
+.thankyou-msg .msg--btn,
+.thankyou-msg .buy-info .msg--btn, .buy-info .modal-bottom .cancel--btn, .modal-bottom .buy-info .cancel--btn, .buy-info
 .modal-bottom .apply--btn,
 .modal-bottom .buy-info .apply--btn, .buy-info .mycart-table .wishlist--btn, .mycart-table .buy-info .wishlist--btn, .buy-info .mycart-table .remove--btn, .mycart-table .buy-info .remove--btn, .buy-info .mycart-footer .shop--btn, .mycart-footer .buy-info .shop--btn, .buy-info .mycart-footer .checkout--btn, .mycart-footer .buy-info .checkout--btn, .buy-info .mycart-modal .add-cart--btn, .mycart-modal .buy-info .add-cart--btn, .buy-info .buy-para .view--btn, .buy-info .buy-para .buy-para__button .buy--btn, .buy-info .listview .buy--btn, .listview .buy-info .buy--btn, .buy-info .product-compare--btn, .buy-info .btn--compare {
   margin-top: 3px;
@@ -14804,9 +15180,7 @@ img.loading {
       display: none; }
 
 .absolute-text {
-  position: absolute;
-  right: 8.3%;
-  bottom: 10%; }
+  float: right; }
   .absolute-text a {
     color: #948484;
     text-decoration: underline; }
@@ -14815,17 +15189,13 @@ img.loading {
   margin: 5px 0 60px;
   padding: 0 25px; }
   .slider2 .flex-prev {
-    left: -25px !important;
+    left: -35px !important;
     opacity: 1 !important; }
-    .slider2 .flex-prev:before {
-      content: url("../img/individual/arrow-prev.png"); }
     .slider2 .flex-prev:hover {
       opacity: 0.5; }
   .slider2 .flex-next {
-    right: -25px !important;
+    right: -35px !important;
     opacity: 1 !important; }
-    .slider2 .flex-next:before {
-      content: url("../img/individual/arrow-next.png") !important; }
     .slider2 .flex-next:hover {
       opacity: 0.5; }
   .slider2 .flex-direction-nav a {
@@ -14902,6 +15272,9 @@ img.loading {
     margin: 2px 0px;
     font-weight: 600;
     color: #252525; }
+  .first-sec .mrp {
+    width: 170px;
+    margin-right: 15px; }
   .first-sec .inline-block .fa {
     margin-left: 30px; }
 
@@ -15628,14 +16001,10 @@ p.compare-btn {
     left: 29%; }
   .new-arrival .new-arrival__title .new-arrival--border--line:after {
     right: 29%; }
-  .new-arrival .new-arrival__slider .flexslider-container .flexslider .flex-prev {
-    left: 87% !important; }
   .featured .featured__title .featured--border--line:before {
     left: 32%; }
   .featured .featured__title .featured--border--line:after {
     right: 32%; }
-  .featured .featured__slider .flexslider .flex-prev {
-    left: 93% !important; }
   .cloth-buy .cloth-buy__title .cloth-buy--border--line:before {
     left: 10%; }
   .cloth-buy .cloth-buy__title .cloth-buy--border--line:after {
@@ -15651,8 +16020,6 @@ p.compare-btn {
     left: 36%; }
   .sale .sale__title .sale--border--line:after {
     right: 36%; }
-  .sale .sale__slider .flexslider-container .flexslider .flex-prev {
-    left: 93% !important; }
   .cloth-buy .cloth-buy__desc:before {
     width: 532px; }
   .about-cloth .cloth-buy .cloth-buy__desc:after {
@@ -15728,19 +16095,16 @@ p.compare-btn {
       right: 28%; }
     .new-arrival .new-arrival__slider {
       padding: 45px 55px 25px; }
-      .new-arrival .new-arrival__slider .flexslider-container .flexslider .flex-prev {
-        left: 85% !important;
-        top: -5%; }
-      .new-arrival .new-arrival__slider .flexslider-container .flexslider .flex-next {
-        top: -5%; }
+  .new-arrival .flex-direction-nav,
+  .sale .flex-direction-nav,
+  .featured .flex-direction-nav {
+    top: -30px; }
   .featured {
     margin-bottom: 15px; }
     .featured .featured__title .featured--border--line:before {
       left: 31%; }
     .featured .featured__title .featured--border--line:after {
       right: 31%; }
-    .featured .featured__slider .flexslider .flex-prev {
-      left: 90.5% !important; }
   .cloth-buy {
     margin-bottom: 15px; }
     .cloth-buy .cloth-buy__title .cloth-buy--border--line:before {
@@ -15773,8 +16137,6 @@ p.compare-btn {
     font-size: 16px; }
   .sale .sale__slider .sale__banner-detail h3 {
     font-size: 20px; }
-  .sale .sale__slider .flexslider-container .flexslider .flex-prev {
-    left: 91% !important; }
   .buy-the-look h1 {
     font-size: 45px; }
   .compare-section {
@@ -15798,9 +16160,6 @@ p.compare-btn {
   .order-details-table, .order-return-table,
   .order-cancel-table {
     padding: 0 15px 35px; }
-    .order-details-table .item-desc, .order-return-table .item-desc,
-    .order-cancel-table .item-desc {
-      width: 55%; }
   .usr-status-title {
     font-size: 17px !important; }
     .usr-status-title .usr-addrs-title {
@@ -15859,9 +16218,50 @@ p.compare-btn {
     margin-top: 56px; }
   .contact-us .contactus-content {
     max-width: 100%; }
+  .store-locator .flex-item-container {
+    position: relative;
+    -webkit-box-align: initial;
+    box-align: initial;
+    -moz-align-items: initial;
+    -ms-align-items: initial;
+    -o-align-items: initial;
+    align-items: initial;
+    -ms-flex-align: initial;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    -webkit-box-direction: normal;
+    box-direction: normal;
+    -moz-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-direction: column; }
   .row-margin {
-    margin-bottom: 0;
-    margin-top: 0; }
+    margin-bottom: 15px;
+    margin-top: 15px; }
+  .map-section {
+    width: 100%;
+    margin: 15px 15px 15px 0; }
+  .custom-slider {
+    margin: 0 15px; }
+    .custom-slider .location-title {
+      padding-left: 15px;
+      padding-right: 15px; }
+    .custom-slider .flexslider .flex-prev {
+      left: -15px !important; }
+    .custom-slider .flexslider .flex-next {
+      right: -15px !important; }
+  .msg-title {
+    font-size: 35px; }
+  .msg-title-focus-text {
+    width: 255px;
+    font-size: 25px; }
+  .thankyou-msg .msg-title-focus-text {
+    width: 255px; }
+  .error-msg .msg-action-section,
+  .thankyou-msg .msg-action-section {
+    min-height: 100px; }
+  .error-msg .brand-img,
+  .thankyou-msg .brand-img {
+    width: 165px; }
   .modal-container .login-head h1, .modal-container-right .login-head h1 {
     font-size: 25px; }
   .modal-container .login-head p, .modal-container-right .login-head p {
@@ -15905,6 +16305,13 @@ p.compare-btn {
   .radio-inline + .radio-inline,
   .checkbox-inline + .checkbox-inline {
     margin-left: 0px; }
+  .flex-direction-nav a {
+    width: 30px;
+    height: 30px; }
+    .flex-direction-nav a:before {
+      font-size: 12px; }
+  .padd-rt0 {
+    padding-right: 15px; }
   .mobview-searchbar-input-lg {
     height: 35px; }
   .mobview-side-nav {
@@ -16007,35 +16414,15 @@ p.compare-btn {
     font-size: 16px; }
   .homepg-slider-product-name {
     font-size: 13px; }
-  .cloth-cat .flexslider .flex-prev {
-    width: 30px;
-    height: 30px;
-    left: 10px !important; }
-    .cloth-cat .flexslider .flex-prev:before {
-      font-size: 35px;
-      position: absolute;
-      top: -11px;
-      left: -2px; }
-  .cloth-cat .flexslider .flex-next {
-    width: 30px;
-    height: 30px;
-    right: 10px !important; }
-    .cloth-cat .flexslider .flex-next:before {
-      font-size: 35px;
-      position: absolute;
-      top: -11px;
-      left: -2px; }
   .new-arrival .new-arrival__title .new-arrival--border--line:before {
     left: 0; }
   .new-arrival .new-arrival__title .new-arrival--border--line:after {
     right: 0; }
   .new-arrival .new-arrival__slider {
     padding: 45px 15px 25px; }
-    .new-arrival .new-arrival__slider .flexslider-container .flexslider .flex-prev {
-      left: 85% !important;
-      top: -5%; }
-    .new-arrival .new-arrival__slider .flexslider-container .flexslider .flex-next {
-      top: -5%; }
+    .new-arrival .new-arrival__slider .new-arrival__banner-detail h4 {
+      height: 30px;
+      -webkit-line-clamp: 2; }
     .new-arrival .new-arrival__slider .new-arrival__banner-detail .buynow--btn {
       padding: 3px 15px; }
     .new-arrival .new-arrival__slider .new-arrival__banner-detail .fa-shopping-cart {
@@ -16047,14 +16434,31 @@ p.compare-btn {
     height: 30px;
     padding: 3px;
     font-size: 14px; }
+  .new-arrival .flex-prev,
+  .sale .flex-prev,
+  .featured .flex-prev {
+    width: 28px;
+    height: 28px;
+    left: 165px !important; }
+  .new-arrival .flex-next,
+  .sale .flex-next,
+  .featured .flex-next {
+    width: 28px;
+    height: 28px; }
+  .featured .flex-direction-nav {
+    top: -20px; }
+  .featured .flex-direction-nav a {
+    background-color: #341314;
+    color: white; }
+    .featured .flex-direction-nav a:before {
+      color: white; }
   .featured .featured__title .featured--border--line:before {
     left: 9%; }
   .featured .featured__title .featured--border--line:after {
     right: 9%; }
-  .featured .featured__slider .flexslider .flex-prev {
-    left: 90.5% !important; }
   .featured .featured__banner-detail .featured__cloth-desc h4 {
-    height: 50px; }
+    height: 30px;
+    -webkit-line-clamp: 2; }
   .featured .featured__banner-detail .buy--btn {
     padding: 3px 15px; }
   .featured .featured__banner-detail .featured__icon-heart {
@@ -16108,11 +16512,11 @@ p.compare-btn {
   .sale .sale__title .sale--border--line:after {
     right: 18%; }
   .sale .sale__slider .sale__banner-detail h4 {
+    height: 30px;
+    -webkit-line-clamp: 2;
     font-size: 13px; }
   .sale .sale__slider .sale__banner-detail h3 {
     font-size: 16px; }
-  .sale .sale__slider .flexslider-container .flexslider .flex-prev {
-    left: 91% !important; }
   .sale .buy--btn {
     padding: 3px 15px; }
   .listing-img-common {
@@ -16139,23 +16543,29 @@ p.compare-btn {
       margin-bottom: 15px; }
   .inner-blog-section {
     width: 100%;
-    padding: 15px 0 0;
-    margin: 0 auto; }
+    padding: 15px 0 0; }
   .inner-blog-title {
     padding: 5px 0;
     margin: 5px 0;
     font-size: 20px; }
   .inner-blog .blog__slider .flexslider {
     margin-bottom: 0; }
-    .inner-blog .blog__slider .flexslider:hover .flex-direction-nav .flex-prev,
-    .inner-blog .blog__slider .flexslider:hover .flex-direction-nav .flex-next {
-      opacity: 1; }
-  .inner-blog-change-content .flex-direction-nav a {
-    width: 90px; }
+  .inner-blog-change-content .flex-item-container {
+    -webkit-box-pack: center;
+    box-pack: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    -o-justify-content: center;
+    justify-content: center;
+    -ms-flex-pack: center; }
   .inner-blog-change-content .flex-direction-nav .flex-prev {
     left: 0px !important; }
-  .inner-blog-change-content .flex-direction-nav .flex-prev {
+  .inner-blog-change-content .flex-direction-nav .flex-next {
     right: 0 !important; }
+  .inner-blog-change-content .action-btn.action-btn-prev {
+    margin-left: 30px; }
+  .inner-blog-change-content .action-btn.action-btn-next {
+    margin-right: 30px; }
   .inner-blog-change-content .fa-long-arrow-left,
   .inner-blog-change-content .fa-long-arrow-right {
     font-size: 14px; }
@@ -16191,6 +16601,8 @@ p.compare-btn {
     font-size: 16px; }
   .buy-info h5 {
     font-size: 13px; }
+  .linking {
+    font-size: 12px; }
   .item-name {
     font-size: 14px; }
   .item-code {
@@ -16210,12 +16622,24 @@ p.compare-btn {
   .account-order-table thead > tr > th, .order-details-table thead > tr > th, .order-return-table thead > tr > th,
   .order-cancel-table thead > tr > th {
     padding-left: 15px; }
+  .account-order-table .item-img, .order-details-table .item-img, .order-return-table .item-img,
+  .order-cancel-table .item-img {
+    width: 115px;
+    padding: 10px;
+    margin-right: 5px; }
+  .account-order-table .item-desc, .order-details-table .item-desc, .order-return-table .item-desc,
+  .order-cancel-table .item-desc {
+    width: 235px; }
   .order-details-table, .order-return-table,
   .order-cancel-table {
     padding: 0 0 15px; }
-    .order-details-table .item-desc, .order-return-table .item-desc,
-    .order-cancel-table .item-desc {
-      width: 55%; }
+    .order-details-table .order-payment-info, .order-return-table .order-payment-info,
+    .order-cancel-table .order-payment-info {
+      font-size: 14px; }
+    .order-details-table address, .order-return-table address,
+    .order-cancel-table address {
+      padding-right: 0;
+      font-size: 14px; }
   .font17, .return-success-msg p,
   .cancel-success-msg p, .contact-us p,
   .contact-us address {
@@ -16320,24 +16744,49 @@ p.compare-btn {
     padding: 15px; }
   .giftcard .addcart--btn {
     width: auto; }
-  .individual-container .breadCrumbs-letter {
-    padding-bottom: 15px; }
-  .individual-container .padd-rt0 {
-    padding-right: 15px; }
-  .individual-container .padd-lt3 {
-    padding-left: 15px; }
-  .individual-container .individual-first {
-    min-height: 200px; }
-  .individual-container .product-img {
-    width: 200px;
-    height: 250px;
-    margin: 0 auto; }
+  .slider2 {
+    padding: 10px 25px;
+    margin: 0; }
+    .slider2 .flexslider {
+      margin-bottom: 0; }
+  .individual-container {
+    padding-top: 15px; }
+    .individual-container .breadCrumbs-letter {
+      padding-bottom: 15px; }
+    .individual-container .padd-rt0 {
+      padding-right: 15px; }
+    .individual-container .padd-lt3 {
+      padding-left: 15px; }
+    .individual-container .individual-first {
+      min-height: 200px; }
+    .individual-container .product-img {
+      width: 200px;
+      height: 250px;
+      margin: 0 auto; }
   .individual-main {
     padding: 15px 7px; }
+  .absolute-text {
+    float: left; }
+  .prod-code .prod-code__left,
+  .prod-code .prod-code__right {
+    margin-left: 0; }
+  .prod-code .prod-code__right {
+    width: 200px;
+    margin-right: 0;
+    float: left !important; }
   .first-sec h3 {
     font-size: 18px; }
   .first-sec h4 {
     font-size: 16px; }
+  .second-sec .viewSize {
+    display: block;
+    max-width: 100%; }
+    .second-sec .viewSize:after {
+      content: none; }
+  .second-sec .quantity {
+    padding: 0; }
+  .second-sec h5 {
+    text-align: left; }
   .fourth-sec .leftContent .inline-block {
     vertical-align: initial; }
   .fourth-sec .leftContent .leftContent__specHead {
@@ -16350,8 +16799,15 @@ p.compare-btn {
     font-size: 13px;
     padding: 5px 6px;
     margin-left: 0; }
+  .listing-container {
+    padding-right: 0;
+    padding-bottom: 15px;
+    padding-left: 0;
+    margin-bottom: 15px; }
+  .list-breadcrumb {
+    margin-top: 15px; }
   .listing-main {
-    padding-left: 15px;
+    padding-left: 0;
     margin-top: 20px; }
   .btn-listing {
     width: 175px;
@@ -16362,23 +16818,103 @@ p.compare-btn {
   .listview .buy--btn {
     width: 125px; }
   .listview .item-details {
-    width: 200px; }
+    width: 200px;
+    white-space: normal; }
   .listview .listview-item-width {
     width: 100px;
     height: 125px; }
   .listview .custom-checkbox {
     width: 135px; }
+  .tab-title {
+    font-size: 20px; }
   .usr-account address {
     margin-bottom: 15px; }
   .usr-account .order-list-action {
     text-align: left; }
   .usr-account .order-list--btn {
     width: 94px;
-    margin-right: 0px;
-    font-size: 9px; }
+    margin-right: 0px; }
   .checkout-tab-btn .btn--list, .checkout-tab-btn .order-list--btn, .checkout-tab-btn .order-action--btn {
     width: 100%; }
+  .mycart-container {
+    padding: 20px 10px; }
   .mycart-table tbody > tr td:last-child {
-    font-size: 20px; }
-  mycart-footer p {
-    font-size: 14px; } }
+    font-size: 18px; }
+  .mycart-footer .checkout--btn,
+  .mycart-footer .shop--btn {
+    width: auto;
+    padding: 3px 8px;
+    margin-bottom: 15px; }
+  .mycart-footer span,
+  .mycart-footer p {
+    font-size: 14px; }
+  .mycart-footer .inline-block:last-child {
+    padding-left: 5px; }
+  .usr-status-title {
+    font-size: 16px !important; }
+  .custom-slider {
+    padding: 15px; }
+    .custom-slider .location-name {
+      margin: 15px 10px; }
+    .custom-slider .flexslider {
+      padding-top: 0;
+      padding-bottom: 0; }
+      .custom-slider .flexslider .flex-prev {
+        left: -30px !important; }
+      .custom-slider .flexslider .flex-next {
+        right: -30px !important; }
+  .store-location-brands-dtl {
+    width: auto;
+    height: auto; }
+  .store-location-dtl {
+    padding: 0 15px; }
+  .msg-title {
+    font-size: 25px; }
+  .msg-title-focus-text {
+    width: 155px;
+    font-size: 15px; }
+  .thankyou-msg .msg-title-focus-text {
+    width: 255px; }
+  .error-msg .msg-action-section,
+  .thankyou-msg .msg-action-section {
+    min-height: 100px; }
+  .error-msg .msg--btn,
+  .thankyou-msg .msg--btn {
+    padding: 3px 15px; }
+  .error-msg .msg-order-status,
+  .thankyou-msg .msg-order-status {
+    font-size: 16px; }
+  .btn--mob-modal {
+    font-size: 12px;
+    padding: 3px 10px; }
+  .quickview-modal-size .modal-dialog {
+    width: auto; }
+  .modal-container, .modal-container-right {
+    padding: 15px; }
+    .modal-container .login-head h1, .modal-container-right .login-head h1 {
+      font-size: 20px; }
+    .modal-container .login-head p, .modal-container-right .login-head p {
+      font-size: 14px; }
+    .modal-container .form-otp, .modal-container-right .form-otp {
+      width: 255px;
+      padding: 10px 15px !important;
+      margin: 0 auto; }
+  .coupon-discount {
+    width: 85%; }
+    .coupon-discount h4 {
+      font-size: 14px; }
+    .coupon-discount .coupon-discount-title h1 {
+      font-size: 20px; }
+    .coupon-discount .modal-bottom {
+      padding: 5px 15px;
+      text-align: center; }
+  .quick-view-product {
+    padding: 0; }
+    .quick-view-product .individual-first {
+      min-height: 200px; }
+    .quick-view-product .product-img {
+      height: 200px; }
+    .quick-view-product .fourth-sec .right-content p {
+      padding-left: 0; }
+    .quick-view-product .fourth-sec .right-content:before {
+      content: none; } }

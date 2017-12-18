@@ -50,6 +50,8 @@ var schema = new Schema({
             required: true
         },
         quantity: Number,
+        productCode:String,
+        description:String,
         style: String,
         color: String,
         status: {
@@ -480,7 +482,7 @@ var model = {
         }).deepPopulate('products.product courierType products.product.size products.product.color').sort({
             createdAt: -1
         }).exec(function (err, orders) {
-            callback(err, orders);
+            callback(err, orderproducts);
         });
     },
 
@@ -1017,7 +1019,7 @@ var model = {
         
         Order.findOne({
             _id: data._id
-        }).lean().exec(function (err, order) {
+        }).lean().deepPopulate("products.product").exec(function (err, order) {
             _.each(order.products, function (product,index) {
                 quantity = product.quantity;
                 product.discountPercent=10;
@@ -1084,7 +1086,7 @@ var model = {
     sendEmail: function (order,prevCallback) {
         async.waterfall([
             function(callback) {
-                Config.generatePdf("invoice-actual.1",order,callback);
+                Config.generatePdf("invoice-actual",order,callback);
             },
             function(data,callback) {
                 var emailData = {};
