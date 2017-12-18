@@ -1095,7 +1095,7 @@ var model = {
                 emailData.body = "Invoice";
                 emailData.from = "supriya.kadam478@hotmail.com";
                 emailData.filename="foo.pdf";
-                //Config.sendEmailAttachment(emailData, callback);
+                Config.sendEmailAttachment(emailData, callback);
             }
         ],function(err, results) {
             if(err){
