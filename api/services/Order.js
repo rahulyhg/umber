@@ -66,7 +66,7 @@ var schema = new Schema({
         unitPrice:Number,
         discountAmount:Number,
         discountPercent:Number,
-        priceAfterTax:Number,
+        priceAfterDiscount:Number,
         taxAmt:Number,
         taxPercent:Number,
         finalAmt:Number
@@ -96,6 +96,11 @@ var schema = new Schema({
         type: String,
         enum: ['processing', 'shipped', 'delivered', 'returned', 'cancelled', 'pending'],
         default: 'processing'
+    },
+    invoiceStatus: {
+        type: String,
+        enum: ["unmoderated", "moderated"],
+        default: 'unmoderated'
     },
     discountCouponId: {
         type: Schema.Types.ObjectId,
@@ -1011,7 +1016,7 @@ var model = {
         var discountPrice =0;
         var taxLimiterWithDiscount = 1000;
         var taxLimiterWithoutDiscount = 1000;
-        var priceAfterTax = 0;
+        var priceAfterDiscount = 0;
         var subTotal=0;
         var totalTax=0;
         var totalDiscount=0;
@@ -1026,39 +1031,40 @@ var model = {
                 product.discountPercent=10;
                 product.discountAmount=0;
                 price = _.ceil(product.price);
-                
                 discountPrice = product.discountAmount;
                 discountPercent = product.discountPercent;
-                if (price <= taxLimiterWithDiscount) {
-                    taxPercent = 5;
-                } else {
-                    taxPercent = 12;
-                }
-                taxAmt = _.ceil((taxPercent / 100) * price);
+                //with discount logic
                 if (discountPrice > 0 || product.discountPercent>0) {
                     actualPrice = price;
-                    priceAfterTax = price + taxAmt;
                     if(discountPrice > 0){
-                        discountPercent = ((discountPrice) * 100) / priceAfterTax;
+                        discountPercent = ((discountPrice) * 100) / actualPrice;
                     }
-                   else if(discountPercent > 0){
-                       discountPrice =_.floor((discountPercent/100)*priceAfterTax);
-                   }
-                    finalAmt = priceAfterTax - discountPrice;
-                   
-                } else {
-                    finalAmt = priceAfterTax = price;
-                    if (finalAmt > taxLimiterWithoutDiscount) {
-                        actualPrice = _.floor(0.88 * (finalAmt));
+                    else if(discountPercent > 0){
+                       discountPrice =_.floor((discountPercent/100)*actualPrice);
+                    }
+                    priceAfterDiscount = actualPrice - discountPrice;
+                    if (priceAfterDiscount <= taxLimiterWithDiscount) {
+                        taxPercent = 5;
                     } else {
+                        taxPercent = 12;
+                    }
+                    taxAmt = _.ceil((taxPercent / 100) * priceAfterDiscount);
+                    finalAmt = priceAfterDiscount + taxAmt;
+                }
+                //without discount logic
+                 else {
+                    finalAmt = priceAfterDiscount = price //final price which includes tax;
+                    if (finalAmt <= taxLimiterWithoutDiscount) {
                         actualPrice = _.floor(0.95 * (finalAmt));
+                    } else {
+                        actualPrice = _.floor(0.88 * (finalAmt));
                     }
                 }
                 product.actualPrice = _.ceil(actualPrice);
                 product.unitPrice = _.ceil(actualPrice/quantity);
                 product.taxAmt = _.ceil(taxAmt);
                 product.taxPercent = taxPercent;
-                product.priceAfterTax = _.ceil(priceAfterTax);
+                product.priceAfterDiscount = _.ceil(priceAfterDiscount);
                 product.discountAmount = _.ceil(discountPrice);
                 product.discountPercent = discountPercent;
                 product.finalAmt = _.ceil(finalAmt);
