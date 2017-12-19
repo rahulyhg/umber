@@ -21,7 +21,7 @@
                                     <td colspan="2">
                                         <div style="width: 185px;float: right">
                                             <div><strong>Invoice Number:</strong><span>&nbsp; &nbsp;10292</span></div>
-                                            <div><strong>Date:</strong><span>&nbsp; &nbsp;6th December 2017</span></div>
+                                            <div><strong>Date:</strong><span>&nbsp; &nbsp;<%= date %></span></div>
                                             <div><strong>GST Number:</strong><span>&nbsp; &nbsp; 76869606</span></div>
                                         </div>
                                     </td>
@@ -49,7 +49,13 @@
                     <td align="top" style="padding: 8px;line-height: 1.42857143;vertical-align: top;">
                         <strong>Customer Name</strong>:
                     </td>
-                    <td align="top" colspan="2" style="width: 445px; padding: 8px;line-height: 1.42857143;text-transform:capitalize ;vertical-align: top;">Siddhesh Talekar</td>
+                    <td align="top" colspan="2" style="width: 445px; padding: 8px;line-height: 1.42857143;text-transform:capitalize ;vertical-align: top;"><%if (user.firstName !==undefined) { %>
+                        <%= user.firstName %>
+                        <% } %> <%if (user.middleName !==undefined) { %>
+                            <%= user.middleName %>
+                            <% } %> <%if (user.lastName !==undefined) { %>
+                                <%= user.lastName %>
+                                <% } %></td>
                 </tr>
                 <tr>
                     <td align="top" style="padding: 8px;line-height: 1.42857143;vertical-align: top;">
@@ -57,7 +63,13 @@
                     </td>
                     <td align="top" colspan="2" style="width: 445px; padding: 8px;line-height: 1.42857143;vertical-align: top;">
                         <address style="width: 360px; font-style: normal;
-    ">BIT building no 20/16, R.B.Chandorkar marg, Agripada, Mumbai-400011</address>
+    "><%= user.billingAddress.line1 %>
+    <%= user.billingAddress.line2 %>
+    <%= user.billingAddress.line3 %>
+    <%= user.billingAddress.city %>
+    <%= user.billingAddress.state %>
+    <%= user.billingAddress.pincode %>
+    <%= user.billingAddress.country %></address>
                     </td>
                 </tr>
                 <tr>
@@ -65,8 +77,17 @@
                         <strong>Shipping Address</strong>:
                     </td>
                     <td align="top" colspan="2" style="width: 445px; padding: 8px;line-height: 1.42857143;vertical-align: top;">
-                        <address style="width: 360px; font-style: normal;
-    ">BIT building no 20/16, R.B.Chandorkar marg, Agripada, Mumbai-400011</address>
+                        <address style="width: 360px; font-style: normal;">
+                           
+                                <%= user.shippingAddresses[0].line1 %>
+                                <%= user.shippingAddresses[0].line2 %>
+                                <%= user.shippingAddresses[0].line3 %>
+                                <%= user.shippingAddresses[0].city %>
+                                <%= user.shippingAddresses[0].state %>
+                                <%= user.shippingAddresses[0].pincode %>
+                                <%= user.shippingAddresses[0].country %>
+                            
+    </address>
                     </td>
                 </tr>
                 <tr>
@@ -85,10 +106,10 @@
                                 <tr>
                                     <td align="top" style="width:270px;padding: 8px;line-height: 1.42857143;vertical-align: top;">
                                         <div style="  color: #333; text-transform:uppercase;">
-                                                <%= product.product.description %></td>
+                                                <%= product.product.description %>
                                         </div>
                                         <div style="font-size: 12px;">
-                                            Product Code:&nbsp;<span><%= product.product.productCode %></td></span>
+                                            Product Code:&nbsp;<span><%= product.product.productCode %></span>
                                         </div>
                                     </td>
                                     <td align="top" style="padding: 8px;line-height: 1.42857143; text-align:center;vertical-align: top;"> &#8377;&nbsp;<%= product.unitPrice %></td>
@@ -111,7 +132,7 @@
                                 <tr>
 
                                     <td align="top"  style="padding: 8px;line-height: 1.42857143;text-align:left;vertical-align: top;">Shipping and Handling</td>
-                                    <td align="top" colspan="2" style="padding: 8px;line-height: 1.42857143;text-align:right;vertical-align: top;">Free Shipping</td>
+                                    <td align="top" colspan="2" style="padding: 8px;line-height: 1.42857143;text-align:right;vertical-align: top;"><span>&#8377;</span><%= shippingAmount %></td>
 
                                 </tr>
                                 <tr>

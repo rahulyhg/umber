@@ -17,6 +17,7 @@ var schema = new Schema({
         unique: true,
         uniqueCaseInsensitive: true
     },
+    date: Date,
     billingAddress: {
         line1: String,
         line2: String,
@@ -60,12 +61,11 @@ var schema = new Schema({
             default: 'accept'
         },
         comment: String,
-        price: Number,
-        actualPrice: Number,
+        actualPrice: Number, //unitprice* quantity
         unitPrice: Number,
         discountAmount: Number,
         discountPercent: Number,
-        priceAfterTax: Number,
+        priceAfterDiscount: Number,
         taxAmt: Number,
         taxPercent: Number,
         finalAmt: Number
@@ -95,6 +95,11 @@ var schema = new Schema({
         type: String,
         enum: ['processing', 'shipped', 'delivered', 'returned', 'cancelled', 'pending'],
         default: 'processing'
+    },
+    invoiceStatus: {
+        type: String,
+        enum: ["unmoderated", "moderated"],
+        default: 'unmoderated'
     },
     discountCouponId: {
         type: Schema.Types.ObjectId,
@@ -1003,14 +1008,14 @@ var model = {
         var taxPercent = 0;
         var taxAmt = 0;
         var finalAmt = 0;
-        var price = 0; //price given (with tax included in case of non-discounted items and without tax in case of discounted items )
         var unitPrice = 0; //Price of each product (without any tax or discount)
+        var price = 0; //price given (with tax in case of non-discounted items and without tax in case of discounted items )
         var actualPrice = 0; // unitPrice * quantity
         var discountPercent = 0;
         var discountPrice = 0;
         var taxLimiterWithDiscount = 1000;
         var taxLimiterWithoutDiscount = 1000;
-        var priceAfterTax = 0;
+        var priceAfterDiscount = 0;
         var subTotal = 0;
         var totalTax = 0;
         var totalDiscount = 0;
@@ -1018,45 +1023,49 @@ var model = {
         var quantity = 0;
 
         Order.findOne({
-            _id: data._id
-        }).lean().deepPopulate("products.product").exec(function (err, order) {
+            _id: data.orderId
+        }).lean().deepPopulate("products.product user").exec(function (err, order) {
             _.each(order.products, function (product, index) {
                 quantity = product.quantity;
-                product.discountPercent = 10;
+                product.discountPercent = 0;
                 product.discountAmount = 0;
-                price = _.ceil(product.price);
-
+                price = _.ceil(product.product.price);
                 discountPrice = product.discountAmount;
                 discountPercent = product.discountPercent;
-                if (price <= taxLimiterWithDiscount) {
-                    taxPercent = 5;
-                } else {
-                    taxPercent = 12;
-                }
-                taxAmt = _.ceil((taxPercent / 100) * price);
+                //with discount logic
                 if (discountPrice > 0 || product.discountPercent > 0) {
                     actualPrice = price;
-                    priceAfterTax = price + taxAmt;
                     if (discountPrice > 0) {
-                        discountPercent = ((discountPrice) * 100) / priceAfterTax;
+                        discountPercent = ((discountPrice) * 100) / actualPrice;
                     } else if (discountPercent > 0) {
-                        discountPrice = _.floor((discountPercent / 100) * priceAfterTax);
+                        discountPrice = _.floor((discountPercent / 100) * actualPrice);
                     }
-                    finalAmt = priceAfterTax - discountPrice;
-
-                } else {
-                    finalAmt = priceAfterTax = price;
-                    if (finalAmt > taxLimiterWithoutDiscount) {
-                        actualPrice = _.floor(0.88 * (finalAmt));
+                    priceAfterDiscount = actualPrice - discountPrice;
+                    if (priceAfterDiscount <= taxLimiterWithDiscount) {
+                        taxPercent = 5;
                     } else {
-                        actualPrice = _.floor(0.95 * (finalAmt));
+                        taxPercent = 12;
                     }
+                    taxAmt = _.ceil((taxPercent / 100) * priceAfterDiscount);
+                    finalAmt = priceAfterDiscount + taxAmt;
+                }
+                //without discount logic
+                else {
+                    finalAmt = priceAfterDiscount = price //final price which includes tax;
+                    if (finalAmt <= taxLimiterWithoutDiscount) {
+                        taxPercent = 5;
+                        actualPrice = _.floor(0.95 * (finalAmt));
+                    } else {
+                        taxPercent = 12;
+                        actualPrice = _.floor(0.88 * (finalAmt));
+                    }
+                    taxAmt = _.ceil((taxPercent / 100) * finalAmt);
                 }
                 product.actualPrice = _.ceil(actualPrice);
                 product.unitPrice = _.ceil(actualPrice / quantity);
                 product.taxAmt = _.ceil(taxAmt);
                 product.taxPercent = taxPercent;
-                product.priceAfterTax = _.ceil(priceAfterTax);
+                product.priceAfterDiscount = _.ceil(priceAfterDiscount);
                 product.discountAmount = _.ceil(discountPrice);
                 product.discountPercent = discountPercent;
                 product.finalAmt = _.ceil(finalAmt);
@@ -1068,7 +1077,8 @@ var model = {
             order.totalDiscount = _.ceil(totalDiscount);
             order.totalTax = _.ceil(totalTax);
             order.subTotal = _.ceil(subTotal);
-            order.grandTotal = grandTotal;
+            order.grandTotal = grandTotal + order.shippingAmount;
+            order.date = (new Date()).toLocaleDateString();
             Order.saveData(order, function (err, data) {
                 if (err) {
                     console.log(err);
@@ -1085,7 +1095,7 @@ var model = {
             },
             function (data, callback) {
                 var emailData = {};
-                emailData.email = "supriya.kadam@wohlig.com";
+                emailData.email = order.user.email;
                 emailData.subject = "Invoice PDF";
                 emailData.body = "Invoice";
                 emailData.from = "supriya.kadam478@hotmail.com";

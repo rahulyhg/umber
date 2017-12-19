@@ -349,13 +349,14 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
         $scope.template = TemplateService;
         $scope.data = {};
         $rootScope.pageTitle = $scope.json.json.name;
-
+        $scope.prevInvoiceStatus=0;
         //  START FOR EDIT
         if ($scope.json.json.preApi) {
             var obj = {};
             obj[$scope.json.json.preApi.params] = $scope.json.keyword._id;
             NavigationService.apiCall($scope.json.json.preApi.url, obj, function (data) {
                 $scope.data = data.data;
+                $scope.prevInvoiceStatus= angular.copy($scope.data.invoiceStatus);
                 $scope.generateField = true;
 
             });
@@ -369,7 +370,7 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
             $scope.json.json.action[1].stateName.json.page = "";
             $state.go($scope.json.json.action[1].stateName.page, $scope.json.json.action[1].stateName.json);
         };
-
+       
         $scope.saveData = function (formData) {
             console.log("FormData", formData)
             NavigationService.apiCall($scope.json.json.apiCall.url, formData, function (data) {
@@ -394,6 +395,16 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
                             order._id = formData.user._id;
                             order.orderId = formData._id;
                             NavigationService.deliveredProductEmail(order, function (data) {
+                                if (data.value) {
+
+                                }
+                            })
+                        }
+                         if(formData.invoiceStatus === "moderated" && $scope.prevInvoiceStatus ==="unmoderated"){
+                            var order = {};
+                            order._id = formData.user._id;
+                            order.orderId = formData._id;
+                            NavigationService.genarateAndMailInvoice(order, function (data) {
                                 if (data.value) {
 
                                 }

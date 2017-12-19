@@ -128,6 +128,18 @@
             "dropDownField": "",
             "dropDownType": "single",
             "dropDown": ["processing", "shipped", "delivered", "returned", "cancelled", "pending"]
+        },{
+            "name": "Invoice Status",
+            "type": "tags",
+            "action": "InvoiceChange",
+            "tableRef": "invoiceStatus",
+            "placeholder": "Select Invoice Status",
+            "id": "invoiceStatus",
+            "validation": ["", "trim", ""],
+            "url": "",
+            "dropDownField": "",
+            "dropDownType": "single",
+            "dropDown": ["unmoderated", "moderated"]
         }, {
             "name": "Payment Status",
             "type": "tags",
