@@ -61,8 +61,7 @@ var schema = new Schema({
             default: 'accept'
         },
         comment: String,
-        price: Number,
-        actualPrice:Number,
+        actualPrice:Number,//unitprice* quantity
         unitPrice:Number,
         discountAmount:Number,
         discountPercent:Number,
@@ -1030,7 +1029,7 @@ var model = {
                 quantity = product.quantity;
                 product.discountPercent=0;
                 product.discountAmount=0;
-                price = _.ceil(product.price);
+                price = _.ceil(product.product.price);
                 discountPrice = product.discountAmount;
                 discountPercent = product.discountPercent;
                 //with discount logic
