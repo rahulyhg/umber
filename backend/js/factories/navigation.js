@@ -240,5 +240,13 @@ myApp.factory('NavigationService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
+        genarateAndMailInvoice: function (userData, callback) {
+            $http({
+                url: adminurl + 'Order/generateInvoice',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
     };
 });

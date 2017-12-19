@@ -399,6 +399,18 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
                                 }
                             })
                         }
+
+                        else if(formData.orderStatus == "processing")
+                        {
+                            var order = {};
+                            order._id = formData.user._id;
+                            order.orderId = formData._id;
+                            NavigationService.genarateAndMailInvoice(order, function (data) {
+                                if (data.value) {
+
+                                }
+                            })
+                        }
                     }
                     if ($scope.json.json.apiCall.url == 'Discount/save') {
                         NavigationService.apiCall('Product/getProductAccordingSku', formData, function (data) {});

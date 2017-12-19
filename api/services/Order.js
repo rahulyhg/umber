@@ -17,6 +17,7 @@ var schema = new Schema({
         unique: true,
         uniqueCaseInsensitive: true
     },
+    date:Date,
     billingAddress: {
         line1: String,
         line2: String,
@@ -1003,8 +1004,8 @@ var model = {
         var taxPercent = 0;
         var taxAmt = 0;
         var finalAmt = 0;
-        var price =0; //price given (with tax included in case of non-discounted items and without tax in case of discounted items )
         var unitPrice = 0; //Price of each product (without any tax or discount)
+        var price =0; //price given (with tax in case of non-discounted items and without tax in case of discounted items )
         var actualPrice= 0; // unitPrice * quantity
         var discountPercent = 0;
         var discountPrice =0;
@@ -1018,8 +1019,8 @@ var model = {
         var quantity =0;
         
         Order.findOne({
-            _id: data._id
-        }).lean().deepPopulate("products.product").exec(function (err, order) {
+            _id: data.orderId
+        }).lean().deepPopulate("products.product user").exec(function (err, order) {
             _.each(order.products, function (product,index) {
                 quantity = product.quantity;
                 product.discountPercent=10;
@@ -1070,14 +1071,12 @@ var model = {
             order.totalTax =_.ceil(totalTax);
             order.subTotal =_.ceil(subTotal);
             order.grandTotal = grandTotal;
-            Order.saveData(order,function(err,data)
-            {
-                if(err)
-                {
+            order.date =(new Date()).toLocaleDateString();
+            Order.saveData(order,function(err,data){
+                if(err){
                     console.log(err);
                 }
-                else
-                {
+                else{
                     callback(null,order);
                 }
             })
