@@ -1028,7 +1028,7 @@ var model = {
         }).lean().deepPopulate("products.product user").exec(function (err, order) {
             _.each(order.products, function (product,index) {
                 quantity = product.quantity;
-                product.discountPercent=10;
+                product.discountPercent=0;
                 product.discountAmount=0;
                 price = _.ceil(product.price);
                 discountPrice = product.discountAmount;
@@ -1054,11 +1054,15 @@ var model = {
                 //without discount logic
                  else {
                     finalAmt = priceAfterDiscount = price //final price which includes tax;
+
                     if (finalAmt <= taxLimiterWithoutDiscount) {
+                        taxPercent =5;
                         actualPrice = _.floor(0.95 * (finalAmt));
                     } else {
+                        taxPercent=12;
                         actualPrice = _.floor(0.88 * (finalAmt));
                     }
+                    taxAmt = _.ceil((taxPercent / 100) * finalAmt);
                 }
                 product.actualPrice = _.ceil(actualPrice);
                 product.unitPrice = _.ceil(actualPrice/quantity);
@@ -1076,7 +1080,7 @@ var model = {
             order.totalDiscount = _.ceil(totalDiscount);
             order.totalTax =_.ceil(totalTax);
             order.subTotal =_.ceil(subTotal);
-            order.grandTotal = grandTotal;
+            order.grandTotal = grandTotal+order.shippingAmount;
             order.date =(new Date()).toLocaleDateString();
             Order.saveData(order,function(err,data){
                 if(err){
