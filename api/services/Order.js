@@ -1054,7 +1054,6 @@ var model = {
                 //without discount logic
                  else {
                     finalAmt = priceAfterDiscount = price //final price which includes tax;
-
                     if (finalAmt <= taxLimiterWithoutDiscount) {
                         taxPercent =5;
                         actualPrice = _.floor(0.95 * (finalAmt));
@@ -1099,7 +1098,7 @@ var model = {
             },
             function(data,callback) {
                 var emailData = {};
-                emailData.email = "supriya.kadam@wohlig.com";
+                emailData.email = order.user.email;
                 emailData.subject = "Invoice PDF";
                 emailData.body = "Invoice";
                 emailData.from = "supriya.kadam478@hotmail.com";
