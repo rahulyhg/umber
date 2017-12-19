@@ -475,17 +475,17 @@
                                                 }
                                                  ::-webkit-scrollbar-track {
                                                     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-                                                    -webkit-border-radius: 10px;
-                                                    border-radius: 10px;
+                                                    -webkit-border-radius: 5px;
+                                                    border-radius: 5px;
                                                 }
                                                  ::-webkit-scrollbar-thumb {
-                                                    -webkit-border-radius: 10px;
-                                                    border-radius: 10px;
+                                                    -webkit-border-radius: 5px;
+                                                    border-radius: 5px;
                                                     background: $darkBrown1;
                                                     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
                                                 }
                                                  ::-webkit-scrollbar-thumb:window-inactive {
-                                                    background: rgba(255, 0, 0, 0.4);
+                                                    background: $darkBrown1;
                                                 }
                                             }
 
@@ -3529,28 +3529,7 @@
                                                 .action .flex-prev,
                                                 .action .flex-next {
                                                     display: block!important;
-                                                } // .flex-direction-nav a {
-                                                //     width: 100px;
-                                                //     display: inline-block; // position: relative;
-                                                // }
-                                                // .flex-direction-nav .flex-prev {
-                                                //     &:before {
-                                                //         font-family: FontAwesome;
-                                                //         content: "\f177";
-                                                //         color: $darkBrown1;
-                                                //         font-size: 16px;
-                                                //         vertical-align: middle;
-                                                //     }
-                                                // }
-                                                // .flex-direction-nav .flex-next {
-                                                //     &:before {
-                                                //         font-family: FontAwesome;
-                                                //         content: "\f178";
-                                                //         color: $darkBrown1;
-                                                //         font-size: 16px;
-                                                //         vertical-align: middle;
-                                                //     }
-                                                // }
+                                                }
                                                 .action-btn {
                                                     margin-right: 5px;
                                                     margin-left: 5px;

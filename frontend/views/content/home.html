@@ -118,7 +118,7 @@
                                         <h3 class="homepg-slider-product-cost"><i class="fa fa-inr" aria-hidden="true"></i>{{newArrival.price |number:0}}</h3>
                                         <h4 class="homepg-slider-product-name text-uppercase">{{newArrival.productName}}</h4>
                                         <div class="abslt-buynow-btn">
-                                            <buttton class="btn buynow--btn text-uppercase" ui-sref="individual-page({id: newArrival.productId})">buy</buttton>
+                                            <buttton class="btn buynow--btn btn--mob-modal text-uppercase" ui-sref="individual-page({id: newArrival.productId})">buy</buttton>
                                         </div>
                                     </div>
                                 </div>
@@ -157,7 +157,7 @@
                                 <i class="fa fa-shopping-cart" aria-hidden="true" data-toggle="tooltip" title="Added to cart"></i>
                             </div>
                             <div class="abslt-buynow-btn">
-                                <buttton class="btn buy--btn text-uppercase" ui-sref="individual-page({id: new.productId})">buy</buttton>
+                                <buttton class="btn buy--btn btn--mob-modal text-uppercase" ui-sref="individual-page({id: new.productId})">buy</buttton>
                             </div>
                         </div>
                     </li>
@@ -187,7 +187,7 @@
                         <p class="line--height">{{getthelook.description}}
                         </p>
                         <p>
-                            <button class="btn text-uppercase buy--now" ui-sref="buythelook({id: getthelook._id})">buy now</button>
+                            <button class="btn text-uppercase btn--mob-modal buy--now" ui-sref="buythelook({id: getthelook._id})">buy now</button>
                         </p>
                     </div>
                 </div>
@@ -240,7 +240,7 @@
                                 <h3><i class="fa fa-inr" aria-hidden="true"></i>{{new.price |number:0}}</h3>
                                 <div class="abslt-buynow-btn">
                                     <!--<buttton class="btn buybtn text-uppercase"  ui-sref="individual-page({id: new._id})">View</buttton>-->
-                                    <buttton class="btn buy--btn text-uppercase" ui-sref="individual-page({id: new.productId})">View</buttton>
+                                    <buttton class="btn buy--btn btn--mob-modal text-uppercase" ui-sref="individual-page({id: new.productId})">View</buttton>
                                 </div>
                             </div>
 
