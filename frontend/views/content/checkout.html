@@ -171,7 +171,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="product in orderTable.products">
+                                        <tr ng-repeat="product in orderTable">
                                             <td>
                                                 <div class="item ">
                                                     <img ng-src="{{product.product.images[0].image | serverimage}} " alt="
@@ -185,7 +185,9 @@
                                             <td></td>
                                             <td>{{product.product.size.name}}</td>
                                             <td>{{product.quantity}}</td>
-                                            <td>&#x20b9{{product.product.price * product.quantity |number:0}}</td>
+                                            <td ng-if="product.product.discountApplicable">&#x20b9 &nbsp;{{product.product.priceWithDiscount|number:0}}</td>
+                                            <td ng-if="!product.product.discountApplicable">&#x20b9 &nbsp;{{product.product.price * product.quantity|number:0}}</td>
+                                            <!--<td>&#x20b9{{product.product.price * product.quantity |number:0}}</td>-->
                                         </tr>
                                     </tbody>
                                     <!--<tfoot>

@@ -194,6 +194,11 @@
                                  isActive: "True"
                              };
                          }
+
+                         _.each($scope.mycartTable.products, function (cartProduct) {
+                             cartProduct.product.discountApplicable = false;
+                         });
+                         console.log("$scope.mycartTable.products$scope.mycartTable.products", $scope.mycartTable.products)
                          console.log(couponObj, "couponObj");
                          $.jStorage.set("coupon", couponObj);
                          var jStorageData = $.jStorage.get("coupon");
@@ -206,8 +211,12 @@
                              selectedDiscount: $scope.discountSelected,
                              totalAmountOfOrder: $scope.total
                          }
+                         _.each($scope.mycartTable.products, function (cartProduct) {
+                             cartProduct.product.discountApplicable = false;
+                         });
                          console.log("$scope.discountValueObject", $scope.discountValueObject);
                          $.jStorage.set("discountValues", $scope.discountValueObject);
+                         $.jStorage.set("myCart", $scope.mycartTable.products);
 
 
                          //  myService.addCouponByUserFromCart(couponObj, function (data) {
@@ -328,6 +337,7 @@
                          }
                          console.log("$scope.discountValueObject", $scope.discountValueObject);
                          $.jStorage.set("discountValues", $scope.discountValueObject);
+                         $.jStorage.set("myCart", $scope.mycartTable.products);
 
                      });
                  } else if ($scope.discountSelected.discountType == "59ede2fcd30c7e2ab3324ece") {
@@ -345,6 +355,9 @@
                          $scope.grandTotalAfterDiscount = 0;
                          //  $.jStorage.set("grandTotal", $scope.grandTotal);
                      }
+                     _.each($scope.mycartTable.products, function (cartProduct) {
+                         cartProduct.product.discountApplicable = false;
+                     });
                      if ($scope.grandTotal >= $scope.discountSelected.yValue) {
                          $scope.grandTotal = $scope.grandTotal - $scope.discountSelected.xValue;
                          $scope.grandTotalAfterDiscount = $scope.discountSelected.xValue;
@@ -381,6 +394,10 @@
                      if ($scope.grandTotal >= $scope.discountSelected.xValue) {
                          $scope.gifts = $scope.discountSelected.gifts;
                          console.log("$scope.gifts", $scope.gifts);
+                         _.each($scope.mycartTable.products, function (cartProduct) {
+                             cartProduct.product.discountApplicable = false;
+                         });
+                         $.jStorage.set("myCart", $scope.mycartTable.products);
                          $scope.discountValueObject = {
                              discountAmount: $scope.grandTotalAfterDiscount,
                              grandTotalAfterDiscount: $scope.grandTotal,
@@ -435,7 +452,7 @@
                              cartProduct.product.discountApplicable = false;
                              _.each(sortedArray, function (product) {
                                  if (product._id == cartProduct.product._id) {
-                                     cartProduct.product.discountApplicable = true;
+                                     //  cartProduct.product.discountApplicable = true;
                                      for (i = 0; i < cartProduct.quantity; i++) {
                                          seperateProductsInBOGOOffer.push(cartProduct);
                                      }
@@ -452,28 +469,58 @@
                          var processingArray = seperateProductsInBOGOOffer;
                          var sumOfPricesToBeDiscard = Math.floor(seperateProductsInBOGOOfferLength / 2);
                          //  console.log("seperateProductsInBOGOOffer%%%",seperateProductsInBOGOOffer);
-                         console.log("sumOfPricesToBeDiscard", sumOfPricesToBeDiscard);
+                         var descardedProductindex = seperateProductsInBOGOOfferLength - sumOfPricesToBeDiscard
+                         console.log("descardedProductindex", descardedProductindex);
                          var totalDiscount = 0;
                          var iteration = 0;
 
                          var finalArray = seperateProductsInBOGOOffer.slice(0, -sumOfPricesToBeDiscard);
-                         //  _.takeRight(processingArray, sumOfPricesToBeDiscard);
-                         _.each(seperateProductsInBOGOOffer, function (val1) {
-                             _.each(finalArray, function (val) {
-                                 if (val1.product._id == val.product._id) {
-                                     val.product.discountApplicable = true;
-                                     val.product.discountPriceOfProduct = 0;
-                                     val.product.priceWithDiscount = val.product.price;
+                         var uniqueProducts = [];
+                         for (i = descardedProductindex - 1; i < seperateProductsInBOGOOfferLength - 1; i++) {
+                             uniqueProducts.push(seperateProductsInBOGOOffer[i])
+                         }
+                         if (seperateProductsInBOGOOffer.length > 2) {
+                             var current = uniqueProducts[0];
+                             var cnt = 0;
+
+                             for (var i = 0; i < uniqueProducts.length; i++) {
+                                 if (uniqueProducts[i] != current) {
+                                     if (cnt > 0) {}
+                                     current = uniqueProducts[i];
+                                     cnt = 1;
                                  } else {
-                                     val1.product.discountApplicable = true;
-                                     val1.product.discountPriceOfProduct = 0;
-                                     val1.product.priceWithDiscount = 0;
+                                     cnt++;
+                                     _.each($scope.mycartTable.products, function (cartProduct) {
+                                         if (cartProduct._id == current._id) {
+                                             cartProduct.product.discountApplicable = true;
+                                             cartProduct.product.discountPriceOfProduct = cartProduct.product.price * cnt;
+                                             cartProduct.product.priceWithDiscount = (current.product.price * current.quantity) - cartProduct.product.discountPriceOfProduct;
+                                         }
+                                     });
                                  }
+                             }
+                             if (cnt > 0) {
+
+                             }
+                         } else {
+                             _.each(finalArray, function (val) {
+                                 _.each(seperateProductsInBOGOOffer, function (val1) {
+                                     val.product.discountApplicable = true;
+                                     if (val1.product._id == val.product._id) {
+                                         val.product.discountApplicable = true;
+                                         val.product.discountPriceOfProduct = 0;
+                                         val.product.priceWithDiscount = val.product.price * val.quantity;
+                                     } else {
+                                         val1.product.discountApplicable = true;
+                                         val1.product.discountPriceOfProduct = val1.product.price;
+                                         val1.product.priceWithDiscount = 0;
+                                     }
+                                 });
                              });
-                         });
-                         console.log("finalArray processingArray", finalArray);
+                         }
+
                          if (finalArray) {
-                             console.log("in if");
+                             console.log("in if")
                              _.each(finalArray, function (last) {
                                  console.log("last", last.product.price);
                                  totalDiscount = totalDiscount + last.product.price;
@@ -507,6 +554,7 @@
                          }
                          console.log("$scope.discountValueObject", $scope.discountValueObject);
                          $.jStorage.set("discountValues", $scope.discountValueObject);
+                         $.jStorage.set("myCart", $scope.mycartTable.products);
 
                          $scope.Couponmodal.close();
 
