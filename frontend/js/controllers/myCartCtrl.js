@@ -274,9 +274,13 @@
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
                                              //  console.log("HIEEEEEEEEEEEEEEEEEEE33333", cartProduct.product.discountApplicable);
                                              if ($scope.priceWithDiscount > 999) {
-                                                 cartProduct.product.gst = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 0.12) * cartProduct.quantity;
+                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 12);
+                                                 var tax = unitPrice * 0.12
+                                                 cartProduct.product.gst = tax * cartProduct.quantity;
                                              } else {
-                                                 cartProduct.product.gst = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 0.05) * cartProduct.quantity;
+                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 5);
+                                                 var tax = unitPrice * 0.05
+                                                 cartProduct.product.gst = tax * cartProduct.quantity;
                                              }
                                              //  $scope.productGst = $scope.productGst + value.product.gst;
                                              $scope.Couponmodal.close();
@@ -287,9 +291,13 @@
                                              cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
                                              if ($scope.priceWithDiscount > 999) {
-                                                 cartProduct.product.gst = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 0.12) * cartProduct.quantity;
+                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 12);
+                                                 var tax = unitPrice * 0.12
+                                                 cartProduct.product.gst = tax * cartProduct.quantity;
                                              } else {
-                                                 cartProduct.product.gst = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 0.05) * cartProduct.quantity;
+                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 5);
+                                                 var tax = unitPrice * 0.05
+                                                 cartProduct.product.gst = tax * cartProduct.quantity;
                                              }
                                              $scope.Couponmodal.close();
                                              break;
@@ -299,9 +307,13 @@
                                              cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
                                              if ($scope.priceWithDiscount > 999) {
-                                                 cartProduct.product.gst = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 0.12) * cartProduct.quantity;
+                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 12);
+                                                 var tax = unitPrice * 0.12
+                                                 cartProduct.product.gst = tax * cartProduct.quantity;
                                              } else {
-                                                 cartProduct.product.gst = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 0.05) * cartProduct.quantity;
+                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 5);
+                                                 var tax = unitPrice * 0.05
+                                                 cartProduct.product.gst = tax * cartProduct.quantity;
                                              }
                                              $scope.Couponmodal.close();
                                              break;
@@ -311,9 +323,13 @@
                                              cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
                                              if ($scope.priceWithDiscount > 999) {
-                                                 cartProduct.product.gst = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 0.12) * cartProduct.quantity;
+                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 12);
+                                                 var tax = unitPrice * 0.12
+                                                 cartProduct.product.gst = tax * cartProduct.quantity;
                                              } else {
-                                                 cartProduct.product.gst = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 0.05) * cartProduct.quantity;
+                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 5);
+                                                 var tax = unitPrice * 0.05
+                                                 cartProduct.product.gst = tax * cartProduct.quantity;
                                              }
                                              $scope.Couponmodal.close();
                                              break;
@@ -323,9 +339,13 @@
                                              cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
                                              if ($scope.priceWithDiscount > 999) {
-                                                 cartProduct.product.gst = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 0.12) * cartProduct.quantity;
+                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 12);
+                                                 var tax = unitPrice * 0.12
+                                                 cartProduct.product.gst = tax * cartProduct.quantity;
                                              } else {
-                                                 cartProduct.product.gst = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 0.05) * cartProduct.quantity;
+                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 5);
+                                                 var tax = unitPrice * 0.05
+                                                 cartProduct.product.gst = tax * cartProduct.quantity;
                                              }
                                              $scope.Couponmodal.close();
                                              break;
@@ -335,9 +355,13 @@
                                              cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
                                              if ($scope.priceWithDiscount > 999) {
-                                                 cartProduct.product.gst = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 0.12) * cartProduct.quantity;
+                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 12);
+                                                 var tax = unitPrice * 0.12
+                                                 cartProduct.product.gst = tax * cartProduct.quantity;
                                              } else {
-                                                 cartProduct.product.gst = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 0.05) * cartProduct.quantity;
+                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 5);
+                                                 var tax = unitPrice * 0.05
+                                                 cartProduct.product.gst = tax * cartProduct.quantity;
                                              }
                                              $scope.Couponmodal.close();
                                              break;
@@ -347,9 +371,13 @@
                                              cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
                                              if ($scope.priceWithDiscount > 999) {
-                                                 cartProduct.product.gst = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 0.12) * cartProduct.quantity;
+                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 12);
+                                                 var tax = unitPrice * 0.12
+                                                 cartProduct.product.gst = tax * cartProduct.quantity;
                                              } else {
-                                                 cartProduct.product.gst = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 0.05) * cartProduct.quantity;
+                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 5);
+                                                 var tax = unitPrice * 0.05
+                                                 cartProduct.product.gst = tax * cartProduct.quantity;
                                              }
                                              $scope.Couponmodal.close();
                                              break;
@@ -563,9 +591,13 @@
                                          val.product.discountPriceOfProduct = val.product.price;
                                          val.product.priceWithDiscount = val.product.price * val.quantity - val.product.price;
                                          if (val.product.discountPriceOfProduct > 999) {
-                                             val.product.gst = ((val.product.price) * 0.12) * val.quantity;
+                                             var unitPrice = ((val.product.price - val.product.discountPriceOfProduct) * 100) / (100 + 12);
+                                             var tax = unitPrice * 0.12
+                                             val.product.gst = tax * val.quantity;
                                          } else {
-                                             val.product.gst = ((val.product.price - val.product.discountPriceOfProduct) * 0.05) * val.quantity;
+                                             var unitPrice = ((val.product.price - val.product.discountPriceOfProduct) * 100) / (100 + 5);
+                                             var tax = unitPrice * 0.05
+                                             val.product.gst = tax * val.quantity;
                                          }
                                      } else {
                                          val1.product.discountApplicable = true;
@@ -586,6 +618,9 @@
                              _.each(finalArray, function (last) {
                                  totalDiscount = totalDiscount + last.product.price;
                                  last.product.gst = (last.product.price * last.quantity - last.product.discountPriceOfProduct) * 0.12;
+                                 var unitPrice = ((last.product.price - last.product.discountPriceOfProduct) * 100) / (100 + 12);
+                                 var tax = unitPrice * 0.12
+                                 val.product.gst = tax;
                              });
                              console.log("totalDiscount in if last", totalDiscount);
                          } else {
@@ -757,11 +792,24 @@
              $scope.productGst = 0;
              _.forEach($scope.mycartTable.products, function (value) {
                  console.log("else-", value);
-                 if (value.product.price > 999) {
-                     value.product.gst = (value.product.price * 0.12) * value.quantity;
-                 } else {
-                     value.product.gst = (value.product.price * 0.05) * value.quantity;
-                 }
+                 //  if (value.product.discountPriceOfProduct) {
+                 //      var dis = value.discountPriceOfProduct;
+                 //  } else {
+                 //      console.log("fdsssssfffffffffff")
+                 //      var dis = 0;
+                 //  }
+                 //  if (value.product.price > 999) {
+                 //      var unitPrice = ((value.product.price - dis) * 100) / (100 + 12);
+                 //      var tax = unitPrice * 0.12;
+                 //      console.log("fdsssssfffffffffff", tax)
+                 //      value.product.gst = tax * value.quantity;
+
+                 //  } else {
+                 //      var unitPrice = ((value.product.price - dis) * 100) / (100 + 5);
+                 //      var tax = unitPrice * 0.05
+                 //      value.product.gst = tax * value.quantity;
+                 //  }
+                 value.product.gst = 0;
                  $scope.productGst = $scope.productGst + value.product.gst;
                  $scope.productArrayForDiscount.push(value.product._id);
 
