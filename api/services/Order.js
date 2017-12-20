@@ -1028,8 +1028,7 @@ var model = {
                         taxPercent = 12;
                     }
                     unitPrice= (priceAfterDiscount*100)/(100 + taxPercent);
-                    taxAmt = _.ceil((taxPercent / 100) * unitPrice);
-                   
+                    taxAmt = _.round(((taxPercent / 100) * unitPrice), 2);
                     if (discountPrice > 0 ) {
                         gst = gst + taxAmt;
                     }
@@ -1046,7 +1045,7 @@ var model = {
             order.gst = _.ceil(gst);
             order.totalDiscount = totalDiscount;
             order.totalAmount = totalAmount;
-            order.grandTotal = (totalAmount - totalDiscount) + gst+ order.shippingAmount;
+            order.grandTotal = _.round((totalAmount - totalDiscount) + gst+ order.shippingAmount, 2);
             order.date = (new Date()).toLocaleDateString();
             Order.saveData(order, function (err, data) {
                 if (err) {
