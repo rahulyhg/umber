@@ -161,7 +161,7 @@
                          $scope.grandTotalAfterDiscount = 0;
                          //  $.jStorage.set("grandTotal", $scope.grandTotal);
                      }
-
+                     $scope.productGst = 0;
                      if ($scope.grandTotal >= $scope.discountSelected.yValue) {
                          //if jstorage.user then userid from jstorage 
                          var timestamp = Date.now();
@@ -197,6 +197,7 @@
 
                          _.each($scope.mycartTable.products, function (cartProduct) {
                              cartProduct.product.discountApplicable = false;
+                             $scope.productGst = $scope.productGst + cartProduct.product.gst;
                          });
                          console.log("$scope.mycartTable.products$scope.mycartTable.products", $scope.mycartTable.products)
                          console.log(couponObj, "couponObj");
@@ -208,6 +209,7 @@
                          $scope.discountValueObject = {
                              discountAmount: $scope.grandTotalAfterDiscount,
                              grandTotalAfterDiscount: $scope.grandTotal,
+                             grandTotalAfterGst: $scope.productGst,
                              selectedDiscount: $scope.discountSelected,
                              totalAmountOfOrder: $scope.total
                          }
@@ -363,11 +365,12 @@
                                      //  cartProduct.product.discountApplicable = false;
                                  }
                              });
-
+                             $scope.productGst = $scope.productGst + cartProduct.product.gst;
                          });
                          $scope.discountValueObject = {
                              discountAmount: $scope.grandTotalAfterDiscount,
                              grandTotalAfterDiscount: $scope.total - $scope.grandTotalAfterDiscount,
+                             grandTotalAfterGst: $scope.productGst,
                              selectedDiscount: $scope.discountSelected,
                              totalAmountOfOrder: $scope.total
                          }
@@ -380,6 +383,7 @@
                      //for Discount of Rs X on Y amount shopping
                      $.jStorage.deleteKey("coupon");
                      $.jStorage.deleteKey("gifts");
+                     $scope.productGst = 0;
                      if ($scope.mycartTable) {
                          $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
                          $scope.grandTotalAfterDiscount = 0;
@@ -393,6 +397,7 @@
                      }
                      _.each($scope.mycartTable.products, function (cartProduct) {
                          cartProduct.product.discountApplicable = false;
+                         $scope.productGst = $scope.productGst + cartProduct.product.gst;
                      });
                      if ($scope.grandTotal >= $scope.discountSelected.yValue) {
                          $scope.grandTotal = $scope.grandTotal - $scope.discountSelected.xValue;
@@ -401,6 +406,7 @@
                          $scope.discountValueObject = {
                              discountAmount: $scope.grandTotalAfterDiscount,
                              grandTotalAfterDiscount: $scope.grandTotal,
+                             grandTotalAfterGst: $scope.productGst,
                              selectedDiscount: $scope.discountSelected,
                              totalAmountOfOrder: $scope.total
                          }
@@ -432,11 +438,13 @@
                          console.log("$scope.gifts", $scope.gifts);
                          _.each($scope.mycartTable.products, function (cartProduct) {
                              cartProduct.product.discountApplicable = false;
+                             $scope.productGst = $scope.productGst + cartProduct.product.gst;
                          });
                          $.jStorage.set("myCart", $scope.mycartTable.products);
                          $scope.discountValueObject = {
                              discountAmount: $scope.grandTotalAfterDiscount,
                              grandTotalAfterDiscount: $scope.grandTotal,
+                             grandTotalAfterGst: $scope.productGst,
                              selectedDiscount: $scope.discountSelected,
                              totalAmountOfOrder: $scope.total
                          }
@@ -517,7 +525,6 @@
                              uniqueProducts.push(seperateProductsInBOGOOffer[i])
                          }
                          if (seperateProductsInBOGOOffer.length > 2) {
-                             console.log("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
                              var current = uniqueProducts[0];
                              var cnt = 0;
 
@@ -533,13 +540,14 @@
                                              cartProduct.product.discountApplicable = true;
                                              cartProduct.product.discountPriceOfProduct = cartProduct.product.price * cnt;
                                              cartProduct.product.priceWithDiscount = (current.product.price * current.quantity) - cartProduct.product.discountPriceOfProduct;
-                                             if ($scope.priceWithDiscount > 999) {
-                                                 cartProduct.product.gst = ((cartProduct.product.price - cartProduct.product.discountPriceOfProduct) * 0.12) * cartProduct.quantity;
-                                             } else {
-                                                 cartProduct.product.gst = ((cartProduct.product.price - cartProduct.product.discountPriceOfProduct) * 0.05) * cartProduct.quantity;
-                                             }
+                                             //  if ($scope.priceWithDiscount > 999) {
+                                             //      cartProduct.product.gst = ((cartProduct.product.price - cartProduct.product.discountPriceOfProduct) * 0.12) * cartProduct.quantity;
+                                             //  } else {
+                                             //      cartProduct.product.gst = ((cartProduct.product.price - cartProduct.product.discountPriceOfProduct) * 0.05) * cartProduct.quantity;
+                                             //  }
                                          }
-                                         $scope.productGst = $scope.productGst + cartProduct.product.gst;
+                                         //  console.log("aaaaaaaaaaaaaaaaaaaaaaaa", cartProduct.product);
+                                         //  $scope.productGst = $scope.productGst + cartProduct.product.gst;
                                      });
                                  }
                              }
@@ -552,12 +560,22 @@
                                      val.product.discountApplicable = true;
                                      if (val1.product._id == val.product._id) {
                                          val.product.discountApplicable = true;
-                                         val.product.discountPriceOfProduct = 0;
-                                         val.product.priceWithDiscount = val.product.price * val.quantity;
+                                         val.product.discountPriceOfProduct = val.product.price;
+                                         val.product.priceWithDiscount = val.product.price * val.quantity - val.product.price;
+                                         if (val.product.discountPriceOfProduct > 999) {
+                                             val.product.gst = ((val.product.price) * 0.12) * val.quantity;
+                                         } else {
+                                             val.product.gst = ((val.product.price - val.product.discountPriceOfProduct) * 0.05) * val.quantity;
+                                         }
                                      } else {
                                          val1.product.discountApplicable = true;
                                          val1.product.discountPriceOfProduct = val1.product.price;
                                          val1.product.priceWithDiscount = 0;
+                                         if ($scope.priceWithDiscount > 999) {
+                                             val1.product.gst = 0;
+                                         } else {
+                                             val1.product.gst = 0;
+                                         }
                                      }
                                  });
                              });
@@ -566,8 +584,8 @@
                          if (finalArray) {
                              console.log("in if")
                              _.each(finalArray, function (last) {
-                                 console.log("last", last.product.price);
                                  totalDiscount = totalDiscount + last.product.price;
+                                 last.product.gst = (last.product.price * last.quantity - last.product.discountPriceOfProduct) * 0.12;
                              });
                              console.log("totalDiscount in if last", totalDiscount);
                          } else {
@@ -581,11 +599,10 @@
                          }
                          console.log("tC", tC);
                          if ($scope.mycartTable) {
-                             //  $scope.productGst = 0;
                              $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
-                             //  _.each($scope.mycartTable, function (cartProduct) {
-                             //      $scope.productGst = $scope.productGst + cartProduct.product.gst;
-                             //  })
+                             _.each($scope.mycartTable.products, function (cartProduct) {
+                                 $scope.productGst = $scope.productGst + cartProduct.product.gst;
+                             });
                              //  $.jStorage.set("grandTotal", $scope.grandTotal);
                          }
                          console.log("$scope.grandTotal", $scope.grandTotal)
@@ -597,6 +614,7 @@
                          $scope.discountValueObject = {
                              discountAmount: $scope.grandTotalAfterDiscount,
                              grandTotalAfterDiscount: $scope.grandTotal,
+                             grandTotalAfterGst: $scope.productGst,
                              selectedDiscount: $scope.discountSelected,
                              totalAmountOfOrder: $scope.total
                          }

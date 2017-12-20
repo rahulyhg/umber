@@ -529,12 +529,13 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
         //     $state.go("mycart");
         // }
         if ($scope.orderTable) {
-            $scope.grandTotal = CartService.getTotal($scope.orderTable);
+            $scope.grandTotal = CartService.getTotal($scope.orderTable.products);
             if ($.jStorage.get("discountValues")) {
                 // discountAmount: 3394, grandTotalAfterDiscount: 3394, selectedDiscount: Object, totalAmountOfOrder: 6788
                 var discountTypeObjectData = $.jStorage.get("discountValues");
                 $scope.discountAmount = discountTypeObjectData.discountAmount;
                 $scope.grandTotalAfterDiscount = discountTypeObjectData.grandTotalAfterDiscount;
+                $scope.grandTotalAfterGst = discountTypeObjectData.grandTotalAfterGst;
                 $scope.totalAmountOfOrder = discountTypeObjectData.totalAmountOfOrder;
             }
         }
