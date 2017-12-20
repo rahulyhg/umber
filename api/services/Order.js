@@ -487,7 +487,7 @@ var model = {
         }).deepPopulate('products.product courierType products.product.size products.product.color').sort({
             createdAt: -1
         }).exec(function (err, orders) {
-            callback(err, orderproducts);
+            callback(err, orders);
         });
     },
 
