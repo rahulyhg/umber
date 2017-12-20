@@ -112,9 +112,9 @@
                                             Product Code:&nbsp;<span><%= product.product.productCode %></span>
                                         </div>
                                     </td>
-                                    <td align="top" style="padding: 8px;line-height: 1.42857143; text-align:center;vertical-align: top;"> &#8377;&nbsp;<%= product.unitPrice %></td>
+                                    <td align="top" style="padding: 8px;line-height: 1.42857143; text-align:center;vertical-align: top;"> &#8377;&nbsp;<%= product.product.price %></td>
                                     <td align="top" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;"><%= product.quantity %></td>
-                                    <td align="top" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;">&#8377;&nbsp;<%= product.actualPrice %></td>
+                                    <td align="top" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;">&#8377;&nbsp;<%= product.value %></td>
                                 </tr>
                                 <% }); %>  
                                 <tr>
@@ -127,7 +127,7 @@
                                             typesetting, remaining essentially unchanged. </p>
                                     </td>
                                     <td align="top" style="padding: 8px;line-height: 1.42857143;text-align:left; text-indent:12px;vertical-align: top;">Subtotal</td>
-                                    <td align="top" colspan="2" style="padding: 8px;line-height: 1.42857143; text-align:center;vertical-align: top;"><span>&#8377;</span><span style="min-width:85px;float:right;"><%= subTotal %></span></td>
+                                    <td align="top" colspan="2" style="padding: 8px;line-height: 1.42857143; text-align:center;vertical-align: top;"><span>&#8377;</span><span style="min-width:85px;float:right;"><%= totalAmount %></span></td>
                                 </tr>
                                 <tr>
 
@@ -141,7 +141,7 @@
                                 </tr>
                                 <tr>
                                     <td align="top" style="padding: 8px;line-height: 1.42857143;text-align:left;vertical-align: top;">Total taxes</td>
-                                    <td align="top" colspan="2" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;"><span>&#8377;</span><span style="min-width:85px;float:right;"><%= totalTax %></span></td>
+                                    <td align="top" colspan="2" style="padding: 8px;line-height: 1.42857143;text-align:center;vertical-align: top;"><span>&#8377;</span><span style="min-width:85px;float:right;"><%= gst %></span></td>
                                 </tr>
                               
                                 <tr>
