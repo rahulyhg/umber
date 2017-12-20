@@ -2015,6 +2015,13 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
     var clickCounter = 0;
     $scope.proceedToDetailTab = function () {
         $scope.view = 'detailTab';
+        var cart = {};
+        cart.product = $.jStorage.get("myCart");
+        cart.userId = $.jStorage.get("userId");
+        cart.accessToken = $.jStorage.get("accessToken");
+        CartService.saveCartWithDiscount(cart, function (data) {
+            console.log("in detailtab cart save", data)
+        })
     };
 
 })
