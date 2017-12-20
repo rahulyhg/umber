@@ -24,6 +24,9 @@
 
                         .mycart-container {
                             padding: 21px 20px 160px 20px;
+                            .table-responsive {
+                                overflow-x: hidden;
+                            }
                         }
 
                         .mycart-table {
@@ -909,11 +912,13 @@
 
                         .compare-product {
                             width: 710px;
+                            max-height: 200px;
                             @include padding(0 5px);
                             background-color: #F5F5F5;
                             position: fixed;
                             bottom: 0;
                             left: 50%; //  @include transform(translateX(-50%));
+                            overflow: auto;
                             z-index: 9999;
                         }
 
