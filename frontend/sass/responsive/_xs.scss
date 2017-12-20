@@ -732,6 +732,22 @@
                      padding: 5px 6px;
                      margin-left: 0;
                  }
+             }
+             .compare-product-main {
+                 width: 290px;
+             }
+             .compare-products {
+                 width: 100px;
+                 @include padding(5px);
+                 @include margin(10px 5px);
+                 .compare-product-img {
+                     width: 55px;
+                     max-height: 65px;
+                 }
+                 .compare-product-title h5 {
+                     margin-top: 5px;
+                     font-size: 13px;
+                 }
              } //End of individual page
              //Start of listing page
              .listing-container {
@@ -793,6 +809,9 @@
              //Start of my-cart page
              .mycart-container {
                  @include padding(20px 10px);
+                 .table-responsive {
+                     overflow-x: auto;
+                 }
              }
              .mycart-table {
                  tbody>tr {
