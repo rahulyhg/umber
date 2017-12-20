@@ -328,7 +328,7 @@ var model = {
         } else {
             Cart.getCart(data, function (err, cart) {
                 if (!_.isEmpty(cart)) {
-                    console.log("cart: ", cart);
+                    //console.log("cart: ", cart);
                     var order = {};
                     order.firstName = data.firstName;
                     order.lastName = data.lastName;
@@ -372,7 +372,7 @@ var model = {
                     order.gifts = gifts;
                     // console.log("order: ", order);
                     Order.saveData(order, function (err, data1) {
-                         console.log("$$$$$$$$$order: ", order);
+                         //console.log("$$$$$$$$$order: ", order);
                         if (err) {
                             callback(err, null);
                         } else if (data1) {
@@ -1060,7 +1060,6 @@ var model = {
     sendEmail: function (order, prevCallback) {
         async.waterfall([
             function (callback) {
-               
                 Config.generatePdf("invoice-actual", order, callback);
             },
             function (data, callback) {
