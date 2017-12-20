@@ -15,10 +15,10 @@
                         <tr>
                             <th>ITEM</th>
                             <th>COLOR</th>
-                            <th>PRICE</th>
+                            <th>MRP</th>
                             <th>SIZE</th>
                             <th>QUANTITY</th>
-                            <th>MRP</th>
+                            <th>PRICE</th>
                             <th>DISCOUNT PRICE</th>
                             <th>GST</th>
                             <th>SUBTOTAL</th>
@@ -37,7 +37,7 @@
                                 </div>
                             </td>
                             <td>{{product.product.color.name}}</td>
-                            <td>&#x20b9 &nbsp;{{product.product.price|number:0}} </td>
+                            <td> &#x20b9 &nbsp;{{product.product.mrp}}</td>
                             <td>{{product.product.size.name}}</td>
                             <td>
                                 <div class="plus-minus-btn">
@@ -56,15 +56,14 @@
                             </a>
                                 </div>
                             </td>
-                            <td>
-                                &#x20b9 &nbsp;{{product.product.mrp}}
-                            </td>
+                            <td>&#x20b9 &nbsp;{{product.product.price|number:0}} </td>
                             <td ng-if="product.product.discountApplicable">&#x20b9 &nbsp;{{product.product.discountPriceOfProduct|number:0}}</td>
                             <td ng-if="!product.product.discountApplicable">&#x20b9 &nbsp;0</td>
-                            <td></td>
+                            <td>&#x20b9 &nbsp;{{product.product.gst|number:0}}</td>
+                            <!--<td ng-if="product.product.price < 999">5%</td>-->
+                            <!--<td ng-if="!product.product.discountApplicable">{{product.product.price * product.quantity * .12|number:0}}</td>-->
                             <td ng-if="product.product.discountApplicable">&#x20b9 &nbsp;{{product.product.priceWithDiscount|number:0}}</td>
                             <td ng-if="!product.product.discountApplicable">&#x20b9 &nbsp;{{product.product.price * product.quantity|number:0}}</td>
-
                         </tr>
                         <tr>
                             <td colspan="8" class="td-border">
@@ -97,14 +96,14 @@
                         <p>&#x20b9 0</p>
                         <p>&#x20b9 {{grandTotalAfterDiscount|number:0}}</p>
                         <p>&#x20b9 {{total-grandTotalAfterDiscount|number:0}}</p>
-                        <p>&#x20b9 0</p>
-                        <p>&#x20b9 {{total-grandTotalAfterDiscount|number:0}}</p>
+                        <p>&#x20b9 {{productGst|number:0}}</p>
+                        <p>&#x20b9 {{total-grandTotalAfterDiscount+productGst|number:0}}</p>
                     </div>
                 </div>
                 <div class="clearfix"></div>
                 <div class="pull-right margin-15">
                     <button class="btn text-uppercase shop--btn" ui-sref="listing-page">Continue shopping</button>
-                    <button class="btn text-uppercase checkout--btn" ui-sref="checkout">checkout</button>
+                    <button class="btn text-uppercase checkout--btn" ng-click="redirectToCheckot()">checkout</button>
                 </div>
             </div>
         </div>

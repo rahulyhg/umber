@@ -577,6 +577,7 @@ myApp
         if ($stateParams.id) {
             $scope.orderId = $stateParams.id;
         }
+        $.jStorage.deleteKey("myCart");
         var emailUser = {};
         emailUser._id = $.jStorage.get("userId");
         emailUser.order = $.jStorage.get("userOrders");
