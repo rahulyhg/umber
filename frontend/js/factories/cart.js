@@ -28,7 +28,15 @@ myApp.factory('CartService', function ($http, cfpLoadingBar) {
             cfpLoadingBar.complete()
             return total;
         },
-
+        saveCartWithDiscount: function (cart) {
+            $http({
+                url: adminurl + 'Cart/saveCartWithDiscount',
+                method: 'POST',
+                data: cart,
+                ignoreLoadingBar: true,
+                withCredentials: false
+            });
+        },
         updateCartQuantity: function (cart) {
             console.log("update cart: ", cart);
             $http({

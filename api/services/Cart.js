@@ -13,6 +13,7 @@ var schema = new Schema({
         quantity: Number,
         style: String,
         color: String,
+        discountAmount: Number,
         comment: {
             type: String
         }
@@ -33,14 +34,20 @@ module.exports = mongoose.model('Cart', schema);
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "products.product", "products.product"));
 var model = {
     setProductInCart: function (userId, product, callback) {
-        // console.log("Each product: ", product);
+        console.log("Each product: ", product);
         var cart = {};
         cart.products = [];
+        if (product.discountApplicable) {
+            var discount = product.discountPriceOfProduct
+        } else {
+            var discount = 0;
+        }
         cart.products.push({
             product: mongoose.Types.ObjectId(product._id),
             quantity: product.reqQuantity,
             style: product.style,
             color: product.color.name,
+            discountAmount: product.discountPriceOfProduct,
             comment: product.comment
         });
         // console.log("#########product in cart#####", cart.products);
@@ -99,6 +106,7 @@ var model = {
                                         quantity: product.reqQuantity,
                                         style: product.style,
                                         color: product.color.name,
+                                        discountAmount: product.discountPriceOfProduct,
                                         comment: product.comment
                                     });
                                     foundCart.userId = userId;
@@ -119,8 +127,12 @@ var model = {
                                 } else {
                                     // Update cart product quantity if present
                                     // console.log("Matching product: ", data.products[idx]);
-                                    foundCart.products[idx].quantity += product.reqQuantity;
-                                    foundCart.products[idx].comment = product.comment;
+                                    if (product.quantityUpdate) {
+                                        foundCart.products[idx].discountAmount = discount;
+                                    } else {
+                                        foundCart.products[idx].quantity += product.reqQuantity;
+                                        foundCart.products[idx].comment = product.comment;
+                                    }
                                     Cart.saveData(foundCart, function (err, data) {
                                         if (err) {
                                             cbWaterfall2(err, null);
@@ -151,7 +163,7 @@ var model = {
     },
 
     saveProduct: function (product, callback) {
-        // console.log("Save product: ", JSON.stringify(product));
+        // console.log("Save product @@@@@@@@@@@@@@@@@@: ", product);
         async.waterfall([
             function isUserLoggedIn(cbWaterfall1) {
                 // Check whether a user exists with given access token
@@ -278,6 +290,25 @@ var model = {
                 }, null);
             }
         })
+    },
+    saveCartWithDiscount: function (product, callback) {
+        if (product.product instanceof Array) {
+            async.eachSeries(product.product, function (eachProduct, eachCallback) {
+                eachProduct.product.reqQuantity = eachProduct.quantity;
+                eachProduct.product.quantityUpdate = true;
+                Cart.setProductInCart(product.userId, eachProduct.product, eachCallback);
+            }, function (err) {
+                if (err) {
+                    callback(err, null);
+                } else {
+                    callback(null, {
+                        message: "Cart updated successfully"
+                    });
+                }
+            });
+        } else {
+            Cart.setProductInCart(product.userId, product, callback);
+        }
     }
 };
 module.exports = _.assign(module.exports, exports, model);

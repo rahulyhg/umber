@@ -25,6 +25,18 @@ var controller = {
             })
         }
     },
+    saveCartWithDiscount: function (req, res) {
+        if (req.body) {
+            Cart.saveCartWithDiscount(req.body, res.callback);
+        } else {
+            res.json({
+                value: false,
+                data: {
+                    message: "Invalid request"
+                }
+            })
+        }
+    },
 
     updateCartQuantity: function (req, res) {
         if (req.body) {
