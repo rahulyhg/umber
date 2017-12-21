@@ -685,17 +685,27 @@ var model = {
                         emailData.billingAddress = orderss.billingAddress;
                         emailData.shippingAddress = orderss.shippingAddress;
                         emailData.shipping = orderss.shippingAmount;
-                        if (orderss.discountAmount) {
-                            emailData.discount = orderss.discountAmount;
-                        } else {
-                            emailData.discount = 0;
+                        // if (orderss.discountAmount) {
+                        //     emailData.discount = orderss.discountAmount;
+                        // } else {
+                        //     emailData.discount = 0;
+                        // }
+                        emailData.discount=0;
+                        if(orderss.gst){
+                            emailData.tax =_.round(orderss.gst);
                         }
-                        emailData.tax = 0;
+                        else{
+                            emailData.tax =0;
+                        }
                         emailData.totalAmount = orderss.totalAmount;
-                        // _.each(emailData.order, function (n) {
-                        //     total = total + n.price;
-                        // })
-                        // emailData.totalAmount = total;
+                        _.each(emailData.order, function (n) {
+                            if(n.discountAmount){
+                                emailData.discount += n.discountAmount;
+                            }else{
+                                emailData.discount += 0;
+                            }
+                        })
+                        emailData.discount =_.round(emailData.discount);
                         Config.ConfirmOrderPlacedMail(emailData, function (err, response) {
                             if (err) {
                                 console.log("error in email", err);
@@ -764,17 +774,28 @@ var model = {
                         emailData.billingAddress = orderss.billingAddress;
                         emailData.shippingAddress = orderss.shippingAddress;
                         emailData.shipping = orderss.shippingAmount;
-                        if (orderss.discountAmount) {
-                            emailData.discount = orderss.discountAmount;
-                        } else {
-                            emailData.discount = 0;
+                        emailData.discount=0;
+                        if(orderss.gst){
+                            emailData.tax =_.round(orderss.gst);
                         }
-                        emailData.tax = 0;
+                        else{
+                            emailData.tax =0;
+                        }
+                        emailData.totalAmount = orderss.totalAmount;
+                        _.each(emailData.order, function (n) {
+                            if(n.discountAmount){
+                                emailData.discount += n.discountAmount;
+                            }else{
+                                emailData.discount += 0;
+                            }
+                        })
+                        emailData.discount =_.round(emailData.discount);
+                        
                         // emailData.totalAmount = orderss.totalAmount;
                         _.each(emailData.order, function (n) {
                             total = total + n.price;
                         })
-                        emailData.totalAmount = total;
+                        emailData.totalAmount = _.round(total);
                         Config.returnedProductEmail(emailData, function (err, response) {
                             if (err) {
                                 console.log("error in email", err);
@@ -832,17 +853,28 @@ var model = {
                         emailData.billingAddress = orderss.billingAddress;
                         emailData.shippingAddress = orderss.shippingAddress;
                         emailData.shipping = orderss.shippingAmount;
-                        if (orderss.discountAmount) {
-                            emailData.discount = orderss.discountAmount;
-                        } else {
-                            emailData.discount = 0;
+                        emailData.discount=0;
+                        if(orderss.gst){
+                            emailData.tax =_.round(orderss.gst);
                         }
-                        emailData.tax = 0;
+                        else{
+                            emailData.tax =0;
+                        }
+                        emailData.totalAmount = orderss.totalAmount;
+                        _.each(emailData.order, function (n) {
+                            if(n.discountAmount){
+                                emailData.discount += n.discountAmount;
+                            }else{
+                                emailData.discount += 0;
+                            }
+                        })
+                        emailData.discount =_.round(emailData.discount);
+                        
                         // emailData.totalAmount = orderss.totalAmount;
                         _.each(emailData.order, function (n) {
                             total = total + n.price;
                         })
-                        emailData.totalAmount = total;
+                        emailData.totalAmount = _.round(total);
                         Config.cancelProductEmail(emailData, function (err, response) {
                             if (err) {
                                 console.log("error in email", err);
@@ -899,13 +931,22 @@ var model = {
                         emailData.billingAddress = orderss.billingAddress;
                         emailData.shippingAddress = orderss.shippingAddress;
                         emailData.shipping = orderss.shippingAmount;
-                        if (orderss.discountAmount) {
-                            emailData.discount = orderss.discountAmount;
-                        } else {
-                            emailData.discount = 0;
+                        emailData.discount=0;
+                        if(orderss.gst){
+                            emailData.tax =_.round(orderss.gst);
                         }
-                        emailData.tax = 0;
-                        emailData.totalAmount = orderss.totalAmount;
+                        else{
+                            emailData.tax =0;
+                        }
+                        emailData.totalAmount = _.round(orderss.totalAmount);
+                        _.each(emailData.order, function (n) {
+                            if(n.discountAmount){
+                                emailData.discount += n.discountAmount;
+                            }else{
+                                emailData.discount += 0;
+                            }
+                        })
+                        emailData.discount =_.round(emailData.discount);
                         // _.each(emailData.order, function (n) {
                         //     total = total + n.price;
                         // })
@@ -966,16 +1007,28 @@ var model = {
                         emailData.billingAddress = orderss.billingAddress;
                         emailData.shippingAddress = orderss.shippingAddress;
                         emailData.shipping = orderss.shippingAmount;
-                        if (orderss.discountAmount) {
-                            emailData.discount = orderss.discountAmount;
-                        } else {
-                            emailData.discount = 0;
+                        emailData.discount=0;
+                        if(orderss.gst){
+                            emailData.tax =_.round(orderss.gst);
                         }
-                        emailData.tax = 0;
-                        emailData.totalAmount = orderss.totalAmount;
-                        // _.each(emailData.order, function (n) {
-                        //     total = total + n.price;
-                        // })
+                        else{
+                            emailData.tax =0;
+                        }
+                        emailData.totalAmount = _.round(orderss.totalAmount);
+                        _.each(emailData.order, function (n) {
+                            if(n.discountAmount){
+                                emailData.discount += n.discountAmount;
+                            }else{
+                                emailData.discount += 0;
+                            }
+                        })
+                        emailData.discount =_.round(emailData.discount);
+                        
+                      
+                        console.log("jhsdfhsdkghnm", emailData.order)
+                        _.each(emailData.order, function (n) {
+                            total = total + n.price;
+                        })
                         // emailData.totalAmount = total;
                         Config.shippedProductEmail(emailData, function (err, response) {
                             if (err) {
