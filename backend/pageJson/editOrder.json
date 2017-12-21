@@ -93,7 +93,7 @@
         }, {
             "name": "Discount Amount",
             "type": "number",
-            "tableRef": "discountAmount",
+            "tableRef": "totalDiscount",
             "placeholder": "Enter discountAmount",
             "id": "discountAmount",
             "validation": ["", "trim", "unique"],
