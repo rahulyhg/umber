@@ -342,6 +342,7 @@ var model = {
                     }
                     // 59f06bc7647252477439a1e4
                     order.totalAmount = 0;
+                    order.totalDiscount = 0;
                     for (var idx = 0; idx < cart.products.length; idx++) {
                         var product = cart.products[idx];
                         var orderData = {
@@ -358,9 +359,17 @@ var model = {
                         }
                         order.products.push(orderData);
                         order.totalAmount += orderData.price;
+                        order.totalAmount -= orderData.discountAmount;
+                        if (orderData.discountAmount) {
+                            order.totalDiscount += orderData.discountAmount;
+                        } else {
+                            order.totalDiscount += 0;
+                        }
                     }
                     order.user = mongoose.Types.ObjectId(data.userId);
                     order.gst = cart.gst;
+                    order.totalAmount += order.gst;
+                    order.totalAmount = _.round(order.totalAmount)
                     order.shippingAmount = 0;
                     if (data.selectedDiscount) {
                         order.discountAmount = data.selectedDiscount.discountAmount;
@@ -671,6 +680,7 @@ var model = {
 
                         var emailData = {};
                         var total = 0;
+                        var cartAmount = 0;
                         emailData.email = created.email;
                         emailData.subject = "BurntUmber product Order";
                         emailData.filename = "confirmed-product-order-emailer.ejs";
@@ -690,22 +700,26 @@ var model = {
                         // } else {
                         //     emailData.discount = 0;
                         // }
-                        emailData.discount=0;
-                        if(orderss.gst){
-                            emailData.tax =_.round(orderss.gst);
+                        emailData.discount = 0;
+                        emailData.cartAmount = 0;
+                        if (orderss.gst) {
+                            emailData.tax = _.round(orderss.gst);
+                        } else {
+                            emailData.tax = 0;
                         }
-                        else{
-                            emailData.tax =0;
-                        }
-                        emailData.totalAmount = orderss.totalAmount;
                         _.each(emailData.order, function (n) {
-                            if(n.discountAmount){
+                            emailData.cartAmount = emailData.cartAmount + (n.product.price * n.quantity);
+                        });
+                        emailData.cartAmount = _.round(emailData.cartAmount);
+                        emailData.totalAmount = _.round(orderss.totalAmount);
+                        _.each(emailData.order, function (n) {
+                            if (n.discountAmount) {
                                 emailData.discount += n.discountAmount;
-                            }else{
+                            } else {
                                 emailData.discount += 0;
                             }
-                        })
-                        emailData.discount =_.round(emailData.discount);
+                        });
+                        emailData.discount = _.round(emailData.discount);
                         Config.ConfirmOrderPlacedMail(emailData, function (err, response) {
                             if (err) {
                                 console.log("error in email", err);
@@ -774,28 +788,32 @@ var model = {
                         emailData.billingAddress = orderss.billingAddress;
                         emailData.shippingAddress = orderss.shippingAddress;
                         emailData.shipping = orderss.shippingAmount;
-                        emailData.discount=0;
-                        if(orderss.gst){
-                            emailData.tax =_.round(orderss.gst);
-                        }
-                        else{
-                            emailData.tax =0;
+                        emailData.discount = 0;
+                        emailData.cartAmount = 0;
+                        if (orderss.gst) {
+                            emailData.tax = _.round(orderss.gst);
+                        } else {
+                            emailData.tax = 0;
                         }
                         emailData.totalAmount = orderss.totalAmount;
                         _.each(emailData.order, function (n) {
-                            if(n.discountAmount){
+                            if (n.discountAmount) {
                                 emailData.discount += n.discountAmount;
-                            }else{
+                            } else {
                                 emailData.discount += 0;
                             }
                         })
-                        emailData.discount =_.round(emailData.discount);
-                        
+                        emailData.discount = _.round(emailData.discount);
+
                         // emailData.totalAmount = orderss.totalAmount;
                         _.each(emailData.order, function (n) {
                             total = total + n.price;
                         })
                         emailData.totalAmount = _.round(total);
+                        _.each(emailData.order, function (n) {
+                            emailData.cartAmount = emailData.cartAmount + (n.product.price * n.quantity);
+                        });
+                        emailData.cartAmount = _.round(emailData.cartAmount);
                         Config.returnedProductEmail(emailData, function (err, response) {
                             if (err) {
                                 console.log("error in email", err);
@@ -853,28 +871,32 @@ var model = {
                         emailData.billingAddress = orderss.billingAddress;
                         emailData.shippingAddress = orderss.shippingAddress;
                         emailData.shipping = orderss.shippingAmount;
-                        emailData.discount=0;
-                        if(orderss.gst){
-                            emailData.tax =_.round(orderss.gst);
-                        }
-                        else{
-                            emailData.tax =0;
+                        emailData.discount = 0;
+                        emailData.cartAmount = 0;
+                        if (orderss.gst) {
+                            emailData.tax = _.round(orderss.gst);
+                        } else {
+                            emailData.tax = 0;
                         }
                         emailData.totalAmount = orderss.totalAmount;
                         _.each(emailData.order, function (n) {
-                            if(n.discountAmount){
+                            if (n.discountAmount) {
                                 emailData.discount += n.discountAmount;
-                            }else{
+                            } else {
                                 emailData.discount += 0;
                             }
                         })
-                        emailData.discount =_.round(emailData.discount);
-                        
+                        emailData.discount = _.round(emailData.discount);
+
                         // emailData.totalAmount = orderss.totalAmount;
                         _.each(emailData.order, function (n) {
                             total = total + n.price;
                         })
                         emailData.totalAmount = _.round(total);
+                        _.each(emailData.order, function (n) {
+                            emailData.cartAmount = emailData.cartAmount + (n.product.price * n.quantity);
+                        });
+                        emailData.cartAmount = _.round(emailData.cartAmount);
                         Config.cancelProductEmail(emailData, function (err, response) {
                             if (err) {
                                 console.log("error in email", err);
@@ -931,22 +953,26 @@ var model = {
                         emailData.billingAddress = orderss.billingAddress;
                         emailData.shippingAddress = orderss.shippingAddress;
                         emailData.shipping = orderss.shippingAmount;
-                        emailData.discount=0;
-                        if(orderss.gst){
-                            emailData.tax =_.round(orderss.gst);
-                        }
-                        else{
-                            emailData.tax =0;
+                        emailData.discount = 0;
+                        emailData.cartAmount = 0;
+                        if (orderss.gst) {
+                            emailData.tax = _.round(orderss.gst);
+                        } else {
+                            emailData.tax = 0;
                         }
                         emailData.totalAmount = _.round(orderss.totalAmount);
                         _.each(emailData.order, function (n) {
-                            if(n.discountAmount){
+                            if (n.discountAmount) {
                                 emailData.discount += n.discountAmount;
-                            }else{
+                            } else {
                                 emailData.discount += 0;
                             }
                         })
-                        emailData.discount =_.round(emailData.discount);
+                        emailData.discount = _.round(emailData.discount);
+                        _.each(emailData.order, function (n) {
+                            emailData.cartAmount = emailData.cartAmount + (n.product.price * n.quantity);
+                        });
+                        emailData.cartAmount = _.round(emailData.cartAmount);
                         // _.each(emailData.order, function (n) {
                         //     total = total + n.price;
                         // })
@@ -1007,25 +1033,26 @@ var model = {
                         emailData.billingAddress = orderss.billingAddress;
                         emailData.shippingAddress = orderss.shippingAddress;
                         emailData.shipping = orderss.shippingAmount;
-                        emailData.discount=0;
-                        if(orderss.gst){
-                            emailData.tax =_.round(orderss.gst);
-                        }
-                        else{
-                            emailData.tax =0;
+                        emailData.discount = 0;
+                        emailData.cartAmount = 0;
+                        if (orderss.gst) {
+                            emailData.tax = _.round(orderss.gst);
+                        } else {
+                            emailData.tax = 0;
                         }
                         emailData.totalAmount = _.round(orderss.totalAmount);
                         _.each(emailData.order, function (n) {
-                            if(n.discountAmount){
+                            if (n.discountAmount) {
                                 emailData.discount += n.discountAmount;
-                            }else{
+                            } else {
                                 emailData.discount += 0;
                             }
                         })
-                        emailData.discount =_.round(emailData.discount);
-                        
-                      
-                        console.log("jhsdfhsdkghnm", emailData.order)
+                        emailData.discount = _.round(emailData.discount);
+                        _.each(emailData.order, function (n) {
+                            emailData.cartAmount = emailData.cartAmount + (n.product.price * n.quantity);
+                        });
+                        emailData.cartAmount = _.round(emailData.cartAmount);
                         _.each(emailData.order, function (n) {
                             total = total + n.price;
                         })
