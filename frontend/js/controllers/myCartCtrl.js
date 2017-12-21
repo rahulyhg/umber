@@ -291,11 +291,11 @@
                                              cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
                                              if ($scope.priceWithDiscount > 999) {
-                                                 var unitPrice = ((cartProduct.product.price - $scope.priceWithDiscount) * 100) / (100 + 12);
+                                                 var unitPrice = ($scope.priceWithDiscount * 100) / (100 + 12);
                                                  var tax = unitPrice * 0.12
                                                  cartProduct.product.gst = tax;
                                              } else {
-                                                 var unitPrice = ((cartProduct.product.price - $scope.priceWithDiscount) * 100) / (100 + 5);
+                                                 var unitPrice = ($scope.priceWithDiscount * 100) / (100 + 5);
                                                  var tax = unitPrice * 0.05
                                                  cartProduct.product.gst = tax;
                                              }
@@ -553,7 +553,7 @@
                              uniqueProducts.push(seperateProductsInBOGOOffer[i])
                          }
                          if (seperateProductsInBOGOOffer.length > 2) {
-                             //  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAA", uniqueProducts);
+                             console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAA", uniqueProducts);
                              var current = uniqueProducts[0];
                              var cnt = 0;
 
@@ -584,15 +584,13 @@
 
                              }
                          } else {
-                             //  console.log("SSSSSSSSSSSSSSSSS")
                              _.each(finalArray, function (val) {
                                  _.each(seperateProductsInBOGOOffer, function (val1) {
                                      val.product.discountApplicable = true;
                                      if (val1.product._id == val.product._id) {
-                                         //  console.log("hfjksdhfsjd", val1.product._id, val.product._id)
                                          val.product.discountApplicable = true;
-                                         val.product.discountPriceOfProduct = val.product.price;
-                                         val.product.priceWithDiscount = val.product.price * val.quantity - val.product.price;
+                                         val.product.discountPriceOfProduct = 0;
+                                         val.product.priceWithDiscount = val.product.price * val.quantity;
                                          if (val.product.discountPriceOfProduct > 999) {
                                              var unitPrice = ((val.product.price - val.product.discountPriceOfProduct) * 100) / (100 + 12);
                                              var tax = unitPrice * 0.12
@@ -603,13 +601,13 @@
                                              val.product.gst = tax * val.quantity;
                                          }
                                      } else {
-                                         val1.product.discountApplicable = true;
-                                         val1.product.discountPriceOfProduct = val1.product.price;
-                                         val1.product.priceWithDiscount = 0;
+                                         val.product.discountApplicable = true;
+                                         val.product.discountPriceOfProduct = val.product.price;
+                                         val.product.priceWithDiscount = 0;
                                          if ($scope.priceWithDiscount > 999) {
-                                             val1.product.gst = 0;
+                                             val.product.gst = 0;
                                          } else {
-                                             val1.product.gst = 0;
+                                             val.product.gst = 0;
                                          }
                                      }
                                  });
