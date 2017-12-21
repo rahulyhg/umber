@@ -709,13 +709,13 @@ var model = {
                             emailData.tax = 0;
                         }
                         _.each(emailData.order, function (n) {
-                            emailData.cartAmount = emailData.cartAmount + (n.product.price * n.quantity);
+                            emailData.cartAmount = emailData.cartAmount + (_.round(n.product.price) * n.quantity);
                         });
                         emailData.cartAmount = _.round(emailData.cartAmount);
                         emailData.totalAmount = _.round(orderss.totalAmount);
                         _.each(emailData.order, function (n) {
                             if (n.discountAmount) {
-                                emailData.discount += n.discountAmount;
+                                emailData.discount += _.round(n.discountAmount);
                             } else {
                                 emailData.discount += 0;
                             }
