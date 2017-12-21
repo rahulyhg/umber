@@ -597,8 +597,8 @@
                                      val.product.discountApplicable = true;
                                      if (val1.product._id == val.product._id) {
                                          val.product.discountApplicable = true;
-                                         val.product.discountPriceOfProduct = 0;
-                                         val.product.priceWithDiscount = val.product.price * val.quantity;
+                                         val.product.discountPriceOfProduct = val.product.price;
+                                         val.product.priceWithDiscount = val.product.price * val.quantity - val.product.price;
                                          if (val.product.discountPriceOfProduct > 999) {
                                              var unitPrice = ((val.product.price - val.product.discountPriceOfProduct) * 100) / (100 + 12);
                                              var tax = unitPrice * 0.12
