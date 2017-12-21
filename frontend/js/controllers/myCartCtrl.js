@@ -291,11 +291,11 @@
                                              cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
                                              if ($scope.priceWithDiscount > 999) {
-                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 12);
+                                                 var unitPrice = ((cartProduct.product.price - $scope.priceWithDiscount) * 100) / (100 + 12);
                                                  var tax = unitPrice * 0.12
                                                  cartProduct.product.gst = tax * cartProduct.quantity;
                                              } else {
-                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 5);
+                                                 var unitPrice = ((cartProduct.product.price - $scope.priceWithDiscount) * 100) / (100 + 5);
                                                  var tax = unitPrice * 0.05
                                                  cartProduct.product.gst = tax * cartProduct.quantity;
                                              }
@@ -307,11 +307,11 @@
                                              cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
                                              if ($scope.priceWithDiscount > 999) {
-                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 12);
+                                                 var unitPrice = (($scope.priceWithDiscount) * 100) / (100 + 12);
                                                  var tax = unitPrice * 0.12
                                                  cartProduct.product.gst = tax * cartProduct.quantity;
                                              } else {
-                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 5);
+                                                 var unitPrice = (($scope.priceWithDiscount) * 100) / (100 + 5);
                                                  var tax = unitPrice * 0.05
                                                  cartProduct.product.gst = tax * cartProduct.quantity;
                                              }
@@ -323,11 +323,11 @@
                                              cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
                                              if ($scope.priceWithDiscount > 999) {
-                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 12);
+                                                 var unitPrice = ($scope.priceWithDiscount * 100) / (100 + 12);
                                                  var tax = unitPrice * 0.12
                                                  cartProduct.product.gst = tax * cartProduct.quantity;
                                              } else {
-                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 5);
+                                                 var unitPrice = ($scope.priceWithDiscount * 100) / (100 + 5);
                                                  var tax = unitPrice * 0.05
                                                  cartProduct.product.gst = tax * cartProduct.quantity;
                                              }
@@ -339,11 +339,11 @@
                                              cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
                                              if ($scope.priceWithDiscount > 999) {
-                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 12);
+                                                 var unitPrice = ($scope.priceWithDiscount * 100) / (100 + 12);
                                                  var tax = unitPrice * 0.12
                                                  cartProduct.product.gst = tax * cartProduct.quantity;
                                              } else {
-                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 5);
+                                                 var unitPrice = ($scope.priceWithDiscount * 100) / (100 + 5);
                                                  var tax = unitPrice * 0.05
                                                  cartProduct.product.gst = tax * cartProduct.quantity;
                                              }
@@ -355,11 +355,11 @@
                                              cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
                                              if ($scope.priceWithDiscount > 999) {
-                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 12);
+                                                 var unitPrice = ($scope.priceWithDiscount * 100) / (100 + 12);
                                                  var tax = unitPrice * 0.12
                                                  cartProduct.product.gst = tax * cartProduct.quantity;
                                              } else {
-                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 5);
+                                                 var unitPrice = ($scope.priceWithDiscount * 100) / (100 + 5);
                                                  var tax = unitPrice * 0.05
                                                  cartProduct.product.gst = tax * cartProduct.quantity;
                                              }
@@ -371,11 +371,11 @@
                                              cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
                                              if ($scope.priceWithDiscount > 999) {
-                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 12);
+                                                 var unitPrice = ($scope.priceWithDiscount * 100) / (100 + 12);
                                                  var tax = unitPrice * 0.12
                                                  cartProduct.product.gst = tax * cartProduct.quantity;
                                              } else {
-                                                 var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 5);
+                                                 var unitPrice = ($scope.priceWithDiscount * 100) / (100 + 5);
                                                  var tax = unitPrice * 0.05
                                                  cartProduct.product.gst = tax * cartProduct.quantity;
                                              }
