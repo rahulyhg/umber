@@ -210,6 +210,7 @@
                              discountAmount: $scope.grandTotalAfterDiscount,
                              grandTotalAfterDiscount: $scope.grandTotal,
                              grandTotalAfterGst: $scope.productGst,
+                             gst: $scope.productGst,
                              selectedDiscount: $scope.discountSelected,
                              totalAmountOfOrder: $scope.total
                          }
@@ -217,6 +218,7 @@
                          console.log("$scope.discountValueObject", $scope.discountValueObject);
                          $.jStorage.set("discountValues", $scope.discountValueObject);
                          $.jStorage.set("myCart", $scope.mycartTable.products);
+                         $.jStorage.set("gst", $scope.productGst);
 
 
                          //  myService.addCouponByUserFromCart(couponObj, function (data) {
@@ -399,12 +401,14 @@
                              discountAmount: $scope.grandTotalAfterDiscount,
                              grandTotalAfterDiscount: $scope.total - $scope.grandTotalAfterDiscount,
                              grandTotalAfterGst: $scope.productGst,
+                             gst: $scope.productGst,
                              selectedDiscount: $scope.discountSelected,
                              totalAmountOfOrder: $scope.total
                          }
                          console.log("$scope.discountValueObject", $scope.discountValueObject);
                          $.jStorage.set("discountValues", $scope.discountValueObject);
                          $.jStorage.set("myCart", $scope.mycartTable.products);
+                         $.jStorage.set("gst", $scope.productGst);
 
                      });
                  } else if ($scope.discountSelected.discountType == "59ede2fcd30c7e2ab3324ece") {
@@ -435,12 +439,14 @@
                              discountAmount: $scope.grandTotalAfterDiscount,
                              grandTotalAfterDiscount: $scope.grandTotal,
                              grandTotalAfterGst: $scope.productGst,
+                             gst: $scope.productGst,
                              selectedDiscount: $scope.discountSelected,
                              totalAmountOfOrder: $scope.total
                          }
                          console.log("$scope.discountValueObject", $scope.discountValueObject);
                          $.jStorage.set("discountValues", $scope.discountValueObject);
                          $.jStorage.set("myCart", $scope.mycartTable.products);
+                         $.jStorage.set("gst", $scope.productGst);
                          $scope.Couponmodal.close();
                      } else {
                          alert("Your Cart Total Low to Avail This Discount!!! Shop More to Get This Discount...");
@@ -473,11 +479,13 @@
                              discountAmount: $scope.grandTotalAfterDiscount,
                              grandTotalAfterDiscount: $scope.grandTotal,
                              grandTotalAfterGst: $scope.productGst,
+                             gst: $scope.productGst,
                              selectedDiscount: $scope.discountSelected,
                              totalAmountOfOrder: $scope.total
                          }
                          console.log("$scope.discountValueObject", $scope.discountValueObject);
                          $.jStorage.set("discountValues", $scope.discountValueObject);
+                         $.jStorage.set("gst", $scope.productGst);
                          //  $.jStorage.set("gifts", $scope.gifts);
                          //  $scope.grandTotal = $scope.grandTotal - $scope.discountSelected.xValue;
                          //  $scope.grandTotalAfterDiscount = $scope.discountSelected.xValue;
@@ -651,13 +659,14 @@
                              discountAmount: $scope.grandTotalAfterDiscount,
                              grandTotalAfterDiscount: $scope.grandTotal,
                              grandTotalAfterGst: $scope.productGst,
+                             gst: $scope.productGst,
                              selectedDiscount: $scope.discountSelected,
                              totalAmountOfOrder: $scope.total
                          }
                          console.log("$scope.discountValueObject", $scope.discountValueObject);
                          $.jStorage.set("discountValues", $scope.discountValueObject);
                          $.jStorage.set("myCart", $scope.mycartTable.products);
-
+                         $.jStorage.set("gst", $scope.productGst);
                          $scope.Couponmodal.close();
 
                      });
@@ -941,6 +950,7 @@
          var cart = {};
          cart.product = $.jStorage.get("myCart");
          cart.userId = $.jStorage.get("userId");
+         cart.gst = $.jStorage.get("gst");
          cart.accessToken = $.jStorage.get("accessToken");
          if ($scope.discountApplicableforCart) {
              CartService.saveCartWithDiscount(cart, function (data) {

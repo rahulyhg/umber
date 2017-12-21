@@ -17,7 +17,8 @@ var schema = new Schema({
         comment: {
             type: String
         }
-    }]
+    }],
+    gst: Number
 });
 
 schema.plugin(deepPopulate, {
@@ -33,7 +34,7 @@ module.exports = mongoose.model('Cart', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "products.product", "products.product"));
 var model = {
-    setProductInCart: function (userId, product, callback) {
+    setProductInCart: function (userId, product, gst, callback) {
         console.log("Each product: ", product);
         var cart = {};
         cart.products = [];
@@ -52,7 +53,7 @@ var model = {
         });
         // console.log("#########product in cart#####", cart.products);
         cart.userId = userId;
-
+        cart.gst = gst;
         async.waterfall([
                 function checkProduct(cbWaterfall1) {
                     // Check if product is available
@@ -110,8 +111,9 @@ var model = {
                                         comment: product.comment
                                     });
                                     foundCart.userId = userId;
+                                    foundCart.gst = gst;
                                     Cart.saveData(foundCart, function (err, data) {
-                                        console.log("!!!!!!foundcart in saveData", foundCart)
+                                        // console.log("!!!!!!foundcart in saveData", foundCart)
                                         if (err) {
                                             cbWaterfall2(err, null);
                                         } else if (data) {
@@ -133,6 +135,7 @@ var model = {
                                         foundCart.products[idx].quantity += product.reqQuantity;
                                         foundCart.products[idx].comment = product.comment;
                                     }
+                                    foundCart.gst = gst;
                                     Cart.saveData(foundCart, function (err, data) {
                                         if (err) {
                                             cbWaterfall2(err, null);
@@ -190,7 +193,7 @@ var model = {
             function saveCart(userId, cbWaterfall2) {
                 if (product.products instanceof Array) {
                     async.eachSeries(product.products, function (eachProduct, eachCallback) {
-                        Cart.setProductInCart(userId, eachProduct.product, eachCallback);
+                        Cart.setProductInCart(userId, eachProduct.product, null, eachCallback);
                     }, function (err) {
                         if (err) {
                             cbWaterfall2(err, null);
@@ -201,7 +204,7 @@ var model = {
                         }
                     });
                 } else {
-                    Cart.setProductInCart(userId, product, cbWaterfall2);
+                    Cart.setProductInCart(userId, product, null, cbWaterfall2);
                 }
             }
         ], function (err, data) {
@@ -296,7 +299,7 @@ var model = {
             async.eachSeries(product.product, function (eachProduct, eachCallback) {
                 eachProduct.product.reqQuantity = eachProduct.quantity;
                 eachProduct.product.quantityUpdate = true;
-                Cart.setProductInCart(product.userId, eachProduct.product, eachCallback);
+                Cart.setProductInCart(product.userId, eachProduct.product, product.gst, eachCallback);
             }, function (err) {
                 if (err) {
                     callback(err, null);
@@ -307,7 +310,7 @@ var model = {
                 }
             });
         } else {
-            Cart.setProductInCart(product.userId, product, callback);
+            Cart.setProductInCart(product.userId, product, product.gst, callback);
         }
     }
 };
