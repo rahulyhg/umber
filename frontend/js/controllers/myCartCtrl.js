@@ -614,19 +614,19 @@
                          }
 
                          if (finalArray) {
-                             console.log("in if")
+                             //  console.log("in if")
                              _.each(finalArray, function (last) {
                                  totalDiscount = totalDiscount + last.product.price;
-                                 last.product.gst = (last.product.price * last.quantity - last.product.discountPriceOfProduct) * 0.12;
-                                 var unitPrice = ((last.product.price - last.product.discountPriceOfProduct) * 100) / (100 + 12);
-                                 var tax = unitPrice * 0.12
-                                 val.product.gst = tax;
+                                 //  last.product.gst = (last.product.price * last.quantity - last.product.discountPriceOfProduct) * 0.12;
+                                 var unitPrice = ((last.product.price * last.quantity - last.product.discountPriceOfProduct) * 100) / (100 + 12);
+                                 var tax = unitPrice * 0.12;
+                                 last.product.gst = tax;
                              });
-                             console.log("totalDiscount in if last", totalDiscount);
+                             //  console.log("totalDiscount in if last", totalDiscount);
                          } else {
-                             console.log("In else");
+                             //  console.log("In else");
                          }
-                         console.log("after if else", allDiscountedProcuctsTotalQty - totalDiscount);
+                         //  console.log("after if else", allDiscountedProcuctsTotalQty - totalDiscount);
                          if (sumOfPricesToBeDiscard < 1) {
                              tC = 0;
                          } else {
