@@ -359,11 +359,12 @@ var model = {
                         }
                         order.products.push(orderData);
                         order.totalAmount += orderData.price;
-                        order.totalAmount -= orderData.discountAmount;
                         if (orderData.discountAmount) {
                             order.totalDiscount += orderData.discountAmount;
+                            order.totalAmount -= orderData.discountAmount;
                         } else {
                             order.totalDiscount += 0;
+                            order.totalAmount -= 0;
                         }
                     }
                     order.user = mongoose.Types.ObjectId(data.userId);
