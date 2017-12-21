@@ -72,7 +72,7 @@ var schema = new Schema({
         required: true
     },
     gst: Number,
-    grandTotal: Number,
+    subTotal: Number,
     shippingAmount: Number,
     totalDiscount: Number,
     paymentMethod: {
@@ -1009,18 +1009,18 @@ var model = {
         var discountPrice = 0;
         var taxLimiter=1000;
         var gst = 0;
-        var totalAmount = 0;
+        var subTotal = 0;
         var totalDiscount =0;
         Order.findOne({
             _id: data.orderId
         }).lean().deepPopulate("products.product user").exec(function (err, order) {
             _.each(order.products, function (product, index) {
-                price = _.ceil(product.product.price);
+                price = _.round(product.product.price);
                 if(product.discountAmount != undefined){
-                    discountPrice = _.round((product.discountAmount), 2);
+                    discountPrice = _.round((product.discountAmount));
                 }
-                discountPercent = ((discountPrice) * 100) / price;
-                    value = price * product.quantity; 
+                value = price * product.quantity; 
+                discountPercent = ((discountPrice) * 100) / value;
                     priceAfterDiscount = value - discountPrice;
                     if (priceAfterDiscount <= taxLimiter) {
                         taxPercent = 5;
@@ -1028,24 +1028,24 @@ var model = {
                         taxPercent = 12;
                     }
                     unitPrice= (priceAfterDiscount*100)/(100 + taxPercent);
-                    taxAmt = _.round(((taxPercent / 100) * unitPrice), 2);
+                    taxAmt = _.round(((taxPercent / 100) * unitPrice));
                     if (discountPrice > 0 ) {
                         gst = gst + taxAmt;
                     }
-                product.value = _.ceil(value);
-                product.unitPrice = _.ceil(unitPrice);
-                product.taxAmt = _.ceil(taxAmt);
+                product.value = _.round(value);
+                product.unitPrice = _.round(unitPrice);
+                product.taxAmt = _.round(taxAmt);
                 product.taxPercent = taxPercent;
-                product.discountAmount = _.ceil(discountPrice);
+                product.discountAmount = _.round(discountPrice);
                 product.discountPercent = discountPercent;
-                product.finalAmt = _.ceil(finalAmt);
-                totalAmount += _.ceil(value);
-                totalDiscount+= _.ceil(discountPrice);
+                product.finalAmt = _.round(finalAmt);
+                subTotal += _.round(value);
+                totalDiscount+= _.round(discountPrice);
             });
-            order.gst = _.ceil(gst);
+            order.gst = _.round(gst);
             order.totalDiscount = totalDiscount;
-            order.totalAmount = totalAmount;
-            order.grandTotal = _.round((totalAmount - totalDiscount) + gst+ order.shippingAmount, 2);
+            order.subTotal = subTotal;
+            order.totalAmount = _.round((subTotal - totalDiscount) + gst+ order.shippingAmount);
             order.date = (new Date()).toLocaleDateString();
             Order.saveData(order, function (err, data) {
                 if (err) {
