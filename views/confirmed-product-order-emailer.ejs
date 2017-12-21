@@ -310,7 +310,7 @@
             border-right: 1px solid #e5e5e5;
             border-bottom: 1px solid #e5e5e5; text-align: right; vertical-align:top">
                                         <div style="margin: 10px 0; color: #341314; font-weight:bold;">&#8377;
-                                            <%=order[i].product.price %>
+                                            <%=_.round(order[i].product.price) %>
                                         </div>
                                     </td>
                                 </tr>
@@ -341,13 +341,13 @@
                                                             <%= discount%>
                                                                 </span>
                                                                 <span class=" clearfix" style="display:block;"><span style="float: left"> &#8377;</span>
-                                                                <%= totalAmount - tax%>
+                                                                <%=cartAmount - discount%>
                                                                     </span>
                                                                     <span class="clearfix" style=" border-bottom: 1px solid #341314;display:block;"><span style="float: left">&#8377;</span>
                                                                     <%= tax%>
                                                                         </span>
                                                                         <span class="clearfix" style="display:block;"><span style="float: left"> &#8377;</span>
-                                                                        <%= totalAmount%>
+                                                                        <%=cartAmount - discount + tax%>
                                                                             </span>
 
                                                 </div>
