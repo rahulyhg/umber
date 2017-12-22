@@ -197,6 +197,15 @@
 
                          _.each($scope.mycartTable.products, function (cartProduct) {
                              cartProduct.product.discountApplicable = false;
+                             //  if (cartProduct.product.price != cartProduct.product.mrp) {
+                             //      if (cartProduct.product.price > 999) {
+                             //          cartProduct.product.gst = (cartProduct.product.price * cartProduct.quantity) * 0.12;
+                             //      } else {
+                             //          cartProduct.product.gst = (cartProduct.product.price * cartProduct.quantity) * 0.05;
+                             //      }
+                             //  } else {
+                             //      cartProduct.product.gst = 0;
+                             //  }
                              $scope.productGst = $scope.productGst + cartProduct.product.gst;
                          });
                          console.log("$scope.mycartTable.products$scope.mycartTable.products", $scope.mycartTable.products)
@@ -274,14 +283,15 @@
                                              cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct;
                                              cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = cartProduct.product.price - $scope.discountPriceOfProduct;
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
-                                             //  console.log("HIEEEEEEEEEEEEEEEEEEE33333", cartProduct.product.discountApplicable);
                                              if ($scope.priceWithDiscount > 999) {
                                                  var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 12);
-                                                 var tax = unitPrice * 0.12
+                                                 //  var tax = unitPrice * 0.12;
+                                                 var tax = $scope.priceWithDiscount * 0.12;
                                                  cartProduct.product.gst = tax;
                                              } else {
                                                  var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 5);
-                                                 var tax = unitPrice * 0.05
+                                                 //  var tax = unitPrice * 0.05;
+                                                 var tax = $scope.priceWithDiscount * 0.05;
                                                  cartProduct.product.gst = tax;
                                              }
                                              //  $scope.productGst = $scope.productGst + value.product.gst;
@@ -294,11 +304,13 @@
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
                                              if ($scope.priceWithDiscount > 999) {
                                                  var unitPrice = ($scope.priceWithDiscount * 100) / (100 + 12);
-                                                 var tax = unitPrice * 0.12
+                                                 //  var tax = unitPrice * 0.12;
+                                                 var tax = $scope.priceWithDiscount * 0.12;
                                                  cartProduct.product.gst = tax;
                                              } else {
                                                  var unitPrice = ($scope.priceWithDiscount * 100) / (100 + 5);
-                                                 var tax = unitPrice * 0.05
+                                                 //  var tax = unitPrice * 0.05
+                                                 var tax = $scope.priceWithDiscount * 0.05;
                                                  cartProduct.product.gst = tax;
                                              }
                                              $scope.Couponmodal.close();
@@ -310,11 +322,13 @@
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
                                              if ($scope.priceWithDiscount > 999) {
                                                  var unitPrice = (($scope.priceWithDiscount) * 100) / (100 + 12);
-                                                 var tax = unitPrice * 0.12
+                                                 //  var tax = unitPrice * 0.12;
+                                                 var tax = $scope.priceWithDiscount * 0.12;
                                                  cartProduct.product.gst = tax;
                                              } else {
                                                  var unitPrice = (($scope.priceWithDiscount) * 100) / (100 + 5);
-                                                 var tax = unitPrice * 0.05
+                                                 //  var tax = unitPrice * 0.05;
+                                                 var tax = $scope.priceWithDiscount * 0.05;
                                                  cartProduct.product.gst = tax;
                                              }
                                              $scope.Couponmodal.close();
@@ -326,11 +340,13 @@
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
                                              if ($scope.priceWithDiscount > 999) {
                                                  var unitPrice = ($scope.priceWithDiscount * 100) / (100 + 12);
-                                                 var tax = unitPrice * 0.12
+                                                 //  var tax = unitPrice * 0.12
+                                                 var tax = $scope.priceWithDiscount * 0.12;
                                                  cartProduct.product.gst = tax;
                                              } else {
                                                  var unitPrice = ($scope.priceWithDiscount * 100) / (100 + 5);
-                                                 var tax = unitPrice * 0.05
+                                                 //  var tax = unitPrice * 0.05;
+                                                 var tax = $scope.priceWithDiscount * 0.05;
                                                  cartProduct.product.gst = tax;
                                              }
                                              $scope.Couponmodal.close();
@@ -342,11 +358,13 @@
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
                                              if ($scope.priceWithDiscount > 999) {
                                                  var unitPrice = ($scope.priceWithDiscount * 100) / (100 + 12);
-                                                 var tax = unitPrice * 0.12
+                                                 //  var tax = unitPrice * 0.12;
+                                                 var tax = $scope.priceWithDiscount * 0.12;
                                                  cartProduct.product.gst = tax;
                                              } else {
                                                  var unitPrice = ($scope.priceWithDiscount * 100) / (100 + 5);
-                                                 var tax = unitPrice * 0.05
+                                                 //  var tax = unitPrice * 0.05;
+                                                 var tax = $scope.priceWithDiscount * 0.05;
                                                  cartProduct.product.gst = tax;
                                              }
                                              $scope.Couponmodal.close();
@@ -358,11 +376,13 @@
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
                                              if ($scope.priceWithDiscount > 999) {
                                                  var unitPrice = ($scope.priceWithDiscount * 100) / (100 + 12);
-                                                 var tax = unitPrice * 0.12
+                                                 //  var tax = unitPrice * 0.12;
+                                                 var tax = $scope.priceWithDiscount * 0.12;
                                                  cartProduct.product.gst = tax;
                                              } else {
                                                  var unitPrice = ($scope.priceWithDiscount * 100) / (100 + 5);
-                                                 var tax = unitPrice * 0.05
+                                                 //  var tax = unitPrice * 0.05;
+                                                 var tax = $scope.priceWithDiscount * 0.05;
                                                  cartProduct.product.gst = tax;
                                              }
                                              $scope.Couponmodal.close();
@@ -374,11 +394,13 @@
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
                                              if ($scope.priceWithDiscount > 999) {
                                                  var unitPrice = ($scope.priceWithDiscount * 100) / (100 + 12);
-                                                 var tax = unitPrice * 0.12
+                                                 //  var tax = unitPrice * 0.12;
+                                                 var tax = $scope.priceWithDiscount * 0.12;
                                                  cartProduct.product.gst = tax;
                                              } else {
                                                  var unitPrice = ($scope.priceWithDiscount * 100) / (100 + 5);
-                                                 var tax = unitPrice * 0.05
+                                                 //  var tax = unitPrice * 0.05;
+                                                 var tax = $scope.priceWithDiscount * 0.05;
                                                  cartProduct.product.gst = tax;
                                              }
                                              $scope.Couponmodal.close();
@@ -388,6 +410,16 @@
                                              cartProduct.product.discountPriceOfProduct = $scope.discountPriceOfProduct = $scope.discountPriceOfProduct = 0;
                                              cartProduct.product.priceWithDiscount = $scope.priceWithDiscount = (cartProduct.product.price * cartProduct.quantity) - $scope.discountPriceOfProduct;
                                              $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
+                                             if (cartProduct.product.price != cartProduct.product.mrp) {
+                                                 if (cartProduct.product.price > 999) {
+                                                     cartProduct.product.gst = $scope.priceWithDiscount * 0.12;
+                                                 } else {
+                                                     cartProduct.product.gst = $scope.priceWithDiscount * 0.05;
+                                                 }
+                                             } else {
+                                                 cartProduct.product.gst = 0;
+                                             }
+
                                              $scope.Couponmodal.close();
                                              break;
                                      }
@@ -429,6 +461,15 @@
                      }
                      _.each($scope.mycartTable.products, function (cartProduct) {
                          cartProduct.product.discountApplicable = false;
+                         //  if (cartProduct.product.price != cartProduct.product.mrp) {
+                         //      if (cartProduct.product.price > 999) {
+                         //          cartProduct.product.gst = (cartProduct.product.price * cartProduct.quantity) * 0.12;
+                         //      } else {
+                         //          cartProduct.product.gst = (cartProduct.product.price * cartProduct.quantity) * 0.05;
+                         //      }
+                         //  }else{
+                         //      cartProduct.product.gst=0;
+                         //  }
                          $scope.productGst = $scope.productGst + cartProduct.product.gst;
                      });
                      if ($scope.grandTotal >= $scope.discountSelected.yValue) {
@@ -459,6 +500,17 @@
                      if ($scope.mycartTable) {
                          $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
                          $scope.grandTotalAfterDiscount = 0;
+                         _.each($scope.mycartTable.products, function (cartProduct) {
+                             //  if (cartProduct.product.price != cartProduct.product.mrp) {
+                             //      if (cartProduct.product.price > 999) {
+                             //          cartProduct.product.gst = (cartProduct.product.price * cartProduct.quantity) * 0.12;
+                             //      } else {
+                             //          cartProduct.product.gst = (cartProduct.product.price * cartProduct.quantity) * 0.005;
+                             //      }
+                             //  } else {
+                             //      cartProduct.product.gst = 0;
+                             //  }
+                         });
                          //  $.jStorage.set("grandTotal", $scope.grandTotal);
                      }
                      //  if ($scope.grandTotal >= $scope.discountSelected.xValue) {
@@ -540,6 +592,15 @@
                                      console.log("seperateProductsInBOGOOffer", seperateProductsInBOGOOffer);
                                  }
                              });
+                             //  if (cartProduct.product.price != cartProduct.product.mrp) {
+                             //      if (cartProduct.product.price > 999) {
+                             //          cartProduct.product.gst = cartProduct.product.price * 0.12;
+                             //      } else {
+                             //          cartProduct.product.gst = cartProduct.product.price * 0.05;
+                             //      }
+                             //  } else {
+                             //      cartProduct.product.gst = 0;
+                             //  }
                          });
                          var allDiscountedProcuctsTotalQty = 0;
                          _.each(seperateProductsInBOGOOffer, function (last1) {
@@ -561,7 +622,6 @@
                              uniqueProducts.push(seperateProductsInBOGOOffer[i])
                          }
                          if (seperateProductsInBOGOOffer.length > 2) {
-                             console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAA", uniqueProducts);
                              var current = uniqueProducts[0];
                              var cnt = 0;
 
@@ -588,9 +648,7 @@
                                      });
                                  }
                              }
-                             if (cnt > 0) {
-
-                             }
+                             if (cnt > 0) {}
                          } else {
                              _.each(finalArray, function (val) {
                                  _.each(seperateProductsInBOGOOffer, function (val1) {
@@ -601,11 +659,13 @@
                                          val.product.priceWithDiscount = val.product.price * val.quantity - val.product.price;
                                          if (val.product.discountPriceOfProduct > 999) {
                                              var unitPrice = ((val.product.price - val.product.discountPriceOfProduct) * 100) / (100 + 12);
-                                             var tax = unitPrice * 0.12
+                                             //  var tax = unitPrice * 0.12;
+                                             var tax = val.product.priceWithDiscount * 0.12;
                                              val.product.gst = tax * val.quantity;
                                          } else {
                                              var unitPrice = ((val.product.price - val.product.discountPriceOfProduct) * 100) / (100 + 5);
-                                             var tax = unitPrice * 0.05
+                                             //  var tax = unitPrice * 0.05;
+                                             var tax = val.product.priceWithDiscount * 0.05;
                                              val.product.gst = tax * val.quantity;
                                          }
                                      } else {
@@ -628,7 +688,8 @@
                                  totalDiscount = totalDiscount + last.product.price;
                                  //  last.product.gst = (last.product.price * last.quantity - last.product.discountPriceOfProduct) * 0.12;
                                  var unitPrice = ((last.product.price * last.quantity - last.product.discountPriceOfProduct) * 100) / (100 + 12);
-                                 var tax = unitPrice * 0.12;
+                                 //  var tax = unitPrice * 0.12;
+                                 var tax = (last.product.price * last.quantity - last.product.discountPriceOfProduct) * 0.12;
                                  last.product.gst = tax;
                              });
                              //  console.log("totalDiscount in if last", totalDiscount);
@@ -808,18 +869,19 @@
                  //      console.log("fdsssssfffffffffff")
                  //      var dis = 0;
                  //  }
-                 //  if (value.product.price > 999) {
-                 //      var unitPrice = ((value.product.price - dis) * 100) / (100 + 12);
-                 //      var tax = unitPrice * 0.12;
-                 //      console.log("fdsssssfffffffffff", tax)
-                 //      value.product.gst = tax * value.quantity;
-
-                 //  } else {
-                 //      var unitPrice = ((value.product.price - dis) * 100) / (100 + 5);
-                 //      var tax = unitPrice * 0.05
-                 //      value.product.gst = tax * value.quantity;
-                 //  }
-                 value.product.gst = 0;
+                 if (value.product.price != value.product.mrp) {
+                     if (value.product.price > 999) {
+                         //   var unitPrice = ((value.product.price - dis) * 100) / (100 + 12);
+                         var tax = (value.product.price * value.quantity) * 0.12;
+                         value.product.gst = tax;
+                     } else {
+                         //  var unitPrice = ((value.product.price - dis) * 100) / (100 + 5);
+                         var tax = (value.product.price * value.quantity) * 0.05;
+                         value.product.gst = tax;
+                     }
+                 } else {
+                     value.product.gst = 0;
+                 }
                  $scope.productGst = $scope.productGst + value.product.gst;
                  $scope.productArrayForDiscount.push(value.product._id);
 

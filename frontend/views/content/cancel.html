@@ -18,7 +18,8 @@
               <th class="align-middle">item ordered</th>
               <th class="align-middle">price</th>
               <th class="align-middle">quantity</th>
-              <th class="align-middle">cancel item</th>
+              <th class="align-middle"></th>
+              <!--<th class="align-middle">cancel item</th>-->
             </tr>
           </thead>
           <tbody ng-repeat="product in order.products">
@@ -64,12 +65,12 @@
                 </div>
               </td>
               <td>
-                <div class=" custom-checkbox">
+                <!--<div class=" custom-checkbox">
                   <div class="inline-block checkbox">
                     <input type="checkbox" id="{{product.product.productCode}}" ng-click="selectedProduct(product)" ng-checked="check(product.product._id)">
                     <label for="{{product.product.productCode}}"></label>
                   </div>
-                </div>
+                </div>-->
               </td>
             </tr>
           </tbody>
