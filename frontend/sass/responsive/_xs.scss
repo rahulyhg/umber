@@ -899,6 +899,10 @@
                  // Used this class in listing-ctrl.js in modal
                  width: auto;
              }
+             .modal-container .marginTop,
+             .modal-container-right .marginTop {
+                 margin-top: 25px;
+             }
              .modal-container {
                  .minHeight {
                      min-height: 260px;
@@ -912,6 +916,7 @@
                  @include padding(15px);
                  .login-head {
                      h1 {
+                         margin-top: 10px;
                          font-size: 20px;
                      }
                      p {
