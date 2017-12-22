@@ -1160,13 +1160,16 @@ var model = {
                 } else {
                     taxPercent = 12;
                 }
+                //buy one get x% discount
                 if (discountPrice > 0) {
                     unitPrice = priceAfterDiscount;
                 }
+                //non discounted or discounted items 
                 else{
                     unitPrice = (priceAfterDiscount * 100) / (100 + taxPercent);
                 }
                 taxAmt = _.round(((taxPercent / 100) * unitPrice));
+                //non discounted
                 if( price!==_.round(product.product.mrp)){
                     gst +=taxAmt;
                 }
