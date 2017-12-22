@@ -1,5 +1,3 @@
-
-
 //import { prependListener } from 'cluster';
 
 // import { disconnect } from 'cluster';
@@ -80,15 +78,15 @@ var schema = new Schema({
     subTotal: Number,
     shippingAmount: Number,
     totalDiscount: Number,
-    invoiceNumberIncr:Number,
-    invoiceNumber:String,
-    orderNumberIncr:Number,
+    invoiceNumberIncr: Number,
+    invoiceNumber: String,
+    orderNumberIncr: Number,
     paymentMethod: {
         type: String,
         enum: ['cod', 'cc', 'dc', 'netbank'],
         default: 'cod'
     },
-    invoicePdfName:String,
+    invoicePdfName: String,
     courierType: {
         type: Schema.Types.ObjectId,
         ref: 'Courier'
@@ -159,14 +157,14 @@ schema.plugin(autoIncrement.plugin, {
     field: 'invoiceNumberIncr',
     startAt: 0000001,
     incrementBy: 1
-    });
+});
 
 schema.plugin(autoIncrement.plugin, {
-        model:'Order',
-        field: 'orderNumberIncr',
-        startAt: 0000001,
-        incrementBy: 1
-    });
+    model: 'Order',
+    field: 'orderNumberIncr',
+    startAt: 0000001,
+    incrementBy: 1
+});
 
 schema.plugin(deepPopulate, {
     populate: {
@@ -391,7 +389,7 @@ var model = {
                         }
                     }
                     order.user = mongoose.Types.ObjectId(data.userId);
-                    order.gst = cart.gst;
+                    order.gst = _.round(cart.gst);
                     order.totalAmount += _.round(order.gst);
                     order.totalAmount = _.round(order.totalAmount)
                     order.shippingAmount = 0;
@@ -404,7 +402,7 @@ var model = {
                     }
                     order.paymentMethod = paymentMethod;
                     order.gifts = gifts;
-                    
+
                     // console.log("order: ", order);
                     Order.saveData(order, function (err, data1) {
                         //console.log("$$$$$$$$$order: ", order);
@@ -469,19 +467,19 @@ var model = {
                                             new: true
                                         }).exec()
                                         // callback(null, order);
-                                    }            
+                                    }
                                 }
-                                model.generateInvoiceOrOrderYear("OR",function(err,orderYear){
+                                model.generateInvoiceOrOrderYear("OR", function (err, orderYear) {
                                     num = order.orderNumberIncr;
                                     num = '' + num;
                                     while (num.length < 7) {
-                                          num = '0' + num;
-                                     }
-                                     order.orderNo = orderYear+num;
-                                     Order.saveData(order, function (err, data) {
+                                        num = '0' + num;
+                                    }
+                                    order.orderNo = orderYear + num;
+                                    Order.saveData(order, function (err, data) {
                                         if (err) {
                                             console.log(err);
-                                        } 
+                                        }
                                     })
                                 })
                                 callback(null, order);
@@ -701,7 +699,7 @@ var model = {
     },
     //API to send order placed Email
     ConfirmOrderPlacedMail: function (data, callback) {
-        
+
         User.findOne({
             _id: data._id
         }).exec(function (error, created) {
@@ -1119,18 +1117,17 @@ var model = {
             }
         })
     },
-    generateInvoiceOrOrderYear:function( str,callback){
+    generateInvoiceOrOrderYear: function (str, callback) {
         var today = new Date();
-        var lastTwoDigitYear = today.getFullYear().toString().substr(2,2);
-        var dateLimit = new Date(today.getFullYear().toString()+"-04-01");
-        var strYear="";
-        if(today > dateLimit){
-            strYear = lastTwoDigitYear+(parseInt(lastTwoDigitYear)+1).toString(); 
+        var lastTwoDigitYear = today.getFullYear().toString().substr(2, 2);
+        var dateLimit = new Date(today.getFullYear().toString() + "-04-01");
+        var strYear = "";
+        if (today > dateLimit) {
+            strYear = lastTwoDigitYear + (parseInt(lastTwoDigitYear) + 1).toString();
+        } else {
+            strYear = (parseInt(lastTwoDigitYear) - 1).toString() + lastTwoDigitYear;
         }
-        else{
-            strYear = (parseInt(lastTwoDigitYear)-1).toString()+lastTwoDigitYear;
-        }
-        callback(null,str+strYear.toString());
+        callback(null, str + strYear.toString());
     },
     generateInvoice: function (data, callback) {
         var taxPercent = 0;
@@ -1164,13 +1161,12 @@ var model = {
                 gst = gst + taxAmt;
                 if (discountPrice > 0) {
                     unitPrice = priceAfterDiscount;
-                }
-                else{
+                } else {
                     unitPrice = (priceAfterDiscount * 100) / (100 + taxPercent);
                 }
                 taxAmt = _.round(((taxPercent / 100) * unitPrice));
-                if( price!==_.round(product.product.mrp)){
-                    gst +=taxAmt;
+                if (price !== _.round(product.product.mrp)) {
+                    gst += taxAmt;
                 }
                 product.value = _.round(value);
                 product.unitPrice = _.round(unitPrice);
@@ -1182,13 +1178,13 @@ var model = {
                 subTotal += _.round(value);
                 totalDiscount += _.round(discountPrice);
             });
-            model.generateInvoiceOrOrderYear("BU",function(err,invoiceYear){
+            model.generateInvoiceOrOrderYear("BU", function (err, invoiceYear) {
                 num = order.invoiceNumberIncr;
                 num = '' + num;
                 while (num.length < 7) {
-                      num = '0' + num;
-                 }
-                order.invoiceNumber = invoiceYear+num;
+                    num = '0' + num;
+                }
+                order.invoiceNumber = invoiceYear + num;
             });
             order.gst = _.round(gst);
             order.totalDiscount = totalDiscount;
@@ -1202,7 +1198,7 @@ var model = {
                     callback(null, order);
                 }
             })
-            
+
         });
     },
     sendEmail: function (order, prevCallback) {
@@ -1210,13 +1206,14 @@ var model = {
             function (callback) {
                 Config.generatePdf("invoice-actual", order, callback);
             },
-            function (data,callback) {
-               order.invoicePdfName = data.name;
-               Order.saveData(order, function (err, data) {
-                if (err) {
-                    console.log(err);obj
-                } else {
-                    callback(null, order);
+            function (data, callback) {
+                order.invoicePdfName = data.name;
+                Order.saveData(order, function (err, data) {
+                    if (err) {
+                        console.log(err);
+                        obj
+                    } else {
+                        callback(null, order);
                     }
                 })
             },
@@ -1227,7 +1224,7 @@ var model = {
                 emailData.body = "Invoice";
                 emailData.from = "supriya.kadam478@hotmail.com";
                 emailData.filename = data.invoicePdfName;
-                Config.sendEmailAttachment(emailData, callback);      
+                Config.sendEmailAttachment(emailData, callback);
             }
         ], function (err, results) {
             if (err) {
