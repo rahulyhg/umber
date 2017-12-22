@@ -1158,7 +1158,6 @@ var model = {
                 } else {
                     taxPercent = 12;
                 }
-                gst = gst + taxAmt;
                 if (discountPrice > 0) {
                     unitPrice = priceAfterDiscount;
                 } else {
