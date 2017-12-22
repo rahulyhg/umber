@@ -349,7 +349,7 @@ var model = {
                         var orderData = {
                             product: mongoose.Types.ObjectId(product.product._id),
                             quantity: product.quantity,
-                            price: product.quantity * product.product.price,
+                            price: product.quantity * _.round(product.product.price),
                             color: product.product.color.name,
                             style: product.product.style,
                             discountAmount: product.discountAmount,
@@ -359,10 +359,10 @@ var model = {
                             order.products = [];
                         }
                         order.products.push(orderData);
-                        order.totalAmount += orderData.price;
+                        order.totalAmount += _.round(orderData.price);
                         if (orderData.discountAmount) {
-                            order.totalDiscount += orderData.discountAmount;
-                            order.totalAmount -= orderData.discountAmount;
+                            order.totalDiscount += _.round(orderData.discountAmount);
+                            order.totalAmount -= _.round(orderData.discountAmount);
                         } else {
                             order.totalDiscount += 0;
                             order.totalAmount -= 0;
@@ -370,7 +370,7 @@ var model = {
                     }
                     order.user = mongoose.Types.ObjectId(data.userId);
                     order.gst = cart.gst;
-                    order.totalAmount += order.gst;
+                    order.totalAmount += _.round(order.gst);
                     order.totalAmount = _.round(order.totalAmount)
                     order.shippingAmount = 0;
                     if (data.selectedDiscount) {
@@ -710,13 +710,13 @@ var model = {
                             emailData.tax = 0;
                         }
                         _.each(emailData.order, function (n) {
-                            emailData.cartAmount = emailData.cartAmount + (n.product.price * n.quantity);
+                            emailData.cartAmount = emailData.cartAmount + (_.round(n.product.price) * n.quantity);
                         });
                         emailData.cartAmount = _.round(emailData.cartAmount);
                         emailData.totalAmount = _.round(orderss.totalAmount);
                         _.each(emailData.order, function (n) {
                             if (n.discountAmount) {
-                                emailData.discount += n.discountAmount;
+                                emailData.discount += _.round(n.discountAmount);
                             } else {
                                 emailData.discount += 0;
                             }
@@ -797,10 +797,10 @@ var model = {
                         } else {
                             emailData.tax = 0;
                         }
-                        emailData.totalAmount = orderss.totalAmount;
+                        emailData.totalAmount = _.round(orderss.totalAmount);
                         _.each(emailData.order, function (n) {
                             if (n.discountAmount) {
-                                emailData.discount += n.discountAmount;
+                                emailData.discount += _.round(n.discountAmount);
                             } else {
                                 emailData.discount += 0;
                             }
@@ -813,7 +813,7 @@ var model = {
                         })
                         emailData.totalAmount = _.round(total);
                         _.each(emailData.order, function (n) {
-                            emailData.cartAmount = emailData.cartAmount + (n.product.price * n.quantity);
+                            emailData.cartAmount = emailData.cartAmount + (_.round(n.product.price) * n.quantity);
                         });
                         emailData.cartAmount = _.round(emailData.cartAmount);
                         Config.returnedProductEmail(emailData, function (err, response) {
@@ -883,7 +883,7 @@ var model = {
                         emailData.totalAmount = orderss.totalAmount;
                         _.each(emailData.order, function (n) {
                             if (n.discountAmount) {
-                                emailData.discount += n.discountAmount;
+                                emailData.discount += _.round(n.discountAmount);
                             } else {
                                 emailData.discount += 0;
                             }
@@ -896,7 +896,7 @@ var model = {
                         })
                         emailData.totalAmount = _.round(total);
                         _.each(emailData.order, function (n) {
-                            emailData.cartAmount = emailData.cartAmount + (n.product.price * n.quantity);
+                            emailData.cartAmount = emailData.cartAmount + (_.round(n.product.price) * n.quantity);
                         });
                         emailData.cartAmount = _.round(emailData.cartAmount);
                         Config.cancelProductEmail(emailData, function (err, response) {
@@ -965,14 +965,14 @@ var model = {
                         emailData.totalAmount = _.round(orderss.totalAmount);
                         _.each(emailData.order, function (n) {
                             if (n.discountAmount) {
-                                emailData.discount += n.discountAmount;
+                                emailData.discount += _.round(n.discountAmount);
                             } else {
                                 emailData.discount += 0;
                             }
                         })
                         emailData.discount = _.round(emailData.discount);
                         _.each(emailData.order, function (n) {
-                            emailData.cartAmount = emailData.cartAmount + (n.product.price * n.quantity);
+                            emailData.cartAmount = emailData.cartAmount + (_.round(n.product.price) * n.quantity);
                         });
                         emailData.cartAmount = _.round(emailData.cartAmount);
                         // _.each(emailData.order, function (n) {
@@ -1045,14 +1045,14 @@ var model = {
                         emailData.totalAmount = _.round(orderss.totalAmount);
                         _.each(emailData.order, function (n) {
                             if (n.discountAmount) {
-                                emailData.discount += n.discountAmount;
+                                emailData.discount += _.round(n.discountAmount);
                             } else {
                                 emailData.discount += 0;
                             }
                         })
                         emailData.discount = _.round(emailData.discount);
                         _.each(emailData.order, function (n) {
-                            emailData.cartAmount = emailData.cartAmount + (n.product.price * n.quantity);
+                            emailData.cartAmount = emailData.cartAmount + (_.round(n.product.price) * n.quantity);
                         });
                         emailData.cartAmount = _.round(emailData.cartAmount);
                         _.each(emailData.order, function (n) {
