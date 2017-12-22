@@ -99,6 +99,15 @@
             "validation": ["", "trim", "unique"],
             "url": ""
         }, {
+            "name": "Gst",
+            "type": "number",
+            "tableRef": "gst",
+            "placeholder": "Enter gst",
+            "id": "gst",
+            "validation": ["", "trim", "unique"],
+            "url": ""
+        },
+        {
             "name": "Shipping Amount",
             "type": "number",
             "tableRef": "shippingAmount",
@@ -128,7 +137,7 @@
             "dropDownField": "",
             "dropDownType": "single",
             "dropDown": ["processing", "shipped", "delivered", "returned", "cancelled", "pending"]
-        },{
+        }, {
             "name": "Invoice Status",
             "type": "tags",
             "action": "InvoiceChange",
