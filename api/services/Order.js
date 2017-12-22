@@ -80,6 +80,7 @@ var schema = new Schema({
         enum: ['cod', 'cc', 'dc', 'netbank'],
         default: 'cod'
     },
+    invoicePdfName:String,
     courierType: {
         type: Schema.Types.ObjectId,
         ref: 'Courier'
@@ -1132,7 +1133,7 @@ var model = {
             order.date = (new Date()).toLocaleDateString();
             Order.saveData(order, function (err, data) {
                 if (err) {
-                    console.log(err);
+                    console.log(err);obj
                 } else {
                     callback(null, order);
                 }
@@ -1144,14 +1145,24 @@ var model = {
             function (callback) {
                 Config.generatePdf("invoice-actual", order, callback);
             },
+            function (data,callback) {
+               order.invoicePdfName = data.name;
+               Order.saveData(order, function (err, data) {
+                if (err) {
+                    console.log(err);obj
+                } else {
+                    callback(null, order);
+                    }
+                })
+            },
             function (data, callback) {
                 var emailData = {};
                 emailData.email = order.user.email;
                 emailData.subject = "Invoice PDF";
                 emailData.body = "Invoice";
                 emailData.from = "supriya.kadam478@hotmail.com";
-                emailData.filename = "foo.pdf";
-                Config.sendEmailAttachment(emailData, callback);
+                emailData.filename = data.invoicePdfName;
+                Config.sendEmailAttachment(emailData, callback);      
             }
         ], function (err, results) {
             if (err) {

@@ -997,7 +997,7 @@ var models = {
                         console.log("#333333",newFilename);
                         callback(null, {
                             name: newFilename,
-                            url: global["env"].realHost + "/api/downloadWithName/" + newFilename
+                            url: global["env"].realHost + "/api/downloadWithName/" + newFilename,
                         });
                     }
                 });
@@ -1033,7 +1033,7 @@ var models = {
                     } else {
                         console.log("In Config To generate PDF");
                         stream.pipe(writestream);
-                        stream.pipe(fs.createWriteStream('foo.pdf'));
+                        stream.pipe(fs.createWriteStream(newFilename));
                     }
 
                 });
