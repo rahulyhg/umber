@@ -526,7 +526,7 @@ var model = {
                                 }).exec(cbSubWaterfall);
                             },
                             function deductQuantity(foundProduct, cbSubWaterfall1) {
-                                var deductPrice = foundProduct.price * product.quantity;
+                                var deductPrice = _.round(foundProduct.price) * product.quantity;
                                 if (data.return) {
                                     var orderStatus = "returned"
                                 } else {
@@ -539,7 +539,7 @@ var model = {
                                     $inc: {
                                         "products.$.quantity": -product.quantity,
                                         "products.$.price": -deductPrice,
-                                        'totalAmount': -deductPrice
+                                        // 'totalAmount': 0,
                                     },
                                     $addToSet: {
                                         returnedProducts: {
@@ -550,6 +550,9 @@ var model = {
                                             comment: product.comment
                                         }
                                     },
+                                    $set: {
+                                        totalAmount: 0
+                                    }
                                     // $set: {
                                     //     orderStatus: orderStatus
                                     // }
@@ -562,7 +565,7 @@ var model = {
                                         });
                                         // console.log("Cancelled product: ", updatedProduct);
                                         Order.saveData(updatedProduct, function (err, order) {
-                                            console.log("Saving updated order: ", err, order);
+                                            // console.log("Saving updated order: ", err, order);
                                             updatedOrder.push(updatedProduct);
                                             cbSubWaterfall1(null, order);
                                         });
@@ -590,7 +593,7 @@ var model = {
     // inputDetails: user - user unique id
     //               status - status of orders to be retrieved - cancelled/returned
     getCancelledOrdersForUser: function (data, callback) {
-        console.log("data", data);
+        // console.log("data getCancelledOrdersForUser", data);
         var returnCanelProduct = [];
         var order = [];
         var index = 0;
@@ -621,11 +624,9 @@ var model = {
                                         order[index].totalAmount = value.totalAmount;
                                         order[index].returnCancelProduct = [];
                                         _.each(value.returnedProducts, function (returnProduct) {
-                                            console.log("status", returnProduct.status);
+                                            // console.log("status", returnProduct.status);
                                             if (returnProduct.status == data.status) {
-                                                console.log("match");
                                                 order[index].returnCancelProduct.push(returnProduct);
-                                                console.log("match2", order[index].returnCancelProduct);
                                             }
                                         });
                                         if (_.isEmpty(order[index].returnCancelProduct)) {
@@ -807,10 +808,10 @@ var model = {
                         emailData.discount = _.round(emailData.discount);
 
                         // emailData.totalAmount = orderss.totalAmount;
-                        _.each(emailData.order, function (n) {
-                            total = total + n.price;
-                        })
-                        emailData.totalAmount = _.round(total);
+                        // _.each(emailData.order, function (n) {
+                        //     total = total + n.price;
+                        // })
+                        // emailData.totalAmount = _.round(total);
                         _.each(emailData.order, function (n) {
                             emailData.cartAmount = emailData.cartAmount + (_.round(n.product.price) * n.quantity);
                         });
