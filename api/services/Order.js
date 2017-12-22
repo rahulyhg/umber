@@ -1169,7 +1169,7 @@ var model = {
                 }
                 taxAmt = _.round(((taxPercent / 100) * unitPrice));
                 if( price!==_.round(product.product.mrp)){
-                    gst +=tax;
+                    gst +=taxAmt;
                 }
                 product.value = _.round(value);
                 product.unitPrice = _.round(unitPrice);
