@@ -1,6 +1,11 @@
+
+
 //import { prependListener } from 'cluster';
 
 // import { disconnect } from 'cluster';
+var autoIncrement = require('mongoose-auto-increment');
+autoIncrement.initialize(mongoose);
+require('mongoose-middleware').initialize(mongoose);
 
 var crypto = require('crypto');
 var http = require('http'),
@@ -75,6 +80,9 @@ var schema = new Schema({
     subTotal: Number,
     shippingAmount: Number,
     totalDiscount: Number,
+    invoiceNumberIncr:Number,
+    invoiceNumber:String,
+    orderNumberIncr:Number,
     paymentMethod: {
         type: String,
         enum: ['cod', 'cc', 'dc', 'netbank'],
@@ -145,6 +153,20 @@ var schema = new Schema({
         type: {}
     }
 });
+
+schema.plugin(autoIncrement.plugin, {
+    model: 'Order',
+    field: 'invoiceNumberIncr',
+    startAt: 0000001,
+    incrementBy: 1
+    });
+
+schema.plugin(autoIncrement.plugin, {
+        model:'Order',
+        field: 'orderNumberIncr',
+        startAt: 0000001,
+        incrementBy: 1
+    });
 
 schema.plugin(deepPopulate, {
     populate: {
@@ -329,7 +351,7 @@ var model = {
         } else {
             Cart.getCart(data, function (err, cart) {
                 if (!_.isEmpty(cart)) {
-                    // console.log("cart: ", cart);
+                    //  console.log("$$$$$$$$$$$$$$$", cart);
                     var order = {};
                     order.firstName = data.firstName;
                     order.lastName = data.lastName;
@@ -382,6 +404,7 @@ var model = {
                     }
                     order.paymentMethod = paymentMethod;
                     order.gifts = gifts;
+                    
                     // console.log("order: ", order);
                     Order.saveData(order, function (err, data1) {
                         //console.log("$$$$$$$$$order: ", order);
@@ -446,8 +469,21 @@ var model = {
                                             new: true
                                         }).exec()
                                         // callback(null, order);
-                                    }
+                                    }            
                                 }
+                                model.generateInvoiceOrOrderYear("OR",function(err,orderYear){
+                                    num = order.orderNumberIncr;
+                                    num = '' + num;
+                                    while (num.length < 7) {
+                                          num = '0' + num;
+                                     }
+                                     order.orderNo = orderYear+num;
+                                     Order.saveData(order, function (err, data) {
+                                        if (err) {
+                                            console.log(err);
+                                        } 
+                                    })
+                                })
                                 callback(null, order);
                             });
                         }
@@ -664,6 +700,7 @@ var model = {
     },
     //API to send order placed Email
     ConfirmOrderPlacedMail: function (data, callback) {
+        
         User.findOne({
             _id: data._id
         }).exec(function (error, created) {
@@ -1081,6 +1118,19 @@ var model = {
             }
         })
     },
+    generateInvoiceOrOrderYear:function( str,callback){
+        var today = new Date();
+        var lastTwoDigitYear = today.getFullYear().toString().substr(2,2);
+        var dateLimit = new Date(today.getFullYear().toString()+"-04-01");
+        var strYear="";
+        if(today > dateLimit){
+            strYear = lastTwoDigitYear+(parseInt(lastTwoDigitYear)+1).toString(); 
+        }
+        else{
+            strYear = (parseInt(lastTwoDigitYear)-1).toString()+lastTwoDigitYear;
+        }
+        callback(null,str+strYear.toString());
+    },
     generateInvoice: function (data, callback) {
         var taxPercent = 0;
         var taxAmt = 0;
@@ -1110,10 +1160,16 @@ var model = {
                 } else {
                     taxPercent = 12;
                 }
-                unitPrice = (priceAfterDiscount * 100) / (100 + taxPercent);
-                taxAmt = _.round(((taxPercent / 100) * unitPrice));
+                gst = gst + taxAmt;
                 if (discountPrice > 0) {
-                    gst = gst + taxAmt;
+                    unitPrice = priceAfterDiscount;
+                }
+                else{
+                    unitPrice = (priceAfterDiscount * 100) / (100 + taxPercent);
+                }
+                taxAmt = _.round(((taxPercent / 100) * unitPrice));
+                if( price!==_.round(product.product.mrp)){
+                    gst +=taxAmt;
                 }
                 product.value = _.round(value);
                 product.unitPrice = _.round(unitPrice);
@@ -1125,6 +1181,14 @@ var model = {
                 subTotal += _.round(value);
                 totalDiscount += _.round(discountPrice);
             });
+            model.generateInvoiceOrOrderYear("BU",function(err,invoiceYear){
+                num = order.invoiceNumberIncr;
+                num = '' + num;
+                while (num.length < 7) {
+                      num = '0' + num;
+                 }
+                order.invoiceNumber = invoiceYear+num;
+            });
             order.gst = _.round(gst);
             order.totalDiscount = totalDiscount;
             order.subTotal = subTotal;
@@ -1132,11 +1196,12 @@ var model = {
             order.date = (new Date()).toLocaleDateString();
             Order.saveData(order, function (err, data) {
                 if (err) {
-                    console.log(err);obj
+                    console.log(err);
                 } else {
                     callback(null, order);
                 }
             })
+            
         });
     },
     sendEmail: function (order, prevCallback) {
