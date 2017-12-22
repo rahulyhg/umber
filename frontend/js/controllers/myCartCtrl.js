@@ -871,12 +871,12 @@
                  //  }
                  if (value.product.price != value.product.mrp) {
                      if (value.product.price > 999) {
-                         //   var unitPrice = ((value.product.price - dis) * 100) / (100 + 12);
-                         var tax = (value.product.price * value.quantity) * 0.12;
+                         var unitPrice = ((value.product.price) * 100) / (100 + 12);
+                         var tax = unitPrice * 0.12;
                          value.product.gst = tax;
                      } else {
-                         //  var unitPrice = ((value.product.price - dis) * 100) / (100 + 5);
-                         var tax = (value.product.price * value.quantity) * 0.05;
+                         var unitPrice = ((value.product.price) * 100) / (100 + 5);
+                         var tax = unitPrice * 0.05;
                          value.product.gst = tax;
                      }
                  } else {

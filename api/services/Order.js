@@ -1194,6 +1194,7 @@ var model = {
             Order.saveData(order, function (err, data) {
                 if (err) {
                     console.log(err);
+                    callback(err, null)
                 } else {
                     callback(null, order);
                 }
