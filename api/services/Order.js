@@ -1160,10 +1160,16 @@ var model = {
                 } else {
                     taxPercent = 12;
                 }
-                unitPrice = (priceAfterDiscount * 100) / (100 + taxPercent);
-                taxAmt = _.round(((taxPercent / 100) * unitPrice));
+                gst = gst + taxAmt;
                 if (discountPrice > 0) {
-                    gst = gst + taxAmt;
+                    unitPrice = priceAfterDiscount;
+                }
+                else{
+                    unitPrice = (priceAfterDiscount * 100) / (100 + taxPercent);
+                }
+                taxAmt = _.round(((taxPercent / 100) * unitPrice));
+                if( price!==_.round(product.product.mrp)){
+                    gst +=tax;
                 }
                 product.value = _.round(value);
                 product.unitPrice = _.round(unitPrice);
