@@ -1151,9 +1151,10 @@ var model = {
                 if (product.discountAmount != undefined) {
                     discountPrice = _.round((product.discountAmount));
                 }
-                if (product.product.mrp != undefined) {
-                    mrp = _.round(product.product.mrp);
+                else{
+                    discountPrice =0;
                 }
+                mrp = _.round(product.product.mrp);
                 priceAfterDiscount = price - discountPrice;
                 if (priceAfterDiscount <= taxLimiter) {
                     taxPercent = 5;
@@ -1174,6 +1175,7 @@ var model = {
                 taxAmt = _.round(((taxPercent / 100) * unitPrice));
               
                 if( price!==_.round(mrp)){
+                    console.log("%%%%%%%%%%");
                     gst +=taxAmt;
                 }
                 product.mrp = _.round(mrp);
