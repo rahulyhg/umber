@@ -62,10 +62,10 @@ var schema = new Schema({
             default: 'accept'
         },
         comment: String,
-        mrp: Number,
         unitPrice: Number,
         discountAmount: Number,
-        discountPercent: Number,
+        discountPercent:Number,
+        discountPriceApplied:Number,
         taxAmt: Number,
         taxPercent: Number,
         finalAmt: Number
@@ -1148,13 +1148,13 @@ var model = {
         }).lean().deepPopulate("products.product user").exec(function (err, order) {
             _.each(order.products, function (product, index) {
                 price = _.round(product.product.price);
+                mrp = _.round(product.product.mrp);
                 if (product.discountAmount != undefined) {
                     discountPrice = _.round((product.discountAmount));
                 }
                 else{
                     discountPrice =0;
                 }
-                mrp = _.round(product.product.mrp);
                 priceAfterDiscount = price - discountPrice;
                 if (priceAfterDiscount <= taxLimiter) {
                     taxPercent = 5;
@@ -1163,31 +1163,25 @@ var model = {
                 }
                 if (discountPrice > 0) {
                     unitPrice = priceAfterDiscount;
-                    //discountPercent = (discountPrice / _.round(product.product.mrp))*100;
+                    discountPercent = (discountPrice / mrp)*100;
                 }
                 else{
                     unitPrice = (priceAfterDiscount * 100) / (100 + taxPercent);
                     if( price!==_.round(mrp)){
                         discountPercent=30;
-                        discountPriceApplied=(discountPercent*_.round(mrp))/100                    
+                        discountPriceApplied=(30*_.round(mrp))/100                    
                     }
                 }
                 taxAmt = _.round(((taxPercent / 100) * unitPrice));
-              
+                console.log("@@@@@@@@@@@@",taxAmt);
                 if( price!==_.round(mrp)){
-                    console.log("%%%%%%%%%%");
                     gst +=taxAmt;
                 }
-                product.mrp = _.round(mrp);
                 product.unitPrice = _.round(unitPrice);
                 product.taxAmt = _.round(taxAmt);
                 product.taxPercent = taxPercent;
-                if(discountPrice>0){
-                    product.discountAmount = _.round(discountPrice);
-                }
-                else{
-                    product.discountAmount = _.round(discountPriceApplied);
-                }
+                product.discountAmount = _.round(discountPrice);
+                product.discountPriceApplied = _.round(discountPriceApplied);
                 product.discountPercent = discountPercent;
                 product.finalAmt = _.round(finalAmt);
                 subTotal += _.round(price);
