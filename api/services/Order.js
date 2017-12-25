@@ -62,10 +62,10 @@ var schema = new Schema({
             default: 'accept'
         },
         comment: String,
-        value: Number,
         unitPrice: Number,
         discountAmount: Number,
-        discountPercent: Number,
+        discountPercent:Number,
+        discountPriceApplied:Number,
         taxAmt: Number,
         taxPercent: Number,
         finalAmt: Number
@@ -1135,24 +1135,27 @@ var model = {
         var finalAmt = 0;
         var unitPrice = 0;
         var price = 0;
-        var value = 0;
         var discountPercent = 0;
         var discountPrice = 0;
+        var discountPriceApplied = 0;
         var taxLimiter = 1000;
         var gst = 0;
         var subTotal = 0;
         var totalDiscount = 0;
+        var mrp=0;
         Order.findOne({
             _id: data.orderId
         }).lean().deepPopulate("products.product user").exec(function (err, order) {
             _.each(order.products, function (product, index) {
-                price = _.round(product.product.price);
+                price = _.round(product.product.price)*product.quantity;
+                mrp = _.round(product.product.mrp);
                 if (product.discountAmount != undefined) {
                     discountPrice = _.round((product.discountAmount));
                 }
-                value = price * product.quantity;
-                discountPercent = ((discountPrice) * 100) / value;
-                priceAfterDiscount = value - discountPrice;
+                else{
+                    discountPrice =0;
+                }
+                priceAfterDiscount = price - discountPrice;
                 if (priceAfterDiscount <= taxLimiter) {
                     taxPercent = 5;
                 } else {
@@ -1160,21 +1163,27 @@ var model = {
                 }
                 if (discountPrice > 0) {
                     unitPrice = priceAfterDiscount;
-                } else {
+                    discountPercent = (discountPrice / mrp)*100;
+                }
+                else{
                     unitPrice = (priceAfterDiscount * 100) / (100 + taxPercent);
+                    if( price!==_.round(mrp)){
+                        discountPercent=30;
+                        discountPriceApplied=(30*_.round(mrp))/100                    
+                    }
                 }
                 taxAmt = _.round(((taxPercent / 100) * unitPrice));
-                if (price !== _.round(product.product.mrp)) {
-                    gst += taxAmt;
+                if( price!==_.round(mrp)){
+                    gst +=taxAmt;
                 }
-                product.value = _.round(value);
                 product.unitPrice = _.round(unitPrice);
                 product.taxAmt = _.round(taxAmt);
                 product.taxPercent = taxPercent;
                 product.discountAmount = _.round(discountPrice);
+                product.discountPriceApplied = _.round(discountPriceApplied);
                 product.discountPercent = discountPercent;
                 product.finalAmt = _.round(finalAmt);
-                subTotal += _.round(value);
+                subTotal += _.round(price);
                 totalDiscount += _.round(discountPrice);
             });
             model.generateInvoiceOrOrderYear("BU", function (err, invoiceYear) {

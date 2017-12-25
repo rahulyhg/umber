@@ -1502,9 +1502,7 @@
                                                 .fa-shirtsinbulk,
                                                 .fa-building,
                                                 .fa-user-circle-o,
-                                                .fa-address-card,
-                                                .fa-user,
-                                                .fa-first-order {
+                                                .fa-address-card {
                                                     margin-right: 10px;
                                                     color: $darkBrown1;
                                                 }
@@ -3110,7 +3108,6 @@
                                             .order-action--btn {
                                                 @extend .btn--list;
                                                 margin-right: 15px;
-                                                background-color: #ddd;
                                                 display: block;
                                                 &:focus {
                                                     background-color: $darkBrown1;

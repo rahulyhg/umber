@@ -307,7 +307,7 @@
             border-right: 1px solid #e5e5e5;
             border-bottom: 1px solid #e5e5e5; text-align: right; vertical-align:top">
                                         <div style="margin: 10px 0; color: #341314; font-weight:bold;">&#8377;
-                                            <%=_.round(order[i].product.price)%>
+                                            <%=order[i].price%>
                                         </div>
                                     </td>
                                 </tr>
@@ -330,7 +330,7 @@
 
                                                 <div style="display:inline-block; line-height: 1.3; vertical-align:top;">
                                                     <span class=" clearfix" style="display:block;"><span style="float: left"> &#8377;</span>
-                                                    <%= cartAmount%>
+                                                    <%= totalAmount%>
                                                         </span>
                                                         <span class=" clearfix" style="display:block;"><span style="float: left"> &#8377;</span>
                                                         <%= shipping%>
@@ -339,13 +339,13 @@
                                                             <%= discount%>
                                                                 </span>
                                                                 <span class=" clearfix" style="display:block;"><span style="float: left"> &#8377;</span>
-                                                                <%=cartAmount - discount%>
+                                                                <%= totalAmount +shipping -discount%>
                                                                     </span>
                                                                     <span class="clearfix" style=" border-bottom: 1px solid #341314;display:block;"><span style="float: left"> &#8377;</span>
                                                                     <%= tax%>
                                                                         </span>
                                                                         <span class="clearfix" style="display:block;"><span style="float: left"> &#8377;</span>
-                                                                        <%= cartAmount - discount + tax+shipping%>
+                                                                        <%= totalAmount +shipping -discount +tax%>
                                                                             </span>
 
                                                 </div>

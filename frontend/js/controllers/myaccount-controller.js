@@ -40,7 +40,6 @@ myApp.controller('MyAccountCtrl', function ($scope, toastr, $state, OrderService
     OrderService.getUserOrders(input, function (data) {
         console.log("order::", data.data.data);
         $scope.orders = data.data.data;
-        console.log('orders data', $scope.orders);
     })
 
     /*****whishlist data***** */

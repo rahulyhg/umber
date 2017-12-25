@@ -1,4 +1,5 @@
-myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, $state, $timeout, WishlistService, toastr, TemplateService, CartService, UserService, $uibModal, CategoryService, ProductService) {
+myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, $state, $timeout, WishlistService,
+        TemplateService, CartService, UserService, $uibModal, CategoryService, ProductService) {
         $scope.template = TemplateService;
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             $(window).scrollTop(0);
@@ -335,7 +336,7 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
         }
 
     })
-    .controller('loginModalCtrl', function ($rootScope, $scope, $timeout, $state, $uibModalInstance, UserService, CartService, WishlistService, $uibModal, toastr) {
+    .controller('loginModalCtrl', function ($rootScope, $scope, $timeout, $state, $uibModalInstance, UserService, CartService, WishlistService, $uibModal) {
 
         $scope.formData = {};
         $scope.loginData = {};
@@ -407,8 +408,7 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
             UserService.userRegistration($scope.formData, function (data) {
                 console.log("*****in register user", data.data.data)
                 if (data.data.error) {
-                    //  $scope.errormsg = "User already exists with the given emailId.Please login to proced"
-                    toastr.error("User already exists with the given emailId.Please login to proced", "Error:")
+                    $scope.errormsg = "User already exists with the given emailId.Please login to proced"
                 } else if (!_.isEmpty(data.data.data)) {
                     $rootScope.userData = data.data.data;
                     $rootScope.otpRegister = $uibModal.open({
@@ -533,8 +533,9 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
                 });
             }
         }
-        $scope.forgotPwd = true; // Need to show 1st section 
+
         $scope.forgotPassword = function () {
+            $scope.forgotPwd = true;
             $scope.otpPwd = false
             $scope.resetPwd = false;
             // code to close the modal 
