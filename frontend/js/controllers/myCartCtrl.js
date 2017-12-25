@@ -808,18 +808,20 @@
                  //      console.log("fdsssssfffffffffff")
                  //      var dis = 0;
                  //  }
-                 //  if (value.product.price > 999) {
-                 //      var unitPrice = ((value.product.price - dis) * 100) / (100 + 12);
-                 //      var tax = unitPrice * 0.12;
-                 //      console.log("fdsssssfffffffffff", tax)
-                 //      value.product.gst = tax * value.quantity;
 
-                 //  } else {
-                 //      var unitPrice = ((value.product.price - dis) * 100) / (100 + 5);
-                 //      var tax = unitPrice * 0.05
-                 //      value.product.gst = tax * value.quantity;
-                 //  }
-                 value.product.gst = 0;
+                 if (value.product.price != value.product.mrp) {
+                     if (value.product.price > 999) {
+                         var unitPrice = ((value.product.price) * 100) / (100 + 12);
+                         var tax = unitPrice * 0.12;
+                         value.product.gst = tax;
+                     } else {
+                         var unitPrice = ((value.product.price) * 100) / (100 + 5);
+                         var tax = unitPrice * 0.05;
+                         value.product.gst = tax;
+                     }
+                 } else {
+                     value.product.gst = 0;
+                 }
                  $scope.productGst = $scope.productGst + value.product.gst;
                  $scope.productArrayForDiscount.push(value.product._id);
 

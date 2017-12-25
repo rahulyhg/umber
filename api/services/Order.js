@@ -1158,7 +1158,6 @@ var model = {
                 } else {
                     taxPercent = 12;
                 }
-                //buy one get x% discount
                 if (discountPrice > 0) {
                     unitPrice = priceAfterDiscount;
                 }
@@ -1197,6 +1196,7 @@ var model = {
             Order.saveData(order, function (err, data) {
                 if (err) {
                     console.log(err);
+                    callback(err, null)
                 } else {
                     callback(null, order);
                 }
