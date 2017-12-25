@@ -1147,7 +1147,7 @@ var model = {
             _id: data.orderId
         }).lean().deepPopulate("products.product user").exec(function (err, order) {
             _.each(order.products, function (product, index) {
-                price = _.round(product.product.price);
+                price = _.round(product.product.price)*product.quantity;
                 mrp = _.round(product.product.mrp);
                 if (product.discountAmount != undefined) {
                     discountPrice = _.round((product.discountAmount));
