@@ -1173,7 +1173,6 @@ var model = {
                     }
                 }
                 taxAmt = _.round(((taxPercent / 100) * unitPrice));
-                console.log("@@@@@@@@@@@@",taxAmt);
                 if( price!==_.round(mrp)){
                     gst +=taxAmt;
                 }
