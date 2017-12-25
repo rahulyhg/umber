@@ -46,24 +46,16 @@
         "id": "yValue",
         "validation": ["trim"]
     }, {
-        "name": "Product",
-        "type": "tags",
-        "tableRef": "products",
-        "onView": true,
-        "placeholder": "Select Product",
-        "id": "productId",
-        "dropDownField": "productName",
-        "dropDownType": "multiple",
-        "searchApi": "searchCall",
-        "url": "",
-        "validation": ["", "trim", ""]
-    }, {
         "name": "SKU of Product",
-        "type": "text",
+        "type": "tags",
         "tableRef": "skuOfProducts",
+        "onView": true,
         "placeholder": "Enter skuOfProducts",
         "id": "skuOfProducts",
-        "url": "",
+        "dropDownField": "name",
+        "dropDownType": "multiple",
+        "searchApi": "searchCall",
+        "url": "Product/getUniqueProductsOfSku",
         "validation": ["", "trim", ""]
     }, {
         "name": "Is Discount in amount?",

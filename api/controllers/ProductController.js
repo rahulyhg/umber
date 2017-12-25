@@ -130,6 +130,10 @@ var controller = {
         Product.getUniqueProducts(res.callback);
     },
 
+    getUniqueProductsOfSku: function (req, res) {
+        Product.getUniqueProductsOfSku(res.callback);
+    },
+
     globalSearch: function (req, res) {
         if (req.body) {
             Product.globalSearch(req.body, res.callback);

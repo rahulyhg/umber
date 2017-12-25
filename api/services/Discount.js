@@ -13,7 +13,14 @@ var schema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Product'
     }],
-    skuOfProducts: String,
+    // sku: [{
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Product'
+    // }],
+    skuOfProducts: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Product'
+    }],
     gifts: [{
         photo: {
             type: String
@@ -36,6 +43,9 @@ schema.plugin(deepPopulate, {
         'products': {
             select: '_id name'
         },
+        'skuOfProducts': {
+            select: '_id name'
+        },
         'discountType': {
             select: '_id name'
         }
@@ -45,7 +55,7 @@ schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('Discount', schema);
 
-var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "products discountType", "products discountType"));
+var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "products discountType skuOfProducts", "products discountType skuOfProducts"));
 var model = {
 
     discountsParticularProduct: function (data, callback) {

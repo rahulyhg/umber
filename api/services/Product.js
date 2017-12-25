@@ -964,6 +964,38 @@ var model = {
         });
     },
 
+    // API for backend Dicount Producut
+    // Sending only productId field results in error
+    // Cannot cast to string. Dashboard returns object {name: $name}
+    // in case only if productId sent, which it tries to map to string.
+    getUniqueProductsOfSku: function (callback) {
+        async.waterfall([
+            function findDistinctProducts(cbWaterfall1) {
+                Product.distinct("name", {
+                    status: 'Enabled'
+                }).exec(function (err, data) {
+                    cbWaterfall1(err, data);
+                });
+            },
+            function getProductDetails(products, cbWaterfall2) {
+                var productsDetails = [];
+                async.each(products, function (product, callback) {
+                    Product.findOne({
+                        name: product
+                    }).exec(function (err, productDetails) {
+                        productsDetails.push(productDetails);
+                        callback(err);
+                    });
+                }, function (err) {
+                    var finalData = {};
+                    finalData.results = productsDetails;
+                    cbWaterfall2(err, finalData);
+                });
+            }
+        ], function (err, productDetails) {
+            callback(err, productDetails);
+        });
+    },
 
     // API to filter products based on selected criteria
     // For listing page
