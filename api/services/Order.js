@@ -1186,6 +1186,8 @@ var model = {
                 subTotal += _.round(price);
                 totalDiscount += _.round(discountPrice);
             });
+
+            
             model.generateInvoiceOrOrderYear("BU", function (err, invoiceYear) {
                 num = order.invoiceNumberIncr;
                 num = '' + num;
