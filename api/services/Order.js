@@ -62,12 +62,13 @@ var schema = new Schema({
             default: 'accept'
         },
         comment: String,
-        priceAfterDiscount:Number,
+        priceAfterDiscount: Number,
         unitPrice: Number,
         discountAmount: Number,
-        discountPercent:Number,
+        discountPercent: Number,
         taxAmt: Number,
-        taxPercent: Number
+        taxPercent: Number,
+        selectedDiscount: String
     }],
     totalAmount: {
         type: Number,
@@ -372,6 +373,7 @@ var model = {
                             color: product.product.color.name,
                             style: product.product.style,
                             discountAmount: product.discountAmount,
+                            selectedDiscount: data.selectedDiscount.selectedDiscount.name,
                             comment: product.comment
                         };
                         if (!order.products) {
@@ -1132,34 +1134,42 @@ var model = {
         var taxPercent = 0;
         var taxAmt = 0;
         var unitPrice = 0;
-        var priceAfterDiscount =0;
+        var priceAfterDiscount = 0;
         var discountPercent = 0;
         var discountPrice = 0;
         var taxLimiter = 1000;
         var gst = 0;
         var subTotal = 0;
         var totalDiscount = 0;
+        var gs = false;
         Order.findOne({
             _id: data.orderId
         }).lean().deepPopulate("products.product user").exec(function (err, order) {
             _.each(order.products, function (product, index) {
-                priceAfterDiscount = _.round(product.product.price)*product.quantity;
+                priceAfterDiscount = _.round(product.product.price) * product.quantity;
                 if (priceAfterDiscount <= taxLimiter) {
                     taxPercent = 5;
                 } else {
                     taxPercent = 12;
                 }
+                if (product.selectedDiscount) {
+                    gs = true;
+                    priceAfterDiscount = priceAfterDiscount - product.discountAmount;
+                } else {
+                    gs = false;
+                }
                 unitPrice = (priceAfterDiscount * 100) / (100 + taxPercent);
                 taxAmt = _.round(((taxPercent / 100) * unitPrice));
-                if(product.discountAmount > 0){
-                    gst +=taxAmt;
+                if (product.discountAmount > 0) {
+                    gst += taxAmt;
                 }
                 product.unitPrice = _.round(unitPrice);
                 product.priceAfterDiscount = priceAfterDiscount;
+                product.discountAmount = product.discountAmount;
                 product.taxAmt = _.round(taxAmt);
                 product.taxPercent = taxPercent;
                 subTotal += _.round(priceAfterDiscount);
-                totalDiscount += _.round(discountPrice);
+                totalDiscount += _.round(product.discountAmount);
             });
             model.generateInvoiceOrOrderYear("BU", function (err, invoiceYear) {
                 num = order.invoiceNumberIncr;
@@ -1172,7 +1182,11 @@ var model = {
             order.gst = _.round(gst);
             order.totalDiscount = totalDiscount;
             order.subTotal = subTotal;
-            order.totalAmount = _.round((subTotal - totalDiscount) + gst + order.shippingAmount);
+            if (gs) {
+                order.totalAmount = _.round((subTotal) + gst + order.shippingAmount);
+            } else {
+                order.totalAmount = _.round((subTotal - totalDiscount) + gst + order.shippingAmount);
+            }
             order.date = (new Date()).toLocaleDateString();
             Order.saveData(order, function (err, data) {
                 if (err) {
@@ -1235,9 +1249,9 @@ var model = {
     //         function (err, order) {
     //             prevCallback(null, order);
     //         });
-           
+
     //     }
     // })}
-    
+
 };
 module.exports = _.assign(module.exports, exports, model);

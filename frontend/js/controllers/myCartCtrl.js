@@ -433,6 +433,7 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
                                     //  cartProduct.product.discountApplicable = false;
                                 }
                             });
+                            cartProduct.product.discount = true;
                             $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + cartProduct.product.discountPriceOfProduct;
                             $scope.productGst = $scope.productGst + cartProduct.product.gst;
                         });
@@ -885,22 +886,22 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
                 if (value.product.price != value.product.mrp) {
                     if (value.product.price > 999) {
                         var discount = 0;
-                        var unitPrice = ((value.product.price) * 100) / (100 + 12);
+                        var unitPrice = ((value.product.price * value.quantity) * 100) / (100 + 12);
                         var tax = unitPrice * 0.12;
                         value.product.gst = tax;
                         value.gst = tax;
                         value.product.discountApplicable = true;
-                        value.product.discountPriceOfProduct = discount = value.product.mrp - value.product.price;
-                        value.product.priceWithDiscount = (value.product.price * value.quantity) - (discount * value.quantity);
+                        value.product.discountPriceOfProduct = discount = (value.product.mrp - value.product.price) * value.quantity;
+                        value.product.priceWithDiscount = (value.product.price * value.quantity);
                     } else {
                         var discount = 0;
-                        var unitPrice = ((value.product.price) * 100) / (100 + 5);
+                        var unitPrice = ((value.product.price * value.quantity) * 100) / (100 + 5);
                         var tax = unitPrice * 0.05;
                         value.product.gst = tax;
                         value.gst = tax;
                         value.product.discountApplicable = true;
-                        value.product.discountPriceOfProduct = value.product.mrp - value.product.price;
-                        value.product.priceWithDiscount = (value.product.price * value.quantity) - (discount * value.quantity);
+                        value.product.discountPriceOfProduct = (value.product.mrp - value.product.price) * value.quantity;
+                        value.product.priceWithDiscount = (value.product.price * value.quantity);
                     }
                 } else {
                     var discount = 0;
