@@ -62,13 +62,12 @@ var schema = new Schema({
             default: 'accept'
         },
         comment: String,
+        priceAfterDiscount:Number,
         unitPrice: Number,
         discountAmount: Number,
         discountPercent:Number,
-        discountPriceApplied:Number,
         taxAmt: Number,
-        taxPercent: Number,
-        finalAmt: Number
+        taxPercent: Number
     }],
     totalAmount: {
         type: Number,
@@ -1132,62 +1131,36 @@ var model = {
     generateInvoice: function (data, callback) {
         var taxPercent = 0;
         var taxAmt = 0;
-        var finalAmt = 0;
         var unitPrice = 0;
-        var price = 0;
+        var priceAfterDiscount =0;
         var discountPercent = 0;
         var discountPrice = 0;
-        var discountPriceApplied = 0;
         var taxLimiter = 1000;
         var gst = 0;
         var subTotal = 0;
         var totalDiscount = 0;
-        var mrp=0;
         Order.findOne({
             _id: data.orderId
         }).lean().deepPopulate("products.product user").exec(function (err, order) {
             _.each(order.products, function (product, index) {
-                price = _.round(product.product.price)*product.quantity;
-                mrp = _.round(product.product.mrp);
-                if (product.discountAmount != undefined) {
-                    discountPrice = _.round((product.discountAmount));
-                }
-                else{
-                    discountPrice =0;
-                }
-                priceAfterDiscount = price - discountPrice;
+                priceAfterDiscount = _.round(product.product.price)*product.quantity;
                 if (priceAfterDiscount <= taxLimiter) {
                     taxPercent = 5;
                 } else {
                     taxPercent = 12;
                 }
-                if (discountPrice > 0) {
-                    unitPrice = priceAfterDiscount;
-                    discountPercent = (discountPrice / mrp)*100;
-                }
-                else{
-                    unitPrice = (priceAfterDiscount * 100) / (100 + taxPercent);
-                    if( price!==_.round(mrp)){
-                        discountPercent=30;
-                        discountPriceApplied=(30*_.round(mrp))/100                    
-                    }
-                }
+                unitPrice = (priceAfterDiscount * 100) / (100 + taxPercent);
                 taxAmt = _.round(((taxPercent / 100) * unitPrice));
-                if( price!==_.round(mrp)){
+                if(product.discountAmount > 0){
                     gst +=taxAmt;
                 }
                 product.unitPrice = _.round(unitPrice);
+                product.priceAfterDiscount = priceAfterDiscount;
                 product.taxAmt = _.round(taxAmt);
                 product.taxPercent = taxPercent;
-                product.discountAmount = _.round(discountPrice);
-                product.discountPriceApplied = _.round(discountPriceApplied);
-                product.discountPercent = discountPercent;
-                product.finalAmt = _.round(finalAmt);
-                subTotal += _.round(price);
+                subTotal += _.round(priceAfterDiscount);
                 totalDiscount += _.round(discountPrice);
             });
-
-            
             model.generateInvoiceOrOrderYear("BU", function (err, invoiceYear) {
                 num = order.invoiceNumberIncr;
                 num = '' + num;
@@ -1246,6 +1219,25 @@ var model = {
                 prevCallback(null, results);
             }
         })
-    }
+    },
+    // generateExcelReport: function (data, prevCallback) {
+    //     Order.find({}).deepPopulate("products.product user").exec(function (err, order) {
+    //         if (err || _.isEmpty(order)) {
+    //             callback(err, []);
+    //         } else {
+    //             async.concatSeries(order, function (orderData, callback) {
+    //             var obj = {};
+    //             obj["InvoiceNumber"] = orderData.invoiceNumber;
+    //             obj["OrderNo"] = orderData.orderNo;
+    //             obj["TotalAmt"] = orderData.totalAmount;
+    //             callback(null, obj);
+    //         },
+    //         function (err, order) {
+    //             prevCallback(null, order);
+    //         });
+           
+    //     }
+    // })}
+    
 };
 module.exports = _.assign(module.exports, exports, model);
