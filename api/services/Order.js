@@ -1151,7 +1151,7 @@ var model = {
                 }
                 unitPrice = (priceAfterDiscount * 100) / (100 + taxPercent);
                 taxAmt = _.round(((taxPercent / 100) * unitPrice));
-                if( price!==_.round(mrp)){
+                if(product.discountAmount === 0){
                     gst +=taxAmt;
                 }
                 product.unitPrice = _.round(unitPrice);
@@ -1220,24 +1220,24 @@ var model = {
             }
         })
     },
-    // generateExcelReport: function (data, prevCallback) {
-    //     Order.find({}).deepPopulate("products.product user").exec(function (err, order) {
-    //         if (err || _.isEmpty(order)) {
-    //             callback(err, []);
-    //         } else {
-    //             async.concatSeries(order, function (orderData, callback) {
-    //             var obj = {};
-    //             obj["InvoiceNumber"] = orderData.invoiceNumber;
-    //             obj["OrderNo"] = orderData.orderNo;
-    //             obj["TotalAmt"] = orderData.totalAmount;
-    //             callback(null, obj);
-    //         },
-    //         function (err, order) {
-    //             prevCallback(null, order);
-    //         });
+    generateExcelReport: function (data, prevCallback) {
+        Order.find({}).deepPopulate("products.product user").exec(function (err, order) {
+            if (err || _.isEmpty(order)) {
+                callback(err, []);
+            } else {
+                async.concatSeries(order, function (orderData, callback) {
+                var obj = {};
+                obj["InvoiceNumber"] = orderData.invoiceNumber;
+                obj["OrderNo"] = orderData.orderNo;
+                obj["TotalAmt"] = orderData.totalAmount;
+                callback(null, obj);
+            },
+            function (err, order) {
+                prevCallback(null, order);
+            });
            
-    //     }
-    // })}
+        }
+    })}
     
 };
 module.exports = _.assign(module.exports, exports, model);
