@@ -46,10 +46,10 @@
     }, {
         "name": "SKU of Product",
         "type": "tags",
-        "tableRef": "skuOfProducts",
+        "tableRef": "products",
         "onView": true,
         "placeholder": "Enter skuOfProducts",
-        "id": "skuOfProducts",
+        "id": "products",
         "dropDownField": "name",
         "dropDownType": "multiple",
         "searchApi": "searchCall",

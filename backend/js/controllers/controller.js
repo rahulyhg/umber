@@ -411,9 +411,9 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
                             })
                         }
                     }
-                    if ($scope.json.json.apiCall.url == 'Discount/save') {
-                        NavigationService.apiCall('Product/getProductAccordingSku', formData, function (data) {});
-                    }
+                    // if ($scope.json.json.apiCall.url == 'Discount/save') {
+                    //     NavigationService.apiCall('Product/getProductAccordingSku', formData, function (data) {});
+                    // }
                     toastr.success($scope.json.json.name + " " + formData.name + " " + messText + " successfully.");
                 } else {
                     console.log("data: ", data);
