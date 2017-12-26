@@ -231,7 +231,10 @@
                                 <p class="text-right " ng-if="discountAmount">MEMBER'S DISCOUNT :
                                     <span>&#x20b9 {{discountAmount |number:0}}</span>
                                 </p>
-                                <p class="text-right " ng-if="grandTotalAfterDiscount">GRAND TOTAL :
+                                <p class="text-right ">GST :
+                                    <span>&#x20b9 {{gst |number:0}}</span>
+                                </p>
+                                <p class="text-right ">GRAND TOTAL :
                                     <span>&#x20b9 {{grandTotalAfterGst+grandTotalAfterDiscount |number:0}}</span>
                                 </p>
                                 <button class="btn btn--list" ng-disabled="!loggedUser" ng-click="proceedToDetailTab();" ng-class="{

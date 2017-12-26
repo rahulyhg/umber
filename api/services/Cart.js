@@ -35,7 +35,7 @@ module.exports = mongoose.model('Cart', schema);
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "products.product", "products.product"));
 var model = {
     setProductInCart: function (userId, product, gst, callback) {
-        console.log("Each product: ", product);
+        // console.log("Each product: ", product);
         var cart = {};
         cart.products = [];
         if (product.discountApplicable) {

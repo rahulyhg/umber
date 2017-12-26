@@ -537,6 +537,10 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                 $scope.grandTotalAfterDiscount = discountTypeObjectData.grandTotalAfterDiscount;
                 $scope.grandTotalAfterGst = discountTypeObjectData.grandTotalAfterGst;
                 $scope.totalAmountOfOrder = discountTypeObjectData.totalAmountOfOrder;
+                $scope.gst = _.round($.jStorage.get("gst"));
+            } else {
+                $scope.gst = _.round($.jStorage.get("gst"));
+                $scope.grandTotalAfterDiscount = _.round($scope.grandTotal) + _.round($.jStorage.get("gst"))
             }
         }
 

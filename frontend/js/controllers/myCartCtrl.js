@@ -874,17 +874,24 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
                         var unitPrice = ((value.product.price) * 100) / (100 + 12);
                         var tax = unitPrice * 0.12;
                         value.product.gst = tax;
+                        value.gst = tax;
+                        value.product.discountApplicable = false;
+                        value.product.discountPriceOfProduct = 0;
                     } else {
                         var unitPrice = ((value.product.price) * 100) / (100 + 5);
                         var tax = unitPrice * 0.05;
                         value.product.gst = tax;
+                        value.gst = tax;
+                        value.product.discountApplicable = false;
+                        value.product.discountPriceOfProduct = 0;
                     }
                 } else {
                     value.product.gst = 0;
                 }
                 $scope.productGst = $scope.productGst + value.product.gst;
                 $scope.productArrayForDiscount.push(value.product._id);
-
+                $.jStorage.set("gst", $scope.productGst);
+                $.jStorage.set("myCart", $scope.mycartTable.products);
             });
             console.log("$scope.productGst", $scope.productGst);
             //  $scope.applicableDiscounts($scope.productArrayForDiscount);
@@ -1014,11 +1021,11 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
         cart.userId = $.jStorage.get("userId");
         cart.gst = $.jStorage.get("gst");
         cart.accessToken = $.jStorage.get("accessToken");
-        if ($scope.discountApplicableforCart) {
-            CartService.saveCartWithDiscount(cart, function (data) {
-                console.log("in detailtab cart save", data)
-            });
-        }
+        // if ($scope.discountApplicableforCart) {
+        CartService.saveCartWithDiscount(cart, function (data) {
+            // console.log("in detailtab cart save", data)
+        });
+        // }
         $state.go("checkout");
     }
 
