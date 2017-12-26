@@ -1151,7 +1151,7 @@ var model = {
                 }
                 unitPrice = (priceAfterDiscount * 100) / (100 + taxPercent);
                 taxAmt = _.round(((taxPercent / 100) * unitPrice));
-                if(product.discountAmount === 0){
+                if(product.discountAmount > 0){
                     gst +=taxAmt;
                 }
                 product.unitPrice = _.round(unitPrice);
