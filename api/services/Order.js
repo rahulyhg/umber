@@ -1055,7 +1055,6 @@ var model = {
                         console.log("User >>> ConfirmOrderPlaced >>> User.findOneAndUpdate >>> error", error);
                         callback(error, null);
                     } else {
-
                         var emailData = {};
                         var total = 0;
                         emailData.email = created.email;
@@ -1141,7 +1140,6 @@ var model = {
         var gst = 0;
         var subTotal = 0;
         var totalDiscount = 0;
-        var gs = false;
         Order.findOne({
             _id: data.orderId
         }).lean().deepPopulate("products.product user").exec(function (err, order) {
@@ -1152,24 +1150,21 @@ var model = {
                 } else {
                     taxPercent = 12;
                 }
-                if (product.selectedDiscount) {
-                    gs = true;
+                if (product.selectedDiscount) {  
                     priceAfterDiscount = priceAfterDiscount - product.discountAmount;
-                } else {
-                    gs = false;
                 }
                 unitPrice = (priceAfterDiscount * 100) / (100 + taxPercent);
                 taxAmt = _.round(((taxPercent / 100) * unitPrice));
                 if (product.discountAmount > 0) {
-                    gst += taxAmt;
+                    gst = gst + taxAmt;
                 }
                 product.unitPrice = _.round(unitPrice);
                 product.priceAfterDiscount = priceAfterDiscount;
                 product.discountAmount = product.discountAmount;
                 product.taxAmt = _.round(taxAmt);
                 product.taxPercent = taxPercent;
-                subTotal += _.round(priceAfterDiscount);
-                totalDiscount += _.round(product.discountAmount);
+                subTotal = subTotal + _.round(priceAfterDiscount);
+                totalDiscount =totalDiscount + _.round(product.discountAmount);
             });
             model.generateInvoiceOrOrderYear("BU", function (err, invoiceYear) {
                 num = order.invoiceNumberIncr;
@@ -1182,11 +1177,7 @@ var model = {
             order.gst = _.round(gst);
             order.totalDiscount = totalDiscount;
             order.subTotal = subTotal;
-            if (gs) {
-                order.totalAmount = _.round((subTotal) + gst + order.shippingAmount);
-            } else {
-                order.totalAmount = _.round((subTotal - totalDiscount) + gst + order.shippingAmount);
-            }
+            order.totalAmount = _.round((subTotal) + gst + order.shippingAmount);
             order.date = (new Date()).toLocaleDateString();
             Order.saveData(order, function (err, data) {
                 if (err) {
@@ -1234,15 +1225,60 @@ var model = {
             }
         })
     },
-    // generateExcelReport: function (data, prevCallback) {
-    //     Order.find({}).deepPopulate("products.product user").exec(function (err, order) {
+    // generateSalesExcelReport: function (data, prevCallback) {
+    //     Order.find({}).deepPopulate("products.product user").lean().exec(function (err, order) {
     //         if (err || _.isEmpty(order)) {
     //             callback(err, []);
     //         } else {
     //             async.concatSeries(order, function (orderData, callback) {
     //             var obj = {};
     //             obj["InvoiceNumber"] = orderData.invoiceNumber;
-    //             obj["OrderNo"] = orderData.orderNo;
+    //             obj["Date"] = orderData.date;
+               
+    //             if (orderData.products) {
+    //                 var prod1="";
+    //                 var prod="";
+    //                 var color1="";
+    //                 var color="";
+    //                 var size1=-1;
+    //                 var size=-1;
+    //                 _.each(orderData.products, function (product) {
+    //                     console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%",product.product);
+    //                     if(product.product){
+    //                         prod = product.product.productId;
+    //                         color=product.product.color;
+    //                         size=product.product.size;
+    //                         console.log("===========",prod);
+    //                             if(prod1===""){
+    //                                 prod1=prod;
+    //                             }
+    //                             else{
+    //                                 prod1 = prod1+"\n"+ prod;
+    //                             }
+                                
+    //                             if(color1===""){
+    //                                 color1=color;
+    //                             }
+    //                             else{
+    //                              color1 = color1+"\n"+ color;
+    //                             }
+                                
+    //                             if(size1===-1){
+    //                                 size1=size;
+    //                             }
+    //                             else{
+    //                              size1 = size1+"\n"+ size;
+    //                             }
+    //                             obj["Size"] =size1;
+    //                             obj["productId"] = prod1;
+    //                             obj["color"] = color1;
+    //                     }
+                       
+    //                 })
+    //             }
+
+    //             obj["TotalDiscount"] = orderData.discountAmount;
+    //             obj["GST"] = orderData.gst;
     //             obj["TotalAmt"] = orderData.totalAmount;
     //             callback(null, obj);
     //         },
