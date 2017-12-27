@@ -14,6 +14,7 @@ var schema = new Schema({
         style: String,
         color: String,
         discountAmount: Number,
+        discountPriceOfProductApplied: Number,
         comment: {
             type: String
         }
@@ -39,9 +40,11 @@ var model = {
         var cart = {};
         cart.products = [];
         if (product.discountApplicable) {
-            var discount = product.discountPriceOfProduct
+            var discount = product.discountPriceOfProduct;
+            var discountApplied = product.discountPriceOfProductApplied;
         } else {
             var discount = 0;
+            var discountApplied = product.discountPriceOfProductApplied;
         }
         cart.products.push({
             product: mongoose.Types.ObjectId(product._id),
@@ -49,6 +52,7 @@ var model = {
             style: product.style,
             color: product.color.name,
             discountAmount: product.discountPriceOfProduct,
+            discountPriceOfProductApplied: product.discountPriceOfProductApplied,
             comment: product.comment
         });
         // console.log("#########product in cart#####", cart.products);
@@ -108,6 +112,7 @@ var model = {
                                         style: product.style,
                                         color: product.color.name,
                                         discountAmount: product.discountPriceOfProduct,
+                                        discountPriceOfProductApplied: product.discountPriceOfProductApplied,
                                         comment: product.comment
                                     });
                                     foundCart.userId = userId;
@@ -131,6 +136,7 @@ var model = {
                                     // console.log("Matching product: ", data.products[idx]);
                                     if (product.quantityUpdate) {
                                         foundCart.products[idx].discountAmount = discount;
+                                        foundCart.products[idx].discountPriceOfProductApplied = discountApplied;
                                     } else {
                                         foundCart.products[idx].quantity += product.reqQuantity;
                                         foundCart.products[idx].comment = product.comment;
