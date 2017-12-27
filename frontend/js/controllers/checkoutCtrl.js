@@ -540,7 +540,8 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                 $scope.gst = _.round($.jStorage.get("gst"));
             } else {
                 $scope.gst = _.round($.jStorage.get("gst"));
-                $scope.grandTotalAfterDiscount = _.round($scope.grandTotal) + _.round($.jStorage.get("gst"))
+                $scope.discountAmount = _.round($.jStorage.get("totalDiscount"))
+                $scope.grandTotalAfterDiscount = $scope.totalAmountOfOrder = _.round($scope.grandTotal) + _.round($.jStorage.get("gst"));
             }
         }
 

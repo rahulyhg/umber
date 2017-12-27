@@ -3109,6 +3109,7 @@
                                             .order-action--btn {
                                                 @extend .btn--list;
                                                 margin-right: 15px;
+                                                background-color: #ddd;
                                                 display: block;
                                                 &:focus {
                                                     background-color: $darkBrown1;

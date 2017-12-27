@@ -65,6 +65,7 @@ var schema = new Schema({
         priceAfterDiscount: Number,
         unitPrice: Number,
         discountAmount: Number,
+        discountPriceOfProductApplied: Number,
         discountPercent: Number,
         taxAmt: Number,
         taxPercent: Number,
@@ -349,7 +350,7 @@ var model = {
         } else {
             Cart.getCart(data, function (err, cart) {
                 if (!_.isEmpty(cart)) {
-                    //  console.log("$$$$$$$$$$$$$$$", cart);
+                    // console.log("$$$$$$$$$$$$$$$", cart);
                     var order = {};
                     order.firstName = data.firstName;
                     order.lastName = data.lastName;
@@ -373,7 +374,7 @@ var model = {
                             color: product.product.color.name,
                             style: product.product.style,
                             discountAmount: product.discountAmount,
-                            selectedDiscount: data.selectedDiscount.selectedDiscount.name,
+                            discountPriceOfProductApplied: product.discountPriceOfProductApplied,
                             comment: product.comment
                         };
                         if (!order.products) {
@@ -381,14 +382,15 @@ var model = {
                         }
                         order.products.push(orderData);
                         order.totalAmount += _.round(orderData.price);
-                        if (orderData.discountAmount) {
-                            order.totalDiscount += _.round(orderData.discountAmount);
-                            order.totalAmount -= _.round(orderData.discountAmount);
+                        if (orderData.discountAmount > 0) {
+                            order.totalDiscount = order.totalDiscount + _.round(orderData.discountAmount) + _.round(orderData.discountPriceOfProductApplied);
+                            order.totalAmount = order.totalAmount - _.round(orderData.discountAmount);
                         } else {
-                            order.totalDiscount += 0;
-                            order.totalAmount -= 0;
+                            order.totalDiscount = order.totalDiscount + _.round(orderData.discountAmount) + _.round(orderData.discountPriceOfProductApplied);
+                            order.totalAmount -= _.round(orderData.discountAmount);
                         }
                     }
+                    // order.totalAmount -= _.round(order.totalDiscount);
                     order.user = mongoose.Types.ObjectId(data.userId);
                     order.gst = _.round(cart.gst);
                     order.totalAmount += _.round(order.gst);
@@ -397,6 +399,7 @@ var model = {
                     if (data.selectedDiscount) {
                         order.discountAmount = data.selectedDiscount.discountAmount;
                         order.amountAfterDiscount = data.selectedDiscount.grandTotalAfterDiscount;
+                        order.discountPriceOfProductApplied = data.discountPriceOfProductApplied;
                     }
                     if (paymentMethod != "cod") {
                         order.orderStatus = "pending";
@@ -741,6 +744,7 @@ var model = {
                         // }
                         emailData.discount = 0;
                         emailData.cartAmount = 0;
+                        emailData.disAfter = 0;
                         if (orderss.gst) {
                             emailData.tax = _.round(orderss.gst);
                         } else {
@@ -751,14 +755,20 @@ var model = {
                         });
                         emailData.cartAmount = _.round(emailData.cartAmount);
                         emailData.totalAmount = _.round(orderss.totalAmount);
+
                         _.each(emailData.order, function (n) {
-                            if (n.discountAmount) {
-                                emailData.discount += _.round(n.discountAmount);
+                            if (n.discountAmount || n.discountPriceOfProductApplied) {
+                                emailData.discount = emailData.discount + _.round(n.discountAmount) + _.round(n.discountPriceOfProductApplied);
+                                emailData.dis = emailData.dis + _.round(n.discountPriceOfProductApplied);
+                                emailData.disAfter = emailData.disAfter + _.round(n.discountAmount)
                             } else {
                                 emailData.discount += 0;
+                                emailData.dis += 0;
+                                emailData.disAfter += 0;
                             }
                         });
                         emailData.discount = _.round(emailData.discount);
+                        emailData.totalAfterGst = emailData.cartAmount + emailData.tax;
                         Config.ConfirmOrderPlacedMail(emailData, function (err, response) {
                             if (err) {
                                 console.log("error in email", err);
@@ -1143,6 +1153,7 @@ var model = {
         Order.findOne({
             _id: data.orderId
         }).lean().deepPopulate("products.product user").exec(function (err, order) {
+
             _.each(order.products, function (product, index) {
                 priceAfterDiscount = _.round(product.product.price) * product.quantity;
                 if (priceAfterDiscount <= taxLimiter) {
@@ -1150,21 +1161,21 @@ var model = {
                 } else {
                     taxPercent = 12;
                 }
-                if (product.selectedDiscount) {  
-                    priceAfterDiscount = priceAfterDiscount - product.discountAmount;
-                }
+
+                priceAfterDiscount = priceAfterDiscount - product.discountAmount;
                 unitPrice = (priceAfterDiscount * 100) / (100 + taxPercent);
                 taxAmt = _.round(((taxPercent / 100) * unitPrice));
-                if (product.discountAmount > 0) {
+
+                if (product.discountPriceOfProductApplied > 0) {
                     gst = gst + taxAmt;
                 }
                 product.unitPrice = _.round(unitPrice);
                 product.priceAfterDiscount = priceAfterDiscount;
-                product.discountAmount = product.discountAmount;
                 product.taxAmt = _.round(taxAmt);
                 product.taxPercent = taxPercent;
                 subTotal = subTotal + _.round(priceAfterDiscount);
-                totalDiscount =totalDiscount + _.round(product.discountAmount);
+
+                totalDiscount = totalDiscount + (_.round(product.discountAmount) + _.round(product.discountPriceOfProductApplied));
             });
             model.generateInvoiceOrOrderYear("BU", function (err, invoiceYear) {
                 num = order.invoiceNumberIncr;

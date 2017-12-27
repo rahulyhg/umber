@@ -235,7 +235,7 @@
                                     <span>&#x20b9 {{gst |number:0}}</span>
                                 </p>
                                 <p class="text-right ">GRAND TOTAL :
-                                    <span>&#x20b9 {{grandTotalAfterGst+grandTotalAfterDiscount |number:0}}</span>
+                                    <span>&#x20b9 {{totalAmountOfOrder |number:0}}</span>
                                 </p>
                                 <button class="btn btn--list" ng-disabled="!loggedUser" ng-click="proceedToDetailTab();" ng-class="{
                         'btn--brownActive': view=='detailTab' }"> Next</button>
