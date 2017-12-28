@@ -182,7 +182,7 @@
                                                 </div>
                                             </td>
                                             <td>{{product.product.color.name}}</td>
-                                            <td>{{product.product.price}}</td>
+                                            <td>{{product.product.price|number:0}}</td>
                                             <td>{{product.product.size.name}}</td>
                                             <td>{{product.quantity}}</td>
                                             <td ng-if="!product.discountAmount">&#x20b9 &nbsp;{{product.product.price * product.quantity|number:0}}</td>
