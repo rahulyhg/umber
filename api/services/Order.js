@@ -382,13 +382,15 @@ var model = {
                         }
                         order.products.push(orderData);
                         order.totalAmount += _.round(orderData.price);
-                        if (orderData.discountAmount > 0) {
-                            order.totalDiscount = order.totalDiscount + _.round(orderData.discountAmount) + _.round(orderData.discountPriceOfProductApplied);
-                            order.totalAmount = order.totalAmount - _.round(orderData.discountAmount);
-                        } else {
-                            order.totalDiscount = order.totalDiscount + _.round(orderData.discountAmount) + _.round(orderData.discountPriceOfProductApplied);
-                            order.totalAmount -= _.round(orderData.discountAmount);
-                        }
+                        // if (orderData.discountAmount > 0) {
+                        // order.totalDiscount = order.totalDiscount + _.round(orderData.discountAmount) + _.round(orderData.discountPriceOfProductApplied);
+                        order.totalDiscount = order.totalDiscount + _.round(orderData.discountAmount);
+                        order.totalAmount = order.totalAmount - _.round(orderData.discountAmount);
+                        // } else {
+                        //     // order.totalDiscount = order.totalDiscount + _.round(orderData.discountAmount) + _.round(orderData.discountPriceOfProductApplied);
+                        //     order.totalDiscount = order.totalDiscount + _.round(orderData.discountAmount);
+                        //     order.totalAmount -= _.round(orderData.discountAmount);
+                        // }
                     }
                     // order.totalAmount -= _.round(order.totalDiscount);
                     order.user = mongoose.Types.ObjectId(data.userId);
@@ -757,14 +759,21 @@ var model = {
                         emailData.totalAmount = _.round(orderss.totalAmount);
 
                         _.each(emailData.order, function (n) {
-                            if (n.discountAmount || n.discountPriceOfProductApplied) {
-                                emailData.discount = emailData.discount + _.round(n.discountAmount) + _.round(n.discountPriceOfProductApplied);
+                            // if (n.discountAmount || n.discountPriceOfProductApplied) {
+                            //     emailData.discount = emailData.discount + _.round(n.discountAmount) + _.round(n.discountPriceOfProductApplied);
+                            //     emailData.dis = emailData.dis + _.round(n.discountPriceOfProductApplied);
+                            //     emailData.disAfter = emailData.disAfter + _.round(n.discountAmount)
+                            // } else {
+                            //     emailData.discount += 0;
+                            //     emailData.dis += 0;
+                            //     emailData.disAfter += 0;
+                            // }
+                            if (n.discountAmount) {
+                                emailData.discount = emailData.discount + _.round(n.discountAmount);
                                 emailData.dis = emailData.dis + _.round(n.discountPriceOfProductApplied);
-                                emailData.disAfter = emailData.disAfter + _.round(n.discountAmount)
                             } else {
                                 emailData.discount += 0;
                                 emailData.dis += 0;
-                                emailData.disAfter += 0;
                             }
                         });
                         emailData.discount = _.round(emailData.discount);
@@ -1245,7 +1254,7 @@ var model = {
     //             var obj = {};
     //             obj["InvoiceNumber"] = orderData.invoiceNumber;
     //             obj["Date"] = orderData.date;
-               
+
     //             if (orderData.products) {
     //                 var prod1="";
     //                 var prod="";
@@ -1266,14 +1275,14 @@ var model = {
     //                             else{
     //                                 prod1 = prod1+"\n"+ prod;
     //                             }
-                                
+
     //                             if(color1===""){
     //                                 color1=color;
     //                             }
     //                             else{
     //                              color1 = color1+"\n"+ color;
     //                             }
-                                
+
     //                             if(size1===-1){
     //                                 size1=size;
     //                             }
@@ -1284,7 +1293,7 @@ var model = {
     //                             obj["productId"] = prod1;
     //                             obj["color"] = color1;
     //                     }
-                       
+
     //                 })
     //             }
 

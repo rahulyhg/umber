@@ -286,12 +286,12 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
                                             // $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.discountPriceOfProduct;
                                             $scope.addDis += _.round($scope.discountPriceOfProduct);
                                             if ($scope.priceWithDiscount > 999) {
-                                                var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 12);
+                                                var unitPrice = ((_.round(cartProduct.product.price) - $scope.discountPriceOfProduct) * 100) / (100 + 12);
                                                 var tax = _.round(unitPrice) * 0.12;
                                                 // var tax = $scope.priceWithDiscount * 0.12;
                                                 cartProduct.product.gst = _.round(tax);
                                             } else {
-                                                var unitPrice = ((cartProduct.product.price - $scope.discountPriceOfProduct) * 100) / (100 + 5);
+                                                var unitPrice = ((_.round(cartProduct.product.price) - $scope.discountPriceOfProduct) * 100) / (100 + 5);
                                                 var tax = _.round(unitPrice) * 0.05;
                                                 // var tax = $scope.priceWithDiscount * 0.05;
                                                 cartProduct.product.gst = _.round(tax);
@@ -333,7 +333,7 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
                                                 var unitPrice = (($scope.priceWithDiscount) * 100) / (100 + 5);
                                                 var tax = _.round(unitPrice) * 0.05;
                                                 // var tax = $scope.priceWithDiscount * 0.05;
-                                                cartProduct.product.gst = tax;
+                                                cartProduct.product.gst = _.round(tax);
                                             }
                                             $scope.Couponmodal.close();
                                             break;
@@ -352,7 +352,7 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
                                                 var unitPrice = ($scope.priceWithDiscount * 100) / (100 + 5);
                                                 var tax = unitPrice * 0.05;
                                                 // var tax = $scope.priceWithDiscount * 0.05;
-                                                cartProduct.product.gst = tax;
+                                                cartProduct.product.gst = _.round(tax);
                                             }
                                             $scope.Couponmodal.close();
                                             break;
@@ -443,7 +443,7 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
                                 }
                             });
                             cartProduct.product.discount = true;
-                            $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + cartProduct.product.discountPriceOfProductApplied;
+                            $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount;
                             $scope.productGst = $scope.productGst + cartProduct.product.gst;
                         });
                         $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + $scope.addDis
@@ -490,7 +490,8 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
                         //      cartProduct.product.gst=0;
                         //  }
                         $scope.productGst = $scope.productGst + cartProduct.product.gst;
-                        $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + cartProduct.product.discountPriceOfProduct + cartProduct.product.discountPriceOfProductApplied;
+                        // $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + cartProduct.product.discountPriceOfProduct + cartProduct.product.discountPriceOfProductApplied;
+                        // $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + cartProduct.product.discountPriceOfProduct;
                     });
                     if ($scope.grandTotal >= $scope.discountSelected.yValue) {
                         $scope.grandTotal = $scope.grandTotal - $scope.discountSelected.xValue;
@@ -738,7 +739,8 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
                             //  $.jStorage.set("grandTotal", $scope.grandTotal);
                         }
                         console.log("$scope.grandTotal", $scope.grandTotal)
-                        $scope.grandTotalAfterDiscount = tC + $scope.alredyDis;
+                        // $scope.grandTotalAfterDiscount = tC + $scope.alredyDis;
+                        $scope.grandTotalAfterDiscount = tC;
                         console.log("$scope.grandTotalAfterDiscount", $scope.grandTotalAfterDiscount)
                         $scope.grandTotal = $scope.grandTotal - $scope.grandTotalAfterDiscount;
                         console.log("$scope.grandTotal last", $scope.grandTotal);
@@ -902,20 +904,20 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
                 if (value.product.price != value.product.mrp) {
                     if (value.product.price > 999) {
                         var discount = 0;
-                        var unitPrice = ((value.product.price * value.quantity) * 100) / (100 + 12);
-                        var tax = unitPrice * 0.12;
-                        value.product.gst = tax;
-                        value.gst = tax;
+                        var unitPrice = ((_.round(value.product.price) * value.quantity) * 100) / (100 + 12);
+                        var tax = _.round(unitPrice) * 0.12;
+                        value.product.gst = _.round(tax);
+                        value.gst = _.round(tax);
                         value.product.discountApplicable = true;
                         value.product.discountPriceOfProductApplied = discount = (value.product.mrp - value.product.price) * value.quantity;
                         value.product.discountPriceOfProduct = 0;
                         value.product.priceWithDiscount = (value.product.price * value.quantity);
                     } else {
                         var discount = 0;
-                        var unitPrice = ((value.product.price * value.quantity) * 100) / (100 + 5);
-                        var tax = unitPrice * 0.05;
-                        value.product.gst = tax;
-                        value.gst = tax;
+                        var unitPrice = ((_.round(value.product.price) * value.quantity) * 100) / (100 + 5);
+                        var tax = _.round(unitPrice) * 0.05;
+                        value.product.gst = _.round(tax);
+                        value.gst = _.round(tax);
                         value.product.discountApplicable = true;
                         value.product.discountPriceOfProductApplied = discount = (value.product.mrp - value.product.price) * value.quantity;
                         value.product.discountPriceOfProduct = 0;
@@ -929,9 +931,10 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
                     value.product.discountPriceOfProduct = 0;
                 }
                 $scope.alredyDis += value.product.discountPriceOfProductApplied
-                $scope.productGst = $scope.productGst + value.product.gst;
+                $scope.productGst = _.round($scope.productGst + value.product.gst);
                 $scope.afterDis += value.product.discountPriceOfProduct;
-                $scope.grandTotalAfterDiscount = $scope.afterDis + $scope.alredyDis;
+                // $scope.grandTotalAfterDiscount = $scope.afterDis + $scope.alredyDis;
+                $scope.grandTotalAfterDiscount = $scope.afterDis;
                 $scope.productArrayForDiscount.push(value.product._id);
                 $.jStorage.set("gst", $scope.productGst);
                 $.jStorage.set("totalDiscount", $scope.grandTotalAfterDiscount);
@@ -957,8 +960,8 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
             if (value.product.price != value.product.mrp) {
                 if (value.product.price > 999) {
                     var discount = 0;
-                    var unitPrice = ((value.product.price * value.quantity) * 100) / (100 + 12);
-                    var tax = unitPrice * 0.12;
+                    var unitPrice = ((_.round(value.product.price) * value.quantity) * 100) / (100 + 12);
+                    var tax = _.round(unitPrice) * 0.12;
                     value.product.gst = tax;
                     value.gst = tax;
                     value.product.discountApplicable = true;
@@ -967,8 +970,8 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
                     value.product.priceWithDiscount = (value.product.price * value.quantity);
                 } else {
                     var discount = 0;
-                    var unitPrice = ((value.product.price * value.quantity) * 100) / (100 + 5);
-                    var tax = unitPrice * 0.05;
+                    var unitPrice = ((_.round(value.product.price) * value.quantity) * 100) / (100 + 5);
+                    var tax = _.round(unitPrice) * 0.05;
                     value.product.gst = tax;
                     value.gst = tax;
                     value.product.discountApplicable = true;
@@ -984,7 +987,7 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
                 value.product.discountPriceOfProduct = 0;
             }
             $scope.productArrayForDiscount.push(value.product._id);
-            $scope.productGst = $scope.productGst + value.product.gst;
+            $scope.productGst = _.round($scope.productGst + value.product.gst);
             $scope.grandTotalAfterDiscount = $scope.grandTotalAfterDiscount + value.product.discountPriceOfProduct + value.product.discountPriceOfProductApplied;
             $.jStorage.set("gst", $scope.productGst);
             $.jStorage.set("totalDiscount", $scope.grandTotalAfterDiscount);

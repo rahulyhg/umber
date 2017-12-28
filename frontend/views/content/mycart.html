@@ -58,8 +58,9 @@
                             </td>
                             <td>&#x20b9 &nbsp;{{product.product.price|number:0}} </td>
                             <td ng-if="product.product.discountApplicable&&product.product.discountPriceOfProduct>0">&#x20b9 &nbsp;{{product.product.discountPriceOfProduct|number:0}}</td>
-                            <td ng-if="product.product.discountApplicable&&product.product.discountPriceOfProduct==0">&#x20b9 &nbsp;{{product.product.discountPriceOfProductApplied|number:0}}</td>
-                            <td ng-if="!product.product.discountApplicable">&#x20b9 &nbsp;{{product.product.discountPriceOfProductApplied|number:0}}</td>
+                            <td ng-if="product.product.discountApplicable&&product.product.discountPriceOfProduct==0">&#x20b9 &nbsp;0</td>
+                            <!--<td ng-if="product.product.discountApplicable&&product.product.discountPriceOfProduct==0">&#x20b9 &nbsp;{{product.product.discountPriceOfProductApplied|number:0}}</td>-->
+                            <td ng-if="!product.product.discountApplicable">&#x20b9 &nbsp;0</td>
                             <!--<td>&#x20b9 &nbsp;{{product.product.gst|number:0}}</td>-->
                             <!--<td ng-if="product.product.price < 999">5%</td>-->
                             <!--<td ng-if="!product.product.discountApplicable">{{product.product.price * product.quantity * .12|number:0}}</td>-->
@@ -96,10 +97,10 @@
                         <p>&#x20b9 {{total|number:0}}</p>
                         <p>&#x20b9 0</p>
                         <p>&#x20b9 {{grandTotalAfterDiscount|number:0}}</p>
-                        <p>&#x20b9 {{total-addDis|number:0}}</p>
+                        <p>&#x20b9 {{total-grandTotalAfterDiscount|number:0}}</p>
                         <!--<p ng-if="!discountApplicableforCart">&#x20b9 0</p>-->
                         <p>&#x20b9 {{productGst|number:0}}</p>
-                        <p>&#x20b9 {{total-afterDis-addDis+productGst|number:0}}</p>
+                        <p>&#x20b9 {{total-grandTotalAfterDiscount+productGst|number:0}}</p>
                         <!--<p ng-if="!discountApplicableforCart">&#x20b9 {{total-grandTotalAfterDiscount|number:0}}</p>-->
                     </div>
                 </div>
