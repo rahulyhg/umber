@@ -22,7 +22,7 @@ myApp.factory('CartService', function ($http, cfpLoadingBar) {
         getTotal: function (products) {
             var total = 0;
             for (var productIdx = 0; productIdx < products.length; productIdx++) {
-                total += products[productIdx].product.price * products[productIdx].quantity;
+                total += _.round(products[productIdx].product.price) * products[productIdx].quantity;
             }
 
             cfpLoadingBar.complete()
