@@ -25,7 +25,6 @@ myApp.controller('OrderDetailCtrl', function ($scope, TemplateService, $translat
         OrderService.getDetailsOfOrder(input, function (output) {
             $scope.order = output.data.data;
             var products = [];
-            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", $scope.order)
             _.each($scope.order.products, function (prod) {
                 products.push({
                     product: prod.product._id,
