@@ -1453,8 +1453,8 @@ var model = {
         var size="";
         var quantity="";
         var name="";
-        if (orderData.returnedProducts) {
-            _.each(orderData.returnedProducts, function (product) {
+        if (orderData.products) {
+            _.each(orderData.products, function (product) {
                 if(product.quantity){
                     if(quantity==""){ 
                         quantity=product.quantity;
