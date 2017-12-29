@@ -339,6 +339,42 @@ var models = {
 
     },
 
+    generateExcel1: function (name, found, res) {
+        var excelData = [];
+        _.each(found, function (singleData) {
+            var singleExcel = {};
+            _.each(singleData, function (n, key) {
+                if (key != "__v" && key != "createdAt" && key != "updatedAt") {
+                    singleExcel[key] = n;
+                }
+            });
+            excelData.push(singleExcel);
+        });
+        var xls = json2xls(excelData);
+        var folder = "./.tmp/";
+        var path = name + "-" + moment().format("MMM-DD-YYYY-hh-mm-ss-a") + ".xlsx";
+        var finalPath = folder + path;
+        console.log("finalPath", finalPath);
+        fs.writeFile(finalPath, xls, 'binary', function (err) {
+            if (err) {
+                res.callback(err, null);
+            } else {
+                fs.readFile(finalPath, function (err, excel) {
+                    if (err) {
+                        res.callback(err, null);
+                    } else {
+                        res({
+                            excel: excel,
+                            path: path,
+                            finalPath: finalPath
+                        })
+                        fs.unlink(finalPath);
+                    }
+                });
+            }
+        });
+
+    },
     excelDateToDate: function isDate(value) {
         value = (value - (25567 + 1)) * 86400 * 1000;
         var mom = moment(value);
