@@ -47,6 +47,12 @@
              color: $darkGray;
              font-size: 16px;
          } //End of used clases
+         //Start of header page
+         .mobview-links li a,
+         .mobview-promotions-link li a {
+             @include padding(15px);
+             font-size: 18px;
+         } //End of header page
          // start of home page 
          .homepg-title {
              @include padding(5px 0);
@@ -64,7 +70,18 @@
              margin: 0 0 10px;
              font-size: 16px;
              font-family: vadodara-md;
-         }
+         } //Start of All categorie section
+         .all-categorie {
+             .list-inline>li:nth-child(3),
+             .list-inline>li:nth-child(5) {
+                 padding-top: 5px;
+             }
+             .all-categorie__dimension {
+                 .padd {
+                     @include padding(0 0 5px 0);
+                 }
+             }
+         } //End of all category
          .new-arrival {
              margin-bottom: 15px;
              .new-arrival__title .new-arrival--border--line {
@@ -77,6 +94,11 @@
              }
              .new-arrival__slider {
                  @include padding( 45px 55px 25px);
+                 .new-arrival__banner-detail {
+                     h4 {
+                         height: 35px;
+                     }
+                 }
              }
          }
          .new-arrival,
@@ -95,6 +117,13 @@
                  }
                  &:after {
                      right: 31%;
+                 }
+             }
+             .featured__banner-detail {
+                 .featured__cloth-desc {
+                     h4 {
+                         height: 35px;
+                     }
                  }
              }
          }
@@ -149,6 +178,7 @@
                  }
              }
              .sale__slider .sale__banner-detail h4 {
+                 height: 35px;
                  font-size: 16px;
              }
              .sale__slider .sale__banner-detail h3 {
@@ -251,8 +281,14 @@
          //End of checkout.html
          //Start of inner-blogs page
          .inner-blog-section {
-             @include padding(25px 0 0);
+             @include padding(15px 0 0);
          } //End of inner-blogs page
+         //Start of brands page
+         .brands-images {
+             .col-md-3 {
+                 border-right: 1px solid gray;
+             }
+         } //End of brands page
          //Start of listing-page
          .Addtocompare {
              margin-top: 15px;
@@ -261,7 +297,7 @@
          }
          .listview {
              .buy--btn {
-                 width: 140px;
+                 width: 115px;
              }
          }
          .listing-dropdown-menu {
@@ -270,12 +306,12 @@
          .buy-info {
              .buy-para {
                  .view--btn {
-                     width: 90px;
+                     width: 85px;
                      font-size: 12px;
                  }
                  .buy-para__button {
                      .buy--btn {
-                         width: 90px;
+                         width: 85px;
                          font-size: 12px;
                      }
                  }
@@ -285,14 +321,19 @@
              display: none;
          }
          .about-cloth .cloth-buy .cloth-buy__desc {
-             padding: 55px 55px 55px 40px;
+             padding: 25px;
+             h2 {
+                 &:before {
+                     top: -60px;
+                 }
+             }
          }
          .cloth-buy .cloth-buy__desc p.line--height {
              height: 55px;
              -webkit-line-clamp: 4;
          }
          .listing-img-common {
-             margin-top: 56px;
+             margin-top: 0;
          } //scss for contact us
          .contact-us .contactus-content {
              max-width: 100%;
