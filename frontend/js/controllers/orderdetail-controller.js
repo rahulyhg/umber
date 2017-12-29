@@ -24,7 +24,18 @@ myApp.controller('OrderDetailCtrl', function ($scope, TemplateService, $translat
         }
         OrderService.getDetailsOfOrder(input, function (output) {
             $scope.order = output.data.data;
-            console.log(output);
+            var products = [];
+            _.each($scope.order.products, function (prod) {
+                products.push({
+                    product: prod.product._id,
+                    quantity: prod.quantity,
+                    discountAmount:prod.discountAmount,
+                    discountPercent:prod.discountPercent,
+                    taxAmt:prod.taxAmt,
+                    taxPercent:prod.taxPercent
+                });
+            })
+            $.jStorage.set("cancellation", products);
         })
 
         $scope.selectedProduct = function (product) {
@@ -124,6 +135,18 @@ myApp.controller('OrderDetailCtrl', function ($scope, TemplateService, $translat
         OrderService.getDetailsOfOrder(input, function (output) {
             $scope.order = output.data.data;
             console.log(output);
+            var products = [];
+            _.each($scope.order.products, function (prod) {
+                products.push({
+                    product: prod.product._id,
+                    quantity: prod.quantity,
+                    discountAmount:prod.discountAmount,
+                    discountPercent:prod.discountPercent,
+                    taxAmt:prod.taxAmt,
+                    taxPercent:prod.taxPercent
+                });
+            })
+            $.jStorage.set("cancellation", products);
         })
 
         $scope.selectedProduct = function (product) {
