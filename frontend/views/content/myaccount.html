@@ -255,9 +255,9 @@
                                         </td>
                                         <td colspan="3">
                                             <div class="pull-right" ng-if="$index==0">
-                                                <button ng-if="order.orderStatus!='delivered'" class="btn order-action--btn text-uppercase" ui-sref="cancel({id:order._id})">Cancel purchase
+                                                <button ng-if="order.orderStatus!='delivered'&&order.orderStatus!='shipped'" class="btn order-action--btn text-uppercase" ui-sref="cancel({id:order._id})">Cancel purchase
                                                 </button>
-                                                <button ng-if="order.orderStatus=='delivered'" class="btn order-action--btn text-uppercase" ui-sref="return({id:order._id})">Return purchase
+                                                <button ng-if="order.orderStatus=='delivered'||order.orderStatus=='shipped'" class="btn order-action--btn text-uppercase" ui-sref="return({id:order._id})">Return purchase
                                                 </button>
                                                 <button class="btn order-action--btn text-uppercase" ui-sref="orderdetail({id:order._id})">order details
                                                 </button>
