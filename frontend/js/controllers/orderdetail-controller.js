@@ -28,7 +28,11 @@ myApp.controller('OrderDetailCtrl', function ($scope, TemplateService, $translat
             _.each($scope.order.products, function (prod) {
                 products.push({
                     product: prod.product._id,
-                    quantity: prod.quantity
+                    quantity: prod.quantity,
+                    discountAmount:prod.discountAmount,
+                    discountPercent:prod.discountPercent,
+                    taxAmt:prod.taxAmt,
+                    taxPercent:prod.taxPercent
                 });
             })
             $.jStorage.set("cancellation", products);
@@ -135,7 +139,11 @@ myApp.controller('OrderDetailCtrl', function ($scope, TemplateService, $translat
             _.each($scope.order.products, function (prod) {
                 products.push({
                     product: prod.product._id,
-                    quantity: prod.quantity
+                    quantity: prod.quantity,
+                    discountAmount:prod.discountAmount,
+                    discountPercent:prod.discountPercent,
+                    taxAmt:prod.taxAmt,
+                    taxPercent:prod.taxPercent
                 });
             })
             $.jStorage.set("cancellation", products);

@@ -62,14 +62,11 @@ var schema = new Schema({
             default: 'accept'
         },
         comment: String,
-        priceAfterDiscount: Number,
         unitPrice: Number,
         discountAmount: Number,
-        discountPriceOfProductApplied: Number,
         discountPercent: Number,
         taxAmt: Number,
-        taxPercent: Number,
-        selectedDiscount: String
+        taxPercent: Number
     }],
     totalAmount: {
         type: Number,
@@ -132,7 +129,6 @@ var schema = new Schema({
             required: true
         },
         quantity: Number,
-        price: Number,
         style: String,
         color: String,
         status: {
@@ -141,6 +137,13 @@ var schema = new Schema({
             default: 'returned',
             index: true
         },
+        priceAfterDiscount: Number,
+        unitPrice: Number,
+        discountAmount: Number,
+        discountPriceOfProductApplied:Number,
+        discountPercent: Number,
+        taxAmt: Number,
+        taxPercent: Number,
         comment: String
     }],
     comment: String,
@@ -382,15 +385,13 @@ var model = {
                         }
                         order.products.push(orderData);
                         order.totalAmount += _.round(orderData.price);
-                        // if (orderData.discountAmount > 0) {
-                        // order.totalDiscount = order.totalDiscount + _.round(orderData.discountAmount) + _.round(orderData.discountPriceOfProductApplied);
-                        order.totalDiscount = order.totalDiscount + _.round(orderData.discountAmount);
-                        order.totalAmount = order.totalAmount - _.round(orderData.discountAmount);
-                        // } else {
-                        //     // order.totalDiscount = order.totalDiscount + _.round(orderData.discountAmount) + _.round(orderData.discountPriceOfProductApplied);
-                        //     order.totalDiscount = order.totalDiscount + _.round(orderData.discountAmount);
-                        //     order.totalAmount -= _.round(orderData.discountAmount);
-                        // }
+                        if (orderData.discountAmount > 0) {
+                            order.totalDiscount = order.totalDiscount + _.round(orderData.discountAmount) + _.round(orderData.discountPriceOfProductApplied);
+                            order.totalAmount = order.totalAmount - _.round(orderData.discountAmount);
+                        } else {
+                            order.totalDiscount = order.totalDiscount + _.round(orderData.discountAmount) + _.round(orderData.discountPriceOfProductApplied);
+                            order.totalAmount -= _.round(orderData.discountAmount);
+                        }
                     }
                     // order.totalAmount -= _.round(order.totalDiscount);
                     order.user = mongoose.Types.ObjectId(data.userId);
@@ -549,17 +550,19 @@ var model = {
     //                        - comment: comment associated with product if any
     //               status - 'returned/cancelled'
     cancelProducts: function (data, callback) {
-        // console.log("data data *************************************", data)
         var updatedOrder = [];
         async.waterfall([
             function checkUser(cbWaterfall) {
                 User.isUserLoggedIn(data.accessToken, cbWaterfall);
             },
             function cancelProducts(user, cbWaterfall1) {
-
                 if (user._id == data.user) {
                     async.each(data.products, function (product, eachCallback) {
                         // console.log("productproductproduct", product);
+                       var discount= product.discountAmount;
+                       var discountPercent=product.discountPercent;
+                       var taxAmt=product.taxAmt;
+                       var taxPercent=product.taxPercent;
                         async.waterfall([
                             function findProduct(cbSubWaterfall) {
                                 Product.findOne({
@@ -588,7 +591,11 @@ var model = {
                                             quantity: product.quantity,
                                             price: deductPrice,
                                             status: orderStatus,
-                                            comment: product.comment
+                                            comment: product.comment,
+                                            discountAmount:discount,
+                                            discountPercent: discountPercent,
+                                            taxAmt: taxAmt,
+                                            taxPercent: taxPercent
                                         }
                                     },
                                     $set: {
@@ -759,21 +766,14 @@ var model = {
                         emailData.totalAmount = _.round(orderss.totalAmount);
 
                         _.each(emailData.order, function (n) {
-                            // if (n.discountAmount || n.discountPriceOfProductApplied) {
-                            //     emailData.discount = emailData.discount + _.round(n.discountAmount) + _.round(n.discountPriceOfProductApplied);
-                            //     emailData.dis = emailData.dis + _.round(n.discountPriceOfProductApplied);
-                            //     emailData.disAfter = emailData.disAfter + _.round(n.discountAmount)
-                            // } else {
-                            //     emailData.discount += 0;
-                            //     emailData.dis += 0;
-                            //     emailData.disAfter += 0;
-                            // }
-                            if (n.discountAmount) {
-                                emailData.discount = emailData.discount + _.round(n.discountAmount);
+                            if (n.discountAmount || n.discountPriceOfProductApplied) {
+                                emailData.discount = emailData.discount + _.round(n.discountAmount) + _.round(n.discountPriceOfProductApplied);
                                 emailData.dis = emailData.dis + _.round(n.discountPriceOfProductApplied);
+                                emailData.disAfter = emailData.disAfter + _.round(n.discountAmount)
                             } else {
                                 emailData.discount += 0;
                                 emailData.dis += 0;
+                                emailData.disAfter += 0;
                             }
                         });
                         emailData.discount = _.round(emailData.discount);
@@ -1166,6 +1166,7 @@ var model = {
         }).lean().deepPopulate("products.product user").exec(function (err, order) {
             _.each(order.products, function (product, index) {
                 value = _.round(product.product.price) * product.quantity;
+                discountPercent = (product.discountAmount*100)/(product.product.price);
                 priceAfterDiscount = value - product.discountAmount;
                 if (priceAfterDiscount <= taxLimiter) {
                     taxPercent = 5;
@@ -1174,7 +1175,6 @@ var model = {
                 }
                 unitPrice = (priceAfterDiscount * 100) / (100 + taxPercent);
                 taxAmt = _.round(((taxPercent / 100) * unitPrice));
-
                 if (product.discountPriceOfProductApplied > 0) {
                     gst = gst + taxAmt;
                 }
@@ -1182,6 +1182,7 @@ var model = {
                 product.priceAfterDiscount = priceAfterDiscount;
                 product.taxAmt = _.round(taxAmt);
                 product.taxPercent = taxPercent;
+                product.discountPercent = discountPercent;
                 subTotal = subTotal + _.round(value);
                 totalDiscount = totalDiscount + (_.round(product.discountAmount));
             });
@@ -1196,8 +1197,7 @@ var model = {
             order.gst = _.round(gst);
             order.totalDiscount = totalDiscount;
             order.subTotal = subTotal;
-            totalAmount = _.round((subTotal-totalDiscount) + gst + order.shippingAmount);
-            order.totalAmount = totalAmount;
+            order.totalAmount = _.round((subTotal-totalDiscount) + gst + order.shippingAmount);
             order.date = (new Date()).toLocaleDateString();
             Order.saveData(order, function (err, data) {
                 if (err) {
@@ -1244,78 +1244,167 @@ var model = {
                 prevCallback(null, results);
             }
         })
-    }
-    // generateSalesExcelReport: function (data, prevCallback) {
-    //     Order.find({}).deepPopulate("products.product user").lean().exec(function (err, order) {
-    //         if (err || _.isEmpty(order)) {
-    //             callback(err, []);
-    //         } else {
-    //             var products = [];
-    //             async.eachSeries(order, function (orderData, callback) {
-    //             // console.log(" ========================== orderData",orderData)
-    //             var obj = {};
-    //             obj["InvoiceNumber"] = orderData.invoiceNumber;
-    //             obj["Date"] = orderData.date;
-    //             obj["TotalDiscount"] = orderData.totalDiscount;
-    //             obj["GST"] = orderData.gst;
-    //             obj["TotalAmt"] = orderData.totalAmount;
-    //             var prod1="";
-    //             var prod="";
-    //             var color1="";
-    //             var color="";
-    //             var size1="";
-    //             var size="";
-    //             if (orderData.products) {                
+    },
+    populateOrderData:function(data,callback){
+        Order.find({}).deepPopulate("products.product.size products.product.color user returnedProducts.product.size returnedProducts.product.color").lean().exec(function (err, order) {
+            if (err || _.isEmpty(order)) {
+                callback(err, []);
+            } else {
+                callback(null,order) ;           
+            }
+         })
+    },
+    generateExcelSalesReport: function (order, prevCallback) {
+                async.concatSeries(order, function (orderData, callback) {
+                var obj = {};
+                obj["InvoiceNumber"] = orderData.invoiceNumber;
+                obj["Date"] = orderData.date;
+                obj["TotalDiscount"] = orderData.totalDiscount;
+                obj["GST"] = orderData.gst;
+                obj["TotalAmt"] = orderData.totalAmount;
+                var productId="";
+                var size="";
+                var color="";
+                var discountPercent="";
+                var taxPercent="";
+                if (orderData.products) {
+                    _.each(orderData.products, function (product) {
+                        if(product.taxPercent){
+                            if( taxPercent==""){
+                                taxPercent=product.taxPercent.toString();
+                            }
+                            else{
+                                taxPercent = taxPercent+'\n'+product.taxPercent.toString();
+                            }    
+                        }
+                        if(product.discountPercent){
+                            if(discountPercent==""){
+                                discountPercent=product.discountPercent.toString();
+                            }
+                            else{
+                                discountPercent =discountPercent+'\n'+product.discountPercent.toString();
+                            }  
+                        }
+                        if(product.product){
+                            if(product.product.productId){
+                                if(productId==""){
+                                    productId=product.product.productId;
+                                }
+                                else{
 
-    //                 _.each(orderData.products, function (product) {
-    //                     if(product.product){
-    //                         prod = product.product.productId;
-    //                         color=product.product.color;
-    //                         size=product.product.size;
-    //                             if(prod1==""){ 
-    //                                 prod1=prod;
-    //                             }
-    //                             else{
-    //                                 prod1 = prod1+"\n"+ prod;
-    //                             }
-                                
-    //                             if(color1==""){
+                                    productId = productId+'\n'+product.product.productId;
+                                }
+                            }
+                            if(product.product.size){
+                                if(size==""){ 
+                                    size=product.product.size.name;
+                                }
+                                else{
+                                   size =  size+'\n'+product.product.size.name;
+                                }
+                            }
+                               
+                            if(product.product.size){
+                                if( color==""){
+                                    color=product.product.color.name;
+                                }
+                                else{
+                                    color=  color+'\n'+product.product.color.name;
+                                }      
+                            }               
+                        }
+                    })
+                    obj["productId"]=productId;
+                    obj["discountPercent"]=discountPercent;
+                    obj["taxPercent"]=taxPercent;
+                    obj["color"]=color;
+                    obj["size"]=size;
+                }
+                callback(null, obj);
+            },
+            function (err, order) {
+                prevCallback(null, order);
+            });
 
-    //                                 color1=color;
-    //                             }
-    //                             else{
-    //                              color1 = color1+"\n"+ color;
-    //                             }
-                                
-    //                             if(size1==""){
-
-    //                                 size1=size;
-    //                             }
-    //                             else{
-    //                              size1 = size1+"\n"+ size;
-    //                             }
-    //                             obj["Size"] =size1;
-    //                             obj["productId"] = prod1;
-    //                             obj["color"] = color1;
-    //                             products.push(obj);
-    //                             obj["Size"] = "";
-    //                             obj["productId"] = "";
-    //                             obj["color"] = "";
-    //                     }
-    //                 })
+        
+    },
+    generateReturnProductsReport: function (order, prevCallback) {
+                async.concatSeries(order, function (orderData, callback) {
+                var obj = {};
+                obj["InvoiceNumber"] = orderData.invoiceNumber;
+                obj["Date"] = orderData.date;
+                obj["TotalDiscount"] = orderData.totalDiscount;
+                obj["GST"] = orderData.gst;
+                obj["TotalAmt"] = orderData.totalAmount;
+                var productId="";
+                var size="";
+                var color="";
+                var discountPercent="";
+                var taxPercent="";
+                if (orderData.returnedProducts) {
+                    _.each(orderData.returnedProducts, function (product) {
+                        if(product.taxPercent){
+                            if( taxPercent==""){
+                                taxPercent=product.taxPercent.toString();
+                            }
+                            else{
+                                taxPercent = taxPercent+'\n'+product.taxPercent.toString();
+                            } 
+                        }
+                        if(product.discountPercent){
+                            if(discountPercent==""){
+                                discountPercent=product.discountPercent.toString();
+                            }
+                            else{
+                                discountPercent =discountPercent+'\n'+product.discountPercent.toString();
+                            }  
+                        }
+                        if(product.product){
+                            if(product.product.productId){
                     
-    //             }
-    //             else {
-    //                 products.push(obj);
-    //             }
-    //             callback();
-    //         },
-    //         function (err, order) {
-    //             prevCallback(null, products);
-    //         });
+                                if(productId==""){
+                                    productId=product.product.productId;
+                                }
+                                else{
 
-    //     }
-    // })}
+                                    productId = productId+'\n'+product.product.productId;
+                                }
+                            }
+                            if(product.product.size){
+                                if(size==""){ 
+                                    size=product.product.size.name;
+                                }
+                                else{
+                                   size =  size+'\n'+product.product.size.name;
+                                }
+                            }
+                               
+                            if(product.product.color){
+                                if( color==""){
+                                    color=product.product.color.name;
+                                }
+                                else{
+                                    color=  color+'\n'+product.product.color.name;
+                                }      
+                            } 
+                        }
+                        
+                       
+                    })
+                    obj["productId"]=productId;
+                    obj["discountPercent"]=discountPercent;
+                    obj["taxPercent"]=taxPercent;
+                    obj["color"]=color;
+                    obj["size"]=size;
+                }
+                callback(null, obj);
+            },
+            function (err, order) {
+                prevCallback(null, order);
+            });
+
+        
+    }
 
 };
 module.exports = _.assign(module.exports, exports, model);
