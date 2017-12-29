@@ -19,7 +19,11 @@ var schema = new Schema({
             type: String
         }
     }],
-    gst: Number
+    gst: Number,
+    giftVoucher: [{
+        type: Schema.Types.ObjectId,
+        ref: 'GiftCard'
+    }]
 });
 
 schema.plugin(deepPopulate, {

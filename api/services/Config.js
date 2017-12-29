@@ -928,33 +928,35 @@ var models = {
             }
         });
     },
-
-    sendEmailAttachment(data,callback)
-    {
+    // send gift voucher code email
+    giftVoucherCode: function (data, callback) {
+        // console.log(" ***** inside email of config ***** ", data);
         Password.find().exec(function (err, userdata) {
             if (err) {
+                console.log(err);
                 callback(err, null);
-            } else if (userdata && userdata.length > 0) 
-            {  
-                            if (data.body) {
+            } else if (userdata && userdata.length > 0) {
+                // console.log("userdata ", userdata);
+                if (data.filename && data.filename != "") {
+
+                    sails.hooks.views.render("gift-voucher", data, function (err, body) {
+                        // console.log("body : ", body);
+                        if (err) {
+                            console.log(err);
+                            callback(err, null);
+                        } else {
+                            console.log('email else');
+                            if (body && body.value != false) {
                                 var helper = require('sendgrid').mail;
+
                                 from_email = new helper.Email(data.from);
                                 to_email = new helper.Email(data.email);
                                 subject = data.subject;
-                                content = new helper.Content("text/html", data.body);
+                                content = new helper.Content("text/html", body);
                                 mail = new helper.Mail(from_email, subject, to_email, content);
-                        
-                                if (data.filename) {
-                                    var attachment = new helper.Attachment();
-                                    var file = fs.readFileSync( data.filename);
-                                    var base64File = new Buffer(file).toString('base64');
-                                    attachment.setContent(base64File);
-                                    var pdfgen = data.filename.split(".");
-                                    data.filename = pdfgen[0] + ".pdf";
-                                    attachment.setFilename(data.filename);
-                                    attachment.setDisposition('attachment');
-                                    mail.addAttachment(attachment);
-                                }
+
+                                console.log("sending mail", mail);
+
                                 var sg = require('sendgrid')(userdata[0].name);
                                 var request = sg.emptyRequest({
                                     method: 'POST',
@@ -967,9 +969,9 @@ var models = {
                                         console.log('Error response received: ', error);
                                         callback(error, null);
                                     } else {
-                                        // console.log("statuscode: ", response.statusCode)
-                                        // console.log("body: ", response.body)
-                                        // console.log(response.headers)
+                                        console.log("statuscode: ", response.statusCode)
+                                        console.log("body: ", response.body)
+                                        console.log(response.headers)
                                         callback(null, response);
                                     }
                                 })
@@ -978,8 +980,71 @@ var models = {
                                     message: "Error while sending mail."
                                 }, null);
                             }
-                        
+                        }
+                    });
+
+                } else {
+                    callback({
+                        message: "Please provide params"
+                    }, null);
+                }
+            } else {
+                callback({
+                    message: "No api keys found"
+                }, null);
+            }
+        });
+    },
+
+    sendEmailAttachment(data, callback) {
+        Password.find().exec(function (err, userdata) {
+            if (err) {
+                callback(err, null);
+            } else if (userdata && userdata.length > 0) {
+                if (data.body) {
+                    var helper = require('sendgrid').mail;
+                    from_email = new helper.Email(data.from);
+                    to_email = new helper.Email(data.email);
+                    subject = data.subject;
+                    content = new helper.Content("text/html", data.body);
+                    mail = new helper.Mail(from_email, subject, to_email, content);
+
+                    if (data.filename) {
+                        var attachment = new helper.Attachment();
+                        var file = fs.readFileSync(data.filename);
+                        var base64File = new Buffer(file).toString('base64');
+                        attachment.setContent(base64File);
+                        var pdfgen = data.filename.split(".");
+                        data.filename = pdfgen[0] + ".pdf";
+                        attachment.setFilename(data.filename);
+                        attachment.setDisposition('attachment');
+                        mail.addAttachment(attachment);
                     }
+                    var sg = require('sendgrid')(userdata[0].name);
+                    var request = sg.emptyRequest({
+                        method: 'POST',
+                        path: '/v3/mail/send',
+                        body: mail.toJSON()
+                    });
+
+                    sg.API(request, function (error, response) {
+                        if (error) {
+                            console.log('Error response received: ', error);
+                            callback(error, null);
+                        } else {
+                            // console.log("statuscode: ", response.statusCode)
+                            // console.log("body: ", response.body)
+                            // console.log(response.headers)
+                            callback(null, response);
+                        }
+                    })
+                } else {
+                    callback({
+                        message: "Error while sending mail."
+                    }, null);
+                }
+
+            }
         });
 
     },
@@ -1030,7 +1095,7 @@ var models = {
                         // res.set('Content-Disposition', "filename=" + filename);
                         // res.send(newFilename)
                     } else {
-                        console.log("#333333",newFilename);
+                        console.log("#333333", newFilename);
                         callback(null, {
                             name: newFilename,
                             url: global["env"].realHost + "/api/downloadWithName/" + newFilename,
@@ -1050,16 +1115,16 @@ var models = {
                         "height": "0.5cm",
                     },
                 };
-                
-                    // Page options 
-                    config.border = {
-                        "top": "1cm", // default is 0, units: mm, cm, in, px 
-                        "right": "0.5cm",
-                        "bottom": "1cm",
-                        "left": "0.5cm"
-                    };
-                
-                 console.log('html : ', html);
+
+                // Page options 
+                config.border = {
+                    "top": "1cm", // default is 0, units: mm, cm, in, px 
+                    "right": "0.5cm",
+                    "bottom": "1cm",
+                    "left": "0.5cm"
+                };
+
+                console.log('html : ', html);
                 var pdf = require('html-pdf');
                 pdf.create(html, config).toStream(function (err, stream) {
                     // console.log(err);

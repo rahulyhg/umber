@@ -1750,10 +1750,23 @@ myApp.controller('CancelMsgCtrl', function ($scope, TemplateService, $translate,
     TemplateService.title = "Canceld Oreder"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
 });
-myApp.controller('GiftCardCtrl', function ($scope, TemplateService, $translate, $rootScope) {
+myApp.controller('GiftCardCtrl', function ($scope, TemplateService, $translate, $rootScope, CartService) {
     $scope.template = TemplateService.getHTML("content/giftcard.html");
     TemplateService.title = "Your Gift Card"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
+    $scope.giftAddToCart = function (giftDetails) {
+        var timestamp = Date.now();
+        var couponCode = "BU" + timestamp;
+        giftDetails.userId = $.jStorage.get("userId");
+        giftDetails.couponCode = couponCode;
+        console.log("in giftdetails!!!!!!!!!!giftDetails", giftDetails)
+        CartService.giftSave(giftDetails, function (data) {
+            console.log("in giftdetails!!!!!!!!!!", data.data);
+            CartService.saveInCart(giftDetails, function (data) {
+
+            })
+        });
+    }
 });
 myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, toastr, TemplateService, myService, NavigationService, $translate, $rootScope, $filter) {
     $scope.template = TemplateService.getHTML("content/storelocator.html");

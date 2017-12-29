@@ -48,7 +48,7 @@ var schema = new Schema({
 schema.plugin(deepPopulate, {
     Populate: {
         'generatedOrderId': {
-            select: '_id name'
+            select: '_id name orderNo'
         },
         'usedOrderId': {
             select: '_id name'
