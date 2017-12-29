@@ -18,6 +18,13 @@
         "type": "redirect",
         "action": "Order/generateReturnProductsReport",
         "linkType": "admin"
+    }, {
+        "name": "GST report",
+        "icon": "delete",
+        "class": "btn-warning",
+        "type": "redirect",
+        "action": "Order/generateGSTReport",
+        "linkType": "admin"
     }],
     "apiCall": {
         "url": "Order/search",

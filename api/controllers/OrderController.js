@@ -330,6 +330,18 @@ var controller = {
                 });
             
         });
+    })},
+
+    generateGSTReport:function(req,res){   
+        Order.populateOrderData(req.body, function (err, data){
+        Order.generateGSTReport(data, function (err, data) {
+                Config.generateExcel1("Order", data, function (excels) {
+                    res.set('Content-Type', "application/octet-stream");
+                    res.set('Content-Disposition', "attachment;filename=" + excels.path);
+                    res.send(excels.excel);
+                });
+            
+        });
     })}
 
 };

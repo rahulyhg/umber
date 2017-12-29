@@ -73,6 +73,7 @@ var schema = new Schema({
         required: true
     },
     gst: Number,
+    gstPercent:Number,
     subTotal: Number,
     shippingAmount: Number,
     totalDiscount: Number,
@@ -1152,6 +1153,7 @@ var model = {
         var taxPercent = 0;
         var taxAmt = 0;
         var unitPrice = 0;
+        var unitPriceSum=0;
         var priceAfterDiscount = 0;
         var discountPercent = 0;
         var discountPrice = 0;
@@ -1175,7 +1177,8 @@ var model = {
                 }
                 unitPrice = (priceAfterDiscount * 100) / (100 + taxPercent);
                 taxAmt = _.round(((taxPercent / 100) * unitPrice));
-                if (product.discountPriceOfProductApplied > 0) {
+                if (product.product.price !=product.product.mrp) {
+                    unitPriceSum=unitPriceSum+unitPrice;
                     gst = gst + taxAmt;
                 }
                 product.unitPrice = _.round(unitPrice);
@@ -1194,6 +1197,9 @@ var model = {
                 }
                 order.invoiceNumber = invoiceYear + num;
             });
+            if(unitPriceSum>0){
+                order.gstPercent=(_.round(gst)*100)/_.round(unitPriceSum);
+            }
             order.gst = _.round(gst);
             order.totalDiscount = totalDiscount;
             order.subTotal = subTotal;
@@ -1261,22 +1267,24 @@ var model = {
                 obj["Date"] = orderData.date;
                 obj["TotalDiscount"] = orderData.totalDiscount;
                 obj["GST"] = orderData.gst;
+                obj["GSTpercentage"] = orderData.gstPercent;
                 obj["TotalAmt"] = orderData.totalAmount;
                 var productId="";
                 var size="";
                 var color="";
                 var discountPercent="";
-                var taxPercent="";
+                var quantity="";
                 if (orderData.products) {
                     _.each(orderData.products, function (product) {
-                        if(product.taxPercent){
-                            if( taxPercent==""){
-                                taxPercent=product.taxPercent.toString();
+                       
+                        if(product.quantity){
+                            if(quantity==""){ 
+                                quantity=product.quantity;
                             }
                             else{
-                                taxPercent = taxPercent+'\n'+product.taxPercent.toString();
-                            }    
-                        }
+                               quantity =  quantity+'\n'+product.quantity;
+                            }
+                        }  
                         if(product.discountPercent){
                             if(discountPercent==""){
                                 discountPercent=product.discountPercent.toString();
@@ -1316,9 +1324,9 @@ var model = {
                     })
                     obj["productId"]=productId;
                     obj["discountPercent"]=discountPercent;
-                    obj["taxPercent"]=taxPercent;
                     obj["color"]=color;
                     obj["size"]=size;
+                    obj["quantity"]=quantity;
                 }
                 callback(null, obj);
             },
@@ -1335,22 +1343,24 @@ var model = {
                 obj["Date"] = orderData.date;
                 obj["TotalDiscount"] = orderData.totalDiscount;
                 obj["GST"] = orderData.gst;
+                obj["GSTpercentage"] = orderData.gstPercent;
                 obj["TotalAmt"] = orderData.totalAmount;
                 var productId="";
                 var size="";
                 var color="";
                 var discountPercent="";
-                var taxPercent="";
+                var quantity="";
                 if (orderData.returnedProducts) {
                     _.each(orderData.returnedProducts, function (product) {
-                        if(product.taxPercent){
-                            if( taxPercent==""){
-                                taxPercent=product.taxPercent.toString();
+                       
+                        if(product.quantity){
+                            if(quantity==""){ 
+                                quantity=product.quantity;
                             }
                             else{
-                                taxPercent = taxPercent+'\n'+product.taxPercent.toString();
-                            } 
-                        }
+                               quantity =  quantity+'\n'+product.quantity;
+                            }
+                        }  
                         if(product.discountPercent){
                             if(discountPercent==""){
                                 discountPercent=product.discountPercent.toString();
@@ -1393,9 +1403,9 @@ var model = {
                     })
                     obj["productId"]=productId;
                     obj["discountPercent"]=discountPercent;
-                    obj["taxPercent"]=taxPercent;
                     obj["color"]=color;
                     obj["size"]=size;
+                    obj["quantity"]=quantity;
                 }
                 callback(null, obj);
             },
@@ -1404,7 +1414,62 @@ var model = {
             });
 
         
-    }
+    },
+
+    generateGSTReport: function (order, prevCallback) {
+        async.concatSeries(order, function (orderData, callback) {
+        var obj = {};
+        obj["InvoiceNumber"] = orderData.invoiceNumber;
+        obj["Date"] = orderData.date;
+        obj["GST"] = orderData.gst;
+        obj["GSTpercentage"] = orderData.gstPercent;
+        obj["totalAmt"] = orderData.totalAmount;
+        var productId="";
+        var size="";
+        var quantity="";
+        if (orderData.returnedProducts) {
+            _.each(orderData.returnedProducts, function (product) {
+                if(product.quantity){
+                    if(quantity==""){ 
+                        quantity=product.quantity;
+                    }
+                    else{
+                       quantity =  quantity+'\n'+product.quantity;
+                    }
+                }  
+                if(product.product){
+                    if(product.product.productId){
+            
+                        if(productId==""){
+                            productId=product.product.productId;
+                        }
+                        else{
+
+                            productId = productId+'\n'+product.product.productId;
+                        }
+                    }
+                    if(product.product.size){
+                        if(size==""){ 
+                            size=product.product.size.name;
+                        }
+                        else{
+                           size =  size+'\n'+product.product.size.name;
+                        }
+                    }
+                }
+            })
+            obj["productId"]=productId;
+            obj["quantity"] = quantity;
+            obj["size"]=size;
+        }
+        callback(null, obj);
+    },
+    function (err, order) {
+        prevCallback(null, order);
+    });
+
+
+}
 
 };
 module.exports = _.assign(module.exports, exports, model);
