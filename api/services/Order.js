@@ -1200,6 +1200,9 @@ var model = {
             if(unitPriceSum>0){
                 order.gstPercent=(_.round(gst)*100)/_.round(unitPriceSum);
             }
+            else{
+                order.gstPercent=0;
+            }
             order.gst = _.round(gst);
             order.totalDiscount = totalDiscount;
             order.subTotal = subTotal;
@@ -1274,6 +1277,7 @@ var model = {
                 var color="";
                 var discountPercent="";
                 var quantity="";
+                var name="";
                 if (orderData.products) {
                     _.each(orderData.products, function (product) {
                        
@@ -1303,6 +1307,15 @@ var model = {
                                     productId = productId+'\n'+product.product.productId;
                                 }
                             }
+                            if(product.product.name){
+                                if(name==""){
+                                    name=product.product.name;
+                                }
+                                else{
+
+                                    name = name+'\n'+product.product.name;
+                                }
+                            }
                             if(product.product.size){
                                 if(size==""){ 
                                     size=product.product.size.name;
@@ -1312,7 +1325,7 @@ var model = {
                                 }
                             }
                                
-                            if(product.product.size){
+                            if(product.product.color){
                                 if( color==""){
                                     color=product.product.color.name;
                                 }
@@ -1322,6 +1335,7 @@ var model = {
                             }               
                         }
                     })
+                    obj["SKU"]=name;
                     obj["productId"]=productId;
                     obj["discountPercent"]=discountPercent;
                     obj["color"]=color;
@@ -1350,6 +1364,7 @@ var model = {
                 var color="";
                 var discountPercent="";
                 var quantity="";
+                var name="";
                 if (orderData.returnedProducts) {
                     _.each(orderData.returnedProducts, function (product) {
                        
@@ -1380,6 +1395,15 @@ var model = {
                                     productId = productId+'\n'+product.product.productId;
                                 }
                             }
+                            if(product.product.name){
+                                if(name==""){
+                                    name=product.product.name;
+                                }
+                                else{
+
+                                    name = name+'\n'+product.product.name;
+                                }
+                            }
                             if(product.product.size){
                                 if(size==""){ 
                                     size=product.product.size.name;
@@ -1401,6 +1425,7 @@ var model = {
                         
                        
                     })
+                    obj["SKU"]=name;
                     obj["productId"]=productId;
                     obj["discountPercent"]=discountPercent;
                     obj["color"]=color;
@@ -1427,6 +1452,7 @@ var model = {
         var productId="";
         var size="";
         var quantity="";
+        var name="";
         if (orderData.returnedProducts) {
             _.each(orderData.returnedProducts, function (product) {
                 if(product.quantity){
@@ -1448,6 +1474,15 @@ var model = {
                             productId = productId+'\n'+product.product.productId;
                         }
                     }
+                    if(product.product.name){
+                        if(name==""){
+                            name=product.product.name;
+                        }
+                        else{
+
+                            name = name+'\n'+product.product.name;
+                        }
+                    }
                     if(product.product.size){
                         if(size==""){ 
                             size=product.product.size.name;
@@ -1459,6 +1494,7 @@ var model = {
                 }
             })
             obj["productId"]=productId;
+            obj["SKU"]=name;
             obj["quantity"] = quantity;
             obj["size"]=size;
         }
