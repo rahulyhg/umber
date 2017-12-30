@@ -25,6 +25,20 @@
         "type": "redirect",
         "action": "Order/generateGSTReport",
         "linkType": "admin"
+    }, {
+        "name": "Courier report",
+        "icon": "delete",
+        "class": "btn-warning",
+        "type": "redirect",
+        "action": "Order/generateCourierReport",
+        "linkType": "admin"
+    }, {
+        "name": "Stock report",
+        "icon": "delete",
+        "class": "btn-warning",
+        "type": "redirect",
+        "action": "Order/generateStockReport",
+        "linkType": "admin"
     }],
     "apiCall": {
         "url": "Order/search",

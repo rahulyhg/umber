@@ -342,6 +342,29 @@ var controller = {
                 });
             
         });
+    })},
+
+    generateCourierReport:function(req,res){   
+        Order.populateOrderData(req.body, function (err, data){
+        Order.generateCourierReport(data, function (err, data) {
+                Config.generateExcel1("Order", data, function (excels) {
+                    res.set('Content-Type', "application/octet-stream");
+                    res.set('Content-Disposition', "attachment;filename=" + excels.path);
+                    res.send(excels.excel);
+                });
+            
+        });
+    })},
+    generateStockReport:function(req,res){   
+        Order.populateOrderData(req.body, function (err, data){
+        Order.generateStockReport(data, function (err, data) {
+                Config.generateExcel1("Order", data, function (excels) {
+                    res.set('Content-Type', "application/octet-stream");
+                    res.set('Content-Disposition', "attachment;filename=" + excels.path);
+                    res.send(excels.excel);
+                });
+            
+        });
     })}
 
 };

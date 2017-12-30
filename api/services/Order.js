@@ -1255,7 +1255,7 @@ var model = {
         })
     },
     populateOrderData:function(data,callback){
-        Order.find({}).deepPopulate("products.product.size products.product.color user returnedProducts.product.size returnedProducts.product.color").lean().exec(function (err, order) {
+        Order.find({}).deepPopulate("products.product.size products.product.prodCollection products.product.color user courierType returnedProducts.product.size returnedProducts.product.color").lean().exec(function (err, order) {
             if (err || _.isEmpty(order)) {
                 callback(err, []);
             } else {
@@ -1500,12 +1500,201 @@ var model = {
         }
         callback(null, obj);
     },
+
+
     function (err, order) {
         prevCallback(null, order);
     });
 
 
-}
+},
 
+generateCourierReport: function (order, prevCallback) {
+    async.concatSeries(order, function (orderData, callback) {
+    var obj = {};
+    obj["InvoiceNumber"] = orderData.invoiceNumber;
+    obj["Date"] = orderData.date;
+    obj["CourierCharges"] = orderData.courierAmount;
+    if(orderData.shippingAddress){
+        obj["city"] = orderData.shippingAddress.city;
+        obj["state"] = orderData.shippingAddress.state;
+    }
+    else{
+        obj["city"]="";
+        obj["state"]="";
+    }
+    if(orderData.courierType){
+        obj["courierName"]=orderData.courierType.name;
+    }
+    else{
+        obj["courierName"]="";
+    }
+    var productId="";
+    var size="";
+    var color="";
+    var courierName="";
+    var quantity="";
+    var name="";
+    if (orderData.products) {
+        _.each(orderData.products, function (product) {
+            if(product.quantity){
+                if(quantity==""){ 
+                    quantity=product.quantity;
+                }
+                else{
+                    quantity =  quantity+'\n'+product.quantity;
+                }
+            }  
+            if(product.product){
+                if(product.product.productId){
+                    if(productId==""){
+                        productId=product.product.productId;
+                    }
+                    else{
+                        productId = productId+'\n'+product.product.productId;
+                    }
+                }
+                if(product.product.name){
+                    if(name==""){
+                        name=product.product.name;
+                    }
+                    else{
+                        name = name+'\n'+product.product.name;
+                    }
+                }
+                if(product.product.size){
+                    if(size==""){ 
+                        size=product.product.size.name;
+                    }
+                    else{
+                       size =  size+'\n'+product.product.size.name;
+                    }
+                }
+                   
+                if(product.product.color){
+                    if( color==""){
+                        color=product.product.color.name;
+                    }
+                    else{
+                        color=  color+'\n'+product.product.color.name;
+                    }      
+                }   
+                            
+            }
+        })
+        obj["SKU"]=name;
+        obj["productId"]=productId;
+        obj["color"]=color;
+        obj["size"]=size;
+        obj["quantity"]=quantity;
+    }
+    callback(null, obj);
+},
+function (err, order) {
+    prevCallback(null, order);
+});
+
+
+},
+generateStockReport: function (order, prevCallback) {
+    async.concatSeries(order, function (orderData, callback) {
+    var obj = {};
+    var productId="";
+    var size="";
+    var color="";
+    var collection="";
+    var quantity="";
+    var styleNo="";
+    var name="";
+    var description="";
+    if (orderData.products) {
+        _.each(orderData.products, function (product) {
+            if(product.product){
+                if(product.product.productId){
+                    if(productId==""){
+                        productId=product.product.productId;
+                    }
+                    else{
+
+                        productId = productId+'\n'+product.product.productId;
+                    }
+                }
+                if(product.product.name){
+                    if(name==""){
+                        name=product.product.name;
+                    }
+                    else{
+
+                        name = name+'\n'+product.product.name;
+                    }
+                }
+                if(product.product.size){
+                    if(size==""){ 
+                        size=product.product.size.name;
+                    }
+                    else{
+                       size =  size+'\n'+product.product.size.name;
+                    }
+                }
+                   
+                if(product.product.color){
+                    if( color==""){
+                        color=product.product.color.name;
+                    }
+                    else{
+                        color=  color+'\n'+product.product.color.name;
+                    }      
+                }  
+                if(product.product.quantity){
+                    if(quantity==""){ 
+                        quantity=product.product.quantity;
+                    }
+                    else{
+                       quantity =  quantity+'\n'+product.product.quantity;
+                    }
+                }    
+                if(product.product.description){
+                    if(description==""){ 
+                        description=product.product.description;
+                    }
+                    else{
+                        description =  description+'\n'+product.product.description;
+                    }
+                }   
+                if(product.product.styleNo){
+                    if(styleNo==""){ 
+                        styleNo=product.product.styleNo;
+                    }
+                    else{
+                        styleNo =  styleNo+'\n'+product.product.styleNo;
+                    }
+                }    
+                if(product.product.prodCollection){
+                    if( collection==""){
+                        collection=product.product.prodCollection.name;
+                    }
+                    else{
+                        collection=  collection+'\n'+product.product.prodCollection.name;
+                    }      
+                }              
+            }
+        })
+        obj["SKU"]=name;
+        obj["productId"]=productId;
+        obj["color"]=color;
+        obj["size"]=size;
+        obj["quantity"]=quantity;
+        obj["description"]=description;
+        obj["collection"]=collection;
+        obj["styleno"]=styleNo;
+    }
+    callback(null, obj);
+},
+function (err, order) {
+    prevCallback(null, order);
+});
+
+
+},
 };
 module.exports = _.assign(module.exports, exports, model);
