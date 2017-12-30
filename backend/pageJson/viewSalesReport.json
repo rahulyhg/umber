@@ -1,0 +1,34 @@
+{
+    "title": "SalesReport",
+    "description": "Sales Report",
+    "pageType": "view",
+    "sendIdWithCreate": true,
+    "urlFields": ["_id"],
+    "button": [{
+        "name": "Sales Report Export",
+        "icon": "print",
+        "class": "btn-danger",
+        "type": "redirect",
+        "action": "Order/generateExcelSalesReport",
+        "linkType": "admin"
+    }, {
+        "name": "return report",
+        "icon": "delete",
+        "class": "btn-warning",
+        "type": "redirect",
+        "action": "Order/generateReturnProductsReport",
+        "linkType": "admin"
+    }, {
+        "name": "GST report",
+        "icon": "delete",
+        "class": "btn-warning",
+        "type": "redirect",
+        "action": "Order/generateGSTReport",
+        "linkType": "admin"
+    }],
+    "apiCall": {
+        "url": "Order/search",
+        "params": "_id"
+    }
+}
+

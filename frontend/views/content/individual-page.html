@@ -161,11 +161,11 @@
                                     <div class="col-md-5 col-sm-5 col-xs-6">
                                         <div class="leftContent">
                                             <ul class="list-unstyled">
-                                                <li ng-if="product.brand">
-                                                    <div class="inline-block leftContent__specHead">
-                                                        <p>Brand</p>
+                                                <li class="flex-item-container spec" ng-if="product.brand">
+                                                    <div class=" leftContent__specHead">
+                                                        <p class="mb-0">Brand</p>
                                                     </div>
-                                                    <div class="inline-block">
+                                                    <div>
                                                         <ul class="list-unstyled">
                                                             <li>
                                                                 {{product.brand.name}}
@@ -173,13 +173,13 @@
                                                         </ul>
                                                     </div>
                                                 </li>
-                                                <li ng-if="product.prodCollection">
-                                                    <div class="inline-block leftContent__specHead">
+                                                <li class="flex-item-container spec" ng-if="product.prodCollection">
+                                                    <div class=" leftContent__specHead">
                                                         <div>
-                                                            <p>Collection</p>
+                                                            <p class="mb-0">Collection</p>
                                                         </div>
                                                     </div>
-                                                    <div class="inline-block">
+                                                    <div>
                                                         <ul class="list-unstyled">
                                                             <li>
                                                                 {{product.prodCollection.name}}
@@ -187,13 +187,13 @@
                                                         </ul>
                                                     </div>
                                                 </li>
-                                                <li ng-if="product.style">
-                                                    <div class="inline-block leftContent__specHead">
+                                                <li class=" flex-item-container spec" ng-if="product.style">
+                                                    <div class=" leftContent__specHead">
                                                         <div>
-                                                            <p>Sleeve</p>
+                                                            <p class="mb-0">Sleeve</p>
                                                         </div>
                                                     </div>
-                                                    <div class="inline-block">
+                                                    <div>
                                                         <ul class="list-unstyled">
                                                             <li>
                                                                 {{product.style}}
@@ -201,11 +201,11 @@
                                                         </ul>
                                                     </div>
                                                 </li>
-                                                <li ng-if="product.fabric">
-                                                    <div class="inline-block leftContent__specHead">
-                                                        <p>Fabric</p>
+                                                <li class="flex-item-container spec" ng-if="product.fabric">
+                                                    <div class=" leftContent__specHead">
+                                                        <p class="mb-0">Fabric</p>
                                                     </div>
-                                                    <div class="inline-block">
+                                                    <div>
                                                         <ul class="list-unstyled">
                                                             <li>
                                                                 {{product.fabric.name}}
@@ -213,13 +213,13 @@
                                                         </ul>
                                                     </div>
                                                 </li>
-                                                <li ng-if="product.color">
-                                                    <div class="inline-block leftContent__specHead">
+                                                <li class=" flex-item-container spec" ng-if="product.color">
+                                                    <div class=" leftContent__specHead">
                                                         <div>
-                                                            <p>Color</p>
+                                                            <p class="mb-0">Color</p>
                                                         </div>
                                                     </div>
-                                                    <div class="inline-block">
+                                                    <div>
                                                         <ul class="list-unstyled">
                                                             <li>
                                                                 {{product.color.name}}
@@ -285,7 +285,7 @@
         </div>
     </div>
 </div>
-<div class="image-individual hidden-xs">
+<div class="image-individual  hidden-sm hidden-xs">
     <img src="img/home/Individual_Product Page.png" class="img-responsive">
 </div>
 

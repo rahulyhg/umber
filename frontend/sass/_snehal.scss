@@ -738,6 +738,9 @@
 
                         .fourth-sec {
                             .leftContent {
+                                .spec {
+                                    @include align-items(baseline);
+                                }
                                 p {
                                     font-weight: 600;
                                     color: $darkGray;
@@ -751,7 +754,8 @@
                                     background: transparent; //border: none;
                                 }
                                 .leftContent__specHead {
-                                    width: 30%;
+                                    width: 65px;
+                                    margin-right: 10px;
                                 }
                             }
                             .right-content {
