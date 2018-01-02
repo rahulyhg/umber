@@ -19,7 +19,7 @@
              margin-bottom: 0;
          } //Extended Classes
          .btn--list {
-             width: 170px;
+             width: 165px;
          } //End of extended classes
          //classes used in same pages
          .tab-title {
@@ -225,11 +225,24 @@
          //Start of blogs page
          //End of blogs page
          //Start of My account(myaccount.html)
-         //End of my-account
+         .order-list--btn {
+             margin-right: 0;
+         } //End of my-account
          //Start of Cancel, cancel-msg, return page
          .order-status-title {
              // This class is used in return, order, return successful & cancel, cancel successful msg.html
              @include margin(20px 0);
+         }
+         /*NOTE:.account-order-table class has been extended in order-detail.html & return-order.html*/
+         .account-order-table {
+             .item-img {
+                 width: 165px;
+                 @include padding(10px);
+                 margin-right: 5px;
+             }
+             .item-desc {
+                 width: 215px;
+             }
          }
          .order-details-table {
              // This class has been extended in order-return-table
@@ -265,10 +278,14 @@
          //Start of checkout.html
          .checkout {
              .content-spacing {
+                 @include margin(25px 0);
                  .btn--list {
                      width: 170px;
                  }
              }
+         }
+         .details-form {
+             margin-bottom: 25px;
          } // class used in check out & my-account page for vertical 
          .checkout-tab-btn {
              display: inline-block;
@@ -303,6 +320,33 @@
          .listing-dropdown-menu {
              width: 185px;
          } //End of listing page
+         //Start of mycart page
+         .order-table {
+             th {
+                 font-size: 18px;
+             }
+             tbody>tr {
+                 td {
+                     font-size: 19px;
+                 }
+                 td.item-block {
+                     width: 140px;
+                 }
+             }
+         }
+         .mycart-container {
+             @include padding(20px 0px 60px 0px);
+         }
+         .mycart-table {
+             .quantity__input {
+                 @include size(35px, 30px);
+                 font-size: 16px;
+                 padding: 0 2px;
+             }
+         }
+         .mycart-table tbody>tr td:last-child {
+             font-size: 20px;
+         } //End of mycart page
          .buy-info {
              .buy-para {
                  .view--btn {
@@ -390,7 +434,16 @@
              .brand-img {
                  width: 165px;
              }
-         } //End of errormsg & thankyou-msg page   
+         } //End of errormsg & thankyou-msg page  
+         // Start of giftcards page
+         .giftcard {
+             .mgbt50 {
+                 margin-bottom: 25px;
+             }
+             .giftcard-padd {
+                 @include padding(20px);
+             }
+         } //End of giftcard page
          //Start of all modals design
          .modal-container {
              .login-head {

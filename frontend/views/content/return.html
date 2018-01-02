@@ -15,19 +15,19 @@
                             <th colspan="4"></th>
                         </tr>
                         <tr class="text-uppercase">
-                            <th>item ordered</th>
+                            <th colspan="2">item ordered</th>
                             <th>price</th>
                             <th>quantity</th>
-                            <th>return item</th>
+                            <!-- <th>return item</th> -->
                         </tr>
                     </thead>
                     <tbody ng-repeat="product in order.products">
                         <tr>
-                            <td class="relate">
-                                <div class="item-img inline-block">
+                            <td class="relate" colspan="2">
+                                <div class="item-img pull-left">
                                     <img ng-src="{{product.product.images[0].image}}" alt="Ordered Item" class="img-responsive">
                                 </div>
-                                <div class="inline-block item-desc">
+                                <div class="pull-right item-desc">
                                     <h4 class="item-name text-uppercase">{{product.product.productName}}
                                     </h4>
                                     <p class="item-code"><span class="text-capitalize">Product Code:</span><span class="text-uppercase"> {{product.product.productCode}}</span>
@@ -63,14 +63,14 @@
                                 </a>-->
                                 </div>
                             </td>
-                            <td>
-                                <!--<div class=" custom-checkbox">
+                            <!-- <td>
+                               <div class=" custom-checkbox">
                                     <div class="inline-block checkbox">
                                         <input type="checkbox" id="{{product.product.productCode}}" ng-click="selectedProduct(product)" ng-checked="check(product.product._id)">
                                         <label for="{{product.product.productCode}}"></label>
                                     </div>
-                                </div>-->
-                            </td>
+                                </div>
+                            </td> -->
                         </tr>
                     </tbody>
 
