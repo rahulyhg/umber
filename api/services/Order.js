@@ -1266,9 +1266,14 @@ var model = {
     generateExcelSalesReport: function (order, prevCallback) {
                 async.concatSeries(order, function (orderData, callback) {
                 var obj = {};
-                var date = new Date(orderData.date);
                 obj["InvoiceNumber"] = orderData.invoiceNumber;
-                obj["Date"] = date.toLocaleDateString();
+                if(orderData.date){
+                    var date = new Date(orderData.date);
+                    obj["Date"] = date.toLocaleDateString();
+                }
+                else{
+                    obj["Date"] = "";
+                }
                 obj["TotalDiscount"] = orderData.totalDiscount;
                 obj["GST"] = orderData.gst;
                 obj["GSTpercentage"] = orderData.gstPercent;
@@ -1354,9 +1359,14 @@ var model = {
     generateReturnProductsReport: function (order, prevCallback) {
                 async.concatSeries(order, function (orderData, callback) {
                 var obj = {};
-                var date = new Date(orderData.date);
                 obj["InvoiceNumber"] = orderData.invoiceNumber;
-                obj["Date"] = date.toLocaleDateString();
+                if(orderData.date){
+                    var date = new Date(orderData.date);
+                    obj["Date"] = date.toLocaleDateString();
+                }
+                else{
+                    obj["Date"] = "";
+                }
                 obj["TotalDiscount"] = orderData.totalDiscount;
                 obj["GST"] = orderData.gst;
                 obj["GSTpercentage"] = orderData.gstPercent;
@@ -1446,9 +1456,14 @@ var model = {
     generateGSTReport: function (order, prevCallback) {
         async.concatSeries(order, function (orderData, callback) {
         var obj = {};
-        var date = new Date(orderData.date);
         obj["InvoiceNumber"] = orderData.invoiceNumber;
-        obj["Date"] = date.toLocaleDateString();
+        if(orderData.date){
+            var date = new Date(orderData.date);
+            obj["Date"] = date.toLocaleDateString();
+        }
+        else{
+            obj["Date"] = "";
+        }
         obj["GST"] = orderData.gst;
         obj["GSTpercentage"] = orderData.gstPercent;
         obj["totalAmt"] = orderData.totalAmount;
