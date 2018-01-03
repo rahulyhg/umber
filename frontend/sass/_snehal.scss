@@ -24,9 +24,6 @@
 
                         .mycart-container {
                             padding: 21px 20px 160px 20px;
-                            .table-responsive {
-                                overflow-x: hidden;
-                            }
                         }
 
                         .mycart-table {
@@ -102,17 +99,8 @@
                                 letter-spacing: 1px;
                                 padding: 3px 0; // width: 126px;
                             }
-                        } // .modal:before {
-                        //     content: '';
-                        //     display: inline-block;
-                        //     height: 100%;
-                        //     vertical-align: middle;
-                        //     margin-right: -4px;
-                        // } // .modal-dialog {
-                        //     display: inline-block;
-                        //     text-align: center;
-                        //     vertical-align: middle;
-                        // }
+                        }
+
                         .mycart-modal-container {
                             padding: 0px 20px;
                         }
@@ -738,6 +726,9 @@
 
                         .fourth-sec {
                             .leftContent {
+                                .spec {
+                                    @include align-items(baseline);
+                                }
                                 p {
                                     font-weight: 600;
                                     color: $darkGray;
@@ -751,7 +742,8 @@
                                     background: transparent; //border: none;
                                 }
                                 .leftContent__specHead {
-                                    width: 30%;
+                                    width: 65px;
+                                    margin-right: 10px;
                                 }
                             }
                             .right-content {

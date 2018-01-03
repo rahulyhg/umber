@@ -352,8 +352,8 @@
                                         </td>
                                         <td>
                                             <div class="custom-checkbox">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" id="{{product._id}}">
+                                                <div class="checkbox pull-right">
+                                                    <input type="checkbox" id="{{product._id}}" ng-model="myVarss" ng-checked="checkStateOnReload(product.productId)" ng-click="clickfun(product);">
                                                     <label for="{{product._id}}">Add to compare</label>
                                                 </div>
                                             </div>
@@ -371,10 +371,11 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <div infinite-scroll="loadMore()" infinite-scroll-distance="1" infinite-scroll-disabled="loadingDisable">
-                            </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div infinite-scroll="loadMore()" infinite-scroll-distance="1" infinite-scroll-disabled="loadingDisable">
             </div>
