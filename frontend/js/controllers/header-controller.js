@@ -533,11 +533,9 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
                 });
             }
         }
-
+        $scope.forgotPwd = true;
         $scope.forgotPassword = function () {
-            $scope.forgotPwd = true;
-            $scope.otpPwd = false
-            $scope.resetPwd = false;
+
             // code to close the modal 
             // $rootScope.loginModal.close();
             // $timeout(function () {
@@ -557,6 +555,9 @@ myApp.controller('headerCtrl', function ($rootScope, $scope, NavigationService, 
                 controller: 'loginModalCtrl'
                 // windowClass: 'modal-content-radi0'
             });
+
+            $scope.otpPwd = false
+            $scope.resetPwd = false;
 
             // $scope.loginModal.close({
             //     $value: $scope.loginModal

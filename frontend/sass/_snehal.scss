@@ -475,6 +475,7 @@
                                 &:hover {
                                     opacity: 0.5;
                                 }
+                                z-index: 0;
                             }
                             .flex-next {
                                 right: -35px !important;
@@ -484,6 +485,7 @@
                                 &:hover {
                                     opacity: 0.5;
                                 }
+                                z-index: 0;
                             }
                             .flex-direction-nav a {
                                 top: 40%;

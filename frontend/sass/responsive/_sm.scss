@@ -231,7 +231,7 @@
          //Start of Cancel, cancel-msg, return page
          .order-status-title {
              // This class is used in return, order, return successful & cancel, cancel successful msg.html
-             @include margin(20px 0);
+             @include margin(15px 0);
          }
          /*NOTE:.account-order-table class has been extended in order-detail.html & return-order.html*/
          .account-order-table {
@@ -264,11 +264,11 @@
          //Start of return-success.html  cancel-msg.html
          .return-success-msg,
          .cancel-success-msg {
-             @include padding(25px);
+             @include padding(20px);
              .return-success-content,
-             s .cancel-success-content {
+             .cancel-success-content {
                  border: 1px solid $borderColor;
-                 @include padding(30px);
+                 @include padding(25px);
              }
              .return-success-width,
              .cancel-success-width {
@@ -323,14 +323,14 @@
          //Start of mycart page
          .order-table {
              th {
-                 font-size: 18px;
+                 font-size: 15px;
              }
              tbody>tr {
                  td {
-                     font-size: 19px;
+                     font-size: 17px;
                  }
                  td.item-block {
-                     width: 140px;
+                     width: 120px;
                  }
              }
          }
@@ -446,6 +446,7 @@
          } //End of giftcard page
          //Start of all modals design
          .modal-container {
+             @include padding( 10px 50px 10px);
              .login-head {
                  h1 {
                      font-size: 25px;
@@ -474,6 +475,7 @@
              width: 600px;
          }
          .quick-view-product {
+             @include padding(20px);
              .individual-main {
                  @include padding(15px);
              }
