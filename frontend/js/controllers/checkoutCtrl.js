@@ -432,6 +432,14 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
             }
         });
     }
+    $scope.giftVoucherCodeMail = function (emailUser) {
+        OrderService.giftVoucherCodeMail(emailUser, function (data) {
+            console.log("in User/giftVoucherCodeMail", data);
+            if (data.value === true) {
+
+            }
+        });
+    }
     // redirect to myAccount OrderTab
     $scope.redirectToOrderTab = function () {
         $state.go("myaccount", {
@@ -487,6 +495,9 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                         if (value == "Cash on delivery") {
                             toastr.success('Thank You your order was placed successfully', 'success');
                             $scope.orderConfirmMail(emailUser);
+                            if ($scope.orders.giftVoucher.length > 0) {
+                                $scope.giftVoucherCodeMail(emailUser);
+                            }
                             $scope.redirectToOrderTab();
                         } else {
                             // payment gateway code goes here

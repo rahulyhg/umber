@@ -908,7 +908,7 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
                         var tax = _.round(unitPrice) * 0.12;
                         value.product.gst = _.round(tax);
                         value.gst = _.round(tax);
-                        value.product.discountApplicable = true;
+                        value.product.discountApplicable = false;
                         value.product.discountPriceOfProductApplied = discount = (value.product.mrp - value.product.price) * value.quantity;
                         value.product.discountPriceOfProduct = 0;
                         value.product.priceWithDiscount = (value.product.price * value.quantity);
@@ -918,7 +918,7 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
                         var tax = _.round(unitPrice) * 0.05;
                         value.product.gst = _.round(tax);
                         value.gst = _.round(tax);
-                        value.product.discountApplicable = true;
+                        value.product.discountApplicable = false;
                         value.product.discountPriceOfProductApplied = discount = (value.product.mrp - value.product.price) * value.quantity;
                         value.product.discountPriceOfProduct = 0;
                         value.product.priceWithDiscount = (value.product.price * value.quantity);
@@ -1009,6 +1009,7 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
     // $scope.mycartTable = {};
     $scope.updateQuantity = function (index, count) {
         // if (ProductService.isProductAvailable(count, $scope.mycartTable.products[index])) {
+        $scope.productGst = 0;
         $scope.mycartTable.products[index].quantity += count;
         if ($scope.mycartTable.products[index].quantity <= 0)
             $scope.mycartTable.products[index].quantity = 0;
@@ -1017,6 +1018,16 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
         //TODO: Calculate actual grand total
         $scope.grandTotal = $scope.total = CartService.getTotal($scope.mycartTable.products);
         $scope.grandTotal = $scope.total = $scope.grandTotal.toFixed(2);
+        _.each($scope.mycartTable.products, function (value) {
+
+            var unitPrice = ((_.round(value.product.price) * value.quantity) * 100) / (100 + 12);
+            var tax = _.round(unitPrice) * 0.12;
+            value.product.gst = _.round(tax);
+            value.gst = _.round(tax);
+            $scope.productGst = _.round($scope.productGst + value.product.gst);
+        });
+
+
         $scope.applyCouponSubmit();
         //  $scope.applyCouponSubmit(null, $scope.mycartTable.products[index].product._id);
         //  $scope.grandTotal=$scope.grandTotal-$scope.grandTotalAfterDiscount;

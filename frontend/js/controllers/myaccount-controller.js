@@ -1750,7 +1750,7 @@ myApp.controller('CancelMsgCtrl', function ($scope, TemplateService, $translate,
     TemplateService.title = "Canceld Oreder"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
 });
-myApp.controller('GiftCardCtrl', function ($scope, TemplateService, $translate, $rootScope, CartService) {
+myApp.controller('GiftCardCtrl', function ($scope, TemplateService, $translate, $rootScope, CartService, $state) {
     $scope.template = TemplateService.getHTML("content/giftcard.html");
     TemplateService.title = "Your Gift Card"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
@@ -1759,11 +1759,15 @@ myApp.controller('GiftCardCtrl', function ($scope, TemplateService, $translate, 
         var couponCode = "BU" + timestamp;
         giftDetails.userId = $.jStorage.get("userId");
         giftDetails.couponCode = couponCode;
-        console.log("in giftdetails!!!!!!!!!!giftDetails", giftDetails)
         CartService.giftSave(giftDetails, function (data) {
-            console.log("in giftdetails!!!!!!!!!!", data.data);
-            CartService.saveInCart(giftDetails, function (data) {
-
+            var gift = {};
+            gift.giftDetails = data.data.data;
+            gift.accessToken = $.jStorage.get("accessToken");
+            gift.userId = $.jStorage.get("userId");
+            CartService.saveProduct(gift, function (data) {
+                if (data.data.data.message == "Cart updated successfully") {
+                    $state.go("mycart");
+                }
             })
         });
     }

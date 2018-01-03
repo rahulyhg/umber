@@ -587,6 +587,14 @@ myApp
 
             }
         });
+        if (emailUser.order.giftVoucher.length > 0) {
+            OrderService.giftVoucherCodeMail(emailUser, function (data) {
+                console.log("in User/giftVoucherCodeMail", data);
+                if (data.value === true) {
+
+                }
+            });
+        }
     })
 
     //Example API Controller

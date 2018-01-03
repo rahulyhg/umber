@@ -929,7 +929,7 @@ var models = {
         });
     },
     // send gift voucher code email
-    giftVoucherCode: function (data, callback) {
+    giftVoucherCodeMail: function (data, callback) {
         // console.log(" ***** inside email of config ***** ", data);
         Password.find().exec(function (err, userdata) {
             if (err) {
@@ -955,7 +955,7 @@ var models = {
                                 content = new helper.Content("text/html", body);
                                 mail = new helper.Mail(from_email, subject, to_email, content);
 
-                                console.log("sending mail", mail);
+                                // console.log("sending mail", mail);
 
                                 var sg = require('sendgrid')(userdata[0].name);
                                 var request = sg.emptyRequest({
