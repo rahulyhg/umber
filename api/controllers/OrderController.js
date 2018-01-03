@@ -307,7 +307,7 @@ var controller = {
         }
     },
 
-    generateExcelSalesReport:function(req,res){   
+    generateExcelSalesReport:function(req,res){ 
         Order.populateOrderData(req.body, function (err, data){
         Order.generateExcelSalesReport(data, function (err, data) {
                 Config.generateExcel1("Order", data, function (excels) {
@@ -315,7 +315,6 @@ var controller = {
                     res.set('Content-Disposition', "attachment;filename=" + excels.path);
                     res.send(excels.excel);
                 });
-            
         })
     });
     },
