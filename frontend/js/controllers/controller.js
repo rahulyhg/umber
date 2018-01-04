@@ -578,6 +578,11 @@ myApp
             $scope.orderId = $stateParams.id;
         }
         $.jStorage.deleteKey("myCart");
+        $.jStorage.deleteKey("gifts");
+        $.jStorage.deleteKey("discountValues");
+        $.jStorage.deleteKey("gst");
+        $.jStorage.deleteKey("totalDiscount");
+        $.jStorage.deleteKey("giftCards");
         var emailUser = {};
         emailUser._id = $.jStorage.get("userId");
         emailUser.order = $.jStorage.get("userOrders");

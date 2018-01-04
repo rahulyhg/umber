@@ -1114,9 +1114,11 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
         cart.gst = $.jStorage.get("gst");
         cart.accessToken = $.jStorage.get("accessToken");
         // if ($scope.discountApplicableforCart) {
-        CartService.saveCartWithDiscount(cart, function (data) {
-            // console.log("in detailtab cart save", data)
-        });
+        if ($.jStorage.get("myCart")) {
+            CartService.saveCartWithDiscount(cart, function (data) {
+                // console.log("in detailtab cart save", data)
+            });
+        }
         // }
         $state.go("checkout");
     }

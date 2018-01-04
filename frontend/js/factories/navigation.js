@@ -119,6 +119,14 @@ myApp.factory('NavigationService', function ($http) {
                 method: 'POST',
                 withCredentials: false
             }).then(callback);
+        },
+        saveCoupon: function (data, callback) {
+            $http({
+                url: adminurl + 'Coupon/save',
+                method: 'POST',
+                data: data,
+                withCredentials: false
+            }).then(callback);
         }
     };
 });

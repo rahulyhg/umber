@@ -422,7 +422,7 @@ var models = {
                                 content = new helper.Content("text/html", body);
                                 mail = new helper.Mail(from_email, subject, to_email, content);
 
-                                console.log("sending mail", mail);
+                                // console.log("sending mail", mail);
 
                                 var sg = require('sendgrid')(userdata[0].name);
                                 var request = sg.emptyRequest({
@@ -487,7 +487,7 @@ var models = {
                                 content = new helper.Content("text/html", body);
                                 mail = new helper.Mail(from_email, subject, to_email, content);
 
-                                console.log("sending mail", mail);
+                                // console.log("sending mail", mail);
 
                                 var sg = require('sendgrid')(userdata[0].name);
                                 var request = sg.emptyRequest({
@@ -553,7 +553,7 @@ var models = {
                                 content = new helper.Content("text/html", body);
                                 mail = new helper.Mail(from_email, subject, to_email, content);
 
-                                console.log("sending mail", mail);
+                                // console.log("sending mail", mail);
 
                                 var sg = require('sendgrid')(userdata[0].name);
                                 var request = sg.emptyRequest({
@@ -620,7 +620,7 @@ var models = {
                                 content = new helper.Content("text/html", body);
                                 mail = new helper.Mail(from_email, subject, to_email, content);
 
-                                console.log("sending mail", mail);
+                                // console.log("sending mail", mail);
 
                                 var sg = require('sendgrid')(userdata[0].name);
                                 var request = sg.emptyRequest({
@@ -687,7 +687,7 @@ var models = {
                                 content = new helper.Content("text/html", body);
                                 mail = new helper.Mail(from_email, subject, to_email, content);
 
-                                console.log("sending mail", mail);
+                                // console.log("sending mail", mail);
 
                                 var sg = require('sendgrid')(userdata[0].name);
                                 var request = sg.emptyRequest({
@@ -754,7 +754,7 @@ var models = {
                                 content = new helper.Content("text/html", body);
                                 mail = new helper.Mail(from_email, subject, to_email, content);
 
-                                console.log("sending mail", mail);
+                                // console.log("sending mail", mail);
 
                                 var sg = require('sendgrid')(userdata[0].name);
                                 var request = sg.emptyRequest({
@@ -821,7 +821,7 @@ var models = {
                                 content = new helper.Content("text/html", body);
                                 mail = new helper.Mail(from_email, subject, to_email, content);
 
-                                console.log("sending mail", mail);
+                                // console.log("sending mail", mail);
 
                                 var sg = require('sendgrid')(userdata[0].name);
                                 var request = sg.emptyRequest({
@@ -888,7 +888,7 @@ var models = {
                                 content = new helper.Content("text/html", body);
                                 mail = new helper.Mail(from_email, subject, to_email, content);
 
-                                console.log("sending mail", mail);
+                                // console.log("sending mail", mail);
 
                                 var sg = require('sendgrid')(userdata[0].name);
                                 var request = sg.emptyRequest({
@@ -1058,7 +1058,7 @@ var models = {
         content = new helper.Content("text/html", body);
         mail = new helper.Mail(from_email, subject, to_email, content);
 
-        console.log("sending mail", mail);
+        // console.log("sending mail", mail);
 
         var sg = require('sendgrid')(userdata[0].name);
         var request = sg.emptyRequest({

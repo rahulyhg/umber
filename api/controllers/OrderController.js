@@ -132,6 +132,17 @@ var controller = {
             });
         }
     },
+    giftVoucherCodeMail: function (req, res) {
+        if (req.body) {
+            Order.giftVoucherCodeMail(req.body, res.callback);
+        } else {
+            res.json({
+                message: {
+                    data: "Invalid request!"
+                }
+            });
+        }
+    },
     redirectUrl: function (req, res) {
         if (req.body) {
             var http = require('http'),
@@ -293,12 +304,12 @@ var controller = {
         if (req.body) {
             async.waterfall([
                 function (callback) {
-                    Order.generateInvoice(req.body,callback);
+                    Order.generateInvoice(req.body, callback);
                 },
-                function (data,callback) {
+                function (data, callback) {
                     Order.sendEmail(data, callback);
                 },
-                function (data,callback) {
+                function (data, callback) {
                     console.log("Email sent");
                 }
             ]);
@@ -307,42 +318,44 @@ var controller = {
         }
     },
 
-    generateExcelSalesReport:function(req,res){   
-        Order.populateOrderData(req.body, function (err, data){
-        Order.generateExcelSalesReport(data, function (err, data) {
+    generateExcelSalesReport: function (req, res) {
+        Order.populateOrderData(req.body, function (err, data) {
+            Order.generateExcelSalesReport(data, function (err, data) {
                 Config.generateExcel1("Order", data, function (excels) {
                     res.set('Content-Type', "application/octet-stream");
                     res.set('Content-Disposition', "attachment;filename=" + excels.path);
                     res.send(excels.excel);
                 });
-            
-        })
-    });
+
+            })
+        });
     },
 
-    generateReturnProductsReport:function(req,res){   
-        Order.populateOrderData(req.body, function (err, data){
-        Order.generateReturnProductsReport(data, function (err, data) {
+    generateReturnProductsReport: function (req, res) {
+        Order.populateOrderData(req.body, function (err, data) {
+            Order.generateReturnProductsReport(data, function (err, data) {
                 Config.generateExcel1("Order", data, function (excels) {
                     res.set('Content-Type', "application/octet-stream");
                     res.set('Content-Disposition', "attachment;filename=" + excels.path);
                     res.send(excels.excel);
                 });
-            
-        });
-    })},
 
-    generateGSTReport:function(req,res){   
-        Order.populateOrderData(req.body, function (err, data){
-        Order.generateGSTReport(data, function (err, data) {
+            });
+        })
+    },
+
+    generateGSTReport: function (req, res) {
+        Order.populateOrderData(req.body, function (err, data) {
+            Order.generateGSTReport(data, function (err, data) {
                 Config.generateExcel1("Order", data, function (excels) {
                     res.set('Content-Type', "application/octet-stream");
                     res.set('Content-Disposition', "attachment;filename=" + excels.path);
                     res.send(excels.excel);
                 });
-            
-        });
-    })}
+
+            });
+        })
+    }
 
 };
 module.exports = _.assign(module.exports, controller);

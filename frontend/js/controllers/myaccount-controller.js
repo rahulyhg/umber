@@ -1759,6 +1759,7 @@ myApp.controller('GiftCardCtrl', function ($scope, TemplateService, $translate, 
         var couponCode = "BU" + timestamp;
         giftDetails.userId = $.jStorage.get("userId");
         giftDetails.couponCode = couponCode;
+        $.jStorage.set("giftCards", giftDetails);
         CartService.giftSave(giftDetails, function (data) {
             var gift = {};
             gift.giftDetails = data.data.data;
