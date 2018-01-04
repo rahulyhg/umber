@@ -68,12 +68,17 @@ var schema = new Schema({
         taxAmt: Number,
         taxPercent: Number
     }],
+    giftVoucher: [{
+        type: Schema.Types.ObjectId,
+        ref: 'GiftCard'
+    }],
     totalAmount: {
         type: Number,
         required: true
     },
+    totalAmountgiftVoucher: Number,
     gst: Number,
-    gstPercent:Number,
+    gstPercent: Number,
     subTotal: Number,
     shippingAmount: Number,
     totalDiscount: Number,
@@ -141,7 +146,7 @@ var schema = new Schema({
         priceAfterDiscount: Number,
         unitPrice: Number,
         discountAmount: Number,
-        discountPriceOfProductApplied:Number,
+        discountPriceOfProductApplied: Number,
         discountPercent: Number,
         taxAmt: Number,
         taxPercent: Number,
@@ -345,6 +350,7 @@ var model = {
         }
         var gifts = data.gifts;
         var allData = data;
+        var couponGiftArr = [];
         // console.log("allData", allData);
         if (_.isEmpty(data.userId)) {
             // console.log("No user found for order");
@@ -369,6 +375,7 @@ var model = {
                     // 59f06bc7647252477439a1e4
                     order.totalAmount = 0;
                     order.totalDiscount = 0;
+                    order.totalAmountgiftVoucher = 0;
                     for (var idx = 0; idx < cart.products.length; idx++) {
                         var product = cart.products[idx];
                         var orderData = {
@@ -394,6 +401,35 @@ var model = {
                             order.totalAmount -= _.round(orderData.discountAmount);
                         }
                     }
+                    for (var idx = 0; idx < cart.giftVoucher.length; idx++) {
+                        var giftVoucher = cart.giftVoucher[idx];
+                        var orderVoucher = {};
+                        var couponGift = {};
+                        GiftCard.findOne({
+                            _id: giftVoucher
+                        }).exec(function (err, voucher) {
+                            if (err) {
+                                console.log("error in cart giftvoucher", err);
+                                callback(err, null);
+                            } else {
+                                if (!_.isEmpty(voucher)) {
+                                    orderVoucher = voucher;
+                                    order.totalAmountgiftVoucher += _.round(orderVoucher.giftAmount);
+                                    couponGift.name = orderVoucher.couponCode;
+                                    couponGift.cAmount = orderVoucher.giftAmount;
+                                    couponGift.isActive = "True";
+                                    couponGift.status = "unUsed";
+                                    couponGift.startDate = new Date();
+                                    couponGift.endDate = (new Date(+new Date() + 365 * 24 * 60 * 60 * 1000));
+                                }
+                            }
+                        });
+                        if (!order.giftVoucher) {
+                            order.giftVoucher = [];
+                        }
+                        order.giftVoucher.push(giftVoucher);
+                        couponGiftArr.push(couponGift);
+                    }
                     // order.totalAmount -= _.round(order.totalDiscount);
                     order.user = mongoose.Types.ObjectId(data.userId);
                     order.gst = _.round(cart.gst);
@@ -411,13 +447,13 @@ var model = {
                     order.paymentMethod = paymentMethod;
                     order.gifts = gifts;
 
-                    // console.log("order: ", order);
+                    console.log("order: ", order);
                     Order.saveData(order, function (err, data1) {
                         //console.log("$$$$$$$$$order: ", order);
                         if (err) {
                             callback(err, null);
                         } else if (data1) {
-                            console.log("in else if avinash", allData);
+                            // console.log("in else if avinash", allData);
                             Order.findOne({
                                 _id: mongoose.Types.ObjectId(data1._id)
                             }).deepPopulate("products.product products.product.size products.product.color").exec(function (err, order) {
@@ -427,6 +463,20 @@ var model = {
                                         _id: mongoose.Types.ObjectId(cart._id)
                                     }).exec(function (err, result) {})
                                     Product.subtractQuantity(data1.products, null);
+                                }
+                                if (cart.giftVoucher.length > 0) {
+                                    Coupon.saveData(couponGift, function (err, couponGiftReceived) {
+                                        if (err) {
+                                            console.log("errrrooooooooooorrrrrrrrrrrr", err);
+                                            callback(err, null);
+                                        } else {
+                                            if (!_.isEmpty(couponGiftReceived)) {
+                                                console.log("!!!!!!!!!!!!!!!!!!!!save coupon", couponGiftReceived)
+                                            }
+
+                                        }
+                                        // callback(null, order);
+                                    })
                                 }
                                 if (allData.selectedDiscount) {
                                     if (allData.selectedDiscount.selectedDiscount) {
@@ -560,10 +610,10 @@ var model = {
                 if (user._id == data.user) {
                     async.each(data.products, function (product, eachCallback) {
                         // console.log("productproductproduct", product);
-                       var discount= product.discountAmount;
-                       var discountPercent=product.discountPercent;
-                       var taxAmt=product.taxAmt;
-                       var taxPercent=product.taxPercent;
+                        var discount = product.discountAmount;
+                        var discountPercent = product.discountPercent;
+                        var taxAmt = product.taxAmt;
+                        var taxPercent = product.taxPercent;
                         async.waterfall([
                             function findProduct(cbSubWaterfall) {
                                 Product.findOne({
@@ -593,7 +643,7 @@ var model = {
                                             price: deductPrice,
                                             status: orderStatus,
                                             comment: product.comment,
-                                            discountAmount:discount,
+                                            discountAmount: discount,
                                             discountPercent: discountPercent,
                                             taxAmt: taxAmt,
                                             taxPercent: taxPercent
@@ -1137,6 +1187,60 @@ var model = {
             }
         })
     },
+    //API to send coupon code via email
+    giftVoucherCodeMail: function (data, callback) {
+        User.findOne({
+            _id: data._id
+        }).exec(function (error, created) {
+            if (error, created == undefined) {
+                console.log("User >>> giftVoucherCodeMail >>> User.findOneAndUpdate >>> error", error);
+                callback(error, null);
+            } else {
+                Order.findOne({
+                    orderNo: data.order.orderNo
+                }).deepPopulate("giftVoucher").lean().exec(function (error, orderss) {
+                    // console.log("User >>> ConfirmOrderPlaced >>>^^^^orderDetail", orderss.products[0].product, "++++++++++++++++++++");
+                    if (error, orderss == undefined) {
+                        console.log("User >>> ConfirmOrderPlaced >>> User.findOneAndUpdate >>> error", error);
+                        callback(error, null);
+                    } else {
+                        var emailData = {};
+                        var sendDataArray = [];
+                        var total = 0;
+                        var cartAmount = 0;
+                        emailData.subject = "BurntUmber Gift Voucher";
+                        emailData.filename = "gift-voucher.ejs";
+                        emailData.from = "harsh@wohlig.com";
+                        async.eachSeries(orderss.giftVoucher, function (voucher, callback1) {
+                            emailData.email = voucher.frndEmail;
+                            emailData.firstname = voucher.frndFirstName;
+                            emailData.lastName = voucher.frndLastName;
+                            emailData.frndName = voucher.userFirstName;
+                            emailData.giftAmount = voucher.giftAmount;
+                            emailData.couponCode = voucher.couponCode;
+                            Config.giftVoucherCodeMail(emailData, function (err, response) {
+                                if (err) {
+                                    console.log("error in email", err);
+                                    callback1("emailError", null);
+                                } else if (response) {
+                                    var sendData = {}
+                                    sendData.email = voucher.frndEmail;
+                                    sendData.firstName = voucher.userFirstName;
+                                    sendData.lastName = voucher.userLastName;
+                                    sendDataArray.push(sendData);
+                                    callback1();
+                                } else {
+                                    callback1("errorOccurredRegister", null);
+                                }
+                            });
+                        }, function (err) {
+                            callback(null, sendDataArray);
+                        });
+                    }
+                });
+            }
+        })
+    },
     generateInvoiceOrOrderYear: function (str, callback) {
         var today = new Date();
         var lastTwoDigitYear = today.getFullYear().toString().substr(2, 2);
@@ -1153,7 +1257,7 @@ var model = {
         var taxPercent = 0;
         var taxAmt = 0;
         var unitPrice = 0;
-        var unitPriceSum=0;
+        var unitPriceSum = 0;
         var priceAfterDiscount = 0;
         var discountPercent = 0;
         var discountPrice = 0;
@@ -1162,13 +1266,13 @@ var model = {
         var subTotal = 0;
         var totalDiscount = 0;
         var totalAmount = 0;
-        var value=0;
+        var value = 0;
         Order.findOne({
             _id: data.orderId
         }).lean().deepPopulate("products.product user").exec(function (err, order) {
             _.each(order.products, function (product, index) {
                 value = _.round(product.product.price) * product.quantity;
-                discountPercent = (product.discountAmount*100)/(product.product.price);
+                discountPercent = (product.discountAmount * 100) / (product.product.price);
                 priceAfterDiscount = value - product.discountAmount;
                 if (priceAfterDiscount <= taxLimiter) {
                     taxPercent = 5;
@@ -1177,8 +1281,8 @@ var model = {
                 }
                 unitPrice = (priceAfterDiscount * 100) / (100 + taxPercent);
                 taxAmt = _.round(((taxPercent / 100) * unitPrice));
-                if (product.product.price !=product.product.mrp) {
-                    unitPriceSum=unitPriceSum+unitPrice;
+                if (product.product.price != product.product.mrp) {
+                    unitPriceSum = unitPriceSum + unitPrice;
                     gst = gst + taxAmt;
                 }
                 product.unitPrice = _.round(unitPrice);
@@ -1197,16 +1301,15 @@ var model = {
                 }
                 order.invoiceNumber = invoiceYear + num;
             });
-            if(unitPriceSum>0){
-                order.gstPercent=(_.round(gst)*100)/_.round(unitPriceSum);
-            }
-            else{
-                order.gstPercent=0;
+            if (unitPriceSum > 0) {
+                order.gstPercent = (_.round(gst) * 100) / _.round(unitPriceSum);
+            } else {
+                order.gstPercent = 0;
             }
             order.gst = _.round(gst);
             order.totalDiscount = totalDiscount;
             order.subTotal = subTotal;
-            order.totalAmount = _.round((subTotal-totalDiscount) + gst + order.shippingAmount);
+            order.totalAmount = _.round((subTotal - totalDiscount) + gst + order.shippingAmount);
             order.date = (new Date()).toLocaleDateString();
             Order.saveData(order, function (err, data) {
                 if (err) {
@@ -1254,99 +1357,93 @@ var model = {
             }
         })
     },
-    populateOrderData:function(data,callback){
+
+    populateOrderData: function (data, callback) {
         Order.find({}).deepPopulate("products.product.size products.product.prodCollection products.product.color user courierType returnedProducts.product.size returnedProducts.product.color").lean().exec(function (err, order) {
             if (err || _.isEmpty(order)) {
                 callback(err, []);
             } else {
-                callback(null,order) ;           
+                callback(null, order);
             }
-         })
+        })
     },
     generateExcelSalesReport: function (order, prevCallback) {
-                async.concatSeries(order, function (orderData, callback) {
+        async.concatSeries(order, function (orderData, callback) {
                 var obj = {};
                 obj["InvoiceNumber"] = orderData.invoiceNumber;
-                if(orderData.date){
+                if (orderData.date) {
                     var date = new Date(orderData.date);
                     obj["Date"] = date.toLocaleDateString();
-                }
-                else{
+                } else {
                     obj["Date"] = "";
                 }
                 obj["TotalDiscount"] = orderData.totalDiscount;
                 obj["GST"] = orderData.gst;
                 obj["GSTpercentage"] = orderData.gstPercent;
                 obj["TotalAmt"] = orderData.totalAmount;
-                var productId="";
-                var size="";
-                var color="";
-                var discountPercent="";
-                var quantity="";
-                var name="";
+                var productId = "";
+                var size = "";
+                var color = "";
+                var discountPercent = "";
+                var quantity = "";
+                var name = "";
                 if (orderData.products) {
                     _.each(orderData.products, function (product) {
-                       
-                        if(product.quantity){
-                            if(quantity==""){ 
-                                quantity=product.quantity;
+
+                        if (product.quantity) {
+                            if (quantity == "") {
+                                quantity = product.quantity;
+                            } else {
+                                quantity = quantity + '\n' + product.quantity;
                             }
-                            else{
-                               quantity =  quantity+'\n'+product.quantity;
-                            }
-                        }  
-                        if(product.discountPercent){
-                            if(discountPercent==""){
-                                discountPercent=product.discountPercent.toString();
-                            }
-                            else{
-                                discountPercent =discountPercent+'\n'+product.discountPercent.toString();
-                            }  
                         }
-                        if(product.product){
-                            if(product.product.productId){
-                                if(productId==""){
-                                    productId=product.product.productId;
-                                }
-                                else{
+                        if (product.discountPercent) {
+                            if (discountPercent == "") {
+                                discountPercent = product.discountPercent.toString();
+                            } else {
+                                discountPercent = discountPercent + '\n' + product.discountPercent.toString();
+                            }
+                        }
+                        if (product.product) {
+                            if (product.product.productId) {
+                                if (productId == "") {
+                                    productId = product.product.productId;
+                                } else {
 
-                                    productId = productId+'\n'+product.product.productId;
+                                    productId = productId + '\n' + product.product.productId;
                                 }
                             }
-                            if(product.product.name){
-                                if(name==""){
-                                    name=product.product.name;
-                                }
-                                else{
+                            if (product.product.name) {
+                                if (name == "") {
+                                    name = product.product.name;
+                                } else {
 
-                                    name = name+'\n'+product.product.name;
+                                    name = name + '\n' + product.product.name;
                                 }
                             }
-                            if(product.product.size){
-                                if(size==""){ 
-                                    size=product.product.size.name;
-                                }
-                                else{
-                                   size =  size+'\n'+product.product.size.name;
+                            if (product.product.size) {
+                                if (size == "") {
+                                    size = product.product.size.name;
+                                } else {
+                                    size = size + '\n' + product.product.size.name;
                                 }
                             }
-                               
-                            if(product.product.color){
-                                if( color==""){
-                                    color=product.product.color.name;
+
+                            if (product.product.color) {
+                                if (color == "") {
+                                    color = product.product.color.name;
+                                } else {
+                                    color = color + '\n' + product.product.color.name;
                                 }
-                                else{
-                                    color=  color+'\n'+product.product.color.name;
-                                }      
-                            }               
+                            }
                         }
                     })
-                    obj["SKU"]=name;
-                    obj["productId"]=productId;
-                    obj["discountPercent"]=discountPercent;
-                    obj["color"]=color;
-                    obj["size"]=size;
-                    obj["quantity"]=quantity;
+                    obj["SKU"] = name;
+                    obj["productId"] = productId;
+                    obj["discountPercent"] = discountPercent;
+                    obj["color"] = color;
+                    obj["size"] = size;
+                    obj["quantity"] = quantity;
                 }
                 callback(null, obj);
             },
@@ -1354,95 +1451,88 @@ var model = {
                 prevCallback(null, order);
             });
 
-        
+
     },
     generateReturnProductsReport: function (order, prevCallback) {
-                async.concatSeries(order, function (orderData, callback) {
+        async.concatSeries(order, function (orderData, callback) {
                 var obj = {};
                 obj["InvoiceNumber"] = orderData.invoiceNumber;
-                if(orderData.date){
+                if (orderData.date) {
                     var date = new Date(orderData.date);
                     obj["Date"] = date.toLocaleDateString();
-                }
-                else{
+                } else {
                     obj["Date"] = "";
                 }
                 obj["TotalDiscount"] = orderData.totalDiscount;
                 obj["GST"] = orderData.gst;
                 obj["GSTpercentage"] = orderData.gstPercent;
                 obj["TotalAmt"] = orderData.totalAmount;
-                var productId="";
-                var size="";
-                var color="";
-                var discountPercent="";
-                var quantity="";
-                var name="";
+                var productId = "";
+                var size = "";
+                var color = "";
+                var discountPercent = "";
+                var quantity = "";
+                var name = "";
                 if (orderData.returnedProducts) {
                     _.each(orderData.returnedProducts, function (product) {
-                       
-                        if(product.quantity){
-                            if(quantity==""){ 
-                                quantity=product.quantity;
-                            }
-                            else{
-                               quantity =  quantity+'\n'+product.quantity;
-                            }
-                        }  
-                        if(product.discountPercent){
-                            if(discountPercent==""){
-                                discountPercent=product.discountPercent.toString();
-                            }
-                            else{
-                                discountPercent =discountPercent+'\n'+product.discountPercent.toString();
-                            }  
-                        }
-                        if(product.product){
-                            if(product.product.productId){
-                    
-                                if(productId==""){
-                                    productId=product.product.productId;
-                                }
-                                else{
 
-                                    productId = productId+'\n'+product.product.productId;
-                                }
+                        if (product.quantity) {
+                            if (quantity == "") {
+                                quantity = product.quantity;
+                            } else {
+                                quantity = quantity + '\n' + product.quantity;
                             }
-                            if(product.product.name){
-                                if(name==""){
-                                    name=product.product.name;
-                                }
-                                else{
-
-                                    name = name+'\n'+product.product.name;
-                                }
-                            }
-                            if(product.product.size){
-                                if(size==""){ 
-                                    size=product.product.size.name;
-                                }
-                                else{
-                                   size =  size+'\n'+product.product.size.name;
-                                }
-                            }
-                               
-                            if(product.product.color){
-                                if( color==""){
-                                    color=product.product.color.name;
-                                }
-                                else{
-                                    color=  color+'\n'+product.product.color.name;
-                                }      
-                            } 
                         }
-                        
-                       
+                        if (product.discountPercent) {
+                            if (discountPercent == "") {
+                                discountPercent = product.discountPercent.toString();
+                            } else {
+                                discountPercent = discountPercent + '\n' + product.discountPercent.toString();
+                            }
+                        }
+                        if (product.product) {
+                            if (product.product.productId) {
+
+                                if (productId == "") {
+                                    productId = product.product.productId;
+                                } else {
+
+                                    productId = productId + '\n' + product.product.productId;
+                                }
+                            }
+                            if (product.product.name) {
+                                if (name == "") {
+                                    name = product.product.name;
+                                } else {
+
+                                    name = name + '\n' + product.product.name;
+                                }
+                            }
+                            if (product.product.size) {
+                                if (size == "") {
+                                    size = product.product.size.name;
+                                } else {
+                                    size = size + '\n' + product.product.size.name;
+                                }
+                            }
+
+                            if (product.product.color) {
+                                if (color == "") {
+                                    color = product.product.color.name;
+                                } else {
+                                    color = color + '\n' + product.product.color.name;
+                                }
+                            }
+                        }
+
+
                     })
-                    obj["SKU"]=name;
-                    obj["productId"]=productId;
-                    obj["discountPercent"]=discountPercent;
-                    obj["color"]=color;
-                    obj["size"]=size;
-                    obj["quantity"]=quantity;
+                    obj["SKU"] = name;
+                    obj["productId"] = productId;
+                    obj["discountPercent"] = discountPercent;
+                    obj["color"] = color;
+                    obj["size"] = size;
+                    obj["quantity"] = quantity;
                 }
                 callback(null, obj);
             },
@@ -1450,268 +1540,248 @@ var model = {
                 prevCallback(null, order);
             });
 
-        
+
     },
 
     generateGSTReport: function (order, prevCallback) {
         async.concatSeries(order, function (orderData, callback) {
-        var obj = {};
-        obj["InvoiceNumber"] = orderData.invoiceNumber;
-        if(orderData.date){
-            var date = new Date(orderData.date);
-            obj["Date"] = date.toLocaleDateString();
-        }
-        else{
-            obj["Date"] = "";
-        }
-        obj["GST"] = orderData.gst;
-        obj["GSTpercentage"] = orderData.gstPercent;
-        obj["totalAmt"] = orderData.totalAmount;
-        var productId="";
-        var size="";
-        var quantity="";
-        var name="";
-        if (orderData.products) {
-            _.each(orderData.products, function (product) {
-                if(product.quantity){
-                    if(quantity==""){ 
-                        quantity=product.quantity;
-                    }
-                    else{
-                       quantity =  quantity+'\n'+product.quantity;
-                    }
-                }  
-                if(product.product){
-                    if(product.product.productId){
-            
-                        if(productId==""){
-                            productId=product.product.productId;
-                        }
-                        else{
-
-                            productId = productId+'\n'+product.product.productId;
-                        }
-                    }
-                    if(product.product.name){
-                        if(name==""){
-                            name=product.product.name;
-                        }
-                        else{
-
-                            name = name+'\n'+product.product.name;
-                        }
-                    }
-                    if(product.product.size){
-                        if(size==""){ 
-                            size=product.product.size.name;
-                        }
-                        else{
-                           size =  size+'\n'+product.product.size.name;
-                        }
-                    }
+                var obj = {};
+                obj["InvoiceNumber"] = orderData.invoiceNumber;
+                if (orderData.date) {
+                    var date = new Date(orderData.date);
+                    obj["Date"] = date.toLocaleDateString();
+                } else {
+                    obj["Date"] = "";
                 }
-            })
-            obj["productId"]=productId;
-            obj["SKU"]=name;
-            obj["quantity"] = quantity;
-            obj["size"]=size;
-        }
-        callback(null, obj);
+                obj["GST"] = orderData.gst;
+                obj["GSTpercentage"] = orderData.gstPercent;
+                obj["totalAmt"] = orderData.totalAmount;
+                var productId = "";
+                var size = "";
+                var quantity = "";
+                var name = "";
+                if (orderData.products) {
+                    _.each(orderData.products, function (product) {
+                        if (product.quantity) {
+                            if (quantity == "") {
+                                quantity = product.quantity;
+                            } else {
+                                quantity = quantity + '\n' + product.quantity;
+                            }
+                        }
+                        if (product.product) {
+                            if (product.product.productId) {
+
+                                if (productId == "") {
+                                    productId = product.product.productId;
+                                } else {
+
+                                    productId = productId + '\n' + product.product.productId;
+                                }
+                            }
+                            if (product.product.name) {
+                                if (name == "") {
+                                    name = product.product.name;
+                                } else {
+
+                                    name = name + '\n' + product.product.name;
+                                }
+                            }
+                            if (product.product.size) {
+                                if (size == "") {
+                                    size = product.product.size.name;
+                                } else {
+                                    size = size + '\n' + product.product.size.name;
+                                }
+                            }
+                        }
+                    })
+                    obj["productId"] = productId;
+                    obj["SKU"] = name;
+                    obj["quantity"] = quantity;
+                    obj["size"] = size;
+                }
+                callback(null, obj);
+            },
+
+
+            function (err, order) {
+                prevCallback(null, order);
+            });
+
+
     },
 
-
-    function (err, order) {
-        prevCallback(null, order);
-    });
-
-
-},
-
-generateCourierReport: function (order, prevCallback) {
-    async.concatSeries(order, function (orderData, callback) {
-    var obj = {};
-    obj["InvoiceNumber"] = orderData.invoiceNumber;
-    obj["CourierCharges"] = orderData.courierAmount;
-    if(orderData.shippingAddress){
-        obj["city"] = orderData.shippingAddress.city;
-        obj["state"] = orderData.shippingAddress.state;
-    }
-    else{
-        obj["city"]="";
-        obj["state"]="";
-    }
-    if(orderData.courierType){
-        obj["courierName"]=orderData.courierType.name;
-    }
-    else{
-        obj["courierName"]="";
-    }
-    var productId="";
-    var size="";
-    var color="";
-    var courierName="";
-    var quantity="";
-    var name="";
-    if (orderData.products) {
-        _.each(orderData.products, function (product) {
-            if(product.quantity){
-                if(quantity==""){ 
-                    quantity=product.quantity;
+    generateCourierReport: function (order, prevCallback) {
+        async.concatSeries(order, function (orderData, callback) {
+                var obj = {};
+                obj["InvoiceNumber"] = orderData.invoiceNumber;
+                obj["CourierCharges"] = orderData.courierAmount;
+                if (orderData.shippingAddress) {
+                    obj["city"] = orderData.shippingAddress.city;
+                    obj["state"] = orderData.shippingAddress.state;
+                } else {
+                    obj["city"] = "";
+                    obj["state"] = "";
                 }
-                else{
-                    quantity =  quantity+'\n'+product.quantity;
+                if (orderData.courierType) {
+                    obj["courierName"] = orderData.courierType.name;
+                } else {
+                    obj["courierName"] = "";
                 }
-            }  
-            if(product.product){
-                if(product.product.productId){
-                    if(productId==""){
-                        productId=product.product.productId;
-                    }
-                    else{
-                        productId = productId+'\n'+product.product.productId;
-                    }
+                var productId = "";
+                var size = "";
+                var color = "";
+                var courierName = "";
+                var quantity = "";
+                var name = "";
+                if (orderData.products) {
+                    _.each(orderData.products, function (product) {
+                        if (product.quantity) {
+                            if (quantity == "") {
+                                quantity = product.quantity;
+                            } else {
+                                quantity = quantity + '\n' + product.quantity;
+                            }
+                        }
+                        if (product.product) {
+                            if (product.product.productId) {
+                                if (productId == "") {
+                                    productId = product.product.productId;
+                                } else {
+                                    productId = productId + '\n' + product.product.productId;
+                                }
+                            }
+                            if (product.product.name) {
+                                if (name == "") {
+                                    name = product.product.name;
+                                } else {
+                                    name = name + '\n' + product.product.name;
+                                }
+                            }
+                            if (product.product.size) {
+                                if (size == "") {
+                                    size = product.product.size.name;
+                                } else {
+                                    size = size + '\n' + product.product.size.name;
+                                }
+                            }
+
+                            if (product.product.color) {
+                                if (color == "") {
+                                    color = product.product.color.name;
+                                } else {
+                                    color = color + '\n' + product.product.color.name;
+                                }
+                            }
+
+                        }
+                    })
+                    obj["SKU"] = name;
+                    obj["productId"] = productId;
+                    obj["color"] = color;
+                    obj["size"] = size;
+                    obj["quantity"] = quantity;
                 }
-                if(product.product.name){
-                    if(name==""){
-                        name=product.product.name;
-                    }
-                    else{
-                        name = name+'\n'+product.product.name;
-                    }
-                }
-                if(product.product.size){
-                    if(size==""){ 
-                        size=product.product.size.name;
-                    }
-                    else{
-                       size =  size+'\n'+product.product.size.name;
-                    }
-                }
-                   
-                if(product.product.color){
-                    if( color==""){
-                        color=product.product.color.name;
-                    }
-                    else{
-                        color=  color+'\n'+product.product.color.name;
-                    }      
-                }   
-                            
-            }
-        })
-        obj["SKU"]=name;
-        obj["productId"]=productId;
-        obj["color"]=color;
-        obj["size"]=size;
-        obj["quantity"]=quantity;
-    }
-    callback(null, obj);
-},
-function (err, order) {
-    prevCallback(null, order);
-});
+                callback(null, obj);
+            },
+            function (err, order) {
+                prevCallback(null, order);
+            });
 
 
-},
-generateStockReport: function (order, prevCallback) {
-    async.concatSeries(order, function (orderData, callback) {
-    var obj = {};
-    var productId="";
-    var size="";
-    var color="";
-    var collection="";
-    var quantity="";
-    var styleNo="";
-    var name="";
-    var description="";
-    if (orderData.products) {
-        _.each(orderData.products, function (product) {
-            if(product.product){
-                if(product.product.productId){
-                    if(productId==""){
-                        productId=product.product.productId;
-                    }
-                    else{
+    },
+    generateStockReport: function (order, prevCallback) {
+        async.concatSeries(order, function (orderData, callback) {
+                var obj = {};
+                var productId = "";
+                var size = "";
+                var color = "";
+                var collection = "";
+                var quantity = "";
+                var styleNo = "";
+                var name = "";
+                var description = "";
+                if (orderData.products) {
+                    _.each(orderData.products, function (product) {
+                        if (product.product) {
+                            if (product.product.productId) {
+                                if (productId == "") {
+                                    productId = product.product.productId;
+                                } else {
 
-                        productId = productId+'\n'+product.product.productId;
-                    }
+                                    productId = productId + '\n' + product.product.productId;
+                                }
+                            }
+                            if (product.product.name) {
+                                if (name == "") {
+                                    name = product.product.name;
+                                } else {
+
+                                    name = name + '\n' + product.product.name;
+                                }
+                            }
+                            if (product.product.size) {
+                                if (size == "") {
+                                    size = product.product.size.name;
+                                } else {
+                                    size = size + '\n' + product.product.size.name;
+                                }
+                            }
+
+                            if (product.product.color) {
+                                if (color == "") {
+                                    color = product.product.color.name;
+                                } else {
+                                    color = color + '\n' + product.product.color.name;
+                                }
+                            }
+                            if (product.product.quantity) {
+                                if (quantity == "") {
+                                    quantity = product.product.quantity;
+                                } else {
+                                    quantity = quantity + '\n' + product.product.quantity;
+                                }
+                            }
+                            if (product.product.description) {
+                                if (description == "") {
+                                    description = product.product.description;
+                                } else {
+                                    description = description + '\n' + product.product.description;
+                                }
+                            }
+                            if (product.product.styleNo) {
+                                if (styleNo == "") {
+                                    styleNo = product.product.styleNo;
+                                } else {
+                                    styleNo = styleNo + '\n' + product.product.styleNo;
+                                }
+                            }
+                            if (product.product.prodCollection) {
+                                if (collection == "") {
+                                    collection = product.product.prodCollection.name;
+                                } else {
+                                    collection = collection + '\n' + product.product.prodCollection.name;
+                                }
+                            }
+                        }
+                    })
+                    obj["SKU"] = name;
+                    obj["productId"] = productId;
+                    obj["color"] = color;
+                    obj["size"] = size;
+                    obj["quantity"] = quantity;
+                    obj["description"] = description;
+                    obj["collection"] = collection;
+                    obj["styleno"] = styleNo;
                 }
-                if(product.product.name){
-                    if(name==""){
-                        name=product.product.name;
-                    }
-                    else{
-
-                        name = name+'\n'+product.product.name;
-                    }
-                }
-                if(product.product.size){
-                    if(size==""){ 
-                        size=product.product.size.name;
-                    }
-                    else{
-                       size =  size+'\n'+product.product.size.name;
-                    }
-                }
-                   
-                if(product.product.color){
-                    if( color==""){
-                        color=product.product.color.name;
-                    }
-                    else{
-                        color=  color+'\n'+product.product.color.name;
-                    }      
-                }  
-                if(product.product.quantity){
-                    if(quantity==""){ 
-                        quantity=product.product.quantity;
-                    }
-                    else{
-                       quantity =  quantity+'\n'+product.product.quantity;
-                    }
-                }    
-                if(product.product.description){
-                    if(description==""){ 
-                        description=product.product.description;
-                    }
-                    else{
-                        description =  description+'\n'+product.product.description;
-                    }
-                }   
-                if(product.product.styleNo){
-                    if(styleNo==""){ 
-                        styleNo=product.product.styleNo;
-                    }
-                    else{
-                        styleNo =  styleNo+'\n'+product.product.styleNo;
-                    }
-                }    
-                if(product.product.prodCollection){
-                    if( collection==""){
-                        collection=product.product.prodCollection.name;
-                    }
-                    else{
-                        collection=  collection+'\n'+product.product.prodCollection.name;
-                    }      
-                }              
-            }
-        })
-        obj["SKU"]=name;
-        obj["productId"]=productId;
-        obj["color"]=color;
-        obj["size"]=size;
-        obj["quantity"]=quantity;
-        obj["description"]=description;
-        obj["collection"]=collection;
-        obj["styleno"]=styleNo;
-    }
-    callback(null, obj);
-},
-function (err, order) {
-    prevCallback(null, order);
-});
+                callback(null, obj);
+            },
+            function (err, order) {
+                prevCallback(null, order);
+            });
 
 
-},
+    },
 };
 module.exports = _.assign(module.exports, exports, model);

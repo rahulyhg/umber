@@ -432,6 +432,14 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
             }
         });
     }
+    $scope.giftVoucherCodeMail = function (emailUser) {
+        OrderService.giftVoucherCodeMail(emailUser, function (data) {
+            console.log("in User/giftVoucherCodeMail", data);
+            if (data.value === true) {
+
+            }
+        });
+    }
     // redirect to myAccount OrderTab
     $scope.redirectToOrderTab = function () {
         $state.go("myaccount", {
@@ -472,6 +480,10 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                 console.log("Orders: ", $scope.orders);
                 $.jStorage.deleteKey("gifts");
                 $.jStorage.deleteKey("discountValues");
+                $.jStorage.deleteKey("gst");
+                $.jStorage.deleteKey("totalDiscount");
+                $.jStorage.deleteKey("myCart");
+                $.jStorage.deleteKey("giftCards");
                 var updateAdd = {
                     _id: $scope.orders._id,
                     user: $.jStorage.get("userId"),
@@ -486,7 +498,13 @@ myApp.controller('CheckoutCtrl', function ($scope, OrderService, ProductService,
                         emailUser.order = $scope.orders;
                         if (value == "Cash on delivery") {
                             toastr.success('Thank You your order was placed successfully', 'success');
-                            $scope.orderConfirmMail(emailUser);
+                            if ($scope.orders.products.length > 0) {
+                                $scope.orderConfirmMail(emailUser);
+                            }
+                            if ($scope.orders.giftVoucher.length > 0) {
+                                var coupon = {};
+                                $scope.giftVoucherCodeMail(emailUser);
+                            }
                             $scope.redirectToOrderTab();
                         } else {
                             // payment gateway code goes here

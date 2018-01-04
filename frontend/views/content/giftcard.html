@@ -1,7 +1,7 @@
 <div>
     <div class="giftcard">
         <div class="giftcard-bgimg">
-            <img src="frontend/img/giftcard/giftcard-banner.jpg" alt="Banner Image" class="img-responsive">
+            <img src="img/giftcard/giftcard-banner.jpg" alt="Banner Image" class="img-responsive">
         </div>
         <div class="container">
             <div class="giftcard-content">
@@ -17,22 +17,22 @@
 
                                         <div class="col-md-6 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <input type="text" placeholder="First Name" class="form-control" ng-model="userDetails.data.firstName">
+                                                <input type="text" placeholder="First Name" class="form-control" ng-model="userDetails.userFirstName">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <input type="text" placeholder="Last Name" class="form-control" ng-model="userDetails.data.lastName">
+                                                <input type="text" placeholder="Last Name" class="form-control" ng-model="userDetails.userLastName">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <input type="number" placeholder="Mobile No" class="form-control" ng-model="userDetails.data.mobile">
+                                                <input type="number" placeholder="Mobile No" class="form-control" ng-model="userDetails.userMobile">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <input type="email" placeholder="Email Address" class="form-control" ng-model="userDetails.data.email">
+                                                <input type="email" placeholder="Email Address" class="form-control" ng-model="userDetails.userEmail">
                                             </div>
                                         </div>
                                     </div>
@@ -47,7 +47,7 @@
                                             <div class="form-group">
                                                 <label class="control-label inr-label"><i class="fa fa-inr"></i></label>
                                                 <div class="giftcard-amount inline-block">
-                                                    <input type="number" placeholder="Enter Your Gift Card Amount" class="form-control">
+                                                    <input type="number" placeholder="Enter Your Gift Card Amount" class="form-control" ng-model="userDetails.giftAmount">
                                                 </div>
                                             </div>
                                         </div>
@@ -66,22 +66,22 @@
 
                                         <div class="col-md-6 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <input type="text" placeholder="First Name" class="form-control" ng-model="userDetails.data.firstName">
+                                                <input type="text" placeholder="First Name" class="form-control" ng-model="userDetails.frndFirstName">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <input type="text" placeholder="Last Name" class="form-control" ng-model="userDetails.data.lastName">
+                                                <input type="text" placeholder="Last Name" class="form-control" ng-model="userDetails.frndLastName">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <input type="number" placeholder="Mobile No" class="form-control" ng-model="userDetails.data.mobile">
+                                                <input type="number" placeholder="Mobile No" class="form-control" ng-model="userDetails.frndMobile">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <input type="email" placeholder="Email Address" class="form-control" ng-model="userDetails.data.email">
+                                                <input type="email" placeholder="Email Address" class="form-control" ng-model="userDetails.frndEmail">
                                             </div>
                                         </div>
                                     </div>
@@ -94,7 +94,7 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <textarea name="" id="" rows="3" class="form-control"></textarea>
+                                                <textarea name="" id="" rows="3" class="form-control" ng-model="userDetails.message"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -103,7 +103,7 @@
                         </div>
                     </div>
                     <div class="addcart-btn">
-                        <p class="text-center"><button class="btn addcart--btn text-uppercase">add to cart</button></p>
+                        <p class="text-center"><button class="btn addcart--btn text-uppercase" ng-click="giftAddToCart(userDetails)">add to cart</button></p>
                     </div>
                 </form>
             </div>

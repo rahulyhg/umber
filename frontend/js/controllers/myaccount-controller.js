@@ -1750,10 +1750,34 @@ myApp.controller('CancelMsgCtrl', function ($scope, TemplateService, $translate,
     TemplateService.title = "Canceld Oreder"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
 });
-myApp.controller('GiftCardCtrl', function ($scope, TemplateService, $translate, $rootScope) {
+myApp.controller('GiftCardCtrl', function ($scope, TemplateService, $translate, $rootScope, CartService, $state) {
     $scope.template = TemplateService.getHTML("content/giftcard.html");
     TemplateService.title = "Your Gift Card"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
+    $scope.giftCards = [];
+    if ($.jStorage.get("giftCards")) {
+        var giftV = $.jStorage.get("giftCards");
+        $scope.giftCards.push(giftV);
+    }
+    $scope.giftAddToCart = function (giftDetails) {
+        var timestamp = Date.now();
+        var couponCode = "BU" + timestamp;
+        giftDetails.userId = $.jStorage.get("userId");
+        giftDetails.couponCode = couponCode;
+        $scope.giftCards.push(giftDetails);
+        $.jStorage.set("giftCards", $scope.giftCards);
+        CartService.giftSave(giftDetails, function (data) {
+            var gift = {};
+            gift.giftDetails = data.data.data;
+            gift.accessToken = $.jStorage.get("accessToken");
+            gift.userId = $.jStorage.get("userId");
+            CartService.saveProduct(gift, function (data) {
+                if (data.data.data.message == "Cart updated successfully") {
+                    $state.go("mycart");
+                }
+            })
+        });
+    }
 });
 myApp.controller('StoreLocatorCtrl', function ($scope, $state, $timeout, toastr, TemplateService, myService, NavigationService, $translate, $rootScope, $filter) {
     $scope.template = TemplateService.getHTML("content/storelocator.html");

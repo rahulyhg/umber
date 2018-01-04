@@ -19,7 +19,11 @@ var schema = new Schema({
             type: String
         }
     }],
-    gst: Number
+    gst: Number,
+    giftVoucher: [{
+        type: Schema.Types.ObjectId,
+        ref: 'GiftCard'
+    }]
 });
 
 schema.plugin(deepPopulate, {
@@ -209,9 +213,51 @@ var model = {
                             });
                         }
                     });
+                } else if (product.giftDetails) {
+                    var gift = {};
+                    gift.giftVoucher = product.giftDetails._id;
+                    Cart.findOne({
+                        userId: product.giftDetails.userId
+                    }).lean().exec(function (err, foundCart) {
+                        if (err) {
+                            cbWaterfall2(err, null);
+                        } else {
+                            if (_.isEmpty(foundCart)) {
+                                gift.userId = product.giftDetails.userId;
+                                Cart.saveData(gift, function (err, data) {
+                                    if (err) {
+                                        cbWaterfall2(err, null);
+                                    } else {
+                                        cbWaterfall2(null, {
+                                            message: "Cart updated successfully"
+                                        });
+                                    }
+                                });
+                            } else {
+                                if (foundCart.giftVoucher) {
+                                    foundCart.giftVoucher.push(gift.giftVoucher);
+                                } else {
+                                    foundCart.giftVoucher.push(gift.giftVoucher);
+                                }
+                                Cart.saveData(foundCart, function (err, data) {
+                                    if (err) {
+                                        cbWaterfall2(err, null);
+                                    } else {
+                                        cbWaterfall2(null, {
+                                            message: "Cart updated successfully"
+                                        });
+                                    }
+                                });
+                                cbWaterfall2(null, {
+                                    message: "Cart updated successfully"
+                                });
+                            }
+                        }
+                    });
                 } else {
                     Cart.setProductInCart(userId, product, null, cbWaterfall2);
                 }
+
             }
         ], function (err, data) {
             console.log("err: ", err);

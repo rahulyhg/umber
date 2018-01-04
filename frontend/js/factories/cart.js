@@ -64,6 +64,24 @@ myApp.factory('CartService', function ($http, cfpLoadingBar) {
                 ignoreLoadingBar: true,
                 withCredentials: false
             }).then(callback);
+        },
+        giftSave: function (gift, callback) {
+            $http({
+                url: adminurl + 'GiftCard/save',
+                method: 'POST',
+                data: gift,
+                ignoreLoadingBar: false,
+                withCredentials: false
+            }).then(callback);
+        },
+        giftSaveInCart: function (gift, callback) {
+            $http({
+                url: adminurl + 'cart/giftSaveInCart',
+                method: 'POST',
+                data: gift,
+                ignoreLoadingBar: false,
+                withCredentials: false
+            }).then(callback);
         }
     };
 });

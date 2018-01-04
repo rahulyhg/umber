@@ -66,6 +66,14 @@ myApp.factory('OrderService', function ($http) {
                 withCredentials: false
             }).then(callback);
         },
+        giftVoucherCodeMail: function (userData, callback) {
+            $http({
+                url: adminurl + 'Order/giftVoucherCodeMail',
+                method: 'POST',
+                data: userData,
+                withCredentials: false
+            }).then(callback);
+        },
         returnedProductEmail: function (userData, callback) {
             $http({
                 url: adminurl + 'Order/returnedProductEmail',

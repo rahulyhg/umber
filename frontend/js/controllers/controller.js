@@ -578,6 +578,11 @@ myApp
             $scope.orderId = $stateParams.id;
         }
         $.jStorage.deleteKey("myCart");
+        $.jStorage.deleteKey("gifts");
+        $.jStorage.deleteKey("discountValues");
+        $.jStorage.deleteKey("gst");
+        $.jStorage.deleteKey("totalDiscount");
+        $.jStorage.deleteKey("giftCards");
         var emailUser = {};
         emailUser._id = $.jStorage.get("userId");
         emailUser.order = $.jStorage.get("userOrders");
@@ -587,6 +592,14 @@ myApp
 
             }
         });
+        if (emailUser.order.giftVoucher.length > 0) {
+            OrderService.giftVoucherCodeMail(emailUser, function (data) {
+                console.log("in User/giftVoucherCodeMail", data);
+                if (data.value === true) {
+
+                }
+            });
+        }
     })
 
     //Example API Controller
