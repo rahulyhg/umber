@@ -1754,12 +1754,18 @@ myApp.controller('GiftCardCtrl', function ($scope, TemplateService, $translate, 
     $scope.template = TemplateService.getHTML("content/giftcard.html");
     TemplateService.title = "Your Gift Card"; //This is the Title of the Website
     //  $scope.navigation = NavigationService.getNavigation();
+    $scope.giftCards = [];
+    if ($.jStorage.get("giftCards")) {
+        var giftV = $.jStorage.get("giftCards");
+        $scope.giftCards.push(giftV);
+    }
     $scope.giftAddToCart = function (giftDetails) {
         var timestamp = Date.now();
         var couponCode = "BU" + timestamp;
         giftDetails.userId = $.jStorage.get("userId");
         giftDetails.couponCode = couponCode;
-        $.jStorage.set("giftCards", giftDetails);
+        $scope.giftCards.push(giftDetails);
+        $.jStorage.set("giftCards", $scope.giftCards);
         CartService.giftSave(giftDetails, function (data) {
             var gift = {};
             gift.giftDetails = data.data.data;

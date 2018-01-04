@@ -886,6 +886,13 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
             console.log("getcart->data: ", data);
             //TODO: Instead of array this will be single doc when query changes to findOneAndUpdate
             $scope.mycartTable = data.data.data;
+            $scope.giftAmount = 0;
+            if ($.jStorage.get("giftCards")) {
+                $scope.giftCards = $.jStorage.get("giftCards");
+                _.forEach($scope.giftCards, function (gift) {
+                    $scope.giftAmount = $scope.giftAmount + gift.giftAmount
+                })
+            }
             if ($scope.mycartTable == undefined) {
                 toastr.error("add product to cart", "Error:")
                 $state.go("home");
@@ -939,6 +946,7 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
                 $.jStorage.set("gst", $scope.productGst);
                 $.jStorage.set("totalDiscount", $scope.grandTotalAfterDiscount);
                 $.jStorage.set("myCart", $scope.mycartTable.products);
+                $.jStorage.set("giftAmount", $scope.giftAmount);
             });
             console.log("$scope.productGst", $scope.productGst);
             //  $scope.applicableDiscounts($scope.productArrayForDiscount);
@@ -1114,11 +1122,11 @@ myApp.controller('MycartCtrl', function ($scope, myService, ModalService, $state
         cart.gst = $.jStorage.get("gst");
         cart.accessToken = $.jStorage.get("accessToken");
         // if ($scope.discountApplicableforCart) {
-        if ($.jStorage.get("myCart")) {
-            CartService.saveCartWithDiscount(cart, function (data) {
-                // console.log("in detailtab cart save", data)
-            });
-        }
+        // if ($.jStorage.get("myCart")) {
+        CartService.saveCartWithDiscount(cart, function (data) {
+            // console.log("in detailtab cart save", data)
+        });
+        // }
         // }
         $state.go("checkout");
     }
