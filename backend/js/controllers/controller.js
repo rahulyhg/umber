@@ -7,6 +7,13 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
         $scope.navigation = NavigationService.getnav();
     })
 
+    .controller('ReportsCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
+        //Used to name the .html file
+        $scope.template = TemplateService.changecontent("reports");
+        $scope.menutitle = NavigationService.makeactive("reports");
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+    })
 
     .controller('AccessController', function ($scope, TemplateService, NavigationService, $timeout, $state) {
         if ($.jStorage.get("accessToken")) {

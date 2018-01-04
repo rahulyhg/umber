@@ -119,12 +119,11 @@ myApp.factory('NavigationService', function ($http) {
             classis: "active",
             sref: "#!/page/viewStoreLocator//",
             icon: "document"
-        },
-        {
-            name: "Sales Report",
+        }, {
+            name: "Generate Reports",
             classis: "active",
-            sref: "#!/page/viewSalesReport//",
-            icon: "document"
+            icon: "document",
+            uiSref: "generate-reports"
         }
 
     ];
@@ -254,6 +253,6 @@ myApp.factory('NavigationService', function ($http) {
                 data: userData,
                 withCredentials: false
             }).then(callback);
-        },
+        }
     };
 });

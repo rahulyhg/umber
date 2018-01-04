@@ -1,0 +1,31 @@
+<html>
+<script language="javascript" type="text/javascript">
+   
+    downloadSalesReport = function() {
+        location.href = adminurl + "Order/generateExcelSalesReport";
+    }
+
+    downloadReturnSalesReport = function() {
+        location.href = adminurl + "Order/generateReturnProductsReport";
+    }
+
+    downloadGSTReport = function() {
+        location.href = adminurl + "Order/generateGSTReport";
+    }
+
+    downloadCourierReport = function() {
+        location.href = adminurl + "Order/generateCourierReport";
+    }
+
+    downloadStockReport = function() {
+        location.href = adminurl + "Order/generateStockReport";
+    }
+ </script>
+<h2>Generate Reports</h2>
+
+<a href="javascript:downloadSalesReport()"><button class="btn-primary">Sales Report</button></a>
+<a href="javascript:downloadReturnSalesReport()"><button class="btn-primary">Return Sales Report</button></a>
+<a href="javascript:downloadGSTReport()"><button class="btn-primary">GST Report</button></a>
+<a href="javascript:downloadCourierReport()"><button class="btn-primary">Courier Report</button></a>
+<a href="javascript:downloadStockReport()"><button class="btn-primary">Stock Report</button></a>
+</html>
