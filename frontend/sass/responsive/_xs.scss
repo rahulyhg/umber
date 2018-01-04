@@ -53,7 +53,12 @@
              .padd-rt0 {
                  padding-right: 15px;
              } //End of global classes
-             //start of header
+             //Start of header page
+             .mobview-links li a,
+             .mobview-promotions-link li a {
+                 @include padding(10px 15px);
+                 font-size: 16px;
+             } //End of header page
              // Design for side navigation
              .mobview-searchbar-input-lg {
                  height: 35px;
@@ -413,6 +418,9 @@
                  }
              } //End of brand page
              //Start of buy the look page
+             .sub-row {
+                 @include margin(auto);
+             }
              .buy-the-look {
                  h1 {
                      font-size: 25px;
@@ -506,6 +514,26 @@
                  }
              } // End of return-success.html
              //Start of checkout.html
+             .order-table {
+                 tbody>tr {
+                     .item {
+                         width: 150px;
+                         white-space: normal;
+                     }
+                 }
+             }
+             .login-tab .user-dicision {
+                 width: 100px;
+                 @include margin(0 auto 10px);
+             }
+             .login-tab .user-dicision.border-line {
+                 &:before {
+                     width: 40px;
+                 }
+                 &::after {
+                     width: 40px;
+                 }
+             }
              .checkout {
                  .content-spacing {
                      .btn--list {
@@ -515,6 +543,11 @@
                          width: auto;
                          @include padding(3px 35px);
                          float: right;
+                     }
+                 }
+                 .product-cal {
+                     .gst {
+                         @include flex-grow(3);
                      }
                  }
              } // class used in check out & my-account page for vertical 
@@ -890,6 +923,9 @@
                  }
              } //End of errormsg & thankyou-msg page   
              //Start of all modals
+             .btn-login {
+                 width: 100%;
+             }
              .btn--mob-modal {
                  // use this class for all modal's button
                  @include padding(3px 15px!important);

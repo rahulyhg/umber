@@ -3,38 +3,40 @@
         <h1>BUY THE LOOK</h1>
     </div>
     <div class="content-spacing">
-        <div class="row">
-            <div class="col-md-5 hidden-sm hidden-xs">
-                <div class="buy-main-img">
-                    <img ng-src="{{insideImage | serverimage}}" alt="" class="img-responsive">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-5 hidden-sm hidden-xs">
+                    <div class="buy-main-img">
+                        <img ng-src="{{insideImage | serverimage}}" alt="" class="img-responsive">
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-7 col-sm-12 col-xs-12">
-                <div class="sub-row">
-                    <!-- <div class="row" ng-repeat="abc in myShirt"> -->
-                    <div class="row">
-                        <!-- <div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="xyz in abc" ng-init="parentIndex = $index"> -->
-                        <div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="xyz in myShirt" ng-init="parentIndex = $index">
+                <div class="col-md-7 col-sm-12 col-xs-12">
+                    <div class="sub-row">
+                        <!-- <div class="row" ng-repeat="abc in myShirt"> -->
+                        <div class="row">
+                            <!-- <div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="xyz in abc" ng-init="parentIndex = $index"> -->
+                            <div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="xyz in myShirt" ng-init="parentIndex = $index">
 
-                            <div class="buy-info">
-                                <div class="buy-slider">
-                                    <flex-slider flex-slide="buy in xyz.images track by $index" prev-text="" next-text="" animation="slide" min-items="3">
-                                        <li>
-                                            <i class="fa fa-heart-o" aria-hidden="true" ng-click="addWishlist(xyz);"></i>
-                                            <img ng-src="{{buy.image | serverimage}}" class="img-responsive" ng-click="addcart();">
-                                        </li>
-                                    </flex-slider>
-                                    <div class="buy-para custom-checkbox">
-                                        <h4><i class="fa fa-inr" aria-hidden="true"></i> {{xyz.price}}</h4>
-                                        <h5 class="text-uppercase">{{xyz.description}}</h5>
-                                        <hr>
-                                        <div class="checkbox marg0">
-                                            <input type="checkbox" id="{{xyz.productId}}" ng-checked="checkStateOnReload(product.productId)" ng-click="clickfun(product)">
-                                            <label for=" {{xyz.productId}} ">
+                                <div class="buy-info">
+                                    <div class="buy-slider">
+                                        <flex-slider flex-slide="buy in xyz.images track by $index" prev-text="" next-text="" animation="slide" min-items="3">
+                                            <li>
+                                                <i class="fa fa-heart-o" aria-hidden="true" ng-click="addWishlist(xyz);"></i>
+                                                <img ng-src="{{buy.image | serverimage}}" class="img-responsive" ng-click="addcart();">
+                                            </li>
+                                        </flex-slider>
+                                        <div class="buy-para custom-checkbox">
+                                            <h4><i class="fa fa-inr" aria-hidden="true"></i> {{xyz.price}}</h4>
+                                            <h5 class="text-uppercase">{{xyz.description}}</h5>
+                                            <hr>
+                                            <div class="checkbox marg0">
+                                                <input type="checkbox" id="{{xyz.productId}}" ng-checked="checkStateOnReload(product.productId)" ng-click="clickfun(product)">
+                                                <label for=" {{xyz.productId}} ">
                                           Add to compare
                                         </label>
+                                            </div>
+                                            <button class="btn btn-default btn--brown text-uppercase " ui-sref="individual-page({id:xyz.productId})">buy</button>
                                         </div>
-                                        <button class="btn btn-default btn--brown text-uppercase " ui-sref="individual-page({id:xyz.productId})">buy</button>
                                     </div>
                                 </div>
                             </div>
