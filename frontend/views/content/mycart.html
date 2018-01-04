@@ -26,7 +26,7 @@
                     </thead>
                     <tbody ng-repeat="product in mycartTable.products track by $index">
                         <tr ng-class="checkStockStatus(product)">
-                            <td rowspan="2">
+                            <td rowspan="2" class="item-block">
                                 <div class="item relate">
                                     <img ng-src="{{product.product.images[0].image | serverimage}}" alt="" class="img-responsive item__img">
                                     <div class="mycart-info">
@@ -68,7 +68,7 @@
                             <td ng-if="!product.product.discountApplicable">&#x20b9 &nbsp;{{product.product.price* product.quantity |number:0}}</td>
                         </tr>
                         <tr>
-                            <td colspan="8" class="td-border">
+                            <td colspan="7" class="td-border">
                                 <div class="pull-right">
                                     <button class=" btn text-uppercase wishlist--btn" ng-click="addToWishlist(product)"> <i class="fa fa-heart" aria-hidden="true"></i>ADD TO WISHLIST</button>
                                     <button class="btn text-uppercase remove--btn" ng-click="removeProductFromCart(mycartTable._id, product.product._id)"><i class="fa fa-trash" aria-hidden="true"></i>REMOVE</button>

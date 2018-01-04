@@ -818,6 +818,7 @@
                                                     tr>th {
                                                         line-height: 1;
                                                         border-bottom: 1px solid $borderColor;
+                                                        vertical-align: top;
                                                     }
                                                 }
                                                 th {
@@ -847,6 +848,9 @@
                                                         p {
                                                             font-size: 12px;
                                                         }
+                                                    }
+                                                    td.item-block {
+                                                        width: 240px;
                                                     }
                                                     td+td {
                                                         border-left: none;
@@ -2208,6 +2212,15 @@
                                                         &:active {
                                                             color: white;
                                                         }
+                                                    }
+                                                }
+                                                .product-cal {
+                                                    min-width: 190px;
+                                                    .gst {
+                                                        @include flex-grow(2);
+                                                    }
+                                                    .gst-rupee {
+                                                        flex: 1;
                                                     }
                                                 }
                                                 .next--btn {

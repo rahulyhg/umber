@@ -172,7 +172,7 @@
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="product in orderTable.products">
-                                            <td>
+                                            <td class="item-block">
                                                 <div class="item ">
                                                     <img ng-src="{{product.product.images[0].image | serverimage}} " alt="
                         " class="img-responsive item__img-checkout ">
@@ -182,7 +182,7 @@
                                                 </div>
                                             </td>
                                             <td>{{product.product.color.name}}</td>
-                                            <td>{{product.product.price|number:0}}</td>
+                                            <td>&#x20b9 &nbsp;{{product.product.price|number:0}}</td>
                                             <td>{{product.product.size.name}}</td>
                                             <td>{{product.quantity}}</td>
                                             <td ng-if="!product.discountAmount">&#x20b9 &nbsp;{{product.product.price * product.quantity|number:0}}</td>
@@ -224,21 +224,22 @@
                                 </table>
 
                             </div>
-                            <div class="pull-right ">
+                            <div class="pull-right product-cal">
                                 <p class="text-right ">ITEM(S) SUBTOTAL :
                                     <span>&#x20b9 {{grandTotal |number:0}}</span>
                                 </p>
                                 <p class="text-right " ng-if="discountAmount">MEMBER'S DISCOUNT :
                                     <span>&#x20b9 {{discountAmount |number:0}}</span>
                                 </p>
-                                <p class="text-right ">GST :
-                                    <span>&#x20b9 {{gst |number:0}}</span>
+                                <p class="text-right flex-item-container"><span class="gst">GST :</span>
+                                    <span class="gst-rupee">&#x20b9 {{gst |number:0}}</span>
                                 </p>
                                 <p class="text-right ">GRAND TOTAL :
                                     <span>&#x20b9 {{grandTotal-discountAmount+gst |number:0}}</span>
                                 </p>
-                                <button class="btn btn--list" ng-disabled="!loggedUser" ng-click="proceedToDetailTab();" ng-class="{
-                        'btn--brownActive': view=='detailTab' }"> Next</button>
+                                <p class="text-right ">
+                                    <button class="btn btn--list" ng-disabled="!loggedUser" ng-click="proceedToDetailTab();" ng-class="{
+                        'btn--brownActive': view=='detailTab' }"> Next</button></p>
                             </div>
                         </div>
 
