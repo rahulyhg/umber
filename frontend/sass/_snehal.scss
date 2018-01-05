@@ -212,8 +212,14 @@
                                 @include margin(null null 5px null);
                             }
                             h5 {
+                                height: 30px;
                                 @include margin(0 0 0 0);
                                 color: $darkGray;
+                                display: -webkit-box;
+                                overflow: hidden;
+                                -webkit-box-orient: vertical;
+                                text-overflow: ellipsis;
+                                -webkit-line-clamp: 2;
                             }
                             p {
                                 line-height: 1;
