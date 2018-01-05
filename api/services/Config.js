@@ -359,6 +359,26 @@ var models = {
             if (err) {
                 res.callback(err, null);
             } else {
+                // if(typeof require !== 'undefined') XLSX = require('xlsx');
+                // var workbook = XLSX.readFile(finalPath);
+                // var first_sheet_name = workbook.SheetNames[0];
+                // var worksheet = workbook.Sheets[first_sheet_name];
+                // var range={s:{c:4, r:1}, e:{c:4, r:155}}
+                // for(var R = range.s.r; R <= range.e.r; R++) {
+                //     for(var C = range.s.c; C <= range.e.c; C++) {
+                //       var cell_address = {c:C, r:R};
+                //       var cell_ref = XLSX.utils.encode_cell(cell_address);
+                //       var desired_cell=worksheet[cell_ref];
+                //       if(desired_cell != undefined) {
+                //           if(desired_cell.v===751){
+                //            //desired_cell.s={font:{color:{ rgb: "FFFFAA00" }}};
+                //             desired_cell.v=0;
+                //           }
+                //       }
+                //     }
+                //   }
+                  
+                // XLSX.writeFile(workbook,finalPath);
                 fs.readFile(finalPath, function (err, excel) {
                     if (err) {
                         res.callback(err, null);
