@@ -1702,6 +1702,7 @@ var model = {
                 var styleNo = "";
                 var name = "";
                 var description = "";
+                var style="";
                 if (orderData.products) {
                     _.each(orderData.products, function (product) {
                         if (product.product) {
@@ -1741,7 +1742,16 @@ var model = {
                                     quantity = product.product.quantity;
                                 } else {
                                     quantity = quantity + '\n' + product.product.quantity;
+                                    
                                 }
+                            }
+                            if(product.product.quantity==751){
+                                obj["style"]={style:[{
+                                    backgroundColor : "green"
+                                }]}    
+                            }
+                            else{
+                                obj["style"]="";
                             }
                             if (product.product.description) {
                                 if (description == "") {
@@ -1765,6 +1775,7 @@ var model = {
                                 }
                             }
                         }
+                       
                     })
                     obj["SKU"] = name;
                     obj["productId"] = productId;
@@ -1774,6 +1785,7 @@ var model = {
                     obj["description"] = description;
                     obj["collection"] = collection;
                     obj["styleno"] = styleNo;
+                   
                 }
                 callback(null, obj);
             },

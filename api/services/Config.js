@@ -443,7 +443,7 @@ var models = {
         });
         var xls = json2xls(excelData);
         var folder = "./.tmp/";
-        var path = name + "-" + moment().format("MMM-DD-YYYY-hh-mm-ss-a") + ".xlsx";
+         var path = name + "-" + moment().format("MMM-DD-YYYY-hh-mm-ss-a") + ".xlsx";
         var finalPath = folder + path;
         console.log("finalPath", finalPath);
         fs.writeFile(finalPath, xls, 'binary', function (err) {
@@ -464,6 +464,15 @@ var models = {
                 });
             }
         });
+        // rekuire = require("rekuire");
+        // var json2xl = rekuire('json2xl');
+        // console.log("%%%%%%%%%%%%%%5",json2xl) 
+        // json2xl.Json2XL(found, function(err, response){
+        //     res({
+        //         excel: response,
+        //         path: path
+        //     })
+        //  });    
     },
     excelDateToDate: function isDate(value) {
         value = (value - (25567 + 1)) * 86400 * 1000;
