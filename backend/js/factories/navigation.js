@@ -52,14 +52,12 @@ myApp.factory('NavigationService', function ($http) {
             classis: "active",
             sref: "#!/page/viewOrder//",
             icon: "document"
-        },
-        {
+        },{
             name: "Courier",
             classis: "active",
             sref: "#!/page/viewCourier//",
             icon: "document"
-        },
-        {
+        },{
             name: "Blogs",
             classis: "active",
             sref: "#!/page/viewBlog//",
