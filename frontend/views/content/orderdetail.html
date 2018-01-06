@@ -88,10 +88,12 @@
                             </address>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-7">
-                            <h4 class="text-right usr-status-title usr-addrs-title">PAYMENT INFORMATION</h4>
-                            <p class="text-right order-payment-info">Item(s) Subtotal: <span>&#8377; {{order.totalAmount |number:0}}</span><br> Shipping: <span>&#8377; {{order.shippingAmount}}</span><br>                                Disscount:
-                                <span>&#8377; {{order.discountAmount}}</span><br> Total: <span>&#8377; {{order.shippingAmount+order.totalAmount-order.discountAmount |number:0}}</span><br>                                Tax: <span>&#8377; 00</span><br> Grand Total: <span>&#8377; {{order.totalAmount|number:0}}</span>
-                            </p>
+                            <div class="usr-payment-info">
+                                <h4 class="text-right usr-status-title usr-addrs-title">PAYMENT INFORMATION</h4>
+                                <p class="text-right order-payment-info">Item(s) Subtotal: <span>&#8377; {{order.totalAmount |number:0}}</span><br> Shipping: <span>&#8377; {{order.shippingAmount}}</span><br>                                    Disscount:
+                                    <span>&#8377; {{order.discountAmount}}</span><br> Total: <span>&#8377; {{order.shippingAmount+order.totalAmount-order.discountAmount |number:0}}</span><br>                                    Tax: <span>&#8377; 00</span><br> Grand Total: <span>&#8377; {{order.totalAmount|number:0}}</span>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>

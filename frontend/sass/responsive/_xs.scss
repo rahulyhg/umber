@@ -481,7 +481,7 @@
                      margin-right: 5px;
                  }
                  .item-desc {
-                     width: 235px;
+                     width: 200px;
                  }
              }
              .order-details-table {
@@ -517,7 +517,7 @@
              .order-table {
                  tbody>tr {
                      .item {
-                         width: 150px;
+                         width: 130px;
                          white-space: normal;
                      }
                  }
@@ -714,11 +714,10 @@
                  .prod-code__left,
                  .prod-code__right {
                      margin-left: 0;
-                 }
-                 .prod-code__right {
-                     width: 200px;
                      margin-right: 0;
-                     float: left!important;
+                 }
+                 .prod-code__left {
+                     width: 135px;
                  }
              }
              .first-sec {
@@ -767,7 +766,7 @@
                  }
              }
              .compare-product-main {
-                 width: 290px;
+                 width: 350px;
              }
              .compare-products {
                  width: 100px;
@@ -826,9 +825,6 @@
                  address {
                      margin-bottom: 15px;
                  }
-                 .order-list-action {
-                     text-align: left;
-                 }
                  .order-list--btn {
                      width: 94px;
                      margin-right: 0px;
@@ -849,7 +845,7 @@
              .mycart-table {
                  tbody>tr {
                      td:last-child {
-                         font-size: 18px;
+                         font-size: 16px;
                      }
                  }
              }
@@ -869,6 +865,12 @@
                  }
              } //End of my-cart page
              //Start of order-detail page
+             .ordertable-footer .usr-payment-info {
+                 .usr-status-title,
+                 .order-payment-info {
+                     text-align: left;
+                 }
+             }
              .usr-status-title {
                  font-size: 16px!important;
              } //End of order-detail page 
@@ -895,6 +897,9 @@
              }
              .store-location-dtl {
                  @include padding(0 15px);
+                 .email {
+                     word-wrap: break-word;
+                 }
              } //End of store locator
              //Start of errormsg & thankyou-msg page
              //Use h2 for msg-title + .font-md for weight bold
@@ -996,6 +1001,11 @@
                          &:before {
                              content: none;
                          }
+                     }
+                 }
+                 .prod-code {
+                     .prod-code__left {
+                         width: 95px;
                      }
                  }
              } //End of quick view page

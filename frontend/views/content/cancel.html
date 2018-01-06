@@ -24,10 +24,10 @@
           <tbody ng-repeat="product in order.products">
             <tr>
               <td class="relate" colspan="2">
-                <div class="item-img pull-left">
+                <div class="item-img inline-block">
                   <img ng-src="{{product.product.images[0].image }}" alt="Ordered Item" class="img-responsive">
                 </div>
-                <div class="pull-right item-desc">
+                <div class="inline-block item-desc">
                   <h4 class="item-name text-uppercase">{{product.product.productName}}
                   </h4>
                   <p class="item-code"><span class="text-capitalize">Product Code:</span><span class="text-uppercase"> {{product.product.productCode}}</span>
