@@ -2807,7 +2807,6 @@ var model = {
         })
     },
     generateStockReport: function (product, prevCallback) {
-        var styleObj={};
         const styles = {
             headerDark: {
                 fill: {
@@ -2824,7 +2823,6 @@ var model = {
                 }
             }
         }
-
         const specification = {
             SKU: {
                 displayName: 'SKU',
@@ -2889,7 +2887,6 @@ var model = {
                 width:120
             },
         };
-        styleSpecification=specification;
         async.concatSeries(product, function (productData, callback) {
             var obj={};
             obj["SKU"] =  productData.name;
@@ -2903,7 +2900,7 @@ var model = {
             callback(null, obj);
         },
             function (err, prod) {
-                prevCallback(null, prod, styleSpecification);
+                prevCallback(null, prod, specification);
             });
     },
 
