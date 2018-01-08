@@ -2797,6 +2797,32 @@ var model = {
         }
 
     },
+    populateProductData: function (data, callback) {
+        Product.find({}).deepPopulate("size prodCollection color").lean().exec(function (err, order) {
+            if (err || _.isEmpty(order)) {
+                callback(err, []);
+            } else {
+                callback(null, order);
+            }
+        })
+    },
+    generateStockReport: function (product, prevCallback) {
+        async.concatSeries(product, function (productData, callback) {
+            var obj={};
+            obj["SKU"] =  productData.name;
+            obj["productId"] = productData.productId;
+            obj["color"] = productData.color.name;
+            obj["size"] = productData.size.name;
+            obj["quantity"] = productData.quantity;
+            obj["description"] = productData.description;
+            obj["collection"] = productData.prodCollection.name;
+            obj["styleno"] = productData.styleNo;
+            callback(null, obj);
+        },
+            function (err, order) {
+                prevCallback(null, order);
+            });
+    },
 
 };
 module.exports = _.assign(module.exports, exports, model);

@@ -362,58 +362,53 @@ var models = {
         ];
         const specification = {
             SKU: {
-                displayName: 'SKU',
                 cellStyle: function (value, row) {
-                    return (row.quantity == 751) ? styles.headerDark : styles.headerLight;
+                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
                 },
                 width:120
             },
             productId: {
-                displayName: 'productId',
+               
                 cellStyle: function (value, row) {
-                    return (row.quantity == 751) ? styles.headerDark : styles.headerLight;
+                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
                 },
                 width:120
             },
             color: {
-                displayName: 'color',
+               
                 cellStyle: function (value, row) {
-                    return (row.quantity == 751) ? styles.headerDark : styles.headerLight;
+                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
                 },
                 width:120
             },
             size: {
-                displayName: 'size',
+               
                 cellStyle: function (value, row) {
-                    return (row.quantity == 751) ? styles.headerDark : styles.headerLight;
+                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
                 },
                 width:120
             },
             quantity: {
-                displayName: 'quantity',
                 cellStyle: function (value, row) {
-                    return (row.quantity == 751) ? styles.headerDark : styles.headerLight;
+                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
                 },
                 width:120
             },
             description: {
-                displayName: 'description',
                 cellStyle: function (value, row) {
-                    return (row.quantity == 751) ? styles.headerDark : styles.headerLight;
+                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
                 },
                 width:120
             },
             collection: {
-                displayName: 'collection',
                 cellStyle: function (value, row) {
-                    return (row.quantity == 751) ? styles.headerDark : styles.headerLight;
+                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
                 },
                 width:120
             },
             styleno: {
-                displayName: 'styleno',
                 cellStyle: function (value, row) {
-                    return (row.quantity == 751) ? styles.headerDark : styles.headerLight;
+                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
                 },
                 width:120
             },
@@ -464,15 +459,6 @@ var models = {
                 });
             }
         });
-        // rekuire = require("rekuire");
-        // var json2xl = rekuire('json2xl');
-        // console.log("%%%%%%%%%%%%%%5",json2xl) 
-        // json2xl.Json2XL(found, function(err, response){
-        //     res({
-        //         excel: response,
-        //         path: path
-        //     })
-        //  });    
     },
     excelDateToDate: function isDate(value) {
         value = (value - (25567 + 1)) * 86400 * 1000;

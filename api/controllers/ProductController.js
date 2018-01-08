@@ -210,7 +210,18 @@ var controller = {
                     message: "Invalid request"
                 }
             });
-        }
+        }r
+    },
+    generateStockReport: function (req, res) {
+        Product.populateProductData(req.body, function (err, data) {
+            Product.generateStockReport(data, function (err, data) {
+                Config.generateFormattedExcel("Product", data, function (excels) {
+                    res.set('Content-Type', "application/octet-stream");
+                    res.set('Content-Disposition', "attachment;filename=" + excels.path);
+                    res.send(excels.excel);
+                });
+            });
+        })
     }
 };
 module.exports = _.assign(module.exports, controller);
