@@ -2825,14 +2825,14 @@ var model = {
                     headerDark: {
                         fill: {
                             fgColor: {
-                                rgb: 'FFFFFF00'
+                                rgb: 'FFFF66'
                             }
                         }
                     },
                     headerLight: {
                         font: {
                             color: {
-                                rgb: '00000000'
+                                rgb: '000000'
                             },
                         }
                     }
