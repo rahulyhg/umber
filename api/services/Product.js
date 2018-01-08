@@ -2808,6 +2808,88 @@ var model = {
     },
     generateStockReport: function (product, prevCallback) {
         var styleObj={};
+        const styles = {
+            headerDark: {
+                fill: {
+                    fgColor: {
+                        rgb: 'FFFF66'
+                    }
+                }
+            },
+            headerLight: {
+                font: {
+                    color: {
+                        rgb: '000000'
+                    },
+                }
+            }
+        }
+
+        const specification = {
+            SKU: {
+                displayName: 'SKU',
+                headerStyle:styles.headerLight,
+                cellStyle: function (value, row) {
+                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
+                },
+                width:140
+            },
+            productId: {
+                displayName: 'productId',
+                headerStyle:styles.headerLight,
+                cellStyle: function (value, row) {
+                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
+                },
+                width:120
+            },
+            color: {
+                displayName: 'Color',
+                headerStyle:styles.headerLight,
+                cellStyle: function (value, row) {
+                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
+                },
+                width:120
+            },
+            size: {
+                displayName: 'Size',
+                headerStyle:styles.headerLight,
+                cellStyle: function (value, row) {
+                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
+                }
+            },
+            quantity: {
+                displayName: 'Quantity',
+                headerStyle:styles.headerLight,
+                cellStyle: function (value, row) {
+                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
+                }
+            },
+            description: {
+                displayName: 'Description',
+                headerStyle:styles.headerLight,
+                cellStyle: function (value, row) {
+                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
+                },
+                width:250
+            },
+            collection: {
+                displayName: 'Collection',
+                headerStyle:styles.headerLight,
+                cellStyle: function (value, row) {
+                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
+                },
+                width:250
+            },
+            styleno: {
+                displayName: 'Style No',
+                headerStyle:styles.headerLight,
+                cellStyle: function (value, row) {
+                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
+                },
+                width:120
+            },
+        };
+        styleSpecification=specification;
         async.concatSeries(product, function (productData, callback) {
             var obj={};
             obj["SKU"] =  productData.name;
@@ -2821,81 +2903,7 @@ var model = {
             callback(null, obj);
         },
             function (err, prod) {
-                const styles = {
-                    headerDark: {
-                        fill: {
-                            fgColor: {
-                                rgb: 'FFFF66'
-                            }
-                        }
-                    },
-                    headerLight: {
-                        font: {
-                            color: {
-                                rgb: '000000'
-                            },
-                        }
-                    }
-                }
-                const heading = [
-                    ['SKU', 'productId', 'color', 'size', 'quantity', 'description', 'collection', 'styleno']
-                ];
-                const specification = {
-                    SKU: {
-                        cellStyle: function (value, row) {
-                            return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
-                        },
-                        width:120
-                    },
-                    productId: {
-                        cellStyle: function (value, row) {
-                            return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
-                        },
-                        width:120
-                    },
-                    color: {
-                       
-                        cellStyle: function (value, row) {
-                            return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
-                        },
-                        width:120
-                    },
-                    size: {
-                       
-                        cellStyle: function (value, row) {
-                            return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
-                        },
-                        width:120
-                    },
-                    quantity: {
-                        cellStyle: function (value, row) {
-                            return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
-                        },
-                        width:120
-                    },
-                    description: {
-                        cellStyle: function (value, row) {
-                            return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
-                        },
-                        width:120
-                    },
-                    collection: {
-                        cellStyle: function (value, row) {
-                            return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
-                        },
-                        width:120
-                    },
-                    styleno: {
-                        cellStyle: function (value, row) {
-                            return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
-                        },
-                        width:120
-                    },
-                };
-                styleObj["styles"]=styles;
-                styleObj["heading"]=heading;
-                styleObj["specification"]=specification;
-                prevCallback(null, prod, styleObj);
+                prevCallback(null, prod, styleSpecification);
             });
     },
 

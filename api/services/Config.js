@@ -338,15 +338,16 @@ var models = {
         });
 
     },
-    generateFormattedExcel: function (name, found, styleObj,res) {
+    generateFormattedExcel: function (name, found, styleSpecification,res) {
         var path = name + "-" + moment().format("MMM-DD-YYYY-hh-mm-ss-a") + ".xlsx";
         const excel = require('node-excel-export');
-        const report = excel.buildExport(
-            [{
-                heading: styleObj.heading,
-                specification: styleObj.specification,
-                data: found
-            }]
+        const report = excel.buildExport(  
+            [
+                {
+                    specification: styleSpecification,
+                    data: found
+                }
+            ]
         );
         res({
             excel: report,
