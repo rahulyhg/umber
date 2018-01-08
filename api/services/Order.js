@@ -1302,7 +1302,7 @@ var model = {
                 order.invoiceNumber = invoiceYear + num;
             });
             if (unitPriceSum > 0) {
-                order.gstPercent = (_.round(gst) * 100) / _.round(unitPriceSum);
+                order.gstPercent = _.round(((gst * 100) / unitPriceSum),2);
             } else {
                 order.gstPercent = 0;
             }
