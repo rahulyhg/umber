@@ -2807,6 +2807,7 @@ var model = {
         })
     },
     generateStockReport: function (product, prevCallback) {
+        var styleObj={};
         async.concatSeries(product, function (productData, callback) {
             var obj={};
             obj["SKU"] =  productData.name;
@@ -2819,8 +2820,82 @@ var model = {
             obj["styleno"] = productData.styleNo;
             callback(null, obj);
         },
-            function (err, order) {
-                prevCallback(null, order);
+            function (err, prod) {
+                const styles = {
+                    headerDark: {
+                        fill: {
+                            fgColor: {
+                                rgb: 'FFFFFF00'
+                            }
+                        }
+                    },
+                    headerLight: {
+                        font: {
+                            color: {
+                                rgb: '00000000'
+                            },
+                        }
+                    }
+                }
+                const heading = [
+                    ['SKU', 'productId', 'color', 'size', 'quantity', 'description', 'collection', 'styleno']
+                ];
+                const specification = {
+                    SKU: {
+                        cellStyle: function (value, row) {
+                            return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
+                        },
+                        width:120
+                    },
+                    productId: {
+                        cellStyle: function (value, row) {
+                            return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
+                        },
+                        width:120
+                    },
+                    color: {
+                       
+                        cellStyle: function (value, row) {
+                            return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
+                        },
+                        width:120
+                    },
+                    size: {
+                       
+                        cellStyle: function (value, row) {
+                            return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
+                        },
+                        width:120
+                    },
+                    quantity: {
+                        cellStyle: function (value, row) {
+                            return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
+                        },
+                        width:120
+                    },
+                    description: {
+                        cellStyle: function (value, row) {
+                            return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
+                        },
+                        width:120
+                    },
+                    collection: {
+                        cellStyle: function (value, row) {
+                            return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
+                        },
+                        width:120
+                    },
+                    styleno: {
+                        cellStyle: function (value, row) {
+                            return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
+                        },
+                        width:120
+                    },
+                };
+                styleObj["styles"]=styles;
+                styleObj["heading"]=heading;
+                styleObj["specification"]=specification;
+                prevCallback(null, prod, styleObj);
             });
     },
 

@@ -338,85 +338,13 @@ var models = {
         });
 
     },
-    generateFormattedExcel: function (name, found, res) {
+    generateFormattedExcel: function (name, found, styleObj,res) {
         var path = name + "-" + moment().format("MMM-DD-YYYY-hh-mm-ss-a") + ".xlsx";
         const excel = require('node-excel-export');
-        const styles = {
-            headerDark: {
-                fill: {
-                    fgColor: {
-                        rgb: 'FFFFFF00'
-                    }
-                }
-            },
-            headerLight: {
-                font: {
-                    color: {
-                        rgb: '00000000'
-                    },
-                }
-            }
-        }
-        const heading = [
-            ['SKU', 'productId', 'color', 'size', 'quantity', 'description', 'collection', 'styleno']
-        ];
-        const specification = {
-            SKU: {
-                cellStyle: function (value, row) {
-                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
-                },
-                width:120
-            },
-            productId: {
-               
-                cellStyle: function (value, row) {
-                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
-                },
-                width:120
-            },
-            color: {
-               
-                cellStyle: function (value, row) {
-                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
-                },
-                width:120
-            },
-            size: {
-               
-                cellStyle: function (value, row) {
-                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
-                },
-                width:120
-            },
-            quantity: {
-                cellStyle: function (value, row) {
-                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
-                },
-                width:120
-            },
-            description: {
-                cellStyle: function (value, row) {
-                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
-                },
-                width:120
-            },
-            collection: {
-                cellStyle: function (value, row) {
-                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
-                },
-                width:120
-            },
-            styleno: {
-                cellStyle: function (value, row) {
-                    return (row.quantity == 0) ? styles.headerDark : styles.headerLight;
-                },
-                width:120
-            },
-        }
         const report = excel.buildExport(
             [{
-                heading: heading,
-                specification: specification,
+                heading: styleObj.heading,
+                specification: styleObj.specification,
                 data: found
             }]
         );

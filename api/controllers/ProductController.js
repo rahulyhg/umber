@@ -214,8 +214,8 @@ var controller = {
     },
     generateStockReport: function (req, res) {
         Product.populateProductData(req.body, function (err, data) {
-            Product.generateStockReport(data, function (err, data) {
-                Config.generateFormattedExcel("Product", data, function (excels) {
+            Product.generateStockReport(data, function (err, data,styleObj) {
+                Config.generateFormattedExcel("Product", data,styleObj,function (excels) {
                     res.set('Content-Type', "application/octet-stream");
                     res.set('Content-Disposition', "attachment;filename=" + excels.path);
                     res.send(excels.excel);
