@@ -279,8 +279,6 @@ var controller = {
         // Order.hdfcPaymentGateway(req.body, res)
         console.log("in hdfc payment gateway");
         var ccav = require('./ccavutil.js');
-
-
         var body = '',
             workingKey = '236E7613D01B3B0BDAA4805D6A1162DB', //Put in the 32-Bit key shared by CCAvenues.
             accessCode = 'AVOH01EK30BS66HOSB', //Put in the Access Code shared by CCAvenues.
