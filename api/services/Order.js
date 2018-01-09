@@ -1463,30 +1463,20 @@ var model = {
                 var color = "";
                 var quantity = "";
                 var name = "";
-                var invoiceNumber = "";
                 var date = "";
-                var totalDiscount = "";
-                var gstPercent = "";
-                var totalAmount = "";
-                var gst = "";
                 if (!_.isEmpty(orderData.returnedProducts)) {
-                    invoiceNumber = orderData.invoiceNumber;
-                    totalDiscount = orderData.totalDiscount;
-                    gst = orderData.gst;
-                    gstPercent = orderData.gstPercent;
-                    totalAmount = orderData.totalAmount;
                     if (orderData.date) {
                         var date1 = new Date(orderData.date);
                         date = date1.toLocaleDateString();
                     } else {
                         date = "";
                     }
-                    obj["InvoiceNumber"] = invoiceNumber;
+                    obj["InvoiceNumber"] = orderData.invoiceNumber;
                     obj["Date"] = date;
-                    obj["TotalDiscount"] = totalDiscount;
-                    obj["GST"] = gst;
-                    obj["GSTpercentage"] = gstPercent;
-                    obj["TotalAmt"] = totalAmount;
+                    obj["TotalDiscount"] = orderData.totalDiscount;
+                    obj["GST"] = orderData.gst;;
+                    obj["GSTpercentage"] = orderData.gstPercent;
+                    obj["TotalAmt"] = orderData.totalAmount;
                 }
                 _.each(orderData.returnedProducts, function (product) {
                     if (!_.isEmpty(product)) {
@@ -1533,7 +1523,6 @@ var model = {
                             }
                         }
                     }
-                   
                     obj["SKU"] = name;
                     obj["productId"] = productId;
                     obj["color"] = color;
