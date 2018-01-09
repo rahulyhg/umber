@@ -1302,7 +1302,7 @@ var model = {
                 order.invoiceNumber = invoiceYear + num;
             });
             if (unitPriceSum > 0) {
-                order.gstPercent = _.round(((gst * 100) / unitPriceSum),2);
+                order.gstPercent = _.round(((gst * 100) / unitPriceSum), 2);
             } else {
                 order.gstPercent = 0;
             }
@@ -1448,34 +1448,48 @@ var model = {
                 callback(null, obj);
             },
             function (err, order) {
+                console.log("$$$$$$$$$$$$", order);
                 prevCallback(null, order);
             });
 
 
     },
     generateReturnProductsReport: function (order, prevCallback) {
+        var obj = {};
+        var results = [];
         async.concatSeries(order, function (orderData, callback) {
-                var obj = {};
-                obj["InvoiceNumber"] = orderData.invoiceNumber;
-                if (orderData.date) {
-                    var date = new Date(orderData.date);
-                    obj["Date"] = date.toLocaleDateString();
-                } else {
-                    obj["Date"] = "";
-                }
-                obj["TotalDiscount"] = orderData.totalDiscount;
-                obj["GST"] = orderData.gst;
-                obj["GSTpercentage"] = orderData.gstPercent;
-                obj["TotalAmt"] = orderData.totalAmount;
                 var productId = "";
                 var size = "";
                 var color = "";
-                var discountPercent = "";
                 var quantity = "";
                 var name = "";
-                if (orderData.returnedProducts) {
-                    _.each(orderData.returnedProducts, function (product) {
-
+                var invoiceNumber = "";
+                var date = "";
+                var totalDiscount = "";
+                var gstPercent = "";
+                var totalAmount = "";
+                var gst = "";
+                if (!_.isEmpty(orderData.returnedProducts)) {
+                    invoiceNumber = orderData.invoiceNumber;
+                    totalDiscount = orderData.totalDiscount;
+                    gst = orderData.gst;
+                    gstPercent = orderData.gstPercent;
+                    totalAmount = orderData.totalAmount;
+                    if (orderData.date) {
+                        var date1 = new Date(orderData.date);
+                        date = date1.toLocaleDateString();
+                    } else {
+                        date = "";
+                    }
+                    obj["InvoiceNumber"] = invoiceNumber;
+                    obj["Date"] = date;
+                    obj["TotalDiscount"] = totalDiscount;
+                    obj["GST"] = gst;
+                    obj["GSTpercentage"] = gstPercent;
+                    obj["TotalAmt"] = totalAmount;
+                }
+                _.each(orderData.returnedProducts, function (product) {
+                    if (!_.isEmpty(product)) {
                         if (product.quantity) {
                             if (quantity == "") {
                                 quantity = product.quantity;
@@ -1483,13 +1497,7 @@ var model = {
                                 quantity = quantity + '\n' + product.quantity;
                             }
                         }
-                        if (product.discountPercent) {
-                            if (discountPercent == "") {
-                                discountPercent = product.discountPercent.toString();
-                            } else {
-                                discountPercent = discountPercent + '\n' + product.discountPercent.toString();
-                            }
-                        }
+
                         if (product.product) {
                             if (product.product.productId) {
 
@@ -1524,20 +1532,20 @@ var model = {
                                 }
                             }
                         }
-
-
-                    })
+                    }
+                   
                     obj["SKU"] = name;
                     obj["productId"] = productId;
-                    obj["discountPercent"] = discountPercent;
                     obj["color"] = color;
                     obj["size"] = size;
                     obj["quantity"] = quantity;
-                }
-                callback(null, obj);
+                    results.push(obj);
+                    obj = {};
+                })
+                callback(null, obj)
             },
             function (err, order) {
-                prevCallback(null, order);
+                prevCallback(null, results);
             });
 
 
