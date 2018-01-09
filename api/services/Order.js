@@ -1448,11 +1448,8 @@ var model = {
                 callback(null, obj);
             },
             function (err, order) {
-                console.log("$$$$$$$$$$$$", order);
                 prevCallback(null, order);
             });
-
-
     },
     generateReturnProductsReport: function (order, prevCallback) {
         var obj = {};
@@ -1494,7 +1491,7 @@ var model = {
                                 if (productId == "") {
                                     productId = product.product.productId;
                                 } else {
-
+                                    console.log("$$$$$$$$$$$$", order);
                                     productId = productId + '\n' + product.product.productId;
                                 }
                             }
@@ -1536,8 +1533,6 @@ var model = {
             function (err, order) {
                 prevCallback(null, results);
             });
-
-
     },
 
     generateGSTReport: function (order, prevCallback) {
