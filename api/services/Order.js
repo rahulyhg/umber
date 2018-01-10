@@ -610,10 +610,10 @@ var model = {
                 if (user._id == data.user) {
                     async.each(data.products, function (product, eachCallback) {
                         // console.log("productproductproduct", product);
-                        var discount = product.discountAmount;
-                        var discountPercent = product.discountPercent;
-                        var taxAmt = product.taxAmt;
-                        var taxPercent = product.taxPercent;
+                        // var discount = product.discountAmount;
+                        // var discountPercent = product.discountPercent;
+                        // var taxAmt = product.taxAmt;
+                        // var taxPercent = product.taxPercent;
                         async.waterfall([
                             function findProduct(cbSubWaterfall) {
                                 Product.findOne({
@@ -643,10 +643,10 @@ var model = {
                                             price: deductPrice,
                                             status: orderStatus,
                                             comment: product.comment,
-                                            discountAmount: discount,
-                                            discountPercent: discountPercent,
-                                            taxAmt: taxAmt,
-                                            taxPercent: taxPercent
+                                            // discountAmount: discount,
+                                            // discountPercent: discountPercent,
+                                            // taxAmt: taxAmt,
+                                            // taxPercent: taxPercent
                                         }
                                     },
                                     $set: {
@@ -1454,7 +1454,7 @@ var model = {
     generateReturnProductsReport: function (order, prevCallback) {
         var obj = {};
         var results = [];
-        async.concatSeries(order, function (orderData, callback) {
+        async.each(order, function (orderData, callback) {
                 var productId = "";
                 var size = "";
                 var color = "";
@@ -1471,7 +1471,7 @@ var model = {
                     obj["InvoiceNumber"] = orderData.invoiceNumber;
                     obj["Date"] = date;
                     obj["TotalDiscount"] = orderData.totalDiscount;
-                    obj["GST"] = orderData.gst;;
+                    obj["GST"] = orderData.gst;
                     obj["GSTpercentage"] = orderData.gstPercent;
                     obj["TotalAmt"] = orderData.totalAmount;
                 }
@@ -1484,14 +1484,11 @@ var model = {
                                 quantity = quantity + '\n' + product.quantity;
                             }
                         }
-
                         if (product.product) {
                             if (product.product.productId) {
-
                                 if (productId == "") {
                                     productId = product.product.productId;
                                 } else {
-                                    console.log("$$$$$$$$$$$$", order);
                                     productId = productId + '\n' + product.product.productId;
                                 }
                             }
@@ -1528,10 +1525,15 @@ var model = {
                     results.push(obj);
                     obj = {};
                 })
-                callback(null, obj)
+                callback()
             },
-            function (err, order) {
-                prevCallback(null, results);
+            function (err) {
+                if( err ) {
+                    console.log('A file failed to process');
+                  } else {
+                    prevCallback(null, results);
+                  }
+               
             });
     },
 
