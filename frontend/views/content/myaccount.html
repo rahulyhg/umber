@@ -427,7 +427,7 @@
                 <div class="wishlist-tab" ng-if="view == 'wishlistTab' ">
                     <div class="col-md-9">
                         <div class="row" ng-repeat="wishlist in wl">
-                            <div class="col-md-3 col-sm-6 col-xs-6" ng-repeat="xyz in wishlist" ng-init="parentIndex = $index">
+                            <div class="col-md-3 col-sm-6 col-xs-12" ng-repeat="xyz in wishlist" ng-init="parentIndex = $index">
                                 <div class="buy-info">
                                     <div class="buy-slider">
                                         <flex-slider flex-slide="buy in xyz.images track by $index" prev-text="" next-text="" animation="slide" min-items="3">
